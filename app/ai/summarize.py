@@ -23,4 +23,6 @@ def summarize_company(company_text):
         ]
     )
 
+    print("\nTOKEN USAGE:")
+    print(response.usage)
     return response.choices[0].message.content
