@@ -10,6 +10,23 @@ def load_company_data():
 def save_output(filename, content):
     with open(f"ai-due-diligence-copilot/app/outputs/{filename}", "w") as file:
         file.write(content)
+
+def build_report(summary, risk_analysis, memo):
+
+    return f"""
+# AI Due Diligence Report
+
+## Company Summary
+
+{summary}
+
+## Risk Analysis
+{risk_analysis}
+
+##Investment Memo
+
+{memo}
+"""
     
 def main():
 
@@ -21,9 +38,12 @@ def main():
 
     memo = generate_investment_memo(company_text)
 
+    report = build_report(summary, risk_analysis, memo)
+
     save_output("summary.txt", summary)
     save_output("risk_analysis.txt", risk_analysis)
     save_output("memo.txt", memo)
+    save_output("due_diligence_report.md", report)
 
     print("\nCOMPANY SUMMARY:\n")
     print(summary)
@@ -33,5 +53,7 @@ def main():
 
     print("\nINVESTMENT MEMO\n")
     print(memo)
+
+    print("\nFULL REPORT GENERATED")
 
 main()
