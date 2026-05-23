@@ -6,6 +6,10 @@ def load_company_data():
 
     with open("ai-due-diligence-copilot/app/data/sample_company.txt", "r") as file:
         return file.read()
+
+def save_output(filename, content):
+    with open(f"ai-due-diligence-copilot/app/outputs/{filename}", "w") as file:
+        file.write(content)
     
 def main():
 
@@ -16,6 +20,10 @@ def main():
     risk_analysis = analyze_risks(company_text)
 
     memo = generate_investment_memo(company_text)
+
+    save_output("summary.txt", summary)
+    save_output("risk_analysis.txt", risk_analysis)
+    save_output("memo.txt", memo)
 
     print("\nCOMPANY SUMMARY:\n")
     print(summary)
