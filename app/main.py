@@ -30,7 +30,7 @@ def build_report(summary, risk_analysis, memo):
     
 def main():
 
-    filepath = "ai-due-diligence-copilot/app/data/sample_company.txt"
+    filepath = input("Enter company filepath: ")
 
     company_text = load_company_data(filepath)
 
