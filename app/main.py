@@ -2,9 +2,9 @@ from ai.summarize import summarize_company
 from ai.risk_analysis import analyze_risks
 from ai.memo_generator import generate_investment_memo
 
-def load_company_data():
+def load_company_data(filepath):
 
-    with open("ai-due-diligence-copilot/app/data/sample_company.txt", "r") as file:
+    with open(filepath, "r") as file:
         return file.read()
 
 def save_output(filename, content):
@@ -30,7 +30,9 @@ def build_report(summary, risk_analysis, memo):
     
 def main():
 
-    company_text = load_company_data()
+    filepath = "ai-due-diligence-copilot/app/data/sample_company.txt"
+
+    company_text = load_company_data(filepath)
 
     summary = summarize_company(company_text)
 
