@@ -1,14 +1,18 @@
-from ai.summarize import summarize_company
-from ai.risk_analysis import analyze_risks
-from ai.memo_generator import generate_investment_memo
+from workflows.due_diligence_workflow import run_due_diligence
+
 
 def load_company_data(filepath):
 
-    with open(filepath, "r") as file:
-        return file.read()
+    try:
+        with open(filepath, "r") as file:
+            return file.read()
+    
+    except FileNotFoundError:
+        print("Error: file not found. Please check the file path")
+        return None
 
 def save_output(filename, content):
-    with open(f"ai-due-diligence-copilot/app/outputs/{filename}", "w") as file:
+    with open(f"app/outputs/{filename}", "w") as file:
         file.write(content)
 
 def build_report(summary, risk_analysis, memo):
@@ -34,11 +38,14 @@ def main():
 
     company_text = load_company_data(filepath)
 
-    summary = summarize_company(company_text)
+    if company_text is None:
+        return
 
-    risk_analysis = analyze_risks(company_text)
+    results = run_due_diligence(company_text)
 
-    memo = generate_investment_memo(company_text)
+    summary = results["summary"]
+    risk_analysis = results["risk_analysis"]
+    memo = results["memo"]
 
     report = build_report(summary, risk_analysis, memo)
 
