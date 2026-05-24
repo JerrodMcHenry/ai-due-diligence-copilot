@@ -46,13 +46,16 @@ def main():
     summary = results["summary"]
     risk_analysis = results["risk_analysis"]
     memo = results["memo"]
+    structured_analysis = results["structured_analysis"]
 
     report = build_report(summary, risk_analysis, memo)
 
     save_output("summary.txt", summary)
     save_output("risk_analysis.txt", risk_analysis)
     save_output("memo.txt", memo)
+    save_output("structured_analysis.txt", str(structured_analysis))
     save_output("due_diligence_report.md", report)
+
 
     print("\nCOMPANY SUMMARY:\n")
     print(summary)
@@ -62,6 +65,9 @@ def main():
 
     print("\nINVESTMENT MEMO\n")
     print(memo)
+
+    print("\nSTRUCTURED ANALYSIS:\n")
+    print(structured_analysis)
 
     print("\nFULL REPORT GENERATED")
 
