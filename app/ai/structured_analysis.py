@@ -24,7 +24,7 @@ company_name
 summary
 key_risks
 strengths
-reccomendation
+recommendation
 
 Startup:
 {company_text}

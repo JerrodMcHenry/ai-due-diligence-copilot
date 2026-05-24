@@ -31,7 +31,29 @@ def build_report(summary, risk_analysis, memo):
 
 {memo}
 """
+
+def build_structured_report(structured_analysis):
+    risks = "\n".join(f"- {risk}" for risk in structured_analysis["key_risks"])
+    strengths = "\n".join(f"- {strength}" for strength in structured_analysis["strengths"])
     
+    return f"""
+# Structured Startup Analysis
+
+## Company Name
+{structured_analysis["company_name"]}
+
+## Summary
+{structured_analysis["summary"]}
+
+## Key Risks
+{risks}
+
+## Strengths
+{strengths}
+
+## Recommendation
+{structured_analysis["recommendation"]}
+"""
 def main():
 
     filepath = input("Enter company filepath: ")
@@ -49,12 +71,14 @@ def main():
     structured_analysis = results["structured_analysis"]
 
     report = build_report(summary, risk_analysis, memo)
+    structured_report = build_structured_report(structured_analysis)
 
     save_output("summary.txt", summary)
     save_output("risk_analysis.txt", risk_analysis)
     save_output("memo.txt", memo)
     save_output("structured_analysis.txt", str(structured_analysis))
     save_output("due_diligence_report.md", report)
+    save_output("structured_report.md", structured_report)
 
 
     print("\nCOMPANY SUMMARY:\n")
