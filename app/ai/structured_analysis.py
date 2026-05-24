@@ -34,4 +34,8 @@ Startup:
     )
 
     content = response.choices[0].message.content
+    print("\nRAW STRUCTURED CONTENT:\n")
+    print(content)
+
+    content = content.replace("```json", "").replace("```", "").strip()
     return json.loads(content)

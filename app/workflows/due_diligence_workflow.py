@@ -11,7 +11,7 @@ def run_due_diligence(company_text):
 
     memo = generate_investment_memo(company_text)
 
-    structured_analysis = generate_structured_analysis
+    structured_analysis = generate_structured_analysis(company_text)
 
     return {
         "summary": summary,
