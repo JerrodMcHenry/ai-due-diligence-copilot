@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from models.startup import StartupAnalysisRequest
+from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
 from workflows.due_diligence_workflow import run_due_diligence
 
 app = FastAPI()
@@ -20,8 +20,17 @@ def version():
 def health_check():
     return {"status": "API is running"}
 
-@app.post("/analyze-startup")
+
+
+@app.post(
+    "/analyze-startup",
+    response_model=StartupAnalysisResponse
+)
 def analyze_startup(request: StartupAnalysisRequest):
     results = run_due_diligence(request.company_text)
-
-    return results
+    
+    return {
+        "summary": results["summary"],
+        "risk_analysis": results["risk_analysis"],
+        "memo": results["memo"]
+    }
