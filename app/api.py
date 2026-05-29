@@ -1,9 +1,11 @@
 from fastapi import FastAPI
+from database.db import create_tables
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
 from workflows.due_diligence_workflow import run_due_diligence
 
 app = FastAPI()
+create_tables()
 
 @app.get("/health")
 def health():
