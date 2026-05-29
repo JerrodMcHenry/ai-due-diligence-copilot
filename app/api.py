@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database.db import create_tables
+from database.db import create_tables, save_analysis
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
 from workflows.due_diligence_workflow import run_due_diligence
@@ -30,6 +30,13 @@ def health_check():
 )
 def analyze_startup(request: StartupAnalysisRequest):
     results = run_due_diligence(request.company_text)
+
+    save_analysis(
+        company_text=request.company_text,
+        summary=results["summary"],
+        risk_analysis=results["risk_analysis"],
+        memo=results["memo"]
+    )
     
     return {
         "summary": results["summary"],

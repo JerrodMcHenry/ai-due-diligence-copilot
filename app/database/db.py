@@ -24,3 +24,30 @@ def create_tables():
     
     connection.commit()
     connection.close()
+
+def save_analysis(
+        company_text,
+        summary,
+        risk_analysis,
+        memo
+):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        INSERT INTO analyses (
+            company_text,
+            summary,
+            risk_analysis,
+            memo
+         )
+        VALUES (?, ?, ?, ?)
+    """,(
+        company_text,
+        summary,
+        risk_analysis,
+        memo
+    ))
+    
+    connection.commit()
+    connection.close()
