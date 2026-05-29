@@ -1,14 +1,20 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
 
+from models.startup import StartupAnalysisRequest
 from workflows.due_diligence_workflow import run_due_diligence
 
 app = FastAPI()
 
-class StartupAnalysisRequest(BaseModel):
-    company_text: str
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
 
-app = FastAPI()
+@app.get("/version")
+def version():
+    return {
+        "app": "AI Due Diligence Copilot",
+        "version": "1.0"
+    }
 
 @app.get("/")
 def health_check():
