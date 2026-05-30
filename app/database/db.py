@@ -66,3 +66,21 @@ def get_analyses():
     connection.close()
 
     return [dict(row) for row in rows]
+
+def get_analysis_by_id(analysis_id):
+    connection = get_connection()
+    cursor = connection.cursor() 
+
+    cursor.execute("""
+        SELECT * FROM analyses
+        WHERE id = ?
+    """, (analysis_id,))
+
+    row = cursor.fetchone()
+
+    connection.close()
+
+    if row is None:
+        return None
+    
+    return dict(row)

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database.db import create_tables, save_analysis, get_analyses
+from database.db import create_tables, save_analysis, get_analyses, get_analysis_by_id
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
 from workflows.due_diligence_workflow import run_due_diligence
@@ -25,6 +25,15 @@ def health_check():
 @app.get("/analyses")
 def get_saved_analyses():
     return get_analyses()
+
+@app.get("/analyses/{analysis_id}")
+def get_saved_analysis(analysis_id: int):
+    analysis = get_analysis_by_id(analysis_id)
+
+    if analysis is None:
+        return {"error": "Analysis not found"}
+    
+    return analysis
 
 @app.post(
     "/analyze-startup",
