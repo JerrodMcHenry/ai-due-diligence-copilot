@@ -1,7 +1,13 @@
-from fastapi import FastAPI
-from database.db import create_tables, save_analysis, get_analyses, get_analysis_by_id
+from fastapi import FastAPI, HTTPException
+from database.db import (create_tables, 
+                         save_analysis, 
+                         get_analyses, 
+                         get_analysis_by_id, 
+                         delete_analysis,
+                         update_analysis
+)
 
-from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
+from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest
 from workflows.due_diligence_workflow import run_due_diligence
 
 app = FastAPI()
@@ -34,6 +40,43 @@ def get_saved_analysis(analysis_id: int):
         return {"error": "Analysis not found"}
     
     return analysis
+
+@app.put("/analyses/{analysis_id}")
+def update_saved_analysis(
+    analysis_id: int,
+    request: UpdateAnalysisRequest
+):
+    updated_count = update_analysis(
+    analysis_id,
+    request.company_text,
+    request.summary,
+    request.risk_analysis,
+    request.memo
+)
+
+    if updated_count == 0:
+        raise HTTPException(
+            status_code=404,
+            detail="Analysis not found"
+        )
+
+    return {
+        "message": "Analysis updated successfully"
+    }
+
+@app.delete("/analyses/{analysis_id}")
+def delete_saved_analysis(analysis_id: int):
+    deleted_count = delete_analysis(analysis_id)
+
+    if deleted_count == 0:
+        raise HTTPException(
+            status_code=404,
+            detail="Analysis not found"
+        )
+    
+    return {
+        "message": "Analysis deleted successfully"
+    }
 
 @app.post(
     "/analyze-startup",

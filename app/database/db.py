@@ -84,3 +84,51 @@ def get_analysis_by_id(analysis_id):
         return None
     
     return dict(row)
+
+def delete_analysis(analysis_id: int):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("DELETE FROM analyses WHERE id = ?", (analysis_id,))
+    connection.commit()
+
+    deleted_count = cursor.rowcount
+    connection.close()
+
+    return deleted_count
+
+def update_analysis(
+    analysis_id: int,
+    company_text: str,
+    summary: str,
+    risk_analysis: str,
+    memo: str
+):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute(
+        """
+        UPDATE analyses
+        SET company_text = ?,
+            summary = ?,
+            risk_analysis = ?,
+            memo = ?
+        WHERE id = ?
+        """,
+        (
+            company_text,
+            summary,
+            risk_analysis,
+            memo,
+            analysis_id
+        )
+    )
+
+    connection.commit()
+
+    updated_count = cursor.rowcount
+
+    connection.close()
+
+    return updated_count
