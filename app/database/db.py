@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 DATABASE_PATH = "app/database/due_diligence.db"
 
@@ -19,16 +20,29 @@ def create_tables():
             summary TEXT NOT NULL,
             risk_analysis TEXT NOT NULL,
             competitor_analysis TEXT,
-            memo TEXT NOT NULL               
+            memo TEXT NOT NULL,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP               
         )
     """)
 
     try:
         cursor.execute(
-            "ALTER TABLE anlyses ADD COLUMN competitor_analysis TEXT"
+            "ALTER TABLE analyses ADD COLUMN competitor_analysis TEXT"
         )
-    except sqlite3.OperationalError:
-        pass
+    except sqlite3.OperationalError as e:
+        print("competitor_analysis migration:", e)
+
+    try:
+        cursor.execute(
+            "ALTER TABLE analyses ADD COLUMN created_at TEXT"
+        )
+        print("created_at column added")
+    except sqlite3.OperationalError as e:
+        print("created_at migration:", e)
+
+    cursor.execute("PRAGMA table_info(analyses)")
+    columns = cursor.fetchall()
+    print("ANALYSES COLUMNS:", columns)
     
     connection.commit()
     connection.close()
@@ -43,21 +57,25 @@ def save_analysis(
     connection = get_connection()
     cursor = connection.cursor()
 
+    created_at = datetime.now().isoformat()
+
     cursor.execute("""
         INSERT INTO analyses (
             company_text,
             summary,
             risk_analysis,
             competitor_analysis,
-            memo
+            memo,
+            created_at
          )
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
         risk_analysis,
         competitor_analysis,
-        memo
+        memo,
+        created_at
     ))
     
     connection.commit()
