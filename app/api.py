@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from database.db import create_tables, save_analysis
+from database.db import create_tables, save_analysis, get_analyses
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse
 from workflows.due_diligence_workflow import run_due_diligence
@@ -22,7 +22,9 @@ def version():
 def health_check():
     return {"status": "API is running"}
 
-
+@app.get("/analyses")
+def get_saved_analyses():
+    return get_analyses()
 
 @app.post(
     "/analyze-startup",

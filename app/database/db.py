@@ -51,3 +51,18 @@ def save_analysis(
     
     connection.commit()
     connection.close()
+
+
+def get_analyses():
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT * FROM analyses
+    """)
+
+    rows = cursor.fetchall()
+
+    connection.close()
+
+    return [dict(row) for row in rows]
