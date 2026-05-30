@@ -18,9 +18,17 @@ def create_tables():
             company_text TEXT NOT NULL,
             summary TEXT NOT NULL,
             risk_analysis TEXT NOT NULL,
+            competitor_analysis TEXT,
             memo TEXT NOT NULL               
         )
     """)
+
+    try:
+        cursor.execute(
+            "ALTER TABLE anlyses ADD COLUMN competitor_analysis TEXT"
+        )
+    except sqlite3.OperationalError:
+        pass
     
     connection.commit()
     connection.close()
@@ -29,6 +37,7 @@ def save_analysis(
         company_text,
         summary,
         risk_analysis,
+        competitor_analysis,
         memo
 ):
     connection = get_connection()
@@ -39,13 +48,15 @@ def save_analysis(
             company_text,
             summary,
             risk_analysis,
+            competitor_analysis,
             memo
          )
-        VALUES (?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
         risk_analysis,
+        competitor_analysis,
         memo
     ))
     
@@ -102,6 +113,7 @@ def update_analysis(
     company_text: str,
     summary: str,
     risk_analysis: str,
+    competitor_analysis: str,
     memo: str
 ):
     connection = get_connection()
@@ -113,6 +125,7 @@ def update_analysis(
         SET company_text = ?,
             summary = ?,
             risk_analysis = ?,
+            competitor_analysis = ?,
             memo = ?
         WHERE id = ?
         """,
@@ -120,6 +133,7 @@ def update_analysis(
             company_text,
             summary,
             risk_analysis,
+            competitor_analysis,
             memo,
             analysis_id
         )

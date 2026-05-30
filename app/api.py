@@ -89,11 +89,13 @@ def analyze_startup(request: StartupAnalysisRequest):
         company_text=request.company_text,
         summary=results["summary"],
         risk_analysis=results["risk_analysis"],
+        competitor_analysis=results["competitor_analysis"],
         memo=results["memo"]
     )
     
     return {
         "summary": results["summary"],
         "risk_analysis": results["risk_analysis"],
+        "competitor_analysis": results["competitor_analysis"],
         "memo": results["memo"]
     }
