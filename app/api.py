@@ -9,6 +9,7 @@ from database.db import (create_tables,
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest
 from workflows.due_diligence_workflow import run_due_diligence
+import json
 
 app = FastAPI()
 create_tables()
@@ -90,12 +91,14 @@ def analyze_startup(request: StartupAnalysisRequest):
         summary=results["summary"],
         risk_analysis=results["risk_analysis"],
         competitor_analysis=results["competitor_analysis"],
-        memo=results["memo"]
+        memo=results["memo"],
+        structured_analysis=results["structured_analysis"]
     )
     
     return {
         "summary": results["summary"],
         "risk_analysis": results["risk_analysis"],
         "competitor_analysis": results["competitor_analysis"],
-        "memo": results["memo"]
+        "memo": results["memo"],
+        "structured_analysis": json.dumps(results["structured_analysis"])
     }

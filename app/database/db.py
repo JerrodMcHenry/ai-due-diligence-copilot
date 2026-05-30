@@ -1,5 +1,6 @@
 import sqlite3
 from datetime import datetime
+import json
 
 DATABASE_PATH = "app/database/due_diligence.db"
 
@@ -21,7 +22,8 @@ def create_tables():
             risk_analysis TEXT NOT NULL,
             competitor_analysis TEXT,
             memo TEXT NOT NULL,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP               
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP ,
+            structured_analysis TEXT              
         )
     """)
 
@@ -40,9 +42,20 @@ def create_tables():
     except sqlite3.OperationalError as e:
         print("created_at migration:", e)
 
+    try:
+        cursor.execute(
+            "ALTER TABLE analyses ADD COLUMN structured_analysis TEXT"
+        )
+        print("stuctured_analysis column added")
+
+    except sqlite3.OperationalError as e:
+        print("structured_analysis migration:", e)
+
     cursor.execute("PRAGMA table_info(analyses)")
     columns = cursor.fetchall()
-    print("ANALYSES COLUMNS:", columns)
+    
+    for column in columns:
+        print(column["name"])
     
     connection.commit()
     connection.close()
@@ -52,12 +65,14 @@ def save_analysis(
         summary,
         risk_analysis,
         competitor_analysis,
-        memo
+        memo,
+        structured_analysis 
 ):
     connection = get_connection()
     cursor = connection.cursor()
 
     created_at = datetime.now().isoformat()
+    structured_analysis_json = json.dumps(structured_analysis)
 
     cursor.execute("""
         INSERT INTO analyses (
@@ -66,16 +81,18 @@ def save_analysis(
             risk_analysis,
             competitor_analysis,
             memo,
-            created_at
+            created_at,
+            structured_analysis
          )
-        VALUES (?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
         risk_analysis,
         competitor_analysis,
         memo,
-        created_at
+        created_at,
+        structured_analysis_json
     ))
     
     connection.commit()
@@ -132,7 +149,8 @@ def update_analysis(
     summary: str,
     risk_analysis: str,
     competitor_analysis: str,
-    memo: str
+    memo: str,
+    structured_analysis: str
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -144,7 +162,8 @@ def update_analysis(
             summary = ?,
             risk_analysis = ?,
             competitor_analysis = ?,
-            memo = ?
+            memo = ?,
+            structured_analysis = ?
         WHERE id = ?
         """,
         (
@@ -153,6 +172,7 @@ def update_analysis(
             risk_analysis,
             competitor_analysis,
             memo,
+            structured_analysis,
             analysis_id
         )
     )

@@ -9,6 +9,7 @@ class StartupAnalysisResponse(BaseModel):
     risk_analysis: str
     competitor_analysis: str
     memo: str
+    structured_analysis: str
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -16,3 +17,4 @@ class UpdateAnalysisRequest(BaseModel):
     risk_analysis: str
     competitor_analysis: str
     memo: str
+    structured_analysis: str
