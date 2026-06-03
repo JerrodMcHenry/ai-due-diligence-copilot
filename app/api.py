@@ -4,7 +4,8 @@ from database.db import (create_tables,
                          get_analyses, 
                          get_analysis_by_id, 
                          delete_analysis,
-                         update_analysis
+                         update_analysis,
+                         search_analyses
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest
@@ -32,6 +33,10 @@ def health_check():
 @app.get("/analyses")
 def get_saved_analyses():
     return get_analyses()
+
+@app.get("/anlyses/search")
+def search_saved_analyses(query: str):
+    return search_analyses(query)
 
 @app.get("/analyses/{analysis_id}")
 def get_saved_analysis(analysis_id: int):

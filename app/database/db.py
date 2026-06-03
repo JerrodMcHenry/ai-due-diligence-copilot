@@ -98,6 +98,54 @@ def save_analysis(
     connection.commit()
     connection.close()
 
+def search_analyses(query: str):
+    connection = get_connection()
+    cursor = connection.cursor()
+
+    search_term = f"%{query}%"
+
+    cursor.execute(
+        """
+        SELECT * FROM analyses
+        WHERE company_text LIKE ?
+            OR summary LIKE ?
+            OR risk_analysis LIKE ?
+            OR competitor_analysis LIKE ?
+            OR memo LIKE ?
+            OR structured_analysis LIKE ?
+        ORDER BY id DESC
+""", 
+(
+    search_term,
+    search_term,
+    search_term,
+    search_term,
+    search_term,
+    search_term
+    
+)
+    )
+
+    rows = cursor.fetchall()
+    connection.close()
+
+    return [parse_structured_analysis(row) for row in rows]
+
+        
+    
+
+def parse_structured_analysis(row):
+    analysis = dict(row)
+
+    if analysis.get("structured_analysis"):
+        try:
+            analysis["structured_analysis"] = json.loads(
+                analysis["structured_analysis"]
+            )
+        except json.JSONDecodeError:
+            pass
+        
+        return analysis
 
 def get_analyses():
     connection = get_connection()
@@ -111,7 +159,7 @@ def get_analyses():
 
     connection.close()
 
-    return [dict(row) for row in rows]
+    return [parse_structured_analysis(row) for row in rows]
 
 def get_analysis_by_id(analysis_id):
     connection = get_connection()
@@ -129,7 +177,7 @@ def get_analysis_by_id(analysis_id):
     if row is None:
         return None
     
-    return dict(row)
+    return parse_structured_analysis(row)
 
 def delete_analysis(analysis_id: int):
     connection = get_connection()
