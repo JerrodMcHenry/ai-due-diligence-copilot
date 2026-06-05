@@ -90,7 +90,7 @@ def delete_saved_analysis(analysis_id: int):
 )
 def analyze_startup(request: StartupAnalysisRequest):
     results = run_due_diligence(request.company_text)
-
+    
     save_analysis(
         company_text=request.company_text,
         summary=results["summary"],
@@ -98,7 +98,8 @@ def analyze_startup(request: StartupAnalysisRequest):
         competitor_analysis=results["competitor_analysis"],
         memo=results["memo"],
         structured_analysis=results["structured_analysis"],
-        investment_score=results["investment_score"]
+        investment_score=results["investment_score"],
+        founder_analysis=results["founder_analysis"]
         
     )
     
@@ -108,5 +109,6 @@ def analyze_startup(request: StartupAnalysisRequest):
         "competitor_analysis": results["competitor_analysis"],
         "memo": results["memo"],
         "structured_analysis": json.dumps(results["structured_analysis"]),
-        "investment_score": results["investment_score"]
+        "investment_score": results["investment_score"],
+        "founder_analysis": results["founder_analysis"]
     }

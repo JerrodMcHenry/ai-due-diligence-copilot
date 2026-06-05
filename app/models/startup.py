@@ -11,6 +11,7 @@ class StartupAnalysisResponse(BaseModel):
     memo: str
     structured_analysis: str
     investment_score: dict
+    founder_analysis: dict
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -20,3 +21,4 @@ class UpdateAnalysisRequest(BaseModel):
     memo: str
     structured_analysis: str
     investment_score: dict
+    founder_analysis: dict

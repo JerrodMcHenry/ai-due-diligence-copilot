@@ -24,7 +24,8 @@ def create_tables():
             memo TEXT NOT NULL,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP ,
             structured_analysis TEXT,
-            investment_score TEXT             
+            investment_score TEXT,
+            founder_analysis TEXT          
         )
     """)
 
@@ -60,6 +61,13 @@ def create_tables():
     except sqlite3.OperationalError as e:
         print("investment_score migration:", e)
 
+    try:
+        cursor.execute(
+            "ALTER TABLE analyses ADD COLUMN founder_analysis TEXT"
+        )
+    except sqlite3.OperationalError:
+        pass
+
     cursor.execute("PRAGMA table_info(analyses)")
     columns = cursor.fetchall()
     
@@ -76,7 +84,8 @@ def save_analysis(
         competitor_analysis,
         memo,
         structured_analysis,
-        investment_score
+        investment_score,
+        founder_analysis
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -84,6 +93,7 @@ def save_analysis(
     created_at = datetime.now().isoformat()
     structured_analysis_json = json.dumps(structured_analysis)
     investment_score_json = json.dumps(investment_score)
+    founder_analysis_json = json.dumps(founder_analysis)
 
     cursor.execute("""
         INSERT INTO analyses (
@@ -94,9 +104,10 @@ def save_analysis(
             memo,
             created_at,
             structured_analysis,
-            investment_score
+            investment_score,
+            founder_analysis
          )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
@@ -105,7 +116,8 @@ def save_analysis(
         memo,
         created_at,
         structured_analysis_json,
-        investment_score_json
+        investment_score_json,
+        founder_analysis_json
     ))
     
     connection.commit()
@@ -127,6 +139,7 @@ def search_analyses(query: str):
             OR memo LIKE ?
             OR structured_analysis LIKE ?
             OR investment_score LIKE ?
+            OR founder_analysis LIKE ?
         ORDER BY id DESC
 """, 
 (
