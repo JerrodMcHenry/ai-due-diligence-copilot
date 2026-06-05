@@ -10,6 +10,7 @@ class StartupAnalysisResponse(BaseModel):
     competitor_analysis: str
     memo: str
     structured_analysis: str
+    investment_score: dict
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -18,3 +19,4 @@ class UpdateAnalysisRequest(BaseModel):
     competitor_analysis: str
     memo: str
     structured_analysis: str
+    investment_score: dict

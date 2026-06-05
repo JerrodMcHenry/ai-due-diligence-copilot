@@ -23,7 +23,8 @@ def create_tables():
             competitor_analysis TEXT,
             memo TEXT NOT NULL,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP ,
-            structured_analysis TEXT              
+            structured_analysis TEXT,
+            investment_score TEXT             
         )
     """)
 
@@ -51,6 +52,14 @@ def create_tables():
     except sqlite3.OperationalError as e:
         print("structured_analysis migration:", e)
 
+    try:
+        cursor.execute(
+        "ALTER TABLE analyses ADD COLUMN investment_score TEXT"
+    )
+        print("investment_score column added")
+    except sqlite3.OperationalError as e:
+        print("investment_score migration:", e)
+
     cursor.execute("PRAGMA table_info(analyses)")
     columns = cursor.fetchall()
     
@@ -66,13 +75,15 @@ def save_analysis(
         risk_analysis,
         competitor_analysis,
         memo,
-        structured_analysis 
+        structured_analysis,
+        investment_score
 ):
     connection = get_connection()
     cursor = connection.cursor()
 
     created_at = datetime.now().isoformat()
     structured_analysis_json = json.dumps(structured_analysis)
+    investment_score_json = json.dumps(investment_score)
 
     cursor.execute("""
         INSERT INTO analyses (
@@ -82,9 +93,10 @@ def save_analysis(
             competitor_analysis,
             memo,
             created_at,
-            structured_analysis
+            structured_analysis,
+            investment_score
          )
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
@@ -92,7 +104,8 @@ def save_analysis(
         competitor_analysis,
         memo,
         created_at,
-        structured_analysis_json
+        structured_analysis_json,
+        investment_score_json
     ))
     
     connection.commit()
@@ -113,6 +126,7 @@ def search_analyses(query: str):
             OR competitor_analysis LIKE ?
             OR memo LIKE ?
             OR structured_analysis LIKE ?
+            OR investment_score LIKE ?
         ORDER BY id DESC
 """, 
 (

@@ -97,7 +97,9 @@ def analyze_startup(request: StartupAnalysisRequest):
         risk_analysis=results["risk_analysis"],
         competitor_analysis=results["competitor_analysis"],
         memo=results["memo"],
-        structured_analysis=results["structured_analysis"]
+        structured_analysis=results["structured_analysis"],
+        investment_score=results["investment_score"]
+        
     )
     
     return {
@@ -105,5 +107,6 @@ def analyze_startup(request: StartupAnalysisRequest):
         "risk_analysis": results["risk_analysis"],
         "competitor_analysis": results["competitor_analysis"],
         "memo": results["memo"],
-        "structured_analysis": json.dumps(results["structured_analysis"])
+        "structured_analysis": json.dumps(results["structured_analysis"]),
+        "investment_score": results["investment_score"]
     }
