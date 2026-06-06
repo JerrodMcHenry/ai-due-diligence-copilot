@@ -25,7 +25,8 @@ def create_tables():
             created_at TEXT DEFAULT CURRENT_TIMESTAMP ,
             structured_analysis TEXT,
             investment_score TEXT,
-            founder_analysis TEXT          
+            founder_analysis TEXT,
+            market_analysis TEXT         
         )
     """)
 
@@ -68,6 +69,13 @@ def create_tables():
     except sqlite3.OperationalError:
         pass
 
+    try:
+        cursor.execute(
+            "ALTER TABLE analyses ADD COLUMN market_analysis TEXT"
+    )
+    except sqlite3.OperationalError:
+        pass
+
     cursor.execute("PRAGMA table_info(analyses)")
     columns = cursor.fetchall()
     
@@ -85,7 +93,8 @@ def save_analysis(
         memo,
         structured_analysis,
         investment_score,
-        founder_analysis
+        founder_analysis,
+        market_analysis
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -94,6 +103,7 @@ def save_analysis(
     structured_analysis_json = json.dumps(structured_analysis)
     investment_score_json = json.dumps(investment_score)
     founder_analysis_json = json.dumps(founder_analysis)
+    market_analysis_json = json.dumps(market_analysis)
 
     cursor.execute("""
         INSERT INTO analyses (
@@ -105,9 +115,10 @@ def save_analysis(
             created_at,
             structured_analysis,
             investment_score,
-            founder_analysis
+            founder_analysis,
+            market_analysis
          )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
@@ -117,7 +128,8 @@ def save_analysis(
         created_at,
         structured_analysis_json,
         investment_score_json,
-        founder_analysis_json
+        founder_analysis_json,
+        market_analysis_json
     ))
     
     connection.commit()
@@ -140,9 +152,13 @@ def search_analyses(query: str):
             OR structured_analysis LIKE ?
             OR investment_score LIKE ?
             OR founder_analysis LIKE ?
+            OR market_analysis LIKE ? 
         ORDER BY id DESC
 """, 
 (
+    search_term,
+    search_term,
+    search_term,
     search_term,
     search_term,
     search_term,
@@ -160,19 +176,24 @@ def search_analyses(query: str):
 
         
     
-
 def parse_structured_analysis(row):
     analysis = dict(row)
 
-    if analysis.get("structured_analysis"):
-        try:
-            analysis["structured_analysis"] = json.loads(
-                analysis["structured_analysis"]
-            )
-        except json.JSONDecodeError:
-            pass
-        
-        return analysis
+    json_fields = [
+        "structured_analysis",
+        "investment_score",
+        "founder_analysis",
+        "market_analysis"
+    ]
+
+    for field in json_fields:
+        if analysis.get(field):
+            try:
+                analysis[field] = json.loads(analysis[field])
+            except json.JSONDecodeError:
+                pass
+
+    return analysis
 
 def get_analyses():
     connection = get_connection()
@@ -225,7 +246,10 @@ def update_analysis(
     risk_analysis: str,
     competitor_analysis: str,
     memo: str,
-    structured_analysis: str
+    structured_analysis: str,
+    investment_score: str,
+    founder_analysis: str,
+    market_analysis: str
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -238,7 +262,10 @@ def update_analysis(
             risk_analysis = ?,
             competitor_analysis = ?,
             memo = ?,
-            structured_analysis = ?
+            structured_analysis = ?,
+            investment_score = ?,
+            founder_analysis = ?,
+            market_analysis = ?
         WHERE id = ?
         """,
         (
@@ -248,6 +275,9 @@ def update_analysis(
             competitor_analysis,
             memo,
             structured_analysis,
+            investment_score,
+            founder_analysis,
+            market_analysis,
             analysis_id
         )
     )

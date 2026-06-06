@@ -5,6 +5,8 @@ from ai.structured_analysis import generate_structured_analysis
 from ai.competitor_anlalysis import analyze_competitors
 from ai.scoring import generate_investment_score
 from ai.founder_analysis import analyze_founders
+from ai.market_analysis import analyze_market
+
 
 def run_due_diligence(company_text):
 
@@ -22,6 +24,8 @@ def run_due_diligence(company_text):
 
     founder_analysis = analyze_founders(company_text)
 
+    market_analysis = analyze_market(company_text)
+
     return {
         "summary": summary,
         "risk_analysis": risk_analysis,
@@ -29,6 +33,7 @@ def run_due_diligence(company_text):
         "memo": memo,
         "structured_analysis": structured_analysis,
         "investment_score": investment_score,
-        "founder_analysis": founder_analysis
+        "founder_analysis": founder_analysis,
+        "market_analysis": market_analysis
         
     }

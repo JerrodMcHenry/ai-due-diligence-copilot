@@ -12,6 +12,7 @@ class StartupAnalysisResponse(BaseModel):
     structured_analysis: str
     investment_score: dict
     founder_analysis: dict
+    market_analysis: dict
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -22,3 +23,4 @@ class UpdateAnalysisRequest(BaseModel):
     structured_analysis: str
     investment_score: dict
     founder_analysis: dict
+    market_analysis: dict
