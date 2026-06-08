@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.responses import FileResponse
 from database.db import (create_tables, 
                          save_analysis, 
                          get_analyses, 
@@ -13,6 +14,7 @@ from workflows.due_diligence_workflow import run_due_diligence
 import json
 from pdf_extractor import extract_text_from_pdf
 from website_scrapper import extract_text_from_website
+from reporting.pdf_generator import generate_pdf_report
 
 app = FastAPI()
 create_tables()
@@ -48,6 +50,22 @@ def get_saved_analysis(analysis_id: int):
         return {"error": "Analysis not found"}
     
     return analysis
+
+
+@app.get("/analyses/{analysis_id}/pdf")
+def download_analysis_pdf(analysis_id: int):
+    analysis = get_analysis_by_id(analysis_id)
+
+    if analysis is None:
+        raise HTTPException(status_code=404, detail="Analysis not found.")
+
+    pdf_path = generate_pdf_report(analysis)
+
+    return FileResponse(
+        path=pdf_path,
+        media_type="application/pdf",
+        filename=pdf_path.split("/")[-1],
+    )
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
