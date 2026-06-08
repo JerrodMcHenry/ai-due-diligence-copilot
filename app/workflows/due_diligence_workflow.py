@@ -6,25 +6,36 @@ from ai.competitor_anlalysis import analyze_competitors
 from ai.scoring import generate_investment_score
 from ai.founder_analysis import analyze_founders
 from ai.market_analysis import analyze_market
+from ai.research_enrichment import enrich_research
 
 
 def run_due_diligence(company_text):
 
-    summary = summarize_company(company_text)
+    research_context = enrich_research(company_text)
 
-    risk_analysis = analyze_risks(company_text)
+    enriched_text = f"""
+Original Company Information:
+{company_text}
 
-    competitor_analysis = analyze_competitors(company_text)
+Additional Research Context:
+{research_context}
+"""
 
-    memo = generate_investment_memo(company_text)
+    summary = summarize_company(enriched_text)
 
-    structured_analysis = generate_structured_analysis(company_text)
+    risk_analysis = analyze_risks(enriched_text)
 
-    investment_score = generate_investment_score(company_text)
+    competitor_analysis = analyze_competitors(enriched_text)
 
-    founder_analysis = analyze_founders(company_text)
+    memo = generate_investment_memo(enriched_text)
 
-    market_analysis = analyze_market(company_text)
+    structured_analysis = generate_structured_analysis(enriched_text)
+
+    investment_score = generate_investment_score(enriched_text)
+
+    founder_analysis = analyze_founders(enriched_text)
+
+    market_analysis = analyze_market(enriched_text)
 
     return {
         "summary": summary,
@@ -35,5 +46,4 @@ def run_due_diligence(company_text):
         "investment_score": investment_score,
         "founder_analysis": founder_analysis,
         "market_analysis": market_analysis
-        
     }
