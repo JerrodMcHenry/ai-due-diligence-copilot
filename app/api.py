@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, UploadFile, File
 from database.db import (create_tables, 
                          save_analysis, 
                          get_analyses, 
@@ -8,9 +8,11 @@ from database.db import (create_tables,
                          search_analyses
 )
 
-from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest
+from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
 from workflows.due_diligence_workflow import run_due_diligence
 import json
+from pdf_extractor import extract_text_from_pdf
+from website_scrapper import extract_text_from_website
 
 app = FastAPI()
 create_tables()
@@ -114,4 +116,78 @@ def analyze_startup(request: StartupAnalysisRequest):
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"]
+    }
+
+
+@app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
+async def analyze_pdf(file: UploadFile = File(...)):
+    if not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+
+    try:
+        pdf_bytes = await file.read()
+        extracted_text = extract_text_from_pdf(pdf_bytes)
+
+        results = run_due_diligence(extracted_text)
+
+        save_analysis(
+            company_text=extracted_text,
+            summary=results["summary"],
+            risk_analysis=results["risk_analysis"],
+            competitor_analysis=results["competitor_analysis"],
+            memo=results["memo"],
+            structured_analysis=results["structured_analysis"],
+            investment_score=results["investment_score"],
+            founder_analysis=results["founder_analysis"],
+            market_analysis=results["market_analysis"],
+        )
+
+        return {
+            "summary": results["summary"],
+            "risk_analysis": results["risk_analysis"],
+            "competitor_analysis": results["competitor_analysis"],
+            "memo": results["memo"],
+            "structured_analysis": json.dumps(results["structured_analysis"]),
+            "investment_score": results["investment_score"],
+            "founder_analysis": results["founder_analysis"],
+            "market_analysis": results["market_analysis"],
+        }
+
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+
+
+
+@app.post("/analyze-website", response_model=StartupAnalysisResponse)
+def analyze_website(request: WebsiteAnalysisRequest):
+
+    website_text = extract_text_from_website(request.url)
+
+    results = run_due_diligence(website_text)
+
+    save_analysis(
+        company_text=request.url,
+        summary=results["summary"],
+        risk_analysis=results["risk_analysis"],
+        competitor_analysis=results["competitor_analysis"],
+        memo=results["memo"],
+        structured_analysis=results["structured_analysis"],
+        investment_score=results["investment_score"],
+        founder_analysis=results["founder_analysis"],
+        market_analysis=results["market_analysis"],
+    )
+
+    return {
+        "summary": results["summary"],
+        "risk_analysis": results["risk_analysis"],
+        "competitor_analysis": results["competitor_analysis"],
+        "memo": results["memo"],
+        "structured_analysis": json.dumps(results["structured_analysis"]),
+        "investment_score": results["investment_score"],
+        "founder_analysis": results["founder_analysis"],
+        "market_analysis": results["market_analysis"],
     }

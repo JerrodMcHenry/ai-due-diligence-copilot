@@ -24,3 +24,6 @@ class UpdateAnalysisRequest(BaseModel):
     investment_score: dict
     founder_analysis: dict
     market_analysis: dict
+
+class WebsiteAnalysisRequest(BaseModel):
+    url: str
