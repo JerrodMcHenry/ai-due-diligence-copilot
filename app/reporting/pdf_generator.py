@@ -30,7 +30,10 @@ def clean_markdown(text):
 
     return text
 
+
+
 def format_value(value):
+
     if isinstance(value, dict):
         return "<br/>".join([
             f"<b>{clean_markdown(key)}:</b> {clean_markdown(val)}"
@@ -38,10 +41,27 @@ def format_value(value):
         ])
 
     if isinstance(value, list):
-        return "<br/>".join([
-            f"- {clean_markdown(item)}"
-            for item in value
-        ])
+
+        formatted_items = []
+
+        for item in value:
+
+            if isinstance(item, dict):
+
+                title = item.get("title", "Unknown Source")
+                url = item.get("url", "")
+
+                formatted_items.append(
+                    f"• {title}<br/>{url}"
+                )
+
+            else:
+
+                formatted_items.append(
+                    f"• {clean_markdown(item)}"
+                )
+
+        return "<br/><br/>".join(formatted_items)
 
     if value is None:
         return ""
