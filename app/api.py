@@ -121,7 +121,8 @@ def analyze_startup(request: StartupAnalysisRequest):
         structured_analysis=results["structured_analysis"],
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
-        market_analysis=results["market_analysis"]
+        market_analysis=results["market_analysis"],
+        sources=results["sources"]
         
     )
     
@@ -133,7 +134,8 @@ def analyze_startup(request: StartupAnalysisRequest):
         "structured_analysis": json.dumps(results["structured_analysis"]),
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
-        "market_analysis": results["market_analysis"]
+        "market_analysis": results["market_analysis"],
+        "sources": results["sources"]
     }
 
 
@@ -158,6 +160,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             investment_score=results["investment_score"],
             founder_analysis=results["founder_analysis"],
             market_analysis=results["market_analysis"],
+            sources=results["sources"]
+            
         )
 
         return {
@@ -169,6 +173,7 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "investment_score": results["investment_score"],
             "founder_analysis": results["founder_analysis"],
             "market_analysis": results["market_analysis"],
+            "sources": results["sources"]
         }
 
     except ValueError as e:
@@ -197,6 +202,7 @@ def analyze_website(request: WebsiteAnalysisRequest):
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
         market_analysis=results["market_analysis"],
+        sources=results["sources"]
     )
 
     return {
@@ -208,4 +214,5 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
+        "sources": results["sources"]
     }

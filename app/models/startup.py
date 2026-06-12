@@ -13,6 +13,7 @@ class StartupAnalysisResponse(BaseModel):
     investment_score: dict
     founder_analysis: dict
     market_analysis: dict
+    sources: list = []
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -24,6 +25,7 @@ class UpdateAnalysisRequest(BaseModel):
     investment_score: dict
     founder_analysis: dict
     market_analysis: dict
+    sources: list = []
 
 class WebsiteAnalysisRequest(BaseModel):
     url: str

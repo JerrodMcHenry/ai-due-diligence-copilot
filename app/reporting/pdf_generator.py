@@ -85,7 +85,8 @@ def generate_pdf_report(analysis: dict) -> str:
         ("Competitor Analysis", analysis.get("competitor_analysis")),
         ("Risk Analysis", analysis.get("risk_analysis")),
         ("Investment Memo", analysis.get("memo")),
-        ("Structured Analysis", analysis.get("structured_analysis")),
+        ("Research Sources", analysis.get("sources")),
+        ("Structured Analysis", analysis.get("structured_analysis"))
     ]
 
     for title, value in sections:

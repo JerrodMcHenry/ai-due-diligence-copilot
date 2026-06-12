@@ -52,13 +52,27 @@ def search_web(query: str) -> str:
 
         research_text +=  f"Title: {title}\nURL: {url}\nContent: {content}\n\n"
 
-    return research_text.strip()
+    sources = []
+
+    for item in results.get("results", []):
+        sources.append({
+            "title": item.get("title", ""),
+            "url": item.get("url", "")
+        })
+
+    return {
+        "research_text": research_text.strip(),
+        "sources": sources
+    }
 
 
 
 def enrich_research(company_text):
     search_query = extract_search_query(company_text)
-    web_research = search_web(search_query)
+    web_results = search_web(search_query)
+
+    web_research = web_results["research_text"]
+    sources = web_results["sources"]
     
     
     response = openai_client.chat.completions.create(
@@ -108,4 +122,7 @@ For the Sources section, include any URLs referenced in the web research.
         ]
     )
 
-    return response.choices[0].message.content
+    return {
+        "research_brief": response.choices[0].message.content,
+        "sources": sources
+    }

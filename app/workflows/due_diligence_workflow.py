@@ -11,8 +11,11 @@ from ai.research_enrichment import enrich_research
 
 def run_due_diligence(company_text):
 
-    research_context = enrich_research(company_text)
+    research_result = enrich_research(company_text)
 
+    research_context = research_result["research_brief"]
+    sources = research_result["sources"]
+    
     enriched_text = f"""
 Original Company Information:
 {company_text}
@@ -45,5 +48,6 @@ Additional Research Context:
         "structured_analysis": structured_analysis,
         "investment_score": investment_score,
         "founder_analysis": founder_analysis,
-        "market_analysis": market_analysis
+        "market_analysis": market_analysis,
+        "sources": sources
     }
