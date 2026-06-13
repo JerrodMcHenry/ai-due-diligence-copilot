@@ -73,12 +73,19 @@ def update_saved_analysis(
     request: UpdateAnalysisRequest
 ):
     updated_count = update_analysis(
-    analysis_id,
-    request.company_text,
-    request.summary,
-    request.risk_analysis,
-    request.memo
-)
+        analysis_id,
+        request.company_text,
+        request.summary,
+        request.risk_analysis,
+        request.competitor_analysis,
+        request.memo,
+        request.structured_analysis,
+        request.investment_score,
+        request.founder_analysis,
+        request.market_analysis,
+        request.sources,
+        request.traction_analysis
+    )
 
     if updated_count == 0:
         raise HTTPException(
@@ -132,7 +139,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         "risk_analysis": results["risk_analysis"],
         "competitor_analysis": results["competitor_analysis"],
         "memo": results["memo"],
-        "structured_analysis": json.dumps(results["structured_analysis"]),
+        "structured_analysis":results["structured_analysis"],
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],

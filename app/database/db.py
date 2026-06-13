@@ -1,191 +1,128 @@
-import sqlite3
-from datetime import datetime
+import os
 import json
+from datetime import datetime
 
-DATABASE_PATH = "app/database/due_diligence.db"
+from dotenv import load_dotenv
+from sqlalchemy import create_engine, text
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set.")
+
+engine = create_engine(DATABASE_URL)
 
 
-def get_connection():
-    connection = sqlite3.connect(DATABASE_PATH)
-    connection.row_factory = sqlite3.Row 
-    return connection 
 
 def create_tables():
-    connection = get_connection()
-    cursor = connection.cursor()
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS analyses (
+                id SERIAL PRIMARY KEY,
+                company_text TEXT NOT NULL,
+                summary TEXT NOT NULL,
+                risk_analysis TEXT NOT NULL,
+                competitor_analysis TEXT,
+                memo TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                structured_analysis TEXT,
+                investment_score TEXT,
+                founder_analysis TEXT,
+                market_analysis TEXT,
+                sources TEXT,
+                traction_analysis TEXT
+            )
+        """))
 
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS analyses (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            company_text TEXT NOT NULL,
-            summary TEXT NOT NULL,
-            risk_analysis TEXT NOT NULL,
-            competitor_analysis TEXT,
-            memo TEXT NOT NULL,
-            created_at TEXT DEFAULT CURRENT_TIMESTAMP ,
-            structured_analysis TEXT,
-            investment_score TEXT,
-            founder_analysis TEXT,
-            market_analysis TEXT,
-            sources TEXT,
-            traction_analysis, TEXT       
-        )
-    """)
+    print("PostgreSQL tables created successfully.")
 
-    try:
-        cursor.execute(
-            "ALTER TABLE analyses ADD COLUMN competitor_analysis TEXT"
-        )
-    except sqlite3.OperationalError as e:
-        print("competitor_analysis migration:", e)
-
-    try:
-        cursor.execute(
-            "ALTER TABLE analyses ADD COLUMN created_at TEXT"
-        )
-        print("created_at column added")
-    except sqlite3.OperationalError as e:
-        print("created_at migration:", e)
-
-    try:
-        cursor.execute(
-            "ALTER TABLE analyses ADD COLUMN structured_analysis TEXT"
-        )
-        print("stuctured_analysis column added")
-
-    except sqlite3.OperationalError as e:
-        print("structured_analysis migration:", e)
-
-    try:
-        cursor.execute(
-        "ALTER TABLE analyses ADD COLUMN investment_score TEXT"
-    )
-        print("investment_score column added")
-    except sqlite3.OperationalError as e:
-        print("investment_score migration:", e)
-
-    try:
-        cursor.execute(
-            "ALTER TABLE analyses ADD COLUMN founder_analysis TEXT"
-        )
-    except sqlite3.OperationalError:
-        pass
-
-    try:
-        cursor.execute(
-            "ALTER TABLE analyses ADD COLUMN market_analysis TEXT"
-    )
-    except sqlite3.OperationalError:
-        pass
-
-    cursor.execute("PRAGMA table_info(analyses)")
-    columns = cursor.fetchall()
-    
-    for column in columns:
-        print(column["name"])
-    
-    connection.commit()
-    connection.close()
+   
 
 def save_analysis(
-        company_text,
-        summary,
-        risk_analysis,
-        competitor_analysis,
-        memo,
-        structured_analysis,
-        investment_score,
-        founder_analysis,
-        market_analysis,
-        sources,
-        traction_analysis
+    company_text,
+    summary,
+    risk_analysis,
+    competitor_analysis,
+    memo,
+    structured_analysis,
+    investment_score,
+    founder_analysis,
+    market_analysis,
+    sources,
+    traction_analysis
 ):
-    connection = get_connection()
-    cursor = connection.cursor()
-
     created_at = datetime.now().isoformat()
-    structured_analysis_json = json.dumps(structured_analysis)
-    investment_score_json = json.dumps(investment_score)
-    founder_analysis_json = json.dumps(founder_analysis)
-    market_analysis_json = json.dumps(market_analysis)
-    sources_json = json.dumps(sources)
-    traction_analysis_json = json.dumps(traction_analysis)
 
-    cursor.execute("""
-        INSERT INTO analyses (
-            company_text,
-            summary,
-            risk_analysis,
-            competitor_analysis,
-            memo,
-            created_at,
-            structured_analysis,
-            investment_score,
-            founder_analysis,
-            market_analysis,
-            sources,
-            traction_analysis
-         )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """,(
-        company_text,
-        summary,
-        risk_analysis,
-        competitor_analysis,
-        memo,
-        created_at,
-        structured_analysis_json,
-        investment_score_json,
-        founder_analysis_json,
-        market_analysis_json,
-        sources_json,
-        traction_analysis_json
-    ))
-    
-    connection.commit()
-    connection.close()
+    with engine.begin() as connection:
+        connection.execute(text("""
+            INSERT INTO analyses (
+                company_text,
+                summary,
+                risk_analysis,
+                competitor_analysis,
+                memo,
+                created_at,
+                structured_analysis,
+                investment_score,
+                founder_analysis,
+                market_analysis,
+                sources,
+                traction_analysis
+            )
+            VALUES (
+                :company_text,
+                :summary,
+                :risk_analysis,
+                :competitor_analysis,
+                :memo,
+                :created_at,
+                :structured_analysis,
+                :investment_score,
+                :founder_analysis,
+                :market_analysis,
+                :sources,
+                :traction_analysis
+            )
+        """), {
+            "company_text": company_text,
+            "summary": summary,
+            "risk_analysis": risk_analysis,
+            "competitor_analysis": competitor_analysis,
+            "memo": memo,
+            "created_at": created_at,
+            "structured_analysis": json.dumps(structured_analysis),
+            "investment_score": json.dumps(investment_score),
+            "founder_analysis": json.dumps(founder_analysis),
+            "market_analysis": json.dumps(market_analysis),
+            "sources": json.dumps(sources),
+            "traction_analysis": json.dumps(traction_analysis),
+        })
 
 def search_analyses(query: str):
-    connection = get_connection()
-    cursor = connection.cursor()
-
     search_term = f"%{query}%"
 
-    cursor.execute(
-        """
-        SELECT * FROM analyses
-        WHERE company_text LIKE ?
-            OR summary LIKE ?
-            OR risk_analysis LIKE ?
-            OR competitor_analysis LIKE ?
-            OR memo LIKE ?
-            OR structured_analysis LIKE ?
-            OR investment_score LIKE ?
-            OR founder_analysis LIKE ?
-            OR market_analysis LIKE ? 
-            OR sources LIKE ?
-            OR transaction_analysis LIKE ?
-        ORDER BY id DESC
-""", 
-(
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term,
-    search_term
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT * FROM analyses
+            WHERE company_text ILIKE :search_term
+                OR summary ILIKE :search_term
+                OR risk_analysis ILIKE :search_term
+                OR competitor_analysis ILIKE :search_term
+                OR memo ILIKE :search_term
+                OR structured_analysis ILIKE :search_term
+                OR investment_score ILIKE :search_term
+                OR founder_analysis ILIKE :search_term
+                OR market_analysis ILIKE :search_term
+                OR sources ILIKE :search_term
+                OR traction_analysis ILIKE :search_term
+            ORDER BY id DESC
+        """), {
+            "search_term": search_term
+        })
 
-    
-)
-    )
-
-    rows = cursor.fetchall()
-    connection.close()
+        rows = result.mappings().all()
 
     return [parse_structured_analysis(row) for row in rows]
 
@@ -200,7 +137,7 @@ def parse_structured_analysis(row):
         "founder_analysis",
         "market_analysis",
         "sources",
-        "transaction_analysis"
+        "traction_analysis"
     ]
 
     for field in json_fields:
@@ -213,48 +150,46 @@ def parse_structured_analysis(row):
     return analysis
 
 def get_analyses():
-    connection = get_connection()
-    cursor = connection.cursor()
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT * FROM analyses
+            ORDER BY id DESC
+        """))
 
-    cursor.execute("""
-        SELECT * FROM analyses
-    """)
-
-    rows = cursor.fetchall()
-
-    connection.close()
+        rows = result.mappings().all()
 
     return [parse_structured_analysis(row) for row in rows]
 
 def get_analysis_by_id(analysis_id):
-    connection = get_connection()
-    cursor = connection.cursor() 
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT * FROM analyses
+            WHERE id = :analysis_id
+        """), {
+            "analysis_id": analysis_id
+        })
 
-    cursor.execute("""
-        SELECT * FROM analyses
-        WHERE id = ?
-    """, (analysis_id,))
-
-    row = cursor.fetchone()
-
-    connection.close()
+        row = result.mappings().first()
 
     if row is None:
         return None
-    
+
     return parse_structured_analysis(row)
 
 def delete_analysis(analysis_id: int):
-    connection = get_connection()
-    cursor = connection.cursor()
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            DELETE FROM analyses
+            WHERE id = :analysis_id
+        """), {
+            "analysis_id": analysis_id
+        })
 
-    cursor.execute("DELETE FROM analyses WHERE id = ?", (analysis_id,))
-    connection.commit()
-
-    deleted_count = cursor.rowcount
-    connection.close()
+        deleted_count = result.rowcount
 
     return deleted_count
+
+
 
 def update_analysis(
     analysis_id: int,
@@ -263,52 +198,43 @@ def update_analysis(
     risk_analysis: str,
     competitor_analysis: str,
     memo: str,
-    structured_analysis: str,
+    structured_analysis: dict,
     investment_score: str,
     founder_analysis: str,
     market_analysis: str,
     sources: str,
-    transaction_analysis: str
+    traction_analysis: str
 ):
-    connection = get_connection()
-    cursor = connection.cursor()
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE analyses
+            SET company_text = :company_text,
+                summary = :summary,
+                risk_analysis = :risk_analysis,
+                competitor_analysis = :competitor_analysis,
+                memo = :memo,
+                structured_analysis = :structured_analysis,
+                investment_score = :investment_score,
+                founder_analysis = :founder_analysis,
+                market_analysis = :market_analysis,
+                sources = :sources,
+                traction_analysis = :traction_analysis
+            WHERE id = :analysis_id
+        """), {
+            "analysis_id": analysis_id,
+            "company_text": company_text,
+            "summary": summary,
+            "risk_analysis": risk_analysis,
+            "competitor_analysis": competitor_analysis,
+            "memo": memo,
+            "structured_analysis": json.dumps(structured_analysis),
+            "investment_score": json.dumps(investment_score),
+            "founder_analysis": json.dumps(founder_analysis),
+            "market_analysis": json.dumps(market_analysis),
+            "sources": json.dumps(sources),
+            "traction_analysis": json.dumps(traction_analysis),
+        })
 
-    cursor.execute(
-        """
-        UPDATE analyses
-        SET company_text = ?,
-            summary = ?,
-            risk_analysis = ?,
-            competitor_analysis = ?,
-            memo = ?,
-            structured_analysis = ?,
-            investment_score = ?,
-            founder_analysis = ?,
-            market_analysis = ?,
-            sources = ?,
-            transaction_analysis = ?
-        WHERE id = ?
-        """,
-        (
-            company_text,
-            summary,
-            risk_analysis,
-            competitor_analysis,
-            memo,
-            structured_analysis,
-            investment_score,
-            founder_analysis,
-            market_analysis,
-            analysis_id,
-            sources,
-            transaction_analysis
-        )
-    )
-
-    connection.commit()
-
-    updated_count = cursor.rowcount
-
-    connection.close()
+        updated_count = result.rowcount
 
     return updated_count

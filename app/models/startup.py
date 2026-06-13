@@ -9,7 +9,7 @@ class StartupAnalysisResponse(BaseModel):
     risk_analysis: str
     competitor_analysis: str
     memo: str
-    structured_analysis: str
+    structured_analysis: dict
     investment_score: dict
     founder_analysis: dict
     market_analysis: dict
@@ -22,7 +22,7 @@ class UpdateAnalysisRequest(BaseModel):
     risk_analysis: str
     competitor_analysis: str
     memo: str
-    structured_analysis: str
+    structured_analysis: dict
     investment_score: dict
     founder_analysis: dict
     market_analysis: dict
