@@ -102,6 +102,7 @@ def generate_pdf_report(analysis: dict) -> str:
         ("Executive Summary", analysis.get("summary")),
         ("Founder Analysis", analysis.get("founder_analysis")),
         ("Market Analysis", analysis.get("market_analysis")),
+        ("Traction Analysis", analysis.get("traction_analysis")),
         ("Competitor Analysis", analysis.get("competitor_analysis")),
         ("Risk Analysis", analysis.get("risk_analysis")),
         ("Investment Memo", analysis.get("memo")),

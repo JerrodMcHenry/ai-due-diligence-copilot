@@ -122,7 +122,8 @@ def analyze_startup(request: StartupAnalysisRequest):
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
         market_analysis=results["market_analysis"],
-        sources=results["sources"]
+        sources=results["sources"],
+        traction_analysis=results["traction_analysis"]
         
     )
     
@@ -135,7 +136,8 @@ def analyze_startup(request: StartupAnalysisRequest):
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
-        "sources": results["sources"]
+        "sources": results["sources"],
+        "traction_analysis": results["traction_analysis"]
     }
 
 
@@ -160,7 +162,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             investment_score=results["investment_score"],
             founder_analysis=results["founder_analysis"],
             market_analysis=results["market_analysis"],
-            sources=results["sources"]
+            sources=results["sources"],
+            traction_analysis=results["traction_analysis"]
             
         )
 
@@ -173,7 +176,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "investment_score": results["investment_score"],
             "founder_analysis": results["founder_analysis"],
             "market_analysis": results["market_analysis"],
-            "sources": results["sources"]
+            "sources": results["sources"],
+            "traction_analysis": results["traction_analysis"]
         }
 
     except ValueError as e:
@@ -202,7 +206,9 @@ def analyze_website(request: WebsiteAnalysisRequest):
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
         market_analysis=results["market_analysis"],
-        sources=results["sources"]
+        sources=results["sources"],
+        traction_analysis=results["traction_analysis"]
+        
     )
 
     return {
@@ -214,5 +220,6 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
-        "sources": results["sources"]
+        "sources": results["sources"],
+        "traction_analysis": results["traction_analysis"]
     }

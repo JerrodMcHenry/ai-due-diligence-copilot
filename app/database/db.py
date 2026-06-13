@@ -27,7 +27,8 @@ def create_tables():
             investment_score TEXT,
             founder_analysis TEXT,
             market_analysis TEXT,
-            sources TEXT       
+            sources TEXT,
+            traction_analysis, TEXT       
         )
     """)
 
@@ -96,7 +97,8 @@ def save_analysis(
         investment_score,
         founder_analysis,
         market_analysis,
-        sources
+        sources,
+        traction_analysis
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -107,6 +109,7 @@ def save_analysis(
     founder_analysis_json = json.dumps(founder_analysis)
     market_analysis_json = json.dumps(market_analysis)
     sources_json = json.dumps(sources)
+    traction_analysis_json = json.dumps(traction_analysis)
 
     cursor.execute("""
         INSERT INTO analyses (
@@ -120,9 +123,10 @@ def save_analysis(
             investment_score,
             founder_analysis,
             market_analysis,
-            sources
+            sources,
+            traction_analysis
          )
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     """,(
         company_text,
         summary,
@@ -134,7 +138,8 @@ def save_analysis(
         investment_score_json,
         founder_analysis_json,
         market_analysis_json,
-        sources_json
+        sources_json,
+        traction_analysis_json
     ))
     
     connection.commit()
@@ -159,9 +164,11 @@ def search_analyses(query: str):
             OR founder_analysis LIKE ?
             OR market_analysis LIKE ? 
             OR sources LIKE ?
+            OR transaction_analysis LIKE ?
         ORDER BY id DESC
 """, 
 (
+    search_term,
     search_term,
     search_term,
     search_term,
@@ -192,7 +199,8 @@ def parse_structured_analysis(row):
         "investment_score",
         "founder_analysis",
         "market_analysis",
-        "sources"
+        "sources",
+        "transaction_analysis"
     ]
 
     for field in json_fields:
@@ -259,7 +267,8 @@ def update_analysis(
     investment_score: str,
     founder_analysis: str,
     market_analysis: str,
-    sources: str
+    sources: str,
+    transaction_analysis: str
 ):
     connection = get_connection()
     cursor = connection.cursor()
@@ -276,7 +285,8 @@ def update_analysis(
             investment_score = ?,
             founder_analysis = ?,
             market_analysis = ?,
-            sources = ?
+            sources = ?,
+            transaction_analysis = ?
         WHERE id = ?
         """,
         (
@@ -290,7 +300,8 @@ def update_analysis(
             founder_analysis,
             market_analysis,
             analysis_id,
-            sources
+            sources,
+            transaction_analysis
         )
     )
 

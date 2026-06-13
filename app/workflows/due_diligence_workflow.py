@@ -7,7 +7,7 @@ from ai.scoring import generate_investment_score
 from ai.founder_analysis import analyze_founders
 from ai.market_analysis import analyze_market
 from ai.research_enrichment import enrich_research
-
+from ai.traction_analysis import analyze_traction
 
 def run_due_diligence(company_text):
 
@@ -40,6 +40,8 @@ Additional Research Context:
 
     market_analysis = analyze_market(enriched_text)
 
+    traction_analysis = analyze_traction(enriched_text)
+
     return {
         "summary": summary,
         "risk_analysis": risk_analysis,
@@ -49,5 +51,6 @@ Additional Research Context:
         "investment_score": investment_score,
         "founder_analysis": founder_analysis,
         "market_analysis": market_analysis,
-        "sources": sources
+        "sources": sources,
+        "traction_analysis": traction_analysis
     }

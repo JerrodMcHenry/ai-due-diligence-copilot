@@ -14,6 +14,7 @@ class StartupAnalysisResponse(BaseModel):
     founder_analysis: dict
     market_analysis: dict
     sources: list = []
+    traction_analysis: dict
 
 class UpdateAnalysisRequest(BaseModel):
     company_text: str
@@ -26,6 +27,7 @@ class UpdateAnalysisRequest(BaseModel):
     founder_analysis: dict
     market_analysis: dict
     sources: list = []
+    traction_analysis: dict
 
 class WebsiteAnalysisRequest(BaseModel):
     url: str
