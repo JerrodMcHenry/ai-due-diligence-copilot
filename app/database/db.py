@@ -38,7 +38,52 @@ def create_tables():
 
     print("PostgreSQL tables created successfully.")
 
-   
+
+def add_analysis_columns():
+    columns = [
+        "sources TEXT",
+        "traction_analysis TEXT",
+    ]
+
+    for column in columns:
+            column_name = column.split()[0]
+
+            try:
+                with engine.begin() as connection:
+                    connection.execute(text(
+                        f"ALTER TABLE analyses ADD COLUMN {column}"
+                ))
+                print(f"{column_name} column added")
+            except Exception as e:
+                print(f"{column_name} migration skipped", e)
+
+
+def add_scoring_columns():
+    columns = [
+        "market_score INTEGER",
+        "team_score INTEGER",
+        "product_score INTEGER",
+        "competition_score INTEGER",
+        "traction_score INTEGER",
+        "financial_score INTEGER",
+        "overall_score INTEGER",
+        "recommendation TEXT",
+
+    ]
+
+    for column in columns:
+            column_name = column.split()[0]
+
+            try:
+                with engine.begin() as connection:
+                    connection.execute(text(
+                    f"ALTER TABLE analyses ADD COLUMN {column}"
+                ))
+                print(f"{column_name} column added")
+            except Exception as e:
+                print(f"{column_name} migration skipped", e)
+
+
 
 def save_analysis(
     company_text,
@@ -51,11 +96,20 @@ def save_analysis(
     founder_analysis,
     market_analysis,
     sources,
-    traction_analysis
+    traction_analysis,
+    market_score,
+    team_score,
+    product_score,
+    competition_score,
+    traction_score,
+    financial_score,
+    overall_score,
+    recommendation
 ):
     created_at = datetime.now().isoformat()
 
     with engine.begin() as connection:
+        
         connection.execute(text("""
             INSERT INTO analyses (
                 company_text,
@@ -69,7 +123,15 @@ def save_analysis(
                 founder_analysis,
                 market_analysis,
                 sources,
-                traction_analysis
+                traction_analysis,
+                market_score,
+                team_score,
+                product_score,
+                competition_score,
+                traction_score,
+                financial_score,
+                overall_score,
+                recommendation
             )
             VALUES (
                 :company_text,
@@ -83,7 +145,15 @@ def save_analysis(
                 :founder_analysis,
                 :market_analysis,
                 :sources,
-                :traction_analysis
+                :traction_analysis,
+                :market_score,
+                :team_score,
+                :product_score,
+                :competition_score,
+                :traction_score,
+                :financial_score,
+                :overall_score,
+                :recommendation
             )
         """), {
             "company_text": company_text,
@@ -98,6 +168,14 @@ def save_analysis(
             "market_analysis": json.dumps(market_analysis),
             "sources": json.dumps(sources),
             "traction_analysis": json.dumps(traction_analysis),
+            "market_score": market_score,
+            "team_score": team_score,
+            "product_score": product_score,
+            "competition_score": competition_score,
+            "traction_score": traction_score,
+            "financial_score": financial_score,
+            "overall_score": overall_score,
+            "recommendation": recommendation,
         })
 
 def search_analyses(query: str):

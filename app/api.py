@@ -6,7 +6,9 @@ from database.db import (create_tables,
                          get_analysis_by_id, 
                          delete_analysis,
                          update_analysis,
-                         search_analyses
+                         search_analyses,
+                         add_scoring_columns,
+                         add_analysis_columns
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -17,7 +19,13 @@ from website_scrapper import extract_text_from_website
 from reporting.pdf_generator import generate_pdf_report
 
 app = FastAPI()
+
+print("RUNNING API.PY MIGRATIONS")
+
 create_tables()
+add_analysis_columns()
+add_scoring_columns()
+
 
 @app.get("/health")
 def health():
@@ -38,7 +46,7 @@ def health_check():
 def get_saved_analyses():
     return get_analyses()
 
-@app.get("/anlyses/search")
+@app.get("/analyses/search")
 def search_saved_analyses(query: str):
     return search_analyses(query)
 
@@ -130,8 +138,16 @@ def analyze_startup(request: StartupAnalysisRequest):
         founder_analysis=results["founder_analysis"],
         market_analysis=results["market_analysis"],
         sources=results["sources"],
-        traction_analysis=results["traction_analysis"]
-        
+        traction_analysis=results["traction_analysis"],
+        market_score=results["market_score"],
+        team_score=results["team_score"],
+        product_score=results["product_score"],
+        competition_score=results["competition_score"],
+        traction_score=results["traction_score"],
+        financial_score=results["financial_score"],
+        overall_score=results["overall_score"],
+        recommendation=results["recommendation"]
+                
     )
     
     return {
@@ -144,7 +160,15 @@ def analyze_startup(request: StartupAnalysisRequest):
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
         "sources": results["sources"],
-        "traction_analysis": results["traction_analysis"]
+        "traction_analysis": results["traction_analysis"],
+        "market_score": results["market_score"],
+        "team_score": results["team_score"],
+        "product_score": results["product_score"],
+        "competition_score": results["competition_score"],
+        "traction_score": results["traction_score"],
+        "financial_score": results["financial_score"],
+        "overall_score": results["overall_score"],
+        "recommendation": results["recommendation"]
     }
 
 
@@ -170,7 +194,15 @@ async def analyze_pdf(file: UploadFile = File(...)):
             founder_analysis=results["founder_analysis"],
             market_analysis=results["market_analysis"],
             sources=results["sources"],
-            traction_analysis=results["traction_analysis"]
+            traction_analysis=results["traction_analysis"],
+            market_score=results["market_score"],
+            team_score=results["team_score"],
+            product_score=results["product_score"],
+            competition_score=results["competition_score"],
+            traction_score=results["traction_score"],
+            financial_score=results["financial_score"],
+            overall_score=results["overall_score"],
+            recommendation=results["recommendation"]
             
         )
 
@@ -179,12 +211,20 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "risk_analysis": results["risk_analysis"],
             "competitor_analysis": results["competitor_analysis"],
             "memo": results["memo"],
-            "structured_analysis": json.dumps(results["structured_analysis"]),
+            "structured_analysis": results["structured_analysis"],
             "investment_score": results["investment_score"],
             "founder_analysis": results["founder_analysis"],
             "market_analysis": results["market_analysis"],
             "sources": results["sources"],
-            "traction_analysis": results["traction_analysis"]
+            "traction_analysis": results["traction_analysis"],
+            "market_score": results["market_score"],
+            "team_score": results["team_score"],
+            "product_score": results["product_score"],
+            "competition_score": results["competition_score"],
+            "traction_score": results["traction_score"],
+            "financial_score": results["financial_score"],
+            "overall_score": results["overall_score"],
+            "recommendation": results["recommendation"]
         }
 
     except ValueError as e:
@@ -214,8 +254,16 @@ def analyze_website(request: WebsiteAnalysisRequest):
         founder_analysis=results["founder_analysis"],
         market_analysis=results["market_analysis"],
         sources=results["sources"],
-        traction_analysis=results["traction_analysis"]
-        
+        traction_analysis=results["traction_analysis"],
+        market_score=results["market_score"],
+        team_score=results["team_score"],
+        product_score=results["product_score"],
+        competition_score=results["competition_score"],
+        traction_score=results["traction_score"],
+        financial_score=results["financial_score"],
+        overall_score=results["overall_score"],
+        recommendation=results["recommendation"]
+                
     )
 
     return {
@@ -223,10 +271,18 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "risk_analysis": results["risk_analysis"],
         "competitor_analysis": results["competitor_analysis"],
         "memo": results["memo"],
-        "structured_analysis": json.dumps(results["structured_analysis"]),
+        "structured_analysis": results["structured_analysis"],
         "investment_score": results["investment_score"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
         "sources": results["sources"],
-        "traction_analysis": results["traction_analysis"]
+        "traction_analysis": results["traction_analysis"],
+        "market_score": results["market_score"],
+        "team_score": results["team_score"],
+        "product_score": results["product_score"],
+        "competition_score": results["competition_score"],
+        "traction_score": results["traction_score"],
+        "financial_score": results["financial_score"],
+        "overall_score": results["overall_score"],
+        "recommendation": results["recommendation"]
     }

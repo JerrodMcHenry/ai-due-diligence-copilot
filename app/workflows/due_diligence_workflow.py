@@ -52,5 +52,14 @@ Additional Research Context:
         "founder_analysis": founder_analysis,
         "market_analysis": market_analysis,
         "sources": sources,
-        "traction_analysis": traction_analysis
-    }
+        "traction_analysis": traction_analysis,
+
+        "market_score": investment_score.get("market_score"),
+        "team_score": investment_score.get("team_score"),
+        "product_score": investment_score.get("product_score"),
+        "competition_score": investment_score.get("competition_score"),
+        "traction_score": investment_score.get("traction_score"),
+        "financial_score": investment_score.get("financial_score"),
+        "overall_score": investment_score.get("overall_score"),
+        "recommendation": investment_score.get("recommendation"),
+}

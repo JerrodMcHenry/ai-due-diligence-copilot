@@ -46,16 +46,18 @@ Do not wrap the JSON in triple backticks.
 
 Return exactly this structure:
 {{
-  "overall_score": 0,
   "market_score": 0,
-  "competition_score": 0,
-  "risk_score": 0,
+  "team_score": 0,
   "product_score": 0,
+  "competition_score": 0,
+  "traction_score": 0,
+  "financial_score": 0,
+  "overall_score": 0,
   "recommendation": "string"
 }}
 
 overall_score should be 0 to 100.
-market_score, competition_score, risk_score, and product_score should be 0 to 10.
+market_score, team_score, product_score, competition_score, traction_score, and financial_score should be 0 to 10.
 """
             }
         ]
@@ -68,10 +70,12 @@ market_score, competition_score, risk_score, and product_score should be 0 to 10
 
     except Exception:
         return {
-            "overall_score": 0,
             "market_score": 0,
-            "competition_score": 0,
-            "risk_score": 0,
+            "team_score": 0,
             "product_score": 0,
+            "competition_score": 0,
+            "traction_score": 0,
+            "financial_score": 0,
+            "overall_score": 0,
             "recommendation": "Unable to parse scoring output"
         }
