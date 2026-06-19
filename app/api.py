@@ -11,7 +11,9 @@ from database.db import (create_tables,
                          add_analysis_columns,
                          get_analytics,
                          add_benchmarking_columns,
-                         get_industry_analytics
+                         get_industry_analytics,
+                         get_rankings,
+                         add_company_name_column
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -85,6 +87,10 @@ def analytics():
 @app.get("/analytics/industries")
 def industry_analytics():
     return get_industry_analytics()
+
+@app.get("/rankings")
+def rankings():
+    return get_rankings()
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
@@ -302,3 +308,8 @@ def analyze_website(request: WebsiteAnalysisRequest):
 def migrate_add_benchmarking_columns():
     add_benchmarking_columns()
     return {"message": "Benchmarking columns migration completed"}
+
+@app.post("/migrate/add-company-name-column")
+def migrate_add_company_name_column():
+    add_company_name_column()
+    return {"message": "Company name column migration completed"}

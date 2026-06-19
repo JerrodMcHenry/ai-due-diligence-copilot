@@ -103,6 +103,16 @@ def add_benchmarking_columns():
         except Exception as e:
             print(f"{column_name} migration skipped", e)
 
+def add_company_name_column():
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE analyses ADD COLUMN company_name TEXT
+            """))
+            print("company_name column added")
+    except Exception as e:
+        print("company_name migration skipped", e)
+
 
 def save_analysis(
     company_text,
@@ -125,12 +135,13 @@ def save_analysis(
     overall_score,
     recommendation
 ):
-    
+    company_name = None
     industry = None
     stage = None
     business_model = None
 
     if isinstance(structured_analysis, dict):
+        company_name = structured_analysis.get("company_name")
         industry = structured_analysis.get("industry")
         stage = structured_analysis.get("stage")
         business_model = structured_analysis.get("business_model")
@@ -141,6 +152,7 @@ def save_analysis(
         
         connection.execute(text("""
             INSERT INTO analyses (
+                company_name,
                 company_text,
                 summary,
                 risk_analysis,
@@ -166,6 +178,7 @@ def save_analysis(
                 business_model
             )
             VALUES (
+                :company_name,
                 :company_text,
                 :summary,
                 :risk_analysis,
@@ -191,6 +204,7 @@ def save_analysis(
                 :business_model
             )
         """), {
+            "company_name": company_name,
             "company_text": company_text,
             "summary": summary,
             "risk_analysis": risk_analysis,
@@ -417,6 +431,35 @@ def get_industry_analytics():
                 COALESCE(stage, 'Unknown'),
                 COALESCE(business_model, 'Unknown')
             ORDER BY total_startups DESC
+        """))
+
+        rows = result.mappings().all()
+
+    return [dict(row) for row in rows]
+
+
+
+def get_rankings():
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                id,
+                company_name,
+                industry,
+                stage,
+                business_model,
+                overall_score,
+                market_score,
+                team_score,
+                product_score,
+                competition_score,
+                traction_score,
+                financial_score,
+                recommendation,
+                created_at
+            FROM analyses
+            WHERE overall_score IS NOT NULL
+            ORDER BY overall_score DESC
         """))
 
         rows = result.mappings().all()
