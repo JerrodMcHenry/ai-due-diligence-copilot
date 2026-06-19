@@ -316,3 +316,44 @@ def update_analysis(
         updated_count = result.rowcount
 
     return updated_count
+
+def get_analytics():
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                COUNT(*) AS total_startups,
+                ROUND(AVG(overall_score), 2) AS average_overall_score,
+                ROUND(AVG(market_score), 2) AS average_market_score,
+                ROUND(AVG(team_score), 2) AS average_team_score,
+                ROUND(AVG(product_score), 2) AS average_product_score,
+                ROUND(AVG(competition_score), 2) AS average_competition_score,
+                ROUND(AVG(traction_score), 2) AS average_traction_score,
+                ROUND(AVG(financial_score), 2) AS average_financial_score
+            FROM analyses
+        """))
+
+        analytics = dict(result.mappings().first())
+
+        top_result = connection.execute(text("""
+            SELECT
+                id,
+                summary,
+                overall_score,
+                market_score,
+                team_score,
+                product_score,
+                traction_score,
+                financial_score,
+                recommendation,
+                created_at
+            FROM analyses
+            WHERE overall_score IS NOT NULL
+            ORDER BY overall_score DESC
+            LIMIT 5  
+        """))
+
+        top_startups = [dict(row) for row in top_result.mappings().all()]
+
+    analytics["top_startups"] = top_startups
+
+    return analytics

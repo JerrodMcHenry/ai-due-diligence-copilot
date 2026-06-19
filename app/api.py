@@ -8,7 +8,8 @@ from database.db import (create_tables,
                          update_analysis,
                          search_analyses,
                          add_scoring_columns,
-                         add_analysis_columns
+                         add_analysis_columns,
+                         get_analytics
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -74,6 +75,10 @@ def download_analysis_pdf(analysis_id: int):
         media_type="application/pdf",
         filename=pdf_path.split("/")[-1],
     )
+
+@app.get("/analytics")
+def analytics():
+    return get_analytics()
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
