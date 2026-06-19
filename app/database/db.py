@@ -83,6 +83,25 @@ def add_scoring_columns():
             except Exception as e:
                 print(f"{column_name} migration skipped", e)
 
+def add_benchmarking_columns():
+    columns = [
+        "industry TEXT",
+        "stage TEXT",
+        "business_model TEXT"
+
+    ]
+
+    for column in columns:
+        column_name = column.split()[0]
+
+        try:
+            with engine.begin() as connection:
+                connection.execute(text(
+                    f"ALTER TABLE analyses ADD COLUMN {column}"
+                ))
+                print(f"{column_name} column added")
+        except Exception as e:
+            print(f"{column_name} migration skipped", e)
 
 
 def save_analysis(
@@ -106,6 +125,16 @@ def save_analysis(
     overall_score,
     recommendation
 ):
+    
+    industry = None
+    stage = None
+    business_model = None
+
+    if isinstance(structured_analysis, dict):
+        industry = structured_analysis.get("industry")
+        stage = structured_analysis.get("stage")
+        business_model = structured_analysis.get("business_model")
+    
     created_at = datetime.now().isoformat()
 
     with engine.begin() as connection:
@@ -131,7 +160,10 @@ def save_analysis(
                 traction_score,
                 financial_score,
                 overall_score,
-                recommendation
+                recommendation,
+                industry,
+                stage,
+                business_model
             )
             VALUES (
                 :company_text,
@@ -153,7 +185,10 @@ def save_analysis(
                 :traction_score,
                 :financial_score,
                 :overall_score,
-                :recommendation
+                :recommendation,
+                :industry,
+                :stage,
+                :business_model
             )
         """), {
             "company_text": company_text,
@@ -176,6 +211,9 @@ def save_analysis(
             "financial_score": financial_score,
             "overall_score": overall_score,
             "recommendation": recommendation,
+            "industry": industry,
+            "stage": stage,
+            "business_model": business_model
         })
 
 def search_analyses(query: str):
@@ -357,3 +395,30 @@ def get_analytics():
     analytics["top_startups"] = top_startups
 
     return analytics
+
+def get_industry_analytics():
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                COALESCE(industry, 'Unknown') AS industry,
+                COALESCE(stage, 'Unknown') AS stage,
+                COALESCE(business_model, 'Unknown') AS business_model,
+                COUNT(*) AS total_startups,
+                ROUND(AVG(overall_score), 2) AS average_overall_score,
+                ROUND(AVG(market_score), 2) AS average_market_score,
+                ROUND(AVG(team_score), 2) AS average_team_score,
+                ROUND(AVG(product_score), 2) AS average_product_score,
+                ROUND(AVG(competition_score), 2) AS average_competition_score,
+                ROUND(AVG(traction_score), 2) AS average_traction_score,
+                ROUND(AVG(financial_score), 2) AS average_financial_score
+            FROM analyses
+            GROUP BY
+                COALESCE(industry, 'Unknown'),
+                COALESCE(stage, 'Unknown'),
+                COALESCE(business_model, 'Unknown')
+            ORDER BY total_startups DESC
+        """))
+
+        rows = result.mappings().all()
+
+    return [dict(row) for row in rows]

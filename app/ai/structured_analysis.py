@@ -21,10 +21,22 @@ def generate_structured_analysis(company_text):
 Analyze this startup and return JSON with these exact keys:
 
 company_name
+industry
+stage
+business_model
 summary
 key_risks
 strengths
 recommendation
+
+
+RULES:
+
+- industry should be a single category such as AI, Fintech, SaaS, Healthcare, Cybersecurity, ClimateTech, Consumer, Marketplace, etc.
+- stage should be one of: Idea, Pre-Seed, Seed, Series A, Series B+, Growth
+- business_model should be one of: SaaS, Marketplace, Subscription, Transaction Fee, Enterprise Software, Consumer App, Hardware, Services
+
+Return only valid JSON.
 
 Startup:
 {company_text}

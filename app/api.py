@@ -9,7 +9,9 @@ from database.db import (create_tables,
                          search_analyses,
                          add_scoring_columns,
                          add_analysis_columns,
-                         get_analytics
+                         get_analytics,
+                         add_benchmarking_columns,
+                         get_industry_analytics
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -79,6 +81,10 @@ def download_analysis_pdf(analysis_id: int):
 @app.get("/analytics")
 def analytics():
     return get_analytics()
+
+@app.get("/analytics/industries")
+def industry_analytics():
+    return get_industry_analytics()
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
@@ -291,3 +297,8 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "overall_score": results["overall_score"],
         "recommendation": results["recommendation"]
     }
+
+@app.post("/migrate/add-benchmarking-columns")
+def migrate_add_benchmarking_columns():
+    add_benchmarking_columns()
+    return {"message": "Benchmarking columns migration completed"}
