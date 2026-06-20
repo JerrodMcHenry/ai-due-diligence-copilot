@@ -8,6 +8,7 @@ from ai.founder_analysis import analyze_founders
 from ai.market_analysis import analyze_market
 from ai.research_enrichment import enrich_research
 from ai.traction_analysis import analyze_traction
+from ai.readiness_score import generate_readiness_score
 
 def run_due_diligence(company_text):
 
@@ -36,11 +37,23 @@ Additional Research Context:
 
     investment_score = generate_investment_score(enriched_text)
 
+    readiness = generate_readiness_score(
+        investment_score.get("market_score"),
+        investment_score.get("team_score"),
+        investment_score.get("product_score"),
+        investment_score.get("competition_score"),
+        investment_score.get("traction_score"),
+        investment_score.get("financial_score"),
+        investment_score.get("overall_score")
+    )
+
     founder_analysis = analyze_founders(enriched_text)
 
     market_analysis = analyze_market(enriched_text)
 
     traction_analysis = analyze_traction(enriched_text)
+
+
 
     return {
         "summary": summary,
@@ -49,6 +62,9 @@ Additional Research Context:
         "memo": memo,
         "structured_analysis": structured_analysis,
         "investment_score": investment_score,
+        "readiness": readiness,
+        "readiness_score": readiness.get("readiness_score"),
+        "readiness_summary": readiness.get("readiness_summary"),
         "founder_analysis": founder_analysis,
         "market_analysis": market_analysis,
         "sources": sources,
@@ -62,4 +78,5 @@ Additional Research Context:
         "financial_score": investment_score.get("financial_score"),
         "overall_score": investment_score.get("overall_score"),
         "recommendation": investment_score.get("recommendation"),
+        
 }

@@ -13,7 +13,8 @@ from database.db import (create_tables,
                          add_benchmarking_columns,
                          get_industry_analytics,
                          get_rankings,
-                         add_company_name_column
+                         add_company_name_column,
+                         add_readiness_columns
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -163,7 +164,11 @@ def analyze_startup(request: StartupAnalysisRequest):
         traction_score=results["traction_score"],
         financial_score=results["financial_score"],
         overall_score=results["overall_score"],
-        recommendation=results["recommendation"]
+        recommendation=results["recommendation"],
+        readiness_score=results["readiness_score"],
+        readiness_summary=results["readiness_summary"],
+
+        
                 
     )
     
@@ -174,6 +179,9 @@ def analyze_startup(request: StartupAnalysisRequest):
         "memo": results["memo"],
         "structured_analysis":results["structured_analysis"],
         "investment_score": results["investment_score"],
+        "readiness": results["readiness"],
+        "readiness_score":results["readiness_score"],
+        "readiness_summary":results["readiness_summary"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
         "sources": results["sources"],
@@ -185,7 +193,10 @@ def analyze_startup(request: StartupAnalysisRequest):
         "traction_score": results["traction_score"],
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
-        "recommendation": results["recommendation"]
+        "recommendation": results["recommendation"],
+
+        
+        
     }
 
 
@@ -219,7 +230,9 @@ async def analyze_pdf(file: UploadFile = File(...)):
             traction_score=results["traction_score"],
             financial_score=results["financial_score"],
             overall_score=results["overall_score"],
-            recommendation=results["recommendation"]
+            recommendation=results["recommendation"],
+            readiness_score=results["readiness_score"],
+            readiness_summary=results["readiness_summary"]
             
         )
 
@@ -230,6 +243,9 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "memo": results["memo"],
             "structured_analysis": results["structured_analysis"],
             "investment_score": results["investment_score"],
+            "readiness": results["readiness"],
+            "readiness_score":results["readiness_score"],
+            "readiness_summary":results["readiness_summary"],
             "founder_analysis": results["founder_analysis"],
             "market_analysis": results["market_analysis"],
             "sources": results["sources"],
@@ -241,7 +257,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "traction_score": results["traction_score"],
             "financial_score": results["financial_score"],
             "overall_score": results["overall_score"],
-            "recommendation": results["recommendation"]
+            "recommendation": results["recommendation"],
+            
         }
 
     except ValueError as e:
@@ -279,7 +296,9 @@ def analyze_website(request: WebsiteAnalysisRequest):
         traction_score=results["traction_score"],
         financial_score=results["financial_score"],
         overall_score=results["overall_score"],
-        recommendation=results["recommendation"]
+        recommendation=results["recommendation"],
+        readiness_score=results["readiness_score"],
+        readiness_summary=results["readiness_summary"]
                 
     )
 
@@ -290,6 +309,9 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "memo": results["memo"],
         "structured_analysis": results["structured_analysis"],
         "investment_score": results["investment_score"],
+        "readiness": results["readiness"],
+        "readiness_score":results["readiness_score"],
+        "readiness_summary":results["readiness_summary"],
         "founder_analysis": results["founder_analysis"],
         "market_analysis": results["market_analysis"],
         "sources": results["sources"],
@@ -301,7 +323,8 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "traction_score": results["traction_score"],
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
-        "recommendation": results["recommendation"]
+        "recommendation": results["recommendation"],
+        
     }
 
 @app.post("/migrate/add-benchmarking-columns")
@@ -313,3 +336,8 @@ def migrate_add_benchmarking_columns():
 def migrate_add_company_name_column():
     add_company_name_column()
     return {"message": "Company name column migration completed"}
+
+@app.post("/migrate/add-readiness-columns")
+def migrate_add_readiness_columns():
+    add_readiness_columns()
+    return {"message": "Readiness columns migration completed"}

@@ -114,6 +114,26 @@ def add_company_name_column():
         print("company_name migration skipped", e)
 
 
+def add_readiness_columns():
+    columns = [
+        "readiness_score INTEGER",
+        "readiness_summary TEXT"
+    ]
+
+    for column in columns:
+        column_name = column.split()[0]
+
+        try:
+            with engine.begin() as connection:
+                connection.execute(text(
+                    f"ALTER TABLE analyses ADD COLUMN {column}"
+                ))
+            print(f"{column_name} column added")
+
+        except Exception as e:
+            print(f"{column_name} migration skipped", e)
+
+
 def save_analysis(
     company_text,
     summary,
@@ -133,7 +153,9 @@ def save_analysis(
     traction_score,
     financial_score,
     overall_score,
-    recommendation
+    recommendation,
+    readiness_score,
+    readiness_summary
 ):
     company_name = None
     industry = None
@@ -173,6 +195,8 @@ def save_analysis(
                 financial_score,
                 overall_score,
                 recommendation,
+                readiness_score,
+                readiness_summary,
                 industry,
                 stage,
                 business_model
@@ -199,6 +223,8 @@ def save_analysis(
                 :financial_score,
                 :overall_score,
                 :recommendation,
+                :readiness_score,
+                :readiness_summary,             
                 :industry,
                 :stage,
                 :business_model
@@ -225,6 +251,8 @@ def save_analysis(
             "financial_score": financial_score,
             "overall_score": overall_score,
             "recommendation": recommendation,
+            "readiness_score": readiness_score,
+            "readiness_summary": readiness_summary,
             "industry": industry,
             "stage": stage,
             "business_model": business_model

@@ -24,6 +24,9 @@ class StartupAnalysisResponse(BaseModel):
     financial_score: int | None = None
     overall_score: int | None = None
     recommendation: str | None = None
+    readiness: dict | None = None
+    readiness_score: int | None = None
+    readiness_summary: str | None = None
 
 class UpdateAnalysisRequest(BaseModel):
     summary: str
@@ -45,6 +48,9 @@ class UpdateAnalysisRequest(BaseModel):
     financial_score: int | None = None
     overall_score: int | None = None
     recommendation: str | None = None
+    readiness: dict | None = None
+    readiness_score: int | None = None
+    readiness_summary: str | None = None
 
 class WebsiteAnalysisRequest(BaseModel):
     url: str
