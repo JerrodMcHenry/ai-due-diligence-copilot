@@ -257,6 +257,43 @@ def get_score_history(company_name: str):
     return [dict(row) for row in rows]
 
 
+def get_startup_trends(company_name: str):
+    history = get_score_history(company_name)
+
+    if len(history) == 0:
+        return {
+            "error": "No history found"
+        }
+
+    first = history[0]
+    latest = history[-1]
+
+    score_change = latest["overall_score"] - first["overall_score"]
+    readiness_change = (
+        latest["readiness_score"] -
+        first["readiness_score"]
+    )
+
+    if score_change > 0:
+        trend = "Improving"
+    elif score_change < 0:
+        trend = "Declining"
+    else:
+        trend = "Stable"
+
+    return {
+        "company_name": company_name,
+        "first_score": first["overall_score"],
+        "latest_score": latest["overall_score"],
+        "score_change": score_change,
+        "first_readiness": first["readiness_score"],
+        "latest_readiness": latest["readiness_score"],
+        "readiness_change": readiness_change,
+        "trend": trend,
+        "total_analyses": len(history)
+    }
+
+
 def save_analysis(
     company_text,
     summary,
