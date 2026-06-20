@@ -134,6 +134,129 @@ def add_readiness_columns():
             print(f"{column_name} migration skipped", e)
 
 
+def create_score_history_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS score_history (
+                id SERIAL PRIMARY KEY,
+                analysis_id INTEGER REFERENCES analyses(id) ON DELETE CASCADE,
+                company_name TEXT,
+                industry TEXT,
+                stage TEXT,
+                business_model TEXT,
+                market_score INTEGER,
+                team_score INTEGER,
+                product_score INTEGER,
+                competition_score INTEGER,
+                traction_score INTEGER,
+                financial_score INTEGER,
+                overall_score INTEGER,
+                readiness_score INTEGER,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("score_history table created successfully.")
+
+def save_score_history(
+    analysis_id,
+    company_name,
+    industry,
+    stage,
+    business_model,
+    market_score,
+    team_score,
+    product_score,
+    competition_score,
+    traction_score,
+    financial_score,
+    overall_score,
+    readiness_score
+):
+    with engine.begin() as connection:
+        connection.execute(text("""
+            INSERT INTO score_history (
+                analysis_id,
+                company_name,
+                industry,
+                stage,
+                business_model,
+                market_score,
+                team_score,
+                product_score,
+                competition_score,
+                traction_score,
+                financial_score,
+                overall_score,
+                readiness_score
+            )
+            VALUES (
+                :analysis_id,
+                :company_name,
+                :industry,
+                :stage,
+                :business_model,
+                :market_score,
+                :team_score,
+                :product_score,
+                :competition_score,
+                :traction_score,
+                :financial_score,
+                :overall_score,
+                :readiness_score
+            )
+        """), {
+            "analysis_id": analysis_id,
+            "company_name": company_name,
+            "industry": industry,
+            "stage": stage,
+            "business_model": business_model,
+            "market_score": market_score,
+            "team_score": team_score,
+            "product_score": product_score,
+            "competition_score": competition_score,
+            "traction_score": traction_score,
+            "financial_score": financial_score,
+            "overall_score": overall_score,
+            "readiness_score": readiness_score,
+        })
+
+    print("Score history saved successfully.")
+
+
+def get_score_history(company_name: str):
+    search_term = f"%{company_name}%"
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                id,
+                analysis_id,
+                company_name,
+                industry,
+                stage,
+                business_model,
+                market_score,
+                team_score,
+                product_score,
+                competition_score,
+                traction_score,
+                financial_score,
+                overall_score,
+                readiness_score,
+                created_at
+            FROM score_history
+            WHERE company_name ILIKE :search_term
+            ORDER BY created_at ASC
+        """), {
+            "search_term": search_term
+        })
+
+        rows = result.mappings().all()
+
+    return [dict(row) for row in rows]
+
+
 def save_analysis(
     company_text,
     summary,
@@ -172,7 +295,7 @@ def save_analysis(
 
     with engine.begin() as connection:
         
-        connection.execute(text("""
+        result = connection.execute(text("""
             INSERT INTO analyses (
                 company_name,
                 company_text,
@@ -229,6 +352,7 @@ def save_analysis(
                 :stage,
                 :business_model
             )
+            RETURNING id
         """), {
             "company_name": company_name,
             "company_text": company_text,
@@ -257,6 +381,10 @@ def save_analysis(
             "stage": stage,
             "business_model": business_model
         })
+        analysis_id = result.scalar()
+    return analysis_id
+
+        
 
 def search_analyses(query: str):
     search_term = f"%{query}%"

@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
-from database.db import (create_tables, 
+from database.db import (create_tables,
+                         create_score_history_table, 
                          save_analysis, 
                          get_analyses, 
                          get_analysis_by_id, 
@@ -14,7 +15,9 @@ from database.db import (create_tables,
                          get_industry_analytics,
                          get_rankings,
                          add_company_name_column,
-                         add_readiness_columns
+                         add_readiness_columns,
+                         save_score_history,
+                         get_score_history
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -31,7 +34,10 @@ print("RUNNING API.PY MIGRATIONS")
 create_tables()
 add_analysis_columns()
 add_scoring_columns()
-
+add_benchmarking_columns()
+add_company_name_column()
+add_readiness_columns()
+create_score_history_table()
 
 @app.get("/health")
 def health():
@@ -93,6 +99,10 @@ def industry_analytics():
 def rankings():
     return get_rankings()
 
+@app.get("/score-history/{company_name}")
+def score_history(company_name: str):
+    return get_score_history(company_name)
+
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
     analysis_id: int,
@@ -145,7 +155,7 @@ def analyze_startup(request: StartupAnalysisRequest):
     results = run_due_diligence(request.company_text)
    
     
-    save_analysis(
+    analysis_id = save_analysis(
         company_text=request.company_text,
         summary=results["summary"],
         risk_analysis=results["risk_analysis"],
@@ -167,11 +177,26 @@ def analyze_startup(request: StartupAnalysisRequest):
         recommendation=results["recommendation"],
         readiness_score=results["readiness_score"],
         readiness_summary=results["readiness_summary"],
-
-        
-                
+               
     )
-    
+    structured_analysis = results["structured_analysis"]
+
+    save_score_history(
+        analysis_id=analysis_id,
+        company_name=structured_analysis.get("company_name"),
+        industry=structured_analysis.get("industry"),
+        stage=structured_analysis.get("stage"),
+        business_model=structured_analysis.get("business_model"),
+        market_score=results["market_score"],
+        team_score=results["team_score"],
+        product_score=results["product_score"],
+        competition_score=results["competition_score"],
+        traction_score=results["traction_score"],
+        financial_score=results["financial_score"],
+        overall_score=results["overall_score"],
+        readiness_score=results["readiness_score"]
+    )
+
     return {
         "summary": results["summary"],
         "risk_analysis": results["risk_analysis"],
