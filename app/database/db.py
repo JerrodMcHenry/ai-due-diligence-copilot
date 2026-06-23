@@ -658,3 +658,30 @@ def get_rankings():
         rows = result.mappings().all()
 
     return [dict(row) for row in rows]
+
+
+def get_top_startups(limit: int = 10):
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT DISTINCT ON (company_name)
+                company_name,
+                industry,
+                stage,
+                business_model,
+                overall_score,
+                readiness_score,
+                created_at
+            FROM score_history
+            WHERE overall_score IS NOT NULL
+            ORDER BY company_name, created_at DESC
+        """))
+
+        latest_rows = result.mappings().all()
+
+    sorted_rows = sorted(
+        [dict(row) for row in latest_rows],
+        key=lambda row: row["overall_score"],
+        reverse=True
+    )
+
+    return sorted_rows[:limit]
