@@ -685,3 +685,51 @@ def get_top_startups(limit: int = 10):
     )
 
     return sorted_rows[:limit]
+
+
+
+def get_top_improving_startups(limit: int = 10):
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT *
+            FROM score_history
+            ORDER BY company_name, created_at ASC
+        """))
+
+        rows = result.mappings().all()
+
+    companies = {}
+
+    for row in rows:
+        normalized_name = row["company_name"].lower().strip()
+
+        if normalized_name not in companies:
+            companies[normalized_name] = {
+                "display_name": row["company_name"],
+                "first_score": row["overall_score"],
+                "latest_score": row["overall_score"]
+            }
+        else:
+            companies[normalized_name]["latest_score"] = row["overall_score"]
+
+    improvements = []
+
+    for company_name, scores in companies.items():
+        score_change = (
+            scores["latest_score"] -
+            scores["first_score"]
+        )
+
+        improvements.append({
+            "company_name": scores["display_name"],
+            "first_score": scores["first_score"],
+            "latest_score": scores["latest_score"],
+            "score_change": score_change
+        })
+
+    improvements.sort(
+        key=lambda x: x["score_change"],
+        reverse=True
+    )
+
+    return improvements[:limit]

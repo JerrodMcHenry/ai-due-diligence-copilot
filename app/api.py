@@ -19,7 +19,8 @@ from database.db import (create_tables,
                          save_score_history,
                          get_score_history,
                          get_startup_trends,
-                         get_top_startups
+                         get_top_startups,
+                         get_top_improving_startups
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -112,6 +113,10 @@ def startup_trends(company_name: str):
 @app.get("/top-startups")
 def top_startups(limit: int = 10):
     return get_top_startups(limit)
+
+@app.get("/top-improving-startups")
+def top_improving_startups(limit: int = 10):
+    return get_top_improving_startups(limit)
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
