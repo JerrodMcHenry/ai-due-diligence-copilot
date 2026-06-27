@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from database.db import (create_tables,
                          create_score_history_table, 
                          save_analysis, 
@@ -31,6 +32,17 @@ from website_scrapper import extract_text_from_website
 from reporting.pdf_generator import generate_pdf_report
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 print("RUNNING API.PY MIGRATIONS")
 

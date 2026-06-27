@@ -568,6 +568,7 @@ def get_analytics():
             SELECT
                 COUNT(*) AS total_startups,
                 ROUND(AVG(overall_score), 2) AS average_overall_score,
+                ROUND(AVG(readiness_score), 2) AS average_readiness_score,
                 ROUND(AVG(market_score), 2) AS average_market_score,
                 ROUND(AVG(team_score), 2) AS average_team_score,
                 ROUND(AVG(product_score), 2) AS average_product_score,
