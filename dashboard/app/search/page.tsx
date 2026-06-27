@@ -1,13 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<any[]>([]);
 
   function handleSearch() {
-    fetch(`http://127.0.0.1:8000/analyses/search?query=${query}`)
+    fetch(
+      `http://127.0.0.1:8000/analyses/search?query=${encodeURIComponent(query)}`
+    )
       .then((response) => response.json())
       .then((data) => setResults(data));
   }
@@ -51,6 +54,14 @@ export default function SearchPage() {
             <p className="mt-4">
               Overall Score: {startup.overall_score ?? "--"}
             </p>
+            <Link
+              href={`/startup/${encodeURIComponent(
+                startup.company_name ?? "unknown"
+              )}`}
+              className="mt-4 inline-block text-blue-400 hover:text-blue-300 font-semibold"
+            >
+              View Startup →
+            </Link>
           </div>
         ))}
       </div>
