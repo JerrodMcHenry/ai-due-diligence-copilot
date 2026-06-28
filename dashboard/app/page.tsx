@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AnalyticsCard from "@/components/AnalyticsCard";
 import TopStartupsTable from "@/components/TopStartupsTable";
 import TopImprovingStartupsTable from "@/components/TopImprovingStartupsTable";
+import PageHeader from "@/components/layout/PageHeader";
 
 export default function Home() {
   const [analytics, setAnalytics] = useState<any>(null);
@@ -25,12 +26,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white p-8">
-      <h1 className="text-5xl font-bold">Startup Intelligence Engine</h1>
-
-      <p className="mt-4 text-gray-400">
-        AI-powered startup intelligence for founders and investors.
-      </p>
+    <div>
+      <PageHeader
+        title="Startup Intelligence Engine"
+        subtitle="Here’s what’s happening across your startup ecosystem."
+      />
 
       <div className="mt-10 grid grid-cols-3 gap-6">
         <AnalyticsCard
@@ -52,6 +52,6 @@ export default function Home() {
       <TopStartupsTable startups={topStartups} />
 
       <TopImprovingStartupsTable startups={topImprovingStartups} />
-    </main>
+    </div>
   );
 }
