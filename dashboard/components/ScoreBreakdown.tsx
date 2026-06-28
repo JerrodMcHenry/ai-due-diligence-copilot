@@ -29,15 +29,37 @@ export default function ScoreBreakdown({
       <h2 className="text-2xl font-bold mb-6">Score Breakdown</h2>
 
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {scores.map((score) => (
-          <div
-            key={score.label}
-            className="rounded-lg bg-gray-950 p-4 border border-gray-800"
-          >
-            <p className="text-gray-400">{score.label}</p>
-            <p className="text-3xl font-bold mt-2">{score.value ?? "--"}</p>
-          </div>
-        ))}
+        {scores.map((score) => {
+          const value = score.value ?? 0;
+          const width = `${value * 10}%`;
+
+          let barColor = "bg-red-500";
+
+          if (value >= 8) {
+            barColor = "bg-green-500";
+          } else if (value >= 5) {
+            barColor = "bg-yellow-500";
+          }
+
+          return (
+            <div
+              key={score.label}
+              className="rounded-lg bg-gray-950 p-4 border border-gray-800"
+            >
+              <div className="flex justify-between items-center">
+                <p className="text-gray-400">{score.label}</p>
+                <p className="font-bold">{score.value ?? "--"}/10</p>
+              </div>
+
+              <div className="mt-4 h-2 rounded-full bg-gray-800">
+                <div
+                  className={`h-2 rounded-full ${barColor}`}
+                  style={{ width }}
+                />
+              </div>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

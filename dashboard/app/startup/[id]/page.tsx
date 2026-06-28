@@ -6,6 +6,7 @@ type StartupProfilePageProps = {
 
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import AnalysisSection from "@/components/AnalysisSection";
+import StartupHero from "@/components/StartupHero";
 
 export default async function StartupProfilePage({
   params,
@@ -32,13 +33,15 @@ export default async function StartupProfilePage({
 
   return (
     <div className="p-8">
-      <h1 className="text-5xl font-bold">{startup.company_name}</h1>
+      <StartupHero
+        companyName={startup.company_name}
+        industry={startup.industry}
+        stage={startup.stage}
+        businessModel={startup.business_model}
+        recommendation={startup.recommendation}
+      />
 
-      <p className="mt-4 text-gray-400">
-        {startup.industry} • {startup.stage} • {startup.business_model}
-      </p>
-
-      <div className="mt-8 grid grid-cols-3 gap-6">
+      <div className="mt-8 grid grid-cols-2 gap-6">
         <div className="rounded-xl bg-gray-900 p-6">
           <p className="text-gray-400">Overall Score</p>
           <h2 className="text-4xl font-bold mt-2">
@@ -51,13 +54,6 @@ export default async function StartupProfilePage({
           <h2 className="text-4xl font-bold mt-2">
             {startup.readiness_score ?? "--"}
           </h2>
-        </div>
-
-        <div className="rounded-xl bg-gray-900 p-6">
-          <p className="text-gray-400">Recommendation</p>
-          <p className="mt-2 text-lg">
-            {startup.recommendation ?? "No recommendation available."}
-          </p>
         </div>
       </div>
 
