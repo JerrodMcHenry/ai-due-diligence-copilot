@@ -7,6 +7,7 @@ type StartupProfilePageProps = {
 import ScoreBreakdown from "@/components/ScoreBreakdown";
 import AnalysisSection from "@/components/AnalysisSection";
 import StartupHero from "@/components/StartupHero";
+import PrimaryScoreCard from "@/components/PrimaryScoreCard";
 
 export default async function StartupProfilePage({
   params,
@@ -42,19 +43,15 @@ export default async function StartupProfilePage({
       />
 
       <div className="mt-8 grid grid-cols-2 gap-6">
-        <div className="rounded-xl bg-gray-900 p-6">
-          <p className="text-gray-400">Overall Score</p>
-          <h2 className="text-4xl font-bold mt-2">
-            {startup.overall_score ?? "--"}
-          </h2>
-        </div>
+        <PrimaryScoreCard
+          title="Startup Intelligence Score"
+          score={startup.overall_score}
+        />
 
-        <div className="rounded-xl bg-gray-900 p-6">
-          <p className="text-gray-400">Readiness Score</p>
-          <h2 className="text-4xl font-bold mt-2">
-            {startup.readiness_score ?? "--"}
-          </h2>
-        </div>
+        <PrimaryScoreCard
+          title="Readiness Score"
+          score={startup.readiness_score}
+        />
       </div>
 
       <ScoreBreakdown
