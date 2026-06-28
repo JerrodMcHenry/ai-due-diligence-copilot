@@ -428,19 +428,29 @@ def search_analyses(query: str):
 
     with engine.begin() as connection:
         result = connection.execute(text("""
-            SELECT * FROM analyses
-            WHERE company_text ILIKE :search_term
-                OR summary ILIKE :search_term
-                OR risk_analysis ILIKE :search_term
-                OR competitor_analysis ILIKE :search_term
-                OR memo ILIKE :search_term
-                OR structured_analysis ILIKE :search_term
-                OR investment_score ILIKE :search_term
-                OR founder_analysis ILIKE :search_term
-                OR market_analysis ILIKE :search_term
-                OR sources ILIKE :search_term
-                OR traction_analysis ILIKE :search_term
-            ORDER BY id DESC
+            SELECT *
+            FROM (
+                SELECT DISTINCT ON (LOWER(COALESCE(company_name, summary)))
+                    *
+                FROM analyses
+                WHERE company_text ILIKE :search_term
+                    OR company_name ILIKE :search_term
+                    OR summary ILIKE :search_term
+                    OR risk_analysis ILIKE :search_term
+                    OR competitor_analysis ILIKE :search_term
+                    OR memo ILIKE :search_term
+                    OR structured_analysis ILIKE :search_term
+                    OR investment_score ILIKE :search_term
+                    OR founder_analysis ILIKE :search_term
+                    OR market_analysis ILIKE :search_term
+                    OR sources ILIKE :search_term
+                    OR traction_analysis ILIKE :search_term
+                ORDER BY
+                    LOWER(COALESCE(company_name, summary)),
+                    created_at DESC,
+                    id DESC
+            ) latest_results
+            ORDER BY created_at DESC
         """), {
             "search_term": search_term
         })
@@ -498,6 +508,31 @@ def get_analysis_by_id(analysis_id):
         return None
 
     return parse_structured_analysis(row)
+
+
+def get_startup_by_name(company_name: str):
+    search_term = f"%{company_name.strip()}%"
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT *
+            FROM analyses
+            WHERE company_name ILIKE :company_name
+                OR structured_analysis ILIKE :company_name
+                OR summary ILIKE :company_name
+            ORDER BY created_at DESC, id DESC
+            LIMIT 1
+        """), {
+            "company_name": search_term
+        })
+
+        row = result.mappings().first()
+
+    if row is None:
+        return None
+
+    return parse_structured_analysis(row)
+        
 
 def delete_analysis(analysis_id: int):
     with engine.begin() as connection:

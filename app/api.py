@@ -21,7 +21,8 @@ from database.db import (create_tables,
                          get_score_history,
                          get_startup_trends,
                          get_top_startups,
-                         get_top_improving_startups
+                         get_top_improving_startups,
+                         get_startup_by_name
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -129,6 +130,17 @@ def top_startups(limit: int = 10):
 @app.get("/top-improving-startups")
 def top_improving_startups(limit: int = 10):
     return get_top_improving_startups(limit)
+
+@app.get("/startup/{company_name}")
+def get_startup_profile(company_name: str):
+    startup = get_startup_by_name(company_name)
+
+    if startup is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Startup not found"
+        )
+    return startup
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
