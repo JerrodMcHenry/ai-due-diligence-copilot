@@ -21,10 +21,6 @@ def build_sie_methodology_analysis(
     traction_analysis,
     risk_analysis,
 ):
-    
-    founder_summary = founder_analysis.get("overall_assessment") if isinstance(founder_analysis, dict) else None
-    traction_summary = traction_analysis.get("overall_traction") if isinstance(traction_analysis, dict) else None
-
     return SIEMethodologyAnalysis(
         context=SIEContext(
             company_name=structured_analysis.get("company_name"),
@@ -41,25 +37,15 @@ def build_sie_methodology_analysis(
             strengths=market_analysis.strengths,
             weaknesses=market_analysis.weaknesses,
             recommendations=market_analysis.recommendations,
-),
+        ),
         team=PillarAnalysis(
             score=investment_score.get("team_score"),
-            confidence="Medium",
-            summary=founder_summary,
-            evidence=[
-                founder_analysis.get("founder_strengths"),
-                founder_analysis.get("domain_expertise"),
-                founder_analysis.get("fundraising_signal"),
-            ] if isinstance(founder_analysis, dict) else [],
-            strengths=[
-                founder_analysis.get("founder_strengths")
-            ] if isinstance(founder_analysis, dict) and founder_analysis.get("founder_strengths") else [],
-            weaknesses=[
-                founder_analysis.get("execution_risk")
-            ] if isinstance(founder_analysis, dict) and founder_analysis.get("execution_risk") else [],
-            recommendations=[
-                "Strengthen evidence of founder-market fit, execution history, and ability to scale go-to-market."
-            ],
+            confidence=founder_analysis.confidence,
+            summary=founder_analysis.summary,
+            evidence=founder_analysis.evidence,
+            strengths=founder_analysis.strengths,
+            weaknesses=founder_analysis.weaknesses,
+            recommendations=founder_analysis.recommendations,
         ),
         product=PillarAnalysis(
             score=investment_score.get("product_score"),
@@ -84,23 +70,12 @@ def build_sie_methodology_analysis(
         ),
         traction=PillarAnalysis(
             score=investment_score.get("traction_score"),
-            confidence="Medium",
-            summary=traction_summary,
-            evidence=[
-                traction_analysis.get("custoner_signals") or traction_analysis.get("customer_signals"),
-                traction_analysis.get("growth_signals"),
-                traction_analysis.get("partnership_signals"),
-                traction_analysis.get("fundraising_signals"),
-            ] if isinstance(traction_analysis, dict) else [],
-            strengths=[
-                traction_analysis.get("overall_traction")
-            ] if isinstance(traction_analysis, dict) and traction_analysis.get("overall_traction") else [],
-            weaknesses=[
-                traction_analysis.get("adoption_risk")
-            ] if isinstance(traction_analysis, dict) and traction_analysis.get("adoption_risk") else [],
-            recommendations=[
-                "Track customer growth, retention, churn, revenue growth, and sales efficiency more explicitly."
-            ],
+            confidence=traction_analysis.confidence,
+            summary=traction_analysis.summary,
+            evidence=traction_analysis.evidence,
+            strengths=traction_analysis.strengths,
+            weaknesses=traction_analysis.weaknesses,
+            recommendations=traction_analysis.recommendations,
         ),
         financial_health=PillarAnalysis(
             score=investment_score.get("financial_score"),
@@ -125,13 +100,13 @@ def build_sie_methodology_analysis(
         next_actions=readiness.get("strengths", []) + readiness.get("weaknesses", []),
     )
 
-def run_due_diligence(company_text):
 
+def run_due_diligence(company_text):
     research_result = enrich_research(company_text)
 
     research_context = research_result["research_brief"]
     sources = research_result["sources"]
-    
+
     enriched_text = f"""
 Original Company Information:
 {company_text}
@@ -141,15 +116,10 @@ Additional Research Context:
 """
 
     summary = summarize_company(enriched_text)
-
     risk_analysis = analyze_risks(enriched_text)
-
     competitor_analysis = analyze_competitors(enriched_text)
-
     memo = generate_investment_memo(enriched_text)
-
     structured_analysis = generate_structured_analysis(enriched_text)
-
     investment_score = generate_investment_score(enriched_text)
 
     readiness = generate_readiness_score(
@@ -159,24 +129,22 @@ Additional Research Context:
         investment_score.get("competition_score"),
         investment_score.get("traction_score"),
         investment_score.get("financial_score"),
-        investment_score.get("overall_score")
+        investment_score.get("overall_score"),
     )
 
     founder_analysis = analyze_founders(enriched_text)
-
     market_analysis = analyze_market(enriched_text)
-
     traction_analysis = analyze_traction(enriched_text)
 
     sie_analysis = build_sie_methodology_analysis(
-    structured_analysis=structured_analysis,
-    investment_score=investment_score,
-    readiness=readiness,
-    founder_analysis=founder_analysis,
-    market_analysis=market_analysis,
-    traction_analysis=traction_analysis,
-    risk_analysis=risk_analysis,
-)
+        structured_analysis=structured_analysis,
+        investment_score=investment_score,
+        readiness=readiness,
+        founder_analysis=founder_analysis,
+        market_analysis=market_analysis,
+        traction_analysis=traction_analysis,
+        risk_analysis=risk_analysis,
+    )
 
     return {
         "summary": summary,
@@ -192,7 +160,6 @@ Additional Research Context:
         "market_analysis": market_analysis,
         "sources": sources,
         "traction_analysis": traction_analysis,
-
         "market_score": investment_score.get("market_score"),
         "team_score": investment_score.get("team_score"),
         "product_score": investment_score.get("product_score"),
@@ -201,6 +168,5 @@ Additional Research Context:
         "financial_score": investment_score.get("financial_score"),
         "overall_score": investment_score.get("overall_score"),
         "recommendation": investment_score.get("recommendation"),
-        "sie_analysis": sie_analysis
-        
-}
+        "sie_analysis": sie_analysis,
+    }
