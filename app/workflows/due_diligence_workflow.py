@@ -21,7 +21,7 @@ def build_sie_methodology_analysis(
     traction_analysis,
     risk_analysis,
 ):
-    market_summary = market_analysis.get("market_summary") if isinstance(market_analysis, dict) else None
+    
     founder_summary = founder_analysis.get("overall_assessment") if isinstance(founder_analysis, dict) else None
     traction_summary = traction_analysis.get("overall_traction") if isinstance(traction_analysis, dict) else None
 
@@ -35,28 +35,13 @@ def build_sie_methodology_analysis(
         ),
         market=PillarAnalysis(
             score=investment_score.get("market_score"),
-            confidence="Medium",
-            summary=market_summary,
-            evidence=[
-                market_analysis.get("tam"),
-                market_analysis.get("sam"),
-                market_analysis.get("som"),
-                market_analysis.get("growth_rate"),
-            ] if isinstance(market_analysis, dict) else [],
-            strengths=[
-                "Operates in a large and growing market" if investment_score.get("market_score", 0) >= 7 else "Market opportunity requires more validation"
-            ],
-            weaknesses=[
-                "Market sizing data is incomplete or unknown"
-            ] if isinstance(market_analysis, dict) and (
-                market_analysis.get("tam") == "UNKNOWN"
-                or market_analysis.get("sam") == "UNKNOWN"
-                or market_analysis.get("som") == "UNKNOWN"
-            ) else [],
-            recommendations=[
-                "Validate TAM, SAM, SOM, and growth rate with credible market data."
-            ],
-        ),
+            confidence=market_analysis.confidence,
+            summary=market_analysis.summary,
+            evidence=market_analysis.evidence,
+            strengths=market_analysis.strengths,
+            weaknesses=market_analysis.weaknesses,
+            recommendations=market_analysis.recommendations,
+),
         team=PillarAnalysis(
             score=investment_score.get("team_score"),
             confidence="Medium",
