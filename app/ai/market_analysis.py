@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import json
 import re
+from models.analysis import MarketAnalysisResult
 
 load_dotenv()
 
@@ -58,11 +59,16 @@ If not explicitly provided, return UNKNOWN.
 Return exactly this JSON structure:
 
 {{
-    "tam": "UNKNOWN or directly supported value only",
-    "sam": "UNKNOWN or directly supported value only",
-    "som": "UNKNOWN or directly supported value only",
-    "growth_rate": "UNKNOWN or directly supported value only",
-    "market_summary": "Evidence-based summary. Clearly separate verified facts from inferences."
+  "summary": "Evidence-based market summary. Clearly separate verified facts from inferences.",
+  "confidence": "Low",
+  "tam": "UNKNOWN or directly supported value only",
+  "sam": "UNKNOWN or directly supported value only",
+  "som": "UNKNOWN or directly supported value only",
+  "growth_rate": "UNKNOWN or directly supported value only",
+  "strengths": [],
+  "weaknesses": [],
+  "evidence": [],
+  "recommendations": []
 }}
 """
             }
@@ -72,12 +78,20 @@ Return exactly this JSON structure:
     content = response.choices[0].message.content
 
     try:
-        return parse_json_from_response(content)
+        data = parse_json_from_response(content)
+
+        # Temporary backward compatibility
+        if "market_summary" not in data:
+            data["market_summary"] = data.get("summary")
+
+        return MarketAnalysisResult(**data)
+
     except Exception:
-        return {
-            "tam": "UNKNOWN",
-            "sam": "UNKNOWN",
-            "som": "UNKNOWN",
-            "growth_rate": "UNKNOWN",
-            "market_summary": "Unable to parse market analysis"
-        }
+        return MarketAnalysisResult(
+    summary="Unable to parse market analysis",
+    confidence="Low",
+    tam="UNKNOWN",
+    sam="UNKNOWN",
+    som="UNKNOWN",
+    growth_rate="UNKNOWN",
+)

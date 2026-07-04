@@ -21,7 +21,8 @@ from database.db import (create_tables,
                          get_score_history,
                          get_startup_trends,
                          get_top_startups,
-                         get_top_improving_startups
+                         get_top_improving_startups,
+                         get_startup_by_name
 )
 
 from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -130,6 +131,17 @@ def top_startups(limit: int = 10):
 def top_improving_startups(limit: int = 10):
     return get_top_improving_startups(limit)
 
+@app.get("/startup/{company_name}")
+def get_startup_profile(company_name: str):
+    startup = get_startup_by_name(company_name)
+
+    if startup is None:
+        raise HTTPException(
+            status_code=404,
+            detail="Startup not found"
+        )
+    return startup
+
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
     analysis_id: int,
@@ -191,7 +203,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         structured_analysis=results["structured_analysis"],
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
-        market_analysis=results["market_analysis"],
+        market_analysis=results["market_analysis"].model_dump(),
         sources=results["sources"],
         traction_analysis=results["traction_analysis"],
         market_score=results["market_score"],
@@ -235,7 +247,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         "readiness_score":results["readiness_score"],
         "readiness_summary":results["readiness_summary"],
         "founder_analysis": results["founder_analysis"],
-        "market_analysis": results["market_analysis"],
+        "market_analysis": results["market_analysis"].model_dump(),
         "sources": results["sources"],
         "traction_analysis": results["traction_analysis"],
         "market_score": results["market_score"],
@@ -246,6 +258,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
         "recommendation": results["recommendation"],
+         "sie_analysis": results["sie_analysis"]
 
         
         
@@ -272,7 +285,7 @@ async def analyze_pdf(file: UploadFile = File(...)):
             structured_analysis=results["structured_analysis"],
             investment_score=results["investment_score"],
             founder_analysis=results["founder_analysis"],
-            market_analysis=results["market_analysis"],
+            market_analysis=results["market_analysis"].model_dump(),
             sources=results["sources"],
             traction_analysis=results["traction_analysis"],
             market_score=results["market_score"],
@@ -299,7 +312,7 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "readiness_score":results["readiness_score"],
             "readiness_summary":results["readiness_summary"],
             "founder_analysis": results["founder_analysis"],
-            "market_analysis": results["market_analysis"],
+            "market_analysis": results["market_analysis"].model_dump(),
             "sources": results["sources"],
             "traction_analysis": results["traction_analysis"],
             "market_score": results["market_score"],
@@ -310,6 +323,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "financial_score": results["financial_score"],
             "overall_score": results["overall_score"],
             "recommendation": results["recommendation"],
+            "sie_analysis": results["sie_analysis"],
+
             
         }
 
@@ -338,7 +353,7 @@ def analyze_website(request: WebsiteAnalysisRequest):
         structured_analysis=results["structured_analysis"],
         investment_score=results["investment_score"],
         founder_analysis=results["founder_analysis"],
-        market_analysis=results["market_analysis"],
+        market_analysis=results["market_analysis"].model_dump(),
         sources=results["sources"],
         traction_analysis=results["traction_analysis"],
         market_score=results["market_score"],
@@ -365,7 +380,7 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "readiness_score":results["readiness_score"],
         "readiness_summary":results["readiness_summary"],
         "founder_analysis": results["founder_analysis"],
-        "market_analysis": results["market_analysis"],
+        "market_analysis": results["market_analysis"].model_dump(),
         "sources": results["sources"],
         "traction_analysis": results["traction_analysis"],
         "market_score": results["market_score"],
@@ -376,6 +391,8 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
         "recommendation": results["recommendation"],
+         "sie_analysis": results["sie_analysis"]
+
         
     }
 
