@@ -258,6 +258,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
         "recommendation": results["recommendation"],
+         "sie_analysis": results["sie_analysis"]
 
         
         
@@ -322,6 +323,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             "financial_score": results["financial_score"],
             "overall_score": results["overall_score"],
             "recommendation": results["recommendation"],
+            "sie_analysis": results["sie_analysis"],
+
             
         }
 
@@ -388,6 +391,8 @@ def analyze_website(request: WebsiteAnalysisRequest):
         "financial_score": results["financial_score"],
         "overall_score": results["overall_score"],
         "recommendation": results["recommendation"],
+         "sie_analysis": results["sie_analysis"]
+
         
     }
 
