@@ -1,6 +1,6 @@
-from pydantic import BaseModel
-from typing import Literal
 from pydantic import BaseModel, Field
+from typing import Literal
+from models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
 
 class StartupAnalysisRequest(BaseModel):
     company_text: str
@@ -14,6 +14,7 @@ class PillarAnalysis(BaseModel):
     strengths: list[str] = Field(default_factory=list)
     weaknesses: list[str] = Field(default_factory=list)
     recommendations: list[str] = Field(default_factory=list)
+    score_breakdown: PillarScoreBreakdown | None = None
 
 
 class SIEContext(BaseModel):
@@ -33,6 +34,7 @@ class SIEMethodologyAnalysis(BaseModel):
     traction: PillarAnalysis | None = None
     financial_health: PillarAnalysis | None = None
     startup_intelligence_score: float | None = None
+    startup_scorecard: StartupIntelligenceScore | None = None
     milestone_readiness_score: float | None = None
     momentum_score: float | None = None
     confidence_score: float | None = None

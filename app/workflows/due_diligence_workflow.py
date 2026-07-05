@@ -9,10 +9,13 @@ from ai.market_analysis import analyze_market
 from ai.research_enrichment import enrich_research
 from ai.traction_analysis import analyze_traction
 from ai.readiness_score import generate_readiness_score
-from models.startup import SIEMethodologyAnalysis, SIEContext, PillarAnalysis
 from ai.product_analysis import analyze_product
 from ai.execution_analysis import analyze_execution
 from ai.financial_analysis import analyze_financials
+
+from models.startup import SIEContext
+from workflows.sie_assembler import assemble_sie_analysis
+
 
 def build_sie_methodology_analysis(
     structured_analysis,
@@ -26,74 +29,24 @@ def build_sie_methodology_analysis(
     financial_analysis,
     risk_analysis,
 ):
-    return SIEMethodologyAnalysis(
-        context=SIEContext(
-            company_name=structured_analysis.get("company_name"),
-            industry=structured_analysis.get("industry"),
-            business_model=structured_analysis.get("business_model"),
-            company_stage=structured_analysis.get("stage"),
-            funding_stage=structured_analysis.get("funding_stage"),
-        ),
-        market=PillarAnalysis(
-            score=investment_score.get("market_score"),
-            confidence=market_analysis.confidence,
-            summary=market_analysis.summary,
-            evidence=market_analysis.evidence,
-            strengths=market_analysis.strengths,
-            weaknesses=market_analysis.weaknesses,
-            recommendations=market_analysis.recommendations,
-        ),
-        team=PillarAnalysis(
-            score=investment_score.get("team_score"),
-            confidence=founder_analysis.confidence,
-            summary=founder_analysis.summary,
-            evidence=founder_analysis.evidence,
-            strengths=founder_analysis.strengths,
-            weaknesses=founder_analysis.weaknesses,
-            recommendations=founder_analysis.recommendations,
-        ),
-        product=PillarAnalysis(
-            score=investment_score.get("product_score"),
-            confidence=product_analysis.confidence,
-            summary=product_analysis.summary,
-            evidence=product_analysis.evidence,
-            strengths=product_analysis.strengths,
-            weaknesses=product_analysis.weaknesses,
-            recommendations=product_analysis.recommendations,
-        ),
-        execution=PillarAnalysis(
-            score=investment_score.get("competition_score"),
-            confidence=execution_analysis.confidence,
-            summary=execution_analysis.summary,
-            evidence=execution_analysis.evidence,
-            strengths=execution_analysis.strengths,
-            weaknesses=execution_analysis.weaknesses,
-            recommendations=execution_analysis.recommendations,
-        ),
-        traction=PillarAnalysis(
-            score=investment_score.get("traction_score"),
-            confidence=traction_analysis.confidence,
-            summary=traction_analysis.summary,
-            evidence=traction_analysis.evidence,
-            strengths=traction_analysis.strengths,
-            weaknesses=traction_analysis.weaknesses,
-            recommendations=traction_analysis.recommendations,
-        ),
-        financial_health=PillarAnalysis(
-            score=investment_score.get("financial_score"),
-            confidence=financial_analysis.confidence,
-            summary=financial_analysis.summary,
-            evidence=financial_analysis.evidence,
-            strengths=financial_analysis.strengths,
-            weaknesses=financial_analysis.weaknesses,
-            recommendations=financial_analysis.recommendations,
-        ),
-        startup_intelligence_score=investment_score.get("overall_score"),
-        milestone_readiness_score=readiness.get("readiness_score"),
-        momentum_score=None,
-        confidence_score=75.0,
-        executive_coaching_summary=readiness.get("readiness_summary"),
-        next_actions=readiness.get("strengths", []) + readiness.get("weaknesses", []),
+    context = SIEContext(
+        company_name=structured_analysis.get("company_name"),
+        industry=structured_analysis.get("industry"),
+        business_model=structured_analysis.get("business_model"),
+        company_stage=structured_analysis.get("stage"),
+        funding_stage=structured_analysis.get("funding_stage"),
+    )
+
+    return assemble_sie_analysis(
+        context=context,
+        market_analysis=market_analysis,
+        team_analysis=founder_analysis,
+        product_analysis=product_analysis,
+        execution_analysis=execution_analysis,
+        traction_analysis=traction_analysis,
+        financial_analysis=financial_analysis,
+        scores=investment_score,
+        readiness=readiness,
     )
 
 
@@ -171,5 +124,4 @@ Additional Research Context:
         "overall_score": investment_score.get("overall_score"),
         "recommendation": investment_score.get("recommendation"),
         "sie_analysis": sie_analysis,
-        
     }
