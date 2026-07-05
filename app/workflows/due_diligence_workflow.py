@@ -10,6 +10,7 @@ from ai.research_enrichment import enrich_research
 from ai.traction_analysis import analyze_traction
 from ai.readiness_score import generate_readiness_score
 from models.startup import SIEMethodologyAnalysis, SIEContext, PillarAnalysis
+from ai.product_analysis import analyze_product
 
 
 def build_sie_methodology_analysis(
@@ -18,6 +19,7 @@ def build_sie_methodology_analysis(
     readiness,
     founder_analysis,
     market_analysis,
+    product_analysis,
     traction_analysis,
     risk_analysis,
 ):
@@ -49,14 +51,12 @@ def build_sie_methodology_analysis(
         ),
         product=PillarAnalysis(
             score=investment_score.get("product_score"),
-            confidence="Medium",
-            summary=structured_analysis.get("summary"),
-            evidence=structured_analysis.get("strengths", []),
-            strengths=structured_analysis.get("strengths", []),
-            weaknesses=structured_analysis.get("key_risks", []),
-            recommendations=[
-                "Clarify product differentiation, customer value proposition, and defensibility."
-            ],
+            confidence=product_analysis.confidence,
+            summary=product_analysis.summary,
+            evidence=product_analysis.evidence,
+            strengths=product_analysis.strengths,
+            weaknesses=product_analysis.weaknesses,
+            recommendations=product_analysis.recommendations,
         ),
         execution=PillarAnalysis(
             score=investment_score.get("competition_score"),
@@ -134,6 +134,7 @@ Additional Research Context:
 
     founder_analysis = analyze_founders(enriched_text)
     market_analysis = analyze_market(enriched_text)
+    product_analysis = analyze_product(enriched_text)
     traction_analysis = analyze_traction(enriched_text)
 
     sie_analysis = build_sie_methodology_analysis(
@@ -142,6 +143,7 @@ Additional Research Context:
         readiness=readiness,
         founder_analysis=founder_analysis,
         market_analysis=market_analysis,
+        product_analysis=product_analysis,
         traction_analysis=traction_analysis,
         risk_analysis=risk_analysis,
     )
@@ -169,4 +171,5 @@ Additional Research Context:
         "overall_score": investment_score.get("overall_score"),
         "recommendation": investment_score.get("recommendation"),
         "sie_analysis": sie_analysis,
+        
     }

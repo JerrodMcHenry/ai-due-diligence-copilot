@@ -50,3 +50,9 @@ class ProductAnalysisResult(BaseModel):
     technical_defensibility: str | None = None
     ease_of_adoption: str | None = None
     product_maturity: str | None = None
+
+class ProductAnalysisResult(AnalysisResult):
+    customer_value: str | None = None
+    technical_defensibility: str | None = None
+    ease_of_adoption: str | None = None
+    product_maturity: str | None = None
