@@ -56,3 +56,18 @@ class ProductAnalysisResult(AnalysisResult):
     technical_defensibility: str | None = None
     ease_of_adoption: str | None = None
     product_maturity: str | None = None
+
+class ExecutionAnalysisResult(AnalysisResult):
+    gtm_execution: str | None = None
+    product_execution: str | None = None
+    operational_execution: str | None = None
+    strategic_execution: str | None = None
+
+class FinancialAnalysisResult(AnalysisResult):
+    revenue_quality: str | None = None
+    pricing_model: str | None = None
+    unit_economics: str | None = None
+    burn_rate: str | None = None
+    runway: str | None = None
+    capital_efficiency: str | None = None
+    fundraising_readiness: str | None = None

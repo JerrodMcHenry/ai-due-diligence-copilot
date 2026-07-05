@@ -11,7 +11,8 @@ from ai.traction_analysis import analyze_traction
 from ai.readiness_score import generate_readiness_score
 from models.startup import SIEMethodologyAnalysis, SIEContext, PillarAnalysis
 from ai.product_analysis import analyze_product
-
+from ai.execution_analysis import analyze_execution
+from ai.financial_analysis import analyze_financials
 
 def build_sie_methodology_analysis(
     structured_analysis,
@@ -20,7 +21,9 @@ def build_sie_methodology_analysis(
     founder_analysis,
     market_analysis,
     product_analysis,
+    execution_analysis,
     traction_analysis,
+    financial_analysis,
     risk_analysis,
 ):
     return SIEMethodologyAnalysis(
@@ -60,13 +63,12 @@ def build_sie_methodology_analysis(
         ),
         execution=PillarAnalysis(
             score=investment_score.get("competition_score"),
-            confidence="Medium",
-            summary="Execution risk is inferred from competitive pressure, operational risk, and ability to differentiate.",
-            evidence=[risk_analysis] if isinstance(risk_analysis, str) else [],
-            weaknesses=structured_analysis.get("key_risks", []),
-            recommendations=[
-                "Create a clearer execution roadmap tied to milestones, hiring needs, go-to-market strategy, and product delivery."
-            ],
+            confidence=execution_analysis.confidence,
+            summary=execution_analysis.summary,
+            evidence=execution_analysis.evidence,
+            strengths=execution_analysis.strengths,
+            weaknesses=execution_analysis.weaknesses,
+            recommendations=execution_analysis.recommendations,
         ),
         traction=PillarAnalysis(
             score=investment_score.get("traction_score"),
@@ -79,18 +81,12 @@ def build_sie_methodology_analysis(
         ),
         financial_health=PillarAnalysis(
             score=investment_score.get("financial_score"),
-            confidence="Low",
-            summary="Financial health is based on limited available revenue and business model information.",
-            evidence=[
-                f"Overall financial score: {investment_score.get('financial_score')}",
-                f"Business model: {structured_analysis.get('business_model')}",
-            ],
-            weaknesses=[
-                "Runway, burn rate, gross margin, CAC, LTV, churn, and revenue quality are missing or incomplete."
-            ],
-            recommendations=[
-                "Collect burn rate, runway, gross margin, CAC, LTV, churn, expansion revenue, and revenue concentration."
-            ],
+            confidence=financial_analysis.confidence,
+            summary=financial_analysis.summary,
+            evidence=financial_analysis.evidence,
+            strengths=financial_analysis.strengths,
+            weaknesses=financial_analysis.weaknesses,
+            recommendations=financial_analysis.recommendations,
         ),
         startup_intelligence_score=investment_score.get("overall_score"),
         milestone_readiness_score=readiness.get("readiness_score"),
@@ -135,7 +131,9 @@ Additional Research Context:
     founder_analysis = analyze_founders(enriched_text)
     market_analysis = analyze_market(enriched_text)
     product_analysis = analyze_product(enriched_text)
+    execution_analysis = analyze_execution(enriched_text)
     traction_analysis = analyze_traction(enriched_text)
+    financial_analysis = analyze_financials(enriched_text)
 
     sie_analysis = build_sie_methodology_analysis(
         structured_analysis=structured_analysis,
@@ -144,7 +142,9 @@ Additional Research Context:
         founder_analysis=founder_analysis,
         market_analysis=market_analysis,
         product_analysis=product_analysis,
+        execution_analysis=execution_analysis,
         traction_analysis=traction_analysis,
+        financial_analysis=financial_analysis,
         risk_analysis=risk_analysis,
     )
 
