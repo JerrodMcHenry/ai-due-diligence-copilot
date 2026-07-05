@@ -5,6 +5,7 @@ from models.startup import (
 )
 
 from ai.scoring import finalize_pillar_score
+from ai.startup_scoring import calculate_startup_intelligence_score
 
 
 def finalize_score_breakdown(analysis_result):
@@ -51,7 +52,7 @@ def assemble_sie_analysis(
     scores: dict,
     readiness: dict | None = None,
 ) -> SIEMethodologyAnalysis:
-    return SIEMethodologyAnalysis(
+    sie_analysis = SIEMethodologyAnalysis(
         context=context,
 
         market=build_pillar_analysis(
@@ -84,8 +85,6 @@ def assemble_sie_analysis(
             scores.get("financial_score"),
         ),
 
-        startup_intelligence_score=scores.get("overall_score"),
-
         milestone_readiness_score=(
             readiness.get("readiness_score")
             if readiness
@@ -104,3 +103,9 @@ def assemble_sie_analysis(
             else []
         ),
     )
+
+    sie_analysis.startup_intelligence_score = (
+        calculate_startup_intelligence_score(sie_analysis)
+    )
+
+    return sie_analysis

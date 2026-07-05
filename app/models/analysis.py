@@ -2,6 +2,7 @@ from pydantic import BaseModel, Field
 from typing import Literal
 from models.scoring import PillarScoreBreakdown
 
+
 class AnalysisResult(BaseModel):
     summary: str | None = None
 
@@ -29,7 +30,10 @@ class MarketAnalysisResult(AnalysisResult):
     growth_rate: str | None = None
 
 
+
 class FounderAnalysisResult(AnalysisResult):
+    score_breakdown: PillarScoreBreakdown | None = None
+
     founder_market_fit: str | None = None
     fundraising_signal: str | None = None
 
