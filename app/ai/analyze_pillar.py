@@ -31,7 +31,7 @@ def format_subscores_for_prompt(pillar: str) -> str:
     return "\n".join(
         f'      {{\n'
         f'        "name": "{name}",\n'
-        f'        "score": 0,\n'
+        f'        "score": null,\n'
         f'        "weight": {weight},\n'
         f'        "rationale": "Why this score was assigned.",\n'
         f'        "evidence": [],\n'
@@ -90,7 +90,9 @@ Rules:
 - Recommendations should be actionable.
 - Do not invent facts.
 - If information is missing, say what is missing.
-- Each subscore score must be from 0 to 10.
+- Each subscore score must be from 0 to 10, or null if there is not enough evidence to score it.
+- Do not use 0 for missing information. Use null for unknown or insufficient evidence.
+- Use 0 only when there is clear negative evidence.
 - Each subscore must include rationale, evidence, and recommendations.
 - Do not include markdown.
 - Do not wrap the JSON in triple backticks.
@@ -135,8 +137,8 @@ def analyze_pillar(
         data = parse_json_from_response(content)
         return result_model(**data)
 
-    except Exception:
-        return result_model(
-            summary=f"Unable to parse {pillar.lower()} analysis",
-            confidence="Low",
-        )
+    except Exception as e:
+        print(f"\n\nERROR IN {pillar.upper()} ANALYSIS")
+        print(e)
+        print(content)
+        raise

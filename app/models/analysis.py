@@ -1,6 +1,9 @@
 from pydantic import BaseModel, Field
 from typing import Literal
 from models.scoring import PillarScoreBreakdown
+from models.evidence import Evidence
+
+
 
 
 class AnalysisResult(BaseModel):
@@ -16,7 +19,7 @@ class AnalysisResult(BaseModel):
 
     weaknesses: list[str] = Field(default_factory=list)
 
-    evidence: list[str] = Field(default_factory=list)
+    evidence: list[Evidence | str] = Field(default_factory=list)
 
     recommendations: list[str] = Field(default_factory=list)
 

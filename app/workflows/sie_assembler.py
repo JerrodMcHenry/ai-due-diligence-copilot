@@ -6,6 +6,8 @@ from models.startup import (
 
 from ai.scoring import finalize_pillar_score
 from ai.startup_scoring import calculate_startup_intelligence_score
+from ai.confidence import calculate_confidence
+
 
 
 def finalize_score_breakdown(analysis_result):
@@ -29,11 +31,13 @@ def build_pillar_analysis(
         else score
     )
 
+    evidence = getattr(analysis_result, "evidence", [])
+
     return PillarAnalysis(
         score=final_score,
-        confidence=getattr(analysis_result, "confidence", None),
+        confidence=calculate_confidence(evidence),
         summary=getattr(analysis_result, "summary", None),
-        evidence=getattr(analysis_result, "evidence", []),
+        evidence=evidence,
         strengths=getattr(analysis_result, "strengths", []),
         weaknesses=getattr(analysis_result, "weaknesses", []),
         recommendations=getattr(analysis_result, "recommendations", []),

@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 from typing import Literal
 from models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
+from models.evidence import Evidence
 
 class StartupAnalysisRequest(BaseModel):
     company_text: str
@@ -10,7 +11,7 @@ class PillarAnalysis(BaseModel):
     score: float | None = None
     confidence: Literal["Low", "Medium", "High"] | None = None
     summary: str | None = None
-    evidence: list[str] = Field(default_factory=list)
+    evidence: list[Evidence | str] = Field(default_factory=list)
     strengths: list[str] = Field(default_factory=list)
     weaknesses: list[str] = Field(default_factory=list)
     recommendations: list[str] = Field(default_factory=list)
