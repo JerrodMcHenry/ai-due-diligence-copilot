@@ -56,16 +56,16 @@ class StartupAnalysisResponse(BaseModel):
     traction_analysis: dict
     
 
-    market_score: int | None = None
-    team_score: int | None = None
-    product_score: int | None = None
-    competition_score: int | None = None
-    traction_score: int | None = None
-    financial_score: int | None = None
-    overall_score: int | None = None
+    market_score: float | None = None
+    team_score: float | None = None
+    product_score: float | None = None
+    competition_score: float | None = None
+    traction_score: float | None = None
+    financial_score: float | None = None
+    overall_score: float | None = None
     recommendation: str | None = None
     readiness: dict | None = None
-    readiness_score: int | None = None
+    readiness_score: float | None = None
     readiness_summary: str | None = None
     sie_analysis: SIEMethodologyAnalysis | None = None
 
@@ -81,18 +81,19 @@ class UpdateAnalysisRequest(BaseModel):
     sources: list = []
     traction_analysis: dict
 
-    market_score: int | None = None
-    team_score: int | None = None
-    product_score: int | None = None
-    competition_score: int | None = None
-    traction_score: int | None = None
-    financial_score: int | None = None
-    overall_score: int | None = None
+    market_score: float | None = None
+    team_score: float | None = None
+    product_score: float | None = None
+    competition_score: float | None = None
+    traction_score: float | None = None
+    financial_score: float | None = None
+    overall_score: float | None = None
     recommendation: str | None = None
     readiness: dict | None = None
-    readiness_score: int | None = None
+    readiness_score: float | None = None
     readiness_summary: str | None = None
     sie_analysis: SIEMethodologyAnalysis | None = None
+
 
 class WebsiteAnalysisRequest(BaseModel):
     url: str

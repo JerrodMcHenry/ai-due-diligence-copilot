@@ -31,7 +31,7 @@ def format_subscores_for_prompt(pillar: str) -> str:
     return "\n".join(
         f'      {{\n'
         f'        "name": "{name}",\n'
-        f'        "score": null,\n'
+        f'        "score": 0,\n'
         f'        "weight": {weight},\n'
         f'        "rationale": "Why this score was assigned.",\n'
         f'        "evidence": [],\n'
@@ -90,9 +90,10 @@ Rules:
 - Recommendations should be actionable.
 - Do not invent facts.
 - If information is missing, say what is missing.
-- Each subscore score must be from 0 to 10, or null if there is not enough evidence to score it.
-- Do not use 0 for missing information. Use null for unknown or insufficient evidence.
-- Use 0 only when there is clear negative evidence.
+- Each subscore score must be from 0 to 10.
+- Do not return null for subscore scores.
+- If information is missing or insufficient, assign a conservative low score and explain the missing evidence in the rationale.
+- Use evidence and rationale to distinguish weak performance from missing information.
 - Each subscore must include rationale, evidence, and recommendations.
 - Do not include markdown.
 - Do not wrap the JSON in triple backticks.

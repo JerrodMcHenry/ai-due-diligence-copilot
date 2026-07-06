@@ -3,7 +3,7 @@ from ai.risk_analysis import analyze_risks
 from ai.memo_generator import generate_investment_memo
 from ai.structured_analysis import generate_structured_analysis
 from ai.competitor_anlalysis import analyze_competitors
-from ai.scoring import generate_investment_score
+
 from ai.founder_analysis import analyze_founders
 from ai.market_analysis import analyze_market
 from ai.research_enrichment import enrich_research
@@ -19,7 +19,6 @@ from workflows.sie_assembler import assemble_sie_analysis
 
 def build_sie_methodology_analysis(
     structured_analysis,
-    investment_score,
     readiness,
     founder_analysis,
     market_analysis,
@@ -27,7 +26,6 @@ def build_sie_methodology_analysis(
     execution_analysis,
     traction_analysis,
     financial_analysis,
-    risk_analysis,
 ):
     context = SIEContext(
         company_name=structured_analysis.get("company_name"),
@@ -45,9 +43,13 @@ def build_sie_methodology_analysis(
         execution_analysis=execution_analysis,
         traction_analysis=traction_analysis,
         financial_analysis=financial_analysis,
-        scores=investment_score,
+        scores={},
         readiness=readiness,
     )
+
+
+def get_pillar_score(pillar):
+    return pillar.score if pillar else None
 
 
 def run_due_diligence(company_text):
@@ -69,17 +71,6 @@ Additional Research Context:
     competitor_analysis = analyze_competitors(enriched_text)
     memo = generate_investment_memo(enriched_text)
     structured_analysis = generate_structured_analysis(enriched_text)
-    investment_score = generate_investment_score(enriched_text)
-
-    readiness = generate_readiness_score(
-        investment_score.get("market_score"),
-        investment_score.get("team_score"),
-        investment_score.get("product_score"),
-        investment_score.get("competition_score"),
-        investment_score.get("traction_score"),
-        investment_score.get("financial_score"),
-        investment_score.get("overall_score"),
-    )
 
     founder_analysis = analyze_founders(enriched_text)
     market_analysis = analyze_market(enriched_text)
@@ -88,9 +79,39 @@ Additional Research Context:
     traction_analysis = analyze_traction(enriched_text)
     financial_analysis = analyze_financials(enriched_text)
 
+    initial_readiness = None
+
     sie_analysis = build_sie_methodology_analysis(
         structured_analysis=structured_analysis,
-        investment_score=investment_score,
+        readiness=initial_readiness,
+        founder_analysis=founder_analysis,
+        market_analysis=market_analysis,
+        product_analysis=product_analysis,
+        execution_analysis=execution_analysis,
+        traction_analysis=traction_analysis,
+        financial_analysis=financial_analysis,
+    )
+
+    market_score = get_pillar_score(sie_analysis.market)
+    team_score = get_pillar_score(sie_analysis.team)
+    product_score = get_pillar_score(sie_analysis.product)
+    execution_score = get_pillar_score(sie_analysis.execution)
+    traction_score = get_pillar_score(sie_analysis.traction)
+    financial_score = get_pillar_score(sie_analysis.financial_health)
+    overall_score = sie_analysis.startup_intelligence_score
+
+    readiness = generate_readiness_score(
+        market_score,
+        team_score,
+        product_score,
+        execution_score,
+        traction_score,
+        financial_score,
+        overall_score,
+    )
+
+    sie_analysis = build_sie_methodology_analysis(
+        structured_analysis=structured_analysis,
         readiness=readiness,
         founder_analysis=founder_analysis,
         market_analysis=market_analysis,
@@ -98,8 +119,20 @@ Additional Research Context:
         execution_analysis=execution_analysis,
         traction_analysis=traction_analysis,
         financial_analysis=financial_analysis,
-        risk_analysis=risk_analysis,
     )
+
+    overall_score = sie_analysis.startup_intelligence_score
+
+    investment_score = {
+        "market_score": market_score,
+        "team_score": team_score,
+        "product_score": product_score,
+        "competition_score": execution_score,
+        "traction_score": traction_score,
+        "financial_score": financial_score,
+        "overall_score": overall_score,
+        "recommendation": None,
+    }
 
     return {
         "summary": summary,
@@ -115,13 +148,13 @@ Additional Research Context:
         "market_analysis": market_analysis,
         "sources": sources,
         "traction_analysis": traction_analysis,
-        "market_score": investment_score.get("market_score"),
-        "team_score": investment_score.get("team_score"),
-        "product_score": investment_score.get("product_score"),
-        "competition_score": investment_score.get("competition_score"),
-        "traction_score": investment_score.get("traction_score"),
-        "financial_score": investment_score.get("financial_score"),
-        "overall_score": investment_score.get("overall_score"),
-        "recommendation": investment_score.get("recommendation"),
+        "market_score": market_score,
+        "team_score": team_score,
+        "product_score": product_score,
+        "competition_score": execution_score,
+        "traction_score": traction_score,
+        "financial_score": financial_score,
+        "overall_score": overall_score,
+        "recommendation": None,
         "sie_analysis": sie_analysis,
     }

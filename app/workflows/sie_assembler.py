@@ -7,7 +7,7 @@ from models.startup import (
 from ai.scoring import finalize_pillar_score
 from ai.startup_scoring import calculate_startup_intelligence_score
 from ai.confidence import calculate_confidence
-
+from ai.scorecard import build_startup_scorecard
 
 
 def finalize_score_breakdown(analysis_result):
@@ -111,5 +111,7 @@ def assemble_sie_analysis(
     sie_analysis.startup_intelligence_score = (
         calculate_startup_intelligence_score(sie_analysis)
     )
-
+   
+    sie_analysis.startup_scorecard = build_startup_scorecard(sie_analysis)
+    
     return sie_analysis
