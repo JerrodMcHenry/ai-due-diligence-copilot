@@ -59,6 +59,16 @@ Weight: {dimension.weight}
 Question:
 {dimension.question}
 
+Description:
+{dimension.description}
+
+Score guidance:
+9-10: {dimension.score_9_10}
+7-8: {dimension.score_7_8}
+5-6: {dimension.score_5_6}
+3-4: {dimension.score_3_4}
+0-2: {dimension.score_0_2}
+
 Strong signals:
 """
 
@@ -74,7 +84,6 @@ Strong signals:
 
     return "\n".join(sections)
 
-
 def build_pillar_prompt(
     pillar: str,
     company_text: str,
@@ -86,7 +95,9 @@ def build_pillar_prompt(
 
     extra_fields_json = ""
     for field_name, description in extra_fields.items():
-        extra_fields_json += f'  "{field_name}": "{description}",\n'
+        extra_fields_json += (
+    f'  "{field_name}": "Brief string only. {description}",\n'
+)
 
     extra_rules_text = "\n".join(f"- {rule}" for rule in extra_rules)
 
@@ -168,6 +179,8 @@ Consistency requirements:
 - Return valid JSON only.
 - Do not include markdown.
 - Do not wrap JSON in triple backticks.
+- Extra fields outside score_breakdown must always be strings, not objects.
+- Only score_breakdown.subscores may contain score, weight, rationale, evidence, and recommendations.
 {extra_rules_text}
 """
 
