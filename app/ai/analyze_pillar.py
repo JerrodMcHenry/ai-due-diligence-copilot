@@ -62,6 +62,9 @@ Question:
 Description:
 {dimension.description}
 
+Stage guidance:
+{dimension.stage_guidance}
+
 Score guidance:
 9-10: {dimension.score_9_10}
 7-8: {dimension.score_7_8}
@@ -79,6 +82,11 @@ Strong signals:
 
         for signal in dimension.weak_signals:
             section += f"- {signal}\n"
+
+        section += "\nDiligence questions:\n"
+
+        for question in dimension.diligence_questions:
+            section += f"- {question}\n"
 
         sections.append(section)
 
