@@ -236,33 +236,15 @@ def analyze_startup(request: StartupAnalysisRequest):
         readiness_score=results["readiness_score"]
     )
 
-    return {
-        "summary": results["summary"],
-        "risk_analysis": results["risk_analysis"],
-        "competitor_analysis": results["competitor_analysis"],
-        "memo": results["memo"],
-        "structured_analysis":results["structured_analysis"],
-        "investment_score": results["investment_score"],
-        "readiness": results["readiness"],
-        "readiness_score":results["readiness_score"],
-        "readiness_summary":results["readiness_summary"],
-        "founder_analysis": results["founder_analysis"].model_dump(),
-        "market_analysis": results["market_analysis"].model_dump(),
-        "sources": results["sources"],
-        "traction_analysis": results["traction_analysis"].model_dump(),
-        "market_score": results["market_score"],
-        "team_score": results["team_score"],
-        "product_score": results["product_score"],
-        "competition_score": results["competition_score"],
-        "traction_score": results["traction_score"],
-        "financial_score": results["financial_score"],
-        "overall_score": results["overall_score"],
-        "recommendation": results["recommendation"],
-         "sie_analysis": results["sie_analysis"]
+    sie_analysis = results["sie_analysis"]
 
+    return StartupAnalysisResponse(
+        context=sie_analysis.context,
+        startup_scorecard=sie_analysis.startup_scorecard,
+        methodology=sie_analysis,
+    )
         
-        
-    }
+    
 
 
 @app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
@@ -301,32 +283,8 @@ async def analyze_pdf(file: UploadFile = File(...)):
             
         )
 
-        return {
-            "summary": results["summary"],
-            "risk_analysis": results["risk_analysis"],
-            "competitor_analysis": results["competitor_analysis"],
-            "memo": results["memo"],
-            "structured_analysis": results["structured_analysis"],
-            "investment_score": results["investment_score"],
-            "readiness": results["readiness"],
-            "readiness_score":results["readiness_score"],
-            "readiness_summary":results["readiness_summary"],
-            "founder_analysis": results["founder_analysis"].model_dump(),
-            "market_analysis": results["market_analysis"].model_dump(),
-            "sources": results["sources"],
-            "traction_analysis": results["traction_analysis"].model_dump(),
-            "market_score": results["market_score"],
-            "team_score": results["team_score"],
-            "product_score": results["product_score"],
-            "competition_score": results["competition_score"],
-            "traction_score": results["traction_score"],
-            "financial_score": results["financial_score"],
-            "overall_score": results["overall_score"],
-            "recommendation": results["recommendation"],
-            "sie_analysis": results["sie_analysis"],
-
-            
-        }
+        
+        
 
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

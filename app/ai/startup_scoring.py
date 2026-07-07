@@ -10,16 +10,3 @@ PILLAR_WEIGHTS = {
     "financial_health": 0.10,
 }
 
-
-def calculate_startup_intelligence_score(
-    analysis: SIEMethodologyAnalysis,
-) -> float:
-    total = 0.0
-
-    for pillar_name, weight in PILLAR_WEIGHTS.items():
-        pillar = getattr(analysis, pillar_name)
-
-        if pillar and pillar.score is not None:
-            total += pillar.score * weight
-
-    return round(total, 1)

@@ -28,13 +28,12 @@ def build_sie_methodology_analysis(
     financial_analysis,
 ):
     context = SIEContext(
-        company_name=structured_analysis.get("company_name"),
-        industry=structured_analysis.get("industry"),
-        business_model=structured_analysis.get("business_model"),
-        company_stage=structured_analysis.get("stage"),
-        funding_stage=structured_analysis.get("funding_stage"),
-    )
-
+    company_name=structured_analysis.get("company_name") or "",
+    industry=structured_analysis.get("industry") or "",
+    business_model=structured_analysis.get("business_model") or "",
+    company_stage=structured_analysis.get("company_stage") or "",
+    funding_stage=structured_analysis.get("funding_stage") or "",
+)
     return assemble_sie_analysis(
         context=context,
         market_analysis=market_analysis,
@@ -43,7 +42,6 @@ def build_sie_methodology_analysis(
         execution_analysis=execution_analysis,
         traction_analysis=traction_analysis,
         financial_analysis=financial_analysis,
-        scores={},
         readiness=readiness,
     )
 

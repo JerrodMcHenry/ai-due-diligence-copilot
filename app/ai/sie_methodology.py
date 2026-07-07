@@ -1,7 +1,10 @@
 import json
 import re
 from openai import OpenAI
+
 from models.startup import SIEMethodologyAnalysis
+from ai.scorecard import build_startup_scorecard
+
 
 client = OpenAI()
 
@@ -28,76 +31,66 @@ Use this exact structure:
 
 {{
   "context": {{
-    "company_name": null,
-    "industry": null,
-    "business_model": null,
-    "company_stage": null,
-    "funding_stage": null
+    "company_name": "",
+    "industry": "",
+    "business_model": "",
+    "company_stage": "",
+    "funding_stage": ""
   }},
   "market": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
   "team": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
   "product": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
   "execution": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
   "traction": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
   "financial_health": {{
-    "score": null,
     "confidence": "Low",
-    "summary": null,
+    "summary": "",
     "evidence": [],
     "strengths": [],
     "weaknesses": [],
     "recommendations": []
   }},
-  "startup_intelligence_score": null,
-  "milestone_readiness_score": null,
-  "momentum_score": null,
-  "confidence_score": null,
-  "executive_coaching_summary": null,
+  "executive_coaching_summary": "",
   "next_actions": []
 }}
 
 Rules:
-- Scores must be 0 to 100.
+- Do not generate scores.
 - Confidence must be only Low, Medium, or High.
 - Evidence must cite facts from the provided company information or research context.
 - Strengths must be specific.
@@ -114,7 +107,10 @@ Startup information:
     response = client.chat.completions.create(
         model="gpt-4.1-mini",
         messages=[
-            {"role": "system", "content": "You are a rigorous startup analyst. Return only valid JSON."},
+            {
+                "role": "system",
+                "content": "You are a rigorous startup analyst. Return only valid JSON.",
+            },
             {"role": "user", "content": prompt},
         ],
         temperature=0.2,
@@ -123,4 +119,25 @@ Startup information:
     content = response.choices[0].message.content
     data = extract_json(content)
 
-    return SIEMethodologyAnalysis(**data)
+    methodology = SIEMethodologyAnalysis(**data)
+
+    scorecard = build_startup_scorecard(methodology)
+
+    methodology.startup_scorecard = scorecard
+    methodology.startup_intelligence_score = scorecard.overall_score
+
+    methodology.market.score = scorecard.market.score
+    methodology.team.score = scorecard.team.score
+    methodology.product.score = scorecard.product.score
+    methodology.execution.score = scorecard.execution.score
+    methodology.traction.score = scorecard.traction.score
+    methodology.financial_health.score = scorecard.financial_health.score
+
+    methodology.market.score_breakdown = scorecard.market
+    methodology.team.score_breakdown = scorecard.team
+    methodology.product.score_breakdown = scorecard.product
+    methodology.execution.score_breakdown = scorecard.execution
+    methodology.traction.score_breakdown = scorecard.traction
+    methodology.financial_health.score_breakdown = scorecard.financial_health
+
+    return methodology
