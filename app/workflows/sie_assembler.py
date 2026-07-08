@@ -6,6 +6,7 @@ from models.startup import (
 
 from ai.scoring import finalize_pillar_score
 from ai.scorecard import build_startup_scorecard
+from ai.investment_score import calculate_investment_score
 
 
 def finalize_score_breakdown(analysis_result):
@@ -49,6 +50,7 @@ def assemble_sie_analysis(
     execution_analysis,
     traction_analysis,
     financial_analysis,
+    scores: dict | None = None,
     readiness: dict | None = None,
 ) -> SIEMethodologyAnalysis:
     sie_analysis = SIEMethodologyAnalysis(
@@ -65,26 +67,33 @@ def assemble_sie_analysis(
             readiness.get("readiness_score") or 0.0
             if readiness
             else 0.0
-),
+        ),
 
         executive_coaching_summary=(
             readiness.get("readiness_summary") or ""
             if readiness
             else ""
-),
+        ),
 
         next_actions=[
-    "Validate retention and churn metrics",
-    "Clarify product differentiation",
-    "Document go-to-market strategy",
-    "Provide unit economics and runway data",
-]
+            "Validate retention and churn metrics",
+            "Clarify product differentiation",
+            "Document go-to-market strategy",
+            "Provide unit economics and runway data",
+        ],
     )
 
+    investment_score = calculate_investment_score(sie_analysis)
+
+    sie_analysis.startup_intelligence_score = investment_score.overall_score
     sie_analysis.startup_scorecard = build_startup_scorecard(sie_analysis)
 
-    sie_analysis.startup_intelligence_score = (
-        sie_analysis.startup_scorecard.overall_score
-    )
+    if sie_analysis.startup_scorecard:
+        sie_analysis.startup_scorecard.overall_score = (
+            investment_score.overall_score
+        )
+        sie_analysis.startup_scorecard.recommendation = (
+            investment_score.recommendation
+        )
 
     return sie_analysis
