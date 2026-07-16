@@ -3,6 +3,7 @@ from typing import Literal
 
 from models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
 from models.evidence import Evidence
+from models.analysis_context import AnalysisContext
 
 
 ConfidenceLevel = Literal["Low", "Medium", "High"]
@@ -17,7 +18,7 @@ class WebsiteAnalysisRequest(BaseModel):
 
 
 class PillarAnalysis(BaseModel):
-    score: float = 0.0
+    score: float | None = None
     confidence: ConfidenceLevel = "Low"
     summary: str = ""
     evidence: list[Evidence | str] = Field(default_factory=list)
@@ -38,6 +39,8 @@ class SIEContext(BaseModel):
 class SIEMethodologyAnalysis(BaseModel):
     context: SIEContext = Field(default_factory=SIEContext)
 
+    analysis_context: AnalysisContext | None = None
+
     market: PillarAnalysis = Field(default_factory=PillarAnalysis)
     team: PillarAnalysis = Field(default_factory=PillarAnalysis)
     product: PillarAnalysis = Field(default_factory=PillarAnalysis)
@@ -54,6 +57,7 @@ class SIEMethodologyAnalysis(BaseModel):
 
     executive_coaching_summary: str = ""
     next_actions: list[str] = Field(default_factory=list)
+    
 
 
 class StartupAnalysisResponse(BaseModel):

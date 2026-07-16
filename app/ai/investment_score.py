@@ -27,134 +27,176 @@ PILLAR_WEIGHTS = {
 
 
 def clamp_score(score: float) -> float:
-    return max(0.0, min(100.0, round(score, 1)))
+    return max(
+        0.0,
+        min(100.0, round(score, 1)),
+    )
 
 
-def calculate_base_score(analysis: SIEMethodologyAnalysis) -> float:
-    total = 0.0
+def calculate_base_score(
+    analysis: SIEMethodologyAnalysis,
+) -> float:
+    """
+    Calculate the overall score using only pillars that were
+    responsibly scored.
+
+    Pillars with score=None are excluded instead of being treated
+    as zero. The remaining pillar weights are renormalized.
+    """
+    scored_pillars: list[tuple[float, float]] = []
 
     for pillar_name, weight in PILLAR_WEIGHTS.items():
-        pillar = getattr(analysis, pillar_name, None)
-        pillar_score = getattr(pillar, "score", 0.0) or 0.0
+        pillar = getattr(
+            analysis,
+            pillar_name,
+            None,
+        )
 
-        total += pillar_score * 10 * weight
+        if pillar is None:
+            continue
 
-    return round(total, 1)
+        pillar_score = getattr(
+            pillar,
+            "score",
+            None,
+        )
+
+        if pillar_score is None:
+            continue
+
+        scored_pillars.append(
+            (pillar_score, weight)
+        )
+
+    if not scored_pillars:
+        return 0.0
+
+    included_weight = sum(
+        weight
+        for _, weight in scored_pillars
+    )
+
+    if included_weight <= 0:
+        return 0.0
+
+    weighted_score = sum(
+        pillar_score * weight
+        for pillar_score, weight in scored_pillars
+    ) / included_weight
+
+    return round(
+        weighted_score * 10,
+        1,
+    )
 
 
-def collect_text(analysis: SIEMethodologyAnalysis) -> str:
+def collect_text(
+    analysis: SIEMethodologyAnalysis,
+) -> str:
     parts: list[str] = []
 
     for pillar_name in PILLAR_WEIGHTS:
-        pillar = getattr(analysis, pillar_name, None)
+        pillar = getattr(
+            analysis,
+            pillar_name,
+            None,
+        )
 
-        if not pillar:
+        if pillar is None:
             continue
 
-        parts.append(pillar.summary or "")
-        parts.extend(str(item) for item in pillar.evidence)
-        parts.extend(pillar.strengths)
-        parts.extend(pillar.weaknesses)
+        parts.append(
+            getattr(pillar, "summary", "") or ""
+        )
+
+        parts.extend(
+            str(item)
+            for item in getattr(
+                pillar,
+                "evidence",
+                [],
+            )
+        )
+
+        parts.extend(
+            getattr(
+                pillar,
+                "strengths",
+                [],
+            )
+        )
+
+        parts.extend(
+            getattr(
+                pillar,
+                "weaknesses",
+                [],
+            )
+        )
 
     return " ".join(parts).lower()
 
 
-def get_adjustments(analysis: SIEMethodologyAnalysis) -> list[ScoreAdjustment]:
-    adjustments: list[ScoreAdjustment] = []
-    text = collect_text(analysis)
+def get_adjustments(
+    analysis: SIEMethodologyAnalysis,
+) -> list[ScoreAdjustment]:
+    """
+    Methodology v1 does not apply keyword-based score adjustments.
 
-    if "repeat founder" in text or "prior exit" in text or "previous exit" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="Experienced Founder Bonus",
-                points=1.5,
-                rationale="The founding team shows prior startup or exit experience.",
-            )
-        )
+    Bonuses and penalties based on phrases such as "competition",
+    "132%", or "25 months" are too brittle and can double-count
+    evidence already reflected in pillar scores.
 
-    if "132%" in text or "net revenue retention" in text and "130" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="Exceptional Retention Bonus",
-                points=2.0,
-                rationale="Net revenue retention appears exceptional for a SaaS company.",
-            )
-        )
-
-    if "82%" in text and "gross margin" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="Strong Gross Margin Bonus",
-                points=1.0,
-                rationale="Gross margin appears strong for a SaaS business.",
-            )
-        )
-
-    if "25 months" in text and "runway" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="Strong Runway Bonus",
-                points=1.0,
-                rationale="The company appears to have strong cash runway.",
-            )
-        )
-
-    if "competition" in text or "competitive" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="Competitive Market Penalty",
-                points=-1.0,
-                rationale="The company operates in a competitive market requiring clear differentiation.",
-            )
-        )
-
-    if "no customers" in text or "no paying customers" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="No Customer Validation Penalty",
-                points=-8.0,
-                rationale="Lack of customer validation materially weakens investment readiness.",
-            )
-        )
-
-    if "high churn" in text:
-        adjustments.append(
-            ScoreAdjustment(
-                name="High Churn Penalty",
-                points=-5.0,
-                rationale="High churn weakens evidence of product-market fit.",
-            )
-        )
-
-    return adjustments
+    Keep this function so the API shape remains backward-compatible.
+    Deterministic, methodology-backed adjustments can be added later.
+    """
+    return []
 
 
 def get_recommendation(score: float) -> str:
     if score >= 90:
         return "Exceptional Investment Candidate"
+
     if score >= 80:
         return "High Potential"
+
     if score >= 70:
         return "Promising but Needs Diligence"
+
     if score >= 60:
         return "Speculative"
+
     if score >= 50:
         return "High Risk"
+
     return "Not Investment Ready"
 
 
 def calculate_investment_score(
     analysis: SIEMethodologyAnalysis,
 ) -> InvestmentScore:
-    base_score = calculate_base_score(analysis)
-    adjustments = get_adjustments(analysis)
+    base_score = calculate_base_score(
+        analysis
+    )
 
-    adjustment_total = sum(adjustment.points for adjustment in adjustments)
-    overall_score = clamp_score(base_score + adjustment_total)
+    adjustments = get_adjustments(
+        analysis
+    )
+
+    adjustment_total = sum(
+        adjustment.points
+        for adjustment in adjustments
+    )
+
+    overall_score = clamp_score(
+        base_score + adjustment_total
+    )
 
     return InvestmentScore(
         base_score=base_score,
         adjustments=adjustments,
         overall_score=overall_score,
-        recommendation=get_recommendation(overall_score),
+        recommendation=get_recommendation(
+            overall_score
+        ),
     )

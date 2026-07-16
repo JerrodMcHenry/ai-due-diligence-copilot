@@ -3,21 +3,37 @@ from dataclasses import dataclass
 
 @dataclass(frozen=True)
 class ScoringDimension:
+
     name: str
+
     weight: float
+
     question: str
+
     description: str
+
     stage_guidance: str
+
     score_9_10: str
+
     score_7_8: str
+
     score_5_6: str
+
     score_3_4: str
+
     score_0_2: str
+
     strong_signals: list[str]
+
     weak_signals: list[str]
+
     evidence_priority: list[str]
+
     common_mistakes: list[str]
+
     benchmark_examples: list[str]
+
     diligence_questions: list[str]
 
 

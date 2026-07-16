@@ -7,6 +7,7 @@ from models.startup import (
 from ai.scoring import finalize_pillar_score
 from ai.scorecard import build_startup_scorecard
 from ai.investment_score import calculate_investment_score
+from models.analysis_context import AnalysisContext
 
 
 def finalize_score_breakdown(analysis_result):
@@ -21,7 +22,7 @@ def finalize_score_breakdown(analysis_result):
 def build_pillar_analysis(analysis_result) -> PillarAnalysis:
     score_breakdown = finalize_score_breakdown(analysis_result)
 
-    final_score = score_breakdown.score if score_breakdown else 0.0
+    final_score = score_breakdown.score if score_breakdown else None
     final_confidence = (
         score_breakdown.confidence
         if score_breakdown
@@ -52,9 +53,12 @@ def assemble_sie_analysis(
     financial_analysis,
     scores: dict | None = None,
     readiness: dict | None = None,
+    analysis_context: AnalysisContext | None = None
+
 ) -> SIEMethodologyAnalysis:
     sie_analysis = SIEMethodologyAnalysis(
         context=context,
+        analysis_context=analysis_context or AnalysisContext(),
 
         market=build_pillar_analysis(market_analysis),
         team=build_pillar_analysis(team_analysis),

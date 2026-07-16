@@ -1,4 +1,4 @@
-from models.scoring import Subscore, PillarScoreBreakdown
+from models.scoring import PillarScoreBreakdown, Subscore
 
 
 SIE_SCORING_CONFIG = {
@@ -55,28 +55,78 @@ TRACTION_SUBSCORES = SIE_SCORING_CONFIG["Traction"]
 FINANCIAL_SUBSCORES = SIE_SCORING_CONFIG["Financial Health"]
 
 
-def get_scoring_dimensions(pillar: str) -> list[tuple[str, float]]:
+def get_scoring_dimensions(
+    pillar: str,
+) -> list[tuple[str, float]]:
     return SIE_SCORING_CONFIG[pillar]
 
 
-def calculate_weighted_score(subscores: list[Subscore]) -> float:
-    if not subscores:
-        return 0.0
+def calculate_weighted_score(
+    subscores: list[Subscore],
+) -> float | None:
+    scorable_subscores = [
+        subscore
+        for subscore in subscores
+        if (
+            subscore.score is not None
+            and subscore.evidence_status != "Unavailable"
+        )
+    ]
 
-    total_weight = sum(subscore.weight for subscore in subscores)
+    if not scorable_subscores:
+        return None
 
-    if total_weight == 0:
-        return 0.0
+    total_weight = sum(
+        subscore.weight
+        for subscore in scorable_subscores
+    )
+
+    if total_weight <= 0:
+        return None
 
     weighted_score = (
-        sum(subscore.score * subscore.weight for subscore in subscores)
+        sum(
+            subscore.score * subscore.weight
+            for subscore in scorable_subscores
+        )
         / total_weight
     )
 
     return round(weighted_score, 1)
 
 
-def create_subscores(definitions: list[tuple[str, float]]) -> list[Subscore]:
+def calculate_evidence_coverage(
+    subscores: list[Subscore],
+) -> float:
+    if not subscores:
+        return 0.0
+
+    total_weight = sum(
+        subscore.weight
+        for subscore in subscores
+    )
+
+    if total_weight <= 0:
+        return 0.0
+
+    covered_weight = sum(
+        subscore.weight
+        for subscore in subscores
+        if (
+            subscore.score is not None
+            and subscore.evidence_status != "Unavailable"
+        )
+    )
+
+    return round(
+        (covered_weight / total_weight) * 100,
+        1,
+    )
+
+
+def create_subscores(
+    definitions: list[tuple[str, float]],
+) -> list[Subscore]:
     return [
         Subscore(
             name=name,
@@ -91,6 +141,12 @@ def finalize_pillar_score(
 ) -> PillarScoreBreakdown:
     score_breakdown.score = calculate_weighted_score(
         score_breakdown.subscores
+    )
+
+    score_breakdown.evidence_coverage = (
+        calculate_evidence_coverage(
+            score_breakdown.subscores
+        )
     )
 
     return score_breakdown

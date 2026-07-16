@@ -30,14 +30,17 @@ def parse_json_from_response(content: str):
 def format_subscores_for_prompt(pillar: str) -> str:
     dimensions = get_scoring_dimensions(pillar)
 
-    return "\n".join(
+    return ",\n".join(
         f'      {{\n'
         f'        "name": "{name}",\n'
-        f'        "score": 0,\n'
+        f'        "score": null,\n'
         f'        "weight": {weight},\n'
-        f'        "rationale": "Explain how the evidence maps to the SIE Scoring Methodology.",\n'
+        f'        "confidence": "Low",\n'
+        f'        "evidence_status": "Unavailable",\n'
+        f'        "rationale": "Explain how the available evidence maps to the SIE Scoring Methodology.",\n'
         f'        "evidence": [],\n'
-        f'        "recommendations": []\n'
+        f'        "recommendations": [],\n'
+        f'        "missing_information": []\n'
         f'      }}'
         for name, weight in dimensions
     )
@@ -53,6 +56,7 @@ def format_scoring_methodology(pillar: str) -> str:
 
     for dimension in methodology:
         section = f"""
+==================================================
 Dimension: {dimension.name}
 Weight: {dimension.weight}
 
@@ -62,35 +66,69 @@ Question:
 Description:
 {dimension.description}
 
-Stage guidance:
+Stage Guidance:
 {dimension.stage_guidance}
 
-Score guidance:
-9-10: {dimension.score_9_10}
-7-8: {dimension.score_7_8}
-5-6: {dimension.score_5_6}
-3-4: {dimension.score_3_4}
-0-2: {dimension.score_0_2}
+Score Guidance
 
-Strong signals:
+9-10
+{dimension.score_9_10}
+
+7-8
+{dimension.score_7_8}
+
+5-6
+{dimension.score_5_6}
+
+3-4
+{dimension.score_3_4}
+
+0-2
+{dimension.score_0_2}
+
+Evidence Priority:
 """
 
-        for signal in dimension.strong_signals:
-            section += f"- {signal}\n"
+        for item in dimension.evidence_priority:
+            section += f"- {item}\n"
 
-        section += "\nWeak signals:\n"
+        section += "\nStrong Signals:\n"
 
-        for signal in dimension.weak_signals:
-            section += f"- {signal}\n"
+        for item in dimension.strong_signals:
+            section += f"- {item}\n"
 
-        section += "\nDiligence questions:\n"
+        section += "\nWeak Signals:\n"
 
-        for question in dimension.diligence_questions:
-            section += f"- {question}\n"
+        for item in dimension.weak_signals:
+            section += f"- {item}\n"
+
+        section += "\nCommon Mistakes:\n"
+
+        for item in dimension.common_mistakes:
+            section += f"- {item}\n"
+
+        section += "\nBenchmark Examples:\n"
+
+        if dimension.benchmark_examples:
+            for item in dimension.benchmark_examples:
+                section += f"- {item}\n"
+        else:
+            section += "- None specified.\n"
+
+        section += "\nDiligence Questions:\n"
+
+        if dimension.diligence_questions:
+            for item in dimension.diligence_questions:
+                section += f"- {item}\n"
+        else:
+            section += "- None specified.\n"
+
+        section += "\n"
 
         sections.append(section)
 
     return "\n".join(sections)
+
 
 def build_pillar_prompt(
     pillar: str,
@@ -118,17 +156,69 @@ Startup and research context:
 SIE Scoring Methodology:
 {format_scoring_methodology(pillar)}
 
-Apply the SIE Scoring Methodology exactly.
+You MUST evaluate every scoring dimension using the SIE Scoring Methodology above.
 
-Important scoring rules:
-- Score business quality, not pitch-deck completeness.
-- Missing information lowers confidence, not the score by itself.
-- Only assign low scores when evidence shows weak performance.
-- Strong objective operating metrics should outweigh missing secondary details.
-- Evaluate the company relative to its stage.
-- If stage is not explicitly stated, infer it from revenue, customer count, funding round, product maturity, and GTM maturity.
-- Use the methodology above before assigning every subscore.
-- Explain how the evidence supports each score.
+For EACH scoring dimension:
+
+1. Read the Question.
+2. Apply the Description.
+3. Apply the Stage Guidance.
+4. Compare the company against the Score Guidance.
+5. Prioritize evidence according to Evidence Priority.
+6. Avoid the listed Common Mistakes.
+7. Use Benchmark Examples when comparable.
+8. Consider the Diligence Questions before assigning the score.
+9. Assign either:
+   - a numeric score from 0 to 10 for Observed or Inferred evidence, or
+   - null for Unavailable evidence.
+10. Write a rationale explaining how the evidence maps to the methodology.
+
+General principles:
+
+EVIDENCE STATUS RULES
+
+For every subscore, assign exactly one evidence_status:
+
+Observed:
+- Direct evidence supports the assessment.
+- Examples: disclosed revenue, retention, customer count, founder history, product behavior, or verified operating metrics.
+- score must be a number from 0 to 10.
+
+Inferred:
+- Multiple credible indirect signals support a reasonable estimate.
+- The rationale must identify the signals and clearly state that the assessment is inferred.
+- score must be a number from 0 to 10.
+- confidence should usually be Low or Medium.
+
+Unavailable:
+- The dimension cannot be responsibly evaluated from the available evidence.
+- score must be null.
+- confidence must be Low.
+- evidence should be empty unless it documents why the information is unavailable.
+- missing_information must identify the evidence required.
+- Do not substitute 0, 3, 5, 6, or any other placeholder score.
+
+Missing information is not weak performance.
+Only assign a low numeric score when affirmative evidence supports weak performance.
+
+PUBLIC ANALYSIS RULES
+
+This is a public startup intelligence analysis.
+
+Private founder metrics are usually not observable from public evidence.
+
+For the following dimensions, use evidence_status "Unavailable" and score null unless direct or credible public evidence is provided:
+
+- Unit Economics
+- Burn Efficiency
+- Runway
+- private CAC or LTV metrics
+- private cash balance
+- private operating forecasts
+
+Do not penalize the company because these private metrics are unavailable.
+
+Publicly observable financial evidence such as disclosed revenue, pricing, funding history, revenue model, public margins, or documented capital efficiency may still be scored when available.
 
 Return ONLY valid JSON with this exact structure:
 
@@ -149,30 +239,7 @@ Return ONLY valid JSON with this exact structure:
   }}
 }}
 
-Investor evaluation principles:
-- You are evaluating intrinsic startup quality.
-- You are not grading documentation quality.
-- Unknown does not mean weak.
-- Low confidence does not automatically mean a low score.
-- Revenue, revenue growth, retention, churn, paying customers, gross margin, CAC payback, LTV:CAC, runway, founder experience, product adoption, and enterprise adoption are high-value evidence.
-- TAM estimates, market reports, vision statements, and pitch claims are lower-value evidence.
-- Strong retention should increase confidence in product quality, customer value, execution, and commercial validation.
-- Strong founder experience should increase confidence in execution, hiring, fundraising, and strategic capability.
-- Deep workflow integrations can be a source of defensibility.
-- Do not assume patents are required for defensibility.
 
-Stage-aware evaluation:
-- Pre-seed: prioritize founder quality, problem insight, customer discovery, MVP quality, and early validation.
-- Seed: prioritize early PMF, paying customers, retention signals, product maturity, and GTM learning.
-- Series A: prioritize repeatable revenue growth, scalable GTM, retention, unit economics, product maturity, and execution quality.
-- Series B+: prioritize operational excellence, financial efficiency, market leadership, scalability, and competitive moat.
-
-Scoring scale:
-- 9-10: Exceptional for this stage.
-- 7-8: Strong for this stage.
-- 5-6: Average or mixed for this stage.
-- 3-4: Weak, with evidence-supported concerns.
-- 0-2: Very weak, little validation, or evidence of poor performance.
 
 Consistency requirements:
 - The summary and subscores must agree.
@@ -181,8 +248,11 @@ Consistency requirements:
 - Every weakness must be evidence-based.
 - Every recommendation must be actionable.
 - Confidence must be Low, Medium, or High.
-- Scores must be 0 to 10.
-- Never return null scores.
+- Observed and Inferred subscores must use numeric scores from 0 to 10.
+- Unavailable subscores must use score null.
+- Never use a placeholder numeric score for unavailable evidence.
+- evidence_status must be only Observed, Inferred, or Unavailable.
+- Subscore confidence must be only Low, Medium, or High.
 - Do not invent facts.
 - Return valid JSON only.
 - Do not include markdown.
@@ -207,14 +277,14 @@ def analyze_pillar(
             {
                 "role": "system",
                 "content": system_message
-                or (
-                    "You are a General Partner at a top-tier venture capital firm. "
-                    "You evaluate intrinsic business quality, not pitch quality. "
-                    "You distinguish missing evidence from poor business performance. "
-                    "You score companies relative to their stage. "
-                    "You apply the SIE Scoring Methodology exactly. "
-                    "Return only valid JSON."
-                ),
+or (
+    "You are a General Partner at a top-tier venture capital firm. "
+    "You evaluate intrinsic business quality, not pitch quality. "
+    "You distinguish observed evidence, reasonable inference, and unavailable information. "
+    "Unavailable information must produce a null score rather than a placeholder score. "
+    "You score companies relative to their stage and apply the SIE Scoring Methodology exactly. "
+    "Return only valid JSON."
+),
             },
             {
                 "role": "user",
