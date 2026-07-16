@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from typing import Any
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -19,7 +20,7 @@ client = OpenAI(
 )
 
 
-def parse_json_from_response(content: str) -> dict:
+def parse_json_from_response(content: str) -> dict[str, Any]:
     """
     Parse a JSON object from the model response.
 
@@ -51,10 +52,9 @@ def format_subscores_for_prompt(
     pillar: str,
 ) -> str:
     """
-    Build the required JSON schema for every configured subscore.
+    Build the required JSON shape for all configured subscores.
 
-    The initial values are examples of the required shape. The model
-    must replace them based on the available evidence.
+    Values are placeholders that the model must replace.
     """
     dimensions = get_scoring_dimensions(
         pillar
@@ -80,8 +80,8 @@ def format_scoring_methodology(
     pillar: str,
 ) -> str:
     """
-    Convert the structured SIE methodology into instructions that the
-    model can apply dimension by dimension.
+    Convert the structured SIE methodology into pillar-specific
+    instructions that the model can evaluate dimension by dimension.
     """
     methodology = SCORING_METHODOLOGY.get(
         pillar
@@ -259,8 +259,8 @@ INFERRED
 - Use evidence_status "Inferred".
 - Confidence should usually be Low or Medium.
 - The rationale must identify the signals and explain the inference.
-- Do not require exact quantitative metrics when credible qualitative signals are sufficient.
-- Do not mark an Inferred dimension Unavailable merely because exact quantitative metrics are absent.
+- Exact quantitative metrics are not required when credible qualitative signals are sufficient.
+- Do not mark an Inferred dimension Unavailable merely because quantitative metrics are absent.
 - Do not infer performance from brand reputation alone.
 - Do not use hindsight or future company outcomes.
 
@@ -271,7 +271,7 @@ PRIVATE
   - use evidence_status "Unavailable"
   - use score null
   - use confidence "Low"
-  - leave evidence empty unless it documents the absence
+  - leave evidence empty
   - list the exact missing information
 - Private dimensions commonly include:
   - runway
@@ -307,13 +307,15 @@ UNAVAILABLE
 - The dimension cannot be responsibly evaluated under its Evidence Requirement.
 - score must be null.
 - confidence must be Low.
+- evidence must be empty.
 - missing_information must identify the evidence required.
-- recommendations should explain the next diligence step.
+- recommendations should describe the next diligence step.
 - never use a placeholder numeric score.
 
 Missing information is not evidence of weak performance.
 
-Only assign a low numeric score when affirmative evidence supports weak performance, poor execution, or material risk.
+Only assign a low numeric score when affirmative evidence supports weak
+performance, poor execution, or material risk.
 
 ==================================================
 PUBLIC ANALYSIS RULES
@@ -323,11 +325,13 @@ This is currently a public startup intelligence analysis.
 
 Private founder metrics are usually not observable from public evidence.
 
-For Private dimensions, return score null and evidence_status "Unavailable" unless direct or explicitly disclosed evidence is provided.
+For Private dimensions, return score null and evidence_status "Unavailable"
+unless relevant internal or explicitly disclosed evidence is provided.
 
 Do not penalize the company because private information is unavailable.
 
-Publicly observable financial evidence may still be used when available, including:
+Publicly observable financial evidence may still be used when available,
+including:
 
 - disclosed revenue
 - disclosed pricing
@@ -352,7 +356,8 @@ When the startup information specifies a historical evaluation period:
 - Do not use later valuation.
 - Do not use eventual outcomes.
 - Do not justify an early-stage score using hindsight.
-- Every evidence item must be traceable to the supplied startup information or period-appropriate research.
+- Every evidence item must be traceable to the supplied startup information
+  or period-appropriate research.
 
 ==================================================
 GENERAL SCORING PRINCIPLES
@@ -368,8 +373,10 @@ GENERAL SCORING PRINCIPLES
   - team size
   - product maturity
   - go-to-market maturity
-- Strong qualitative evidence can support a high score for Public and Inferred dimensions.
-- Do not require quantitative metrics for dimensions that can be responsibly assessed using public facts or credible inference.
+- Strong qualitative evidence can support a high score for Public and
+  Inferred dimensions.
+- Do not require quantitative metrics for dimensions that can be responsibly
+  assessed using public facts or credible inference.
 - Do not invent facts.
 - Do not use missing evidence as proof of weakness.
 - The summary, rationale, evidence, and score must be internally consistent.
@@ -399,7 +406,8 @@ OUTPUT CONSISTENCY REQUIREMENTS
 ==================================================
 
 - The summary and subscores must agree.
-- Do not describe a pillar as strong and then assign weak scores without explaining the contradiction.
+- Do not describe a pillar as strong and then assign weak scores without
+  explaining the contradiction.
 - Do not assign low scores solely because information is missing.
 - Every strength must be evidence-based.
 - Every weakness must be evidence-based.
@@ -411,9 +419,12 @@ OUTPUT CONSISTENCY REQUIREMENTS
 - Unavailable subscores must use score null.
 - Never use placeholder numeric scores for unavailable evidence.
 - For Unavailable subscores, missing_information must not be empty.
+- For Unavailable subscores, evidence must be empty.
 - For Observed and Inferred subscores, evidence must not be empty.
 - Extra fields outside score_breakdown must always be strings, not objects.
-- Only score_breakdown.subscores may contain score, weight, rationale, evidence, recommendations, confidence, evidence_status, and missing_information.
+- Only score_breakdown.subscores may contain score, weight, rationale,
+  evidence, recommendations, confidence, evidence_status, and
+  missing_information.
 - Return valid JSON only.
 - Do not include markdown.
 - Do not wrap JSON in triple backticks.
@@ -424,6 +435,398 @@ Additional pillar rules:
 """
 
 
+def get_methodology_by_name(
+    pillar: str,
+) -> dict[str, Any]:
+    """
+    Return the configured scoring dimensions indexed by dimension name.
+    """
+    return {
+        dimension.name: dimension
+        for dimension in SCORING_METHODOLOGY.get(
+            pillar,
+            [],
+        )
+    }
+
+
+def validate_dimension_names(
+    pillar: str,
+    score_breakdown,
+) -> list[str]:
+    """
+    Validate that the response contains every configured dimension
+    exactly once and does not introduce unknown dimensions.
+    """
+    methodology_by_name = get_methodology_by_name(
+        pillar
+    )
+
+    expected_names = set(
+        methodology_by_name
+    )
+
+    returned_names = [
+        subscore.name
+        for subscore in score_breakdown.subscores
+    ]
+
+    returned_name_set = set(
+        returned_names
+    )
+
+    errors: list[str] = []
+
+    missing_names = expected_names - returned_name_set
+    unknown_names = returned_name_set - expected_names
+
+    if missing_names:
+        errors.append(
+            "Missing scoring dimensions: "
+            + ", ".join(
+                sorted(missing_names)
+            )
+        )
+
+    if unknown_names:
+        errors.append(
+            "Unknown scoring dimensions: "
+            + ", ".join(
+                sorted(unknown_names)
+            )
+        )
+
+    if len(returned_names) != len(returned_name_set):
+        errors.append(
+            "Duplicate scoring dimensions were returned."
+        )
+
+    return errors
+
+
+def validate_evidence_requirements(
+    pillar: str,
+    score_breakdown,
+) -> list[str]:
+    """
+    Validate model output against methodology requirements.
+
+    This does not calculate scores. It rejects structurally invalid
+    or internally contradictory subscore output.
+    """
+    methodology_by_name = get_methodology_by_name(
+        pillar
+    )
+
+    errors = validate_dimension_names(
+        pillar=pillar,
+        score_breakdown=score_breakdown,
+    )
+
+    positive_signal_terms = (
+        "adoption",
+        "customer demand",
+        "customer pull",
+        "credible",
+        "clear",
+        "differentiated",
+        "developer-led",
+        "early customers",
+        "early traction",
+        "early users",
+        "market pull",
+        "multiple signals",
+        "product-led",
+        "product shipped",
+        "shipped product",
+        "strong",
+        "strategic clarity",
+        "strategic focus",
+        "traction",
+        "working product",
+        "word-of-mouth",
+    )
+
+    for subscore in score_breakdown.subscores:
+        dimension = methodology_by_name.get(
+            subscore.name
+        )
+
+        if dimension is None:
+            continue
+
+        requirement = dimension.evidence_requirement
+        status = subscore.evidence_status
+        score = subscore.score
+        evidence = subscore.evidence or []
+        missing_information = (
+            subscore.missing_information or []
+        )
+        rationale = (
+            subscore.rationale or ""
+        ).strip()
+
+        rationale_lower = rationale.lower()
+
+        if abs(
+            subscore.weight - dimension.weight
+        ) > 0.0001:
+            errors.append(
+                f"{subscore.name}: returned weight "
+                f"{subscore.weight} does not match configured "
+                f"weight {dimension.weight}."
+            )
+
+        if score is not None and not 0 <= score <= 10:
+            errors.append(
+                f"{subscore.name}: score must be between 0 and 10."
+            )
+
+        if status == "Unavailable":
+            if score is not None:
+                errors.append(
+                    f"{subscore.name}: Unavailable evidence must use "
+                    f"score null."
+                )
+
+            if subscore.confidence != "Low":
+                errors.append(
+                    f"{subscore.name}: Unavailable evidence must use "
+                    f"Low confidence."
+                )
+
+            if evidence:
+                errors.append(
+                    f"{subscore.name}: Unavailable evidence must use "
+                    f"an empty evidence list."
+                )
+
+            if not missing_information:
+                errors.append(
+                    f"{subscore.name}: Unavailable evidence must list "
+                    f"missing information."
+                )
+
+        elif status in {"Observed", "Inferred"}:
+            if score is None:
+                errors.append(
+                    f"{subscore.name}: {status} evidence requires a "
+                    f"numeric score."
+                )
+
+            if not evidence:
+                errors.append(
+                    f"{subscore.name}: {status} evidence requires "
+                    f"supporting evidence."
+                )
+
+            if status == "Inferred" and len(evidence) < 2:
+                errors.append(
+                    f"{subscore.name}: Inferred evidence requires at "
+                    f"least two credible supporting signals."
+                )
+
+        else:
+            errors.append(
+                f"{subscore.name}: invalid evidence_status "
+                f"{status!r}."
+            )
+
+        identifies_positive_signals = any(
+            term in rationale_lower
+            for term in positive_signal_terms
+        )
+
+        if (
+            requirement in {"Public", "Inferred"}
+            and status == "Unavailable"
+            and identifies_positive_signals
+        ):
+            errors.append(
+                f"{subscore.name}: the rationale identifies positive "
+                f"public or inferential signals but marks this "
+                f"{requirement} dimension Unavailable. Reassess it as "
+                f"Observed or Inferred with a numeric score."
+            )
+
+        if (
+            requirement == "Public"
+            and status == "Unavailable"
+            and not rationale
+        ):
+            errors.append(
+                f"{subscore.name}: Public dimensions require a clear "
+                f"explanation before they may be marked Unavailable."
+            )
+
+        if (
+            requirement == "Private"
+            and status in {"Observed", "Inferred"}
+        ):
+            private_evidence_terms = (
+                "arr",
+                "burn",
+                "cac",
+                "cash",
+                "churn",
+                "customer concentration",
+                "gross margin",
+                "grr",
+                "ltv",
+                "margin",
+                "mrr",
+                "nrr",
+                "retention",
+                "revenue",
+                "runway",
+            )
+
+            combined_private_evidence = " ".join(
+                [
+                    rationale_lower,
+                    *(
+                        str(item).lower()
+                        for item in evidence
+                    ),
+                ]
+            )
+
+            contains_private_evidence = any(
+                term in combined_private_evidence
+                for term in private_evidence_terms
+            )
+
+            if not contains_private_evidence:
+                errors.append(
+                    f"{subscore.name}: Private dimensions require "
+                    f"explicitly disclosed internal or financial "
+                    f"evidence before receiving a numeric score."
+                )
+
+    return errors
+
+
+def build_correction_prompt(
+    original_prompt: str,
+    original_content: str,
+    validation_errors: list[str],
+) -> str:
+    """
+    Build one correction request for outputs that violate the
+    methodology or response contract.
+    """
+    formatted_errors = "\n".join(
+        f"- {error}"
+        for error in validation_errors
+    )
+
+    return f"""
+The previous response violated the SIE methodology or output contract.
+
+Validation errors:
+
+{formatted_errors}
+
+Return a corrected version of the entire JSON object.
+
+Correction rules:
+
+- Preserve all valid dimensions, scores, evidence, and fields.
+- Correct only the dimensions involved in validation errors.
+- Do not remove any configured scoring dimensions.
+- Do not add new scoring dimensions.
+- Preserve the configured name and weight for every dimension.
+- Public dimensions may be scored from credible public qualitative evidence.
+- Inferred dimensions must receive a numeric score when at least two credible
+  and independent signals support an assessment.
+- Exact quantitative metrics are not required for Public or Inferred
+  dimensions.
+- Private dimensions must remain null when relevant internal evidence is
+  unavailable.
+- Unavailable dimensions must have:
+  - score null
+  - confidence Low
+  - an empty evidence list
+  - non-empty missing_information
+- Observed and Inferred dimensions must have:
+  - a numeric score from 0 to 10
+  - non-empty evidence
+- Do not use hindsight.
+- Do not invent facts.
+- Return valid JSON only.
+- Do not include markdown.
+
+Original analysis request:
+
+{original_prompt}
+
+Previous JSON response:
+
+{original_content}
+"""
+
+
+def call_analysis_model(
+    system_content: str,
+    user_content: str,
+    temperature: float,
+) -> str:
+    """
+    Make one model call and return response text.
+    """
+    response = client.chat.completions.create(
+        model="gpt-4.1-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": system_content,
+            },
+            {
+                "role": "user",
+                "content": user_content,
+            },
+        ],
+        temperature=temperature,
+    )
+
+    return (
+        response.choices[0].message.content
+        or ""
+    )
+
+
+def print_raw_subscores(
+    pillar: str,
+    score_breakdown,
+) -> None:
+    """
+    Temporary calibration logging.
+
+    Remove or replace with structured logging after calibration.
+    """
+    print(
+        "\n" + "=" * 70
+    )
+    print(
+        f"{pillar.upper()} RAW SUBSCORES"
+    )
+    print(
+        "=" * 70
+    )
+
+    for subscore in score_breakdown.subscores:
+        print(
+            f"{subscore.name:<30}"
+            f" Score: {str(subscore.score):<5}"
+            f" | Evidence: {subscore.evidence_status:<11}"
+            f" | Confidence: {subscore.confidence}"
+        )
+
+    print(
+        "=" * 70 + "\n"
+    )
+
+
 def analyze_pillar(
     pillar: str,
     company_text: str,
@@ -432,40 +835,32 @@ def analyze_pillar(
     extra_fields: dict[str, str] | None = None,
     extra_rules: list[str] | None = None,
 ):
-    response = client.chat.completions.create(
-        model="gpt-4.1-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": system_message
-                or (
-                    "You are a General Partner at a top-tier venture capital firm. "
-                    "You evaluate intrinsic startup quality, not pitch quality. "
-                    "You apply each scoring dimension's Public, Inferred, or Private evidence requirement exactly. "
-                    "You distinguish observed evidence, reasonable inference, and unavailable information. "
-                    "Unavailable private information must produce a null score rather than a placeholder score. "
-                    "Public and Inferred dimensions may be scored using credible qualitative evidence. "
-                    "You do not use hindsight during historical calibration. "
-                    "You return only valid JSON."
-                ),
-            },
-            {
-                "role": "user",
-                "content": build_pillar_prompt(
-                    pillar=pillar,
-                    company_text=company_text,
-                    extra_fields=extra_fields,
-                    extra_rules=extra_rules,
-                ),
-            },
-        ],
+    system_content = system_message or (
+        "You are a General Partner at a top-tier venture capital firm. "
+        "You evaluate intrinsic startup quality, not pitch quality. "
+        "You apply each scoring dimension's Public, Inferred, or Private "
+        "evidence requirement exactly. "
+        "Public and Inferred dimensions may be scored using credible "
+        "qualitative evidence. "
+        "Unavailable private information must produce a null score. "
+        "You do not use hindsight during historical calibration. "
+        "Return only valid JSON."
+    )
+
+    user_prompt = build_pillar_prompt(
+        pillar=pillar,
+        company_text=company_text,
+        extra_fields=extra_fields,
+        extra_rules=extra_rules,
+    )
+
+    content = call_analysis_model(
+        system_content=system_content,
+        user_content=user_prompt,
         temperature=0.2,
     )
 
-    content = (
-        response.choices[0].message.content
-        or ""
-    )
+    latest_content = content
 
     try:
         data = parse_json_from_response(
@@ -476,12 +871,57 @@ def analyze_pillar(
             **data
         )
 
-        if result.score_breakdown:
-            result.score_breakdown = (
-                finalize_pillar_score(
-                    result.score_breakdown
-                )
+        validation_errors = validate_evidence_requirements(
+            pillar=pillar,
+            score_breakdown=result.score_breakdown,
+        )
+
+        if validation_errors:
+            correction_prompt = build_correction_prompt(
+                original_prompt=user_prompt,
+                original_content=content,
+                validation_errors=validation_errors,
             )
+
+            corrected_content = call_analysis_model(
+                system_content=system_content,
+                user_content=correction_prompt,
+                temperature=0.0,
+            )
+
+            latest_content = corrected_content
+
+            corrected_data = parse_json_from_response(
+                corrected_content
+            )
+
+            result = result_model(
+                **corrected_data
+            )
+
+            remaining_errors = validate_evidence_requirements(
+                pillar=pillar,
+                score_breakdown=result.score_breakdown,
+            )
+
+            if remaining_errors:
+                formatted_errors = "; ".join(
+                    remaining_errors
+                )
+
+                raise ValueError(
+                    f"Corrected {pillar} analysis still violates "
+                    f"evidence requirements: {formatted_errors}"
+                )
+
+        print_raw_subscores(
+            pillar=pillar,
+            score_breakdown=result.score_breakdown,
+        )
+
+        result.score_breakdown = finalize_pillar_score(
+            result.score_breakdown
+        )
 
         return result
 
@@ -493,6 +933,6 @@ def analyze_pillar(
             error
         )
         print(
-            content
+            latest_content
         )
         raise
