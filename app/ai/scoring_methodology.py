@@ -1,40 +1,38 @@
 from dataclasses import dataclass
+from typing import Literal
+
+
+EvidenceRequirement = Literal[
+    "Public",
+    "Inferred",
+    "Private",
+]
 
 
 @dataclass(frozen=True)
 class ScoringDimension:
-
     name: str
-
     weight: float
 
     question: str
-
     description: str
-
     stage_guidance: str
 
     score_9_10: str
-
     score_7_8: str
-
     score_5_6: str
-
     score_3_4: str
-
     score_0_2: str
 
     strong_signals: list[str]
-
     weak_signals: list[str]
 
     evidence_priority: list[str]
-
     common_mistakes: list[str]
-
     benchmark_examples: list[str]
-
     diligence_questions: list[str]
+
+    evidence_requirement: EvidenceRequirement
 
 
 SCORING_METHODOLOGY = {
@@ -42,6 +40,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Market Size",
             weight=0.25,
+            evidence_requirement="Public",
             question="How large is the realistic addressable market if this company executes successfully?",
             description=(
                 "Evaluate venture-scale market potential. Do not punish missing TAM alone. "
@@ -101,6 +100,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Market Growth",
             weight=0.20,
+            evidence_requirement="Public",
             question="Is the underlying market growing rapidly?",
             description=(
                 "Evaluate category growth, not just company growth. Company growth can support the assessment, "
@@ -159,6 +159,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Market Timing",
             weight=0.20,
+            evidence_requirement="Public",
             question="Is now the right time for this solution?",
             description=(
                 "Evaluate whether customer readiness, technology maturity, regulation, budgets, and workflow urgency support adoption now. "
@@ -217,6 +218,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Competitive Intensity",
             weight=0.15,
+            evidence_requirement="Public",
             question="Can the company realistically win despite competition?",
             description=(
                 "Do not penalize a startup simply because competitors exist. Attractive markets usually have competitors. "
@@ -275,6 +277,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Customer Demand",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="How convincing is the evidence that customers genuinely want this product?",
             description=(
                 "Evaluate actual customer pull using adoption, revenue, retention, expansion, usage, urgency, and customer outcomes. "
@@ -339,6 +342,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Founder-Market Fit",
             weight=0.25,
+            evidence_requirement="Public",
             question="Does the founding team have unusually strong insight or experience in the market?",
             description=(
                 "Evaluate founder connection to the customer, problem, and industry. "
@@ -396,6 +400,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Technical Capability",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Can the team build, maintain, and scale the product?",
             description=(
                 "Evaluate technical capability relative to product complexity. "
@@ -454,6 +459,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Business Capability",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Can the team sell, operate, and build a durable company?",
             description=(
                 "Evaluate commercial, operational, and company-building capability. "
@@ -513,6 +519,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Leadership",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Can the team lead, hire, and scale the organization?",
             description=(
                 "Evaluate leadership maturity, hiring ability, decision quality, and ability to attract talent. "
@@ -572,6 +579,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Execution Track Record",
             weight=0.15,
+            evidence_requirement="Inferred",
             question="Has the team demonstrated the ability to execute against meaningful milestones?",
             description=(
                 "Evaluate demonstrated progress, not promises. Execution track record includes product shipped, customers won, revenue grown, retention maintained, and milestones achieved."
@@ -633,6 +641,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Customer Value",
             weight=0.25,
+            evidence_requirement="Inferred",
             question="Does the product solve an important customer problem with measurable value?",
             description=(
                 "Evaluate pain severity, ROI, workflow importance, and customer outcomes. "
@@ -692,6 +701,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Differentiation",
             weight=0.20,
+            evidence_requirement="Public",
             question="Is the product meaningfully different from alternatives?",
             description=(
                 "Evaluate whether the product has a clear wedge, superior customer outcome, unique workflow, or insight that competitors lack. "
@@ -750,6 +760,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Usability",
             weight=0.15,
+            evidence_requirement="Public",
             question="Can customers adopt and use the product with low friction?",
             description=(
                 "Evaluate onboarding, workflow fit, implementation burden, UX, and ease of adoption. "
@@ -808,6 +819,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Defensibility",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Can the product become difficult to copy or replace?",
             description=(
                 "Evaluate moats beyond patents: switching costs, data, workflow lock-in, integrations, network effects, ecosystem position, regulatory complexity, and distribution. "
@@ -869,6 +881,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Adoption Potential",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Can adoption scale meaningfully across customers, teams, or markets?",
             description=(
                 "Evaluate whether the product can spread across users, teams, accounts, geographies, or adjacent use cases. "
@@ -931,6 +944,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Go-to-Market Execution",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the company effectively acquiring customers through a repeatable motion?",
             description=(
                 "Evaluate ICP clarity, pipeline, sales motion, acquisition efficiency, sales cycle, and repeatability. "
@@ -990,6 +1004,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Product Execution",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the team executing well on product development and delivery?",
             description=(
                 "Evaluate product maturity, roadmap delivery, reliability, integrations, iteration speed, and customer outcomes. "
@@ -1049,6 +1064,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Operational Execution",
             weight=0.20,
+            evidence_requirement="Private",
             question="Can the company operate efficiently as it scales?",
             description=(
                 "Evaluate burn discipline, margins, runway, hiring, processes, and operating cadence. "
@@ -1108,6 +1124,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Strategic Execution",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the company making strategically sound decisions?",
             description=(
                 "Evaluate positioning, focus, sequencing, wedge strategy, partnerships, and competitive response. "
@@ -1167,6 +1184,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Execution Velocity",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the company moving fast enough relative to its stage?",
             description=(
                 "Evaluate speed of revenue growth, customer acquisition, product delivery, hiring, and milestone achievement. "
@@ -1229,6 +1247,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Customer Growth",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the customer base growing meaningfully for the company's stage?",
             description=(
                 "Evaluate customer acquisition relative to stage, segment, ACV, and business model. "
@@ -1288,6 +1307,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Revenue Growth",
             weight=0.20,
+            evidence_requirement="Private",
             question="Is revenue growing strongly relative to stage and business model?",
             description=(
                 "Evaluate revenue growth rate, new logo growth, expansion revenue, ACV, and revenue durability. "
@@ -1347,6 +1367,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Retention",
             weight=0.20,
+            evidence_requirement="Private",
             question="Are customers staying, renewing, and expanding?",
             description=(
                 "Evaluate churn, NRR, GRR, renewals, expansion, and customer stickiness. "
@@ -1407,6 +1428,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Engagement",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Are customers actively using the product in a way that indicates durable value?",
             description=(
                 "Evaluate usage frequency, workflow depth, automation volume, active users, and outcome evidence. "
@@ -1467,6 +1489,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Commercial Validation",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is there convincing commercial proof that the business works?",
             description=(
                 "Evaluate paying customers, renewals, expansion, pricing power, unit economics, case studies, and referenceability. "
@@ -1530,6 +1553,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Revenue Quality",
             weight=0.20,
+            evidence_requirement="Private",
             question="Is revenue durable, recurring, and high quality?",
             description=(
                 "Evaluate recurring revenue, retention, predictability, concentration, customer quality, and contract durability. "
@@ -1589,6 +1613,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Unit Economics",
             weight=0.20,
+            evidence_requirement="Private",
             question="Are the economics of acquiring and serving customers attractive?",
             description=(
                 "Evaluate gross margin, CAC payback, LTV:CAC, pricing power, sales efficiency, and expansion. "
@@ -1649,6 +1674,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Burn Efficiency",
             weight=0.20,
+            evidence_requirement="Private",
             question="Is the company using capital efficiently?",
             description=(
                 "Evaluate burn relative to revenue, growth, stage, and milestones. "
@@ -1708,6 +1734,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Runway",
             weight=0.20,
+            evidence_requirement="Private",
             question="Does the company have enough cash runway to reach the next major milestone?",
             description=(
                 "Evaluate cash runway relative to fundraising needs, growth plan, market conditions, and stage. "
@@ -1766,6 +1793,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Fundraising Readiness",
             weight=0.20,
+            evidence_requirement="Inferred",
             question="Is the company well positioned to raise capital for the next milestone?",
             description=(
                 "Evaluate whether team, market, traction, metrics, narrative, and use of funds support the next financing. "
