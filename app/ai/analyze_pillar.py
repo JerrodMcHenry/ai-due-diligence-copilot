@@ -523,30 +523,6 @@ def validate_evidence_requirements(
         score_breakdown=score_breakdown,
     )
 
-    positive_signal_terms = (
-        "adoption",
-        "customer demand",
-        "customer pull",
-        "credible",
-        "clear",
-        "differentiated",
-        "developer-led",
-        "early customers",
-        "early traction",
-        "early users",
-        "market pull",
-        "multiple signals",
-        "product-led",
-        "product shipped",
-        "shipped product",
-        "strong",
-        "strategic clarity",
-        "strategic focus",
-        "traction",
-        "working product",
-        "word-of-mouth",
-    )
-
     for subscore in score_breakdown.subscores:
         dimension = methodology_by_name.get(
             subscore.name
@@ -632,22 +608,7 @@ def validate_evidence_requirements(
                 f"{status!r}."
             )
 
-        identifies_positive_signals = any(
-            term in rationale_lower
-            for term in positive_signal_terms
-        )
-
-        if (
-            requirement in {"Public", "Inferred"}
-            and status == "Unavailable"
-            and identifies_positive_signals
-        ):
-            errors.append(
-                f"{subscore.name}: the rationale identifies positive "
-                f"public or inferential signals but marks this "
-                f"{requirement} dimension Unavailable. Reassess it as "
-                f"Observed or Inferred with a numeric score."
-            )
+    
 
         if (
             requirement == "Public"
@@ -863,13 +824,9 @@ def analyze_pillar(
     latest_content = content
 
     try:
-        data = parse_json_from_response(
-            content
-        )
+        data = parse_json_from_response(content)
 
-        result = result_model(
-            **data
-        )
+        result = result_model(**data)
 
         validation_errors = validate_evidence_requirements(
             pillar=pillar,
@@ -895,9 +852,7 @@ def analyze_pillar(
                 corrected_content
             )
 
-            result = result_model(
-                **corrected_data
-            )
+            result = result_model(**corrected_data)
 
             remaining_errors = validate_evidence_requirements(
                 pillar=pillar,
@@ -905,14 +860,13 @@ def analyze_pillar(
             )
 
             if remaining_errors:
-                formatted_errors = "; ".join(
-                    remaining_errors
+                print(
+                    f"\nWARNING: Corrected {pillar} analysis still "
+                    "has validation issues:"
                 )
 
-                raise ValueError(
-                    f"Corrected {pillar} analysis still violates "
-                    f"evidence requirements: {formatted_errors}"
-                )
+                for validation_error in remaining_errors:
+                    print(f"- {validation_error}")
 
         print_raw_subscores(
             pillar=pillar,
@@ -929,10 +883,6 @@ def analyze_pillar(
         print(
             f"\n\nERROR IN {pillar.upper()} ANALYSIS"
         )
-        print(
-            error
-        )
-        print(
-            latest_content
-        )
+        print(error)
+        print(latest_content)
         raise

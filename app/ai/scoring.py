@@ -95,6 +95,76 @@ def calculate_weighted_score(
     return round(weighted_score, 1)
 
 
+
+CONFIDENCE_VALUES = {
+    "Low": 1,
+    "Medium": 2,
+    "High": 3,
+}
+
+
+def calculate_pillar_confidence(
+    subscores: list[Subscore],
+) -> str:
+    scorable_subscores = [
+        subscore
+        for subscore in subscores
+        if (
+            subscore.score is not None
+            and subscore.evidence_status != "Unavailable"
+        )
+    ]
+
+    if not scorable_subscores:
+        return "Low"
+
+    total_weight = sum(
+        subscore.weight
+        for subscore in subscores
+    )
+
+    covered_weight = sum(
+        subscore.weight
+        for subscore in scorable_subscores
+    )
+
+    if total_weight <= 0:
+        return "Low"
+
+    coverage_ratio = covered_weight / total_weight
+
+    weighted_confidence = sum(
+        CONFIDENCE_VALUES[subscore.confidence]
+        * subscore.weight
+        for subscore in scorable_subscores
+    ) / covered_weight
+
+    observed_weight = sum(
+        subscore.weight
+        for subscore in scorable_subscores
+        if subscore.evidence_status == "Observed"
+    )
+
+    observed_ratio = observed_weight / covered_weight
+
+    if (
+        coverage_ratio >= 0.80
+        and weighted_confidence >= 2.4
+        and observed_ratio >= 0.40
+    ):
+        return "High"
+
+    if (
+        coverage_ratio >= 0.40
+        and weighted_confidence >= 1.6
+    ):
+        return "Medium"
+
+    return "Low"
+
+
+
+
 def calculate_evidence_coverage(
     subscores: list[Subscore],
 ) -> float:
@@ -145,6 +215,12 @@ def finalize_pillar_score(
 
     score_breakdown.evidence_coverage = (
         calculate_evidence_coverage(
+            score_breakdown.subscores
+        )
+    )
+
+    score_breakdown.confidence = (
+        calculate_pillar_confidence(
             score_breakdown.subscores
         )
     )

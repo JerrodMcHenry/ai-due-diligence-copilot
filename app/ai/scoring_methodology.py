@@ -1247,7 +1247,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Customer Growth",
             weight=0.20,
-            evidence_requirement="Inferred",
+            evidence_requirement="Public",
             question="Is the customer base growing meaningfully for the company's stage?",
             description=(
                 "Evaluate customer acquisition relative to stage, segment, ACV, and business model. "
@@ -1307,7 +1307,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Revenue Growth",
             weight=0.20,
-            evidence_requirement="Private",
+            evidence_requirement="Public",
             question="Is revenue growing strongly relative to stage and business model?",
             description=(
                 "Evaluate revenue growth rate, new logo growth, expansion revenue, ACV, and revenue durability. "
@@ -1367,7 +1367,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Retention",
             weight=0.20,
-            evidence_requirement="Private",
+            evidence_requirement="Public",
             question="Are customers staying, renewing, and expanding?",
             description=(
                 "Evaluate churn, NRR, GRR, renewals, expansion, and customer stickiness. "
@@ -1553,7 +1553,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Revenue Quality",
             weight=0.20,
-            evidence_requirement="Private",
+            evidence_requirement="Inferred",
             question="Is revenue durable, recurring, and high quality?",
             description=(
                 "Evaluate recurring revenue, retention, predictability, concentration, customer quality, and contract durability. "
@@ -1613,7 +1613,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Unit Economics",
             weight=0.20,
-            evidence_requirement="Private",
+            evidence_requirement="Public",
             question="Are the economics of acquiring and serving customers attractive?",
             description=(
                 "Evaluate gross margin, CAC payback, LTV:CAC, pricing power, sales efficiency, and expansion. "
@@ -1734,7 +1734,7 @@ SCORING_METHODOLOGY = {
         ScoringDimension(
             name="Runway",
             weight=0.20,
-            evidence_requirement="Private",
+            evidence_requirement="Public",
             question="Does the company have enough cash runway to reach the next major milestone?",
             description=(
                 "Evaluate cash runway relative to fundraising needs, growth plan, market conditions, and stage. "
