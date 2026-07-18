@@ -1,6 +1,8 @@
 from app.workflows.due_diligence_workflow import run_due_diligence
-from reporting.report_builder import build_report, build_structured_report
-
+from app.reporting.report_builder import (
+    build_report,
+    build_structured_report,
+)
 
 def load_company_data(filepath):
 
