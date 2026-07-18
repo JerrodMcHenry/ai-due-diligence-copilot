@@ -1,5 +1,5 @@
-from ai.analyze_pillar import analyze_pillar
-from models.analysis import TractionAnalysisResult
+from app.ai.analyze_pillar import analyze_pillar
+from app.models.analysis import TractionAnalysisResult
 
 
 def analyze_traction(company_text):

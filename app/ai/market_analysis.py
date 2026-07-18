@@ -1,5 +1,5 @@
-from ai.analyze_pillar import analyze_pillar
-from models.analysis import MarketAnalysisResult
+from app.ai.analyze_pillar import analyze_pillar
+from app.models.analysis import MarketAnalysisResult
 
 
 def analyze_market(company_text: str) -> MarketAnalysisResult:

@@ -2,8 +2,8 @@ import json
 import re
 from openai import OpenAI
 
-from models.startup import SIEMethodologyAnalysis
-from ai.scorecard import build_startup_scorecard
+from app.models.startup import SIEMethodologyAnalysis
+from app.ai.scorecard import build_startup_scorecard
 
 
 client = OpenAI()

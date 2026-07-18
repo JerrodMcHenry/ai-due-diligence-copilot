@@ -1,4 +1,4 @@
-from models.evidence import Evidence
+from app.models.evidence import Evidence
 
 
 def calculate_confidence(evidence: list[Evidence | str]) -> str:

@@ -1,8 +1,8 @@
 from pydantic import BaseModel, Field
 from typing import Literal
 
-from models.scoring import PillarScoreBreakdown
-from models.evidence import Evidence
+from app.models.scoring import PillarScoreBreakdown
+from app.models.evidence import Evidence
 
 
 ConfidenceLevel = Literal["Low", "Medium", "High"]

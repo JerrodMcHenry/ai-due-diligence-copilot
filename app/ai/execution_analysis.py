@@ -1,5 +1,5 @@
-from ai.analyze_pillar import analyze_pillar
-from models.analysis import ExecutionAnalysisResult
+from app.ai.analyze_pillar import analyze_pillar
+from app.models.analysis import ExecutionAnalysisResult
 
 
 def analyze_execution(company_text):

@@ -1,20 +1,20 @@
-from ai.summarize import summarize_company
-from ai.risk_analysis import analyze_risks
-from ai.memo_generator import generate_investment_memo
-from ai.structured_analysis import generate_structured_analysis
-from ai.competitor_anlalysis import analyze_competitors
+from app.ai.summarize import summarize_company
+from app.ai.risk_analysis import analyze_risks
+from app.ai.memo_generator import generate_investment_memo
+from app.ai.structured_analysis import generate_structured_analysis
+from app.ai.competitor_anlalysis import analyze_competitors
 
-from ai.founder_analysis import analyze_founders
-from ai.market_analysis import analyze_market
-from ai.research_enrichment import enrich_research
-from ai.traction_analysis import analyze_traction
-from ai.readiness_score import generate_readiness_score
-from ai.product_analysis import analyze_product
-from ai.execution_analysis import analyze_execution
-from ai.financial_analysis import analyze_financials
+from app.ai.founder_analysis import analyze_founders
+from app.ai.market_analysis import analyze_market
+from app.ai.research_enrichment import enrich_research
+from app.ai.traction_analysis import analyze_traction
+from app.ai.readiness_score import generate_readiness_score
+from app.ai.product_analysis import analyze_product
+from app.ai.execution_analysis import analyze_execution
+from app.ai.financial_analysis import analyze_financials
 
-from models.startup import SIEContext
-from workflows.sie_assembler import assemble_sie_analysis
+from app.models.startup import SIEContext
+from app.workflows.sie_assembler import assemble_sie_analysis
 
 
 def build_sie_methodology_analysis(

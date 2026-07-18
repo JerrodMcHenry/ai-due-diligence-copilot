@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from database.db import (create_tables,
+from app.workflowsfrom app.database.db import (create_tables,
                          create_score_history_table, 
                          save_analysis, 
                          get_analyses, 
@@ -25,8 +25,8 @@ from database.db import (create_tables,
                          get_startup_by_name
 )
 
-from models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
-from workflows.due_diligence_workflow import run_due_diligence
+from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
+from app.workflows.due_diligence_workflow import run_due_diligence
 import json
 from pdf_extractor import extract_text_from_pdf
 from website_scrapper import extract_text_from_website

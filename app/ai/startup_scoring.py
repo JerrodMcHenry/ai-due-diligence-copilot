@@ -1,4 +1,4 @@
-from models.startup import SIEMethodologyAnalysis
+from app.models.startup import SIEMethodologyAnalysis
 
 
 PILLAR_WEIGHTS = {

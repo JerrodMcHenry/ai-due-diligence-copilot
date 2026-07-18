@@ -1,6 +1,6 @@
 from pydantic import BaseModel, Field
 
-from models.startup import SIEMethodologyAnalysis
+from app.models.startup import SIEMethodologyAnalysis
 
 
 class ScoreAdjustment(BaseModel):

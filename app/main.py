@@ -1,4 +1,4 @@
-from workflows.due_diligence_workflow import run_due_diligence
+from app.workflows.due_diligence_workflow import run_due_diligence
 from reporting.report_builder import build_report, build_structured_report
 
 

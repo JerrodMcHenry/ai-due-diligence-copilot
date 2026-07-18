@@ -1,13 +1,13 @@
-from models.startup import (
+from app.models.startup import (
     SIEMethodologyAnalysis,
     SIEContext,
     PillarAnalysis,
 )
 
-from ai.scoring import finalize_pillar_score
-from ai.scorecard import build_startup_scorecard
-from ai.investment_score import calculate_investment_score
-from models.analysis_context import AnalysisContext
+from app.ai.scoring import finalize_pillar_score
+from app.ai.scorecard import build_startup_scorecard
+from app.ai.investment_score import calculate_investment_score
+from app.models.analysis_context import AnalysisContext
 
 
 def finalize_score_breakdown(analysis_result):

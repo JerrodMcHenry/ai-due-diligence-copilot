@@ -1,5 +1,5 @@
-from ai.analyze_pillar import analyze_pillar
-from models.analysis import FounderAnalysisResult
+from app.ai.analyze_pillar import analyze_pillar
+from app.models.analysis import FounderAnalysisResult
 
 
 def analyze_founders(company_text):

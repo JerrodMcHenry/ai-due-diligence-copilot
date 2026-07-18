@@ -1,6 +1,6 @@
-from models.startup import SIEMethodologyAnalysis
-from models.scoring import StartupIntelligenceScore
-from ai.startup_scoring import PILLAR_WEIGHTS
+from app.models.startup import SIEMethodologyAnalysis
+from app.models.scoring import StartupIntelligenceScore
+from app.ai.startup_scoring import PILLAR_WEIGHTS
 
 
 def get_recommendation(score: float | None) -> str:

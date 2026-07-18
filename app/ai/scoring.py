@@ -1,4 +1,4 @@
-from models.scoring import PillarScoreBreakdown, Subscore
+from app.models.scoring import PillarScoreBreakdown, Subscore
 
 
 SIE_SCORING_CONFIG = {

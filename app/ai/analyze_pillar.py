@@ -6,11 +6,11 @@ from typing import Any
 from dotenv import load_dotenv
 from openai import OpenAI
 
-from ai.scoring import (
+from app.ai.scoring import (
     finalize_pillar_score,
     get_scoring_dimensions,
 )
-from ai.scoring_methodology import SCORING_METHODOLOGY
+from app.ai.scoring_methodology import SCORING_METHODOLOGY
 
 
 load_dotenv()
