@@ -2,8 +2,11 @@ import json
 from pathlib import Path
 from typing import Any
 
-from app.calibration.expected_scores import EXPECTED_SCORES
-from app.workflows.due_diligence_workflow import run_due_diligence  # adjust this import to the real file
+from app.calibration.expected_scores import (
+    EXPECTED_SCORES,
+    ScoreRange,
+)
+from app.workflows.due_diligence_workflow import run_due_diligence
 
 
 CALIBRATION_DIR = Path(__file__).resolve().parent
@@ -29,7 +32,11 @@ def serialize_value(value: Any) -> Any:
     return value
 
 
-def extract_actual_scores(results: dict[str, Any]) -> dict[str, float | None]:
+def extract_actual_scores(
+    results: dict[str, Any],
+) -> dict[str, float | None]:
+    """Extract top-level calibration scores from workflow results."""
+
     sie_analysis = results["sie_analysis"]
     scorecard = sie_analysis.startup_scorecard
 
@@ -44,25 +51,59 @@ def extract_actual_scores(results: dict[str, Any]) -> dict[str, float | None]:
     }
 
 
-def score_is_within_range(
+def score_matches_expectation(
     actual_score: float | None,
-    minimum: float,
-    maximum: float,
+    expected_range: ScoreRange,
 ) -> bool:
-    if actual_score is None:
-        return False
+    """
+    Return True when a score satisfies its calibration expectation.
 
-    return minimum <= actual_score <= maximum
+    A missing score passes only when the benchmark explicitly allows
+    unavailable evidence for that metric.
+    """
+
+    if actual_score is None:
+        return expected_range.allow_unavailable
+
+    return (
+        expected_range.minimum
+        <= actual_score
+        <= expected_range.maximum
+    )
+
+
+def format_actual_score(actual_score: float | None) -> str:
+    """Format an actual score for terminal output."""
+
+    if actual_score is None:
+        return "None"
+
+    return f"{actual_score:.1f}"
+
+
+def format_expected_range(expected_range: ScoreRange) -> str:
+    """Format the expected score range and availability rule."""
+
+    range_display = (
+        f"{expected_range.minimum:.1f}"
+        f"–{expected_range.maximum:.1f}"
+    )
+
+    if expected_range.allow_unavailable:
+        return f"{range_display} or None"
+
+    return range_display
 
 
 def save_report(
     case_name: str,
     results: dict[str, Any],
 ) -> Path:
+    """Save the complete workflow output as a JSON calibration report."""
+
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
     report_path = REPORTS_DIR / f"{case_name}.json"
-
     serialized_results = serialize_value(results)
 
     with report_path.open("w", encoding="utf-8") as report_file:
@@ -77,12 +118,13 @@ def save_report(
 
 
 def run_case(case_name: str) -> bool:
-    input_path = DATA_DIR / f"{case_name}.txt"
+    """Run and evaluate one calibration benchmark."""
 
+    input_path = DATA_DIR / f"{case_name}.txt"
     company_text = input_path.read_text(encoding="utf-8")
 
     print(f"\nRunning calibration: {case_name}")
-    print("-" * 60)
+    print("-" * 72)
 
     results = run_due_diligence(company_text)
 
@@ -95,29 +137,19 @@ def run_case(case_name: str) -> bool:
     for metric_name, expected_range in expected_scores.items():
         actual_score = actual_scores.get(metric_name)
 
-        passed = score_is_within_range(
+        passed = score_matches_expectation(
             actual_score=actual_score,
-            minimum=expected_range.minimum,
-            maximum=expected_range.maximum,
+            expected_range=expected_range,
         )
 
         status = "PASS" if passed else "FAIL"
-
-        actual_display = (
-            f"{actual_score:.1f}"
-            if actual_score is not None
-            else "None"
-        )
-
-        expected_display = (
-            f"{expected_range.minimum:.1f}"
-            f"–{expected_range.maximum:.1f}"
-        )
+        actual_display = format_actual_score(actual_score)
+        expected_display = format_expected_range(expected_range)
 
         print(
             f"{metric_name:<20}"
             f"{actual_display:<10}"
-            f"{expected_display:<14}"
+            f"{expected_display:<22}"
             f"{status}"
         )
 
@@ -131,6 +163,8 @@ def run_case(case_name: str) -> bool:
 
 
 def validate_calibration_cases() -> list[str]:
+    """Validate benchmark files and expected-score configuration."""
+
     errors: list[str] = []
 
     REPORTS_DIR.mkdir(parents=True, exist_ok=True)
@@ -160,6 +194,8 @@ def validate_calibration_cases() -> list[str]:
 
 
 def main() -> None:
+    """Run the complete calibration suite."""
+
     errors = validate_calibration_cases()
 
     if errors:
@@ -177,9 +213,9 @@ def main() -> None:
         if run_case(case_name):
             passed_cases += 1
 
-    print("\n" + "=" * 60)
+    print("\n" + "=" * 72)
     print("CALIBRATION SUMMARY")
-    print("=" * 60)
+    print("=" * 72)
     print(f"Passed: {passed_cases}/{total_cases}")
     print(f"Failed: {total_cases - passed_cases}/{total_cases}")
 

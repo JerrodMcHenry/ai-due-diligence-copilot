@@ -613,12 +613,13 @@ def validate_evidence_requirements(
         if (
             requirement == "Public"
             and status == "Unavailable"
-            and not rationale
-        ):
+):
             errors.append(
-                f"{subscore.name}: Public dimensions require a clear "
-                f"explanation before they may be marked Unavailable."
-            )
+                f"{subscore.name}: Public dimensions must receive a numeric "
+                f"score using the supplied company information. Public "
+                f"dimensions may not be marked Unavailable."
+    )
+
 
         if (
             requirement == "Private"
@@ -692,6 +693,14 @@ Return a corrected version of the entire JSON object.
 
 Correction rules:
 
+- Before leaving a Public or Inferred dimension Unavailable, search the
+  supplied company information again for relevant qualitative evidence.
+- Company-provided facts count as supplied evidence.
+- Exact numerical metrics are not required for Public dimensions.
+- An Inferred dimension may be scored when at least two concrete signals
+  support a limited conclusion.
+- Do not create evidence merely to avoid an Unavailable result.
+- If no relevant evidence truly exists after re-evaluation, preserve null.
 - Preserve all valid dimensions, scores, evidence, and fields.
 - Correct only the dimensions involved in validation errors.
 - Do not remove any configured scoring dimensions.
@@ -818,7 +827,7 @@ def analyze_pillar(
     content = call_analysis_model(
         system_content=system_content,
         user_content=user_prompt,
-        temperature=0.2,
+        temperature=0.0,
     )
 
     latest_content = content
