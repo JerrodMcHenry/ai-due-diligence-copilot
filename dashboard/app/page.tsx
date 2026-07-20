@@ -1,10 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import AnalyticsCard from "@/components/AnalyticsCard";
 import TopStartupsTable from "@/components/TopStartupsTable";
 import TopImprovingStartupsTable from "@/components/TopImprovingStartupsTable";
 import PageHeader from "@/components/layout/PageHeader";
+
+import {
+  getAnalytics,
+  getTopStartups,
+  getTopImprovingStartups,
+} from "@/lib/api";
 
 export default function Home() {
   const [analytics, setAnalytics] = useState<any>(null);
@@ -12,27 +19,34 @@ export default function Home() {
   const [topImprovingStartups, setTopImprovingStartups] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/analytics")
-      .then((response) => response.json())
-      .then((data) => setAnalytics(data));
+    async function loadDashboard() {
+      try {
+        const [analyticsData, topStartupsData, topImprovingData] =
+          await Promise.all([
+            getAnalytics(),
+            getTopStartups(),
+            getTopImprovingStartups(),
+          ]);
 
-    fetch("http://127.0.0.1:8000/top-startups")
-      .then((response) => response.json())
-      .then((data) => setTopStartups(data));
+        setAnalytics(analyticsData);
+        setTopStartups(topStartupsData);
+        setTopImprovingStartups(topImprovingData);
+      } catch (error) {
+        console.error("Failed to load dashboard:", error);
+      }
+    }
 
-    fetch("http://127.0.0.1:8000/top-improving-startups")
-      .then((response) => response.json())
-      .then((data) => setTopImprovingStartups(data));
+    loadDashboard();
   }, []);
 
   return (
     <div>
       <PageHeader
-        title="Startup Intelligence Engine"
-        subtitle="Here’s what’s happening across your startup ecosystem."
+        title="Dashboard"
+        subtitle="Monitor startup performance, intelligence scores, and recent movement across the platform."
       />
 
-      <div className="mt-10 grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
         <AnalyticsCard
           title="Total Startups"
           value={analytics?.total_startups ?? "--"}

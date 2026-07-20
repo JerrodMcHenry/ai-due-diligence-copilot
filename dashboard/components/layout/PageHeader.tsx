@@ -10,18 +10,22 @@ export default function PageHeader({
   action,
 }: PageHeaderProps) {
   return (
-    <div className="mb-8 flex items-start justify-between gap-6">
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-white">
+    <header className="mb-8 flex flex-col gap-5 border-b border-slate-800 pb-7 sm:flex-row sm:items-start sm:justify-between">
+      <div className="min-w-0">
+        <h1 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
           {title}
         </h1>
 
-        {subtitle && (
-          <p className="mt-2 max-w-2xl text-sm text-slate-400">{subtitle}</p>
-        )}
+        {subtitle ? (
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-400 sm:text-base">
+            {subtitle}
+          </p>
+        ) : null}
       </div>
 
-      {action && <div>{action}</div>}
-    </div>
+      {action ? (
+        <div className="flex shrink-0 items-center">{action}</div>
+      ) : null}
+    </header>
   );
 }
