@@ -4,10 +4,10 @@ type StartupProfilePageProps = {
   }>;
 };
 
-import ScoreBreakdown from "@/components/ScoreBreakdown";
-import AnalysisSection from "@/components/AnalysisSection";
-import StartupHero from "@/components/StartupHero";
-import PrimaryScoreCard from "@/components/PrimaryScoreCard";
+import ScoreBreakdown from "@/components/startup/ScoreBreakdown";
+import AnalysisSection from "@/components/startup/AnalysisSection";
+import StartupHero from "@/components/startup/StartupHero";
+import PrimaryScoreCard from "@/components/startup/PrimaryScoreCard";
 
 export default async function StartupProfilePage({
   params,

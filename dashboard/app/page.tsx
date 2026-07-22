@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 
-import AnalyticsCard from "@/components/AnalyticsCard";
-import TopStartupsTable from "@/components/TopStartupsTable";
-import TopImprovingStartupsTable from "@/components/TopImprovingStartupsTable";
+import AnalyticsCard from "@/components/dashboard/AnalyticsCard";
+import TopStartupsTable from "@/components/dashboard/TopStartupsTable";
+import TopImprovingStartupsTable from "@/components/dashboard/TopImprovingStartupsTable";
 import PageHeader from "@/components/layout/PageHeader";
 
 import {
