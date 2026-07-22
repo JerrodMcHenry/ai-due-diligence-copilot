@@ -1,70 +1,141 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
+
+import PageHeader from "@/components/layout/PageHeader";
+import { searchStartups } from "@/lib/api";
+
+import type { StartupSearchResult } from "@/types";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<StartupSearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  function handleSearch() {
-    fetch(
-      `http://127.0.0.1:8000/analyses/search?query=${encodeURIComponent(query)}`
-    )
-      .then((response) => response.json())
-      .then((data) => setResults(data));
+  async function handleSearch() {
+    const trimmedQuery = query.trim();
+
+    if (!trimmedQuery) {
+      setResults([]);
+      setError("Enter a company name or keyword.");
+      setHasSearched(false);
+      return;
+    }
+
+    try {
+      setIsLoading(true);
+      setError(null);
+      setHasSearched(true);
+
+      const data = await searchStartups(trimmedQuery);
+      setResults(data);
+    } catch (error) {
+      console.error("Failed to search startups:", error);
+      setResults([]);
+      setError("Search could not be completed. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    void handleSearch();
   }
 
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold">Search Startups</h1>
+    <>
+      <PageHeader
+        title="Search"
+        subtitle="Find startups by company name, market, summary, or risk."
+      />
 
-      <p className="mt-4 text-gray-400">
-        Search startups in the intelligence engine.
-      </p>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-3 sm:flex-row">
+        <label htmlFor="startup-search" className="sr-only">
+          Search startups
+        </label>
 
-      <div className="mt-8 flex gap-4">
         <input
-          className="w-full rounded-lg bg-gray-900 border-gray-800 p-3 text-white"
-          placeholder="Search by company, summary, market, risk..."
+          id="startup-search"
+          type="search"
+          className="min-h-11 w-full rounded-lg border border-slate-800 bg-slate-900 px-4 text-white outline-none transition-colors placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+          placeholder="Search by company, summary, market, or risk..."
           value={query}
           onChange={(event) => setQuery(event.target.value)}
         />
 
         <button
-          onClick={handleSearch}
-          className="rounded-lg bg-blue-600 px-6 font-semibold hover:bg-blue-500"
+          type="submit"
+          disabled={isLoading}
+          className="min-h-11 rounded-lg bg-blue-600 px-6 text-sm font-semibold text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Search
+          {isLoading ? "Searching..." : "Search"}
         </button>
-      </div>
+      </form>
 
-      <div className="=mt-8 space-y-4">
-        {results.map((startup, index) => (
-          <div
-            key={index}
-            className="rounded-xl bg-gray-900 p-6 border border-gray-800"
-          >
-            <h2 className="text-2xl font-bold">
-              {startup.company_name ?? "Unknown Startup"}
-            </h2>
+      {error ? (
+        <div className="mt-6 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+          {error}
+        </div>
+      ) : null}
 
-            <p className="mt-2 text-gray-400">{startup.summary}</p>
+      <div className="mt-8 space-y-4">
+        {isLoading ? (
+          <>
+            <div className="h-40 animate-pulse rounded-xl border border-slate-800 bg-slate-900" />
+            <div className="h-40 animate-pulse rounded-xl border border-slate-800 bg-slate-900" />
+          </>
+        ) : null}
 
-            <p className="mt-4">
-              Overall Score: {startup.overall_score ?? "--"}
+        {!isLoading && hasSearched && results.length === 0 && !error ? (
+          <div className="rounded-xl border border-slate-800 bg-slate-900 px-6 py-12 text-center">
+            <p className="font-medium text-slate-300">
+              No matching startups found
             </p>
-            <Link
-              href={`/startup/${encodeURIComponent(
-                startup.company_name ?? "unknown"
-              )}`}
-              className="mt-4 inline-block text-blue-400 hover:text-blue-300 font-semibold"
-            >
-              View Startup →
-            </Link>
+
+            <p className="mt-1 text-sm text-slate-500">
+              Try another company name or a broader keyword.
+            </p>
           </div>
-        ))}
+        ) : null}
+
+        {!isLoading &&
+          results.map((startup) => {
+            const companyName = startup.company_name ?? "Unknown Startup";
+
+            return (
+              <article
+                key={`${companyName}-${startup.overall_score ?? "unscored"}`}
+                className="rounded-xl border border-slate-800 bg-slate-900 p-6"
+              >
+                <h2 className="text-xl font-semibold text-white">
+                  {companyName}
+                </h2>
+
+                <p className="mt-2 text-sm leading-6 text-slate-400">
+                  {startup.summary ?? "No summary is available."}
+                </p>
+
+                <p className="mt-4 text-sm text-slate-300">
+                  Overall Score:{" "}
+                  <span className="font-semibold text-white">
+                    {startup.overall_score ?? "--"}
+                  </span>
+                </p>
+
+                <Link
+                  href={`/startup/${encodeURIComponent(companyName)}`}
+                  className="mt-5 inline-flex text-sm font-semibold text-blue-400 transition-colors hover:text-blue-300"
+                >
+                  View startup →
+                </Link>
+              </article>
+            );
+          })}
       </div>
-    </div>
+    </>
   );
 }
