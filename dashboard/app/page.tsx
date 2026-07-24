@@ -8,6 +8,7 @@ import TopStartupsTable from "@/components/dashboard/TopStartupsTable";
 
 import PageHeader from "@/components/layout/PageHeader";
 import BaseCard from "@/components/ui/BaseCard";
+import SPSRing from "@/components/ui/SPSRing";
 
 import {
   getAnalytics,
@@ -135,17 +136,17 @@ export default function Home() {
 
           <section className="grid gap-6 lg:grid-cols-3">
             <BaseCard className="p-8 lg:col-span-2">
-              <div className="flex items-start justify-between">
+              <div className="flex flex-col gap-8 xl:flex-row xl:justify-between">
                 <div>
                   <p className="text-sm font-medium text-text-secondary">
                     Startup Intelligence Engine
                   </p>
 
-                  <h1 className="mt-3 text-6xl font-bold tracking-tight">
-                    {formatMetric(analytics?.average_overall_score)}
-                  </h1>
+                  <div className="mt-6">
+                    <SPSRing score={analytics?.average_overall_score ?? 0} />
+                  </div>
 
-                  <p className="mt-2 text-xl font-semibold">
+                  <p className="mt-6 text-xl font-semibold">
                     Startup Power Score
                   </p>
 
