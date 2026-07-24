@@ -8,7 +8,7 @@ import TopStartupsTable from "@/components/dashboard/TopStartupsTable";
 
 import PageHeader from "@/components/layout/PageHeader";
 import BaseCard from "@/components/ui/BaseCard";
-import SPSRing from "@/components/ui/SPSRing";
+import { SPSRing } from "@/components/sps";
 
 import {
   getAnalytics,
@@ -143,7 +143,13 @@ export default function Home() {
                   </p>
 
                   <div className="mt-6">
-                    <SPSRing score={analytics?.average_overall_score ?? 0} />
+                    <SPSRing
+                      score={analytics?.average_overall_score ?? 0}
+                      size="lg"
+                      trend={2.4}
+                      percentile={32}
+                      confidence="Medium"
+                    />
                   </div>
 
                   <p className="mt-6 text-xl font-semibold">
