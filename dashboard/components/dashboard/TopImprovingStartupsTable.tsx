@@ -1,9 +1,6 @@
-type ImprovingStartup = {
-  company_name: string;
-  first_score: number;
-  latest_score: number;
-  score_change: number;
-};
+import BaseCard from "@/components/ui/BaseCard";
+
+import type { ImprovingStartup } from "@/types";
 
 type TopImprovingStartupsTableProps = {
   startups: ImprovingStartup[];
@@ -17,81 +14,81 @@ export default function TopImprovingStartupsTable({
   startups,
 }: TopImprovingStartupsTableProps) {
   return (
-    <section className="mt-10 overflow-hidden rounded-xl border border-slate-800 bg-slate-900">
-      <div className="border-b border-slate-800 px-5 py-5 sm:px-6">
-        <h2 className="text-lg font-semibold text-white sm:text-xl">
-          Top Improving Startups
+    <BaseCard className="overflow-hidden">
+      <div className="flex flex-col gap-2 border-b border-border px-5 py-5 sm:px-6">
+        <h2 className="text-lg font-semibold text-text-primary">
+          Fastest improving startups
         </h2>
 
-        <p className="mt-1 text-sm text-slate-400">
-          Companies with the largest increase in intelligence score.
+        <p className="text-sm text-text-muted">
+          Companies with the largest increase in Startup Power Score.
         </p>
       </div>
 
       {startups.length === 0 ? (
-        <div className="px-6 py-12 text-center">
-          <p className="text-sm font-medium text-slate-300">
+        <div className="px-6 py-14 text-center">
+          <p className="text-sm font-medium text-text-primary">
             No improvement data available
           </p>
 
-          <p className="mt-1 text-sm text-slate-500">
-            Score changes will appear after startups have multiple analyses.
+          <p className="mt-2 text-sm text-text-muted">
+            Score movement will appear after startups receive multiple analyses.
           </p>
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-[700px] w-full text-sm">
-            <thead className="bg-slate-950/50">
-              <tr className="border-b border-slate-800 text-left text-xs font-medium uppercase tracking-wide text-slate-500">
-                <th scope="col" className="min-w-[220px] px-6 py-3">
+          <table className="w-full min-w-[700px] text-sm">
+            <thead className="bg-surface-muted">
+              <tr className="border-b border-border text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
+                <th scope="col" className="min-w-[240px] px-6 py-3.5">
                   Company
                 </th>
 
-                <th scope="col" className="whitespace-nowrap px-6 py-3">
-                  First Score
+                <th scope="col" className="px-6 py-3.5">
+                  Previous SPS
                 </th>
 
-                <th scope="col" className="whitespace-nowrap px-6 py-3">
-                  Latest Score
+                <th scope="col" className="px-6 py-3.5">
+                  Current SPS
                 </th>
 
-                <th scope="col" className="whitespace-nowrap px-6 py-3">
-                  Score Change
+                <th scope="col" className="px-6 py-3.5">
+                  Change
                 </th>
               </tr>
             </thead>
 
-            <tbody className="divide-y divide-slate-800">
-              {startups.map((startup) => {
+            <tbody className="divide-y divide-border">
+              {startups.map((startup, index) => {
                 const isPositive = startup.score_change > 0;
                 const isNegative = startup.score_change < 0;
 
                 return (
                   <tr
-                    key={`${startup.company_name}-${startup.first_score}-${startup.latest_score}`}
-                    className="transition-colors hover:bg-slate-800/40"
+                    key={`${startup.company_name}-${startup.first_score}-${startup.latest_score}-${index}`}
+                    className="transition-colors hover:bg-surface-muted"
                   >
-                    <td className="whitespace-nowrap px-6 py-4 font-medium text-white">
+                    <td className="px-6 py-4 font-medium text-text-primary">
                       {startup.company_name}
                     </td>
 
-                    <td className="whitespace-nowrap px-6 py-4 text-slate-300">
+                    <td className="whitespace-nowrap px-6 py-4 text-text-secondary">
                       {formatScore(startup.first_score)}
                     </td>
 
-                    <td className="whitespace-nowrap px-6 py-4 text-slate-300">
+                    <td className="whitespace-nowrap px-6 py-4 font-medium text-text-primary">
                       {formatScore(startup.latest_score)}
                     </td>
 
                     <td className="whitespace-nowrap px-6 py-4">
                       <span
                         className={[
-                          "inline-flex rounded-full px-2.5 py-1 text-xs font-semibold",
+                          "inline-flex min-w-14 justify-center rounded-full px-2.5 py-1 text-xs font-semibold",
                           isPositive
-                            ? "bg-emerald-500/10 text-emerald-400"
+                            ? "bg-success-soft text-success"
                             : isNegative
-                            ? "bg-red-500/10 text-red-400"
-                            : "bg-slate-700/50 text-slate-300",
+                            ? "bg-danger-soft text-danger"
+                            : "bg-surface-muted text-text-secondary",
                         ].join(" ")}
                       >
                         {isPositive ? "+" : ""}
@@ -105,6 +102,6 @@ export default function TopImprovingStartupsTable({
           </table>
         </div>
       )}
-    </section>
+    </BaseCard>
   );
 }
