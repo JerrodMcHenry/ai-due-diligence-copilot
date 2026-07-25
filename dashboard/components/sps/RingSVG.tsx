@@ -1,3 +1,5 @@
+import { getSPSMetadata, normalizeSPS } from "./scoreMetadata";
+
 type RingSVGProps = {
   score: number;
   size: number;
@@ -5,29 +7,15 @@ type RingSVGProps = {
   animated?: boolean;
 };
 
-function getScoreClass(score: number) {
-  if (score >= 80) {
-    return "stroke-success";
-  }
-
-  if (score >= 60) {
-    return "stroke-primary";
-  }
-
-  if (score >= 40) {
-    return "stroke-warning";
-  }
-
-  return "stroke-danger";
-}
-
 export default function RingSVG({
   score,
   size,
   strokeWidth,
   animated = true,
 }: RingSVGProps) {
-  const normalizedScore = Math.max(0, Math.min(score, 100));
+  const normalizedScore = normalizeSPS(score);
+  const metadata = getSPSMetadata(normalizedScore);
+
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const strokeOffset = circumference - (normalizedScore / 100) * circumference;
@@ -59,7 +47,7 @@ export default function RingSVG({
         strokeDasharray={circumference}
         strokeDashoffset={strokeOffset}
         className={[
-          getScoreClass(normalizedScore),
+          metadata.strokeClass,
           animated
             ? "transition-[stroke-dashoffset] duration-1000 ease-out"
             : "",

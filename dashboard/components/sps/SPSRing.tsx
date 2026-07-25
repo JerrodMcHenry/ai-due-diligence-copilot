@@ -1,5 +1,6 @@
 import RingCenter from "./RingCenter";
 import RingSVG from "./RingSVG";
+import { getSPSMetadata, normalizeSPS } from "./scoreMetadata";
 
 import type { SPSRingProps } from "./types";
 
@@ -22,28 +23,6 @@ const SIZE_CONFIG = {
   },
 } as const;
 
-function getGrade(score: number) {
-  if (score >= 95) return "A+";
-  if (score >= 90) return "A";
-  if (score >= 85) return "A−";
-  if (score >= 80) return "B+";
-  if (score >= 75) return "B";
-  if (score >= 70) return "B−";
-  if (score >= 65) return "C+";
-  if (score >= 60) return "C";
-  if (score >= 50) return "D";
-  return "F";
-}
-
-function getScoreLabel(score: number) {
-  if (score >= 90) return "Exceptional";
-  if (score >= 80) return "Excellent";
-  if (score >= 70) return "Strong";
-  if (score >= 60) return "Promising";
-  if (score >= 40) return "Developing";
-  return "Needs attention";
-}
-
 export default function SPSRing({
   score,
   trend,
@@ -55,16 +34,24 @@ export default function SPSRing({
   animated = true,
   showDetails = true,
 }: SPSRingProps) {
-  const normalizedScore = Math.max(0, Math.min(score, 100));
+  const normalizedScore = normalizeSPS(score);
   const config = SIZE_CONFIG[size];
+  const metadata = getSPSMetadata(normalizedScore);
 
-  const resolvedGrade = grade ?? getGrade(normalizedScore);
-  const resolvedLabel = label ?? getScoreLabel(normalizedScore);
+  const resolvedGrade = grade ?? metadata.grade;
+  const resolvedLabel = label ?? metadata.label;
 
   return (
     <div className="flex flex-col items-center">
       <div
-        className="relative flex items-center justify-center"
+        className={[
+          "relative flex items-center justify-center rounded-full",
+          "transition-transform duration-300 ease-out",
+          "hover:scale-[1.02]",
+          metadata.glowClass,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         style={{
           width: config.diameter,
           height: config.diameter,
