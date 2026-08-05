@@ -4,6 +4,7 @@ from typing import Literal
 from app.models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
 from app.models.evidence import Evidence
 from app.models.analysis_context import AnalysisContext
+from datetime import datetime
 
 
 ConfidenceLevel = Literal["Low", "Medium", "High"]
@@ -67,4 +68,9 @@ class StartupAnalysisResponse(BaseModel):
 
 
 class UpdateAnalysisRequest(BaseModel):
+    methodology: SIEMethodologyAnalysis
+
+class StartupProfileResponse(BaseModel):
+    id: int
+    created_at: datetime
     methodology: SIEMethodologyAnalysis

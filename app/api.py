@@ -22,10 +22,11 @@ from app.database.db import (create_tables,
                          get_startup_trends,
                          get_top_startups,
                          get_top_improving_startups,
-                         get_startup_by_name
+                         get_startup_by_name,
+                         add_methodology_column
 )
 
-from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
+from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
 from app.workflows.due_diligence_workflow import run_due_diligence
 import json
 from app.pdf_extractor import extract_text_from_pdf
@@ -53,6 +54,7 @@ add_scoring_columns()
 add_benchmarking_columns()
 add_company_name_column()
 add_readiness_columns()
+add_methodology_column()
 create_score_history_table()
 
 @app.get("/health")
@@ -131,16 +133,23 @@ def top_startups(limit: int = 10):
 def top_improving_startups(limit: int = 10):
     return get_top_improving_startups(limit)
 
-@app.get("/startup/{company_name}")
+@app.get(
+    "/startup/{company_name}",
+    response_model=StartupProfileResponse,
+)
 def get_startup_profile(company_name: str):
     startup = get_startup_by_name(company_name)
 
     if startup is None:
         raise HTTPException(
             status_code=404,
-            detail="Startup not found"
+            detail=(
+                "No canonical startup profile was found. "
+                "The startup may need to be analyzed again."
+            ),
         )
-    return startup
+
+    return StartupProfileResponse(**startup)
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
@@ -206,6 +215,7 @@ def analyze_startup(request: StartupAnalysisRequest):
         market_analysis=results["market_analysis"].model_dump(),
         sources=results["sources"],
         traction_analysis=results["traction_analysis"].model_dump(),
+        methodology=results["sie_analysis"].model_dump(mode="json"),
         market_score=results["market_score"],
         team_score=results["team_score"],
         product_score=results["product_score"],
@@ -270,6 +280,7 @@ async def analyze_pdf(file: UploadFile = File(...)):
             market_analysis=results["market_analysis"].model_dump(),
             sources=results["sources"],
             traction_analysis=results["traction_analysis"].model_dump(),
+            methodology=results["sie_analysis"].model_dump(mode="json"),
             market_score=results["market_score"],
             team_score=results["team_score"],
             product_score=results["product_score"],
@@ -280,10 +291,18 @@ async def analyze_pdf(file: UploadFile = File(...)):
             recommendation=results["recommendation"],
             readiness_score=results["readiness_score"],
             readiness_summary=results["readiness_summary"]
+
+            
             
         )
 
-        
+        sie_analysis = results["sie_analysis"]
+
+        return StartupAnalysisResponse(
+        context=sie_analysis.context,
+        startup_scorecard=sie_analysis.startup_scorecard,
+        methodology=sie_analysis,
+)
         
 
     except ValueError as e:
@@ -314,6 +333,7 @@ def analyze_website(request: WebsiteAnalysisRequest):
         market_analysis=results["market_analysis"].model_dump(),
         sources=results["sources"],
         traction_analysis=results["traction_analysis"].model_dump(),
+        methodology=results["sie_analysis"].model_dump(mode="json"),
         market_score=results["market_score"],
         team_score=results["team_score"],
         product_score=results["product_score"],
@@ -327,32 +347,13 @@ def analyze_website(request: WebsiteAnalysisRequest):
                 
     )
 
-    return {
-        "summary": results["summary"],
-        "risk_analysis": results["risk_analysis"],
-        "competitor_analysis": results["competitor_analysis"],
-        "memo": results["memo"],
-        "structured_analysis": results["structured_analysis"],
-        "investment_score": results["investment_score"],
-        "readiness": results["readiness"],
-        "readiness_score":results["readiness_score"],
-        "readiness_summary":results["readiness_summary"],
-        "founder_analysis": results["founder_analysis"].model_dump(),
-        "market_analysis": results["market_analysis"].model_dump(),
-        "sources": results["sources"],
-        "traction_analysis": results["traction_analysis"].model_dump(),
-        "market_score": results["market_score"],
-        "team_score": results["team_score"],
-        "product_score": results["product_score"],
-        "competition_score": results["competition_score"],
-        "traction_score": results["traction_score"],
-        "financial_score": results["financial_score"],
-        "overall_score": results["overall_score"],
-        "recommendation": results["recommendation"],
-         "sie_analysis": results["sie_analysis"]
+    sie_analysis = results["sie_analysis"]
 
-        
-    }
+    return StartupAnalysisResponse(
+        context=sie_analysis.context,
+        startup_scorecard=sie_analysis.startup_scorecard,
+        methodology=sie_analysis,
+    )
 
 @app.post("/migrate/add-benchmarking-columns")
 def migrate_add_benchmarking_columns():

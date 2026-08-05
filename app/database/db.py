@@ -5,6 +5,8 @@ from datetime import datetime
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
+
+
 load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -315,7 +317,8 @@ def save_analysis(
     overall_score,
     recommendation,
     readiness_score,
-    readiness_summary
+    readiness_summary,
+    methodology,
 ):
     company_name = None
     industry = None
@@ -347,6 +350,7 @@ def save_analysis(
                 market_analysis,
                 sources,
                 traction_analysis,
+                methodology,
                 market_score,
                 team_score,
                 product_score,
@@ -375,6 +379,7 @@ def save_analysis(
                 :market_analysis,
                 :sources,
                 :traction_analysis,
+                CAST(:methodology AS JSONB),
                 :market_score,
                 :team_score,
                 :product_score,
@@ -388,6 +393,7 @@ def save_analysis(
                 :industry,
                 :stage,
                 :business_model
+                
             )
             RETURNING id
         """), {
@@ -404,6 +410,7 @@ def save_analysis(
             "market_analysis": json.dumps(market_analysis),
             "sources": json.dumps(sources),
             "traction_analysis": json.dumps(traction_analysis),
+            "methodology": json.dumps(methodology),
             "market_score": market_score,
             "team_score": team_score,
             "product_score": product_score,
@@ -471,14 +478,18 @@ def parse_structured_analysis(row):
         "market_analysis",
         "sources",
         "traction_analysis"
+        "methodology",
     ]
 
     for field in json_fields:
-        if analysis.get(field):
-            try:
-                analysis[field] = json.loads(analysis[field])
-            except json.JSONDecodeError:
-                pass
+
+        value = analysis.get(field)
+
+    if isinstance(value, str):
+        try:
+            analysis[field] = json.loads(value)
+        except json.JSONDecodeError:
+            pass
 
     return analysis
 
@@ -511,19 +522,22 @@ def get_analysis_by_id(analysis_id):
 
 
 def get_startup_by_name(company_name: str):
-    search_term = f"%{company_name.strip()}%"
+    normalized_company_name = company_name.strip()
 
     with engine.begin() as connection:
         result = connection.execute(text("""
-            SELECT *
+            SELECT
+                id,
+                created_at,
+                methodology
             FROM analyses
-            WHERE company_name ILIKE :company_name
-                OR structured_analysis ILIKE :company_name
-                OR summary ILIKE :company_name
+            WHERE LOWER(TRIM(company_name)) =
+                  LOWER(TRIM(:company_name))
+              AND methodology IS NOT NULL
             ORDER BY created_at DESC, id DESC
             LIMIT 1
         """), {
-            "company_name": search_term
+            "company_name": normalized_company_name
         })
 
         row = result.mappings().first()
@@ -531,7 +545,14 @@ def get_startup_by_name(company_name: str):
     if row is None:
         return None
 
-    return parse_structured_analysis(row)
+    startup = dict(row)
+
+    if isinstance(startup["methodology"], str):
+        startup["methodology"] = json.loads(
+            startup["methodology"]
+        )
+
+    return startup
         
 
 def delete_analysis(analysis_id: int):
@@ -793,3 +814,16 @@ def get_top_improving_startups(limit: int = 10):
     )
 
     return improvements[:limit]
+
+def add_methodology_column():
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE analyses
+                ADD COLUMN methodology JSONB
+            """))
+
+        print("methodology column added")
+
+    except Exception as error:
+        print("methodology migration skipped", error)
