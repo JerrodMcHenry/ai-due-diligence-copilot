@@ -1,6 +1,6 @@
 import RingCenter from "./RingCenter";
 import RingSVG from "./RingSVG";
-import { getSPSMetadata, normalizeSPS } from "./scoreMetadata";
+import { getSPSMetadata, normalizeSPS } from "./utils/scoreMetadata";
 
 import type { SPSRingProps } from "./types";
 

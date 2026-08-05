@@ -686,15 +686,39 @@ def get_rankings():
                 financial_score,
                 recommendation,
                 created_at
-            FROM analyses
-            WHERE overall_score IS NOT NULL
-            ORDER BY overall_score DESC
+            FROM (
+                SELECT
+                    id,
+                    company_name,
+                    industry,
+                    stage,
+                    business_model,
+                    overall_score,
+                    market_score,
+                    team_score,
+                    product_score,
+                    competition_score,
+                    traction_score,
+                    financial_score,
+                    recommendation,
+                    created_at,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY LOWER(TRIM(company_name))
+                        ORDER BY created_at DESC, id DESC
+                    ) AS row_number
+                FROM analyses
+                WHERE
+                    overall_score IS NOT NULL
+                    AND company_name IS NOT NULL
+                    AND TRIM(company_name) <> ''
+            ) ranked_analyses
+            WHERE row_number = 1
+            ORDER BY overall_score DESC, company_name ASC
         """))
 
         rows = result.mappings().all()
 
     return [dict(row) for row in rows]
-
 
 def get_top_startups(limit: int = 10):
     with engine.begin() as connection:

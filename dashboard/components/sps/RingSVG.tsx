@@ -1,4 +1,4 @@
-import { getSPSMetadata, normalizeSPS } from "./scoreMetadata";
+import { getSPSMetadata, normalizeSPS } from "./utils/scoreMetadata";
 
 type RingSVGProps = {
   score: number;
