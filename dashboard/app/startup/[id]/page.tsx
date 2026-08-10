@@ -1,96 +1,71 @@
-type StartupProfilePageProps = {
+import Link from "next/link";
+
+import { getStartupProfile } from "@/lib/api";
+
+import BaseCard from "@/components/ui/BaseCard";
+import StartupHeroV2 from "@/components/startup/StartupHeroV2";
+import IntelligencePillars from "@/components/startup/IntelligencePillars";
+
+import type { StartupProfileResponse } from "@/types";
+
+type Props = {
   params: Promise<{
     id: string;
   }>;
 };
 
-import ScoreBreakdown from "@/components/startup/ScoreBreakdown";
-import AnalysisSection from "@/components/startup/AnalysisSection";
-import StartupHero from "@/components/startup/StartupHero";
-import PrimaryScoreCard from "@/components/startup/PrimaryScoreCard";
+function isNotFoundError(error: unknown): boolean {
+  return error instanceof Error && /\(404\)/.test(error.message);
+}
 
-export default async function StartupProfilePage({
-  params,
-}: StartupProfilePageProps) {
+async function loadStartupProfile(
+  id: string
+): Promise<StartupProfileResponse | null> {
+  try {
+    return await getStartupProfile(id);
+  } catch (error) {
+    if (isNotFoundError(error)) {
+      return null;
+    }
+
+    throw error;
+  }
+}
+
+export default async function StartupProfilePage({ params }: Props) {
   const { id } = await params;
 
-  const response = await fetch(
-    `http://127.0.0.1:8000/startup/${encodeURIComponent(id)}`,
-    {
-      cache: "no-store",
-    }
-  );
+  const startup = await loadStartupProfile(id);
 
-  if (!response.ok) {
+  if (!startup) {
     return (
-      <div className="p-8">
-        <h1 className="text-4xl font-bold">Startup Not Found</h1>
-        <p className="mt-4 text-gray-400">No startup profile found for {id}.</p>
-      </div>
+      <BaseCard className="p-10 text-center">
+        <h1 className="text-2xl font-bold text-text-primary">
+          Startup not found
+        </h1>
+
+        <p className="mt-3 text-text-secondary">
+          No startup profile was found for &ldquo;{id}&rdquo;. It may need to
+          be analyzed first, or the name may not match exactly.
+        </p>
+
+        <Link
+          href="/search"
+          className="mt-6 inline-flex text-sm font-semibold text-primary hover:text-primary-hover"
+        >
+          Back to search →
+        </Link>
+      </BaseCard>
     );
   }
 
-  const startup = await response.json();
+  const methodology = startup.methodology;
 
   return (
-    <div className="p-8">
-      <StartupHero
-        companyName={startup.company_name}
-        industry={startup.industry}
-        stage={startup.stage}
-        businessModel={startup.business_model}
-        recommendation={startup.recommendation}
-      />
+    <div className="space-y-8">
+      <StartupHeroV2 methodology={methodology} />
 
-      <div className="mt-8 grid grid-cols-2 gap-6">
-        <PrimaryScoreCard
-          title="Startup Intelligence Score"
-          score={startup.overall_score}
-        />
-
-        <PrimaryScoreCard
-          title="Readiness Score"
-          score={startup.readiness_score}
-        />
-      </div>
-
-      <ScoreBreakdown
-        marketScore={startup.market_score}
-        teamScore={startup.team_score}
-        productScore={startup.product_score}
-        competitionScore={startup.competition_score}
-        tractionScore={startup.traction_score}
-        financialScore={startup.financial_score}
-      />
-
-      <AnalysisSection title="Executive Summary" content={startup.summary} />
-
-      <AnalysisSection
-        title="Founder Analysis"
-        content={startup.founder_analysis}
-      />
-
-      <AnalysisSection
-        title="Market Analysis"
-        content={startup.market_analysis}
-      />
-
-      <AnalysisSection
-        title="Traction Analysis"
-        content={startup.traction_analysis}
-      />
-
-      <AnalysisSection title="Investment Memo" content={startup.memo} />
-
-      <AnalysisSection
-        title="Competitor Analysis"
-        content={startup.competitor_analysis}
-      />
-
-      <section className="mt-10 rounded-xl bg-gray-900 p-6">
-        <h2 className="text-2xl font-bold mb-4">Readiness Summary</h2>
-        <p className="text-gray-300">{startup.readiness_summary}</p>
-      </section>
+      <IntelligencePillars methodology={methodology} />
     </div>
   );
 }

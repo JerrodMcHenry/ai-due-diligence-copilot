@@ -1,0 +1,129 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project overview
+
+AI Due Diligence Copilot analyzes a startup (from pasted text, a PDF, or a website URL) and produces a
+structured, evidence-based investment analysis using the "Startup Intelligence Engine" (SIE) methodology.
+It has two halves that run as separate processes:
+
+- **`app/`** — Python/FastAPI backend. Runs the AI analysis pipeline (OpenAI + Tavily) and persists results
+  to Postgres.
+- **`dashboard/`** — Next.js 16 (App Router) frontend that reads from the backend API and renders rankings,
+  search, and per-startup score breakdowns.
+
+The full SIE methodology (pillars, scoring weights, evidence rules) is documented in
+`app/docs/SIE_Methodology_v1.md` and `dashboard/docs/sie-intelligence-framework.md` — read these before
+changing any scoring logic.
+
+## Commands
+
+Run backend commands from this directory (`ai-due-diligence-copilot/`) so the `app` package resolves.
+
+```bash
+# Backend setup
+pip install -r requirements.txt
+# requires OPENAI_API_KEY, TAVILY_API_KEY, DATABASE_URL (postgresql://...) in .env
+
+# Run the API server
+uvicorn app.api:app --reload --port 8000
+
+# Run the CLI pipeline (prompts for a file path, e.g. app/data/sample_company.txt)
+python -m app.main
+
+# Run the scoring calibration suite against benchmark companies
+python -m app.calibration.run_calibration
+```
+
+```bash
+# Dashboard (from dashboard/)
+npm run dev      # http://localhost:3000, expects the API at http://127.0.0.1:8000
+npm run build
+npm run lint
+npm start
+```
+
+There is no automated unit/integration test suite in this repo. The closest equivalent is the calibration
+suite (`app/calibration/`), which checks that pillar scores for known benchmark companies fall within
+expected ranges (`app/calibration/expected_scores.py`) — treat it as the regression check when touching
+scoring, prompts, or evidence rules.
+
+## Architecture
+
+### Backend request flow
+
+`app/api.py` is the FastAPI entrypoint. On import it runs a series of additive, idempotent migration
+functions (`create_tables`, `add_scoring_columns`, etc. from `app/database/db.py`) against `DATABASE_URL` —
+there is no Alembic/migration framework; new columns are added by writing a new `add_*_columns()` function
+and calling it at startup, wrapped in try/except so re-running is safe.
+
+For a given company input, the pipeline (`app/workflows/due_diligence_workflow.py::run_due_diligence`) is:
+
+1. **Enrichment** — `app/ai/research_enrichment.py` (Tavily) adds public research context to the raw
+   company text. PDFs and URLs are converted to text first via `app/pdf_extractor.py` /
+   `app/website_scrapper.py`.
+2. **Pillar analysis** — six independent analyses run over the enriched text: market, team (founders),
+   product, execution, traction, financial health (`app/ai/market_analysis.py`,
+   `founder_analysis.py`, `product_analysis.py`, `execution_analysis.py`, `traction_analysis.py`,
+   `financial_analysis.py`), plus free-form summary/risk/memo/competitor/structured-analysis calls.
+3. **Assembly** — `app/workflows/sie_assembler.py::assemble_sie_analysis` combines the six pillar results
+   plus a readiness score into one `SIEMethodologyAnalysis` (`app/models/startup.py`), computes the overall
+   `startup_intelligence_score` (`app/ai/investment_score.py`) and the `startup_scorecard`
+   (`app/ai/scorecard.py`).
+4. Note `run_due_diligence` calls `build_sie_methodology_analysis` **twice**: once with `readiness=None` to
+   get pillar scores, then again after computing the readiness score from those scores
+   (`app/ai/readiness_score.py`), so the final object includes readiness. Keep this two-pass shape in mind
+   when changing what feeds the readiness calculation.
+5. `app/api.py` persists the result via `save_analysis`/`save_score_history` and returns a
+   `StartupAnalysisResponse`.
+
+### The pillar-analysis engine (`app/ai/analyze_pillar.py`)
+
+All six pillar modules are thin wrappers that call the single generic `analyze_pillar()` — they only supply
+a pillar name, a Pydantic `result_model`, and pillar-specific extra fields/rules. Don't reimplement this
+per-pillar; add new pillars by following the same wrapper pattern (see `market_analysis.py` as the
+reference example).
+
+`analyze_pillar()`'s contract, driven by `app/ai/scoring_methodology.py` (per-pillar dimensions, weights,
+score-band guidance) and `app/ai/scoring.py` (weighted-average finalization):
+
+- Every scoring dimension is tagged **Public**, **Inferred**, or **Private**, which controls what evidence
+  is required and whether `Unavailable` (null score) is a legal outcome for that dimension.
+- The model is called once (`gpt-4.1-mini`, temperature 0), the JSON response is validated against the
+  evidence/score rules (`validate_evidence_requirements`), and if validation fails a single correction pass
+  is sent back to the model with the specific errors before giving up and logging a warning.
+- `finalize_pillar_score` (in `scoring.py`) computes the weighted pillar score from validated subscores —
+  this is the only place pillar scores are calculated; don't hand-roll weighted averages elsewhere.
+
+When editing prompts or evidence rules, changes belong in `scoring_methodology.py` /
+`analyze_pillar.py`, not in the individual pillar files, since all six pillars share this machinery.
+
+### Data models
+
+`app/models/` holds the Pydantic contracts shared across the backend: `startup.py` (`SIEMethodologyAnalysis`,
+`PillarAnalysis`, API request/response models), `scoring.py` (`PillarScoreBreakdown`,
+`StartupIntelligenceScore`), `evidence.py`, `analysis_context.py`. The dashboard's `types/` directory mirrors
+these shapes by hand — when a Pydantic model changes, update the matching TypeScript type.
+
+### Dashboard
+
+Next.js App Router app. Pages live in `dashboard/app/` (`rankings`, `search`, `startup/[id]`); UI is split
+into `components/dashboard`, `components/layout`, `components/rankings`, `components/startup`, and
+`components/sps` (the circular score-ring visualization). All backend calls go through
+`dashboard/lib/api/*.ts`, thin typed wrappers around `apiFetch` (`lib/api/client.ts`), which reads
+`NEXT_PUBLIC_API_URL` (default `http://127.0.0.1:8000`). The backend's CORS policy
+(`app/api.py`) only allows `localhost:3000`/`127.0.0.1:3000`, so keep the dev port in sync if you change it.
+Path alias `@/*` maps to the `dashboard/` root (`tsconfig.json`).
+
+`dashboard/AGENTS.md` (pulled in via `dashboard/CLAUDE.md`) flags that this Next.js version has
+breaking API/convention changes from training-data knowledge — check `node_modules/next/dist/docs/` before
+writing Next.js code in `dashboard/`.
+
+### Calibration suite
+
+`app/calibration/` is a standalone regression harness, not unit tests — see `app/calibration/README.md`
+for its full rules. Key points: benchmark inputs live in `app/calibration/data/<company>_<stage>.txt`, the
+filename stem must match a key in `EXPECTED_SCORES` (`expected_scores.py`), expected values are *ranges*
+not exact scores, and the harness must never be used to justify changing the production scoring formula
+based on a single benchmark result — look for patterns across multiple benchmarks first.
