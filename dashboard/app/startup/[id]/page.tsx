@@ -63,7 +63,7 @@ export default async function StartupProfilePage({ params }: Props) {
 
   return (
     <div className="space-y-8">
-      <StartupHeroV2 methodology={methodology} />
+      <StartupHeroV2 methodology={methodology} createdAt={startup.created_at} />
 
       <IntelligencePillars methodology={methodology} />
     </div>

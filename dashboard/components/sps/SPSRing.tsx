@@ -5,6 +5,10 @@ import { getSPSMetadata, normalizeSPS } from "./utils/scoreMetadata";
 import type { SPSRingProps } from "./types";
 
 const SIZE_CONFIG = {
+  xs: {
+    diameter: 56,
+    strokeWidth: 5,
+  },
   sm: {
     diameter: 120,
     strokeWidth: 10,
@@ -33,6 +37,7 @@ export default function SPSRing({
   size = "lg",
   animated = true,
   showDetails = true,
+  ariaLabel,
 }: SPSRingProps) {
   const normalizedScore = normalizeSPS(score);
   const config = SIZE_CONFIG[size];
@@ -57,9 +62,10 @@ export default function SPSRing({
           height: config.diameter,
         }}
         role="img"
-        aria-label={`Startup Power Score ${normalizedScore.toFixed(
-          1
-        )} out of 100`}
+        aria-label={
+          ariaLabel ??
+          `Startup Power Score ${normalizedScore.toFixed(1)} out of 100`
+        }
       >
         <RingSVG
           score={normalizedScore}
@@ -72,6 +78,7 @@ export default function SPSRing({
           score={normalizedScore}
           grade={showDetails ? resolvedGrade : undefined}
           label={showDetails ? resolvedLabel : undefined}
+          compact={size === "xs"}
         />
       </div>
 

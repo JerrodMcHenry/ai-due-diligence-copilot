@@ -21,9 +21,11 @@ export interface SPSRingProps {
 
   label?: string;
 
-  size?: "sm" | "md" | "lg" | "xl";
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
 
   animated?: boolean;
 
   showDetails?: boolean;
+
+  ariaLabel?: string;
 }

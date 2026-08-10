@@ -2,9 +2,25 @@ type RingCenterProps = {
   score: number;
   label?: string;
   grade?: string;
+  compact?: boolean;
 };
 
-export default function RingCenter({ score, label, grade }: RingCenterProps) {
+export default function RingCenter({
+  score,
+  label,
+  grade,
+  compact = false,
+}: RingCenterProps) {
+  if (compact) {
+    return (
+      <div className="absolute inset-0 flex items-center justify-center">
+        <span className="text-sm font-bold tracking-tight text-text-primary">
+          {score.toFixed(1)}
+        </span>
+      </div>
+    );
+  }
+
   return (
     <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
       <span className="text-5xl font-bold tracking-tight text-text-primary">
