@@ -9,6 +9,29 @@ EvidenceRequirement = Literal[
 ]
 
 
+# Canonical SIE pillar-level weights.
+#
+# These determine how much each of the six pillars contributes to the
+# overall Startup Intelligence Score (SPS). This is a different, coarser
+# granularity than SCORING_METHODOLOGY below, which weights the individual
+# scoring dimensions *within* one pillar.
+#
+# This is the single source of truth for pillar weights. Previously this
+# value was defined independently in both app/ai/investment_score.py and
+# app/ai/startup_scoring.py, and the two definitions had drifted apart
+# (product 0.15 vs 0.20, financial_health 0.15 vs 0.10) with no record of
+# an intentional methodology change. Both modules now import PILLAR_WEIGHTS
+# from here. Do not reintroduce a second copy of this dict elsewhere.
+PILLAR_WEIGHTS: dict[str, float] = {
+    "market": 0.20,
+    "team": 0.20,
+    "product": 0.20,
+    "execution": 0.15,
+    "traction": 0.15,
+    "financial_health": 0.10,
+}
+
+
 @dataclass(frozen=True)
 class ScoringDimension:
     name: str

@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field
 
 from app.models.startup import SIEMethodologyAnalysis
+from app.ai.scoring_methodology import PILLAR_WEIGHTS
 
 
 class ScoreAdjustment(BaseModel):
@@ -14,16 +15,6 @@ class InvestmentScore(BaseModel):
     adjustments: list[ScoreAdjustment] = Field(default_factory=list)
     overall_score: float = 0.0
     recommendation: str = ""
-
-
-PILLAR_WEIGHTS = {
-    "market": 0.20,
-    "team": 0.20,
-    "product": 0.15,
-    "execution": 0.15,
-    "traction": 0.15,
-    "financial_health": 0.15,
-}
 
 
 def clamp_score(score: float) -> float:
