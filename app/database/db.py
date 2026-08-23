@@ -553,7 +553,52 @@ def get_startup_by_name(company_name: str):
         )
 
     return startup
-        
+
+
+def get_sps_history(company_name: str):
+    """
+    Canonical SPS history for a company, sourced from the methodology
+    JSONB rather than the legacy score_history table.
+
+    score_history stores overall_score as INTEGER (lossy vs. the real
+    float score) and, for every company analyzed before canonical
+    methodology persistence existed, spans multiple incompatible
+    revisions of the scoring algorithm. Filtering to
+    methodology IS NOT NULL here naturally excludes all of that
+    pre-canonical data, at the cost of most companies currently having
+    zero or one point until more analyses are run under the current
+    methodology.
+    """
+    normalized_company_name = company_name.strip()
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                id,
+                created_at,
+                methodology->>'startup_intelligence_score' AS sps
+            FROM analyses
+            WHERE LOWER(TRIM(company_name)) =
+                  LOWER(TRIM(:company_name))
+              AND methodology IS NOT NULL
+            ORDER BY created_at ASC, id ASC
+        """), {
+            "company_name": normalized_company_name
+        })
+
+        rows = result.mappings().all()
+
+    return [
+        {
+            "analysis_id": row["id"],
+            "created_at": row["created_at"],
+            "startup_intelligence_score": (
+                float(row["sps"]) if row["sps"] is not None else None
+            ),
+        }
+        for row in rows
+    ]
+
 
 def delete_analysis(analysis_id: int):
     with engine.begin() as connection:

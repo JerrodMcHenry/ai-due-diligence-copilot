@@ -1,12 +1,13 @@
 import Link from "next/link";
 
-import { getStartupProfile } from "@/lib/api";
+import { getSPSHistory, getStartupProfile } from "@/lib/api";
 
 import BaseCard from "@/components/ui/BaseCard";
 import StartupHeroV2 from "@/components/startup/StartupHeroV2";
+import SPSHistory from "@/components/startup/SPSHistory";
 import IntelligencePillars from "@/components/startup/IntelligencePillars";
 
-import type { StartupProfileResponse } from "@/types";
+import type { SPSHistoryPoint, StartupProfileResponse } from "@/types";
 
 type Props = {
   params: Promise<{
@@ -29,6 +30,17 @@ async function loadStartupProfile(
     }
 
     throw error;
+  }
+}
+
+// SPS History is supplementary to the profile, not core to it — any
+// failure here (network hiccup, etc.) degrades to an empty history rather
+// than breaking the page.
+async function loadSPSHistory(id: string): Promise<SPSHistoryPoint[]> {
+  try {
+    return await getSPSHistory(id);
+  } catch {
+    return [];
   }
 }
 
@@ -60,10 +72,13 @@ export default async function StartupProfilePage({ params }: Props) {
   }
 
   const methodology = startup.methodology;
+  const history = await loadSPSHistory(id);
 
   return (
     <div className="space-y-8">
       <StartupHeroV2 methodology={methodology} createdAt={startup.created_at} />
+
+      <SPSHistory history={history} />
 
       <IntelligencePillars methodology={methodology} />
     </div>

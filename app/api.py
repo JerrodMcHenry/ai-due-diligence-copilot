@@ -23,7 +23,8 @@ from app.database.db import (create_tables,
                          get_top_startups,
                          get_top_improving_startups,
                          get_startup_by_name,
-                         add_methodology_column
+                         add_methodology_column,
+                         get_sps_history
 )
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
@@ -150,6 +151,10 @@ def get_startup_profile(company_name: str):
         )
 
     return StartupProfileResponse(**startup)
+
+@app.get("/startup/{company_name}/sps-history")
+def get_startup_sps_history(company_name: str):
+    return get_sps_history(company_name)
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(

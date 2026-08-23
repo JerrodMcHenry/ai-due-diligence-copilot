@@ -106,3 +106,11 @@ export type StartupProfileResponse = {
   created_at: string;
   methodology: SIEMethodologyAnalysis;
 };
+
+// One point per canonical (methodology-bearing) analysis, sourced from
+// GET /startup/{company_name}/sps-history. Chronological order.
+export type SPSHistoryPoint = {
+  analysis_id: number;
+  created_at: string;
+  startup_intelligence_score: number;
+};
