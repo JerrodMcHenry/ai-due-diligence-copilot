@@ -12,6 +12,7 @@ tavily_client = TavilyClient(api_key=os.getenv("TAVILY_API_KEY"))
 def extract_search_query(company_text: str) -> str:
     response = openai_client.chat.completions.create(
         model="gpt-4.1-mini",
+        temperature=0.0,
         messages= [
             {
                 "role": "system",
@@ -77,6 +78,7 @@ def enrich_research(company_text):
     
     response = openai_client.chat.completions.create(
         model="gpt-4.1-mini",
+        temperature=0.0,
         messages=[
             {
                 "role": "system",
@@ -124,5 +126,6 @@ For the Sources section, include any URLs referenced in the web research.
 
     return {
         "research_brief": response.choices[0].message.content,
-        "sources": sources
+        "sources": sources,
+        "search_query": search_query,
     }

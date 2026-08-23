@@ -32,6 +32,24 @@ class Subscore(BaseModel):
 
     missing_information: list[str] = Field(default_factory=list)
 
+    # --- Evidence/Scoring Separation sprint additions ---
+    #
+    # Structured facts distinct from quoted `evidence` -- e.g. a short
+    # normalized signal like "MRR grew $18K to $61K" rather than a full
+    # quoted sentence. Populated by the evidence-extraction stage
+    # (app/ai/evidence_extraction.py), carried through unchanged by the
+    # scoring stage. Empty for analyses produced before this field
+    # existed -- never backfilled.
+    signals: list[str] = Field(default_factory=list)
+
+    # Diagnostics, not methodology: whether this dimension's evidence
+    # assessment or numeric score required a scoped correction pass
+    # (app/ai/analyze_pillar.py). Never affects scoring or aggregation --
+    # purely for explainability/observability. False for analyses
+    # produced before this field existed.
+    evidence_corrected: bool = False
+    score_corrected: bool = False
+
 
 class PillarScoreBreakdown(BaseModel):
     pillar: str = ""

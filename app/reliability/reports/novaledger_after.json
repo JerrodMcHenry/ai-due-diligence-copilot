@@ -1,0 +1,2559 @@
+{
+  "fixture": "novaledger",
+  "label": "after",
+  "n_runs": 10,
+  "raw_runs": [
+    {
+      "overall_sps": 71.4,
+      "pillars": {
+        "market": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 6.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 6.8,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.3,
+          "confidence": "High",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 5.0,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 68.7,
+      "pillars": {
+        "market": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Track Record": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 5.6,
+          "confidence": "Low",
+          "evidence_coverage": 85.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Usability": {
+              "score": 5.0,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 4.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Adoption Potential": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.3,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.4,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 72.5,
+      "pillars": {
+        "market": {
+          "score": 7.4,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Defensibility": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.0,
+          "confidence": "Low",
+          "evidence_coverage": 60.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Velocity": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.2,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 6.6,
+          "confidence": "Low",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Burn Efficiency": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 71.3,
+      "pillars": {
+        "market": {
+          "score": 6.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 6.4,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.7,
+          "confidence": "Medium",
+          "evidence_coverage": 60.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.2,
+          "confidence": "Low",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 73.4,
+      "pillars": {
+        "market": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 7.2,
+          "confidence": "Low",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.8,
+          "confidence": "High",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 70.5,
+      "pillars": {
+        "market": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 6.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Track Record": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 6.6,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.3,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.4,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 72.8,
+      "pillars": {
+        "market": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.5,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 7.5,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Defensibility": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Adoption Potential": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.4,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 72.0,
+      "pillars": {
+        "market": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 6.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Defensibility": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.8,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.4,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 71.6,
+      "pillars": {
+        "market": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 7.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 6.5,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Defensibility": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.4,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Commercial Validation": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.0,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    },
+    {
+      "overall_sps": 70.6,
+      "pillars": {
+        "market": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Growth": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Competitive Intensity": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Customer Demand": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "team": {
+          "score": 6.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Technical Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Business Capability": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Leadership": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low"
+            },
+            "Execution Track Record": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "product": {
+          "score": 7.1,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Defensibility": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "execution": {
+          "score": 6.8,
+          "confidence": "Medium",
+          "evidence_coverage": 80.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Product Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Operational Execution": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low"
+            },
+            "Strategic Execution": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Execution Velocity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "traction": {
+          "score": 7.2,
+          "confidence": "High",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Revenue Growth": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High"
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Engagement": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Commercial Validation": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        },
+        "financial_health": {
+          "score": 7.2,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Unit Economics": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            },
+            "Runway": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium"
+            },
+            "Fundraising Readiness": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "stats": {
+    "n_runs": 10,
+    "overall_sps": {
+      "min": 68.7,
+      "max": 73.4,
+      "range": 4.7,
+      "stdev": 1.275
+    },
+    "pillars": {
+      "market": {
+        "min": 6.9,
+        "max": 7.4,
+        "range": 0.5,
+        "stdev": 0.12,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "team": {
+        "min": 6.9,
+        "max": 7.9,
+        "range": 1.0,
+        "stdev": 0.36,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "product": {
+        "min": 5.6,
+        "max": 7.5,
+        "range": 1.9,
+        "stdev": 0.5139,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true,
+        "null_status_flipped": false
+      },
+      "execution": {
+        "min": 6.8,
+        "max": 7.8,
+        "range": 1.0,
+        "stdev": 0.2828,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true,
+        "null_status_flipped": false
+      },
+      "traction": {
+        "min": 7.2,
+        "max": 7.8,
+        "range": 0.6,
+        "stdev": 0.1833,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "High",
+          "Medium"
+        ],
+        "confidence_flipped": true,
+        "null_status_flipped": false
+      },
+      "financial_health": {
+        "min": 6.6,
+        "max": 7.2,
+        "range": 0.6,
+        "stdev": 0.1661,
+        "scored_in_n_of_n_runs": "10/10",
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true,
+        "null_status_flipped": false
+      }
+    },
+    "subscores": {
+      "market/Competitive Intensity": {
+        "min": 6.0,
+        "max": 7.0,
+        "range": 1.0,
+        "stdev": 0.3,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "market/Customer Demand": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.4899,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "market/Market Growth": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "market/Market Size": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "market/Market Timing": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.3,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "team/Business Capability": {
+        "min": 6.0,
+        "max": 7.0,
+        "range": 1.0,
+        "stdev": 0.4899,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "team/Execution Track Record": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.5,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "team/Founder-Market Fit": {
+        "min": 9.0,
+        "max": 9.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false
+      },
+      "team/Leadership": {
+        "min": 5.0,
+        "max": 7.0,
+        "range": 2.0,
+        "stdev": 0.6,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "team/Technical Capability": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.4583,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "product/Adoption Potential": {
+        "min": 5.0,
+        "max": 8.0,
+        "range": 3.0,
+        "stdev": 0.7,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "product/Customer Value": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "product/Defensibility": {
+        "min": 4.0,
+        "max": 7.0,
+        "range": 3.0,
+        "stdev": 0.9798,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "product/Differentiation": {
+        "min": 5.0,
+        "max": 7.0,
+        "range": 2.0,
+        "stdev": 0.6633,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "product/Usability": {
+        "min": 5.0,
+        "max": 7.0,
+        "range": 2.0,
+        "stdev": 0.8718,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Unavailable"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "execution/Execution Velocity": {
+        "min": 6.0,
+        "max": 8.0,
+        "range": 2.0,
+        "stdev": 0.4714,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Unavailable"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "execution/Go-to-Market Execution": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.3,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "execution/Operational Execution": {
+        "min": 6.0,
+        "max": 6.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Unavailable"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "execution/Product Execution": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.4899,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "execution/Strategic Execution": {
+        "min": 6.0,
+        "max": 7.0,
+        "range": 1.0,
+        "stdev": 0.4,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "traction/Commercial Validation": {
+        "min": 6.0,
+        "max": 8.0,
+        "range": 2.0,
+        "stdev": 0.6667,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed",
+          "Unavailable"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "High",
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "traction/Customer Growth": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false
+      },
+      "traction/Engagement": {
+        "min": 5.0,
+        "max": 6.0,
+        "range": 1.0,
+        "stdev": 0.433,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Unavailable"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "traction/Retention": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "traction/Revenue Growth": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false
+      },
+      "financial_health/Burn Efficiency": {
+        "min": 5.0,
+        "max": 6.0,
+        "range": 1.0,
+        "stdev": 0.4,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "financial_health/Fundraising Readiness": {
+        "min": 6.0,
+        "max": 7.0,
+        "range": 1.0,
+        "stdev": 0.4,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "financial_health/Revenue Quality": {
+        "min": 7.0,
+        "max": 8.0,
+        "range": 1.0,
+        "stdev": 0.5,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false
+      },
+      "financial_health/Runway": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      },
+      "financial_health/Unit Economics": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred",
+          "Observed"
+        ],
+        "evidence_status_flipped": true,
+        "confidence_values_seen": [
+          "Low",
+          "Medium"
+        ],
+        "confidence_flipped": true
+      }
+    },
+    "flip_rates": {
+      "evidence_status_flip_rate": 0.4,
+      "evidence_status_flips": 12,
+      "subscore_count": 30,
+      "pillar_confidence_flip_rate": 0.6667,
+      "pillar_confidence_flips": 4,
+      "subscore_confidence_flip_rate": 0.5333,
+      "subscore_confidence_flips": 16,
+      "null_pillar_flip_rate": 0.0,
+      "null_pillar_flips": 0
+    }
+  },
+  "gates": {
+    "gates": [
+      {
+        "gate": "Overall SPS range <= 1.0",
+        "value": 4.7,
+        "passed": false,
+        "meets_target_0.5": false
+      },
+      {
+        "gate": "Pillar score range <= 0.2 (worst pillar)",
+        "value": 1.9,
+        "worst_pillar": "product",
+        "passed": false
+      },
+      {
+        "gate": "Evidence-status flip rate == 0%",
+        "value": 0.4,
+        "passed": false
+      },
+      {
+        "gate": "Pillar confidence flip rate == 0",
+        "value": 0.6667,
+        "passed": false
+      },
+      {
+        "gate": "Null/Unavailable pillar flip rate == 0",
+        "value": 0.0,
+        "passed": true
+      }
+    ],
+    "all_passed": false
+  }
+}

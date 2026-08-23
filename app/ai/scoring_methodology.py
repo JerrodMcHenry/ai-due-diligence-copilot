@@ -32,6 +32,16 @@ PILLAR_WEIGHTS: dict[str, float] = {
 }
 
 
+# Version of the pillar-to-overall-SPS aggregation methodology: the
+# PILLAR_WEIGHTS values above plus the weighted-average/renormalization
+# formula in app/ai/investment_score.py::calculate_base_score. Stamped
+# onto every new analysis's analysis_context.scoring_version (see
+# app/models/analysis_context.py) so a stored SPS can be traced back to
+# the weight configuration that produced it. Bump this string whenever
+# PILLAR_WEIGHTS or the aggregation formula changes.
+SCORING_VERSION = "1.0"
+
+
 @dataclass(frozen=True)
 class ScoringDimension:
     name: str
