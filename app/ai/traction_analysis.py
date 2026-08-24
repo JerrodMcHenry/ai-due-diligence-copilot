@@ -20,6 +20,14 @@ def analyze_traction(company_text):
             "Do not invent customer counts, revenue, churn, retention, or growth rates.",
             "Only use metrics explicitly present in the startup information.",
             "If traction details are missing, say what is missing.",
-            "Evaluate traction across customer growth, revenue growth, retention, engagement, and commercial validation.",
+            # SIE Methodology v2: "commercial validation" removed (it double-counted
+            # evidence already owned by Customer Growth/Revenue Growth/Retention).
+            # Growth Velocity (a Deterministic, normalized-rate dimension -- see
+            # app/ai/sie_v2_anchors.py) replaces it. If the supplied text discloses a
+            # real, dated, two-point customer-count or revenue series (both points
+            # confirmed actuals, not a projection), extract it into the Growth
+            # Velocity dimension's structured_facts field; do not estimate one from
+            # a single data point.
+            "Evaluate traction across customer growth, revenue growth, retention, engagement, and growth velocity.",
         ],
     )

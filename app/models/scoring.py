@@ -50,6 +50,18 @@ class Subscore(BaseModel):
     evidence_corrected: bool = False
     score_corrected: bool = False
 
+    # SIE Methodology v2 Part 4 (evidence-semantics wiring, post-
+    # implementation review): WHICH of the nine canonical missing-evidence
+    # states applies, populated only when evidence_status == "Unavailable"
+    # (see app.ai.sie_v2_evidence_semantics.MissingEvidenceState). This is
+    # purely additive REPORTING granularity layered on top of the existing,
+    # unchanged 3-state (Observed/Inferred/Unavailable) arithmetic -- it
+    # never changes whether a dimension is excluded from the scored set,
+    # only records WHY. None for every Subscore produced before this field
+    # existed, and for every Observed/Inferred Subscore -- never backfilled,
+    # never required.
+    missing_evidence_state: str | None = None
+
 
 class PillarScoreBreakdown(BaseModel):
     pillar: str = ""

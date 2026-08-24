@@ -17,6 +17,7 @@ from app.ai.execution_analysis import analyze_execution
 from app.ai.financial_analysis import analyze_financials
 from app.ai.analyze_pillar import PILLAR_ANALYSIS_MODEL, PILLAR_PROMPT_VERSION
 from app.ai.scoring_methodology import SCORING_VERSION
+from app.ai.sie_v2_methodology import METHODOLOGY_VERSION, ANCHOR_REGISTRY_VERSION
 
 from app.models.startup import SIEContext
 from app.models.analysis_context import AnalysisContext
@@ -40,6 +41,16 @@ def build_provenance_context(
     bypasses live research and has no new research to attribute.
     """
     return AnalysisContext(
+        # SIE Methodology v2: methodology_version was previously never
+        # explicitly set here, so it silently stayed at AnalysisContext's
+        # Pydantic default ("1.0") for every analysis, v1 included -- a
+        # real provenance gap the v2 implementation gap analysis found and
+        # fixes. anchor_registry_version is new in v2: distinguishes "same
+        # 28 dimensions, refined anchor" from "different dimension set" if
+        # the anchor registry is ever updated independently of the
+        # architecture (see app/ai/sie_v2_methodology.py).
+        methodology_version=METHODOLOGY_VERSION,
+        anchor_registry_version=ANCHOR_REGISTRY_VERSION,
         scoring_version=SCORING_VERSION,
         model_identifier=PILLAR_ANALYSIS_MODEL,
         prompt_version=PILLAR_PROMPT_VERSION,

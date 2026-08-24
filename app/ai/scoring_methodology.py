@@ -39,7 +39,7 @@ PILLAR_WEIGHTS: dict[str, float] = {
 # app/models/analysis_context.py) so a stored SPS can be traced back to
 # the weight configuration that produced it. Bump this string whenever
 # PILLAR_WEIGHTS or the aggregation formula changes.
-SCORING_VERSION = "1.0"
+SCORING_VERSION = "2.0"
 
 
 @dataclass(frozen=True)
@@ -976,7 +976,7 @@ SCORING_METHODOLOGY = {
     "Execution": [
         ScoringDimension(
             name="Go-to-Market Execution",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Inferred",
             question="Is the company effectively acquiring customers through a repeatable motion?",
             description=(
@@ -1036,7 +1036,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Product Execution",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Inferred",
             question="Is the team executing well on product development and delivery?",
             description=(
@@ -1096,7 +1096,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Operational Execution",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Private",
             question="Can the company operate efficiently as it scales?",
             description=(
@@ -1156,7 +1156,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Strategic Execution",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Inferred",
             question="Is the company making strategically sound decisions?",
             description=(
@@ -1214,72 +1214,17 @@ SCORING_METHODOLOGY = {
                 "What strategic choices has the company rejected?",
             ],
         ),
-        ScoringDimension(
-            name="Execution Velocity",
-            weight=0.20,
-            evidence_requirement="Inferred",
-            question="Is the company moving fast enough relative to its stage?",
-            description=(
-                "Evaluate speed of revenue growth, customer acquisition, product delivery, hiring, and milestone achievement. "
-                "Velocity should be judged relative to stage and business model."
-            ),
-            stage_guidance=(
-                "Pre-seed: velocity is learning and building. "
-                "Seed: velocity is PMF progress and early traction. "
-                "Series A: velocity is repeatable growth and scaling. "
-                "Series B+: velocity is efficient expansion."
-            ),
-            score_9_10="Exceptional velocity with rapid growth, fast learning, and repeated milestone achievement.",
-            score_7_8="Strong velocity for the company’s stage.",
-            score_5_6="Moderate velocity with some progress but not exceptional.",
-            score_3_4="Slow progress relative to stage.",
-            score_0_2="Stalled execution.",
-            strong_signals=[
-                "Rapid MRR growth",
-                "Fast customer acquisition",
-                "Product velocity",
-                "Hiring momentum",
-                "Milestones hit",
-                "Fast sales learning",
-                "Strong expansion",
-            ],
-            weak_signals=[
-                "Flat growth",
-                "Slow product progress",
-                "Missed milestones",
-                "Stalled GTM",
-                "Slow learning",
-                "Low urgency",
-            ],
-                        evidence_priority=[
-                "Revenue growth rate",
-                "Customer growth",
-                "Product milestones",
-                "Hiring momentum",
-                "Learning velocity",
-            ],
-            common_mistakes=[
-                "Do not require all velocity metrics if revenue and customer growth are strong.",
-                "Do not mistake activity for progress.",
-                "Do not ignore stagnation after fundraising.",
-            ],
-            benchmark_examples=[
-                "3.5x MRR growth in 12 months is strong Series A velocity.",
-                "Fast customer acquisition plus strong retention is more meaningful than feature release count alone.",
-            ],
-            diligence_questions=[
-                "How fast is revenue growing?",
-                "What milestones were hit?",
-                "Where is execution slow?",
-                "What is the next major milestone?",
-            ],
-        ),
+        # "Execution Velocity" removed in v2 (SIE_Methodology_v2_Specification.md Part 2):
+        # its evidence scope is absorbed into Product Execution's "roadmap velocity"
+        # evidence-priority item above. Growth Velocity, a differently-defined
+        # Deterministic dimension (a normalized rate computed from Customer Growth /
+        # Revenue Growth facts, not an LLM judgment of "speed"), now lives in Traction.
     ],
 
     "Traction": [
         ScoringDimension(
             name="Customer Growth",
-            weight=0.20,
+            weight=0.15,
             evidence_requirement="Public",
             question="Is the customer base growing meaningfully for the company's stage?",
             description=(
@@ -1339,7 +1284,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Revenue Growth",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Public",
             question="Is revenue growing strongly relative to stage and business model?",
             description=(
@@ -1399,7 +1344,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Retention",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Public",
             question="Are customers staying, renewing, and expanding?",
             description=(
@@ -1460,7 +1405,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Engagement",
-            weight=0.20,
+            weight=0.15,
             evidence_requirement="Inferred",
             question="Are customers actively using the product in a way that indicates durable value?",
             description=(
@@ -1519,65 +1464,75 @@ SCORING_METHODOLOGY = {
                 "What workflow volume runs through the product?",
             ],
         ),
+        # "Commercial Validation" removed in v2 -- it double-counted evidence already
+        # owned by Customer Growth/Revenue Growth/Retention (paying customers, renewals,
+        # unit economics). Replaced by Growth Velocity, relocated/redefined from the
+        # removed Execution-pillar "Execution Velocity" dimension: a DETERMINISTIC,
+        # normalized-rate construct (materiality-floor -> annualized CAGR -> scale-tiered
+        # bands; app/ai/sie_v2_anchors.py::score_growth_metric), not an LLM judgment of
+        # "speed". The rubric text below still guides the evidence-extraction/scoring LLM
+        # stages when the deterministic path cannot produce a number (e.g. no valid
+        # two-point series exists) and the dimension falls through to Unavailable/
+        # CALIBRATION_ANCHOR_REQUIRED rather than a fabricated score.
         ScoringDimension(
-            name="Commercial Validation",
+            name="Growth Velocity",
             weight=0.20,
-            evidence_requirement="Inferred",
-            question="Is there convincing commercial proof that the business works?",
+            evidence_requirement="Public",
+            question="Is the company's growth rate strong relative to its own scale and stage, once normalized?",
             description=(
-                "Evaluate paying customers, renewals, expansion, pricing power, unit economics, case studies, and referenceability. "
-                "Commercial validation should be judged relative to stage and sales motion."
+                "A derived, Traction-shaped construct: growth rate normalized by company age/stage, "
+                "materiality-floor-gated, business-model-window-aware (SIE_Methodology_v2_Specification.md "
+                "Part 2). Deterministic when a valid two-point actual (not projected) customer-count or "
+                "revenue series exists at or above the business-model-appropriate materiality floor; "
+                "structurally Not Applicable for pre-revenue companies or below the floor -- never scored "
+                "as if a trivial-base percentage swing were equivalent to large-scale growth."
             ),
             stage_guidance=(
-                "Pre-seed: commercial validation may be LOIs, paid pilots, or design partners. "
-                "Seed: expect early paid proof. "
-                "Series A: expect strong commercial evidence and repeatability. "
-                "Series B+: expect scalable commercial engine."
+                "Pre-seed: Not Applicable by construction -- no growth curve exists yet to normalize. "
+                "Seed/Series A/B+: Deterministic when the required two-point series exists at or above the "
+                "materiality floor for the company's business-model family; otherwise Unavailable, never "
+                "estimated from a single point or a projection."
             ),
-            score_9_10="Exceptional commercial validation with strong revenue, retention, economics, references, and repeatability.",
-            score_7_8="Strong commercial validation with paying customers and credible proof.",
-            score_5_6="Some commercial proof but still early or incomplete.",
-            score_3_4="Limited commercial validation.",
-            score_0_2="No commercial validation.",
+            score_9_10="Exceptional annualized growth rate for the company's scale tier (see anchor bands).",
+            score_7_8="Strong annualized growth rate for the company's scale tier.",
+            score_5_6="Credible, stage-appropriate annualized growth rate.",
+            score_3_4="Below-expectations annualized growth rate for the company's scale tier.",
+            score_0_2="Negative or negligible growth once normalized.",
             strong_signals=[
-                "Paying customers",
-                "Strong ACV",
-                "Good unit economics",
-                "Case studies",
-                "Expansion revenue",
-                "Renewals",
-                "Reference customers",
-                "Repeatable sales",
+                "A real, dated, two-point customer-count or revenue series with both points confirmed actuals",
+                "Growth rate well above the scale-tier band for the company's business-model family",
+                "A measurement window of at least ~2 quarters (avoids short-window CAGR distortion)",
             ],
             weak_signals=[
-                "No paying customers",
-                "No renewals",
-                "Weak pricing",
-                "No customer proof",
-                "Pilot-only traction",
-                "No referenceability",
+                "Only one data point exists (no series to normalize)",
+                "One or both comparison points is a projection/guidance figure, not a confirmed actual",
+                "Starting value is below the business-model-family materiality floor",
+                "Measurement window under ~2 quarters (annualizing it produces an unreliable, inflated rate)",
             ],
-                        evidence_priority=[
-                "Paying customers",
-                "Renewals",
-                "Expansion",
-                "Reference customers",
-                "Unit economics",
+            evidence_priority=[
+                "Two dated, confirmed-actual counts/revenue figures for the same metric",
+                "The measurement window between them",
+                "The company's business-model family (determines the materiality floor and scale tier)",
+                "Whether the company is pre-revenue (structurally Not Applicable if so)",
             ],
             common_mistakes=[
-                "Do not treat unpaid pilots as equal to paid customers.",
-                "Do not ignore case studies and references when paired with revenue.",
-                "Do not overrate revenue that is non-recurring or unsustainable.",
+                "Do not treat a single data point as a series.",
+                "Do not pair a confirmed actual with a projection/guidance figure.",
+                "Do not report a literal annualized rate from a sub-2-quarter window without dampening.",
+                "Do not score a trivial-base percentage swing (e.g. 2->6 customers) as equivalent to "
+                "large-scale growth (e.g. 5M->15M ARR) merely because the percentages match.",
             ],
             benchmark_examples=[
-                "185 paying customers, strong ACV, and 5x+ LTV:CAC are strong Series A commercial validation.",
-                "Referenceable enterprise customers materially strengthen commercial validation.",
+                "20,000 -> 80,000 merchants over ~3.5 years (SMB SaaS/platform family) is a Credible-to-Strong "
+                "annualized rate once normalized for scale.",
+                "10,000 -> 40,000 units over ~14 months (hardware, high-ticket) is an Exceptional rate for "
+                "that scale tier.",
             ],
             diligence_questions=[
-                "Are customers paying real money?",
-                "Is pricing sustainable?",
-                "Do customers renew and expand?",
-                "Can customers serve as references?",
+                "Is there a real, dated, two-point series for this specific metric?",
+                "Are both points confirmed actuals, not one a projection?",
+                "What is the measurement window, and does it clear the ~2-quarter minimum?",
+                "What business-model family and materiality floor apply?",
             ],
         ),
     ],
@@ -1645,8 +1600,11 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Unit Economics",
-            weight=0.20,
-            evidence_requirement="Public",
+            weight=0.25,
+            # v2 corrects a mistagging identified in the frozen spec (Part 7): Unit
+            # Economics evidence (margin, CAC payback, take-rate, loss ratio, etc.) is
+            # Usually-Private-in-practice even at scale, not Public.
+            evidence_requirement="Private",
             question="Are the economics of acquiring and serving customers attractive?",
             description=(
                 "Evaluate gross margin, CAC payback, LTV:CAC, pricing power, sales efficiency, and expansion. "
@@ -1706,7 +1664,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Burn Efficiency",
-            weight=0.20,
+            weight=0.25,
             evidence_requirement="Private",
             question="Is the company using capital efficiently?",
             description=(
@@ -1766,7 +1724,7 @@ SCORING_METHODOLOGY = {
         ),
         ScoringDimension(
             name="Runway",
-            weight=0.20,
+            weight=0.30,
             evidence_requirement="Public",
             question="Does the company have enough cash runway to reach the next major milestone?",
             description=(
@@ -1823,68 +1781,24 @@ SCORING_METHODOLOGY = {
                 "Can burn be flexed if fundraising conditions worsen?",
             ],
         ),
-        ScoringDimension(
-            name="Fundraising Readiness",
-            weight=0.20,
-            evidence_requirement="Inferred",
-            question="Is the company well positioned to raise capital for the next milestone?",
-            description=(
-                "Evaluate whether team, market, traction, metrics, narrative, and use of funds support the next financing. "
-                "Fundraising readiness is not just whether the company needs money; it is whether investors have a compelling reason to invest now."
-            ),
-            stage_guidance=(
-                "Pre-seed: team, market, and insight matter most. "
-                "Seed: early proof and founder-market fit matter. "
-                "Series A: metrics, repeatability, and market narrative matter. "
-                "Series B+: scale, efficiency, and category leadership matter."
-            ),
-            score_9_10="Exceptional fundraising profile likely to attract strong investor interest and competitive terms.",
-            score_7_8="Strong fundraising readiness with credible metrics and narrative.",
-            score_5_6="Some readiness but important gaps remain.",
-            score_3_4="Weak fundraising profile with serious investor objections.",
-            score_0_2="Not ready for institutional capital.",
-            strong_signals=[
-                "Strong growth",
-                "Strong retention",
-                "Experienced founders",
-                "Healthy unit economics",
-                "Large market",
-                "Clear use of funds",
-                "Strong investor narrative",
-                "Reference customers",
-            ],
-            weak_signals=[
-                "Weak metrics",
-                "Unclear market",
-                "Poor economics",
-                "No investor narrative",
-                "Short runway",
-                "Weak team",
-                "No milestone clarity",
-            ],
-                        evidence_priority=[
-                "Growth",
-                "Retention",
-                "Team quality",
-                "Market size",
-                "Use of funds",
-                "Investor narrative",
-            ],
-            common_mistakes=[
-                "Do not equate needing money with being fundable.",
-                "Do not ignore investor objections.",
-                "Do not overrate a raise plan without metrics or milestones.",
-            ],
-            benchmark_examples=[
-                "Strong growth, 130%+ NRR, strong unit economics, and relevant founders make a compelling Series A profile.",
-                "A clear use of funds tied to enterprise sales or product expansion improves fundraising readiness.",
-            ],
-            diligence_questions=[
-                "Why fund this company now?",
-                "What milestones will capital unlock?",
-                "What investor objections remain?",
-                "What round size and use of funds are justified?",
-            ],
-        ),
+        # "Fundraising Readiness" demoted in v2 (Part 2): remains an UNSCORED narrative
+        # flag, never one of the 28 scored dimensions, never entering pillar/SPS
+        # aggregation. Its rubric text is preserved below (unused by scoring) purely as
+        # the source for an unscored narrative field a pillar wrapper may still choose to
+        # populate for profile display -- see FUNDRAISING_READINESS_NARRATIVE_RUBRIC.
     ],
+}
+
+
+FUNDRAISING_READINESS_NARRATIVE_RUBRIC = {
+    "question": "Is the company well positioned to raise capital for the next milestone?",
+    "description": (
+        "Evaluate whether team, market, traction, metrics, narrative, and use of funds support the next "
+        "financing. Fundraising readiness is not just whether the company needs money; it is whether "
+        "investors have a compelling reason to invest now."
+    ),
+    "note": (
+        "Unscored in v2 -- narrative-only. Never assign a weight, never enter a Subscore, never enter "
+        "pillar or SPS aggregation. See SIE_Methodology_v2_Specification.md Part 2."
+    ),
 }

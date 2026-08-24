@@ -36,6 +36,13 @@ class AnalysisContext(BaseModel):
 
     methodology_version: str = "1.0"
 
+    # SIE Methodology v2 addition: distinguishes "same 28-dimension
+    # architecture, refined/expanded anchor set" from "different dimension
+    # set entirely". Empty for analyses run before this field existed
+    # (never backfilled), consistent with every other provenance field's
+    # "empty means not recorded, not fabricated" convention.
+    anchor_registry_version: str = ""
+
     # --- Provenance (SIE Scoring Reliability sprint, Phase 5) ---
     #
     # Populated only for analyses run after this field set was added.

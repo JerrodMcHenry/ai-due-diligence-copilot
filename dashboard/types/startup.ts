@@ -79,6 +79,16 @@ export type SIEContext = {
   funding_stage: string;
 };
 
+// SIE Methodology v2, Part 9 item 6 (Blocker 3): a purely additive,
+// display-only whole-pillar-coverage label -- never a math adjustment to
+// startup_intelligence_score. Optional/nullable because analyses stored
+// before this field existed have no key for it at all.
+export type PartialStructuralCoverage = {
+  partial_structural_coverage: boolean;
+  pillars_unavailable_entirely: string[];
+  note: string;
+};
+
 export type SIEMethodologyAnalysis = {
   context: SIEContext;
 
@@ -96,6 +106,8 @@ export type SIEMethodologyAnalysis = {
 
   executive_coaching_summary: string;
   next_actions: string[];
+
+  structural_coverage?: PartialStructuralCoverage | null;
 
   startup_scorecard?: unknown;
   analysis_context?: unknown;

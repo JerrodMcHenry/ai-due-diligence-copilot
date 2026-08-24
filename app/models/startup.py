@@ -37,6 +37,25 @@ class SIEContext(BaseModel):
     funding_stage: str = ""
 
 
+class PartialStructuralCoverage(BaseModel):
+    """
+    SIE Methodology v2, Part 9 item 6 (Blocker 3 fix, post-implementation
+    review): a purely additive, DISPLAY-ONLY label for whole-pillar evidence
+    absence. Computed by
+    app.ai.sie_v2_evidence_semantics.compute_partial_structural_coverage()
+    from each pillar's already-existing final score (None == that pillar had
+    zero scored dimensions). Never a math adjustment to SPS -- startup_
+    intelligence_score is computed identically whether or not this field is
+    populated. field is None (not this model's zero-value) on every analysis
+    that predates this field, so historical JSONB records are never silently
+    reinterpreted as "fully covered."
+    """
+
+    partial_structural_coverage: bool = False
+    pillars_unavailable_entirely: list[str] = Field(default_factory=list)
+    note: str = ""
+
+
 class SIEMethodologyAnalysis(BaseModel):
     context: SIEContext = Field(default_factory=SIEContext)
 
@@ -55,6 +74,11 @@ class SIEMethodologyAnalysis(BaseModel):
     milestone_readiness_score: float = 0.0
     momentum_score: float = 0.0
     confidence_score: float = 0.0
+
+    # None (not PartialStructuralCoverage()'s own zero-value) is the
+    # backward-compatible default: a record stored before this field existed
+    # decodes to None here, never to a fabricated "fully covered" reading.
+    structural_coverage: PartialStructuralCoverage | None = None
 
     executive_coaching_summary: str = ""
     next_actions: list[str] = Field(default_factory=list)

@@ -17,9 +17,33 @@ def analyze_financials(company_text: str) -> FinancialAnalysisResult:
         extra_fields={
             "revenue_quality": "Assessment of revenue durability, recurrence, retention, concentration, and predictability.",
             "pricing_model": "Assessment of pricing structure, pricing power, and contract economics.",
-            "unit_economics": "Assessment of gross margin, CAC payback, LTV:CAC, and sales efficiency.",
-            "burn_rate": "Assessment of burn rate, burn multiple, and growth relative to spending.",
-            "runway": "Assessment of cash runway and ability to reach the next major milestone.",
+            "unit_economics": (
+                "Assessment of whether a typical unit/customer/transaction earns sufficient economic "
+                "value relative to the cost to acquire and serve it. Use the evidence family that "
+                "actually matches this company's business model -- SaaS/subscription (gross margin, "
+                "CAC payback, LTV:CAC), marketplace (take-rate, gross-vs-net revenue, per-transaction "
+                "servicing cost), insurance (loss ratio, combined ratio), hardware/manufacturing "
+                "(per-unit COGS vs. price), commerce/DTC (landed cost vs. price, contribution margin), "
+                "or R&D-partnership/deeptech (program fee vs. cost to deliver). Do not require or expect "
+                "SaaS-shaped figures from a company in a different family."
+            ),
+            "burn_rate": (
+                "Assessment of burn rate, burn multiple, and growth relative to spending. When a "
+                "defensible burn multiple cannot be computed (capital-intensive pre-revenue hardware/"
+                "biotech/deeptech, or spend driven by capex/R&D rather than revenue-generating "
+                "operations), evaluate spend relative to stated milestones/output, capital intensity "
+                "appropriate to the business model, and financing consumption relative to demonstrated "
+                "progress instead -- but never restate Runway's 'how long until cash runs out' question "
+                "here; that is Runway's exclusive domain."
+            ),
+            "runway": (
+                "Assessment of cash runway and ability to reach the next major milestone. When an exact "
+                "months-of-runway calculation is not possible, permit judgment only from strong, direct "
+                "evidence of the financing position (documented near-insolvency, emergency/rescue "
+                "financing, or clearly substantial cash reserves relative to known operating needs). "
+                "The absence of public cash data is never itself grounds to infer distress -- do not "
+                "score this dimension low merely because no cash figure was disclosed."
+            ),
             "capital_efficiency": "Assessment of growth and milestone achievement relative to capital consumed.",
             "fundraising_readiness": "Assessment of readiness to raise the next financing round.",
         },
@@ -45,8 +69,12 @@ def analyze_financials(company_text: str) -> FinancialAnalysisResult:
             ),
             "If a genuinely required financial detail is absent, identify only that specific missing information.",
             (
+                # SIE Methodology v2: Fundraising Readiness is unscored (narrative-only) --
+                # not one of the four scored Financial Health dimensions.
                 "Evaluate financial health across Revenue Quality, Unit Economics, "
-                "Burn Efficiency, Runway, and Fundraising Readiness."
+                "Burn Efficiency, and Runway. Fundraising Readiness is narrative-only in v2 -- "
+                "assess it for the fundraising_readiness field above, but it is not scored "
+                "and does not enter Financial Health's pillar aggregation."
             ),
         ],
     )

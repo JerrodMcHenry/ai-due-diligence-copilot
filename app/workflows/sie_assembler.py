@@ -2,11 +2,13 @@ from app.models.startup import (
     SIEMethodologyAnalysis,
     SIEContext,
     PillarAnalysis,
+    PartialStructuralCoverage,
 )
 
 from app.ai.scoring import finalize_pillar_score
 from app.ai.scorecard import build_startup_scorecard
 from app.ai.investment_score import calculate_investment_score
+from app.ai.sie_v2_evidence_semantics import compute_partial_structural_coverage
 from app.models.analysis_context import AnalysisContext
 
 
@@ -86,6 +88,28 @@ def assemble_sie_analysis(
             "Provide unit economics and runway data",
         ],
     )
+
+    # SIE Methodology v2, Part 9 item 6 (Blocker 3 fix, post-implementation
+    # review): PSC is derived from actual whole-pillar availability -- each
+    # pillar's already-finalized score, None meaning that pillar had zero
+    # scored dimensions -- and is purely a display label layered on top.
+    # Computed AFTER the six PillarAnalysis objects above (so it reads their
+    # real final scores) but BEFORE calculate_investment_score() runs, to
+    # make unmistakable in the code that PSC cannot influence SPS: SPS is
+    # computed from sie_analysis's pillar scores exactly as before, and
+    # structural_coverage is never read by calculate_investment_score() or
+    # build_startup_scorecard().
+    psc = compute_partial_structural_coverage(
+        {
+            "market": sie_analysis.market.score,
+            "team": sie_analysis.team.score,
+            "product": sie_analysis.product.score,
+            "execution": sie_analysis.execution.score,
+            "traction": sie_analysis.traction.score,
+            "financial_health": sie_analysis.financial_health.score,
+        }
+    )
+    sie_analysis.structural_coverage = PartialStructuralCoverage(**psc)
 
     investment_score = calculate_investment_score(sie_analysis)
 

@@ -53,6 +53,20 @@ class EvidenceAnalysis(BaseModel):
     # reliability harness.
     rationale: str = ""
 
+    # --- SIE Methodology v2 addition ---
+    #
+    # Populated only for the 5 Deterministic-mode dimensions (Customer Growth,
+    # Revenue Growth, Retention, Growth Velocity, Unit Economics -- see
+    # app/ai/sie_v2_methodology.py), and only when the evidence-extraction
+    # stage found a genuine, typed two-point series in the raw text. This is
+    # the ONLY new field this stage's LLM call is asked to populate for v2 --
+    # everything else about "what does this number mean" (the actual
+    # start->end->band conversion) is pure Python
+    # (app/ai/sie_v2_anchors.py), never decided by the model. None means no
+    # valid structured series was found; the dimension then falls through to
+    # ordinary evidence_status handling, never a fabricated number.
+    structured_facts: dict | None = None
+
 
 class PillarEvidenceAnalysis(BaseModel):
     """All of one pillar's dimension-level evidence assessments."""

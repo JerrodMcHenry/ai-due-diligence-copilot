@@ -1,64 +1,31 @@
 from app.models.scoring import PillarScoreBreakdown, Subscore
+from app.ai.scoring_methodology import SCORING_METHODOLOGY
 
 
-SIE_SCORING_CONFIG = {
-    "Market": [
-        ("Market Size", 0.25),
-        ("Market Growth", 0.20),
-        ("Market Timing", 0.20),
-        ("Competitive Intensity", 0.15),
-        ("Customer Demand", 0.20),
-    ],
-    "Team": [
-        ("Founder-Market Fit", 0.25),
-        ("Technical Capability", 0.20),
-        ("Business Capability", 0.20),
-        ("Leadership", 0.20),
-        ("Execution Track Record", 0.15),
-    ],
-    "Product": [
-        ("Customer Value", 0.25),
-        ("Differentiation", 0.20),
-        ("Usability", 0.15),
-        ("Defensibility", 0.20),
-        ("Adoption Potential", 0.20),
-    ],
-    "Execution": [
-        ("Go-to-Market Execution", 0.20),
-        ("Product Execution", 0.20),
-        ("Operational Execution", 0.20),
-        ("Strategic Execution", 0.20),
-        ("Execution Velocity", 0.20),
-    ],
-    "Traction": [
-        ("Customer Growth", 0.20),
-        ("Revenue Growth", 0.20),
-        ("Retention", 0.20),
-        ("Engagement", 0.20),
-        ("Commercial Validation", 0.20),
-    ],
-    "Financial Health": [
-        ("Revenue Quality", 0.20),
-        ("Unit Economics", 0.20),
-        ("Burn Efficiency", 0.20),
-        ("Runway", 0.20),
-        ("Fundraising Readiness", 0.20),
-    ],
-}
-
-
-MARKET_SUBSCORES = SIE_SCORING_CONFIG["Market"]
-TEAM_SUBSCORES = SIE_SCORING_CONFIG["Team"]
-PRODUCT_SUBSCORES = SIE_SCORING_CONFIG["Product"]
-EXECUTION_SUBSCORES = SIE_SCORING_CONFIG["Execution"]
-TRACTION_SUBSCORES = SIE_SCORING_CONFIG["Traction"]
-FINANCIAL_SUBSCORES = SIE_SCORING_CONFIG["Financial Health"]
-
+# SIE Methodology v2: SIE_SCORING_CONFIG (name+weight only) used to be a
+# second, independently-maintained copy of the same 28/30 dimension names
+# and weights already defined in SCORING_METHODOLOGY (scoring_methodology.py).
+# The two had no mechanism forcing them to stay in sync. get_scoring_dimensions()
+# now derives its (name, weight) tuples from SCORING_METHODOLOGY directly --
+# one authoritative source (SIE_Methodology_v2_Specification.md Part 2 gap
+# analysis, Phase 2) -- rather than maintaining a duplicate dict here.
+#
+# MARKET_SUBSCORES etc. below are kept only because older code may still
+# import them by name; they are computed from the same single source, not a
+# second definition of it.
 
 def get_scoring_dimensions(
     pillar: str,
 ) -> list[tuple[str, float]]:
-    return SIE_SCORING_CONFIG[pillar]
+    return [(d.name, d.weight) for d in SCORING_METHODOLOGY[pillar]]
+
+
+MARKET_SUBSCORES = get_scoring_dimensions("Market")
+TEAM_SUBSCORES = get_scoring_dimensions("Team")
+PRODUCT_SUBSCORES = get_scoring_dimensions("Product")
+EXECUTION_SUBSCORES = get_scoring_dimensions("Execution")
+TRACTION_SUBSCORES = get_scoring_dimensions("Traction")
+FINANCIAL_SUBSCORES = get_scoring_dimensions("Financial Health")
 
 
 def calculate_weighted_score(

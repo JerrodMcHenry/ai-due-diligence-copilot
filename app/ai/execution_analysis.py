@@ -18,7 +18,12 @@ def analyze_execution(company_text):
             "strategic_execution": "Assessment of strategic execution.",
         },
         extra_rules=[
-            "Evaluate execution across go-to-market execution, product execution, operational execution, strategic execution, and execution velocity.",
+            # SIE Methodology v2: "execution velocity" removed from this pillar's
+            # evaluation list -- its evidence scope (shipping/iteration speed,
+            # roadmap velocity) is folded into Product Execution's own evidence
+            # priority. Growth Velocity, a differently-defined Deterministic
+            # dimension, now lives in the Traction pillar, not here.
+            "Evaluate execution across go-to-market execution, product execution, operational execution, and strategic execution.",
             "Do not invent execution milestones.",
             "If execution details are missing, say what is missing.",
         ],

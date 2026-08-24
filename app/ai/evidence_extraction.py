@@ -17,10 +17,12 @@ exact same Python object returned from the first parse -- never
 touched, so it cannot be altered by an unrelated correction.
 """
 
+import json
 from typing import Any
 
 from app.ai.scoring import get_scoring_dimensions
 from app.ai.scoring_methodology import SCORING_METHODOLOGY
+from app.ai.sie_v2_methodology import deterministic_dimension_names
 from app.models.evidence_analysis import EvidenceAnalysis, PillarEvidenceAnalysis
 
 from app.ai.pillar_shared import (
@@ -132,6 +134,26 @@ Evidence Priority:
 
 
 def format_dimension_placeholder(name: str) -> str:
+    structured_facts_field = ""
+    if name in deterministic_dimension_names() or name == "Customer Demand":
+        # SIE Methodology v2: for Deterministic dimensions, ask the model to
+        # additionally extract (never score) a typed two-point series if one
+        # genuinely exists in the raw text -- the actual score is computed
+        # afterward by pure Python (app/ai/sie_v2_anchors.py), never by the
+        # model. Customer Demand is NOT Deterministic (it stays Hybrid,
+        # scored normally by app/ai/pillar_scoring.py) but ALSO uses
+        # structured_facts, for a narrower purpose: Part 8's lifecycle
+        # question of whether Customer Demand is even the right question to
+        # ask anymore (Customer Demand lifecycle fix, post-implementation
+        # review) -- see resolve_customer_demand_applicability() and
+        # app/ai/analyze_pillar.py::apply_customer_demand_lifecycle_override().
+        # null means nothing qualifying was found; that is a correct,
+        # complete answer, not a failure.
+        structured_facts_field = (
+            f',\n'
+            f'        "structured_facts": null'
+        )
+
     return (
         f'      {{\n'
         f'        "dimension": "{name}",\n'
@@ -142,9 +164,114 @@ def format_dimension_placeholder(name: str) -> str:
         f'        "missing_information": [],\n'
         f'        "recommendations": [],\n'
         f'        "rationale": "Explain what evidence exists (or does not) '
-        f'and why."\n'
+        f'and why."'
+        f'{structured_facts_field}\n'
         f'      }}'
     )
+
+
+STRUCTURED_FACTS_INSTRUCTIONS = """
+STRUCTURED FACTS (Deterministic dimensions: Customer Growth, Revenue Growth,
+Retention, Growth Velocity, Unit Economics -- plus one Hybrid dimension,
+Customer Demand, for a narrower lifecycle-applicability purpose only, see
+below)
+
+For Customer Growth, Revenue Growth, and Growth Velocity: if the supplied
+text discloses a genuine, dated, two-point series for the SAME metric (e.g.
+two customer counts, two revenue figures, at two different dates, both
+stated as actuals -- not one actual and one projection/guidance/target),
+populate "structured_facts" with:
+
+  {
+    "start_value": <number>,
+    "end_value": <number>,
+    "window_years": <number, the time between the two points in years>,
+    "metric_confirmed_actual": true,
+    "business_model_family": "<one of: enterprise_saas, smb_saas_platform, "
+      "consumer, marketplace, commerce_dtc, insurance, hardware, "
+      "deeptech_partnership, default>"
+  }
+
+Customer Growth and Growth Velocity are scored by DIFFERENT functions even
+though they share this same extraction shape -- Growth Velocity asks how
+fast the rate is once normalized for time (and requires window_years to
+annualize); Customer Growth asks how strongly the base itself expanded (an
+achieved multiple, not a rate). For Customer Growth specifically,
+"window_years" may be omitted if the text discloses the two data points but
+not a precise elapsed time between them -- the multiple can still be
+extracted; do not withhold "structured_facts" for Customer Growth merely
+because no exact window is stated. For Revenue Growth and Growth Velocity,
+"window_years" is required -- omit "structured_facts" for those two
+dimensions if no time window can be determined.
+
+For Retention: if NRR, GRR, and/or monthly logo churn are explicitly
+disclosed, populate "structured_facts" with whichever of these are actually
+present (omit any not disclosed):
+
+  { "nrr_pct": <number>, "grr_pct": <number>, "monthly_logo_churn_pct": <number> }
+
+For Unit Economics: identify which business-model-family evidence family
+actually matches this company (one of: saas_subscription, marketplace,
+insurance, hardware, commerce_dtc, deeptech_partnership) -- use MORE than
+one family only if the company genuinely operates distinct economic units
+(e.g. a fintech with both a SaaS software layer and an insurance-
+underwriting layer), never split a single business into families just
+because multiple financial figures are disclosed. Populate "structured_facts"
+with:
+
+  { "families": [ <one object per detected family> ] }
+
+For a "saas_subscription" family entry, include only the figures actually
+disclosed (omit any not stated):
+
+  { "business_model_family": "saas_subscription", "gross_margin_pct": <number>,
+    "cac_payback_months": <number>, "ltv_cac_ratio": <number> }
+
+For every other family, do not invent a numeric threshold -- extract only
+whether the evidence clears two withholding-relevant bars, both booleans:
+
+  { "business_model_family": "<marketplace|insurance|hardware|commerce_dtc|"
+      "deeptech_partnership>",
+    "has_primary_metric": <true/false -- the family's defining metric is "
+      "disclosed at all, e.g. take-rate, loss ratio, per-unit COGS vs. price>",
+    "has_supporting_signal": <true/false -- a second, corroborating cost/"
+      "sustainability signal is ALSO disclosed, not just the primary metric alone>",
+    "is_generic_industry_commentary": <true/false -- the evidence is generic "
+      "industry-wide commentary rather than company-specific figures> }
+
+If no business-model-family evidence exists at all for Unit Economics, set
+"structured_facts" to null.
+
+For Customer Demand (Hybrid, NOT Deterministic -- this does not change how
+it is scored, only whether it is scored at all): populate "structured_facts"
+to help determine whether demand-validation evidence is even the right
+question for this company's actual maturity, or whether realized Traction
+has already superseded it (Part 8's lifecycle rule):
+
+  { "financing_round_label": "<the company's stated financing round/stage "
+      "label as text, e.g. 'Pre-seed', 'Seed', 'Series A' -- omit or leave "
+      "empty if not stated>",
+    "has_disclosed_customer_or_revenue_data": <true/false -- ANY customer "
+      "count or revenue figure at all is disclosed, regardless of scale>,
+    "is_single_market_or_pre_scale": <true/false -- company is operating in "
+      "a single market/geography or is otherwise pre-scale, not yet expanded>,
+    "realized_traction_evidence_exists": <true/false -- SUBSTANTIAL "
+      "realized traction (meaningful revenue or a meaningful customer base "
+      "at scale) is disclosed -- not merely early pilot/waitlist/LOI signals> }
+
+This is an applicability signal only -- do not use it to re-score Traction,
+and do not let it substitute for Customer Demand's own ordinary evidence
+assessment above; it only feeds a separate lifecycle check performed in
+Python after this response.
+
+If no qualifying structured data exists for a dimension, set
+"structured_facts" to null -- do not estimate, interpolate, or invent a
+missing value. If one of two growth-series points is explicitly a forecast,
+guidance, or target rather than a confirmed actual, set
+"metric_confirmed_actual" to false (the final score will then correctly be
+withheld, not computed from a mismatched pair). For every dimension not
+named above, omit "structured_facts" or leave it null.
+"""
 
 
 def build_evidence_prompt(
@@ -195,7 +322,7 @@ For each dimension below, determine:
 7. rationale: why this evidence_status and confidence were assigned.
 
 {format_dimension_evidence_instructions(pillar)}
-
+{STRUCTURED_FACTS_INSTRUCTIONS}
 ==================================================
 GENERAL RULES
 ==================================================
@@ -533,7 +660,37 @@ def extract_pillar_evidence(
         temperature=0.0,
     )
 
-    data = parse_json_from_response(content)
+    try:
+        data = parse_json_from_response(content)
+    except (json.JSONDecodeError, ValueError):
+        # Malformed-JSON retry (robustness fix, post-implementation review):
+        # parse_json_from_response had no retry at all for a genuinely
+        # malformed (not merely text-wrapped) JSON response -- a real
+        # occurrence surfaced by a live end-to-end run, where a longer,
+        # more structurally complex response (the Blocker 4 Unit Economics
+        # family-list shape) triggered a raw json.JSONDecodeError that
+        # crashed the whole pillar uncaught. Mirrors this file's existing
+        # single-retry-then-degrade pattern for validation errors: one
+        # corrective follow-up call; if that also fails to parse, degrade
+        # to data={} rather than crash -- every dimension then falls
+        # through to the existing "not returned by the model" Unavailable
+        # placeholder below, exactly as if the model had returned an empty
+        # dimensions list. Never fabricates evidence to paper over the
+        # failure.
+        try:
+            retry_content = call_analysis_model(
+                system_content=system_content,
+                user_content=(
+                    prompt
+                    + "\n\nYour previous response was not valid JSON and could not be parsed. "
+                      "Return ONLY a single valid JSON object matching the schema above -- no "
+                      "commentary, no markdown code fences, no trailing text."
+                ),
+                temperature=0.0,
+            )
+            data = parse_json_from_response(retry_content)
+        except (json.JSONDecodeError, ValueError):
+            data = {}
 
     dimensions_data = data.pop("dimensions", [])
     narrative_fields = dict(data)

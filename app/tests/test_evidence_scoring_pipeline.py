@@ -213,6 +213,54 @@ def test_evidence_extraction_direct() -> None:
     expect("summary" in narrative_fields, "summary missing from narrative fields")
 
 
+# Genuinely malformed JSON (missing a comma) -- not the "extra text
+# surrounding valid JSON" case parse_json_from_response's regex fallback
+# already handles, but a real json.JSONDecodeError.
+MALFORMED_JSON = '{"summary": "ok" "confidence": "Medium", "dimensions": []}'
+
+
+def test_malformed_json_response_retried_then_recovers() -> None:
+    """Robustness fix (post-implementation review, discovered via a live
+    end-to-end run): a genuinely malformed first response must trigger one
+    corrective retry, not crash the pillar outright."""
+    with patch(
+        "app.ai.evidence_extraction.call_analysis_model",
+        side_effect=[MALFORMED_JSON, INITIAL_EVIDENCE_JSON],
+    ):
+        pillar_evidence, narrative_fields, corrected = extract_pillar_evidence(
+            pillar="Market",
+            company_text=COMPANY_TEXT,
+            system_content="test",
+        )
+
+    expect(len(pillar_evidence.dimensions) == 5, "Retry should recover the full 5-dimension response")
+    expect(narrative_fields.get("stage_hint") == "Series A", "Recovered response's narrative fields should parse normally")
+
+
+def test_malformed_json_response_degrades_without_crashing_when_retry_also_fails() -> None:
+    """If the corrective retry ALSO fails to parse, the pillar must degrade
+    to an all-Unavailable placeholder (never fabricate evidence, never
+    crash the whole analysis) -- the same fail-closed posture Blocker 1
+    established for missing structured_facts, extended to a raw JSON parse
+    failure."""
+    with patch(
+        "app.ai.evidence_extraction.call_analysis_model",
+        side_effect=[MALFORMED_JSON, MALFORMED_JSON],
+    ):
+        pillar_evidence, narrative_fields, corrected = extract_pillar_evidence(
+            pillar="Market",
+            company_text=COMPANY_TEXT,
+            system_content="test",
+        )
+
+    expect(len(pillar_evidence.dimensions) == 5, f"All 5 Market dimensions should still be present as placeholders, got {len(pillar_evidence.dimensions)}")
+    expect(
+        all(d.evidence_status == "Unavailable" for d in pillar_evidence.dimensions),
+        "Every dimension must degrade to Unavailable, never a fabricated score/evidence",
+    )
+    expect(narrative_fields == {}, "Narrative fields must be empty, not fabricated, when both parse attempts fail")
+
+
 TESTS = [
     test_evidence_analysis_model_has_no_score_field,
     test_scoring_prompt_never_contains_raw_company_text,
@@ -220,6 +268,8 @@ TESTS = [
     test_unavailable_evidence_never_sent_to_scorer,
     test_full_pipeline_end_to_end_with_mocked_calls,
     test_evidence_extraction_direct,
+    test_malformed_json_response_retried_then_recovers,
+    test_malformed_json_response_degrades_without_crashing_when_retry_also_fails,
 ]
 
 
