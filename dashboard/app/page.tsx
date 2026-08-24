@@ -22,14 +22,6 @@ import type {
   StartupRanking,
 } from "@/types";
 
-function formatMetric(value: number | undefined) {
-  if (value === undefined) {
-    return "0";
-  }
-
-  return Number.isInteger(value) ? value.toString() : value.toFixed(1);
-}
-
 function DashboardSkeleton() {
   return (
     <div className="space-y-8">
@@ -146,9 +138,6 @@ export default function Home() {
                     <SPSRing
                       score={analytics?.average_overall_score ?? 0}
                       size="lg"
-                      trend={2.4}
-                      percentile={32}
-                      confidence="Medium"
                     />
                   </div>
 
@@ -187,49 +176,22 @@ export default function Home() {
               </div>
             </BaseCard>
 
+            {/* "Average Readiness" was removed here: readiness_score has
+                no defined numeric scale (the LLM prompt that produces it
+                in app/ai/readiness_score.py never specifies a range), so
+                historical values mix 0-10-ish and 0-100-ish readings in
+                the same column -- averaging them produces a number that
+                looks precise but isn't meaningful. See the P0 Product
+                Trust Cleanup report for the full root-cause note; fixing
+                it for real means changing that scoring prompt, which is
+                out of scope here. */}
             <div className="grid gap-4">
               <AnalyticsCard
                 title="Tracked Startups"
                 value={analytics?.total_startups ?? 0}
                 description="Companies currently tracked."
               />
-
-              <AnalyticsCard
-                title="Average Readiness"
-                value={formatMetric(analytics?.average_readiness_score)}
-                description="Average investment readiness."
-              />
             </div>
-          </section>
-
-          {/* Recommended Actions */}
-
-          <section className="grid gap-4 md:grid-cols-3">
-            <BaseCard className="p-6">
-              <p className="text-sm text-text-secondary">Highest Impact</p>
-
-              <h3 className="mt-4 text-lg font-semibold">
-                Improve GTM Strategy
-              </h3>
-
-              <p className="mt-6 text-sm text-text-secondary">
-                Estimated Impact
-              </p>
-
-              <p className="mt-1 text-2xl font-bold text-green-500">+3 SPS</p>
-            </BaseCard>
-
-            <BaseCard className="p-6">
-              <p className="text-sm text-text-secondary">Validate Pricing</p>
-
-              <p className="mt-8 text-2xl font-bold">+2 SPS</p>
-            </BaseCard>
-
-            <BaseCard className="p-6">
-              <p className="text-sm text-text-secondary">Customer Interviews</p>
-
-              <p className="mt-8 text-2xl font-bold">+2 SPS</p>
-            </BaseCard>
           </section>
 
           {/* Rankings */}

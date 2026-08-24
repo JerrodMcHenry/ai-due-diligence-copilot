@@ -5,6 +5,13 @@ from datetime import datetime
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
 
+# P0 Product Trust Cleanup: reuse the single source of truth for "what
+# counts as the current canonical methodology" rather than hardcoding the
+# version string a second time here. sie_v2_methodology.py has no
+# project-internal imports of its own, so this does not introduce a
+# circular import or any real import cost.
+from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
+
 
 
 load_dotenv()
@@ -431,40 +438,67 @@ def save_analysis(
         
 
 def search_analyses(query: str):
+    """
+    P0 Product Trust Cleanup: search results must represent unique
+    startups backed by their latest CANONICAL Methodology v2 analysis --
+    the same "methodology IS NOT NULL and methodology_version matches the
+    current constant" rule as get_rankings(), so a legacy (pre-v2 or
+    methodology-null) analysis can never surface as a current canonical
+    startup. Search still matches broadly across the same text columns as
+    before (company_text, summary, risk_analysis, etc.) -- only the
+    candidate pool (canonical rows only) and the returned score's source
+    (methodology.startup_intelligence_score, not the legacy overall_score
+    column) have changed; the match behavior and result shape the frontend
+    consumes (company_name, summary, overall_score) are unchanged.
+    """
     search_term = f"%{query}%"
 
     with engine.begin() as connection:
         result = connection.execute(text("""
-            SELECT *
+            SELECT
+                company_name,
+                summary,
+                overall_score
             FROM (
-                SELECT DISTINCT ON (LOWER(COALESCE(company_name, summary)))
-                    *
+                SELECT DISTINCT ON (LOWER(TRIM(company_name)))
+                    company_name,
+                    summary,
+                    (methodology->>'startup_intelligence_score')::float AS overall_score,
+                    created_at
                 FROM analyses
-                WHERE company_text ILIKE :search_term
-                    OR company_name ILIKE :search_term
-                    OR summary ILIKE :search_term
-                    OR risk_analysis ILIKE :search_term
-                    OR competitor_analysis ILIKE :search_term
-                    OR memo ILIKE :search_term
-                    OR structured_analysis ILIKE :search_term
-                    OR investment_score ILIKE :search_term
-                    OR founder_analysis ILIKE :search_term
-                    OR market_analysis ILIKE :search_term
-                    OR sources ILIKE :search_term
-                    OR traction_analysis ILIKE :search_term
+                WHERE
+                    methodology IS NOT NULL
+                    AND methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                    AND company_name IS NOT NULL
+                    AND TRIM(company_name) <> ''
+                    AND (
+                        company_text ILIKE :search_term
+                        OR company_name ILIKE :search_term
+                        OR summary ILIKE :search_term
+                        OR risk_analysis ILIKE :search_term
+                        OR competitor_analysis ILIKE :search_term
+                        OR memo ILIKE :search_term
+                        OR structured_analysis ILIKE :search_term
+                        OR investment_score ILIKE :search_term
+                        OR founder_analysis ILIKE :search_term
+                        OR market_analysis ILIKE :search_term
+                        OR sources ILIKE :search_term
+                        OR traction_analysis ILIKE :search_term
+                    )
                 ORDER BY
-                    LOWER(COALESCE(company_name, summary)),
+                    LOWER(TRIM(company_name)),
                     created_at DESC,
                     id DESC
-            ) latest_results
+            ) latest_canonical_results
             ORDER BY created_at DESC
         """), {
-            "search_term": search_term
+            "search_term": search_term,
+            "methodology_version": METHODOLOGY_VERSION,
         })
 
         rows = result.mappings().all()
 
-    return [parse_structured_analysis(row) for row in rows]
+    return [dict(row) for row in rows]
 
         
     
@@ -735,6 +769,24 @@ def get_industry_analytics():
 
 
 def get_rankings():
+    """
+    P0 Product Trust Cleanup: rankings must reflect ONLY canonical
+    Methodology v2 analyses -- never the legacy flattened score columns,
+    and never an analysis whose methodology JSON predates the current v2
+    dimension set (e.g. a stored blob stamped methodology_version "1.0",
+    which `methodology IS NOT NULL` alone does not exclude).
+
+    Every column below is read from the methodology JSONB, not the legacy
+    analyses.overall_score/market_score/etc. columns -- those columns are
+    left exactly as they were (still written at analysis time for
+    historical/legacy consumers) but are no longer this query's source of
+    truth. The response SHAPE is unchanged (same keys as before) so the
+    frontend RankingsTable requires no changes.
+
+    "One row per startup, latest canonical analysis" is still enforced via
+    the same ROW_NUMBER()-over-normalized-company_name pattern as before,
+    now scoped to canonical rows only.
+    """
     with engine.begin() as connection:
         result = connection.execute(text("""
             SELECT
@@ -759,14 +811,14 @@ def get_rankings():
                     industry,
                     stage,
                     business_model,
-                    overall_score,
-                    market_score,
-                    team_score,
-                    product_score,
-                    competition_score,
-                    traction_score,
-                    financial_score,
-                    recommendation,
+                    (methodology->>'startup_intelligence_score')::float AS overall_score,
+                    (methodology->'market'->>'score')::float AS market_score,
+                    (methodology->'team'->>'score')::float AS team_score,
+                    (methodology->'product'->>'score')::float AS product_score,
+                    (methodology->'execution'->>'score')::float AS competition_score,
+                    (methodology->'traction'->>'score')::float AS traction_score,
+                    (methodology->'financial_health'->>'score')::float AS financial_score,
+                    methodology->'startup_scorecard'->>'recommendation' AS recommendation,
                     created_at,
                     ROW_NUMBER() OVER (
                         PARTITION BY LOWER(TRIM(company_name))
@@ -774,13 +826,17 @@ def get_rankings():
                     ) AS row_number
                 FROM analyses
                 WHERE
-                    overall_score IS NOT NULL
+                    methodology IS NOT NULL
+                    AND methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                    AND methodology->>'startup_intelligence_score' IS NOT NULL
                     AND company_name IS NOT NULL
                     AND TRIM(company_name) <> ''
             ) ranked_analyses
             WHERE row_number = 1
-            ORDER BY overall_score DESC, company_name ASC
-        """))
+            ORDER BY overall_score DESC NULLS LAST, company_name ASC
+        """), {
+            "methodology_version": METHODOLOGY_VERSION,
+        })
 
         rows = result.mappings().all()
 

@@ -69,10 +69,6 @@ export default function TopStartupsTable({ startups }: TopStartupsTableProps) {
                 <th scope="col" className="px-6 py-3.5">
                   SPS
                 </th>
-
-                <th scope="col" className="px-6 py-3.5">
-                  Readiness
-                </th>
               </tr>
             </thead>
 
@@ -111,10 +107,6 @@ export default function TopStartupsTable({ startups }: TopStartupsTableProps) {
                     >
                       {formatScore(startup.overall_score)}
                     </span>
-                  </td>
-
-                  <td className="whitespace-nowrap px-6 py-4 text-text-secondary">
-                    {formatScore(startup.readiness_score)}
                   </td>
                 </tr>
               ))}

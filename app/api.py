@@ -29,6 +29,7 @@ from app.database.db import (create_tables,
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
 from app.workflows.due_diligence_workflow import run_due_diligence
+from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 import json
 from app.pdf_extractor import extract_text_from_pdf
 from app.website_scrapper import extract_text_from_website
@@ -66,7 +67,14 @@ def health():
 def version():
     return {
         "app": "AI Due Diligence Copilot",
-        "version": "1.0"
+        "version": "1.0",
+        # P0 Product Trust Cleanup: additive field only -- "version" above
+        # is the app version and is left untouched (out of this cleanup's
+        # scope). methodology_version reuses the same constant the backend
+        # stamps onto every new canonical analysis
+        # (app/ai/sie_v2_methodology.py), so the frontend has one safe,
+        # already-correct source instead of a second hardcoded string.
+        "methodology_version": METHODOLOGY_VERSION,
     }
 
 @app.get("/")

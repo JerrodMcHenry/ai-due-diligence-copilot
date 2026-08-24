@@ -1,0 +1,1200 @@
+{
+  "fixture": "novaledger",
+  "label": "v2_wiring_check",
+  "n_runs": 1,
+  "raw_runs": [
+    {
+      "overall_sps": 72.8,
+      "pillars": {
+        "market": {
+          "score": 7.6,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Market Size": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "The company targets the mid-market e-commerce finance tooling segment",
+                "Public research indicates growing demand for automated reconciliation as multi-processor checkout becomes standard",
+                "PayPal processed about $1.7 trillion in payment volume last year and serves over 400 million active accounts globally",
+                "Stripe is growing rapidly and expanding services"
+              ],
+              "signals": [
+                "Target customer segment: mid-market e-commerce finance teams",
+                "Growing adoption of multi-processor checkout",
+                "Large payment processor ecosystems (Stripe, PayPal, Shopify Payments)",
+                "SaaS business model with high gross margin (~78%)"
+              ],
+              "rationale": "The evidence indicates a large and attractive market targeting mid-market e-commerce finance teams with growing demand for automated reconciliation. The presence of large payment processors like PayPal and Stripe, and the SaaS model with high gross margins, supports a credible venture-scale path with meaningful expansion potential. However, exact TAM figures are not provided, so the score reflects a strong but not massive market.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Market Growth": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Public research indicates growing demand for automated reconciliation as multi-processor checkout becomes standard",
+                "NovaLedger's customer count grew from 10 to 40 paying customers over two quarters",
+                "Monthly recurring revenue grew from $18,000 to $61,000 over two quarters",
+                "Stripe is growing rapidly and expanding services"
+              ],
+              "signals": [
+                "Increasing buyer urgency for automated reconciliation",
+                "Company growth supports category expansion",
+                "Digital transformation and multi-processor checkout adoption trends"
+              ],
+              "rationale": "Multiple signals such as growing demand for automated reconciliation, rapid company growth in customers and MRR, and expansion of payment processors like Stripe indicate a healthy and rapidly expanding market with clear demand drivers and durable category expansion.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Market Timing": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "NovaLedger has shipped product with 40 paying customers",
+                "Multi-processor checkout adoption is increasing, creating buyer urgency",
+                "Manual spreadsheet reconciliation remains a primary competitor, indicating pain points",
+                "Dependence on API access from major payment processors indicates technology readiness"
+              ],
+              "signals": [
+                "Customer adoption momentum",
+                "Technology maturity with API integrations",
+                "Pain point of manual reconciliation becoming acute"
+              ],
+              "rationale": "The company has shipped product with 40 paying customers, and increasing adoption of multi-processor checkout creates buyer urgency. The pain point of manual reconciliation is acute, and technology readiness is demonstrated by API integrations. These factors support good timing with adoption momentum and customer demand.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Competitive Intensity": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Primary competitors are manual spreadsheet-based reconciliation and general-purpose accounting automation tools",
+                "Founders have direct domain expertise from Stripe and payments processors",
+                "NovaLedger integrates directly with Stripe, Shopify Payments, and PayPal APIs",
+                "Customer concentration risk exists but company shows growth and retention"
+              ],
+              "signals": [
+                "Clear wedge in multi-processor reconciliation specialization",
+                "Founder domain expertise",
+                "Product differentiation via API integrations",
+                "Customer retention and expansion"
+              ],
+              "rationale": "The company shows differentiation through direct API integrations with major payment processors and founder domain expertise. The primary competitors are manual processes and general tools, indicating a clear wedge. Customer retention and growth further support a credible right to win despite competition.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Customer Demand": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "NovaLedger has 40 paying mid-market e-commerce customers",
+                "MRR grew from $18,000 to $61,000 over two quarters",
+                "Net revenue retention approximately 115% over two quarters",
+                "Product automates reconciliation and reduces manual work"
+              ],
+              "signals": [
+                "Paying customers",
+                "Revenue growth",
+                "High net revenue retention",
+                "Customer expansion adding payment processors"
+              ],
+              "rationale": "Evidence of 40 paying customers, strong MRR growth, and approximately 115% net revenue retention over two quarters demonstrates strong and repeatable customer demand with expansion. The product addresses a clear pain point by automating manual reconciliation, supporting credible customer pull.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            }
+          }
+        },
+        "team": {
+          "score": 7.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Founder-Market Fit": {
+              "score": 9.0,
+              "evidence_status": "Observed",
+              "confidence": "High",
+              "evidence": [
+                "Co-founder and CEO previously led payments infrastructure at Stripe for 4 years.",
+                "Co-founder and CTO previously built internal reconciliation tooling at a large payments processor.",
+                "Both founders have direct, relevant domain experience in the exact problem they are solving."
+              ],
+              "signals": [
+                "Founders have prior payments engineering experience at Stripe and a large payments processor.",
+                "Founders have built reconciliation tooling before.",
+                "Product addresses a known market problem in multi-processor payment reconciliation."
+              ],
+              "rationale": "The founders have direct, relevant domain expertise with prior payments engineering experience at Stripe and a large payments processor, and have built reconciliation tooling before. This demonstrates exceptional founder-market fit with deep customer insight and relevant prior success, aligning with the 9-10 score band.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Technical Capability": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "NovaLedger has a shipped product used by 40 paying customers.",
+                "Product integrates directly with Stripe, Shopify Payments, and PayPal APIs and automatically flags mismatched transactions.",
+                "Founders have engineering backgrounds at Stripe and a large payments processor."
+              ],
+              "signals": [
+                "Product complexity includes multi-API integration and automated transaction matching.",
+                "Technical founders with relevant engineering experience.",
+                "Product is live and serving paying customers."
+              ],
+              "rationale": "The team has shipped a product used by 40 paying customers that integrates complex APIs (Stripe, Shopify Payments, PayPal) and automates transaction matching. Founders have strong engineering backgrounds at Stripe and a large payments processor. This indicates strong technical capability with credible ability to build and scale, fitting the 7-8 score range.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Business Capability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Monthly recurring revenue grew from $18,000 to $61,000 over two quarters.",
+                "Net revenue retention over two quarters is approximately 115%.",
+                "Company raised a $6M Series A round eight months ago."
+              ],
+              "signals": [
+                "Revenue growth indicates some commercial execution.",
+                "High net revenue retention suggests customer satisfaction and expansion.",
+                "Successful Series A fundraising implies investor confidence in business model."
+              ],
+              "rationale": "The company shows clear revenue growth (MRR from $18K to $61K in two quarters), high net revenue retention (~115%), and has raised a $6M Series A round. These signals indicate strong business capability with credible GTM and operating execution, consistent with a 7-8 score.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Leadership": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+                "Customer base includes multiple customers, suggesting the team can attract and maintain client relationships.",
+                "Gross margin data implies operational understanding and decision-making capability.",
+                "Burn rate and customer concentration metrics provide insight into financial management and risk awareness."
+              ],
+              "signals": [
+                "Funding secured demonstrates ability to attract talent and resources.",
+                "Multiple customers indicate leadership's capacity to grow the organization and manage relationships.",
+                "Financial metrics (burn, gross margin) reflect decision quality and operational maturity."
+              ],
+              "rationale": "Although explicit leadership details are limited, the team has secured significant funding, grown a customer base, and demonstrates operational maturity through financial metrics. These credible signals support strong leadership indicators with credible ability to scale, aligning with a 7-8 score.",
+              "evidence_corrected": true,
+              "score_corrected": false
+            },
+            "Execution Track Record": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Product shipped and used by 40 paying customers.",
+                "Customer count grew from 10 to 40 over two quarters.",
+                "Monthly recurring revenue increased from $18,000 to $61,000 over two quarters.",
+                "Net revenue retention approximately 115% over two quarters."
+              ],
+              "signals": [
+                "Rapid customer growth from 10 to 40 in two quarters.",
+                "Significant MRR growth in the same period.",
+                "Positive net revenue retention indicating expansion and retention."
+              ],
+              "rationale": "The team has shipped a product with 40 paying customers, grown customer count from 10 to 40, increased MRR from $18K to $61K, and maintained net revenue retention of ~115% over two quarters. This demonstrates strong execution with clear evidence of progress, fitting the 7-8 score band.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            }
+          }
+        },
+        "product": {
+          "score": 6.9,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Customer Value": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "MRR grew from $18,000 to $61,000 over two quarters",
+                "Net revenue retention approximately 115% over two quarters",
+                "Product automates reconciliation across Stripe, Shopify Payments, and PayPal",
+                "Founders have relevant domain expertise in payments and reconciliation"
+              ],
+              "signals": [
+                "MRR growth from $18K to $61K in two quarters",
+                "Net revenue retention of ~115%",
+                "40 paying mid-market e-commerce customers",
+                "Automation reduces manual spreadsheet work"
+              ],
+              "rationale": "The evidence shows strong customer value with meaningful impact and credible proof: MRR grew significantly from $18K to $61K in two quarters, net revenue retention is approximately 115%, and the product automates reconciliation across major payment processors reducing manual work. While direct ROI data is not provided, these signals indicate strong customer outcomes and retention consistent with a score in the 7-8 range.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Differentiation": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Product integrates directly with Stripe, Shopify Payments, and PayPal APIs",
+                "Primary competitors are manual spreadsheet processes and general accounting tools lacking multi-processor focus",
+                "Founders have deep payments infrastructure and reconciliation tooling experience"
+              ],
+              "signals": [
+                "Multi-processor payment reconciliation specialization",
+                "Direct API integrations with major payment processors",
+                "Founders\u2019 prior Stripe and payments processor experience"
+              ],
+              "rationale": "The product demonstrates meaningful differentiation through its unique multi-processor payment reconciliation specialization and direct API integrations with Stripe, Shopify Payments, and PayPal. Founders\u2019 deep domain expertise further supports differentiation. However, lack of explicit customer recognition or competitive win data limits the score to the lower end of strong differentiation.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Usability": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Product integrates directly with payment processor APIs",
+                "Growth from 10 to 40 paying customers over two quarters",
+                "Product automatically flags mismatched transactions for finance teams"
+              ],
+              "signals": [
+                "Repeatable customer onboarding implied by customer growth",
+                "Workflow integration with finance teams managing payouts and chargebacks",
+                "Automation reduces manual spreadsheet work"
+              ],
+              "rationale": "Customer growth from 10 to 40 paying customers and direct API integrations imply repeatable onboarding and reasonable adoption friction. Automation of transaction flagging integrates well with finance workflows. Absence of direct user feedback or detailed onboarding data suggests good but not exceptional usability, supporting a score in the 7-8 range.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Defensibility": {
+              "score": 5.0,
+              "evidence_status": "Inferred",
+              "confidence": "Low",
+              "evidence": [
+                "Deep integrations with Stripe, Shopify Payments, and PayPal APIs",
+                "High net revenue retention (~115%) indicating some customer lock-in",
+                "Founders\u2019 domain expertise in payments infrastructure and reconciliation tooling"
+              ],
+              "signals": [
+                "Dependence on continued API access from major payment processors",
+                "Customer retention and expansion revenue",
+                "Integration depth with multiple payment processors"
+              ],
+              "rationale": "Evidence of deep integrations and high net revenue retention (~115%) suggests some emerging defensibility and customer lock-in. Founders\u2019 domain expertise adds to this. However, lack of explicit switching costs, proprietary data, network effects, or ecosystem partnerships limits defensibility to moderate and not yet durable, consistent with a score of 5-6. Given low confidence in evidence, a conservative 5 is appropriate.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Adoption Potential": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "MRR growth from $18,000 to $61,000 over two quarters",
+                "Net revenue retention approximately 115%",
+                "Customer base grew from 10 to 40 paying customers"
+              ],
+              "signals": [
+                "Expansion revenue indicated by net revenue retention >100%",
+                "Repeatable sales motion implied by customer growth",
+                "Product addresses growing market need in mid-market e-commerce"
+              ],
+              "rationale": "Strong signals include rapid MRR growth, net revenue retention above 100%, and customer base growth from 10 to 40 paying customers, indicating repeatable sales motion and expansion revenue. The product addresses a growing market need in mid-market e-commerce. While detailed sales process data is missing, these signals support strong adoption potential consistent with a score of 7-8.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            }
+          }
+        },
+        "execution": {
+          "score": 7.5,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Go-to-Market Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "The company has disclosed burn rate, indicating active investment in growth and sales activities.",
+                "Customer concentration and number of customers suggest some level of customer acquisition and retention.",
+                "Funding rounds imply investor confidence in the company's GTM strategy and execution.",
+                "Gross margin data supports the potential for efficient customer acquisition and scalable sales."
+              ],
+              "signals": [
+                "Active burn rate reflecting investment in sales and marketing",
+                "Presence of multiple customers indicating pipeline development",
+                "Funding rounds supporting GTM scalability",
+                "Gross margin indicating acquisition efficiency"
+              ],
+              "rationale": "The evidence indicates a repeatable go-to-market motion with multiple customers, active investment in sales and marketing (burn rate), and funding rounds supporting scalability. Gross margin data suggests efficient customer acquisition. However, exact quantitative metrics like CAC payback or sales cycle length are not provided, limiting the confidence to strong but not exceptional execution.",
+              "evidence_corrected": true,
+              "score_corrected": false
+            },
+            "Product Execution": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "NovaLedger has a shipped product used by 40 paying mid-market e-commerce customers",
+                "The product integrates directly with Stripe, Shopify Payments, and PayPal APIs and automatically flags mismatched transactions",
+                "Net revenue retention over two quarters is approximately 115%, indicating strong customer outcomes and retention",
+                "Gross margin on the core product is approximately 78%, consistent with a scalable SaaS product"
+              ],
+              "signals": [
+                "Product shipped and in active use",
+                "Deep integrations with major payment processors",
+                "Strong net revenue retention (~115%)",
+                "High gross margin (~78%)"
+              ],
+              "rationale": "The company has a shipped product used by 40 paying mid-market customers, with deep integrations to major payment processors and strong net revenue retention (~115%). High gross margin (~78%) supports scalability. These signals demonstrate strong product maturity and customer outcomes consistent with Series A expectations, though not necessarily exceptional fast iteration or enterprise scale.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Operational Execution": {
+              "score": 8.0,
+              "evidence_status": "Observed",
+              "confidence": "High",
+              "evidence": [
+                "The company has disclosed burn rate and runway information indicating controlled cash usage.",
+                "Funding history shows multiple rounds with increasing capital, supporting scaling plans.",
+                "Customer concentration data reveals a diversified customer base, reducing risk.",
+                "Gross margin figures are strong, suggesting efficient cost management.",
+                "Customer growth metrics indicate successful scaling without operational bottlenecks."
+              ],
+              "signals": [
+                "Sustainable burn rate aligned with growth trajectory",
+                "Healthy gross margins supporting operational scalability",
+                "Diversified customer base reducing dependency risk",
+                "Sufficient runway to execute hiring and process improvements",
+                "Evidence of scalable operating cadence from growth and funding patterns"
+              ],
+              "rationale": "Observed evidence shows controlled burn rate, strong gross margins, diversified customer base, sufficient runway, and funding history supporting scaling. Customer growth metrics indicate scalable operating cadence without bottlenecks. These factors reflect strong operational discipline and scalability appropriate for Series A, though not necessarily exceptional.",
+              "evidence_corrected": true,
+              "score_corrected": false
+            },
+            "Strategic Execution": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "Company burn rate indicates disciplined capital management aligned with strategic priorities.",
+                "Customer concentration data shows focus on a clear initial customer profile (ICP), supporting wedge strategy.",
+                "Existing customer base and funding rounds demonstrate ability to form partnerships and attract investment.",
+                "Gross margin levels suggest a viable business model that supports competitive positioning."
+              ],
+              "signals": [
+                "Disciplined burn rate reflecting prioritization and sequencing of initiatives.",
+                "Clear ICP indicated by customer concentration and customer profiles.",
+                "Successful funding rounds signaling investor confidence in strategy.",
+                "Gross margin supporting sustainable competitive advantage."
+              ],
+              "rationale": "The evidence shows disciplined capital management (burn rate), a clear initial customer profile (customer concentration), successful funding rounds, and gross margins supporting a viable business model. These signals indicate a coherent expansion strategy and focused wedge consistent with Series A expectations. However, lack of explicit details on competitive response or long-term category strategy limits the score to strong but not exceptional.",
+              "evidence_corrected": true,
+              "score_corrected": false
+            }
+          }
+        },
+        "traction": {
+          "score": 6.7,
+          "confidence": "Low",
+          "evidence_coverage": 85.0,
+          "subscores": {
+            "Customer Growth": {
+              "score": null,
+              "evidence_status": "Unavailable",
+              "confidence": "Low",
+              "evidence": [
+                "NovaLedger has grown from 10 to 40 paying customers over the past two quarters.",
+                "The product is used by 40 paying mid-market e-commerce customers."
+              ],
+              "signals": [
+                "Customer count grew from 10 to 40 in two quarters",
+                "Product shipped and adopted by mid-market e-commerce customers"
+              ],
+              "rationale": "[Deterministic v2 anchor -- Not Applicable] Starting value (10.0) is below the materiality floor (500) for the 'smb_saas_platform' family -- growth from an economically meaningless base is structurally excluded, not scored, per Part 1's explicit design goal.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Revenue Growth": {
+              "score": 6.5,
+              "evidence_status": "Observed",
+              "confidence": "Low",
+              "evidence": [
+                "Monthly recurring revenue has grown from $18,000 to $61,000 over the past two quarters.",
+                "Net revenue retention over the last two quarters is approximately 115%, driven by customers adding additional payment processors as they scale."
+              ],
+              "signals": [
+                "MRR grew from $18K to $61K in two quarters",
+                "NRR approximately 115% indicating expansion revenue"
+              ],
+              "rationale": "[Deterministic v2 anchor] 18000.0 -> 61000.0 over 0.50 years (annualized CAGR 1048.5%), scale tier relative to a 500 floor for 'smb_saas_platform' -> Strong band. Window is 0.50 years (<=0.6), at or below the ~2-quarter minimum for a trustworthy annualized rate -- literal CAGR (1048.5%) dampened one band (to Strong) rather than reported at face value, per the short-window caution rule.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Retention": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium",
+              "evidence": [
+                "Net revenue retention over the last two quarters is approximately 115%, driven by customers adding additional payment processors as they scale."
+              ],
+              "signals": [
+                "NRR approximately 115% over two quarters"
+              ],
+              "rationale": "[Deterministic v2 anchor] FROZEN Retention anchors applied to 1 disclosed figure(s): NRR=115, GRR=None, monthly logo churn=None.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Engagement": {
+              "score": 7.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "The product integrates directly with Stripe, Shopify Payments, and PayPal APIs and automatically flags mismatched transactions for finance teams to review.",
+                "Customers are adding additional payment processors as they scale, indicating deeper product usage."
+              ],
+              "signals": [
+                "Product automates reconciliation workflow across multiple payment processors",
+                "Customer expansion by adding payment processors suggests workflow embedding",
+                "High net revenue retention implies ongoing customer value and usage"
+              ],
+              "rationale": "While direct usage metrics are unavailable, the product's deep integration with multiple payment processors and customers adding processors as they scale indicate workflow embedding and durable value. Combined with high NRR, this supports strong engagement consistent with a 7-8 score, with 7 reflecting some incompleteness in direct usage data.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Growth Velocity": {
+              "score": 6.5,
+              "evidence_status": "Observed",
+              "confidence": "Low",
+              "evidence": [
+                "Customer count grew from 10 to 40 paying customers over two quarters.",
+                "MRR grew from $18,000 to $61,000 over two quarters."
+              ],
+              "signals": [
+                "Two confirmed actual data points for customer count and MRR over a 6-month window",
+                "Growth well above materiality floor for SMB SaaS business model"
+              ],
+              "rationale": "[Deterministic v2 anchor] 10000.0 -> 40000.0 over 0.50 years (annualized CAGR 1500.0%), scale tier relative to a 500 floor for 'smb_saas_platform' -> Strong band. Window is 0.50 years (<=0.6), at or below the ~2-quarter minimum for a trustworthy annualized rate -- literal CAGR (1500.0%) dampened one band (to Strong) rather than reported at face value, per the short-window caution rule.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            }
+          }
+        },
+        "financial_health": {
+          "score": 6.7,
+          "confidence": "Medium",
+          "evidence_coverage": 100.0,
+          "subscores": {
+            "Revenue Quality": {
+              "score": 8.0,
+              "evidence_status": "Inferred",
+              "confidence": "Medium",
+              "evidence": [
+                "MRR grew from $18,000 to $61,000 over two quarters",
+                "Net revenue retention over last two quarters approximately 115%",
+                "Largest customer represents roughly 9% of monthly recurring revenue"
+              ],
+              "signals": [
+                "Recurring revenue",
+                "High net revenue retention (~115%)",
+                "Customer concentration risk (~9% largest customer)"
+              ],
+              "rationale": "The evidence shows recurring revenue with strong net revenue retention (~115%) and a largest customer concentration of only 9%, indicating good revenue quality with some minor customer concentration risk. The lack of churn and contract details limits a perfect score, but overall the revenue quality is strong for Series A.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Unit Economics": {
+              "score": 6.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium",
+              "evidence": [
+                "Gross margin on core product approximately 78%"
+              ],
+              "signals": [
+                "High gross margin (~78%)"
+              ],
+              "rationale": "Gross margin is approximately 78%, which is high and indicative of scalable SaaS economics. However, key unit economics such as CAC payback and LTV:CAC are not disclosed, limiting the ability to fully assess unit economics. Therefore, the score reflects acceptable economics with some uncertainty.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Burn Efficiency": {
+              "score": 6.0,
+              "evidence_status": "Observed",
+              "confidence": "Medium",
+              "evidence": [
+                "Current monthly burn approximately $180,000",
+                "MRR grew from $18,000 to $61,000 over two quarters"
+              ],
+              "signals": [
+                "Burn rate $180K/month",
+                "Revenue growth from $18K to $61K MRR in two quarters"
+              ],
+              "rationale": "The company has a monthly burn of $180,000 and MRR growth from $18,000 to $61,000 over two quarters, showing investment in growth. However, without CAC payback or detailed efficiency metrics, burn efficiency cannot be fully quantified, resulting in a moderate score.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            },
+            "Runway": {
+              "score": 7.0,
+              "evidence_status": "Observed",
+              "confidence": "High",
+              "evidence": [
+                "Company reports approximately 14 months of runway at current burn rate"
+              ],
+              "signals": [
+                "14 months runway",
+                "Burn rate $180K/month"
+              ],
+              "rationale": "The company reports approximately 14 months of runway at the current burn rate, which is healthy and provides manageable financing risk. While not exceptional (18+ months), this runway is sufficient to support scaling and the next raise at Series A.",
+              "evidence_corrected": false,
+              "score_corrected": false
+            }
+          }
+        }
+      }
+    }
+  ],
+  "stats": {
+    "n_runs": 1,
+    "overall_sps": {
+      "min": 72.8,
+      "max": 72.8,
+      "range": 0.0,
+      "stdev": 0.0
+    },
+    "pillars": {
+      "market": {
+        "min": 7.6,
+        "max": 7.6,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "team": {
+        "min": 7.9,
+        "max": 7.9,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "product": {
+        "min": 6.9,
+        "max": 6.9,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "execution": {
+        "min": 7.5,
+        "max": 7.5,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "traction": {
+        "min": 6.7,
+        "max": 6.7,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Low"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      },
+      "financial_health": {
+        "min": 6.7,
+        "max": 6.7,
+        "range": 0.0,
+        "stdev": 0.0,
+        "scored_in_n_of_n_runs": "1/1",
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "null_status_flipped": false
+      }
+    },
+    "subscores": {
+      "market/Competitive Intensity": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "market/Customer Demand": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "market/Market Growth": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "market/Market Size": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "market/Market Timing": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "team/Business Capability": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "team/Execution Track Record": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "team/Founder-Market Fit": {
+        "min": 9.0,
+        "max": 9.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "team/Leadership": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "1/1",
+        "score_corrections": "0/1"
+      },
+      "team/Technical Capability": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "product/Adoption Potential": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "product/Customer Value": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "product/Defensibility": {
+        "min": 5.0,
+        "max": 5.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "product/Differentiation": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "product/Usability": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "execution/Go-to-Market Execution": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "1/1",
+        "score_corrections": "0/1"
+      },
+      "execution/Operational Execution": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "1/1",
+        "score_corrections": "0/1"
+      },
+      "execution/Product Execution": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "execution/Strategic Execution": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "1/1",
+        "score_corrections": "0/1"
+      },
+      "traction/Customer Growth": {
+        "min": null,
+        "max": null,
+        "range": null,
+        "stdev": null,
+        "evidence_status_values_seen": [
+          "Unavailable"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "traction/Engagement": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "traction/Growth Velocity": {
+        "min": 6.5,
+        "max": 6.5,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "traction/Retention": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "traction/Revenue Growth": {
+        "min": 6.5,
+        "max": 6.5,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Low"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "financial_health/Burn Efficiency": {
+        "min": 6.0,
+        "max": 6.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "financial_health/Revenue Quality": {
+        "min": 8.0,
+        "max": 8.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Inferred"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "financial_health/Runway": {
+        "min": 7.0,
+        "max": 7.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "High"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      },
+      "financial_health/Unit Economics": {
+        "min": 6.0,
+        "max": 6.0,
+        "range": 0.0,
+        "stdev": 0.0,
+        "evidence_status_values_seen": [
+          "Observed"
+        ],
+        "evidence_status_flipped": false,
+        "confidence_values_seen": [
+          "Medium"
+        ],
+        "confidence_flipped": false,
+        "evidence_content_flipped": false,
+        "signal_content_flipped": false,
+        "evidence_corrections": "0/1",
+        "score_corrections": "0/1"
+      }
+    },
+    "flip_rates": {
+      "evidence_status_flip_rate": 0.0,
+      "evidence_status_flips": 0,
+      "subscore_count": 28,
+      "pillar_confidence_flip_rate": 0.0,
+      "pillar_confidence_flips": 0,
+      "subscore_confidence_flip_rate": 0.0,
+      "subscore_confidence_flips": 0,
+      "null_pillar_flip_rate": 0.0,
+      "null_pillar_flips": 0,
+      "evidence_content_flip_rate": 0.0,
+      "evidence_content_flips": 0,
+      "extracted_fact_flip_rate": 0.0,
+      "extracted_fact_flips": 0,
+      "evidence_correction_frequency": 0.1429,
+      "evidence_correction_events": 4,
+      "score_correction_frequency": 0.0,
+      "score_correction_events": 0
+    }
+  },
+  "gates": {
+    "gates": [
+      {
+        "gate": "Overall SPS range <= 1.0",
+        "value": 0.0,
+        "passed": true,
+        "meets_target_0.5": true
+      },
+      {
+        "gate": "Pillar score range <= 0.2 (worst pillar)",
+        "value": 0.0,
+        "worst_pillar": null,
+        "passed": true
+      },
+      {
+        "gate": "Evidence-status flip rate == 0%",
+        "value": 0.0,
+        "passed": true
+      },
+      {
+        "gate": "Pillar confidence flip rate == 0",
+        "value": 0.0,
+        "passed": true
+      },
+      {
+        "gate": "Null/Unavailable pillar flip rate == 0",
+        "value": 0.0,
+        "passed": true
+      }
+    ],
+    "all_passed": true
+  }
+}

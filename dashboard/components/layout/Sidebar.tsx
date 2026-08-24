@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import ThemeToggle from "@/components/ui/ThemeToggle";
+import { getVersion } from "@/lib/api";
 
 type NavigationItem = {
   name: string;
@@ -18,6 +20,10 @@ const navigation: NavigationItem[] = [
   {
     name: "Dashboard",
     href: "/",
+  },
+  {
+    name: "Analyze Startup",
+    href: "/analyze",
   },
   {
     name: "Rankings",
@@ -39,6 +45,34 @@ function isActiveRoute(pathname: string, href: string) {
 
 export default function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
+
+  // Sidebar lives in the root layout, so this fetches once per app
+  // session, not per navigation. Starts null (renders nothing rather than
+  // a wrong/stale version) until the real value is confirmed from the
+  // backend's single source of truth (app/ai/sie_v2_methodology.py, via
+  // the existing /version endpoint) -- never falls back to a hardcoded
+  // guess if the request fails.
+  const [methodologyVersion, setMethodologyVersion] = useState<string | null>(
+    null
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+
+    getVersion()
+      .then((data) => {
+        if (isMounted) {
+          setMethodologyVersion(data.methodology_version);
+        }
+      })
+      .catch(() => {
+        // Leave it unset rather than showing something false.
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   return (
     <aside className="flex h-full w-72 flex-col border-r border-border bg-sidebar">
@@ -97,9 +131,11 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
             Startup Power Score™
           </p>
 
-          <p className="mt-1 text-xs text-text-muted">
-            Intelligence Methodology v1
-          </p>
+          {methodologyVersion ? (
+            <p className="mt-1 text-xs text-text-muted">
+              Methodology {methodologyVersion}
+            </p>
+          ) : null}
         </div>
       </div>
     </aside>

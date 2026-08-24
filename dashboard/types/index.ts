@@ -1,3 +1,5 @@
 export * from "./analytics";
 export * from "./startup";
 export * from "./search";
+export * from "./version";
+export * from "./analyze";

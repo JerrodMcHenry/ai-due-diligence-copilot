@@ -19,6 +19,27 @@ function isNotFoundError(error: unknown): boolean {
   return error instanceof Error && /\(404\)/.test(error.message);
 }
 
+// Rankings/Search build this route's href with
+// encodeURIComponent(companyName) (required — company names can contain
+// spaces/&/etc. that aren't valid unencoded in a URL). getStartupProfile /
+// getSPSHistory also encode when constructing the backend request (required
+// — that's the actual outgoing HTTP call). Decoding exactly once here,
+// where the raw path segment enters application code, is what keeps that
+// pair of encodes to a net single encoding pass end-to-end; skipping this
+// step is what previously left the API call encoding an already-encoded
+// value (e.g. "Ramp%20Business%20Corporation" -> "Ramp%2520..."), which the
+// backend could never match against a stored company_name. Safe for names
+// that were never encoded to begin with — decodeURIComponent on a string
+// with no percent-sequences is a no-op — and guarded against a malformed
+// sequence rather than letting the page crash on one.
+function decodeCompanyNameParam(id: string): string {
+  try {
+    return decodeURIComponent(id);
+  } catch {
+    return id;
+  }
+}
+
 async function loadStartupProfile(
   id: string
 ): Promise<StartupProfileResponse | null> {
@@ -46,8 +67,9 @@ async function loadSPSHistory(id: string): Promise<SPSHistoryPoint[]> {
 
 export default async function StartupProfilePage({ params }: Props) {
   const { id } = await params;
+  const companyName = decodeCompanyNameParam(id);
 
-  const startup = await loadStartupProfile(id);
+  const startup = await loadStartupProfile(companyName);
 
   if (!startup) {
     return (
@@ -57,8 +79,8 @@ export default async function StartupProfilePage({ params }: Props) {
         </h1>
 
         <p className="mt-3 text-text-secondary">
-          No startup profile was found for &ldquo;{id}&rdquo;. It may need to
-          be analyzed first, or the name may not match exactly.
+          No startup profile was found for &ldquo;{companyName}&rdquo;. It may
+          need to be analyzed first, or the name may not match exactly.
         </p>
 
         <Link
@@ -72,7 +94,7 @@ export default async function StartupProfilePage({ params }: Props) {
   }
 
   const methodology = startup.methodology;
-  const history = await loadSPSHistory(id);
+  const history = await loadSPSHistory(companyName);
 
   return (
     <div className="space-y-8">
