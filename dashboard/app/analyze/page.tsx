@@ -87,6 +87,30 @@ export default function AnalyzeStartupPage() {
     return () => clearInterval(interval);
   }, [isSubmitting]);
 
+  // MVP hardening: a refresh or tab close mid-analysis doesn't lose the
+  // (expensive, multi-minute) analysis itself -- the backend request keeps
+  // running and still persists on completion -- but it does strand the
+  // user with no way to know when it finished or land on the resulting
+  // profile automatically. The native browser confirmation is the
+  // smallest honest guard against an accidental refresh/close; it can't
+  // (and doesn't try to) prevent a deliberate one.
+  useEffect(() => {
+    if (!isSubmitting) {
+      return;
+    }
+
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      event.preventDefault();
+      // Legacy browsers key off the return value rather than
+      // preventDefault() alone.
+      event.returnValue = "";
+    }
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [isSubmitting]);
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 

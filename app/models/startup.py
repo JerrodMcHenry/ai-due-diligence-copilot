@@ -11,7 +11,14 @@ ConfidenceLevel = Literal["Low", "Medium", "High"]
 
 
 class StartupAnalysisRequest(BaseModel):
-    company_text: str
+    # MVP hardening: bounds on oversized/empty input. Pydantic rejects a
+    # violating request with a 422 before the route body (and the real,
+    # multi-minute, paid pipeline call) ever runs. 50,000 characters is a
+    # generous ceiling for a company description -- comfortably above any
+    # real submission seen in testing (a few thousand characters) -- meant
+    # to stop a pathological paste (an entire scraped site, a whole PDF's
+    # raw text, etc.), not to constrain legitimate use.
+    company_text: str = Field(min_length=1, max_length=50_000)
 
 
 class WebsiteAnalysisRequest(BaseModel):

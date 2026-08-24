@@ -31,6 +31,7 @@ from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, 
 from app.workflows.due_diligence_workflow import run_due_diligence
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 import json
+import traceback
 from app.pdf_extractor import extract_text_from_pdf
 from app.website_scrapper import extract_text_from_website
 from app.reporting.pdf_generator import generate_pdf_report
@@ -213,51 +214,89 @@ def delete_saved_analysis(analysis_id: int):
     response_model=StartupAnalysisResponse
 )
 def analyze_startup(request: StartupAnalysisRequest):
-    results = run_due_diligence(request.company_text)
-   
-    
-    analysis_id = save_analysis(
-        company_text=request.company_text,
-        summary=results["summary"],
-        risk_analysis=results["risk_analysis"],
-        competitor_analysis=results["competitor_analysis"],
-        memo=results["memo"],
-        structured_analysis=results["structured_analysis"],
-        investment_score=results["investment_score"],
-        founder_analysis=results["founder_analysis"].model_dump(),
-        market_analysis=results["market_analysis"].model_dump(),
-        sources=results["sources"],
-        traction_analysis=results["traction_analysis"].model_dump(),
-        methodology=results["sie_analysis"].model_dump(mode="json"),
-        market_score=results["market_score"],
-        team_score=results["team_score"],
-        product_score=results["product_score"],
-        competition_score=results["competition_score"],
-        traction_score=results["traction_score"],
-        financial_score=results["financial_score"],
-        overall_score=results["overall_score"],
-        recommendation=results["recommendation"],
-        readiness_score=results["readiness_score"],
-        readiness_summary=results["readiness_summary"],
-               
-    )
-    structured_analysis = results["structured_analysis"]
+    # MVP hardening: this call is the one place a real user actually hits
+    # this endpoint today (the frontend Analyze Startup page). It runs a
+    # 3-5 minute pipeline with no internal retry-exhaustion boundary of its
+    # own -- an OpenAI/Tavily outage, a genuinely malformed LLM response
+    # that survives the pipeline's own single correction pass, or any
+    # other unexpected failure previously propagated as a bare, unhandled
+    # exception: FastAPI's default handler turns that into a generic 500
+    # with no body detail, which is fine for not leaking internals, but
+    # gives the user no honest explanation and (via app/analyze-pdf's
+    # existing str(e) pattern nearby) it's easy to accidentally leak an
+    # internal exception message here instead. Logging server-side and
+    # raising a clean, non-leaking HTTPException keeps this endpoint
+    # consistent with how every other error path in this file already
+    # behaves (e.g. the 404s below), which the frontend already handles.
+    try:
+        results = run_due_diligence(request.company_text)
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "The analysis could not be completed. This can happen if a "
+                "research or AI provider is temporarily unavailable. Please "
+                "try again."
+            ),
+        )
 
-    save_score_history(
-        analysis_id=analysis_id,
-        company_name=structured_analysis.get("company_name"),
-        industry=structured_analysis.get("industry"),
-        stage=structured_analysis.get("stage"),
-        business_model=structured_analysis.get("business_model"),
-        market_score=results["market_score"],
-        team_score=results["team_score"],
-        product_score=results["product_score"],
-        competition_score=results["competition_score"],
-        traction_score=results["traction_score"],
-        financial_score=results["financial_score"],
-        overall_score=results["overall_score"],
-        readiness_score=results["readiness_score"]
-    )
+    try:
+        analysis_id = save_analysis(
+            company_text=request.company_text,
+            summary=results["summary"],
+            risk_analysis=results["risk_analysis"],
+            competitor_analysis=results["competitor_analysis"],
+            memo=results["memo"],
+            structured_analysis=results["structured_analysis"],
+            investment_score=results["investment_score"],
+            founder_analysis=results["founder_analysis"].model_dump(),
+            market_analysis=results["market_analysis"].model_dump(),
+            sources=results["sources"],
+            traction_analysis=results["traction_analysis"].model_dump(),
+            methodology=results["sie_analysis"].model_dump(mode="json"),
+            market_score=results["market_score"],
+            team_score=results["team_score"],
+            product_score=results["product_score"],
+            competition_score=results["competition_score"],
+            traction_score=results["traction_score"],
+            financial_score=results["financial_score"],
+            overall_score=results["overall_score"],
+            recommendation=results["recommendation"],
+            readiness_score=results["readiness_score"],
+            readiness_summary=results["readiness_summary"],
+
+        )
+        structured_analysis = results["structured_analysis"]
+
+        save_score_history(
+            analysis_id=analysis_id,
+            company_name=structured_analysis.get("company_name"),
+            industry=structured_analysis.get("industry"),
+            stage=structured_analysis.get("stage"),
+            business_model=structured_analysis.get("business_model"),
+            market_score=results["market_score"],
+            team_score=results["team_score"],
+            product_score=results["product_score"],
+            competition_score=results["competition_score"],
+            traction_score=results["traction_score"],
+            financial_score=results["financial_score"],
+            overall_score=results["overall_score"],
+            readiness_score=results["readiness_score"]
+        )
+    except Exception:
+        # Distinct from the pipeline failure above on purpose: the
+        # (expensive, multi-minute) analysis DID complete here -- only
+        # persisting it failed. Telling the user that honestly matters:
+        # retrying means re-running the whole pipeline, not just re-saving.
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "The analysis completed but could not be saved. Please try "
+                "again."
+            ),
+        )
 
     sie_analysis = results["sie_analysis"]
 

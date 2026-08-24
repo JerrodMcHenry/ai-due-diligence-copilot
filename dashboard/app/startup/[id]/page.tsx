@@ -69,7 +69,16 @@ export default async function StartupProfilePage({ params }: Props) {
   const { id } = await params;
   const companyName = decodeCompanyNameParam(id);
 
-  const startup = await loadStartupProfile(companyName);
+  // MVP hardening: these two requests don't depend on each other (both
+  // only need companyName), so run them in parallel rather than paying
+  // two sequential network round trips for every profile load. The one
+  // trade-off is that a "not found" company also fires (and discards) an
+  // SPS-history request it didn't need -- a small, one-time cost on a
+  // rare path, in exchange for materially faster loads on the common one.
+  const [startup, history] = await Promise.all([
+    loadStartupProfile(companyName),
+    loadSPSHistory(companyName),
+  ]);
 
   if (!startup) {
     return (
@@ -94,7 +103,6 @@ export default async function StartupProfilePage({ params }: Props) {
   }
 
   const methodology = startup.methodology;
-  const history = await loadSPSHistory(companyName);
 
   return (
     <div className="space-y-8">
