@@ -1,0 +1,515 @@
+{
+  "company_name": "Ginkgo Bioworks",
+  "filename": "ginkgo_bioworks.json",
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "source_chain": "PASS_A -> targeted_PASS_A_rerun -> ANCHOR_CALIBRATION_PHASE1 (this file is the merged canonical state under the frozen calibration-rerun contract; PASS A/targeted-rerun source files are unmodified)",
+  "dimensions": [
+    {
+      "dimension": "Market Size",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "large, thesis-dependent 'bioeconomy' opportunity; few direct public comparables at this scale",
+      "rationale": "Real but explicitly speculative/thesis-dependent market claim.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Growth",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No category growth data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Timing",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No trigger event.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Competitive Intensity",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "'very few direct public comparables at this scale'",
+      "rationale": "Explicit statement of limited direct competition at this scale is a real, if indirect, competitive-structure signal.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Demand",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Reclassified under the repaired Customer Demand lifecycle rule (spec Part 7): No disclosed program-count, partnership-revenue, or program-fee figures despite the late round label; Traction pillar is entirely Unavailable for this record -- realized Traction has NOT actually superseded",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(customer_demand_maturity)"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Founder-Market Fit",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 8,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "High",
+      "evidence_used": "five PhD-level scientists/engineers from MIT with deep, directly relevant academic/technical domain expertise in synthetic biology",
+      "rationale": "Strong, explicit, specific domain pedigree evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Technical Capability",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 8,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "MIT PhD founding team; platform intended to reduce cost/time of organism design",
+      "rationale": "Real, complex technical-build capability evidence, credential-based.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Business Capability",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 4,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "record explicitly states 'has this specific team commercialized a platform business before remained an open question at this stage'",
+      "rationale": "A real, direct, affirmative statement flagging unproven platform-commercialization track record -- genuine evidence of a gap, not mere silence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Leadership",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring/org evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Execution Track Record",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "$275M Series D from a sophisticated, named investor syndicate (Cascade/Gates, Viking Global, YC Continuity, General Atlantic), implying multiple successful prior rounds",
+      "rationale": "Real, strong fundraising-milestone pattern.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Value",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "platform intended to reduce the cost and time of designing custom organisms",
+      "rationale": "A real, stated value proposition, not independently verified or quantified.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Differentiation",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No named-alternative comparison.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Usability",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No adoption-friction evidence (B2B R&D-partnership model, no onboarding info).",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Defensibility",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No explicit lock-in/data-moat mechanism argued.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Adoption Potential",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "platform applicability across 'industrial, agricultural, and other applications'",
+      "rationale": "Real but generic multi-vertical applicability claim, no specific named use-case surface.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Go-to-Market Execution",
+      "pillar": "Execution",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No CAC/pipeline data; R&D-partnership model doesn't disclose deal-count.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Product Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No shipped-milestone/roadmap-velocity specifics.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Operational Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring-plan/process data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Strategic Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low-Medium",
+      "evidence_used": "monetization via R&D partnerships/program fees rather than per-unit product sale, a named business-model choice",
+      "rationale": "A real, stated strategic/business-model choice, outcome unproven.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No program/partnership-count data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Retention",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No retention evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Engagement",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No usage telemetry (B2B platform, no data disclosed).",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Growth Velocity",
+      "pillar": "Traction",
+      "evidence_status": "not_applicable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No growth series; consistent with this record's designed purpose as a non-SaaS-shaped deeptech stress test.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Quality",
+      "pillar": "Financial Health",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue disclosed.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Unit Economics",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data; the R&D-partnership/program-fee model also would not map cleanly to SaaS-shaped margin/CAC-payback anchors even if data existed.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN (but likely mismatched to this business model, per the same translation-gap pattern seen at Beepi)",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Burn Efficiency",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No burn data; 'long capital runway built deliberately' is qualitative color, not a number.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Runway",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No explicit cash/burn-rate figure to compute months-of-runway, despite qualitative color about 'a long capital runway being built deliberately'.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    }
+  ]
+}

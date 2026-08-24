@@ -1,0 +1,75 @@
+{
+  "company_name": "Shopify",
+  "snapshot_date": "2013-12-12",
+  "snapshot_stage": "Series C close",
+  "industry": "E-commerce infrastructure / SaaS",
+  "business_model": "Subscription SaaS plus payment-processing take-rate, merchant-count-driven",
+  "historical_evidence": {
+    "company": "Founded 2006 in Ottawa, Canada by Tobias L\u00fctke, Daniel Weinand, and Scott Lake, providing e-commerce storefront software allowing merchants to build and run online stores.",
+    "market": "Large and growing SMB e-commerce infrastructure market, with the company by this point also expanding into offline/point-of-sale retail, broadening its addressable market beyond pure online storefronts.",
+    "team": "Founding team had operated the company for roughly seven years by the snapshot date, having scaled it through multiple funding rounds and a substantial, disclosed merchant-growth trajectory.",
+    "product": "E-commerce platform enabling merchants to build online stores, recently expanded to support offline/point-of-sale retail as well, positioning the company as a broader 'commerce' platform rather than a purely online storefront tool.",
+    "execution": "Raised $100M in Series C funding in December 2013, led by OMERS Ventures and Insight Venture Partners (with Bessemer Venture Partners, FirstMark Capital, and others participating), at a valuation reported as 'near $1 billion.'",
+    "traction": "Disclosed merchant count grew from approximately 20,000 stores in 2010 to over 80,000 by the snapshot date \u2014 a real, specific, disclosed four-year growth trajectory. Merchants had also sold well over $1.5 billion in cumulative product volume through the platform by the end of 2013.",
+    "financial": "No specific company revenue figures (as distinct from merchant gross-merchandise-volume) were found in the contemporaneous sources reviewed for the December 2013 snapshot."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_c_raised",
+      "value": 100000000,
+      "unit": "usd",
+      "period": "2013-12",
+      "source": "TechCrunch / Shopify press release",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "valuation",
+      "value": 1000000000,
+      "unit": "usd",
+      "period": "2013-12",
+      "source": "TechCrunch (\"near $1 billion\")",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "merchant_count_2013",
+      "value": 80000,
+      "unit": "count",
+      "period": "2013-12",
+      "source": "TechCrunch / Shopify press release",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "merchant_count_2010",
+      "value": 20000,
+      "unit": "count",
+      "period": "2010",
+      "source": "Aggregated (Shopify press release)",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "cumulative_gmv_by_2013",
+      "value": 1500000000,
+      "unit": "usd",
+      "period": "2013-12",
+      "source": "Shopify press release",
+      "source_type": "public_research",
+      "confidence": "High"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Shopify Raises $100M To Drop The 'E' And Become The Commerce Company That Spans On- And Offline",
+      "url": "https://techcrunch.com/2013/12/11/shopify-100-million-series-c/",
+      "published": "2013-12-11"
+    },
+    {
+      "title": "Shopify Announces $100 Million Funding",
+      "url": "https://www.shopify.com/news/shopify-announces-100-million-funding",
+      "published": "2013-12-12"
+    }
+  ]
+}

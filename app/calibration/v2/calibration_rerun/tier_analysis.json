@@ -1,0 +1,142 @@
+{
+  "tier_statistics": {
+    "Elite": {
+      "n": 1,
+      "mean": 66.9,
+      "median": 66.9,
+      "min": 66.9,
+      "max": 66.9,
+      "values": [
+        66.9
+      ]
+    },
+    "Strong": {
+      "n": 3,
+      "mean": 64.33,
+      "median": 63.4,
+      "min": 62.6,
+      "max": 67.0,
+      "values": [
+        67.0,
+        63.4,
+        62.6
+      ]
+    },
+    "Promising": {
+      "n": 3,
+      "mean": 61.67,
+      "median": 61.0,
+      "min": 60.9,
+      "max": 63.1,
+      "values": [
+        63.1,
+        61.0,
+        60.9
+      ]
+    },
+    "Average": {
+      "n": 5,
+      "mean": 54.74,
+      "median": 53.6,
+      "min": 51.6,
+      "max": 58.1,
+      "values": [
+        58.1,
+        57.6,
+        53.6,
+        52.8,
+        51.6
+      ]
+    },
+    "Weak": {
+      "n": 2,
+      "mean": 52.35,
+      "median": 52.35,
+      "min": 51.7,
+      "max": 53.0,
+      "values": [
+        53.0,
+        51.7
+      ]
+    },
+    "Special-Stress": {
+      "n": 1,
+      "mean": 50.9,
+      "median": 50.9,
+      "min": 50.9,
+      "max": 50.9,
+      "values": [
+        50.9
+      ]
+    }
+  },
+  "cross_tier_pairs_evaluated": 91,
+  "inversions": [
+    {
+      "lower_tier_company": "Jawbone",
+      "lower_tier": "Weak",
+      "lower_sps": 53.0,
+      "higher_tier_company": "Meetup",
+      "higher_tier": "Average",
+      "higher_sps": 51.6,
+      "gap": 1.4
+    },
+    {
+      "lower_tier_company": "Ginkgo Bioworks",
+      "lower_tier": "Promising",
+      "lower_sps": 63.1,
+      "higher_tier_company": "Airbnb",
+      "higher_tier": "Strong",
+      "higher_sps": 62.6,
+      "gap": 0.5
+    },
+    {
+      "lower_tier_company": "Jawbone",
+      "lower_tier": "Weak",
+      "lower_sps": 53.0,
+      "higher_tier_company": "Bonobos",
+      "higher_tier": "Average",
+      "higher_sps": 52.8,
+      "gap": 0.2
+    },
+    {
+      "lower_tier_company": "Beepi",
+      "lower_tier": "Weak",
+      "lower_sps": 51.7,
+      "higher_tier_company": "Meetup",
+      "higher_tier": "Average",
+      "higher_sps": 51.6,
+      "gap": 0.1
+    },
+    {
+      "lower_tier_company": "Stripe",
+      "lower_tier": "Strong",
+      "lower_sps": 67.0,
+      "higher_tier_company": "Figma",
+      "higher_tier": "Elite",
+      "higher_sps": 66.9,
+      "gap": 0.1
+    }
+  ],
+  "total_inversions": 5,
+  "concordance_pct": 94.5,
+  "sps_range": {
+    "min": 50.9,
+    "max": 67.0
+  },
+  "comparison_to_pass_b": {
+    "pass_b_concordance_pct": 94.5,
+    "rerun_concordance_pct": 94.5,
+    "pass_b_inversions": 5,
+    "rerun_inversions": 5,
+    "pass_b_sps_range": [
+      50.9,
+      67.0
+    ],
+    "rerun_sps_range": [
+      50.9,
+      67.0
+    ],
+    "changed": false
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "company_name": "Zenefits",
+  "snapshot_date": "2015-05-06",
+  "snapshot_stage": "Series C close",
+  "industry": "HR / benefits / insurance software",
+  "business_model": "Free HR-management SaaS monetized via insurance-brokerage commissions",
+  "expected_quality_tier": "Strong (at-the-time) — HINDSIGHT-DIVERGENCE TEST CASE, see benchmark_notes",
+  "calibration_set": "holdout",
+
+  "historical_evidence": {
+    "company": "Founded 2013 by Parker Conrad and Laks Srini, offering free cloud-based HR software (onboarding, payroll integration, benefits management) monetized through insurance brokerage commissions on the benefits it helped administer.",
+    "market": "Large, underserved SMB HR/benefits-administration market with legacy, high-friction incumbents; the free-software-monetized-by-insurance-commission model was a genuinely novel wedge as of 2015.",
+    "team": "Founder Parker Conrad had prior startup experience (SigFig); by the Series C the company had scaled headcount rapidly to support its stated growth targets.",
+    "product": "Free, fast-to-deploy HR/benefits platform, differentiated primarily on price (free) and speed of setup relative to legacy brokers and HR software.",
+    "execution": "Extremely rapid funding progression: $15M Series A (January 2014) to a $66M Series B at a >$500M valuation (mid-2014) to a $500M Series C at a $4.5B valuation (May 6, 2015) — a 9x valuation step-up in roughly one year, among the fastest scaling trajectories publicly reported for a SaaS company at that time.",
+    "traction": "Publicly reported 2015 revenue guidance of over $50M for the year, up from approximately $8M in 2014 — a >6x year-over-year revenue growth claim reported contemporaneously by the company and covered without material contemporaneous challenge in the sources reviewed.",
+    "financial": "The company had publicly stated an ambition to reach $100M ARR by three years post-launch; the Series C was led by Fidelity and TPG, both sophisticated late-stage institutional investors, which is itself a meaningful signal of diligence having been performed at the time, however that diligence later turned out to have been insufficient (see future_outcome)."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_c_raised", "value": 500000000, "unit": "usd", "period": "2015-05", "source": "TechCrunch / Forbes", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_c_valuation", "value": 4500000000, "unit": "usd", "period": "2015-05", "source": "Forbes", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_b_valuation", "value": 500000000, "unit": "usd", "period": "2014-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "revenue_2014", "value": 8000000, "unit": "usd", "period": "2014", "source": "Company guidance reported by TechCrunch", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "revenue_guidance_2015", "value": 50000000, "unit": "usd", "period": "2015", "source": "Company guidance reported by TechCrunch", "source_type": "public_research", "confidence": "Low"}
+  ],
+
+  "sources": [
+    {"title": "Cloud HR Startup Zenefits Is Looking To Raise A Giant New Round Of Funding", "url": "https://techcrunch.com/2015/04/21/zenefits-400-million/", "published": "2015-04-21"},
+    {"title": "HR Startup Zenefits Raises $500 Million At $4.5 Billion Valuation", "url": "https://www.forbes.com/sites/briansolomon/2015/05/06/hr-startup-zenefits-raises-500-million-at-4-5-billion-valuation/", "published": "2015-05-06"},
+    {"title": "Zenefits halves its previous valuation to $2B to head off investor lawsuits", "url": "https://techcrunch.com/2016/06/30/zenefits-revalues-itself-at-2-billion-giving-later-shareholders-more-ownership/", "published": "2016-06-30", "note": "post-snapshot; used only for future_outcome"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "scandal / valuation collapse / leadership change",
+    "outcome_summary": "In late 2015/early 2016 it emerged that Zenefits had systematically enabled brokers to bypass state-mandated insurance licensing training, among other compliance failures. Founder/CEO Parker Conrad resigned in February 2016; the company halved its own valuation to $2B in mid-2016 to head off investor lawsuits, laid off a large share of its workforce, and never recovered its earlier trajectory.",
+    "outcome_date": "2016-02"
+  },
+
+  "benchmark_notes": {
+    "why_included": "The single most important case in this portfolio for testing the 'no hindsight' discipline explicitly, per the governing constraint of this whole methodology-design chain. At the May 2015 snapshot, essentially every publicly available signal — funding velocity, investor quality (Fidelity, TPG), reported revenue growth, market opportunity — pointed toward a Strong-to-Elite read. A sophisticated contemporaneous investor reading only 2015 evidence would very plausibly have reached the same conclusion Fidelity and TPG did. The compliance failures that later surfaced were not, as far as the sources reviewed indicate, prominently flagged in mainstream contemporaneous coverage as of the snapshot date. This is intentionally NOT a case where SIE should be expected to have 'seen it coming' — it is a case for testing whether SIE avoids being retroactively graded down for an outcome it had no contemporaneous evidence basis to predict, and separately, a genuine test of whether the methodology's own scoring at the time would have produced a defensibly Strong tier (the correct outcome for this exercise) rather than an artificially suppressed one.",
+    "known_ambiguities": "It is possible that closer contemporaneous reading of trade press (insurance-industry-specific publications, not mainstream tech press) contained earlier warning signs than the general-audience sources reviewed here surfaced — this record does not claim to have exhaustively searched specialist insurance-compliance trade press, and that is a genuine evidence-collection limitation rather than a claim that no earlier signal existed anywhere.",
+    "evidence_limitations": "Revenue figures are company-guided/self-reported as relayed by press, not independently verified or audited — flagged as Low confidence in the normalized_facts entry for 2015 guidance specifically, appropriately lower confidence than the well-corroborated funding-round figures."
+  }
+}

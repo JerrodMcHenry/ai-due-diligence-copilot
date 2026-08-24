@@ -1,0 +1,42 @@
+{
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "frozen_at": "2026-08-23",
+  "note": "This exact contract, once recorded here, was not altered for the duration of this run. No anchor, weight, dimension definition, or missing-evidence rule was adjusted mid-run.",
+  "methodology_version": "v2-spec-2026-08-23 (app/docs/SIE_Methodology_v2_Specification.md, unmodified this turn)",
+  "dimension_architecture": "28 dimensions across 6 pillars, unchanged from the canonical spec: Market(5) Team(5) Product(5) Execution(4) Traction(5) Financial Health(4).",
+  "pillar_weights": {"Market": 0.20, "Team": 0.20, "Product": 0.20, "Execution": 0.15, "Traction": 0.15, "Financial Health": 0.10},
+  "dimension_weights": {
+    "Market": {"Market Size": 0.25, "Market Growth": 0.20, "Market Timing": 0.20, "Competitive Intensity": 0.15, "Customer Demand": 0.20},
+    "Team": {"Founder-Market Fit": 0.25, "Technical Capability": 0.20, "Business Capability": 0.20, "Leadership": 0.20, "Execution Track Record": 0.15},
+    "Product": {"Customer Value": 0.25, "Differentiation": 0.20, "Usability": 0.15, "Defensibility": 0.20, "Adoption Potential": 0.20},
+    "Execution": {"Go-to-Market Execution": 0.25, "Product Execution": 0.25, "Operational Execution": 0.25, "Strategic Execution": 0.25},
+    "Traction": {"Retention": 0.25, "Revenue Growth": 0.25, "Growth Velocity": 0.20, "Customer Growth": 0.15, "Engagement": 0.15},
+    "Financial Health": {"Runway": 0.30, "Unit Economics": 0.25, "Burn Efficiency": 0.25, "Revenue Quality": 0.20}
+  },
+  "scoring_modes": {
+    "Deterministic (5)": ["Customer Growth", "Revenue Growth", "Retention", "Growth Velocity", "Unit Economics"],
+    "Hybrid (15)": ["Market Size", "Competitive Intensity", "Customer Demand", "Technical Capability", "Business Capability", "Customer Value", "Usability", "Adoption Potential", "Go-to-Market Execution", "Product Execution", "Operational Execution", "Engagement", "Revenue Quality", "Burn Efficiency", "Runway"],
+    "Constrained LLM (8)": ["Market Growth", "Market Timing", "Founder-Market Fit", "Leadership", "Execution Track Record", "Differentiation", "Defensibility", "Strategic Execution"]
+  },
+  "numerical_anchors_applied": {
+    "source": "app/calibration/v2/anchor_calibration/phase1/ANCHOR_DESIGN.md, unmodified during this run",
+    "growth_velocity": "materiality-floor -> annualized-CAGR -> scale-tiered-band architecture (Part 1)",
+    "customer_growth": "business-model-aware floors/tiers, same CAGR-band mechanism (Part 2)",
+    "revenue_growth": "same-metric-only rule, stage-aware CAGR bands (Part 3)",
+    "unit_economics": "6 business-model evidence families with named primary/supporting metrics and insufficient-combination rules (Part 4)",
+    "burn_efficiency": "quantitative burn-multiple bands (unused, 0/15) + qualitative 5-band fallback gated on direct, non-hedged, company-specific evidence (Part 5)",
+    "runway": "quantitative months-of-runway bands (unused, 0/15) + qualitative 6-band fallback gated the same way (Part 6)"
+  },
+  "provisional_anchors_in_effect_unchanged": [
+    "Growth Velocity / Customer Growth scale-tier absolute cutoffs",
+    "Qualitative Burn Efficiency exact score-within-band placements",
+    "Qualitative Runway exact score-within-band placements",
+    "Insurance/underwriting Unit Economics qualitative-disclosure threshold"
+  ],
+  "missing_evidence_rules": "Nine canonical states (spec Part 4), unchanged: not_expected_by_stage, not_applicable, optional_unavailable, usually_private_unavailable, expected_unavailable, research_failure, explicit_management_refusal, conflicting_evidence, mixed_evidence. Usually-Private and Expected-But-Unavailable remain arithmetically identical, differing only in diligence-flag severity.",
+  "aggregation_rules": "Weighted average over the scored set only, per-pillar and per-company renormalization to the scored subset's weights (spec Part 9), unchanged. No confidence or coverage penalty applied to the SPS number itself (per this run's explicit instruction) -- coverage and confidence remain separate, displayed metadata, not multipliers on SPS.",
+  "model_identifier": "claude-sonnet-5 (analyst reasoning over blind_inputs, not an automated pipeline call) -- identical disclosure as all prior PASS A / targeted-rerun / PASS B / Phase 1 work in this program",
+  "prompt_version": "CALIBRATION_RERUN_v1 (evidence re-read fresh from app/calibration/v2/pass_a/blind_inputs/*.json for every scored/reconfirmed cell; no new evidence gathered)",
+  "evidence_source": "app/calibration/v2/pass_a/blind_inputs/*.json exclusively -- the same blind-loader-stripped records used throughout PASS A, the targeted rerun, and PASS B. No benchmark record was reopened.",
+  "not_used_as_evidence": "expected_quality_tier was not consulted at any point during dimension scoring (Part 2 of this run). It was read only after all scores were finalized, for Part 6 tier evaluation -- see run_metadata.json for the same allowlist discipline used in PASS B."
+}

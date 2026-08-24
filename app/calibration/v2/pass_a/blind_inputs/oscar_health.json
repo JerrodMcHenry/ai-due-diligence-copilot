@@ -1,0 +1,52 @@
+{
+  "company_name": "Oscar Health",
+  "snapshot_date": "2016-02-22",
+  "snapshot_stage": "Series C close",
+  "industry": "Health insurance / insurtech",
+  "business_model": "Individual/small-group health insurance carrier with a consumer-tech-forward member experience",
+  "historical_evidence": {
+    "company": "Founded 2012 by Josh Kushner, Mario Schlosser, and Kevin Nazemi, a health-insurance company built to offer ACA-marketplace individual and small-group plans with a modern, app-driven member experience.",
+    "market": "Large but heavily regulated, capital-intensive, and structurally difficult insurance market with thin margins and significant underwriting risk \u2014 a fundamentally different risk profile than a typical software marketplace.",
+    "team": "Founder Josh Kushner had a notable venture-investing background (Thrive Capital); the team had scaled the company through several large funding rounds by the snapshot date.",
+    "product": "Modern, app-based member experience layered on top of a traditional insurance-carrier operating model \u2014 the technology layer was genuinely differentiated from legacy insurers, but the underlying insurance-underwriting economics are the harder, more consequential part of the business.",
+    "execution": "Raised $400M in Series C funding in February 2016, led by Fidelity, at a $2.7B valuation \u2014 a roughly $1B valuation increase from a $1.7B valuation just five months earlier (September 2015, $32.5M from Google Capital), an unusually large and fast valuation step-up.",
+    "traction": "No specific member-count figures were found in the contemporaneous sources reviewed for the February 2016 snapshot.",
+    "financial": "Contemporaneous coverage explicitly reported significant underwriting losses as the company scaled, alongside the large valuation increase \u2014 a genuine, real-time-visible tension between rapid growth/valuation momentum and reported financial losses, rather than a retrospective judgment."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_c_raised",
+      "value": 400000000,
+      "unit": "usd",
+      "period": "2016-02",
+      "source": "Forbes",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_c_valuation",
+      "value": 2700000000,
+      "unit": "usd",
+      "period": "2016-02",
+      "source": "Forbes",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "prior_valuation_sept_2015",
+      "value": 1700000000,
+      "unit": "usd",
+      "period": "2015-09",
+      "source": "Forbes",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Oscar Health Gets $400 Million And A $2.7 Billion Valuation from Fidelity",
+      "url": "https://www.forbes.com/sites/stevenbertoni/2016/02/22/oscar-health-gets-400-million-and-a-2-7-billion-valuation-from-fidelity/",
+      "published": "2016-02-22"
+    }
+  ]
+}

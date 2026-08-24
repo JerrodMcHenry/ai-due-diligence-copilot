@@ -1,0 +1,66 @@
+{
+  "company_name": "Stripe",
+  "snapshot_date": "2016-11-25",
+  "snapshot_stage": "Series D close",
+  "industry": "Fintech / payments infrastructure",
+  "business_model": "Developer-first payments API, transaction-fee revenue",
+  "historical_evidence": {
+    "company": "Founded 2010 by Patrick and John Collison, providing developer-first APIs for accepting and processing online payments, by this point an established and widely-adopted platform among internet businesses.",
+    "market": "Large, growing global digital-payments market, with entrenched incumbents (PayPal, traditional merchant processors) but continued strong secular growth in e-commerce and internet-native businesses as the underlying demand driver.",
+    "team": "Founders had by this point run the company for six years, through multiple funding rounds and demonstrated an ability to scale both the product and the organization.",
+    "product": "Mature, widely-adopted developer-first payments API platform with a strong reputation for documentation and integration speed, differentiated primarily on developer experience relative to legacy payment processors.",
+    "execution": "Raised $150M in a Series D round in November 2016, co-led by CapitalG (Alphabet's late-stage investment arm) and existing investor General Catalyst, at a $9.2 billion post-money valuation \u2014 up from a $5 billion valuation the prior year, alongside a separate revolving credit facility of up to $250M from J.P. Morgan, Goldman Sachs, Morgan Stanley, and Barclays.",
+    "traction": "No specific payment-volume or merchant-count figures were found in the contemporaneous sources reviewed for the November 2016 snapshot specifically.",
+    "financial": "The near-doubling of valuation year-over-year (from $5B to $9.2B) alongside a large institutional credit facility from four major banks is a strong, real-time-visible signal of sustained investor and lender confidence in the company's scale and financial trajectory."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_d_raised",
+      "value": 150000000,
+      "unit": "usd",
+      "period": "2016-11",
+      "source": "TechCrunch / CNBC / Recode",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_d_valuation",
+      "value": 9200000000,
+      "unit": "usd",
+      "period": "2016-11",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "prior_valuation_2015",
+      "value": 5000000000,
+      "unit": "usd",
+      "period": "2015",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "credit_facility",
+      "value": 250000000,
+      "unit": "usd",
+      "period": "2016-11",
+      "source": "CNBC",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Payments provider Stripe has raised another $150M at a $9B valuation",
+      "url": "https://techcrunch.com/2016/11/25/payments-provider-stripe-has-raised-another-150-at-a-9b-valuation/",
+      "published": "2016-11-25"
+    },
+    {
+      "title": "Stripe raises $150 million more at a $9 billion valuation",
+      "url": "https://www.cnbc.com/2016/11/25/stripe-raises-150-million-more-at-a-9-billion-valuation.html",
+      "published": "2016-11-25"
+    }
+  ]
+}

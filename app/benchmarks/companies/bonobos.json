@@ -1,0 +1,43 @@
+{
+  "company_name": "Bonobos",
+  "snapshot_date": "2012-04-12",
+  "snapshot_stage": "Growth round (Series A/B extension)",
+  "industry": "DTC apparel / e-commerce",
+  "business_model": "Direct-to-consumer menswear, online-first with emerging retail partnership",
+  "expected_quality_tier": "Average",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Founded 2007, direct-to-consumer menswear brand best known for a signature better-fitting pants line, expanding into a fuller menswear assortment by 2012.",
+    "market": "Growing but increasingly crowded DTC apparel category; menswear e-commerce specifically was less saturated than womenswear at the time, a real but moderate wedge.",
+    "team": "Founding team had built the brand over roughly five years by the snapshot date, with prior institutional backing from Accel Partners and Lightspeed Venture Partners since 2010.",
+    "product": "Signature fitted menswear (pants, later broader apparel), differentiated primarily on fit and online buying experience rather than a structurally defensible technology or network-effect advantage.",
+    "execution": "Raised $16.4M in April 2012 led by retail giant Nordstrom, with Accel and Lightspeed participating, bringing total funding to nearly $40M — notable not just for the capital but for Nordstrom's strategic participation, which came paired with a retail distribution deal placing Bonobos product in physical Nordstrom stores and on Nordstrom.com.",
+    "traction": "No specific revenue or unit-sales figures were found in the contemporaneous sources reviewed for the April 2012 snapshot specifically. REPAIR ATTEMPTED, NOT RESOLVED (see benchmark_notes): a targeted search for additional dated, primary-sourced 2011-2012 revenue/growth figures (including a widely-circulated claim of a Cyber Monday 2011 traffic spike and ~100% YoY growth into 2012) turned up only modern, unsourced retrospective aggregation (e.g., a 2024 narrative piece with no cited sources) — these claims are NOT included here because they could not be independently verified against a contemporaneous source, consistent with prioritizing historical integrity over completeness.",
+    "financial": "The Nordstrom strategic investment and retail partnership is a meaningful commercial-validation signal (a large incumbent retailer choosing to both invest in and distribute the product), though it does not substitute for disclosed revenue or margin data, neither of which was found for this snapshot."
+  },
+
+  "normalized_facts": [
+    {"metric": "round_raised", "value": 16400000, "unit": "usd", "period": "2012-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "total_raised_to_date", "value": 40000000, "unit": "usd", "period": "2012-04", "source": "TechCrunch (approximate, aggregated)", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "lead_strategic_investor", "value": "Nordstrom", "unit": null, "period": "2012-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_ab_raised_by_2010", "value": 18500000, "unit": "usd", "period": "2010", "source": "TechCrunch (same article already in sources[])", "source_type": "public_research", "confidence": "Medium", "note": "extracted from the existing April 2012 TechCrunch source during evidence repair — the article notes total prior Series A/B funding of $18.5M from Accel and Lightspeed by 2010, additional funding-history context not previously pulled into normalized_facts"}
+  ],
+
+  "sources": [
+    {"title": "Men's Clothing Brand Bonobos Raises $16.4M From Accel; Lands Nordstrom Investment And Retail Deal", "url": "https://techcrunch.com/2012/04/12/custom-fit-mens-clothing-brand-bonobos-raises-16-4m-from-accel-lands-nordstrom-investment-and-retail-deal/", "published": "2012-04-12"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "acquisition (moderate outcome)",
+    "outcome_summary": "Bonobos was acquired by Walmart in 2017 for approximately $310 million — a real but unspectacular venture outcome relative to the total capital the company had raised (nearly $130M across its lifetime), widely characterized in later coverage as a mediocre-to-fine but not breakout result for its investors.",
+    "outcome_date": "2017-06"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A genuinely 'average' company by design — not a dramatic failure and not a breakout success, testing whether SIE's tier assignment correctly avoids pulling toward either extreme for a company whose contemporaneous evidence (steady growth, a credible strategic partner, no visible red flags, but also no explosive traction signal or defensible moat) is itself genuinely moderate.",
+    "known_ambiguities": "The Nordstrom deal could reasonably be read as either a strong commercial-validation signal (a major retailer's endorsement) or a signal that the company needed a strategic partner's distribution reach to scale, since it lacked its own — this ambiguity is intentional and should be reflected as genuine uncertainty rather than resolved artificially in either direction.",
+    "evidence_limitations": "No revenue, unit-sales, or customer-retention figures were found for the April 2012 snapshot in the sources reviewed; Traction and Financial Health pillars are expected to rely primarily on the strategic-partnership signal rather than hard metrics.",
+    "evidence_repair_log": "2026-08-23: targeted search performed for additional Traction/Financial evidence per repair instructions. Found only unsourced modern retrospective content (a 2024 narrative article citing no sources for its 2011-2012 revenue/growth figures) — did NOT meet this portfolio's sourcing bar and was deliberately NOT added. One legitimate enrichment was made: a funding-history detail (total $18.5M raised by 2010) already present in the existing, already-cited TechCrunch source but not previously extracted into normalized_facts. This record remains the thinnest in the calibration set on Traction/Financial Health after a genuine repair attempt — that outcome is reported honestly rather than papered over with weak sourcing."
+  }
+}

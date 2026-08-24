@@ -1,0 +1,514 @@
+{
+  "company_name": "Bonobos",
+  "filename": "bonobos.json",
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "source_chain": "PASS_A -> targeted_PASS_A_rerun -> ANCHOR_CALIBRATION_PHASE1 (this file is the merged canonical state under the frozen calibration-rerun contract; PASS A/targeted-rerun source files are unmodified)",
+  "dimensions": [
+    {
+      "dimension": "Market Size",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "growing but increasingly crowded DTC apparel category; menswear less saturated than womenswear",
+      "rationale": "Real market with a stated relative wedge (menswear less saturated) but no scale figure.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Growth",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No category growth-rate data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Timing",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No trigger event.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Competitive Intensity",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 4,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "'increasingly crowded' DTC apparel category",
+      "rationale": "Real, explicit negative-leaning evidence about competitive crowding.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Demand",
+      "pillar": "Market",
+      "evidence_status": "optional_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No pre-revenue-specific demand signal captured.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Founder-Market Fit",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "no explicit prior-domain-background evidence stated",
+      "rationale": "No positive or negative domain-fit evidence in the record; scored neutral.",
+      "missing_information": "Founders' pre-Bonobos background.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Technical Capability",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No evidence either way; DTC ecommerce still requires some technical capability, treated as expected-but-unavailable rather than not-applicable.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Business Capability",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No commercial-background specifics.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Leadership",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring/org evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Execution Track Record",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "built the brand over ~5 years, prior institutional backing since 2010",
+      "rationale": "Mild positive tenure signal but no explicit milestone list.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Value",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low-Medium",
+      "evidence_used": "differentiated primarily on fit -- a real, named product problem addressed",
+      "rationale": "A real, if generic, value claim (better-fitting menswear).",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Differentiation",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "differentiated primarily on fit and online buying experience",
+      "rationale": "Real, named differentiation basis (fit-focused positioning) vs. generic apparel retail.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Usability",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No onboarding/time-to-value evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Defensibility",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 3,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "record explicitly states differentiation rests on 'fit and online buying experience rather than a structurally defensible technology or network-effect advantage'",
+      "rationale": "This is a real, direct, affirmative statement that the product lacks a structural moat mechanism -- genuine negative evidence, not mere silence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Adoption Potential",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "expanding into a fuller menswear assortment",
+      "rationale": "Mild, product-line (not geo/segment) expansion signal only.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Go-to-Market Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "Nordstrom retail distribution deal secured (physical stores + Nordstrom.com)",
+      "rationale": "A major incumbent retailer agreeing to distribute the product is a real, disclosed GTM-channel expansion, though no CAC/pipeline data exists.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Product Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No roadmap/shipping-cadence evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Operational Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring-plan/process evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Strategic Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "Nordstrom strategic partnership as a named strategic choice (partner for distribution rather than build alone)",
+      "rationale": "One clear, real strategic choice evidenced.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No customer-count data; repair attempted, no qualifying source found.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue figures; repair attempted, no qualifying source found.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Retention",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No retention evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Engagement",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No usage data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Growth Velocity",
+      "pillar": "Traction",
+      "evidence_status": "not_applicable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No growth series exists.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Quality",
+      "pillar": "Financial Health",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Unit Economics",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Burn Efficiency",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Runway",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    }
+  ]
+}

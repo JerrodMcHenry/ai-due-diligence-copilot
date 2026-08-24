@@ -1,0 +1,217 @@
+[
+  {
+    "company": "Airbnb", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No spend-vs-milestones/capital-intensity/operating-efficiency/financing-consumption evidence exists in the blind record. Mode label updated for spec consistency; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Airbnb", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash-position or financing-position evidence (near-insolvency, emergency financing, substantial reserves) exists. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Beepi", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: business_model tag ('asset-heavy') is a generic categorization, not concrete spend/efficiency evidence. Scoring from this alone would be exactly the vague-narrative pattern the Hybrid contract must not reward. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Beepi", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: the Series C target-vs-raised shortfall ($300M sought, $70M closed) is investor-demand evidence, not a statement about current cash reserves or imminent distress. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Bonobos", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No spend/capital-intensity evidence in the blind record. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Bonobos", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Figma", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No spend/capital-intensity evidence in the blind record. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Figma", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Ginkgo Bioworks", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: 'a long capital runway was being built deliberately' is the analyst's own inference from raise size, not a direct disclosed spend/efficiency fact. Scoring from an inferred intent, not an observed outcome, would be the vague-narrative pattern the critical quality check must catch. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Ginkgo Bioworks", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: same 'deliberate long runway' inference does not meet 'clearly substantial reserves relative to known operating needs' -- operating needs for this company are unknown, and raise-size-implies-runway is exactly the fallacy the instructions warn against. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Instacart", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: the 'structurally more capital-efficient than Webvan' thesis is real qualitative evidence, but it was already allocated to Operational Execution and Strategic Execution in the original PASS A run (explicit double-counting-avoidance choice). Reusing it a third time here would compound double-counting; it also describes a forward-looking structural design choice, not a demonstrated spend-efficiency outcome. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Instacart", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Jawbone", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Original record itself flags the raise as ambiguous ('strong investor conviction OR a need for significant additional capital... or both'). Explicitly not scored per the critical-quality-check standard against vague financing narratives.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Jawbone", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Same ambiguous raise-size evidence; not 'clearly substantial reserves.' No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Meetup", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Original record itself flags 'modest total funding' as ambiguous (capital efficiency vs. limited investor appetite). Preserved as unscored per the same standard.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Meetup", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash-position evidence (monthly cash-sales figures are revenue, not a cash balance). Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Oscar Health", "dimension": "Burn Efficiency", "mode_only": false,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "scored", "score": null, "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "scored", "score": 3, "confidence": "Low-Medium", "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "reason": "Real, disclosed, dated evidence exists: 'significant underwriting losses as the company scaled,' explicitly reported alongside the valuation increase -- a genuine operating-efficiency signal, not a vague narrative (magnitude unquantified, hence Low-Medium confidence and a below-neutral rather than floor score). This evidence is the same underlying fact also considered for Unit Economics (flagged as a double-count risk by the original PASS A analyst); Unit Economics itself remains unscored (Category A, no anchor), so this is not a double-score.",
+    "spec_rule_changed": "Part 7 Burn Efficiency: Deterministic -> Hybrid, qualitative fallback via operating-efficiency evidence.",
+    "score_changed": true, "availability_changed": true
+  },
+  {
+    "company": "Oscar Health", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "Considered and rejected: the $400M raise is not 'clearly substantial reserves relative to known operating needs' given the same record explicitly discloses significant, scaling underwriting losses working against that read. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Quibi", "dimension": "Burn Efficiency", "mode_only": false,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "scored", "score": null, "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "scored", "score": 3, "confidence": "Medium", "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "reason": "Real, quantified, dated financing-consumption evidence: $600M planned year-one content spend (scaling to $978M by year five) committed before launch, against a 20M-subscriber five-year 'base case' target and zero revenue. This is concrete capital-intensity/financing-consumption-relative-to-milestones evidence, not a vague narrative -- extremely aggressive committed spend with no demand validation yet.",
+    "spec_rule_changed": "Part 7 Burn Efficiency: Deterministic -> Hybrid, qualitative fallback via capital-intensity and financing-consumption-relative-to-milestones evidence.",
+    "score_changed": true, "availability_changed": true
+  },
+  {
+    "company": "Quibi", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "expected_unavailable", "score": null, "anchor_status": "FROZEN (evidence-insufficient: cash known, burn rate not yet knowable pre-launch)"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "expected_unavailable", "score": null},
+    "reason": "Considered and rejected: $1B cash against a $600M year-one spend plan does not cleanly match any of the four permitted qualitative categories (not documented near-insolvency, not emergency financing, not imminent inability to meet obligations, and not clearly substantial reserves once the disclosed spend plan is accounted for). Computing an implied runway from content-spend figures alone would require inventing a formula the spec does not provide. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Shopify", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No spend/capital-intensity evidence in the blind record. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Shopify", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Shyp", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "The 'structurally margin-thin' qualitative characterization was already allocated to Unit Economics by the original analyst to avoid double-counting; preserved as unscored here for consistency (also generic industry-wide framing, not Shyp-specific spend evidence). No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Shyp", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Stripe", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "The $250M credit facility is a lending/liquidity-access signal, not a spend-efficiency signal. No score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Stripe", "dimension": "Runway", "mode_only": false,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "expected_unavailable", "score": null, "anchor_status": "FROZEN"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "scored", "score": 7, "confidence": "Medium", "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "reason": "A $250M revolving credit facility committed by four major banks (J.P. Morgan, Goldman Sachs, Morgan Stanley, Barclays) is real, concrete, disclosed evidence of institutionally-validated financing position/liquidity access -- not a vague narrative. Scored moderately (7, not higher) because a credit facility is available-but-undrawn financing, not literal cash-on-hand, and Stripe's own operating needs are not independently quantified in the record -- flagged explicitly as the closest boundary call in this rerun for the user's review.",
+    "spec_rule_changed": "Part 7 Runway: Deterministic -> Hybrid, qualitative fallback via 'clearly substantial reserves relative to known operating needs.'",
+    "score_changed": true, "availability_changed": true
+  },
+  {
+    "company": "Tesla Motors", "dimension": "Burn Efficiency", "mode_only": false,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "scored", "score": null, "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "scored", "score": 1, "confidence": "High", "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "reason": "The single most severe, best-corroborated financial-distress case in the portfolio: ~$9M cash remaining (Nov 2008), 18% workforce reduction, last-minute $40M convertible-debt financing signed Christmas Eve 2008. This is exactly the case that motivated the Deterministic->Hybrid repair -- direct, severe, multiply-sourced negative capital-planning/spend-efficiency evidence, not absence.",
+    "spec_rule_changed": "Part 7 Burn Efficiency: Deterministic -> Hybrid.",
+    "score_changed": true, "availability_changed": true
+  },
+  {
+    "company": "Tesla Motors", "dimension": "Runway", "mode_only": false,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "scored", "score": null, "anchor_status": "CALIBRATION_ANCHOR_REQUIRED (partial input: cash known, burn rate unknown)"},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "scored", "score": 2, "confidence": "Medium-High", "anchor_status": "CALIBRATION_ANCHOR_REQUIRED"},
+    "reason": "Matches 'documented near-insolvency' and 'emergency financing' -- the two most severe qualitative categories named in the Hybrid contract -- directly and explicitly: near-total cash depletion (~$9M, Nov 2008) requiring two successive emergency raises ($40M convertible debt Dec 2008, $50M Daimler investment May 2009, the latter described by Musk as 'crucial' to avoid missing payroll). Scored 2, not 1 or 0: the snapshot date (May 19, 2009) is the same day the Daimler capital closed, so the acute crisis had just been addressed by fresh capital as of the snapshot -- the score reflects the demonstrated fragility and extreme recency of near-failure, not an assertion of still-ongoing insolvency at the snapshot date itself, since no current cash balance or resulting burn rate is disclosed.",
+    "spec_rule_changed": "Part 7 Runway: Deterministic -> Hybrid, qualitative fallback via 'documented near-insolvency' and 'emergency financing.'",
+    "score_changed": true, "availability_changed": true
+  },
+  {
+    "company": "Warby Parker", "dimension": "Burn Efficiency", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No spend/capital-intensity evidence in the blind record. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  },
+  {
+    "company": "Warby Parker", "dimension": "Runway", "mode_only": true,
+    "original": {"scoring_mode": "Deterministic", "evidence_status": "usually_private_unavailable", "score": null},
+    "revised": {"scoring_mode": "Hybrid", "evidence_status": "usually_private_unavailable", "score": null},
+    "reason": "No cash/financing-position evidence. Mode label updated; no score.",
+    "score_changed": false, "availability_changed": false
+  }
+]

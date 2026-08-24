@@ -1,0 +1,46 @@
+{
+  "company_name": "Jawbone",
+  "snapshot_date": "2014-09-15",
+  "snapshot_stage": "Series F-equivalent late-stage round",
+  "industry": "Consumer hardware / wearables",
+  "business_model": "Hardware sales (fitness trackers, speakers), one-time-purchase, low recurring-revenue component",
+  "expected_quality_tier": "Weak",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Consumer electronics company (formerly AliphCom) making wireless speakers and, from 2011, the UP line of fitness/wellness wearable trackers, backed by a roster of top-tier investors including Sequoia, Andreessen Horowitz, Khosla Ventures, and Kleiner Perkins.",
+    "market": "Fast-growing consumer wearables/fitness-tracking category as of 2014, but already showing signs of maturing competitive structure with a clear, better-resourced category leader.",
+    "team": "Experienced consumer-hardware team with a track record of shipping multiple product generations (speakers, then wearables) and raising from elite investors across several rounds.",
+    "product": "UP wearable fitness tracker line, competing directly against Fitbit and, by 2014, an entering Apple/Samsung on smartwatch-adjacent functionality — a crowded and rapidly evolving product category.",
+    "execution": "Raised $147M in September 2014 at a $3.2B valuation — a very large late-stage raise for a hardware company, suggesting either strong investor conviction or a need for significant additional capital to compete, or both.",
+    "traction": "REPAIRED (see benchmark_notes): NPD Group point-of-sale tracking data, reported by MobiHealthNews, covers the 52-week period from early January 2013 through early January 2014 and puts Fitbit at 68% of fitness-tracker retail unit sales, Jawbone UP at 19%, and Nike FuelBand at 10% — a real, dated, methodologically-labeled competitive-share statistic, though its measurement window ends roughly eight months before the September 2014 snapshot rather than coinciding with it. Looser, undated or vaguely-dated claims elsewhere in circulation (e.g., 'roughly 15%' or 'roughly 18%' for Jawbone 'in 2014') could not be traced to a source with a stated measurement period and have been excluded rather than used to corroborate a more dramatic gap.",
+    "financial": "No specific revenue or margin figures were found in the contemporaneous sources reviewed for this snapshot; the scale of the raise ($147M) alongside a distant #2 market position is itself a signal worth flagging for Burn Efficiency/Fundraising Readiness analysis."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_f_raised", "value": 147000000, "unit": "usd", "period": "2014-09", "source": "CB Insights", "source_type": "public_research", "confidence": "High"},
+    {"metric": "valuation", "value": 3200000000, "unit": "usd", "period": "2014-09", "source": "CB Insights", "source_type": "public_research", "confidence": "High"},
+    {"metric": "market_share_jawbone_npd_2013_ending_jan2014", "value": 19, "unit": "percent", "period": "2013-01/2014-01", "source": "NPD Group point-of-sale data, reported by MobiHealthNews", "source_type": "public_research", "confidence": "Medium", "note": "REPLACES a prior unflagged, unsourced-measurement-period 'roughly 15%' claim removed during evidence repair; this figure has an explicit, stated 52-week measurement window ending ~8 months before the snapshot, which is why confidence is Medium rather than High despite being a named, methodologically-labeled data source"},
+    {"metric": "market_share_fitbit_npd_2013_ending_jan2014", "value": 68, "unit": "percent", "period": "2013-01/2014-01", "source": "NPD Group point-of-sale data, reported by MobiHealthNews", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "market_share_nike_fuelband_npd_2013_ending_jan2014", "value": 10, "unit": "percent", "period": "2013-01/2014-01", "source": "NPD Group point-of-sale data, reported by MobiHealthNews", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "Fitbit, Jawbone, Nike had 97 percent of fitness tracker retail sales in 2013", "url": "https://www.mobihealthnews.com/28825/fitbit-jawbone-nike-had-97-percent-of-fitness-tracker-retail-sales-in-2013", "published": "2014-01 (approximate — exact date not independently confirmable; the article's own stated NPD measurement window, 52 weeks ending early January 2014, is what establishes it precedes the Sept 2014 snapshot regardless of the article's exact publish date within that range)", "note": "Added during evidence repair to replace the unflagged 2017 CB Insights retrospective as the source for the Jawbone/Fitbit competitive-share claim; this is a dated, methodologically-labeled primary trade-press report of NPD Group data, not a later aggregator's undated restatement"},
+    {"title": "Wearables Maker Jawbone, Once Valued At $3B, Enters Liquidation", "url": "https://www.cbinsights.com/research/jawbone-valuation-history/", "published": "2017", "note": "post-snapshot retrospective; retained only for the funding/valuation figures it corroborates (series_f_raised, valuation), which are independently well-supported — no longer used as the source for any market-share claim"},
+    {"title": "Jawbone's demise a case of 'death by overfunding' in Silicon Valley", "url": "https://www.cnbc.com/2017/07/10/jawbones-demise-a-case-of-death-by-overfunding-in-silicon-valley.html", "published": "2017-07-10", "note": "post-snapshot retrospective; used only for future_outcome and to cross-check funding figures, not for at-the-time narrative"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "liquidation",
+    "outcome_summary": "Jawbone raised additional capital through 2016 but was never able to close the competitive gap with Fitbit and other entrants; the company ceased operations and entered assignment-for-benefit-of-creditors liquidation in mid-2017, having raised roughly $930M in total venture funding.",
+    "outcome_date": "2017-07"
+  },
+
+  "benchmark_notes": {
+    "why_included": "Tests whether SIE correctly weighs a hard, contemporaneously-knowable competitive-share statistic against a very large, prestigious-investor-backed funding round — i.e., whether elite-investor participation alone inflates the Team/Fundraising-Readiness read despite a clearly unfavorable Market/Competitive-Intensity signal that was equally available at the time.",
+    "known_ambiguities": "Reasonable analysts could differ on how much weight an 8-months-stale market-share statistic should carry versus the possibility of a comeback or a further-widened gap by the actual snapshot date — this is intentionally not an open-and-shut Very Weak case, since $147M from Sequoia/a16z/Khosla/Kleiner Perkins is a genuinely strong contemporaneous signal in the other direction.",
+    "evidence_limitations": "No contemporaneous revenue, gross margin, or burn-rate figures were located for the 2014 snapshot specifically; Financial Health is expected to be evidence-thin for this record based on public sources alone.",
+    "evidence_repair_log": "2026-08-23: the original market_share_jawbone/market_share_fitbit facts (15%/38%) were sourced only to a 2017 CB Insights retrospective without a stated measurement period and without the required post-snapshot 'note' flag — a genuine hindsight-leakage risk flagged in the prior audit. Replaced with NPD Group data (via MobiHealthNews) carrying an explicit 52-week measurement window (Jan 2013-Jan 2014). TIER-QUESTIONABILITY FLAG (per audit Part 6, tier not changed): the replacement figures show a real but somewhat less extreme gap (19% vs. 68%, not 15% vs. 38%) and reflect a window ending ~8 months before the snapshot rather than September 2014 itself. The 'Weak' tier's evidentiary support is accordingly a bit softer than originally presented — a defensible reading of the funding trajectory alone ($147M from elite investors, up to a $3.2B valuation) would lean more toward 'Average' if the competitive-share evidence were excluded entirely. The tier is left unchanged pending separate adjudication, as instructed, but this softening should be weighed in that adjudication."
+  }
+}

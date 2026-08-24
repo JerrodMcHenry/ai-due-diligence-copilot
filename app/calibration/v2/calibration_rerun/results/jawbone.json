@@ -1,0 +1,514 @@
+{
+  "company_name": "Jawbone",
+  "filename": "jawbone.json",
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "source_chain": "PASS_A -> targeted_PASS_A_rerun -> ANCHOR_CALIBRATION_PHASE1 (this file is the merged canonical state under the frozen calibration-rerun contract; PASS A/targeted-rerun source files are unmodified)",
+  "dimensions": [
+    {
+      "dimension": "Market Size",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "fast-growing consumer wearables/fitness-tracking category",
+      "rationale": "Real category claim, no scale figure.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Growth",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "'fast-growing consumer wearables/fitness-tracking category as of 2014'",
+      "rationale": "Real category-growth characterization, though generic and unquantified.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Timing",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No explicit trigger event.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Competitive Intensity",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 3,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "NPD data: Fitbit 68% vs. Jawbone 19% of retail unit sales for the 52-week period ending early Jan 2014, ~8 months before the snapshot",
+      "rationale": "Direct, quantified evidence of a significant, already-visible competitive gap -- real negative evidence, not absence, though the measurement window does not coincide exactly with the snapshot date.",
+      "missing_information": "A market-share figure specific to September 2014.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Demand",
+      "pillar": "Market",
+      "evidence_status": "optional_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No distinct pre-revenue signal; superseded by realized market-share data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Founder-Market Fit",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "'experienced consumer-hardware team with a track record of shipping multiple product generations'",
+      "rationale": "Real, if generic, domain-relevant tenure.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Technical Capability",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "shipping multiple product generations (speakers, then wearables)",
+      "rationale": "Real shipped-complexity evidence across multiple product categories.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Business Capability",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "'Raising from elite investors' is fundraising-adjacent, not commercial-background-specific.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Leadership",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring/org evidence at this late stage.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Execution Track Record",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "shipping multiple product generations",
+      "rationale": "Real milestone pattern, though the same underlying fact is also used for Technical Capability -- noted as an evidence-reuse caution.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Value",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "generic fitness-tracking value",
+      "rationale": "No specific ROI/pain-severity narrative beyond category-generic value.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Differentiation",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 4,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "'competing directly against Fitbit and... entering Apple/Samsung on smartwatch-adjacent functionality'",
+      "rationale": "No named differentiator vs. Fitbit/Apple/Samsung in the evidence, only crowded-category framing.",
+      "missing_information": "A stated point of differentiation.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Usability",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No adoption-friction evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Defensibility",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No lock-in/data-moat evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Adoption Potential",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No named adjacent-expansion surface.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Go-to-Market Execution",
+      "pillar": "Execution",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No CAC/pipeline data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Product Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "shipping multiple product generations",
+      "rationale": "Real delivery-cadence evidence, again overlapping with Technical Capability's evidence -- flagged as a possible evidence-reuse pattern for this record.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Operational Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No process data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Strategic Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 4,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "large capital raise amid a distant #2 market position",
+      "rationale": "Ambiguous evidence -- a large raise while trailing the category leader could reflect a sound doubling-down strategy or a lack of alternatives; no clear strategic-choice evidence resolves this.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "NPD data is a share-of-category-unit-sales statistic, not a customer-count series for Jawbone specifically.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Retention",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No retention evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Engagement",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No usage telemetry.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Growth Velocity",
+      "pillar": "Traction",
+      "evidence_status": "not_applicable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No series exists.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Quality",
+      "pillar": "Financial Health",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Unit Economics",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Burn Efficiency",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "'Scale of the raise alongside a distant #2 position' is qualitative color only, no burn number.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Runway",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No cash/burn data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    }
+  ]
+}

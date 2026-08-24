@@ -1,0 +1,29 @@
+{
+  "company_name": "Dollar Shave Club",
+  "snapshot_date": "2015-06-22",
+  "snapshot_stage": "Series D close",
+  "industry": "DTC subscription grooming/razors",
+  "business_model": "Direct-to-consumer subscription razor/grooming delivery, recurring per-member fee",
+  "anti_contamination_note": "Cutoff frozen at 2015-06-22 (Series D announcement date) before evidence beyond 'a Series D exists around mid-2015' was gathered.",
+  "historical_evidence": {
+    "company": "Founded 2011, launched 2012, a subscription razor and grooming-products delivery service, widely known for a viral 2012 launch video.",
+    "market": "Large, historically high-margin razor/grooming market dominated by entrenched incumbents (notably Gillette), a real, contemporaneously-visible incumbent-disruption wedge.",
+    "team": "No specific founder-background detail beyond the company's own origin story was found in the primary sources reviewed for this snapshot.",
+    "product": "Subscription-based razor and grooming-product delivery, differentiated on price and convenience relative to razor-aisle retail.",
+    "execution": "Raised $75M in Series D funding on June 22, 2015, from Venrock, TCV, Forerunner Ventures, and new investor Dragoneer Investment Group, at a pre-money valuation 'north of $500 million' -- following a $50M Series C closed less than a year prior (total raised to date $148M).",
+    "traction": "Disclosed more than 2 million subscribers as of the snapshot date, holding 13.3% of all U.S. razor sales -- a real, dated, primary-sourced scale and competitive-share figure. Prior comparison point: an independently reported figure of approximately 1.1 million active subscribers by December 2014 (six months before the snapshot) -- sourced to secondary/aggregator reporting rather than a TechCrunch-equivalent primary outlet, and treated with correspondingly lower confidence.",
+    "financial": "No revenue or margin figures were found in the primary (TechCrunch) source reviewed for this snapshot specifically. Revenue figures reported elsewhere ($19M for 2013, $65M for 2014) come from secondary/aggregator sources not independently corroborated by a primary press article located within this research pass, and are therefore NOT included in normalized_facts, consistent with this program's standing rule of excluding claims that cannot be traced to a contemporaneous primary source."
+  },
+  "normalized_facts": [
+    {"metric": "series_d_raised", "value": 75000000, "unit": "usd", "period": "2015-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "pre_money_valuation", "value": 500000000, "unit": "usd", "period": "2015-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "High", "note": "stated as 'north of $500 million,' a floor not an exact figure"},
+    {"metric": "series_c_raised", "value": 50000000, "unit": "usd", "period": "2014 (approximate, 'less than a year prior')", "source": "TechCrunch", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "total_raised_to_date", "value": 148000000, "unit": "usd", "period": "2015-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "subscribers_2015", "value": 2000000, "unit": "count", "period": "2015-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "High", "note": "stated as 'more than 2 million'"},
+    {"metric": "us_razor_market_share_2015", "value": 13.3, "unit": "percent", "period": "2015-06", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "subscribers_dec2014", "value": 1100000, "unit": "count", "period": "2014-12", "source": "Aggregated secondary reporting (Businessweek-attributed, not independently re-verified against a primary article in this research pass)", "source_type": "public_research", "confidence": "Low", "note": "used only as a directional growth-series comparison point; flagged lower-confidence per this program's sourcing discipline"}
+  ],
+  "sources": [
+    {"title": "Dollar Shave Club Raises $75M To Fend Off Gillette And Harry's", "url": "https://techcrunch.com/2015/06/22/dollar-shave-club-raises-75mm-to-fend-off-gillette-and-harrys", "published": "2015-06-22"}
+  ]
+}

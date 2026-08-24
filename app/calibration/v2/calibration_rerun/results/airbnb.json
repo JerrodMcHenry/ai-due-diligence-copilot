@@ -1,0 +1,514 @@
+{
+  "company_name": "Airbnb",
+  "filename": "airbnb.json",
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "source_chain": "PASS_A -> targeted_PASS_A_rerun -> ANCHOR_CALIBRATION_PHASE1 (this file is the merged canonical state under the frozen calibration-rerun contract; PASS A/targeted-rerun source files are unmodified)",
+  "dimensions": [
+    {
+      "dimension": "Market Size",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "large global travel-accommodation market; European footprint expansion via acquisition",
+      "rationale": "Large market with a real, named expansion signal but no quantified TAM.",
+      "missing_information": "No market-size figure.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Growth",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No category-level (industry) growth evidence found; only company growth exists, which must not be used per dimension boundary.",
+      "missing_information": "Category-level travel-accommodation market growth data.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Timing",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No named trigger event in the evidence.",
+      "missing_information": "A stated 'why now' driver.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Competitive Intensity",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "hotels named as established, heavily-regulated incumbent structure",
+      "rationale": "Incumbent structure named but no distribution/win-loss data; stage-neutral read.",
+      "missing_information": "Win/loss evidence vs. named incumbents.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Demand",
+      "pillar": "Market",
+      "evidence_status": "optional_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Superseded by real Traction evidence (bookings); no distinct pre-revenue demand signal (LOI/waitlist) captured separately, and Traction evidence must not be reused here.",
+      "missing_information": "Pre-revenue-specific demand signal.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Founder-Market Fit",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "operating tenure (~3 years) via Y Combinator and a prior Series A",
+      "rationale": "Operating tenure only; no explicit prior-domain-background evidence in the record.",
+      "missing_information": "Founders' pre-Airbnb domain background.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Technical Capability",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No shipped-product-complexity or technical-founder evidence in the record.",
+      "missing_information": "Technical build evidence.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Business Capability",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No commercial-background specifics for founders.",
+      "missing_information": "Prior sales/ops leadership background.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Leadership",
+      "pillar": "Team",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring/org-depth evidence found.",
+      "missing_information": "Executive-team depth, hiring track record.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Execution Track Record",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "acquisition of a German competitor; fast Series A ($7.2M) to Series B ($112M) progression",
+      "rationale": "Real milestone-achievement pattern (acquisition, fast follow-on raise) supports an above-neutral read.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Value",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "1M bookings implies real usage-based value delivery",
+      "rationale": "Weak/inferred: usage volume implies value, but no direct pain-severity/ROI narrative.",
+      "missing_information": "Direct customer-value narrative.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Differentiation",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No explicit present-tense comparison against named alternatives.",
+      "missing_information": "Named-competitor differentiation claim.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Usability",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No adoption-friction / time-to-value evidence.",
+      "missing_information": "Onboarding or activation evidence.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Defensibility",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No durability-mechanism (lock-in/data/network-effect) evidence stated.",
+      "missing_information": "Moat-mechanism evidence.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Adoption Potential",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "European market entry via acquisition, strengthening footprint",
+      "rationale": "Real, named geographic-expansion surface distinct from realized bookings.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Go-to-Market Execution",
+      "pillar": "Execution",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No CAC/pipeline/sales-motion data.",
+      "missing_information": "CAC, sales-cycle, conversion data.",
+      "conflicts": null,
+      "anchor_status": "FROZEN (CAC-payback anchor exists, no evidence to apply it to)",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Product Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Low",
+      "evidence_used": "acquisition-driven European product/market expansion",
+      "rationale": "Single data point, weak inference; no independent roadmap-cadence evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Operational Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No non-financial process/hiring-plan evidence.",
+      "missing_information": "Org structure, hiring plan.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Strategic Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low-Medium",
+      "evidence_used": "acquisition of a German competitor as a stated strategic move",
+      "rationale": "One clear strategic choice evidenced, limited broader context.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "1M bookings is a usage-volume statistic, not a customer-count time series; no series data exists to compute a growth rate.",
+      "missing_information": "Customer-count series (t0, t1).",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Growth",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue figures found.",
+      "missing_information": "Revenue time series.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Retention",
+      "pillar": "Traction",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No NRR/GRR/churn evidence anywhere in the record.",
+      "missing_information": "Retention data.",
+      "conflicts": null,
+      "anchor_status": "FROZEN (best-anchored dimension in the methodology; blocked purely by evidence absence)",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Engagement",
+      "pillar": "Traction",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "1M bookings within roughly 4 months, a real disclosed usage-scale figure",
+      "rationale": "Aggregate transaction volume is a legitimate usage signal for a marketplace even without per-user telemetry.",
+      "missing_information": "Per-user usage frequency.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Growth Velocity",
+      "pillar": "Traction",
+      "evidence_status": "not_applicable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No multi-period growth series exists (single bookings figure only).",
+      "missing_information": "Multi-period growth series.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Quality",
+      "pillar": "Financial Health",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue/concentration/contract data.",
+      "missing_information": "Revenue-quality evidence.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Unit Economics",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No margin/take-rate/CAC data disclosed.",
+      "missing_information": "Take-rate, margin data.",
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Burn Efficiency",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No burn data.",
+      "missing_information": "Burn multiple inputs.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Runway",
+      "pillar": "Financial Health",
+      "evidence_status": "usually_private_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No cash-on-hand or burn-rate data.",
+      "missing_information": "Cash position, burn rate.",
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    }
+  ]
+}

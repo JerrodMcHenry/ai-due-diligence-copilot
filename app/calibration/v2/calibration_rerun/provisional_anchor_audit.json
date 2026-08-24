@@ -1,0 +1,47 @@
+[
+  {
+    "anchor": "Growth Velocity scale-tier cutoffs (absolute tier boundaries, e.g. '10k-100k merchants = medium tier')",
+    "classification": "KEEP PROVISIONAL",
+    "reason": "Tested against exactly one company (Shopify) in exactly one family (SMB SaaS/platform). The band architecture (floor-gate, annualize, scale-tiered CAGR bands) is sound and not rejected, but the specific absolute cutoffs have zero corroborating data points. A single test cannot validate a tier boundary."
+  },
+  {
+    "anchor": "Customer Growth business-model-family floors (all 8 families)",
+    "classification": "KEEP PROVISIONAL",
+    "reason": "Only the SMB SaaS/platform floor was actually exercised. The other 7 families (enterprise SaaS, consumer, marketplace, commerce, insurance, hardware, deeptech) have ZERO companies in this 15-company portfolio that test their floors at all -- they remain purely illustrative until a company from each family with qualifying evidence appears in a future benchmark expansion."
+  },
+  {
+    "anchor": "Qualitative Burn Efficiency band architecture (5-tier shape: poor/weak/credible/strong/exceptional, gated on directness of evidence)",
+    "classification": "FREEZE",
+    "reason": "Reconfirmed identically against Tesla (Clearly poor) and Quibi (Weak) under the formalized bands, with zero change from the pre-formalization scores, and the reproducibility spot-check independently re-derived Tesla's score against the band table with an exact match. The architecture's core discipline -- explicitly excluding hedged/ambiguous source language -- was also independently re-confirmed by correctly continuing to reject Ginkgo, Jawbone, Meetup, Beepi, and Instacart. This is the most-tested anchor in this whole calibration effort."
+  },
+  {
+    "anchor": "Qualitative Burn Efficiency exact score-within-band placement (e.g., is Tesla exactly a 1, not a 2)",
+    "classification": "KEEP PROVISIONAL",
+    "reason": "The band architecture is validated (see above); the precise number chosen within a band is still single-analyst judgment, not independently cross-checked by a second scorer. Distinguish the shape (frozen) from the exact placement (provisional)."
+  },
+  {
+    "anchor": "Qualitative Runway band architecture (6-tier shape, including the 'poor, just addressed' vs. 'poor, unresolved' distinction)",
+    "classification": "FREEZE",
+    "reason": "Same reasoning as Burn Efficiency's architecture -- reconfirmed identically against Tesla and Stripe, correctly continues to reject Beepi/Jawbone/Ginkgo/Oscar Health/Quibi (including explicitly rejecting Quibi's $1B-cash-vs-$600M-spend case, which is exactly the kind of large-raise-in-isolation pattern this architecture was designed to resist)."
+  },
+  {
+    "anchor": "Qualitative Runway exact score-within-band placement",
+    "classification": "KEEP PROVISIONAL",
+    "reason": "Same reasoning as Burn Efficiency's placement -- validated shape, unvalidated exact number."
+  },
+  {
+    "anchor": "Insurance/underwriting Unit Economics qualitative-disclosure threshold ('a direct, dated, company-specific loss disclosure, even without a numeric ratio, may support a score')",
+    "classification": "KEEP PROVISIONAL",
+    "reason": "This is the newest, least-tested rule in the whole system -- it has been exercised exactly once (Oscar Health), and the Part 9 sensitivity check found it numerically inert in this portfolio, which is reassuring but is evidence of 'did no harm,' not evidence of 'is correct.' It also directly created this run's newest evidence-reuse concern (double-citation with Burn Efficiency for the same fact). Not rejected -- the underlying reasoning (a specific, dated, unambiguous company disclosure clears a meaningfully higher bar than a vague narrative) still holds up under the blind-threshold test -- but far too thin an evidence base to freeze."
+  },
+  {
+    "anchor": "Marketplace/take-rate 'take rate alone is insufficient' rule (Beepi)",
+    "classification": "FREEZE",
+    "reason": "This is a negative rule (it correctly continues to withhold a score), which is inherently lower-risk to freeze than a positive threshold that produces a number. The reasoning -- a revenue-capture rate answers a different question than unit profitability -- holds regardless of company identity."
+  },
+  {
+    "anchor": "Commerce/DTC 'thesis is not outcome' rule (Warby Parker)",
+    "classification": "FREEZE",
+    "reason": "Same reasoning as the marketplace rule above -- a negative/withholding rule grounded in a defensible, company-agnostic principle (stated intent is not realized economics)."
+  }
+]

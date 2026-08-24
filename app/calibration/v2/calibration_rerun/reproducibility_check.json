@@ -1,0 +1,25 @@
+{
+  "method_disclosure": "This scoring process is single-analyst reasoning over frozen blind evidence, not an automated multi-sample LLM pipeline (disclosed consistently throughout PASS A, the targeted rerun, PASS B, and Phase 1). True reproducibility testing in the sense of measuring model-temperature stochastic variance is not achievable here. What follows is the same lightweight self-consistency discipline used in the original PASS A run_metadata.json, extended to a slightly larger, more representative sample: each dimension below was re-derived independently from the blind evidence a second time, without consulting the stored first-pass score, then compared.",
+  "deterministic_dimensions": {
+    "claim": "Deterministic dimensions reproduce exactly by construction -- once a formula and its inputs are fixed, there is no judgment step that could introduce variance.",
+    "verification": "Shopify's Customer Growth and Growth Velocity anchor calculations (Phase 1) were re-run against the same merchant-count inputs and the same CAGR formula a second time; both reproduced identical outputs (Customer Growth=7, Growth Velocity=6) as expected. No other Deterministic dimension is currently scored (0/15 for Retention, Revenue Growth; Unit Economics' one scored cell, Oscar Health, is Deterministic-mode but reached via a qualitative-fallback rule rather than a formula, so it is measured under the Hybrid/Constrained-LLM spot-check below instead)."
+  },
+  "hybrid_and_constrained_llm_spot_check": {
+    "sample_size": 7,
+    "sample_selection": "Spread across both modes, across companies not otherwise concentrated in the evidence-reuse registry, including one deliberately close/ambiguous call (Ginkgo Business Capability) to stress-test for instability rather than only picking easy cases.",
+    "results": [
+      {"company": "Quibi", "dimension": "Leadership", "mode": "Constrained LLM", "stored_score": 9, "rederived_score": 9, "match": true},
+      {"company": "Jawbone", "dimension": "Differentiation", "mode": "Constrained LLM", "stored_score": 4, "rederived_score": 4, "match": true},
+      {"company": "Tesla Motors", "dimension": "Strategic Execution", "mode": "Constrained LLM", "stored_score": 6, "rederived_score": 6, "match": true},
+      {"company": "Airbnb", "dimension": "Market Size", "mode": "Hybrid", "stored_score": 7, "rederived_score": 7, "match": true},
+      {"company": "Ginkgo Bioworks", "dimension": "Customer Value", "mode": "Hybrid", "stored_score": 6, "rederived_score": 6, "match": true},
+      {"company": "Ginkgo Bioworks", "dimension": "Business Capability", "mode": "Hybrid", "stored_score": 4, "rederived_score": 4, "match": true, "note": "Deliberately chosen as a closer/more ambiguous call (an explicit-gap statement, not a clean positive or negative) -- reproduced exactly."},
+      {"company": "Tesla Motors", "dimension": "Burn Efficiency", "mode": "Hybrid (Phase 1 qualitative anchor)", "stored_score": 1, "rederived_score": 1, "match": true, "note": "Re-checked directly against the newly-formalized Phase 1 band table, not just re-judged freehand."}
+    ],
+    "score_spread_observed": "0 (7/7 exact matches)",
+    "evidence_status_stability": "7/7 stable -- no case flipped between scored/Unavailable states.",
+    "confidence_stability": "7/7 stable -- confidence labels reproduced identically where recorded.",
+    "anchor_selection_stability": "7/7 stable -- the same qualitative band was selected both times for the two Phase 1-anchor cases checked (Tesla Burn Efficiency)."
+  },
+  "caveat": "0/7 instability in this sample is a reassuring but limited result -- it demonstrates consistency in a single analyst's re-reading discipline, not the kind of guarantee that repeated-sampling from an actual model API would provide. This distinction was intentionally not glossed over. If a stronger reproducibility guarantee is required before treating any anchor as frozen, it would need genuinely independent scoring (a second analyst or a fresh model session with no exposure to this conversation), not a larger version of this same spot-check."
+}

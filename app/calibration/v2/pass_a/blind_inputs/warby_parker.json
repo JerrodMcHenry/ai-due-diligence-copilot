@@ -1,0 +1,66 @@
+{
+  "company_name": "Warby Parker",
+  "snapshot_date": "2011-09-20",
+  "snapshot_stage": "Series A close",
+  "industry": "DTC eyewear / consumer retail",
+  "business_model": "Direct-to-consumer prescription eyewear, online-first, home try-on model",
+  "historical_evidence": {
+    "company": "Founded by four Wharton MBA classmates (Neil Blumenthal, Dave Gilboa, Andrew Hunt, Jeffrey Raider), selling prescription eyewear online at a fraction of typical retail prices, with a novel home try-on program to address the fit/try-before-buy problem inherent to online eyewear.",
+    "market": "Large, historically high-margin eyewear market dominated by a small number of vertically integrated incumbents (notably Luxottica), a genuinely attractive wedge for a lower-priced DTC challenger.",
+    "team": "Founding team came directly from a business-school environment with a clearly articulated thesis about the eyewear industry's pricing structure, though with no prior startup-operating track record as of this early stage.",
+    "product": "Online eyewear ordering with a five-pairs-at-home try-on program before purchase \u2014 directly solving the core objection to buying prescription glasses online (fit/appearance uncertainty) with a specific, well-designed product mechanic.",
+    "execution": "Raised $2.5M in seed funding in May 2011, followed by a $12.5M Series A in September 2011 led by First Round Capital and Tiger Global \u2014 a fast progression from seed to a meaningful Series A within roughly four months.",
+    "traction": "REPAIRED (see benchmark_notes): the best contemporaneous source located \u2014 TechCrunch's own January 2012 year-in-review piece on Warby Parker's 2011 \u2014 explicitly states the company 'doesn't include ... absolute numbers on its traffic or sales growth,' i.e., Warby Parker did not disclose sales or unit figures at the time. That same article does confirm, with a specific figure, that Warby Parker distributed over 100,000 pairs of glasses through its Buy-a-Pair-Give-a-Pair donation program during 2011. The widely-repeated claims that the company had '$1 million in sales' and had 'shipped its 100,000th pair' by year-end 2011 could not be traced to any contemporaneous primary source \u2014 every instance found leads back to undated retrospective case-study content with no visible citation. Given a real, well-sourced '100,000 pairs donated' figure exists for the same year, it is plausible (though unconfirmed) that later secondary sources conflated donated units with sold units when repeating the '100,000' figure.",
+    "financial": "The lower-price, direct-to-consumer model was explicitly built around bypassing the traditional multi-layer eyewear supply chain's markup, a coherent and testable unit-economics thesis, though detailed margin figures were not found in the sources reviewed for this snapshot."
+  },
+  "normalized_facts": [
+    {
+      "metric": "seed_raised",
+      "value": 2500000,
+      "unit": "usd",
+      "period": "2011-05",
+      "source": "Clay.com aggregation of Crunchbase/press data",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "series_a_raised",
+      "value": 12500000,
+      "unit": "usd",
+      "period": "2011-09",
+      "source": "Clay.com aggregation of Crunchbase/press data",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "pairs_donated_2011",
+      "value": 100000,
+      "unit": "count",
+      "period": "2011",
+      "source": "TechCrunch year-in-review",
+      "source_type": "public_research",
+      "confidence": "High",
+      "note": "REPLACES the removed 'annual_sales_2011' ($1M) and 'cumulative_pairs_shipped' (100,000 sold) facts, which could not be validated against any contemporaneous primary source and have been removed rather than preserved \u2014 this figure (pairs DONATED via Buy-a-Pair-Give-a-Pair, not sold) is the closest verifiable analog and is explicitly, directly stated by a dated, contemporaneous primary source"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Worvey\u2014 Err, Warby Parker Takes A Look Back At Its 2011",
+      "url": "https://techcrunch.com/2012/01/24/worvey-err-warby-parker-takes-a-look-back-at-its-2011/",
+      "published": "2012-01-24",
+      "note": "Added during evidence repair as the primary contemporaneous (near-year-end) source for Warby Parker's 2011 activity, replacing reliance on undated retrospective content. This article is itself the source of the finding that the $1M-sales/100k-sold claims could not be corroborated \u2014 it explicitly states Warby Parker did not disclose absolute sales/traffic figures at the time."
+    },
+    {
+      "title": "Business Case Study: Warby Parker",
+      "url": "https://www.causeartist.com/case-study-warby-parker/",
+      "published": "n/a",
+      "note": "UNVERIFIED / DOWNGRADED during evidence repair \u2014 undated retrospective case-study content, the genre the collection protocol was designed to avoid; retained in this list only to document what could NOT be corroborated, not as a basis for any historical_evidence claim"
+    },
+    {
+      "title": "How Much Did Warby Parker Raise? Funding & Key Investors",
+      "url": "https://www.clay.com/dossier/warby-parker-funding",
+      "published": "n/a",
+      "note": "retained only for the funding-round dollar amounts (seed/Series A), which are independently corroborated by the funding-progression narrative; not used for any traction claim"
+    }
+  ]
+}

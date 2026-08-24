@@ -1,0 +1,24 @@
+{
+  "rerun_type": "TARGETED PASS A rerun, post-specification-repair",
+  "methodology_version": "v2-spec-2026-08-23 (post-repair: Execution weights .25 each, Unit Economics business-model-agnostic, Burn Efficiency/Runway Hybrid, Customer Demand maturity-based lifecycle, Partial Structural Coverage display state)",
+  "specification_document": "app/docs/SIE_Methodology_v2_Specification.md",
+  "original_pass_a_run": "app/calibration/v2/pass_a/ (results/, blind_inputs/, aggregate_results.json, run_metadata.json) -- left completely untouched by this rerun, preserved as the historical record",
+  "scope": "Re-evaluate ONLY Burn Efficiency (all 15), Runway (all 15), Customer Demand (maturity applicability check on all 15, substantive re-evaluation on the subset found applicable), and Unit Economics (A/B/C evidence-family review on the 7 companies previously blocked by SaaS-only anchor framing). All other dimensions and all other companies' judgments are byte-for-byte unchanged from the original PASS A results.",
+  "evidence_used": "Only the same blind_inputs/*.json already exposed to the original PASS A blind-scoring run. No new evidence was gathered, no benchmark record was re-opened or re-read, no field beyond the original PERMITTED_FIELDS allowlist was consulted.",
+  "blinding_and_quarantine": "expected_quality_tier, future_outcome, and benchmark_notes were not inspected at any point during this rerun. The 5 holdout companies (Fab.com, Rdio, Homejoy, DoorDash, Zenefits) were not opened or referenced. PASS B has not begun.",
+  "not_performed": [
+    "PASS B",
+    "tier reveal",
+    "outcome-informed scoring of any kind",
+    "modification of app/benchmarks/companies/*.json or any benchmark asset",
+    "modification of production scoring code (app/ai/*, app/workflows/*)",
+    "modification of the original app/calibration/v2/pass_a/results/*.json files",
+    "a commit"
+  ],
+  "provenance_files": {
+    "revised_dimensions.json": "Per-company, per-dimension record of every Burn Efficiency and Runway entry reconsidered, with original value, revised value, reason, and the specific spec rule that changed. Entries where only the scoring_mode label changed (Deterministic -> Hybrid) with no score/availability change are marked mode_only: true.",
+    "customer_demand_review.json": "Per-company maturity determination for Customer Demand applicability under the repaired lifecycle rule, and the resulting evidence_status change for the 3 companies found applicable.",
+    "unit_economics_review.json": "A/B/C evidence-family classification for the 7 companies previously blocked under the old SaaS-only Unit Economics framing. No scores changed for any of these 7 -- this file is a documented review, not a rescoring.",
+    "aggregate_results.json": "Recomputed pillar/SPS aggregates for all 15 companies. 11 companies are byte-identical to the original PASS A aggregate (Airbnb, Beepi, Bonobos, Figma, Ginkgo Bioworks, Instacart, Jawbone, Meetup, Shopify, Shyp, Warby Parker -- Market/Financial Health pillar SCORES unchanged even where diligence_flag_count shifted). 4 companies have revised Financial Health pillar scores and SPS (Oscar Health, Quibi, Stripe, Tesla)."
+  }
+}

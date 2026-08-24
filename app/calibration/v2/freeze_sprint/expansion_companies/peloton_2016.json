@@ -1,0 +1,32 @@
+{
+  "company_name": "Peloton",
+  "snapshot_date": "2016-06-18",
+  "snapshot_stage": "Post-Series D ($120M total raised disclosed)",
+  "industry": "Connected fitness hardware",
+  "business_model": "Hardware sale (stationary bike) plus recurring subscription for streamed classes",
+  "anti_contamination_note": "Cutoff frozen at 2016-06-18 (the Fortune article's publish date, the latest dated primary source located for this snapshot window) before evidence beyond 'Peloton exists, mid-2016' was gathered.",
+  "historical_evidence": {
+    "company": "Founded 2012, launched publicly in early 2014, a connected-fitness hardware company selling an internet-connected stationary bike with live and on-demand streamed classes.",
+    "market": "Home-fitness/connected-hardware market; the article frames the company as building a new category (premium connected fitness hardware) rather than competing directly in an established one.",
+    "team": "No specific founder-background detail found in the primary source reviewed for this snapshot.",
+    "product": "Hardware (bike) plus software (streamed classes) bundle; priced at $1,995 per bike plus a $39/month subscription for class content.",
+    "execution": "By the snapshot date had raised $120 million total (Catterton, Tiger Global, True Ventures) across rounds including an April 2015 Series C ($30M) and a subsequent round; had expanded to 50 U.S. retail locations.",
+    "traction": "Disclosed close to 40,000 bikes sold since the early-2014 launch, as of the June 2016 snapshot -- a real, dated, primary-sourced unit-sales figure. Prior comparison point: an April 2015 Series C announcement (a separate primary source) disclosed more than 10,000 bikes sold across all 50 states and 16 countries as of that earlier date.",
+    "financial": "Historical revenue of approximately $80 million in sales over 2014-2015 combined (hardware only, excluding subscription revenue) was disclosed, alongside a stated five-fold revenue increase in 2015 versus 2014, and a company-stated 2016 revenue projection of $150 million. The company claimed profitability but 'didn't reveal any further financial details' -- a real, dated, but self-reported and unquantified positive claim, treated accordingly (see Unit Economics rationale below)."
+  },
+  "normalized_facts": [
+    {"metric": "total_raised_to_date", "value": 120000000, "unit": "usd", "period": "2016-06", "source": "Fortune", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_c_raised", "value": 30000000, "unit": "usd", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "bikes_sold_apr2015", "value": 10000, "unit": "count", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High", "note": "stated as 'more than 10,000'"},
+    {"metric": "bikes_sold_jun2016", "value": 40000, "unit": "count", "period": "2016-06", "source": "Fortune", "source_type": "public_research", "confidence": "High", "note": "stated as 'close to 40,000'"},
+    {"metric": "revenue_2014_2015_combined", "value": 80000000, "unit": "usd", "period": "2014-2015", "source": "Fortune", "source_type": "public_research", "confidence": "Medium", "note": "hardware sales only, explicitly excluding subscription revenue"},
+    {"metric": "revenue_growth_2015", "value": 5, "unit": "multiple (5x)", "period": "2015", "source": "Fortune", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "revenue_projection_2016", "value": 150000000, "unit": "usd", "period": "2016 (company projection, not a confirmed actual)", "source": "Fortune", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "bike_price", "value": 1995, "unit": "usd", "period": "2016-06", "source": "Fortune", "source_type": "public_research", "confidence": "High"},
+    {"metric": "subscription_price_monthly", "value": 39, "unit": "usd", "period": "2016-06", "source": "Fortune", "source_type": "public_research", "confidence": "High"}
+  ],
+  "sources": [
+    {"title": "Peloton, the maker of a $2,000 stationary bike, has now raised $120 million", "url": "https://fortune.com/2016/06/18/peloton/", "published": "2016-06-18"},
+    {"title": "Stationary Bike Startup Peloton Expands Production And Distribution With $30M In New Funding", "url": "https://techcrunch.com/2015/04/16/stationary-bike-startup-peloton-expands-production-and-distribution-with-30m-in-new-funding/", "published": "2015-04-16"}
+  ]
+}

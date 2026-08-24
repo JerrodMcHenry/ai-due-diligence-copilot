@@ -1,0 +1,48 @@
+{
+  "company_name": "Ginkgo Bioworks",
+  "snapshot_date": "2017-12-14",
+  "snapshot_stage": "Series D close",
+  "industry": "Synthetic biology / biotech infrastructure",
+  "business_model": "Organism-engineering-as-a-service platform, R&D-partnership and licensing revenue, long development horizon",
+  "historical_evidence": {
+    "company": "Founded 2008 by five MIT-trained scientists/engineers, building a platform ('foundry') for designing and manufacturing custom organisms for industrial, agricultural, and other applications.",
+    "market": "Large, thesis-dependent long-term market opportunity (the 'bioeconomy') with very few direct public comparables at this scale, making market-size and competitive-intensity assessment inherently more speculative than for a typical software company.",
+    "team": "Founding team of five PhD-level scientists/engineers from MIT with deep, directly relevant academic/technical domain expertise in synthetic biology \u2014 a strong Founder-Market-Fit and Technical-Capability signal by credential, though 'has this specific team commercialized a platform business before' remained an open question at this stage.",
+    "product": "A biological-engineering platform intended to reduce the cost and time of designing custom organisms, monetized primarily through R&D partnerships and program fees with corporate/industrial partners rather than a conventional per-unit product sale.",
+    "execution": "Raised $275M in Series D funding in December 2017, valuing the company at over $1 billion, from a notably sophisticated investor group including Viking Global, Y Combinator's Continuity Fund, Cascade Investment (Bill Gates' investment vehicle), and General Atlantic \u2014 a strong signal of late-stage, technically-literate capital conviction in the underlying platform thesis.",
+    "traction": "No specific program-count, partnership-revenue, or program-fee figures were found in the contemporaneous sources reviewed for the December 2017 snapshot.",
+    "financial": "The scale of the raise ($275M) relative to the company's long-horizon R&D-platform model implies a long capital runway was being built deliberately, consistent with a deeptech thesis where near-term revenue is not the primary near-term proof point \u2014 a structurally different Financial-Health read than a typical SaaS or marketplace company would warrant at the same nominal funding stage."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_d_raised",
+      "value": 275000000,
+      "unit": "usd",
+      "period": "2017-12",
+      "source": "TechCrunch / SynBioBeta",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "valuation",
+      "value": 1000000000,
+      "unit": "usd",
+      "period": "2017-12",
+      "source": "TechCrunch (\"valuing the company at over $1 billion\")",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Ginkgo Bioworks secures $275 million in Series D, valuing the company at over $1 billion",
+      "url": "https://techcrunch.com/2017/12/14/gingko-bioworks-secures-275-million-in-series-d-valuing-the-company-at-over-1-billion",
+      "published": "2017-12-14"
+    },
+    {
+      "title": "Leveraging the Power of Biology for Manufacturing: Ginkgo Bioworks Raises $275 Million in Series D Funding",
+      "url": "https://www.synbiobeta.com/read/leveraging-the-power-of-biology-for-manufacturing-ginkgo-bioworks-raises-275-million-in-series-d-funding",
+      "published": "2017-12"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "company_name": "Meetup",
+  "snapshot_date": "2008-07-23",
+  "snapshot_stage": "Series B close",
+  "industry": "Consumer / online community",
+  "business_model": "Subscription (organizer-paid) local group-organizing platform",
+  "historical_evidence": {
+    "company": "Founded 2002, an online platform for organizing local, real-world group gatherings around shared interests, monetized via a subscription fee charged to group organizers.",
+    "market": "A genuinely useful, durable niche (local interest-group coordination) but not an obviously venture-scale category ceiling in the way a broader social-network or marketplace platform might be.",
+    "team": "Founding team led by Scott Heiferman had operated the company since 2002, giving roughly six years of operating history by the snapshot date.",
+    "product": "Web-based tool for creating and joining local interest groups and scheduling in-person meetups; a straightforward, well-understood product with modest technical complexity relative to many venture-backed consumer products of the era.",
+    "execution": "Raised a $7.5M Series B in July 2008 led by Union Square Ventures and DFJ, following a smaller $2M Series A from eBay years earlier \u2014 total funding remained modest (under $10M combined) relative to typical venture trajectories of the period, suggesting either capital efficiency or more limited investor appetite for the growth ceiling.",
+    "traction": "REPAIRED (see benchmark_notes): leaked internal shareholder documents, reported by TechCrunch in September 2009, disclose that Meetup had roughly 19,700 active groups as of the July 2008 period specifically (growing to roughly 27,500 over the following year) \u2014 a real, dated, quantified group-count figure describing the snapshot period itself, not the later reporting date.",
+    "financial": "REPAIRED (see benchmark_notes): the same leaked shareholder documents disclose July 2008 monthly cash sales of $558,576 (rising 37.2% to $776,495 by July 2009), and that approximately 85% of income came from organizer subscription fees rather than sponsorship/advertising \u2014 real, quantified, dated revenue figures for the snapshot month itself, plus explicit confirmation the organizer-subscription model was already the dominant, functioning revenue mechanism at the time."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_b_raised",
+      "value": 7500000,
+      "unit": "usd",
+      "period": "2008-07",
+      "source": "Crunchbase",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "series_a_raised",
+      "value": 2000000,
+      "unit": "usd",
+      "period": "2006",
+      "source": "Crunchbase",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "total_raised_to_date",
+      "value": 9500000,
+      "unit": "usd",
+      "period": "2008-07",
+      "source": "Crunchbase",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "cash_sales_july_2008",
+      "value": 558576,
+      "unit": "usd",
+      "period": "2008-07",
+      "source": "Leaked internal shareholder documents, reported by TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium",
+      "note": "the reporting article is dated Sept 2009, but the disclosed figure describes July 2008 specifically \u2014 the snapshot month itself, not a later period; see sources[] note and evidence_repair_log for the reasoning behind treating this as usable historical_evidence rather than hindsight leakage"
+    },
+    {
+      "metric": "active_groups_2008",
+      "value": 19700,
+      "unit": "count",
+      "period": "2008",
+      "source": "Leaked internal shareholder documents, reported by TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium",
+      "note": "approximate figure ('about 19,700') as stated in the source; same fact-date-vs-report-date reasoning as cash_sales_july_2008"
+    },
+    {
+      "metric": "organizer_fee_share_of_revenue",
+      "value": 85,
+      "unit": "percent",
+      "period": "2008-2009 (as reported)",
+      "source": "Leaked internal shareholder documents, reported by TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Low",
+      "note": "the source does not specify whether this 85% figure is a snapshot of July 2008 specifically or a characterization spanning the full period covered by the leaked documents (2008-2009); included as directional confirmation the subscription model was the dominant revenue mechanism, not as a precise July 2008 data point"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Series B - Meetup - Crunchbase Funding Round Profile",
+      "url": "https://www.crunchbase.com/funding_round/meetup-series-b--55ac444b",
+      "published": "2008-07-23"
+    },
+    {
+      "title": "Leaked Shareholder Docs: Meetup Hits Profitability And $9 Million In Revenues",
+      "url": "https://techcrunch.com/2009/09/15/leaked-shareholder-docs-meetup-hits-profitability-and-9-million-in-revenues/",
+      "published": "2009-09-15",
+      "note": "Added during evidence repair to replace the single-aggregator sourcing flagged in the prior audit. This article's REPORTING date (Sept 2009) is after the snapshot (July 2008), but the specific July 2008 cash-sales and group-count figures it discloses describe the snapshot period itself, not the reporting period \u2014 analogous to how an SEC filing dated after a fiscal period can still be the authoritative source for facts about that period. Only the July-2008-specific figures were extracted into historical_evidence/normalized_facts; the article's other figures (July 2009 cash sales, the following year's group count, the $9M full-year revenue headline) describe post-snapshot periods and were deliberately excluded."
+    }
+  ]
+}

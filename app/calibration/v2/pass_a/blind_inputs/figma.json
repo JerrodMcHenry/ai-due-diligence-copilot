@@ -1,0 +1,57 @@
+{
+  "company_name": "Figma",
+  "snapshot_date": "2020-04-30",
+  "snapshot_stage": "Series D close",
+  "industry": "Design collaboration software / SaaS",
+  "business_model": "Freemium SaaS, browser-based real-time collaborative design tool",
+  "historical_evidence": {
+    "company": "Founded 2012 by Dylan Field and Evan Wallace, a browser-based, real-time collaborative interface-design tool, positioned as a multiplayer alternative to traditional single-user design software.",
+    "market": "Design and collaborative-work-tooling market, with the product's real-time multiplayer approach and browser-native architecture positioned as a structurally different technical approach than incumbent, locally-installed design software.",
+    "team": "Founders had operated the company since 2012, with several prior funding rounds establishing an escalating quality of investor backing by the snapshot date.",
+    "product": "Real-time, multi-user collaborative design tool running in the browser, with reported expanding use cases beyond interface design into visual whiteboarding, diagramming, and presentation creation \u2014 organic usage expansion into adjacent workflows is itself a meaningful product-strength signal.",
+    "execution": "Raised $50M in Series D funding on April 30, 2020, led by Andreessen Horowitz with participation from Durable Capital and existing backers Index Ventures, Greylock, Kleiner Perkins, Sequoia Capital, and Founders Fund, at a $2 billion valuation \u2014 a roughly 4.5x valuation increase from its $440M Series C valuation in 2019, a very rapid one-year step-up.",
+    "traction": "Contemporaneous coverage noted increased Figma engagement coinciding with the early-2020 shift toward remote work as the pandemic began \u2014 a real, timely usage-momentum signal, though no specific user-count, revenue, or NRR figures were found in the sources reviewed for the snapshot date.",
+    "financial": "The scale and speed of the valuation step-up (4.5x in roughly one year), combined with a syndicate including nearly every major tier-one venture firm across multiple rounds, is a strong signal of sustained, broad-based investor conviction, though no specific revenue or margin figures were found for this snapshot."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_d_raised",
+      "value": 50000000,
+      "unit": "usd",
+      "period": "2020-04",
+      "source": "TechCrunch / Forbes",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_d_valuation",
+      "value": 2000000000,
+      "unit": "usd",
+      "period": "2020-04",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_c_valuation_2019",
+      "value": 440000000,
+      "unit": "usd",
+      "period": "2019",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Figma raises $50 million Series D led by Andreessen Horowitz",
+      "url": "https://techcrunch.com/2020/04/30/figma-raises-50-million-series-d-led-by-andreessen-horowitz",
+      "published": "2020-04-30"
+    },
+    {
+      "title": "Figma Eyes Acquisitions, New Tools With $50 Million In Fresh Funding At $2 Billion Valuation",
+      "url": "https://www.forbes.com/sites/alexkonrad/2020/04/30/figma-raises-funding-eyes-acquisitions/",
+      "published": "2020-04-30"
+    }
+  ]
+}

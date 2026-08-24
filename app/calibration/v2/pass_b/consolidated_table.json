@@ -1,0 +1,332 @@
+[
+  {
+    "company": "Stripe",
+    "snapshot_date": "2016-11-25",
+    "snapshot_stage": "Series D close",
+    "sps": 67.0,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Financial Health"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 11,
+    "psc": [
+      "Traction"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Strong / Elite",
+    "tier_bin": "Strong"
+  },
+  {
+    "company": "Figma",
+    "snapshot_date": "2020-04-30",
+    "snapshot_stage": "Series D close",
+    "sps": 66.9,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 10,
+    "psc": [
+      "Financial Health"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Elite",
+    "tier_bin": "Elite"
+  },
+  {
+    "company": "Shopify",
+    "snapshot_date": "2013-12-12",
+    "snapshot_stage": "Series C close",
+    "sps": 63.2,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 13,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Strong",
+    "tier_bin": "Strong"
+  },
+  {
+    "company": "Ginkgo Bioworks",
+    "snapshot_date": "2017-12-14",
+    "snapshot_stage": "Series D close",
+    "sps": 63.1,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 14,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Promising / High-Uncertainty",
+    "tier_bin": "Promising"
+  },
+  {
+    "company": "Airbnb",
+    "snapshot_date": "2011-07-24",
+    "snapshot_stage": "Series B close",
+    "sps": 62.6,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 13,
+    "psc": [
+      "Financial Health"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Strong",
+    "tier_bin": "Strong"
+  },
+  {
+    "company": "Instacart",
+    "snapshot_date": "2013-07-10",
+    "snapshot_stage": "Series A close",
+    "sps": 61.0,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 39.3,
+    "diligence_flag_count": 13,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Promising",
+    "tier_bin": "Promising"
+  },
+  {
+    "company": "Warby Parker",
+    "snapshot_date": "2011-09-20",
+    "snapshot_stage": "Series A close",
+    "sps": 60.9,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 14,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Promising",
+    "tier_bin": "Promising"
+  },
+  {
+    "company": "Shyp",
+    "snapshot_date": "2015-04-21",
+    "snapshot_stage": "Series B close",
+    "sps": 58.1,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 15,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Average / Mixed",
+    "tier_bin": "Average"
+  },
+  {
+    "company": "Quibi",
+    "snapshot_date": "2019-10-03",
+    "snapshot_stage": "Pre-launch, post initial $1B raise",
+    "sps": 57.6,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Financial Health"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 7,
+    "psc": [
+      "Traction"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Average / Mixed, High Risk",
+    "tier_bin": "Average"
+  },
+  {
+    "company": "Oscar Health",
+    "snapshot_date": "2016-02-22",
+    "snapshot_stage": "Series C close",
+    "sps": 53.6,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Financial Health"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 25.0,
+    "diligence_flag_count": 17,
+    "psc": [
+      "Execution",
+      "Traction"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Average / Mixed",
+    "tier_bin": "Average"
+  },
+  {
+    "company": "Jawbone",
+    "snapshot_date": "2014-09-15",
+    "snapshot_stage": "Series F-equivalent late-stage round",
+    "sps": 53.0,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 12,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Weak",
+    "tier_bin": "Weak"
+  },
+  {
+    "company": "Bonobos",
+    "snapshot_date": "2012-04-12",
+    "snapshot_stage": "Growth round (Series A/B extension)",
+    "sps": 52.8,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution"
+    ],
+    "n_scored_pillars": 4,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 13,
+    "psc": [
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 2,
+    "expected_quality_tier": "Average",
+    "tier_bin": "Average"
+  },
+  {
+    "company": "Beepi",
+    "snapshot_date": "2015-12-15",
+    "snapshot_stage": "Series C close",
+    "sps": 51.7,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product"
+    ],
+    "n_scored_pillars": 3,
+    "overall_coverage_pct": 21.4,
+    "diligence_flag_count": 17,
+    "psc": [
+      "Execution",
+      "Traction",
+      "Financial Health"
+    ],
+    "n_psc": 3,
+    "expected_quality_tier": "Weak",
+    "tier_bin": "Weak"
+  },
+  {
+    "company": "Meetup",
+    "snapshot_date": "2008-07-23",
+    "snapshot_stage": "Series B close",
+    "sps": 51.6,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Financial Health"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 28.6,
+    "diligence_flag_count": 15,
+    "psc": [
+      "Traction"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Average",
+    "tier_bin": "Average"
+  },
+  {
+    "company": "Tesla Motors",
+    "snapshot_date": "2009-05-19",
+    "snapshot_stage": "Strategic investment round, post near-bankruptcy",
+    "sps": 50.9,
+    "scored_pillars": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Financial Health"
+    ],
+    "n_scored_pillars": 5,
+    "overall_coverage_pct": 50.0,
+    "diligence_flag_count": 10,
+    "psc": [
+      "Traction"
+    ],
+    "n_psc": 1,
+    "expected_quality_tier": "Strong Thesis / Weak Near-Term Execution \u2014 special stress case, see benchmark_notes",
+    "tier_bin": "Special-Stress"
+  }
+]

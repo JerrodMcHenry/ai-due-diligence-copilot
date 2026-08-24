@@ -1,0 +1,514 @@
+{
+  "company_name": "Quibi",
+  "filename": "quibi.json",
+  "contract_version": "v2-calibration-rerun-2026-08-23",
+  "source_chain": "PASS_A -> targeted_PASS_A_rerun -> ANCHOR_CALIBRATION_PHASE1 (this file is the merged canonical state under the frozen calibration-rerun contract; PASS A/targeted-rerun source files are unmodified)",
+  "dimensions": [
+    {
+      "dimension": "Market Size",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "mobile short-form video attention market 'already large'",
+      "rationale": "Real, large-market claim, though the market is also described as crowded/free-dominated (see Competitive Intensity).",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Growth",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No explicit category growth-rate stat.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Market Timing",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low",
+      "evidence_used": "general mobile-attention-shift context",
+      "rationale": "The underlying thesis is a timing bet, but no specific named trigger event is stated distinct from the general market description.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Competitive Intensity",
+      "pillar": "Market",
+      "evidence_status": "scored",
+      "score": 3,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium-High",
+      "evidence_used": "market 'already large and dominated by free, ad-supported/creator-driven platforms (TikTok, Instagram, Snapchat)'",
+      "rationale": "Strong, real, explicit incumbent-dominance evidence -- named competitors already own the category with a free model Quibi's premium model must displace.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Demand",
+      "pillar": "Market",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch is genuinely the stage where this dimension should be most central, yet no LOI/waitlist/pre-registration signal is present -- the absence is itself more notable here than at later-stage companies, elevated flag.",
+      "missing_information": "Pre-registration or waitlist figures.",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Founder-Market Fit",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 4,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "High",
+      "evidence_used": "'neither had a specific prior track record building a mobile-video or short-form-content consumer product'",
+      "rationale": "A real, explicit, direct statement of a gap in exactly the relevant domain, despite broad executive credentials elsewhere.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Technical Capability",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "proprietary 'Turnstyle' technology enabling portrait/landscape switching, already built pre-launch",
+      "rationale": "Real, named, shipped technical feature.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Business Capability",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 8,
+      "scoring_mode": "Hybrid",
+      "confidence": "High",
+      "evidence_used": "Whitman's HP/eBay CEO tenure",
+      "rationale": "Direct, large-scale, named commercial-leadership background.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Leadership",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 9,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "High",
+      "evidence_used": "Katzenberg (former DreamWorks Animation CEO, former Disney studio chairman) and Whitman (former HP/eBay CEO)",
+      "rationale": "Two exceptionally credentialed, named prior CEOs leading the company -- rare, strong evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Execution Track Record",
+      "pillar": "Team",
+      "evidence_status": "scored",
+      "score": 5,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Low-Medium",
+      "evidence_used": "$1B pre-launch raise from major studios",
+      "rationale": "Pre-launch; milestone evidence limited to fundraising progress, no shipped product yet within this venture.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Value",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Product concept described but unproven pre-launch; no independent ROI/pain-severity evidence.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Differentiation",
+      "pillar": "Product",
+      "evidence_status": "scored",
+      "score": 7,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "'Turnstyle' technology, described as a genuinely novel technical/format bet",
+      "rationale": "Real, explicit, named present-tense difference.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Usability",
+      "pillar": "Product",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch; no onboarding/time-to-value evidence can yet exist.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Defensibility",
+      "pillar": "Product",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Constrained LLM",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch, nothing to lock in yet.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Adoption Potential",
+      "pillar": "Product",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No named adjacent-use-case surface stated.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Go-to-Market Execution",
+      "pillar": "Execution",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch; no CAC/pipeline data can yet exist.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Product Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "Turnstyle technology built and functioning pre-launch",
+      "rationale": "Real shipped-capability evidence, even though content/launch hasn't happened yet.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Operational Execution",
+      "pillar": "Execution",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No hiring-plan/process data.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Strategic Execution",
+      "pillar": "Execution",
+      "evidence_status": "scored",
+      "score": 6,
+      "scoring_mode": "Constrained LLM",
+      "confidence": "Medium",
+      "evidence_used": "explicit, named strategic bet: premium, subscription, studio-produced content vs. free, ad-supported, creator-driven incumbents",
+      "rationale": "A real, clearly articulated strategic choice; outcome unproven.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Customer Growth",
+      "pillar": "Traction",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch, correctly N/A.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Growth",
+      "pillar": "Traction",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch, correctly N/A.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Retention",
+      "pillar": "Traction",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch, correctly N/A.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "FROZEN",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Engagement",
+      "pillar": "Traction",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-launch, correctly N/A.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Growth Velocity",
+      "pillar": "Traction",
+      "evidence_status": "not_applicable",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "Pre-metric by construction -- the designed test case for this state.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Revenue Quality",
+      "pillar": "Financial Health",
+      "evidence_status": "not_expected_by_stage",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "No revenue exists pre-launch.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Unit Economics",
+      "pillar": "Financial Health",
+      "evidence_status": "scored",
+      "score": null,
+      "scoring_mode": "Deterministic",
+      "confidence": null,
+      "evidence_used": "content cost of $10,000-$125,000 per minute, disclosed and dated",
+      "rationale": "Real, quantified, disclosed per-unit cost data exists, but the FROZEN margin/CAC-payback/LTV:CAC anchors require revenue-side inputs this pre-launch company does not have -- a partial-input gap, not a total evidence gap.",
+      "missing_information": "Revenue-side figures (subscription price, expected ARPU).",
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Burn Efficiency",
+      "pillar": "Financial Health",
+      "evidence_status": "scored",
+      "score": 3,
+      "scoring_mode": "Hybrid",
+      "confidence": "Medium",
+      "evidence_used": "planned content spend of $600M year one, scaling to $978M by year five, against a 20M-subscriber five-year target",
+      "rationale": "Real, quantified, dated financing-consumption evidence: $600M planned year-one content spend (scaling to $978M by year five) committed before launch, against a 20M-subscriber five-year 'base case' target and zero revenue. This is concrete capital-intensity/financing-consumption-relative-to-milestones evidence, not a vague narrative -- extremely aggressive committed spend with no demand validation yet.",
+      "missing_information": null,
+      "conflicts": null,
+      "anchor_status": "CALIBRATION_ANCHOR_REQUIRED",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN"
+      ],
+      "anchor_applied": null
+    },
+    {
+      "dimension": "Runway",
+      "pillar": "Financial Health",
+      "evidence_status": "expected_unavailable",
+      "score": null,
+      "scoring_mode": "Hybrid",
+      "confidence": null,
+      "evidence_used": null,
+      "rationale": "$1B raised is a real cash position, but no burn-rate figure exists yet (pre-launch) to compute months-of-runway.",
+      "missing_information": "A burn-rate figure.",
+      "conflicts": null,
+      "anchor_status": "FROZEN (evidence-insufficient: cash known, burn rate not yet knowable pre-launch)",
+      "contract_version": "v2-calibration-rerun-2026-08-23",
+      "provenance": [
+        "PASS_A",
+        "TARGETED_PASS_A_RERUN(mode_label_only)"
+      ],
+      "anchor_applied": null
+    }
+  ]
+}

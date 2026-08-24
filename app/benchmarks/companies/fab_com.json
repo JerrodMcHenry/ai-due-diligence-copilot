@@ -1,0 +1,47 @@
+{
+  "company_name": "Fab.com",
+  "snapshot_date": "2013-11-15",
+  "snapshot_stage": "Post-Series D (partial close), mid-pivot",
+  "industry": "E-commerce / design retail",
+  "business_model": "Flash-sale e-commerce, pivoting to owned-inventory home furnishings",
+  "expected_quality_tier": "Very Weak / Failed",
+  "calibration_set": "holdout",
+
+  "historical_evidence": {
+    "company": "Founded 2011 as a social network for the LGBT community (Fabulis), pivoted in 2011 to a flash-sale design/home-goods e-commerce site. By April 2013 had pivoted again, acquiring German custom-furniture company myFab and pushing into owned-inventory home furnishings under a new brand, Hem.",
+    "market": "Flash-sale/deals e-commerce was a crowded, cooling category by 2013 (Gilt, One Kings Lane, Zulily all competing); the home-furnishings vertical Fab pivoted into is capital-intensive and inventory-heavy, a meaningfully different model than its original curated-marketplace approach.",
+    "team": "Co-founder and CEO Jason Goldberg remained; co-founder Bradford Shellhammer, who had driven the original curation/merchandising vision, departed the company around the pivot (reported November 1, 2013) and moved to a non-executive advisor role.",
+    "product": "Original product was a curated flash-sale marketplace for design goods. The pivot introduced Hem, an owned-inventory custom-furniture line, a substantially different (and more operationally complex) product than the original marketplace model.",
+    "execution": "Set out to raise $300M in its Series D but closed only $150M in June 2013 at a reported $1B pre-money valuation — a meaningful shortfall against its own target. Two separate rounds of layoffs followed within five months: 100+ employees cut in July 2013, and 100+ more let go in October/November 2013, on top of earlier cuts — reducing headcount from a peak of roughly 700.",
+    "traction": "No specific customer-count or revenue figures were disclosed in the contemporaneous coverage reviewed; the company's own public messaging shifted from flash-sale growth metrics to narrative about the furniture pivot, itself a signal that the original metric set was no longer being emphasized.",
+    "financial": "Later reporting (2014) disclosed the company was burning approximately $14M/month before the pivot and layoffs, though this specific burn figure was not confirmed as publicly known as of the November 2013 snapshot date and is flagged as a possible evidence-limitation gap (see benchmark_notes)."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_d_raised", "value": 150000000, "unit": "usd", "period": "2013-06", "source": "TechCrunch / Forbes coverage of Series D close", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_d_target", "value": 300000000, "unit": "usd", "period": "2013-06", "source": "Forbes reporting on shortfall vs. target", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "valuation_pre_money", "value": 1000000000, "unit": "usd", "period": "2013-06", "source": "Fortune / Forbes", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "layoffs_july_2013", "value": 100, "unit": "employees", "period": "2013-07", "source": "Forbes", "source_type": "public_research", "confidence": "High"},
+    {"metric": "layoffs_oct_nov_2013", "value": 100, "unit": "employees", "period": "2013-10", "source": "Forbes", "source_type": "public_research", "confidence": "High"},
+    {"metric": "peak_headcount", "value": 700, "unit": "employees", "period": "2012", "source": "Aggregated retrospective (NBC News)", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "Another Round Of Layoffs Is About To Hit New York Startup Fab.com", "url": "https://www.forbes.com/sites/alexkonrad/2013/11/11/another-round-of-layoffs-is-about-to-hit-new-york-startup-fab-com/", "published": "2013-11-11"},
+    {"title": "Fab.com Co-Founder Departs After Pivot From Flash Sales Model", "url": "https://www.forbes.com/sites/alexkonrad/2013/11/01/fab-com-co-founder-departs-after-pivot-from-flash-sales-model/", "published": "2013-11-01"},
+    {"title": "Fab was never a billion-dollar company", "url": "https://fortune.com/2015/01/22/fab-billion-dollar-valuation/", "published": "2015-01-22", "note": "post-snapshot retrospective; used only to cross-check the pre-money valuation figure, not as a source of pre-snapshot narrative"},
+    {"title": "Hem, Fab's Pivot Into Home Furnishings, Goes Live In 40 Markets", "url": "https://techcrunch.com/2014/09/29/hem-fab-europe-furniture/", "published": "2014-09-29", "note": "post-snapshot; used only for future_outcome tracking, not historical_evidence"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "failure / fire sale",
+    "outcome_summary": "Continued to struggle through 2014; sold to PCH International in 2015 for a small fraction of its former $1B valuation, widely reported as an effective shutdown of the original business.",
+    "outcome_date": "2015-01"
+  },
+
+  "benchmark_notes": {
+    "why_included": "Provides a genuine, non-hindsight-dependent Very Weak anchor: the distress signals (missed fundraising target, two rounds of major layoffs, a co-founder departure) were all real-time, contemporaneously reported facts as of the snapshot date, not retrospective judgment. Tests whether SIE correctly reads clearly negative public evidence as negative rather than defaulting to a moderate score out of caution.",
+    "known_ambiguities": "The company's own messaging around the November 2013 snapshot emphasized the new furniture-pivot narrative rather than providing clean before/after traction numbers, making the Traction and Financial Health pillars genuinely evidence-thin even though the overall picture is clearly negative — a useful test of whether thin evidence in a company that is nonetheless comprehensively distressed gets scored appropriately low rather than defaulting toward the middle for lack of hard numbers.",
+    "evidence_limitations": "The specific $14M/month burn figure only appears in sources published after the snapshot date (October 2014) and has been excluded from historical_evidence and normalized_facts for that reason, even though it plausibly reflects the same underlying period — flagged rather than backdated. No contemporaneous (pre-snapshot) revenue or customer-count figures were found in the sources reviewed."
+  }
+}

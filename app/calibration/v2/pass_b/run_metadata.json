@@ -1,0 +1,20 @@
+{
+  "pass": "B",
+  "purpose": "Diagnostic only -- tier reveal and disagreement analysis. No methodology, weight, anchor, or code change performed in this pass.",
+  "methodology_version": "v2-spec-2026-08-23 (unchanged during PASS B)",
+  "canonical_score_source_rule": "Targeted PASS A rerun result where one exists (Oscar Health, Quibi, Stripe, Tesla Motors, Ginkgo Bioworks, Instacart, Warby Parker), otherwise the original PASS A result. In practice this means app/calibration/v2/pass_a/targeted_rerun/aggregate_results.json is the canonical source for all 15 companies, since that file already contains the original values for every company it did not revise.",
+  "provenance_ordering": "CRITICAL: all 15 companies' SPS, pillar scores, dimension scores, coverage, and confidence values were finalized and written to disk in app/calibration/v2/pass_a/ and app/calibration/v2/pass_a/targeted_rerun/ BEFORE this PASS B step ran. expected_quality_tier was read for the first time only in this PASS B step, via a script that extracted ONLY the expected_quality_tier field (never future_outcome, never benchmark_notes) using the manifest's set==calibration filter -- the same allowlist discipline as blind_loader.py, applied in reverse (reveal tier only, keep outcome blind). No score was regenerated, adjusted, or re-derived after tier reveal.",
+  "not_inspected": ["future_outcome", "benchmark_notes", "any holdout company record (Fab.com, Rdio, Homejoy, DoorDash, Zenefits)"],
+  "not_performed_in_pass_b": [
+    "PASS C",
+    "any change to SIE_Methodology_v2_Specification.md",
+    "any change to benchmark records",
+    "any change to production scoring code",
+    "any change to PASS A or targeted-PASS-A-rerun results",
+    "any numeric anchor calibration",
+    "any weight change",
+    "any dimension/pillar architecture change",
+    "a commit"
+  ],
+  "tier_extraction_method": "python3 script reading app/benchmarks/manifest.json to filter set==\"calibration\", then loading only expected_quality_tier from each of the 15 corresponding app/benchmarks/companies/*.json files. Holdout files were never opened."
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "priority": 1,
+    "dimensions": ["Growth Velocity", "Customer Growth", "Revenue Growth"],
+    "pillar": "Traction",
+    "mode": "Deterministic",
+    "current_behavior": "0/15 companies scored across all three dimensions, despite Shopify having clean, real, dated two-point evidence (merchant count 20,000 -> 80,000 over ~3 years) that a human analyst could defensibly convert into a growth-rate figure.",
+    "tier_discrimination_problem": "Total non-discrimination -- these three dimensions contribute nothing to any of the 15 companies' scores, in the one pillar (Traction) explicitly intended to carry the hardest, most objective evidence in the whole methodology.",
+    "problem_type": "Pure thresholding/conversion-function absence, not scale placement or compression. The evidence itself is fine where it exists; there is simply no function to turn a growth rate into a 0-10 score.",
+    "evidence_needed_to_calibrate": "A materiality floor, a business-model-aware comparison window, and a rate-to-score conversion table -- calibrated against a broader sample of real growth-rate/quality-outcome pairs than the single clean case (Shopify) this portfolio can support alone. This is a single high-leverage fix: solving it once likely unlocks all three dimensions at once, since they share the same missing conversion-function root cause."
+  },
+  {
+    "priority": 2,
+    "dimensions": ["Unit Economics (non-SaaS families)"],
+    "pillar": "Financial Health",
+    "mode": "Deterministic",
+    "current_behavior": "7 of 15 companies have real, family-appropriate qualitative or partial-quantitative evidence (Beepi's disclosed 9% marketplace take-rate, Oscar Health's disclosed underwriting losses, Warby Parker's DTC value-chain-compression thesis, Ginkgo's R&D-partnership model) that is completely blocked from producing a score.",
+    "tier_discrimination_problem": "Financial Health showed the SHARPEST discrimination of any pillar wherever it was actually available in this PASS (range 1.55-7.0, versus e.g. Market's compressed 4.0-6.75) -- unblocking these 7 companies would likely both raise Financial Health coverage from 33% toward 80%+ AND meaningfully sharpen portfolio-wide discrimination.",
+    "problem_type": "Pure anchor/threshold absence (real evidence exists, conversion missing), not compression.",
+    "evidence_needed_to_calibrate": "Comparable companies' disclosed take-rates (marketplace), loss/combined ratios (insurance), and per-unit margins (hardware/DTC) at various stages, to establish family-specific 'what counts as good' thresholds. Requires a broader, family-specific benchmark sample beyond these 7 companies to avoid overfitting the anchor to this portfolio."
+  },
+  {
+    "priority": 3,
+    "dimensions": ["Burn Efficiency", "Runway"],
+    "pillar": "Financial Health",
+    "mode": "Hybrid (just changed from Deterministic in the prior spec repair)",
+    "current_behavior": "Functioning directionally in this rerun (Tesla scored appropriately at the bottom, Stripe appropriately positive), but every qualitative score assigned (Tesla=1, Oscar Health=3, Quibi=3, Stripe=7) reflects unaided single-analyst judgment against no FROZEN severity band.",
+    "tier_discrimination_problem": "Not a coverage or compression problem -- a placement-consistency problem. A different analyst scoring the same Tesla evidence might reasonably land on a 1, 2, or 3; there is currently no way to check.",
+    "problem_type": "Scale-placement/thresholding ambiguity -- newly introduced by enabling qualitative scoring at all, and worth being honest about rather than treating the numbers produced in this rerun as more precise than they are.",
+    "evidence_needed_to_calibrate": "Qualitative severity-band definitions (what specific evidence pattern constitutes a 1 vs. a 3 vs. a 5) validated against either multiple independent analysts scoring the same evidence, or a larger sample of historical financial-crisis/health cases than this portfolio's single severe case (Tesla) can support."
+  },
+  {
+    "priority": 4,
+    "dimensions": ["Retention"],
+    "pillar": "Traction",
+    "mode": "Deterministic",
+    "current_behavior": "0/15 scored -- not one company in the portfolio has retention/NRR/GRR/churn data in the frozen historical record.",
+    "tier_discrimination_problem": "Total non-discrimination, but distinct in kind from Growth Velocity above.",
+    "problem_type": "NOT an anchor-calibration candidate in the usual sense -- this looks like a structural evidence-availability limitation (public companies pre-~2015 rarely disclosed retention metrics the way modern SaaS reporting does), not a missing conversion function. Flagged separately so it is not conflated with the genuinely fixable Growth Velocity gap.",
+    "evidence_needed_to_calibrate": "Not a calibration question at all for this historical portfolio -- would require either a benchmark set weighted toward more recent, retention-disclosing companies, or accepting that Retention will remain structurally sparse for older historical snapshots regardless of anchor quality."
+  }
+]

@@ -1,0 +1,19 @@
+{
+  "note": "Diagnostic comparison only. app/calibration/v2/pass_a/targeted_rerun/aggregate_results.json (canonical, PASS B baseline) is unchanged. app/calibration/v2/anchor_calibration/phase1/aggregate_results_proposed.json is a separate, non-canonical simulation output.",
+  "sps_changes": [
+    {"company": "Shopify", "old_sps": 63.2, "new_sps": 63.4, "delta": 0.2, "cause": "Traction pillar recovered from suppressed to 6.43 via newly-scored Customer Growth (7) and Growth Velocity (6)"},
+    {"company": "Oscar Health", "old_sps": 53.6, "new_sps": 53.6, "delta": 0.0, "cause": "Financial Health coverage improved 25%->28.6% (portfolio-wide denominator) via newly-scored Unit Economics (3), but pillar score unchanged at 3.0 because it coincidentally matches the existing Burn Efficiency score"}
+  ],
+  "all_other_13_companies": "byte-identical SPS, pillar scores, and dimension scores -- unaffected by this phase's anchors, since none of their evidence cleared a materiality floor or a family-evidence bar.",
+  "sps_range": {"old": [50.9, 67.0], "new": [50.9, 67.0], "changed": false},
+  "tier_concordance": {"old_inversions": 5, "new_inversions": 5, "old_pairs_evaluated": 91, "new_pairs_evaluated": 91, "old_concordance_pct": 94.5, "new_concordance_pct": 94.5, "changed": false},
+  "compression_effect": {
+    "traction_pillar_coverage": {"old": "2/15 companies (13%)", "new": "3/15 companies (20%)", "assessment": "modest improvement, still majority-suppressed"},
+    "financial_health_pillar_coverage": {"old_scored_dim_count_oscar_health": 1, "new_scored_dim_count_oscar_health": 2, "assessment": "coverage improved without changing the score -- the new evidence corroborates rather than moves the existing read, which is a reassuring consistency signal, not evidence of miscalibration"},
+    "new_inversions_created": 0,
+    "existing_inversions_resolved": 0,
+    "score_inflation_observed": false,
+    "floor_effects_observed": false
+  },
+  "interpretation": "Small, evidence-grounded, non-overfit result. The anchors were justified economically/methodologically in ANCHOR_DESIGN.md before being checked against this portfolio; the resulting effect here (2 SPS points moved by 0.0-0.2 each, zero inversion changes) is reported as a consequence, not as validation sought after the fact. This is the expected signature of a calibration step that unlocked a small amount of genuinely qualifying evidence without stretching any threshold to fit a known company or tier."
+}

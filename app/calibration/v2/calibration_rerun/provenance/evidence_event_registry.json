@@ -1,0 +1,95 @@
+{
+  "method": "Each distinct underlying fact/event in each company's blind_input record was assigned a stable evidence-event ID (company_slug + short fact label). Every scored dimension whose evidence_used text traces to that fact is listed under it. Measurement only -- no deduplication or penalty applied in this run.",
+  "events_cited_by_3_or_more_dimensions": [
+    {
+      "event_id": "tesla_roadster_shipped",
+      "fact": "A real, functioning, shipping electric sports car with paying customers who pre-paid deposits.",
+      "dimensions": ["Technical Capability (Team)", "Customer Value (Product)", "Differentiation (Product)", "Execution Track Record (Team)", "Product Execution (Execution)"],
+      "n_dimensions": 5,
+      "pillars_spanned": ["Team", "Product", "Execution"],
+      "pillar_weight_concentration": "Spread across 3 pillars; no single pillar's scored weight is majority-derived from this one fact alone.",
+      "assessment": "Closer to LEGITIMATE MULTI-DIMENSIONAL EVIDENCE -- cross-pillar spread limits amplification risk in any one pillar's arithmetic."
+    },
+    {
+      "event_id": "tesla_cash_crisis",
+      "fact": "Nov-Dec 2008 near-bankruptcy: ~$9M cash, 18% workforce cut, last-minute $40M convertible-debt financing.",
+      "dimensions": ["Leadership (Team)", "Operational Execution (Execution)", "Burn Efficiency (Financial Health)", "Runway (Financial Health)"],
+      "n_dimensions": 4,
+      "pillars_spanned": ["Team", "Execution", "Financial Health"],
+      "pillar_weight_concentration": "Burn Efficiency (.25) + Runway (.30) together = .55 of Financial Health's total dimension weight -- MORE THAN HALF of Tesla's Financial Health pillar is driven by this single event.",
+      "assessment": "CORRELATED EVIDENCE AMPLIFICATION -- within-pillar concentration is severe. This is the single strongest amplification case in the portfolio."
+    },
+    {
+      "event_id": "shopify_merchant_growth",
+      "fact": "Disclosed merchant count grew from ~20,000 (2010) to over 80,000 (Dec 2013).",
+      "dimensions": ["Customer Growth (Traction)", "Growth Velocity (Traction)", "Execution Track Record (Team)", "Product Execution (Execution)"],
+      "n_dimensions": 4,
+      "pillars_spanned": ["Traction", "Team", "Execution"],
+      "pillar_weight_concentration": "Customer Growth (.15) + Growth Velocity (.20) = .35, which is 100% of Shopify's scored Traction weight after this run's anchors were applied -- Shopify's ENTIRE Traction pillar score now rests on one fact.",
+      "assessment": "CORRELATED EVIDENCE AMPLIFICATION, newly introduced by this phase's anchors. Worth flagging explicitly: unlocking Growth Velocity/Customer Growth from the same series that already fed Execution Track Record/Product Execution increases, rather than decreases, this company's single-fact concentration."
+    },
+    {
+      "event_id": "instacart_webvan_contrast",
+      "fact": "Crowdsourced, asset-light model explicitly framed (by the company and press) as structurally avoiding Webvan's owned-fleet failure mode.",
+      "dimensions": ["Competitive Intensity (Market)", "Differentiation (Product)", "Operational Execution (Execution)", "Strategic Execution (Execution)"],
+      "n_dimensions": 4,
+      "pillars_spanned": ["Market", "Product", "Execution"],
+      "pillar_weight_concentration": "Operational Execution (.25) + Strategic Execution (.25) = .50, which is two-thirds of Instacart's total scored Execution weight (.75) -- a majority of the Execution pillar traces to one fact.",
+      "assessment": "CORRELATED EVIDENCE AMPLIFICATION within Execution, though the Market/Product citations are more independently legitimate (different questions: competitive structure vs. present-tense product difference)."
+    },
+    {
+      "event_id": "airbnb_acquisition",
+      "fact": "Acquisition of a German competitor, strengthening European footprint, shortly before the Series B round.",
+      "dimensions": ["Product Execution (Execution)", "Strategic Execution (Execution)", "Adoption Potential (Product)"],
+      "n_dimensions": 3,
+      "pillars_spanned": ["Execution", "Product"],
+      "pillar_weight_concentration": "Product Execution (.25) + Strategic Execution (.25) = .50, two-thirds of Airbnb's total scored Execution weight (.75).",
+      "assessment": "CORRELATED EVIDENCE AMPLIFICATION within Execution -- same pattern as Instacart."
+    },
+    {
+      "event_id": "figma_usage_expansion",
+      "fact": "Organic product-usage expansion beyond interface design into whiteboarding, diagramming, presentations.",
+      "dimensions": ["Customer Value (Product)", "Adoption Potential (Product)", "Product Execution (Execution)"],
+      "n_dimensions": 3,
+      "pillars_spanned": ["Product", "Execution"],
+      "pillar_weight_concentration": "Customer Value (.25) + Adoption Potential (.20) = .45 of Figma's total scored Product weight; Product Execution sits in a separate pillar.",
+      "assessment": "Mixed -- meaningful within-Product concentration, but genuinely distinct questions (value delivered vs. expansion surface) asked of the same fact, and diluted by a third dimension in a different pillar. Borderline, leaning LEGITIMATE."
+    },
+    {
+      "event_id": "jawbone_shipped_generations",
+      "fact": "Shipped multiple product generations (speakers, then wearables) across the company's history.",
+      "dimensions": ["Technical Capability (Team)", "Execution Track Record (Team)", "Product Execution (Execution)"],
+      "n_dimensions": 3,
+      "pillars_spanned": ["Team", "Execution"],
+      "pillar_weight_concentration": "Technical Capability (.20) + Execution Track Record (.15) = .35 of Jawbone's total scored Team weight (.60) -- over half.",
+      "assessment": "CORRELATED EVIDENCE AMPLIFICATION -- self-flagged by the original PASS A analyst at the time of scoring; this registry formalizes that flag with an explicit weight calculation. Directly implicated in the Jawbone/Meetup inversion traced in PASS B."
+    },
+    {
+      "event_id": "meetup_subscription_revenue",
+      "fact": "~85% of income from organizer subscription fees, a real disclosed working monetization model.",
+      "dimensions": ["Business Capability (Team)", "Go-to-Market Execution (Execution)", "Revenue Quality (Financial Health)"],
+      "n_dimensions": 3,
+      "pillars_spanned": ["Team", "Execution", "Financial Health"],
+      "pillar_weight_concentration": "Spread across 3 pillars, one dimension each -- no pillar's scored weight is majority-derived from this fact alone.",
+      "assessment": "LEGITIMATE MULTI-DIMENSIONAL EVIDENCE -- the same real fact genuinely and distinctly informs commercial capability, go-to-market functioning, and revenue durability; cross-pillar spread limits amplification."
+    }
+  ],
+  "events_cited_by_2_dimensions": [
+    {"event_id": "bonobos_nordstrom_deal", "dimensions": ["Go-to-Market Execution", "Strategic Execution"], "pillars_spanned": ["Execution"], "assessment": "Modest within-pillar concentration (.50 of Bonobos's scored Execution weight), but two genuinely distinct angles (channel evidence vs. partner-choice evidence)."},
+    {"event_id": "ginkgo_mit_founders", "dimensions": ["Founder-Market Fit", "Technical Capability"], "pillars_spanned": ["Team"], "assessment": "Legitimate -- pedigree vs. build-capability are distinct questions, commonly evidenced by the same credential fact."},
+    {"event_id": "oscar_underwriting_losses", "dimensions": ["Burn Efficiency", "Unit Economics"], "pillars_spanned": ["Financial Health"], "assessment": "NEW this phase (Anchor Calibration Phase 1 unlocked Unit Economics from the same fact already used for Burn Efficiency). Numerically inert in this run (see Part 9 sensitivity check) but a real double-citation within one pillar -- flagged, not resolved."},
+    {"event_id": "quibi_executive_credentials", "dimensions": ["Business Capability", "Leadership"], "pillars_spanned": ["Team"], "assessment": "Legitimate -- general commercial background vs. specific named leadership credential are distinct, standard angles on an executive-team fact."},
+    {"event_id": "shyp_expansion_timeline", "dimensions": ["Execution Track Record", "Go-to-Market Execution"], "pillars_spanned": ["Team", "Execution"], "assessment": "Legitimate, and notably the original PASS A analyst deliberately did NOT also cite this fact for Strategic Execution to avoid triple-counting -- good discipline already present."},
+    {"event_id": "stripe_valuation_and_credit", "dimensions": ["Execution Track Record", "Runway"], "pillars_spanned": ["Team", "Financial Health"], "assessment": "Legitimate -- overall momentum vs. specific liquidity-position read are distinct questions, cross-pillar."},
+    {"event_id": "figma_pandemic_trigger", "dimensions": ["Market Timing", "Engagement"], "pillars_spanned": ["Market", "Traction"], "assessment": "Legitimate, cross-pillar."}
+  ],
+  "summary": {
+    "total_events_registered": 15,
+    "events_with_3plus_dimension_reuse": 8,
+    "events_with_2_dimension_reuse": 7,
+    "classified_correlated_amplification": ["tesla_cash_crisis", "shopify_merchant_growth", "instacart_webvan_contrast", "airbnb_acquisition", "jawbone_shipped_generations"],
+    "classified_legitimate_multi_dimensional": ["tesla_roadster_shipped", "meetup_subscription_revenue", "ginkgo_mit_founders", "quibi_executive_credentials", "shyp_expansion_timeline", "stripe_valuation_and_credit", "figma_pandemic_trigger"],
+    "borderline": ["figma_usage_expansion", "oscar_underwriting_losses (new)"],
+    "classification_criterion_used": "Cross-pillar spread is the dominant mitigating factor; within-pillar weight concentration exceeding roughly half of that pillar's scored weight is the dominant amplifying factor. This is a measurement criterion applied post hoc for this registry, not a rule enforced anywhere in scoring."
+  }
+}

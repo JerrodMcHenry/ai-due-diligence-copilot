@@ -1,0 +1,56 @@
+{
+  "methodology_version": "v2-spec-2026-08-23",
+  "calibration_contract_version": "v2-calibration-rerun-2026-08-23",
+  "canonical_specification_path": "app/docs/SIE_Methodology_v2_Specification.md",
+  "canonical_specification_section": "Part 15 -- Calibration program closure: pre-holdout freeze checkpoint",
+  "calibration_completed_at": "2026-08-23",
+  "calibration_company_count": 15,
+  "targeted_expansion_count": 4,
+  "holdout_company_count": 5,
+  "holdout_status": "UNTOUCHED",
+  "holdout_note": "Never opened, read, scored, or content-referenced at any point in this program. Enforced by app/calibration/v2/blind_loader.py's manifest-driven set==\"calibration\" filter (HoldoutAccessError on any holdout load attempt), guarded by the 7 tests in app/calibration/v2/test_blind_loader.py.",
+  "calibration_artifact_paths": [
+    "app/calibration/v2/pass_a/",
+    "app/calibration/v2/pass_a/targeted_rerun/",
+    "app/calibration/v2/pass_b/",
+    "app/calibration/v2/anchor_calibration/phase1/",
+    "app/calibration/v2/calibration_rerun/",
+    "app/calibration/v2/freeze_sprint/",
+    "app/benchmarks/ (companies/, manifest.json, README.md -- 15 calibration + 5 holdout records)"
+  ],
+  "frozen_anchor_registry": [
+    {"anchor": "Growth Velocity / Customer Growth conversion architecture (materiality floor -> annualized CAGR -> scale-tiered bands, incl. short-window dampening)", "source": "app/calibration/v2/freeze_sprint/FREEZE_SPRINT_REPORT.md Part 6"},
+    {"anchor": "Qualitative Burn Efficiency band architecture (5-tier)", "source": "app/calibration/v2/calibration_rerun/provisional_anchor_audit.json"},
+    {"anchor": "Qualitative Runway band architecture (6-tier)", "source": "app/calibration/v2/calibration_rerun/provisional_anchor_audit.json"},
+    {"anchor": "Marketplace Unit Economics: take-rate-alone-insufficient withholding rule", "source": "app/calibration/v2/calibration_rerun/provisional_anchor_audit.json"},
+    {"anchor": "Commerce/DTC Unit Economics: thesis-is-not-outcome withholding rule", "source": "app/calibration/v2/calibration_rerun/provisional_anchor_audit.json"}
+  ],
+  "provisional_anchor_registry": [
+    {"anchor": "Growth Velocity / Customer Growth exact scale-tier absolute cutoffs", "reason": "tested only at large scale, only 3 of 8 named business-model families"},
+    {"anchor": "Insurance Unit Economics qualitative-disclosure threshold", "reason": "tested twice (Oscar Health, Lemonade); behaves sensibly but still a two-data-point rule"},
+    {"anchor": "Commerce/DTC and hardware Unit Economics insufficient-combination withholding rules", "reason": "withholding behavior validated; neither family has produced a positive score yet"},
+    {"anchor": "Qualitative Burn Efficiency / Runway exact score-within-band placement", "reason": "band architecture is FROZEN; exact number chosen within a band is single-analyst judgment, not cross-validated"},
+    {"anchor": "Marketplace Unit Economics / Customer Growth family-selection logic", "reason": "correctly identifies the right unit (GMV/transacting-count) but has not yet produced an actual score in any tested case"}
+  ],
+  "anchors_rejected": [],
+  "known_limitations": [
+    "Customer Growth and Growth Velocity have cited the identical underlying growth-event series in every tested instance where both were scoreable (Shopify, Dollar Shave Club, Peloton, Lemonade -- 4/4). Flagged for a future dimension-definition review; dimension architecture was explicitly out of scope for this calibration program and was NOT changed to address this.",
+    "Enterprise SaaS growth, consumer growth, and deeptech/partnership growth anchor families remain completely untested by any company examined across the full 19-company program (15 calibration + 4 targeted expansion).",
+    "Revenue Growth has zero scored examples across all 19 companies examined -- every candidate series either used non-comparable metrics, was a projection rather than a confirmed actual, or lacked a second comparison point entirely.",
+    "Evidence Independence Metadata (Part 15, item 6 of the specification) is a specification-level rule only -- no aggregation code in this repository currently computes independent_coverage_pct, effective_independent_dimensions, or the semantic-duplication tag. Implementation is future, separately-authorized work.",
+    "Traction pillar coverage remains low across the 15-company calibration set (score-bearing for 3/15 companies even after all anchor work); Financial Health remains suppressed for 10/15. Both are evidence-availability limitations of this specific historical portfolio, not defects in the pillars themselves -- Financial Health was the single sharpest discriminator of any pillar wherever it was actually available (PASS B finding)."
+  ],
+  "test_suite_status_at_freeze": {
+    "python_tests": "37/37 passed across test_scoring_weights, test_evidence_validator, test_stage_extraction, test_provenance, test_evidence_scoring_pipeline, test_scoped_correction, test_public_evidence_consistency",
+    "tsc_noEmit": "0 errors",
+    "eslint": "clean",
+    "next_build": "successful"
+  },
+  "not_authorized_by_this_checkpoint": [
+    "PASS C / holdout scoring",
+    "inspection of future_outcome for any company",
+    "production scoring code changes",
+    "further methodology or weight changes",
+    "a commit"
+  ]
+}

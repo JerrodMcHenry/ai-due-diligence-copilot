@@ -1,0 +1,37 @@
+{
+  "tier_ladder_used": {
+    "note": "Ordinal ladder constructed by taking the primary tier word from each compound expected_quality_tier label. Tesla Motors held off the linear ladder as Special-Stress per the benchmark's own explicit framing ('special stress case').",
+    "1_Elite": ["Figma"],
+    "2_Strong": ["Stripe (label: Strong / Elite)", "Shopify", "Airbnb"],
+    "3_Promising": ["Ginkgo Bioworks (label: Promising / High-Uncertainty)", "Instacart", "Warby Parker"],
+    "4_Average": ["Shyp (label: Average / Mixed)", "Quibi (label: Average / Mixed, High Risk)", "Oscar Health (label: Average / Mixed)", "Bonobos", "Meetup"],
+    "5_Weak": ["Jawbone", "Beepi"],
+    "Special_Stress": ["Tesla Motors (label: Strong Thesis / Weak Near-Term Execution)"]
+  },
+  "cross_tier_pairs_evaluated": 91,
+  "total_inversions": 5,
+  "concordance_rate_pct": 94.5,
+  "inversions": [
+    {"lower_tier_company": "Jawbone", "lower_tier": "Weak", "lower_sps": 53.0,
+     "higher_tier_company": "Meetup", "higher_tier": "Average", "higher_sps": 51.6,
+     "gap": 1.4, "severity": "meaningful -- primary Part 3 deep-dive case"},
+    {"lower_tier_company": "Ginkgo Bioworks", "lower_tier": "Promising", "lower_sps": 63.1,
+     "higher_tier_company": "Airbnb", "higher_tier": "Strong", "higher_sps": 62.6,
+     "gap": 0.5, "severity": "borderline -- secondary Part 3 deep-dive case"},
+    {"lower_tier_company": "Jawbone", "lower_tier": "Weak", "lower_sps": 53.0,
+     "higher_tier_company": "Bonobos", "higher_tier": "Average", "higher_sps": 52.8,
+     "gap": 0.2, "severity": "negligible -- same root cause as the Jawbone/Meetup case"},
+    {"lower_tier_company": "Beepi", "lower_tier": "Weak", "lower_sps": 51.7,
+     "higher_tier_company": "Meetup", "higher_tier": "Average", "higher_sps": 51.6,
+     "gap": 0.1, "severity": "negligible -- effectively a tie, within measurement noise"},
+    {"lower_tier_company": "Stripe", "lower_tier": "Strong", "lower_sps": 67.0,
+     "higher_tier_company": "Figma", "higher_tier": "Elite", "higher_sps": 66.9,
+     "gap": 0.1, "severity": "negligible -- effectively a tie; Stripe's label itself straddles Strong/Elite"}
+  ],
+  "severe_inversions": "NONE. No inversion exceeds 1.4 points on the 0-100 SPS scale, and no case exists anywhere in the portfolio of a company from a clearly lower tier (e.g. Weak) scoring above a company from a clearly higher tier (e.g. Elite/Strong) by a wide margin. All 5 inversions are boundary-adjacent, small-magnitude cases.",
+  "not_an_inversion_but_notable": {
+    "company": "Tesla Motors",
+    "note": "Scores below the entire Weak tier (SPS 50.9 vs Beepi 51.7, Jawbone 53.0), but Tesla is intentionally off the linear ladder as a self-flagged stress case, so this is not counted as a tier inversion. See company disagreement analysis for the dedicated trace -- this is the single most important finding in PASS B and is NOT a coverage artifact (Tesla has the HIGHEST overall_coverage_pct of any of the 15 companies, 50.0%)."
+  },
+  "rank_order_summary": "13 of 15 companies (87%) sit in an SPS position consistent with a coarse 5-bin read of their tier; the only two boundary crossings with any real magnitude (Jawbone/Meetup, Ginkgo/Airbnb) are both traceable to specific, identifiable evidence-availability and evidence-reuse causes (see company_disagreement section of PASS_B_REPORT.md), not to random or systematic tier misordering."
+}

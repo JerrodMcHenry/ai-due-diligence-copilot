@@ -1,0 +1,50 @@
+{
+  "portfolio_name": "SIE Methodology v2 Historical Benchmark Portfolio",
+  "portfolio_version": "1.0",
+  "created": "2026-08-23",
+  "total_companies": 20,
+  "note": "This manifest indexes the structured benchmark records under app/benchmarks/companies/. It contains no scores. See app/benchmarks/README.md for full methodology.",
+
+  "companies": [
+    {"file": "fab_com.json", "company_name": "Fab.com", "snapshot_date": "2013-11-15", "industry": "E-commerce / design retail", "expected_quality_tier": "Very Weak / Failed", "set": "holdout"},
+    {"file": "beepi.json", "company_name": "Beepi", "snapshot_date": "2015-12-15", "industry": "Used-car marketplace", "expected_quality_tier": "Weak", "set": "calibration"},
+    {"file": "jawbone.json", "company_name": "Jawbone", "snapshot_date": "2014-09-15", "industry": "Consumer hardware / wearables", "expected_quality_tier": "Weak", "set": "calibration"},
+    {"file": "shyp.json", "company_name": "Shyp", "snapshot_date": "2015-04-21", "industry": "On-demand logistics", "expected_quality_tier": "Average / Mixed", "set": "calibration"},
+    {"file": "bonobos.json", "company_name": "Bonobos", "snapshot_date": "2012-04-12", "industry": "DTC apparel", "expected_quality_tier": "Average", "set": "calibration"},
+    {"file": "meetup.json", "company_name": "Meetup", "snapshot_date": "2008-07-23", "industry": "Consumer / online community", "expected_quality_tier": "Average", "set": "calibration"},
+    {"file": "rdio.json", "company_name": "Rdio", "snapshot_date": "2012-11-01", "industry": "Music streaming", "expected_quality_tier": "Average / Mixed", "set": "holdout"},
+    {"file": "oscar_health.json", "company_name": "Oscar Health", "snapshot_date": "2016-02-22", "industry": "Health insurance / insurtech", "expected_quality_tier": "Average / Mixed", "set": "calibration"},
+    {"file": "quibi.json", "company_name": "Quibi", "snapshot_date": "2019-10-03", "industry": "Media / mobile streaming", "expected_quality_tier": "Average / Mixed, High Risk", "set": "calibration"},
+    {"file": "homejoy.json", "company_name": "Homejoy", "snapshot_date": "2013-12-05", "industry": "Home services marketplace", "expected_quality_tier": "Promising (flagged risk)", "set": "holdout"},
+    {"file": "instacart.json", "company_name": "Instacart", "snapshot_date": "2013-07-10", "industry": "Grocery delivery", "expected_quality_tier": "Promising", "set": "calibration"},
+    {"file": "warby_parker.json", "company_name": "Warby Parker", "snapshot_date": "2011-09-20", "industry": "DTC eyewear", "expected_quality_tier": "Promising", "set": "calibration"},
+    {"file": "ginkgo_bioworks.json", "company_name": "Ginkgo Bioworks", "snapshot_date": "2017-12-14", "industry": "Synthetic biology / deeptech", "expected_quality_tier": "Promising / High-Uncertainty", "set": "calibration"},
+    {"file": "doordash.json", "company_name": "DoorDash", "snapshot_date": "2016-03-01", "industry": "Food delivery / logistics", "expected_quality_tier": "Promising", "set": "holdout"},
+    {"file": "airbnb.json", "company_name": "Airbnb", "snapshot_date": "2011-07-24", "industry": "Travel / short-term rental marketplace", "expected_quality_tier": "Strong", "set": "calibration"},
+    {"file": "shopify.json", "company_name": "Shopify", "snapshot_date": "2013-12-12", "industry": "E-commerce infrastructure / SaaS", "expected_quality_tier": "Strong", "set": "calibration"},
+    {"file": "tesla.json", "company_name": "Tesla Motors", "snapshot_date": "2009-05-19", "industry": "Automotive / clean-energy hardware", "expected_quality_tier": "Strong Thesis / Weak Near-Term Execution (special case)", "set": "calibration"},
+    {"file": "zenefits.json", "company_name": "Zenefits", "snapshot_date": "2015-05-06", "industry": "HR / benefits / insurance software", "expected_quality_tier": "Strong (at-the-time) — hindsight-divergence special case", "set": "holdout"},
+    {"file": "stripe.json", "company_name": "Stripe", "snapshot_date": "2016-11-25", "industry": "Fintech / payments infrastructure", "expected_quality_tier": "Strong / Elite", "set": "calibration"},
+    {"file": "figma.json", "company_name": "Figma", "snapshot_date": "2020-04-30", "industry": "Design collaboration software / SaaS", "expected_quality_tier": "Elite", "set": "calibration"}
+  ],
+
+  "tier_distribution": {
+    "Very Weak / Failed": 1,
+    "Weak": 2,
+    "Average / Mixed": 6,
+    "Promising": 5,
+    "Strong": 2,
+    "Strong / Elite": 1,
+    "Elite": 1,
+    "special_case_not_on_standard_ladder": 1
+  },
+
+  "calibration_holdout_split": {
+    "calibration_count": 15,
+    "holdout_count": 5,
+    "calibration_pct": 75,
+    "holdout_pct": 25,
+    "holdout_companies": ["Fab.com", "Rdio", "Homejoy", "DoorDash", "Zenefits"],
+    "holdout_tier_span": "Very Weak, Average/Mixed, Promising (x2), Strong-at-the-time/hindsight-divergence — deliberately spans multiple quality levels, not concentrated in one tier"
+  }
+}

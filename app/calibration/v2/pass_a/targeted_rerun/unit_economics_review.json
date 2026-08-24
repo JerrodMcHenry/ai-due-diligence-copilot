@@ -1,0 +1,61 @@
+{
+  "spec_rule": "Part 7 Unit Economics: business-model-agnostic definition, 6 named evidence families (SaaS/subscription, marketplace/take-rate, insurance/underwriting, hardware/manufacturing, commerce/DTC, R&D-partnership/deeptech). SaaS-family anchors (margin>80%, CAC payback<12mo, LTV:CAC>3x) remain FROZEN but scoped to that family only; all other families' numeric anchors are CALIBRATION REQUIRED, not FROZEN.",
+  "classification_key": {
+    "A": "Evidence is conceptually admissible under a named business-model family, but cannot yet convert to a defensible 0-10 score because that family's numeric anchors are CALIBRATION REQUIRED (not FROZEN).",
+    "B": "Existing evidence already supports a defensible score using universal 0-10 semantics without inventing thresholds.",
+    "C": "Evidence remains insufficient for a Unit-Economics-specific score, regardless of anchor/family status."
+  },
+  "instruction_compliance": "Do NOT invent numerical thresholds. Do not force a score simply because evidence now belongs to a valid family. Result: 0 of 7 companies moved to Category B. All 7 remain unscored -- score and evidence_status fields are UNCHANGED from the original PASS A results for every company below.",
+  "companies": [
+    {
+      "company": "Beepi", "family": "marketplace/take-rate",
+      "evidence": "Disclosed maximum 9% take-rate of sale price; explicit gross-vs-net revenue distinction. No cost-side data (inspection, delivery, financing) to compute a contribution margin.",
+      "category": "A",
+      "reason": "Real, dated, quantified take-rate evidence matches the marketplace/take-rate family exactly, but no marketplace-family take-rate anchor is FROZEN (what take-rate level constitutes 'good' is unset) -- converting 9% into a 0-10 score would require inventing a threshold.",
+      "score_changed": false
+    },
+    {
+      "company": "Oscar Health", "family": "insurance/underwriting",
+      "evidence": "'Significant underwriting losses as the company scaled,' explicitly disclosed. No specific loss-ratio or combined-ratio figure.",
+      "category": "A",
+      "reason": "Matches the insurance/underwriting family conceptually, but the available evidence is qualitative (confirms losses exist) not quantitative (no loss ratio), and no insurance-family anchor is FROZEN either way.",
+      "score_changed": false
+    },
+    {
+      "company": "Quibi", "family": "SaaS/subscription (closest fit for a subscription media model)",
+      "evidence": "Content cost of $10,000-$125,000 per minute, disclosed and dated. No revenue-side inputs (subscription price, ARPU) exist pre-launch.",
+      "category": "C",
+      "reason": "Even under the FROZEN SaaS-family anchors, margin/CAC-payback/LTV:CAC all require revenue-side inputs that are structurally unavailable before commercial launch -- this is an evidence-insufficiency problem, not an anchor-calibration problem.",
+      "score_changed": false
+    },
+    {
+      "company": "Shyp", "family": "no clean fit among the 6 named families (service/logistics, per-transaction fee)",
+      "evidence": "Record explicitly characterizes the model as 'structurally margin-thin' (pickup + packing labor + shipping cost against a single flat fee). No actual margin/cost figures.",
+      "category": "C",
+      "reason": "Purely evaluative/qualitative characterization with no quantified figures, and the business model does not map cleanly onto any of the 6 named evidence families -- insufficient regardless of anchor status.",
+      "score_changed": false
+    },
+    {
+      "company": "Warby Parker", "family": "commerce/DTC",
+      "evidence": "'Explicitly built around bypassing the traditional multi-layer eyewear supply chain's markup' -- a real, specific structural value-chain-compression thesis. No actual margin figures.",
+      "category": "A",
+      "reason": "Matches the commerce/DTC family conceptually (value-chain-compression is a recognized DTC economics argument), but commerce/DTC-family numeric anchors are CALIBRATION REQUIRED, not FROZEN.",
+      "score_changed": false
+    },
+    {
+      "company": "Instacart", "family": "marketplace-adjacent (crowdsourced, asset-light delivery)",
+      "evidence": "Qualitative capital-efficiency thesis vs. Webvan's owned-fleet failure mode -- already allocated to Operational Execution and Strategic Execution.",
+      "category": "C",
+      "reason": "The available evidence answers an operational/capital-structure question (already credited elsewhere), not a per-unit margin/take-rate question -- it does not constitute Unit-Economics-specific evidence regardless of family or anchor status.",
+      "score_changed": false
+    },
+    {
+      "company": "Ginkgo Bioworks", "family": "R&D-partnership/deeptech",
+      "evidence": "No program-fee, margin, or partnership-economics figures disclosed at all.",
+      "category": "A",
+      "reason": "This is the exact business model the R&D-partnership/deeptech family was created to describe -- conceptual mismatch from the old SaaS-only framing is now resolved -- but the company discloses zero program-economics evidence, and the family's anchors are CALIBRATION REQUIRED regardless.",
+      "score_changed": false
+    }
+  ],
+  "summary": "Category A: 4 (Beepi, Oscar Health, Warby Parker, Ginkgo Bioworks). Category C: 3 (Quibi, Shyp, Instacart). Category B: 0. No scores changed. The primary value of this review is conceptual: 4 of 7 companies' evidence now has a correctly-named business-model-family home instead of being measured against a mismatched SaaS anchor, which is a real clarity improvement worth carrying into a future PASS when family anchors are calibrated -- but it produces no numeric change today."
+}

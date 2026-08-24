@@ -1,0 +1,27 @@
+{
+  "company_name": "Lemonade",
+  "snapshot_date": "2017-12-19",
+  "snapshot_stage": "Series C close",
+  "industry": "Renters/homeowners insurance / insurtech",
+  "business_model": "Direct-to-consumer digital renters and homeowners insurance carrier, app-driven claims/underwriting",
+  "anti_contamination_note": "Cutoff frozen at 2017-12-19 (Series C announcement date) before evidence beyond 'a SoftBank-led round exists around Dec 2017' was gathered. The loss-ratio figure used below is drawn from a 2019-dated Forbes article that explicitly reports the value 'at the end of 2017' -- a fact-date-vs-report-date case handled the same way as Meetup's and Jawbone's evidence repairs in the original 15-company portfolio: the fact describes the snapshot period, the reporting date does not.",
+  "historical_evidence": {
+    "company": "Founded 2015, launched its first product (renters insurance) in New York in September 2016, a digital-first insurance carrier using an app-driven underwriting and claims process.",
+    "market": "Large, heavily regulated insurance market; renters/homeowners insurance specifically has historically low switching activity and low customer engagement, a real structural challenge for a new entrant regardless of product quality.",
+    "team": "No specific founder-background detail found in the primary source reviewed for this snapshot.",
+    "product": "App-based renters/homeowners insurance with a stated fast claims-processing/underwriting model, positioned as a modern alternative to traditional broker-sold policies.",
+    "execution": "Raised $120 million in a round announced December 19, 2017, led by SoftBank Group's Vision Fund, with GV (Alphabet), General Catalyst, and Sequoia Capital participating.",
+    "traction": "Disclosed 90,000 policyholders as of the snapshot date ('policies worth tens of billions of dollars' -- likely referring to aggregate insured/coverage value, not premium, and preserved verbatim rather than reinterpreted). Prior comparison point: approximately 16,000 policies sold in the first half of 2017 (roughly six months before the snapshot), sourced to secondary/aggregator reporting rather than independently re-verified against a primary outlet in this research pass, and treated with correspondingly lower confidence.",
+    "financial": "A loss ratio (claims paid divided by premiums collected) of 166% 'at the end of 2017' is reported by a 2019 Forbes article, explicitly describing the snapshot-period fact rather than a later period -- a real, quantified, dated, negative economics signal, with the source itself contextualizing it against a 65-70% range for large incumbent insurers as the healthy comparison point, and explicitly characterizing it as 'unsustainable.'"
+  },
+  "normalized_facts": [
+    {"metric": "series_c_raised", "value": 120000000, "unit": "usd", "period": "2017-12", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "policyholders_dec2017", "value": 90000, "unit": "count", "period": "2017-12", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "policies_sold_h1_2017", "value": 16000, "unit": "count", "period": "2017 H1", "source": "Aggregated secondary reporting, not independently re-verified against a primary article in this research pass", "source_type": "public_research", "confidence": "Low"},
+    {"metric": "loss_ratio_end_2017", "value": 166, "unit": "percent", "period": "2017-12 (fact-dated; reported 2019-05)", "source": "Forbes (Jeff Kauflin, 'First, Fire All The Brokers...', published 2019-05-02, reporting a fact explicitly dated to end-of-2017)", "source_type": "public_research", "confidence": "Medium", "note": "report-date postdates the snapshot by ~17 months, but the disclosed fact itself describes the end-of-2017 period -- same fact-date-vs-report-date reasoning used elsewhere in this benchmark program; the healthy-industry comparison figure (65-70%) is contemporaneous framing supplied by the same source, not a later retrospective judgment"}
+  ],
+  "sources": [
+    {"title": "SoftBank leads a $120 million round for insurance startup Lemonade", "url": "https://techcrunch.com/2017/12/19/softbank-leads-a-120-million-round-for-insurance-startup-lemonade/", "published": "2017-12-19"},
+    {"title": "First, Fire All The Brokers: How Lemonade, A Millennial-Loved Fintech Unicorn, Is Disrupting The Insurance Business", "url": "https://www.forbes.com/sites/jeffkauflin/2019/05/02/lemonade-fintech-insurance-unicorn/", "published": "2019-05-02", "note": "used only for the end-of-2017 loss-ratio figure it explicitly attributes to that period; not used for any post-snapshot narrative"}
+  ]
+}

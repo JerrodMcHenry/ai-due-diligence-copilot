@@ -1,0 +1,46 @@
+{
+  "company_name": "Quibi",
+  "snapshot_date": "2019-10-03",
+  "snapshot_stage": "Pre-launch, post initial $1B raise",
+  "industry": "Media / mobile streaming",
+  "business_model": "Subscription short-form mobile-only video, high original-content spend",
+  "expected_quality_tier": "Average / Mixed, High Risk",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Founded by Jeffrey Katzenberg (former DreamWorks Animation CEO, former Disney studio chairman) with Meg Whitman (former HP/eBay CEO) as CEO, building a mobile-only short-form ('quick bites') premium streaming video service, still roughly six months from commercial launch at the snapshot date.",
+    "market": "The mobile short-form video attention market was already large and dominated by free, ad-supported/creator-driven platforms (TikTok, Instagram, Snapchat); Quibi's premium, subscription, studio-produced content model was a structurally different bet within an already-crowded attention category.",
+    "team": "Katzenberg and Whitman are both proven, exceptionally credentialed executives with major prior successes (DreamWorks Animation, HP/eBay respectively), though neither had a specific prior track record building a mobile-video or short-form-content consumer product.",
+    "product": "Built around proprietary 'Turnstyle' technology enabling seamless switching between portrait and landscape viewing, with content produced specifically and only for mobile-phone consumption — a genuinely novel technical/format bet, paired with a large committed content budget (publicly reported plans to spend up to $1B on programming through 2025).",
+    "execution": "Raised $1 billion pre-launch from a roster of major film studios (Disney, WarnerMedia, NBCUniversal, Sony, and others) on the strength of its executive team's reputations — an unusually large pre-launch, pre-product-market-fit capital commitment.",
+    "traction": "None — the product had not yet launched commercially as of the snapshot date, so no user, subscriber, or engagement data exists to evaluate; this is expected and correct for a pre-launch company, not an evidence gap.",
+    "financial": "Contemporaneous coverage (as of the snapshot date) explicitly noted that industry insiders privately expressed skepticism about whether mobile-obsessed, younger consumers would pay for a glossier, studio-produced alternative to free platforms like TikTok — a real, contemporaneously-reported note of caution existing alongside the massive capital commitment, not a retrospective judgment invented after the product's later failure. ENRICHED (see benchmark_notes): the same Digiday pitch-deck reporting already cited in this record discloses more specific committed-spend figures than originally extracted — a 'base case' investor plan of 20 million subscribers within five years, first-year content spend of $600M scaling to as much as $978M by year five, and per-minute content costs of $10,000-$125,000 (comparable to or exceeding broadcast-TV per-minute costs) for short-form content. This is real, dated, Financial-Health/Burn-Efficiency-relevant evidence of the capital intensity and revenue assumptions underlying the business plan, not merely the aggregate raise figure."
+  },
+
+  "normalized_facts": [
+    {"metric": "pre_launch_raise_total", "value": 1000000000, "unit": "usd", "period": "2018-2019", "source": "Inc./aggregated reporting", "source_type": "public_research", "confidence": "High"},
+    {"metric": "planned_content_spend_through_2025", "value": 1000000000, "unit": "usd", "period": "2019-10", "source": "Digiday", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "base_case_subscriber_target_5yr", "value": 20000000, "unit": "count", "period": "2019 (5-year plan)", "source": "Digiday (same source already in sources[])", "source_type": "public_research", "confidence": "Medium", "note": "added during dimension-coverage search — extracted from an already-cited source, not a new one; this is an investor-pitch target, not an achieved figure"},
+    {"metric": "planned_content_spend_year1", "value": 600000000, "unit": "usd", "period": "2020 (planned)", "source": "Digiday (same source already in sources[])", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "content_cost_per_minute_high", "value": 125000, "unit": "usd", "period": "2019-10", "source": "Digiday (same source already in sources[])", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "With Quibi, Meg Whitman and Jeffrey Katzenberg want to turn streaming on its head", "url": "https://www.cnn.com/2019/10/03/business/quibi-whitman-katzenberg-risk-takers", "published": "2019-10-03"},
+    {"title": "Inside Jeffrey Katzenberg's plan to spend up to $1b by 2025 on programming for Quibi", "url": "https://digiday.com/future-of-tv/inside-jeffrey-katzenbergs-pitch-to-investors-on-mobile-video-service-quibi/", "published": "2019"},
+    {"title": "Still a year away from launch, Meg Whitman and Jeffrey Katzenberg's Quibi keeps adding talent", "url": "https://techcrunch.com/2018/12/05/still-a-year-away-from-launch-meg-whitman-and-jeffrey-katzenbergs-quibi-keeps-adding-talent/", "published": "2018-12-05"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "shutdown, six months post-launch",
+    "outcome_summary": "Quibi launched in April 2020 (amid the onset of the COVID-19 pandemic, an external shock not knowable at the snapshot date), struggled to gain subscribers, and shut down entirely by December 2020 — one of the fastest, most capital-intensive startup failures in recent memory, having raised approximately $1.75 billion in total.",
+    "outcome_date": "2020-12"
+  },
+
+  "benchmark_notes": {
+    "why_included": "Deliberately tiered Average/Mixed rather than Very Weak or Failed at the snapshot date, specifically to avoid hindsight bias: the pre-launch skepticism that did exist contemporaneously (mobile-only appeal, competing against free platforms) was real and worth weighting, but it existed alongside an extraordinarily large capital commitment from sophisticated studio investors and an exceptionally credentialed executive team — a genuinely mixed, high-uncertainty profile at the time, not an obvious failure waiting to happen. Also serves as a second hindsight-discipline stress test alongside Zenefits, from the opposite direction (elite team + narrative concerns, versus Zenefits' elite team + no visible concerns).",
+    "known_ambiguities": "It is genuinely debatable how much weight a contemporaneous investor should have placed on the 'industry insiders privately skeptical' signal reported by CNN versus the sheer scale and sophistication of the capital that had already committed — this record deliberately does not resolve that tension into a confident tier in either direction.",
+    "evidence_limitations": "As a pre-launch company, Traction is correctly and entirely absent by construction, not by evidence-collection failure — this record is a useful test of whether SIE's stage-conditional logic (Part 3 of the Scoring Semantics document) correctly treats pre-launch Traction as Not-Yet-Applicable rather than penalizing the total absence of usage data.",
+    "evidence_repair_log": "2026-08-23: dimension-coverage search extracted additional Financial-Health/Burn-Efficiency-relevant detail (subscriber targets, year-one content spend, per-minute content costs) from a source already cited in this record. No new source needed. No tier-questionability finding — the added figures reinforce the existing 'massive capital intensity relative to unproven demand' characterization already central to this record's Average/Mixed tier."
+  }
+}

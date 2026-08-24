@@ -1,0 +1,42 @@
+{
+  "company_name": "Rdio",
+  "snapshot_date": "2012-11-01",
+  "snapshot_stage": "Major growth round ($50M, Fidelity/Morgan Stanley)",
+  "industry": "Music streaming",
+  "business_model": "Subscription music streaming, no free ad-supported tier at launch",
+  "expected_quality_tier": "Average / Mixed",
+  "calibration_set": "holdout",
+
+  "historical_evidence": {
+    "company": "Founded 2010 by Skype co-founders Janus Friis and Niklas Zennström, a subscription-based music-streaming service competing directly with Spotify in the same category and roughly the same launch window.",
+    "market": "Fast-growing, well-capitalized, intensely competitive music-streaming category as of 2012, with Spotify already the clear category leader by scale of funding and reported usage.",
+    "team": "Founded by proven, previously-successful entrepreneurs (Skype's founders) — a genuinely strong Founder-Market-Fit-adjacent signal, though building a proven track record in telecom/VoIP is a different domain than music/media licensing and consumer subscription products.",
+    "product": "Subscription-only streaming product (no free ad-supported tier), a structurally different go-to-market approach than Spotify's freemium model, requiring users to pay from day one rather than converting from a free tier.",
+    "execution": "Raised $50M in 2012 from institutional investors Fidelity and Morgan Stanley — a real, sophisticated-investor-backed capital raise, though smaller in scale than the funding rounds being closed by Spotify in the same period.",
+    "traction": "No specific subscriber-count figures were found in the contemporaneous sources reviewed for the snapshot date.",
+    "financial": "By comparison, Spotify was contemporaneously reported (mid-2012) to be raising at a $3B valuation off reported revenue of roughly $200M in the first six months of that year alone — a scale gap that was publicly visible and quantifiable at the time, not a retrospective judgment, and directly relevant to Rdio's Competitive Intensity read."
+  },
+
+  "normalized_facts": [
+    {"metric": "round_raised", "value": 50000000, "unit": "usd", "period": "2012", "source": "Aggregated reporting (Billboard/Dealroom)", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "competitor_spotify_valuation", "value": 3000000000, "unit": "usd", "period": "2012", "source": "TechCrunch", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "competitor_spotify_revenue_h1_2012", "value": 200000000, "unit": "usd", "period": "2012-H1", "source": "GrowthHackers aggregation of contemporaneous reporting", "source_type": "public_research", "confidence": "Low"}
+  ],
+
+  "sources": [
+    {"title": "Rdio Gets $108 Million in Equity Over 2 Years According to New Filings", "url": "https://www.billboard.com/pro/rdio-108-million-equity-sec-filings/", "published": "2015"},
+    {"title": "How Spotify Turned Free Music into a $10+ Billion Valuation", "url": "https://growthhackers.com/growth-studies/spotify/", "published": "n/a", "note": "used only for the contemporaneous 2012 Spotify valuation/revenue figures cross-referenced against period reporting, not for Rdio-specific historical evidence"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "bankruptcy / asset sale",
+    "outcome_summary": "Rdio was unable to close the funding and scale gap with Spotify and other well-capitalized competitors; the company filed for bankruptcy in November 2015, with Pandora acquiring its technology assets for $75 million.",
+    "outcome_date": "2015-11"
+  },
+
+  "benchmark_notes": {
+    "why_included": "Tests whether SIE's Competitive Intensity dimension correctly weighs a real, contemporaneously quantifiable funding/revenue scale gap against a direct, named competitor, rather than crediting Rdio's genuinely strong Founder-Market-Fit signal (proven Skype founders) as sufficient to offset it — a direct instance of the Differentiation-vs.-Defensibility-vs.-Competitive-Intensity distinction this methodology's design work has emphasized: Rdio's product may have been differentiated on UX grounds, but its Competitive Intensity position was genuinely weak given the scale gap.",
+    "known_ambiguities": "The 2012 Spotify revenue/valuation figures were sourced from an aggregation site rather than a primary contemporaneous news article and are flagged Low confidence accordingly; the underlying comparison (Rdio meaningfully behind Spotify in scale as of 2012) is well-corroborated across multiple retrospective sources but the precise contemporaneous figures should be treated as directional, not exact.",
+    "evidence_limitations": "No Rdio-specific subscriber count or revenue figures were located for the 2012 snapshot; this record leans heavily on the funding-round and competitive-landscape signals rather than direct company metrics."
+  }
+}

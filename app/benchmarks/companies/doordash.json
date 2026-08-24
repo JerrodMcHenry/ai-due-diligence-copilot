@@ -1,0 +1,42 @@
+{
+  "company_name": "DoorDash",
+  "snapshot_date": "2016-03-01",
+  "snapshot_stage": "Series C close",
+  "industry": "Food delivery / logistics",
+  "business_model": "Three-sided marketplace (restaurants, drivers, consumers), delivery-fee and commission revenue",
+  "expected_quality_tier": "Promising",
+  "calibration_set": "holdout",
+
+  "historical_evidence": {
+    "company": "Founded 2013 by a group of Stanford students, a food-delivery marketplace connecting restaurants (including those without their own delivery capability), independent delivery drivers, and consumers.",
+    "market": "Large, already-crowded, capital-intensive food-delivery/logistics category as of 2016, competing directly against several well-funded rivals (Postmates, Caviar, and the then-nascent UberEats) with generally thin, actively-debated unit economics across the category.",
+    "team": "Founding team had operated the company for roughly three years by the snapshot date; no widely reported prior-exit pedigree found in the sources reviewed.",
+    "product": "Three-sided delivery marketplace product, differentiated primarily on restaurant selection and reliability of delivery rather than a structurally unique technology.",
+    "execution": "Raised $127M in Series C funding in March 2016, but at a $600 million valuation that was flat versus its Series B valuation of $600 million one year earlier (March 2015) despite raising significantly more capital in the interim — a real, contemporaneously-visible caution signal (a flat valuation across a funding round, rather than a step-up, often indicates softer investor demand or negotiated-down terms), not a hindsight-informed judgment.",
+    "traction": "No specific order-volume or city-count figures were found in the contemporaneous sources reviewed for the March 2016 snapshot specifically.",
+    "financial": "No specific revenue, take-rate, or unit-economics figures were found in the contemporaneous sources reviewed."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_c_raised", "value": 127000000, "unit": "usd", "period": "2016-03", "source": "PitchBook / Crunchbase", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_c_valuation", "value": 600000000, "unit": "usd", "period": "2016-03", "source": "PitchBook", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "series_b_valuation", "value": 600000000, "unit": "usd", "period": "2015-03", "source": "PitchBook", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "total_raised_to_date", "value": 187000000, "unit": "usd", "period": "2016-03", "source": "PitchBook", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "DoorDash secures $127M Series C", "url": "https://pitchbook.com/newsletter/doordash-secures-127m-series-c", "published": "2016-03"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "large-scale success / IPO / category leadership",
+    "outcome_summary": "DoorDash went on to become the largest U.S. food-delivery platform by market share, raised a $535M Series D at a $1.4B valuation in 2018, and completed an IPO in December 2020 at a valuation exceeding $60 billion.",
+    "outcome_date": "2020-12"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A deliberate correction against an obvious hindsight-bias trap: because DoorDash later became a dominant, hugely successful public company, it would be easy to reflexively tier its 2016 snapshot as 'Strong,' but the flat valuation between Series B and Series C is a real, contemporaneously-visible caution signal that a genuinely disciplined analyst working only from March 2016 evidence should weigh. This record deliberately tiers DoorDash as Promising rather than Strong at this specific snapshot for that reason, and is placed in the holdout set specifically so this correction is validated rather than used to tune scoring.",
+    "known_ambiguities": "A flat valuation could also simply reflect a strategic choice by the company to avoid unnecessary dilution rather than genuinely soft demand — the sources reviewed do not resolve which explanation is correct, and this record does not force a resolution either.",
+    "evidence_limitations": "No order-volume, city-count, or revenue figures were located for the March 2016 snapshot specifically; the primary contemporaneous signal available is the funding/valuation trajectory itself."
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "company_name": "Homejoy",
+  "snapshot_date": "2013-12-05",
+  "snapshot_stage": "Combined Series A/B close",
+  "industry": "Home services marketplace",
+  "business_model": "On-demand home cleaning marketplace, low fixed price point, independent-contractor labor",
+  "expected_quality_tier": "Promising (with flagged unit-economics/retention risk)",
+  "calibration_set": "holdout",
+
+  "historical_evidence": {
+    "company": "Founded by Adora Cheung and Aaron Cheung, a Y Combinator graduate offering on-demand home cleaning bookable online.",
+    "market": "Large, highly fragmented home-cleaning services market with no dominant national brand as of 2013, a genuinely large addressable wedge for a marketplace model.",
+    "team": "Y Combinator pedigree; founders had operated the business since a 2012 YC batch, giving roughly 18 months of operating history by the snapshot date.",
+    "product": "Simple, low-friction online booking for home cleaning at a flat, aggressively low price point (reported around $20/hour) — a clear, easy-to-understand consumer product with low onboarding friction.",
+    "execution": "Progressed from a small 2012 seed round to a combined $38M Series A/B in December 2013 led by Google Ventures (with Redpoint Ventures, Max Levchin, and First Round Capital also participating) in roughly 18 months — a fast, well-backed fundraising trajectory with blue-chip investor participation.",
+    "traction": "Operating in 31 cities as of the snapshot per contemporaneous coverage; no specific repeat-customer, retention, or unit-volume figures were found in the sources reviewed.",
+    "financial": "The stated $20/hour price point was widely discussed in coverage as aggressive relative to the cost of sourcing, vetting, and retaining independent-contractor cleaners at scale, though no specific contemporaneous unit-economics figures (contractor pay, customer acquisition cost) were found in the sources reviewed for this snapshot — flagged as a real, evidence-visible-in-principle risk rather than a hindsight-informed one, since the tension between a low flat price and a fragmented, quality-variable contractor labor pool was an inherent, observable feature of the business model at the time, independent of what happened later."
+  },
+
+  "normalized_facts": [
+    {"metric": "combined_series_ab_raised", "value": 38000000, "unit": "usd", "period": "2013-12", "source": "Forbes / TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "cities_operating", "value": 31, "unit": "count", "period": "2013-12", "source": "Forbes", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "hourly_price", "value": 20, "unit": "usd", "period": "2013-12", "source": "Forbes", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "House Cleaning Startup Homejoy Raises $38 Million", "url": "https://www.forbes.com/sites/natalierobehmed/2013/12/05/house-cleaning-startup-homejoy-raises-38-million/", "published": "2013-12-05"},
+    {"title": "Google Ventures, Redpoint led combined USD8 million backing for Homejoy", "url": "https://www.vcpost.com/articles/19277/20131205/google-ventures-redpoint-led-combined-usd8-million-backing-homejoy.htm", "published": "2013-12-05"},
+    {"title": "Hot Startup Homejoy Cleans Up America", "url": "https://www.forbes.com/sites/natalierobehmed/2013/12/16/u-s-callout-homejoy/", "published": "2013-12-16"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "shutdown",
+    "outcome_summary": "Homejoy shut down in July 2015, citing an inability to raise further funding amid multiple worker-misclassification lawsuits and persistently poor customer retention/repeat-usage rates that undermined its economics.",
+    "outcome_date": "2015-07"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A deliberately nuanced case, not a clean Weak or clean Promising label — the surface signal (fast raise, blue-chip investors, YC pedigree) is genuinely strong, while a structural unit-economics/labor-model risk is observable in principle from the business model itself even without hindsight. Tests whether SIE's Product/Traction/Financial-Health pillars can surface a real, model-inherent risk from qualitative description alone, rather than either (a) scoring purely on investor-pedigree signals and missing the risk, or (b) being unfairly marked down using facts (the 2015 lawsuits, the eventual retention data) that were not actually available at the snapshot date.",
+    "known_ambiguities": "Whether a genuinely skilled contemporaneous analyst would have flagged the retention/unit-economics risk as severely as it turned out to be, or only as a moderate open question, is itself debatable — this record deliberately does not force a single confident tier, assigning 'Promising with flagged risk' rather than 'Weak,' to avoid injecting the hindsight-informed severity of the eventual outcome into the at-the-time label.",
+    "evidence_limitations": "No contemporaneous repeat-usage, churn, or contractor-retention figures were found in public sources as of the snapshot date — this is expected to leave Traction and parts of Financial Health thin/Unavailable, which is itself an important test of correct missing-evidence handling rather than score suppression."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "pass": "A",
+  "methodology_version": "v2-spec-2026-08-23",
+  "methodology_document": "app/docs/SIE_Methodology_v2_Specification.md",
+  "model_identifier": "claude-sonnet-5 (analyst reasoning over blind-loader-stripped evidence, not an automated pipeline call)",
+  "prompt_version": "PASS_A_manual_v1",
+  "run_date": "2026-08-23",
+  "companies_scored": 15,
+  "companies_holdout_quarantined": 5,
+  "dimensions_per_company": 28,
+  "total_dimension_instances": 420,
+  "blinding_method": "app/calibration/v2/blind_loader.py -- allowlist field-stripping (expected_quality_tier, future_outcome, benchmark_notes removed before evidence is read), enforced by 7 guard tests in test_blind_loader.py (all passing).",
+  "blinding_caveat": "The analyst performing PASS A authored the underlying benchmark records (including the stripped fields) in earlier turns of this conversation. The loader's field-stripping is real and structurally enforced; the analyst's prior knowledge of those fields cannot be structurally erased, only deliberately not consulted. See scorer.py module docstring for full disclosure.",
+  "reproducibility_check": "Illustrative only, not a real measurement -- 3 dimension-company pairs were re-derived from evidence a second time without consulting the stored first score, as a lightweight self-consistency spot-check. All 3 matched exactly. This does not constitute a reliability-harness-grade reproducibility measurement (no repeated model-temperature sampling, no independent fresh-agent runs) -- see PASS A findings report for full caveats.",
+  "results_directory": "app/calibration/v2/pass_a/results/",
+  "aggregate_output": "app/calibration/v2/pass_a/aggregate_results.json",
+  "not_persisted_to_production": "No result here was written to the production analyses table or any production database. All outputs are flat files under app/calibration/v2/pass_a/."
+}

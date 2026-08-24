@@ -1,0 +1,208 @@
+[
+  {
+    "company": "Etsy",
+    "sps": 69.2,
+    "pillars": {
+      "Market": {
+        "pillar_score": 7.0,
+        "scoreable_dimensions": [
+          "Market Size"
+        ]
+      },
+      "Team": {
+        "pillar_score": 8.0,
+        "scoreable_dimensions": [
+          "Execution Track Record"
+        ]
+      },
+      "Product": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Adoption Potential"
+        ]
+      },
+      "Execution": {
+        "pillar_score": 6.5,
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ]
+      },
+      "Traction": {
+        "pillar_score": 7.0,
+        "scoreable_dimensions": [
+          "Engagement"
+        ]
+      },
+      "Financial Health": {
+        "pillar_score": null,
+        "scoreable_dimensions": []
+      }
+    },
+    "pillars_scored": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction"
+    ]
+  },
+  {
+    "company": "Dollar Shave Club",
+    "sps": 66.9,
+    "pillars": {
+      "Market": {
+        "pillar_score": 6.62,
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ]
+      },
+      "Team": {
+        "pillar_score": 7.0,
+        "scoreable_dimensions": [
+          "Execution Track Record"
+        ]
+      },
+      "Product": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ]
+      },
+      "Execution": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ]
+      },
+      "Traction": {
+        "pillar_score": 8.0,
+        "scoreable_dimensions": [
+          "Customer Growth",
+          "Growth Velocity"
+        ]
+      },
+      "Financial Health": {
+        "pillar_score": null,
+        "scoreable_dimensions": []
+      }
+    },
+    "pillars_scored": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction"
+    ]
+  },
+  {
+    "company": "Peloton",
+    "sps": 68.0,
+    "pillars": {
+      "Market": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Market Size"
+        ]
+      },
+      "Team": {
+        "pillar_score": 7.0,
+        "scoreable_dimensions": [
+          "Technical Capability",
+          "Execution Track Record"
+        ]
+      },
+      "Product": {
+        "pillar_score": 6.44,
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ]
+      },
+      "Execution": {
+        "pillar_score": 6.33,
+        "scoreable_dimensions": [
+          "Go-to-Market Execution",
+          "Product Execution",
+          "Strategic Execution"
+        ]
+      },
+      "Traction": {
+        "pillar_score": 8.57,
+        "scoreable_dimensions": [
+          "Customer Growth",
+          "Growth Velocity"
+        ]
+      },
+      "Financial Health": {
+        "pillar_score": null,
+        "scoreable_dimensions": []
+      }
+    },
+    "pillars_scored": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction"
+    ]
+  },
+  {
+    "company": "Lemonade",
+    "sps": 56.8,
+    "pillars": {
+      "Market": {
+        "pillar_score": 4.88,
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ]
+      },
+      "Team": {
+        "pillar_score": 6.43,
+        "scoreable_dimensions": [
+          "Technical Capability",
+          "Execution Track Record"
+        ]
+      },
+      "Product": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ]
+      },
+      "Execution": {
+        "pillar_score": 6.0,
+        "scoreable_dimensions": [
+          "Product Execution"
+        ]
+      },
+      "Traction": {
+        "pillar_score": 7.43,
+        "scoreable_dimensions": [
+          "Customer Growth",
+          "Growth Velocity"
+        ]
+      },
+      "Financial Health": {
+        "pillar_score": 2.0,
+        "scoreable_dimensions": [
+          "Unit Economics"
+        ]
+      }
+    },
+    "pillars_scored": [
+      "Market",
+      "Team",
+      "Product",
+      "Execution",
+      "Traction",
+      "Financial Health"
+    ]
+  }
+]

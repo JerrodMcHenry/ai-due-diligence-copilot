@@ -1,0 +1,46 @@
+{
+  "company_name": "Beepi",
+  "snapshot_date": "2015-12-15",
+  "snapshot_stage": "Series C close",
+  "industry": "Used-car marketplace / automotive",
+  "business_model": "Peer-to-peer used-car marketplace (buy/sell/inspect/finance/deliver), asset-heavy",
+  "expected_quality_tier": "Weak",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Founded 2013 by Alejandro (Ale) Resnik and Owainn Robertson, offering a peer-to-peer marketplace for buying and selling used cars with white-glove inspection, financing, and delivery.",
+    "market": "Large addressable used-car market, but one dominated by entrenched, capital-intensive incumbents (CarMax, dealer networks) and requiring significant logistics/inspection infrastructure to operate at scale.",
+    "team": "Founding team had prior operating experience but no widely reported public track record of a prior successful exit as of the snapshot date.",
+    "product": "White-glove, high-touch used-car buying/selling experience — inspection, 24-hour test drives, financing, and delivery all bundled — a genuinely differentiated but operationally heavy product relative to a pure listings marketplace.",
+    "execution": "The Series C round had originally been targeted at $300M when fundraising began in May 2015; the round that actually closed in December 2015 raised $70M, led by Chinese automaker SAIC — a substantial shortfall against the original target, a real-time-visible signal of weaker-than-expected investor demand.",
+    "traction": "No specific unit volume, revenue, or take-rate figures were found in the contemporaneous sources reviewed for this snapshot.",
+    "financial": "Some mid-2015 press coverage referenced a $564M post-money valuation figure tied to the round; the size gap between the originally sought $300M and the $70M actually raised is itself a financial-health-relevant signal of reduced investor confidence relative to the company's own ambitions. ENRICHED (see benchmark_notes): an October 2015 industry analysis discloses Beepi's revenue-recognition and take-rate structure — because Beepi took ownership of each car before reselling it, the full sale price was booked as gross revenue, with a stated maximum commission/fee of 9% of the sale price representing the company's actual economic take (implying roughly $9M in 2014 net-fee revenue against a company-guided ~$350M in 2015 gross/sale-price-inclusive revenue). This is real, dated, Unit-Economics-relevant evidence — a disclosed take-rate and a gross-vs-net revenue distinction — though no cost-side figures (inspection, delivery, financing costs) were found to compute a full contribution margin."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_c_target", "value": 300000000, "unit": "usd", "period": "2015-05", "source": "Crunchbase / aggregated reporting", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "series_c_raised", "value": 70000000, "unit": "usd", "period": "2015-12", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_c_lead_investor", "value": "SAIC Motor", "unit": null, "period": "2015-12", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "max_take_rate_pct_of_sale_price", "value": 9, "unit": "percent", "period": "2014-2015", "source": "Sramana Mitra industry analysis (already in sources[])", "source_type": "public_research", "confidence": "Medium", "note": "added during dimension-coverage search — a real disclosed commission/take-rate structure, extracted from a source already cited in this record but not previously pulled into normalized_facts"},
+    {"metric": "estimated_net_fee_revenue_2014", "value": 9000000, "unit": "usd", "period": "2014", "source": "Sramana Mitra industry analysis (already in sources[])", "source_type": "public_research", "confidence": "Low", "note": "an analyst estimate (maximum implied by the 9% take-rate), not a disclosed company figure — flagged Low confidence accordingly"}
+  ],
+
+  "sources": [
+    {"title": "Used-car marketplace Beepi shuts down outside of CA, merges with stealth Fair.com", "url": "https://techcrunch.com/2016/12/07/used-car-marketplace-beepi-shuts-down-outside-of-ca-merges-with-stealth-fair-com", "published": "2016-12-07", "note": "used only for future_outcome, not historical_evidence"},
+    {"title": "Billion Dollar Unicorns: Beepi Disintermediates Used Car Dealerships", "url": "https://www.sramanamitra.com/2015/10/01/billion-dollar-unicorns-beepi-disintermediates-used-car-dealerships/", "published": "2015-10-01"},
+    {"title": "Used car marketplace Beepi goes bust", "url": "https://www.axios.com/2017/12/15/used-car-marketplace-beepi-goes-bust-1513300511", "published": "2017-12-15", "note": "used only for future_outcome"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "shutdown / partial wind-down",
+    "outcome_summary": "Shut down operations outside California in December 2016 and attempted a merger with then-stealth startup Fair.com; the broader Beepi business ultimately wound down entirely by late 2017.",
+    "outcome_date": "2017-12"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A genuinely obscure-to-moderately-known failure (unlike Quibi or Theranos, Beepi never had the kind of pre-launch media saturation that creates a strong prior in either direction), testing SIE's behavior on a company with real but comparatively thin public evidence — the fundraising-shortfall signal is present but requires actually noticing the target-vs.-actual gap rather than just the headline raise amount.",
+    "known_ambiguities": "It is genuinely ambiguous from public sources alone whether the shortfall reflects weak underlying business performance or simply a tightening 2015-2016 late-stage financing market broadly (several 2015-era 'unicorns' saw valuation markdowns unrelated to their own execution) — this is a legitimate case where SIE's Financial Health / Fundraising Readiness read should reflect genuine uncertainty rather than false confidence either way.",
+    "evidence_limitations": "No contemporaneous transaction-volume or per-order economics (CAC, inspection/delivery cost) were found; Traction remains genuinely evidence-thin. Financial Health now has a real, dated take-rate figure but no cost-side data to compute a true contribution margin.",
+    "evidence_repair_log": "2026-08-23: dimension-coverage search located a real Unit-Economics-relevant disclosure (9% maximum take-rate, gross-vs-net revenue distinction) in a source already cited in this record's sources[] but not previously extracted into normalized_facts. No new source was needed. No tier-questionability finding — this enrichment is consistent with, not challenging to, the existing 'Weak' tier."
+  }
+}

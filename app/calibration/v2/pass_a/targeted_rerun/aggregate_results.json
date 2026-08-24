@@ -1,0 +1,1717 @@
+[
+  {
+    "company_name": "Airbnb",
+    "filename": "airbnb.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.25,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Technical Capability",
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.75,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Differentiation",
+          "Usability",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.44,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [
+          "Engagement"
+        ],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 62.6,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 13,
+    "pillars_unavailable_entirely": [
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Beepi",
+    "filename": "beepi.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.25,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Technical Capability",
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 4.25,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 40.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [
+          "Revenue Growth"
+        ],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Unit Economics"
+        ],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 51.7,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 21.4,
+    "diligence_flag_count": 17,
+    "pillars_unavailable_entirely": [
+      "Execution",
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Bonobos",
+    "filename": "bonobos.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.25,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Technical Capability",
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 40.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Usability"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.06,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 80.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Go-to-Market Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Product Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 52.8,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 13,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Figma",
+    "filename": "figma.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Timing",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.25,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.5,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.62,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [
+          "Engagement"
+        ],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 66.9,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 10,
+    "pillars_unavailable_entirely": [
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Ginkgo Bioworks",
+    "filename": "ginkgo_bioworks.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.37,
+        "pillar_confidence": "Low",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Business Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.81,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 80.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Differentiation",
+          "Usability",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 40.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Product Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 63.1,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 14,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Instacart",
+    "filename": "instacart.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.83,
+        "pillar_confidence": "Low",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.31,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.33,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 75.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 61.0,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 39.3,
+    "diligence_flag_count": 13,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Jawbone",
+    "filename": "jawbone.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Growth",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.25,
+        "pillar_confidence": "Low",
+        "coverage_pct": 60.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.33,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 4.56,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 53.0,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 12,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Meetup",
+    "filename": "meetup.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Competitive Intensity",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 4.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 20.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Business Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.44,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 80.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value"
+        ],
+        "unavailable_dimensions": [
+          "Differentiation",
+          "Usability",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 20.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Go-to-Market Execution"
+        ],
+        "unavailable_dimensions": [
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [
+          "Revenue Quality"
+        ],
+        "unavailable_dimensions": [
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      }
+    },
+    "sps": 51.6,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 28.6,
+    "diligence_flag_count": 15,
+    "pillars_unavailable_entirely": [
+      "Traction"
+    ]
+  },
+  {
+    "company_name": "Oscar Health",
+    "filename": "oscar_health.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Competitive Intensity",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 20.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.83,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.44,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [
+          "Burn Efficiency"
+        ],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Unit Economics"
+        ],
+        "pillar_score": 3.0,
+        "coverage_pct": 25.0,
+        "pillar_confidence": "Low"
+      }
+    },
+    "sps": 53.6,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 25.0,
+    "diligence_flag_count": 17,
+    "pillars_unavailable_entirely": [
+      "Execution",
+      "Traction"
+    ]
+  },
+  {
+    "company_name": "Quibi",
+    "filename": "quibi.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Timing",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 4.92,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Business Capability",
+          "Leadership",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.55,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 100.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Differentiation"
+        ],
+        "unavailable_dimensions": [
+          "Customer Value",
+          "Usability",
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 20.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [
+          "Burn Efficiency"
+        ],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Unit Economics"
+        ],
+        "pillar_score": 3.0,
+        "coverage_pct": 25.0,
+        "pillar_confidence": "Low"
+      }
+    },
+    "sps": 57.6,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 7,
+    "pillars_unavailable_entirely": [
+      "Traction"
+    ]
+  },
+  {
+    "company_name": "Shopify",
+    "filename": "shopify.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Growth"
+        ],
+        "unavailable_dimensions": [
+          "Market Timing",
+          "Competitive Intensity",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.11,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.42,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.92,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Growth",
+          "Retention",
+          "Engagement"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Customer Growth",
+          "Growth Velocity"
+        ],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 63.2,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 13,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Shyp",
+    "filename": "shyp.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Timing"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Competitive Intensity",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.44,
+        "pillar_confidence": "Low",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.5,
+        "pillar_confidence": "Low",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Usability",
+          "Adoption Potential"
+        ],
+        "unavailable_dimensions": [
+          "Differentiation",
+          "Defensibility"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.58,
+        "pillar_confidence": "Low",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Go-to-Market Execution"
+        ],
+        "unavailable_dimensions": [
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Unit Economics"
+        ],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 58.1,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 32.1,
+    "diligence_flag_count": 15,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  },
+  {
+    "company_name": "Stripe",
+    "filename": "stripe.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Market Growth",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.75,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Leadership",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.56,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 80.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Usability"
+        ],
+        "unavailable_dimensions": [
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.42,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Low",
+        "coverage_pct": 25.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [
+          "Runway"
+        ],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics",
+          "Burn Efficiency"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "coverage_pct": 25.0,
+        "pillar_confidence": "Low"
+      }
+    },
+    "sps": 67.0,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 42.9,
+    "diligence_flag_count": 11,
+    "pillars_unavailable_entirely": [
+      "Traction"
+    ]
+  },
+  {
+    "company_name": "Tesla Motors",
+    "filename": "tesla.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.5,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Leadership",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.12,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 80.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Defensibility"
+        ],
+        "unavailable_dimensions": [
+          "Usability",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Operational Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 4.33,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 75.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Unit Economics"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 1.55,
+        "coverage_pct": 50.0,
+        "pillar_confidence": "Medium"
+      }
+    },
+    "sps": 50.9,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 50.0,
+    "diligence_flag_count": 10,
+    "pillars_unavailable_entirely": [
+      "Traction"
+    ]
+  },
+  {
+    "company_name": "Warby Parker",
+    "filename": "warby_parker.json",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "scoreable_dimensions": [
+          "Market Size",
+          "Competitive Intensity"
+        ],
+        "unavailable_dimensions": [
+          "Market Growth",
+          "Market Timing",
+          "Customer Demand"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.88,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 40.0
+      },
+      "Team": {
+        "pillar": "Team",
+        "scoreable_dimensions": [
+          "Founder-Market Fit",
+          "Technical Capability",
+          "Execution Track Record"
+        ],
+        "unavailable_dimensions": [
+          "Business Capability",
+          "Leadership"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 5.08,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Product": {
+        "pillar": "Product",
+        "scoreable_dimensions": [
+          "Customer Value",
+          "Differentiation",
+          "Usability"
+        ],
+        "unavailable_dimensions": [
+          "Defensibility",
+          "Adoption Potential"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 7.0,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 60.0
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "scoreable_dimensions": [
+          "Product Execution",
+          "Strategic Execution"
+        ],
+        "unavailable_dimensions": [
+          "Go-to-Market Execution",
+          "Operational Execution"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": 6.5,
+        "pillar_confidence": "Medium",
+        "coverage_pct": 50.0
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Customer Growth",
+          "Revenue Growth",
+          "Retention",
+          "Engagement",
+          "Growth Velocity"
+        ],
+        "na_dimensions": [
+          "Growth Velocity"
+        ],
+        "calibration_blocked_dimensions": [],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "scoreable_dimensions": [],
+        "unavailable_dimensions": [
+          "Revenue Quality",
+          "Burn Efficiency",
+          "Runway"
+        ],
+        "na_dimensions": [],
+        "calibration_blocked_dimensions": [
+          "Unit Economics"
+        ],
+        "pillar_score": null,
+        "pillar_score_suppressed_reason": "No dimension in this pillar produced a defensible score for this company.",
+        "coverage_pct": 0.0
+      }
+    },
+    "sps": 60.9,
+    "sps_suppressed_reason": null,
+    "overall_coverage_pct": 35.7,
+    "diligence_flag_count": 14,
+    "pillars_unavailable_entirely": [
+      "Traction",
+      "Financial Health"
+    ]
+  }
+]

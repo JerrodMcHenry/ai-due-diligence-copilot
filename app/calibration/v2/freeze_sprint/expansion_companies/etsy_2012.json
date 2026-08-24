@@ -1,0 +1,32 @@
+{
+  "company_name": "Etsy",
+  "snapshot_date": "2012-05-09",
+  "snapshot_stage": "Growth round ($40M, following a 2010 Series E)",
+  "industry": "Handmade/vintage goods e-commerce marketplace",
+  "business_model": "Two-sided marketplace, seller-listing-fee plus transaction-fee take-rate",
+  "anti_contamination_note": "Cutoff frozen at 2012-05-09 (the funding round's announcement date) BEFORE any evidence beyond 'round exists, roughly this date' was gathered. All facts below are sourced to items dated at or before this cutoff, or to later reporting that explicitly describes a fact from at-or-before this period (fact-date used, report-date noted) -- same discipline as the original 15-company portfolio.",
+  "historical_evidence": {
+    "company": "Founded 2005, an online marketplace for handmade and vintage goods and craft supplies, connecting independent sellers directly with buyers.",
+    "market": "Large e-commerce market with a specific, defensible niche (handmade/vintage/craft) distinct from general commodity e-commerce.",
+    "team": "No specific founder-background detail found in the primary source reviewed for this snapshot.",
+    "product": "Marketplace platform connecting sellers directly to buyers; by this snapshot the company had scaled to 150 countries and a large seller base.",
+    "execution": "Raised $40M in a growth round (following a 2010 Series E) announced May 9, 2012, led by Index Ventures with Accel Partners, Union Square Ventures, and Hubert Burda Media participating -- total raised to date approximately $92M. Stated use of funds: international expansion and seller support tooling.",
+    "traction": "Disclosed 15 million registered users, 875,000 active sellers, and 40 million monthly visitors as of the snapshot date -- real, dated, primary-sourced scale figures. Prior comparison point: an August 2010 Series E announcement (a separate primary source) disclosed 125 employees, a stated 2010 GMV projection of $400M ('projected to double'), and a 2010 revenue projection of $30-50M -- explicitly PROJECTIONS stated at the time, not confirmed actuals, and preserved as such.",
+    "financial": "Monthly GMV of $65M disclosed as of the snapshot (the month immediately preceding the announcement), with the prior full year's (2011) annual GMV disclosed as $525M -- both real, dated, primary-sourced figures. No revenue figure (distinct from GMV) was disclosed in the snapshot-date source."
+  },
+  "normalized_facts": [
+    {"metric": "round_raised", "value": 40000000, "unit": "usd", "period": "2012-05", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "total_raised_to_date", "value": 92000000, "unit": "usd", "period": "2012-05", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "registered_users_2012", "value": 15000000, "unit": "count", "period": "2012-05", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "active_sellers_2012", "value": 875000, "unit": "count", "period": "2012-05", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "monthly_visitors_2012", "value": 40000000, "unit": "count", "period": "2012-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "monthly_gmv_2012", "value": 65000000, "unit": "usd", "period": "2012-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "annual_gmv_2011", "value": 525000000, "unit": "usd", "period": "2011", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "gmv_projection_2010", "value": 400000000, "unit": "usd", "period": "2010 (projection, not confirmed actual)", "source": "TechCrunch (separate 2010 article)", "source_type": "public_research", "confidence": "Medium", "note": "explicitly a stated projection at the time of the 2010 Series E, not a confirmed actual -- used only as directional prior-period color, not as a clean growth-series input"},
+    {"metric": "employees_2010", "value": 125, "unit": "count", "period": "2010-08", "source": "TechCrunch (separate 2010 article)", "source_type": "public_research", "confidence": "High"}
+  ],
+  "sources": [
+    {"title": "Etsy Raises $40M To Fuel International Expansion", "url": "https://techcrunch.com/2012/05/09/etsy-raises-40m-to-fuel-international-expansion/", "published": "2012-05-09"},
+    {"title": "Index Ventures Buys Into Etsy, Triples Valuation To Nearly $300 Million", "url": "https://techcrunch.com/2010/08/26/etsy-300-million-valuation/", "published": "2010-08-26", "note": "used only for the 2010 comparison-period color (GMV projection, employee count) -- pre-dates and does not corroborate the 2012 snapshot metrics themselves"}
+  ]
+}

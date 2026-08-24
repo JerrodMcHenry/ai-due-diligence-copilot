@@ -1,0 +1,47 @@
+{
+  "company_name": "Shyp",
+  "snapshot_date": "2015-04-21",
+  "snapshot_stage": "Series B close",
+  "industry": "On-demand logistics / shipping",
+  "business_model": "On-demand pickup-pack-ship service, per-transaction fee, courier-network-dependent",
+  "expected_quality_tier": "Average / Mixed",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "On-demand shipping startup letting users request pickup of an item via app; Shyp would then pack and ship it on the customer's behalf for a flat service fee plus shipping cost.",
+    "market": "Part of the broader 2014-2015 'on-demand economy' wave (alongside similarly structured startups in food, laundry, and other categories), a category that was itself a subject of active, contemporaneous investor debate about unit-economics sustainability.",
+    "team": "No widely reported prior-exit or notable-pedigree signal found in the sources reviewed for this snapshot.",
+    "product": "Simple, low-friction consumer product (request pickup via app, item gets packed and shipped) expanding city by city; live in four cities (including a newly launched Los Angeles market) as of the snapshot.",
+    "execution": "Raised a $50M Series B in April 2015 led by Kleiner Perkins (John Doerr personally led the deal and joined the board), at a $250M valuation, bringing total funding to $62.2M — a strong signal of top-tier investor conviction. ENRICHED (see benchmark_notes): a real, dated pre-snapshot expansion timeline is now established — Shyp launched in Miami in November 2014 (its third market after San Francisco and New York) and was already preparing a Los Angeles launch for 'early 2015' at that time, meaning the LA beta live as of the April 2015 snapshot represents the completion of a roughly five-month-old expansion plan rather than a sudden, unplanned move — real evidence of deliberate, sequenced geographic-expansion execution, not just a funding-size signal.",
+    "traction": "No specific transaction-volume, repeat-usage, or revenue figures were found in the contemporaneous sources reviewed.",
+    "financial": "The per-transaction, courier-dependent, physically-fulfilled service model (pickup + packing labor + shipping cost, for a single flat customer fee) was a structurally margin-thin model that was part of the broader, contemporaneously-active 'is the on-demand economy's unit economics sustainable' debate in 2015 tech press covering this wave of startups generally, though no Shyp-specific unit-economics figures were found."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_b_raised", "value": 50000000, "unit": "usd", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_b_valuation", "value": 250000000, "unit": "usd", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "total_raised_to_date", "value": 62200000, "unit": "usd", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "cities_live", "value": 4, "unit": "count", "period": "2015-04", "source": "TechCrunch", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "miami_launch", "value": "Shyp's third market, after San Francisco and New York", "unit": null, "period": "2014-11", "source": "TechCrunch (added during dimension-coverage search)", "source_type": "public_research", "confidence": "High"}
+  ],
+
+  "sources": [
+    {"title": "Shyp Confirms $50M Raise, Launches Beta Service In Los Angeles", "url": "https://techcrunch.com/2015/04/21/shyp-launches-beta-service-in-los-angeles/", "published": "2015-04-21"},
+    {"title": "Sources: Shyp Is Raising $50 Million At A $250 Million Valuation", "url": "https://techcrunch.com/2015/04/02/sources-shyp-is-raising-50-million-at-a-250-million-valuation", "published": "2015-04-02"},
+    {"title": "Shyp Launches In Miami, Prepares For Los Angeles In Early 2015", "url": "https://techcrunch.com/2014/11/19/shyp-launches-in-miami-prepares-for-los-angeles-launch-in-early-2015", "published": "2014-11-19", "note": "Added during dimension-coverage search to establish a real, dated pre-snapshot geographic-expansion timeline for the Execution pillar."},
+    {"title": "On-demand shipping startup Shyp is shutting down", "url": "https://techcrunch.com/2018/03/27/on-demand-shipping-startup-shyp-is-shutting-down/", "published": "2018-03-27", "note": "post-snapshot; used only for future_outcome"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "shutdown",
+    "outcome_summary": "Shyp shut down in March 2018, with the CEO citing that 'the road to success remains too far away' after multiple business-model pivots (including a later move upmarket toward small-business shipping) failed to produce sustainable unit economics.",
+    "outcome_date": "2018-03"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A useful test of whether SIE can identify a structurally margin-thin business model from its own operating description (per-transaction physical fulfillment funded by a single flat fee) as a real Financial-Health/Unit-Economics concern, independent of any hard financial disclosures, versus simply crediting the large, prestigious Series B as decisive evidence of quality.",
+    "known_ambiguities": "It is genuinely debatable whether the on-demand-logistics category's unit-economics concerns were as clearly 'known' in April 2015 as they appear in hindsight after several similar companies (including Shyp itself) later failed for related reasons — this record avoids over-stating how obvious the risk was at the time.",
+    "evidence_limitations": "No transaction volume, repeat-usage, or revenue figures were located for the snapshot date; Traction and Financial Health remain evidence-thin from public sources alone.",
+    "evidence_repair_log": "2026-08-23: dimension-coverage search located a new, properly-dated (Nov 2014) contemporaneous source establishing a real geographic-expansion timeline, strengthening Execution from a funding-only signal to a signal that includes deliberate, sequenced market entry. An LA-beta shipment-volume figure ('3x more shipments than any other beta launch') was found but excluded — it describes a milestone reached shortly after the April 21, 2015 snapshot date and would constitute post-snapshot information. No tier-questionability finding — the enrichment is consistent with the existing Average/Mixed tier."
+  }
+}

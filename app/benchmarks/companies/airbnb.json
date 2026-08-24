@@ -1,0 +1,45 @@
+{
+  "company_name": "Airbnb",
+  "snapshot_date": "2011-07-24",
+  "snapshot_stage": "Series B close",
+  "industry": "Travel / short-term rental marketplace",
+  "business_model": "Two-sided peer-to-peer accommodation marketplace, take-rate on bookings",
+  "expected_quality_tier": "Strong",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Founded 2008 by Brian Chesky, Joe Gebbia, and Nathan Blecharczyk, a marketplace connecting travelers with hosts renting spare rooms or entire homes.",
+    "market": "Large global travel-accommodation market with an established, heavily-regulated incumbent structure (hotels), and genuine open regulatory/legitimacy questions about short-term residential rentals in many jurisdictions as of 2011 — a real, contemporaneously-known risk factor, not a hindsight-informed one.",
+    "team": "Founding team had operated the company for roughly three years by the snapshot date, through Y Combinator and a prior, smaller Series A.",
+    "product": "Two-sided marketplace product connecting hosts and guests, with recent expansion (via acquisition of a German competitor) strengthening its European footprint shortly before this round.",
+    "execution": "Raised $112M in Series B funding in July 2011, led by Andreessen Horowitz (contributing $60M of the total) with DST Global and General Catalyst participating, at a $1.3 billion valuation — a large step-up from its prior Series A ($7.2M), and Airbnb's formal entry into the 'unicorn' valuation tier.",
+    "traction": "Reported having surpassed one million total bookings worldwide within roughly the preceding four months as of the snapshot — a real, disclosed usage-scale figure, not merely a funding-size signal.",
+    "financial": "No specific revenue or take-rate figures were found in the contemporaneous sources reviewed for the July 2011 snapshot."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_b_raised", "value": 112000000, "unit": "usd", "period": "2011-07", "source": "TechCrunch / CNN Money / Airbnb press release", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_b_valuation", "value": 1300000000, "unit": "usd", "period": "2011-07", "source": "TechCrunch", "source_type": "public_research", "confidence": "High"},
+    {"metric": "series_a_raised", "value": 7200000, "unit": "usd", "period": "2010", "source": "CNN Money", "source_type": "public_research", "confidence": "Medium"},
+    {"metric": "cumulative_bookings", "value": 1000000, "unit": "count", "period": "2011-07", "source": "CNN Money", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "AIRBNB RAISES $112 MILLION IN SERIES B FINANCING TO FUEL INTERNATIONAL GROWTH", "url": "https://assets.airbnb.com/press/press-releases/Airbnb_PressRelease_SeriesB_07252011.pdf", "published": "2011-07-25"},
+    {"title": "Airbnb raises $112 million funding round", "url": "https://money.cnn.com/2011/07/25/technology/airbnb_funding/index.htm", "published": "2011-07-25"},
+    {"title": "Airbnb Bags $112 Million In Series B From Andreessen, DST And General Catalyst", "url": "https://techcrunch.com/2011/07/24/airbnb-bags-112-million-in-series-b-from-andreessen-and-others", "published": "2011-07-24"},
+    {"title": "It's Official: Airbnb Joins The Billion Dollar Valuation Club", "url": "https://www.forbes.com/sites/nicoleperlroth/2011/07/24/its-official-airbnb-joins-the-billion-dollar-valuation-club/", "published": "2011-07-24"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "large-scale success / IPO",
+    "outcome_summary": "Airbnb grew into one of the largest travel companies globally, weathered significant regulatory battles in many cities as anticipated, and went public via a direct listing in December 2020 at a valuation exceeding $100 billion.",
+    "outcome_date": "2020-12"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A Strong-tier anchor with a genuine, real-time-visible open risk (regulatory/legitimacy uncertainty around short-term rentals) alongside strong disclosed usage traction (1M bookings) — tests whether SIE correctly credits real usage-scale evidence as Strong while still flagging the open regulatory question as a genuine diligence item rather than either ignoring it or treating it as disqualifying.",
+    "known_ambiguities": "As an extremely well-known company today, hindsight-leakage risk in general web research is high; sources were restricted to the specific July 2011 Series B announcement coverage rather than retrospective 'early Airbnb' narrative pieces to keep the historical_evidence field free of later-outcome-colored framing.",
+    "evidence_limitations": "No revenue, take-rate, or host/guest-count-split figures were found for the snapshot date; the traction signal relies on the single disclosed booking-volume figure."
+  }
+}

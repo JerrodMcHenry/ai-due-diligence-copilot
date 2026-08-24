@@ -1,0 +1,84 @@
+{
+  "company_name": "Jawbone",
+  "snapshot_date": "2014-09-15",
+  "snapshot_stage": "Series F-equivalent late-stage round",
+  "industry": "Consumer hardware / wearables",
+  "business_model": "Hardware sales (fitness trackers, speakers), one-time-purchase, low recurring-revenue component",
+  "historical_evidence": {
+    "company": "Consumer electronics company (formerly AliphCom) making wireless speakers and, from 2011, the UP line of fitness/wellness wearable trackers, backed by a roster of top-tier investors including Sequoia, Andreessen Horowitz, Khosla Ventures, and Kleiner Perkins.",
+    "market": "Fast-growing consumer wearables/fitness-tracking category as of 2014, but already showing signs of maturing competitive structure with a clear, better-resourced category leader.",
+    "team": "Experienced consumer-hardware team with a track record of shipping multiple product generations (speakers, then wearables) and raising from elite investors across several rounds.",
+    "product": "UP wearable fitness tracker line, competing directly against Fitbit and, by 2014, an entering Apple/Samsung on smartwatch-adjacent functionality \u2014 a crowded and rapidly evolving product category.",
+    "execution": "Raised $147M in September 2014 at a $3.2B valuation \u2014 a very large late-stage raise for a hardware company, suggesting either strong investor conviction or a need for significant additional capital to compete, or both.",
+    "traction": "REPAIRED (see benchmark_notes): NPD Group point-of-sale tracking data, reported by MobiHealthNews, covers the 52-week period from early January 2013 through early January 2014 and puts Fitbit at 68% of fitness-tracker retail unit sales, Jawbone UP at 19%, and Nike FuelBand at 10% \u2014 a real, dated, methodologically-labeled competitive-share statistic, though its measurement window ends roughly eight months before the September 2014 snapshot rather than coinciding with it. Looser, undated or vaguely-dated claims elsewhere in circulation (e.g., 'roughly 15%' or 'roughly 18%' for Jawbone 'in 2014') could not be traced to a source with a stated measurement period and have been excluded rather than used to corroborate a more dramatic gap.",
+    "financial": "No specific revenue or margin figures were found in the contemporaneous sources reviewed for this snapshot; the scale of the raise ($147M) alongside a distant #2 market position is itself a signal worth flagging for Burn Efficiency/Fundraising Readiness analysis."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_f_raised",
+      "value": 147000000,
+      "unit": "usd",
+      "period": "2014-09",
+      "source": "CB Insights",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "valuation",
+      "value": 3200000000,
+      "unit": "usd",
+      "period": "2014-09",
+      "source": "CB Insights",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "market_share_jawbone_npd_2013_ending_jan2014",
+      "value": 19,
+      "unit": "percent",
+      "period": "2013-01/2014-01",
+      "source": "NPD Group point-of-sale data, reported by MobiHealthNews",
+      "source_type": "public_research",
+      "confidence": "Medium",
+      "note": "REPLACES a prior unflagged, unsourced-measurement-period 'roughly 15%' claim removed during evidence repair; this figure has an explicit, stated 52-week measurement window ending ~8 months before the snapshot, which is why confidence is Medium rather than High despite being a named, methodologically-labeled data source"
+    },
+    {
+      "metric": "market_share_fitbit_npd_2013_ending_jan2014",
+      "value": 68,
+      "unit": "percent",
+      "period": "2013-01/2014-01",
+      "source": "NPD Group point-of-sale data, reported by MobiHealthNews",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "market_share_nike_fuelband_npd_2013_ending_jan2014",
+      "value": 10,
+      "unit": "percent",
+      "period": "2013-01/2014-01",
+      "source": "NPD Group point-of-sale data, reported by MobiHealthNews",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Fitbit, Jawbone, Nike had 97 percent of fitness tracker retail sales in 2013",
+      "url": "https://www.mobihealthnews.com/28825/fitbit-jawbone-nike-had-97-percent-of-fitness-tracker-retail-sales-in-2013",
+      "published": "2014-01 (approximate \u2014 exact date not independently confirmable; the article's own stated NPD measurement window, 52 weeks ending early January 2014, is what establishes it precedes the Sept 2014 snapshot regardless of the article's exact publish date within that range)",
+      "note": "Added during evidence repair to replace the unflagged 2017 CB Insights retrospective as the source for the Jawbone/Fitbit competitive-share claim; this is a dated, methodologically-labeled primary trade-press report of NPD Group data, not a later aggregator's undated restatement"
+    },
+    {
+      "title": "Wearables Maker Jawbone, Once Valued At $3B, Enters Liquidation",
+      "url": "https://www.cbinsights.com/research/jawbone-valuation-history/",
+      "published": "2017",
+      "note": "post-snapshot retrospective; retained only for the funding/valuation figures it corroborates (series_f_raised, valuation), which are independently well-supported \u2014 no longer used as the source for any market-share claim"
+    },
+    {
+      "title": "Jawbone's demise a case of 'death by overfunding' in Silicon Valley",
+      "url": "https://www.cnbc.com/2017/07/10/jawbones-demise-a-case-of-death-by-overfunding-in-silicon-valley.html",
+      "published": "2017-07-10",
+      "note": "post-snapshot retrospective; used only for future_outcome and to cross-check funding figures, not for at-the-time narrative"
+    }
+  ]
+}

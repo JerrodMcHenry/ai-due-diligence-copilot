@@ -1,0 +1,41 @@
+{
+  "company_name": "Instacart",
+  "snapshot_date": "2013-07-10",
+  "snapshot_stage": "Series A close",
+  "industry": "Grocery delivery / marketplace",
+  "business_model": "Crowdsourced personal-shopper delivery marketplace, no owned warehouse/logistics infrastructure",
+  "expected_quality_tier": "Promising",
+  "calibration_set": "calibration",
+
+  "historical_evidence": {
+    "company": "Founded by Apoorva Mehta (a former Amazon supply-chain engineer), offering same-day grocery delivery via a crowdsourced network of independent 'Personal Shoppers.'",
+    "market": "Large, well-understood grocery-delivery market with a notable prior failure precedent (Webvan's dot-com-era collapse from over-investment in owned warehouse/logistics infrastructure) — a real, contemporaneously-known cautionary comparison.",
+    "team": "Founder had relevant supply-chain domain background from Amazon; Sequoia's Michael Moritz, a former Webvan board member, personally joined Instacart's board as part of the round — a notable signal given his direct historical experience with the category's most famous failure.",
+    "product": "App-based grocery ordering with delivery in as little as one hour, differentiated from Webvan's model specifically by using crowdsourced shoppers' own vehicles rather than owned trucks/warehouses, directly addressing the capital-intensity problem that sank the prior generation of grocery-delivery startups.",
+    "execution": "Raised $8.5M in Series A funding in July 2013, led by Sequoia Capital with participation from Khosla Ventures, Canaan Partners, SVAngel, and Paul Buchheit — a credible, well-regarded syndicate for a company at this stage.",
+    "traction": "Operating in San Francisco at the snapshot date with a stated goal of expanding to at least 10 major U.S. cities by the end of 2014; no specific order-volume or revenue figures were found in the sources reviewed.",
+    "financial": "The crowdsourced, asset-light delivery model was explicitly, contemporaneously framed (by the company and covering press) as structurally more capital-efficient than the owned-fleet model that had failed for Webvan — a real, articulable financial-health-relevant thesis, though not yet proven at scale as of this small Series A."
+  },
+
+  "normalized_facts": [
+    {"metric": "series_a_raised", "value": 8500000, "unit": "usd", "period": "2013-07", "source": "GlobeNewswire / PYMNTS", "source_type": "public_research", "confidence": "High"},
+    {"metric": "cities_goal_2014", "value": 10, "unit": "count", "period": "2013-07", "source": "PYMNTS", "source_type": "public_research", "confidence": "Medium"}
+  ],
+
+  "sources": [
+    {"title": "Same-Day Grocery Delivery Service Instacart Partners With Sequoia and Raises $8.5M in Series A Funding", "url": "https://www.globenewswire.com/news-release/2013/07/10/1470833/0/en/Same-Day-Grocery-Delivery-Service-Instacart-Partners-With-Sequoia-and-Raises-8-5M-in-Series-A-Funding.html", "published": "2013-07-10"},
+    {"title": "Sequoia Leads $8.5 Million Investment in Same-Day Grocery Delivery Startup Instacart", "url": "https://allthingsd.com/20130710/sequoia-leads-8-5-million-investment-in-same-day-grocery-delivery-startup-instacart", "published": "2013-07-10"}
+  ],
+
+  "future_outcome": {
+    "outcome_type": "large-scale success / eventual IPO",
+    "outcome_summary": "Instacart went on to raise numerous large follow-on rounds, expanded nationally, and completed an IPO in September 2023 at an approximately $11 billion valuation.",
+    "outcome_date": "2023-09"
+  },
+
+  "benchmark_notes": {
+    "why_included": "A genuinely small, early, thin-evidence company at its snapshot (an $8.5M Series A is a modest round even by 2013 standards) that later became a major success — tests whether SIE's stage-conditional handling correctly avoids penalizing an inherently evidence-thin early-stage company while still crediting the real, contemporaneously-articulable signals present (the Webvan-failure-mode-avoidance thesis, Moritz's directly-relevant board involvement) rather than defaulting to a generically moderate score purely because so little traction data exists yet.",
+    "known_ambiguities": "Because Instacart is now an extremely well-known company, there is a genuine hindsight-leakage risk in any research about it; this record has been deliberately restricted to only the specific July 2013 Series A announcement coverage rather than any retrospective 'early Instacart' narrative pieces written after its later success became known, to avoid importing hindsight-colored framing into the historical_evidence fields.",
+    "evidence_limitations": "No order volume, revenue, or repeat-customer data was found for the July 2013 snapshot; this is expected and appropriate for a company at this stage, testing correct Pre-Seed/Seed-adjacent stage-conditional exclusion rather than score suppression for Traction and Financial Health."
+  }
+}
