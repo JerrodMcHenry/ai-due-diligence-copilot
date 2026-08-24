@@ -31,6 +31,7 @@ from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, 
 from app.workflows.due_diligence_workflow import run_due_diligence
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 import json
+import os
 import traceback
 from app.pdf_extractor import extract_text_from_pdf
 from app.website_scrapper import extract_text_from_website
@@ -38,12 +39,28 @@ from app.reporting.pdf_generator import generate_pdf_report
 
 app = FastAPI()
 
+# Staging Deployment Preparation: local development origins are preserved
+# as the default (identical behavior to before, when CORS_ALLOWED_ORIGINS
+# is unset), while a deployed backend sets CORS_ALLOWED_ORIGINS to the
+# real, deployed frontend origin(s) -- comma-separated, e.g.
+# "https://sie-staging.vercel.app,https://app.example.com" -- so the
+# origin list never has to be hardcoded or committed here, and never
+# widens to a wildcard.
+_LOCAL_DEV_CORS_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+
+def _resolve_cors_origins() -> list[str]:
+    raw = os.getenv("CORS_ALLOWED_ORIGINS", "")
+    origins = [origin.strip() for origin in raw.split(",") if origin.strip()]
+    return origins or _LOCAL_DEV_CORS_ORIGINS
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=_resolve_cors_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -358,11 +375,28 @@ async def analyze_pdf(file: UploadFile = File(...)):
         
 
     except ValueError as e:
+        # ValueError here is always one of pdf_extractor.py's own
+        # deliberate, controlled messages (e.g. "No readable text found in
+        # PDF.") -- safe to show as-is, unlike the generic branch below.
         raise HTTPException(status_code=400, detail=str(e))
 
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
+    except Exception:
+        # Staging Deployment Preparation: this previously returned
+        # str(e) directly -- safe to overlook while the endpoint was only
+        # ever reachable from a local dev server, but staging exposes this
+        # backend publicly even though the frontend doesn't call this
+        # endpoint yet. str(e) here could be an OpenAI/DB/PDF-library
+        # internal error message, not one of our own controlled strings.
+        # Same fail-closed pattern as /analyze-startup: log server-side,
+        # never leak the raw exception to the client.
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "The analysis could not be completed. Please try again."
+            ),
+        )
+
 
 
 
