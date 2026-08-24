@@ -698,46 +698,38 @@ def update_analysis(
     return updated_count
 
 def get_analytics():
-    with engine.begin() as connection:
-        result = connection.execute(text("""
-            SELECT
-                COUNT(*) AS total_startups,
-                ROUND(AVG(overall_score), 2) AS average_overall_score,
-                ROUND(AVG(readiness_score), 2) AS average_readiness_score,
-                ROUND(AVG(market_score), 2) AS average_market_score,
-                ROUND(AVG(team_score), 2) AS average_team_score,
-                ROUND(AVG(product_score), 2) AS average_product_score,
-                ROUND(AVG(competition_score), 2) AS average_competition_score,
-                ROUND(AVG(traction_score), 2) AS average_traction_score,
-                ROUND(AVG(financial_score), 2) AS average_financial_score
-            FROM analyses
-        """))
+    """
+    Canonical Dashboard MVP: sourced from the exact same canonical
+    population get_rankings() computes (latest Methodology v2 analysis per
+    normalized startup) -- not COUNT(*)/AVG(...) over the full `analyses`
+    table, which is still >90% legacy, pre-v2 rows. "Tracked startups" and
+    "average score" now honestly mean "canonical startups" and "average
+    canonical SPS."
 
-        analytics = dict(result.mappings().first())
+    Per-pillar legacy averages (market/team/product/competition/traction/
+    financial) and average_readiness_score are dropped entirely rather than
+    carried forward unused: nothing in the frontend consumes them, they
+    were sourced from the same legacy columns, and readiness_score
+    specifically has no defined numeric scale at all (see the P0 Product
+    Trust Cleanup report) -- inventing a "canonical" version of either
+    would mean fabricating a metric, not just re-sourcing one. The
+    redundant top_startups sub-list is dropped too: get_top_startups()
+    already serves that, from the same canonical population, independently.
+    """
+    rankings = get_rankings()
 
-        top_result = connection.execute(text("""
-            SELECT
-                id,
-                summary,
-                overall_score,
-                market_score,
-                team_score,
-                product_score,
-                traction_score,
-                financial_score,
-                recommendation,
-                created_at
-            FROM analyses
-            WHERE overall_score IS NOT NULL
-            ORDER BY overall_score DESC
-            LIMIT 5  
-        """))
+    scores = [
+        row["overall_score"]
+        for row in rankings
+        if row["overall_score"] is not None
+    ]
 
-        top_startups = [dict(row) for row in top_result.mappings().all()]
-
-    analytics["top_startups"] = top_startups
-
-    return analytics
+    return {
+        "total_startups": len(rankings),
+        "average_overall_score": (
+            round(sum(scores) / len(scores), 2) if scores else None
+        ),
+    }
 
 def get_industry_analytics():
     with engine.begin() as connection:
@@ -843,40 +835,48 @@ def get_rankings():
     return [dict(row) for row in rows]
 
 def get_top_startups(limit: int = 10):
-    with engine.begin() as connection:
-        result = connection.execute(text("""
-            SELECT DISTINCT ON (company_name)
-                company_name,
-                industry,
-                stage,
-                business_model,
-                overall_score,
-                readiness_score,
-                created_at
-            FROM score_history
-            WHERE overall_score IS NOT NULL
-            ORDER BY company_name, created_at DESC
-        """))
-
-        latest_rows = result.mappings().all()
-
-    sorted_rows = sorted(
-        [dict(row) for row in latest_rows],
-        key=lambda row: row["overall_score"],
-        reverse=True
-    )
-
-    return sorted_rows[:limit]
-
+    """
+    Canonical Dashboard MVP: Top Startups reuses get_rankings() directly --
+    the exact same canonical population, "latest analysis per startup"
+    logic, and SPS-descending order -- rather than a second, parallel
+    query against the legacy score_history table. Top Startups and
+    Rankings can now never disagree about which analyses are eligible or
+    which one is "latest" for a given company, because they're the same
+    query.
+    """
+    return get_rankings()[:limit]
 
 
 def get_top_improving_startups(limit: int = 10):
+    """
+    Canonical Dashboard MVP: sourced ONLY from canonical Methodology v2
+    analyses (methodology IS NOT NULL AND methodology_version matches the
+    current constant) -- never the legacy score_history table, which mixes
+    incompatible scoring eras and has no methodology-version concept at
+    all. A startup needs at least 2 canonical analyses before an
+    "improvement" can be honestly computed; a startup with only one
+    canonical analysis is excluded, not compared against itself or against
+    a legacy score. Returns [] -- not a partial/fake leaderboard -- if
+    fewer than one startup currently qualifies; the frontend's existing
+    empty state already renders that truthfully.
+    """
     with engine.begin() as connection:
         result = connection.execute(text("""
-            SELECT *
-            FROM score_history
-            ORDER BY company_name, created_at ASC
-        """))
+            SELECT
+                company_name,
+                (methodology->>'startup_intelligence_score')::float AS sps,
+                created_at
+            FROM analyses
+            WHERE
+                methodology IS NOT NULL
+                AND methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                AND methodology->>'startup_intelligence_score' IS NOT NULL
+                AND company_name IS NOT NULL
+                AND TRIM(company_name) <> ''
+            ORDER BY LOWER(TRIM(company_name)), created_at ASC, id ASC
+        """), {
+            "methodology_version": METHODOLOGY_VERSION,
+        })
 
         rows = result.mappings().all()
 
@@ -888,26 +888,25 @@ def get_top_improving_startups(limit: int = 10):
         if normalized_name not in companies:
             companies[normalized_name] = {
                 "display_name": row["company_name"],
-                "first_score": row["overall_score"],
-                "latest_score": row["overall_score"]
+                "first_score": row["sps"],
+                "latest_score": row["sps"],
+                "canonical_analysis_count": 1,
             }
         else:
-            companies[normalized_name]["latest_score"] = row["overall_score"]
+            companies[normalized_name]["latest_score"] = row["sps"]
+            companies[normalized_name]["display_name"] = row["company_name"]
+            companies[normalized_name]["canonical_analysis_count"] += 1
 
-    improvements = []
-
-    for company_name, scores in companies.items():
-        score_change = (
-            scores["latest_score"] -
-            scores["first_score"]
-        )
-
-        improvements.append({
-            "company_name": scores["display_name"],
-            "first_score": scores["first_score"],
-            "latest_score": scores["latest_score"],
-            "score_change": score_change
-        })
+    improvements = [
+        {
+            "company_name": data["display_name"],
+            "first_score": data["first_score"],
+            "latest_score": data["latest_score"],
+            "score_change": round(data["latest_score"] - data["first_score"], 2),
+        }
+        for data in companies.values()
+        if data["canonical_analysis_count"] >= 2
+    ]
 
     improvements.sort(
         key=lambda x: x["score_change"],

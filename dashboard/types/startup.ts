@@ -1,9 +1,13 @@
+// Canonical Dashboard MVP: get_top_startups() now returns exactly
+// get_rankings()'s rows (see app/database/db.py), which never include
+// readiness_score -- that field was dropped, not just left unrendered
+// (readiness_score has no defined numeric scale; see the P0 Product Trust
+// Cleanup report).
 export interface StartupRanking {
   company_name: string;
   industry: string;
   stage: string;
   overall_score: number;
-  readiness_score: number;
 }
 
 export interface ImprovingStartup {

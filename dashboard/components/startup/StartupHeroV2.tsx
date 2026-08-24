@@ -4,7 +4,7 @@ import { SPSRing } from "@/components/sps";
 import BaseCard from "@/components/ui/BaseCard";
 
 import { CONFIDENCE_BADGE_CLASSES, PILLARS } from "./pillarMeta";
-import { SparkleIcon } from "./icons";
+import { AlertIcon, SparkleIcon } from "./icons";
 
 import type { ConfidenceLevel, SIEMethodologyAnalysis } from "@/types";
 
@@ -39,6 +39,26 @@ function getAnalysisType(analysisContext: unknown): string | null {
           .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
           .join(" ")
       );
+    }
+  }
+
+  return null;
+}
+
+// Same defensive-read pattern as getAnalysisType above -- analysis_context
+// is typed `unknown` on the frontend, so this asserts nothing about its
+// shape beyond checking for the one field it needs.
+function getMethodologyVersion(analysisContext: unknown): string | null {
+  if (
+    typeof analysisContext === "object" &&
+    analysisContext !== null &&
+    "methodology_version" in analysisContext
+  ) {
+    const value = (analysisContext as { methodology_version?: unknown })
+      .methodology_version;
+
+    if (typeof value === "string" && value.trim().length > 0) {
+      return value;
     }
   }
 
@@ -108,7 +128,25 @@ export default function StartupHeroV2({
   const overallConfidence = getOverallConfidence(methodology);
   const recommendation = getRecommendation(methodology.startup_scorecard);
   const analysisType = getAnalysisType(methodology.analysis_context);
+  const methodologyVersion = getMethodologyVersion(methodology.analysis_context);
   const analysisDate = formatAnalysisDate(createdAt);
+
+  const metaLineParts = [
+    analysisType,
+    methodologyVersion ? `Methodology ${methodologyVersion}` : null,
+    analysisDate ? `Analyzed ${analysisDate}` : null,
+  ].filter((part): part is string => Boolean(part));
+
+  // Partial Structural Coverage (SIE Methodology v2, Part 9 item 6): a
+  // purely additive, display-only signal that one or more whole pillars
+  // had no scoreable evidence at all. Never touches the SPS shown above --
+  // shown only when the backend actually flagged it, never inferred.
+  // structural_coverage is absent/null on analyses stored before this
+  // field existed, so the banner correctly never appears for those.
+  const structuralCoverage = methodology.structural_coverage;
+  const showPartialCoverageWarning = Boolean(
+    structuralCoverage?.partial_structural_coverage
+  );
 
   const { company_stage, industry, business_model, funding_stage } = methodology.context;
 
@@ -151,12 +189,32 @@ export default function StartupHeroV2({
             </MetaChip>
           </div>
 
-          {analysisType || analysisDate ? (
+          {metaLineParts.length > 0 ? (
             <p className="mt-2 text-xs text-text-muted">
-              {analysisType}
-              {analysisType && analysisDate ? " · " : null}
-              {analysisDate ? `Analyzed ${analysisDate}` : null}
+              {metaLineParts.join(" · ")}
             </p>
+          ) : null}
+
+          {showPartialCoverageWarning ? (
+            <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-warning/20 bg-warning/10 px-4 py-3 text-sm">
+              <AlertIcon className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
+
+              <div>
+                <p className="font-medium text-warning">
+                  Partial structural coverage
+                </p>
+
+                <p className="mt-1 text-text-secondary">
+                  {structuralCoverage?.pillars_unavailable_entirely &&
+                  structuralCoverage.pillars_unavailable_entirely.length > 0
+                    ? `No scoreable evidence was found for: ${structuralCoverage.pillars_unavailable_entirely.join(", ")}. `
+                    : ""}
+                  The Startup Power Score above reflects only the pillars
+                  that could be responsibly scored -- it is not penalized
+                  for the missing ones.
+                </p>
+              </div>
+            </div>
           ) : null}
 
           <div className="mt-6 border-t border-border pt-6">
