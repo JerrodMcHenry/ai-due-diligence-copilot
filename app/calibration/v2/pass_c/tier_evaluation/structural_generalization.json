@@ -1,0 +1,32 @@
+{
+  "phase": "C4 -- structural generalization test",
+  "questions": [
+    {"q": 1, "question": "Did higher-quality holdouts generally score above lower-quality holdouts?", "answer": "YES", "evidence": "9/9 cross-tier-eligible pairs concordant, zero inversions."},
+    {"q": 2, "question": "Did any clearly weak company receive an obviously strong SPS?", "answer": "NO", "evidence": "Fab.com (Very Weak/Failed) scored lowest of all 5 (31.8), separated from the next-lowest (Rdio, 46.7) by 14.9 points."},
+    {"q": 3, "question": "Did any clearly strong company receive an obviously weak SPS?", "answer": "NO", "evidence": "Zenefits (Strong at-the-time) scored highest of all 5 (66.3)."},
+    {"q": 4, "question": "Did any business model systematically break the anchors?", "answer": "NO", "evidence": "5 distinct business models represented (DTC-pivot e-commerce, subscription streaming, services marketplace, delivery marketplace, freemium-SaaS-plus-commission), none producing a nonsensical or unrepresentable result. DoorDash and Rdio's low coverage (21.4% each) reflects the evidence density already present in these pre-built benchmark records, not an anchor failure -- no fresh research was performed for the holdouts (correctly: PASS C scores from existing frozen evidence only)."},
+    {"q": 5, "question": "Did missing public evidence create obviously misleading quality scores?", "answer": "NO", "evidence": "DoorDash and Rdio, despite the lowest coverage, both land in the middle of the range on real, cited negative evidence (competitive crowding, a flat valuation step; a stark named-competitor scale gap) -- not falsely inflated or falsely crushed by the missingness itself."},
+    {"q": 6, "question": "Did provisional anchors behave nonsensically?", "answer": "NO", "evidence": "Homejoy's marketplace/services-labor-cost Unit Economics judgment landed sensibly (3, Weak) without forcing a family fit. Fab.com's qualitative Burn Efficiency (2) and Runway (3) tracked the severity of the evidence appropriately, not at either extreme."},
+    {"q": 7, "question": "Did Customer Growth/Growth Velocity overlap materially distort a result?", "answer": "NO -- did not have the opportunity to occur", "evidence": "Neither dimension was simultaneously scoreable for any of the 5 holdouts (all blocked by evidence absence or, for Zenefits, the guidance-vs-actual discipline). The known limitation is real but was not exercised in this run."},
+    {"q": 8, "question": "Did evidence concentration materially distort a pillar or SPS?", "answer": "YES -- two real, significant new instances found, reported per instruction, not fixed", "evidence": "See 'evidence_concentration_findings' below -- Zenefits' Product pillar (100% of its scored weight from one sentence) is the most concentrated single-pillar case found anywhere in this entire program."},
+    {"q": 9, "question": "Did any dimension behave fundamentally differently from calibration?", "answer": "NO", "evidence": "The neutral-5 default for genuine silence, the anti-bias-for-simple-products convention, and the projection-vs-actual growth-anchor discipline (re-exercised for Zenefits' 2014-actual/2015-guidance pair, consistent with the Etsy and Peloton precedents from the freeze sprint) all behaved identically to calibration."},
+    {"q": 10, "question": "Did SPS compression materially prevent useful differentiation?", "answer": "NO -- the opposite", "evidence": "Holdout SPS range is 31.8-66.3 (34.5 points), more than double the 15-company calibration range (50.9-67.0, 16.1 points). This reflects that this holdout set happens to include more evidentially extreme real-world cases (a severe multi-signal crisis; an extraordinary fundraising trajectory), not necessarily that the methodology's discriminating power changed -- but it demonstrates the methodology is NOT artificially compressed when the underlying evidence genuinely warrants separation."}
+  ],
+  "evidence_concentration_findings": [
+    {
+      "company": "Zenefits", "pillar": "Product", "event": "the single 'free, fast-to-deploy... relative to legacy brokers' sentence",
+      "dimensions": ["Customer Value (7)", "Differentiation (7)", "Usability (7)"],
+      "weight_concentration": "100% of Zenefits' scored Product pillar weight (.60 of .60 scored) traces to one short sentence -- the most concentrated single-pillar case found anywhere across this entire calibration program (exceeding Tesla's 55%-of-Financial-Health and Shopify's 100%-of-a-2-dimension-Traction-pillar cases).",
+      "sps_impact": "Product carries a .20 pillar weight -- a materially sized fraction of SPS resting on one fact, not three independently corroborated ones.",
+      "classification": "CALIBRATION IMPERFECTION, not structural failure -- this is the already-identified evidence-concentration phenomenon (Evidence Independence Metadata, specified but not yet implemented) manifesting in its most extreme form yet observed. Raises the implementation PRIORITY of EIM; does not indicate a new category of problem."
+    },
+    {
+      "company": "Fab.com", "pillar": "Financial Health", "event": "the Series-D-shortfall-plus-repeated-layoffs pattern",
+      "dimensions": ["Burn Efficiency (2)", "Runway (3)"],
+      "weight_concentration": "100% of Fab.com's scored Financial Health weight (.55 of .55 scored) traces to one underlying event pattern -- the same event also informs Execution Track Record and Operational Execution in other pillars (cross-pillar spread there is legitimate; the Financial-Health-internal concentration is the concern).",
+      "sps_impact": "Financial Health carries only a .10 pillar weight -- smaller SPS exposure than Zenefits' Product case, but the within-pillar concentration ratio is identical (100%).",
+      "classification": "CALIBRATION IMPERFECTION -- same phenomenon, same not-yet-implemented remedy (EIM metadata), not a new or different problem."
+    }
+  ],
+  "calibration_imperfection_vs_structural_failure": "Both evidence-concentration findings above, and every other observation in this phase, are classified CALIBRATION IMPERFECTION. Nothing in this phase produced a finding that the pillar architecture, weight structure, missing-evidence rules, or aggregation formula themselves are wrong -- every result traces to evidence sparsity or to the already-known, already-specified (if not yet implemented) evidence-concentration pattern. No STRUCTURAL FAILURE is indicated by this phase."
+}

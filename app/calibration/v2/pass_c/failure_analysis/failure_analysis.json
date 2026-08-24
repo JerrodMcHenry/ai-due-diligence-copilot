@@ -1,0 +1,61 @@
+{
+  "phase": "C6 -- failure analysis",
+  "classification_key": {
+    "A": "acceptable ambiguity", "B": "sparse evidence", "C": "anchor calibration limitation",
+    "D": "provisional-anchor limitation", "E": "evidence concentration", "F": "Customer Growth/Growth Velocity overlap",
+    "G": "LLM judgment issue", "H": "benchmark-label issue", "I": "genuine structural methodology defect",
+    "J": "unknowable future event", "K": "other"
+  },
+  "meaningful_disagreements": [
+    {
+      "id": 1, "company": "Zenefits", "finding": "Product pillar score (7.0) is 100% derived from one sentence ('free, fast-to-deploy... relative to legacy brokers'), split across 3 dimensions (Customer Value, Differentiation, Usability) as if independently corroborated.",
+      "trace": "SPS 66.3 -> Product pillar 7.0 (.20 weight) -> Customer Value(7)/Differentiation(7)/Usability(7) -> all three cite the identical evidence sentence -> no dimension-boundary or scoring-rule violation, each dimension asks a genuinely distinct question in the abstract, but the AVAILABLE evidence for this company happens to answer all three from one compact source passage.",
+      "classification": ["E"],
+      "severity": "The single most concentrated evidence-reuse case found anywhere in this program (exceeding Tesla's and Shopify's prior record cases). Does not change the score's validity (each dimension's judgment is individually defensible) but materially overstates how independently corroborated the Product pillar reads at face value.",
+      "action": "REPORTED, not fixed, per this pass's explicit rules. Raises the implementation priority of the already-specified Evidence Independence Metadata (freeze sprint), not its design."
+    },
+    {
+      "id": 2, "company": "Fab.com", "finding": "Financial Health pillar score (2.55) is 100% derived from one event pattern (Series D shortfall plus repeated layoffs), split across Burn Efficiency and Runway.",
+      "trace": "SPS 31.8 -> Financial Health 2.55 (.10 weight) -> Burn Efficiency(2)/Runway(3) -> both cite the same shortfall-plus-layoffs pattern, which ALSO informs Execution Track Record and Operational Execution in other pillars.",
+      "classification": ["E"],
+      "severity": "Same phenomenon as finding 1, smaller SPS exposure (.10 vs .20 pillar weight). The cross-pillar citations (Team, Execution) are legitimate multi-dimensional evidence per the freeze sprint's own framework; the within-Financial-Health concentration is the flagged concern.",
+      "action": "REPORTED, not fixed."
+    },
+    {
+      "id": 3, "company": "DoorDash, Rdio", "finding": "Both companies land within 0.1 SPS points of each other (46.8 vs 46.7) despite different expected tiers (Promising vs. Average/Mixed), and both have the lowest evidence coverage in the holdout set (21.4% each).",
+      "trace": "Both SPS values rest on exactly the same 3 scored pillars (Market, Team, Product) with Execution, Traction, and Financial Health all suppressed for both companies -- a coincidental convergence in evidence AVAILABILITY (not evidence content) that flattens two qualitatively different risk stories (DoorDash's flat-valuation/crowded-field caution vs. Rdio's stark named-competitor-gap caution) into near-identical aggregate numbers.",
+      "classification": ["B"],
+      "severity": "Not an inversion (technically still concordant), but a real near-total loss of separation between two adjacent expected tiers at this specific data point, driven by shared evidence sparsity rather than any dimension/anchor defect.",
+      "action": "REPORTED. Consistent with the calibration program's standing finding that low-coverage companies produce less reliable SPS separation -- not a new phenomenon, a re-confirmation of it in a genuinely new (holdout) sample."
+    },
+    {
+      "id": 4, "company": "Homejoy", "finding": "Unit Economics (3, Weak) was scored from a source characterization ('widely discussed as aggressive') that is more hedged than the direct-company-disclosure standard the insurance-family precedent (Oscar Health) was held to.",
+      "trace": "SPS 58.2 -> Financial Health 3.0 -> Unit Economics(3) -> evidence: '$20/hour... widely discussed... as aggressive relative to... cost' -> explicitly flagged in the original rationale as a closer call than the Oscar Health precedent, scored with Low-Medium (not Medium) confidence to reflect that honestly.",
+      "classification": ["D"],
+      "severity": "Low -- this is exactly the kind of judgment-call variance the freeze sprint already anticipated when it classified the qualitative-disclosure thresholds as FROZEN AS PROVISIONAL rather than FROZEN. The score itself later proved directionally correct (retention/economics were the explicitly cited failure driver), but the anchor's exact admission threshold ('widely discussed' vs. a direct disclosure) genuinely remains under-specified.",
+      "action": "REPORTED. Confirms rather than newly discovers the provisional status already assigned to this anchor family -- no upgrade or downgrade of its classification is made here, since that would be tuning after seeing a result, which this pass explicitly prohibits."
+    },
+    {
+      "id": 5, "company": "DoorDash", "finding": "Blind SPS (46.8, near the bottom of the holdout set) diverges sharply from the eventual outcome (category-leading IPO at $60B+).",
+      "trace": "SPS 46.8 -> Market(4.88)/Team(4.17)/Product(5.0), all near stage-relative-neutral-to-below -> built from real, cited, genuinely cautionary March-2016 evidence (flat Series C valuation, a crowded well-funded competitive field, no claimed technical differentiation, no disclosed traction) -> Execution/Traction/Financial Health entirely suppressed (21.4% coverage, the lowest in the holdout set).",
+      "classification": ["J", "B"],
+      "severity": "Not a scoring defect. The snapshot-date evidence was genuinely thin and cautionary on its own terms; several similarly-positioned 2016-era rivals did not achieve DoorDash's outcome. The low coverage (21.4%) is itself an honest signal that this score should be read with low confidence, which is the coverage metadata doing exactly its intended job.",
+      "action": "No action -- explicitly the case-type this pass's instructions warn against over-punishing. Logged as a clean illustration of the 'unknowable future event' principle, not a finding requiring any response."
+    },
+    {
+      "id": 6, "company": "Zenefits", "finding": "Blind SPS (66.3, highest in the holdout set) diverges sharply from the eventual outcome (compliance scandal, CEO resignation, valuation collapse).",
+      "trace": "SPS 66.3 -> driven substantially by Execution Track Record (9, exceptional) from a real, well-documented, explicitly-superlative-labeled 9x valuation step-up -> the scandal that followed stemmed from an internal, undisclosed, actively-concealed compliance practice with zero footprint in any public source reviewed at the snapshot date.",
+      "classification": ["J", "K"],
+      "severity": "Not a scoring defect -- the score accurately reflects genuinely strong, real public information. The 'K' (other) component is a legitimate, non-punitive structural observation: no dimension in the current 28-dimension architecture is aimed at regulatory/compliance/governance integrity, a category of risk that (by its concealed nature) is largely outside what any public-evidence methodology can detect regardless of dimension design.",
+      "action": "Logged as a candidate topic for a future Methodology v2.1 conversation (whether a governance/compliance-integrity dimension, or an explicit documented scope boundary, is warranted) -- NOT proposed or implemented here, and explicitly not treated as a v2 defect."
+    },
+    {
+      "id": 7, "company": "Homejoy", "finding": "Worker-misclassification lawsuits (a real driver of the eventual shutdown) have zero footprint in the pre-snapshot evidence.",
+      "trace": "No dimension scored this because no evidence of it existed in the frozen historical record provided.",
+      "classification": ["J", "K"],
+      "severity": "Same category as finding 6 -- a real risk driver invisible to a public-evidence methodology at the snapshot date (whether because it was not yet public, or simply not captured in this benchmark record's sourcing). The current architecture has no dimension explicitly aimed at labor/employment-classification legal risk.",
+      "action": "Logged alongside finding 6 as a possible shared future-methodology topic (a broader 'legal/regulatory/compliance risk' consideration), not acted on."
+    }
+  ],
+  "category_I_check": "No finding in this analysis was classified I (genuine structural methodology defect). Every disagreement traces to sparse evidence (B), a provisional anchor's known limitation (D), the already-specified evidence-concentration phenomenon (E), or genuinely unknowable future events combined with a legitimate, non-punitive dimension-scope observation (J/K). Per instruction, no redesign is proposed."
+}

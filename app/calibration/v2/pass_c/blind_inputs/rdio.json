@@ -1,0 +1,58 @@
+{
+  "company_name": "Rdio",
+  "snapshot_date": "2012-11-01",
+  "snapshot_stage": "Major growth round ($50M, Fidelity/Morgan Stanley)",
+  "industry": "Music streaming",
+  "business_model": "Subscription music streaming, no free ad-supported tier at launch",
+  "historical_evidence": {
+    "company": "Founded 2010 by Skype co-founders Janus Friis and Niklas Zennstr\u00f6m, a subscription-based music-streaming service competing directly with Spotify in the same category and roughly the same launch window.",
+    "market": "Fast-growing, well-capitalized, intensely competitive music-streaming category as of 2012, with Spotify already the clear category leader by scale of funding and reported usage.",
+    "team": "Founded by proven, previously-successful entrepreneurs (Skype's founders) \u2014 a genuinely strong Founder-Market-Fit-adjacent signal, though building a proven track record in telecom/VoIP is a different domain than music/media licensing and consumer subscription products.",
+    "product": "Subscription-only streaming product (no free ad-supported tier), a structurally different go-to-market approach than Spotify's freemium model, requiring users to pay from day one rather than converting from a free tier.",
+    "execution": "Raised $50M in 2012 from institutional investors Fidelity and Morgan Stanley \u2014 a real, sophisticated-investor-backed capital raise, though smaller in scale than the funding rounds being closed by Spotify in the same period.",
+    "traction": "No specific subscriber-count figures were found in the contemporaneous sources reviewed for the snapshot date.",
+    "financial": "By comparison, Spotify was contemporaneously reported (mid-2012) to be raising at a $3B valuation off reported revenue of roughly $200M in the first six months of that year alone \u2014 a scale gap that was publicly visible and quantifiable at the time, not a retrospective judgment, and directly relevant to Rdio's Competitive Intensity read."
+  },
+  "normalized_facts": [
+    {
+      "metric": "round_raised",
+      "value": 50000000,
+      "unit": "usd",
+      "period": "2012",
+      "source": "Aggregated reporting (Billboard/Dealroom)",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "competitor_spotify_valuation",
+      "value": 3000000000,
+      "unit": "usd",
+      "period": "2012",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "competitor_spotify_revenue_h1_2012",
+      "value": 200000000,
+      "unit": "usd",
+      "period": "2012-H1",
+      "source": "GrowthHackers aggregation of contemporaneous reporting",
+      "source_type": "public_research",
+      "confidence": "Low"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Rdio Gets $108 Million in Equity Over 2 Years According to New Filings",
+      "url": "https://www.billboard.com/pro/rdio-108-million-equity-sec-filings/",
+      "published": "2015"
+    },
+    {
+      "title": "How Spotify Turned Free Music into a $10+ Billion Valuation",
+      "url": "https://growthhackers.com/growth-studies/spotify/",
+      "published": "n/a",
+      "note": "used only for the contemporaneous 2012 Spotify valuation/revenue figures cross-referenced against period reporting, not for Rdio-specific historical evidence"
+    }
+  ]
+}

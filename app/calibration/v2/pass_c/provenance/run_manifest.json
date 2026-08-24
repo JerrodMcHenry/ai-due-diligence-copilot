@@ -1,0 +1,25 @@
+{
+  "pass": "C",
+  "purpose": "Holdout validation against a FROZEN methodology. Not calibration.",
+  "frozen_checkpoint_commit": "438d17cf586d67b8dd2d6f62ef9eca7a50ebd01a",
+  "frozen_checkpoint_commit_short": "438d17c",
+  "methodology_version": "v2-spec-2026-08-23",
+  "calibration_contract_version": "v2-calibration-rerun-2026-08-23",
+  "canonical_specification_path": "app/docs/SIE_Methodology_v2_Specification.md",
+  "freeze_manifest_path": "app/calibration/freeze_manifest.json",
+  "pre_flight_checks": {
+    "git_head_verified": "438d17cf586d67b8dd2d6f62ef9eca7a50ebd01a -- matches the required frozen checkpoint exactly",
+    "working_tree_clean": true,
+    "freeze_manifest_confirmed": "read and confirmed consistent (methodology_version, frozen/provisional anchor registries, holdout_status=UNTOUCHED)"
+  },
+  "holdout_files": [
+    {"company_name": "Fab.com", "path": "app/benchmarks/companies/fab_com.json", "sha256_before_access": "642adaf2715add8dcdb4b9d196a767c386d88f62fa1481666d2f35bcc98d6ebf", "size_bytes": 6457, "mtime_before_access": "2026-08-23T16:19:09.596108"},
+    {"company_name": "Rdio", "path": "app/benchmarks/companies/rdio.json", "sha256_before_access": "447eb7888c5bf34ae9294c60eac5c1322a7323f9521442d8f26664a229071649", "size_bytes": 4867, "mtime_before_access": "2026-08-23T16:21:52.163750"},
+    {"company_name": "Homejoy", "path": "app/benchmarks/companies/homejoy.json", "sha256_before_access": "fb5720149e0cdb6c5d40ce9012537ce96278bb8cd65e473df98dabbe1a8a1f2d", "size_bytes": 5322, "mtime_before_access": "2026-08-23T16:20:17.136813"},
+    {"company_name": "DoorDash", "path": "app/benchmarks/companies/doordash.json", "sha256_before_access": "feeb6cec60b90776fb55dce29d4e15976ab826ed82ffd00908c71b2869e283d2", "size_bytes": 4448, "mtime_before_access": "2026-08-23T16:24:10.907956"},
+    {"company_name": "Zenefits", "path": "app/benchmarks/companies/zenefits.json", "sha256_before_access": "b20877e36f3211a1933ac3bbad01448c3069378af3a71b5f0ce11cf4aec1460f", "size_bytes": 6452, "mtime_before_access": "2026-08-23T16:19:54.845695"}
+  ],
+  "provenance_statement": "The five hashes and mtimes above were captured by reading each file's raw bytes ONLY for hashing/stat purposes, before any semantic content (historical_evidence, normalized_facts, expected_quality_tier, future_outcome, benchmark_notes) was read or interpreted. The methodology (commit 438d17c) was frozen and verified BEFORE this capture. Phase C1 (blind scoring) begins only after this file is written. The mtimes above are unchanged from original benchmark-creation timestamps (2026-08-23, 16:19-16:24) recorded and cross-checked at every prior quarantine-confirmation step across PASS A, the targeted rerun, PASS B, Anchor Calibration Phase 1, the calibration rerun, and the freeze sprint -- these files have never been written to.",
+  "blinding_method_for_scoring": "app/calibration/v2/blind_loader.py's load_calibration_company()-equivalent field allowlist will be applied manually to each holdout record's fields (company_name, snapshot_date, snapshot_stage, industry, business_model, historical_evidence, normalized_facts, sources) -- expected_quality_tier, future_outcome, and benchmark_notes will not be read during Phase C1. Note: the blind_loader.py code itself would raise HoldoutAccessError if invoked programmatically against these files (by design, for the calibration passes) -- Phase C1 reads the permitted fields directly and manually applies the identical allowlist discipline, since this is the one context in the whole program where holdout access is the explicit, authorized point of the exercise.",
+  "sequencing_commitment": "Phase C1 (blind scoring) -> Phase C2 (freeze + hash blind results) -> Phase C3 (reveal expected_quality_tier, analyze) -> Phase C4 (structural generalization test) -> Phase C5 (reveal future_outcome, retrospective stress test only) -> Phase C6 (failure analysis). No step is reordered. No score is altered after Phase C2's freeze."
+}

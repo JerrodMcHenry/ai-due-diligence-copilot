@@ -1,0 +1,42 @@
+{
+  "phase": "C3 -- expected-tier reveal and evaluation",
+  "revealed_after_blind_freeze": true,
+  "future_outcome_still_blind_at_this_phase": true,
+  "companies": [
+    {"company": "Zenefits", "blind_sps": 66.3, "expected_quality_tier": "Strong (at-the-time) -- HINDSIGHT-DIVERGENCE TEST CASE, see benchmark_notes", "tier_rank": 1},
+    {"company": "Homejoy", "blind_sps": 58.2, "expected_quality_tier": "Promising (with flagged unit-economics/retention risk)", "tier_rank": 2},
+    {"company": "DoorDash", "blind_sps": 46.8, "expected_quality_tier": "Promising", "tier_rank": 2},
+    {"company": "Rdio", "blind_sps": 46.7, "expected_quality_tier": "Average / Mixed", "tier_rank": 3},
+    {"company": "Fab.com", "blind_sps": 31.8, "expected_quality_tier": "Very Weak / Failed", "tier_rank": 4}
+  ],
+  "sps_ordering": ["Zenefits (66.3)", "Homejoy (58.2)", "DoorDash (46.8)", "Rdio (46.7)", "Fab.com (31.8)"],
+  "tier_ordering_expected": ["Zenefits (Strong)", "Homejoy & DoorDash (Promising, tied rank)", "Rdio (Average/Mixed)", "Fab.com (Very Weak/Failed)"],
+  "raw_pairwise_comparisons": [
+    {"pair": "Zenefits vs Homejoy", "tiers": "1 vs 2", "sps": "66.3 vs 58.2", "result": "concordant"},
+    {"pair": "Zenefits vs DoorDash", "tiers": "1 vs 2", "sps": "66.3 vs 46.8", "result": "concordant"},
+    {"pair": "Zenefits vs Rdio", "tiers": "1 vs 3", "sps": "66.3 vs 46.7", "result": "concordant"},
+    {"pair": "Zenefits vs Fab.com", "tiers": "1 vs 4", "sps": "66.3 vs 31.8", "result": "concordant"},
+    {"pair": "Homejoy vs DoorDash", "tiers": "2 vs 2 (same tier)", "sps": "58.2 vs 46.8", "result": "not cross-tier-eligible -- excluded from concordance count, reported for transparency; an 11.4-point within-tier spread"},
+    {"pair": "Homejoy vs Rdio", "tiers": "2 vs 3", "sps": "58.2 vs 46.7", "result": "concordant"},
+    {"pair": "Homejoy vs Fab.com", "tiers": "2 vs 4", "sps": "58.2 vs 31.8", "result": "concordant"},
+    {"pair": "DoorDash vs Rdio", "tiers": "2 vs 3", "sps": "46.8 vs 46.7", "result": "concordant, but by only 0.1 points -- practically a tie, not meaningful discrimination between these two tiers at this data point"},
+    {"pair": "DoorDash vs Fab.com", "tiers": "2 vs 4", "sps": "46.8 vs 31.8", "result": "concordant"},
+    {"pair": "Rdio vs Fab.com", "tiers": "3 vs 4", "sps": "46.7 vs 31.8", "result": "concordant"}
+  ],
+  "cross_tier_eligible_pairs": 9,
+  "concordant_pairs": 9,
+  "discordant_pairs": 0,
+  "concordance_pct": 100.0,
+  "concordance_caveat": "n=5 (9 cross-tier-eligible pairs) is extremely small. 100% concordance here means 9 for 9, not a statistically robust rate -- a single differently-evidenced company could move this to 88.9% or lower. Reported alongside the raw pair list per instruction, not as a standalone headline number. One of the 9 'concordant' pairs (DoorDash vs. Rdio) is concordant by only 0.1 SPS points and should be read as a practical tie, not real discrimination.",
+  "severe_inversions": "NONE -- zero inversions of any kind, let alone severe ones.",
+  "pillar_level_disagreement_note": "Homejoy's expected label explicitly flags 'unit-economics/retention risk' -- the blind scoring independently identified both: Unit Economics scored 3 (Weak) from the $20/hour-vs-contractor-cost tension, and Retention was correctly Unavailable with an explicit note that the source itself flagged retention data as notably absent for a recurring-service business. This is a strong, direct, blind confirmation that the methodology surfaced the same risk factors the benchmark label anticipated, using only pre-snapshot evidence -- not reverse-engineered from the label.",
+  "dimension_level_disagreement_note": "None of the 5 companies show an obvious single-dimension anomaly that contradicts the overall pillar-level story; every scored dimension traces to specific, cited evidence (see blind_results/*.json rationale fields).",
+  "evidence_coverage_and_confidence_by_company": [
+    {"company": "Zenefits", "coverage_pct": 35.7, "psc_pillars": 2, "note": "Traction and Financial Health both fully suppressed -- SPS rests entirely on Market/Team/Product/Execution, all real evidence, no Financial Health signal despite a $500M/$4.5B raise (no cash/burn/margin figures were ever disclosed in the sources reviewed)."},
+    {"company": "Homejoy", "coverage_pct": 35.7, "psc_pillars": 1, "note": "Only Traction suppressed; Financial Health scored (3.0) from the unit-economics tension."},
+    {"company": "DoorDash", "coverage_pct": 21.4, "psc_pillars": 3, "note": "Lowest coverage of the 5 -- Execution, Traction, and Financial Health all suppressed; SPS rests on only Market/Team/Product."},
+    {"company": "Rdio", "coverage_pct": 21.4, "psc_pillars": 3, "note": "Same coverage profile as DoorDash -- Execution, Traction, Financial Health all suppressed."},
+    {"company": "Fab.com", "coverage_pct": 39.3, "psc_pillars": 1, "note": "Highest coverage of the 5, driven by the unusually rich (if negative) crisis narrative populating Team, Execution, and Financial Health more heavily than any other holdout company -- directly analogous to Tesla's high-coverage-low-score pattern from the calibration set."}
+  ],
+  "business_model_note": "The 5 holdouts span 5 distinct business models (flash-sale/DTC-pivot, subscription streaming, services marketplace, three-sided delivery marketplace, freemium-SaaS-plus-insurance-commission) -- a genuinely different mix than the 15-company calibration set, none of which are literal repeats of a calibration-set business model. No business model among the 5 produced a nonsensical or unrepresentable result."
+}

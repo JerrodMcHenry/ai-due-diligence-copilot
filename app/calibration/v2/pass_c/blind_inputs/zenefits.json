@@ -1,0 +1,81 @@
+{
+  "company_name": "Zenefits",
+  "snapshot_date": "2015-05-06",
+  "snapshot_stage": "Series C close",
+  "industry": "HR / benefits / insurance software",
+  "business_model": "Free HR-management SaaS monetized via insurance-brokerage commissions",
+  "historical_evidence": {
+    "company": "Founded 2013 by Parker Conrad and Laks Srini, offering free cloud-based HR software (onboarding, payroll integration, benefits management) monetized through insurance brokerage commissions on the benefits it helped administer.",
+    "market": "Large, underserved SMB HR/benefits-administration market with legacy, high-friction incumbents; the free-software-monetized-by-insurance-commission model was a genuinely novel wedge as of 2015.",
+    "team": "Founder Parker Conrad had prior startup experience (SigFig); by the Series C the company had scaled headcount rapidly to support its stated growth targets.",
+    "product": "Free, fast-to-deploy HR/benefits platform, differentiated primarily on price (free) and speed of setup relative to legacy brokers and HR software.",
+    "execution": "Extremely rapid funding progression: $15M Series A (January 2014) to a $66M Series B at a >$500M valuation (mid-2014) to a $500M Series C at a $4.5B valuation (May 6, 2015) \u2014 a 9x valuation step-up in roughly one year, among the fastest scaling trajectories publicly reported for a SaaS company at that time.",
+    "traction": "Publicly reported 2015 revenue guidance of over $50M for the year, up from approximately $8M in 2014 \u2014 a >6x year-over-year revenue growth claim reported contemporaneously by the company and covered without material contemporaneous challenge in the sources reviewed.",
+    "financial": "The company had publicly stated an ambition to reach $100M ARR by three years post-launch; the Series C was led by Fidelity and TPG, both sophisticated late-stage institutional investors, which is itself a meaningful signal of diligence having been performed at the time, however that diligence later turned out to have been insufficient (see future_outcome)."
+  },
+  "normalized_facts": [
+    {
+      "metric": "series_c_raised",
+      "value": 500000000,
+      "unit": "usd",
+      "period": "2015-05",
+      "source": "TechCrunch / Forbes",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_c_valuation",
+      "value": 4500000000,
+      "unit": "usd",
+      "period": "2015-05",
+      "source": "Forbes",
+      "source_type": "public_research",
+      "confidence": "High"
+    },
+    {
+      "metric": "series_b_valuation",
+      "value": 500000000,
+      "unit": "usd",
+      "period": "2014-06",
+      "source": "TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "revenue_2014",
+      "value": 8000000,
+      "unit": "usd",
+      "period": "2014",
+      "source": "Company guidance reported by TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Medium"
+    },
+    {
+      "metric": "revenue_guidance_2015",
+      "value": 50000000,
+      "unit": "usd",
+      "period": "2015",
+      "source": "Company guidance reported by TechCrunch",
+      "source_type": "public_research",
+      "confidence": "Low"
+    }
+  ],
+  "sources": [
+    {
+      "title": "Cloud HR Startup Zenefits Is Looking To Raise A Giant New Round Of Funding",
+      "url": "https://techcrunch.com/2015/04/21/zenefits-400-million/",
+      "published": "2015-04-21"
+    },
+    {
+      "title": "HR Startup Zenefits Raises $500 Million At $4.5 Billion Valuation",
+      "url": "https://www.forbes.com/sites/briansolomon/2015/05/06/hr-startup-zenefits-raises-500-million-at-4-5-billion-valuation/",
+      "published": "2015-05-06"
+    },
+    {
+      "title": "Zenefits halves its previous valuation to $2B to head off investor lawsuits",
+      "url": "https://techcrunch.com/2016/06/30/zenefits-revalues-itself-at-2-billion-giving-later-shareholders-more-ownership/",
+      "published": "2016-06-30",
+      "note": "post-snapshot; used only for future_outcome"
+    }
+  ]
+}
