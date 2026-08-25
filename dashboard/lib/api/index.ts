@@ -5,3 +5,5 @@ export * from "./rankings";
 export * from "./version";
 export * from "./analyze";
 export * from "./savedStartups";
+export * from "./discovery";
+export * from "./compare";

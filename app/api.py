@@ -35,10 +35,20 @@ from app.database.db import (create_tables,
                          save_startup_for_user,
                          unsave_startup_for_user,
                          is_startup_saved_by_user,
-                         get_saved_startups_for_user
+                         get_saved_startups_for_user,
+                         discover_startups,
+                         count_discover_startups,
+                         get_discovery_filter_options,
+                         DEFAULT_DISCOVERY_LIMIT,
+                         MAX_DISCOVERY_LIMIT,
+                         get_startups_for_comparison,
+                         MIN_COMPARISON_STARTUPS,
+                         MAX_COMPARISON_STARTUPS
 )
+from typing import Literal
+from fastapi import Query
 
-from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus
+from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
@@ -170,6 +180,185 @@ def industry_analytics():
 @app.get("/rankings")
 def rankings():
     return get_rankings()
+
+
+# ---------------------------------------------------------------------------
+# Startup Discovery V1. Public (no RequireAuth) -- exploring the canonical
+# startup universe is intelligence, same as Rankings/Search/Startup
+# Profile, not a paid action. Every filter is optional; Query(...) bounds
+# below are the "invalid filters fail cleanly" layer (a 422 before any SQL
+# ever runs), on top of app/database/db.py's own defensive clamping.
+# Distinct from Rankings on purpose -- Rankings is "the canonical
+# leaderboard" (unfiltered, full population); Discovery is "help me find
+# startups matching my criteria" (filtered, sorted, paginated). Both read
+# the exact same canonical population; neither is a second definition of
+# it. See discover_startups()'s own docstring in app/database/db.py.
+# ---------------------------------------------------------------------------
+
+@app.get("/discover", response_model=DiscoveryResponse)
+def discover(
+    query: str | None = Query(None, max_length=200),
+    industry: str | None = Query(None, max_length=200),
+    stage: str | None = Query(None, max_length=200),
+    business_model: str | None = Query(None, max_length=200),
+    min_sps: float | None = Query(None, ge=0, le=100),
+    max_sps: float | None = Query(None, ge=0, le=100),
+    min_market: float | None = Query(None, ge=0, le=10),
+    min_team: float | None = Query(None, ge=0, le=10),
+    min_product: float | None = Query(None, ge=0, le=10),
+    min_execution: float | None = Query(None, ge=0, le=10),
+    min_traction: float | None = Query(None, ge=0, le=10),
+    min_financial_health: float | None = Query(None, ge=0, le=10),
+    sort: Literal["sps_desc", "sps_asc", "newest", "name_asc"] = "sps_desc",
+    limit: int = Query(DEFAULT_DISCOVERY_LIMIT, ge=1, le=MAX_DISCOVERY_LIMIT),
+    offset: int = Query(0, ge=0),
+):
+    filters = dict(
+        query=query,
+        industry=industry,
+        stage=stage,
+        business_model=business_model,
+        min_sps=min_sps,
+        max_sps=max_sps,
+        min_market=min_market,
+        min_team=min_team,
+        min_product=min_product,
+        min_execution=min_execution,
+        min_traction=min_traction,
+        min_financial_health=min_financial_health,
+    )
+
+    try:
+        results = discover_startups(sort=sort, limit=limit, offset=offset, **filters)
+        total = count_discover_startups(**filters)
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Discovery results could not be loaded. Please try again.",
+        )
+
+    return DiscoveryResponse(total=total, results=results)
+
+
+@app.get("/discover/filter-options", response_model=DiscoveryFilterOptions)
+def discover_filter_options():
+    try:
+        return get_discovery_filter_options()
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Filter options could not be loaded. Please try again.",
+        )
+
+
+# ---------------------------------------------------------------------------
+# Compare Startups V1. Public (no RequireAuth) -- comparing canonical
+# intelligence is the same kind of public intelligence as Rankings/Search/
+# Startup Profile, not a paid or personalized action. Reuses
+# get_startups_for_comparison()'s canonical startup_id resolution (see its
+# own docstring in app/database/db.py) -- this endpoint's own job is only
+# input parsing/bounding and slimming the full methodology JSONB down to
+# ComparisonStartup's fields.
+# ---------------------------------------------------------------------------
+
+def _build_comparison_pillar(pillar_key: str, methodology: dict) -> ComparisonPillar:
+    pillar_data = methodology.get(pillar_key) or {}
+    score_breakdown = pillar_data.get("score_breakdown") or {}
+    subscores_data = score_breakdown.get("subscores") or []
+
+    subscores = [
+        ComparisonSubscore(
+            name=subscore.get("name", ""),
+            score=subscore.get("score"),
+            weight=subscore.get("weight", 0.0),
+            confidence=subscore.get("confidence", "Low"),
+            evidence_status=subscore.get("evidence_status", "Observed"),
+            rationale=subscore.get("rationale", ""),
+            recommendations=subscore.get("recommendations") or [],
+            missing_information=subscore.get("missing_information") or [],
+        )
+        for subscore in subscores_data
+    ]
+
+    return ComparisonPillar(
+        pillar=pillar_key,
+        score=pillar_data.get("score"),
+        confidence=pillar_data.get("confidence", "Low"),
+        evidence_coverage=score_breakdown.get("evidence_coverage", 0.0),
+        summary=pillar_data.get("summary", ""),
+        strengths=pillar_data.get("strengths") or [],
+        weaknesses=pillar_data.get("weaknesses") or [],
+        recommendations=pillar_data.get("recommendations") or [],
+        subscores=subscores,
+    )
+
+
+def _build_comparison_startup(row: dict) -> ComparisonStartup:
+    methodology = row["methodology"]
+    context = methodology.get("context") or {}
+
+    return ComparisonStartup(
+        startup_id=row["startup_id"],
+        company_name=context.get("company_name") or row["company_name"] or "",
+        industry=context.get("industry", ""),
+        company_stage=context.get("company_stage", ""),
+        business_model=context.get("business_model", ""),
+        latest_analysis_at=row["created_at"],
+        overall_score=methodology.get("startup_intelligence_score"),
+        market=_build_comparison_pillar("market", methodology),
+        team=_build_comparison_pillar("team", methodology),
+        product=_build_comparison_pillar("product", methodology),
+        execution=_build_comparison_pillar("execution", methodology),
+        traction=_build_comparison_pillar("traction", methodology),
+        financial_health=_build_comparison_pillar("financial_health", methodology),
+    )
+
+
+@app.get("/compare", response_model=ComparisonResponse)
+def compare(startups: str = Query(..., min_length=1, max_length=200)):
+    # Deliberately permissive parsing -- a malformed/non-numeric token is
+    # dropped, not a 422, matching Part 5's "invalid IDs fail gracefully".
+    # Only "fewer than MIN_COMPARISON_STARTUPS well-formed ids" is a hard
+    # rejection; everything else degrades to the most useful response it
+    # can, with missing_startup_ids reporting what didn't resolve.
+    raw_tokens = [token.strip() for token in startups.split(",") if token.strip()]
+
+    parsed_ids: list[int] = []
+    for token in raw_tokens:
+        try:
+            parsed_ids.append(int(token))
+        except ValueError:
+            continue
+
+    deduped_ids = list(dict.fromkeys(parsed_ids))
+
+    if len(deduped_ids) < MIN_COMPARISON_STARTUPS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Provide at least {MIN_COMPARISON_STARTUPS} distinct startup IDs to compare.",
+        )
+
+    # Safely bounded, not hard-rejected: a shared/old link listing more
+    # than the current max simply compares the first
+    # MAX_COMPARISON_STARTUPS rather than erroring the whole request.
+    bounded_ids = deduped_ids[:MAX_COMPARISON_STARTUPS]
+
+    try:
+        rows = get_startups_for_comparison(bounded_ids)
+        resolved_ids = {row["startup_id"] for row in rows}
+        missing_ids = [id_ for id_ in bounded_ids if id_ not in resolved_ids]
+        comparison_startups = [_build_comparison_startup(row) for row in rows]
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Comparison could not be loaded. Please try again.",
+        )
+
+    return ComparisonResponse(startups=comparison_startups, missing_startup_ids=missing_ids)
+
 
 @app.get("/score-history/{company_name}")
 def score_history(company_name: str):

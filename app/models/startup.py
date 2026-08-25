@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field, field_validator
 from typing import Literal
 
-from app.models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
+from app.models.scoring import StartupIntelligenceScore, PillarScoreBreakdown, EvidenceStatus
 from app.models.evidence import Evidence
 from app.models.analysis_context import AnalysisContext
 from datetime import datetime
@@ -160,3 +160,108 @@ class SavedStartupEntry(BaseModel):
 
 class SavedStartupStatus(BaseModel):
     saved: bool
+
+
+class DiscoveryResult(BaseModel):
+    """
+    Startup Discovery V1 row shape -- deliberately flat, mirroring
+    SavedStartupEntry/RankingEntry (a list view, not a second
+    startup-details experience). Every field is read fresh from that
+    startup's current latest canonical analysis on every request -- see
+    discover_startups()'s own docstring in app/database/db.py. Pillar
+    fields are None when that pillar was Unavailable on the underlying
+    analysis, never fabricated.
+    """
+    startup_id: int
+    company_name: str
+    industry: str | None = None
+    stage: str | None = None
+    business_model: str | None = None
+    overall_score: float | None = None
+    market_score: float | None = None
+    team_score: float | None = None
+    product_score: float | None = None
+    execution_score: float | None = None
+    traction_score: float | None = None
+    financial_score: float | None = None
+    created_at: datetime
+
+
+class DiscoveryResponse(BaseModel):
+    total: int
+    results: list[DiscoveryResult]
+
+
+class DiscoveryFilterOptions(BaseModel):
+    """
+    Startup Discovery V1, Part 4: option lists derived from the real
+    canonical population -- see get_discovery_filter_options()'s own
+    docstring. Never a hardcoded taxonomy.
+    """
+    industries: list[str]
+    stages: list[str]
+    business_models: list[str]
+
+
+# ---------------------------------------------------------------------------
+# Compare Startups V1. This is a deliberately slimmer, purpose-built set of
+# models -- not a reuse of PillarAnalysis/SIEMethodologyAnalysis wholesale
+# -- so the /compare payload carries only what a side-by-side comparison
+# actually needs (no raw evidence quotes, no executive_coaching_summary,
+# no momentum/confidence scores never populated by the backend). Every
+# field here is read directly from the existing stored methodology JSONB;
+# nothing is recomputed, re-scored, or re-summarized by an LLM.
+# ---------------------------------------------------------------------------
+
+class ComparisonSubscore(BaseModel):
+    name: str
+    # None means this dimension could not be responsibly scored --
+    # preserved as None here too, never coerced to 0.
+    score: float | None = None
+    weight: float = 0.0
+    confidence: ConfidenceLevel = "Low"
+    evidence_status: EvidenceStatus = "Observed"
+    rationale: str = ""
+    recommendations: list[str] = Field(default_factory=list)
+    missing_information: list[str] = Field(default_factory=list)
+
+
+class ComparisonPillar(BaseModel):
+    pillar: str
+    # None means no dimensions in this pillar were scorable -- i.e. this
+    # pillar is Unavailable for this startup. Never defaulted to 0.
+    score: float | None = None
+    confidence: ConfidenceLevel = "Low"
+    evidence_coverage: float = 0.0
+    summary: str = ""
+    strengths: list[str] = Field(default_factory=list)
+    weaknesses: list[str] = Field(default_factory=list)
+    recommendations: list[str] = Field(default_factory=list)
+    subscores: list[ComparisonSubscore] = Field(default_factory=list)
+
+
+class ComparisonStartup(BaseModel):
+    startup_id: int
+    company_name: str
+    industry: str = ""
+    company_stage: str = ""
+    business_model: str = ""
+    latest_analysis_at: datetime
+    overall_score: float | None = None
+
+    market: ComparisonPillar
+    team: ComparisonPillar
+    product: ComparisonPillar
+    execution: ComparisonPillar
+    traction: ComparisonPillar
+    financial_health: ComparisonPillar
+
+
+class ComparisonResponse(BaseModel):
+    startups: list[ComparisonStartup]
+    # Requested startup_ids that could not be resolved to a canonical
+    # analysis -- an invalid/nonexistent id, or a real startup whose only
+    # analyses predate Methodology v2. Never silently dropped without a
+    # trace: the frontend surfaces this honestly rather than pretending
+    # the request was fully satisfied.
+    missing_startup_ids: list[int] = Field(default_factory=list)

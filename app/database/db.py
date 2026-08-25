@@ -1251,6 +1251,357 @@ def get_rankings():
 
     return [dict(row) for row in rows]
 
+
+# ---------------------------------------------------------------------------
+# Startup Discovery V1. One centralized query, reused by both the count and
+# the page of results, so "which startups match these filters" can never
+# disagree between the two.
+#
+# Same canonical population as get_rankings() -- methodology IS NOT NULL,
+# methodology_version == the current constant, startup_intelligence_score
+# present, company_name present -- and the same "exactly one row per
+# startup, latest analysis wins" rule. The one deliberate difference:
+# get_rankings() still partitions by LOWER(TRIM(company_name)) (its own
+# docstring explains why it hasn't been migrated off that); this partitions
+# by analyses.startup_id, the real FK written by get_or_create_startup()/
+# save_analysis() -- the same choice already made for
+# get_saved_startups_for_user() in Saved Startups Phase 1, for the same
+# reason (a real identity, not a re-derived string match). On the current
+# canonical population these two grouping rules produce the identical
+# result set (verified: both currently resolve to the same 6 startups) --
+# this is a stricter implementation of the same semantics, not a new
+# definition of "current startup."
+#
+# Every filter is optional and additive (AND'd together). A pillar-minimum
+# filter (min_market, etc.) compares against a JSONB-derived score that is
+# NULL for any startup whose pillar was Unavailable -- SQL's own NULL
+# semantics (`NULL >= x` is never TRUE) mean an unavailable pillar can
+# never satisfy a minimum, with no special-case code required. Nothing
+# here invents or defaults a missing score.
+# ---------------------------------------------------------------------------
+
+DEFAULT_DISCOVERY_LIMIT = 24
+MAX_DISCOVERY_LIMIT = 100
+
+_DISCOVERY_SORT_COLUMNS = {
+    "sps_desc": "overall_score DESC NULLS LAST, company_name ASC",
+    "sps_asc": "overall_score ASC NULLS LAST, company_name ASC",
+    "newest": "created_at DESC, company_name ASC",
+    "name_asc": "company_name ASC",
+}
+
+
+def _build_discovery_filters(
+    query: str | None,
+    industry: str | None,
+    stage: str | None,
+    business_model: str | None,
+    min_sps: float | None,
+    max_sps: float | None,
+    min_market: float | None,
+    min_team: float | None,
+    min_product: float | None,
+    min_execution: float | None,
+    min_traction: float | None,
+    min_financial_health: float | None,
+) -> tuple[str, dict]:
+    """
+    Shared by discover_startups() and count_discover_startups() below, so
+    the count shown to a user and the rows they actually get always agree
+    about which startups qualify. Every value is bound as a SQLAlchemy
+    parameter (:name) -- no filter value is ever interpolated into the SQL
+    string itself, including the free-text `query`.
+    """
+    clauses: list[str] = []
+    params: dict = {}
+
+    if query:
+        clauses.append("company_name ILIKE :query")
+        params["query"] = f"%{query}%"
+
+    if industry:
+        clauses.append("industry = :industry")
+        params["industry"] = industry
+
+    if stage:
+        clauses.append("stage = :stage")
+        params["stage"] = stage
+
+    if business_model:
+        clauses.append("business_model = :business_model")
+        params["business_model"] = business_model
+
+    if min_sps is not None:
+        clauses.append("overall_score >= :min_sps")
+        params["min_sps"] = min_sps
+
+    if max_sps is not None:
+        clauses.append("overall_score <= :max_sps")
+        params["max_sps"] = max_sps
+
+    if min_market is not None:
+        clauses.append("market_score >= :min_market")
+        params["min_market"] = min_market
+
+    if min_team is not None:
+        clauses.append("team_score >= :min_team")
+        params["min_team"] = min_team
+
+    if min_product is not None:
+        clauses.append("product_score >= :min_product")
+        params["min_product"] = min_product
+
+    if min_execution is not None:
+        clauses.append("execution_score >= :min_execution")
+        params["min_execution"] = min_execution
+
+    if min_traction is not None:
+        clauses.append("traction_score >= :min_traction")
+        params["min_traction"] = min_traction
+
+    if min_financial_health is not None:
+        clauses.append("financial_score >= :min_financial_health")
+        params["min_financial_health"] = min_financial_health
+
+    where_sql = ""
+    if clauses:
+        where_sql = " AND " + " AND ".join(clauses)
+
+    return where_sql, params
+
+
+_DISCOVERY_BASE_CTE = """
+    WITH latest_per_startup AS (
+        SELECT
+            startup_id,
+            company_name,
+            industry,
+            stage,
+            business_model,
+            overall_score,
+            market_score,
+            team_score,
+            product_score,
+            execution_score,
+            traction_score,
+            financial_score,
+            created_at
+        FROM (
+            SELECT
+                a.startup_id AS startup_id,
+                a.company_name AS company_name,
+                a.industry AS industry,
+                a.stage AS stage,
+                a.business_model AS business_model,
+                (a.methodology->>'startup_intelligence_score')::float AS overall_score,
+                (a.methodology->'market'->>'score')::float AS market_score,
+                (a.methodology->'team'->>'score')::float AS team_score,
+                (a.methodology->'product'->>'score')::float AS product_score,
+                (a.methodology->'execution'->>'score')::float AS execution_score,
+                (a.methodology->'traction'->>'score')::float AS traction_score,
+                (a.methodology->'financial_health'->>'score')::float AS financial_score,
+                a.created_at AS created_at,
+                ROW_NUMBER() OVER (
+                    PARTITION BY a.startup_id
+                    ORDER BY a.created_at DESC, a.id DESC
+                ) AS row_number
+            FROM analyses a
+            WHERE
+                a.startup_id IS NOT NULL
+                AND a.methodology IS NOT NULL
+                AND a.methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                AND a.methodology->>'startup_intelligence_score' IS NOT NULL
+                AND a.company_name IS NOT NULL
+                AND TRIM(a.company_name) <> ''
+        ) ranked
+        WHERE row_number = 1
+    )
+"""
+
+
+def discover_startups(
+    query: str | None = None,
+    industry: str | None = None,
+    stage: str | None = None,
+    business_model: str | None = None,
+    min_sps: float | None = None,
+    max_sps: float | None = None,
+    min_market: float | None = None,
+    min_team: float | None = None,
+    min_product: float | None = None,
+    min_execution: float | None = None,
+    min_traction: float | None = None,
+    min_financial_health: float | None = None,
+    sort: str = "sps_desc",
+    limit: int = DEFAULT_DISCOVERY_LIMIT,
+    offset: int = 0,
+):
+    where_sql, params = _build_discovery_filters(
+        query, industry, stage, business_model,
+        min_sps, max_sps,
+        min_market, min_team, min_product, min_execution, min_traction, min_financial_health,
+    )
+
+    params["methodology_version"] = METHODOLOGY_VERSION
+    # Defensive bounds even though app/api.py's Query(...) validation
+    # already enforces these -- this function is also called directly by
+    # tests and is safe to call with untrusted values on its own.
+    params["limit"] = max(1, min(limit, MAX_DISCOVERY_LIMIT))
+    params["offset"] = max(0, offset)
+
+    order_sql = _DISCOVERY_SORT_COLUMNS.get(sort, _DISCOVERY_SORT_COLUMNS["sps_desc"])
+
+    sql = _DISCOVERY_BASE_CTE + f"""
+        SELECT * FROM latest_per_startup
+        WHERE 1=1{where_sql}
+        ORDER BY {order_sql}
+        LIMIT :limit OFFSET :offset
+    """
+
+    with engine.begin() as connection:
+        result = connection.execute(text(sql), params)
+        rows = result.mappings().all()
+
+    return [dict(row) for row in rows]
+
+
+def count_discover_startups(
+    query: str | None = None,
+    industry: str | None = None,
+    stage: str | None = None,
+    business_model: str | None = None,
+    min_sps: float | None = None,
+    max_sps: float | None = None,
+    min_market: float | None = None,
+    min_team: float | None = None,
+    min_product: float | None = None,
+    min_execution: float | None = None,
+    min_traction: float | None = None,
+    min_financial_health: float | None = None,
+) -> int:
+    where_sql, params = _build_discovery_filters(
+        query, industry, stage, business_model,
+        min_sps, max_sps,
+        min_market, min_team, min_product, min_execution, min_traction, min_financial_health,
+    )
+
+    params["methodology_version"] = METHODOLOGY_VERSION
+
+    sql = _DISCOVERY_BASE_CTE + f"""
+        SELECT COUNT(*) FROM latest_per_startup
+        WHERE 1=1{where_sql}
+    """
+
+    with engine.begin() as connection:
+        return connection.execute(text(sql), params).scalar()
+
+
+def get_discovery_filter_options():
+    """
+    Startup Discovery V1, Part 4: filter option lists are derived from the
+    REAL canonical population, never hardcoded -- so the UI can never offer
+    an industry/stage/business model that currently returns zero results,
+    and automatically grows as more canonical analyses are added. Sourced
+    from the exact same canonical population discover_startups() itself
+    queries (same methodology_version/startup_id gate), via the shared CTE.
+    """
+    sql = _DISCOVERY_BASE_CTE + """
+        SELECT
+            ARRAY_AGG(DISTINCT industry) FILTER (WHERE industry IS NOT NULL AND TRIM(industry) <> '') AS industries,
+            ARRAY_AGG(DISTINCT stage) FILTER (WHERE stage IS NOT NULL AND TRIM(stage) <> '') AS stages,
+            ARRAY_AGG(DISTINCT business_model) FILTER (WHERE business_model IS NOT NULL AND TRIM(business_model) <> '') AS business_models
+        FROM latest_per_startup
+    """
+
+    with engine.begin() as connection:
+        row = connection.execute(
+            text(sql), {"methodology_version": METHODOLOGY_VERSION}
+        ).mappings().first()
+
+    return {
+        "industries": sorted(row["industries"] or []),
+        "stages": sorted(row["stages"] or []),
+        "business_models": sorted(row["business_models"] or []),
+    }
+
+
+MIN_COMPARISON_STARTUPS = 2
+MAX_COMPARISON_STARTUPS = 4
+
+
+def get_startups_for_comparison(startup_ids: list[int]):
+    """
+    Compare Startups V1. Resolves each of the given canonical startups.id
+    values to its own latest canonical (methodology_version-matching)
+    analysis -- the same startup_id-keyed "latest per startup" semantics
+    as discover_startups()/get_saved_startups_for_user(), not a new or
+    competing definition of "current startup".
+
+    Unlike discover_startups()'s flat DiscoveryResult shape, this returns
+    the FULL methodology JSONB per startup -- Compare needs pillar
+    strengths/weaknesses/subscores, which the flat Discovery shape never
+    carried. app/api.py's /compare endpoint slims this down to the fields
+    the frontend actually needs (see ComparisonStartup); this function's
+    job is only canonical resolution.
+
+    Deduplicates startup_ids (preserving first-occurrence order) and
+    returns results in that SAME order -- callers that need to know which
+    of their requested ids didn't resolve (invalid id, or a real startup
+    with no canonical analysis yet) compare their own input against the
+    returned rows' startup_ids; this function never raises for a
+    partially-unresolvable list, since "some ids didn't resolve" is a
+    normal, cleanly-representable outcome, not an error.
+    """
+    deduped_ids = list(dict.fromkeys(startup_ids))
+
+    if not deduped_ids:
+        return []
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            WITH latest_per_startup AS (
+                SELECT
+                    a.startup_id AS startup_id,
+                    a.id AS analysis_id,
+                    a.company_name AS company_name,
+                    a.created_at AS created_at,
+                    a.methodology AS methodology,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY a.startup_id
+                        ORDER BY a.created_at DESC, a.id DESC
+                    ) AS row_number
+                FROM analyses a
+                WHERE
+                    a.startup_id = ANY(:startup_ids)
+                    AND a.methodology IS NOT NULL
+                    AND a.methodology->'analysis_context'->>'methodology_version' = :methodology_version
+            )
+            SELECT startup_id, analysis_id, company_name, created_at, methodology
+            FROM latest_per_startup
+            WHERE row_number = 1
+        """), {
+            "startup_ids": deduped_ids,
+            "methodology_version": METHODOLOGY_VERSION,
+        })
+
+        rows = {row["startup_id"]: dict(row) for row in result.mappings().all()}
+
+    ordered_results = []
+
+    for startup_id in deduped_ids:
+        row = rows.get(startup_id)
+
+        if row is None:
+            continue
+
+        if isinstance(row["methodology"], str):
+            row["methodology"] = json.loads(row["methodology"])
+
+        ordered_results.append(row)
+
+    return ordered_results
+
+
 def get_top_startups(limit: int = 10):
     """
     Canonical Dashboard MVP: Top Startups reuses get_rankings() directly --

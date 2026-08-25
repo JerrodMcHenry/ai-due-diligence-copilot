@@ -6,8 +6,11 @@ import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
 import BaseCard from "@/components/ui/BaseCard";
+import CompareToggle from "@/components/discovery/CompareToggle";
+import CompareSelectionBar from "@/components/discovery/CompareSelectionBar";
 
 import { getSavedStartups, unsaveStartup } from "@/lib/api";
+import { useComparisonSelection } from "@/lib/hooks/useComparisonSelection";
 
 import type { SavedStartupEntry } from "@/types";
 
@@ -75,6 +78,7 @@ export default function SavedStartupsView() {
   const [loadState, setLoadState] = useState<LoadState>("loading");
   const [removingId, setRemovingId] = useState<number | null>(null);
   const [removeError, setRemoveError] = useState<string | null>(null);
+  const compareSelection = useComparisonSelection();
 
   useEffect(() => {
     let isMounted = true;
@@ -184,7 +188,7 @@ export default function SavedStartupsView() {
           ) : null}
 
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-sm">
+            <table className="w-full min-w-[860px] text-sm">
               <thead className="bg-surface-muted">
                 <tr className="border-b border-border text-left text-xs font-semibold uppercase tracking-wider text-text-muted">
                   <th scope="col" className="min-w-[240px] px-6 py-3.5">
@@ -205,6 +209,10 @@ export default function SavedStartupsView() {
 
                   <th scope="col" className="px-6 py-3.5">
                     Latest analysis
+                  </th>
+
+                  <th scope="col" className="px-6 py-3.5">
+                    <span className="sr-only">Compare</span>
                   </th>
 
                   <th scope="col" className="px-6 py-3.5 text-right">
@@ -251,6 +259,14 @@ export default function SavedStartupsView() {
                       {formatAnalysisDate(entry.latest_analysis_at)}
                     </td>
 
+                    <td className="whitespace-nowrap px-6 py-4">
+                      <CompareToggle
+                        selected={compareSelection.isSelected(entry.startup_id)}
+                        disabled={compareSelection.atMax}
+                        onToggle={() => compareSelection.toggle(entry.startup_id)}
+                      />
+                    </td>
+
                     <td className="whitespace-nowrap px-6 py-4 text-right">
                       <button
                         type="button"
@@ -270,6 +286,11 @@ export default function SavedStartupsView() {
           </div>
         </BaseCard>
       )}
+
+      <CompareSelectionBar
+        selectedIds={compareSelection.selectedIds}
+        onClear={compareSelection.clear}
+      />
     </>
   );
 }
