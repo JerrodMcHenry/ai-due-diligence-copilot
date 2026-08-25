@@ -859,6 +859,17 @@ def get_top_improving_startups(limit: int = 10):
     a legacy score. Returns [] -- not a partial/fake leaderboard -- if
     fewer than one startup currently qualifies; the frontend's existing
     empty state already renders that truthfully.
+
+    Final MVP Stabilization: also requires score_change > 0. Without this,
+    a company whose SPS actually declined between analyses could still
+    surface here (as the least-bad entry) under the label "Fastest
+    improving startups" -- a real, honest-labeling defect found during
+    the Core MVP acceptance walkthrough, not a hypothetical: with only one
+    repeat-analyzed company in the dataset and a negative score_change,
+    that company was the sole (misleading) entry. A company that hasn't
+    actually improved now falls out of this list entirely and the
+    zero-results empty state (see above) takes over, rather than the list
+    quietly including a decline.
     """
     with engine.begin() as connection:
         result = connection.execute(text("""
@@ -906,6 +917,7 @@ def get_top_improving_startups(limit: int = 10):
         }
         for data in companies.values()
         if data["canonical_analysis_count"] >= 2
+        and data["latest_score"] > data["first_score"]
     ]
 
     improvements.sort(

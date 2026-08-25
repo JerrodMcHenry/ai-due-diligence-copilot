@@ -29,6 +29,8 @@ def build_provenance_context(
     search_query: str = "",
     research_brief: str = "",
     sources: list | None = None,
+    analysis_type: str = "public",
+    evidence_sources: list[str] | None = None,
 ) -> AnalysisContext:
     """
     Build the provenance record for one analysis (SIE Scoring Reliability
@@ -39,8 +41,28 @@ def build_provenance_context(
     research to record -- run_due_diligence() always supplies them; the
     frozen-evidence reliability harness does not, since it intentionally
     bypasses live research and has no new research to attribute.
+
+    Pitch Deck / PDF Ingestion: analysis_type is provenance/display
+    metadata only (see AnalysisContext.analysis_type's AnalysisType
+    literal) -- it never reaches scoring, evidence, or any pillar
+    analysis. Defaults to "public" so every existing caller (text,
+    website, calibration, the reliability harness) is unaffected; only
+    /analyze-pdf and /analyze pass a non-default value through
+    run_due_diligence().
+
+    Unified Multi-Source Analyze Startup: evidence_sources is the real,
+    non-mutually-exclusive record of which evidence source TYPES fed this
+    analysis (see AnalysisContext.evidence_sources' EvidenceSourceType
+    literal, already defined and already list-shaped -- this activates
+    it, it doesn't add a new field). Left as None for every caller except
+    POST /analyze, so AnalysisContext's own pre-existing default
+    (["company_description"]) is unchanged for /analyze-startup,
+    /analyze-website, /analyze-pdf, calibration, and the reliability
+    harness -- exactly their current (dormant-field) behavior, preserved.
+    Like analysis_type, this is provenance/display metadata only.
     """
-    return AnalysisContext(
+    kwargs = dict(
+        analysis_type=analysis_type,
         # SIE Methodology v2: methodology_version was previously never
         # explicitly set here, so it silently stayed at AnalysisContext's
         # Pydantic default ("1.0") for every analysis, v1 included -- a
@@ -65,6 +87,11 @@ def build_provenance_context(
         analyzed_at=datetime.now(timezone.utc).isoformat(),
     )
 
+    if evidence_sources is not None:
+        kwargs["evidence_sources"] = evidence_sources
+
+    return AnalysisContext(**kwargs)
+
 
 def build_sie_methodology_analysis(
     structured_analysis,
@@ -79,6 +106,8 @@ def build_sie_methodology_analysis(
     search_query: str = "",
     research_brief: str = "",
     sources: list | None = None,
+    analysis_type: str = "public",
+    evidence_sources: list[str] | None = None,
 ):
     # generate_structured_analysis() (app/ai/structured_analysis.py) asks the
     # model for a single "stage" field (e.g. "Series A") -- there is no
@@ -110,12 +139,48 @@ def build_sie_methodology_analysis(
             search_query=search_query,
             research_brief=research_brief,
             sources=sources,
+            analysis_type=analysis_type,
+            evidence_sources=evidence_sources,
         ),
     )
 
 
 def get_pillar_score(pillar):
     return pillar.score if pillar else None
+
+
+def assemble_multi_source_text(
+    website_text: str | None = None,
+    pdf_text: str | None = None,
+    user_text: str | None = None,
+) -> str:
+    """
+    Unified Multi-Source Analyze Startup: joins whichever evidence
+    sources were actually supplied into ONE labeled company_text blob --
+    this is the entire "Evidence/Input Assembly" step. Only sections that
+    were actually supplied are included (no empty "=== Pitch Deck ==="
+    header when no deck was given). No LLM call, no summarization, no
+    second pipeline -- the result is handed to run_due_diligence()
+    exactly like any other company_text always has been; the labeling is
+    what lets source identity survive into the model's own evidence
+    rationale (it can say "the pitch deck states..." vs "the website
+    states...") without touching evidence-extraction prompts or the
+    Evidence/DimensionEvidence schema, the same way build_enriched_text()
+    below already separates "Original Company Information" from
+    "Additional Research Context" today.
+    """
+    sections: list[str] = []
+
+    if website_text:
+        sections.append(f"=== Company Website ===\n{website_text}")
+
+    if pdf_text:
+        sections.append(f"=== Pitch Deck ===\n{pdf_text}")
+
+    if user_text:
+        sections.append(f"=== Additional Company Information ===\n{user_text}")
+
+    return "\n\n".join(sections)
 
 
 def build_enriched_text(company_text: str, research_context: str) -> str:
@@ -158,7 +223,17 @@ def analyze_pillars_from_enriched_text(enriched_text: str) -> dict:
     }
 
 
-def run_due_diligence(company_text):
+def run_due_diligence(
+    company_text,
+    analysis_type: str = "public",
+    evidence_sources: list[str] | None = None,
+):
+    # analysis_type / evidence_sources are provenance/display metadata
+    # only (see build_provenance_context above) -- they flow straight
+    # through to AnalysisContext and never influence research, pillar
+    # analysis, or scoring. Defaults keep every pre-existing caller
+    # (text, website, calibration, the CLI) behaving exactly as before;
+    # only /analyze-pdf and /analyze pass non-default values.
     research_result = enrich_research(company_text)
 
     research_context = research_result["research_brief"]
@@ -196,6 +271,8 @@ def run_due_diligence(company_text):
         search_query=search_query,
         research_brief=research_context,
         sources=sources,
+        analysis_type=analysis_type,
+        evidence_sources=evidence_sources,
     )
 
     market_score = get_pillar_score(sie_analysis.market)
@@ -229,6 +306,8 @@ def run_due_diligence(company_text):
         search_query=search_query,
         research_brief=research_context,
         sources=sources,
+        analysis_type=analysis_type,
+        evidence_sources=evidence_sources,
     )
 
     overall_score = sie_analysis.startup_intelligence_score

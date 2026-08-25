@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import ValidationError as PydanticValidationError
 from app.database.db import (create_tables,
                          create_score_history_table, 
                          save_analysis, 
@@ -27,13 +28,13 @@ from app.database.db import (create_tables,
                          get_sps_history
 )
 
-from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest
-from app.workflows.due_diligence_workflow import run_due_diligence
+from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH
+from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 import json
 import os
 import traceback
-from app.pdf_extractor import extract_text_from_pdf
+from app.pdf_extractor import extract_text_from_pdf, MAX_PDF_BYTES, PdfExtractionError
 from app.website_scrapper import extract_text_from_website
 from app.reporting.pdf_generator import generate_pdf_report
 
@@ -226,6 +227,268 @@ def delete_saved_analysis(analysis_id: int):
         "message": "Analysis deleted successfully"
     }
 
+# Unified Multi-Source Analyze Startup: three maxed-out sources joined
+# together could otherwise be far larger than any single source was ever
+# bounded to (company_text alone is capped at MAX_COMPANY_TEXT_LENGTH,
+# but website/PDF extraction have their own separate byte-level caps with
+# no shared character-count ceiling) -- this bounds the ASSEMBLED result,
+# after every individual source has already validated on its own.
+MAX_ASSEMBLED_TEXT_LENGTH = 150_000
+
+
+def _read_pdf_upload_sync(file: UploadFile) -> bytes:
+    """
+    Sync counterpart to /analyze-pdf's _read_pdf_upload (below), for use
+    inside POST /analyze's sync (non-async) path operation function --
+    see analyze_unified()'s concurrency comment for why. Reads the
+    upload's underlying file object directly (UploadFile.file, a plain
+    SpooledTemporaryFile) in bounded chunks -- no `await` needed here,
+    since it's FastAPI's automatic threadpool dispatch for a sync route
+    that keeps this off the event loop, not anything async in this
+    function itself. Still fully in-memory, still no temporary files.
+    """
+    chunks: list[bytes] = []
+    total = 0
+
+    while True:
+        chunk = file.file.read(64 * 1024)
+
+        if not chunk:
+            break
+
+        total += len(chunk)
+
+        if total > MAX_PDF_BYTES:
+            raise PdfExtractionError(
+                f"That PDF is too large to analyze (max "
+                f"{MAX_PDF_BYTES // (1024 * 1024)} MB)."
+            )
+
+        chunks.append(chunk)
+
+    return b"".join(chunks)
+
+
+@app.post("/analyze", response_model=StartupAnalysisResponse)
+def analyze_unified(
+    website_url: str | None = Form(None),
+    company_text: str | None = Form(None),
+    pdf: UploadFile | None = File(None),
+):
+    # Unified Multi-Source Analyze Startup: website, pitch deck, and
+    # user-provided text are evidence SOURCES feeding ONE canonical SIE
+    # analysis, not separate mutually-exclusive analysis products (see
+    # the Phase 1 design report and the Phase 2 product decision this
+    # implements). This does not replace /analyze-startup,
+    # /analyze-website, or /analyze-pdf -- they're untouched, kept for
+    # backward compatibility -- it's the new primary path the frontend
+    # now uses.
+    #
+    # Deliberately a sync `def`, not `async def`: FastAPI/Starlette
+    # automatically runs a sync path operation in a worker thread, which
+    # is what keeps the multi-minute pipeline call below from blocking
+    # the event loop and starving concurrent requests (GET /health,
+    # /analytics, ...) -- the exact bug /analyze-pdf has today from being
+    # `async def` with fully synchronous, blocking work inside it. No
+    # queue/worker architecture needed for this -- running synchronously
+    # in a thread FastAPI already provides is the smallest idiomatic fix,
+    # deliberately not applied to /analyze-pdf itself in this change.
+    website_url = website_url.strip() if website_url else None
+    company_text = company_text.strip() if company_text else None
+    has_pdf = pdf is not None and bool(pdf.filename)
+
+    if not website_url and not company_text and not has_pdf:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "Provide at least one of: company website, pitch deck, or "
+                "company information."
+            ),
+        )
+
+    # Product decision: an explicitly supplied source that fails
+    # validation/extraction rejects the WHOLE request before the
+    # expensive pipeline runs -- never silently dropped in favor of
+    # whatever other sources happened to succeed. A user who supplied a
+    # website and a deck must get an analysis that used both, or a clear
+    # error, never a silent website-only analysis they'd have no reason
+    # to suspect was incomplete.
+    website_text = None
+    pdf_text = None
+
+    if website_url:
+        try:
+            validated_url = WebsiteAnalysisRequest(url=website_url)
+        except PydanticValidationError:
+            raise HTTPException(
+                status_code=400,
+                detail="Website URL must start with http:// or https://",
+            )
+
+        try:
+            website_text = extract_text_from_website(validated_url.url)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        except Exception:
+            traceback.print_exc()
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "That website could not be retrieved. Please check the "
+                    "URL and try again."
+                ),
+            )
+
+    if has_pdf:
+        if not pdf.filename.lower().endswith(".pdf"):
+            raise HTTPException(
+                status_code=400, detail="Only PDF files are supported."
+            )
+
+        try:
+            pdf_bytes = _read_pdf_upload_sync(pdf)
+            pdf_text = extract_text_from_pdf(pdf_bytes)
+        except ValueError as e:
+            raise HTTPException(status_code=400, detail=str(e))
+        except Exception:
+            traceback.print_exc()
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "That PDF could not be read. Please check the file and "
+                    "try again."
+                ),
+            )
+
+    if company_text:
+        # Reuses StartupAnalysisRequest's own bound (MAX_COMPANY_TEXT_LENGTH)
+        # rather than duplicating the number -- company_text here is a raw
+        # Form field, not something Pydantic validates on the way in, so
+        # this is what actually enforces the same limit /analyze-startup
+        # already does.
+        try:
+            StartupAnalysisRequest(company_text=company_text)
+        except PydanticValidationError:
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "Additional company information must be no more than "
+                    f"{MAX_COMPANY_TEXT_LENGTH:,} characters."
+                ),
+            )
+
+    assembled_text = assemble_multi_source_text(
+        website_text=website_text,
+        pdf_text=pdf_text,
+        user_text=company_text,
+    )
+
+    if len(assembled_text) > MAX_ASSEMBLED_TEXT_LENGTH:
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "The combined information from your sources is too long "
+                f"to analyze (max {MAX_ASSEMBLED_TEXT_LENGTH:,} characters "
+                "combined). Please shorten one or more sources."
+            ),
+        )
+
+    # Unified Multi-Source Analyze Startup, Provenance: evidence_sources
+    # is the real, non-mutually-exclusive record of what fed this
+    # analysis -- activates the already-existing (previously dormant)
+    # AnalysisContext.evidence_sources list field, no new field added.
+    # public_research is always included since enrich_research() always
+    # runs inside run_due_diligence() below. analysis_type stays a single
+    # derived DISPLAY label only (backward compatible with the existing
+    # Startup Profile badge) via the exact deterministic rule specified:
+    # pitch_deck present wins, otherwise public. Neither field is read by
+    # scoring, evidence extraction, or any pillar analysis.
+    evidence_sources: list[str] = []
+
+    if website_text:
+        evidence_sources.append("website")
+
+    if pdf_text:
+        evidence_sources.append("pitch_deck")
+
+    if company_text:
+        evidence_sources.append("company_description")
+
+    evidence_sources.append("public_research")
+
+    analysis_type = "pitch_deck" if pdf_text else "public"
+
+    try:
+        results = run_due_diligence(
+            assembled_text,
+            analysis_type=analysis_type,
+            evidence_sources=evidence_sources,
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "The analysis could not be completed. This can happen if a "
+                "research or AI provider is temporarily unavailable. Please "
+                "try again."
+            ),
+        )
+
+    try:
+        # Persist the assembled, labeled multi-source text as
+        # company_text rather than picking one arbitrary source --
+        # nothing supplied is silently left out of the stored record.
+        save_analysis(
+            company_text=assembled_text,
+            summary=results["summary"],
+            risk_analysis=results["risk_analysis"],
+            competitor_analysis=results["competitor_analysis"],
+            memo=results["memo"],
+            structured_analysis=results["structured_analysis"],
+            investment_score=results["investment_score"],
+            founder_analysis=results["founder_analysis"].model_dump(),
+            market_analysis=results["market_analysis"].model_dump(),
+            sources=results["sources"],
+            traction_analysis=results["traction_analysis"].model_dump(),
+            methodology=results["sie_analysis"].model_dump(mode="json"),
+            market_score=results["market_score"],
+            team_score=results["team_score"],
+            product_score=results["product_score"],
+            competition_score=results["competition_score"],
+            traction_score=results["traction_score"],
+            financial_score=results["financial_score"],
+            overall_score=results["overall_score"],
+            recommendation=results["recommendation"],
+            readiness_score=results["readiness_score"],
+            readiness_summary=results["readiness_summary"]
+        )
+    except Exception:
+        # Distinct from the pipeline failure above on purpose, same as
+        # every other ingestion endpoint: the (expensive, multi-minute)
+        # analysis DID complete here -- only persisting it failed.
+        # save_score_history() is deliberately not called here, for the
+        # same established reason: Rankings/Search/Dashboard/SPS History
+        # all read analyses.methodology JSONB directly, not the legacy
+        # score_history table.
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "The analysis completed but could not be saved. Please try "
+                "again."
+            ),
+        )
+
+    sie_analysis = results["sie_analysis"]
+
+    return StartupAnalysisResponse(
+        context=sie_analysis.context,
+        startup_scorecard=sie_analysis.startup_scorecard,
+        methodology=sie_analysis,
+    )
+
+
 @app.post(
     "/analyze-startup",
     response_model=StartupAnalysisResponse
@@ -326,17 +589,80 @@ def analyze_startup(request: StartupAnalysisRequest):
     
 
 
+async def _read_pdf_upload(file: UploadFile) -> bytes:
+    """
+    Reads the uploaded file in bounded chunks and aborts as soon as the
+    running total exceeds MAX_PDF_BYTES, instead of first buffering an
+    arbitrarily large upload fully into memory and only checking its
+    size afterward -- this is what actually enforces the cap as a
+    resource protection during upload, not just a post-hoc validation
+    once the whole thing is already sitting in memory. Still entirely
+    in-memory -- no temporary files.
+    """
+    chunks: list[bytes] = []
+    total = 0
+
+    while True:
+        chunk = await file.read(64 * 1024)
+
+        if not chunk:
+            break
+
+        total += len(chunk)
+
+        if total > MAX_PDF_BYTES:
+            raise PdfExtractionError(
+                f"That PDF is too large to analyze (max "
+                f"{MAX_PDF_BYTES // (1024 * 1024)} MB)."
+            )
+
+        chunks.append(chunk)
+
+    return b"".join(chunks)
+
+
 @app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
 async def analyze_pdf(file: UploadFile = File(...)):
-    if not file.filename.lower().endswith(".pdf"):
+    # Pitch Deck / PDF Ingestion: same three-stage fail-closed shape as
+    # /analyze-startup and /analyze-website. Retrieval/extraction/
+    # validation failures (bad, oversized, corrupt, encrypted, or
+    # non-PDF upload) are the caller's to fix and get a 400 built from
+    # pdf_extractor's own safe, already-user-facing message -- same
+    # contract WebsiteFetchError uses for /analyze-website. Pipeline and
+    # persistence failures are ours, and get the exact same generic,
+    # non-leaking 502/500 responses every other ingestion path uses.
+    if not file.filename or not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
 
     try:
-        pdf_bytes = await file.read()
+        pdf_bytes = await _read_pdf_upload(file)
         extracted_text = extract_text_from_pdf(pdf_bytes)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "That PDF could not be read. Please check the file and "
+                "try again."
+            ),
+        )
 
-        results = run_due_diligence(extracted_text)
+    try:
+        results = run_due_diligence(extracted_text, analysis_type="pitch_deck")
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "The analysis could not be completed. This can happen if a "
+                "research or AI provider is temporarily unavailable. Please "
+                "try again."
+            ),
+        )
 
+    try:
         save_analysis(
             company_text=extracted_text,
             summary=results["summary"],
@@ -360,42 +686,32 @@ async def analyze_pdf(file: UploadFile = File(...)):
             recommendation=results["recommendation"],
             readiness_score=results["readiness_score"],
             readiness_summary=results["readiness_summary"]
-
-            
-            
         )
-
-        sie_analysis = results["sie_analysis"]
-
-        return StartupAnalysisResponse(
-        context=sie_analysis.context,
-        startup_scorecard=sie_analysis.startup_scorecard,
-        methodology=sie_analysis,
-)
-        
-
-    except ValueError as e:
-        # ValueError here is always one of pdf_extractor.py's own
-        # deliberate, controlled messages (e.g. "No readable text found in
-        # PDF.") -- safe to show as-is, unlike the generic branch below.
-        raise HTTPException(status_code=400, detail=str(e))
-
     except Exception:
-        # Staging Deployment Preparation: this previously returned
-        # str(e) directly -- safe to overlook while the endpoint was only
-        # ever reachable from a local dev server, but staging exposes this
-        # backend publicly even though the frontend doesn't call this
-        # endpoint yet. str(e) here could be an OpenAI/DB/PDF-library
-        # internal error message, not one of our own controlled strings.
-        # Same fail-closed pattern as /analyze-startup: log server-side,
-        # never leak the raw exception to the client.
+        # Distinct from the pipeline failure above on purpose, same as
+        # /analyze-startup and /analyze-website: the (expensive,
+        # multi-minute) analysis DID complete here -- only persisting it
+        # failed. save_score_history() is deliberately not called here,
+        # for the same reason already established for /analyze-website:
+        # Rankings/Search/Dashboard/SPS History all read
+        # analyses.methodology JSONB directly, not the legacy
+        # score_history table.
         traceback.print_exc()
         raise HTTPException(
             status_code=500,
             detail=(
-                "The analysis could not be completed. Please try again."
+                "The analysis completed but could not be saved. Please try "
+                "again."
             ),
         )
+
+    sie_analysis = results["sie_analysis"]
+
+    return StartupAnalysisResponse(
+        context=sie_analysis.context,
+        startup_scorecard=sie_analysis.startup_scorecard,
+        methodology=sie_analysis,
+    )
 
 
 

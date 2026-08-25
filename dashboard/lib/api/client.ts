@@ -2,6 +2,11 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
 
 type ApiFetchOptions = {
   method?: "GET" | "POST";
+  // A FormData body (Pitch Deck Upload's multipart request) is sent
+  // as-is with no Content-Type header set -- the browser fills in
+  // `multipart/form-data; boundary=...` itself, which it can only do
+  // correctly if this code doesn't set Content-Type first. Anything
+  // else is treated as a JSON body, exactly as before.
   body?: unknown;
   // Only pass this for calls that genuinely need a hard upper bound (the
   // real, multi-minute analysis call). Every existing GET caller omits it
@@ -23,16 +28,24 @@ export async function apiFetch<T>(
       ? setTimeout(() => controller.abort(), options.timeoutMs)
       : undefined;
 
+  const isFormData =
+    typeof FormData !== "undefined" && options?.body instanceof FormData;
+
   let response: Response;
 
   try {
     response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: options?.method ?? "GET",
       headers:
-        options?.body !== undefined
+        options?.body !== undefined && !isFormData
           ? { "Content-Type": "application/json" }
           : undefined,
-      body: options?.body !== undefined ? JSON.stringify(options.body) : undefined,
+      body:
+        options?.body === undefined
+          ? undefined
+          : isFormData
+            ? (options.body as FormData)
+            : JSON.stringify(options.body),
       signal: controller?.signal,
     });
   } catch {

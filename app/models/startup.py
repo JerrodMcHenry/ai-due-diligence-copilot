@@ -9,16 +9,21 @@ from datetime import datetime
 
 ConfidenceLevel = Literal["Low", "Medium", "High"]
 
+# MVP hardening: bounds on oversized/empty input. Pydantic rejects a
+# violating request with a 422 before the route body (and the real,
+# multi-minute, paid pipeline call) ever runs. 50,000 characters is a
+# generous ceiling for a company description -- comfortably above any
+# real submission seen in testing (a few thousand characters) -- meant
+# to stop a pathological paste (an entire scraped site, a whole PDF's
+# raw text, etc.), not to constrain legitimate use. Pulled out to a
+# constant (Unified Multi-Source Analyze Startup) so POST /analyze can
+# reuse the exact same bound when validating its raw company_text form
+# field via this same model, rather than duplicating the number.
+MAX_COMPANY_TEXT_LENGTH = 50_000
+
 
 class StartupAnalysisRequest(BaseModel):
-    # MVP hardening: bounds on oversized/empty input. Pydantic rejects a
-    # violating request with a 422 before the route body (and the real,
-    # multi-minute, paid pipeline call) ever runs. 50,000 characters is a
-    # generous ceiling for a company description -- comfortably above any
-    # real submission seen in testing (a few thousand characters) -- meant
-    # to stop a pathological paste (an entire scraped site, a whole PDF's
-    # raw text, etc.), not to constrain legitimate use.
-    company_text: str = Field(min_length=1, max_length=50_000)
+    company_text: str = Field(min_length=1, max_length=MAX_COMPANY_TEXT_LENGTH)
 
 
 class WebsiteAnalysisRequest(BaseModel):

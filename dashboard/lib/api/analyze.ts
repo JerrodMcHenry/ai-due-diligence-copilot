@@ -31,3 +31,59 @@ export function analyzeWebsite(url: string): Promise<AnalyzeStartupResponse> {
     timeoutMs: ANALYZE_TIMEOUT_MS,
   });
 }
+
+// Pitch Deck / PDF Ingestion: same canonical response shape again --
+// POST /analyze-pdf extracts company_text from the uploaded PDF
+// server-side (see app/pdf_extractor.py), then runs the exact same
+// pipeline. Sent as multipart/form-data (a FormData body), the one
+// request shape apiFetch's JSON-only path can't express -- see
+// client.ts's isFormData handling.
+export function analyzePdf(file: File): Promise<AnalyzeStartupResponse> {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  return apiFetch<AnalyzeStartupResponse>("/analyze-pdf", {
+    method: "POST",
+    body: formData,
+    timeoutMs: ANALYZE_TIMEOUT_MS,
+  });
+}
+
+// Unified Multi-Source Analyze Startup: website, pitch deck, and
+// user-provided text are evidence sources feeding ONE canonical
+// analysis, not separate mutually-exclusive modes -- POST /analyze
+// accepts any combination of the three (at least one required) and
+// assembles them server-side (see
+// app/workflows/due_diligence_workflow.py::assemble_multi_source_text)
+// before running the exact same pipeline. analyzeStartup/analyzeWebsite/
+// analyzePdf above are kept as-is for backward compatibility, but the
+// Analyze Startup page now calls this instead.
+export function analyzeMultiSource({
+  websiteUrl,
+  pdfFile,
+  companyText,
+}: {
+  websiteUrl?: string;
+  pdfFile?: File | null;
+  companyText?: string;
+}): Promise<AnalyzeStartupResponse> {
+  const formData = new FormData();
+
+  if (websiteUrl) {
+    formData.append("website_url", websiteUrl);
+  }
+
+  if (pdfFile) {
+    formData.append("pdf", pdfFile);
+  }
+
+  if (companyText) {
+    formData.append("company_text", companyText);
+  }
+
+  return apiFetch<AnalyzeStartupResponse>("/analyze", {
+    method: "POST",
+    body: formData,
+    timeoutMs: ANALYZE_TIMEOUT_MS,
+  });
+}

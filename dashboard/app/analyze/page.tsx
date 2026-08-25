@@ -1,42 +1,31 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import PageHeader from "@/components/layout/PageHeader";
-import { analyzeStartup, analyzeWebsite } from "@/lib/api";
+import { analyzeMultiSource } from "@/lib/api";
 
-// Website / URL Ingestion: the two ways to start an analysis. "url" is
-// the primary/simple path (just paste a company website), "text" is the
-// original free-form path this page has always had. Both funnel into the
-// exact same canonical pipeline/response shape -- only which API client
-// function gets called (and which input control is shown) differs.
-type Mode = "url" | "text";
+// Unified Multi-Source Analyze Startup: company website, pitch deck, and
+// additional company information are evidence SOURCES feeding one
+// canonical analysis, not separate mutually-exclusive modes -- all three
+// fields are shown together, any combination (including just one) is
+// valid, and a single submit sends whichever were filled in to POST
+// /analyze (see lib/api/analyze.ts::analyzeMultiSource). This replaces
+// the earlier three-tab mode switcher.
 
-// Minimum characters before we bother sending a request -- catches the
-// obviously-empty/junk case client-side without pretending to validate
-// content quality (that's the real analysis's job, not this page's).
-const MIN_LENGTH = 40;
+// Client-side only, matching app/pdf_extractor.py's real cap -- catches
+// an obviously-oversized file before spending a network round trip. The
+// backend re-validates independently (size, magic bytes, page count,
+// encryption, ...) regardless of what passes here.
+const MAX_PDF_BYTES = 15 * 1024 * 1024;
 
-const PLACEHOLDER = `Example:
+const COMPANY_TEXT_PLACEHOLDER = `Anything else worth including that the website or pitch deck might not
+capture -- recent traction or metrics, funding details, specific
+customers, financial details, or context on stage/business model.
 
-Company: Acme Robotics
-What it does: Acme builds autonomous inventory-scanning robots for mid-size warehouses.
-Industry: Industrial robotics / supply chain
-Business model: Hardware-as-a-service -- monthly subscription per robot, plus a per-warehouse onboarding fee.
-Stage: Series A
-Product: Scanner robots plus a fleet-management dashboard; integrates with common WMS platforms.
-Customers: 12 paying warehouse operators, up from 3 a year ago.
-Traction: $1.8M ARR, up from $400K last year. Net revenue retention ~115%.
-Funding: Raised a $9M Series A in 2025; $11M raised to date.
-Team: Founders previously built warehouse automation elsewhere; 18 employees.
-Financials (if known): ~70% gross margin, 14 months of runway.
-
-Include whatever you actually know: company name, what it does, industry,
-business model, stage, product, customers, traction, funding, team, and any
-financial details. More real detail produces a more complete analysis --
-you don't need to fill in every line above, and you don't need to guess at
-anything you don't know.`;
+This is optional and supplementary -- it doesn't need to stand on its
+own the way it would if it were your only source.`;
 
 // What the pipeline actually does, in order -- shown as a static list of
 // what SIE evaluates, never as a checklist that claims a given stage has
@@ -58,30 +47,16 @@ function formatElapsed(totalSeconds: number): string {
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
 }
 
-function validate(text: string): string | null {
-  const trimmed = text.trim();
-
-  if (trimmed.length === 0) {
-    return "Enter some information about the startup before submitting.";
-  }
-
-  if (trimmed.length < MIN_LENGTH) {
-    return `Add a bit more detail (at least ${MIN_LENGTH} characters) so SIE has enough to work with -- company name, what it does, industry, stage, traction, and so on.`;
-  }
-
-  return null;
-}
-
-// Client-side check only -- catches the obviously-wrong case (empty,
-// missing scheme) before spending a network round trip. The backend
-// (WebsiteAnalysisRequest + app/website_scrapper.py) is the actual
-// source of truth for what's a safe, fetchable URL and re-validates
-// independently regardless of what passes here.
-function validateUrl(url: string): string | null {
+// Every field below is individually optional -- validate its own shape
+// only when something was actually entered, then separately require that
+// at least one of the three ended up supplied. Same client-side-only
+// contract as before: catches the obvious case before a network round
+// trip, the backend re-validates every source independently regardless.
+function validateWebsiteUrl(url: string): string | null {
   const trimmed = url.trim();
 
   if (trimmed.length === 0) {
-    return "Enter a company website URL before submitting.";
+    return null;
   }
 
   if (!/^https?:\/\//i.test(trimmed)) {
@@ -91,12 +66,55 @@ function validateUrl(url: string): string | null {
   return null;
 }
 
+function validatePdfFile(file: File | null): string | null {
+  if (!file) {
+    return null;
+  }
+
+  if (!file.name.toLowerCase().endsWith(".pdf")) {
+    return "Only PDF files are supported.";
+  }
+
+  if (file.size > MAX_PDF_BYTES) {
+    return `That PDF is too large to analyze (max ${MAX_PDF_BYTES / (1024 * 1024)} MB).`;
+  }
+
+  return null;
+}
+
+function validateForm(
+  websiteUrl: string,
+  pdfFile: File | null,
+  companyText: string
+): string | null {
+  const urlError = validateWebsiteUrl(websiteUrl);
+  if (urlError) {
+    return urlError;
+  }
+
+  const pdfError = validatePdfFile(pdfFile);
+  if (pdfError) {
+    return pdfError;
+  }
+
+  const hasWebsite = websiteUrl.trim().length > 0;
+  const hasPdf = pdfFile !== null;
+  const hasText = companyText.trim().length > 0;
+
+  if (!hasWebsite && !hasPdf && !hasText) {
+    return "Provide at least one of: company website, pitch deck, or company information.";
+  }
+
+  return null;
+}
+
 export default function AnalyzeStartupPage() {
   const router = useRouter();
 
-  const [mode, setMode] = useState<Mode>("url");
-  const [companyText, setCompanyText] = useState("");
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
+  const [companyText, setCompanyText] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
@@ -150,8 +168,7 @@ export default function AnalyzeStartupPage() {
       return;
     }
 
-    const validationError =
-      mode === "url" ? validateUrl(websiteUrl) : validate(companyText);
+    const validationError = validateForm(websiteUrl, pdfFile, companyText);
 
     if (validationError) {
       setStatus("error");
@@ -164,10 +181,11 @@ export default function AnalyzeStartupPage() {
     setElapsedSeconds(0);
 
     try {
-      const response =
-        mode === "url"
-          ? await analyzeWebsite(websiteUrl.trim())
-          : await analyzeStartup(companyText);
+      const response = await analyzeMultiSource({
+        websiteUrl: websiteUrl.trim() || undefined,
+        pdfFile: pdfFile ?? undefined,
+        companyText: companyText.trim() || undefined,
+      });
       const companyName = response.context?.company_name?.trim();
 
       if (!companyName) {
@@ -184,10 +202,7 @@ export default function AnalyzeStartupPage() {
       // pass end-to-end, same contract as every other link into that route.
       router.push(`/startup/${encodeURIComponent(companyName)}`);
     } catch (caughtError) {
-      console.error(
-        mode === "url" ? "Analyze Website failed:" : "Analyze Startup failed:",
-        caughtError
-      );
+      console.error("Analyze Startup failed:", caughtError);
 
       const message =
         caughtError instanceof Error ? caughtError.message : "";
@@ -207,75 +222,106 @@ export default function AnalyzeStartupPage() {
     <>
       <PageHeader
         title="Analyze Startup"
-        subtitle="Give SIE what you know about a startup, and it will research, evaluate, and score it against the Methodology v2 intelligence framework, then build a full Startup Profile."
+        subtitle="Provide a company website, a pitch deck, additional information, or any combination -- SIE will combine what you give it with its own research and build one full Startup Profile against the Methodology v2 intelligence framework."
       />
 
       {!isSubmitting ? (
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div
-            role="radiogroup"
-            aria-label="Analysis input method"
-            className="inline-flex rounded-lg border border-slate-800 bg-slate-900 p-1"
-          >
-            {(["url", "text"] as const).map((candidate) => (
-              <button
-                key={candidate}
-                type="button"
-                role="radio"
-                aria-checked={mode === candidate}
-                onClick={() => {
-                  setMode(candidate);
-                  setError(null);
-                }}
-                className={`min-h-9 rounded-md px-4 text-sm font-semibold transition-colors ${
-                  mode === candidate
-                    ? "bg-blue-600 text-white"
-                    : "text-slate-400 hover:text-white"
-                }`}
-              >
-                {candidate === "url" ? "Website URL" : "Company Information"}
-              </button>
-            ))}
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div>
+            <label
+              htmlFor="website-url"
+              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+            >
+              Company Website
+            </label>
+
+            <input
+              id="website-url"
+              type="text"
+              inputMode="url"
+              value={websiteUrl}
+              onChange={(event) => setWebsiteUrl(event.target.value)}
+              placeholder="https://example.com"
+              className="mt-2 w-full rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            />
           </div>
 
-          {mode === "url" ? (
-            <div>
-              <label htmlFor="website-url" className="sr-only">
-                Company website URL
-              </label>
+          <div>
+            <label
+              htmlFor="pitch-deck-file"
+              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+            >
+              Pitch Deck
+            </label>
 
-              <input
-                id="website-url"
-                type="text"
-                inputMode="url"
-                value={websiteUrl}
-                onChange={(event) => setWebsiteUrl(event.target.value)}
-                placeholder="https://example.com"
-                className="w-full rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-              />
+            <input
+              id="pitch-deck-file"
+              ref={pdfInputRef}
+              type="file"
+              accept="application/pdf,.pdf"
+              onChange={(event) =>
+                setPdfFile(event.target.files?.[0] ?? null)
+              }
+              className="hidden"
+            />
 
-              <p className="mt-2 text-xs text-slate-500">
-                SIE will read the company&rsquo;s website, research it
-                further, and build a full Startup Profile from what it
-                finds.
-              </p>
+            <div className="mt-2">
+              {pdfFile ? (
+                <div className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-900 px-4 py-3">
+                  <span className="truncate text-sm text-white">
+                    {pdfFile.name}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setPdfFile(null);
+                      // Reset the underlying input so choosing the same
+                      // file again after removing it still fires
+                      // onChange (the browser otherwise treats it as an
+                      // unchanged selection and stays silent).
+                      if (pdfInputRef.current) {
+                        pdfInputRef.current.value = "";
+                      }
+                    }}
+                    className="shrink-0 text-sm font-semibold text-slate-400 hover:text-white"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ) : (
+                <label
+                  htmlFor="pitch-deck-file"
+                  className="flex min-h-11 w-full cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-300 transition-colors hover:border-blue-500 hover:text-white"
+                >
+                  Choose PDF file&hellip;
+                </label>
+              )}
             </div>
-          ) : (
-            <div>
-              <label htmlFor="company-text" className="sr-only">
-                Startup information
-              </label>
+          </div>
 
-              <textarea
-                id="company-text"
-                value={companyText}
-                onChange={(event) => setCompanyText(event.target.value)}
-                placeholder={PLACEHOLDER}
-                rows={16}
-                className="w-full resize-y rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 font-mono text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-              />
-            </div>
-          )}
+          <div>
+            <label
+              htmlFor="company-text"
+              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+            >
+              Additional Company Information
+            </label>
+
+            <textarea
+              id="company-text"
+              value={companyText}
+              onChange={(event) => setCompanyText(event.target.value)}
+              placeholder={COMPANY_TEXT_PLACEHOLDER}
+              rows={8}
+              className="mt-2 w-full resize-y rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 font-mono text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+            />
+          </div>
+
+          <p className="text-xs text-slate-500">
+            At least one source is required. Provide any combination --
+            SIE combines everything you give it into one analysis.
+          </p>
 
           {error ? (
             <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
