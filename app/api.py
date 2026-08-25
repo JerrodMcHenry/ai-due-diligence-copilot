@@ -36,6 +36,7 @@ from app.database.db import (create_tables,
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
+from app.auth import AuthenticatedUser, RequireAuth
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 import json
 import os
@@ -295,7 +296,18 @@ def analyze_unified(
     website_url: str | None = Form(None),
     company_text: str | None = Form(None),
     pdf: UploadFile | None = File(None),
+    current_user: AuthenticatedUser = RequireAuth,
 ):
+    # SIE Authentication Phase 2: requires a valid Clerk-authenticated
+    # user -- RequireAuth resolves before this function body runs, so an
+    # unauthenticated request is rejected with a clean 401 before any
+    # extraction/pipeline work (and therefore before any paid OpenAI/
+    # Tavily cost) ever happens. current_user is intentionally unused
+    # beyond that: authentication means "this user exists" (see
+    # get_or_create_user()'s docstring), never "this user owns this
+    # startup" -- no startup_membership is created here or anywhere in
+    # this function, by design.
+    #
     # Unified Multi-Source Analyze Startup: website, pitch deck, and
     # user-provided text are evidence SOURCES feeding ONE canonical SIE
     # analysis, not separate mutually-exclusive analysis products (see
@@ -514,7 +526,16 @@ def analyze_unified(
     "/analyze-startup",
     response_model=StartupAnalysisResponse
 )
-def analyze_startup(request: StartupAnalysisRequest):
+def analyze_startup(
+    request: StartupAnalysisRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    # SIE Authentication Phase 2: this legacy endpoint triggers the exact
+    # same paid pipeline as /analyze, so it requires the same
+    # authentication -- no unauthenticated bypass around the frontend's
+    # protected path. See /analyze's own comment for what RequireAuth
+    # does and doesn't do (no ownership/membership created here either).
+    #
     # MVP hardening: this call is the one place a real user actually hits
     # this endpoint today (the frontend Analyze Startup page). It runs a
     # 3-5 minute pipeline with no internal retry-exhaustion boundary of its
@@ -643,7 +664,13 @@ async def _read_pdf_upload(file: UploadFile) -> bytes:
 
 
 @app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
-async def analyze_pdf(file: UploadFile = File(...)):
+async def analyze_pdf(
+    file: UploadFile = File(...),
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    # SIE Authentication Phase 2: same paid pipeline as /analyze, same
+    # required authentication -- see /analyze's own comment.
+    #
     # Pitch Deck / PDF Ingestion: same three-stage fail-closed shape as
     # /analyze-startup and /analyze-website. Retrieval/extraction/
     # validation failures (bad, oversized, corrupt, encrypted, or
@@ -738,7 +765,13 @@ async def analyze_pdf(file: UploadFile = File(...)):
 
 
 @app.post("/analyze-website", response_model=StartupAnalysisResponse)
-def analyze_website(request: WebsiteAnalysisRequest):
+def analyze_website(
+    request: WebsiteAnalysisRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    # SIE Authentication Phase 2: same paid pipeline as /analyze, same
+    # required authentication -- see /analyze's own comment.
+    #
     # Website / URL Ingestion: same fail-closed shape as /analyze-startup,
     # with one extra stage in front for retrieval. Retrieval/validation
     # failures (bad, unreachable, or disallowed URL) are the caller's to

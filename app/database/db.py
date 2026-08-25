@@ -230,6 +230,36 @@ def create_users_table():
     print("users table created successfully.")
 
 
+def get_or_create_user(user_id: str, email: str | None = None) -> None:
+    """
+    SIE Authentication Phase 2 -- lazy users-table synchronization. Called
+    by app/auth.py's get_current_user() dependency on every successfully
+    authenticated request. Idempotent: ON CONFLICT DO NOTHING, so a
+    user's first authenticated request creates their row and every
+    request after that is a safe no-op -- never a duplicate, never an
+    error, no explicit "does this user already exist" check needed first.
+
+    Deliberately does not update email on conflict: Clerk is the actual
+    identity source of truth (see the SIE Accounts & Ownership
+    architecture design) -- this table exists only so
+    startup_memberships/saved_startups have a stable local foreign-key
+    target, not to mirror a Clerk profile. Whatever email was present (or
+    not) on a user's first authenticated request is what's stored;
+    keeping it in sync with Clerk on every change is explicitly out of
+    scope here (no webhook infrastructure, per that design).
+
+    This function creates ONLY a users row. It never touches
+    startup_memberships or saved_startups -- authentication means "this
+    user exists," never "this user owns a startup."
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            INSERT INTO users (id, email)
+            VALUES (:id, :email)
+            ON CONFLICT (id) DO NOTHING
+        """), {"id": user_id, "email": email})
+
+
 def create_startup_memberships_table():
     with engine.begin() as connection:
         connection.execute(text("""

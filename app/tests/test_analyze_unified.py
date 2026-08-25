@@ -19,6 +19,15 @@ AnalysisContext plumbing -- only the six pillar LLM calls and Tavily
 research are skipped -- so evidence_sources/analysis_type threading is
 exercised for real, not just asserted on the fake's own input echo.
 
+SIE Authentication Phase 2 added a real Clerk-JWT auth gate in front of
+these same endpoints. This file is about multi-source assembly, not
+auth -- auth itself has its own dedicated coverage in
+test_backend_authentication.py -- so it bypasses the gate for its own
+process lifetime via FastAPI's dependency_overrides, returning a fixed
+fake identity instead of verifying a real token. No test below asserts
+anything about who this identity is; it only exists so requests reach
+the endpoint bodies under test at all.
+
 Run with:
     python -m app.tests.test_analyze_unified
 """
@@ -30,6 +39,7 @@ from fastapi.testclient import TestClient
 from reportlab.pdfgen import canvas
 
 import app.api as api
+from app.auth import AuthenticatedUser, get_current_user
 from app.models.analysis import (
     ExecutionAnalysisResult,
     FinancialAnalysisResult,
@@ -51,6 +61,13 @@ FAKE_WEBSITE_TEXT = "Acme Robotics builds autonomous inventory-scanning robots."
 FAKE_PDF_TEXT = "Acme Robotics pitch deck content for extraction testing."
 
 client = TestClient(api.app)
+
+# See module docstring: this file tests multi-source assembly, not auth,
+# so it bypasses the real Clerk verification with a fixed fake identity
+# for its own process lifetime.
+api.app.dependency_overrides[get_current_user] = lambda: AuthenticatedUser(
+    user_id="test-user-analyze-unified"
+)
 
 
 def _make_pdf_bytes(text: str = FAKE_PDF_TEXT) -> bytes:

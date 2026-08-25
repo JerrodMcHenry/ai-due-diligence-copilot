@@ -26,6 +26,8 @@ performed** — this is preparation only.
 | `OPENAI_API_KEY` | Set manually in the Render dashboard | Secret — never commit |
 | `TAVILY_API_KEY` | Set manually in the Render dashboard | Secret — never commit |
 | `CORS_ALLOWED_ORIGINS` | Set manually in the Render dashboard | Comma-separated list of allowed frontend origins, e.g. `https://sie-staging.vercel.app`. Unset = local-dev-only origins (see `app/api.py`) |
+| `CLERK_ISSUER` | The Clerk instance's Frontend API URL, e.g. `https://your-app.clerk.accounts.dev` (dev) or `https://clerk.yourdomain.com` (production custom domain) — decode it from the `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` set on the frontend, or copy it from the Clerk Dashboard | Required for all four paid analyze endpoints to accept requests — see `app/auth.py`. **No safe default**: unlike `CORS_ALLOWED_ORIGINS`, an unset `CLERK_ISSUER` fails every authenticated request closed (401), it does not fall back to a guessed value |
+| `CLERK_AUTHORIZED_PARTIES` | Set manually in the Render dashboard | Comma-separated list of allowed frontend origins that may present a token, e.g. `https://sie-staging.vercel.app`. Unset = the same two local-dev origins `CORS_ALLOWED_ORIGINS` falls back to. Mirrors `CORS_ALLOWED_ORIGINS`'s own pattern; set both together |
 | `PYTHON_VERSION` | Set in `render.yaml` | Pinned to `3.12.5` to match the version this app has been tested against locally |
 
 ### Frontend (Vercel)
@@ -33,6 +35,30 @@ performed** — this is preparation only.
 | Variable | Value | Notes |
 |---|---|---|
 | `NEXT_PUBLIC_API_URL` | The deployed Render backend's public URL, e.g. `https://sie-backend-staging.onrender.com` | Must be set before the first Vercel build that needs to talk to staging data — it's baked in at build time as a `NEXT_PUBLIC_` var |
+| `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` | From the Clerk Dashboard → API keys | Safe to expose to the browser by design — it identifies the Clerk instance, it does not authenticate anything on its own |
+| `CLERK_SECRET_KEY` | From the Clerk Dashboard → API keys | Server-only — **never** prefix with `NEXT_PUBLIC_`. Used server-side by `@clerk/nextjs` (`ClerkProvider`, `proxy.ts`, `auth()`); never sent to the browser |
+
+Both are required at build time — `ClerkProvider` (rendered in the root
+layout, present on every page) throws if `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`
+is missing/invalid, so `npm run build` will fail without a real key pair. See
+"Local development (Clerk)" below for the no-account-needed dev option.
+
+## Local development (Clerk)
+
+Two ways to run `npm run dev` locally, in order of preference:
+
+1. **Keyless mode (no Clerk account needed)** — `@clerk/nextjs` 7.x ships a
+   "keyless" onboarding mode: with `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`/
+   `CLERK_SECRET_KEY` both unset, running `next dev` auto-provisions a
+   temporary, accountless Clerk application scoped to that dev server and
+   works immediately — no signup, no dashboard, no keys to copy. This does
+   **not** work for `next build` (a production build has no long-running dev
+   server to hold the temporary instance), so it's a `dev`-only convenience.
+2. **A real (free) Clerk application** — create one at
+   [clerk.com](https://clerk.com), copy its publishable/secret key pair into
+   `dashboard/.env.local` (not committed — see `dashboard/.gitignore`'s
+   existing `.env*` rule), required for `npm run build`/`npm start` and for
+   staging/production.
 
 ## Backend build/start commands
 
@@ -59,6 +85,19 @@ development behavior is unchanged. **Never set this to `*`.** Once the Vercel
 staging URL is known, set it as `CORS_ALLOWED_ORIGINS` on the Render service
 and redeploy (or Render will pick it up on the next deploy/restart).
 
+## Clerk backend auth setup
+
+`app/auth.py` verifies every request to the four paid analyze endpoints
+(`/analyze`, `/analyze-startup`, `/analyze-website`, `/analyze-pdf`) against
+Clerk's own public JWKS for `CLERK_ISSUER`, and (when present) checks the
+token's `azp` claim against `CLERK_AUTHORIZED_PARTIES`. All other endpoints —
+Dashboard/analytics, Rankings, Search, Startup Profile, `/health`, `/version`
+— stay public and need no Clerk configuration. Set `CLERK_ISSUER` and
+`CLERK_AUTHORIZED_PARTIES` on the Render backend once the Clerk application
+and Vercel staging URL are both known, alongside `CORS_ALLOWED_ORIGINS` in
+step 6 below — they're independent settings but change at the same point in
+the deploy sequence.
+
 ## Expected deployment order
 
 1. **Create the Render Blueprint** from `render.yaml` (Render dashboard → New →
@@ -72,8 +111,10 @@ and redeploy (or Render will pick it up on the next deploy/restart).
 4. **Note the backend's public URL** (e.g. `https://sie-backend-staging.onrender.com`).
 5. **Deploy the frontend to Vercel**, setting `NEXT_PUBLIC_API_URL` to that URL
    before the build.
-6. **Set `CORS_ALLOWED_ORIGINS`** on the Render backend to the Vercel URL from
-   step 5, then redeploy the backend so it picks up the new origin.
+6. **Set `CORS_ALLOWED_ORIGINS`, `CLERK_ISSUER`, and `CLERK_AUTHORIZED_PARTIES`**
+   on the Render backend (the latter two per "Clerk backend auth setup" above)
+   to the Vercel URL from step 5, then redeploy the backend so it picks up the
+   new origin/issuer.
 7. Run the health verification steps below.
 
 ## Health verification steps
@@ -83,13 +124,17 @@ and redeploy (or Render will pick it up on the next deploy/restart).
    and matches the current constant.
 3. Open the deployed frontend → Dashboard loads with an empty/zero state
    (fresh staging DB has no analyses yet — this is expected, not a bug).
-4. Analyze Startup → submit a real company → confirm the analysis completes,
-   redirects to its Startup Profile, and the profile renders (six pillars,
-   SPS, evidence).
+4. Sign in via Clerk, then Analyze Startup → submit a real company → confirm
+   the analysis completes, redirects to its Startup Profile, and the profile
+   renders (six pillars, SPS, evidence). Signed out, the same submission
+   should fail with a 401 surfaced as a "session expired, sign in" message,
+   not a silent failure or a 500.
 5. Confirm that company now appears in Rankings and Search on the deployed
    frontend.
 6. Check the browser console for CORS errors specifically — a misconfigured
-   `CORS_ALLOWED_ORIGINS` shows up immediately here as blocked requests.
+   `CORS_ALLOWED_ORIGINS` shows up immediately here as blocked requests. A
+   misconfigured `CLERK_ISSUER`/`CLERK_AUTHORIZED_PARTIES` instead shows up as
+   every authenticated submission returning 401 regardless of sign-in state.
 
 ## Rollback basics
 

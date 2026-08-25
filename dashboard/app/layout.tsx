@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import AppShell from "@/components/layout/AppShell";
 import ThemeProvider from "@/components/providers/ThemeProvider";
@@ -36,9 +37,16 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
       <body className="min-h-screen bg-background font-sans text-foreground antialiased">
-        <ThemeProvider>
-          <AppShell>{children}</AppShell>
-        </ThemeProvider>
+        {/* SIE Authentication Phase 1: ClerkProvider wraps the whole app,
+            same placement Clerk's own current Next.js App Router
+            quickstart uses (inside <body>, outside everything else) --
+            preserves the existing ThemeProvider/AppShell structure and
+            styling untouched underneath it. */}
+        <ClerkProvider>
+          <ThemeProvider>
+            <AppShell>{children}</AppShell>
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );

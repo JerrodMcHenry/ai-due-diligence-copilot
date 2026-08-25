@@ -13,6 +13,14 @@ type ApiFetchOptions = {
   // and keeps the browser's default (no) fetch timeout, unchanged from
   // before this file was extended.
   timeoutMs?: number;
+  // SIE Authentication Phase 2: a Clerk session token, attached as
+  // `Authorization: Bearer <token>`. Deliberately a per-call option, not
+  // global auth-awareness on apiFetch itself -- every existing public
+  // call site (Dashboard, Rankings, Search, Startup Profile) stays
+  // exactly as it was, most of them running in Server Components where
+  // there's no client-side Clerk token to attach anyway. Only the
+  // authenticated analyze call (see lib/api/analyze.ts) passes this.
+  token?: string | null;
 };
 
 // Extended (additive, backward compatible) for POST support -- every
@@ -31,15 +39,22 @@ export async function apiFetch<T>(
   const isFormData =
     typeof FormData !== "undefined" && options?.body instanceof FormData;
 
+  const headers: Record<string, string> = {};
+
+  if (options?.body !== undefined && !isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  if (options?.token) {
+    headers["Authorization"] = `Bearer ${options.token}`;
+  }
+
   let response: Response;
 
   try {
     response = await fetch(`${API_BASE_URL}${endpoint}`, {
       method: options?.method ?? "GET",
-      headers:
-        options?.body !== undefined && !isFormData
-          ? { "Content-Type": "application/json" }
-          : undefined,
+      headers: Object.keys(headers).length > 0 ? headers : undefined,
       body:
         options?.body === undefined
           ? undefined

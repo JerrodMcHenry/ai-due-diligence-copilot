@@ -58,14 +58,23 @@ export function analyzePdf(file: File): Promise<AnalyzeStartupResponse> {
 // before running the exact same pipeline. analyzeStartup/analyzeWebsite/
 // analyzePdf above are kept as-is for backward compatibility, but the
 // Analyze Startup page now calls this instead.
+//
+// SIE Authentication Phase 2: POST /analyze now requires a valid Clerk
+// bearer token server-side -- `token` is the caller's real Clerk session
+// token (from useAuth().getToken() in the page, see
+// AnalyzeStartupForm.tsx), attached as `Authorization: Bearer <token>`
+// via apiFetch's `token` option. This function never reads or stores the
+// token itself; it only forwards what it's given for this one request.
 export function analyzeMultiSource({
   websiteUrl,
   pdfFile,
   companyText,
+  token,
 }: {
   websiteUrl?: string;
   pdfFile?: File | null;
   companyText?: string;
+  token?: string | null;
 }): Promise<AnalyzeStartupResponse> {
   const formData = new FormData();
 
@@ -85,5 +94,6 @@ export function analyzeMultiSource({
     method: "POST",
     body: formData,
     timeoutMs: ANALYZE_TIMEOUT_MS,
+    token,
   });
 }

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { Show, UserButton } from "@clerk/nextjs";
 
 import ThemeToggle from "@/components/ui/ThemeToggle";
 import { getVersion } from "@/lib/api";
@@ -124,6 +125,34 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
       </nav>
 
       <div className="space-y-4 border-t border-border p-6">
+        {/* SIE Authentication Phase 1: smallest placement consistent with
+            the existing nav -- one row in the same footer area as the
+            theme toggle. <Show> is Clerk's current control component
+            (Core 3 removed <SignedIn>/<SignedOut> in favor of it -- see
+            proxy.ts's comment for the same finding). Signed out gets a
+            plain Link styled like a nav item (not Clerk's <SignInButton>)
+            so it navigates to our own /sign-in page with the exact same
+            styling as everything else here, nothing Clerk-hosted. Signed
+            in gets Clerk's real <UserButton />, which includes sign-out. */}
+        <Show when="signed-out">
+          <Link
+            href="/sign-in"
+            onClick={onNavigate}
+            className="flex min-h-11 items-center justify-center rounded-xl bg-primary px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            Sign In
+          </Link>
+        </Show>
+
+        <Show when="signed-in">
+          <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+            <UserButton />
+            <span className="text-sm font-medium text-sidebar-foreground">
+              Account
+            </span>
+          </div>
+        </Show>
+
         <ThemeToggle />
 
         <div className="rounded-xl border border-border bg-surface p-4">
