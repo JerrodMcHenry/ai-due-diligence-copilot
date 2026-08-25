@@ -454,6 +454,79 @@ def get_startup_trends(company_name: str):
     }
 
 
+def get_or_create_startup(company_name, connection=None):
+    """
+    SIE Accounts & Ownership -- canonical Startup write path. Resolves
+    company_name to its canonical startups.id, creating exactly one new
+    startups row the first time this identity is ever seen.
+
+    Uses the EXACT same normalization rule as backfill_startup_ids() and
+    every canonical read query in this file (LOWER(TRIM(company_name)))
+    -- not a new or improved one, so a new analysis can never resolve to
+    a different notion of "the same startup" than the migration already
+    established.
+
+    Concurrency-safe: relies on the UNIQUE constraint on
+    startups.normalized_name via INSERT ... ON CONFLICT DO NOTHING,
+    followed by a SELECT for the (now certainly present) row's id. This
+    is correct regardless of which of two concurrent callers' INSERT
+    actually wins the race -- Postgres serializes concurrent inserts
+    against the same unique key (the loser waits briefly rather than
+    racing incorrectly), so by the time the SELECT below runs, the
+    winning row is guaranteed visible in this transaction.
+
+    Never modifies an existing startup's canonical_name: ON CONFLICT DO
+    NOTHING never updates the existing row, so a later analysis that
+    happens to use different casing/whitespace for an already-known
+    company reuses the existing row exactly as first stored -- only the
+    very first analysis for a given normalized identity sets
+    canonical_name.
+
+    Creates ONLY a startups row -- never touches startup_memberships or
+    saved_startups, and never associates a user. Ownership is a
+    completely separate concept from analysis (see the SIE Accounts &
+    Ownership architecture design); this function's only job is identity
+    resolution.
+
+    Pass an existing SQLAlchemy Connection (already inside a transaction,
+    e.g. save_analysis()'s own) via `connection` to keep Startup
+    resolution and the Analysis insert atomic -- if that transaction
+    later rolls back for any reason, a Startup created here rolls back
+    with it, so a failed analysis write can never leave behind an orphan
+    Startup. If no connection is passed, this opens and commits its own
+    short transaction (useful for standalone/test callers).
+
+    Returns None for a null/empty company_name -- exactly matching the
+    existing exclusion already used everywhere else (search_analyses(),
+    get_rankings(), backfill_startup_ids()) -- a nameless analysis is
+    never merged into a fake shared identity, and gets no startup_id.
+    """
+    normalized_name = company_name.strip().lower() if company_name else ""
+
+    if not normalized_name:
+        return None
+
+    def _resolve(conn):
+        conn.execute(text("""
+            INSERT INTO startups (canonical_name, normalized_name)
+            VALUES (:canonical_name, :normalized_name)
+            ON CONFLICT (normalized_name) DO NOTHING
+        """), {
+            "canonical_name": company_name.strip(),
+            "normalized_name": normalized_name,
+        })
+
+        return conn.execute(text("""
+            SELECT id FROM startups WHERE normalized_name = :normalized_name
+        """), {"normalized_name": normalized_name}).scalar()
+
+    if connection is not None:
+        return _resolve(connection)
+
+    with engine.begin() as new_connection:
+        return _resolve(new_connection)
+
+
 def save_analysis(
     company_text,
     summary,
@@ -492,10 +565,20 @@ def save_analysis(
     created_at = datetime.now().isoformat()
 
     with engine.begin() as connection:
-        
+        # SIE Accounts & Ownership -- canonical Startup write path,
+        # centralized here so every existing and future save_analysis()
+        # caller gets it automatically (no per-endpoint duplication).
+        # Resolved inside this same transaction/connection so Startup
+        # resolution and the Analysis insert commit or roll back
+        # together -- a failed Analysis insert can never leave behind an
+        # orphan Startup. See get_or_create_startup()'s own docstring for
+        # the normalization/concurrency/ownership guarantees.
+        startup_id = get_or_create_startup(company_name, connection=connection)
+
         result = connection.execute(text("""
             INSERT INTO analyses (
                 company_name,
+                startup_id,
                 company_text,
                 summary,
                 risk_analysis,
@@ -525,6 +608,7 @@ def save_analysis(
             )
             VALUES (
                 :company_name,
+                :startup_id,
                 :company_text,
                 :summary,
                 :risk_analysis,
@@ -547,15 +631,16 @@ def save_analysis(
                 :overall_score,
                 :recommendation,
                 :readiness_score,
-                :readiness_summary,             
+                :readiness_summary,
                 :industry,
                 :stage,
                 :business_model
-                
+
             )
             RETURNING id
         """), {
             "company_name": company_name,
+            "startup_id": startup_id,
             "company_text": company_text,
             "summary": summary,
             "risk_analysis": risk_analysis,
