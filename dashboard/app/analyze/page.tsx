@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import PageHeader from "@/components/layout/PageHeader";
-import { analyzeStartup } from "@/lib/api";
+import { analyzeStartup, analyzeWebsite } from "@/lib/api";
+
+// Website / URL Ingestion: the two ways to start an analysis. "url" is
+// the primary/simple path (just paste a company website), "text" is the
+// original free-form path this page has always had. Both funnel into the
+// exact same canonical pipeline/response shape -- only which API client
+// function gets called (and which input control is shown) differs.
+type Mode = "url" | "text";
 
 // Minimum characters before we bother sending a request -- catches the
 // obviously-empty/junk case client-side without pretending to validate
@@ -65,10 +72,31 @@ function validate(text: string): string | null {
   return null;
 }
 
+// Client-side check only -- catches the obviously-wrong case (empty,
+// missing scheme) before spending a network round trip. The backend
+// (WebsiteAnalysisRequest + app/website_scrapper.py) is the actual
+// source of truth for what's a safe, fetchable URL and re-validates
+// independently regardless of what passes here.
+function validateUrl(url: string): string | null {
+  const trimmed = url.trim();
+
+  if (trimmed.length === 0) {
+    return "Enter a company website URL before submitting.";
+  }
+
+  if (!/^https?:\/\//i.test(trimmed)) {
+    return "Website URL must start with http:// or https://";
+  }
+
+  return null;
+}
+
 export default function AnalyzeStartupPage() {
   const router = useRouter();
 
+  const [mode, setMode] = useState<Mode>("url");
   const [companyText, setCompanyText] = useState("");
+  const [websiteUrl, setWebsiteUrl] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
@@ -122,7 +150,8 @@ export default function AnalyzeStartupPage() {
       return;
     }
 
-    const validationError = validate(companyText);
+    const validationError =
+      mode === "url" ? validateUrl(websiteUrl) : validate(companyText);
 
     if (validationError) {
       setStatus("error");
@@ -135,7 +164,10 @@ export default function AnalyzeStartupPage() {
     setElapsedSeconds(0);
 
     try {
-      const response = await analyzeStartup(companyText);
+      const response =
+        mode === "url"
+          ? await analyzeWebsite(websiteUrl.trim())
+          : await analyzeStartup(companyText);
       const companyName = response.context?.company_name?.trim();
 
       if (!companyName) {
@@ -152,7 +184,10 @@ export default function AnalyzeStartupPage() {
       // pass end-to-end, same contract as every other link into that route.
       router.push(`/startup/${encodeURIComponent(companyName)}`);
     } catch (caughtError) {
-      console.error("Analyze Startup failed:", caughtError);
+      console.error(
+        mode === "url" ? "Analyze Website failed:" : "Analyze Startup failed:",
+        caughtError
+      );
 
       const message =
         caughtError instanceof Error ? caughtError.message : "";
@@ -177,20 +212,70 @@ export default function AnalyzeStartupPage() {
 
       {!isSubmitting ? (
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label htmlFor="company-text" className="sr-only">
-              Startup information
-            </label>
-
-            <textarea
-              id="company-text"
-              value={companyText}
-              onChange={(event) => setCompanyText(event.target.value)}
-              placeholder={PLACEHOLDER}
-              rows={16}
-              className="w-full resize-y rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 font-mono text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            />
+          <div
+            role="radiogroup"
+            aria-label="Analysis input method"
+            className="inline-flex rounded-lg border border-slate-800 bg-slate-900 p-1"
+          >
+            {(["url", "text"] as const).map((candidate) => (
+              <button
+                key={candidate}
+                type="button"
+                role="radio"
+                aria-checked={mode === candidate}
+                onClick={() => {
+                  setMode(candidate);
+                  setError(null);
+                }}
+                className={`min-h-9 rounded-md px-4 text-sm font-semibold transition-colors ${
+                  mode === candidate
+                    ? "bg-blue-600 text-white"
+                    : "text-slate-400 hover:text-white"
+                }`}
+              >
+                {candidate === "url" ? "Website URL" : "Company Information"}
+              </button>
+            ))}
           </div>
+
+          {mode === "url" ? (
+            <div>
+              <label htmlFor="website-url" className="sr-only">
+                Company website URL
+              </label>
+
+              <input
+                id="website-url"
+                type="text"
+                inputMode="url"
+                value={websiteUrl}
+                onChange={(event) => setWebsiteUrl(event.target.value)}
+                placeholder="https://example.com"
+                className="w-full rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              />
+
+              <p className="mt-2 text-xs text-slate-500">
+                SIE will read the company&rsquo;s website, research it
+                further, and build a full Startup Profile from what it
+                finds.
+              </p>
+            </div>
+          ) : (
+            <div>
+              <label htmlFor="company-text" className="sr-only">
+                Startup information
+              </label>
+
+              <textarea
+                id="company-text"
+                value={companyText}
+                onChange={(event) => setCompanyText(event.target.value)}
+                placeholder={PLACEHOLDER}
+                rows={16}
+                className="w-full resize-y rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 font-mono text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+              />
+            </div>
+          )}
 
           {error ? (
             <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">

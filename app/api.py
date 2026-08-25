@@ -402,36 +402,83 @@ async def analyze_pdf(file: UploadFile = File(...)):
 
 @app.post("/analyze-website", response_model=StartupAnalysisResponse)
 def analyze_website(request: WebsiteAnalysisRequest):
+    # Website / URL Ingestion: same fail-closed shape as /analyze-startup,
+    # with one extra stage in front for retrieval. Retrieval/validation
+    # failures (bad, unreachable, or disallowed URL) are the caller's to
+    # fix and get a 400 built from website_scrapper's own safe,
+    # already-user-facing message (WebsiteFetchError/ValueError) -- same
+    # contract /analyze-pdf already uses for pdf_extractor's ValueErrors.
+    # Pipeline and persistence failures are ours, and get the exact same
+    # generic, non-leaking 502/500 responses /analyze-startup uses so a
+    # website-sourced analysis fails no less safely than a text one.
+    try:
+        website_text = extract_text_from_website(request.url)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=400,
+            detail=(
+                "That website could not be retrieved. Please check the URL "
+                "and try again."
+            ),
+        )
 
-    website_text = extract_text_from_website(request.url)
+    try:
+        results = run_due_diligence(website_text)
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail=(
+                "The analysis could not be completed. This can happen if a "
+                "research or AI provider is temporarily unavailable. Please "
+                "try again."
+            ),
+        )
 
-    results = run_due_diligence(website_text)
-
-    save_analysis(
-        company_text=request.url,
-        summary=results["summary"],
-        risk_analysis=results["risk_analysis"],
-        competitor_analysis=results["competitor_analysis"],
-        memo=results["memo"],
-        structured_analysis=results["structured_analysis"],
-        investment_score=results["investment_score"],
-        founder_analysis=results["founder_analysis"].model_dump(),
-        market_analysis=results["market_analysis"].model_dump(),
-        sources=results["sources"],
-        traction_analysis=results["traction_analysis"].model_dump(),
-        methodology=results["sie_analysis"].model_dump(mode="json"),
-        market_score=results["market_score"],
-        team_score=results["team_score"],
-        product_score=results["product_score"],
-        competition_score=results["competition_score"],
-        traction_score=results["traction_score"],
-        financial_score=results["financial_score"],
-        overall_score=results["overall_score"],
-        recommendation=results["recommendation"],
-        readiness_score=results["readiness_score"],
-        readiness_summary=results["readiness_summary"]
-                
-    )
+    try:
+        save_analysis(
+            company_text=request.url,
+            summary=results["summary"],
+            risk_analysis=results["risk_analysis"],
+            competitor_analysis=results["competitor_analysis"],
+            memo=results["memo"],
+            structured_analysis=results["structured_analysis"],
+            investment_score=results["investment_score"],
+            founder_analysis=results["founder_analysis"].model_dump(),
+            market_analysis=results["market_analysis"].model_dump(),
+            sources=results["sources"],
+            traction_analysis=results["traction_analysis"].model_dump(),
+            methodology=results["sie_analysis"].model_dump(mode="json"),
+            market_score=results["market_score"],
+            team_score=results["team_score"],
+            product_score=results["product_score"],
+            competition_score=results["competition_score"],
+            traction_score=results["traction_score"],
+            financial_score=results["financial_score"],
+            overall_score=results["overall_score"],
+            recommendation=results["recommendation"],
+            readiness_score=results["readiness_score"],
+            readiness_summary=results["readiness_summary"]
+        )
+    except Exception:
+        # Distinct from the pipeline failure above on purpose, same as
+        # /analyze-startup: the (expensive, multi-minute) analysis DID
+        # complete here -- only persisting it failed. save_score_history()
+        # is deliberately NOT called here -- Rankings/Search/Dashboard/SPS
+        # History all already read analyses.methodology JSONB directly,
+        # not the legacy score_history table, so it isn't required for
+        # this analysis to appear correctly anywhere in the product.
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail=(
+                "The analysis completed but could not be saved. Please try "
+                "again."
+            ),
+        )
 
     sie_analysis = results["sie_analysis"]
 

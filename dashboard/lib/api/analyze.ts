@@ -18,3 +18,16 @@ export function analyzeStartup(
     timeoutMs: ANALYZE_TIMEOUT_MS,
   });
 }
+
+// Website / URL Ingestion: same canonical response shape as
+// analyzeStartup() -- POST /analyze-website runs the exact same
+// run_due_diligence pipeline, it just extracts company_text from a
+// website URL server-side first (see app/website_scrapper.py) instead of
+// taking it directly from the caller.
+export function analyzeWebsite(url: string): Promise<AnalyzeStartupResponse> {
+  return apiFetch<AnalyzeStartupResponse>("/analyze-website", {
+    method: "POST",
+    body: { url },
+    timeoutMs: ANALYZE_TIMEOUT_MS,
+  });
+}

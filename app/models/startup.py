@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import Literal
 
 from app.models.scoring import StartupIntelligenceScore, PillarScoreBreakdown
@@ -22,7 +22,25 @@ class StartupAnalysisRequest(BaseModel):
 
 
 class WebsiteAnalysisRequest(BaseModel):
-    url: str
+    # Website / URL Ingestion: bounds obviously-invalid input with a fast
+    # 422 before any network I/O -- the real security validation (scheme
+    # allow-list, private-network rejection, DNS-rebinding-safe pinning,
+    # bounded redirects/response size) happens in
+    # app/website_scrapper.py, which is the one place that knowledge
+    # should live. 2048 chars is a generous ceiling for a URL (well above
+    # any real company website URL, including ones with query strings),
+    # meant to reject a pathological paste, not to constrain real use.
+    url: str = Field(min_length=1, max_length=2048)
+
+    @field_validator("url")
+    @classmethod
+    def _must_look_like_a_url(cls, value: str) -> str:
+        trimmed = value.strip()
+
+        if not trimmed.lower().startswith(("http://", "https://")):
+            raise ValueError("Website URL must start with http:// or https://")
+
+        return trimmed
 
 
 class PillarAnalysis(BaseModel):
