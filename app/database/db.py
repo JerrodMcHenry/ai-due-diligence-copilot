@@ -167,6 +167,157 @@ def create_score_history_table():
 
     print("score_history table created successfully.")
 
+
+# ---------------------------------------------------------------------------
+# SIE Accounts & Ownership -- Canonical Startup Entity (first implementation
+# slice; see the accompanying architecture design). This introduces a real
+# `startups` row as the stable identity every canonical query (get_rankings,
+# search_analyses, get_startup_by_name, get_sps_history,
+# get_top_improving_startups) has always re-derived ad hoc via
+# LOWER(TRIM(company_name)) grouping, instead of storing it anywhere.
+#
+# Foundation only in this slice: create_users_table() /
+# create_startup_memberships_table() / create_saved_startups_table() exist
+# so the schema is in place, but nothing populates them yet -- no
+# authentication, no ownership assignment, no Saved Startups behavior.
+# Every startup created by backfill_startup_ids() below is unowned by
+# construction (it never touches startup_memberships), per the explicit
+# product decision that analysis and ownership are separate concepts and
+# analyzing a startup must never grant membership.
+#
+# None of the existing canonical read queries are migrated to use
+# startup_id in this slice -- they are left completely untouched so this
+# migration's correctness can be verified independently of any product
+# behavior change (see the test suite and the stabilization report this
+# slice produces).
+# ---------------------------------------------------------------------------
+
+def create_startups_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS startups (
+                id SERIAL PRIMARY KEY,
+                canonical_name TEXT NOT NULL,
+                normalized_name TEXT NOT NULL UNIQUE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("startups table created successfully.")
+
+
+def add_startup_id_column():
+    try:
+        with engine.begin() as connection:
+            connection.execute(text(
+                "ALTER TABLE analyses ADD COLUMN startup_id INTEGER REFERENCES startups(id)"
+            ))
+        print("startup_id column added")
+    except Exception as e:
+        print("startup_id migration skipped", e)
+
+
+def create_users_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS users (
+                id TEXT PRIMARY KEY,
+                email TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("users table created successfully.")
+
+
+def create_startup_memberships_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS startup_memberships (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                role TEXT NOT NULL DEFAULT 'owner',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT startup_memberships_user_startup_key UNIQUE (user_id, startup_id)
+            )
+        """))
+
+    print("startup_memberships table created successfully.")
+
+
+def create_saved_startups_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS saved_startups (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                CONSTRAINT saved_startups_user_startup_key UNIQUE (user_id, startup_id)
+            )
+        """))
+
+    print("saved_startups table created successfully.")
+
+
+def backfill_startup_ids():
+    """
+    One-time (but safely re-runnable) data migration: creates exactly one
+    startups row per LOWER(TRIM(company_name)) identity already implicitly
+    used as "startup identity" by every canonical read query in this file
+    -- the EXACT same normalization rule those queries already use, not a
+    new or improved one, so this migration cannot silently redefine what
+    "the same startup" means. Rows with no company_name (NULL, or blank
+    after trim) are skipped entirely and get no startup_id, exactly as
+    those same canonical queries already exclude them from grouping (see
+    search_analyses()/get_rankings()'s own "company_name IS NOT NULL AND
+    TRIM(company_name) <> ''" filters) -- they are never merged into one
+    fake shared identity.
+
+    canonical_name is taken from the most recent matching analysis
+    (ORDER BY created_at DESC, id DESC), the same "latest wins" tie-break
+    get_rankings()/get_startup_by_name() already use for "which row
+    represents this startup right now".
+
+    Idempotent: the UNIQUE constraint on startups.normalized_name makes
+    the insert step a safe no-op for identities already present (ON
+    CONFLICT DO NOTHING); the update step only ever touches
+    analyses.startup_id IS NULL rows, so re-running this after some rows
+    are already backfilled changes nothing further and is always safe to
+    call at every startup alongside the other migrations.
+
+    Creates ONLY startups rows and analyses.startup_id values -- never
+    touches startup_memberships or saved_startups. Every startup created
+    here is unowned by construction; no ownership is fabricated for
+    historical analyses.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            INSERT INTO startups (canonical_name, normalized_name)
+            SELECT DISTINCT ON (LOWER(TRIM(company_name)))
+                company_name,
+                LOWER(TRIM(company_name))
+            FROM analyses
+            WHERE company_name IS NOT NULL
+              AND TRIM(company_name) <> ''
+            ORDER BY LOWER(TRIM(company_name)), created_at DESC, id DESC
+            ON CONFLICT (normalized_name) DO NOTHING
+        """))
+
+        result = connection.execute(text("""
+            UPDATE analyses
+            SET startup_id = startups.id
+            FROM startups
+            WHERE analyses.startup_id IS NULL
+              AND analyses.company_name IS NOT NULL
+              AND TRIM(analyses.company_name) <> ''
+              AND LOWER(TRIM(analyses.company_name)) = startups.normalized_name
+        """))
+
+    print(f"startup backfill complete: {result.rowcount} analyses linked to startups")
+
+
 def save_score_history(
     analysis_id,
     company_name,

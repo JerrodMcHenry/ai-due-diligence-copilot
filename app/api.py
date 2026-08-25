@@ -25,7 +25,13 @@ from app.database.db import (create_tables,
                          get_top_improving_startups,
                          get_startup_by_name,
                          add_methodology_column,
-                         get_sps_history
+                         get_sps_history,
+                         create_startups_table,
+                         add_startup_id_column,
+                         create_users_table,
+                         create_startup_memberships_table,
+                         create_saved_startups_table,
+                         backfill_startup_ids
 )
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH
@@ -77,6 +83,21 @@ add_company_name_column()
 add_readiness_columns()
 add_methodology_column()
 create_score_history_table()
+
+# SIE Accounts & Ownership -- Canonical Startup Entity (first
+# implementation slice). Order matters: startups must exist before
+# analyses.startup_id can reference it, and users must exist before the
+# membership/saved tables that reference it. backfill_startup_ids() runs
+# last and is safe to call on every startup (idempotent -- see its own
+# docstring in app/database/db.py). No existing canonical read query
+# (get_rankings, search_analyses, get_startup_by_name, get_sps_history,
+# get_top_improving_startups, get_analytics) is touched by this slice.
+create_startups_table()
+add_startup_id_column()
+create_users_table()
+create_startup_memberships_table()
+create_saved_startups_table()
+backfill_startup_ids()
 
 @app.get("/health")
 def health():
