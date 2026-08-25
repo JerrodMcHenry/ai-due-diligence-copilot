@@ -106,7 +106,11 @@ export default async function StartupProfilePage({ params }: Props) {
 
   return (
     <div className="space-y-8">
-      <StartupHeroV2 methodology={methodology} createdAt={startup.created_at} />
+      <StartupHeroV2
+        methodology={methodology}
+        createdAt={startup.created_at}
+        startupId={startup.startup_id}
+      />
 
       <SPSHistory history={history} />
 

@@ -11,6 +11,12 @@ import { getVersion } from "@/lib/api";
 type NavigationItem = {
   name: string;
   href: string;
+  // Saved Startups (Watchlist Phase 1): true only for /saved -- a
+  // signed-out visitor would see a personalized-looking nav item that
+  // just redirects them to sign-in, which is misleading rather than
+  // useful, so it's wrapped in <Show when="signed-in"> below instead of
+  // appearing in the plain map every other item uses.
+  authOnly?: boolean;
 };
 
 type SidebarProps = {
@@ -33,6 +39,11 @@ const navigation: NavigationItem[] = [
   {
     name: "Search",
     href: "/search",
+  },
+  {
+    name: "Saved Startups",
+    href: "/saved",
+    authOnly: true,
   },
 ];
 
@@ -104,7 +115,7 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
         {navigation.map((item) => {
           const active = isActiveRoute(pathname, item.href);
 
-          return (
+          const link = (
             <Link
               key={item.href}
               href={item.href}
@@ -121,6 +132,16 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
               {item.name}
             </Link>
           );
+
+          if (item.authOnly) {
+            return (
+              <Show key={item.href} when="signed-in">
+                {link}
+              </Show>
+            );
+          }
+
+          return link;
         })}
       </nav>
 

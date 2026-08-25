@@ -119,8 +119,34 @@ export type SIEMethodologyAnalysis = {
 
 export type StartupProfileResponse = {
   id: number;
+  // Saved Startups (Watchlist Phase 1): the canonical Startup FK, additive
+  // alongside `id` (which is the analysis id, not the startup id -- see
+  // the backend's get_startup_by_name() docstring). null only for
+  // historical rows that predate the write path; the Save control hides
+  // itself rather than guessing an id to save.
+  startup_id: number | null;
   created_at: string;
   methodology: SIEMethodologyAnalysis;
+};
+
+// Saved Startups (Watchlist Phase 1): GET /me/saved-startups row shape.
+// Deliberately flat, mirroring RankingEntry -- every field is read fresh
+// from the startup's current latest canonical analysis on every request,
+// never a snapshot copied in at save time. industry/stage/overall_score/
+// latest_analysis_at are null when the saved startup currently has no
+// canonical analysis -- never fabricated.
+export type SavedStartupEntry = {
+  startup_id: number;
+  company_name: string;
+  industry: string | null;
+  stage: string | null;
+  overall_score: number | null;
+  latest_analysis_at: string | null;
+  saved_at: string;
+};
+
+export type SavedStartupStatus = {
+  saved: boolean;
 };
 
 // One point per canonical (methodology-bearing) analysis, sourced from

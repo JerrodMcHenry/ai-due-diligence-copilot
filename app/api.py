@@ -31,10 +31,14 @@ from app.database.db import (create_tables,
                          create_users_table,
                          create_startup_memberships_table,
                          create_saved_startups_table,
-                         backfill_startup_ids
+                         backfill_startup_ids,
+                         save_startup_for_user,
+                         unsave_startup_for_user,
+                         is_startup_saved_by_user,
+                         get_saved_startups_for_user
 )
 
-from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH
+from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
@@ -204,6 +208,67 @@ def get_startup_profile(company_name: str):
 @app.get("/startup/{company_name}/sps-history")
 def get_startup_sps_history(company_name: str):
     return get_sps_history(company_name)
+
+
+# ---------------------------------------------------------------------------
+# Saved Startups / Watchlist -- Phase 1. All four endpoints require a
+# valid Clerk-authenticated user (RequireAuth -- the same dependency the
+# four paid analyze endpoints already use) and derive the acting user
+# EXCLUSIVELY from current_user.user_id (the verified JWT's `sub` claim)
+# -- never from a path/query/body parameter a caller could set to another
+# user's id. There is deliberately no /users/{user_id}/saved-startups
+# route: "the authenticated user" and "me" are the same thing everywhere
+# below, which makes reading/saving/removing another user's list
+# structurally impossible, not just policy-enforced.
+#
+# This is a watchlist/bookmark relationship only -- none of these ever
+# touch startup_memberships, and saving a startup never implies ownership
+# of it (see save_startup_for_user()'s own docstring in app/database/db.py
+# and the SIE Accounts & Ownership architecture design).
+#
+# Public intelligence routes (GET /startup/{company_name} and everything
+# above) are completely untouched by this section -- these are new,
+# additive routes, not a change to how any existing route is protected.
+# ---------------------------------------------------------------------------
+
+@app.get("/me/saved-startups", response_model=list[SavedStartupEntry])
+def list_my_saved_startups(
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    return get_saved_startups_for_user(current_user.user_id)
+
+
+@app.get("/me/saved-startups/{startup_id}", response_model=SavedStartupStatus)
+def get_my_saved_startup_status(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    return SavedStartupStatus(
+        saved=is_startup_saved_by_user(current_user.user_id, startup_id)
+    )
+
+
+@app.post("/me/saved-startups/{startup_id}", response_model=SavedStartupStatus)
+def save_my_startup(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    try:
+        save_startup_for_user(current_user.user_id, startup_id)
+    except ValueError:
+        raise HTTPException(status_code=404, detail="Startup not found.")
+
+    return SavedStartupStatus(saved=True)
+
+
+@app.delete("/me/saved-startups/{startup_id}", response_model=SavedStartupStatus)
+def unsave_my_startup(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    unsave_startup_for_user(current_user.user_id, startup_id)
+    return SavedStartupStatus(saved=False)
+
 
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(

@@ -4,6 +4,7 @@ from datetime import datetime
 
 from dotenv import load_dotenv
 from sqlalchemy import create_engine, text
+from sqlalchemy.exc import IntegrityError
 
 # P0 Product Trust Cleanup: reuse the single source of truth for "what
 # counts as the current canonical methodology" rather than hardcoding the
@@ -289,6 +290,140 @@ def create_saved_startups_table():
         """))
 
     print("saved_startups table created successfully.")
+
+
+# ---------------------------------------------------------------------------
+# Saved Startups / Watchlist -- Phase 1. saved_startups is a pure
+# relationship table (user_id, startup_id) -- see create_saved_startups_table()
+# above. These four functions are the ONLY code that reads or writes it.
+#
+# Deliberately does NOT copy SPS, company_name, industry, stage, or any
+# other intelligence field into saved_startups at save time -- a saved
+# startup points at startups.id only, and get_saved_startups_for_user()
+# below joins out to the LATEST canonical (methodology_version-matching)
+# analysis for that startup_id every time it's called, so a user's
+# watchlist always reflects current intelligence, never a stale snapshot
+# frozen at save time. This is the same "join out to current state, don't
+# copy" principle get_rankings()/search_analyses() already use for
+# "latest analysis per startup" -- applied here across a relationship
+# table instead of within analyses itself.
+#
+# None of these functions ever touch startup_memberships. Saving a
+# startup is a bookmark, not a claim of ownership -- see the SIE Accounts
+# & Ownership architecture design and get_or_create_user()'s own
+# docstring for the same principle applied to authentication.
+# ---------------------------------------------------------------------------
+
+def save_startup_for_user(user_id: str, startup_id: int) -> bool:
+    """
+    Idempotent: ON CONFLICT (user_id, startup_id) DO NOTHING means saving
+    an already-saved startup is a safe no-op, never a duplicate row and
+    never an error. Returns True if a new row was created, False if the
+    startup was already saved (both are success outcomes to the caller;
+    see app/api.py's save endpoint).
+
+    Raises ValueError for a startup_id that doesn't exist in startups --
+    saved_startups.startup_id has a real FK constraint, so this always
+    fails cleanly (never a half-written row) on an invalid id; the FK
+    violation is caught here and translated into a clean, callable-facing
+    error rather than leaking a raw IntegrityError/psycopg2 exception up
+    to app/api.py.
+    """
+    try:
+        with engine.begin() as connection:
+            result = connection.execute(text("""
+                INSERT INTO saved_startups (user_id, startup_id)
+                VALUES (:user_id, :startup_id)
+                ON CONFLICT (user_id, startup_id) DO NOTHING
+            """), {"user_id": user_id, "startup_id": startup_id})
+
+            return result.rowcount > 0
+    except IntegrityError as error:
+        raise ValueError(f"Startup {startup_id} does not exist") from error
+
+
+def unsave_startup_for_user(user_id: str, startup_id: int) -> bool:
+    """
+    Idempotent: deleting a row that isn't there deletes zero rows, not an
+    error -- unsaving an already-unsaved (or never-saved) startup is
+    always safe. Returns True if a row was actually removed, False if
+    there was nothing to remove.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            DELETE FROM saved_startups
+            WHERE user_id = :user_id AND startup_id = :startup_id
+        """), {"user_id": user_id, "startup_id": startup_id})
+
+        return result.rowcount > 0
+
+
+def is_startup_saved_by_user(user_id: str, startup_id: int) -> bool:
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT 1 FROM saved_startups
+            WHERE user_id = :user_id AND startup_id = :startup_id
+        """), {"user_id": user_id, "startup_id": startup_id})
+
+        return result.first() is not None
+
+
+def get_saved_startups_for_user(user_id: str):
+    """
+    One row per startup this user has saved, most-recently-saved first.
+    Each row's intelligence fields (industry, stage, overall_score,
+    latest_analysis_at) come from a LEFT JOIN LATERAL that independently
+    resolves that startup's own latest canonical (methodology_version ==
+    current) analysis via analyses.startup_id -- the real FK written by
+    get_or_create_startup()/save_analysis(), not a re-derivation via
+    company_name normalization the way get_rankings() still does (see
+    that function's own docstring for why it hasn't been migrated to the
+    FK) -- so this always reflects current intelligence, never a snapshot
+    from whenever the startup was saved.
+
+    LEFT (not INNER) JOIN LATERAL deliberately: a startup a user saved
+    can, in principle, currently have zero canonical analyses (e.g. its
+    only analysis predates Methodology v2, or predates the write path and
+    was never backfilled with a matching canonical row). That startup
+    still appears in the list -- with null intelligence fields -- rather
+    than silently vanishing from a list the user explicitly built. No
+    field here is ever fabricated to fill the gap.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                ss.startup_id AS startup_id,
+                ss.created_at AS saved_at,
+                startups.canonical_name AS company_name,
+                latest.industry AS industry,
+                latest.stage AS stage,
+                latest.overall_score AS overall_score,
+                latest.created_at AS latest_analysis_at
+            FROM saved_startups ss
+            JOIN startups ON startups.id = ss.startup_id
+            LEFT JOIN LATERAL (
+                SELECT
+                    industry,
+                    stage,
+                    (methodology->>'startup_intelligence_score')::float AS overall_score,
+                    created_at
+                FROM analyses
+                WHERE analyses.startup_id = ss.startup_id
+                  AND methodology IS NOT NULL
+                  AND methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                ORDER BY created_at DESC, id DESC
+                LIMIT 1
+            ) latest ON true
+            WHERE ss.user_id = :user_id
+            ORDER BY ss.created_at DESC
+        """), {
+            "user_id": user_id,
+            "methodology_version": METHODOLOGY_VERSION,
+        })
+
+        rows = result.mappings().all()
+
+    return [dict(row) for row in rows]
 
 
 def backfill_startup_ids():
@@ -822,12 +957,28 @@ def get_analysis_by_id(analysis_id):
 
 
 def get_startup_by_name(company_name: str):
+    """
+    Note: the `id` field returned here is analyses.id (the specific
+    analysis row), not startups.id -- that naming predates the canonical
+    Startup entity and is left alone since existing consumers
+    (SPS History, etc.) already depend on it meaning "this analysis".
+
+    Saved Startups (Watchlist Phase 1) added `startup_id` (analyses.
+    startup_id, the canonical Startup FK -- see get_or_create_startup())
+    alongside it, additively, so the frontend Save control has something
+    stable to save without repurposing `id` or requiring a second request.
+    A NULL startup_id here (only possible for pre-write-path historical
+    rows that predate both the backfill and this column) means the
+    frontend has nothing valid to save and hides the control rather than
+    guessing.
+    """
     normalized_company_name = company_name.strip()
 
     with engine.begin() as connection:
         result = connection.execute(text("""
             SELECT
                 id,
+                startup_id,
                 created_at,
                 methodology
             FROM analyses

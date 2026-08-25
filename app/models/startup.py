@@ -126,5 +126,37 @@ class UpdateAnalysisRequest(BaseModel):
 
 class StartupProfileResponse(BaseModel):
     id: int
+    # Saved Startups (Watchlist Phase 1): the canonical Startup FK
+    # (analyses.startup_id), additive alongside the existing analysis-id
+    # `id` field above -- see get_startup_by_name()'s docstring. None only
+    # for historical rows that predate both the write path and its
+    # backfill; the frontend Save control hides itself when this is None
+    # rather than guessing an id to save.
+    startup_id: int | None = None
     created_at: datetime
     methodology: SIEMethodologyAnalysis
+
+
+class SavedStartupEntry(BaseModel):
+    """
+    Saved Startups (Watchlist Phase 1) list-row shape -- see
+    get_saved_startups_for_user()'s docstring. Deliberately flat and
+    minimal (mirrors RankingEntry's shape, not the full nested
+    SIEMethodologyAnalysis) since this is a list view, not a second
+    startup-details experience; every field here is read fresh from the
+    startup's current latest canonical analysis on every request, never
+    copied into saved_startups itself. industry/stage/overall_score/
+    latest_analysis_at are None when the saved startup currently has no
+    canonical analysis -- never fabricated.
+    """
+    startup_id: int
+    company_name: str
+    industry: str | None = None
+    stage: str | None = None
+    overall_score: float | None = None
+    latest_analysis_at: datetime | None = None
+    saved_at: datetime
+
+
+class SavedStartupStatus(BaseModel):
+    saved: bool

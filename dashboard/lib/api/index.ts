@@ -4,3 +4,4 @@ export * from "./search";
 export * from "./rankings";
 export * from "./version";
 export * from "./analyze";
+export * from "./savedStartups";

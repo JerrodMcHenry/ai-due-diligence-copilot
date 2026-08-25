@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { SPSRing } from "@/components/sps";
 import BaseCard from "@/components/ui/BaseCard";
+import SaveStartupButton from "./SaveStartupButton";
 
 import { CONFIDENCE_BADGE_CLASSES, PILLARS } from "./pillarMeta";
 import { AlertIcon, SparkleIcon } from "./icons";
@@ -11,6 +12,12 @@ import type { ConfidenceLevel, SIEMethodologyAnalysis } from "@/types";
 type StartupHeroV2Props = {
   methodology: SIEMethodologyAnalysis;
   createdAt: string;
+  // Saved Startups (Watchlist Phase 1): the canonical Startup FK -- see
+  // StartupProfileResponse's own comment. null for the rare historical
+  // row that predates the write path, in which case the Save control is
+  // omitted entirely rather than rendered against an id that doesn't
+  // resolve to anything.
+  startupId?: number | null;
 };
 
 const ANALYSIS_TYPE_LABELS: Record<string, string> = {
@@ -124,6 +131,7 @@ function getRecommendation(startupScorecard: unknown): string | null {
 export default function StartupHeroV2({
   methodology,
   createdAt,
+  startupId,
 }: StartupHeroV2Props) {
   const overallConfidence = getOverallConfidence(methodology);
   const recommendation = getRecommendation(methodology.startup_scorecard);
@@ -168,9 +176,15 @@ export default function StartupHeroV2({
         </div>
 
         <div>
-          <h1 className="text-4xl font-bold text-text-primary">
-            {methodology.context.company_name}
-          </h1>
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h1 className="text-4xl font-bold text-text-primary">
+              {methodology.context.company_name}
+            </h1>
+
+            {startupId != null ? (
+              <SaveStartupButton startupId={startupId} />
+            ) : null}
+          </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
             {company_stage ? <MetaChip>{company_stage}</MetaChip> : null}
