@@ -49,16 +49,28 @@ from app.database.db import (create_tables,
                          list_modeled_ventures_for_user,
                          get_modeled_venture_for_user,
                          update_modeled_venture_for_user,
-                         delete_modeled_venture_for_user
+                         delete_modeled_venture_for_user,
+                         create_startup_claims_table,
+                         create_startup_claim,
+                         list_startup_claims_for_user,
+                         get_startup_claim_status_for_user,
+                         list_pending_startup_claims_for_admin,
+                         approve_startup_claim,
+                         reject_startup_claim,
+                         cancel_startup_claim,
+                         StartupNotFoundError,
+                         DuplicatePendingClaimError,
+                         AlreadyMemberError
 )
 from typing import Literal
 from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
+from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
-from app.auth import AuthenticatedUser, RequireAuth
+from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 from app.ai.vps_scoring import compute_vps
 from app.ai.vps_guidance import generate_guidance
@@ -129,6 +141,13 @@ backfill_startup_ids()
 # in app/database/db.py) -- ordering relative to the migrations above
 # only matters because it references users(id), which must already exist.
 create_modeled_ventures_table()
+
+# Phase 7.1A -- Startup Claim & Membership backend lifecycle. Purely
+# additive: references users(id)/startups(id), which already exist by
+# this point. Does not alter startup_memberships's existing schema/
+# default at all (see create_startup_claims_table()'s own docstring in
+# app/database/db.py for why).
+create_startup_claims_table()
 
 @app.get("/health")
 def health():
@@ -671,6 +690,143 @@ def compare_venture_scenarios(
         current=VPSResult(**current_result),
         modified=VPSResult(**modified_result),
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.1A -- Startup Claim & Membership backend lifecycle.
+#
+# CORE INVARIANT: startup_memberships represents actual authorized
+# relationships. A pending, rejected, or cancelled claim NEVER creates a
+# membership -- the only endpoint below that can possibly result in a new
+# startup_memberships row is approve_my_claim_admin_action (the admin
+# approval action), which delegates to approve_startup_claim(), the one
+# function in this codebase allowed to write that table (see its own
+# docstring in app/database/db.py).
+#
+# user_id is derived exclusively from RequireAuth/current_user.user_id on
+# every founder-facing endpoint below -- never accepted from a path,
+# query, or body parameter. Admin endpoints are gated by RequireAdmin,
+# which itself is built on the same unchanged JWT verification (see
+# app/auth.py) plus a server-side ADMIN_USER_IDS allowlist check.
+# ---------------------------------------------------------------------------
+
+@app.post("/startup-claims", response_model=StartupClaimSubmissionResponse)
+def submit_startup_claim(
+    request: CreateStartupClaimRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    try:
+        claim_id = create_startup_claim(
+            user_id=current_user.user_id,
+            startup_id=request.startup_id,
+            justification=request.justification,
+            contact_email=request.contact_email,
+        )
+    except StartupNotFoundError:
+        raise HTTPException(status_code=404, detail="Startup not found.")
+    except AlreadyMemberError:
+        raise HTTPException(
+            status_code=409,
+            detail="You already have access to this startup -- no claim is needed.",
+        )
+    except DuplicatePendingClaimError:
+        raise HTTPException(
+            status_code=409,
+            detail="You already have a pending claim for this startup.",
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Your claim could not be submitted. Please try again.",
+        )
+
+    return StartupClaimSubmissionResponse(
+        id=claim_id, startup_id=request.startup_id, status="pending"
+    )
+
+
+@app.get("/me/startup-claims", response_model=list[MyStartupClaim])
+def list_my_startup_claims(current_user: AuthenticatedUser = RequireAuth):
+    return list_startup_claims_for_user(current_user.user_id)
+
+
+@app.get("/me/startup-claims/{startup_id}", response_model=StartupClaimStatus | None)
+def get_my_startup_claim_status(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """Smallest useful helper for Phase 7.1B's 'Claim this startup'
+    control -- the caller's own most recent claim for this one startup,
+    or null if they've never claimed it. Never reveals anyone else's
+    claim status for the same startup."""
+    status = get_startup_claim_status_for_user(current_user.user_id, startup_id)
+
+    if status is None:
+        return None
+
+    return StartupClaimStatus(
+        claim_id=status["id"],
+        status=status["status"],
+        submitted_at=status["submitted_at"],
+        reviewed_at=status["reviewed_at"],
+        rejection_reason=status["rejection_reason"],
+    )
+
+
+@app.post("/me/startup-claims/{claim_id}/cancel", response_model=StartupClaimActionResponse)
+def cancel_my_startup_claim(
+    claim_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    cancelled = cancel_startup_claim(current_user.user_id, claim_id)
+
+    if not cancelled:
+        # Same non-leaking shape as every other user-scoped resource in
+        # this codebase: "doesn't exist", "belongs to someone else", and
+        # "isn't pending anymore" are all indistinguishable from the
+        # caller's perspective.
+        raise HTTPException(status_code=404, detail="Claim not found.")
+
+    return StartupClaimActionResponse(claim_id=claim_id, status="cancelled")
+
+
+@app.get("/admin/startup-claims", response_model=list[AdminStartupClaim])
+def list_admin_startup_claims(current_user: AuthenticatedUser = RequireAdmin):
+    return list_pending_startup_claims_for_admin()
+
+
+@app.post("/admin/startup-claims/{claim_id}/approve", response_model=StartupClaimActionResponse)
+def approve_admin_startup_claim(
+    claim_id: int,
+    current_user: AuthenticatedUser = RequireAdmin,
+):
+    result = approve_startup_claim(claim_id, current_user.user_id)
+
+    if result is None:
+        raise HTTPException(
+            status_code=409,
+            detail="This claim is not currently pending (it may not exist, or has already been reviewed).",
+        )
+
+    return StartupClaimActionResponse(claim_id=claim_id, status="approved")
+
+
+@app.post("/admin/startup-claims/{claim_id}/reject", response_model=StartupClaimActionResponse)
+def reject_admin_startup_claim(
+    claim_id: int,
+    request: RejectStartupClaimRequest,
+    current_user: AuthenticatedUser = RequireAdmin,
+):
+    rejected = reject_startup_claim(claim_id, current_user.user_id, request.rejection_reason)
+
+    if not rejected:
+        raise HTTPException(
+            status_code=409,
+            detail="This claim is not currently pending (it may not exist, or has already been reviewed).",
+        )
+
+    return StartupClaimActionResponse(claim_id=claim_id, status="rejected")
 
 
 @app.put("/analyses/{analysis_id}")

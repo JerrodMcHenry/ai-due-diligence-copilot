@@ -175,3 +175,41 @@ def get_current_user(request: Request) -> AuthenticatedUser:
 # `Depends(get_current_user)` at every call site, while still being the
 # exact same dependency (no wrapping, no behavior difference).
 RequireAuth = Depends(get_current_user)
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.1A -- admin authorization, built directly on top of the
+# unchanged JWT verification above. ADMIN_USER_IDS mirrors this file's
+# own CLERK_AUTHORIZED_PARTIES pattern and app/api.py's
+# CORS_ALLOWED_ORIGINS pattern exactly: a comma-separated env var,
+# parsed fresh on every check (no caching to go stale), no wildcard, no
+# fallback identity. An unset or empty ADMIN_USER_IDS means the
+# allowlist is empty, which means every admin check fails -- nobody is
+# admin by default. Never exposed to the frontend (it is read only here,
+# server-side, from os.environ; no endpoint returns its value).
+# ---------------------------------------------------------------------------
+
+def _resolve_admin_user_ids() -> list[str]:
+    raw = os.getenv("ADMIN_USER_IDS", "")
+    return [user_id.strip() for user_id in raw.split(",") if user_id.strip()]
+
+
+def require_admin(current_user: AuthenticatedUser = RequireAuth) -> AuthenticatedUser:
+    """
+    FastAPI dependency: reuses get_current_user() for JWT verification
+    unchanged (an unauthenticated or invalid-token request still gets the
+    existing 401 -- this function's own body never runs). Adds exactly
+    one more check on top: the verified user_id must appear in
+    ADMIN_USER_IDS. A signed-in non-admin is a genuine, verified identity
+    that simply lacks authorization -- a 403, not a 401. Admin status is
+    never derived from anything a client sends (no header, query param,
+    or request body is consulted here) -- solely the verified user_id
+    compared against server-side configuration.
+    """
+    if current_user.user_id not in _resolve_admin_user_ids():
+        raise HTTPException(status_code=403, detail="Admin access required.")
+
+    return current_user
+
+
+RequireAdmin = Depends(require_admin)

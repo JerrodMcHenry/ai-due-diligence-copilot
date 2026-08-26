@@ -277,6 +277,338 @@ def create_startup_memberships_table():
     print("startup_memberships table created successfully.")
 
 
+# ---------------------------------------------------------------------------
+# Phase 7.1A -- Startup Claim & Membership backend lifecycle.
+#
+# CORE INVARIANT, stated once here as the single source of truth: the
+# ONLY code path in this entire application allowed to INSERT INTO
+# startup_memberships is approve_startup_claim() below, and it only ever
+# does so for a claim that was, at the instant of that same transaction,
+# genuinely status='pending'. Submitting a claim, viewing a claim,
+# rejecting a claim, and cancelling a claim all create ZERO membership
+# rows -- this is enforced by construction (those functions simply never
+# contain an INSERT INTO startup_memberships statement), not by a runtime
+# check. Analyzing a startup, saving a startup, and creating a modeled
+# venture have never touched this table and still don't -- see
+# get_or_create_startup()'s, save_startup_for_user()'s, and
+# create_modeled_venture()'s own docstrings.
+#
+# role is ALWAYS 'member' on approval, regardless of claim order. Phase
+# 7.1's original design considered auto-assigning 'owner' to the first
+# approved claimant; that was explicitly corrected before implementation
+# -- approval order is not proof of superior ownership authority. Owner
+# elevation is deferred to a future, intentionally-designed member-
+# administration feature. startup_memberships.role's column/default are
+# unchanged; every INSERT below simply specifies role='member' explicitly.
+# ---------------------------------------------------------------------------
+
+class StartupClaimError(Exception):
+    """Base class for clean, application-level claim failures -- never a
+    raw IntegrityError/psycopg2 exception surfacing to app/api.py."""
+
+
+class StartupNotFoundError(StartupClaimError):
+    pass
+
+
+class DuplicatePendingClaimError(StartupClaimError):
+    pass
+
+
+class AlreadyMemberError(StartupClaimError):
+    """Raised when the claimant already has an approved membership for
+    this startup -- Part 3's 'an existing membership should prevent
+    unnecessary duplicate claiming'."""
+
+
+def create_startup_claims_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS startup_claims (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                status TEXT NOT NULL DEFAULT 'pending'
+                    CHECK (status IN ('pending', 'approved', 'rejected', 'cancelled')),
+                verification_method TEXT NOT NULL DEFAULT 'manual_review',
+                justification TEXT,
+                contact_email TEXT,
+                submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                reviewed_at TIMESTAMP,
+                reviewed_by TEXT REFERENCES users(id),
+                rejection_reason TEXT
+            )
+        """))
+
+    with engine.begin() as connection:
+        # Partial unique index: at most one PENDING claim per
+        # (user_id, startup_id) -- a rejected or cancelled prior claim
+        # does NOT count toward this, so resubmission is always possible
+        # (Part 6/9's explicit "rejected claim can be resubmitted").
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS startup_claims_one_pending_per_user_startup
+            ON startup_claims (user_id, startup_id)
+            WHERE status = 'pending'
+        """))
+
+    print("startup_claims table created successfully.")
+
+
+def create_startup_claim(
+    user_id: str,
+    startup_id: int,
+    justification: str,
+    contact_email: str | None,
+) -> int:
+    """
+    Creates exactly one pending startup_claims row. Never touches
+    startup_memberships -- see this section's own module-level comment.
+
+    Raises:
+        StartupNotFoundError -- startup_id doesn't exist.
+        AlreadyMemberError -- the caller already has an approved
+            membership for this startup; a new claim would be redundant.
+        DuplicatePendingClaimError -- the caller already has a pending
+            claim for this startup (checked explicitly, then re-checked
+            via the partial unique index itself as a race-safe fallback
+            if two concurrent requests both pass the initial check).
+    """
+    with engine.begin() as connection:
+        startup_exists = connection.execute(
+            text("SELECT 1 FROM startups WHERE id = :startup_id"),
+            {"startup_id": startup_id},
+        ).scalar()
+
+        if startup_exists is None:
+            raise StartupNotFoundError(f"Startup {startup_id} does not exist")
+
+        already_member = connection.execute(text("""
+            SELECT 1 FROM startup_memberships
+            WHERE user_id = :user_id AND startup_id = :startup_id
+        """), {"user_id": user_id, "startup_id": startup_id}).scalar()
+
+        if already_member is not None:
+            raise AlreadyMemberError(
+                f"User {user_id} is already a member of startup {startup_id}"
+            )
+
+        already_pending = connection.execute(text("""
+            SELECT 1 FROM startup_claims
+            WHERE user_id = :user_id AND startup_id = :startup_id AND status = 'pending'
+        """), {"user_id": user_id, "startup_id": startup_id}).scalar()
+
+        if already_pending is not None:
+            raise DuplicatePendingClaimError(
+                f"User {user_id} already has a pending claim for startup {startup_id}"
+            )
+
+        try:
+            result = connection.execute(text("""
+                INSERT INTO startup_claims (
+                    user_id, startup_id, status, verification_method,
+                    justification, contact_email
+                )
+                VALUES (
+                    :user_id, :startup_id, 'pending', 'manual_review',
+                    :justification, :contact_email
+                )
+                RETURNING id
+            """), {
+                "user_id": user_id,
+                "startup_id": startup_id,
+                "justification": justification,
+                "contact_email": contact_email,
+            })
+        except IntegrityError as error:
+            # Race-safe fallback: two concurrent requests could both pass
+            # the already_pending check above before either commits: the
+            # partial unique index itself is the final authority.
+            raise DuplicatePendingClaimError(
+                f"User {user_id} already has a pending claim for startup {startup_id}"
+            ) from error
+
+        return result.scalar()
+
+
+def list_startup_claims_for_user(user_id: str):
+    """Only the caller's OWN claims -- see GET /me/startup-claims in
+    app/api.py. Deliberately excludes justification/contact_email (not
+    part of Part 4's required field list for this endpoint) and every
+    other user's data by construction (the WHERE clause is the only
+    thing that can ever match a row)."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                sc.id AS id,
+                sc.startup_id AS startup_id,
+                s.canonical_name AS canonical_name,
+                sc.status AS status,
+                sc.verification_method AS verification_method,
+                sc.submitted_at AS submitted_at,
+                sc.reviewed_at AS reviewed_at,
+                sc.rejection_reason AS rejection_reason
+            FROM startup_claims sc
+            JOIN startups s ON s.id = sc.startup_id
+            WHERE sc.user_id = :user_id
+            ORDER BY sc.submitted_at DESC
+        """), {"user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def get_startup_claim_status_for_user(user_id: str, startup_id: int):
+    """
+    Smallest useful helper for Phase 7.1B's future 'Claim this startup'
+    control: the caller's own most recent claim for this one startup, or
+    None if they've never claimed it. Never reveals whether anyone ELSE
+    has claimed or been approved for this startup -- scoped to user_id in
+    the SQL itself, same discipline as every other per-user query in this
+    file.
+    """
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT id, status, submitted_at, reviewed_at, rejection_reason
+            FROM startup_claims
+            WHERE user_id = :user_id AND startup_id = :startup_id
+            ORDER BY submitted_at DESC
+            LIMIT 1
+        """), {"user_id": user_id, "startup_id": startup_id}).mappings().first()
+
+        return dict(row) if row is not None else None
+
+
+def list_pending_startup_claims_for_admin():
+    """
+    Admin-only READ -- authorization (RequireAdmin) is enforced entirely
+    at the API layer in app/api.py, matching this file's existing
+    convention that DB functions implement queries, not access control
+    (e.g. get_saved_startups_for_user() doesn't re-check auth either; the
+    endpoint does). This function has no per-user filter by design --
+    an admin legitimately needs to see every pending claim.
+
+    existing_member_count gives the reviewer context (Part 4/6: "already
+    has a member" is information for the human, never a submission
+    blocker) without a second round trip.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                sc.id AS id,
+                sc.startup_id AS startup_id,
+                s.canonical_name AS canonical_name,
+                sc.user_id AS user_id,
+                u.email AS user_email,
+                sc.contact_email AS contact_email,
+                sc.justification AS justification,
+                sc.submitted_at AS submitted_at,
+                (
+                    SELECT COUNT(*) FROM startup_memberships sm
+                    WHERE sm.startup_id = sc.startup_id
+                ) AS existing_member_count
+            FROM startup_claims sc
+            JOIN startups s ON s.id = sc.startup_id
+            JOIN users u ON u.id = sc.user_id
+            WHERE sc.status = 'pending'
+            ORDER BY sc.submitted_at ASC
+        """))
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def approve_startup_claim(claim_id: int, admin_user_id: str):
+    """
+    THE ONLY function in this entire codebase that may INSERT INTO
+    startup_memberships. Fully atomic in one transaction:
+
+    1. SELECT ... FOR UPDATE locks this specific claim row for the
+       duration of the transaction -- a concurrent second approval
+       attempt on the SAME claim_id blocks here until this transaction
+       commits or rolls back, then re-reads status and correctly finds
+       it's no longer 'pending' (Part 9's "approval race cannot create
+       duplicate memberships").
+    2. If the claim doesn't exist or isn't currently pending (already
+       approved/rejected/cancelled, or a concurrent approval already won
+       the race), this returns None and writes NOTHING -- not an error,
+       just "nothing to do".
+    3. Otherwise: insert the membership (role ALWAYS 'member' -- see this
+       section's own module-level comment), with ON CONFLICT DO NOTHING
+       as a second, independent layer of duplicate protection (the
+       existing UNIQUE(user_id, startup_id) constraint on
+       startup_memberships), then mark the claim approved with
+       reviewed_at/reviewed_by.
+
+    Because both writes happen inside the same engine.begin() block, a
+    failure in either one rolls back both -- an approved claim can never
+    exist without its membership, and a failed claim-status update can
+    never leave an unauthorized membership behind.
+    """
+    with engine.begin() as connection:
+        claim = connection.execute(text("""
+            SELECT id, user_id, startup_id, status
+            FROM startup_claims
+            WHERE id = :claim_id
+            FOR UPDATE
+        """), {"claim_id": claim_id}).mappings().first()
+
+        if claim is None or claim["status"] != "pending":
+            return None
+
+        connection.execute(text("""
+            INSERT INTO startup_memberships (user_id, startup_id, role)
+            VALUES (:user_id, :startup_id, 'member')
+            ON CONFLICT (user_id, startup_id) DO NOTHING
+        """), {"user_id": claim["user_id"], "startup_id": claim["startup_id"]})
+
+        connection.execute(text("""
+            UPDATE startup_claims
+            SET status = 'approved',
+                reviewed_at = CURRENT_TIMESTAMP,
+                reviewed_by = :admin_user_id
+            WHERE id = :claim_id
+        """), {"claim_id": claim_id, "admin_user_id": admin_user_id})
+
+        return {
+            "claim_id": claim_id,
+            "user_id": claim["user_id"],
+            "startup_id": claim["startup_id"],
+        }
+
+
+def reject_startup_claim(claim_id: int, admin_user_id: str, rejection_reason: str) -> bool:
+    """Only a currently-pending claim transitions to rejected -- the
+    WHERE status = 'pending' guard makes this a safe no-op (0 rows
+    affected) against an already-decided or concurrently-decided claim.
+    Creates zero startup_memberships rows, always."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE startup_claims
+            SET status = 'rejected',
+                reviewed_at = CURRENT_TIMESTAMP,
+                reviewed_by = :admin_user_id,
+                rejection_reason = :rejection_reason
+            WHERE id = :claim_id AND status = 'pending'
+        """), {
+            "claim_id": claim_id,
+            "admin_user_id": admin_user_id,
+            "rejection_reason": rejection_reason,
+        })
+
+        return result.rowcount > 0
+
+
+def cancel_startup_claim(user_id: str, claim_id: int) -> bool:
+    """Claimant-only (WHERE user_id = :user_id), own-claim-only, and only
+    a currently-pending claim can be cancelled. Zero membership effect."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE startup_claims
+            SET status = 'cancelled'
+            WHERE id = :claim_id AND user_id = :user_id AND status = 'pending'
+        """), {"claim_id": claim_id, "user_id": user_id})
+
+        return result.rowcount > 0
+
+
 def create_saved_startups_table():
     with engine.begin() as connection:
         connection.execute(text("""
