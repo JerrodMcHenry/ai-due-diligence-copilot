@@ -9,6 +9,7 @@ import BaseCard from "@/components/ui/BaseCard";
 import { SPSRing } from "@/components/sps";
 import SPSHistory from "@/components/startup/SPSHistory";
 import IntelligencePillars from "@/components/startup/IntelligencePillars";
+import ActionPlan from "@/components/founder/ActionPlan";
 import { PILLARS } from "@/components/startup/pillarMeta";
 import {
   formatAnalysisDate,
@@ -185,12 +186,27 @@ export default function FounderStartupWorkspaceView({
           />
 
           <PrioritiesSection methodology={methodology} />
+        </>
+      )}
 
+      {/* Phase 7.3 -- Founder Progress & Improvement V1: rendered even
+          when this startup has no canonical analysis yet, since
+          founder-created actions don't depend on one (Part 17) -- only
+          the "Recommended by SIE" sub-section inside ActionPlan itself
+          is conditional on methodology being non-null. */}
+      <ActionPlan
+        startupId={startup_id}
+        canonicalName={canonical_name}
+        methodology={methodology}
+      />
+
+      {methodology ? (
+        <>
           <SPSHistory history={sps_history} />
 
           <IntelligencePillars methodology={methodology} />
         </>
-      )}
+      ) : null}
     </div>
   );
 }
@@ -301,15 +317,14 @@ function getScoredPillars(methodology: SIEMethodologyAnalysis): ScoredPillar[] {
   return scored;
 }
 
-// "What's working" / "Needs attention" / "Top priorities" -- all derived
-// purely by sorting the same six real pillar scores/strengths/weaknesses/
-// recommendations the public profile already has; nothing here is
-// recomputed or re-scored. Deliberately does NOT surface
-// methodology.next_actions -- that field is a fixed, hardcoded list
-// (see app/workflows/sie_assembler.py) identical on every analysis
-// regardless of company, so treating it as a personalized recommendation
-// here would be misleading; each pillar's own recommendations list is
-// genuine, evidence-derived, per-company output.
+// "What's working" / "Needs attention" -- derived purely by sorting the
+// same six real pillar scores/strengths/weaknesses the public profile
+// already has; nothing here is recomputed or re-scored. The
+// recommendations themselves (formerly a read-only "Top Priorities" list
+// here) now live in the Action Plan section below as actionable
+// "Recommended by SIE" suggestions (Phase 7.3,
+// components/founder/founderActionSuggestions.ts) -- kept in exactly one
+// place so the same five sentences never appear twice on this page.
 function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysis }) {
   const scored = getScoredPillars(methodology);
 
@@ -333,10 +348,6 @@ function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysi
     .reverse()
     .filter((p) => !strongestKeys.has(p.key))
     .slice(0, 2);
-
-  const recommendations = Array.from(
-    new Set(weakest.flatMap((p) => p.analysis.recommendations).filter(Boolean))
-  ).slice(0, 5);
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
@@ -377,28 +388,6 @@ function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysi
           ))}
         </div>
       </BaseCard>
-
-      {recommendations.length > 0 ? (
-        <BaseCard className="p-6 lg:col-span-2">
-          <h2 className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
-            Top Priorities
-          </h2>
-
-          <ul className="mt-4 space-y-1.5">
-            {recommendations.map((recommendation, index) => (
-              <li
-                key={index}
-                className="flex items-start gap-2.5 rounded-lg bg-primary/5 px-3.5 py-2.5 text-sm text-text-primary"
-              >
-                <span aria-hidden="true" className="mt-0.5 shrink-0 text-primary">
-                  →
-                </span>
-                <span className="max-w-prose leading-6">{recommendation}</span>
-              </li>
-            ))}
-          </ul>
-        </BaseCard>
-      ) : null}
     </div>
   );
 }

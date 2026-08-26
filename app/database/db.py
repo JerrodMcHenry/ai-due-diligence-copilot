@@ -772,6 +772,216 @@ def get_founder_startup_workspace(startup_id: int):
     }
 
 
+FOUNDER_ACTION_STATUSES = ("todo", "in_progress", "completed", "dismissed")
+FOUNDER_ACTION_SOURCES = ("sie_recommendation", "founder_created")
+FOUNDER_ACTION_PILLARS = (
+    "market", "team", "product", "execution", "traction", "financial_health",
+)
+
+
+class FounderActionError(Exception):
+    """Base class for clean, application-level founder-action failures --
+    never a raw IntegrityError/psycopg2 exception surfacing to app/api.py.
+    Mirrors StartupClaimError's own role for the claims section above."""
+
+
+class FounderActionNotFoundError(FounderActionError):
+    pass
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.3 -- Founder Progress & Improvement V1. founder_actions is a
+# dedicated, purely additive table -- it is NEVER read by, written by, or
+# joined into anything in the scoring/methodology path (analyses,
+# startup_intelligence_score, PillarAnalysis, VPS, calibration). It holds
+# workflow state ONLY: what a founder intends to do or has done, never
+# evidence and never a score. See this section's own tests
+# (test_founder_actions.py) for the code-level audit proving that
+# no function here ever writes analyses.methodology, any *_score column,
+# or startup_memberships.
+#
+# Shared per-startup, not per-member (explicit product decision, Part 11):
+# every list/update function below is scoped by startup_id alone --
+# created_by_user_id is recorded for provenance/attribution only, never
+# used to filter what a member can see or move between statuses. Any
+# verified member of a startup sees and can act on the same plan.
+# ---------------------------------------------------------------------------
+
+def create_founder_actions_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS founder_actions (
+                id SERIAL PRIMARY KEY,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                created_by_user_id TEXT NOT NULL REFERENCES users(id),
+                title TEXT NOT NULL,
+                description TEXT,
+                related_pillar TEXT,
+                status TEXT NOT NULL DEFAULT 'todo'
+                    CHECK (status IN ('todo', 'in_progress', 'completed', 'dismissed')),
+                source TEXT NOT NULL
+                    CHECK (source IN ('sie_recommendation', 'founder_created')),
+                -- Dedup key for SIE-derived actions only (see
+                -- create_founder_action()'s own docstring) -- always NULL
+                -- for founder_created, so the partial unique index below
+                -- never constrains founder-authored text at all.
+                source_ref TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                completed_at TIMESTAMP
+            )
+        """))
+
+        # Scoped to (startup_id, source_ref), not globally -- the exact
+        # same recommendation text for a DIFFERENT startup is a distinct,
+        # legitimate row; only a second copy of the SAME recommendation
+        # for the SAME startup is blocked. WHERE source = 'sie_recommendation'
+        # means this index says nothing about founder_created rows (whose
+        # source_ref is always NULL, and NULL never conflicts with NULL
+        # in a unique index regardless) -- see create_founder_action()'s
+        # own docstring for why founder-authored text is deliberately
+        # never deduplicated.
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS founder_actions_dedup_sie_recommendation
+            ON founder_actions (startup_id, source_ref)
+            WHERE source = 'sie_recommendation'
+        """))
+
+    print("founder_actions table created successfully.")
+
+
+def list_founder_actions_for_startup(startup_id: int):
+    """Every action for this startup, regardless of who created it or its
+    current status -- the frontend groups by status client-side (Next Up
+    / In Progress / Completed / dismissed items simply omitted from the
+    default view). Authorization (RequireStartupMember) is enforced
+    entirely at the API layer, matching this file's existing convention
+    (e.g. list_pending_startup_claims_for_admin()'s own docstring)."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                id, startup_id, created_by_user_id, title, description,
+                related_pillar, status, source, source_ref,
+                created_at, updated_at, completed_at
+            FROM founder_actions
+            WHERE startup_id = :startup_id
+            ORDER BY created_at ASC
+        """), {"startup_id": startup_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def create_founder_action(
+    startup_id: int,
+    created_by_user_id: str,
+    title: str,
+    description: str | None,
+    related_pillar: str | None,
+    source: str,
+):
+    """
+    Creates one founder_actions row, OR -- for an sie_recommendation whose
+    exact title already exists for this startup -- returns the existing
+    row untouched instead of erroring or creating a duplicate. This is
+    the "Add to Plan" idempotency guarantee (Part 13): clicking it twice
+    on the same suggested recommendation is a safe no-op, never a second
+    row, never a 409 the frontend has to explain.
+
+    source_ref (the dedup key) is derived HERE from title, never accepted
+    from the caller -- there is no client-supplied identity field to
+    spoof or collide. founder_created rows always get source_ref=None,
+    so two founder-authored actions with coincidentally identical text
+    are both kept -- see this function's own module-level comment for why
+    that's deliberate (founder text is not deduplicated).
+
+    Existing-row lookup on conflict is a second, separate SELECT rather
+    than relying on RETURNING (which is empty on an ON CONFLICT DO
+    NOTHING no-op) -- both happen inside the same transaction, so this
+    is still atomic with respect to a concurrent identical insert.
+    """
+    source_ref = title.strip() if source == "sie_recommendation" else None
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            INSERT INTO founder_actions (
+                startup_id, created_by_user_id, title, description,
+                related_pillar, status, source, source_ref
+            )
+            VALUES (
+                :startup_id, :created_by_user_id, :title, :description,
+                :related_pillar, 'todo', :source, :source_ref
+            )
+            ON CONFLICT (startup_id, source_ref)
+                WHERE source = 'sie_recommendation'
+                DO NOTHING
+            RETURNING
+                id, startup_id, created_by_user_id, title, description,
+                related_pillar, status, source, source_ref,
+                created_at, updated_at, completed_at
+        """), {
+            "startup_id": startup_id,
+            "created_by_user_id": created_by_user_id,
+            "title": title,
+            "description": description,
+            "related_pillar": related_pillar,
+            "source": source,
+            "source_ref": source_ref,
+        })
+
+        row = result.mappings().first()
+
+        if row is not None:
+            return dict(row)
+
+        # Conflict: an sie_recommendation with this exact title already
+        # exists for this startup -- return it as-is (see this function's
+        # own docstring; never revives a dismissed one, never duplicates).
+        existing = connection.execute(text("""
+            SELECT
+                id, startup_id, created_by_user_id, title, description,
+                related_pillar, status, source, source_ref,
+                created_at, updated_at, completed_at
+            FROM founder_actions
+            WHERE startup_id = :startup_id AND source_ref = :source_ref
+        """), {"startup_id": startup_id, "source_ref": source_ref}).mappings().first()
+
+        return dict(existing)
+
+
+def update_founder_action_status(startup_id: int, action_id: int, new_status: str):
+    """
+    Returns the updated row, or None if this action_id doesn't exist for
+    this exact startup_id (never revealing whether it exists for a
+    DIFFERENT startup -- the WHERE clause is what makes a cross-startup
+    update structurally impossible, not a check performed after the
+    fact, same discipline as update_modeled_venture_for_user()'s own
+    user_id-scoped WHERE clause).
+
+    completed_at is set to NOW() only on a transition INTO 'completed',
+    and cleared back to NULL on any transition AWAY from it (the
+    "reopen" case) -- never touched for a lateral move between the other
+    three statuses. updated_at always advances.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE founder_actions
+            SET status = :new_status,
+                updated_at = CURRENT_TIMESTAMP,
+                completed_at = CASE
+                    WHEN :new_status = 'completed' THEN CURRENT_TIMESTAMP
+                    ELSE NULL
+                END
+            WHERE id = :action_id AND startup_id = :startup_id
+            RETURNING
+                id, startup_id, created_by_user_id, title, description,
+                related_pillar, status, source, source_ref,
+                created_at, updated_at, completed_at
+        """), {"new_status": new_status, "action_id": action_id, "startup_id": startup_id})
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
+
+
 def create_saved_startups_table():
     with engine.begin() as connection:
         connection.execute(text("""

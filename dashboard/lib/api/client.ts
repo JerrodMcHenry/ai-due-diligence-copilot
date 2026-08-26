@@ -1,7 +1,10 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
 
 type ApiFetchOptions = {
-  method?: "GET" | "POST" | "PUT" | "DELETE";
+  // PATCH added for Phase 7.3's founder-action status transitions
+  // (lib/api/founderActions.ts) -- every existing call site is
+  // unaffected, method still defaults to GET when omitted.
+  method?: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
   // A FormData body (Pitch Deck Upload's multipart request) is sent
   // as-is with no Content-Type header set -- the browser fills in
   // `multipart/form-data; boundary=...` itself, which it can only do

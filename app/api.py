@@ -62,7 +62,11 @@ from app.database.db import (create_tables,
                          DuplicatePendingClaimError,
                          AlreadyMemberError,
                          get_startup_memberships_for_user,
-                         get_founder_startup_workspace
+                         get_founder_startup_workspace,
+                         create_founder_actions_table,
+                         list_founder_actions_for_startup,
+                         create_founder_action,
+                         update_founder_action_status
 )
 from typing import Literal
 from fastapi import Query
@@ -72,6 +76,7 @@ from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, Vent
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
+from app.models.founder_action import FounderAction, CreateFounderActionRequest, UpdateFounderActionStatusRequest, FOUNDER_ACTION_PILLARS
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
@@ -152,6 +157,13 @@ create_modeled_ventures_table()
 # default at all (see create_startup_claims_table()'s own docstring in
 # app/database/db.py for why).
 create_startup_claims_table()
+
+# Phase 7.3 -- Founder Progress & Improvement V1. Purely additive:
+# references startups(id)/users(id), which already exist by this point.
+# Never touches startup_memberships or analyses -- see
+# create_founder_actions_table()'s own module-level comment in
+# app/database/db.py for the full "workflow state, never scoring" boundary.
+create_founder_actions_table()
 
 @app.get("/health")
 def health():
@@ -874,6 +886,83 @@ def get_founder_startup(
         raise HTTPException(status_code=404, detail="Startup not found.")
 
     return workspace
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.3 -- Founder Progress & Improvement V1. Same RequireStartupMember
+# gate as GET /founder/startups/{startup_id} above -- every endpoint below
+# 404s before its body runs if the caller has no live startup_memberships
+# row for this exact startup_id, never authorized by startup_claims,
+# saved_startups, modeled_ventures, or anything client-supplied.
+#
+# Shared plan, not per-member (Part 11): none of these endpoints filter
+# by current_user.user_id -- any verified member of the startup sees and
+# can act on every action in it. created_by_user_id (set from
+# current_user.user_id, never accepted from the request body) is
+# provenance only.
+#
+# founder_actions is pure workflow state -- no endpoint here ever touches
+# analyses, methodology, startup_intelligence_score, or
+# startup_memberships. See app/database/db.py's own Phase 7.3 section for
+# the full boundary statement and app/tests/test_founder_actions.py for
+# the code-level audit.
+#
+# No separate GET .../suggested-actions endpoint exists: the six pillars'
+# real recommendations are already present in GET /founder/startups/
+# {startup_id}'s own `methodology` field (Phase 7.2), and the frontend
+# derives suggested actions from that response client-side -- identical
+# in spirit to how PrioritiesSection's "Top Priorities" already ranks by
+# weakest pillar. Adding a second endpoint to return the same data a
+# different way would duplicate, not simplify, this surface.
+# ---------------------------------------------------------------------------
+
+@app.get("/founder/startups/{startup_id}/actions", response_model=list[FounderAction])
+def list_founder_actions(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    return list_founder_actions_for_startup(startup_id)
+
+
+@app.post("/founder/startups/{startup_id}/actions", response_model=FounderAction)
+def create_founder_action_endpoint(
+    startup_id: int,
+    request: CreateFounderActionRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    if request.related_pillar is not None and request.related_pillar not in FOUNDER_ACTION_PILLARS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"related_pillar must be one of {sorted(FOUNDER_ACTION_PILLARS)} or omitted.",
+        )
+
+    return create_founder_action(
+        startup_id=startup_id,
+        created_by_user_id=current_user.user_id,
+        title=request.title.strip(),
+        description=(request.description.strip() if request.description else None),
+        related_pillar=request.related_pillar,
+        source=request.source,
+    )
+
+
+@app.patch("/founder/startups/{startup_id}/actions/{action_id}", response_model=FounderAction)
+def update_founder_action_status_endpoint(
+    startup_id: int,
+    action_id: int,
+    request: UpdateFounderActionStatusRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    updated = update_founder_action_status(startup_id, action_id, request.status)
+
+    if updated is None:
+        # Same non-leaking shape as every other startup/claim-scoped
+        # resource in this codebase: "doesn't exist" and "belongs to a
+        # different startup" are indistinguishable from the caller's
+        # perspective.
+        raise HTTPException(status_code=404, detail="Action not found.")
+
+    return updated
 
 
 @app.put("/analyses/{analysis_id}")
