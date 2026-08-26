@@ -5,3 +5,4 @@ export * from "./version";
 export * from "./analyze";
 export * from "./compare";
 export * from "./ideaLab";
+export * from "./startupClaim";

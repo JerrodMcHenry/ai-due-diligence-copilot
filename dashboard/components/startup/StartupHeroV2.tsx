@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 
 import { SPSRing } from "@/components/sps";
 import BaseCard from "@/components/ui/BaseCard";
+import ClaimStartupButton from "./ClaimStartupButton";
 import SaveStartupButton from "./SaveStartupButton";
 
 import { CONFIDENCE_BADGE_CLASSES, PILLARS } from "./pillarMeta";
@@ -182,7 +183,10 @@ export default function StartupHeroV2({
             </h1>
 
             {startupId != null ? (
-              <SaveStartupButton startupId={startupId} />
+              <div className="flex flex-col items-end gap-2">
+                <ClaimStartupButton startupId={startupId} />
+                <SaveStartupButton startupId={startupId} />
+              </div>
             ) : null}
           </div>
 
