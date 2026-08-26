@@ -62,6 +62,12 @@ const navigation: NavigationItem[] = [
     group: "Personal",
     authOnly: true,
   },
+  {
+    name: "Founder Workspace",
+    href: "/founder",
+    group: "Personal",
+    authOnly: true,
+  },
 ];
 
 function isActiveRoute(pathname: string, href: string) {

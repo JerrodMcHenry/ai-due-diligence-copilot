@@ -30,7 +30,15 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // /saved -- same UX-only redirect, real enforcement is each page's own
 // auth.protect() (app/idea-lab/page.tsx, app/idea-lab/new/page.tsx,
 // app/idea-lab/[id]/page.tsx).
-const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)", "/idea-lab(.*)"]);
+//
+// Phase 7.2 -- Founder Workspace V1: /founder added the same way. Real
+// enforcement is each page's own auth.protect() (app/founder/page.tsx,
+// app/founder/startups/[startupId]/page.tsx) PLUS, for a specific
+// startup's data, the backend's own RequireStartupMember dependency
+// (app/auth.py) -- this route-matcher redirect has no bearing on which
+// startups a signed-in user may see, only on whether /founder(.*) is
+// reachable at all while signed out.
+const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)", "/idea-lab(.*)", "/founder(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {

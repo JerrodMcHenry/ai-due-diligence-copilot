@@ -61,7 +61,8 @@ from app.database.db import (create_tables,
                          StartupNotFoundError,
                          DuplicatePendingClaimError,
                          AlreadyMemberError,
-                         get_startup_memberships_for_user
+                         get_startup_memberships_for_user,
+                         get_founder_startup_workspace
 )
 from typing import Literal
 from fastapi import Query
@@ -70,9 +71,10 @@ from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, 
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
+from app.models.founder import FounderStartupWorkspace
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
-from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin
+from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 from app.ai.vps_scoring import compute_vps
 from app.ai.vps_guidance import generate_guidance
@@ -846,6 +848,32 @@ def reject_admin_startup_claim(
 @app.get("/me/startups", response_model=list[MyStartupMembership])
 def list_my_startups(current_user: AuthenticatedUser = RequireAuth):
     return get_startup_memberships_for_user(current_user.user_id)
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.2 -- Founder Workspace V1. RequireStartupMember (app/auth.py)
+# resolves startup_id from this route's own path parameter and 404s
+# before this function body ever runs if the caller has no live
+# startup_memberships row for it -- never authorized by startup_claims,
+# saved_startups, modeled_ventures, or anything client-supplied. This is
+# the only startup-scoped Founder Workspace endpoint in V1.
+# ---------------------------------------------------------------------------
+
+@app.get("/founder/startups/{startup_id}", response_model=FounderStartupWorkspace)
+def get_founder_startup(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    workspace = get_founder_startup_workspace(startup_id)
+
+    if workspace is None:
+        # Should be unreachable once RequireStartupMember has already
+        # passed (a membership row can't reference a nonexistent
+        # startups.id, per that table's own FK) -- kept as a clean 404
+        # rather than a 500 in case that ever stops being true.
+        raise HTTPException(status_code=404, detail="Startup not found.")
+
+    return workspace
 
 
 @app.put("/analyses/{analysis_id}")

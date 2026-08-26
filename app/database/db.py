@@ -681,6 +681,97 @@ def user_has_startup_membership(user_id: str, startup_id: int) -> bool:
         return result.first() is not None
 
 
+# ---------------------------------------------------------------------------
+# Phase 7.2 -- Founder Workspace V1. One read-only function, no new table,
+# no new write path. Authorization for who may call this is entirely the
+# caller's job (RequireStartupMember in app/auth.py) -- this function
+# itself trusts startup_id unconditionally, same division of
+# responsibility list_pending_startup_claims_for_admin() already
+# documents for RequireAdmin.
+# ---------------------------------------------------------------------------
+
+def get_founder_startup_workspace(startup_id: int):
+    """
+    Everything Founder Workspace V1's default view needs for one startup,
+    in one read: the canonical identity (from startups itself, so this
+    resolves even for a startup with zero analyses yet), its latest
+    canonical intelligence, and its full SPS history.
+
+    Deliberately resolves the latest analysis by the real startup_id FK
+    (analyses.startup_id) rather than by company_name string-matching --
+    a stricter, more correct key than get_startup_by_name() uses, made
+    possible here because the caller always already has a real startup_id
+    (from startup_memberships, via RequireStartupMember) rather than a
+    URL-provided name. Uses the exact same "methodology IS NOT NULL"
+    filter as get_startup_by_name() (no additional methodology_version
+    gate), so this always reports the same current SPS as the public
+    Startup Profile for the same startup -- the two are never allowed to
+    disagree about "what is this company's current intelligence".
+
+    methodology/created_at are None when no canonical analysis exists yet
+    for this startup -- never fabricated to a placeholder score. Returns
+    None only if startup_id itself doesn't resolve to a real startups
+    row, which should never happen once RequireStartupMember has already
+    passed (a membership row can't exist for a startup_id that isn't
+    real, per the FK), but is still checked so this function is safe to
+    call on its own.
+    """
+    with engine.begin() as connection:
+        startup_row = connection.execute(text("""
+            SELECT id, canonical_name FROM startups WHERE id = :startup_id
+        """), {"startup_id": startup_id}).mappings().first()
+
+        if startup_row is None:
+            return None
+
+        analysis_row = connection.execute(text("""
+            SELECT id, created_at, methodology
+            FROM analyses
+            WHERE startup_id = :startup_id
+              AND methodology IS NOT NULL
+            ORDER BY created_at DESC, id DESC
+            LIMIT 1
+        """), {"startup_id": startup_id}).mappings().first()
+
+        history_rows = connection.execute(text("""
+            SELECT
+                id,
+                created_at,
+                methodology->>'startup_intelligence_score' AS sps
+            FROM analyses
+            WHERE startup_id = :startup_id
+              AND methodology IS NOT NULL
+            ORDER BY created_at ASC, id ASC
+        """), {"startup_id": startup_id}).mappings().all()
+
+    methodology = None
+    created_at = None
+
+    if analysis_row is not None:
+        created_at = analysis_row["created_at"]
+        methodology = analysis_row["methodology"]
+
+        if isinstance(methodology, str):
+            methodology = json.loads(methodology)
+
+    return {
+        "startup_id": startup_row["id"],
+        "canonical_name": startup_row["canonical_name"],
+        "created_at": created_at,
+        "methodology": methodology,
+        "sps_history": [
+            {
+                "analysis_id": row["id"],
+                "created_at": row["created_at"],
+                "startup_intelligence_score": (
+                    float(row["sps"]) if row["sps"] is not None else None
+                ),
+            }
+            for row in history_rows
+        ],
+    }
+
+
 def create_saved_startups_table():
     with engine.begin() as connection:
         connection.execute(text("""

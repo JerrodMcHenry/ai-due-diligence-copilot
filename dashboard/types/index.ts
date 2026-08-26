@@ -7,3 +7,4 @@ export * from "./compare";
 export * from "./ideaLab";
 export * from "./startupClaim";
 export * from "./startupMembership";
+export * from "./founder";

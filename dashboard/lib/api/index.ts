@@ -10,3 +10,4 @@ export * from "./compare";
 export * from "./ideaLab";
 export * from "./startupClaims";
 export * from "./startupMemberships";
+export * from "./founder";

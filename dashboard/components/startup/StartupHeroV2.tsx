@@ -55,8 +55,11 @@ function getAnalysisType(analysisContext: unknown): string | null {
 
 // Same defensive-read pattern as getAnalysisType above -- analysis_context
 // is typed `unknown` on the frontend, so this asserts nothing about its
-// shape beyond checking for the one field it needs.
-function getMethodologyVersion(analysisContext: unknown): string | null {
+// shape beyond checking for the one field it needs. Exported: Founder
+// Workspace (Phase 7.2) reuses this exact derivation rather than
+// duplicating it, so the two surfaces can never disagree about which
+// methodology version produced a given analysis.
+export function getMethodologyVersion(analysisContext: unknown): string | null {
   if (
     typeof analysisContext === "object" &&
     analysisContext !== null &&
@@ -73,7 +76,9 @@ function getMethodologyVersion(analysisContext: unknown): string | null {
   return null;
 }
 
-function formatAnalysisDate(isoDate: string): string | null {
+// Exported for the same reason as getMethodologyVersion above -- reused
+// by Founder Workspace (Phase 7.2).
+export function formatAnalysisDate(isoDate: string): string | null {
   const date = new Date(isoDate);
 
   if (Number.isNaN(date.getTime())) {
@@ -92,7 +97,9 @@ function formatAnalysisDate(isoDate: string): string | null {
 // populated by the backend, so treating it as real data would mean
 // displaying a number that's always 0). Ties resolve toward the more
 // conservative (lower) confidence level.
-function getOverallConfidence(methodology: SIEMethodologyAnalysis): ConfidenceLevel {
+// Exported for the same reason as getMethodologyVersion above -- reused
+// by Founder Workspace (Phase 7.2).
+export function getOverallConfidence(methodology: SIEMethodologyAnalysis): ConfidenceLevel {
   const counts: Record<ConfidenceLevel, number> = { Low: 0, Medium: 0, High: 0 };
 
   for (const pillar of PILLARS) {
