@@ -9,3 +9,5 @@ export * from "./startupClaim";
 export * from "./startupMembership";
 export * from "./founder";
 export * from "./founderAction";
+export * from "./founderUpdate";
+export * from "./startupMilestone";

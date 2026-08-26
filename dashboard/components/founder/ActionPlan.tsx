@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
@@ -425,24 +424,6 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
             onStatusChange={handleStatusChange}
           />
         </div>
-      ) : null}
-
-      {completedCount > 0 ? (
-        <BaseCard className="mt-6 flex flex-wrap items-center justify-between gap-3 border-primary/20 bg-primary/5 p-5">
-          <div>
-            <p className="text-sm font-semibold text-text-primary">Ready to update your intelligence?</p>
-            <p className="mt-1 text-sm text-text-secondary">
-              Once you&rsquo;ve gathered real evidence, re-analyze {canonicalName} to see whether
-              your SPS reflects the progress.
-            </p>
-          </div>
-          <Link
-            href={`/analyze?startup_id=${startupId}`}
-            className="shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
-          >
-            Re-analyze Startup
-          </Link>
-        </BaseCard>
       ) : null}
     </section>
   );

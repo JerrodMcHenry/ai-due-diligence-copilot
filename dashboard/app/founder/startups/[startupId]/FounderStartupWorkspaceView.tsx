@@ -10,6 +10,8 @@ import { SPSRing } from "@/components/sps";
 import SPSHistory from "@/components/startup/SPSHistory";
 import IntelligencePillars from "@/components/startup/IntelligencePillars";
 import ActionPlan from "@/components/founder/ActionPlan";
+import Milestones from "@/components/founder/Milestones";
+import RecentUpdates from "@/components/founder/RecentUpdates";
 import { PILLARS } from "@/components/startup/pillarMeta";
 import {
   formatAnalysisDate,
@@ -199,6 +201,43 @@ export default function FounderStartupWorkspaceView({
         canonicalName={canonical_name}
         methodology={methodology}
       />
+
+      {/* Phase 7.4 -- Founder Evidence + Milestones V1: same as
+          ActionPlan above, rendered regardless of whether this startup
+          has a canonical analysis yet (Part 18: "Founder may still
+          create milestones and updates" with no analysis). Neither
+          component reads or writes methodology/SPS at all. */}
+      <Milestones startupId={startup_id} />
+
+      <RecentUpdates startupId={startup_id} />
+
+      {/* Part 15: the single re-analysis nudge at the true end of the
+          operating loop (Needs Attention -> Action Plan -> Milestones ->
+          Recent Updates -> Re-analyze), rather than a separate copy
+          inside each section above -- one truthful, restrained CTA, not
+          three similar ones stacked down the page. Only shown once
+          there's an existing SPS to potentially update; re-analysis
+          itself is always the founder's deliberate choice, never
+          automatic (Part 15's own requirement). */}
+      {methodology ? (
+        <BaseCard className="flex flex-wrap items-center justify-between gap-3 border-primary/20 bg-primary/5 p-5">
+          <div>
+            <p className="text-sm font-semibold text-text-primary">
+              Have meaningful new evidence?
+            </p>
+            <p className="mt-1 text-sm text-text-secondary">
+              Update {canonical_name}&rsquo;s startup intelligence to see whether your
+              SPS reflects what&rsquo;s actually happened.
+            </p>
+          </div>
+          <Link
+            href={reanalyzeHref}
+            className="shrink-0 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
+          >
+            Re-analyze Startup
+          </Link>
+        </BaseCard>
+      ) : null}
 
       {methodology ? (
         <>

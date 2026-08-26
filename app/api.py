@@ -66,7 +66,15 @@ from app.database.db import (create_tables,
                          create_founder_actions_table,
                          list_founder_actions_for_startup,
                          create_founder_action,
-                         update_founder_action_status
+                         update_founder_action_status,
+                         create_founder_updates_table,
+                         list_founder_updates_for_startup,
+                         create_founder_update,
+                         update_founder_update,
+                         create_startup_milestones_table,
+                         list_startup_milestones_for_startup,
+                         create_startup_milestone,
+                         update_startup_milestone_status
 )
 from typing import Literal
 from fastapi import Query
@@ -77,6 +85,8 @@ from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubm
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
 from app.models.founder_action import FounderAction, CreateFounderActionRequest, UpdateFounderActionStatusRequest, FOUNDER_ACTION_PILLARS
+from app.models.founder_update import FounderUpdate, CreateFounderUpdateRequest, UpdateFounderUpdateRequest, FOUNDER_UPDATE_PILLARS
+from app.models.startup_milestone import StartupMilestone, CreateMilestoneRequest, UpdateMilestoneStatusRequest, MILESTONE_PILLARS
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
@@ -164,6 +174,16 @@ create_startup_claims_table()
 # create_founder_actions_table()'s own module-level comment in
 # app/database/db.py for the full "workflow state, never scoring" boundary.
 create_founder_actions_table()
+
+# Phase 7.4 -- Founder Evidence + Milestones V1. Purely additive:
+# references startups(id)/users(id), which already exist by this point.
+# Never touches startup_memberships or analyses -- see
+# create_founder_updates_table()'s/create_startup_milestones_table()'s
+# own module-level comment in app/database/db.py for the full
+# "founder-reported record, never canonical evidence, never scoring"
+# boundary.
+create_founder_updates_table()
+create_startup_milestones_table()
 
 @app.get("/health")
 def health():
@@ -961,6 +981,139 @@ def update_founder_action_status_endpoint(
         # different startup" are indistinguishable from the caller's
         # perspective.
         raise HTTPException(status_code=404, detail="Action not found.")
+
+    return updated
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.4 -- Founder Evidence + Milestones V1. Same RequireStartupMember
+# gate as every other Founder Workspace endpoint above -- every route
+# below 404s before its body runs if the caller has no live
+# startup_memberships row for this exact startup_id, never authorized by
+# startup_claims, saved_startups, modeled_ventures, or anything
+# client-supplied.
+#
+# Shared plan (Part 11, same decision as Phase 7.3): none of these
+# endpoints filter by current_user.user_id -- any verified member of the
+# startup sees and can act on every update/milestone in it.
+# created_by_user_id (set from current_user.user_id, never accepted from
+# the request body) is provenance only.
+#
+# founder_updates/startup_milestones are pure founder-reported record --
+# no endpoint here ever touches analyses, methodology,
+# startup_intelligence_score, or startup_memberships. See
+# app/database/db.py's own Phase 7.4 section for the full boundary
+# statement and app/tests/test_founder_updates.py /
+# test_startup_milestones.py for the code-level audits.
+# ---------------------------------------------------------------------------
+
+@app.get("/founder/startups/{startup_id}/updates", response_model=list[FounderUpdate])
+def list_founder_updates(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    return list_founder_updates_for_startup(startup_id)
+
+
+@app.post("/founder/startups/{startup_id}/updates", response_model=FounderUpdate)
+def create_founder_update_endpoint(
+    startup_id: int,
+    request: CreateFounderUpdateRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    if request.related_pillar is not None and request.related_pillar not in FOUNDER_UPDATE_PILLARS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"related_pillar must be one of {sorted(FOUNDER_UPDATE_PILLARS)} or omitted.",
+        )
+
+    return create_founder_update(
+        startup_id=startup_id,
+        created_by_user_id=current_user.user_id,
+        update_type=request.update_type,
+        title=request.title.strip(),
+        description=(request.description.strip() if request.description else None),
+        related_pillar=request.related_pillar,
+        occurred_at=request.occurred_at,
+        metric_name=request.metric_name,
+        metric_value=request.metric_value,
+        metric_unit=request.metric_unit,
+    )
+
+
+@app.patch("/founder/startups/{startup_id}/updates/{update_id}", response_model=FounderUpdate)
+def update_founder_update_endpoint(
+    startup_id: int,
+    update_id: int,
+    request: UpdateFounderUpdateRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    if request.related_pillar is not None and request.related_pillar not in FOUNDER_UPDATE_PILLARS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"related_pillar must be one of {sorted(FOUNDER_UPDATE_PILLARS)} or omitted.",
+        )
+
+    updated = update_founder_update(
+        startup_id=startup_id,
+        update_id=update_id,
+        update_type=request.update_type,
+        title=request.title.strip(),
+        description=(request.description.strip() if request.description else None),
+        related_pillar=request.related_pillar,
+        occurred_at=request.occurred_at,
+        metric_name=request.metric_name,
+        metric_value=request.metric_value,
+        metric_unit=request.metric_unit,
+    )
+
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Update not found.")
+
+    return updated
+
+
+@app.get("/founder/startups/{startup_id}/milestones", response_model=list[StartupMilestone])
+def list_startup_milestones(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    return list_startup_milestones_for_startup(startup_id)
+
+
+@app.post("/founder/startups/{startup_id}/milestones", response_model=StartupMilestone)
+def create_startup_milestone_endpoint(
+    startup_id: int,
+    request: CreateMilestoneRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    if request.related_pillar is not None and request.related_pillar not in MILESTONE_PILLARS:
+        raise HTTPException(
+            status_code=400,
+            detail=f"related_pillar must be one of {sorted(MILESTONE_PILLARS)} or omitted.",
+        )
+
+    return create_startup_milestone(
+        startup_id=startup_id,
+        created_by_user_id=current_user.user_id,
+        title=request.title.strip(),
+        description=(request.description.strip() if request.description else None),
+        related_pillar=request.related_pillar,
+        target_date=request.target_date,
+    )
+
+
+@app.patch("/founder/startups/{startup_id}/milestones/{milestone_id}", response_model=StartupMilestone)
+def update_startup_milestone_status_endpoint(
+    startup_id: int,
+    milestone_id: int,
+    request: UpdateMilestoneStatusRequest,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    updated = update_startup_milestone_status(startup_id, milestone_id, request.status)
+
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Milestone not found.")
 
     return updated
 

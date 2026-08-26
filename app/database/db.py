@@ -982,6 +982,290 @@ def update_founder_action_status(startup_id: int, action_id: int, new_status: st
         return dict(row) if row is not None else None
 
 
+FOUNDER_UPDATE_TYPES = (
+    "customer", "revenue", "product", "team", "fundraising",
+    "partnership", "validation", "operations", "other",
+)
+MILESTONE_STATUSES = ("planned", "in_progress", "achieved", "cancelled")
+
+FOUNDER_UPDATE_COLUMNS = """
+    id, startup_id, created_by_user_id, update_type, title, description,
+    related_pillar, metric_name, metric_value, metric_unit,
+    occurred_at, created_at, updated_at
+"""
+
+MILESTONE_COLUMNS = """
+    id, startup_id, created_by_user_id, title, description,
+    related_pillar, status, target_date, completed_at,
+    created_at, updated_at
+"""
+
+# ---------------------------------------------------------------------------
+# Phase 7.4 -- Founder Evidence + Milestones V1. Two dedicated, purely
+# additive tables -- founder_updates and startup_milestones -- neither
+# ever read by, written by, or joined into anything in the scoring/
+# methodology path (analyses, startup_intelligence_score, PillarAnalysis,
+# VPS, calibration). Both hold FOUNDER-REPORTED operational record only,
+# same "workflow state, never evidence, never a score" boundary
+# founder_actions established in Phase 7.3 -- see this section's own
+# tests (test_founder_updates.py, test_startup_milestones.py) for the
+# code-level audit.
+#
+# Distinct from app/models/evidence.py's Evidence model on purpose: that
+# Evidence is CANONICAL pillar-analysis evidence (LLM-extracted, embedded
+# in PillarAnalysis.evidence, assessed against Public/Inferred/Private
+# rules) -- a completely different epistemic standard from "a founder
+# typed a sentence into a form." founder_updates rows are never inserted
+# into methodology.evidence, and no function in this file ever performs
+# that conversion. A founder update becomes part of canonical evidence
+# only if the founder separately, deliberately re-analyzes and mentions
+# it in what they submit -- exactly like any other self-reported fact
+# fed into the existing pipeline, no different or more privileged than
+# before this phase existed.
+#
+# Shared per-startup, not per-member (same Part 11 decision Phase 7.3
+# made for founder_actions): every function below is scoped by
+# startup_id alone -- created_by_user_id is attribution only.
+# ---------------------------------------------------------------------------
+
+def create_founder_updates_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS founder_updates (
+                id SERIAL PRIMARY KEY,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                created_by_user_id TEXT NOT NULL REFERENCES users(id),
+                update_type TEXT NOT NULL CHECK (update_type IN (
+                    'customer', 'revenue', 'product', 'team', 'fundraising',
+                    'partnership', 'validation', 'operations', 'other'
+                )),
+                title TEXT NOT NULL,
+                description TEXT,
+                related_pillar TEXT,
+                -- Optional structured metric (Part 9) -- deliberately just
+                -- three plain nullable columns, no metrics platform, no
+                -- separate metrics table, no charting. All three are
+                -- either all present or all absent; enforced at the API
+                -- layer (CreateFounderUpdateRequest), not here, matching
+                -- this file's existing convention that DB functions
+                -- implement writes, not validation.
+                metric_name TEXT,
+                metric_value NUMERIC,
+                metric_unit TEXT,
+                occurred_at TIMESTAMP NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("founder_updates table created successfully.")
+
+
+def list_founder_updates_for_startup(startup_id: int):
+    """Every update for this startup, regardless of who recorded it --
+    newest-first by occurred_at (the founder-chosen "when did this
+    happen" date, not necessarily when the row was inserted), which is
+    what a Recent Updates timeline actually wants. Authorization
+    (RequireStartupMember) is enforced entirely at the API layer, same
+    convention as list_founder_actions_for_startup()."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {FOUNDER_UPDATE_COLUMNS}
+            FROM founder_updates
+            WHERE startup_id = :startup_id
+            ORDER BY occurred_at DESC, created_at DESC
+        """), {"startup_id": startup_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def create_founder_update(
+    startup_id: int,
+    created_by_user_id: str,
+    update_type: str,
+    title: str,
+    description: str | None,
+    related_pillar: str | None,
+    occurred_at,
+    metric_name: str | None = None,
+    metric_value: float | None = None,
+    metric_unit: str | None = None,
+):
+    """No deduplication of any kind -- unlike founder_actions' SIE-
+    recommendation dedup, every founder update is a genuinely distinct
+    reported event even if the text happens to repeat (a founder may
+    legitimately report "Signed a new customer" multiple times)."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO founder_updates (
+                startup_id, created_by_user_id, update_type, title,
+                description, related_pillar, metric_name, metric_value,
+                metric_unit, occurred_at
+            )
+            VALUES (
+                :startup_id, :created_by_user_id, :update_type, :title,
+                :description, :related_pillar, :metric_name, :metric_value,
+                :metric_unit, :occurred_at
+            )
+            RETURNING {FOUNDER_UPDATE_COLUMNS}
+        """), {
+            "startup_id": startup_id,
+            "created_by_user_id": created_by_user_id,
+            "update_type": update_type,
+            "title": title,
+            "description": description,
+            "related_pillar": related_pillar,
+            "metric_name": metric_name,
+            "metric_value": metric_value,
+            "metric_unit": metric_unit,
+            "occurred_at": occurred_at,
+        })
+
+        return dict(result.mappings().first())
+
+
+def update_founder_update(
+    startup_id: int,
+    update_id: int,
+    update_type: str,
+    title: str,
+    description: str | None,
+    related_pillar: str | None,
+    occurred_at,
+    metric_name: str | None = None,
+    metric_value: float | None = None,
+    metric_unit: str | None = None,
+):
+    """Full-field correction, not a partial patch -- same shape as
+    update_modeled_venture_for_user()'s own precedent (every editable
+    field is supplied on every call, avoiding the ambiguity of "field
+    absent" vs. "field explicitly cleared"). Returns None if this
+    update_id doesn't exist for this exact startup_id -- same
+    non-leaking, WHERE-clause-scoped discipline as
+    update_founder_action_status()."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE founder_updates
+            SET update_type = :update_type,
+                title = :title,
+                description = :description,
+                related_pillar = :related_pillar,
+                metric_name = :metric_name,
+                metric_value = :metric_value,
+                metric_unit = :metric_unit,
+                occurred_at = :occurred_at,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = :update_id AND startup_id = :startup_id
+            RETURNING {FOUNDER_UPDATE_COLUMNS}
+        """), {
+            "update_type": update_type,
+            "title": title,
+            "description": description,
+            "related_pillar": related_pillar,
+            "metric_name": metric_name,
+            "metric_value": metric_value,
+            "metric_unit": metric_unit,
+            "occurred_at": occurred_at,
+            "update_id": update_id,
+            "startup_id": startup_id,
+        })
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
+
+
+def create_startup_milestones_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS startup_milestones (
+                id SERIAL PRIMARY KEY,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                created_by_user_id TEXT NOT NULL REFERENCES users(id),
+                title TEXT NOT NULL,
+                description TEXT,
+                related_pillar TEXT,
+                status TEXT NOT NULL DEFAULT 'planned'
+                    CHECK (status IN ('planned', 'in_progress', 'achieved', 'cancelled')),
+                target_date DATE,
+                completed_at TIMESTAMP,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("startup_milestones table created successfully.")
+
+
+def list_startup_milestones_for_startup(startup_id: int):
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {MILESTONE_COLUMNS}
+            FROM startup_milestones
+            WHERE startup_id = :startup_id
+            ORDER BY created_at ASC
+        """), {"startup_id": startup_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def create_startup_milestone(
+    startup_id: int,
+    created_by_user_id: str,
+    title: str,
+    description: str | None,
+    related_pillar: str | None,
+    target_date,
+):
+    """New milestones always start 'planned' -- no other status is ever
+    accepted at creation time, matching create_founder_action()'s own
+    "status always starts at the initial value" discipline."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO startup_milestones (
+                startup_id, created_by_user_id, title, description,
+                related_pillar, status, target_date
+            )
+            VALUES (
+                :startup_id, :created_by_user_id, :title, :description,
+                :related_pillar, 'planned', :target_date
+            )
+            RETURNING {MILESTONE_COLUMNS}
+        """), {
+            "startup_id": startup_id,
+            "created_by_user_id": created_by_user_id,
+            "title": title,
+            "description": description,
+            "related_pillar": related_pillar,
+            "target_date": target_date,
+        })
+
+        return dict(result.mappings().first())
+
+
+def update_startup_milestone_status(startup_id: int, milestone_id: int, new_status: str):
+    """Same completed_at discipline as update_founder_action_status():
+    set to NOW() only on a transition INTO 'achieved', cleared back to
+    NULL on any transition away from it (the "reopen" case). Marking a
+    milestone 'achieved' or 'cancelled' never touches analyses,
+    methodology, or any *_score column -- see this section's own
+    module-level comment and test_startup_milestones.py's static audit."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE startup_milestones
+            SET status = :new_status,
+                updated_at = CURRENT_TIMESTAMP,
+                completed_at = CASE
+                    WHEN :new_status = 'achieved' THEN CURRENT_TIMESTAMP
+                    ELSE NULL
+                END
+            WHERE id = :milestone_id AND startup_id = :startup_id
+            RETURNING {MILESTONE_COLUMNS}
+        """), {"new_status": new_status, "milestone_id": milestone_id, "startup_id": startup_id})
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
+
+
 def create_saved_startups_table():
     with engine.begin() as connection:
         connection.execute(text("""

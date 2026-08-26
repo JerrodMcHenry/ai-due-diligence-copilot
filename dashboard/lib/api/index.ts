@@ -12,3 +12,5 @@ export * from "./startupClaims";
 export * from "./startupMemberships";
 export * from "./founder";
 export * from "./founderActions";
+export * from "./founderUpdates";
+export * from "./startupMilestones";
