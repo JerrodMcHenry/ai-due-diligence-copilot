@@ -819,9 +819,15 @@ def create_founder_actions_table():
                 related_pillar TEXT,
                 status TEXT NOT NULL DEFAULT 'todo'
                     CHECK (status IN ('todo', 'in_progress', 'completed', 'dismissed')),
+                -- Phase 8 added 'fundraising_gap' alongside the original
+                -- two values (see
+                -- add_fundraising_gap_source_to_founder_actions() below
+                -- for the matching migration on a database that already
+                -- has this table) -- backward compatible, existing rows
+                -- are untouched either way.
                 source TEXT NOT NULL
-                    CHECK (source IN ('sie_recommendation', 'founder_created')),
-                -- Dedup key for SIE-derived actions only (see
+                    CHECK (source IN ('sie_recommendation', 'founder_created', 'fundraising_gap')),
+                -- Dedup key for non-founder-authored actions (see
                 -- create_founder_action()'s own docstring) -- always NULL
                 -- for founder_created, so the partial unique index below
                 -- never constrains founder-authored text at all.
@@ -833,21 +839,54 @@ def create_founder_actions_table():
         """))
 
         # Scoped to (startup_id, source_ref), not globally -- the exact
-        # same recommendation text for a DIFFERENT startup is a distinct,
-        # legitimate row; only a second copy of the SAME recommendation
-        # for the SAME startup is blocked. WHERE source = 'sie_recommendation'
-        # means this index says nothing about founder_created rows (whose
-        # source_ref is always NULL, and NULL never conflicts with NULL
-        # in a unique index regardless) -- see create_founder_action()'s
+        # same recommendation/gap text for a DIFFERENT startup is a
+        # distinct, legitimate row; only a second copy of the SAME
+        # recommendation/gap for the SAME startup is blocked.
+        # WHERE source <> 'founder_created' covers both
+        # 'sie_recommendation' and Phase 8's 'fundraising_gap' (and any
+        # future non-founder-authored source) with one predicate, while
+        # founder_created rows (whose source_ref is always NULL) are
+        # never constrained by it at all -- see create_founder_action()'s
         # own docstring for why founder-authored text is deliberately
         # never deduplicated.
         connection.execute(text("""
             CREATE UNIQUE INDEX IF NOT EXISTS founder_actions_dedup_sie_recommendation
             ON founder_actions (startup_id, source_ref)
-            WHERE source = 'sie_recommendation'
+            WHERE source <> 'founder_created'
         """))
 
     print("founder_actions table created successfully.")
+
+
+def add_fundraising_gap_source_to_founder_actions():
+    """
+    Phase 8 migration for a database where founder_actions already
+    exists from Phase 7.3/CREATE TABLE IF NOT EXISTS never re-runs the
+    body above. Idempotent: DROP ... IF EXISTS + CREATE, safe to call on
+    every startup. Widens the CHECK constraint to allow 'fundraising_gap'
+    and widens the dedup index's predicate to match (see
+    create_founder_actions_table()'s own comment for why
+    `source <> 'founder_created'` is the correct predicate for both).
+    Never touches existing rows.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            ALTER TABLE founder_actions DROP CONSTRAINT IF EXISTS founder_actions_source_check
+        """))
+        connection.execute(text("""
+            ALTER TABLE founder_actions ADD CONSTRAINT founder_actions_source_check
+            CHECK (source IN ('sie_recommendation', 'founder_created', 'fundraising_gap'))
+        """))
+        connection.execute(text("""
+            DROP INDEX IF EXISTS founder_actions_dedup_sie_recommendation
+        """))
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS founder_actions_dedup_sie_recommendation
+            ON founder_actions (startup_id, source_ref)
+            WHERE source <> 'founder_created'
+        """))
+
+    print("founder_actions.source migrated to include fundraising_gap.")
 
 
 def list_founder_actions_for_startup(startup_id: int):
@@ -880,11 +919,13 @@ def create_founder_action(
     source: str,
 ):
     """
-    Creates one founder_actions row, OR -- for an sie_recommendation whose
-    exact title already exists for this startup -- returns the existing
-    row untouched instead of erroring or creating a duplicate. This is
-    the "Add to Plan" idempotency guarantee (Part 13): clicking it twice
-    on the same suggested recommendation is a safe no-op, never a second
+    Creates one founder_actions row, OR -- for a non-founder-authored
+    action (source='sie_recommendation' or, since Phase 8,
+    'fundraising_gap') whose exact title already exists for this startup
+    -- returns the existing row untouched instead of erroring or
+    creating a duplicate. This is the "Add to Plan" idempotency guarantee
+    (Part 13/Phase 8 Part 16): clicking it twice on the same suggested
+    recommendation or fundraising gap is a safe no-op, never a second
     row, never a 409 the frontend has to explain.
 
     source_ref (the dedup key) is derived HERE from title, never accepted
@@ -899,7 +940,7 @@ def create_founder_action(
     NOTHING no-op) -- both happen inside the same transaction, so this
     is still atomic with respect to a concurrent identical insert.
     """
-    source_ref = title.strip() if source == "sie_recommendation" else None
+    source_ref = title.strip() if source != "founder_created" else None
 
     with engine.begin() as connection:
         result = connection.execute(text("""
@@ -912,7 +953,7 @@ def create_founder_action(
                 :related_pillar, 'todo', :source, :source_ref
             )
             ON CONFLICT (startup_id, source_ref)
-                WHERE source = 'sie_recommendation'
+                WHERE source <> 'founder_created'
                 DO NOTHING
             RETURNING
                 id, startup_id, created_by_user_id, title, description,

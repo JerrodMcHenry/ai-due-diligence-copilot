@@ -6,7 +6,10 @@
 // shared per-startup, not private per-member).
 
 export type FounderActionStatus = "todo" | "in_progress" | "completed" | "dismissed";
-export type FounderActionSource = "sie_recommendation" | "founder_created";
+// Phase 8 -- Fundraising Readiness V1 adds "fundraising_gap" alongside
+// the original two sources -- see app/models/founder_action.py's own
+// comment on FounderActionSource.
+export type FounderActionSource = "sie_recommendation" | "founder_created" | "fundraising_gap";
 
 export interface FounderAction {
   id: number;

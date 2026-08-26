@@ -74,7 +74,8 @@ from app.database.db import (create_tables,
                          create_startup_milestones_table,
                          list_startup_milestones_for_startup,
                          create_startup_milestone,
-                         update_startup_milestone_status
+                         update_startup_milestone_status,
+                         add_fundraising_gap_source_to_founder_actions
 )
 from typing import Literal
 from fastapi import Query
@@ -87,6 +88,8 @@ from app.models.founder import FounderStartupWorkspace
 from app.models.founder_action import FounderAction, CreateFounderActionRequest, UpdateFounderActionStatusRequest, FOUNDER_ACTION_PILLARS
 from app.models.founder_update import FounderUpdate, CreateFounderUpdateRequest, UpdateFounderUpdateRequest, FOUNDER_UPDATE_PILLARS
 from app.models.startup_milestone import StartupMilestone, CreateMilestoneRequest, UpdateMilestoneStatusRequest, MILESTONE_PILLARS
+from app.models.fundraising_readiness import FundraisingReadinessResponse, PillarReadinessOut, ReadinessGapOut, ChecklistItemOut
+from app.ai.fundraising_readiness import assess_fundraising_readiness
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
@@ -184,6 +187,15 @@ create_founder_actions_table()
 # boundary.
 create_founder_updates_table()
 create_startup_milestones_table()
+
+# Phase 8 -- Fundraising Readiness V1. Widens founder_actions.source to
+# allow 'fundraising_gap' (Part 16's Action Plan integration) -- see
+# add_fundraising_gap_source_to_founder_actions()'s own docstring in
+# app/database/db.py. No new table: readiness itself is computed fresh
+# from existing canonical intelligence on every request (see
+# app/ai/fundraising_readiness.py's own module docstring for the
+# persistence decision), so there is no create_*_table() call for it.
+add_fundraising_gap_source_to_founder_actions()
 
 @app.get("/health")
 def health():
@@ -1116,6 +1128,86 @@ def update_startup_milestone_status_endpoint(
         raise HTTPException(status_code=404, detail="Milestone not found.")
 
     return updated
+
+
+# ---------------------------------------------------------------------------
+# Phase 8 -- Fundraising Readiness V1. Same RequireStartupMember gate as
+# every other Founder Workspace endpoint -- 404s before its body runs if
+# the caller has no live startup_memberships row for this exact
+# startup_id, never authorized by startup_claims, saved_startups,
+# modeled_ventures, or anything client-supplied. Fundraising preparation
+# is private founder information; this is deliberately not a public
+# endpoint.
+#
+# Reuses get_founder_startup_workspace() (Phase 7.2) unchanged rather
+# than a new query -- readiness is computed fresh from the SAME canonical
+# methodology that endpoint already reads, never a second source of
+# truth, never persisted (see app/ai/fundraising_readiness.py's own
+# module docstring for the persistence decision). This function performs
+# no scoring itself -- assess_fundraising_readiness() is pure,
+# deterministic arithmetic over already-computed fields; nothing here
+# calls an LLM, writes methodology, or touches startup_memberships.
+# ---------------------------------------------------------------------------
+
+@app.get("/founder/startups/{startup_id}/fundraising", response_model=FundraisingReadinessResponse)
+def get_fundraising_readiness(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireStartupMember,
+):
+    workspace = get_founder_startup_workspace(startup_id)
+
+    if workspace is None:
+        raise HTTPException(status_code=404, detail="Startup not found.")
+
+    methodology = workspace["methodology"]
+    assessment = assess_fundraising_readiness(methodology)
+
+    current_sps = methodology.get("startup_intelligence_score") if methodology is not None else None
+    created_at = workspace["created_at"]
+
+    return FundraisingReadinessResponse(
+        startup_id=workspace["startup_id"],
+        canonical_name=workspace["canonical_name"],
+        has_canonical_analysis=assessment.has_canonical_analysis,
+        stage_label=assessment.stage_label,
+        stage_recognized=assessment.stage_recognized,
+        readiness_score=assessment.readiness_score,
+        readiness_band=assessment.readiness_band,
+        pillar_readiness=[
+            PillarReadinessOut(
+                pillar=p.pillar,
+                label=p.label,
+                score=p.score,
+                confidence=p.confidence,
+                evidence_coverage=p.evidence_coverage,
+                weight=p.weight,
+                readiness_contribution=p.readiness_contribution,
+                top_strength=p.top_strength,
+                top_weakness=p.top_weakness,
+            )
+            for p in assessment.pillar_readiness
+        ],
+        gaps=[
+            ReadinessGapOut(
+                category=g.category,
+                pillar=g.pillar,
+                issue=g.issue,
+                why_it_matters=g.why_it_matters,
+                recommended_next_step=g.recommended_next_step,
+                source_text=g.source_text,
+            )
+            for g in assessment.gaps
+        ],
+        investor_questions=assessment.investor_questions,
+        checklist=[
+            ChecklistItemOut(category=c.category, status=c.status, note=c.note)
+            for c in assessment.checklist
+        ],
+        has_pitch_deck=assessment.has_pitch_deck,
+        pitch_deck_note=assessment.pitch_deck_note,
+        current_sps=current_sps,
+        analyzed_at=created_at.isoformat() if created_at is not None else None,
+    )
 
 
 @app.put("/analyses/{analysis_id}")

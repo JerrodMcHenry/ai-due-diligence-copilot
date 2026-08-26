@@ -494,6 +494,14 @@ function ActionRow({
             SIE
           </span>
         ) : null}
+        {/* Phase 8: visibly distinguishes a Fundraising-Readiness-derived
+            action from an SIE pillar recommendation -- same idea, a
+            different source/provenance, per Part 16's own requirement. */}
+        {action.source === "fundraising_gap" ? (
+          <span className="rounded-full bg-warning/10 px-2 py-0.5 text-[11px] font-medium text-warning">
+            Fundraising
+          </span>
+        ) : null}
       </div>
 
       <div className="mt-2.5 flex flex-wrap gap-2">

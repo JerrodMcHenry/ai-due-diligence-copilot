@@ -16,7 +16,15 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 FounderActionStatus = Literal["todo", "in_progress", "completed", "dismissed"]
-FounderActionSource = Literal["sie_recommendation", "founder_created"]
+# Phase 8 -- Fundraising Readiness V1 adds "fundraising_gap" alongside
+# the existing two sources (backward compatible: existing rows/callers
+# using sie_recommendation/founder_created are unaffected). See
+# app/database/db.py's add_fundraising_gap_source_to_founder_actions()
+# for the corresponding CHECK-constraint migration and
+# create_founder_action()'s own dedup discipline, which applies
+# identically to this new source (same startup_id+source_ref partial
+# unique index, just a third valid `source` value).
+FounderActionSource = Literal["sie_recommendation", "founder_created", "fundraising_gap"]
 
 # Mirrors SIEMethodologyAnalysis's six pillar field names exactly
 # (app/models/startup.py) -- the only valid values for related_pillar.

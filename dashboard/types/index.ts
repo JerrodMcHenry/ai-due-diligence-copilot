@@ -11,3 +11,4 @@ export * from "./founder";
 export * from "./founderAction";
 export * from "./founderUpdate";
 export * from "./startupMilestone";
+export * from "./fundraisingReadiness";

@@ -12,6 +12,7 @@ import IntelligencePillars from "@/components/startup/IntelligencePillars";
 import ActionPlan from "@/components/founder/ActionPlan";
 import Milestones from "@/components/founder/Milestones";
 import RecentUpdates from "@/components/founder/RecentUpdates";
+import FundraisingReadinessCard from "@/components/founder/FundraisingReadinessCard";
 import { PILLARS } from "@/components/startup/pillarMeta";
 import {
   formatAnalysisDate,
@@ -190,6 +191,12 @@ export default function FounderStartupWorkspaceView({
           <PrioritiesSection methodology={methodology} />
         </>
       )}
+
+      {/* Phase 8 -- Fundraising Readiness V1: a compact teaser card
+          linking to the dedicated /fundraising page (Part 11's own
+          preference), rendered regardless of whether this startup has a
+          canonical analysis yet -- the page itself handles that honestly. */}
+      <FundraisingReadinessCard startupId={startup_id} />
 
       {/* Phase 7.3 -- Founder Progress & Improvement V1: rendered even
           when this startup has no canonical analysis yet, since
