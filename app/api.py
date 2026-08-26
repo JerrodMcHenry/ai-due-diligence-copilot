@@ -60,7 +60,8 @@ from app.database.db import (create_tables,
                          cancel_startup_claim,
                          StartupNotFoundError,
                          DuplicatePendingClaimError,
-                         AlreadyMemberError
+                         AlreadyMemberError,
+                         get_startup_memberships_for_user
 )
 from typing import Literal
 from fastapi import Query
@@ -68,6 +69,7 @@ from fastapi import Query
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
+from app.models.startup_membership import MyStartupMembership
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin
@@ -827,6 +829,23 @@ def reject_admin_startup_claim(
         )
 
     return StartupClaimActionResponse(claim_id=claim_id, status="rejected")
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.1C -- Founder Membership Authorization Foundation. Read-only:
+# get_startup_memberships_for_user() derives every row exclusively from
+# startup_memberships (see that function's own docstring) -- never from
+# startup_claims, saved_startups, or modeled_ventures. This is the
+# intended entry point for a future /founder surface (Phase 7.2): "which
+# canonical startups does this authenticated user legitimately belong
+# to?" user_id is derived exclusively from RequireAuth/current_user.user_id,
+# never from a path, query, or body parameter, same discipline as every
+# other /me/* endpoint above.
+# ---------------------------------------------------------------------------
+
+@app.get("/me/startups", response_model=list[MyStartupMembership])
+def list_my_startups(current_user: AuthenticatedUser = RequireAuth):
+    return get_startup_memberships_for_user(current_user.user_id)
 
 
 @app.put("/analyses/{analysis_id}")

@@ -24,7 +24,7 @@ import jwt
 from fastapi import Depends, HTTPException, Request
 from jwt import PyJWKClient
 
-from app.database.db import get_or_create_user
+from app.database.db import get_or_create_user, user_has_startup_membership
 
 # Env-driven, mirrors the existing CORS_ALLOWED_ORIGINS pattern in
 # app/api.py. This is the Clerk instance's Frontend API URL (e.g.
@@ -213,3 +213,49 @@ def require_admin(current_user: AuthenticatedUser = RequireAuth) -> Authenticate
 
 
 RequireAdmin = Depends(require_admin)
+
+
+# ---------------------------------------------------------------------------
+# Phase 7.1C -- Founder Membership Authorization Foundation. Reusable
+# dependency for future founder-only routes scoped to one startup (Phase
+# 7.2's Founder Workspace and beyond). Not called from any route yet --
+# this phase deliberately stops at the foundation, per its own scope.
+#
+# Authorization is derived exclusively from a live startup_memberships
+# row via user_has_startup_membership() (see that function's own
+# docstring in app/database/db.py) -- never from approved startup_claims
+# history, a client-supplied role, or a client-supplied user_id. Only
+# current_user.user_id (the verified JWT subject) and startup_id (the
+# route's own path parameter, resolved by FastAPI, never client-supplied
+# in a body/query a caller could substitute a different value into) ever
+# reach that check.
+# ---------------------------------------------------------------------------
+
+def require_startup_member(
+    startup_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+) -> AuthenticatedUser:
+    """
+    FastAPI dependency for a route declaring a `startup_id` path
+    parameter -- FastAPI resolves this dependency's own `startup_id`
+    argument from that same path value automatically, the same mechanism
+    every other path-parameter-typed endpoint function in app/api.py
+    already relies on.
+
+    Reuses get_current_user() unchanged for JWT verification first (an
+    unauthenticated or invalid-token request never reaches the membership
+    check at all, and gets the existing 401). A signed-in user with no
+    startup_memberships row for this exact startup_id gets a 404, not a
+    403 -- matching this file's require_admin() precedent of a clean,
+    non-leaking failure, and specifically never distinguishing "this
+    startup doesn't exist" from "you have no access to it," so guessing
+    startup_ids can never be used to enumerate which startups exist or
+    who has access to them.
+    """
+    if not user_has_startup_membership(current_user.user_id, startup_id):
+        raise HTTPException(status_code=404, detail="Startup not found.")
+
+    return current_user
+
+
+RequireStartupMember = Depends(require_startup_member)

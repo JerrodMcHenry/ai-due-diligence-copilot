@@ -9,3 +9,4 @@ export * from "./discovery";
 export * from "./compare";
 export * from "./ideaLab";
 export * from "./startupClaims";
+export * from "./startupMemberships";

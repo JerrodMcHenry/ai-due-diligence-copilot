@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
-import { cancelMyStartupClaim, getMyStartupClaimStatus } from "@/lib/api";
+import { cancelMyStartupClaim, getMyStartupClaimStatus, getMyStartups } from "@/lib/api";
 import ClaimStartupForm from "./ClaimStartupForm";
 
 import type { StartupClaimStatus, StartupClaimSubmissionResponse } from "@/types";
@@ -20,11 +20,17 @@ type ClaimStartupButtonProps = {
 // through sign-in, same established pattern as SaveStartupButton.
 //
 // SIGNED IN: checks real claim status on mount (GET /me/startup-claims/
-// {id}) rather than assuming -- this single endpoint already resolves to
-// the caller's own MOST RECENT claim (see its own docstring in
-// app/database/db.py), so "approved", "pending", "rejected", and "no
-// claim at all" are all derived from one real, fresh read -- never
-// guessed or remembered from a previous session.
+// {id}) for "pending"/"rejected"/"no claim at all" display -- that
+// endpoint resolves to the caller's own MOST RECENT claim (see its own
+// docstring in app/database/db.py). "Verified member" is NOT derived
+// from that claim's status, though -- an approved claim is historical
+// evidence that approval happened once, not proof of current access
+// (Phase 7.1C). Membership is checked independently via GET /me/startups
+// (backed by startup_memberships alone), and that check wins: a live
+// membership always shows "member", and if a membership is ever removed
+// in the future while the claim row still reads 'approved', this
+// correctly falls back to "claimable" rather than continuing to claim
+// verified access that no longer exists.
 //
 // Every state transition below waits for the backend to confirm before
 // changing what's shown -- this never optimistically shows "pending" or
@@ -79,9 +85,24 @@ export default function ClaimStartupButton({ startupId }: ClaimStartupButtonProp
           return;
         }
 
-        const status = await getMyStartupClaimStatus(startupId, token);
+        const [status, memberships] = await Promise.all([
+          getMyStartupClaimStatus(startupId, token),
+          getMyStartups(token),
+        ]);
 
         if (!isMounted) {
+          return;
+        }
+
+        // Membership -- not claim status -- is the authorization source
+        // of truth (Phase 7.1C). Checked first and wins outright: a live
+        // startup_memberships row means "member", full stop, regardless
+        // of what the claim history says.
+        const isMember = memberships.some((m) => m.startup_id === startupId);
+
+        if (isMember) {
+          setClaim(status);
+          setPhase("member");
           return;
         }
 
@@ -93,18 +114,14 @@ export default function ClaimStartupButton({ startupId }: ClaimStartupButtonProp
 
         setClaim(status);
 
-        if (status.status === "approved") {
-          // The backend only ever reports "approved" here because a real
-          // startup_memberships row exists for this user/startup (see
-          // approve_startup_claim()'s own invariant) -- this label is
-          // never shown speculatively.
-          setPhase("member");
-        } else if (status.status === "pending") {
+        if (status.status === "pending") {
           setPhase("pending");
         } else if (status.status === "rejected") {
           setPhase("rejected");
         } else {
-          // cancelled -- claimable again, same as never having claimed.
+          // cancelled, or historically approved but no longer a member
+          // (e.g. membership was later removed) -- claimable again,
+          // same as never having claimed. Never shown as "member" here.
           setPhase("claimable");
         }
       } catch {

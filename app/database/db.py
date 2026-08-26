@@ -609,6 +609,78 @@ def cancel_startup_claim(user_id: str, claim_id: int) -> bool:
         return result.rowcount > 0
 
 
+# ---------------------------------------------------------------------------
+# Phase 7.1C -- Founder Membership Authorization Foundation. Purely
+# additive reads: no new table, no new INSERT path. startup_memberships
+# remains write-once via approve_startup_claim() above -- that function's
+# own module-level comment is still the single source of truth for "the
+# only place this table is ever written."
+#
+# The distinction these two functions exist to enforce, ahead of Phase
+# 7.2 Founder Workspace: an approved startup_claims row is historical
+# evidence that approval happened once; a live startup_memberships row is
+# the ONLY current authorization truth. Neither function below ever
+# consults startup_claims, saved_startups, or modeled_ventures -- so if a
+# membership-removal path is ever added in the future, these functions
+# correctly stop authorizing access the instant the row is gone, even
+# though the original claim would still read 'approved' forever (claims
+# are an immutable historical record; see approve_startup_claim()'s own
+# docstring -- it never rewrites a claim once decided).
+# ---------------------------------------------------------------------------
+
+def get_startup_memberships_for_user(user_id: str):
+    """
+    Every canonical startup this user currently has authorized access to
+    -- one row per startup_memberships relationship belonging to them,
+    derived from that table alone. A user with memberships at several
+    startups gets one row each (no assumption anywhere that a user
+    belongs to at most one startup); a startup with several members
+    likewise has one independent row per member here, scoped by user_id
+    in the WHERE clause the same way get_saved_startups_for_user() and
+    list_startup_claims_for_user() are scoped.
+
+    Deliberately does not join in SPS/industry/stage/or any other
+    intelligence field -- see this section's own module-level comment.
+    A future founder surface that needs current intelligence per startup
+    should join out to canonical analyses via startup_id at read time,
+    the same "join, don't copy" principle get_saved_startups_for_user()
+    already applies.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                sm.id AS membership_id,
+                sm.startup_id AS startup_id,
+                s.canonical_name AS canonical_name,
+                sm.role AS role,
+                sm.created_at AS created_at
+            FROM startup_memberships sm
+            JOIN startups s ON s.id = sm.startup_id
+            WHERE sm.user_id = :user_id
+            ORDER BY sm.created_at ASC
+        """), {"user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def user_has_startup_membership(user_id: str, startup_id: int) -> bool:
+    """
+    The single question every founder-only authorization check reduces
+    to: does a live startup_memberships row exist for this exact
+    (user_id, startup_id) pair? No claim history, no client-supplied
+    role, no other table is ever consulted here -- see RequireStartupMember
+    in app/auth.py, the intended caller for Phase 7.2's founder-only
+    routes.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT 1 FROM startup_memberships
+            WHERE user_id = :user_id AND startup_id = :startup_id
+        """), {"user_id": user_id, "startup_id": startup_id})
+
+        return result.first() is not None
+
+
 def create_saved_startups_table():
     with engine.begin() as connection:
         connection.execute(text("""
