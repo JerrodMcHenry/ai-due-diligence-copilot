@@ -69,11 +69,20 @@ export function analyzeMultiSource({
   websiteUrl,
   pdfFile,
   companyText,
+  startupId,
   token,
 }: {
   websiteUrl?: string;
   pdfFile?: File | null;
   companyText?: string;
+  // Phase 7.2.1 -- Deterministic Founder Re-analysis: OPTIONAL. Omitted
+  // entirely for a normal analysis (identical request shape to before
+  // this field existed). When present, POST /analyze treats it as the
+  // authoritative canonical startup to attach this analysis to -- see
+  // that endpoint's own comment in app/api.py -- after independently
+  // re-verifying the caller's membership itself; this value is never
+  // trusted just because it was sent.
+  startupId?: number | null;
   token?: string | null;
 }): Promise<AnalyzeStartupResponse> {
   const formData = new FormData();
@@ -88,6 +97,10 @@ export function analyzeMultiSource({
 
   if (companyText) {
     formData.append("company_text", companyText);
+  }
+
+  if (startupId != null) {
+    formData.append("startup_id", String(startupId));
   }
 
   return apiFetch<AnalyzeStartupResponse>("/analyze", {

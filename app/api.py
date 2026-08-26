@@ -74,7 +74,7 @@ from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
-from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember
+from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
 from app.ai.vps_scoring import compute_vps
 from app.ai.vps_guidance import generate_guidance
@@ -967,6 +967,14 @@ def analyze_unified(
     website_url: str | None = Form(None),
     company_text: str | None = Form(None),
     pdf: UploadFile | None = File(None),
+    # Phase 7.2.1 -- Deterministic Founder Re-analysis: OPTIONAL. Absent
+    # (None) on every normal/public analysis -- that path is completely
+    # unchanged, see below and save_analysis()'s own docstring. When
+    # present, this becomes the authoritative canonical identity for the
+    # resulting analysis (Founder Workspace's "Re-analyze"), gated by the
+    # membership check immediately below -- never trusted merely because
+    # the client supplied it.
+    startup_id: int | None = Form(None),
     current_user: AuthenticatedUser = RequireAuth,
 ):
     # SIE Authentication Phase 2: requires a valid Clerk-authenticated
@@ -974,10 +982,10 @@ def analyze_unified(
     # unauthenticated request is rejected with a clean 401 before any
     # extraction/pipeline work (and therefore before any paid OpenAI/
     # Tavily cost) ever happens. current_user is intentionally unused
-    # beyond that: authentication means "this user exists" (see
-    # get_or_create_user()'s docstring), never "this user owns this
-    # startup" -- no startup_membership is created here or anywhere in
-    # this function, by design.
+    # beyond that when startup_id is absent: authentication means "this
+    # user exists" (see get_or_create_user()'s docstring), never "this
+    # user owns this startup" -- no startup_membership is created here or
+    # anywhere in this function, by design, regardless of startup_id.
     #
     # Unified Multi-Source Analyze Startup: website, pitch deck, and
     # user-provided text are evidence SOURCES feeding ONE canonical SIE
@@ -997,6 +1005,21 @@ def analyze_unified(
     # queue/worker architecture needed for this -- running synchronously
     # in a thread FastAPI already provides is the smallest idiomatic fix,
     # deliberately not applied to /analyze-pdf itself in this change.
+    #
+    # Phase 7.2.1: the founder-targeted membership check runs FIRST --
+    # before URL/PDF validation, before any extraction, before the
+    # pipeline -- so an unauthorized or invalid startup_id fails closed
+    # with zero side effects and zero pipeline cost, per that phase's own
+    # "do not run the expensive analysis pipeline" requirement.
+    # require_startup_member() is called directly as a plain function
+    # (not via its usual Depends() wiring, which only resolves startup_id
+    # from a route's own PATH parameter -- this route has none, since
+    # startup_id is optional here) -- same function, same
+    # membership-only check, same non-leaking 404, as every other
+    # RequireStartupMember caller; reused, not reimplemented.
+    if startup_id is not None:
+        require_startup_member(startup_id=startup_id, current_user=current_user)
+
     website_url = website_url.strip() if website_url else None
     company_text = company_text.strip() if company_text else None
     has_pdf = pdf is not None and bool(pdf.filename)
@@ -1165,7 +1188,15 @@ def analyze_unified(
             overall_score=results["overall_score"],
             recommendation=results["recommendation"],
             readiness_score=results["readiness_score"],
-            readiness_summary=results["readiness_summary"]
+            readiness_summary=results["readiness_summary"],
+            # Phase 7.2.1: None on every normal/public analysis (the
+            # `if startup_id is not None` guard above is the only thing
+            # that ever populates it, and only after that same value
+            # already passed require_startup_member()) -- passing it
+            # through here is what makes save_analysis() skip
+            # get_or_create_startup() and attach directly to this exact
+            # authorized canonical startup instead.
+            startup_id=startup_id,
         )
     except Exception:
         # Distinct from the pipeline failure above on purpose, same as

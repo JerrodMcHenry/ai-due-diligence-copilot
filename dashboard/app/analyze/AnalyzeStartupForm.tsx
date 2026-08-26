@@ -2,11 +2,11 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
-import { analyzeMultiSource } from "@/lib/api";
+import { analyzeMultiSource, getFounderStartupWorkspace } from "@/lib/api";
 
 // Unified Multi-Source Analyze Startup: company website, pitch deck, and
 // additional company information are evidence SOURCES feeding one
@@ -50,6 +50,34 @@ const STAGES = [
 ];
 
 type Status = "idle" | "submitting" | "error";
+
+// Phase 7.2.1 -- Deterministic Founder Re-analysis: this component now
+// has two modes, distinguished ONLY by the presence of a `startup_id`
+// query param -- normal analysis (no param) is completely unchanged.
+// "founder-targeted" mode is verified with a real backend call
+// (GET /founder/startups/{id}, the exact same RequireStartupMember-gated
+// endpoint Founder Workspace itself uses) BEFORE the form is even shown
+// -- a cheap, fast check, run instead of the multi-minute pipeline, so
+// an unauthorized/invalid/stale startup_id is rejected without wasting
+// an LLM run and without ever rendering a form that would silently fall
+// back to creating a new, unrelated public analysis. This frontend check
+// is UX only, exactly like every other client-side check in this file --
+// POST /analyze re-verifies membership itself regardless (see app/api.py).
+type FounderTargetState =
+  | { status: "none" }
+  | { status: "checking" }
+  | { status: "ready"; startupId: number; canonicalName: string }
+  | { status: "denied" };
+
+function parseStartupIdParam(raw: string | null): number | null {
+  if (!raw) {
+    return null;
+  }
+
+  const parsed = Number(raw);
+
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : null;
+}
 
 // SIE Authentication Phase 2: shown for both a client-side-detected
 // expired session (getToken() returned null) and a backend 401 --
@@ -129,6 +157,7 @@ function validateForm(
 
 export default function AnalyzeStartupForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   // SIE Authentication Phase 2: getToken() is Clerk's current supported
   // API for obtaining the real session JWT to attach to a backend call
   // (see the compatibility spike) -- called fresh at submit time, never
@@ -142,6 +171,67 @@ export default function AnalyzeStartupForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+
+  const requestedStartupId = parseStartupIdParam(searchParams.get("startup_id"));
+  const [founderTarget, setFounderTarget] = useState<FounderTargetState>(
+    requestedStartupId !== null ? { status: "checking" } : { status: "none" }
+  );
+
+  // Phase 7.2.1: verifies the founder-targeted request BEFORE showing
+  // any form -- see FounderTargetState's own comment for why this reuses
+  // Founder Workspace's own membership-gated endpoint rather than
+  // inventing a second check. Every setState call below lives inside
+  // this locally-defined async function (react-hooks/set-state-in-effect
+  // convention, same pattern as SaveStartupButton/ClaimStartupButton).
+  useEffect(() => {
+    let isMounted = true;
+
+    async function verifyFounderTarget() {
+      if (requestedStartupId === null) {
+        if (isMounted) {
+          setFounderTarget({ status: "none" });
+        }
+        return;
+      }
+
+      if (isMounted) {
+        setFounderTarget({ status: "checking" });
+      }
+
+      try {
+        const token = await getToken();
+
+        if (!token) {
+          if (isMounted) {
+            setFounderTarget({ status: "denied" });
+          }
+          return;
+        }
+
+        const workspace = await getFounderStartupWorkspace(requestedStartupId, token);
+
+        if (isMounted) {
+          setFounderTarget({
+            status: "ready",
+            startupId: requestedStartupId,
+            canonicalName: workspace.canonical_name,
+          });
+        }
+      } catch (verifyError) {
+        console.error("Failed to verify founder-targeted re-analysis:", verifyError);
+
+        if (isMounted) {
+          setFounderTarget({ status: "denied" });
+        }
+      }
+    }
+
+    verifyFounderTarget();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [requestedStartupId, getToken]);
 
   const isSubmitting = status === "submitting";
 
@@ -219,12 +309,31 @@ export default function AnalyzeStartupForm() {
         return;
       }
 
+      const isFounderTargeted = founderTarget.status === "ready";
+
       const response = await analyzeMultiSource({
         websiteUrl: websiteUrl.trim() || undefined,
         pdfFile: pdfFile ?? undefined,
         companyText: companyText.trim() || undefined,
+        startupId: isFounderTargeted ? founderTarget.startupId : undefined,
         token,
       });
+
+      // Founder-targeted mode: redirect back into Founder Workspace for
+      // the exact startup_id just submitted, not the public profile --
+      // this also sidesteps a real mismatch: the analysis just extracted
+      // may have named the company something slightly different (e.g.
+      // "Linear App" instead of "Linear"), and POST /analyze deliberately
+      // persists the row under the EXISTING canonical name for identity
+      // purposes (see save_analysis()'s own docstring) rather than this
+      // extracted variant, so building a profile URL from
+      // response.context.company_name here could 404. Founder Workspace
+      // itself always resolves by the real startup_id, never by name.
+      if (isFounderTargeted) {
+        router.push(`/founder/startups/${founderTarget.startupId}`);
+        return;
+      }
+
       const companyName = response.context?.company_name?.trim();
 
       if (!companyName) {
@@ -254,17 +363,76 @@ export default function AnalyzeStartupForm() {
             ? "Couldn't reach the SIE backend. Confirm it's running, then try again."
             : /API request failed \(401\)/.test(message)
               ? SESSION_EXPIRED_MESSAGE
-              : "The analysis failed. Your input hasn't been lost -- you can try again."
+              : /API request failed \(404\)/.test(message) && founderTarget.status === "ready"
+                ? "You no longer have access to update this startup. Return to Founder Workspace and try again."
+                : "The analysis failed. Your input hasn't been lost -- you can try again."
       );
     }
   }
 
+  // Phase 7.2.1: a founder-targeted request that fails verification never
+  // falls back to the normal form -- per that phase's own "do not fall
+  // back to normal analysis mode" requirement, showing this instead of a
+  // form that would silently create an unrelated public analysis.
+  if (founderTarget.status === "checking") {
+    return (
+      <>
+        <PageHeader title="Analyze Startup" />
+        <div className="h-64 animate-pulse rounded-xl border border-slate-800 bg-slate-900" />
+      </>
+    );
+  }
+
+  if (founderTarget.status === "denied") {
+    return (
+      <>
+        <PageHeader title="Analyze Startup" />
+        <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-8 text-center">
+          <h2 className="text-lg font-semibold text-red-300">
+            You don&rsquo;t have access to update this startup
+          </h2>
+          <p className="mx-auto mt-2 max-w-md text-sm text-red-300/80">
+            This startup workspace doesn&rsquo;t exist, or you&rsquo;re not a
+            verified member of it.
+          </p>
+          <Link
+            href="/founder"
+            className="mt-6 inline-flex text-sm font-semibold text-red-200 underline hover:text-red-100"
+          >
+            ← Back to Founder Workspace
+          </Link>
+        </div>
+      </>
+    );
+  }
+
+  const isFounderTargeted = founderTarget.status === "ready";
+
   return (
     <>
       <PageHeader
-        title="Analyze Startup"
-        subtitle="Provide a company website, a pitch deck, additional information, or any combination -- SIE will combine what you give it with its own research and build one full Startup Profile against the Methodology v2 intelligence framework."
+        title={isFounderTargeted ? "Re-analyze Startup" : "Analyze Startup"}
+        subtitle={
+          isFounderTargeted
+            ? "Provide a company website, an updated pitch deck, or additional information -- SIE combines it with its own research and refreshes this startup's Methodology v2 intelligence."
+            : "Provide a company website, a pitch deck, additional information, or any combination -- SIE will combine what you give it with its own research and build one full Startup Profile against the Methodology v2 intelligence framework."
+        }
       />
+
+      {isFounderTargeted && !isSubmitting ? (
+        <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-blue-300">
+            Updating intelligence for
+          </p>
+          <p className="mt-1 text-xl font-bold text-white">
+            {founderTarget.canonicalName}
+          </p>
+          <p className="mt-2 text-sm text-blue-200/80">
+            This analysis will be attached directly to {founderTarget.canonicalName}
+            &rsquo;s existing profile -- it will never create a separate startup.
+          </p>
+        </div>
+      ) : null}
 
       {!isSubmitting ? (
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -382,7 +550,7 @@ export default function AnalyzeStartupForm() {
             type="submit"
             className="min-h-11 rounded-lg bg-blue-600 px-6 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
           >
-            Analyze Startup
+            {isFounderTargeted ? "Update Startup" : "Analyze Startup"}
           </button>
         </form>
       ) : (

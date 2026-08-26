@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { auth } from "@clerk/nextjs/server";
 
 import AnalyzeStartupForm from "./AnalyzeStartupForm";
@@ -12,11 +14,25 @@ import AnalyzeStartupForm from "./AnalyzeStartupForm";
 // a substitute for it (see proxy.ts's own comment).
 //
 // IMPORTANT: this protects the FRONTEND route only. POST /analyze on the
-// FastAPI backend is not yet auth-enforced (Phase 2) -- a signed-out
-// visitor can't reach this page, but a direct API call to the backend
-// still can. Do not read this page-level gate as backend security.
+// FastAPI backend enforces its own auth independently (RequireAuth, and
+// -- for a founder-targeted request -- membership too; see app/auth.py).
+//
+// Phase 7.2.1 -- Deterministic Founder Re-analysis: AnalyzeStartupForm
+// now reads an optional ?startup_id= query param via useSearchParams(),
+// which Next.js requires be wrapped in a Suspense boundary (same
+// pattern app/search/page.tsx already established for DiscoveryView's
+// own useSearchParams() usage) -- normal analysis (no query param) is
+// otherwise completely unaffected by this wrapper.
 export default async function AnalyzeStartupPage() {
   await auth.protect();
 
-  return <AnalyzeStartupForm />;
+  return (
+    <Suspense
+      fallback={
+        <div className="h-96 animate-pulse rounded-2xl border border-slate-800 bg-slate-900" />
+      }
+    >
+      <AnalyzeStartupForm />
+    </Suspense>
+  );
 }

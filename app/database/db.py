@@ -1210,7 +1210,45 @@ def save_analysis(
     readiness_score,
     readiness_summary,
     methodology,
+    startup_id=None,
 ):
+    """
+    Phase 7.2.1 -- Deterministic Founder Re-analysis: startup_id is an
+    OPTIONAL authoritative override, meant only for a caller that has
+    ALREADY verified the current user is a real member of that exact
+    startup (POST /analyze's own use of require_startup_member() before
+    ever calling this function) -- save_analysis() itself does not check
+    authorization, matching this file's existing convention that DB
+    functions implement queries/writes, not access control.
+
+    When startup_id is None (every existing caller, and /analyze's own
+    normal/public path): behavior is completely unchanged --
+    get_or_create_startup() resolves identity from the extracted
+    company_name exactly as before.
+
+    When startup_id is supplied: get_or_create_startup() is never
+    called, so this analysis can never spawn a second startups row no
+    matter what company name this particular analysis happened to
+    extract ("Linear" vs "Linear Inc." vs "Linear App" all resolve to the
+    SAME startup_id here, deterministically, because none of them are
+    ever consulted for identity). The given id is looked up (never
+    blindly trusted) inside this same transaction; a nonexistent id
+    raises ValueError and nothing is written -- same
+    "raise ValueError for a startup_id that doesn't exist" contract
+    save_startup_for_user() already uses, so callers already know this
+    shape.
+
+    Per the Phase 7.2.1 design decision on identity vs. display: the
+    row's `company_name` column (the field other canonical read paths
+    key off, e.g. search_analyses()'s DISTINCT ON) is set to the
+    startup's EXISTING canonical_name, not whatever this analysis
+    happened to extract -- this is what actually prevents identity
+    drift. The LLM-extracted name is NOT discarded, though: it still
+    lives in `methodology`/`structured_analysis` (the JSONB blobs) via
+    the analysis_context/company_name this function already receives one
+    layer up, in `structured_analysis` -- callers may still show it,
+    it simply never overrides canonical_name here.
+    """
     company_name = None
     industry = None
     stage = None
@@ -1221,19 +1259,46 @@ def save_analysis(
         industry = structured_analysis.get("industry")
         stage = structured_analysis.get("stage")
         business_model = structured_analysis.get("business_model")
-    
+
     created_at = datetime.now().isoformat()
 
     with engine.begin() as connection:
-        # SIE Accounts & Ownership -- canonical Startup write path,
-        # centralized here so every existing and future save_analysis()
-        # caller gets it automatically (no per-endpoint duplication).
-        # Resolved inside this same transaction/connection so Startup
-        # resolution and the Analysis insert commit or roll back
-        # together -- a failed Analysis insert can never leave behind an
-        # orphan Startup. See get_or_create_startup()'s own docstring for
-        # the normalization/concurrency/ownership guarantees.
-        startup_id = get_or_create_startup(company_name, connection=connection)
+        if startup_id is not None:
+            # Authoritative path (Phase 7.2.1): identity is already
+            # decided by the caller's verified startup_id -- resolve the
+            # real row directly, never via get_or_create_startup()'s
+            # name-matching. The FK constraint on analyses.startup_id
+            # would itself reject a nonexistent id, but failing here with
+            # a clean ValueError (inside this same transaction, before
+            # any INSERT is attempted) is the same "clean application
+            # error, never a raw IntegrityError" discipline
+            # save_startup_for_user() already established.
+            startup_row = connection.execute(text("""
+                SELECT id, canonical_name FROM startups WHERE id = :startup_id
+            """), {"startup_id": startup_id}).mappings().first()
+
+            if startup_row is None:
+                raise ValueError(f"Startup {startup_id} does not exist")
+
+            resolved_startup_id = startup_row["id"]
+            # Overrides the extracted company_name for the DB column
+            # only -- see this function's own docstring for why this is
+            # the one thing that actually needs to stay pinned to the
+            # canonical identity, while methodology/structured_analysis
+            # (untouched below) may still carry whatever this analysis
+            # extracted.
+            company_name = startup_row["canonical_name"]
+        else:
+            # SIE Accounts & Ownership -- canonical Startup write path,
+            # centralized here so every existing and future
+            # save_analysis() caller gets it automatically (no
+            # per-endpoint duplication). Resolved inside this same
+            # transaction/connection so Startup resolution and the
+            # Analysis insert commit or roll back together -- a failed
+            # Analysis insert can never leave behind an orphan Startup.
+            # See get_or_create_startup()'s own docstring for the
+            # normalization/concurrency/ownership guarantees.
+            resolved_startup_id = get_or_create_startup(company_name, connection=connection)
 
         result = connection.execute(text("""
             INSERT INTO analyses (
@@ -1300,7 +1365,7 @@ def save_analysis(
             RETURNING id
         """), {
             "company_name": company_name,
-            "startup_id": startup_id,
+            "startup_id": resolved_startup_id,
             "company_text": company_text,
             "summary": summary,
             "risk_analysis": risk_analysis,

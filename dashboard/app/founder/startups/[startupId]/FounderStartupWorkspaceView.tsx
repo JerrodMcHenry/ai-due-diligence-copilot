@@ -141,8 +141,15 @@ export default function FounderStartupWorkspaceView({
     );
   }
 
-  const { canonical_name, created_at, methodology, sps_history } = workspace;
+  const { startup_id, canonical_name, created_at, methodology, sps_history } = workspace;
   const publicProfileHref = `/startup/${encodeURIComponent(canonical_name)}`;
+  // Phase 7.2.1 -- Deterministic Founder Re-analysis: startup_id in the
+  // query string is what makes AnalyzeStartupForm verify membership and
+  // guarantee this exact canonical startup as the write target -- see
+  // that component's own FounderTargetState comment. Never the company
+  // name: a name-based link could never guarantee re-attachment to this
+  // same startup, which was the whole problem this phase fixes.
+  const reanalyzeHref = `/analyze?startup_id=${startup_id}`;
 
   return (
     <div className="space-y-8">
@@ -158,7 +165,7 @@ export default function FounderStartupWorkspaceView({
               View Public Profile
             </Link>
             <Link
-              href="/analyze"
+              href={reanalyzeHref}
               className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
             >
               Re-analyze
@@ -168,7 +175,7 @@ export default function FounderStartupWorkspaceView({
       />
 
       {!methodology ? (
-        <NotYetAnalyzed canonicalName={canonical_name} />
+        <NotYetAnalyzed canonicalName={canonical_name} reanalyzeHref={reanalyzeHref} />
       ) : (
         <>
           <OverviewSection
@@ -188,7 +195,13 @@ export default function FounderStartupWorkspaceView({
   );
 }
 
-function NotYetAnalyzed({ canonicalName }: { canonicalName: string }) {
+function NotYetAnalyzed({
+  canonicalName,
+  reanalyzeHref,
+}: {
+  canonicalName: string;
+  reanalyzeHref: string;
+}) {
   return (
     <BaseCard className="p-10 text-center">
       <h2 className="text-xl font-bold text-text-primary">
@@ -201,13 +214,8 @@ function NotYetAnalyzed({ canonicalName }: { canonicalName: string }) {
         recommendations here.
       </p>
 
-      <p className="mt-3 text-xs text-text-muted">
-        When re-analyzing, use the company name exactly as shown above (
-        {canonicalName}) so it connects back to this same startup.
-      </p>
-
       <Link
-        href="/analyze"
+        href={reanalyzeHref}
         className="mt-6 inline-flex rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
       >
         Analyze this startup
