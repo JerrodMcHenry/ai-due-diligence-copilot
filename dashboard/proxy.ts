@@ -26,7 +26,11 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // IMPORTANT: this protects Next.js page navigation only. The FastAPI
 // backend (POST /analyze and friends) enforces nothing yet -- that's
 // Phase 2. A direct call to the backend bypasses this file entirely.
-const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)"]);
+// Idea Lab / Venture Simulator V1: /idea-lab added alongside /analyze and
+// /saved -- same UX-only redirect, real enforcement is each page's own
+// auth.protect() (app/idea-lab/page.tsx, app/idea-lab/new/page.tsx,
+// app/idea-lab/[id]/page.tsx).
+const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)", "/idea-lab(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {

@@ -1,7 +1,7 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://127.0.0.1:8000";
 
 type ApiFetchOptions = {
-  method?: "GET" | "POST" | "DELETE";
+  method?: "GET" | "POST" | "PUT" | "DELETE";
   // A FormData body (Pitch Deck Upload's multipart request) is sent
   // as-is with no Content-Type header set -- the browser fills in
   // `multipart/form-data; boundary=...` itself, which it can only do

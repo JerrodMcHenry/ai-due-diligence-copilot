@@ -1602,6 +1602,194 @@ def get_startups_for_comparison(startup_ids: list[int]):
     return ordered_results
 
 
+# ---------------------------------------------------------------------------
+# Idea Lab / Venture Simulator V1. modeled_ventures is a completely
+# separate persistence concept from startups/analyses -- see the Phase 6
+# design report for the full reasoning. Structurally:
+#
+# - No column here references startups or analyses. Creating, editing, or
+#   deleting a modeled venture can never touch canonical intelligence,
+#   because there is no foreign key path to it at all.
+# - Every read/write function below takes user_id as a REQUIRED filter,
+#   not an optional one -- the same "ownership scoped in the SQL itself,
+#   not just checked in Python after the fact" discipline already used
+#   for saved_startups (see save_startup_for_user()'s own docstring).
+#   A mismatched owner gets a clean "not found" (None / 0 rows), never a
+#   leaked row and never a different error shape that would let a caller
+#   distinguish "doesn't exist" from "belongs to someone else".
+# - model_result (the computed VPS) is stored as its own JSONB column,
+#   entirely separate from analyses.methodology -- a modeled venture can
+#   never be mistaken for a canonical analysis by any query that reads
+#   analyses, because it was never inserted into analyses at all.
+# ---------------------------------------------------------------------------
+
+def create_modeled_ventures_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS modeled_ventures (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                name TEXT NOT NULL,
+                description TEXT,
+                industry TEXT,
+                business_model TEXT,
+                target_customer TEXT,
+                stage TEXT,
+                assumptions JSONB NOT NULL DEFAULT '{}'::jsonb,
+                model_result JSONB,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("modeled_ventures table created successfully.")
+
+
+def create_modeled_venture(
+    user_id: str,
+    name: str,
+    description: str | None,
+    industry: str | None,
+    business_model: str | None,
+    target_customer: str | None,
+    stage: str | None,
+    assumptions: dict,
+    model_result: dict | None,
+) -> int:
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            INSERT INTO modeled_ventures (
+                user_id, name, description, industry, business_model,
+                target_customer, stage, assumptions, model_result
+            )
+            VALUES (
+                :user_id, :name, :description, :industry, :business_model,
+                :target_customer, :stage, :assumptions, :model_result
+            )
+            RETURNING id
+        """), {
+            "user_id": user_id,
+            "name": name,
+            "description": description,
+            "industry": industry,
+            "business_model": business_model,
+            "target_customer": target_customer,
+            "stage": stage,
+            "assumptions": json.dumps(assumptions),
+            "model_result": json.dumps(model_result) if model_result is not None else None,
+        })
+
+        return result.scalar()
+
+
+def _parse_venture_row(row: dict) -> dict:
+    venture = dict(row)
+
+    if isinstance(venture.get("assumptions"), str):
+        venture["assumptions"] = json.loads(venture["assumptions"])
+
+    if isinstance(venture.get("model_result"), str):
+        venture["model_result"] = json.loads(venture["model_result"])
+
+    return venture
+
+
+def list_modeled_ventures_for_user(user_id: str):
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT id, user_id, name, description, industry, business_model,
+                   target_customer, stage, assumptions, model_result,
+                   created_at, updated_at
+            FROM modeled_ventures
+            WHERE user_id = :user_id
+            ORDER BY updated_at DESC
+        """), {"user_id": user_id})
+
+        rows = result.mappings().all()
+
+    return [_parse_venture_row(dict(row)) for row in rows]
+
+
+def get_modeled_venture_for_user(user_id: str, venture_id: int):
+    """
+    Returns None both when the venture doesn't exist AND when it belongs
+    to a different user -- the caller (app/api.py) maps both to the same
+    404, so a request can never distinguish "wrong id" from "someone
+    else's venture" (the same non-leaking shape already used for Saved
+    Startups' invalid-startup-id handling).
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT id, user_id, name, description, industry, business_model,
+                   target_customer, stage, assumptions, model_result,
+                   created_at, updated_at
+            FROM modeled_ventures
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id})
+
+        row = result.mappings().first()
+
+    if row is None:
+        return None
+
+    return _parse_venture_row(dict(row))
+
+
+def update_modeled_venture_for_user(
+    user_id: str,
+    venture_id: int,
+    name: str,
+    description: str | None,
+    industry: str | None,
+    business_model: str | None,
+    target_customer: str | None,
+    stage: str | None,
+    assumptions: dict,
+    model_result: dict | None,
+) -> bool:
+    """Returns True if a row was actually updated -- False means either the
+    venture doesn't exist or belongs to a different user; the WHERE
+    clause's user_id filter is what makes cross-user writes structurally
+    impossible, not a Python-level check performed after the fact."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE modeled_ventures
+            SET name = :name,
+                description = :description,
+                industry = :industry,
+                business_model = :business_model,
+                target_customer = :target_customer,
+                stage = :stage,
+                assumptions = :assumptions,
+                model_result = :model_result,
+                updated_at = CURRENT_TIMESTAMP
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "name": name,
+            "description": description,
+            "industry": industry,
+            "business_model": business_model,
+            "target_customer": target_customer,
+            "stage": stage,
+            "assumptions": json.dumps(assumptions),
+            "model_result": json.dumps(model_result) if model_result is not None else None,
+        })
+
+        return result.rowcount > 0
+
+
+def delete_modeled_venture_for_user(user_id: str, venture_id: int) -> bool:
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            DELETE FROM modeled_ventures
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id})
+
+        return result.rowcount > 0
+
+
 def get_top_startups(limit: int = 10):
     """
     Canonical Dashboard MVP: Top Startups reuses get_rankings() directly --

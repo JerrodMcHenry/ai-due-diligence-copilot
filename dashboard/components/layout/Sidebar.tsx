@@ -11,12 +11,18 @@ import { getVersion } from "@/lib/api";
 type NavigationItem = {
   name: string;
   href: string;
-  // Saved Startups (Watchlist Phase 1): true only for /saved -- a
-  // signed-out visitor would see a personalized-looking nav item that
-  // just redirects them to sign-in, which is misleading rather than
-  // useful, so it's wrapped in <Show when="signed-in"> below instead of
-  // appearing in the plain map every other item uses.
+  // Saved Startups (Watchlist Phase 1): true whenever a signed-out
+  // visitor would see a personalized-looking nav item that just
+  // redirects them to sign-in, which is misleading rather than useful --
+  // wrapped in <Show when="signed-in"> below instead of appearing in the
+  // plain map every public item uses.
   authOnly?: boolean;
+  // Idea Lab V1 (Part 18): a light grouping label, not a sidebar
+  // redesign -- three small section headers (Public Intelligence, Build,
+  // Personal) so Idea Lab has a clear conceptual home next to Analyze
+  // Startup, distinct from the public discovery surfaces above it and
+  // the private Saved Startups workspace below it.
+  group: "Public Intelligence" | "Build" | "Personal";
 };
 
 type SidebarProps = {
@@ -27,22 +33,33 @@ const navigation: NavigationItem[] = [
   {
     name: "Dashboard",
     href: "/",
-  },
-  {
-    name: "Analyze Startup",
-    href: "/analyze",
+    group: "Public Intelligence",
   },
   {
     name: "Rankings",
     href: "/rankings",
+    group: "Public Intelligence",
   },
   {
     name: "Search",
     href: "/search",
+    group: "Public Intelligence",
+  },
+  {
+    name: "Analyze Startup",
+    href: "/analyze",
+    group: "Build",
+  },
+  {
+    name: "Idea Lab",
+    href: "/idea-lab",
+    group: "Build",
+    authOnly: true,
   },
   {
     name: "Saved Startups",
     href: "/saved",
+    group: "Personal",
     authOnly: true,
   },
 ];
@@ -112,12 +129,12 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
         aria-label="Main navigation"
         className="flex-1 space-y-2 overflow-y-auto px-4 py-6"
       >
-        {navigation.map((item) => {
+        {navigation.map((item, index) => {
           const active = isActiveRoute(pathname, item.href);
+          const isNewGroup = index === 0 || navigation[index - 1].group !== item.group;
 
           const link = (
             <Link
-              key={item.href}
               href={item.href}
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
@@ -133,15 +150,35 @@ export default function Sidebar({ onNavigate }: SidebarProps) {
             </Link>
           );
 
-          if (item.authOnly) {
-            return (
-              <Show key={item.href} when="signed-in">
-                {link}
-              </Show>
-            );
-          }
+          const header = isNewGroup ? (
+            <p className="mb-1.5 px-4 text-[11px] font-semibold uppercase tracking-wider text-sidebar-muted/70">
+              {item.group}
+            </p>
+          ) : null;
 
-          return link;
+          // The header travels inside the SAME <Show> as an authOnly item
+          // -- a lone "Personal" section header with nothing visible
+          // beneath it (Saved Startups hidden while signed out) would be
+          // its own small version of the misleading-empty-section problem
+          // Part 18 warns about, even though it's not personalized data
+          // itself.
+          const content = item.authOnly ? (
+            <Show when="signed-in">
+              {header}
+              {link}
+            </Show>
+          ) : (
+            <>
+              {header}
+              {link}
+            </>
+          );
+
+          return (
+            <div key={item.href} className={isNewGroup && index > 0 ? "pt-3" : undefined}>
+              {content}
+            </div>
+          );
         })}
       </nav>
 

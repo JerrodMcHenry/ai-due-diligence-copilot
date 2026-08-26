@@ -43,15 +43,24 @@ from app.database.db import (create_tables,
                          MAX_DISCOVERY_LIMIT,
                          get_startups_for_comparison,
                          MIN_COMPARISON_STARTUPS,
-                         MAX_COMPARISON_STARTUPS
+                         MAX_COMPARISON_STARTUPS,
+                         create_modeled_ventures_table,
+                         create_modeled_venture,
+                         list_modeled_ventures_for_user,
+                         get_modeled_venture_for_user,
+                         update_modeled_venture_for_user,
+                         delete_modeled_venture_for_user
 )
 from typing import Literal
 from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
+from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
+from app.ai.vps_scoring import compute_vps
+from app.ai.vps_guidance import generate_guidance
 import json
 import os
 import traceback
@@ -113,6 +122,12 @@ create_users_table()
 create_startup_memberships_table()
 create_saved_startups_table()
 backfill_startup_ids()
+
+# Idea Lab / Venture Simulator V1. modeled_ventures has no FK to
+# startups/analyses (see create_modeled_ventures_table()'s own docstring
+# in app/database/db.py) -- ordering relative to the migrations above
+# only matters because it references users(id), which must already exist.
+create_modeled_ventures_table()
 
 @app.get("/health")
 def health():
@@ -457,6 +472,161 @@ def unsave_my_startup(
 ):
     unsave_startup_for_user(current_user.user_id, startup_id)
     return SavedStartupStatus(saved=False)
+
+
+# ---------------------------------------------------------------------------
+# Idea Lab / Venture Simulator V1. Every endpoint below requires
+# RequireAuth and derives the acting user EXCLUSIVELY from
+# current_user.user_id -- there is no /users/{user_id}/ventures route, so
+# reading/editing/deleting another user's venture is structurally
+# impossible, the same discipline as Saved Startups. modeled_ventures has
+# no relationship to startups/analyses at all (see
+# create_modeled_ventures_table()'s own docstring) -- nothing here can
+# ever appear in Rankings, Discovery, or canonical Compare, and none of
+# it creates a startup_membership or saved_startup.
+#
+# The Venture Potential Score (VPS) computed below is architecturally
+# separate from SPS: compute_vps()/generate_guidance() (app/ai/
+# vps_scoring.py, vps_guidance.py) never import from or call into
+# app/ai/scoring.py, scoring_methodology.py, or investment_score.py, and
+# never touch the analyses table. See those modules' own docstrings for
+# the full reasoning.
+# ---------------------------------------------------------------------------
+
+def _build_model_result(assumptions: dict) -> dict:
+    vps_result = compute_vps(assumptions)
+    guidance = generate_guidance(assumptions, vps_result)
+    return {**vps_result, **guidance}
+
+
+@app.post("/ventures", response_model=VentureResponse)
+def create_venture(
+    request: CreateVentureRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    assumptions_dict = request.assumptions.model_dump()
+    model_result = _build_model_result(assumptions_dict)
+
+    try:
+        venture_id = create_modeled_venture(
+            user_id=current_user.user_id,
+            name=request.name,
+            description=request.description,
+            industry=request.industry,
+            business_model=request.business_model,
+            target_customer=request.target_customer,
+            stage=request.stage,
+            assumptions=assumptions_dict,
+            model_result=model_result,
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Your venture could not be saved. Please try again.",
+        )
+
+    venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
+    return VentureResponse(**venture)
+
+
+@app.get("/ventures", response_model=list[VentureSummary])
+def list_ventures(current_user: AuthenticatedUser = RequireAuth):
+    ventures = list_modeled_ventures_for_user(current_user.user_id)
+
+    return [
+        VentureSummary(
+            id=venture["id"],
+            name=venture["name"],
+            stage=venture["stage"],
+            vps=(venture["model_result"] or {}).get("vps"),
+            updated_at=venture["updated_at"],
+        )
+        for venture in ventures
+    ]
+
+
+@app.get("/ventures/{venture_id}", response_model=VentureResponse)
+def get_venture(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
+
+    if venture is None:
+        # Deliberately the same 404 whether the id doesn't exist at all or
+        # belongs to a different user -- see
+        # get_modeled_venture_for_user()'s own docstring.
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    return VentureResponse(**venture)
+
+
+@app.put("/ventures/{venture_id}", response_model=VentureResponse)
+def update_venture(
+    venture_id: int,
+    request: UpdateVentureRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    assumptions_dict = request.assumptions.model_dump()
+    model_result = _build_model_result(assumptions_dict)
+
+    updated = update_modeled_venture_for_user(
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        name=request.name,
+        description=request.description,
+        industry=request.industry,
+        business_model=request.business_model,
+        target_customer=request.target_customer,
+        stage=request.stage,
+        assumptions=assumptions_dict,
+        model_result=model_result,
+    )
+
+    if not updated:
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
+    return VentureResponse(**venture)
+
+
+@app.delete("/ventures/{venture_id}")
+def delete_venture(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    deleted = delete_modeled_venture_for_user(current_user.user_id, venture_id)
+
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    return {"deleted": True}
+
+
+@app.post("/ventures/scenario-compare", response_model=ScenarioCompareResponse)
+def compare_venture_scenarios(
+    request: ScenarioCompareRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """
+    Part 11: current vs. modified scenario -- stateless (both assumption
+    sets come from the request body; nothing is read from or written to
+    modeled_ventures here), so trying a scenario never overwrites the
+    venture's actually-saved assumptions. Requires auth only because it's
+    part of the private Idea Lab surface, not because it reads any
+    per-user data. Deliberately a distinct endpoint from GET /compare --
+    it never touches startups/analyses/canonical Startup identity, and a
+    modeled venture can never be passed to /compare's startup_id-based
+    contract.
+    """
+    current_result = _build_model_result(request.current_assumptions.model_dump())
+    modified_result = _build_model_result(request.modified_assumptions.model_dump())
+
+    return ScenarioCompareResponse(
+        current=VPSResult(**current_result),
+        modified=VPSResult(**modified_result),
+    )
 
 
 @app.put("/analyses/{analysis_id}")
