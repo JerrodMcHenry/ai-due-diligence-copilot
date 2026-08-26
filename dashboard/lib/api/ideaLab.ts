@@ -1,6 +1,7 @@
 import type {
   CreateVentureRequest,
   ScenarioCompareResponse,
+  StructureIdeaResponse,
   VentureAssumptions,
   VentureResponse,
   VentureSummary,
@@ -11,6 +12,19 @@ import { apiFetch } from "./client";
 // Idea Lab / Venture Simulator V1. Every call here requires a real Clerk
 // session token, same pattern as lib/api/savedStartups.ts -- modeled
 // ventures are private user data, never public intelligence.
+
+// Phase 6.1: stateless -- creates nothing, computes no VPS. See POST
+// /ventures/structure-idea's own docstring in app/api.py.
+export function structureIdea(
+  description: string,
+  token: string
+): Promise<StructureIdeaResponse> {
+  return apiFetch<StructureIdeaResponse>("/ventures/structure-idea", {
+    method: "POST",
+    body: { description },
+    token,
+  });
+}
 
 export function listVentures(token: string): Promise<VentureSummary[]> {
   return apiFetch<VentureSummary[]>("/ventures", { token });

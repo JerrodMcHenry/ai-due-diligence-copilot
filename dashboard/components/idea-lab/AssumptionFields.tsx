@@ -7,14 +7,22 @@ type FieldWrapperProps = {
   label: string;
   htmlFor: string;
   children: React.ReactNode;
+  // Phase 6.1: an optional provenance badge (see ProvenanceBadge.tsx),
+  // rendered beside the label -- purely additive, every existing caller
+  // (the venture workspace's own assumption editor) keeps working with
+  // no badge shown at all.
+  badge?: React.ReactNode;
 };
 
-function FieldWrapper({ label, htmlFor, children }: FieldWrapperProps) {
+function FieldWrapper({ label, htmlFor, children, badge }: FieldWrapperProps) {
   return (
     <div>
-      <label htmlFor={htmlFor} className="mb-1.5 block text-xs font-medium text-text-muted">
-        {label}
-      </label>
+      <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1.5">
+        <label htmlFor={htmlFor} className="block text-xs font-medium text-text-muted">
+          {label}
+        </label>
+        {badge}
+      </div>
       {children}
     </div>
   );
@@ -30,6 +38,7 @@ export function TextField({
   onChange,
   placeholder,
   multiline,
+  badge,
 }: {
   id: string;
   label: string;
@@ -37,9 +46,10 @@ export function TextField({
   onChange: (value: string | null) => void;
   placeholder?: string;
   multiline?: boolean;
+  badge?: React.ReactNode;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge}>
       {multiline ? (
         <textarea
           id={id}
@@ -71,6 +81,7 @@ export function NumberField({
   min = 0,
   step = 1,
   placeholder,
+  badge,
 }: {
   id: string;
   label: string;
@@ -79,9 +90,10 @@ export function NumberField({
   min?: number;
   step?: number;
   placeholder?: string;
+  badge?: React.ReactNode;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge}>
       <input
         id={id}
         type="number"
@@ -106,15 +118,17 @@ export function SelectField({
   value,
   options,
   onChange,
+  badge,
 }: {
   id: string;
   label: string;
   value: string | null;
   options: string[];
   onChange: (value: string | null) => void;
+  badge?: React.ReactNode;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge}>
       <select
         id={id}
         value={value ?? ""}
@@ -137,14 +151,16 @@ export function ToggleField({
   label,
   value,
   onChange,
+  badge,
 }: {
   id: string;
   label: string;
   value: boolean | null;
   onChange: (value: boolean | null) => void;
+  badge?: React.ReactNode;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge}>
       <select
         id={id}
         value={value === null ? "" : value ? "yes" : "no"}

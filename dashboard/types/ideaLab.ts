@@ -138,4 +138,113 @@ export interface ScenarioCompareResponse {
   modified: VPSResult;
 }
 
+// Phase 6.1 -- AI-Assisted Idea Setup. Every leaf value the AI proposes
+// carries its own provenance so the review UI can render "Based on your
+// description" / "Modeled assumption" / "Not provided yet" instead of
+// presenting everything with equal, unearned confidence. See
+// app/models/idea_lab.py's own docstring -- validation fields are held
+// to a stricter backend-enforced contract than this type alone can
+// express (a value here with provenance "ai_inferred" under `validation`
+// should never occur; the backend guarantees it, this type doesn't).
+export type DraftProvenance = "user_provided" | "ai_inferred" | "unknown";
+
+export interface DraftField<T> {
+  value: T | null;
+  provenance: DraftProvenance;
+  source_quote: string | null;
+}
+
+export interface VentureDraft {
+  name: DraftField<string>;
+  industry: DraftField<string>;
+  business_model: DraftField<string>;
+  target_customer: DraftField<string>;
+  stage: DraftField<string>;
+  market: {
+    market_description: DraftField<string>;
+    estimated_market_size: DraftField<string>;
+    competition_intensity: DraftField<string>;
+  };
+  problem_solution: {
+    problem_statement: DraftField<string>;
+    solution_description: DraftField<string>;
+    differentiation: DraftField<string>;
+  };
+  founder: {
+    founder_count: DraftField<number>;
+    relevant_domain_experience_years: DraftField<number>;
+    has_technical_cofounder: DraftField<boolean>;
+    has_business_cofounder: DraftField<boolean>;
+  };
+  gtm: {
+    primary_acquisition_strategy: DraftField<string>;
+    expected_cac: DraftField<number>;
+  };
+  economics: {
+    pricing_model: DraftField<string>;
+    price_point: DraftField<number>;
+    expected_gross_margin_pct: DraftField<number>;
+  };
+  validation: {
+    customer_interviews: DraftField<number>;
+    waitlist_signups: DraftField<number>;
+    paying_customers: DraftField<number>;
+    monthly_revenue: DraftField<number>;
+  };
+  capital: {
+    starting_capital: DraftField<number>;
+    monthly_burn: DraftField<number>;
+  };
+}
+
+export interface StructureIdeaResponse {
+  draft: VentureDraft;
+}
+
+// Converts a VentureDraft (every field is a {value, provenance} pair)
+// into a plain VentureAssumptions the founder can edit and eventually
+// submit to POST /ventures -- provenance is UI-only from this point on;
+// the persisted venture only ever stores plain values, same as a
+// manually-filled-in venture always has.
+export function draftToAssumptions(draft: VentureDraft): VentureAssumptions {
+  return {
+    target_customer: draft.target_customer.value,
+    market: {
+      market_description: draft.market.market_description.value,
+      estimated_market_size: draft.market.estimated_market_size.value,
+      competition_intensity: draft.market.competition_intensity.value,
+    },
+    problem_solution: {
+      problem_statement: draft.problem_solution.problem_statement.value,
+      solution_description: draft.problem_solution.solution_description.value,
+      differentiation: draft.problem_solution.differentiation.value,
+    },
+    founder: {
+      founder_count: draft.founder.founder_count.value,
+      relevant_domain_experience_years: draft.founder.relevant_domain_experience_years.value,
+      has_technical_cofounder: draft.founder.has_technical_cofounder.value,
+      has_business_cofounder: draft.founder.has_business_cofounder.value,
+    },
+    gtm: {
+      primary_acquisition_strategy: draft.gtm.primary_acquisition_strategy.value,
+      expected_cac: draft.gtm.expected_cac.value,
+    },
+    economics: {
+      pricing_model: draft.economics.pricing_model.value,
+      price_point: draft.economics.price_point.value,
+      expected_gross_margin_pct: draft.economics.expected_gross_margin_pct.value,
+    },
+    validation: {
+      customer_interviews: draft.validation.customer_interviews.value,
+      waitlist_signups: draft.validation.waitlist_signups.value,
+      paying_customers: draft.validation.paying_customers.value,
+      monthly_revenue: draft.validation.monthly_revenue.value,
+    },
+    capital: {
+      starting_capital: draft.capital.starting_capital.value,
+      monthly_burn: draft.capital.monthly_burn.value,
+    },
+  };
+}
+
 export const VENTURE_STAGES = ["Idea", "Researching", "Validating", "Building", "Launched"] as const;

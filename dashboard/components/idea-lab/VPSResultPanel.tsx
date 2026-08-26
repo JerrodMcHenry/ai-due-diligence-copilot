@@ -64,6 +64,18 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
         <p className="mt-2 text-xs text-text-muted">
           Based on your current assumptions — not observed evidence, and not comparable to a real company&rsquo;s SPS.
         </p>
+
+        <details className="group mx-auto mt-4 max-w-md text-left">
+          <summary className="cursor-pointer list-none text-xs font-semibold text-primary marker:content-none">
+            What does this score mean? ▾
+          </summary>
+          <ul className="mt-2 space-y-1.5 text-xs leading-5 text-text-secondary">
+            <li>• VPS is <strong>modeled</strong>, not SPS — it&rsquo;s a different score for a different purpose, and the two are never comparable.</li>
+            <li>• It reflects your own stated assumptions, not verified company performance.</li>
+            <li>• Missing categories are expected for an early idea — that&rsquo;s honest, not a penalty.</li>
+            <li>• Validation improves as you add real observations (interviews, signups, paying customers) — not by changing assumptions alone.</li>
+          </ul>
+        </details>
       </BaseCard>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

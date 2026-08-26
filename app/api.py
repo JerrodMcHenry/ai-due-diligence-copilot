@@ -55,7 +55,8 @@ from typing import Literal
 from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
-from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse
+from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
+from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
@@ -497,6 +498,49 @@ def _build_model_result(assumptions: dict) -> dict:
     vps_result = compute_vps(assumptions)
     guidance = generate_guidance(assumptions, vps_result)
     return {**vps_result, **guidance}
+
+
+# ---------------------------------------------------------------------------
+# Phase 6.1 -- AI-Assisted Idea Setup. A stateless drafting endpoint: it
+# reads nothing from and writes nothing to modeled_ventures (or any other
+# table), never calls compute_vps()/_build_model_result(), and cannot
+# create a Startup/Analysis -- there is no code path from here into
+# save_analysis(), get_or_create_startup(), or any Rankings/Discovery
+# query. Requires RequireAuth per the task's explicit instruction ("use
+# the existing authenticated user boundary even though nothing is
+# persisted") even though current_user is otherwise unused here -- this
+# keeps the whole /ventures* surface consistently behind auth rather than
+# carving out one public exception.
+#
+# Fails closed on every failure mode: StructureIdeaRequest's own
+# min/max_length bounds reject empty/oversized input with a 422 before
+# this function body ever runs; any LLM/parsing failure inside
+# structure_idea() raises IdeaStructuringError, caught below and turned
+# into one generic, safe 502 -- never the raw provider exception.
+# ---------------------------------------------------------------------------
+
+@app.post("/ventures/structure-idea", response_model=StructureIdeaResponse)
+def structure_idea_endpoint(
+    request: StructureIdeaRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    try:
+        draft_dict = structure_idea(request.description)
+        draft = VentureDraft(**draft_dict)
+    except IdeaStructuringError:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail="We couldn't structure that idea right now. Please try again.",
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail="We couldn't structure that idea right now. Please try again.",
+        )
+
+    return StructureIdeaResponse(draft=draft)
 
 
 @app.post("/ventures", response_model=VentureResponse)

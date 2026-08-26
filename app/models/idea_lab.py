@@ -16,6 +16,7 @@ easy to accidentally leak one into a response shaped for the other.
 """
 
 from datetime import datetime
+from typing import Literal
 
 from pydantic import BaseModel, Field
 
@@ -161,3 +162,126 @@ class ScenarioCompareRequest(BaseModel):
 class ScenarioCompareResponse(BaseModel):
     current: VPSResult
     modified: VPSResult
+
+
+# ---------------------------------------------------------------------------
+# Phase 6.1 -- AI-Assisted Idea Setup. These models represent a DRAFT the
+# founder must explicitly review and confirm -- they are never persisted
+# directly and never feed compute_vps() on their own (see
+# app/ai/idea_structuring.py). Every leaf value carries its own
+# provenance so the UI can render "Based on your description" /
+# "Modeled assumption" / "Not provided yet" instead of presenting
+# everything with equal, unearned confidence.
+#
+# Validation fields use the SAME DraftTextField/DraftNumberField shapes
+# as every other group, but are held to a stricter contract enforced in
+# Python, not just by prompting: see
+# idea_structuring.py::_apply_validation_safety_filter, which forcibly
+# nulls any validation field whose provenance isn't "user_provided" AND
+# independently verified against the founder's own submitted text. The
+# LLM's own claim of "user_provided" is never trusted by itself.
+# ---------------------------------------------------------------------------
+
+DraftProvenance = Literal["user_provided", "ai_inferred", "unknown"]
+
+
+class DraftTextField(BaseModel):
+    value: str | None = None
+    provenance: DraftProvenance = "unknown"
+    # Only meaningful when provenance == "user_provided" -- a substring
+    # the model claims is quoted/paraphrased-from the founder's own
+    # description, used to verify (not just trust) that claim. See
+    # idea_structuring.py's own docstring.
+    source_quote: str | None = None
+
+
+class DraftNumberField(BaseModel):
+    value: float | None = None
+    provenance: DraftProvenance = "unknown"
+    source_quote: str | None = None
+
+
+class DraftBoolField(BaseModel):
+    value: bool | None = None
+    provenance: DraftProvenance = "unknown"
+    source_quote: str | None = None
+
+
+class DraftMarketAssumptions(BaseModel):
+    market_description: DraftTextField = Field(default_factory=DraftTextField)
+    estimated_market_size: DraftTextField = Field(default_factory=DraftTextField)
+    competition_intensity: DraftTextField = Field(default_factory=DraftTextField)
+
+
+class DraftProblemSolutionAssumptions(BaseModel):
+    problem_statement: DraftTextField = Field(default_factory=DraftTextField)
+    solution_description: DraftTextField = Field(default_factory=DraftTextField)
+    differentiation: DraftTextField = Field(default_factory=DraftTextField)
+
+
+class DraftFounderAssumptions(BaseModel):
+    founder_count: DraftNumberField = Field(default_factory=DraftNumberField)
+    relevant_domain_experience_years: DraftNumberField = Field(default_factory=DraftNumberField)
+    has_technical_cofounder: DraftBoolField = Field(default_factory=DraftBoolField)
+    has_business_cofounder: DraftBoolField = Field(default_factory=DraftBoolField)
+
+
+class DraftGtmAssumptions(BaseModel):
+    primary_acquisition_strategy: DraftTextField = Field(default_factory=DraftTextField)
+    expected_cac: DraftNumberField = Field(default_factory=DraftNumberField)
+
+
+class DraftEconomicsAssumptions(BaseModel):
+    pricing_model: DraftTextField = Field(default_factory=DraftTextField)
+    price_point: DraftNumberField = Field(default_factory=DraftNumberField)
+    expected_gross_margin_pct: DraftNumberField = Field(default_factory=DraftNumberField)
+
+
+class DraftValidationObservations(BaseModel):
+    """
+    AI MUST NEVER infer any field here (Phase 6.1's core safety rule).
+    Pydantic alone can't enforce "only user_provided allowed" -- that
+    would make a legitimate `unknown` value impossible to express with
+    the same type -- so this stays structurally identical to the other
+    groups, and the actual enforcement is
+    idea_structuring.py::_apply_validation_safety_filter, which runs on
+    EVERY response before it ever reaches this model, regardless of what
+    the LLM returned.
+    """
+    customer_interviews: DraftNumberField = Field(default_factory=DraftNumberField)
+    waitlist_signups: DraftNumberField = Field(default_factory=DraftNumberField)
+    paying_customers: DraftNumberField = Field(default_factory=DraftNumberField)
+    monthly_revenue: DraftNumberField = Field(default_factory=DraftNumberField)
+
+
+class DraftCapitalAssumptions(BaseModel):
+    starting_capital: DraftNumberField = Field(default_factory=DraftNumberField)
+    monthly_burn: DraftNumberField = Field(default_factory=DraftNumberField)
+
+
+class VentureDraft(BaseModel):
+    name: DraftTextField = Field(default_factory=DraftTextField)
+    industry: DraftTextField = Field(default_factory=DraftTextField)
+    business_model: DraftTextField = Field(default_factory=DraftTextField)
+    target_customer: DraftTextField = Field(default_factory=DraftTextField)
+    stage: DraftTextField = Field(default_factory=DraftTextField)
+    market: DraftMarketAssumptions = Field(default_factory=DraftMarketAssumptions)
+    problem_solution: DraftProblemSolutionAssumptions = Field(default_factory=DraftProblemSolutionAssumptions)
+    founder: DraftFounderAssumptions = Field(default_factory=DraftFounderAssumptions)
+    gtm: DraftGtmAssumptions = Field(default_factory=DraftGtmAssumptions)
+    economics: DraftEconomicsAssumptions = Field(default_factory=DraftEconomicsAssumptions)
+    validation: DraftValidationObservations = Field(default_factory=DraftValidationObservations)
+    capital: DraftCapitalAssumptions = Field(default_factory=DraftCapitalAssumptions)
+
+
+class StructureIdeaRequest(BaseModel):
+    # Bounded well below MAX_COMPANY_TEXT_LENGTH (analyze's own 50,000 --
+    # see app/models/startup.py) -- this is a short idea pitch, not a
+    # pasted document; a generous ceiling here is about rejecting a
+    # pathological paste cleanly (Part 3's "oversized input -> clean
+    # 4xx"), not accommodating long-form text.
+    description: str = Field(min_length=1, max_length=4000)
+
+
+class StructureIdeaResponse(BaseModel):
+    draft: VentureDraft
