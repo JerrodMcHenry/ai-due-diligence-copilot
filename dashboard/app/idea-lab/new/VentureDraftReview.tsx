@@ -3,7 +3,11 @@
 import { useState } from "react";
 
 import BaseCard from "@/components/ui/BaseCard";
+import Button from "@/components/ui/Button";
+import Disclosure from "@/components/ui/Disclosure";
 import ProvenanceBadge from "@/components/idea-lab/ProvenanceBadge";
+import VentureOverview from "@/components/idea-lab/VentureOverview";
+import { defaultStillFiguringOut } from "@/components/idea-lab/ventureOverviewHelpers";
 import {
   NumberField,
   SelectField,
@@ -87,8 +91,25 @@ export default function VentureDraftReview({
         </button>
       </BaseCard>
 
-      <div className="space-y-3">
-        <ReviewAccordion title="Venture Basics" defaultOpen>
+      {/* Phase 10.6, Part 3: the plain-language summary a founder sees
+          FIRST -- before the seven-section form below, which is now
+          collapsed by default (progressive disclosure) rather than shown
+          fully expanded. */}
+      <VentureOverview
+        idea={originalDescription}
+        whoItsFor={targetCustomer}
+        howItMakesMoney={businessModel}
+        stillFiguringOut={defaultStillFiguringOut()}
+      />
+
+      <Disclosure summary="Review and edit the full model" defaultOpen={false}>
+        <div className="space-y-3">
+          <p className="text-xs text-text-muted">
+            Everything below is the complete structured model SIE proposed. Expand any section to
+            review or correct it — nothing is saved until you confirm below.
+          </p>
+
+          <ReviewAccordion title="Venture Basics">
           <TextField
             id="review-name"
             label="Venture name"
@@ -126,7 +147,7 @@ export default function VentureDraftReview({
           />
         </ReviewAccordion>
 
-        <ReviewAccordion title="Market" defaultOpen>
+        <ReviewAccordion title="Market">
           <SelectField
             id="review-market-size"
             label="Estimated market size"
@@ -153,7 +174,7 @@ export default function VentureDraftReview({
           />
         </ReviewAccordion>
 
-        <ReviewAccordion title="Problem & Solution" defaultOpen>
+        <ReviewAccordion title="Problem & Solution">
           <TextField
             id="review-problem"
             label="Problem statement"
@@ -254,7 +275,7 @@ export default function VentureDraftReview({
           />
         </ReviewAccordion>
 
-        <ReviewAccordion title="Validation (founder-reported observations)" defaultOpen>
+        <ReviewAccordion title="What you've learned (founder-reported observations)">
           <p className="sm:col-span-2 text-xs text-text-muted">
             SIE never invents these — they&rsquo;re only filled in when you
             explicitly said so, or when you fill them in yourself below.
@@ -305,24 +326,16 @@ export default function VentureDraftReview({
             badge={<ProvenanceBadge provenance={draft.capital.monthly_burn.provenance} />}
           />
         </ReviewAccordion>
-      </div>
+        </div>
+      </Disclosure>
 
       <div className="flex items-center justify-end gap-3">
-        <button
-          type="button"
-          onClick={onBack}
-          className="rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-text-secondary transition-colors hover:border-primary hover:text-primary"
-        >
+        <Button type="button" variant="secondary" onClick={onBack}>
           Back
-        </button>
-        <button
-          type="button"
-          disabled={isSubmitting}
-          onClick={handleConfirm}
-          className="rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
-        >
+        </Button>
+        <Button type="button" disabled={isSubmitting} loading={isSubmitting} onClick={handleConfirm}>
           {isSubmitting ? "Creating..." : "Create Venture"}
-        </button>
+        </Button>
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ export default function IdeaLabDashboard() {
     <>
       <PageHeader
         title="Idea Lab"
-        subtitle="Model a startup idea, see its Venture Potential Score, and explore what would make it stronger — before you build anything."
+        subtitle="Start with just an idea. SIE helps you model it, test your assumptions, and see what would make it stronger — before you build anything."
         action={
           <Link
             href="/idea-lab/new"

@@ -1,19 +1,10 @@
 import BaseCard from "@/components/ui/BaseCard";
+import Disclosure from "@/components/ui/Disclosure";
+import ScoreDisplay from "@/components/ui/ScoreDisplay";
+
+import NextMoves from "./NextMoves";
 
 import type { VPSResult } from "@/types";
-
-function getVpsClasses(value: number | null): string {
-  if (value === null) {
-    return "text-text-muted";
-  }
-  if (value >= 7) {
-    return "text-success";
-  }
-  if (value >= 5) {
-    return "text-primary";
-  }
-  return "text-warning";
-}
 
 function getCategoryBarColor(score: number | null): string {
   if (score === null) {
@@ -33,9 +24,14 @@ type VPSResultPanelProps = {
   title?: string;
 };
 
-// Part 8/14: VPS is never presented without its MODELED label directly
-// beside it, and the category/guidance sections below make clear WHAT
-// drove the number and WHERE evidence is missing -- never just a grade.
+// Phase 10.6 -- Idea Lab V2, Part 5/6/9/10. Same data this panel always
+// rendered (VPSResult is completely unchanged) -- reorganized around
+// Design System V2's ScoreDisplay, "we don't know this yet" framing for
+// Unavailable categories instead of a bare em dash, and Next Moves
+// promoted above the category grid instead of a "Next Milestones" list
+// buried at the bottom (Part 9: prefer 3 focused moves over a dumped
+// list -- the fuller `next_milestones` array this panel used to print in
+// full is now only surfaced 3 at a time via NextMoves).
 export default function VPSResultPanel({ result, title = "Venture Potential Score" }: VPSResultPanelProps) {
   if (result.vps === null) {
     return (
@@ -53,80 +49,68 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
 
   return (
     <div className="space-y-6">
-      <BaseCard className="p-6 text-center">
-        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{title}</p>
-        <p className={`mt-1 text-5xl font-bold ${getVpsClasses(result.vps)}`}>
-          {result.vps.toFixed(1)}
-        </p>
-        <p className="mt-2 inline-block rounded-full bg-surface-muted px-3 py-1 text-xs font-semibold text-text-muted">
-          {result.label}
-        </p>
-        <p className="mt-2 text-xs text-text-muted">
-          Based on your current assumptions — not observed evidence, and not comparable to a real company&rsquo;s SPS.
-        </p>
+      <BaseCard className="p-6">
+        <ScoreDisplay
+          label={title}
+          score={result.vps}
+          scoreSuffix="/ 10"
+          modeled
+        />
 
-        <details className="group mx-auto mt-4 max-w-md text-left">
-          <summary className="cursor-pointer list-none text-xs font-semibold text-primary marker:content-none">
-            What does this score mean? ▾
-          </summary>
-          <ul className="mt-2 space-y-1.5 text-xs leading-5 text-text-secondary">
-            <li>• VPS is <strong>modeled</strong>, not SPS — it&rsquo;s a different score for a different purpose, and the two are never comparable.</li>
-            <li>• It reflects your own stated assumptions, not verified company performance.</li>
-            <li>• Missing categories are expected for an early idea — that&rsquo;s honest, not a penalty.</li>
-            <li>• Validation improves as you add real observations (interviews, signups, paying customers) — not by changing assumptions alone.</li>
-          </ul>
-        </details>
+        <div className="mx-auto mt-4 max-w-md">
+          <Disclosure summary="What does this score mean?">
+            <ul className="space-y-1.5 text-xs leading-5 text-text-secondary">
+              <li>• VPS is <strong>modeled</strong>, not SPS — it&rsquo;s a different score for a different purpose, and the two are never comparable.</li>
+              <li>• It reflects your own stated assumptions, not verified company performance.</li>
+              <li>• Missing categories are expected for an early idea — that&rsquo;s honest, not a penalty.</li>
+              <li>• Validation improves as you add real observations (interviews, signups, paying customers) — not by changing assumptions alone.</li>
+            </ul>
+          </Disclosure>
+        </div>
       </BaseCard>
 
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {result.categories.map((category) => (
-          <BaseCard key={category.key} className="p-4">
-            <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-text-secondary">{category.label}</p>
-              <p className="text-sm font-semibold text-text-primary">
-                {category.score !== null ? category.score.toFixed(1) : "—"}
-              </p>
-            </div>
+      <NextMoves milestones={result.next_milestones} />
 
-            <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
-              {category.score !== null ? (
-                <div
-                  className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
-                  style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
-                />
+      <div>
+        <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
+          How your model breaks down
+        </h3>
+
+        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {result.categories.map((category) => (
+            <BaseCard key={category.key} className="p-4">
+              <div className="flex items-center justify-between">
+                <p className="text-sm font-medium text-text-secondary">{category.label}</p>
+                <p className="text-sm font-semibold text-text-primary">
+                  {category.score !== null ? category.score.toFixed(1) : "—"}
+                </p>
+              </div>
+
+              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
+                {category.score !== null ? (
+                  <div
+                    className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
+                    style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
+                  />
+                ) : null}
+              </div>
+
+              {category.score === null ? (
+                <p className="mt-1.5 text-[11px] text-text-muted">We don&rsquo;t know this yet</p>
+              ) : category.basis.length > 0 ? (
+                <p className="mt-1.5 truncate text-[11px] text-text-muted">{category.basis[0]}</p>
               ) : null}
-            </div>
-
-            {category.score === null ? (
-              <p className="mt-1.5 text-[11px] text-text-muted">Not enough assumptions yet</p>
-            ) : null}
-          </BaseCard>
-        ))}
+            </BaseCard>
+          ))}
+        </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
-        <GuidanceList title="Strengths" items={result.strengths} icon="▲" iconClass="text-success" />
-        <GuidanceList title="Risks" items={result.risks} icon="▼" iconClass="text-danger" />
-        <GuidanceList title="Key Assumptions" items={result.key_assumptions} icon="•" iconClass="text-primary" />
-        <GuidanceList title="Validation Gaps" items={result.validation_gaps} icon="!" iconClass="text-warning" />
+        <GuidanceList title="Strongest modeled areas" items={result.strengths} icon="▲" iconClass="text-success" />
+        <GuidanceList title="Biggest modeled unknowns" items={result.risks} icon="▼" iconClass="text-danger" />
+        <GuidanceList title="What you believe" items={result.key_assumptions} icon="•" iconClass="text-primary" />
+        <DiscoveryGaps items={result.validation_gaps} />
       </div>
-
-      {result.next_milestones.length > 0 ? (
-        <BaseCard className="p-5">
-          <h3 className="text-sm font-semibold text-text-primary">Next Milestones</h3>
-          <p className="mt-1 text-xs text-text-muted">
-            Ways to strengthen the modeled venture and reduce uncertainty — not guarantees of success.
-          </p>
-          <ul className="mt-3 space-y-1.5 text-sm text-text-secondary">
-            {result.next_milestones.map((milestone, index) => (
-              <li key={index} className="flex gap-2">
-                <span aria-hidden="true" className="text-primary">→</span>
-                <span>{milestone}</span>
-              </li>
-            ))}
-          </ul>
-        </BaseCard>
-      ) : null}
     </div>
   );
 }
@@ -153,6 +137,31 @@ function GuidanceList({
         {items.map((item, index) => (
           <li key={index} className="flex gap-2">
             <span aria-hidden="true" className={iconClass}>{icon}</span>
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </BaseCard>
+  );
+}
+
+// Phase 10.6, Part 6: missing information framed as discovery, not error --
+// `validation_gaps` is unchanged from the backend (app/ai/vps_guidance.py
+// already writes these as friendly, non-blaming sentences, e.g. "No
+// customer interviews reported yet"). Renamed "Validation Gaps" ->
+// "What you haven't learned yet" here, purely presentational.
+function DiscoveryGaps({ items }: { items: string[] }) {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <BaseCard className="p-4">
+      <h3 className="text-sm font-semibold text-text-primary">What you haven&rsquo;t learned yet</h3>
+      <ul className="mt-2 space-y-1.5 text-sm text-text-secondary">
+        {items.map((item, index) => (
+          <li key={index} className="flex gap-2">
+            <span aria-hidden="true" className="text-warning">!</span>
             <span>{item}</span>
           </li>
         ))}

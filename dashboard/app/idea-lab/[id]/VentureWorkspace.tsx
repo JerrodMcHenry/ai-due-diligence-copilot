@@ -7,8 +7,15 @@ import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
 import BaseCard from "@/components/ui/BaseCard";
+import Button from "@/components/ui/Button";
+import Disclosure from "@/components/ui/Disclosure";
 import VPSResultPanel from "@/components/idea-lab/VPSResultPanel";
 import ScenarioComparison from "@/components/idea-lab/ScenarioComparison";
+import VentureJourney from "@/components/idea-lab/VentureJourney";
+import VentureOverview from "@/components/idea-lab/VentureOverview";
+import VentureCard from "@/components/idea-lab/VentureCard";
+import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
+import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import {
   NumberField,
   SelectField,
@@ -137,6 +144,37 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     }
   }
 
+  // Phase 10.6, Part 7: a "What if?" preset runs through this SAME
+  // preview mechanism -- it only supplies a different `modifiedAssumptions`
+  // value (whatIfScenarios.ts's own patch of the saved venture, not the
+  // manually-edited `draft`). `draft` is updated to match so that if the
+  // founder chooses "Apply & Save" afterward, the existing handleSave()
+  // (unchanged) persists exactly the scenario they just previewed --
+  // there is no separate apply path for a What If result.
+  async function handleRunScenario(modifiedAssumptions: VentureAssumptions) {
+    if (!venture) return;
+
+    setIsPreviewing(true);
+    setActionError(null);
+    setDraft(modifiedAssumptions);
+
+    try {
+      const token = await getToken();
+      if (!token) {
+        setActionError("Your session expired. Sign in again.");
+        return;
+      }
+
+      const result = await compareVentureScenarios(venture.assumptions, modifiedAssumptions, token);
+      setScenario(result);
+    } catch (error) {
+      console.error("Failed to run what-if scenario:", error);
+      setActionError("Couldn't calculate that scenario. Try again.");
+    } finally {
+      setIsPreviewing(false);
+    }
+  }
+
   async function handleSave() {
     setIsSaving(true);
     setActionError(null);
@@ -220,18 +258,32 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         title={venture.name}
         subtitle="Modeled venture — Idea Lab"
         action={
-          <button
+          <Button
             type="button"
+            variant="subtle"
             disabled={isDeleting}
             onClick={handleDelete}
-            className="rounded-lg border border-border px-3 py-2 text-sm font-semibold text-text-muted transition-colors hover:border-danger hover:text-danger disabled:cursor-not-allowed disabled:opacity-60"
+            className="hover:text-danger"
           >
             {isDeleting ? "Deleting..." : "Delete venture"}
-          </button>
+          </Button>
         }
       />
 
       <div className="space-y-8">
+        <BaseCard className="p-5">
+          <VentureJourney stage={stage} />
+        </BaseCard>
+
+        <VentureOverview
+          idea={description}
+          whoItsFor={targetCustomer}
+          howItMakesMoney={businessModel}
+          stillFiguringOut={
+            venture.model_result ? stillFiguringOutFromCategories(venture.model_result.categories) : []
+          }
+        />
+
         {venture.model_result ? <VPSResultPanel result={venture.model_result} /> : null}
 
         {actionError ? (
@@ -239,6 +291,14 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             {actionError}
           </div>
         ) : null}
+
+        <BaseCard className="p-5">
+          <WhatIfPanel
+            currentAssumptions={venture.assumptions}
+            onRunScenario={handleRunScenario}
+            isRunning={isPreviewing}
+          />
+        </BaseCard>
 
         {scenario ? (
           <ScenarioComparison
@@ -249,33 +309,35 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           />
         ) : null}
 
+        <Disclosure summary="Edit the full model" defaultOpen={false}>
         <section>
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold text-text-primary">Assumptions</h2>
+            <h2 className="text-xl font-semibold text-text-primary">What you believe</h2>
 
             <div className="flex items-center gap-2">
-              <button
+              <Button
                 type="button"
+                variant="secondary"
                 disabled={isPreviewing || !hasUnsavedChanges}
                 onClick={handlePreview}
-                className="rounded-lg border border-primary/30 px-4 py-2 text-sm font-semibold text-primary transition-colors hover:bg-primary-soft disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isPreviewing ? "Calculating..." : "Recalculate (preview)"}
-              </button>
+              </Button>
 
-              <button
+              <Button
                 type="button"
                 disabled={isSaving || !hasUnsavedChanges}
+                loading={isSaving}
                 onClick={handleSave}
-                className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-50"
               >
                 {isSaving ? "Saving..." : "Save Changes"}
-              </button>
+              </Button>
             </div>
           </div>
 
           <p className="mt-1 text-xs text-text-muted">
-            Everything below except Validation is a modeled assumption, not observed evidence.
+            Everything below except &ldquo;What you&rsquo;ve learned&rdquo; is a modeled assumption, not
+            observed evidence.
           </p>
 
           <div className="mt-4 space-y-3">
@@ -290,7 +352,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               onStage={setStage}
             />
 
-            <AssumptionAccordion title="Market" defaultOpen>
+            <AssumptionAccordion title="Market">
               <SelectField
                 id="market-size"
                 label="Estimated market size"
@@ -403,7 +465,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               />
             </AssumptionAccordion>
 
-            <AssumptionAccordion title="Validation (founder-reported observations)">
+            <AssumptionAccordion title="What you've learned (founder-reported observations)">
               <NumberField
                 id="val-interviews"
                 label="Customer interviews conducted"
@@ -446,6 +508,26 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             </AssumptionAccordion>
           </div>
         </section>
+        </Disclosure>
+
+        {/* Phase 10.6, Part 11: visual architecture for a future
+            shareable venture card -- see VentureCard.tsx's own comment.
+            Collapsed by default so it doesn't compete with the primary
+            workspace; nothing here is wired to sharing yet. */}
+        <Disclosure summary="Preview your venture card" defaultOpen={false}>
+          {venture.model_result ? (
+            <VentureCard
+              name={venture.name}
+              oneLineConcept={description}
+              vps={venture.model_result.vps}
+              categories={venture.model_result.categories}
+            />
+          ) : (
+            <p className="text-sm text-text-muted">
+              Model a few assumptions to see a preview of your venture card.
+            </p>
+          )}
+        </Disclosure>
       </div>
     </>
   );
