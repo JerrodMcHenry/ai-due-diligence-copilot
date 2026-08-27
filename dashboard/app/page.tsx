@@ -1,208 +1,62 @@
-"use client";
+import { Suspense } from "react";
 
-import { useEffect, useState } from "react";
+import AnalyzeCallout from "@/components/home/AnalyzeCallout";
+import CompetitionTeaser from "@/components/home/CompetitionTeaser";
+import ExplorePreview from "@/components/home/ExplorePreview";
+import Hero from "@/components/home/Hero";
+import IdeaJourney from "@/components/home/IdeaJourney";
+import ScenarioExamples from "@/components/home/ScenarioExamples";
+import ThreePaths from "@/components/home/ThreePaths";
+import TrustSection from "@/components/home/TrustSection";
+import VisualPayoff from "@/components/home/VisualPayoff";
 
-import AnalyticsCard from "@/components/dashboard/AnalyticsCard";
-import TopImprovingStartupsTable from "@/components/dashboard/TopImprovingStartupsTable";
-import TopStartupsTable from "@/components/dashboard/TopStartupsTable";
+// Phase 10.5 -- Consumer Home V2. Replaces the old "platform average SPS"
+// analytics dashboard (identical for every visitor, signed-in or not --
+// see Phase 10.2's own audit finding) with a homepage built around the
+// product's actual acquisition loop: IDEA -> MODEL -> ITERATE. Public,
+// unauthenticated (Part 14) -- the ONLY auth boundary on this page is the
+// existing one every other protected route already has, enforced when
+// Hero's "Build My Startup" navigates to /idea-lab/new, not by anything
+// here.
+//
+// A Server Component (the old Home was "use client" for its own
+// client-side analytics fetch -- Hero is the only piece here that needs
+// the client, and it's marked "use client" itself; everything else can
+// render on the server, including ExplorePreview's own data fetch,
+// matching the same convention /rankings and /search already use).
+//
+// force-dynamic: without this, Next.js prerenders "/" once at BUILD time
+// (confirmed via a real production build -- it was marked "○ Static"),
+// which would bake ExplorePreview's real startup list into the page
+// permanently until the next deploy. The old Home fetched its own data
+// client-side on every visit and never had this problem; this is the
+// server-rendered equivalent of that same freshness guarantee, not a new
+// behavior.
+export const dynamic = "force-dynamic";
 
-import PageHeader from "@/components/layout/PageHeader";
-import BaseCard from "@/components/ui/BaseCard";
-import { SPSRing } from "@/components/sps";
-
-import {
-  getAnalytics,
-  getTopImprovingStartups,
-  getTopStartups,
-} from "@/lib/api";
-
-import type {
-  AnalyticsSummary,
-  ImprovingStartup,
-  StartupRanking,
-} from "@/types";
-
-function DashboardSkeleton() {
+export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <div className="h-56 animate-pulse rounded-2xl border border-border bg-surface" />
-
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {Array.from({ length: 3 }).map((_, index) => (
-          <div
-            key={index}
-            className="h-40 animate-pulse rounded-2xl border border-border bg-surface"
-          />
-        ))}
+    <div className="space-y-24 pb-16 sm:space-y-28">
+      <div>
+        <Hero />
+        <VisualPayoff />
       </div>
 
-      <div className="h-96 animate-pulse rounded-2xl border border-border bg-surface" />
+      <ThreePaths />
 
-      <div className="h-80 animate-pulse rounded-2xl border border-border bg-surface" />
-    </div>
-  );
-}
+      <IdeaJourney />
 
-export default function Home() {
-  const [analytics, setAnalytics] = useState<AnalyticsSummary | null>(null);
+      <ScenarioExamples />
 
-  const [topStartups, setTopStartups] = useState<StartupRanking[]>([]);
+      <AnalyzeCallout />
 
-  const [topImprovingStartups, setTopImprovingStartups] = useState<
-    ImprovingStartup[]
-  >([]);
+      <Suspense fallback={null}>
+        <ExplorePreview />
+      </Suspense>
 
-  const [isLoading, setIsLoading] = useState(true);
+      <CompetitionTeaser />
 
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    async function loadDashboard() {
-      try {
-        setError(null);
-
-        const [analyticsData, topStartupsData, topImprovingData] =
-          await Promise.all([
-            getAnalytics(),
-            getTopStartups(),
-            getTopImprovingStartups(),
-          ]);
-
-        if (!isMounted) {
-          return;
-        }
-
-        setAnalytics(analyticsData);
-        setTopStartups(topStartupsData);
-        setTopImprovingStartups(topImprovingData);
-      } catch (error) {
-        console.error(error);
-
-        if (isMounted) {
-          setError("Unable to load dashboard data.");
-        }
-      } finally {
-        if (isMounted) {
-          setIsLoading(false);
-        }
-      }
-    }
-
-    loadDashboard();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  return (
-    <div className="space-y-8">
-      <PageHeader
-        title="Good Evening 👋"
-        subtitle="Welcome back. Here's how your startup intelligence platform is performing today."
-      />
-
-      {error ? (
-        <BaseCard className="border-danger/30 bg-danger-soft p-6">
-          <h2 className="text-base font-semibold text-danger">
-            Unable to load dashboard
-          </h2>
-
-          <p className="mt-2 text-sm text-danger">{error}</p>
-
-          <button
-            type="button"
-            onClick={() => window.location.reload()}
-            className="mt-5 rounded-xl bg-danger px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
-          >
-            Try Again
-          </button>
-        </BaseCard>
-      ) : isLoading ? (
-        <DashboardSkeleton />
-      ) : (
-        <>
-          {/* Hero */}
-
-          <section className="grid gap-6 lg:grid-cols-3">
-            <BaseCard className="p-8 lg:col-span-2">
-              <div className="flex flex-col gap-8 xl:flex-row xl:justify-between">
-                <div>
-                  <p className="text-sm font-medium text-text-secondary">
-                    Startup Intelligence Engine
-                  </p>
-
-                  <div className="mt-6">
-                    <SPSRing
-                      score={analytics?.average_overall_score ?? 0}
-                      size="lg"
-                    />
-                  </div>
-
-                  <p className="mt-6 text-xl font-semibold">
-                    Startup Power Score
-                  </p>
-
-                  <p className="mt-3 text-green-500 font-medium">
-                    ▲ Platform Average
-                  </p>
-
-                  <div className="mt-8">
-                    <div className="mb-2 flex justify-between text-sm">
-                      <span>Goal</span>
-                      <span>80 SPS</span>
-                    </div>
-
-                    <div className="h-3 overflow-hidden rounded-full bg-border">
-                      <div
-                        className="h-full rounded-full bg-primary transition-all duration-700"
-                        style={{
-                          width: `${Math.min(
-                            ((analytics?.average_overall_score ?? 0) / 80) *
-                              100,
-                            100
-                          )}%`,
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="rounded-xl bg-primary/10 px-4 py-2 text-sm font-semibold text-primary">
-                  SPS™
-                </div>
-              </div>
-            </BaseCard>
-
-            {/* "Average Readiness" was removed here: readiness_score has
-                no defined numeric scale (the LLM prompt that produces it
-                in app/ai/readiness_score.py never specifies a range), so
-                historical values mix 0-10-ish and 0-100-ish readings in
-                the same column -- averaging them produces a number that
-                looks precise but isn't meaningful. See the P0 Product
-                Trust Cleanup report for the full root-cause note; fixing
-                it for real means changing that scoring prompt, which is
-                out of scope here. */}
-            <div className="grid gap-4">
-              <AnalyticsCard
-                title="Tracked Startups"
-                value={analytics?.total_startups ?? 0}
-                description="Companies currently tracked."
-              />
-            </div>
-          </section>
-
-          {/* Rankings */}
-
-          <section className="space-y-8">
-            <TopStartupsTable startups={topStartups} />
-
-            <TopImprovingStartupsTable startups={topImprovingStartups} />
-          </section>
-        </>
-      )}
+      <TrustSection />
     </div>
   );
 }

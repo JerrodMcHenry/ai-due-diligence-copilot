@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
 
 import { createVenture, structureIdea } from "@/lib/api";
+import { consumeHomepageIdea } from "@/lib/homepageIdeaHandoff";
 import VentureDraftReview, { type ConfirmedVenture } from "./VentureDraftReview";
 
 import type { VentureDraft } from "@/types";
@@ -36,6 +37,36 @@ export default function NewVentureForm() {
   const [draft, setDraft] = useState<VentureDraft | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isCreating, setIsCreating] = useState(false);
+
+  // Phase 10.5 -- Consumer Home V2: pre-fills the description a visitor
+  // already typed on the homepage's hero idea input, if they arrived via
+  // that flow (see lib/homepageIdeaHandoff.ts for the full handoff
+  // contract). A plain client-only effect, not a query param, so there's
+  // nothing to parse/validate here beyond "was something stashed" --
+  // every other code path in this file (structuring, review, create) is
+  // completely unaware this happened and behaves exactly as it did
+  // before this phase.
+  //
+  // The Promise.resolve().then() is a genuine microtask boundary, not
+  // decoration -- react-hooks/set-state-in-effect flags a setState call
+  // that's synchronously reachable from the effect body (it could have
+  // run during render instead); deferring it to a microtask is the same
+  // shape every other effect in this codebase that legitimately sets
+  // state already uses (they clear it via a real `await`, e.g.
+  // AnalyzeStartupForm's verifyFounderTarget()) -- this has no real async
+  // work, so it earns that boundary the honest way: this update must
+  // land strictly after the initial client render commits, since
+  // sessionStorage doesn't exist during SSR and description must start
+  // as "" there for hydration to match.
+  useEffect(() => {
+    Promise.resolve().then(() => {
+      const stashedIdea = consumeHomepageIdea();
+
+      if (stashedIdea) {
+        setDescription(stashedIdea);
+      }
+    });
+  }, []);
 
   async function handleBuildModel(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
