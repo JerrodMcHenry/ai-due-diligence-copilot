@@ -1,3 +1,18 @@
+// Design System V2 (Phase 10.4): glowClass values below were literal
+// hardcoded rgba() shadows (e.g. "rgba(34,197,94,0.18)") duplicating the
+// success/primary/warning token colors in raw form -- a hardcoded-color
+// bypass of the token system (Part 1's audit explicitly calls this out).
+// Rewritten to derive the glow from the same --success/--primary/--warning
+// custom properties every other token-driven color in this app uses, via
+// the same color-mix() pattern globals.css already uses for ::selection.
+// Each class string below is written out in full (not assembled from
+// pieces at runtime) because Tailwind's build-time scanner extracts
+// candidate classes by matching literal text in source files -- a
+// dynamically-interpolated class name would never be generated. Visual
+// output (color, radius, opacity, and how intensity scales with score) is
+// unchanged -- this only changes where the color comes from, not what it
+// looks like, and touches no score or grade boundary.
+
 export type SPSMetadata = {
   grade: string;
   label: string;
@@ -24,7 +39,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-success",
       textClass: "text-success",
       backgroundClass: "bg-success/10",
-      glowClass: "shadow-[0_0_40px_rgba(34,197,94,0.18)]",
+      glowClass: "shadow-[0_0_40px_color-mix(in_srgb,var(--success)_18%,transparent)]",
     };
   }
 
@@ -36,7 +51,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-success",
       textClass: "text-success",
       backgroundClass: "bg-success/10",
-      glowClass: "shadow-[0_0_36px_rgba(34,197,94,0.16)]",
+      glowClass: "shadow-[0_0_36px_color-mix(in_srgb,var(--success)_16%,transparent)]",
     };
   }
 
@@ -49,7 +64,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-success",
       textClass: "text-success",
       backgroundClass: "bg-success/10",
-      glowClass: "shadow-[0_0_32px_rgba(34,197,94,0.14)]",
+      glowClass: "shadow-[0_0_32px_color-mix(in_srgb,var(--success)_14%,transparent)]",
     };
   }
 
@@ -62,7 +77,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-success",
       textClass: "text-success",
       backgroundClass: "bg-success/10",
-      glowClass: "shadow-[0_0_28px_rgba(34,197,94,0.12)]",
+      glowClass: "shadow-[0_0_28px_color-mix(in_srgb,var(--success)_12%,transparent)]",
     };
   }
 
@@ -75,7 +90,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-primary",
       textClass: "text-primary",
       backgroundClass: "bg-primary/10",
-      glowClass: "shadow-[0_0_28px_rgba(59,130,246,0.12)]",
+      glowClass: "shadow-[0_0_28px_color-mix(in_srgb,var(--primary)_12%,transparent)]",
     };
   }
 
@@ -88,7 +103,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-primary",
       textClass: "text-primary",
       backgroundClass: "bg-primary/10",
-      glowClass: "shadow-[0_0_24px_rgba(59,130,246,0.1)]",
+      glowClass: "shadow-[0_0_24px_color-mix(in_srgb,var(--primary)_10%,transparent)]",
     };
   }
 
@@ -101,7 +116,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-warning",
       textClass: "text-warning",
       backgroundClass: "bg-warning/10",
-      glowClass: "shadow-[0_0_24px_rgba(245,158,11,0.1)]",
+      glowClass: "shadow-[0_0_24px_color-mix(in_srgb,var(--warning)_10%,transparent)]",
     };
   }
 
@@ -114,7 +129,7 @@ export function getSPSMetadata(score: number): SPSMetadata {
       strokeClass: "stroke-warning",
       textClass: "text-warning",
       backgroundClass: "bg-warning/10",
-      glowClass: "shadow-[0_0_22px_rgba(245,158,11,0.09)]",
+      glowClass: "shadow-[0_0_22px_color-mix(in_srgb,var(--warning)_9%,transparent)]",
     };
   }
 

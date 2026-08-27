@@ -38,6 +38,13 @@
   --danger: #e11d48;
   --danger-soft: #ffe4e6;
 
+  /* Design System V2 (Phase 10.4): "info" reuses the existing accent hue
+     rather than inventing a new color -- semantically distinct (status
+     messaging vs. brand accent), value-identical, so no new hex value is
+     introduced. */
+  --info: #06b6d4;
+  --info-soft: #cffafe;
+
   --sidebar: #ffffff;
   --sidebar-foreground: #172033;
   --sidebar-muted: #64748b;
@@ -83,6 +90,9 @@
   --danger: #fb7185;
   --danger-soft: #431725;
 
+  --info: #22d3ee;
+  --info-soft: #0d3540;
+
   --sidebar: #091525;
   --sidebar-foreground: #eef4ff;
   --sidebar-muted: #8797ad;
@@ -126,11 +136,43 @@
   --color-danger: var(--danger);
   --color-danger-soft: var(--danger-soft);
 
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-muted: var(--sidebar-muted);
   --color-sidebar-hover: var(--sidebar-hover);
   --color-sidebar-active: var(--sidebar-active);
+
+  /* Design System V2 (Phase 10.4), Part 3 -- normalized aliases for the
+     token set above, not a second set of colors. Every value here points
+     at an existing --text, --surface, or --primary variable; nothing new
+     is introduced except the names, so `text-foreground-secondary` and
+     `text-text-secondary` (existing, still used across ~15+ files) always
+     render identically in both themes. Kept as aliases rather than a
+     rename to avoid a risky mechanical find/replace across the whole
+     dashboard/ tree for a naming preference alone. */
+  --color-foreground-secondary: var(--text-secondary);
+  --color-foreground-muted: var(--text-muted);
+  --color-surface-raised: var(--surface-elevated);
+  --color-surface-subtle: var(--surface-muted);
+  --color-primary-subtle: var(--primary-soft);
+
+  /* Intelligence-specific semantics (Part 3) -- also aliases, not new
+     hues: "movement" and "confidence" are DIFFERENT CONCEPTS from
+     success/warning/danger (a score going up is "positive movement", not
+     literally "success"), so giving them their own token names lets
+     future code express intent clearly without overloading a status
+     color for two different meanings. Pillar identity/grade color still
+     comes from scoreMetadata.ts, unaffected by this. */
+  --color-movement-positive: var(--success);
+  --color-movement-negative: var(--danger);
+  --color-movement-neutral: var(--text-muted);
+
+  --color-confidence-high: var(--success);
+  --color-confidence-medium: var(--warning);
+  --color-confidence-low: var(--text-muted);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

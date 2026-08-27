@@ -6,6 +6,11 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
+import Button from "@/components/ui/Button";
+import ErrorMessage from "@/components/ui/ErrorMessage";
+import Input from "@/components/ui/Input";
+import Skeleton from "@/components/ui/Skeleton";
+import Textarea from "@/components/ui/Textarea";
 import { analyzeMultiSource, getFounderStartupWorkspace } from "@/lib/api";
 
 // Unified Multi-Source Analyze Startup: company website, pitch deck, and
@@ -389,7 +394,7 @@ export default function AnalyzeStartupForm() {
     return (
       <>
         <PageHeader title="Analyze Startup" />
-        <div className="h-64 animate-pulse rounded-xl border border-slate-800 bg-slate-900" />
+        <Skeleton className="h-64 w-full" />
       </>
     );
   }
@@ -398,21 +403,22 @@ export default function AnalyzeStartupForm() {
     return (
       <>
         <PageHeader title="Analyze Startup" />
-        <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-8 text-center">
-          <h2 className="text-lg font-semibold text-red-300">
+        <ErrorMessage
+          className="p-8 text-center"
+          action={
+            <Link href="/founder" className="font-semibold underline hover:text-danger/80">
+              ← Back to Founder Workspace
+            </Link>
+          }
+        >
+          <h2 className="text-lg font-semibold text-danger">
             You don&rsquo;t have access to update this startup
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm text-red-300/80">
+          <p className="mx-auto mt-2 max-w-md text-sm text-danger/80">
             This startup workspace doesn&rsquo;t exist, or you&rsquo;re not a
             verified member of it.
           </p>
-          <Link
-            href="/founder"
-            className="mt-6 inline-flex text-sm font-semibold text-red-200 underline hover:text-red-100"
-          >
-            ← Back to Founder Workspace
-          </Link>
-        </div>
+        </ErrorMessage>
       </>
     );
   }
@@ -431,14 +437,14 @@ export default function AnalyzeStartupForm() {
       />
 
       {isFounderTargeted && !isSubmitting ? (
-        <div className="mb-6 rounded-xl border border-blue-500/30 bg-blue-500/10 px-5 py-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-blue-300">
+        <div className="mb-6 rounded-xl border border-info/30 bg-info-soft px-5 py-4">
+          <p className="text-xs font-semibold uppercase tracking-wider text-info">
             Updating intelligence for
           </p>
-          <p className="mt-1 text-xl font-bold text-white">
+          <p className="mt-1 text-xl font-bold text-text-primary">
             {founderTarget.canonicalName}
           </p>
-          <p className="mt-2 text-sm text-blue-200/80">
+          <p className="mt-2 text-sm text-text-secondary">
             This analysis will be attached directly to {founderTarget.canonicalName}
             &rsquo;s existing profile -- it will never create a separate startup.
           </p>
@@ -447,29 +453,20 @@ export default function AnalyzeStartupForm() {
 
       {!isSubmitting ? (
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="website-url"
-              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
-            >
-              Company Website
-            </label>
-
-            <input
-              id="website-url"
-              type="text"
-              inputMode="url"
-              value={websiteUrl}
-              onChange={(event) => setWebsiteUrl(event.target.value)}
-              placeholder="https://example.com"
-              className="mt-2 w-full rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            />
-          </div>
+          <Input
+            id="website-url"
+            label="Company Website"
+            type="text"
+            inputMode="url"
+            value={websiteUrl}
+            onChange={(event) => setWebsiteUrl(event.target.value)}
+            placeholder="https://example.com"
+          />
 
           <div>
             <label
               htmlFor="pitch-deck-file"
-              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
+              className="text-xs font-semibold uppercase tracking-wide text-text-secondary"
             >
               Pitch Deck
             </label>
@@ -487,13 +484,15 @@ export default function AnalyzeStartupForm() {
 
             <div className="mt-2">
               {pdfFile ? (
-                <div className="flex min-h-11 items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-900 px-4 py-3">
-                  <span className="truncate text-sm text-white">
+                <div className="flex min-h-11 items-center justify-between gap-3 rounded-xl border border-border bg-surface px-4 py-3">
+                  <span className="truncate text-sm text-text-primary">
                     {pdfFile.name}
                   </span>
 
-                  <button
+                  <Button
                     type="button"
+                    variant="subtle"
+                    size="sm"
                     onClick={() => {
                       setPdfFile(null);
                       // Reset the underlying input so choosing the same
@@ -504,15 +503,14 @@ export default function AnalyzeStartupForm() {
                         pdfInputRef.current.value = "";
                       }
                     }}
-                    className="shrink-0 text-sm font-semibold text-slate-400 hover:text-white"
                   >
                     Remove
-                  </button>
+                  </Button>
                 </div>
               ) : (
                 <label
                   htmlFor="pitch-deck-file"
-                  className="flex min-h-11 w-full cursor-pointer items-center justify-center rounded-lg border border-dashed border-slate-700 bg-slate-900 px-4 py-3 text-sm font-semibold text-slate-300 transition-colors hover:border-blue-500 hover:text-white"
+                  className="flex min-h-11 w-full cursor-pointer items-center justify-center rounded-xl border border-dashed border-border-strong bg-surface px-4 py-3 text-sm font-semibold text-text-secondary transition-colors hover:border-primary hover:text-text-primary"
                 >
                   Choose PDF file&hellip;
                 </label>
@@ -520,49 +518,38 @@ export default function AnalyzeStartupForm() {
             </div>
           </div>
 
-          <div>
-            <label
-              htmlFor="company-text"
-              className="text-xs font-semibold uppercase tracking-wider text-slate-500"
-            >
-              Additional Company Information
-            </label>
+          <Textarea
+            id="company-text"
+            label="Additional Company Information"
+            value={companyText}
+            onChange={(event) => setCompanyText(event.target.value)}
+            placeholder={COMPANY_TEXT_PLACEHOLDER}
+            rows={8}
+            className="font-mono"
+          />
 
-            <textarea
-              id="company-text"
-              value={companyText}
-              onChange={(event) => setCompanyText(event.target.value)}
-              placeholder={COMPANY_TEXT_PLACEHOLDER}
-              rows={8}
-              className="mt-2 w-full resize-y rounded-lg border border-slate-800 bg-slate-900 px-4 py-3 font-mono text-sm leading-6 text-white outline-none transition-colors placeholder:text-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
-            />
-          </div>
-
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-text-muted">
             At least one source is required. Provide any combination --
             SIE combines everything you give it into one analysis.
           </p>
 
           {error ? (
-            <div className="rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-300">
-              {error}
-              {error === SESSION_EXPIRED_MESSAGE ? (
-                <>
-                  {" "}
-                  <Link href="/sign-in" className="font-semibold underline hover:text-red-200">
+            <ErrorMessage
+              action={
+                error === SESSION_EXPIRED_MESSAGE ? (
+                  <Link href="/sign-in" className="font-semibold underline hover:text-danger/80">
                     Sign in
                   </Link>
-                </>
-              ) : null}
-            </div>
+                ) : undefined
+              }
+            >
+              {error}
+            </ErrorMessage>
           ) : null}
 
-          <button
-            type="submit"
-            className="min-h-11 rounded-lg bg-blue-600 px-6 text-sm font-semibold text-white transition-colors hover:bg-blue-500"
-          >
+          <Button type="submit">
             {isFounderTargeted ? "Update Startup" : "Analyze Startup"}
-          </button>
+          </Button>
         </form>
       ) : (
         <AnalyzingState elapsedSeconds={elapsedSeconds} />
@@ -573,47 +560,47 @@ export default function AnalyzeStartupForm() {
 
 function AnalyzingState({ elapsedSeconds }: { elapsedSeconds: number }) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900 p-8">
+    <div className="rounded-2xl border border-border bg-surface p-8">
       <div className="flex items-center gap-4">
         <span
           aria-hidden="true"
-          className="h-8 w-8 shrink-0 animate-spin rounded-full border-2 border-slate-700 border-t-blue-500"
+          className="h-8 w-8 shrink-0 animate-spin rounded-full border-2 border-border-strong border-t-primary"
         />
 
         <div>
-          <p className="text-lg font-semibold text-white">
+          <p className="text-lg font-semibold text-text-primary">
             Analyzing startup&hellip;
           </p>
 
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-text-secondary">
             SIE is researching and evaluating this startup. This typically
             takes a few minutes -- please keep this tab open.
           </p>
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-slate-500" aria-live="polite">
+      <p className="mt-6 text-sm text-text-muted" aria-live="polite">
         Elapsed: {formatElapsed(elapsedSeconds)}
       </p>
 
-      <div className="mt-6 border-t border-slate-800 pt-6">
-        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+      <div className="mt-6 border-t border-border pt-6">
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
           What SIE evaluates
         </p>
 
-        <ul className="mt-3 space-y-2 text-sm text-slate-400">
+        <ul className="mt-3 space-y-2 text-sm text-text-secondary">
           {STAGES.map((stage) => (
             <li key={stage} className="flex items-center gap-2.5">
               <span
                 aria-hidden="true"
-                className="h-1.5 w-1.5 shrink-0 rounded-full bg-slate-600"
+                className="h-1.5 w-1.5 shrink-0 rounded-full bg-border-strong"
               />
               {stage}
             </li>
           ))}
         </ul>
 
-        <p className="mt-4 text-xs text-slate-600">
+        <p className="mt-4 text-xs text-text-muted">
           This describes what the analysis covers, not live progress -- SIE
           doesn&rsquo;t currently report which stage is in flight, so no
           single step is shown as complete until the whole analysis

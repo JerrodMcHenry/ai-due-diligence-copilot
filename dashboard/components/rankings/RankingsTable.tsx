@@ -3,8 +3,22 @@
 import Link from "next/link";
 import { useMemo, useState } from "react";
 
+import Badge, { type BadgeTone } from "@/components/ui/Badge";
+import BaseCard from "@/components/ui/BaseCard";
+import Button from "@/components/ui/Button";
+import EmptyState from "@/components/ui/EmptyState";
+import { getSPSMetadata } from "@/components/sps/utils/scoreMetadata";
+
 import type { RankingEntry } from "@/types";
 
+// Design System V2 (Phase 10.4), Part 12: this was the single most
+// hardcoded-dark-only file found in Part 1's audit (slate/white/cyan/
+// indigo/fuchsia literals, backdrop-blur, raw rgba() glow shadows,
+// independent 80/65/50 score-color thresholds that disagreed with
+// SPSRing's own banding) -- picked as the "one representative public
+// intelligence surface" migration this phase asks for. Every filter/sort/
+// search useState and useMemo below is byte-for-byte unchanged; only
+// className/markup was touched.
 type RankingsTableProps = {
   rankings: RankingEntry[];
 };
@@ -19,40 +33,27 @@ function formatScore(value: number | null | undefined) {
   return Number.isInteger(value) ? value.toString() : value.toFixed(1);
 }
 
-function getScoreClasses(score: number | null | undefined) {
+// Reuses the exact same score-band logic SPSRing already renders with --
+// previously this file had its OWN independent 80/65/50 thresholds that
+// could (and did) disagree with the ring's 95/90/.../40 bands, so the same
+// score could read as one color here and a different one on the Startup
+// Profile it links to. One source of truth for "what color is a B+" now.
+function scoreBadgeClasses(score: number | null | undefined) {
   if (typeof score !== "number" || Number.isNaN(score)) {
-    return "border-slate-700 bg-slate-800 text-slate-400";
+    return "border-border bg-surface-muted text-text-muted";
   }
 
-  if (score >= 80) {
-    return "border-emerald-400/25 bg-emerald-400/10 text-emerald-300 shadow-[0_0_20px_rgba(52,211,153,0.08)]";
-  }
-
-  if (score >= 65) {
-    return "border-cyan-400/25 bg-cyan-400/10 text-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.08)]";
-  }
-
-  if (score >= 50) {
-    return "border-amber-400/25 bg-amber-400/10 text-amber-300";
-  }
-
-  return "border-rose-400/25 bg-rose-400/10 text-rose-300";
+  const metadata = getSPSMetadata(score);
+  return `border-transparent ${metadata.backgroundClass} ${metadata.textClass}`;
 }
 
-function getRankClasses(rank: number) {
-  if (rank === 1) {
-    return "border-amber-300/30 bg-amber-300/10 text-amber-200";
-  }
-
-  if (rank === 2) {
-    return "border-slate-300/25 bg-slate-300/10 text-slate-200";
-  }
-
-  if (rank === 3) {
-    return "border-orange-400/25 bg-orange-400/10 text-orange-300";
-  }
-
-  return "border-slate-700/80 bg-slate-800/70 text-slate-400";
+// Simplified from three distinct hardcoded gold/silver/bronze hues to two
+// semantic tones -- #1 stands out, #2/#3 are gently distinguished from the
+// rest, without inventing colors the token system doesn't otherwise have.
+function rankBadgeTone(rank: number): BadgeTone {
+  if (rank === 1) return "warning";
+  if (rank <= 3) return "primary";
+  return "neutral";
 }
 
 function getInitials(companyName: string) {
@@ -69,16 +70,6 @@ function getInitials(companyName: string) {
   return `${words[0][0]}${words[1][0]}`.toUpperCase();
 }
 
-function MetadataBadge({ value }: { value: string | null | undefined }) {
-  const displayValue = value?.trim() || "--";
-
-  return (
-    <span className="inline-flex max-w-[190px] truncate rounded-full border border-slate-700/80 bg-slate-800/70 px-3 py-1.5 text-[13px] font-medium text-slate-300">
-      {displayValue}
-    </span>
-  );
-}
-
 function StatCard({
   label,
   value,
@@ -89,21 +80,22 @@ function StatCard({
   detail: string;
 }) {
   return (
-    <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900/70 p-5 shadow-xl shadow-black/10 backdrop-blur">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/70 to-transparent" />
-
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+    <BaseCard className="p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
         {label}
       </p>
 
-      <p className="mt-3 text-3xl font-semibold tracking-tight text-white">
+      <p className="mt-3 text-3xl font-semibold tracking-tight text-text-primary">
         {value}
       </p>
 
-      <p className="mt-1 text-sm text-slate-500">{detail}</p>
-    </div>
+      <p className="mt-1 text-sm text-text-muted">{detail}</p>
+    </BaseCard>
   );
 }
+
+const SELECT_CLASSES =
+  "h-11 w-full rounded-xl border border-border bg-surface px-3 text-sm text-text-secondary outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 export default function RankingsTable({ rankings }: RankingsTableProps) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -192,19 +184,11 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
 
   if (rankings.length === 0) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/70 px-6 py-16 text-center shadow-xl shadow-black/20 backdrop-blur">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 to-indigo-500/10 text-lg font-semibold text-cyan-300">
-          SI
-        </div>
-
-        <p className="mt-5 text-lg font-semibold text-slate-100">
-          No ranking data available
-        </p>
-
-        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-500">
-          Rankings will appear after startup analyses have been completed.
-        </p>
-      </div>
+      <EmptyState
+        icon={<span className="text-sm font-bold">SI</span>}
+        title="No ranking data available"
+        description="Rankings will appear after startup analyses have been completed."
+      />
     );
   }
 
@@ -230,8 +214,8 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
         />
       </section>
 
-      <section className="overflow-hidden rounded-2xl border border-white/10 bg-slate-900/70 shadow-2xl shadow-black/20 backdrop-blur">
-        <div className="border-b border-white/10 bg-gradient-to-r from-indigo-500/[0.08] via-cyan-500/[0.04] to-fuchsia-500/[0.06] p-4 sm:p-5">
+      <BaseCard className="overflow-hidden">
+        <div className="border-b border-border bg-surface-subtle p-4 sm:p-5">
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-[minmax(260px,1fr)_190px_180px_190px]">
             <div className="relative">
               <label htmlFor="ranking-search" className="sr-only">
@@ -240,7 +224,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
 
               <span
                 aria-hidden="true"
-                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-base text-slate-500"
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-base text-text-muted"
               >
                 ⌕
               </span>
@@ -251,7 +235,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                 value={searchQuery}
                 onChange={(event) => setSearchQuery(event.target.value)}
                 placeholder="Search companies..."
-                className="h-11 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 pl-10 pr-4 text-[15px] text-slate-100 outline-none transition placeholder:text-slate-600 focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/10"
+                className="h-11 w-full rounded-xl border border-border bg-surface pl-10 pr-4 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/20"
               />
             </div>
 
@@ -261,7 +245,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
               <select
                 value={industryFilter}
                 onChange={(event) => setIndustryFilter(event.target.value)}
-                className="h-11 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3 text-[15px] text-slate-300 outline-none transition focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/10"
+                className={SELECT_CLASSES}
               >
                 <option value="all">All industries</option>
 
@@ -279,7 +263,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
               <select
                 value={stageFilter}
                 onChange={(event) => setStageFilter(event.target.value)}
-                className="h-11 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3 text-[15px] text-slate-300 outline-none transition focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/10"
+                className={SELECT_CLASSES}
               >
                 <option value="all">All stages</option>
 
@@ -299,7 +283,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                 onChange={(event) =>
                   setSortOption(event.target.value as SortOption)
                 }
-                className="h-11 w-full rounded-xl border border-slate-700/80 bg-slate-950/70 px-3 text-[15px] text-slate-300 outline-none transition focus:border-cyan-400/50 focus:ring-4 focus:ring-cyan-400/10"
+                className={SELECT_CLASSES}
               >
                 <option value="score-desc">Score: highest first</option>
                 <option value="score-asc">Score: lowest first</option>
@@ -309,39 +293,41 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
             </label>
           </div>
 
-          <p className="mt-3 text-sm text-slate-500">
+          <p className="mt-3 text-sm text-text-muted">
             Showing {filteredRankings.length} of {rankings.length} startups
           </p>
         </div>
 
         {filteredRankings.length === 0 ? (
           <div className="px-6 py-16 text-center">
-            <p className="text-lg font-semibold text-slate-200">
+            <p className="text-lg font-semibold text-text-primary">
               No startups match these filters
             </p>
 
-            <p className="mt-2 text-sm text-slate-500">
+            <p className="mt-2 text-sm text-text-muted">
               Try changing the company search, industry, or stage.
             </p>
 
-            <button
+            <Button
               type="button"
+              variant="secondary"
+              size="sm"
+              className="mt-5"
               onClick={() => {
                 setSearchQuery("");
                 setIndustryFilter("all");
                 setStageFilter("all");
                 setSortOption("score-desc");
               }}
-              className="mt-5 rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2.5 text-sm font-semibold text-cyan-300 transition hover:border-cyan-400/40 hover:bg-cyan-400/15"
             >
               Clear filters
-            </button>
+            </Button>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[900px] text-[15px]">
-              <thead className="bg-slate-950/80 backdrop-blur">
-                <tr className="border-b border-white/10 text-left text-xs font-semibold uppercase tracking-[0.1em] text-slate-500">
+            <table className="w-full min-w-[900px] text-sm">
+              <thead className="bg-surface-subtle">
+                <tr className="border-b border-border text-left text-xs font-semibold uppercase tracking-wide text-text-muted">
                   <th scope="col" className="w-24 px-6 py-4">
                     Rank
                   </th>
@@ -374,7 +360,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                 </tr>
               </thead>
 
-              <tbody className="divide-y divide-white/[0.07]">
+              <tbody className="divide-y divide-border">
                 {filteredRankings.map((startup, index) => {
                   const rank = index + 1;
                   const companyName =
@@ -383,16 +369,12 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                   return (
                     <tr
                       key={startup.id}
-                      className="group transition duration-200 hover:bg-gradient-to-r hover:from-indigo-500/[0.08] hover:via-cyan-500/[0.04] hover:to-transparent"
+                      className="transition-colors hover:bg-surface-subtle"
                     >
                       <td className="whitespace-nowrap px-6 py-5">
-                        <span
-                          className={`inline-flex min-w-11 items-center justify-center rounded-full border px-3 py-1.5 text-[13px] font-bold ${getRankClasses(
-                            rank
-                          )}`}
-                        >
+                        <Badge tone={rankBadgeTone(rank)} className="min-w-11 justify-center">
                           #{rank}
-                        </span>
+                        </Badge>
                       </td>
 
                       <td className="px-6 py-5">
@@ -400,17 +382,17 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                           href={`/startup/${encodeURIComponent(companyName)}`}
                           className="group/link inline-flex items-center gap-3"
                         >
-                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-indigo-400/20 bg-gradient-to-br from-indigo-500/20 to-cyan-400/10 text-[13px] font-bold text-indigo-200 transition group-hover/link:border-cyan-400/30 group-hover/link:text-cyan-200">
+                          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary-soft text-xs font-bold text-primary transition-colors group-hover/link:bg-primary group-hover/link:text-white">
                             {getInitials(companyName)}
                           </span>
 
-                          <span className="text-[15px] font-semibold text-slate-100 transition-colors group-hover/link:text-cyan-300">
+                          <span className="text-sm font-semibold text-text-primary transition-colors group-hover/link:text-primary">
                             {companyName}
                           </span>
 
                           <span
                             aria-hidden="true"
-                            className="translate-x-0 text-base text-slate-600 opacity-0 transition-all group-hover/link:translate-x-1 group-hover/link:text-cyan-300 group-hover/link:opacity-100"
+                            className="translate-x-0 text-base text-text-muted opacity-0 transition-all group-hover/link:translate-x-1 group-hover/link:text-primary group-hover/link:opacity-100"
                           >
                             →
                           </span>
@@ -418,20 +400,26 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-5">
-                        <MetadataBadge value={startup.industry} />
+                        <Badge tone="neutral" className="max-w-[190px] truncate">
+                          {startup.industry?.trim() || "--"}
+                        </Badge>
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-5">
-                        <MetadataBadge value={startup.stage} />
+                        <Badge tone="neutral" className="max-w-[190px] truncate">
+                          {startup.stage?.trim() || "--"}
+                        </Badge>
                       </td>
 
                       <td className="hidden whitespace-nowrap px-6 py-5 lg:table-cell">
-                        <MetadataBadge value={startup.business_model} />
+                        <Badge tone="neutral" className="max-w-[190px] truncate">
+                          {startup.business_model?.trim() || "--"}
+                        </Badge>
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-5 text-right">
                         <span
-                          className={`inline-flex min-w-16 items-center justify-center rounded-full border px-3.5 py-1.5 text-[15px] font-bold tabular-nums ${getScoreClasses(
+                          className={`inline-flex min-w-16 items-center justify-center rounded-full border px-3.5 py-1.5 text-sm font-bold tabular-nums ${scoreBadgeClasses(
                             startup.overall_score
                           )}`}
                         >
@@ -445,7 +433,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
             </table>
           </div>
         )}
-      </section>
+      </BaseCard>
     </div>
   );
 }
