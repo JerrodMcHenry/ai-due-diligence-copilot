@@ -22,7 +22,17 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise ValueError("DATABASE_URL environment variable is not set.")
 
-engine = create_engine(DATABASE_URL)
+# Phase 10.1A -- Critical Security/Runtime Hardening: pool_pre_ping=True
+# issues a cheap "SELECT 1"-style liveness check before handing out a
+# pooled connection, transparently discarding and replacing one a
+# managed Postgres provider has silently closed server-side (e.g. after
+# an idle timeout) instead of letting the caller's next real query fail
+# with a raw OperationalError. Pool size/overflow/recycle are left at
+# SQLAlchemy's defaults -- nothing in this codebase holds a connection
+# open for the duration of an LLM call (every DB interaction is a short
+# engine.begin() block), so the default pool is sufficient for expected
+# beta load and there is no evidence of an actual sizing problem to fix.
+engine = create_engine(DATABASE_URL, pool_pre_ping=True)
 
 
 

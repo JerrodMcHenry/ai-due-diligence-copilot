@@ -222,8 +222,25 @@ def version():
 def health_check():
     return {"status": "API is running"}
 
+# Phase 10.1A -- Critical Security Hardening. These five raw
+# analysis-row endpoints predate the canonical Startup/auth architecture
+# and are not part of the current product surface -- confirmed by
+# repository search that no frontend code calls any of them (the only
+# live consumer of the /analyses family is GET /analyses/search, used by
+# the public /search page, which is intentionally untouched here: it
+# only ever returns company_name/summary/overall_score, the same public
+# tier as Rankings/Discovery/Startup Profile).
+#
+# Analyses belong to canonical startups, not individual users -- there is
+# no per-user ownership concept to build here, and inventing one would be
+# scope creep this phase explicitly forbids. RequireAdmin is the smallest
+# defensible policy: raw row-level read/update/delete of any analysis by
+# sequential ID is an administrative/legacy-data-management operation,
+# not a signed-in-user workflow, so RequireAuth alone (which only proves
+# "this is some authenticated user") would still leave every beta user
+# able to read or destroy any other user's/startup's analysis data.
 @app.get("/analyses")
-def get_saved_analyses():
+def get_saved_analyses(current_user: AuthenticatedUser = RequireAdmin):
     return get_analyses()
 
 @app.get("/analyses/search")
@@ -231,17 +248,17 @@ def search_saved_analyses(query: str):
     return search_analyses(query)
 
 @app.get("/analyses/{analysis_id}")
-def get_saved_analysis(analysis_id: int):
+def get_saved_analysis(analysis_id: int, current_user: AuthenticatedUser = RequireAdmin):
     analysis = get_analysis_by_id(analysis_id)
 
     if analysis is None:
         return {"error": "Analysis not found"}
-    
+
     return analysis
 
 
 @app.get("/analyses/{analysis_id}/pdf")
-def download_analysis_pdf(analysis_id: int):
+def download_analysis_pdf(analysis_id: int, current_user: AuthenticatedUser = RequireAdmin):
     analysis = get_analysis_by_id(analysis_id)
 
     if analysis is None:
@@ -1265,7 +1282,8 @@ def get_fundraising_readiness(
 @app.put("/analyses/{analysis_id}")
 def update_saved_analysis(
     analysis_id: int,
-    request: UpdateAnalysisRequest
+    request: UpdateAnalysisRequest,
+    current_user: AuthenticatedUser = RequireAdmin,
 ):
     updated_count = update_analysis(
         analysis_id,
@@ -1293,7 +1311,7 @@ def update_saved_analysis(
     }
 
 @app.delete("/analyses/{analysis_id}")
-def delete_saved_analysis(analysis_id: int):
+def delete_saved_analysis(analysis_id: int, current_user: AuthenticatedUser = RequireAdmin):
     deleted_count = delete_analysis(analysis_id)
 
     if deleted_count == 0:
@@ -1317,12 +1335,14 @@ MAX_ASSEMBLED_TEXT_LENGTH = 150_000
 
 def _read_pdf_upload_sync(file: UploadFile) -> bytes:
     """
-    Sync counterpart to /analyze-pdf's _read_pdf_upload (below), for use
-    inside POST /analyze's sync (non-async) path operation function --
-    see analyze_unified()'s concurrency comment for why. Reads the
-    upload's underlying file object directly (UploadFile.file, a plain
-    SpooledTemporaryFile) in bounded chunks -- no `await` needed here,
-    since it's FastAPI's automatic threadpool dispatch for a sync route
+    Sync counterpart to the now-unused async _read_pdf_upload() (below) --
+    originally written for use inside POST /analyze's sync (non-async)
+    path operation function, see analyze_unified()'s concurrency comment
+    for why, and reused as of Phase 10.1A by /analyze-pdf as well (also
+    converted to a sync `def`; see that endpoint's own comment). Reads
+    the upload's underlying file object directly (UploadFile.file, a
+    plain SpooledTemporaryFile) in bounded chunks -- no `await` needed
+    here, since it's FastAPI's automatic threadpool dispatch for a sync route
     that keeps this off the event loop, not anything async in this
     function itself. Still fully in-memory, still no temporary files.
     """
@@ -1721,6 +1741,12 @@ def analyze_startup(
 
 async def _read_pdf_upload(file: UploadFile) -> bytes:
     """
+    Unused as of Phase 10.1A: /analyze-pdf (its only caller) was
+    converted to a sync `def` to fix an event-loop-blocking bug (see that
+    endpoint's own comment) and now uses _read_pdf_upload_sync() above
+    instead. Left in place rather than removed -- no current risk, and
+    removing it is out of this phase's narrow security/runtime scope.
+
     Reads the uploaded file in bounded chunks and aborts as soon as the
     running total exceeds MAX_PDF_BYTES, instead of first buffering an
     arbitrarily large upload fully into memory and only checking its
@@ -1752,12 +1778,27 @@ async def _read_pdf_upload(file: UploadFile) -> bytes:
 
 
 @app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
-async def analyze_pdf(
+def analyze_pdf(
     file: UploadFile = File(...),
     current_user: AuthenticatedUser = RequireAuth,
 ):
     # SIE Authentication Phase 2: same paid pipeline as /analyze, same
     # required authentication -- see /analyze's own comment.
+    #
+    # Phase 10.1A -- Critical Security/Runtime Hardening: this endpoint
+    # was previously `async def` while calling run_due_diligence()
+    # (fully synchronous, multi-minute) directly with no `await` -- which
+    # ran the entire pipeline on the single asyncio event loop thread and
+    # blocked every other concurrent request (including /health) for the
+    # whole duration of one pitch-deck analysis. Now a plain `def`, the
+    # exact same pattern /analyze/_analyze-startup/_analyze-website
+    # already use correctly, so FastAPI/Starlette dispatches it to its
+    # worker thread pool instead. _read_pdf_upload_sync() (below) reads
+    # the upload via its synchronous `.file` handle -- already used by
+    # /analyze's own PDF-source path -- in place of the async
+    # `await file.read(...)` this endpoint used to need for a coroutine
+    # context it no longer runs in. No other behavior changed: same
+    # extraction, same pipeline call, same persistence, same response.
     #
     # Pitch Deck / PDF Ingestion: same three-stage fail-closed shape as
     # /analyze-startup and /analyze-website. Retrieval/extraction/
@@ -1771,7 +1812,7 @@ async def analyze_pdf(
         raise HTTPException(status_code=400, detail="Only PDF files are supported.")
 
     try:
-        pdf_bytes = await _read_pdf_upload(file)
+        pdf_bytes = _read_pdf_upload_sync(file)
         extracted_text = extract_text_from_pdf(pdf_bytes)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -1946,17 +1987,14 @@ def analyze_website(
         methodology=sie_analysis,
     )
 
-@app.post("/migrate/add-benchmarking-columns")
-def migrate_add_benchmarking_columns():
-    add_benchmarking_columns()
-    return {"message": "Benchmarking columns migration completed"}
-
-@app.post("/migrate/add-company-name-column")
-def migrate_add_company_name_column():
-    add_company_name_column()
-    return {"message": "Company name column migration completed"}
-
-@app.post("/migrate/add-readiness-columns")
-def migrate_add_readiness_columns():
-    add_readiness_columns()
-    return {"message": "Readiness columns migration completed"}
+# Phase 10.1A -- Critical Security Hardening. The three /migrate/* HTTP
+# routes that used to live here (add-benchmarking-columns,
+# add-company-name-column, add-readiness-columns) were removed: they were
+# unauthenticated, unused by the frontend (confirmed by repository
+# search), and fully redundant -- the exact same underlying functions
+# (add_benchmarking_columns(), add_company_name_column(),
+# add_readiness_columns(), imported above) already run unconditionally,
+# idempotently, at process startup (see the migration sequence near the
+# top of this file). Removing the routes closes an unauthenticated
+# attack surface with zero loss of functionality; the migration helper
+# functions themselves are untouched and still run on every startup.
