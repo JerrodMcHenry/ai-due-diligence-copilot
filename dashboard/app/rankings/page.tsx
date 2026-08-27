@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 import PageHeader from "@/components/layout/PageHeader";
 import RankingsTable from "@/components/rankings/RankingsTable";
@@ -52,6 +53,14 @@ export default function RankingsPage() {
       <PageHeader
         title="Rankings"
         subtitle="Compare startup intelligence scores across the platform."
+        action={
+          <Link
+            href="/search"
+            className="text-sm font-semibold text-primary hover:text-primary-hover"
+          >
+            Advanced search &amp; compare →
+          </Link>
+        }
       />
 
       {isLoading ? (

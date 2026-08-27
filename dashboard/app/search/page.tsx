@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 
 import PageHeader from "@/components/layout/PageHeader";
 
@@ -20,6 +21,14 @@ export default function SearchPage() {
       <PageHeader
         title="Discover Startups"
         subtitle="Browse the canonical Startup Intelligence Engine universe -- filter by industry, stage, and Startup Power Score to find companies worth a closer look."
+        action={
+          <Link
+            href="/rankings"
+            className="text-sm font-semibold text-primary hover:text-primary-hover"
+          >
+            View rankings →
+          </Link>
+        }
       />
 
       <Suspense

@@ -1,83 +1,46 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import Sidebar from "./Sidebar";
+import TopNav from "./TopNav";
+import MobileTabBar from "./MobileTabBar";
 
 type AppShellProps = {
   children: React.ReactNode;
 };
 
+// Phase 10.3 -- Shell & Navigation Reset. Replaces the previous fixed-
+// width desktop sidebar (Sidebar.tsx, now removed) with a sticky top
+// navigation bar (TopNav) and a purpose-built mobile bottom tab bar
+// (MobileTabBar) -- see both components' own docstrings for the full
+// design record. No route/auth logic lives here or ever did; this file
+// is pure layout chrome.
+//
+// The old shell permanently reserved 288px (`lg:pl-72`) for the sidebar
+// on every single page, including narrow, focused ones. That offset is
+// gone entirely -- content now has the full viewport width to work with,
+// and any page that wants a narrower reading column constrains itself
+// (e.g. NewVentureForm's own `max-w-2xl`), rather than the shell forcing
+// one width on everything. max-w-[1600px] is kept as the outer ceiling
+// (unchanged from before) so wide data pages (Rankings, Discovery,
+// Compare) render exactly as they did previously -- this phase changes
+// the chrome around pages, not their own internal layouts (Part 4/9).
+//
+// Also fixes a pre-existing bug while touching this file anyway:
+// previously hardcoded `bg-slate-950 text-white` ignored the light/dark
+// theme entirely (every page's own content already read the real
+// --background/--foreground tokens; only this outer shell didn't) --
+// now uses the same token-driven classes as everything else, which is
+// what actually makes light mode work correctly at the shell level for
+// the first time.
 export default function AppShell({ children }: AppShellProps) {
-  const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
-
-  useEffect(() => {
-    if (!mobileNavigationOpen) {
-      return;
-    }
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMobileNavigationOpen(false);
-      }
-    };
-
-    document.addEventListener("keydown", handleEscape);
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      document.body.style.overflow = "";
-    };
-  }, [mobileNavigationOpen]);
-
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-72">
-        <Sidebar />
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <TopNav />
 
-      {mobileNavigationOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <button
-            type="button"
-            aria-label="Close navigation"
-            onClick={() => setMobileNavigationOpen(false)}
-            className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-          />
-
-          <div className="relative h-full w-72 max-w-[85vw] shadow-2xl">
-            <Sidebar onNavigate={() => setMobileNavigationOpen(false)} />
-          </div>
+      <main className="min-h-screen pb-24 md:pb-0">
+        <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+          {children}
         </div>
-      )}
+      </main>
 
-      <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 flex h-16 items-center border-b border-slate-800 bg-slate-950/90 px-4 backdrop-blur md:px-6 lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileNavigationOpen(true)}
-            aria-label="Open navigation"
-            aria-expanded={mobileNavigationOpen}
-            className="inline-flex size-10 items-center justify-center rounded-lg border border-slate-700 text-slate-300 transition-colors hover:bg-slate-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
-          >
-            <span aria-hidden="true" className="text-xl leading-none">
-              ☰
-            </span>
-          </button>
-
-          <div className="ml-4">
-            <p className="text-sm font-semibold text-white">
-              Startup Intelligence
-            </p>
-          </div>
-        </header>
-
-        <main className="min-h-screen">
-          <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
-            {children}
-          </div>
-        </main>
-      </div>
+      <MobileTabBar />
     </div>
   );
 }
