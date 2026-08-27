@@ -219,6 +219,16 @@ def _grant_membership(user_id: str, startup_id: int, role: str = "member") -> No
 
 def _cleanup() -> None:
     with engine.begin() as connection:
+        # Phase 10.1B: this file's re-analysis tests call POST /analyze
+        # against a small fixed set of zztest user ids -- without this,
+        # repeated runs would accumulate real analysis_runs rows and
+        # eventually trip either the daily usage cap or the
+        # duplicate-cooldown check (see app/database/db.py's
+        # analysis_runs section).
+        connection.execute(
+            text("DELETE FROM analysis_runs WHERE user_id = ANY(:ids)"),
+            {"ids": ALL_USERS},
+        )
         connection.execute(
             text("""
                 DELETE FROM founder_updates

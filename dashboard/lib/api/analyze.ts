@@ -9,55 +9,23 @@ import { apiFetch } from "./client";
 // realistic expectation of how long a normal run takes.
 const ANALYZE_TIMEOUT_MS = 10 * 60 * 1000;
 
-export function analyzeStartup(
-  companyText: string
-): Promise<AnalyzeStartupResponse> {
-  return apiFetch<AnalyzeStartupResponse>("/analyze-startup", {
-    method: "POST",
-    body: { company_text: companyText },
-    timeoutMs: ANALYZE_TIMEOUT_MS,
-  });
-}
-
-// Website / URL Ingestion: same canonical response shape as
-// analyzeStartup() -- POST /analyze-website runs the exact same
-// run_due_diligence pipeline, it just extracts company_text from a
-// website URL server-side first (see app/website_scrapper.py) instead of
-// taking it directly from the caller.
-export function analyzeWebsite(url: string): Promise<AnalyzeStartupResponse> {
-  return apiFetch<AnalyzeStartupResponse>("/analyze-website", {
-    method: "POST",
-    body: { url },
-    timeoutMs: ANALYZE_TIMEOUT_MS,
-  });
-}
-
-// Pitch Deck / PDF Ingestion: same canonical response shape again --
-// POST /analyze-pdf extracts company_text from the uploaded PDF
-// server-side (see app/pdf_extractor.py), then runs the exact same
-// pipeline. Sent as multipart/form-data (a FormData body), the one
-// request shape apiFetch's JSON-only path can't express -- see
-// client.ts's isFormData handling.
-export function analyzePdf(file: File): Promise<AnalyzeStartupResponse> {
-  const formData = new FormData();
-  formData.append("file", file);
-
-  return apiFetch<AnalyzeStartupResponse>("/analyze-pdf", {
-    method: "POST",
-    body: formData,
-    timeoutMs: ANALYZE_TIMEOUT_MS,
-  });
-}
-
 // Unified Multi-Source Analyze Startup: website, pitch deck, and
 // user-provided text are evidence sources feeding ONE canonical
 // analysis, not separate mutually-exclusive modes -- POST /analyze
 // accepts any combination of the three (at least one required) and
 // assembles them server-side (see
 // app/workflows/due_diligence_workflow.py::assemble_multi_source_text)
-// before running the exact same pipeline. analyzeStartup/analyzeWebsite/
-// analyzePdf above are kept as-is for backward compatibility, but the
-// Analyze Startup page now calls this instead.
+// before running the exact same pipeline.
+//
+// Phase 10.1B: this is now the ONLY paid analysis entry point --
+// analyzeStartup()/analyzeWebsite()/analyzePdf() (POST /analyze-startup,
+// /analyze-website, /analyze-pdf) were removed along with the backend
+// routes themselves (zero product consumers). POST /analyze also now
+// enforces AI-cost/abuse protection server-side (a same-account
+// concurrency lock, a short duplicate-submission cooldown, and a beta
+// usage cap) -- surfaced to the caller as ordinary 409/429 HTTP statuses,
+// handled in AnalyzeStartupForm.tsx's existing status-code-driven error
+// copy, nothing new needed in this file itself.
 //
 // SIE Authentication Phase 2: POST /analyze now requires a valid Clerk
 // bearer token server-side -- `token` is the caller's real Clerk session

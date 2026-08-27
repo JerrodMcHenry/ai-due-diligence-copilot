@@ -1,5 +1,6 @@
 import os
 import json
+import hashlib
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -3092,6 +3093,205 @@ def get_top_improving_startups(limit: int = 10):
     )
 
     return improvements[:limit]
+
+# ---------------------------------------------------------------------------
+# Phase 10.1B -- AI Cost + Analysis Abuse Protection. analysis_runs is a
+# new, additive, purely operational table: one row per REAL attempt to
+# run the expensive pipeline (POST /analyze reaching the usage-protection
+# gate), never a second scoring or intelligence concept. It has no FK
+# from any canonical table and nothing here ever reads back into
+# Methodology v2/SPS/VPS/Fundraising Readiness/Investor Workspace -- it
+# exists purely to answer three operational questions: "does this user
+# already have a run in flight," "how many attempts has this user made
+# recently," and "did this user just submit the exact same thing."
+#
+# Durability requirement (Part 3): the concurrency lock below MUST survive
+# multiple worker processes and process restarts, not just be correct
+# within one Python process. It is enforced by
+# analysis_runs_one_active_per_user, a PARTIAL UNIQUE INDEX on
+# (user_id) WHERE status = 'running' -- the database itself guarantees at
+# most one 'running' row per user_id can ever exist, regardless of how
+# many processes/threads race to insert one. This is the same
+# "correctness lives in a real constraint, not a check-then-act race" the
+# codebase already established at create_startup_memberships_table()'s
+# UNIQUE(user_id, startup_id) and approve_startup_claim()'s
+# SELECT ... FOR UPDATE.
+# ---------------------------------------------------------------------------
+
+# Centralized, named policy constants (Part 4: "keep the policy
+# centralized/configurable rather than scattering magic numbers") --
+# every number a beta-usage decision depends on lives here, nowhere else.
+
+# How many analysis attempts (any status -- 'running', 'completed', or
+# 'failed' all count, matching Part 4.C's "completed/started analyses")
+# a single user may make in the rolling window below. This is a small
+# closed beta with a bounded, personally-invited user population (see the
+# Phase 10.1 audit) -- 20/day is generous enough not to interfere with a
+# real founder testing their own startup repeatedly or an investor
+# exploring several companies in one sitting, while still bounding the
+# realistic worst case (a careless script, a stuck retry loop, a shared
+# account) to a small, predictable number of paid LLM/Tavily calls.
+DAILY_ANALYSIS_CAP = 20
+USAGE_WINDOW_HOURS = 24
+
+# How long a 'running' row is trusted before it's treated as abandoned
+# (Part 5: "stale running records caused by process termination"). Reuses
+# the frontend's own existing ANALYZE_TIMEOUT_MS (10 minutes --
+# dashboard/lib/api/analyze.ts) as the exact same "this should have
+# finished by now" ceiling, rather than inventing a second number for the
+# same real-world fact: a genuine analysis that hasn't finished in 10
+# minutes is already considered hung/timed-out from the client's own
+# point of view.
+STALE_RUN_THRESHOLD_MINUTES = 10
+
+# How long a SUCCESSFUL (status='completed') run's fingerprint blocks an
+# identical resubmission from the same user (Part 4.B: "shortly after a
+# successful submission"). Deliberately short -- long enough to catch an
+# accidental double-click/duplicate-tab submission of the exact same
+# input, short enough that a user who genuinely wants to re-run the same
+# public company text again later is never meaningfully blocked. Never
+# applied to a failed run (a user must always be able to immediately
+# retry after a failure -- see AnalyzeStartupForm.tsx's own existing "Your
+# input hasn't been lost -- you can try again" copy) and never applied to
+# a founder-targeted re-analysis (startup_id is not None) -- Phase 7.2.1's
+# whole point is that re-analyzing the SAME startup again soon after a
+# previous run is a legitimate, expected workflow, not a duplicate.
+DUPLICATE_COOLDOWN_MINUTES = 5
+
+
+def create_analysis_runs_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS analysis_runs (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                startup_id INTEGER REFERENCES startups(id),
+                fingerprint TEXT,
+                status TEXT NOT NULL DEFAULT 'running'
+                    CHECK (status IN ('running', 'completed', 'failed')),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                completed_at TIMESTAMP
+            )
+        """))
+
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS analysis_runs_one_active_per_user
+            ON analysis_runs (user_id)
+            WHERE status = 'running'
+        """))
+
+    print("analysis_runs table created successfully.")
+
+
+def compute_analysis_fingerprint(company_text: str | None, website_url: str | None, pdf_bytes: bytes | None) -> str:
+    """
+    A deterministic fingerprint of the RAW inputs a caller submitted --
+    computed from what the client actually sent, before any extraction,
+    so the duplicate-cooldown check (has_recent_duplicate_completed_run()
+    below) can run before website fetch/PDF parsing, not after (Part 5).
+    Plain sha256 over a delimited, order-fixed concatenation -- no
+    external library, no secret, nothing sensitive derived from it that
+    isn't already fully known to the caller who submitted it.
+    """
+    normalized_text = (company_text or "").strip()
+    normalized_url = (website_url or "").strip().lower()
+    pdf_digest = hashlib.sha256(pdf_bytes).hexdigest() if pdf_bytes else ""
+
+    combined = f"{normalized_text}\x00{normalized_url}\x00{pdf_digest}"
+    return hashlib.sha256(combined.encode("utf-8")).hexdigest()
+
+
+def count_recent_analysis_runs(user_id: str) -> int:
+    """Part 4.C usage-cap check -- counts every attempt (any status) in
+    the rolling USAGE_WINDOW_HOURS window, regardless of how it ended."""
+    with engine.begin() as connection:
+        return connection.execute(text("""
+            SELECT count(*) FROM analysis_runs
+            WHERE user_id = :user_id
+              AND created_at > CURRENT_TIMESTAMP - make_interval(hours => :window_hours)
+        """), {"user_id": user_id, "window_hours": USAGE_WINDOW_HOURS}).scalar()
+
+
+def has_recent_duplicate_completed_run(user_id: str, fingerprint: str) -> bool:
+    """
+    Part 4.B rapid-accidental-duplicate check. Only ever called by the
+    caller for a NON-founder-targeted request (startup_id is None) --
+    see this module's own DUPLICATE_COOLDOWN_MINUTES docstring for why
+    founder-targeted re-analysis and failed runs are both deliberately
+    excluded from this check entirely (the exclusion is enforced by what
+    the caller passes in / calls this at all, not by a parameter here).
+    """
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT 1 FROM analysis_runs
+            WHERE user_id = :user_id
+              AND fingerprint = :fingerprint
+              AND status = 'completed'
+              AND startup_id IS NULL
+              AND created_at > CURRENT_TIMESTAMP - make_interval(mins => :cooldown_minutes)
+            LIMIT 1
+        """), {"user_id": user_id, "fingerprint": fingerprint, "cooldown_minutes": DUPLICATE_COOLDOWN_MINUTES}).first()
+        return row is not None
+
+
+def begin_analysis_run(user_id: str, startup_id: int | None, fingerprint: str) -> int | None:
+    """
+    Part 4.A concurrency lock. First expires any of THIS user's stale
+    'running' rows (a crash/restart mid-pipeline is the only way one can
+    outlive STALE_RUN_THRESHOLD_MINUTES, since a real run always
+    transitions to 'completed'/'failed' via finish_analysis_run() in a
+    try/finally -- see that function's own docstring), in its own
+    transaction, then attempts the actual INSERT in a second, separate
+    transaction so a unique-violation there cleanly aborts only that one
+    statement.
+
+    Returns the new row's id on success. Returns None if the user already
+    has a genuinely active (non-stale) 'running' row -- the caller must
+    treat None as "reject with 409," never retry-insert itself; the
+    partial unique index (see create_analysis_runs_table()) is what
+    actually guarantees correctness under real concurrent requests, this
+    pre-expiry step is only what keeps a long-dead crash from permanently
+    locking the user out.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            UPDATE analysis_runs
+            SET status = 'failed', completed_at = CURRENT_TIMESTAMP
+            WHERE user_id = :user_id
+              AND status = 'running'
+              AND created_at < CURRENT_TIMESTAMP - make_interval(mins => :threshold)
+        """), {"user_id": user_id, "threshold": STALE_RUN_THRESHOLD_MINUTES})
+
+    try:
+        with engine.begin() as connection:
+            result = connection.execute(text("""
+                INSERT INTO analysis_runs (user_id, startup_id, fingerprint, status)
+                VALUES (:user_id, :startup_id, :fingerprint, 'running')
+                RETURNING id
+            """), {"user_id": user_id, "startup_id": startup_id, "fingerprint": fingerprint})
+            return result.scalar()
+    except IntegrityError:
+        return None
+
+
+def finish_analysis_run(run_id: int, status: str) -> None:
+    """
+    Releases the concurrency lock (Part 5: "do not leave the user
+    permanently locked because a previous request crashed") by
+    transitioning a 'running' row to its real terminal status. Called
+    from a `finally` block around the entire post-gate request body in
+    POST /analyze, so this runs whether the request ultimately succeeded,
+    failed validation, failed extraction, failed the pipeline, or failed
+    to persist -- every one of those paths still frees the user to submit
+    again immediately.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            UPDATE analysis_runs
+            SET status = :status, completed_at = CURRENT_TIMESTAMP
+            WHERE id = :run_id
+        """), {"run_id": run_id, "status": status})
+
 
 def add_methodology_column():
     try:

@@ -365,7 +365,18 @@ export default function AnalyzeStartupForm() {
               ? SESSION_EXPIRED_MESSAGE
               : /API request failed \(404\)/.test(message) && founderTarget.status === "ready"
                 ? "You no longer have access to update this startup. Return to Founder Workspace and try again."
-                : "The analysis failed. Your input hasn't been lost -- you can try again."
+                : // Phase 10.1B -- AI Cost + Analysis Abuse Protection: 409
+                  // covers both the same-account concurrency lock and the
+                  // duplicate-submission cooldown; 429 covers the beta usage
+                  // cap. Deliberately generic, friendly copy here rather than
+                  // parsing/displaying the backend's own detail string --
+                  // matches this catch block's existing convention of fixed,
+                  // reviewed messages per status code, never raw backend text.
+                  /API request failed \(409\)/.test(message)
+                  ? "An analysis is already in progress or was just submitted for your account. Please wait a few minutes before trying again."
+                  : /API request failed \(429\)/.test(message)
+                    ? "You've reached the current beta analysis limit. Please try again later."
+                    : "The analysis failed. Your input hasn't been lost -- you can try again."
       );
     }
   }

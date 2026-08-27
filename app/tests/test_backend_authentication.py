@@ -136,11 +136,13 @@ def _auth_headers(token: str | None) -> dict:
     return {"Authorization": f"Bearer {token}"} if token else {}
 
 
+# Phase 10.1B: /analyze-startup, /analyze-website, and /analyze-pdf were
+# removed entirely (zero frontend/product consumers) -- POST /analyze is
+# now the only paid endpoint, so it's the only one left in this list. See
+# test_analysis_usage_protection.py for the tests proving the removed
+# three now 404 for every caller, not just an unauthenticated one.
 PAID_ENDPOINTS = [
     ("POST", "/analyze", {}, {}),
-    ("POST", "/analyze-startup", {"company_text": "x"}, {}),
-    ("POST", "/analyze-website", {"url": "https://example.com"}, {}),
-    ("POST", "/analyze-pdf", {}, {}),
 ]
 
 
@@ -330,22 +332,12 @@ def test_repeated_authenticated_requests_reuse_same_users_row() -> None:
 # --- 9-11: no legacy endpoint can bypass auth ------------------------------
 
 
-def test_legacy_analyze_startup_cannot_bypass_auth() -> None:
-    with _patched_auth():
-        response = client.post("/analyze-startup", json={"company_text": "x"})
-        expect(response.status_code == 401, f"Expected 401, got {response.status_code}")
-
-
-def test_legacy_analyze_website_cannot_bypass_auth() -> None:
-    with _patched_auth():
-        response = client.post("/analyze-website", json={"url": "https://example.com"})
-        expect(response.status_code == 401, f"Expected 401, got {response.status_code}")
-
-
-def test_legacy_analyze_pdf_cannot_bypass_auth() -> None:
-    with _patched_auth():
-        response = client.post("/analyze-pdf")
-        expect(response.status_code == 401, f"Expected 401, got {response.status_code}")
+# --- Phase 10.1B: legacy paid endpoints removed, not just re-auth-gated ----
+# /analyze-startup, /analyze-website, /analyze-pdf's own "cannot bypass
+# auth" coverage was removed along with the routes themselves (a 401 test
+# no longer applies to a route that doesn't exist at all -- it now 404s
+# for every caller regardless of auth). See
+# test_analysis_usage_protection.py for the tests proving that.
 
 
 # --- 12-16: public read endpoints remain fully public ----------------------
@@ -402,9 +394,6 @@ TESTS = [
     test_valid_token_passes_auth_gate,
     test_first_valid_request_creates_one_users_row,
     test_repeated_authenticated_requests_reuse_same_users_row,
-    test_legacy_analyze_startup_cannot_bypass_auth,
-    test_legacy_analyze_website_cannot_bypass_auth,
-    test_legacy_analyze_pdf_cannot_bypass_auth,
     test_public_endpoints_require_no_auth,
     test_failure_responses_never_leak_token_or_internals,
 ]

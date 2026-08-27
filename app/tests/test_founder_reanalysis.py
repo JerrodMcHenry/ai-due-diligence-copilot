@@ -232,6 +232,15 @@ def _grant_membership(user_id: str, startup_id: int, role: str = "member") -> No
 
 def _cleanup() -> None:
     with engine.begin() as connection:
+        # Phase 10.1B: this file calls POST /analyze many times against a
+        # small fixed set of zztest user ids -- without this, repeated
+        # runs would accumulate real analysis_runs rows and eventually
+        # trip either the daily usage cap or the duplicate-cooldown check
+        # (see app/database/db.py's analysis_runs section).
+        connection.execute(
+            text("DELETE FROM analysis_runs WHERE user_id = ANY(:ids)"),
+            {"ids": ALL_USERS},
+        )
         connection.execute(
             text("""
                 DELETE FROM startup_memberships
@@ -822,20 +831,36 @@ def main() -> None:
 
     _cleanup()
 
+    # Phase 10.1B: this file deliberately makes ~20 real POST /analyze
+    # calls as USER_A across its own test scenarios -- a realistic volume
+    # for exercising many re-analysis scenarios in one run, but enough to
+    # legitimately trip the real DAILY_ANALYSIS_CAP (20/24h) on its own,
+    # independent of any cross-run residue (already handled by
+    # _cleanup()'s new analysis_runs deletion). Raising the cap here only
+    # relaxes it for THIS test process -- app/database/db.py's own
+    # DAILY_ANALYSIS_CAP constant (what actually ships/runs in
+    # production) is completely untouched; this patches app.api's own
+    # already-imported name, the same monkeypatch technique this file
+    # already uses for api.run_due_diligence.
+    original_daily_cap = api.DAILY_ANALYSIS_CAP
+    api.DAILY_ANALYSIS_CAP = 1000
+
     failures: list[str] = []
 
-    for test in TESTS:
-        name = test.__name__
+    try:
+        for test in TESTS:
+            name = test.__name__
 
-        try:
-            test()
-        except AssertionError as error:
-            print(f"FAIL  {name}\n      {error}")
-            failures.append(name)
-        else:
-            print(f"PASS  {name}")
-
-    _cleanup()
+            try:
+                test()
+            except AssertionError as error:
+                print(f"FAIL  {name}\n      {error}")
+                failures.append(name)
+            else:
+                print(f"PASS  {name}")
+    finally:
+        api.DAILY_ANALYSIS_CAP = original_daily_cap
+        _cleanup()
 
     print("-" * 72)
     print(f"{len(TESTS) - len(failures)}/{len(TESTS)} passed")

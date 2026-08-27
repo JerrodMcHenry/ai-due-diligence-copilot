@@ -20,13 +20,23 @@ research are skipped -- so evidence_sources/analysis_type threading is
 exercised for real, not just asserted on the fake's own input echo.
 
 SIE Authentication Phase 2 added a real Clerk-JWT auth gate in front of
-these same endpoints. This file is about multi-source assembly, not
-auth -- auth itself has its own dedicated coverage in
-test_backend_authentication.py -- so it bypasses the gate for its own
-process lifetime via FastAPI's dependency_overrides, returning a fixed
-fake identity instead of verifying a real token. No test below asserts
-anything about who this identity is; it only exists so requests reach
-the endpoint bodies under test at all.
+this endpoint. This file is about multi-source assembly, not auth --
+auth itself has its own dedicated coverage in test_backend_authentication.py
+-- so it bypasses the gate for its own process lifetime via FastAPI's
+dependency_overrides, returning a fixed fake identity instead of
+verifying a real token. No test below asserts anything about who this
+identity is; it only exists so requests reach the endpoint body under
+test at all.
+
+Phase 10.1B added AI Cost + Analysis Abuse Protection directly inside
+POST /analyze (see app/database/db.py's analysis_runs section) --
+_ensure_test_user()/_cleanup_analysis_runs() below exist because that
+protection now writes real analysis_runs rows keyed by this file's fixed
+fake identity, which must not accumulate across repeated runs of this
+file (see their own docstrings). /analyze-startup, /analyze-website, and
+/analyze-pdf were removed entirely in that same phase (zero frontend
+consumers) -- their own regression coverage here was removed with them;
+see test_analysis_usage_protection.py for the tests proving they're gone.
 
 Run with:
     python -m app.tests.test_analyze_unified
@@ -37,9 +47,11 @@ from io import BytesIO
 
 from fastapi.testclient import TestClient
 from reportlab.pdfgen import canvas
+from sqlalchemy import text
 
 import app.api as api
 from app.auth import AuthenticatedUser, get_current_user
+from app.database.db import engine
 from app.models.analysis import (
     ExecutionAnalysisResult,
     FinancialAnalysisResult,
@@ -59,6 +71,7 @@ def expect(condition: bool, message: str) -> None:
 
 FAKE_WEBSITE_TEXT = "Acme Robotics builds autonomous inventory-scanning robots."
 FAKE_PDF_TEXT = "Acme Robotics pitch deck content for extraction testing."
+TEST_USER_ID = "test-user-analyze-unified"
 
 client = TestClient(api.app)
 
@@ -66,8 +79,37 @@ client = TestClient(api.app)
 # so it bypasses the real Clerk verification with a fixed fake identity
 # for its own process lifetime.
 api.app.dependency_overrides[get_current_user] = lambda: AuthenticatedUser(
-    user_id="test-user-analyze-unified"
+    user_id=TEST_USER_ID
 )
+
+
+def _ensure_test_user() -> None:
+    """
+    Phase 10.1B: bypassing get_current_user() (above) also bypasses the
+    real get_or_create_user() lazy-sync it normally performs -- without
+    this, TEST_USER_ID has no `users` row, and begin_analysis_run()'s
+    INSERT (analysis_runs.user_id REFERENCES users(id)) would fail its
+    foreign key on the very first /analyze call in this file.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("INSERT INTO users (id) VALUES (:id) ON CONFLICT (id) DO NOTHING"), {"id": TEST_USER_ID})
+
+
+def _cleanup_analysis_runs() -> None:
+    """
+    Phase 10.1B: every successful /analyze call in this file now inserts
+    a real analysis_runs row for TEST_USER_ID. Without cleanup, re-running
+    this file (which happens constantly during development) would
+    accumulate rows that eventually trip either the daily cap
+    (DAILY_ANALYSIS_CAP) or, within DUPLICATE_COOLDOWN_MINUTES of a prior
+    run, the duplicate-cooldown check -- since several tests below
+    legitimately reuse the same website_url/company_text combination run
+    to run. Called both before and after the test loop (self-healing
+    against a prior crashed run), matching this project's established
+    zztest_*-cleanup convention elsewhere.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("DELETE FROM analysis_runs WHERE user_id = :id"), {"id": TEST_USER_ID})
 
 
 def _make_pdf_bytes(text: str = FAKE_PDF_TEXT) -> bytes:
@@ -143,11 +185,13 @@ def patched_pipeline():
         return 999
 
     def fake_save_score_history(**kwargs):
-        # Only /analyze-startup (of the four endpoints exercised in this
-        # file) calls this. fake_save_analysis returns a fake id (999)
-        # that doesn't correspond to a real row, so the real
-        # save_score_history would fail its analysis_id foreign key --
-        # stub it too rather than touch the real DB from this file.
+        # Historical: only the now-removed /analyze-startup ever called
+        # this (see Phase 10.1B's removal of /analyze-startup,
+        # /analyze-website, /analyze-pdf). No current code path in this
+        # file reaches it, but it stays patched defensively -- if it ever
+        # were called, fake_save_analysis's fake id (999) doesn't
+        # correspond to a real row, so the real save_score_history would
+        # fail its analysis_id foreign key against the real DB.
         call_log.append({"save_score_history_kwargs": kwargs})
 
     def fake_extract_text_from_website(url):
@@ -418,60 +462,12 @@ def test_assembled_input_size_bound() -> None:
     )
 
 
-# --- Backward compatibility --------------------------------------------------
-
-
-def test_legacy_analyze_startup_still_works() -> None:
-    with patched_pipeline() as call_log:
-        response = client.post(
-            "/analyze-startup",
-            json={"company_text": "Acme Robotics builds autonomous robots for warehouses."},
-        )
-
-    expect(response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}")
-    calls = _pipeline_calls(call_log)
-    expect(len(calls) == 1, "Expected exactly one pipeline call")
-    expect(
-        calls[0]["evidence_sources"] is None,
-        "Legacy /analyze-startup must not pass evidence_sources",
-    )
-    expect(
-        calls[0]["analysis_type"] == "public",
-        "Legacy /analyze-startup must default to analysis_type='public'",
-    )
-
-
-def test_legacy_analyze_website_still_works() -> None:
-    with patched_pipeline() as call_log:
-        response = client.post("/analyze-website", json={"url": "https://example.com"})
-
-    expect(response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}")
-    calls = _pipeline_calls(call_log)
-    expect(len(calls) == 1, "Expected exactly one pipeline call")
-    expect(
-        calls[0]["evidence_sources"] is None,
-        "Legacy /analyze-website must not pass evidence_sources",
-    )
-
-
-def test_legacy_analyze_pdf_still_works() -> None:
-    with patched_pipeline() as call_log:
-        response = client.post(
-            "/analyze-pdf",
-            files={"file": ("deck.pdf", _make_pdf_bytes(), "application/pdf")},
-        )
-
-    expect(response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}")
-    calls = _pipeline_calls(call_log)
-    expect(len(calls) == 1, "Expected exactly one pipeline call")
-    expect(
-        calls[0]["analysis_type"] == "pitch_deck",
-        "Legacy /analyze-pdf must still stamp analysis_type='pitch_deck'",
-    )
-    expect(
-        calls[0]["evidence_sources"] is None,
-        "Legacy /analyze-pdf must not pass evidence_sources",
-    )
+# --- Legacy endpoint removal (Phase 10.1B) -----------------------------------
+# /analyze-startup, /analyze-website, /analyze-pdf's own "still works"
+# regression coverage was removed along with the routes themselves (they
+# no longer exist to test) -- see app/tests/test_analysis_usage_protection.py
+# for the tests proving they now 404 and that /analyze alone remains
+# exposed.
 
 
 def test_old_stored_analysis_context_without_evidence_sources_still_validates() -> None:
@@ -501,9 +497,6 @@ TESTS = [
     test_invalid_supplied_website_rejects_entire_request,
     test_invalid_supplied_pdf_rejects_entire_request,
     test_assembled_input_size_bound,
-    test_legacy_analyze_startup_still_works,
-    test_legacy_analyze_website_still_works,
-    test_legacy_analyze_pdf_still_works,
     test_old_stored_analysis_context_without_evidence_sources_still_validates,
 ]
 
@@ -511,6 +504,9 @@ TESTS = [
 def main() -> None:
     print("\nUnified Multi-Source Analyze Startup tests")
     print("-" * 72)
+
+    _ensure_test_user()
+    _cleanup_analysis_runs()
 
     failures: list[str] = []
 
@@ -524,6 +520,8 @@ def main() -> None:
             failures.append(name)
         else:
             print(f"PASS  {name}")
+
+    _cleanup_analysis_runs()
 
     print("-" * 72)
     print(f"{len(TESTS) - len(failures)}/{len(TESTS)} passed")

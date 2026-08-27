@@ -76,7 +76,15 @@ from app.database.db import (create_tables,
                          create_startup_milestone,
                          update_startup_milestone_status,
                          add_fundraising_gap_source_to_founder_actions,
-                         get_watchlist_startups_for_user
+                         get_watchlist_startups_for_user,
+                         create_analysis_runs_table,
+                         compute_analysis_fingerprint,
+                         count_recent_analysis_runs,
+                         has_recent_duplicate_completed_run,
+                         begin_analysis_run,
+                         finish_analysis_run,
+                         DAILY_ANALYSIS_CAP,
+                         USAGE_WINDOW_HOURS
 )
 from typing import Literal
 from fastapi import Query
@@ -199,6 +207,13 @@ create_startup_milestones_table()
 # app/ai/fundraising_readiness.py's own module docstring for the
 # persistence decision), so there is no create_*_table() call for it.
 add_fundraising_gap_source_to_founder_actions()
+
+# Phase 10.1B -- AI Cost + Analysis Abuse Protection. Purely additive:
+# references users(id)/startups(id), which already exist by this point.
+# See create_analysis_runs_table()'s own module-level comment in
+# app/database/db.py for the full design record (the partial unique
+# index is what makes the concurrency lock durable across processes).
+create_analysis_runs_table()
 
 @app.get("/health")
 def health():
@@ -1397,20 +1412,20 @@ def analyze_unified(
     # user-provided text are evidence SOURCES feeding ONE canonical SIE
     # analysis, not separate mutually-exclusive analysis products (see
     # the Phase 1 design report and the Phase 2 product decision this
-    # implements). This does not replace /analyze-startup,
-    # /analyze-website, or /analyze-pdf -- they're untouched, kept for
-    # backward compatibility -- it's the new primary path the frontend
-    # now uses.
+    # implements). As of Phase 10.1B this is the ONLY paid analysis entry
+    # point -- /analyze-startup, /analyze-website, and /analyze-pdf were
+    # removed (zero frontend/product consumers, confirmed by repository
+    # search) so there is exactly one HTTP surface to protect, not four.
+    # The underlying extraction helpers those routes used
+    # (extract_text_from_website, extract_text_from_pdf,
+    # _read_pdf_upload_sync) and their request models (WebsiteAnalysisRequest,
+    # StartupAnalysisRequest) are unchanged and still used directly below.
     #
     # Deliberately a sync `def`, not `async def`: FastAPI/Starlette
     # automatically runs a sync path operation in a worker thread, which
     # is what keeps the multi-minute pipeline call below from blocking
     # the event loop and starving concurrent requests (GET /health,
-    # /analytics, ...) -- the exact bug /analyze-pdf has today from being
-    # `async def` with fully synchronous, blocking work inside it. No
-    # queue/worker architecture needed for this -- running synchronously
-    # in a thread FastAPI already provides is the smallest idiomatic fix,
-    # deliberately not applied to /analyze-pdf itself in this change.
+    # /analytics, ...).
     #
     # Phase 7.2.1: the founder-targeted membership check runs FIRST --
     # before URL/PDF validation, before any extraction, before the
@@ -1439,15 +1454,13 @@ def analyze_unified(
             ),
         )
 
-    # Product decision: an explicitly supplied source that fails
-    # validation/extraction rejects the WHOLE request before the
-    # expensive pipeline runs -- never silently dropped in favor of
-    # whatever other sources happened to succeed. A user who supplied a
-    # website and a deck must get an analysis that used both, or a clear
-    # error, never a silent website-only analysis they'd have no reason
-    # to suspect was incomplete.
-    website_text = None
-    pdf_text = None
+    # Phase 10.1B: cheap, zero-I/O-beyond-reading-the-upload format
+    # validation happens BEFORE the usage-protection gate below, so a
+    # request with an obviously malformed URL, a non-PDF upload, or
+    # oversized text never consumes a usage-cap slot or trips the
+    # duplicate-cooldown/concurrency-lock checks for something that was
+    # never going to run anyway.
+    validated_url = None
 
     if website_url:
         try:
@@ -1458,29 +1471,37 @@ def analyze_unified(
                 detail="Website URL must start with http:// or https://",
             )
 
+    if has_pdf and not pdf.filename.lower().endswith(".pdf"):
+        raise HTTPException(
+            status_code=400, detail="Only PDF files are supported."
+        )
+
+    if company_text:
+        # Reuses StartupAnalysisRequest's own bound (MAX_COMPANY_TEXT_LENGTH)
+        # rather than duplicating the number -- company_text here is a raw
+        # Form field, not something Pydantic validates on the way in.
         try:
-            website_text = extract_text_from_website(validated_url.url)
-        except ValueError as e:
-            raise HTTPException(status_code=400, detail=str(e))
-        except Exception:
-            traceback.print_exc()
+            StartupAnalysisRequest(company_text=company_text)
+        except PydanticValidationError:
             raise HTTPException(
                 status_code=400,
                 detail=(
-                    "That website could not be retrieved. Please check the "
-                    "URL and try again."
+                    "Additional company information must be no more than "
+                    f"{MAX_COMPANY_TEXT_LENGTH:,} characters."
                 ),
             )
 
-    if has_pdf:
-        if not pdf.filename.lower().endswith(".pdf"):
-            raise HTTPException(
-                status_code=400, detail="Only PDF files are supported."
-            )
+    # Reads the raw upload now (bounded by MAX_PDF_BYTES, already-hardened
+    # I/O -- see _read_pdf_upload_sync's own docstring) so its bytes are
+    # available for the fingerprint below. This is deliberately NOT yet
+    # extract_text_from_pdf() -- the actual (heavier, more failure-prone)
+    # text-extraction step stays gated behind the usage-protection check
+    # further down, per Part 5's "PDF extraction if reasonably avoidable."
+    pdf_bytes = None
 
+    if has_pdf:
         try:
             pdf_bytes = _read_pdf_upload_sync(pdf)
-            pdf_text = extract_text_from_pdf(pdf_bytes)
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
         except Exception:
@@ -1493,499 +1514,246 @@ def analyze_unified(
                 ),
             )
 
-    if company_text:
-        # Reuses StartupAnalysisRequest's own bound (MAX_COMPANY_TEXT_LENGTH)
-        # rather than duplicating the number -- company_text here is a raw
-        # Form field, not something Pydantic validates on the way in, so
-        # this is what actually enforces the same limit /analyze-startup
-        # already does.
-        try:
-            StartupAnalysisRequest(company_text=company_text)
-        except PydanticValidationError:
+    # -------------------------------------------------------------------
+    # Phase 10.1B -- AI Cost + Analysis Abuse Protection. Everything from
+    # here through begin_analysis_run() runs BEFORE website fetch, PDF
+    # text extraction, and run_due_diligence() -- see
+    # app/database/db.py's own module comment (right above
+    # create_analysis_runs_table()) for the full design record: why a
+    # Postgres partial unique index is the durability mechanism, why the
+    # duplicate-cooldown check never applies to a founder-targeted
+    # re-analysis, and why the daily cap counts started attempts.
+    # -------------------------------------------------------------------
+    fingerprint = compute_analysis_fingerprint(company_text, website_url, pdf_bytes)
+
+    # Rapid-accidental-duplicate check (Part 4.B) -- deliberately skipped
+    # entirely for a founder-targeted re-analysis (startup_id is not
+    # None): re-running the same startup soon after a previous analysis
+    # is Phase 7.2.1's own explicit, legitimate workflow, never a
+    # duplicate to block. Never triggered by a FAILED prior run either
+    # (has_recent_duplicate_completed_run only matches status='completed')
+    # -- a user must always be able to immediately retry after a failure.
+    if startup_id is None and has_recent_duplicate_completed_run(current_user.user_id, fingerprint):
+        raise HTTPException(
+            status_code=409,
+            detail=(
+                "You recently submitted this exact analysis. Please wait a "
+                "few minutes before submitting it again."
+            ),
+        )
+
+    # Beta usage cap (Part 4.C) -- counts every attempt (any status) in
+    # the rolling window, applies equally to founder-targeted re-analysis.
+    if count_recent_analysis_runs(current_user.user_id) >= DAILY_ANALYSIS_CAP:
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                f"You've reached the current beta limit of {DAILY_ANALYSIS_CAP} "
+                f"analyses per {USAGE_WINDOW_HOURS} hours. Please try again later."
+            ),
+        )
+
+    # Same-user concurrency lock (Part 4.A) -- the ONLY place in this
+    # codebase that inserts an analysis_runs row. A None return means a
+    # genuinely active (non-stale) run already exists for this user;
+    # begin_analysis_run() itself already expired any stale one first.
+    run_id = begin_analysis_run(current_user.user_id, startup_id, fingerprint)
+
+    if run_id is None:
+        raise HTTPException(
+            status_code=409,
+            detail=(
+                "An analysis is already running for your account. Please "
+                "wait for it to finish before starting another."
+            ),
+        )
+
+    # Pessimistic default: only flipped to "completed" after save_analysis()
+    # actually succeeds below. Every exit from this try block -- an
+    # extraction failure, a pipeline failure, a persistence failure, or a
+    # clean return -- reaches the finally clause exactly once, which is
+    # what guarantees a crashed/failed request never leaves the user
+    # permanently locked out (Part 5).
+    run_status = "failed"
+
+    try:
+        # Product decision (unchanged from before Phase 10.1B): an
+        # explicitly supplied source that fails extraction rejects the
+        # WHOLE request before the expensive pipeline runs -- never
+        # silently dropped in favor of whatever other sources succeeded.
+        website_text = None
+        pdf_text = None
+
+        if validated_url is not None:
+            try:
+                website_text = extract_text_from_website(validated_url.url)
+            except ValueError as e:
+                raise HTTPException(status_code=400, detail=str(e))
+            except Exception:
+                traceback.print_exc()
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        "That website could not be retrieved. Please check "
+                        "the URL and try again."
+                    ),
+                )
+
+        if pdf_bytes is not None:
+            try:
+                pdf_text = extract_text_from_pdf(pdf_bytes)
+            except ValueError as e:
+                raise HTTPException(status_code=400, detail=str(e))
+            except Exception:
+                traceback.print_exc()
+                raise HTTPException(
+                    status_code=400,
+                    detail=(
+                        "That PDF could not be read. Please check the file "
+                        "and try again."
+                    ),
+                )
+
+        assembled_text = assemble_multi_source_text(
+            website_text=website_text,
+            pdf_text=pdf_text,
+            user_text=company_text,
+        )
+
+        if len(assembled_text) > MAX_ASSEMBLED_TEXT_LENGTH:
             raise HTTPException(
                 status_code=400,
                 detail=(
-                    "Additional company information must be no more than "
-                    f"{MAX_COMPANY_TEXT_LENGTH:,} characters."
+                    "The combined information from your sources is too long "
+                    f"to analyze (max {MAX_ASSEMBLED_TEXT_LENGTH:,} characters "
+                    "combined). Please shorten one or more sources."
                 ),
             )
 
-    assembled_text = assemble_multi_source_text(
-        website_text=website_text,
-        pdf_text=pdf_text,
-        user_text=company_text,
-    )
+        # Unified Multi-Source Analyze Startup, Provenance: evidence_sources
+        # is the real, non-mutually-exclusive record of what fed this
+        # analysis -- activates the already-existing (previously dormant)
+        # AnalysisContext.evidence_sources list field, no new field added.
+        # public_research is always included since enrich_research() always
+        # runs inside run_due_diligence() below. analysis_type stays a single
+        # derived DISPLAY label only (backward compatible with the existing
+        # Startup Profile badge) via the exact deterministic rule specified:
+        # pitch_deck present wins, otherwise public. Neither field is read by
+        # scoring, evidence extraction, or any pillar analysis.
+        evidence_sources: list[str] = []
 
-    if len(assembled_text) > MAX_ASSEMBLED_TEXT_LENGTH:
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "The combined information from your sources is too long "
-                f"to analyze (max {MAX_ASSEMBLED_TEXT_LENGTH:,} characters "
-                "combined). Please shorten one or more sources."
-            ),
-        )
+        if website_text:
+            evidence_sources.append("website")
 
-    # Unified Multi-Source Analyze Startup, Provenance: evidence_sources
-    # is the real, non-mutually-exclusive record of what fed this
-    # analysis -- activates the already-existing (previously dormant)
-    # AnalysisContext.evidence_sources list field, no new field added.
-    # public_research is always included since enrich_research() always
-    # runs inside run_due_diligence() below. analysis_type stays a single
-    # derived DISPLAY label only (backward compatible with the existing
-    # Startup Profile badge) via the exact deterministic rule specified:
-    # pitch_deck present wins, otherwise public. Neither field is read by
-    # scoring, evidence extraction, or any pillar analysis.
-    evidence_sources: list[str] = []
+        if pdf_text:
+            evidence_sources.append("pitch_deck")
 
-    if website_text:
-        evidence_sources.append("website")
+        if company_text:
+            evidence_sources.append("company_description")
 
-    if pdf_text:
-        evidence_sources.append("pitch_deck")
+        evidence_sources.append("public_research")
 
-    if company_text:
-        evidence_sources.append("company_description")
+        analysis_type = "pitch_deck" if pdf_text else "public"
 
-    evidence_sources.append("public_research")
-
-    analysis_type = "pitch_deck" if pdf_text else "public"
-
-    try:
-        results = run_due_diligence(
-            assembled_text,
-            analysis_type=analysis_type,
-            evidence_sources=evidence_sources,
-        )
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=502,
-            detail=(
-                "The analysis could not be completed. This can happen if a "
-                "research or AI provider is temporarily unavailable. Please "
-                "try again."
-            ),
-        )
-
-    try:
-        # Persist the assembled, labeled multi-source text as
-        # company_text rather than picking one arbitrary source --
-        # nothing supplied is silently left out of the stored record.
-        save_analysis(
-            company_text=assembled_text,
-            summary=results["summary"],
-            risk_analysis=results["risk_analysis"],
-            competitor_analysis=results["competitor_analysis"],
-            memo=results["memo"],
-            structured_analysis=results["structured_analysis"],
-            investment_score=results["investment_score"],
-            founder_analysis=results["founder_analysis"].model_dump(),
-            market_analysis=results["market_analysis"].model_dump(),
-            sources=results["sources"],
-            traction_analysis=results["traction_analysis"].model_dump(),
-            methodology=results["sie_analysis"].model_dump(mode="json"),
-            market_score=results["market_score"],
-            team_score=results["team_score"],
-            product_score=results["product_score"],
-            competition_score=results["competition_score"],
-            traction_score=results["traction_score"],
-            financial_score=results["financial_score"],
-            overall_score=results["overall_score"],
-            recommendation=results["recommendation"],
-            readiness_score=results["readiness_score"],
-            readiness_summary=results["readiness_summary"],
-            # Phase 7.2.1: None on every normal/public analysis (the
-            # `if startup_id is not None` guard above is the only thing
-            # that ever populates it, and only after that same value
-            # already passed require_startup_member()) -- passing it
-            # through here is what makes save_analysis() skip
-            # get_or_create_startup() and attach directly to this exact
-            # authorized canonical startup instead.
-            startup_id=startup_id,
-        )
-    except Exception:
-        # Distinct from the pipeline failure above on purpose, same as
-        # every other ingestion endpoint: the (expensive, multi-minute)
-        # analysis DID complete here -- only persisting it failed.
-        # save_score_history() is deliberately not called here, for the
-        # same established reason: Rankings/Search/Dashboard/SPS History
-        # all read analyses.methodology JSONB directly, not the legacy
-        # score_history table.
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                "The analysis completed but could not be saved. Please try "
-                "again."
-            ),
-        )
-
-    sie_analysis = results["sie_analysis"]
-
-    return StartupAnalysisResponse(
-        context=sie_analysis.context,
-        startup_scorecard=sie_analysis.startup_scorecard,
-        methodology=sie_analysis,
-    )
-
-
-@app.post(
-    "/analyze-startup",
-    response_model=StartupAnalysisResponse
-)
-def analyze_startup(
-    request: StartupAnalysisRequest,
-    current_user: AuthenticatedUser = RequireAuth,
-):
-    # SIE Authentication Phase 2: this legacy endpoint triggers the exact
-    # same paid pipeline as /analyze, so it requires the same
-    # authentication -- no unauthenticated bypass around the frontend's
-    # protected path. See /analyze's own comment for what RequireAuth
-    # does and doesn't do (no ownership/membership created here either).
-    #
-    # MVP hardening: this call is the one place a real user actually hits
-    # this endpoint today (the frontend Analyze Startup page). It runs a
-    # 3-5 minute pipeline with no internal retry-exhaustion boundary of its
-    # own -- an OpenAI/Tavily outage, a genuinely malformed LLM response
-    # that survives the pipeline's own single correction pass, or any
-    # other unexpected failure previously propagated as a bare, unhandled
-    # exception: FastAPI's default handler turns that into a generic 500
-    # with no body detail, which is fine for not leaking internals, but
-    # gives the user no honest explanation and (via app/analyze-pdf's
-    # existing str(e) pattern nearby) it's easy to accidentally leak an
-    # internal exception message here instead. Logging server-side and
-    # raising a clean, non-leaking HTTPException keeps this endpoint
-    # consistent with how every other error path in this file already
-    # behaves (e.g. the 404s below), which the frontend already handles.
-    try:
-        results = run_due_diligence(request.company_text)
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=502,
-            detail=(
-                "The analysis could not be completed. This can happen if a "
-                "research or AI provider is temporarily unavailable. Please "
-                "try again."
-            ),
-        )
-
-    try:
-        analysis_id = save_analysis(
-            company_text=request.company_text,
-            summary=results["summary"],
-            risk_analysis=results["risk_analysis"],
-            competitor_analysis=results["competitor_analysis"],
-            memo=results["memo"],
-            structured_analysis=results["structured_analysis"],
-            investment_score=results["investment_score"],
-            founder_analysis=results["founder_analysis"].model_dump(),
-            market_analysis=results["market_analysis"].model_dump(),
-            sources=results["sources"],
-            traction_analysis=results["traction_analysis"].model_dump(),
-            methodology=results["sie_analysis"].model_dump(mode="json"),
-            market_score=results["market_score"],
-            team_score=results["team_score"],
-            product_score=results["product_score"],
-            competition_score=results["competition_score"],
-            traction_score=results["traction_score"],
-            financial_score=results["financial_score"],
-            overall_score=results["overall_score"],
-            recommendation=results["recommendation"],
-            readiness_score=results["readiness_score"],
-            readiness_summary=results["readiness_summary"],
-
-        )
-        structured_analysis = results["structured_analysis"]
-
-        save_score_history(
-            analysis_id=analysis_id,
-            company_name=structured_analysis.get("company_name"),
-            industry=structured_analysis.get("industry"),
-            stage=structured_analysis.get("stage"),
-            business_model=structured_analysis.get("business_model"),
-            market_score=results["market_score"],
-            team_score=results["team_score"],
-            product_score=results["product_score"],
-            competition_score=results["competition_score"],
-            traction_score=results["traction_score"],
-            financial_score=results["financial_score"],
-            overall_score=results["overall_score"],
-            readiness_score=results["readiness_score"]
-        )
-    except Exception:
-        # Distinct from the pipeline failure above on purpose: the
-        # (expensive, multi-minute) analysis DID complete here -- only
-        # persisting it failed. Telling the user that honestly matters:
-        # retrying means re-running the whole pipeline, not just re-saving.
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                "The analysis completed but could not be saved. Please try "
-                "again."
-            ),
-        )
-
-    sie_analysis = results["sie_analysis"]
-
-    return StartupAnalysisResponse(
-        context=sie_analysis.context,
-        startup_scorecard=sie_analysis.startup_scorecard,
-        methodology=sie_analysis,
-    )
-        
-    
-
-
-async def _read_pdf_upload(file: UploadFile) -> bytes:
-    """
-    Unused as of Phase 10.1A: /analyze-pdf (its only caller) was
-    converted to a sync `def` to fix an event-loop-blocking bug (see that
-    endpoint's own comment) and now uses _read_pdf_upload_sync() above
-    instead. Left in place rather than removed -- no current risk, and
-    removing it is out of this phase's narrow security/runtime scope.
-
-    Reads the uploaded file in bounded chunks and aborts as soon as the
-    running total exceeds MAX_PDF_BYTES, instead of first buffering an
-    arbitrarily large upload fully into memory and only checking its
-    size afterward -- this is what actually enforces the cap as a
-    resource protection during upload, not just a post-hoc validation
-    once the whole thing is already sitting in memory. Still entirely
-    in-memory -- no temporary files.
-    """
-    chunks: list[bytes] = []
-    total = 0
-
-    while True:
-        chunk = await file.read(64 * 1024)
-
-        if not chunk:
-            break
-
-        total += len(chunk)
-
-        if total > MAX_PDF_BYTES:
-            raise PdfExtractionError(
-                f"That PDF is too large to analyze (max "
-                f"{MAX_PDF_BYTES // (1024 * 1024)} MB)."
+        try:
+            results = run_due_diligence(
+                assembled_text,
+                analysis_type=analysis_type,
+                evidence_sources=evidence_sources,
+            )
+        except Exception:
+            traceback.print_exc()
+            raise HTTPException(
+                status_code=502,
+                detail=(
+                    "The analysis could not be completed. This can happen if a "
+                    "research or AI provider is temporarily unavailable. Please "
+                    "try again."
+                ),
             )
 
-        chunks.append(chunk)
+        try:
+            # Persist the assembled, labeled multi-source text as
+            # company_text rather than picking one arbitrary source --
+            # nothing supplied is silently left out of the stored record.
+            save_analysis(
+                company_text=assembled_text,
+                summary=results["summary"],
+                risk_analysis=results["risk_analysis"],
+                competitor_analysis=results["competitor_analysis"],
+                memo=results["memo"],
+                structured_analysis=results["structured_analysis"],
+                investment_score=results["investment_score"],
+                founder_analysis=results["founder_analysis"].model_dump(),
+                market_analysis=results["market_analysis"].model_dump(),
+                sources=results["sources"],
+                traction_analysis=results["traction_analysis"].model_dump(),
+                methodology=results["sie_analysis"].model_dump(mode="json"),
+                market_score=results["market_score"],
+                team_score=results["team_score"],
+                product_score=results["product_score"],
+                competition_score=results["competition_score"],
+                traction_score=results["traction_score"],
+                financial_score=results["financial_score"],
+                overall_score=results["overall_score"],
+                recommendation=results["recommendation"],
+                readiness_score=results["readiness_score"],
+                readiness_summary=results["readiness_summary"],
+                # Phase 7.2.1: None on every normal/public analysis (the
+                # `if startup_id is not None` guard above is the only thing
+                # that ever populates it, and only after that same value
+                # already passed require_startup_member()) -- passing it
+                # through here is what makes save_analysis() skip
+                # get_or_create_startup() and attach directly to this exact
+                # authorized canonical startup instead.
+                startup_id=startup_id,
+            )
+        except Exception:
+            # Distinct from the pipeline failure above on purpose, same as
+            # before Phase 10.1B: the (expensive, multi-minute) analysis DID
+            # complete here -- only persisting it failed. save_score_history()
+            # is deliberately not called here, for the same established
+            # reason: Rankings/Search/Dashboard/SPS History all read
+            # analyses.methodology JSONB directly, not the legacy
+            # score_history table.
+            traceback.print_exc()
+            raise HTTPException(
+                status_code=500,
+                detail=(
+                    "The analysis completed but could not be saved. Please try "
+                    "again."
+                ),
+            )
 
-    return b"".join(chunks)
+        run_status = "completed"
 
+        sie_analysis = results["sie_analysis"]
 
-@app.post("/analyze-pdf", response_model=StartupAnalysisResponse)
-def analyze_pdf(
-    file: UploadFile = File(...),
-    current_user: AuthenticatedUser = RequireAuth,
-):
-    # SIE Authentication Phase 2: same paid pipeline as /analyze, same
-    # required authentication -- see /analyze's own comment.
-    #
-    # Phase 10.1A -- Critical Security/Runtime Hardening: this endpoint
-    # was previously `async def` while calling run_due_diligence()
-    # (fully synchronous, multi-minute) directly with no `await` -- which
-    # ran the entire pipeline on the single asyncio event loop thread and
-    # blocked every other concurrent request (including /health) for the
-    # whole duration of one pitch-deck analysis. Now a plain `def`, the
-    # exact same pattern /analyze/_analyze-startup/_analyze-website
-    # already use correctly, so FastAPI/Starlette dispatches it to its
-    # worker thread pool instead. _read_pdf_upload_sync() (below) reads
-    # the upload via its synchronous `.file` handle -- already used by
-    # /analyze's own PDF-source path -- in place of the async
-    # `await file.read(...)` this endpoint used to need for a coroutine
-    # context it no longer runs in. No other behavior changed: same
-    # extraction, same pipeline call, same persistence, same response.
-    #
-    # Pitch Deck / PDF Ingestion: same three-stage fail-closed shape as
-    # /analyze-startup and /analyze-website. Retrieval/extraction/
-    # validation failures (bad, oversized, corrupt, encrypted, or
-    # non-PDF upload) are the caller's to fix and get a 400 built from
-    # pdf_extractor's own safe, already-user-facing message -- same
-    # contract WebsiteFetchError uses for /analyze-website. Pipeline and
-    # persistence failures are ours, and get the exact same generic,
-    # non-leaking 502/500 responses every other ingestion path uses.
-    if not file.filename or not file.filename.lower().endswith(".pdf"):
-        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
-
-    try:
-        pdf_bytes = _read_pdf_upload_sync(file)
-        extracted_text = extract_text_from_pdf(pdf_bytes)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "That PDF could not be read. Please check the file and "
-                "try again."
-            ),
+        return StartupAnalysisResponse(
+            context=sie_analysis.context,
+            startup_scorecard=sie_analysis.startup_scorecard,
+            methodology=sie_analysis,
         )
-
-    try:
-        results = run_due_diligence(extracted_text, analysis_type="pitch_deck")
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=502,
-            detail=(
-                "The analysis could not be completed. This can happen if a "
-                "research or AI provider is temporarily unavailable. Please "
-                "try again."
-            ),
-        )
-
-    try:
-        save_analysis(
-            company_text=extracted_text,
-            summary=results["summary"],
-            risk_analysis=results["risk_analysis"],
-            competitor_analysis=results["competitor_analysis"],
-            memo=results["memo"],
-            structured_analysis=results["structured_analysis"],
-            investment_score=results["investment_score"],
-            founder_analysis=results["founder_analysis"].model_dump(),
-            market_analysis=results["market_analysis"].model_dump(),
-            sources=results["sources"],
-            traction_analysis=results["traction_analysis"].model_dump(),
-            methodology=results["sie_analysis"].model_dump(mode="json"),
-            market_score=results["market_score"],
-            team_score=results["team_score"],
-            product_score=results["product_score"],
-            competition_score=results["competition_score"],
-            traction_score=results["traction_score"],
-            financial_score=results["financial_score"],
-            overall_score=results["overall_score"],
-            recommendation=results["recommendation"],
-            readiness_score=results["readiness_score"],
-            readiness_summary=results["readiness_summary"]
-        )
-    except Exception:
-        # Distinct from the pipeline failure above on purpose, same as
-        # /analyze-startup and /analyze-website: the (expensive,
-        # multi-minute) analysis DID complete here -- only persisting it
-        # failed. save_score_history() is deliberately not called here,
-        # for the same reason already established for /analyze-website:
-        # Rankings/Search/Dashboard/SPS History all read
-        # analyses.methodology JSONB directly, not the legacy
-        # score_history table.
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                "The analysis completed but could not be saved. Please try "
-                "again."
-            ),
-        )
-
-    sie_analysis = results["sie_analysis"]
-
-    return StartupAnalysisResponse(
-        context=sie_analysis.context,
-        startup_scorecard=sie_analysis.startup_scorecard,
-        methodology=sie_analysis,
-    )
+    finally:
+        finish_analysis_run(run_id, run_status)
 
 
-
-
-@app.post("/analyze-website", response_model=StartupAnalysisResponse)
-def analyze_website(
-    request: WebsiteAnalysisRequest,
-    current_user: AuthenticatedUser = RequireAuth,
-):
-    # SIE Authentication Phase 2: same paid pipeline as /analyze, same
-    # required authentication -- see /analyze's own comment.
-    #
-    # Website / URL Ingestion: same fail-closed shape as /analyze-startup,
-    # with one extra stage in front for retrieval. Retrieval/validation
-    # failures (bad, unreachable, or disallowed URL) are the caller's to
-    # fix and get a 400 built from website_scrapper's own safe,
-    # already-user-facing message (WebsiteFetchError/ValueError) -- same
-    # contract /analyze-pdf already uses for pdf_extractor's ValueErrors.
-    # Pipeline and persistence failures are ours, and get the exact same
-    # generic, non-leaking 502/500 responses /analyze-startup uses so a
-    # website-sourced analysis fails no less safely than a text one.
-    try:
-        website_text = extract_text_from_website(request.url)
-    except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=400,
-            detail=(
-                "That website could not be retrieved. Please check the URL "
-                "and try again."
-            ),
-        )
-
-    try:
-        results = run_due_diligence(website_text)
-    except Exception:
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=502,
-            detail=(
-                "The analysis could not be completed. This can happen if a "
-                "research or AI provider is temporarily unavailable. Please "
-                "try again."
-            ),
-        )
-
-    try:
-        save_analysis(
-            company_text=request.url,
-            summary=results["summary"],
-            risk_analysis=results["risk_analysis"],
-            competitor_analysis=results["competitor_analysis"],
-            memo=results["memo"],
-            structured_analysis=results["structured_analysis"],
-            investment_score=results["investment_score"],
-            founder_analysis=results["founder_analysis"].model_dump(),
-            market_analysis=results["market_analysis"].model_dump(),
-            sources=results["sources"],
-            traction_analysis=results["traction_analysis"].model_dump(),
-            methodology=results["sie_analysis"].model_dump(mode="json"),
-            market_score=results["market_score"],
-            team_score=results["team_score"],
-            product_score=results["product_score"],
-            competition_score=results["competition_score"],
-            traction_score=results["traction_score"],
-            financial_score=results["financial_score"],
-            overall_score=results["overall_score"],
-            recommendation=results["recommendation"],
-            readiness_score=results["readiness_score"],
-            readiness_summary=results["readiness_summary"]
-        )
-    except Exception:
-        # Distinct from the pipeline failure above on purpose, same as
-        # /analyze-startup: the (expensive, multi-minute) analysis DID
-        # complete here -- only persisting it failed. save_score_history()
-        # is deliberately NOT called here -- Rankings/Search/Dashboard/SPS
-        # History all already read analyses.methodology JSONB directly,
-        # not the legacy score_history table, so it isn't required for
-        # this analysis to appear correctly anywhere in the product.
-        traceback.print_exc()
-        raise HTTPException(
-            status_code=500,
-            detail=(
-                "The analysis completed but could not be saved. Please try "
-                "again."
-            ),
-        )
-
-    sie_analysis = results["sie_analysis"]
-
-    return StartupAnalysisResponse(
-        context=sie_analysis.context,
-        startup_scorecard=sie_analysis.startup_scorecard,
-        methodology=sie_analysis,
-    )
+# Phase 10.1B -- AI Cost + Analysis Abuse Protection. /analyze-startup,
+# /analyze-pdf, and /analyze-website (and the async _read_pdf_upload()
+# helper only /analyze-pdf ever called) were removed from here -- zero
+# frontend/product consumers (confirmed by repository search), and each
+# was a pure request-parsing wrapper around the exact same
+# run_due_diligence() pipeline /analyze already runs, so removing them
+# leaves one canonical paid analysis entry point to protect instead of
+# four. Every reusable piece they depended on is untouched and still
+# used directly by /analyze itself: extract_text_from_website,
+# extract_text_from_pdf, _read_pdf_upload_sync, WebsiteAnalysisRequest,
+# StartupAnalysisRequest. save_score_history() (only ever called from
+# /analyze-startup) is also untouched -- GET /score-history/{company}
+# still works for any pre-existing legacy data, it's simply never
+# written to by any current code path, exactly as was already true
+# before this phase (every other ingestion path already stopped calling
+# it in favor of the canonical methodology JSONB).
 
 # Phase 10.1A -- Critical Security Hardening. The three /migrate/* HTTP
 # routes that used to live here (add-benchmarking-columns,
