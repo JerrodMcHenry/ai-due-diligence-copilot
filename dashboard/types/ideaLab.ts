@@ -248,3 +248,47 @@ export function draftToAssumptions(draft: VentureDraft): VentureAssumptions {
 }
 
 export const VENTURE_STAGES = ["Idea", "Researching", "Validating", "Building", "Launched"] as const;
+
+// Phase 10.7 -- Founder Missions V1. Mirrors app/models/venture_missions.py
+// exactly. A mission is an ACTIVITY -- nothing in this shape can carry a
+// number into VentureAssumptions.validation; `learning_summary` is
+// free-text reflection only. See VentureMission's own comment below.
+export type MissionType =
+  | "customer_discovery"
+  | "validation"
+  | "pricing"
+  | "gtm"
+  | "product"
+  | "founder"
+  | "economics"
+  | "other";
+
+export type MissionSource = "vps_guidance" | "founder_created";
+
+export type MissionStatus = "active" | "completed" | "dismissed";
+
+export interface VentureMission {
+  id: number;
+  venture_id: number;
+  created_by_user_id: string;
+  title: string;
+  description: string | null;
+  mission_type: MissionType;
+  related_category: string | null;
+  source: MissionSource;
+  source_ref: string | null;
+  status: MissionStatus;
+  learning_summary: string | null;
+  learning_recorded_at: string | null;
+  created_at: string;
+  updated_at: string;
+  completed_at: string | null;
+}
+
+export interface CreateMissionRequest {
+  title: string;
+  description?: string | null;
+  mission_type?: MissionType;
+  related_category?: string | null;
+  source?: MissionSource;
+}

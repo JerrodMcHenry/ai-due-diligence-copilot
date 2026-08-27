@@ -50,6 +50,11 @@ from app.database.db import (create_tables,
                          get_modeled_venture_for_user,
                          update_modeled_venture_for_user,
                          delete_modeled_venture_for_user,
+                         create_venture_missions_table,
+                         list_venture_missions_for_owner,
+                         create_venture_mission,
+                         update_venture_mission_status_for_owner,
+                         record_venture_mission_learning_for_owner,
                          create_startup_claims_table,
                          create_startup_claim,
                          list_startup_claims_for_user,
@@ -91,6 +96,7 @@ from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
+from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -174,6 +180,11 @@ backfill_startup_ids()
 # in app/database/db.py) -- ordering relative to the migrations above
 # only matters because it references users(id), which must already exist.
 create_modeled_ventures_table()
+
+# Phase 10.7 -- Founder Missions V1. venture_missions FKs to
+# modeled_ventures(id), which must already exist by this point (same
+# ordering reasoning as modeled_ventures's own migration above).
+create_venture_missions_table()
 
 # Phase 7.1A -- Startup Claim & Membership backend lifecycle. Purely
 # additive: references users(id)/startups(id), which already exist by
@@ -822,6 +833,113 @@ def compare_venture_scenarios(
         current=VPSResult(**current_result),
         modified=VPSResult(**modified_result),
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 10.7 -- Founder Missions V1.
+#
+# THE VPS FIREWALL: no function in this section calls
+# _build_model_result()/compute_vps(), and none writes to
+# modeled_ventures.assumptions or modeled_ventures.model_result. A
+# mission's status (active/completed/dismissed) and its learning_summary
+# have no code path to a score -- see venture_missions's own table
+# docstring in app/database/db.py for the full reasoning. The ONLY way a
+# score changes is the pre-existing PUT /ventures/{venture_id} above,
+# unchanged by this phase.
+#
+# AUTHORIZATION: every endpoint below first calls
+# get_modeled_venture_for_user(current_user.user_id, venture_id) and 404s
+# if it returns None -- the exact same "doesn't exist" and "belongs to
+# someone else" collapse into one response every other /ventures/{id}
+# endpoint already uses (see get_modeled_venture_for_user()'s own
+# docstring), so a cross-user probe can never distinguish "no such
+# venture" from "not yours". The mission-table functions themselves
+# additionally re-scope by owner in their own SQL (defense in depth, not
+# the only check).
+# ---------------------------------------------------------------------------
+
+def _require_owned_venture(current_user: AuthenticatedUser, venture_id: int):
+    venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
+
+    if venture is None:
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    return venture
+
+
+@app.get("/ventures/{venture_id}/missions", response_model=list[VentureMissionResponse])
+def list_venture_missions(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+    return [VentureMissionResponse(**mission) for mission in missions]
+
+
+@app.post("/ventures/{venture_id}/missions", response_model=VentureMissionResponse)
+def create_mission(
+    venture_id: int,
+    request: CreateMissionRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    mission = create_venture_mission(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        title=request.title,
+        description=request.description,
+        mission_type=request.mission_type,
+        related_category=request.related_category,
+        source=request.source,
+    )
+    return VentureMissionResponse(**mission)
+
+
+@app.patch("/ventures/{venture_id}/missions/{mission_id}/status", response_model=VentureMissionResponse)
+def update_mission_status(
+    venture_id: int,
+    mission_id: int,
+    request: UpdateMissionStatusRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    mission = update_venture_mission_status_for_owner(
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        mission_id=mission_id,
+        new_status=request.status,
+    )
+
+    if mission is None:
+        raise HTTPException(status_code=404, detail="Mission not found.")
+
+    return VentureMissionResponse(**mission)
+
+
+@app.post("/ventures/{venture_id}/missions/{mission_id}/learning", response_model=VentureMissionResponse)
+def record_mission_learning(
+    venture_id: int,
+    mission_id: int,
+    request: RecordMissionLearningRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    mission = record_venture_mission_learning_for_owner(
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        mission_id=mission_id,
+        learning_summary=request.learning_summary,
+    )
+
+    if mission is None:
+        raise HTTPException(status_code=404, detail="Mission not found.")
+
+    return VentureMissionResponse(**mission)
 
 
 # ---------------------------------------------------------------------------

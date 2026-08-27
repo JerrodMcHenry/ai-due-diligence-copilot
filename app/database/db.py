@@ -3001,6 +3001,261 @@ def delete_modeled_venture_for_user(user_id: str, venture_id: int) -> bool:
         return result.rowcount > 0
 
 
+# ---------------------------------------------------------------------------
+# Phase 10.7 -- Founder Missions V1. venture_missions belongs to
+# modeled_ventures, structurally as separate from founder_actions/
+# startups/analyses as modeled_ventures itself already is from those same
+# tables (see create_modeled_ventures_table()'s own docstring -- the same
+# reasoning applies here one level down). The FK is to modeled_ventures(id)
+# ONLY; there is no column here, and no query anywhere in this module,
+# that could resolve a mission to a startup_id, analysis_id, or
+# founder_action.
+#
+# Deliberately modeled on founder_actions' own table/function shape
+# (title, description, a related-category label, status, source +
+# source_ref for the exact same "Add to Plan is idempotent" dedup
+# discipline -- see create_founder_action()'s own docstring, reused here
+# verbatim in create_venture_mission()) rather than a new pattern --
+# Part 1's own instruction to inspect founder_actions "only as a
+# reference," not to reuse it directly (no shared table, no shared FK, no
+# shared endpoint).
+#
+# THE VPS FIREWALL (Part 9) is structural, not a convention someone has to
+# remember: no function in this section ever touches modeled_ventures.
+# assumptions or modeled_ventures.model_result, and no function in
+# app/api.py's mission endpoints ever calls compute_vps()/
+# update_modeled_venture_for_user(). A mission's status has no code path
+# to a score.
+#
+# learning_summary/learning_recorded_at live directly on this table
+# (Part 11's Option A) -- a mission has at most one current reflection in
+# V1, so a second table would be unused complexity today. resource_ref is
+# a nullable, unused-in-V1 column (Part 18): a future Founder Playbook
+# feature can populate it without a schema change, but nothing reads or
+# writes it in this phase.
+def create_venture_missions_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_missions (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                created_by_user_id TEXT NOT NULL REFERENCES users(id),
+                title TEXT NOT NULL,
+                description TEXT,
+                mission_type TEXT NOT NULL DEFAULT 'other'
+                    CHECK (mission_type IN (
+                        'customer_discovery', 'validation', 'pricing', 'gtm',
+                        'product', 'founder', 'economics', 'other'
+                    )),
+                related_category TEXT,
+                source TEXT NOT NULL
+                    CHECK (source IN ('vps_guidance', 'founder_created')),
+                -- Dedup key for vps_guidance-sourced missions only -- see
+                -- create_venture_mission()'s own docstring. Always NULL
+                -- for founder_created, so the partial unique index below
+                -- never constrains founder-authored missions.
+                source_ref TEXT,
+                status TEXT NOT NULL DEFAULT 'active'
+                    CHECK (status IN ('active', 'completed', 'dismissed')),
+                learning_summary TEXT,
+                learning_recorded_at TIMESTAMP,
+                -- Part 18: nullable, future Founder Playbook hook. Unused
+                -- (never read, never written) in this phase.
+                resource_ref TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                completed_at TIMESTAMP
+            )
+        """))
+
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS venture_missions_dedup_vps_guidance
+            ON venture_missions (venture_id, source_ref)
+            WHERE source <> 'founder_created'
+        """))
+
+    print("venture_missions table created successfully.")
+
+
+def _mission_ownership_join_clause() -> str:
+    # Ownership is enforced by this JOIN's predicate, not by a Python
+    # check performed after a row is fetched -- the same discipline
+    # get_modeled_venture_for_user() already uses one table up. A mission
+    # belonging to a venture some OTHER user owns can never be selected,
+    # updated, or returned by any function below; there is no code path
+    # where the WHERE clause is satisfied but the row belongs to the
+    # wrong user.
+    return "JOIN modeled_ventures v ON v.id = vm.venture_id"
+
+
+def list_venture_missions_for_owner(user_id: str, venture_id: int):
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
+                   vm.description, vm.mission_type, vm.related_category,
+                   vm.source, vm.source_ref, vm.status, vm.learning_summary,
+                   vm.learning_recorded_at, vm.created_at, vm.updated_at,
+                   vm.completed_at
+            FROM venture_missions vm
+            {_mission_ownership_join_clause()}
+            WHERE vm.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY vm.created_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def create_venture_mission(
+    venture_id: int,
+    user_id: str,
+    title: str,
+    description: str | None,
+    mission_type: str,
+    related_category: str | None,
+    source: str,
+):
+    """
+    Creates one venture_missions row, OR -- for a vps_guidance-sourced
+    mission whose exact title already exists for this venture -- returns
+    the existing row untouched. Verbatim the same idempotency contract as
+    create_founder_action() (see that function's own docstring for the
+    full reasoning); source_ref is derived HERE from title, never accepted
+    from the caller, and founder_created missions are never deduplicated.
+
+    Ownership is enforced by the caller (app/api.py) verifying
+    get_modeled_venture_for_user(user_id, venture_id) is not None BEFORE
+    this runs -- this function itself does not re-check ownership because
+    venture_id here is only ever a value the caller already confirmed
+    belongs to user_id, same as create_founder_action() trusts an
+    already-verified startup_id.
+    """
+    source_ref = title.strip() if source != "founder_created" else None
+
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            INSERT INTO venture_missions (
+                venture_id, created_by_user_id, title, description,
+                mission_type, related_category, source, source_ref, status
+            )
+            VALUES (
+                :venture_id, :created_by_user_id, :title, :description,
+                :mission_type, :related_category, :source, :source_ref, 'active'
+            )
+            ON CONFLICT (venture_id, source_ref)
+                WHERE source <> 'founder_created'
+                DO NOTHING
+            RETURNING
+                id, venture_id, created_by_user_id, title, description,
+                mission_type, related_category, source, source_ref, status,
+                learning_summary, learning_recorded_at, created_at,
+                updated_at, completed_at
+        """), {
+            "venture_id": venture_id,
+            "created_by_user_id": user_id,
+            "title": title,
+            "description": description,
+            "mission_type": mission_type,
+            "related_category": related_category,
+            "source": source,
+            "source_ref": source_ref,
+        })
+
+        row = result.mappings().first()
+
+        if row is not None:
+            return dict(row)
+
+        existing = connection.execute(text("""
+            SELECT id, venture_id, created_by_user_id, title, description,
+                   mission_type, related_category, source, source_ref, status,
+                   learning_summary, learning_recorded_at, created_at,
+                   updated_at, completed_at
+            FROM venture_missions
+            WHERE venture_id = :venture_id AND source_ref = :source_ref
+        """), {"venture_id": venture_id, "source_ref": source_ref}).mappings().first()
+
+        return dict(existing)
+
+
+def update_venture_mission_status_for_owner(
+    user_id: str, venture_id: int, mission_id: int, new_status: str
+):
+    """
+    Returns the updated row, or None if this mission_id doesn't exist for
+    this venture_id/user_id combination -- never revealing whether the
+    mission exists for a different user's venture (the JOIN's WHERE
+    clause is what makes that structurally impossible, not a Python check
+    after the fact).
+
+    completed_at is set the first time status becomes 'completed' and is
+    NEVER cleared afterward (dismissing a previously-completed mission,
+    while unusual, doesn't erase the historical fact that it was once
+    completed) -- CASE WHEN only sets it forward, never back to NULL.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE venture_missions vm
+            SET status = :new_status,
+                updated_at = CURRENT_TIMESTAMP,
+                completed_at = CASE
+                    WHEN :new_status = 'completed' THEN CURRENT_TIMESTAMP
+                    ELSE vm.completed_at
+                END
+            FROM modeled_ventures v
+            WHERE vm.venture_id = v.id
+              AND vm.id = :mission_id
+              AND vm.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
+                      vm.description, vm.mission_type, vm.related_category,
+                      vm.source, vm.source_ref, vm.status, vm.learning_summary,
+                      vm.learning_recorded_at, vm.created_at, vm.updated_at,
+                      vm.completed_at
+        """), {
+            "mission_id": mission_id,
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "new_status": new_status,
+        })
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
+
+
+def record_venture_mission_learning_for_owner(
+    user_id: str, venture_id: int, mission_id: int, learning_summary: str
+):
+    """Same ownership-scoped UPDATE...FROM...WHERE shape as
+    update_venture_mission_status_for_owner() -- see that function's own
+    docstring. Recording a reflection never touches `status`; a founder
+    can reflect without completing, or complete without reflecting."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE venture_missions vm
+            SET learning_summary = :learning_summary,
+                learning_recorded_at = CURRENT_TIMESTAMP,
+                updated_at = CURRENT_TIMESTAMP
+            FROM modeled_ventures v
+            WHERE vm.venture_id = v.id
+              AND vm.id = :mission_id
+              AND vm.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
+                      vm.description, vm.mission_type, vm.related_category,
+                      vm.source, vm.source_ref, vm.status, vm.learning_summary,
+                      vm.learning_recorded_at, vm.created_at, vm.updated_at,
+                      vm.completed_at
+        """), {
+            "mission_id": mission_id,
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "learning_summary": learning_summary,
+        })
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
+
+
 def get_top_startups(limit: int = 10):
     """
     Canonical Dashboard MVP: Top Startups reuses get_rankings() directly --

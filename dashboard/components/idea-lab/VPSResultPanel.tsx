@@ -2,8 +2,6 @@ import BaseCard from "@/components/ui/BaseCard";
 import Disclosure from "@/components/ui/Disclosure";
 import ScoreDisplay from "@/components/ui/ScoreDisplay";
 
-import NextMoves from "./NextMoves";
-
 import type { VPSResult } from "@/types";
 
 function getCategoryBarColor(score: number | null): string {
@@ -26,12 +24,16 @@ type VPSResultPanelProps = {
 
 // Phase 10.6 -- Idea Lab V2, Part 5/6/9/10. Same data this panel always
 // rendered (VPSResult is completely unchanged) -- reorganized around
-// Design System V2's ScoreDisplay, "we don't know this yet" framing for
-// Unavailable categories instead of a bare em dash, and Next Moves
-// promoted above the category grid instead of a "Next Milestones" list
-// buried at the bottom (Part 9: prefer 3 focused moves over a dumped
-// list -- the fuller `next_milestones` array this panel used to print in
-// full is now only surfaced 3 at a time via NextMoves).
+// Design System V2's ScoreDisplay and "we don't know this yet" framing
+// for Unavailable categories instead of a bare em dash.
+//
+// Phase 10.7, Part 16: NextMoves moved OUT of this panel to its own
+// top-level section in VentureWorkspace (Overview -> Journey -> Modeled
+// VPS -> Next 3 Moves -> Missions -> What If? -> Full Model) -- Next
+// Moves now needs to pass a "Make this a mission" callback down, which a
+// score-display panel has no business owning. VPSResultPanel itself
+// still only ever renders the VPSResult its caller gives it; nothing
+// about that contract changed.
 export default function VPSResultPanel({ result, title = "Venture Potential Score" }: VPSResultPanelProps) {
   if (result.vps === null) {
     return (
@@ -68,8 +70,6 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
           </Disclosure>
         </div>
       </BaseCard>
-
-      <NextMoves milestones={result.next_milestones} />
 
       <div>
         <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">

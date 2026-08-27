@@ -15,7 +15,10 @@ import VentureJourney from "@/components/idea-lab/VentureJourney";
 import VentureOverview from "@/components/idea-lab/VentureOverview";
 import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
+import MissionsSection from "@/components/idea-lab/MissionsSection";
+import NextMoves from "@/components/idea-lab/NextMoves";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
+import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
   NumberField,
   SelectField,
@@ -32,6 +35,7 @@ import {
 import { emptyAssumptions, VENTURE_STAGES } from "@/types";
 
 import type {
+  MissionType,
   ScenarioCompareResponse,
   VentureAssumptions,
   VentureResponse,
@@ -67,6 +71,18 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   const [isSaving, setIsSaving] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  // Phase 10.7 -- Founder Missions V1. `pendingMission` is the ONLY
+  // channel between NextMoves and MissionsSection: NextMoves reports
+  // which milestone text the founder chose ("Make this a mission"),
+  // MissionsSection performs the one API call that creates it, then
+  // clears this back to null. `missionedMilestones` is the reverse
+  // direction -- which vps_guidance-sourced mission titles already exist,
+  // so NextMoves can show "Added ✓" instead of offering a duplicate.
+  const [pendingMission, setPendingMission] = useState<
+    { title: string; relatedCategory: string; missionType: MissionType } | null
+  >(null);
+  const [missionedMilestones, setMissionedMilestones] = useState<string[]>([]);
 
   useEffect(() => {
     let isMounted = true;
@@ -291,6 +307,43 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             {actionError}
           </div>
         ) : null}
+
+        {venture.model_result ? (
+          <NextMoves
+            milestones={venture.model_result.next_milestones}
+            missionedMilestones={missionedMilestones}
+            onMakeMission={(milestoneText) => {
+              const suggestion = suggestionForMilestone(milestoneText);
+              setPendingMission({
+                title: milestoneText,
+                relatedCategory: suggestion.relatedCategory,
+                missionType: suggestion.missionType,
+              });
+            }}
+          />
+        ) : null}
+
+        <MissionsSection
+          ventureId={ventureId}
+          currentAssumptions={venture.assumptions}
+          currentModelResult={venture.model_result}
+          ventureRequestBase={{
+            name: name.trim() || "Untitled venture",
+            description,
+            industry,
+            business_model: businessModel,
+            target_customer: targetCustomer,
+            stage,
+          }}
+          pendingMission={pendingMission}
+          onPendingMissionConsumed={() => setPendingMission(null)}
+          onMissionTitlesChanged={setMissionedMilestones}
+          onVentureUpdated={(updated) => {
+            setVenture(updated);
+            setDraft(updated.assumptions);
+            setScenario(null);
+          }}
+        />
 
         <BaseCard className="p-5">
           <WhatIfPanel
