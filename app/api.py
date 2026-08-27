@@ -75,7 +75,8 @@ from app.database.db import (create_tables,
                          list_startup_milestones_for_startup,
                          create_startup_milestone,
                          update_startup_milestone_status,
-                         add_fundraising_gap_source_to_founder_actions
+                         add_fundraising_gap_source_to_founder_actions,
+                         get_watchlist_startups_for_user
 )
 from typing import Literal
 from fastapi import Query
@@ -90,6 +91,8 @@ from app.models.founder_update import FounderUpdate, CreateFounderUpdateRequest,
 from app.models.startup_milestone import StartupMilestone, CreateMilestoneRequest, UpdateMilestoneStatusRequest, MILESTONE_PILLARS
 from app.models.fundraising_readiness import FundraisingReadinessResponse, PillarReadinessOut, ReadinessGapOut, ChecklistItemOut
 from app.ai.fundraising_readiness import assess_fundraising_readiness
+from app.models.investor_workspace import InvestorWorkspaceResponse, InvestorOverviewOut, WatchedStartupOut, PillarChangeOut, RecentChangeOut, AttentionItemOut
+from app.ai.investor_workspace import assess_investor_workspace
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
@@ -540,6 +543,55 @@ def unsave_my_startup(
 ):
     unsave_startup_for_user(current_user.user_id, startup_id)
     return SavedStartupStatus(saved=False)
+
+
+# ---------------------------------------------------------------------------
+# Investor Workspace V1 (Phase 9). RequireAuth -- the same dependency
+# Saved Startups already uses -- NOT RequireStartupMember: watching a
+# startup as an investor is completely unrelated to being a verified
+# startup member (Part 10). The acting user comes exclusively from
+# current_user.user_id, exactly like every Saved Startups endpoint above;
+# there is deliberately no /users/{user_id}/investor-workspace route.
+#
+# saved_startups remains the sole watchlist relationship -- this endpoint
+# reads it (via get_watchlist_startups_for_user()) and deterministically
+# diffs canonical intelligence (app/ai/investor_workspace.py); it writes
+# nothing, so it can never affect SPS, methodology, Rankings, Discovery,
+# VPS, or Fundraising Readiness.
+# ---------------------------------------------------------------------------
+
+@app.get("/investor/workspace", response_model=InvestorWorkspaceResponse)
+def get_investor_workspace(
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    rows = get_watchlist_startups_for_user(current_user.user_id)
+    assessment = assess_investor_workspace(rows)
+
+    return InvestorWorkspaceResponse(
+        overview=InvestorOverviewOut(**assessment.overview.__dict__),
+        watched_startups=[
+            WatchedStartupOut(
+                startup_id=w.startup_id,
+                company_name=w.company_name,
+                industry=w.industry,
+                stage=w.stage,
+                saved_at=w.saved_at,
+                latest_analysis_at=w.latest_analysis_at,
+                has_canonical_analysis=w.has_canonical_analysis,
+                has_multiple_analyses=w.has_multiple_analyses,
+                current_sps=w.current_sps,
+                previous_sps=w.previous_sps,
+                sps_delta=w.sps_delta,
+                overall_confidence=w.overall_confidence,
+                is_stale=w.is_stale,
+                pillars=[PillarChangeOut(**p.__dict__) for p in w.pillars],
+                attention_reasons=w.attention_reasons,
+            )
+            for w in assessment.watched_startups
+        ],
+        recent_changes=[RecentChangeOut(**c.__dict__) for c in assessment.recent_changes],
+        attention_items=[AttentionItemOut(**a.__dict__) for a in assessment.attention_items],
+    )
 
 
 # ---------------------------------------------------------------------------

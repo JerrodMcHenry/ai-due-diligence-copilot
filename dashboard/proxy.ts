@@ -38,7 +38,12 @@ import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 // (app/auth.py) -- this route-matcher redirect has no bearing on which
 // startups a signed-in user may see, only on whether /founder(.*) is
 // reachable at all while signed out.
-const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)", "/idea-lab(.*)", "/founder(.*)"]);
+//
+// Phase 9 -- Investor Workspace V1: /investor added the same way. Real
+// enforcement is app/investor/page.tsx's own auth.protect() PLUS the
+// backend's RequireAuth (not RequireStartupMember -- Investor Workspace
+// is personal, not membership-gated).
+const isProtectedRoute = createRouteMatcher(["/analyze(.*)", "/saved(.*)", "/idea-lab(.*)", "/founder(.*)", "/investor(.*)"]);
 
 export default clerkMiddleware(async (auth, req) => {
   if (isProtectedRoute(req)) {

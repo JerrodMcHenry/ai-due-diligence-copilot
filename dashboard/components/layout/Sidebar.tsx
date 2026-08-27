@@ -63,6 +63,12 @@ const navigation: NavigationItem[] = [
     authOnly: true,
   },
   {
+    name: "Investor Workspace",
+    href: "/investor",
+    group: "Personal",
+    authOnly: true,
+  },
+  {
     name: "Founder Workspace",
     href: "/founder",
     group: "Personal",

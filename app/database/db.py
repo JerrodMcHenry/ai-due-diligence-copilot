@@ -2698,6 +2698,111 @@ def get_startups_for_comparison(startup_ids: list[int]):
 
 
 # ---------------------------------------------------------------------------
+# Investor Workspace V1 (Phase 9). No new table: saved_startups remains the
+# sole watchlist relationship (see save_startup_for_user()/
+# get_saved_startups_for_user() above), and this function's only job is
+# resolving each of a user's saved startups to its two most recent
+# canonical (methodology_version-matching) analyses -- "latest" and
+# "previous" -- so app/ai/investor_workspace.py can deterministically diff
+# them. Same ROW_NUMBER()-per-startup_id pattern as
+# get_startups_for_comparison() just above, generalized from "top 1" to
+# "top 2" and batched across every saved startup_id in one query rather
+# than one query per startup.
+# ---------------------------------------------------------------------------
+
+def get_watchlist_startups_for_user(user_id: str):
+    """
+    One entry per startup this user has saved (most-recently-saved first),
+    each carrying its own `latest` and `previous` canonical analysis
+    (id/created_at/methodology), independently resolved by startup_id --
+    not by re-deriving identity from company_name the way get_rankings()
+    still does. Either or both of `latest`/`previous` is None, never a
+    fabricated stand-in:
+
+    - `latest` is None when the startup has zero canonical analyses yet
+      (e.g. only pre-Methodology-v2 history, or never analyzed at all).
+      The startup still appears in the list -- a user's own saved list is
+      never silently trimmed by the state of canonical intelligence.
+    - `previous` is None when the startup has exactly one canonical
+      analysis. This is the "no historical comparison yet" case Part 13.B
+      calls out; callers must represent it as "unknown", never as a zero
+      delta.
+
+    Ownership is enforced entirely in SQL via `WHERE ss.user_id =
+    :user_id` -- there is no path through this function for one user's
+    watchlist to include another user's saved_startups row.
+    """
+    with engine.begin() as connection:
+        saved_rows = connection.execute(text("""
+            SELECT
+                ss.startup_id AS startup_id,
+                ss.created_at AS saved_at,
+                startups.canonical_name AS company_name
+            FROM saved_startups ss
+            JOIN startups ON startups.id = ss.startup_id
+            WHERE ss.user_id = :user_id
+            ORDER BY ss.created_at DESC
+        """), {"user_id": user_id}).mappings().all()
+
+        startup_ids = [row["startup_id"] for row in saved_rows]
+
+        history_by_startup: dict[int, list[dict]] = {}
+
+        if startup_ids:
+            history_rows = connection.execute(text("""
+                SELECT startup_id, analysis_id, created_at, methodology, row_number
+                FROM (
+                    SELECT
+                        a.startup_id AS startup_id,
+                        a.id AS analysis_id,
+                        a.created_at AS created_at,
+                        a.methodology AS methodology,
+                        ROW_NUMBER() OVER (
+                            PARTITION BY a.startup_id
+                            ORDER BY a.created_at DESC, a.id DESC
+                        ) AS row_number
+                    FROM analyses a
+                    WHERE
+                        a.startup_id = ANY(:startup_ids)
+                        AND a.methodology IS NOT NULL
+                        AND a.methodology->'analysis_context'->>'methodology_version' = :methodology_version
+                ) ranked
+                WHERE row_number <= 2
+            """), {
+                "startup_ids": startup_ids,
+                "methodology_version": METHODOLOGY_VERSION,
+            }).mappings().all()
+
+            for row in history_rows:
+                methodology = row["methodology"]
+                if isinstance(methodology, str):
+                    methodology = json.loads(methodology)
+
+                entry = {
+                    "analysis_id": row["analysis_id"],
+                    "created_at": row["created_at"],
+                    "methodology": methodology,
+                }
+
+                history_by_startup.setdefault(row["startup_id"], [None, None])
+                history_by_startup[row["startup_id"]][row["row_number"] - 1] = entry
+
+    results = []
+
+    for row in saved_rows:
+        latest, previous = history_by_startup.get(row["startup_id"], [None, None])
+        results.append({
+            "startup_id": row["startup_id"],
+            "company_name": row["company_name"],
+            "saved_at": row["saved_at"],
+            "latest": latest,
+            "previous": previous,
+        })
+
+    return results
+
+
+# ---------------------------------------------------------------------------
 # Idea Lab / Venture Simulator V1. modeled_ventures is a completely
 # separate persistence concept from startups/analyses -- see the Phase 6
 # design report for the full reasoning. Structurally:
