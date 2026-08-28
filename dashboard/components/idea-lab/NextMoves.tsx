@@ -1,5 +1,8 @@
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
+import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import { suggestionForMilestone } from "./missionSuggestions";
+import { getPlaybookForVpsCategory } from "@/lib/playbooks/resourceMap";
 
 // Phase 10.6 -- Idea Lab V2, Part 9. "Your next 3 moves" -- the EXACT
 // SAME deterministic, rule-based `next_milestones` list
@@ -38,6 +41,11 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
       <ol className="mt-3 space-y-3">
         {topThree.map((milestone, index) => {
           const alreadyMissioned = missionedMilestones.includes(milestone);
+          // Phase 10.9 -- Founder Playbooks V1, Part 5B: reuses the SAME
+          // exact-string lookup Phase 10.7 already built for "Make this a
+          // mission" (missionSuggestions.ts) rather than a second table --
+          // one milestone->category classification, two presentational uses.
+          const playbook = getPlaybookForVpsCategory(suggestionForMilestone(milestone).relatedCategory);
 
           return (
             <li key={milestone} className="flex items-start gap-3">
@@ -47,18 +55,22 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
               <div className="flex-1 pt-0.5">
                 <p className="text-sm leading-6 text-text-primary">{milestone}</p>
 
-                {onMakeMission ? (
-                  <Button
-                    type="button"
-                    variant="subtle"
-                    size="sm"
-                    className="mt-1 -ml-3.5"
-                    disabled={alreadyMissioned}
-                    onClick={() => onMakeMission(milestone)}
-                  >
-                    {alreadyMissioned ? "Added to your missions ✓" : "Make this a mission →"}
-                  </Button>
-                ) : null}
+                <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                  {onMakeMission ? (
+                    <Button
+                      type="button"
+                      variant="subtle"
+                      size="sm"
+                      className="-ml-3.5"
+                      disabled={alreadyMissioned}
+                      onClick={() => onMakeMission(milestone)}
+                    >
+                      {alreadyMissioned ? "Added to your missions ✓" : "Make this a mission →"}
+                    </Button>
+                  ) : null}
+
+                  {playbook ? <PlaybookLink slug={playbook.slug} label={`Learn how: ${playbook.title} →`} /> : null}
+                </div>
               </div>
             </li>
           );

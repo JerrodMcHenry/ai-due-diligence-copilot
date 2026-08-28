@@ -1,6 +1,8 @@
 import BaseCard from "@/components/ui/BaseCard";
 import Disclosure from "@/components/ui/Disclosure";
 import ScoreDisplay from "@/components/ui/ScoreDisplay";
+import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import { getPlaybookForVpsCategory } from "@/lib/playbooks/resourceMap";
 
 import type { VPSResult } from "@/types";
 
@@ -77,31 +79,41 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
         </h3>
 
         <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {result.categories.map((category) => (
-            <BaseCard key={category.key} className="p-4">
-              <div className="flex items-center justify-between">
-                <p className="text-sm font-medium text-text-secondary">{category.label}</p>
-                <p className="text-sm font-semibold text-text-primary">
-                  {category.score !== null ? category.score.toFixed(1) : "—"}
-                </p>
-              </div>
+          {result.categories.map((category) => {
+            // Phase 10.9 -- Founder Playbooks V1, Part 5B: a single central
+            // lookup (dashboard/lib/playbooks/resourceMap.ts) -- no new VPS
+            // logic, compute_vps() untouched, category.key is the exact
+            // same field this panel already renders.
+            const playbook = getPlaybookForVpsCategory(category.key);
 
-              <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
-                {category.score !== null ? (
-                  <div
-                    className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
-                    style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
-                  />
+            return (
+              <BaseCard key={category.key} className="p-4">
+                <div className="flex items-center justify-between">
+                  <p className="text-sm font-medium text-text-secondary">{category.label}</p>
+                  <p className="text-sm font-semibold text-text-primary">
+                    {category.score !== null ? category.score.toFixed(1) : "—"}
+                  </p>
+                </div>
+
+                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
+                  {category.score !== null ? (
+                    <div
+                      className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
+                      style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
+                    />
+                  ) : null}
+                </div>
+
+                {category.score === null ? (
+                  <p className="mt-1.5 text-[11px] text-text-muted">We don&rsquo;t know this yet</p>
+                ) : category.basis.length > 0 ? (
+                  <p className="mt-1.5 truncate text-[11px] text-text-muted">{category.basis[0]}</p>
                 ) : null}
-              </div>
 
-              {category.score === null ? (
-                <p className="mt-1.5 text-[11px] text-text-muted">We don&rsquo;t know this yet</p>
-              ) : category.basis.length > 0 ? (
-                <p className="mt-1.5 truncate text-[11px] text-text-muted">{category.basis[0]}</p>
-              ) : null}
-            </BaseCard>
-          ))}
+                {playbook ? <PlaybookLink slug={playbook.slug} className="mt-2 block" /> : null}
+              </BaseCard>
+            );
+          })}
         </div>
       </div>
 
@@ -155,6 +167,12 @@ function DiscoveryGaps({ items }: { items: string[] }) {
     return null;
   }
 
+  // Phase 10.9, Part 5B: every validation_gaps line is, by construction
+  // (see app/ai/vps_guidance.py::_validation_gaps()), about the same
+  // "validation" VPS category -- one link for the whole section, not one
+  // per line, matches Part 5's "do not plaster links everywhere."
+  const playbook = getPlaybookForVpsCategory("validation");
+
   return (
     <BaseCard className="p-4">
       <h3 className="text-sm font-semibold text-text-primary">What you haven&rsquo;t learned yet</h3>
@@ -166,6 +184,7 @@ function DiscoveryGaps({ items }: { items: string[] }) {
           </li>
         ))}
       </ul>
+      {playbook ? <PlaybookLink slug={playbook.slug} label={`Learn how: ${playbook.title} →`} className="mt-2 block" /> : null}
     </BaseCard>
   );
 }

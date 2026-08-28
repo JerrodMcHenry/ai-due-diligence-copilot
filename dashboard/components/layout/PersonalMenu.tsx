@@ -67,6 +67,22 @@ function InvestorIcon() {
   );
 }
 
+function LearnIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
+      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+      <path d="M4 20.5V5.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+// Phase 10.9 -- Founder Playbooks V1, Part 11: no new TopNav item --
+// "Learn" is discovered here, the same restrained account-menu path
+// every other personal/non-primary destination already uses, plus
+// contextual links from inside the product itself (see
+// dashboard/lib/playbooks/resourceMap.ts's own callers). /playbooks
+// itself is public (no auth), so this link works identically for every
+// signed-in user regardless of what they've built so far.
 export default function PersonalMenu() {
   return (
     <UserButton appearance={{ elements: { userButtonAvatarBox: "size-9" } }}>
@@ -75,6 +91,7 @@ export default function PersonalMenu() {
         <UserButton.Link label="My Startup" href="/founder" labelIcon={<StartupIcon />} />
         <UserButton.Link label="Watchlist" href="/saved" labelIcon={<WatchlistIcon />} />
         <UserButton.Link label="Investor intelligence" href="/investor" labelIcon={<InvestorIcon />} />
+        <UserButton.Link label="Learn" href="/playbooks" labelIcon={<LearnIcon />} />
       </UserButton.MenuItems>
     </UserButton>
   );

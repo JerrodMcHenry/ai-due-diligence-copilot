@@ -6,6 +6,8 @@ import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
 import PageHeader from "@/components/layout/PageHeader";
+import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import { getPlaybookForReadinessGap } from "@/lib/playbooks/resourceMap";
 
 import { createFounderAction, getFounderActions, getFundraisingReadiness } from "@/lib/api";
 
@@ -266,6 +268,11 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                 {readiness.gaps.map((gap) => {
                   const isAdded = addedGapTexts.has(gap.source_text);
                   const isPending = pendingGapTexts.has(gap.source_text);
+                  // Phase 10.9 -- Founder Playbooks V1, Part 5D: educational
+                  // guidance only -- reads the exact same gap.category/
+                  // gap.pillar this card already renders through, never
+                  // affects readiness_score or any other computed value.
+                  const playbook = getPlaybookForReadinessGap({ category: gap.category, pillar: gap.pillar });
 
                   return (
                     <BaseCard key={gap.source_text} className="p-5">
@@ -274,6 +281,9 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                           <p className="text-sm font-medium text-text-primary">{gap.issue}</p>
                           <p className="mt-1.5 text-sm text-text-secondary">{gap.why_it_matters}</p>
                           <p className="mt-1.5 text-sm text-primary">→ {gap.recommended_next_step}</p>
+                          {playbook ? (
+                            <PlaybookLink slug={playbook.slug} label={`Learn how: ${playbook.title} →`} className="mt-1.5 block" />
+                          ) : null}
                         </div>
 
                         <button

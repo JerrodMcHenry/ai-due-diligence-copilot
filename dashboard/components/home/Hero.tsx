@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import Button from "@/components/ui/Button";
@@ -75,6 +76,17 @@ export default function Hero() {
             Free to start. No credit card. Your idea stays yours.
           </p>
         </div>
+
+        {/* Phase 10.9 -- Founder Playbooks V1, Part 12: a restrained
+            educational invitation that supports "Build My Startup" as the
+            primary CTA rather than competing with it -- smaller type,
+            secondary position, no button of its own. */}
+        <p className="mt-6 text-sm text-text-muted">
+          Never built a startup before?{" "}
+          <Link href="/playbooks" className="font-semibold text-primary hover:underline">
+            We&rsquo;ll teach you.
+          </Link>
+        </p>
       </div>
     </section>
   );

@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:playbooks": "node tests/playbooks.test.ts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",

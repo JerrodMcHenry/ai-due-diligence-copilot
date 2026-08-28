@@ -10,6 +10,8 @@ import Skeleton from "@/components/ui/Skeleton";
 
 import CategoryChangesList from "./CategoryChangesList";
 import { explainCategoryChanges } from "./categoryChangeExplain";
+import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 
 import {
   createVentureMission,
@@ -385,6 +387,17 @@ export default function MissionsSection({
                   </p>
                 </div>
               ) : null}
+
+              {/* Phase 10.9 -- Founder Playbooks V1, Part 5A: purely
+                  additive -- the mission is fully usable (Start/Complete/
+                  Dismiss/Reflect) whether or not a playbook link renders. */}
+              {(() => {
+                const playbook = getPlaybookForMission({
+                  missionType: primaryMission.mission_type,
+                  relatedCategory: primaryMission.related_category,
+                });
+                return playbook ? <PlaybookLink slug={playbook.slug} label={`Learn: ${playbook.title} →`} /> : null;
+              })()}
 
               {primaryMission.learning_summary ? (
                 <div className="rounded-lg bg-surface-subtle p-3">

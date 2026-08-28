@@ -15,6 +15,8 @@ import Skeleton from "@/components/ui/Skeleton";
 import Button from "@/components/ui/Button";
 
 import { getPitchDeckReview } from "@/lib/api";
+import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import { getPlaybookForDeckSection } from "@/lib/playbooks/resourceMap";
 import type {
   DeckReadinessLabel,
   DeckSectionCoaching,
@@ -313,6 +315,12 @@ function StoryCard({ label, field }: { label: string; field: DeckStoryField }) {
 
 function SectionCard({ section }: { section: DeckSectionCoaching }) {
   const pageLabel = pageRefLabel(section.page_refs);
+  // Phase 10.9 -- Founder Playbooks V1, Part 5C: purely additive
+  // presentation -- does not touch the grounding/sanitization pipeline
+  // (app/ai/pitch_deck_coaching.py) or turn playbook content into deck
+  // evidence in any way; `section.category` is the exact same field
+  // this card already renders.
+  const playbook = getPlaybookForDeckSection(section.category);
 
   return (
     <BaseCard className="p-4">
@@ -357,6 +365,10 @@ function SectionCard({ section }: { section: DeckSectionCoaching }) {
           <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Try this</p>
           <p className="mt-1 text-sm leading-6 text-text-secondary">{section.try_this}</p>
         </div>
+      ) : null}
+
+      {playbook ? (
+        <PlaybookLink slug={playbook.slug} label="Learn how to improve this →" className="mt-3 block" />
       ) : null}
     </BaseCard>
   );

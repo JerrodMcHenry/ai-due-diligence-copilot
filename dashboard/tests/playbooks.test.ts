@@ -1,0 +1,267 @@
+// Phase 10.9 -- Founder Playbooks V1 tests.
+//
+// No JS test runner exists in this repo (no jest/vitest/test script in
+// package.json) -- the established test culture here is a hand-rolled
+// expect()/PASS-FAIL/main() script, run directly (mirrors every
+// app/tests/test_*.py file's own convention). Node 26's native TypeScript
+// support runs this file with no build step and no bundler, which is
+// exactly why dashboard/content/playbooks/* and
+// dashboard/lib/playbooks/resourceMap.ts are written with zero "@/..."
+// path-alias imports (plain node has no alias resolver) -- see those
+// files' own docstrings.
+//
+// Run with (from dashboard/):
+//   node tests/playbooks.test.ts
+// or:
+//   npm run test:playbooks
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import path from "node:path";
+
+import { getAllPlaybooks, getJourneyGroups, getPlaybookBySlug } from "../content/playbooks/index.ts";
+import {
+  getPlaybookForDeckSection,
+  getPlaybookForMission,
+  getPlaybookForReadinessGap,
+  getPlaybookForVpsCategory,
+} from "../lib/playbooks/resourceMap.ts";
+
+function expect(condition: boolean, message: string): void {
+  if (!condition) {
+    throw new Error(message);
+  }
+}
+
+// Part 3's exact required list.
+const REQUIRED_SLUGS = [
+  "customer-discovery",
+  "problem-validation",
+  "mvp",
+  "market-sizing",
+  "pricing",
+  "go-to-market",
+  "pitch-deck",
+  "fundraising",
+  "cap-table",
+  "company-formation",
+  "hiring",
+];
+
+function test_valid_playbook_resolution(): void {
+  const playbook = getPlaybookBySlug("customer-discovery");
+  expect(playbook !== undefined, "A known slug must resolve to a playbook");
+  expect(playbook?.slug === "customer-discovery", "The resolved playbook must have the requested slug");
+}
+
+function test_invalid_slug_returns_undefined(): void {
+  expect(getPlaybookBySlug("not-a-real-playbook-slug") === undefined, "An unknown slug must return undefined, not throw");
+  expect(getPlaybookBySlug("") === undefined, "An empty slug must return undefined");
+}
+
+function test_required_playbooks_exist(): void {
+  for (const slug of REQUIRED_SLUGS) {
+    expect(getPlaybookBySlug(slug) !== undefined, `Part 3 requires a playbook at slug "${slug}"`);
+  }
+}
+
+function test_content_completeness(): void {
+  const VALID_STAGES = new Set(["start", "model", "build", "pitch", "fundraise"]);
+  const VALID_AUDIENCES = new Set(["founder", "investor", "general"]);
+
+  for (const playbook of getAllPlaybooks()) {
+    expect(playbook.title.trim().length > 0, `${playbook.slug}: title must not be empty`);
+    expect(playbook.description.trim().length > 0, `${playbook.slug}: description must not be empty`);
+    expect(playbook.whatIsThis.length > 0 && playbook.whatIsThis.every((p) => p.trim().length > 0), `${playbook.slug}: whatIsThis must have at least one non-empty paragraph`);
+    expect(playbook.whyItMatters.trim().length > 0, `${playbook.slug}: whyItMatters must not be empty`);
+    expect(playbook.steps.length >= 3, `${playbook.slug}: expected at least 3 steps, got ${playbook.steps.length}`);
+    expect(playbook.commonMistakes.length >= 2, `${playbook.slug}: expected at least 2 common mistakes, got ${playbook.commonMistakes.length}`);
+    expect(playbook.checklist.length >= 3, `${playbook.slug}: expected at least 3 checklist items, got ${playbook.checklist.length}`);
+    expect(playbook.whatGoodLooksLike.trim().length > 0, `${playbook.slug}: whatGoodLooksLike must not be empty`);
+    expect(playbook.estimatedMinutes > 0, `${playbook.slug}: estimatedMinutes must be positive`);
+    expect(VALID_STAGES.has(playbook.journeyStage), `${playbook.slug}: journeyStage "${playbook.journeyStage}" is not a recognized stage`);
+    expect(VALID_AUDIENCES.has(playbook.audience), `${playbook.slug}: audience "${playbook.audience}" is not recognized`);
+  }
+}
+
+function test_related_playbooks_resolve(): void {
+  for (const playbook of getAllPlaybooks()) {
+    for (const relatedSlug of playbook.relatedPlaybooks) {
+      expect(
+        getPlaybookBySlug(relatedSlug) !== undefined,
+        `${playbook.slug} references relatedPlaybooks slug "${relatedSlug}", which does not exist -- dangling reference`
+      );
+    }
+  }
+}
+
+function test_journey_groups_cover_every_playbook_exactly_once(): void {
+  const groups = getJourneyGroups();
+  const total = groups.reduce((sum, group) => sum + group.playbooks.length, 0);
+  expect(total === getAllPlaybooks().length, "Every playbook must appear in exactly one journey group");
+
+  for (const group of groups) {
+    for (const playbook of group.playbooks) {
+      expect(playbook.journeyStage === group.stage, `${playbook.slug} is grouped under "${group.stage}" but its own journeyStage is "${playbook.journeyStage}"`);
+    }
+  }
+}
+
+// --- Centralized mapping tests (Part 6/15) ----------------------------------
+
+function test_vps_category_mapping_covers_all_six_categories(): void {
+  // app/ai/vps_scoring.py::VPS_CATEGORIES -- every category Idea Lab's
+  // VPSResultPanel/NextMoves can ever show must resolve to a REAL,
+  // existing playbook (never a dangling slug).
+  const categories = ["market_potential", "problem_solution", "founder_readiness", "gtm_feasibility", "economic_potential", "validation"];
+
+  for (const category of categories) {
+    const playbook = getPlaybookForVpsCategory(category);
+    expect(playbook !== null, `VPS category "${category}" should map to a playbook`);
+  }
+
+  expect(getPlaybookForVpsCategory("validation")?.slug === "customer-discovery", "Part 5's own worked example: validation -> Customer Discovery");
+}
+
+function test_mission_type_mapping_examples() {
+  // Part 5A's own worked examples.
+  expect(
+    getPlaybookForMission({ missionType: "customer_discovery" })?.slug === "customer-discovery",
+    "Customer interview mission (mission_type=customer_discovery) should map to Customer Discovery"
+  );
+  expect(
+    getPlaybookForMission({ missionType: "pricing" })?.slug === "pricing",
+    "Pricing experiment (mission_type=pricing) should map to Pricing"
+  );
+  // "Market research" from missionSuggestions.ts's own table has
+  // missionType="other" + relatedCategory="market_potential" -- mission_type
+  // alone has no confident mapping, so this must fall back to the category.
+  expect(
+    getPlaybookForMission({ missionType: "other", relatedCategory: "market_potential" })?.slug === "market-sizing",
+    "A mission with no specific mission_type mapping must fall back to related_category"
+  );
+}
+
+function test_mission_with_no_mapping_remains_usable_without_a_playbook(): void {
+  const playbook = getPlaybookForMission({ missionType: "other", relatedCategory: null });
+  expect(playbook === null, "A mission with no confident mapping must resolve to null, not a guessed playbook");
+}
+
+function test_deck_section_mapping_examples(): void {
+  // Part 5C's own worked examples.
+  expect(getPlaybookForDeckSection("problem")?.slug === "problem-validation", "Deck Problem section -> Problem Validation");
+  expect(getPlaybookForDeckSection("market")?.slug === "market-sizing", "Deck Market section -> Market & Competition");
+  expect(getPlaybookForDeckSection("business_model")?.slug === "pricing", "Deck Business Model section -> Business Model & Pricing");
+  expect(getPlaybookForDeckSection("ask")?.slug === "fundraising", "Deck Ask section -> Fundraising");
+  expect(getPlaybookForDeckSection("traction") !== null, "Deck Traction section should map to a playbook (Go-to-Market or Fundraising, per Part 5C)");
+}
+
+function test_deck_section_with_no_clear_resource_returns_null(): void {
+  expect(getPlaybookForDeckSection("cover") === null, "Cover has no dedicated educational resource -- must not force a guess");
+  expect(getPlaybookForDeckSection("other") === null, "An uncategorized deck section must not force a guess");
+}
+
+function test_readiness_gap_mapping_examples(): void {
+  // Part 5D's own explicit four-playbook list: Fundraising, Pitch Deck,
+  // Go-to-Market, Cap Table.
+  expect(
+    getPlaybookForReadinessGap({ category: "materials", pillar: null })?.slug === "pitch-deck",
+    "A 'no pitch deck analyzed' gap must map to the Pitch Deck playbook regardless of pillar"
+  );
+  expect(
+    getPlaybookForReadinessGap({ category: "weak_evidence", pillar: "team" })?.slug === "hiring",
+    "A team-pillar gap should map to Hiring & Team"
+  );
+  expect(
+    getPlaybookForReadinessGap({ category: "weak_evidence", pillar: "execution" })?.slug === "go-to-market",
+    "An execution-pillar gap should map to Go-to-Market"
+  );
+  expect(
+    getPlaybookForReadinessGap({ category: "insufficient_evidence_for_stage", pillar: "financial_health" })?.slug === "cap-table",
+    "A financial_health-pillar gap should map to Cap Table & Dilution"
+  );
+  expect(
+    getPlaybookForReadinessGap({ category: "likely_investor_scrutiny", pillar: null })?.slug === "fundraising",
+    "A gap with no pillar and no special category should fall back to the generic Fundraising playbook"
+  );
+}
+
+// --- Firewall tests (Part 10) ------------------------------------------------
+//
+// These modules have zero I/O by construction -- no fetch, no database
+// call, no mutation of anything -- so the meaningful automated check is
+// that the SOURCE CODE itself never references anything from the
+// scoring/persistence layers. This isn't a behavioral test (there is no
+// behavior to provoke); it's a structural guard against a future edit
+// accidentally introducing exactly the coupling Part 10 forbids.
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const DASHBOARD_ROOT = path.resolve(__dirname, "..");
+
+const FORBIDDEN_SUBSTRINGS = [
+  "apiFetch",
+  "fetch(",
+  "compute_vps",
+  "updateVenture(",
+  "updateVentureMissionStatus",
+  "createFounderAction",
+  "save_analysis",
+  "localStorage.setItem",
+];
+
+const FILES_THAT_MUST_STAY_PURE = [
+  "content/playbooks/types.ts",
+  "content/playbooks/data.ts",
+  "content/playbooks/index.ts",
+  "lib/playbooks/resourceMap.ts",
+];
+
+function test_playbook_modules_contain_no_scoring_or_persistence_calls(): void {
+  for (const relativePath of FILES_THAT_MUST_STAY_PURE) {
+    const source = readFileSync(path.join(DASHBOARD_ROOT, relativePath), "utf-8");
+
+    for (const forbidden of FORBIDDEN_SUBSTRINGS) {
+      expect(!source.includes(forbidden), `${relativePath} must never reference "${forbidden}" (Part 10 firewall)`);
+    }
+  }
+}
+
+const TESTS: [string, () => void][] = [
+  ["test_valid_playbook_resolution", test_valid_playbook_resolution],
+  ["test_invalid_slug_returns_undefined", test_invalid_slug_returns_undefined],
+  ["test_required_playbooks_exist", test_required_playbooks_exist],
+  ["test_content_completeness", test_content_completeness],
+  ["test_related_playbooks_resolve", test_related_playbooks_resolve],
+  ["test_journey_groups_cover_every_playbook_exactly_once", test_journey_groups_cover_every_playbook_exactly_once],
+  ["test_vps_category_mapping_covers_all_six_categories", test_vps_category_mapping_covers_all_six_categories],
+  ["test_mission_type_mapping_examples", test_mission_type_mapping_examples],
+  ["test_mission_with_no_mapping_remains_usable_without_a_playbook", test_mission_with_no_mapping_remains_usable_without_a_playbook],
+  ["test_deck_section_mapping_examples", test_deck_section_mapping_examples],
+  ["test_deck_section_with_no_clear_resource_returns_null", test_deck_section_with_no_clear_resource_returns_null],
+  ["test_readiness_gap_mapping_examples", test_readiness_gap_mapping_examples],
+  ["test_playbook_modules_contain_no_scoring_or_persistence_calls", test_playbook_modules_contain_no_scoring_or_persistence_calls],
+];
+
+function main(): void {
+  console.log("\nFounder Playbooks V1 tests");
+  console.log("-".repeat(72));
+
+  const failures: string[] = [];
+
+  for (const [name, test] of TESTS) {
+    try {
+      test();
+      console.log(`PASS  ${name}`);
+    } catch (error) {
+      console.log(`FAIL  ${name}\n      ${(error as Error).message}`);
+      failures.push(name);
+    }
+  }
+
+  console.log("-".repeat(72));
+  console.log(`${TESTS.length - failures.length}/${TESTS.length} passed`);
+
+  if (failures.length > 0) {
+    process.exit(1);
+  }
+}
+
+main();
