@@ -12,6 +12,7 @@ import Input from "@/components/ui/Input";
 import Skeleton from "@/components/ui/Skeleton";
 import Textarea from "@/components/ui/Textarea";
 import { analyzeMultiSource, getFounderStartupWorkspace } from "@/lib/api";
+import { consumeVentureDescriptionForAnalyze } from "@/lib/ventureToStartupHandoff";
 
 // Unified Multi-Source Analyze Startup: company website, pitch deck, and
 // additional company information are evidence SOURCES feeding one
@@ -194,6 +195,31 @@ export default function AnalyzeStartupForm() {
   const [mode, setMode] = useState<"choose" | "startup">(
     requestedStartupId !== null ? "startup" : "choose"
   );
+
+  // Phase 10.10 -- Founder Journey Integration, Part 8: pre-fills
+  // "Additional Company Information" with the founder's own venture
+  // description if they arrived via Idea Lab's "Ready to turn this into a
+  // real startup?" bridge (see lib/ventureToStartupHandoff.ts). Never
+  // runs for a founder-targeted re-analysis (?startup_id=) -- that flow
+  // always re-analyzes the SAME existing canonical startup, which has
+  // nothing to do with any modeled venture's description. Promise.
+  // resolve().then() is the same genuine microtask boundary NewVentureForm.tsx
+  // already uses for the analogous homepage-idea consume, for the same
+  // "sessionStorage doesn't exist during SSR" reason.
+  useEffect(() => {
+    if (requestedStartupId !== null) {
+      return;
+    }
+
+    Promise.resolve().then(() => {
+      const stashedDescription = consumeVentureDescriptionForAnalyze();
+
+      if (stashedDescription) {
+        setCompanyText(stashedDescription);
+        setMode("startup");
+      }
+    });
+  }, [requestedStartupId]);
 
   // Phase 7.2.1: verifies the founder-targeted request BEFORE showing
   // any form -- see FounderTargetState's own comment for why this reuses

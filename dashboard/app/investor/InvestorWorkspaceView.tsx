@@ -153,8 +153,11 @@ export default function InvestorWorkspaceView() {
 
   return (
     <>
+      {/* Phase 10.10, Part 11: title now matches PersonalMenu's own
+          "Investor intelligence" label -- route (/investor) and every
+          internal reference are unchanged, presentation only. */}
       <PageHeader
-        title="Investor Workspace"
+        title="Investor Intelligence"
         subtitle="What's happening across the startups you're tracking."
       />
 

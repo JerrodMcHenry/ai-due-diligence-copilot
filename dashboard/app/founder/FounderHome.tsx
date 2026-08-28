@@ -67,8 +67,13 @@ export default function FounderHome() {
 
   return (
     <div className="space-y-8">
+      {/* Phase 10.10, Part 11: title now matches PersonalMenu's own "My
+          Startup" label exactly (previously the nav said "My Startup" but
+          this page's own H1 said "Founder Workspace" -- the underlying
+          route, backend concept, and every internal reference are
+          unchanged, presentation only). */}
       <PageHeader
-        title="Founder Workspace"
+        title="My Startup"
         subtitle="Your private command center for the startups you've been verified as a member of."
       />
 

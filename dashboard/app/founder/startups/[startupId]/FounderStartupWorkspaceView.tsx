@@ -13,6 +13,8 @@ import ActionPlan from "@/components/founder/ActionPlan";
 import Milestones from "@/components/founder/Milestones";
 import RecentUpdates from "@/components/founder/RecentUpdates";
 import FundraisingReadinessCard from "@/components/founder/FundraisingReadinessCard";
+import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
+import NextStepCard from "@/components/journey/NextStepCard";
 import { PILLARS } from "@/components/startup/pillarMeta";
 import {
   formatAnalysisDate,
@@ -192,11 +194,17 @@ export default function FounderStartupWorkspaceView({
         </>
       )}
 
-      {/* Phase 8 -- Fundraising Readiness V1: a compact teaser card
-          linking to the dedicated /fundraising page (Part 11's own
-          preference), rendered regardless of whether this startup has a
-          canonical analysis yet -- the page itself handles that honestly. */}
-      <FundraisingReadinessCard startupId={startup_id} />
+      {/* Phase 8 -- Fundraising Readiness V1 + Phase 10.10, Part 9/10: a
+          compact teaser card linking to the dedicated /fundraising page,
+          paired with a Pitch Deck Coach teaser so "prepare pitch" and
+          "assess fundraising readiness" read as one connected step in
+          the founder journey rather than two unrelated features. Rendered
+          regardless of whether this startup has a canonical analysis yet
+          -- the readiness page itself handles that honestly. */}
+      <div className="grid gap-4 sm:grid-cols-2">
+        <FundraisingReadinessCard startupId={startup_id} />
+        <PitchDeckCoachTeaser />
+      </div>
 
       {/* Phase 7.3 -- Founder Progress & Improvement V1: rendered even
           when this startup has no canonical analysis yet, since
@@ -257,6 +265,10 @@ export default function FounderStartupWorkspaceView({
   );
 }
 
+// Phase 10.10, Part 16: consolidated onto the same shared NextStepCard
+// every other "what should I do next?" moment in the product now uses
+// (Idea Lab's IdeaLabNextStep, this same pattern) -- this used to be its
+// own bespoke BaseCard with identical intent.
 function NotYetAnalyzed({
   canonicalName,
   reanalyzeHref,
@@ -265,24 +277,12 @@ function NotYetAnalyzed({
   reanalyzeHref: string;
 }) {
   return (
-    <BaseCard className="p-10 text-center">
-      <h2 className="text-xl font-bold text-text-primary">
-        No intelligence yet
-      </h2>
-
-      <p className="mx-auto mt-3 max-w-md text-sm text-text-secondary">
-        {canonicalName} doesn&rsquo;t have a completed Startup Intelligence
-        analysis yet. Run one to see your SPS, pillar scores, and
-        recommendations here.
-      </p>
-
-      <Link
-        href={reanalyzeHref}
-        className="mt-6 inline-flex rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
-      >
-        Analyze this startup
-      </Link>
-    </BaseCard>
+    <NextStepCard
+      eyebrow="No intelligence yet"
+      title={`Analyze ${canonicalName} to see its Startup Power Score`}
+      why="Run SIE's analysis to see pillar scores, strengths, risks, and recommendations here."
+      primaryAction={{ label: "Analyze this startup", href: reanalyzeHref }}
+    />
   );
 }
 

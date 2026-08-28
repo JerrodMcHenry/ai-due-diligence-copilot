@@ -349,7 +349,15 @@ export default function MissionsSection({
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <h2 className="text-xl font-semibold text-text-primary">Your Missions</h2>
+        <div>
+          <h2 className="text-xl font-semibold text-text-primary">Your Missions</h2>
+          {/* Phase 10.10, Part 5: makes the Next Moves -> Missions
+              relationship explicit in copy, not just in adjacent layout --
+              a mission is how a move above actually gets done. */}
+          <p className="mt-0.5 text-xs text-text-muted">
+            How you actually work through your next moves, one at a time.
+          </p>
+        </div>
         <p className="text-xs text-text-muted">
           {completedCount} mission{completedCount === 1 ? "" : "s"} completed · {activeMissions.length} active
         </p>

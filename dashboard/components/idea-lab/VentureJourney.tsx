@@ -1,32 +1,33 @@
-import { VENTURE_STAGES } from "@/types";
+import { getJourneyStage, VENTURE_JOURNEY_STEP_IDS, VENTURE_STAGE_TO_JOURNEY_STAGE } from "@/lib/founderJourney";
 
-// Phase 10.6 -- Idea Lab V2, Part 4. Reuses Home's IDEA -> MODEL -> VALIDATE
-// -> BUILD -> FUNDRAISE progression (components/home/IdeaJourney.tsx) as a
-// per-venture position indicator -- product navigation and progress
-// framing, explicitly NOT an objective claim the venture has reached a
-// business stage (Part 4). It is a straightforward relabeling of the
-// EXISTING `stage` field's five values (VENTURE_STAGES, unchanged) onto
-// friendlier journey language:
+// Phase 10.6 -- Idea Lab V2, Part 4. Reuses Home's IDEA -> MODEL ->
+// EXPERIMENT -> BUILD -> FUNDRAISE progression (components/home/
+// IdeaJourney.tsx) as a per-venture position indicator -- product
+// navigation and progress framing, explicitly NOT an objective claim the
+// venture has reached a business stage (Part 4). It is a straightforward
+// relabeling of the EXISTING `stage` field's five values (VENTURE_STAGES,
+// unchanged) onto friendlier journey language.
 //
-//   Idea        -> Idea       (nothing modeled yet beyond the description)
-//   Researching -> Model      (still shaping the venture model)
-//   Validating  -> Validate   (testing assumptions against reality)
-//   Building    -> Build      (actively building)
-//   Launched    -> Fundraise  (the natural next focus once live -- a
-//                              heuristic, not a claim every launched
-//                              venture is fundraising)
-//
-// The underlying `stage` value stored on the venture, the VENTURE_STAGES
-// dropdown, and every API contract are completely unchanged -- this is
-// presentation only, same discipline as Phase 10.3's nav relabeling.
-const JOURNEY_LABELS = ["Idea", "Model", "Validate", "Build", "Fundraise"] as const;
+// Phase 10.10, Part 3: the labels themselves now come from the ONE
+// shared founderJourney.ts vocabulary (VENTURE_STAGE_TO_JOURNEY_STAGE's
+// own docstring has the full Idea/Researching/Validating/Building/
+// Launched -> idea/model/experiment/build/fundraise mapping) instead of
+// a second, locally hardcoded label array. The underlying `stage` value
+// stored on the venture, the VENTURE_STAGES dropdown, and every API
+// contract remain completely unchanged -- this is presentation only,
+// same discipline as Phase 10.3's nav relabeling.
+const JOURNEY_LABELS = VENTURE_JOURNEY_STEP_IDS.map((id) => getJourneyStage(id).label);
 
 function currentStepIndex(stage: string | null): number {
   if (!stage) {
     return 0;
   }
 
-  const index = VENTURE_STAGES.indexOf(stage as (typeof VENTURE_STAGES)[number]);
+  // Goes through the shared normalization map rather than indexing
+  // VENTURE_STAGES/VENTURE_JOURNEY_STEP_IDS in parallel -- correct even
+  // if the two arrays are ever reordered independently.
+  const journeyStageId = VENTURE_STAGE_TO_JOURNEY_STAGE[stage];
+  const index = journeyStageId ? VENTURE_JOURNEY_STEP_IDS.indexOf(journeyStageId) : -1;
   return index === -1 ? 0 : index;
 }
 

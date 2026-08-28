@@ -1,12 +1,11 @@
 import { Suspense } from "react";
 
-import AnalyzeCallout from "@/components/home/AnalyzeCallout";
 import CompetitionTeaser from "@/components/home/CompetitionTeaser";
+import EntryPaths from "@/components/home/EntryPaths";
 import ExplorePreview from "@/components/home/ExplorePreview";
 import Hero from "@/components/home/Hero";
 import IdeaJourney from "@/components/home/IdeaJourney";
 import ScenarioExamples from "@/components/home/ScenarioExamples";
-import ThreePaths from "@/components/home/ThreePaths";
 import TrustSection from "@/components/home/TrustSection";
 import VisualPayoff from "@/components/home/VisualPayoff";
 
@@ -42,13 +41,11 @@ export default function HomePage() {
         <VisualPayoff />
       </div>
 
-      <ThreePaths />
+      <EntryPaths />
 
       <IdeaJourney />
 
       <ScenarioExamples />
-
-      <AnalyzeCallout />
 
       <Suspense fallback={null}>
         <ExplorePreview />

@@ -18,11 +18,16 @@ type DisclosureProps = {
   children: ReactNode;
   defaultOpen?: boolean;
   className?: string;
+  // Phase 10.10, Part 5: lets a caller link/scroll straight to a specific
+  // Disclosure (e.g. a "what should I do next?" card pointing at "Edit
+  // the full model") without inventing a second wrapper element.
+  id?: string;
 };
 
-export default function Disclosure({ summary, children, defaultOpen = false, className = "" }: DisclosureProps) {
+export default function Disclosure({ summary, children, defaultOpen = false, className = "", id }: DisclosureProps) {
   return (
     <details
+      id={id}
       open={defaultOpen}
       className={["group rounded-2xl border border-border bg-surface open:pb-2", className].join(" ")}
     >

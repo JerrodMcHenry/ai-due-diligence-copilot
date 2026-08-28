@@ -160,8 +160,11 @@ export default function SavedStartupsView() {
 
   return (
     <>
+      {/* Phase 10.10, Part 11: title now matches PersonalMenu's own
+          "Watchlist" label -- route (/saved) and every internal
+          reference are unchanged, presentation only. */}
       <PageHeader
-        title="Saved Startups"
+        title="Watchlist"
         subtitle="Startups you're tracking, always shown with their latest Startup Power Score."
       />
 

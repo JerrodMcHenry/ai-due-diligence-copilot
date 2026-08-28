@@ -2,13 +2,16 @@ import Link from "next/link";
 
 import BaseCard from "@/components/ui/BaseCard";
 
-// Phase 10.5, Part 5. Three strong pathways, not a feature grid -- each
-// one links straight into an EXISTING route (no new pages, no new logic):
-// Build -> /idea-lab, Analyze -> /analyze, Explore -> /rankings (the same
-// primary Explore destination TopNav already uses -- see Phase 10.3's
-// PRIMARY_NAVIGATION). Three items only, matching TopNav's own Explore/
-// Build/Analyze vocabulary so Home and the shell nav reinforce the same
-// mental model rather than introducing a fourth, different taxonomy.
+// Phase 10.10 -- Founder Journey Integration, Part 4/16. Replaces the
+// old two-CTA pair (ThreePaths.tsx's own "Analyze a startup" card AND
+// AnalyzeCallout.tsx, a second section further down the page pointing at
+// the exact same /analyze route with overlapping copy) with FOUR
+// distinct entry points, one per Part 4's own stated visitor: "I have an
+// idea," "I already have a startup," "I have a pitch deck," "I want
+// inspiration." Every link still goes straight into an EXISTING route --
+// no new pages, no new logic, same discipline the old ThreePaths already
+// established. AnalyzeCallout.tsx is deleted; nothing it did isn't
+// covered here.
 type Path = {
   eyebrow: string;
   title: string;
@@ -20,7 +23,7 @@ type Path = {
 
 const PATHS: Path[] = [
   {
-    eyebrow: "For aspiring founders",
+    eyebrow: "I have an idea",
     title: "Build an idea",
     description:
       "Model a startup, explore assumptions, run what-if scenarios, and turn uncertainty into a plan.",
@@ -38,10 +41,10 @@ const PATHS: Path[] = [
     ),
   },
   {
-    eyebrow: "For founders already building",
-    title: "Analyze a startup",
+    eyebrow: "I already have a startup",
+    title: "Analyze my startup",
     description:
-      "Analyze company information or a pitch deck and get structured startup intelligence.",
+      "Analyze your company information or website and get a structured Startup Profile.",
     cta: "Analyze my startup",
     href: "/analyze",
     icon: (
@@ -52,7 +55,21 @@ const PATHS: Path[] = [
     ),
   },
   {
-    eyebrow: "For investors, students & the curious",
+    eyebrow: "I have a pitch deck",
+    title: "Review my pitch deck",
+    description:
+      "Upload a PDF deck and get coaching on the story it tells, what's working, and what to fix first.",
+    cta: "Review my deck",
+    href: "/analyze/deck",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
+        <rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    eyebrow: "I want inspiration",
     title: "Explore startups",
     description:
       "Browse startup profiles, rankings, compare companies, and understand what drives their scores.",
@@ -67,29 +84,29 @@ const PATHS: Path[] = [
   },
 ];
 
-export default function ThreePaths() {
+export default function EntryPaths() {
   return (
     <section>
       <h2 className="text-center text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
-        Three ways in
+        Where do you want to start?
       </h2>
 
-      <div className="mt-8 grid gap-5 md:grid-cols-3">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {PATHS.map((path) => (
           <Link key={path.href} href={path.href} className="group block">
             <BaseCard
               variant="raised"
-              className="flex h-full flex-col p-7 transition-transform group-hover:-translate-y-1"
+              className="flex h-full flex-col p-6 transition-transform group-hover:-translate-y-1"
             >
-              <div className="flex size-12 items-center justify-center rounded-2xl bg-primary-soft text-primary">
+              <div className="flex size-11 items-center justify-center rounded-2xl bg-primary-soft text-primary">
                 {path.icon}
               </div>
 
-              <p className="mt-5 text-xs font-semibold uppercase tracking-wide text-text-muted">
+              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-text-muted">
                 {path.eyebrow}
               </p>
 
-              <p className="mt-1.5 text-xl font-bold text-text-primary">{path.title}</p>
+              <p className="mt-1.5 text-lg font-bold text-text-primary">{path.title}</p>
 
               <p className="mt-2 flex-1 text-sm leading-6 text-text-secondary">
                 {path.description}

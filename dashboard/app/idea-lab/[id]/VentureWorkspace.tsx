@@ -25,6 +25,10 @@ import {
   TextField,
   ToggleField,
 } from "@/components/idea-lab/AssumptionFields";
+import NextStepCard from "@/components/journey/NextStepCard";
+import { resolveIdeaLabNextStep } from "@/lib/journey/resolveIdeaLabNextStep";
+import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
+import { stashVentureDescriptionForAnalyze } from "@/lib/ventureToStartupHandoff";
 
 import {
   compareVentureScenarios,
@@ -39,6 +43,7 @@ import type {
   ScenarioCompareResponse,
   VentureAssumptions,
   VentureResponse,
+  VPSResult,
 } from "@/types";
 
 type LoadState = "loading" | "ready" | "error" | "not-found";
@@ -308,6 +313,33 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           </div>
         ) : null}
 
+        {/* Phase 10.10, Part 5/6: ONE headline "what should I do next?"
+            card, deterministically derived from the exact same
+            next_milestones/vps data NextMoves already renders below it
+            (see resolveIdeaLabNextStep's own docstring -- no new logic,
+            no score, no LLM). NextMoves keeps showing the fuller top-3
+            list underneath as supporting detail; this is the hierarchy
+            Part 5 asks for, not a duplicate competing CTA -- "Start this
+            mission" here calls the exact same setPendingMission()
+            mechanism NextMoves' own "Make this a mission" button does. */}
+        {venture.model_result ? <IdeaLabNextStep
+          modelResult={venture.model_result}
+          missionedMilestones={missionedMilestones}
+          onStartMission={(milestoneText, suggestion) =>
+            setPendingMission({
+              title: milestoneText,
+              relatedCategory: suggestion.relatedCategory,
+              missionType: suggestion.missionType,
+            })
+          }
+          onAnalyzeStartup={() => {
+            if (description) {
+              stashVentureDescriptionForAnalyze(description);
+            }
+            router.push("/analyze");
+          }}
+        /> : null}
+
         {venture.model_result ? (
           <NextMoves
             milestones={venture.model_result.next_milestones}
@@ -323,6 +355,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           />
         ) : null}
 
+        <div id="your-missions">
         <MissionsSection
           ventureId={ventureId}
           currentAssumptions={venture.assumptions}
@@ -344,6 +377,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             setScenario(null);
           }}
         />
+        </div>
 
         <BaseCard className="p-5">
           <WhatIfPanel
@@ -362,7 +396,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           />
         ) : null}
 
-        <Disclosure summary="Edit the full model" defaultOpen={false}>
+        <Disclosure id="edit-the-full-model" summary="Edit the full model" defaultOpen={false}>
         <section>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-xl font-semibold text-text-primary">What you believe</h2>
@@ -583,6 +617,72 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         </Disclosure>
       </div>
     </>
+  );
+}
+
+// Phase 10.10 -- Founder Journey Integration, Part 5/6. Turns
+// resolveIdeaLabNextStep()'s pure, deterministic result into real
+// NextStepCard props -- the only place that happens, since building the
+// actual actions needs callbacks (setPendingMission, router navigation)
+// the resolver itself deliberately has no access to.
+function IdeaLabNextStep({
+  modelResult,
+  missionedMilestones,
+  onStartMission,
+  onAnalyzeStartup,
+}: {
+  modelResult: VPSResult;
+  missionedMilestones: string[];
+  onStartMission: (milestoneText: string, suggestion: { relatedCategory: string; missionType: MissionType }) => void;
+  onAnalyzeStartup: () => void;
+}) {
+  const nextStep = resolveIdeaLabNextStep(modelResult);
+
+  if (nextStep.kind === "add_assumptions") {
+    return (
+      <NextStepCard
+        title="Add a few assumptions to see your first model"
+        why="Even a rough guess at your market or problem statement is enough to get started."
+        primaryAction={{ label: "Edit your model", href: "#edit-the-full-model" }}
+      />
+    );
+  }
+
+  if (nextStep.kind === "work_on_milestone") {
+    const suggestion = suggestionForMilestone(nextStep.milestoneText);
+    const alreadyMissioned = missionedMilestones.includes(nextStep.milestoneText);
+    const playbook = getPlaybookForMission({
+      missionType: suggestion.missionType,
+      relatedCategory: suggestion.relatedCategory,
+    });
+
+    return (
+      <NextStepCard
+        title={nextStep.milestoneText}
+        why="This reduces one of your venture's biggest unknowns right now."
+        primaryAction={
+          alreadyMissioned
+            ? { label: "Go to your missions", href: "#your-missions" }
+            : { label: "Start this mission", onClick: () => onStartMission(nextStep.milestoneText, suggestion) }
+        }
+        learnPlaybookSlug={playbook?.slug}
+      />
+    );
+  }
+
+  // "ready_for_real_startup" -- Part 8's idea -> real startup bridge.
+  // Deliberately explains the boundary rather than implying anything
+  // transfers automatically: analyzing does not create a startup by
+  // itself, and nothing here invents evidence -- POST /analyze still runs
+  // its own independent research/evidence pipeline exactly as it does for
+  // any other visitor.
+  return (
+    <NextStepCard
+      eyebrow="Your model looks solid"
+      title="Ready to turn this into a real startup?"
+      why="This modeled idea shows what COULD work, based on your own assumptions. A real Startup Profile shows what evidence supports TODAY, built the same way for every company on SIE. Analyzing brings over your own description as a starting point -- it never creates anything or invents evidence on your behalf."
+      primaryAction={{ label: "Analyze My Startup", onClick: onAnalyzeStartup }}
+    />
   );
 }
 

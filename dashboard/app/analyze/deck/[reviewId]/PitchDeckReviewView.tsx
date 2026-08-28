@@ -16,6 +16,7 @@ import Button from "@/components/ui/Button";
 
 import { getPitchDeckReview } from "@/lib/api";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import NextStepCard from "@/components/journey/NextStepCard";
 import { getPlaybookForDeckSection } from "@/lib/playbooks/resourceMap";
 import type {
   DeckReadinessLabel,
@@ -294,6 +295,23 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
             </div>
           </section>
         ) : null}
+
+        {/* Phase 10.10 -- Founder Journey Integration, Part 9: a deck
+            review is never the end of the loop. Deliberately generic and
+            never inferring fundraising readiness from deck quality (Part
+            9's own explicit warning) -- this is an educational pointer
+            forward, not a claim this deck (or this founder) is ready to
+            raise. A canonical founder with an actual Fundraising
+            Readiness assessment already finds it via My Startup in the
+            account menu; nothing here guesses at or links a specific
+            startup. */}
+        <NextStepCard
+          eyebrow="What's next?"
+          title="Keep preparing for the conversation"
+          why="A clear deck is one part of being ready to raise -- not the whole picture. Fundraising Readiness looks at the evidence behind your whole story."
+          primaryAction={{ label: "Review another deck", href: "/analyze/deck" }}
+          learnPlaybookSlug="fundraising"
+        />
       </div>
     </>
   );

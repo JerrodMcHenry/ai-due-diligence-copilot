@@ -1,14 +1,24 @@
+import { getJourneyStage } from "@/lib/founderJourney";
+
 // Phase 10.5, Part 6. "SIE isn't only an idea grader -- it stays useful as
 // the idea becomes a real company." A concise five-step progression, kept
 // aspirational without implying any guarantee (no "get funded", no
 // success framing) -- each step's description says what SIE HELPS WITH,
 // never what it promises will happen.
+//
+// Phase 10.10, Part 3: labels now come from the shared founderJourney.ts
+// vocabulary (a curated 5-of-8 subset, matching VentureJourney.tsx's own
+// per-venture stepper) instead of a second, separately hardcoded array --
+// only the SIE-specific "what this helps with" descriptions stay local to
+// this marketing component, since founderJourney.ts's own descriptions
+// are deliberately product-agnostic ("Test the assumptions that matter"),
+// not phrased as what SIE itself does.
 const STEPS = [
-  { label: "Idea", description: "Describe it in your own words." },
-  { label: "Model", description: "SIE structures it into a venture model." },
-  { label: "Validate", description: "Test assumptions, run what-if scenarios." },
-  { label: "Build", description: "Track milestones and progress as a founder." },
-  { label: "Fundraise", description: "Understand your fundraising readiness." },
+  { label: getJourneyStage("idea").label, description: "Describe it in your own words." },
+  { label: getJourneyStage("model").label, description: "SIE structures it into a venture model." },
+  { label: getJourneyStage("experiment").label, description: "Test assumptions, run what-if scenarios." },
+  { label: getJourneyStage("build").label, description: "Track milestones and progress as a founder." },
+  { label: getJourneyStage("fundraise").label, description: "Understand your fundraising readiness." },
 ];
 
 export default function IdeaJourney() {
