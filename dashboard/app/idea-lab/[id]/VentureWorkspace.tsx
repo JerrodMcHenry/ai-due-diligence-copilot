@@ -620,6 +620,31 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   );
 }
 
+// Phase 10.11, Part 2: fixes the one friction point Phase 10.10's own
+// report flagged -- clicking "Edit your model" scrolled to the "Edit the
+// full model" <details>, but a native <details> doesn't auto-expand on
+// anchor navigation, leaving it collapsed right where the founder was
+// just sent. A small local DOM helper, not a global state system: opens
+// the element and scrolls to it in one click, then moves focus onto its
+// own <summary> so a keyboard user lands somewhere meaningful (not
+// yanked away with no context) and screen readers announce the now-
+// expanded region.
+function openDisclosureAndScrollIntoView(id: string) {
+  const element = document.getElementById(id);
+
+  if (!(element instanceof HTMLDetailsElement)) {
+    return;
+  }
+
+  element.open = true;
+  element.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  const summary = element.querySelector("summary");
+  if (summary instanceof HTMLElement) {
+    summary.focus();
+  }
+}
+
 // Phase 10.10 -- Founder Journey Integration, Part 5/6. Turns
 // resolveIdeaLabNextStep()'s pure, deterministic result into real
 // NextStepCard props -- the only place that happens, since building the
@@ -643,7 +668,7 @@ function IdeaLabNextStep({
       <NextStepCard
         title="Add a few assumptions to see your first model"
         why="Even a rough guess at your market or problem statement is enough to get started."
-        primaryAction={{ label: "Edit your model", href: "#edit-the-full-model" }}
+        primaryAction={{ label: "Edit your model", onClick: () => openDisclosureAndScrollIntoView("edit-the-full-model") }}
       />
     );
   }

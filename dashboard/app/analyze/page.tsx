@@ -2,6 +2,7 @@ import { Suspense } from "react";
 
 import { auth } from "@clerk/nextjs/server";
 
+import Skeleton from "@/components/ui/Skeleton";
 import AnalyzeStartupForm from "./AnalyzeStartupForm";
 
 // SIE Authentication Phase 1: page-level protection, independent of
@@ -27,11 +28,7 @@ export default async function AnalyzeStartupPage() {
   await auth.protect();
 
   return (
-    <Suspense
-      fallback={
-        <div className="h-96 animate-pulse rounded-2xl border border-slate-800 bg-slate-900" />
-      }
-    >
+    <Suspense fallback={<Skeleton className="h-96 w-full rounded-2xl" />}>
       <AnalyzeStartupForm />
     </Suspense>
   );

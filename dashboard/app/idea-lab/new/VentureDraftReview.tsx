@@ -39,6 +39,22 @@ type VentureDraftReviewProps = {
   isSubmitting: boolean;
 };
 
+// Phase 10.11, Part 1/16: a short, presentation-only naming hint --
+// never a value, only a placeholder, so the venture's real name is
+// never silently set to a paragraph. Cuts at a word boundary so it
+// reads as a plausible short name, not a truncated sentence.
+function suggestNamePlaceholder(description: string): string {
+  const trimmed = description.trim();
+
+  if (trimmed.length <= 48) {
+    return trimmed || "e.g. RideShare Campus";
+  }
+
+  const cut = trimmed.slice(0, 48);
+  const lastSpace = cut.lastIndexOf(" ");
+  return `${(lastSpace > 20 ? cut.slice(0, lastSpace) : cut).trim()}…`;
+}
+
 // Phase 6.1, Part 5/6: the founder never lands on a saved venture
 // straight out of the AI structuring call -- this screen is the explicit
 // review/edit/confirm step. Nothing here is submitted anywhere until
@@ -51,7 +67,12 @@ export default function VentureDraftReview({
   onConfirm,
   isSubmitting,
 }: VentureDraftReviewProps) {
-  const [name, setName] = useState(draft.name.value ?? originalDescription.slice(0, 120));
+  // Phase 10.11: never defaults to the raw description -- that produced
+  // a startup "named" a full paragraph, which then repeated itself
+  // verbatim in the Venture Overview right below it. Empty (with a short
+  // placeholder hint) invites the founder to actually name it; blank
+  // still safely falls back to "Untitled venture" in handleConfirm below.
+  const [name, setName] = useState(draft.name.value ?? "");
   const [industry, setIndustry] = useState(draft.industry.value);
   const [businessModel, setBusinessModel] = useState(draft.business_model.value);
   const [targetCustomer, setTargetCustomer] = useState(draft.target_customer.value);
@@ -91,6 +112,21 @@ export default function VentureDraftReview({
         </button>
       </BaseCard>
 
+      {/* Phase 10.11, Part 1/16: a visible naming moment, not buried
+          inside the collapsed "Review and edit the full model" disclosure
+          below -- naming your startup is a genuine, small delight
+          ("Whoa, this actually looks like a startup"), not a form field
+          to skip past. */}
+      <BaseCard className="p-5">
+        <TextField
+          id="review-name"
+          label="What's your venture called?"
+          value={name}
+          onChange={(value) => setName(value ?? "")}
+          placeholder={suggestNamePlaceholder(originalDescription)}
+        />
+      </BaseCard>
+
       {/* Phase 10.6, Part 3: the plain-language summary a founder sees
           FIRST -- before the seven-section form below, which is now
           collapsed by default (progressive disclosure) rather than shown
@@ -110,12 +146,8 @@ export default function VentureDraftReview({
           </p>
 
           <ReviewAccordion title="Venture Basics">
-          <TextField
-            id="review-name"
-            label="Venture name"
-            value={name}
-            onChange={(value) => setName(value ?? "")}
-          />
+          {/* Name lives above as its own visible field now (Phase
+              10.11) -- not repeated here. */}
           <TextField
             id="review-industry"
             label="Industry"

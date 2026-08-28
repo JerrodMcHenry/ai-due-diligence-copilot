@@ -172,6 +172,15 @@ export default function StartupHeroV2({
     Boolean(funding_stage) &&
     funding_stage.trim().toLowerCase() !== company_stage.trim().toLowerCase();
 
+  // Phase 10.11, Part 4/15: industry and business_model sometimes land on
+  // the exact same extracted value (e.g. both "SaaS") -- shown as two
+  // adjacent identical chips, that reads as a duplicate/glitch rather
+  // than two distinct facts. Same "don't repeat a value" discipline as
+  // showFundingStage above.
+  const showBusinessModel =
+    Boolean(business_model) &&
+    business_model.trim().toLowerCase() !== industry.trim().toLowerCase();
+
   return (
     <BaseCard className="p-8">
       <div className="grid gap-10 lg:grid-cols-[320px_1fr] lg:items-center">
@@ -201,7 +210,7 @@ export default function StartupHeroV2({
             {company_stage ? <MetaChip>{company_stage}</MetaChip> : null}
             {showFundingStage ? <MetaChip>{funding_stage}</MetaChip> : null}
             {industry ? <MetaChip>{industry}</MetaChip> : null}
-            {business_model ? <MetaChip>{business_model}</MetaChip> : null}
+            {showBusinessModel ? <MetaChip>{business_model}</MetaChip> : null}
 
             {recommendation ? (
               <MetaChip className="bg-primary/10 text-primary">

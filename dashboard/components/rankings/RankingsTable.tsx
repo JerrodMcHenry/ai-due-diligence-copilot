@@ -33,6 +33,17 @@ function formatScore(value: number | null | undefined) {
   return Number.isInteger(value) ? value.toString() : value.toFixed(1);
 }
 
+// Phase 10.11, Part 4/6: a handful of older analyses stored a literal
+// placeholder string ("UNKNOWN", "N/A", "None") as business_model rather
+// than leaving it empty -- shown raw, that reads as an internal enum
+// leaking through, not "we don't know yet." Normalizes those the same
+// way an empty value already displays, without touching the stored data
+// or any analysis/scoring logic.
+function formatLabel(value: string | null | undefined): string {
+  const trimmed = value?.trim() ?? "";
+  return /^(unknown|n\/a|none)$/i.test(trimmed) ? "" : trimmed;
+}
+
 // Reuses the exact same score-band logic SPSRing already renders with --
 // previously this file had its OWN independent 80/65/50 thresholds that
 // could (and did) disagree with the ring's 95/90/.../40 bands, so the same
@@ -401,19 +412,19 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
 
                       <td className="whitespace-nowrap px-6 py-5">
                         <Badge tone="neutral" className="max-w-[190px] truncate">
-                          {startup.industry?.trim() || "--"}
+                          {formatLabel(startup.industry) || "--"}
                         </Badge>
                       </td>
 
                       <td className="whitespace-nowrap px-6 py-5">
                         <Badge tone="neutral" className="max-w-[190px] truncate">
-                          {startup.stage?.trim() || "--"}
+                          {formatLabel(startup.stage) || "--"}
                         </Badge>
                       </td>
 
                       <td className="hidden whitespace-nowrap px-6 py-5 lg:table-cell">
                         <Badge tone="neutral" className="max-w-[190px] truncate">
-                          {startup.business_model?.trim() || "--"}
+                          {formatLabel(startup.business_model) || "--"}
                         </Badge>
                       </td>
 

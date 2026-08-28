@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "test:playbooks": "node tests/playbooks.test.ts",
-    "test:journey": "node tests/journey.test.ts"
+    "test:journey": "node tests/journey.test.ts",
+    "test": "npm run test:playbooks && npm run test:journey"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",
