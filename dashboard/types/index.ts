@@ -13,3 +13,4 @@ export * from "./founderUpdate";
 export * from "./startupMilestone";
 export * from "./fundraisingReadiness";
 export * from "./investorWorkspace";
+export * from "./pitchDeckCoach";

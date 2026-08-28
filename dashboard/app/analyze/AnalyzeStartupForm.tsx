@@ -182,6 +182,19 @@ export default function AnalyzeStartupForm() {
     requestedStartupId !== null ? { status: "checking" } : { status: "none" }
   );
 
+  // Phase 10.8 -- Pitch Deck Coach V1, Part 20: "Analyze" becomes a
+  // chooser first ("What do you want to improve?") for a normal visitor,
+  // rather than dropping straight into the canonical-analysis form. A
+  // founder-targeted re-analysis (?startup_id=) skips this entirely --
+  // that visitor arrived via an explicit "Re-analyze" CTA and must land
+  // straight on the form, never a generic chooser. Choosing "Review My
+  // Pitch Deck" navigates away to the completely separate /analyze/deck
+  // surface (POST /pitch-deck-reviews, never POST /analyze); choosing
+  // "Analyze My Startup" simply reveals this exact, unchanged form.
+  const [mode, setMode] = useState<"choose" | "startup">(
+    requestedStartupId !== null ? "startup" : "choose"
+  );
+
   // Phase 7.2.1: verifies the founder-targeted request BEFORE showing
   // any form -- see FounderTargetState's own comment for why this reuses
   // Founder Workspace's own membership-gated endpoint rather than
@@ -395,6 +408,45 @@ export default function AnalyzeStartupForm() {
       <>
         <PageHeader title="Analyze Startup" />
         <Skeleton className="h-64 w-full" />
+      </>
+    );
+  }
+
+  // Phase 10.8, Part 20: the chooser only ever shows for a normal
+  // (non-founder-targeted) visitor who hasn't picked a path yet.
+  if (founderTarget.status === "none" && mode === "choose") {
+    return (
+      <>
+        <PageHeader
+          title="What do you want to improve?"
+          subtitle="Choose the kind of feedback you're looking for."
+        />
+
+        <div className="grid gap-4 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => router.push("/analyze/deck")}
+            className="flex min-h-32 flex-col items-start gap-2 rounded-2xl border border-border bg-surface p-6 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
+          >
+            <span className="text-base font-semibold text-text-primary">Review My Pitch Deck</span>
+            <span className="text-sm leading-6 text-text-secondary">
+              Upload a PDF deck and get coaching on the story it tells, what&rsquo;s working, and what to
+              fix first.
+            </span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMode("startup")}
+            className="flex min-h-32 flex-col items-start gap-2 rounded-2xl border border-border bg-surface p-6 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
+          >
+            <span className="text-base font-semibold text-text-primary">Analyze My Startup</span>
+            <span className="text-sm leading-6 text-text-secondary">
+              Provide a website, pitch deck, or company information and build a full Startup Profile
+              against the Methodology v2 intelligence framework.
+            </span>
+          </button>
+        </div>
       </>
     );
   }

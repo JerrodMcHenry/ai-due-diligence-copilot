@@ -145,3 +145,47 @@ def extract_text_from_pdf(pdf_bytes: bytes) -> str:
         raise PdfExtractionError("No readable text found in PDF.")
 
     return cleaned_text
+
+
+def extract_pages_from_pdf(pdf_bytes: bytes) -> list[str]:
+    """
+    Phase 10.8 -- Pitch Deck Coach V1. Same validation, same hardening,
+    same in-memory-only handling as extract_text_from_pdf() above -- this
+    calls the exact same private helpers (_validate_magic_bytes,
+    _open_reader, _validate_page_count) rather than duplicating any of
+    that logic, so there is exactly one place PDF security lives in this
+    module. extract_text_from_pdf() itself is completely untouched and
+    still used, byte-for-byte unchanged, by POST /analyze.
+
+    The one difference: this returns one string PER PAGE (in order,
+    index 0 = page 1), instead of one joined document. Pitch Deck Coach
+    needs this so it can honestly cite "page 6" rather than only ever
+    being able to say "somewhere in this deck" -- extract_text_from_pdf()'s
+    single joined string throws that boundary away.
+
+    A page with no extractable text becomes an empty string at its index
+    (not skipped, unlike extract_text_from_pdf()'s tolerant loop) -- the
+    caller needs the real page numbering to stay intact for provenance to
+    be honest; a skipped page here would silently misnumber every
+    subsequent one.
+    """
+    validate_pdf_size(pdf_bytes)
+    _validate_magic_bytes(pdf_bytes)
+
+    reader = _open_reader(pdf_bytes)
+    _validate_page_count(reader)
+
+    pages: list[str] = []
+
+    for page in reader.pages:
+        try:
+            page_text = page.extract_text() or ""
+        except Exception:
+            page_text = ""
+
+        pages.append(page_text.strip())
+
+    if not any(pages):
+        raise PdfExtractionError("No readable text found in PDF.")
+
+    return pages

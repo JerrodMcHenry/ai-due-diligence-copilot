@@ -3256,6 +3256,138 @@ def record_venture_mission_learning_for_owner(
         return dict(row) if row is not None else None
 
 
+# ---------------------------------------------------------------------------
+# Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
+# startups/analyses/modeled_ventures -- only to users(id), the same "clean
+# private entity" shape modeled_ventures and venture_missions already
+# established (see create_modeled_ventures_table()'s and
+# create_venture_missions_table()'s own docstrings). A pitch deck review
+# is a coaching artifact, never a Startup/Analysis: nothing in this
+# section, or anywhere that reads from this table, has a path into
+# Rankings, Discovery, Compare, or SPS History.
+#
+# `review` is one JSONB blob holding the full sanitized coaching payload
+# app/ai/pitch_deck_coaching.py::generate_pitch_deck_review() returns
+# (story/sections/top_fixes/strengths/open_questions/prep_questions) --
+# deliberately not split across columns, the same reasoning
+# modeled_ventures.model_result already uses for VPSResult: this is a
+# single cohesive artifact always read and written as a whole, never
+# queried by its internal fields.
+#
+# Deck text is intentionally NOT persisted here -- only readiness_label,
+# deck_filename, page_count, and the review JSONB. The founder's raw deck
+# content only ever needs to exist in memory for the one request that
+# reviews it; storing it again would be a second copy of potentially
+# sensitive material with no product use for this phase.
+# ---------------------------------------------------------------------------
+
+def create_pitch_deck_reviews_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS pitch_deck_reviews (
+                id SERIAL PRIMARY KEY,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                deck_filename TEXT NOT NULL,
+                page_count INTEGER NOT NULL,
+                readiness_label TEXT NOT NULL,
+                review JSONB NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("pitch_deck_reviews table created successfully.")
+
+
+def create_pitch_deck_review(
+    user_id: str,
+    deck_filename: str,
+    page_count: int,
+    readiness_label: str,
+    review: dict,
+) -> int:
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            INSERT INTO pitch_deck_reviews (
+                user_id, deck_filename, page_count, readiness_label, review
+            )
+            VALUES (
+                :user_id, :deck_filename, :page_count, :readiness_label, :review
+            )
+            RETURNING id
+        """), {
+            "user_id": user_id,
+            "deck_filename": deck_filename,
+            "page_count": page_count,
+            "readiness_label": readiness_label,
+            "review": json.dumps(review),
+        })
+
+        return result.scalar()
+
+
+def _parse_pitch_deck_review_row(row: dict) -> dict:
+    parsed = dict(row)
+
+    if isinstance(parsed.get("review"), str):
+        parsed["review"] = json.loads(parsed["review"])
+
+    return parsed
+
+
+def list_pitch_deck_reviews_for_user(user_id: str):
+    """Part 17: reviews naturally coexist -- every POST creates a new row,
+    nothing here overwrites a prior review. Summary shape only (no
+    `review` JSONB) -- matches list_modeled_ventures_for_user()'s own
+    light-list convention; app/api.py projects this into
+    PitchDeckReviewSummary."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT id, user_id, deck_filename, page_count, readiness_label, created_at
+            FROM pitch_deck_reviews
+            WHERE user_id = :user_id
+            ORDER BY created_at DESC
+        """), {"user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def count_recent_pitch_deck_reviews(user_id: str, window_hours: int) -> int:
+    """Minimal cost-control check (Part 24's own "preserve Phase 10.1
+    hardening" posture, scoped down for this phase): counts every review
+    row created in the rolling window, regardless of outcome. Pitch Deck
+    Coach makes exactly one LLM call per review (see
+    generate_pitch_deck_review()), a materially smaller cost surface than
+    the six-pillar canonical pipeline analysis_runs guards -- so this
+    reuses that module's proportionate, count-based approach rather than
+    its full concurrency-lock/fingerprint/dedup machinery, which this
+    phase's own test list (Part 25) does not call for."""
+    with engine.begin() as connection:
+        return connection.execute(text("""
+            SELECT count(*) FROM pitch_deck_reviews
+            WHERE user_id = :user_id
+              AND created_at > CURRENT_TIMESTAMP - make_interval(hours => :window_hours)
+        """), {"user_id": user_id, "window_hours": window_hours}).scalar()
+
+
+def get_pitch_deck_review_for_user(user_id: str, review_id: int):
+    """Returns None both when the review doesn't exist AND when it
+    belongs to a different user -- same non-leaking 404 shape as
+    get_modeled_venture_for_user()."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT id, user_id, deck_filename, page_count, readiness_label, review, created_at
+            FROM pitch_deck_reviews
+            WHERE id = :review_id AND user_id = :user_id
+        """), {"review_id": review_id, "user_id": user_id})
+
+        row = result.mappings().first()
+
+    if row is None:
+        return None
+
+    return _parse_pitch_deck_review_row(dict(row))
+
+
 def get_top_startups(limit: int = 10):
     """
     Canonical Dashboard MVP: Top Startups reuses get_rankings() directly --

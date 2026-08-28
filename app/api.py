@@ -89,7 +89,12 @@ from app.database.db import (create_tables,
                          begin_analysis_run,
                          finish_analysis_run,
                          DAILY_ANALYSIS_CAP,
-                         USAGE_WINDOW_HOURS
+                         USAGE_WINDOW_HOURS,
+                         create_pitch_deck_reviews_table,
+                         create_pitch_deck_review,
+                         list_pitch_deck_reviews_for_user,
+                         get_pitch_deck_review_for_user,
+                         count_recent_pitch_deck_reviews
 )
 from typing import Literal
 from fastapi import Query
@@ -108,6 +113,8 @@ from app.ai.fundraising_readiness import assess_fundraising_readiness
 from app.models.investor_workspace import InvestorWorkspaceResponse, InvestorOverviewOut, WatchedStartupOut, PillarChangeOut, RecentChangeOut, AttentionItemOut
 from app.ai.investor_workspace import assess_investor_workspace
 from app.ai.idea_structuring import structure_idea, IdeaStructuringError
+from app.models.pitch_deck_coach import PitchDeckReviewResponse, PitchDeckReviewSummary
+from app.ai.pitch_deck_coaching import generate_pitch_deck_review, PitchDeckCoachingError
 from app.workflows.due_diligence_workflow import run_due_diligence, assemble_multi_source_text
 from app.auth import AuthenticatedUser, RequireAuth, RequireAdmin, RequireStartupMember, require_startup_member
 from app.ai.sie_v2_methodology import METHODOLOGY_VERSION
@@ -116,7 +123,7 @@ from app.ai.vps_guidance import generate_guidance
 import json
 import os
 import traceback
-from app.pdf_extractor import extract_text_from_pdf, MAX_PDF_BYTES, PdfExtractionError
+from app.pdf_extractor import extract_text_from_pdf, extract_pages_from_pdf, MAX_PDF_BYTES, PdfExtractionError
 from app.website_scrapper import extract_text_from_website
 from app.reporting.pdf_generator import generate_pdf_report
 
@@ -185,6 +192,12 @@ create_modeled_ventures_table()
 # modeled_ventures(id), which must already exist by this point (same
 # ordering reasoning as modeled_ventures's own migration above).
 create_venture_missions_table()
+
+# Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
+# startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
+# own docstring in app/database/db.py) -- ordering relative to the
+# migrations above only matters because it references users(id).
+create_pitch_deck_reviews_table()
 
 # Phase 7.1A -- Startup Claim & Membership backend lifecycle. Purely
 # additive: references users(id)/startups(id), which already exist by
@@ -940,6 +953,139 @@ def record_mission_learning(
         raise HTTPException(status_code=404, detail="Mission not found.")
 
     return VentureMissionResponse(**mission)
+
+
+# ---------------------------------------------------------------------------
+# Phase 10.8 -- Pitch Deck Coach V1. Deliberately separate from POST
+# /analyze in every way that matters (see app/ai/pitch_deck_coaching.py's
+# own module docstring for the full investigation/boundary record): this
+# never calls run_due_diligence(), never touches Methodology v2/SPS/VPS,
+# and a PitchDeckReview can never become a Startup/Analysis/modeled
+# venture. Authorization is ownership-only (RequireAuth + a
+# user_id-scoped query), never RequireStartupMember -- a student with
+# only a deck and no startup must be able to use this (Part 19).
+# ---------------------------------------------------------------------------
+
+# One review makes exactly one LLM call (materially cheaper than the
+# six-pillar canonical pipeline /analyze protects) -- see
+# count_recent_pitch_deck_reviews()'s own docstring in app/database/db.py
+# for why this reuses that module's count-based cost control rather than
+# its full concurrency-lock/fingerprint machinery, which this phase's own
+# required test list (Part 25) does not call for.
+PITCH_DECK_REVIEW_DAILY_CAP = 15
+
+
+def _require_owned_pitch_deck_review(current_user: AuthenticatedUser, review_id: int) -> dict:
+    review = get_pitch_deck_review_for_user(current_user.user_id, review_id)
+
+    if review is None:
+        raise HTTPException(status_code=404, detail="Pitch deck review not found.")
+
+    return review
+
+
+def _pitch_deck_review_response(saved: dict) -> PitchDeckReviewResponse:
+    return PitchDeckReviewResponse(id=saved["id"], created_at=saved["created_at"], **saved["review"])
+
+
+@app.post("/pitch-deck-reviews", response_model=PitchDeckReviewResponse)
+def create_pitch_deck_review_endpoint(
+    pdf: UploadFile = File(...),
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    if not pdf.filename or not pdf.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
+
+    if count_recent_pitch_deck_reviews(current_user.user_id, USAGE_WINDOW_HOURS) >= PITCH_DECK_REVIEW_DAILY_CAP:
+        raise HTTPException(
+            status_code=429,
+            detail=(
+                f"You've reached the current limit of {PITCH_DECK_REVIEW_DAILY_CAP} "
+                f"pitch deck reviews per {USAGE_WINDOW_HOURS} hours. Please try again later."
+            ),
+        )
+
+    # Reuses the exact same bounded, in-memory-only upload reader /analyze
+    # already uses -- see _read_pdf_upload_sync()'s own docstring above.
+    # No new PDF I/O path; no PDF security helper duplicated or weakened.
+    try:
+        pdf_bytes = _read_pdf_upload_sync(pdf)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=400,
+            detail="That PDF could not be read. Please check the file and try again.",
+        )
+
+    try:
+        pages = extract_pages_from_pdf(pdf_bytes)
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=400,
+            detail="That PDF could not be read. Please check the file and try again.",
+        )
+
+    try:
+        review = generate_pitch_deck_review(pages, pdf.filename)
+    except PitchDeckCoachingError:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail="We couldn't review that pitch deck right now. Please try again.",
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=502,
+            detail="We couldn't review that pitch deck right now. Please try again.",
+        )
+
+    try:
+        review_id = create_pitch_deck_review(
+            user_id=current_user.user_id,
+            deck_filename=review["deck_filename"],
+            page_count=review["page_count"],
+            readiness_label=review["readiness_label"],
+            review=review,
+        )
+    except Exception:
+        traceback.print_exc()
+        raise HTTPException(
+            status_code=500,
+            detail="Your review completed but could not be saved. Please try again.",
+        )
+
+    saved = get_pitch_deck_review_for_user(current_user.user_id, review_id)
+    return _pitch_deck_review_response(saved)
+
+
+@app.get("/pitch-deck-reviews", response_model=list[PitchDeckReviewSummary])
+def list_pitch_deck_reviews(current_user: AuthenticatedUser = RequireAuth):
+    reviews = list_pitch_deck_reviews_for_user(current_user.user_id)
+
+    return [
+        PitchDeckReviewSummary(
+            id=review["id"],
+            deck_filename=review["deck_filename"],
+            readiness_label=review["readiness_label"],
+            created_at=review["created_at"],
+        )
+        for review in reviews
+    ]
+
+
+@app.get("/pitch-deck-reviews/{review_id}", response_model=PitchDeckReviewResponse)
+def get_pitch_deck_review_endpoint(
+    review_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    saved = _require_owned_pitch_deck_review(current_user, review_id)
+    return _pitch_deck_review_response(saved)
 
 
 # ---------------------------------------------------------------------------

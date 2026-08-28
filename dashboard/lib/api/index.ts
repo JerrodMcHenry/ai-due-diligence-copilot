@@ -17,3 +17,4 @@ export * from "./founderUpdates";
 export * from "./startupMilestones";
 export * from "./fundraisingReadiness";
 export * from "./investorWorkspace";
+export * from "./pitchDeckCoach";
