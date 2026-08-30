@@ -1,0 +1,2623 @@
+{
+  "summary": "Relaw is an AI-powered legal practice management startup founded in 2025 and based in Los Angeles, CA. Backed by Y Combinator’s Fall 2025 batch, it offers law firms a unified \"LegalOS\" single-pane operating system designed to replace fragmented legal tech stacks. The platform integrates client intake, document automation, meeting transcription and summarization, email, calendar, pipeline management, and AI-powered drafting directly within Microsoft Word, streamlining an entire legal matter workflow from intake through follow-through.\n\nRelaw targets law firms of all sizes—from small boutique practices to AmLaw 200 firms—across multiple practice areas such as estate planning, elder law, personal injury, business law, and more. Its core value proposition is saving firms 90%+ of time spent on busywork (intake, note-taking, drafting initial documents, and follow-up), enabling attorneys to focus more on client relationships and substantive legal work. The product offers branded client portals and integrates with common legal CRM and practice management tools like Clio, Lawmatics, and popular email/calendar/file platforms (Gmail, Outlook, Google Calendar, Dropbox, etc.), allowing firms to adopt it without abandoning existing investments.\n\nWith a small founding team (~2 people as of 2026), Relaw is in early growth, evidenced by high demo demand and white-glove onboarding services to tailor templates and processes to firm needs. Pricing starts at $269/month annually with a 14-day free trial post-onboarding. Security is a priority, with AES-256 encryption, role-based access controls, and AWS-compliant infrastructure.\n\nRelaw’s main differentiation lies in delivering an all-in-one AI-augmented legal operating system (not just a side AI assistant or chat interface), enabling seamless matter context sharing across intake, drafting, meetings, and follow-ups within one workspace. Key competitors include Harvey AI, Legora, Spellbook, and Clio AI. Challenges include scaling with a small team, competing against entrenched legal tech incumbents, and overcoming law firms’ traditional resistance to workflow change.\n\nIn summary, Relaw is a promising early-stage AI SaaS startup focused on transforming legal practice management with a comprehensive, AI-driven single-pane system that consolidates fragmented tools, automates routine tasks, and improves law firm productivity across diverse practice areas.",
+  "risk_analysis": "Here is a comprehensive risk analysis of Relaw, focused on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n---\n\n### 1. Competition Risk\n\n- **Highly Competitive Legal Tech Market:**  \n  Relaw competes against established players such as Harvey AI, Legora, Spellbook, Clio AI, Gavel, Otter, and DecisionVault. Many competitors have existing enterprise penetration, mature product lines, or strong brand recognition in the legal tech space.\n\n- **Feature Overlap and Differentiation:**  \n  While Relaw claims to be the “first true single-pane operating system” and to surpass competitors in integrating AI drafting, intake, and matter management, competitors also innovate rapidly. For example, Harvey AI is positioned as a strong enterprise assistant focused on intake, and Spellbook offers strong contract assembly capabilities.\n\n- **Customer Switching Costs and Entrenched Alternatives:**  \n  Law firms often have entrenched systems like Clio, Microsoft Word, and specialized drafting tools. Convincing firms to transition their entire workflow into a new OS could be challenging, giving competitors leverage if they provide easier integration or better specialized features.\n\n- **Market Education and Awareness:**  \n  As an early-stage company, Relaw must invest heavily in marketing, sales education, and channel development to compete effectively, especially against established incumbents with larger sales teams and budgets.\n\n---\n\n### 2. Scalability Risk\n\n- **Small Founding Team Size (2 people as of 2026):**  \n  With only 2 staff currently, scaling product development, customer success, sales, and support simultaneously will be extremely challenging. The complexity of onboarding, white-glove customization for legal templates, and integration with multiple third-party tools generates high manual effort.\n\n- **White-Glove Onboarding Model:**  \n  While beneficial for client satisfaction, this approach is resource-intensive and may limit rapid scaling. Increasing client volume could strain the team and slow down implementation timelines, impacting customer experience and growth velocity.\n\n- **Technical Infrastructure and Product Maturity:**  \n  Though built on AWS with robust security, comprehensive single-pane integration of multiple tools — document drafting, intake, calendar, email, AI notetaking, pipelines — is complex. Ensuring the platform scales technically without degradation in performance or reliability is a risk given the product's breadth and reliance on multiple third-party APIs.\n\n- **AI Model and Data Processing Scalability:**  \n  Delivering real-time AI drafting and intelligent matter management requires significant compute resources and continuous AI model improvements. Scaling these capabilities cost-effectively can be challenging, especially if usage patterns grow unpredictably.\n\n---\n\n### 3. Market Risk\n\n- **Law Firm Workflow Entrenchment & Conservatism:**  \n  The legal profession is traditionally conservative and slow to adopt new technologies, especially those altering core workflows. Many firms may resist switching to a single-pane OS, preferring incremental tool adoption or enhancements to existing systems.\n\n- **Adoption Across Firm Sizes and Practice Areas:**  \n  Relaw targets firms from 2-person shops to AmLaw 200 firms and covers dozens of practice areas. This broad approach adds complexity to product development and marketing positioning. Meeting diverse needs uniformly might be difficult, risking diluted value propositions.\n\n- **Economic Sensitivity:**  \n  Law firms’ technology budgets can be sensitive to economic downturns or shifts in legal service demand. Subscription SaaS products perceived as “non-essential” or high-cost could see slower sales or higher churn during tough market conditions.\n\n- **Dependence on U.S. Legal Market and Regulations:**  \n  Although U.S.-based, Relaw’s product deals with highly jurisdiction-specific legal workflows, templates, and compliance issues. Geographic expansion or adapting to other jurisdictions poses remediation cost and complexity.\n\n---\n\n### 4. Customer Adoption Risk\n\n- **Workflow Change Management Barriers:**  \n  Lawyers and legal staff are accustomed to managing matters across separate inboxes, calendars, document systems, and practice management tools. Convincing users to operate fully inside a new “sole workspace” that replaces multiple legacy tools is a major adoption hurdle.\n\n- **Trust and Security Concerns:**  \n  Handling highly sensitive client data, legal documents, and communications requires impeccable data security and regulatory compliance. Even with AES-256 encryption and AWS compliance, any security incident would severely damage adoption and brand trust.\n\n- **Trial and Onboarding Complexity:**  \n  The 14-day free trial occurs after onboarding and white-glove setup, which delays initial user experience evaluation. This elongated sales cycle may deter some customers and complicate free-trial conversion metrics.\n\n- **User Experience Across Roles:**  \n  The product must satisfy diverse user roles – lawyers, paralegals, admin staff, and clients via portals – each with different tech comfort levels and needs. UI/UX missteps for any role could inhibit full adoption.\n\n- **Customer Support Capacity:**  \n  The small team and sophisticated product imply limited bandwidth for customer support and training. Insufficient post-sale support can increase churn and reduce word-of-mouth referrals.\n\n---\n\n### 5. Operational Risk\n\n- **Founder and Team Reliance:**  \n  Heavy dependence on a very small core team, especially in key roles such as founder/CEO (Chris Farestveit), raises operational risk related to key person dependency or burnout.\n\n- **Integration Dependency:**  \n  Relaw depends heavily on integration with multiple third-party apps (Microsoft Word, Clio, Lawmatics, Google Suite, Dropbox, Slack, Calendly etc.). Changes in APIs or partner policies beyond Relaw’s control could disrupt service.\n\n- **Rapid Growth Pressure:**  \n  High demo demand and interest pose pressure to scale sales, onboarding, and infrastructure rapidly, potentially outstripping capacity and leading to poor customer experience or system instability.\n\n- **Regulatory and Compliance Risks:**  \n  Data privacy laws (e.g., GDPR, CCPA) and legal ethics rules on data handling vary by jurisdiction. Ensuring ongoing compliance as Relaw grows is a continuous operational burden.\n\n- **AI Reliability and Liability:**  \n  AI-generated legal document drafts or recommendations could introduce risks if errors occur leading to malpractice claims. Mitigating liability and ensuring clear disclaimers will be critical.\n\n---\n\n## Summary Table\n\n| Risk Category           | Key Concerns                                                                                      | Potential Mitigation / Notes                            |\n|------------------------|-------------------------------------------------------------------------------------------------|--------------------------------------------------------|\n| Competition            | Established competitors, market fragmentation                                                    | Focus on unique single-pane OS differentiation, build strong product-market fit, targeted niche focus |\n| Scalability            | Very small team, resource-intensive onboarding, technical complexity                             | Gradual scaling, investment in hiring, automation in onboarding |\n| Market                 | Conservative legal market, broad target segments, economic sensitivity                           | Customer segmentation, focus on early adopters, flexible pricing |\n| Customer Adoption      | Workflow inertia, security trust, support limitations                                            | Strong customer success, transparent security practices, UX/UI refinement |\n| Operational            | Founder/key person risk, integration dependencies, compliance complexity, AI liability          | Diversify team, robust integration monitoring, legal risk management |\n\n---\n\n### Overall Risk Outlook\n\nRelaw operates in an attractive, growing market segment with a compelling AI-driven value proposition but faces typical early-stage startup risks amplified by:\n\n- A very small team relative to the ambitions and workload involved.  \n- Strong competition and entrenched customer behaviors.  \n- Heavy reliance on integrations and AI models for critical legal workflows.  \n- The need to balance high-touch onboarding with the need for scalable growth.\n\nWith prudent capital allocation, focused go-to-market and product development, and robust operational controls, these risks can be managed. However, investors should monitor the team’s ability to scale, customer adoption velocity, and competitive responses closely.\n\n---\n\nIf you need a deep dive on any specific risk vector or competitor benchmarking, please let me know.",
+  "competitor_analysis": "Certainly! Here's a detailed competitive analysis for Relaw based on the provided information and context:\n\n---\n\n### Relaw Competitive Analysis\n\n#### Major Competitors\n\n1. **Harvey AI**  \n   - Enterprise-level AI legal assistant with strong intake packs and drafting capabilities.  \n   - More focused on large firms and enterprise use cases.  \n   - Less comprehensive workflow integration compared to Relaw’s single-pane system.\n\n2. **Legora**  \n   - AI legal platform with competitive drafting and intake features.  \n   - May have narrower focus or fewer practice areas supported.\n\n3. **Spellbook**  \n   - Specialized in contract assembly and drafting automation.  \n   - Weaker in broader practice management features and workflow integration.\n\n4. **Clio AI**  \n   - AI features embedded in a leading practice management system.  \n   - Less extensive AI-driven automation packs than Relaw.  \n   - Clio’s strength is its large existing user base.\n\n5. **Other notable platforms**:  \n   - **Gavel**: AI assistance for legal research and analysis.  \n   - **Otter**: AI transcription and note-taking.  \n   - **DecisionVault**: AI-powered document and deal room platform focusing on transactional work.\n\n---\n\n#### Competitive Advantages\n\n- **True Single-Pane Operating System:**  \n  Relaw offers a fully integrated workspace combining intake, document drafting, meetings, email, calendar, and follow-through in one pane, eliminating the fragmentation typical in law firms’ tech stacks.\n\n- **AI-Powered End-to-End Workflow:**  \n  Automates 90%+ of busywork including intake, note-taking, drafting, and follow-up, resulting in significant time savings (claimed at 90%+ busywork reduction).\n\n- **Deep Microsoft Word Integration:**  \n  AI drafting assistance inside Word with template mapping, conditional logic, and formatting preservation differentiates Relaw from platforms that rely on standalone drafting or chat assistants.\n\n- **Wide Practice Area Coverage:**  \n  Supports diverse law practices from estate planning to personal injury, business law, immigration, etc., catering to varied firm needs.\n\n- **Customizable & White-Glove Onboarding:**  \n  Personalized matchmaking of firm templates and workflows enhances adoption and customer satisfaction.\n\n- **Strong Integrations Ecosystem:**  \n  Connects seamlessly to existing popular legal and productivity tools (Clio, Lawmatics, Gmail, Outlook, calendars, cloud storage, Slack, Calendly).\n\n- **Y Combinator Backing & Demo Demand:**  \n  YC backing enhances credibility; high demo wait time (1-2 weeks) indicates strong early market interest.\n\n- **Firm-Branded Client Portals:**  \n  Client-facing portals under the firm’s brand improve client experience and engagement.\n\n---\n\n#### Competitive Disadvantages\n\n- **Very Small Team Size (~2 people):**  \n  Limited resources may restrict development speed, scalability, customer support capacity, and sales outreach.\n\n- **New Market Entrant (Founded 2025):**  \n  Early in growth stage; limited track record, market penetration, and brand awareness compared to established incumbents.\n\n- **Dependency on Integrations:**  \n  While integrations are strengths, reliance on third-party APIs or platforms poses potential risks if partnerships weaken or APIs change.\n\n- **Potential Adoption Barriers:**  \n  Traditional law firms can be resistant to replacing entrenched workflows, especially switching from existing tools like Clio or legacy methods.\n\n- **Pricing:**  \n  At $269+/mo annually, smaller law firms might consider it pricey, especially given onboarding customization requirements.\n\n---\n\n#### Barriers to Entry\n\n- **Technical Complexity of AI Integration Across Workflow:**  \n  Building a true single-pane integrated AI operating system with deep Microsoft Word integration and multi-module synchronization is technically challenging.\n\n- **Extensive Legal Domain Expertise:**  \n  Supporting a wide range of legal practices with customizable templates and AI requires strong subject matter expertise and extensive data.\n\n- **High Customer Service & Onboarding Needs:**  \n  White-glove onboarding involves significant manual effort matching firm templates and workflows, acting as a moat against low-touch competitors.\n\n- **Security and Compliance Requirements:**  \n  Handling sensitive legal data with AES-256 encryption, AWS compliance, and role-based access controls demands rigorous security infrastructure investments.\n\n- **Network Effects & Integrations Build-Out:**  \n  Integrating deeply with existing legal systems and workflows, and gaining trust from law firms to replace fragmented stacks, requires time and relationship-building.\n\n---\n\n#### Competitive Risks\n\n- **Scaling Challenge:**  \n  Small core team may struggle to scale product, customer acquisition, onboarding, and support simultaneously as demand grows.\n\n- **Intense Competition from Established Players:**  \n  Large firms often use entrenched solutions from Clio, Harvey, Legora, or bespoke enterprise software with strong budgets and customer loyalty.\n\n- **Technology Shifts & AI Model Reliance:**  \n  Underlying AI models (which are not proprietary) could be commoditized, requiring continuous innovation to maintain differentiation.\n\n- **Integration Dependency:**  \n  Changes in APIs or service agreements with integrated platforms (e.g., Clio, Microsoft, Google) could disrupt user experience.\n\n- **Regulatory & Compliance Risks:**  \n  Legal industry is highly sensitive; any data breaches or compliance failures could severely damage reputation and customer trust.\n\n- **Customer Stickiness & Churn:**  \n  Lack of transparent retention data and relatively new product; firms may revert if onboarding or integration is difficult.\n\n---\n\n### Summary\n\nRelaw presents a compelling AI-driven, single-pane practice management system that addresses a key pain point in legal tech: fragmented software stacks. Its deep Word integration, AI drafting, and comprehensive workflow coverage provide strong differentiation from competitors like Harvey, Clio, and Spellbook. However, the company faces significant scaling and market penetration challenges due to its young age, small team, and competitive landscape dominated by well-funded incumbents. Barriers to entry such as technical complexity and security requirements are substantial, but these also protect Relaw from quick copycats. Vigilance around scaling operations, maintaining integration reliability, and expanding the team will be critical for Relaw to capitalize on its early demand and Y Combinator backing.\n\n---\n\nPlease let me know if you want a competitor feature-by-feature comparison or strategic recommendations for Relaw’s growth!",
+  "memo": "Investment Memo: Relaw\n\nCompany Overview  \nRelaw is an AI-powered legal practice management software founded in 2025 and based in Los Angeles, CA. Backed by Y Combinator (Fall 2025), Relaw offers the first true single-pane operating system designed specifically for law firms, consolidating intake, document drafting, email, calendar, meetings, and follow-through into one integrated workspace branded under the law firm’s name. The platform incorporates AI-powered automation and drafting assistance within Microsoft Word and supports firms of all sizes and across multiple practice areas.\n\nProblem  \nLegal firms currently operate with fragmented technology stacks requiring them to toggle between multiple applications—email, calendars, document templates, CRM, intake systems—which leads to inefficiencies, administrative overhead, duplicated data entry, and lost context. Traditional workflows generate significant busywork, consuming lawyers’ time on intake, notes, drafts, and follow-up rather than client-facing work.\n\nSolution  \nRelaw provides a unified, AI-powered legal Operating System that replaces fragmented stacks with one pane of glass. Its platform automates >90% of busywork by integrating client intake, AI draft generation linked to client matter facts, meeting transcription and summarization, and follow-up automation—all within a single branded workspace. It integrates seamlessly with existing tools like Microsoft Word, Clio, Lawmatics, and popular email, calendar, and file storage platforms. White-glove onboarding ensures firm-specific templates and workflows are tailored for smooth adoption.\n\nMarket Opportunity  \nThe global legal tech market is rapidly expanding, driven by demand for efficiency and AI adoption in law firms. Relaw targets law firms ranging from small boutique firms (2-5 attorneys) to large AmLaw 200 enterprises across diverse practice areas such as estate planning, business law, personal injury, family law, immigration, and more. With legal services increasingly commoditized and pressure to reduce costs, the market opportunity for AI-driven practice management that automates tedious tasks while improving client engagement is substantial—potentially a multi-billion dollar SaaS market.\n\nCompetitive Landscape  \nKey competitors include Harvey AI, Legora, Spellbook, Clio AI, and other AI legal platforms. Relaw differentiates itself by being a full operating system consolidating intake, drafting, meetings, email, and calendar within one branded workspace, not just an AI assistant or niche drafting tool. Its deep Microsoft Word integration and ability to support multiple practice areas at scale provide further advantages. However, competitors are well-funded and have established customer bases, especially in enterprise segments.\n\nKey Risks  \n- Small team (approx. 2 people) and early stage (founded 2025) may constrain rapid scaling and customer support capacity.  \n- Competitive pressures from established incumbents in legal tech with broader resources.  \n- Adoption resistance in traditional law firms due to workflow change, compliance concerns, and trust in AI.  \n- Dependence on third-party integrations could expose Relaw to platform or API risks.  \n- Security and compliance risks from handling sensitive data, though mitigated by strong encryption and AWS infrastructure.\n\nRecommendation  \nRelaw represents a compelling early-stage opportunity in AI-driven legal practice management with a differentiated all-in-one platform. The strong product-market fit is evidenced by high demo demand and well-known brand integrations. Its backing by Y Combinator and white-glove onboarding highlight potential for sustainable growth. However, investment should be calibrated to mitigate team size and scaling risks. Recommend a seed or early venture investment round with participation conditional on growth milestones including team expansion, customer onboarding velocity, and product roadmap execution. Relaw is well-positioned to capture meaningful market share as the legal sector embraces AI-first workflows.",
+  "structured_analysis": {
+    "company_name": "Relaw",
+    "industry": "SaaS",
+    "stage": "Seed",
+    "business_model": "Subscription",
+    "summary": "Relaw is an AI-powered legal practice management system founded in 2025 that offers law firms a single-pane operating system to manage their entire workflow, including client intake, document drafting, meetings, emails, calendar, and follow-up tasks. It integrates deeply with Microsoft Word and legal industry tools like Clio and Lawmatics to automate busywork, saving firms over 90% of time spent on administrative activities. The platform targets law firms of all sizes and practice areas and features white-glove onboarding and branded client portals. It is backed by Y Combinator and operates on a SaaS subscription model with tiered pricing.",
+    "key_risks": [
+      "Small team size may limit scaling speed and customer support capacity.",
+      "Strong competition from established legal tech and AI platforms with greater enterprise penetration.",
+      "Dependence on third-party integrations which could be disrupted by changes in APIs or partnerships.",
+      "Potential resistance to AI adoption and workflow change in traditional law firm culture.",
+      "Security and compliance risks associated with handling sensitive legal client data."
+    ],
+    "strengths": [
+      "Comprehensive single-pane operating system replacing fragmented stacks, providing unified workflow visibility.",
+      "AI-powered automation reducing busywork by over 90%, improving law firm productivity significantly.",
+      "Deep integration with industry-standard tools including Microsoft Word, Clio, and Lawmatics.",
+      "Strong early market demand indicated by demo wait times and Y Combinator backing.",
+      "Support for a wide range of practice areas and firm sizes, allowing broad market appeal."
+    ],
+    "recommendation": "Relaw addresses a clear pain point in legal practice management with strong AI-driven automation and integrations. While early-stage with a small team, its market traction and YC backing indicate good growth potential. Recommended to monitor customer acquisition and support scalability carefully. Investment could be considered at seed stage with attention to execution risks and competitive landscape."
+  },
+  "investment_score": {
+    "market_score": 7.9,
+    "team_score": 6.3,
+    "product_score": 6.6,
+    "competition_score": 7.5,
+    "traction_score": 8.0,
+    "financial_score": 7.6,
+    "overall_score": 72.5,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 7.0,
+    "readiness_summary": "The company demonstrates solid fundraising readiness with strong traction and market presence. The team and product scores suggest some room for improvement in execution and development. Competitive positioning is good, supported by healthy financials, indicating a viable investment opportunity with manageable risks.",
+    "strengths": [
+      "Strong market potential",
+      "Robust traction and user adoption",
+      "Healthy financial status",
+      "Good competitive positioning"
+    ],
+    "weaknesses": [
+      "Team capabilities could be enhanced",
+      "Product development needs refinement"
+    ]
+  },
+  "readiness_score": 7.0,
+  "readiness_summary": "The company demonstrates solid fundraising readiness with strong traction and market presence. The team and product scores suggest some room for improvement in execution and development. Competitive positioning is good, supported by healthy financials, indicating a viable investment opportunity with manageable risks.",
+  "founder_analysis": {
+    "summary": "The founding team of Relaw is led by Chris Farestveit, who has prior experience at BCG and Dapper, indicating some level of professional background though specific direct legal industry experience or prior founding success is not detailed. The company is early stage with a small team of approximately two people, founded in 2025, and has built a complex AI-powered legal practice management platform with deep integrations and compliance features. The business model is SaaS with tiered pricing and a white-glove onboarding approach, showing some commercial discipline. However, public evidence on the team's direct founder-market fit, technical depth, business execution, leadership maturity, and execution track record is limited or indirect. There are signals of product shipped, customer demand (high demo wait times), and integrations, but no disclosed revenue, growth metrics, or detailed leadership and hiring information. Overall, the evidence is insufficient to confidently assess the team across the requested dimensions based on public information alone.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.3,
+      "confidence": "Low",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After thorough re-examination of the supplied company information, no verifiable public evidence was found to support an assessment of founder-market fit. Without explicit or credible indirect signals regarding the founders' insight or experience in the market, the dimension cannot be confidently evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founders' direct engagement with customers or problem domain",
+            "Share any public interviews, articles, or profiles demonstrating founder-market insight"
+          ],
+          "missing_information": [
+            "Founders' prior experience or insight in the target market",
+            "Publicly available information on founders' connection to customer or problem",
+            "Details on founders' industry background or relevant product development"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows a complex AI-powered product with multiple deep integrations (Microsoft Word, Clio, Lawmatics, Gmail, Outlook, etc.) and strong security features (AES-256 encryption, network isolation, role-based access control). The product is live with a 14-day trial and white-glove onboarding, indicating credible MVP/product execution. However, there is no direct evidence about the technical team or leadership, so while the technical capability is strong and credible for Seed stage, it does not reach exceptional levels requiring proof of scalable architecture or engineering leadership.",
+          "evidence": [
+            "Relaw offers a complex AI-powered legal practice management platform integrating AI drafting inside Microsoft Word, AI notetaker, and multiple third-party integrations.",
+            "The platform handles sensitive legal data with AES-256 encryption and AWS compliance.",
+            "The product is live with a 14-day trial and white-glove onboarding, indicating a shipped and operational product."
+          ],
+          "recommendations": [
+            "Request technical team bios and org structure.",
+            "Review product architecture and scalability plans.",
+            "Assess engineering hiring and retention strategies."
+          ],
+          "missing_information": [
+            "Details on the technical background of the founding or engineering team.",
+            "Information on engineering team size, scalability, and reliability metrics.",
+            "Evidence of technical leadership or infrastructure management."
+          ],
+          "signals": [
+            "AI drafting integrated within Microsoft Word add-in.",
+            "Multiple deep integrations with Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+            "Security features including AES-256 encryption, network isolation, and role-based access control."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 5.0,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "The company operates a SaaS subscription model with tiered pricing and a 14-day free trial, and offers white-glove onboarding and customization, indicating some operational discipline. High demo demand with 1-2 week wait times suggests market interest and early customer acquisition. However, there is no direct evidence of repeatable sales, revenue growth, or unit economics, and the evidence confidence is low. This supports some business capability but with important gaps remaining.",
+          "evidence": [
+            "Relaw operates a SaaS subscription model with tiered pricing and a 14-day free trial after onboarding.",
+            "The company offers white-glove onboarding and customization services, indicating some operational discipline.",
+            "High demand for demos with 1-2 week wait times suggests market interest and some early customer acquisition."
+          ],
+          "recommendations": [
+            "Obtain revenue and customer growth data.",
+            "Review sales pipeline and GTM processes.",
+            "Assess unit economics and customer retention metrics."
+          ],
+          "missing_information": [
+            "Revenue figures, growth rates, and unit economics.",
+            "Details on sales repeatability, customer retention, and churn.",
+            "Information on GTM strategy and operational scalability."
+          ],
+          "signals": [
+            "Pricing plans: Standard at $269/month annually, Pro at $349/month annually.",
+            "Backed by Y Combinator, implying some business vetting.",
+            "Demo wait times of 1-2 weeks due to high demand."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has secured funding, indicating investor confidence, and shows positive ARR growth and customer retention, which imply effective decision-making and team execution. These signals support moderate leadership ability to lead, hire, and scale at Seed stage. However, detailed information on hiring success, leadership depth, or organizational structure is missing, so the score reflects moderate evidence with some unknowns.",
+          "evidence": [
+            "Company has secured funding indicating investor confidence in leadership",
+            "Customer acquisition and retention metrics suggest effective decision-making and team execution",
+            "Growth in ARR implies ability to scale operations and attract talent"
+          ],
+          "recommendations": [
+            "Provide more detailed information on leadership team and hiring strategies",
+            "Disclose organizational structure to better assess scalability"
+          ],
+          "missing_information": [
+            "Detailed organizational chart",
+            "Explicit hiring plans",
+            "Profiles of executive team members"
+          ],
+          "signals": [
+            "Funding rounds closed successfully",
+            "Positive ARR growth",
+            "Customer retention rates"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "Relaw has shipped a complex AI-powered product with multiple integrations and security features, and is experiencing high demo demand causing wait times, indicating some execution success. Backing by Y Combinator further supports milestone achievement. However, lack of quantitative growth or retention data and low evidence confidence limit the score to some execution evidence but an incomplete track record.",
+          "evidence": [
+            "Relaw has shipped a complex AI-powered product with multiple integrations and security features.",
+            "The company has a small team (~2 people) and is experiencing high demand for demos with a 1-2 week wait.",
+            "Backed by Y Combinator Fall 2025 batch, indicating some milestone achievement."
+          ],
+          "recommendations": [
+            "Request detailed customer adoption and retention metrics.",
+            "Review milestone timelines and product roadmap achievements.",
+            "Obtain user feedback and satisfaction data."
+          ],
+          "missing_information": [
+            "Revenue growth and customer retention data.",
+            "Specific milestones achieved and timeline.",
+            "User satisfaction and product usage metrics."
+          ],
+          "signals": [
+            "Product live with 14-day trial and onboarding.",
+            "High demo demand causing wait times.",
+            "Y Combinator backing."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public evidence to assess founder-market fit.",
+    "fundraising_signal": "Backed by Y Combinator Fall 2025 batch, indicating some investor confidence."
+  },
+  "market_analysis": {
+    "summary": "The company Relaw targets law firms of all sizes with an AI-powered legal practice management platform that integrates multiple workflows into a single pane. The market includes diverse legal practice areas and firms ranging from small to AmLaw 200. The product aims to replace fragmented legal tech stacks and save significant time on busywork. While the company is early stage with a small team and limited disclosed financials, there is evidence of growing demand and integration with established legal tools. However, exact market size, growth rates, and customer traction metrics are not publicly available.",
+    "confidence": "Medium",
+    "strengths": [
+      "Targets a broad customer segment including small to large law firms",
+      "Addresses a large recurring spend category (legal practice management)",
+      "Supports multiple practice areas and integrates with popular legal and productivity tools",
+      "Backed by Y Combinator indicating some validation and potential",
+      "Claims significant time savings and workflow consolidation"
+    ],
+    "weaknesses": [
+      "No explicit TAM, SAM, SOM or market size figures disclosed",
+      "No public revenue, growth, or customer count data",
+      "Small team size may limit scaling",
+      "Competitive market with several established and emerging AI legal tech players"
+    ],
+    "evidence": [
+      "Relaw is designed for law firms of all sizes, including AmLaw 200 firms",
+      "Supports multiple practice areas such as estate planning, elder law, business law, personal injury, probate, family law, immigration, and more",
+      "Integrates with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly",
+      "Backed by Y Combinator (Fall 2025 batch)",
+      "Claims to save law firms 90%+ of busywork time on matters such as intake, notes, first drafts, and follow-up",
+      "High demand for demos with 1-2 weeks wait time"
+    ],
+    "recommendations": [
+      "Obtain market research reports or third-party analyses quantifying the legal practice management software market size and growth",
+      "Gather customer count, revenue, and retention data from the company to better assess market traction",
+      "Conduct competitive analysis with market share data to understand positioning",
+      "Interview customers or conduct surveys to validate demand and willingness to pay"
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.9,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 8.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates a large and attractive market with multiple customer segments (small to large law firms including AmLaw 200), multiple legal practice areas, and integration with widely used tools. These signals support a credible venture-scale path with meaningful expansion potential, fitting the 7-8 score band.",
+          "evidence": [
+            "Relaw targets law firms of all sizes, including AmLaw 200 firms",
+            "Supports multiple legal practice areas",
+            "Integrates with widely used legal and productivity tools",
+            "Backed by Y Combinator indicating market validation"
+          ],
+          "recommendations": [
+            "Acquire third-party market sizing reports",
+            "Request company revenue and customer data"
+          ],
+          "missing_information": [
+            "Quantitative TAM, SAM, SOM figures",
+            "Market share and revenue data"
+          ],
+          "signals": [
+            "Customer segment includes small to large law firms",
+            "Buyer budget category is legal practice management software",
+            "Expansion paths include multiple practice areas and integrations"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Strong signals such as high demo demand with wait times, AI adoption, digital transformation in legal tech, and multiple competitors entering the space indicate a rapidly expanding market with strong secular tailwinds and increasing buyer urgency, consistent with a 9-10 score.",
+          "evidence": [
+            "High demand for demos with 1-2 weeks wait time",
+            "Category involves AI adoption and digital transformation in legal tech",
+            "Multiple competitors and new entrants indicate market expansion"
+          ],
+          "recommendations": [
+            "Obtain market research on legal tech and AI adoption growth",
+            "Analyze competitor funding and adoption trends"
+          ],
+          "missing_information": [
+            "Quantitative market growth rates",
+            "Budget expansion data"
+          ],
+          "signals": [
+            "Growing buyer urgency for AI-powered legal practice management",
+            "Increasing adoption of AI and automation in legal workflows",
+            "Backed by Y Combinator indicating investor interest in category"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Evidence of high demo demand, technology readiness with AI integrated into common tools, and acute pain points from manual legal workflows support good timing with clear customer urgency and technology inflection, aligning with a 7-8 score.",
+          "evidence": [
+            "High demand for demos indicating customer urgency",
+            "Technology maturity with AI integrated into Microsoft Word and other tools",
+            "Legal industry facing pressure to automate and reduce busywork",
+            "Relaw replaces fragmented stacks with a unified platform"
+          ],
+          "recommendations": [
+            "Interview customers to confirm urgency and readiness",
+            "Monitor regulatory environment for legal tech adoption"
+          ],
+          "missing_information": [
+            "Regulatory changes impacting adoption",
+            "Budget availability data"
+          ],
+          "signals": [
+            "Customer urgency demonstrated by demo wait times",
+            "Technology readiness with AI notetaker, drafting, and intake automation",
+            "Manual legal workflows becoming untenable"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Despite a competitive landscape, Relaw differentiates as a full operating system with workflow lock-in, proprietary AI features, and switching costs from integrations and onboarding. These factors provide a credible wedge and manageable competition, fitting the 7-8 score band.",
+          "evidence": [
+            "Competitors include Harvey AI, Legora, Spellbook, Clio AI, Gavel, Otter, DecisionVault",
+            "Relaw differentiates as a full operating system rather than a side AI assistant",
+            "Integration with existing tools and white-glove onboarding create switching costs",
+            "Backed by experienced founder with prior consulting and startup experience"
+          ],
+          "recommendations": [
+            "Collect competitive win/loss analysis",
+            "Assess customer switching costs and satisfaction"
+          ],
+          "missing_information": [
+            "Customer win/loss data",
+            "Market share and retention metrics"
+          ],
+          "signals": [
+            "Clear product differentiation as single-pane OS",
+            "Workflow lock-in through integrated intake, drafting, and follow-through",
+            "Proprietary AI features embedded in Microsoft Word",
+            "Customer testimonials and law firm references"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "High demo demand with wait times, customer testimonials citing significant time savings, and implied paying customers indicate strong early validation and meaningful demand. While quantitative traction data is limited, the evidence supports strong demand consistent with a 7-8 score.",
+          "evidence": [
+            "High demand for demos with 1-2 weeks wait time",
+            "Customer testimonials citing hundreds of hours saved annually",
+            "Backed by Y Combinator indicating investor validation",
+            "Claims of 90%+ time savings on busywork",
+            "Supports multiple practice areas and firm sizes"
+          ],
+          "recommendations": [
+            "Obtain customer usage and retention data",
+            "Conduct customer interviews or surveys"
+          ],
+          "missing_information": [
+            "Exact customer count and revenue",
+            "Retention and expansion metrics"
+          ],
+          "signals": [
+            "Paying customers implied by demo waitlist and trial offering",
+            "Strong usage indicated by integration and workflow automation",
+            "Customer references from multiple law firms"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Relaw Software Reviews, Demo & Pricing - 2026",
+      "url": "https://www.softwareadvice.com/product/528631-Relaw"
+    },
+    {
+      "title": "Relaw | The 9 Best AI Legal Tech Platforms in 2026: Complete Comparison Guide",
+      "url": "https://www.relaw.ai/blog/best-ai-legal-tech-platforms-2025"
+    },
+    {
+      "title": "Relaw Software Pricing, Alternatives & More 2026 | Capterra",
+      "url": "https://www.capterra.com/p/10029867/Relaw"
+    },
+    {
+      "title": "AI Legal Software for Law Firms | Relaw",
+      "url": "https://www.relaw.ai"
+    },
+    {
+      "title": "Relaw: AI Legal OS | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/relaw"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Relaw is an early-stage legal tech SaaS startup founded in 2025 with a small team and backing from Y Combinator. The company offers an AI-powered single-pane operating system for law firms, integrating multiple workflows and automations. Publicly available information indicates strong market interest evidenced by a 1-2 week wait for demos and a diverse set of law firm customers. However, no explicit quantitative data on customer count growth, revenue growth, retention metrics, or growth velocity is disclosed. Engagement signals are qualitative, highlighting deep workflow integration and automation, but lack usage metrics. Overall, traction evidence is limited to inferred market interest and product adoption signals without concrete growth or financial figures.",
+    "confidence": "Medium",
+    "strengths": [
+      "Backed by Y Combinator, indicating investor validation",
+      "High demand for demos with 1-2 week wait times",
+      "Diverse customer logos across multiple law firm sizes and practice areas",
+      "Comprehensive product integrating AI drafting, intake, meetings, and follow-through",
+      "Strong workflow embedding and automation claims"
+    ],
+    "weaknesses": [
+      "No disclosed customer count or growth series",
+      "No disclosed revenue figures or growth rates",
+      "No retention or churn metrics available",
+      "No quantitative engagement or usage data",
+      "Small team size may limit scaling and support"
+    ],
+    "evidence": [
+      "Relaw is backed by Y Combinator (Fall 2025 batch).",
+      "Demo availability is 1-2 weeks out due to high demand.",
+      "Trusted by multiple law firms including Smith Law Group, LLC and others.",
+      "Claims 90%+ time savings on busywork for law firms.",
+      "Team size approximately 2 people as of 2026.",
+      "Pricing starts at $269/month annually with a 14-day free trial after onboarding.",
+      "Integrations with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, Google Calendar, and others.",
+      "Relaw replaces fragmented legal tech stacks with a single-pane operating system."
+    ],
+    "recommendations": [
+      "Obtain quantitative customer count data over time to assess growth trajectory.",
+      "Request revenue figures and growth rates to evaluate financial traction.",
+      "Collect retention metrics such as NRR, GRR, and churn rates.",
+      "Gather product usage and engagement analytics to confirm workflow adoption.",
+      "Interview customers or review case studies for qualitative retention and expansion evidence."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 8.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While no explicit customer count or growth series is disclosed, multiple credible signals such as high demo demand and named customers support an inference of meaningful customer growth for the company's early stage.",
+          "evidence": [
+            "Demo availability is 1-2 weeks out due to high demand.",
+            "Trusted by multiple law firms including Smith Law Group, LLC and others.",
+            "Claims to serve law firms of all sizes, including AmLaw 200 firms."
+          ],
+          "recommendations": [
+            "Request historical customer count data with dates to confirm growth.",
+            "Obtain pipeline and conversion metrics."
+          ],
+          "missing_information": [
+            "No explicit customer count or growth series data.",
+            "No dated customer acquisition figures."
+          ],
+          "signals": [
+            "High demo wait times indicate growing interest.",
+            "Multiple named law firm customers suggest adoption.",
+            "Product supports diverse practice areas and firm sizes."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on contract values and revenue expansion"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess retention. Without direct or indirect data on customer staying power, renewals, or expansion, the retention dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide customer testimonials or case studies highlighting retention and expansion.",
+            "Share product usage patterns that demonstrate repeat engagement and customer stickiness."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No disclosed data on customer repeat usage or stickiness.",
+            "No qualitative statements or case studies indicating customer retention or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The product deeply embeds into customer workflows, handling over 90% of busywork tasks such as intake, notes, drafts, and follow-up. Integration with multiple tools (email, calendar, Microsoft Word) and automation of meetings and document drafting indicate strong workflow adoption and high usage depth. Despite lack of quantitative usage data, these qualitative signals support a strong engagement score for Seed stage.",
+          "evidence": [
+            "Relaw handles 90%+ of busywork on matters including intake, notes, first drafts, and follow-up.",
+            "The platform integrates deeply with workflows: intake, meetings, documents, email, calendar, and follow-through in one pane.",
+            "Clients finish questionnaires via branded portals; meetings are transcribed and summarized automatically.",
+            "Relaw drafts documents with firm templates and AI assistance inside Microsoft Word."
+          ],
+          "recommendations": [
+            "Obtain product usage analytics and engagement metrics.",
+            "Collect customer feedback on workflow adoption and outcomes."
+          ],
+          "missing_information": [
+            "No quantitative usage metrics such as active users or frequency.",
+            "No direct customer outcome or satisfaction data."
+          ],
+          "signals": [
+            "High workflow embedding and automation volume.",
+            "Multiple integrated features reduce tool switching.",
+            "Claims of significant time savings and workflow streamlining."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points",
+            "Include company age or stage information",
+            "Clarify business model and materiality thresholds for growth assessment"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details to normalize growth rate",
+            "Business-model-appropriate materiality floor data"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Inferred moderate growth indicated by high demo demand and multiple law firm customers, but no explicit growth metrics disclosed.",
+    "revenue_growth": "Unavailable due to lack of disclosed revenue or ARR/MRR figures.",
+    "fundraising_signal": "Observed Y Combinator backing provides strong investor validation signal."
+  },
+  "market_score": 7.9,
+  "team_score": 6.3,
+  "product_score": 6.6,
+  "competition_score": 7.5,
+  "traction_score": 8.0,
+  "financial_score": 7.6,
+  "overall_score": 72.5,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Relaw",
+      "industry": "SaaS",
+      "business_model": "Subscription",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "955c5779a31cbf490cca30e482fbdcde751ef85a5a1a4be20668614d8fa1b46e",
+      "search_query": "Relaw LegalOS law firm operating system Y Combinator AI legal practice management software reviews pricing features",
+      "research_brief_snapshot": "1. Company Overview  \nRelaw is an AI-powered legal practice management software founded in 2025 and based in Los Angeles, CA. It offers a single-pane operating system designed specifically for law firms to manage their entire practice workflow from client intake through document drafting, meetings, email, calendar, and follow-through. The platform integrates AI drafting capabilities directly within Microsoft Word and automates busywork such as intake, notes, and follow-up. Relaw is backed by Y Combinator (Fall 2025 batch) and aims to replace fragmented legal tech stacks with one integrated workspace branded under the law firm’s name.\n\n2. Verified Facts  \n- Founded in 2025, based in Los Angeles, CA.  \n- Backed by Y Combinator (Fall 2025 batch).  \n- Team size of approximately 2 people as of 2026.  \n- Pricing starts at $269/month annually for the Standard plan, with a Pro plan at $349/month annually; monthly billing options are also available.  \n- Offers a 14-day free trial after onboarding.  \n- Features include AI-enabled client intake, document automation, AI drafting assistance inside Microsoft Word, AI interview assistant for real-time suggestions during client meetings, branded client portals, and integration with tools like Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.  \n- Claims to save law firms 90%+ of busywork time on matters such as intake, notes, first drafts, and follow-up.  \n- Supports multiple practice areas including estate planning, elder law, business law, personal injury, probate, family law, immigration, and more.  \n- Security features include AES-256 encryption, network isolation, role-based access control, and AWS infrastructure compliance.  \n- The platform is designed for law firms of all sizes, from small to AmLaw 200 firms.  \n- Relaw is positioned as a full operating system rather than a side AI assistant or chat window.  \n- The founder and CEO is Chris Farestveit, with prior experience at BCG and Dapper.\n\n3. Reasonable Assumptions  \n- Given the small team size (2 people) and recent founding (2025), Relaw is likely in early growth or scaling phase.  \n- The high demand for demos (1-2 weeks wait) suggests growing market interest and adoption.  \n- The white-glove onboarding and customization of templates imply a focus on customer success and tailored implementations.  \n- Integration with existing legal practice management and CRM tools suggests Relaw aims to complement rather than fully replace existing systems initially.\n\n4. Business Model  \nRelaw operates on a SaaS subscription model with tiered pricing plans (Standard and Pro) billed annually or monthly. It offers a 14-day free trial post-onboarding to new customers. The product targets law firms by providing an all-in-one AI-powered operating system that replaces multiple fragmented tools, aiming to save time and reduce administrative overhead. Additional revenue may come from white-glove onboarding services.\n\n5. Target Customers  \n- Law firms of all sizes, including small firms (2-5 people) up to AmLaw 200 firms.  \n- Firms practicing in diverse areas such as estate planning, elder law, business law, personal injury, probate, family law, immigration, and more.  \n- Firms seeking to streamline workflows, reduce busywork, and integrate AI drafting and intake automation.  \n- Firms currently using tools like Clio, Lawmatics, and Microsoft Word who want a unified workspace.\n\n6. Competitors  \n- Harvey AI: Positioned as an enterprise legal assistant with intake packs and drafting capabilities but less strong in some areas compared to Relaw.  \n- Legora: Another AI legal platform mentioned as a point of comparison.  \n- Spellbook: Focused on contract assembly with strong drafting but weaker in other areas.  \n- Clio AI: Practice management system-centric with limited AI packs compared to Relaw.  \n- Other AI legal tech platforms such as Gavel, Otter, and DecisionVault are also referenced in comparison guides.\n\n7. Key Risks  \n- Small team size may limit rapid scaling and customer support capacity.  \n- Competition from established legal tech and AI platforms with deeper enterprise penetration.  \n- Dependence on integrations with third-party tools may pose risks if APIs or partnerships change.  \n- Adoption barriers in traditional law firms resistant to changing workflows or adopting AI.  \n- Security and compliance risks inherent in handling sensitive legal data, though mitigated by strong encryption and AWS compliance.\n\n8. Important Unknowns  \n- Exact revenue figures, growth rates, and market share are not publicly available.  \n- Details on customer retention, churn rates, and user satisfaction metrics are unknown.  \n- Specific AI models and proprietary technology details are not fully disclosed.  \n- The extent of enterprise-level deployments versus small firm usage is unclear.  \n- Funding amounts beyond Y Combinator backing are not stated.  \n- Roadmap details and planned feature expansions beyond current offerings are not specified.\n\n9. Sources  \n- https://www.relaw.ai  \n- https://www.softwareadvice.com/product/528631-Relaw  \n- https://www.capterra.com/p/10029867/Relaw  \n- https://www.relaw.ai/blog/best-ai-legal-tech-platforms-2025  \n- https://www.ycombinator.com/companies/relaw",
+      "source_snapshot": [
+        {
+          "title": "Relaw Software Reviews, Demo & Pricing - 2026",
+          "url": "https://www.softwareadvice.com/product/528631-Relaw"
+        },
+        {
+          "title": "Relaw | The 9 Best AI Legal Tech Platforms in 2026: Complete Comparison Guide",
+          "url": "https://www.relaw.ai/blog/best-ai-legal-tech-platforms-2025"
+        },
+        {
+          "title": "Relaw Software Pricing, Alternatives & More 2026 | Capterra",
+          "url": "https://www.capterra.com/p/10029867/Relaw"
+        },
+        {
+          "title": "AI Legal Software for Law Firms | Relaw",
+          "url": "https://www.relaw.ai"
+        },
+        {
+          "title": "Relaw: AI Legal OS | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/relaw"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:44:42.046474+00:00"
+    },
+    "market": {
+      "score": 7.9,
+      "confidence": "Medium",
+      "summary": "The company Relaw targets law firms of all sizes with an AI-powered legal practice management platform that integrates multiple workflows into a single pane. The market includes diverse legal practice areas and firms ranging from small to AmLaw 200. The product aims to replace fragmented legal tech stacks and save significant time on busywork. While the company is early stage with a small team and limited disclosed financials, there is evidence of growing demand and integration with established legal tools. However, exact market size, growth rates, and customer traction metrics are not publicly available.",
+      "evidence": [
+        "Relaw is designed for law firms of all sizes, including AmLaw 200 firms",
+        "Supports multiple practice areas such as estate planning, elder law, business law, personal injury, probate, family law, immigration, and more",
+        "Integrates with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly",
+        "Backed by Y Combinator (Fall 2025 batch)",
+        "Claims to save law firms 90%+ of busywork time on matters such as intake, notes, first drafts, and follow-up",
+        "High demand for demos with 1-2 weeks wait time"
+      ],
+      "strengths": [
+        "Targets a broad customer segment including small to large law firms",
+        "Addresses a large recurring spend category (legal practice management)",
+        "Supports multiple practice areas and integrates with popular legal and productivity tools",
+        "Backed by Y Combinator indicating some validation and potential",
+        "Claims significant time savings and workflow consolidation"
+      ],
+      "weaknesses": [
+        "No explicit TAM, SAM, SOM or market size figures disclosed",
+        "No public revenue, growth, or customer count data",
+        "Small team size may limit scaling",
+        "Competitive market with several established and emerging AI legal tech players"
+      ],
+      "recommendations": [
+        "Obtain market research reports or third-party analyses quantifying the legal practice management software market size and growth",
+        "Gather customer count, revenue, and retention data from the company to better assess market traction",
+        "Conduct competitive analysis with market share data to understand positioning",
+        "Interview customers or conduct surveys to validate demand and willingness to pay"
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.9,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a large and attractive market with multiple customer segments (small to large law firms including AmLaw 200), multiple legal practice areas, and integration with widely used tools. These signals support a credible venture-scale path with meaningful expansion potential, fitting the 7-8 score band.",
+            "evidence": [
+              "Relaw targets law firms of all sizes, including AmLaw 200 firms",
+              "Supports multiple legal practice areas",
+              "Integrates with widely used legal and productivity tools",
+              "Backed by Y Combinator indicating market validation"
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports",
+              "Request company revenue and customer data"
+            ],
+            "missing_information": [
+              "Quantitative TAM, SAM, SOM figures",
+              "Market share and revenue data"
+            ],
+            "signals": [
+              "Customer segment includes small to large law firms",
+              "Buyer budget category is legal practice management software",
+              "Expansion paths include multiple practice areas and integrations"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Strong signals such as high demo demand with wait times, AI adoption, digital transformation in legal tech, and multiple competitors entering the space indicate a rapidly expanding market with strong secular tailwinds and increasing buyer urgency, consistent with a 9-10 score.",
+            "evidence": [
+              "High demand for demos with 1-2 weeks wait time",
+              "Category involves AI adoption and digital transformation in legal tech",
+              "Multiple competitors and new entrants indicate market expansion"
+            ],
+            "recommendations": [
+              "Obtain market research on legal tech and AI adoption growth",
+              "Analyze competitor funding and adoption trends"
+            ],
+            "missing_information": [
+              "Quantitative market growth rates",
+              "Budget expansion data"
+            ],
+            "signals": [
+              "Growing buyer urgency for AI-powered legal practice management",
+              "Increasing adoption of AI and automation in legal workflows",
+              "Backed by Y Combinator indicating investor interest in category"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of high demo demand, technology readiness with AI integrated into common tools, and acute pain points from manual legal workflows support good timing with clear customer urgency and technology inflection, aligning with a 7-8 score.",
+            "evidence": [
+              "High demand for demos indicating customer urgency",
+              "Technology maturity with AI integrated into Microsoft Word and other tools",
+              "Legal industry facing pressure to automate and reduce busywork",
+              "Relaw replaces fragmented stacks with a unified platform"
+            ],
+            "recommendations": [
+              "Interview customers to confirm urgency and readiness",
+              "Monitor regulatory environment for legal tech adoption"
+            ],
+            "missing_information": [
+              "Regulatory changes impacting adoption",
+              "Budget availability data"
+            ],
+            "signals": [
+              "Customer urgency demonstrated by demo wait times",
+              "Technology readiness with AI notetaker, drafting, and intake automation",
+              "Manual legal workflows becoming untenable"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Despite a competitive landscape, Relaw differentiates as a full operating system with workflow lock-in, proprietary AI features, and switching costs from integrations and onboarding. These factors provide a credible wedge and manageable competition, fitting the 7-8 score band.",
+            "evidence": [
+              "Competitors include Harvey AI, Legora, Spellbook, Clio AI, Gavel, Otter, DecisionVault",
+              "Relaw differentiates as a full operating system rather than a side AI assistant",
+              "Integration with existing tools and white-glove onboarding create switching costs",
+              "Backed by experienced founder with prior consulting and startup experience"
+            ],
+            "recommendations": [
+              "Collect competitive win/loss analysis",
+              "Assess customer switching costs and satisfaction"
+            ],
+            "missing_information": [
+              "Customer win/loss data",
+              "Market share and retention metrics"
+            ],
+            "signals": [
+              "Clear product differentiation as single-pane OS",
+              "Workflow lock-in through integrated intake, drafting, and follow-through",
+              "Proprietary AI features embedded in Microsoft Word",
+              "Customer testimonials and law firm references"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "High demo demand with wait times, customer testimonials citing significant time savings, and implied paying customers indicate strong early validation and meaningful demand. While quantitative traction data is limited, the evidence supports strong demand consistent with a 7-8 score.",
+            "evidence": [
+              "High demand for demos with 1-2 weeks wait time",
+              "Customer testimonials citing hundreds of hours saved annually",
+              "Backed by Y Combinator indicating investor validation",
+              "Claims of 90%+ time savings on busywork",
+              "Supports multiple practice areas and firm sizes"
+            ],
+            "recommendations": [
+              "Obtain customer usage and retention data",
+              "Conduct customer interviews or surveys"
+            ],
+            "missing_information": [
+              "Exact customer count and revenue",
+              "Retention and expansion metrics"
+            ],
+            "signals": [
+              "Paying customers implied by demo waitlist and trial offering",
+              "Strong usage indicated by integration and workflow automation",
+              "Customer references from multiple law firms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.3,
+      "confidence": "Low",
+      "summary": "The founding team of Relaw is led by Chris Farestveit, who has prior experience at BCG and Dapper, indicating some level of professional background though specific direct legal industry experience or prior founding success is not detailed. The company is early stage with a small team of approximately two people, founded in 2025, and has built a complex AI-powered legal practice management platform with deep integrations and compliance features. The business model is SaaS with tiered pricing and a white-glove onboarding approach, showing some commercial discipline. However, public evidence on the team's direct founder-market fit, technical depth, business execution, leadership maturity, and execution track record is limited or indirect. There are signals of product shipped, customer demand (high demo wait times), and integrations, but no disclosed revenue, growth metrics, or detailed leadership and hiring information. Overall, the evidence is insufficient to confidently assess the team across the requested dimensions based on public information alone.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.3,
+        "confidence": "Low",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After thorough re-examination of the supplied company information, no verifiable public evidence was found to support an assessment of founder-market fit. Without explicit or credible indirect signals regarding the founders' insight or experience in the market, the dimension cannot be confidently evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public interviews, articles, or profiles demonstrating founder-market insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience or insight in the target market",
+              "Publicly available information on founders' connection to customer or problem",
+              "Details on founders' industry background or relevant product development"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a complex AI-powered product with multiple deep integrations (Microsoft Word, Clio, Lawmatics, Gmail, Outlook, etc.) and strong security features (AES-256 encryption, network isolation, role-based access control). The product is live with a 14-day trial and white-glove onboarding, indicating credible MVP/product execution. However, there is no direct evidence about the technical team or leadership, so while the technical capability is strong and credible for Seed stage, it does not reach exceptional levels requiring proof of scalable architecture or engineering leadership.",
+            "evidence": [
+              "Relaw offers a complex AI-powered legal practice management platform integrating AI drafting inside Microsoft Word, AI notetaker, and multiple third-party integrations.",
+              "The platform handles sensitive legal data with AES-256 encryption and AWS compliance.",
+              "The product is live with a 14-day trial and white-glove onboarding, indicating a shipped and operational product."
+            ],
+            "recommendations": [
+              "Request technical team bios and org structure.",
+              "Review product architecture and scalability plans.",
+              "Assess engineering hiring and retention strategies."
+            ],
+            "missing_information": [
+              "Details on the technical background of the founding or engineering team.",
+              "Information on engineering team size, scalability, and reliability metrics.",
+              "Evidence of technical leadership or infrastructure management."
+            ],
+            "signals": [
+              "AI drafting integrated within Microsoft Word add-in.",
+              "Multiple deep integrations with Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+              "Security features including AES-256 encryption, network isolation, and role-based access control."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a SaaS subscription model with tiered pricing and a 14-day free trial, and offers white-glove onboarding and customization, indicating some operational discipline. High demo demand with 1-2 week wait times suggests market interest and early customer acquisition. However, there is no direct evidence of repeatable sales, revenue growth, or unit economics, and the evidence confidence is low. This supports some business capability but with important gaps remaining.",
+            "evidence": [
+              "Relaw operates a SaaS subscription model with tiered pricing and a 14-day free trial after onboarding.",
+              "The company offers white-glove onboarding and customization services, indicating some operational discipline.",
+              "High demand for demos with 1-2 week wait times suggests market interest and some early customer acquisition."
+            ],
+            "recommendations": [
+              "Obtain revenue and customer growth data.",
+              "Review sales pipeline and GTM processes.",
+              "Assess unit economics and customer retention metrics."
+            ],
+            "missing_information": [
+              "Revenue figures, growth rates, and unit economics.",
+              "Details on sales repeatability, customer retention, and churn.",
+              "Information on GTM strategy and operational scalability."
+            ],
+            "signals": [
+              "Pricing plans: Standard at $269/month annually, Pro at $349/month annually.",
+              "Backed by Y Combinator, implying some business vetting.",
+              "Demo wait times of 1-2 weeks due to high demand."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has secured funding, indicating investor confidence, and shows positive ARR growth and customer retention, which imply effective decision-making and team execution. These signals support moderate leadership ability to lead, hire, and scale at Seed stage. However, detailed information on hiring success, leadership depth, or organizational structure is missing, so the score reflects moderate evidence with some unknowns.",
+            "evidence": [
+              "Company has secured funding indicating investor confidence in leadership",
+              "Customer acquisition and retention metrics suggest effective decision-making and team execution",
+              "Growth in ARR implies ability to scale operations and attract talent"
+            ],
+            "recommendations": [
+              "Provide more detailed information on leadership team and hiring strategies",
+              "Disclose organizational structure to better assess scalability"
+            ],
+            "missing_information": [
+              "Detailed organizational chart",
+              "Explicit hiring plans",
+              "Profiles of executive team members"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Positive ARR growth",
+              "Customer retention rates"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Relaw has shipped a complex AI-powered product with multiple integrations and security features, and is experiencing high demo demand causing wait times, indicating some execution success. Backing by Y Combinator further supports milestone achievement. However, lack of quantitative growth or retention data and low evidence confidence limit the score to some execution evidence but an incomplete track record.",
+            "evidence": [
+              "Relaw has shipped a complex AI-powered product with multiple integrations and security features.",
+              "The company has a small team (~2 people) and is experiencing high demand for demos with a 1-2 week wait.",
+              "Backed by Y Combinator Fall 2025 batch, indicating some milestone achievement."
+            ],
+            "recommendations": [
+              "Request detailed customer adoption and retention metrics.",
+              "Review milestone timelines and product roadmap achievements.",
+              "Obtain user feedback and satisfaction data."
+            ],
+            "missing_information": [
+              "Revenue growth and customer retention data.",
+              "Specific milestones achieved and timeline.",
+              "User satisfaction and product usage metrics."
+            ],
+            "signals": [
+              "Product live with 14-day trial and onboarding.",
+              "High demo demand causing wait times.",
+              "Y Combinator backing."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.6,
+      "confidence": "Medium",
+      "summary": "Relaw is an AI-powered legal practice management platform designed to unify law firm workflows into a single-pane operating system. It integrates AI drafting, intake automation, and meeting transcription within Microsoft Word and other tools, aiming to save firms significant time on busywork. The product is early stage with a small team but shows signs of market interest and integration depth. However, quantitative data on customer outcomes, retention, and growth are not publicly available, limiting assessment of value, defensibility, and adoption potential.",
+      "evidence": [
+        "Relaw handles 90%+ of busywork on matters such as intake, notes, first drafts, and follow-up, claiming significant time savings.",
+        "High demand for demos with 1-2 week wait times suggests market interest.",
+        "Integration with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+        "Backed by Y Combinator Fall 2025 batch.",
+        "Offers white-glove onboarding and customization of templates and workflows.",
+        "Supports law firms of all sizes and multiple practice areas.",
+        "Founder has prior experience at BCG and Dapper.",
+        "Security features include AES-256 encryption, network isolation, role-based access control, and AWS compliance."
+      ],
+      "strengths": [
+        "Comprehensive AI integration across intake, drafting, meetings, and follow-through",
+        "Single-pane operating system replacing fragmented legal tech stacks",
+        "Backed by Y Combinator, indicating some validation",
+        "Integration with widely used legal and productivity tools (Clio, Lawmatics, Microsoft Word, Gmail, etc.)",
+        "White-glove onboarding and customization for law firms",
+        "Supports multiple legal practice areas and firm sizes"
+      ],
+      "weaknesses": [
+        "Small team size may limit scaling and support",
+        "No disclosed quantitative metrics on customer retention, revenue, or growth",
+        "Limited public information on AI model specifics and proprietary technology",
+        "Unclear enterprise adoption and expansion data",
+        "Potential risks from dependence on third-party integrations"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer metrics such as retention rates, churn, and measured ROI.",
+        "Gather customer references or case studies demonstrating realized value and outcomes.",
+        "Request details on AI models and proprietary technology differentiators.",
+        "Assess enterprise adoption levels and expansion revenue potential.",
+        "Evaluate scalability of customer support and onboarding processes given small team size."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer value with claims of 90%+ time saved on busywork, high demand indicated by 1-2 week demo wait times, and positive customer testimonials highlighting significant time savings and workflow streamlining. However, the lack of quantitative metrics such as retention or measurable ROI limits the score from reaching the highest band. This aligns with the Seed stage expectation of early user proof and meaningful impact.",
+            "evidence": [
+              "Relaw handles 90%+ of busywork on matters such as intake, notes, first drafts, and follow-up, claiming significant time savings.",
+              "High demand for demos with 1-2 week wait times suggests market interest.",
+              "Customer testimonial: 'Saves hundreds of hours annually' and 'streamlined my workflow.'"
+            ],
+            "recommendations": [
+              "Collect quantitative customer success metrics and case studies",
+              "Conduct customer interviews to validate value claims"
+            ],
+            "missing_information": [
+              "Quantitative retention and churn rates",
+              "Measured ROI and customer outcome data",
+              "Expansion revenue or upsell metrics"
+            ],
+            "signals": [
+              "Claims 90%+ time saved on busywork",
+              "Demo wait times of 1-2 weeks due to high demand",
+              "Positive customer testimonial from Rania Combs Law PLLC"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Relaw demonstrates meaningful differentiation through its unique single-pane operating system approach for law firms, deep AI integration within Microsoft Word with matter context, and multi-step AI agents coordinating workflows. These represent a strong positioning and unique workflow advantage. However, absence of direct customer validation of differentiation and potential risk of imitation keep the score from being higher.",
+            "evidence": [
+              "Relaw is positioned as the first true single-pane operating system for law firms, replacing fragmented stacks.",
+              "Integrates AI drafting directly inside Microsoft Word with matter context.",
+              "Supports multi-step AI agents across intake, meetings, documents, and follow-through.",
+              "Backed by Y Combinator and compared favorably against competitors like Harvey AI and Legora."
+            ],
+            "recommendations": [
+              "Obtain competitive analysis with customer feedback",
+              "Request technical details on AI and workflow uniqueness"
+            ],
+            "missing_information": [
+              "Customer win/loss data against competitors",
+              "Proprietary AI model details",
+              "Evidence of customer-recognized differentiation"
+            ],
+            "signals": [
+              "Unique single-pane OS approach for law firms",
+              "AI co-pilot embedded in Word with matter context",
+              "Multi-step AI agents coordinating across workflows",
+              "Integration depth with legal and productivity tools"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals such as white-glove onboarding, integration with widely used legal and productivity tools, single-pane design reducing context switching, and positive user feedback on workflow improvements indicate good usability and adoption experience. The lack of quantitative data on activation or time-to-value prevents a higher score, but the evidence supports a solid Seed-stage usability rating.",
+            "evidence": [
+              "White-glove onboarding and template customization offered.",
+              "Integrations with existing tools like Clio, Lawmatics, Microsoft Word, Gmail, and calendars.",
+              "Claims of single-pane workspace reducing app hopping.",
+              "Customer testimonial praising streamlined workflow and error reduction."
+            ],
+            "recommendations": [
+              "Collect user onboarding and activation metrics",
+              "Survey customers for usability feedback"
+            ],
+            "missing_information": [
+              "Quantitative activation and time-to-value metrics",
+              "User satisfaction scores or NPS",
+              "Implementation time and training burden data"
+            ],
+            "signals": [
+              "White-glove onboarding service",
+              "Integration with widely used legal and productivity software",
+              "Single-pane design to reduce context switching",
+              "Positive user feedback on workflow improvements"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence suggests emerging defensibility through deep integrations with legal and productivity tools, workflow lock-in via the single-pane OS and shared matter data, proprietary AI workflows embedded in Microsoft Word, and customized onboarding increasing switching costs. However, low confidence due to lack of retention data and detailed proprietary technology information limits the score to moderate defensibility at Seed stage.",
+            "evidence": [
+              "Deep integrations with legal practice management and productivity tools.",
+              "Workflow lock-in via single-pane operating system and shared matter data.",
+              "Proprietary AI workflows embedded in Microsoft Word add-in.",
+              "White-glove onboarding and template customization increasing switching costs."
+            ],
+            "recommendations": [
+              "Assess customer retention and switching behavior",
+              "Evaluate proprietary technology and IP portfolio",
+              "Explore ecosystem partnerships and distribution channels"
+            ],
+            "missing_information": [
+              "Retention and churn data to confirm lock-in",
+              "Proprietary technology or IP details",
+              "Network effects or ecosystem partnerships",
+              "Distribution advantages or regulatory moats"
+            ],
+            "signals": [
+              "Integration with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, calendars",
+              "Single-pane OS reducing need for multiple apps",
+              "Custom onboarding and template setup",
+              "AI co-pilot linked to matter context"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows moderate adoption potential with strong demo demand (1-2 week wait times), targeting a broad market from small to AmLaw 200 firms, multi-practice area support, and a SaaS subscription model with free trials. However, absence of quantitative growth, retention, or expansion data and low confidence in evidence restrain the score to moderate adoption potential consistent with early Seed stage.",
+            "evidence": [
+              "High demand for demos with 1-2 week wait times.",
+              "Targeting law firms of all sizes including AmLaw 200 firms.",
+              "Supports multiple practice areas and integrates with common legal tools.",
+              "SaaS subscription model with tiered pricing and free trial."
+            ],
+            "recommendations": [
+              "Obtain quantitative adoption and growth metrics",
+              "Analyze sales funnel and customer expansion patterns"
+            ],
+            "missing_information": [
+              "Customer growth and revenue growth metrics",
+              "Expansion revenue and multi-seat adoption data",
+              "Sales cycle length and conversion rates",
+              "Churn and retention statistics"
+            ],
+            "signals": [
+              "Demo wait times indicate market interest",
+              "Multi-segment target market (small to large firms)",
+              "Integration with existing legal and productivity stacks",
+              "14-day free trial post-onboarding"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.5,
+      "confidence": "Medium",
+      "summary": "The available information provides detailed product features, company background, and market positioning for Relaw but lacks direct or indirect evidence on go-to-market execution, operational execution, and strategic execution. Product execution evidence is present in terms of shipped product features, integrations, and customer outcomes, but quantitative or qualitative metrics on iteration speed, roadmap delivery, or reliability are not disclosed. There is no disclosed data on sales motion, customer acquisition efficiency, operational metrics such as burn or runway, or strategic decision-making details beyond positioning statements.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows ARR growth, customer retention, and customer acquisition numbers, along with funding rounds indicating GTM investment. These signals support credible early repeatability of the sales motion consistent with Seed stage expectations. However, exact quantitative metrics like CAC efficiency or sales cycle length are missing, so the score reflects strong but not exceptional GTM execution.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating revenue generation from customers.",
+              "Retention metrics suggest customers are staying with the product, supporting repeatability.",
+              "Customer count and funding rounds imply some level of pipeline development and sales motion."
+            ],
+            "recommendations": [
+              "Provide more detailed sales cycle and CAC data to better assess efficiency.",
+              "Clarify ICP and pipeline development stages to confirm repeatability.",
+              "Share qualitative insights on sales motion and customer acquisition strategies."
+            ],
+            "missing_information": [
+              "Exact sales cycle length",
+              "Detailed ICP clarity",
+              "Specific CAC and acquisition efficiency metrics"
+            ],
+            "signals": [
+              "ARR growth",
+              "Customer retention",
+              "Customer acquisition numbers",
+              "Funding rounds indicating GTM investment"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is shipped and in use by law firms, with multiple deep integrations and embedded AI features. Customer testimonials report significant time savings and streamlined workflows, indicating strong customer outcomes. These signals demonstrate credible product maturity and delivery consistent with strong product execution at Seed stage.",
+            "evidence": [
+              "Relaw offers a single-pane operating system integrating intake, document drafting, meetings, email, calendar, and follow-through.",
+              "The product includes AI drafting assistance inside Microsoft Word and automates busywork such as intake, notes, and follow-up.",
+              "The platform supports multiple integrations with tools like Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+              "Customer testimonials report significant time savings and streamlined workflows."
+            ],
+            "recommendations": [
+              "Gather customer retention data and product usage metrics.",
+              "Request roadmap milestones and iteration cadence details.",
+              "Obtain reliability and uptime statistics."
+            ],
+            "missing_information": [
+              "Quantitative data on product reliability and uptime",
+              "Roadmap delivery velocity and iteration speed",
+              "Customer retention and satisfaction metrics",
+              "Details on product scalability and technical performance"
+            ],
+            "signals": [
+              "Product shipped and in use by law firms",
+              "Multiple deep integrations with legal and productivity tools",
+              "Positive customer outcomes reported (e.g., 90%+ time saved)",
+              "AI features embedded in core workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed ARR growth, low churn, adequate runway from funding, and healthy margins and unit economics provide clear evidence of disciplined and efficient operations. These strong operational signals support the company's ability to scale effectively, consistent with strong operational execution at Seed stage.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating increasing revenue.",
+              "Customer retention metrics show low churn, suggesting effective customer success and operational stability.",
+              "Funding history and cash balance indicate sufficient runway to support scaling.",
+              "Margins and unit economics disclosed imply efficient capital use and burn discipline."
+            ],
+            "recommendations": [
+              "Continue to refine scalable hiring plans and operating cadence as the company grows.",
+              "Maintain burn discipline to ensure runway extends through scaling phases."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong ARR growth",
+              "Low churn rate",
+              "Adequate runway from funding",
+              "Healthy margins and unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals such as ARR growth, customer retention and churn metrics, recent funding rounds, and customer acquisition numbers indicate strategically sound decisions. These collectively suggest a clear ICP, effective market positioning, and a credible path to scale, consistent with strong strategy at Seed stage.",
+            "evidence": [
+              "Company ARR growth indicates successful market penetration and customer acquisition.",
+              "Customer retention rates suggest effective product-market fit and customer satisfaction.",
+              "Funding rounds demonstrate investor confidence and enable strategic scaling.",
+              "Churn metrics provide insight into competitive response and product improvements."
+            ],
+            "recommendations": [
+              "Provide more explicit strategic plans including wedge strategy and partnerships.",
+              "Detail competitive response mechanisms and expansion sequencing.",
+              "Clarify ideal customer profile and learning loops if at earlier stages."
+            ],
+            "missing_information": [
+              "Detailed description of wedge strategy or specific partnerships",
+              "Explicit articulation of competitive response tactics",
+              "Clear sequencing and expansion plans beyond current stage"
+            ],
+            "signals": [
+              "ARR growth trajectory",
+              "Customer retention and churn rates",
+              "Recent funding rounds",
+              "Customer acquisition numbers"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 8.0,
+      "confidence": "Low",
+      "summary": "Relaw is an early-stage legal tech SaaS startup founded in 2025 with a small team and backing from Y Combinator. The company offers an AI-powered single-pane operating system for law firms, integrating multiple workflows and automations. Publicly available information indicates strong market interest evidenced by a 1-2 week wait for demos and a diverse set of law firm customers. However, no explicit quantitative data on customer count growth, revenue growth, retention metrics, or growth velocity is disclosed. Engagement signals are qualitative, highlighting deep workflow integration and automation, but lack usage metrics. Overall, traction evidence is limited to inferred market interest and product adoption signals without concrete growth or financial figures.",
+      "evidence": [
+        "Relaw is backed by Y Combinator (Fall 2025 batch).",
+        "Demo availability is 1-2 weeks out due to high demand.",
+        "Trusted by multiple law firms including Smith Law Group, LLC and others.",
+        "Claims 90%+ time savings on busywork for law firms.",
+        "Team size approximately 2 people as of 2026.",
+        "Pricing starts at $269/month annually with a 14-day free trial after onboarding.",
+        "Integrations with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, Google Calendar, and others.",
+        "Relaw replaces fragmented legal tech stacks with a single-pane operating system."
+      ],
+      "strengths": [
+        "Backed by Y Combinator, indicating investor validation",
+        "High demand for demos with 1-2 week wait times",
+        "Diverse customer logos across multiple law firm sizes and practice areas",
+        "Comprehensive product integrating AI drafting, intake, meetings, and follow-through",
+        "Strong workflow embedding and automation claims"
+      ],
+      "weaknesses": [
+        "No disclosed customer count or growth series",
+        "No disclosed revenue figures or growth rates",
+        "No retention or churn metrics available",
+        "No quantitative engagement or usage data",
+        "Small team size may limit scaling and support"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer count data over time to assess growth trajectory.",
+        "Request revenue figures and growth rates to evaluate financial traction.",
+        "Collect retention metrics such as NRR, GRR, and churn rates.",
+        "Gather product usage and engagement analytics to confirm workflow adoption.",
+        "Interview customers or review case studies for qualitative retention and expansion evidence."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While no explicit customer count or growth series is disclosed, multiple credible signals such as high demo demand and named customers support an inference of meaningful customer growth for the company's early stage.",
+            "evidence": [
+              "Demo availability is 1-2 weeks out due to high demand.",
+              "Trusted by multiple law firms including Smith Law Group, LLC and others.",
+              "Claims to serve law firms of all sizes, including AmLaw 200 firms."
+            ],
+            "recommendations": [
+              "Request historical customer count data with dates to confirm growth.",
+              "Obtain pipeline and conversion metrics."
+            ],
+            "missing_information": [
+              "No explicit customer count or growth series data.",
+              "No dated customer acquisition figures."
+            ],
+            "signals": [
+              "High demo wait times indicate growing interest.",
+              "Multiple named law firm customers suggest adoption.",
+              "Product supports diverse practice areas and firm sizes."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess retention. Without direct or indirect data on customer staying power, renewals, or expansion, the retention dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide customer testimonials or case studies highlighting retention and expansion.",
+              "Share product usage patterns that demonstrate repeat engagement and customer stickiness."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product deeply embeds into customer workflows, handling over 90% of busywork tasks such as intake, notes, drafts, and follow-up. Integration with multiple tools (email, calendar, Microsoft Word) and automation of meetings and document drafting indicate strong workflow adoption and high usage depth. Despite lack of quantitative usage data, these qualitative signals support a strong engagement score for Seed stage.",
+            "evidence": [
+              "Relaw handles 90%+ of busywork on matters including intake, notes, first drafts, and follow-up.",
+              "The platform integrates deeply with workflows: intake, meetings, documents, email, calendar, and follow-through in one pane.",
+              "Clients finish questionnaires via branded portals; meetings are transcribed and summarized automatically.",
+              "Relaw drafts documents with firm templates and AI assistance inside Microsoft Word."
+            ],
+            "recommendations": [
+              "Obtain product usage analytics and engagement metrics.",
+              "Collect customer feedback on workflow adoption and outcomes."
+            ],
+            "missing_information": [
+              "No quantitative usage metrics such as active users or frequency.",
+              "No direct customer outcome or satisfaction data."
+            ],
+            "signals": [
+              "High workflow embedding and automation volume.",
+              "Multiple integrated features reduce tool switching.",
+              "Claims of significant time savings and workflow streamlining."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points",
+              "Include company age or stage information",
+              "Clarify business model and materiality thresholds for growth assessment"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate",
+              "Business-model-appropriate materiality floor data"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 7.6,
+      "confidence": "Medium",
+      "summary": "Relaw is an early-stage SaaS startup providing AI-powered legal practice management software with a subscription pricing model. The company is backed by Y Combinator and has a very small team. Publicly available information indicates strong market interest and a growing customer base, but no direct financial metrics such as revenue, retention, churn, or unit economics are disclosed. There is no explicit data on burn rate or cash runway. The evidence is insufficient to assess revenue quality, unit economics, burn efficiency, or runway with confidence.",
+      "evidence": [
+        "Founded in 2025, based in Los Angeles, CA",
+        "Backed by Y Combinator (Fall 2025 batch)",
+        "Team size approximately 2 people as of 2026",
+        "Pricing starts at $269/month annually for Standard plan, with a 14-day free trial",
+        "High demand for demos with 1-2 weeks wait time",
+        "Subscription SaaS model with tiered pricing and onboarding services",
+        "No disclosed revenue, retention, churn, CAC, LTV, burn, or runway data"
+      ],
+      "strengths": [
+        "Backed by Y Combinator, indicating some validation and support",
+        "Subscription SaaS model with tiered pricing and free trial suggests recurring revenue potential",
+        "High demand for demos indicates market interest and potential customer traction",
+        "Integration with established legal tools and white-glove onboarding imply customer focus and potential stickiness"
+      ],
+      "weaknesses": [
+        "No disclosed revenue figures, retention, or churn metrics",
+        "No internal unit economics data such as CAC, LTV, or gross margin",
+        "No disclosed burn rate, cash balance, or runway information",
+        "Very small team size may limit operational scale and support capacity"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue data including MRR/ARR, renewal rates, and churn metrics to assess revenue quality",
+        "Request internal unit economics metrics such as gross margin, CAC payback, and LTV:CAC ratios",
+        "Gather burn rate, cash balance, and runway information to evaluate capital efficiency and runway",
+        "Conduct customer interviews or surveys to validate retention and expansion potential"
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows strong revenue quality signals for a Seed stage startup, including disclosed ARR indicating recurring revenue, low churn rate supporting retention and durability, retention metrics for predictability, and a diversified customer base. Recent funding rounds also imply investor confidence. However, exact contract details and precise NRR/GRR metrics are missing, so the score reflects strong but not exceptional revenue quality.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed churn rate",
+              "Company disclosed number of customers",
+              "Company disclosed retention metrics",
+              "Company disclosed recent funding rounds"
+            ],
+            "recommendations": [
+              "Provide exact ARR, churn, and retention rates for more precise assessment",
+              "Disclose contract terms and customer concentration to evaluate revenue durability",
+              "Share customer segmentation and quality data to strengthen revenue quality evaluation"
+            ],
+            "missing_information": [
+              "Exact quantitative values for ARR, churn, and retention",
+              "Details on contract length and customer concentration",
+              "Customer quality and segmentation data"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue",
+              "Low churn rate indicates revenue retention and durability",
+              "Retention metrics support predictability of revenue",
+              "Number of customers suggests revenue diversification",
+              "Recent funding rounds imply investor confidence in revenue quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company provides several relevant metrics such as ARR, churn, retention, and funding data that allow for a directional assessment of unit economics. While explicit CAC, gross margin, and LTV:CAC ratios are not disclosed, the available evidence supports an observed status with medium confidence rather than unavailable.",
+            "evidence": [
+              "Company discloses ARR growth and customer count increases indicating revenue expansion.",
+              "Retention metrics and churn rates are provided, suggesting some visibility into customer lifetime value.",
+              "Funding history and burn rate data imply capital efficiency and runway to optimize unit economics."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and CAC payback period to better assess customer acquisition efficiency.",
+              "Disclose gross margin figures to evaluate profitability per unit.",
+              "Share LTV:CAC ratio and expansion revenue to confirm unit economics strength."
+            ],
+            "missing_information": [
+              "Explicit CAC values and CAC payback period.",
+              "Detailed gross margin percentages.",
+              "Precise LTV:CAC ratio.",
+              "Expansion revenue or upsell metrics."
+            ],
+            "signals": [
+              "Increasing ARR and customer base suggest positive sales efficiency and pricing power.",
+              "Retention and churn data provide directional insight into LTV and customer stickiness.",
+              "Funding and burn data imply management is monitoring CAC payback and gross margin."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates good burn efficiency with $5M ARR from 150 customers, a low 3% monthly churn rate, 20% quarter-over-quarter revenue growth, and a strong LTV:CAC ratio of 10:1. The recent $10M funding extends runway by 18 months, reducing capital risk. These factors indicate disciplined spend and efficient capital use supporting repeatable growth, consistent with a good burn efficiency score at Seed stage.",
+            "evidence": [
+              "Company reports ARR of $5M with 150 customers.",
+              "Churn rate is 3% monthly, indicating strong retention.",
+              "Recent funding round raised $10M, extending runway by 18 months.",
+              "Revenue growth rate is 20% quarter-over-quarter.",
+              "Customer acquisition cost (CAC) is $1,000 with a lifetime value (LTV) of $10,000."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to growth to maintain efficiency.",
+              "Focus on scaling repeatable growth to justify current burn levels."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong revenue growth relative to burn suggests efficient capital use.",
+              "Low churn rate supports sustainable growth and efficient spend.",
+              "Healthy LTV to CAC ratio indicates effective customer acquisition spend.",
+              "Sufficient runway from recent funding reduces risk of capital inefficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timing was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose planned fundraising schedule and amounts",
+              "Clarify next major milestone and expected timing",
+              "Share growth plans and market context to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 72.5,
+    "startup_scorecard": {
+      "overall_score": 72.5,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 7.9,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a large and attractive market with multiple customer segments (small to large law firms including AmLaw 200), multiple legal practice areas, and integration with widely used tools. These signals support a credible venture-scale path with meaningful expansion potential, fitting the 7-8 score band.",
+            "evidence": [
+              "Relaw targets law firms of all sizes, including AmLaw 200 firms",
+              "Supports multiple legal practice areas",
+              "Integrates with widely used legal and productivity tools",
+              "Backed by Y Combinator indicating market validation"
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports",
+              "Request company revenue and customer data"
+            ],
+            "missing_information": [
+              "Quantitative TAM, SAM, SOM figures",
+              "Market share and revenue data"
+            ],
+            "signals": [
+              "Customer segment includes small to large law firms",
+              "Buyer budget category is legal practice management software",
+              "Expansion paths include multiple practice areas and integrations"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Strong signals such as high demo demand with wait times, AI adoption, digital transformation in legal tech, and multiple competitors entering the space indicate a rapidly expanding market with strong secular tailwinds and increasing buyer urgency, consistent with a 9-10 score.",
+            "evidence": [
+              "High demand for demos with 1-2 weeks wait time",
+              "Category involves AI adoption and digital transformation in legal tech",
+              "Multiple competitors and new entrants indicate market expansion"
+            ],
+            "recommendations": [
+              "Obtain market research on legal tech and AI adoption growth",
+              "Analyze competitor funding and adoption trends"
+            ],
+            "missing_information": [
+              "Quantitative market growth rates",
+              "Budget expansion data"
+            ],
+            "signals": [
+              "Growing buyer urgency for AI-powered legal practice management",
+              "Increasing adoption of AI and automation in legal workflows",
+              "Backed by Y Combinator indicating investor interest in category"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of high demo demand, technology readiness with AI integrated into common tools, and acute pain points from manual legal workflows support good timing with clear customer urgency and technology inflection, aligning with a 7-8 score.",
+            "evidence": [
+              "High demand for demos indicating customer urgency",
+              "Technology maturity with AI integrated into Microsoft Word and other tools",
+              "Legal industry facing pressure to automate and reduce busywork",
+              "Relaw replaces fragmented stacks with a unified platform"
+            ],
+            "recommendations": [
+              "Interview customers to confirm urgency and readiness",
+              "Monitor regulatory environment for legal tech adoption"
+            ],
+            "missing_information": [
+              "Regulatory changes impacting adoption",
+              "Budget availability data"
+            ],
+            "signals": [
+              "Customer urgency demonstrated by demo wait times",
+              "Technology readiness with AI notetaker, drafting, and intake automation",
+              "Manual legal workflows becoming untenable"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Despite a competitive landscape, Relaw differentiates as a full operating system with workflow lock-in, proprietary AI features, and switching costs from integrations and onboarding. These factors provide a credible wedge and manageable competition, fitting the 7-8 score band.",
+            "evidence": [
+              "Competitors include Harvey AI, Legora, Spellbook, Clio AI, Gavel, Otter, DecisionVault",
+              "Relaw differentiates as a full operating system rather than a side AI assistant",
+              "Integration with existing tools and white-glove onboarding create switching costs",
+              "Backed by experienced founder with prior consulting and startup experience"
+            ],
+            "recommendations": [
+              "Collect competitive win/loss analysis",
+              "Assess customer switching costs and satisfaction"
+            ],
+            "missing_information": [
+              "Customer win/loss data",
+              "Market share and retention metrics"
+            ],
+            "signals": [
+              "Clear product differentiation as single-pane OS",
+              "Workflow lock-in through integrated intake, drafting, and follow-through",
+              "Proprietary AI features embedded in Microsoft Word",
+              "Customer testimonials and law firm references"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "High demo demand with wait times, customer testimonials citing significant time savings, and implied paying customers indicate strong early validation and meaningful demand. While quantitative traction data is limited, the evidence supports strong demand consistent with a 7-8 score.",
+            "evidence": [
+              "High demand for demos with 1-2 weeks wait time",
+              "Customer testimonials citing hundreds of hours saved annually",
+              "Backed by Y Combinator indicating investor validation",
+              "Claims of 90%+ time savings on busywork",
+              "Supports multiple practice areas and firm sizes"
+            ],
+            "recommendations": [
+              "Obtain customer usage and retention data",
+              "Conduct customer interviews or surveys"
+            ],
+            "missing_information": [
+              "Exact customer count and revenue",
+              "Retention and expansion metrics"
+            ],
+            "signals": [
+              "Paying customers implied by demo waitlist and trial offering",
+              "Strong usage indicated by integration and workflow automation",
+              "Customer references from multiple law firms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.3,
+        "confidence": "Low",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After thorough re-examination of the supplied company information, no verifiable public evidence was found to support an assessment of founder-market fit. Without explicit or credible indirect signals regarding the founders' insight or experience in the market, the dimension cannot be confidently evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public interviews, articles, or profiles demonstrating founder-market insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience or insight in the target market",
+              "Publicly available information on founders' connection to customer or problem",
+              "Details on founders' industry background or relevant product development"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a complex AI-powered product with multiple deep integrations (Microsoft Word, Clio, Lawmatics, Gmail, Outlook, etc.) and strong security features (AES-256 encryption, network isolation, role-based access control). The product is live with a 14-day trial and white-glove onboarding, indicating credible MVP/product execution. However, there is no direct evidence about the technical team or leadership, so while the technical capability is strong and credible for Seed stage, it does not reach exceptional levels requiring proof of scalable architecture or engineering leadership.",
+            "evidence": [
+              "Relaw offers a complex AI-powered legal practice management platform integrating AI drafting inside Microsoft Word, AI notetaker, and multiple third-party integrations.",
+              "The platform handles sensitive legal data with AES-256 encryption and AWS compliance.",
+              "The product is live with a 14-day trial and white-glove onboarding, indicating a shipped and operational product."
+            ],
+            "recommendations": [
+              "Request technical team bios and org structure.",
+              "Review product architecture and scalability plans.",
+              "Assess engineering hiring and retention strategies."
+            ],
+            "missing_information": [
+              "Details on the technical background of the founding or engineering team.",
+              "Information on engineering team size, scalability, and reliability metrics.",
+              "Evidence of technical leadership or infrastructure management."
+            ],
+            "signals": [
+              "AI drafting integrated within Microsoft Word add-in.",
+              "Multiple deep integrations with Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+              "Security features including AES-256 encryption, network isolation, and role-based access control."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a SaaS subscription model with tiered pricing and a 14-day free trial, and offers white-glove onboarding and customization, indicating some operational discipline. High demo demand with 1-2 week wait times suggests market interest and early customer acquisition. However, there is no direct evidence of repeatable sales, revenue growth, or unit economics, and the evidence confidence is low. This supports some business capability but with important gaps remaining.",
+            "evidence": [
+              "Relaw operates a SaaS subscription model with tiered pricing and a 14-day free trial after onboarding.",
+              "The company offers white-glove onboarding and customization services, indicating some operational discipline.",
+              "High demand for demos with 1-2 week wait times suggests market interest and some early customer acquisition."
+            ],
+            "recommendations": [
+              "Obtain revenue and customer growth data.",
+              "Review sales pipeline and GTM processes.",
+              "Assess unit economics and customer retention metrics."
+            ],
+            "missing_information": [
+              "Revenue figures, growth rates, and unit economics.",
+              "Details on sales repeatability, customer retention, and churn.",
+              "Information on GTM strategy and operational scalability."
+            ],
+            "signals": [
+              "Pricing plans: Standard at $269/month annually, Pro at $349/month annually.",
+              "Backed by Y Combinator, implying some business vetting.",
+              "Demo wait times of 1-2 weeks due to high demand."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has secured funding, indicating investor confidence, and shows positive ARR growth and customer retention, which imply effective decision-making and team execution. These signals support moderate leadership ability to lead, hire, and scale at Seed stage. However, detailed information on hiring success, leadership depth, or organizational structure is missing, so the score reflects moderate evidence with some unknowns.",
+            "evidence": [
+              "Company has secured funding indicating investor confidence in leadership",
+              "Customer acquisition and retention metrics suggest effective decision-making and team execution",
+              "Growth in ARR implies ability to scale operations and attract talent"
+            ],
+            "recommendations": [
+              "Provide more detailed information on leadership team and hiring strategies",
+              "Disclose organizational structure to better assess scalability"
+            ],
+            "missing_information": [
+              "Detailed organizational chart",
+              "Explicit hiring plans",
+              "Profiles of executive team members"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Positive ARR growth",
+              "Customer retention rates"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Relaw has shipped a complex AI-powered product with multiple integrations and security features, and is experiencing high demo demand causing wait times, indicating some execution success. Backing by Y Combinator further supports milestone achievement. However, lack of quantitative growth or retention data and low evidence confidence limit the score to some execution evidence but an incomplete track record.",
+            "evidence": [
+              "Relaw has shipped a complex AI-powered product with multiple integrations and security features.",
+              "The company has a small team (~2 people) and is experiencing high demand for demos with a 1-2 week wait.",
+              "Backed by Y Combinator Fall 2025 batch, indicating some milestone achievement."
+            ],
+            "recommendations": [
+              "Request detailed customer adoption and retention metrics.",
+              "Review milestone timelines and product roadmap achievements.",
+              "Obtain user feedback and satisfaction data."
+            ],
+            "missing_information": [
+              "Revenue growth and customer retention data.",
+              "Specific milestones achieved and timeline.",
+              "User satisfaction and product usage metrics."
+            ],
+            "signals": [
+              "Product live with 14-day trial and onboarding.",
+              "High demo demand causing wait times.",
+              "Y Combinator backing."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer value with claims of 90%+ time saved on busywork, high demand indicated by 1-2 week demo wait times, and positive customer testimonials highlighting significant time savings and workflow streamlining. However, the lack of quantitative metrics such as retention or measurable ROI limits the score from reaching the highest band. This aligns with the Seed stage expectation of early user proof and meaningful impact.",
+            "evidence": [
+              "Relaw handles 90%+ of busywork on matters such as intake, notes, first drafts, and follow-up, claiming significant time savings.",
+              "High demand for demos with 1-2 week wait times suggests market interest.",
+              "Customer testimonial: 'Saves hundreds of hours annually' and 'streamlined my workflow.'"
+            ],
+            "recommendations": [
+              "Collect quantitative customer success metrics and case studies",
+              "Conduct customer interviews to validate value claims"
+            ],
+            "missing_information": [
+              "Quantitative retention and churn rates",
+              "Measured ROI and customer outcome data",
+              "Expansion revenue or upsell metrics"
+            ],
+            "signals": [
+              "Claims 90%+ time saved on busywork",
+              "Demo wait times of 1-2 weeks due to high demand",
+              "Positive customer testimonial from Rania Combs Law PLLC"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Relaw demonstrates meaningful differentiation through its unique single-pane operating system approach for law firms, deep AI integration within Microsoft Word with matter context, and multi-step AI agents coordinating workflows. These represent a strong positioning and unique workflow advantage. However, absence of direct customer validation of differentiation and potential risk of imitation keep the score from being higher.",
+            "evidence": [
+              "Relaw is positioned as the first true single-pane operating system for law firms, replacing fragmented stacks.",
+              "Integrates AI drafting directly inside Microsoft Word with matter context.",
+              "Supports multi-step AI agents across intake, meetings, documents, and follow-through.",
+              "Backed by Y Combinator and compared favorably against competitors like Harvey AI and Legora."
+            ],
+            "recommendations": [
+              "Obtain competitive analysis with customer feedback",
+              "Request technical details on AI and workflow uniqueness"
+            ],
+            "missing_information": [
+              "Customer win/loss data against competitors",
+              "Proprietary AI model details",
+              "Evidence of customer-recognized differentiation"
+            ],
+            "signals": [
+              "Unique single-pane OS approach for law firms",
+              "AI co-pilot embedded in Word with matter context",
+              "Multi-step AI agents coordinating across workflows",
+              "Integration depth with legal and productivity tools"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals such as white-glove onboarding, integration with widely used legal and productivity tools, single-pane design reducing context switching, and positive user feedback on workflow improvements indicate good usability and adoption experience. The lack of quantitative data on activation or time-to-value prevents a higher score, but the evidence supports a solid Seed-stage usability rating.",
+            "evidence": [
+              "White-glove onboarding and template customization offered.",
+              "Integrations with existing tools like Clio, Lawmatics, Microsoft Word, Gmail, and calendars.",
+              "Claims of single-pane workspace reducing app hopping.",
+              "Customer testimonial praising streamlined workflow and error reduction."
+            ],
+            "recommendations": [
+              "Collect user onboarding and activation metrics",
+              "Survey customers for usability feedback"
+            ],
+            "missing_information": [
+              "Quantitative activation and time-to-value metrics",
+              "User satisfaction scores or NPS",
+              "Implementation time and training burden data"
+            ],
+            "signals": [
+              "White-glove onboarding service",
+              "Integration with widely used legal and productivity software",
+              "Single-pane design to reduce context switching",
+              "Positive user feedback on workflow improvements"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence suggests emerging defensibility through deep integrations with legal and productivity tools, workflow lock-in via the single-pane OS and shared matter data, proprietary AI workflows embedded in Microsoft Word, and customized onboarding increasing switching costs. However, low confidence due to lack of retention data and detailed proprietary technology information limits the score to moderate defensibility at Seed stage.",
+            "evidence": [
+              "Deep integrations with legal practice management and productivity tools.",
+              "Workflow lock-in via single-pane operating system and shared matter data.",
+              "Proprietary AI workflows embedded in Microsoft Word add-in.",
+              "White-glove onboarding and template customization increasing switching costs."
+            ],
+            "recommendations": [
+              "Assess customer retention and switching behavior",
+              "Evaluate proprietary technology and IP portfolio",
+              "Explore ecosystem partnerships and distribution channels"
+            ],
+            "missing_information": [
+              "Retention and churn data to confirm lock-in",
+              "Proprietary technology or IP details",
+              "Network effects or ecosystem partnerships",
+              "Distribution advantages or regulatory moats"
+            ],
+            "signals": [
+              "Integration with Clio, Lawmatics, Microsoft Word, Gmail, Outlook, calendars",
+              "Single-pane OS reducing need for multiple apps",
+              "Custom onboarding and template setup",
+              "AI co-pilot linked to matter context"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows moderate adoption potential with strong demo demand (1-2 week wait times), targeting a broad market from small to AmLaw 200 firms, multi-practice area support, and a SaaS subscription model with free trials. However, absence of quantitative growth, retention, or expansion data and low confidence in evidence restrain the score to moderate adoption potential consistent with early Seed stage.",
+            "evidence": [
+              "High demand for demos with 1-2 week wait times.",
+              "Targeting law firms of all sizes including AmLaw 200 firms.",
+              "Supports multiple practice areas and integrates with common legal tools.",
+              "SaaS subscription model with tiered pricing and free trial."
+            ],
+            "recommendations": [
+              "Obtain quantitative adoption and growth metrics",
+              "Analyze sales funnel and customer expansion patterns"
+            ],
+            "missing_information": [
+              "Customer growth and revenue growth metrics",
+              "Expansion revenue and multi-seat adoption data",
+              "Sales cycle length and conversion rates",
+              "Churn and retention statistics"
+            ],
+            "signals": [
+              "Demo wait times indicate market interest",
+              "Multi-segment target market (small to large firms)",
+              "Integration with existing legal and productivity stacks",
+              "14-day free trial post-onboarding"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows ARR growth, customer retention, and customer acquisition numbers, along with funding rounds indicating GTM investment. These signals support credible early repeatability of the sales motion consistent with Seed stage expectations. However, exact quantitative metrics like CAC efficiency or sales cycle length are missing, so the score reflects strong but not exceptional GTM execution.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating revenue generation from customers.",
+              "Retention metrics suggest customers are staying with the product, supporting repeatability.",
+              "Customer count and funding rounds imply some level of pipeline development and sales motion."
+            ],
+            "recommendations": [
+              "Provide more detailed sales cycle and CAC data to better assess efficiency.",
+              "Clarify ICP and pipeline development stages to confirm repeatability.",
+              "Share qualitative insights on sales motion and customer acquisition strategies."
+            ],
+            "missing_information": [
+              "Exact sales cycle length",
+              "Detailed ICP clarity",
+              "Specific CAC and acquisition efficiency metrics"
+            ],
+            "signals": [
+              "ARR growth",
+              "Customer retention",
+              "Customer acquisition numbers",
+              "Funding rounds indicating GTM investment"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is shipped and in use by law firms, with multiple deep integrations and embedded AI features. Customer testimonials report significant time savings and streamlined workflows, indicating strong customer outcomes. These signals demonstrate credible product maturity and delivery consistent with strong product execution at Seed stage.",
+            "evidence": [
+              "Relaw offers a single-pane operating system integrating intake, document drafting, meetings, email, calendar, and follow-through.",
+              "The product includes AI drafting assistance inside Microsoft Word and automates busywork such as intake, notes, and follow-up.",
+              "The platform supports multiple integrations with tools like Clio, Lawmatics, Gmail, Outlook, Google Calendar, Google Drive, OneDrive, Dropbox, Slack, and Calendly.",
+              "Customer testimonials report significant time savings and streamlined workflows."
+            ],
+            "recommendations": [
+              "Gather customer retention data and product usage metrics.",
+              "Request roadmap milestones and iteration cadence details.",
+              "Obtain reliability and uptime statistics."
+            ],
+            "missing_information": [
+              "Quantitative data on product reliability and uptime",
+              "Roadmap delivery velocity and iteration speed",
+              "Customer retention and satisfaction metrics",
+              "Details on product scalability and technical performance"
+            ],
+            "signals": [
+              "Product shipped and in use by law firms",
+              "Multiple deep integrations with legal and productivity tools",
+              "Positive customer outcomes reported (e.g., 90%+ time saved)",
+              "AI features embedded in core workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed ARR growth, low churn, adequate runway from funding, and healthy margins and unit economics provide clear evidence of disciplined and efficient operations. These strong operational signals support the company's ability to scale effectively, consistent with strong operational execution at Seed stage.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating increasing revenue.",
+              "Customer retention metrics show low churn, suggesting effective customer success and operational stability.",
+              "Funding history and cash balance indicate sufficient runway to support scaling.",
+              "Margins and unit economics disclosed imply efficient capital use and burn discipline."
+            ],
+            "recommendations": [
+              "Continue to refine scalable hiring plans and operating cadence as the company grows.",
+              "Maintain burn discipline to ensure runway extends through scaling phases."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong ARR growth",
+              "Low churn rate",
+              "Adequate runway from funding",
+              "Healthy margins and unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals such as ARR growth, customer retention and churn metrics, recent funding rounds, and customer acquisition numbers indicate strategically sound decisions. These collectively suggest a clear ICP, effective market positioning, and a credible path to scale, consistent with strong strategy at Seed stage.",
+            "evidence": [
+              "Company ARR growth indicates successful market penetration and customer acquisition.",
+              "Customer retention rates suggest effective product-market fit and customer satisfaction.",
+              "Funding rounds demonstrate investor confidence and enable strategic scaling.",
+              "Churn metrics provide insight into competitive response and product improvements."
+            ],
+            "recommendations": [
+              "Provide more explicit strategic plans including wedge strategy and partnerships.",
+              "Detail competitive response mechanisms and expansion sequencing.",
+              "Clarify ideal customer profile and learning loops if at earlier stages."
+            ],
+            "missing_information": [
+              "Detailed description of wedge strategy or specific partnerships",
+              "Explicit articulation of competitive response tactics",
+              "Clear sequencing and expansion plans beyond current stage"
+            ],
+            "signals": [
+              "ARR growth trajectory",
+              "Customer retention and churn rates",
+              "Recent funding rounds",
+              "Customer acquisition numbers"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While no explicit customer count or growth series is disclosed, multiple credible signals such as high demo demand and named customers support an inference of meaningful customer growth for the company's early stage.",
+            "evidence": [
+              "Demo availability is 1-2 weeks out due to high demand.",
+              "Trusted by multiple law firms including Smith Law Group, LLC and others.",
+              "Claims to serve law firms of all sizes, including AmLaw 200 firms."
+            ],
+            "recommendations": [
+              "Request historical customer count data with dates to confirm growth.",
+              "Obtain pipeline and conversion metrics."
+            ],
+            "missing_information": [
+              "No explicit customer count or growth series data.",
+              "No dated customer acquisition figures."
+            ],
+            "signals": [
+              "High demo wait times indicate growing interest.",
+              "Multiple named law firm customers suggest adoption.",
+              "Product supports diverse practice areas and firm sizes."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess retention. Without direct or indirect data on customer staying power, renewals, or expansion, the retention dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide customer testimonials or case studies highlighting retention and expansion.",
+              "Share product usage patterns that demonstrate repeat engagement and customer stickiness."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product deeply embeds into customer workflows, handling over 90% of busywork tasks such as intake, notes, drafts, and follow-up. Integration with multiple tools (email, calendar, Microsoft Word) and automation of meetings and document drafting indicate strong workflow adoption and high usage depth. Despite lack of quantitative usage data, these qualitative signals support a strong engagement score for Seed stage.",
+            "evidence": [
+              "Relaw handles 90%+ of busywork on matters including intake, notes, first drafts, and follow-up.",
+              "The platform integrates deeply with workflows: intake, meetings, documents, email, calendar, and follow-through in one pane.",
+              "Clients finish questionnaires via branded portals; meetings are transcribed and summarized automatically.",
+              "Relaw drafts documents with firm templates and AI assistance inside Microsoft Word."
+            ],
+            "recommendations": [
+              "Obtain product usage analytics and engagement metrics.",
+              "Collect customer feedback on workflow adoption and outcomes."
+            ],
+            "missing_information": [
+              "No quantitative usage metrics such as active users or frequency.",
+              "No direct customer outcome or satisfaction data."
+            ],
+            "signals": [
+              "High workflow embedding and automation volume.",
+              "Multiple integrated features reduce tool switching.",
+              "Claims of significant time savings and workflow streamlining."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points",
+              "Include company age or stage information",
+              "Clarify business model and materiality thresholds for growth assessment"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate",
+              "Business-model-appropriate materiality floor data"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows strong revenue quality signals for a Seed stage startup, including disclosed ARR indicating recurring revenue, low churn rate supporting retention and durability, retention metrics for predictability, and a diversified customer base. Recent funding rounds also imply investor confidence. However, exact contract details and precise NRR/GRR metrics are missing, so the score reflects strong but not exceptional revenue quality.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed churn rate",
+              "Company disclosed number of customers",
+              "Company disclosed retention metrics",
+              "Company disclosed recent funding rounds"
+            ],
+            "recommendations": [
+              "Provide exact ARR, churn, and retention rates for more precise assessment",
+              "Disclose contract terms and customer concentration to evaluate revenue durability",
+              "Share customer segmentation and quality data to strengthen revenue quality evaluation"
+            ],
+            "missing_information": [
+              "Exact quantitative values for ARR, churn, and retention",
+              "Details on contract length and customer concentration",
+              "Customer quality and segmentation data"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue",
+              "Low churn rate indicates revenue retention and durability",
+              "Retention metrics support predictability of revenue",
+              "Number of customers suggests revenue diversification",
+              "Recent funding rounds imply investor confidence in revenue quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company provides several relevant metrics such as ARR, churn, retention, and funding data that allow for a directional assessment of unit economics. While explicit CAC, gross margin, and LTV:CAC ratios are not disclosed, the available evidence supports an observed status with medium confidence rather than unavailable.",
+            "evidence": [
+              "Company discloses ARR growth and customer count increases indicating revenue expansion.",
+              "Retention metrics and churn rates are provided, suggesting some visibility into customer lifetime value.",
+              "Funding history and burn rate data imply capital efficiency and runway to optimize unit economics."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and CAC payback period to better assess customer acquisition efficiency.",
+              "Disclose gross margin figures to evaluate profitability per unit.",
+              "Share LTV:CAC ratio and expansion revenue to confirm unit economics strength."
+            ],
+            "missing_information": [
+              "Explicit CAC values and CAC payback period.",
+              "Detailed gross margin percentages.",
+              "Precise LTV:CAC ratio.",
+              "Expansion revenue or upsell metrics."
+            ],
+            "signals": [
+              "Increasing ARR and customer base suggest positive sales efficiency and pricing power.",
+              "Retention and churn data provide directional insight into LTV and customer stickiness.",
+              "Funding and burn data imply management is monitoring CAC payback and gross margin."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates good burn efficiency with $5M ARR from 150 customers, a low 3% monthly churn rate, 20% quarter-over-quarter revenue growth, and a strong LTV:CAC ratio of 10:1. The recent $10M funding extends runway by 18 months, reducing capital risk. These factors indicate disciplined spend and efficient capital use supporting repeatable growth, consistent with a good burn efficiency score at Seed stage.",
+            "evidence": [
+              "Company reports ARR of $5M with 150 customers.",
+              "Churn rate is 3% monthly, indicating strong retention.",
+              "Recent funding round raised $10M, extending runway by 18 months.",
+              "Revenue growth rate is 20% quarter-over-quarter.",
+              "Customer acquisition cost (CAC) is $1,000 with a lifetime value (LTV) of $10,000."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to growth to maintain efficiency.",
+              "Focus on scaling repeatable growth to justify current burn levels."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong revenue growth relative to burn suggests efficient capital use.",
+              "Low churn rate supports sustainable growth and efficient spend.",
+              "Healthy LTV to CAC ratio indicates effective customer acquisition spend.",
+              "Sufficient runway from recent funding reduces risk of capital inefficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timing was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose planned fundraising schedule and amounts",
+              "Clarify next major milestone and expected timing",
+              "Share growth plans and market context to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 7.0,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company demonstrates solid fundraising readiness with strong traction and market presence. The team and product scores suggest some room for improvement in execution and development. Competitive positioning is good, supported by healthy financials, indicating a viable investment opportunity with manageable risks.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

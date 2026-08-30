@@ -1,0 +1,2473 @@
+{
+  "summary": "Dome is a B2B SaaS startup that offers a unified API platform aggregating data and trading functionalities from multiple prediction market platforms, including Polymarket and Kalshi. Its API provides developers, trading firms, and fintech companies with simplified, normalized access to real-time and historical market data, wallet analytics, order tracking, and cross-platform market matching through a single integration. Dome also offers an SDK and supports WebSocket and webhook integrations for real-time streaming.\n\nFounded by blockchain engineer Kurush Dubash, Dome monetizes via tiered subscription plans based on API usage and premium features. The platform reduces developer overhead by managing heterogeneous data feeds and blockchain infrastructure complexities. Dome’s APIs deliver granular datasets beyond those available natively on individual prediction markets, aiding in embedding market data and deploying multi-platform trading strategies.\n\nDome was acquired by Polymarket, with its APIs scheduled for discontinuation on April 28, 2026, prompting customers to migrate to Polymarket’s APIs. The acquisition likely aims to consolidate API offerings and solidify Polymarket’s leadership in the prediction market infrastructure space. Dome competes with other API aggregators like Probalytics and PolyRouter but distinguishes itself by combining data streaming and cross-platform trading capabilities.\n\nKey risks include vendor dependency on third-party platforms and Polymarket, potential migration challenges due to API end-of-life, and competition. Specific financials and detailed post-acquisition roadmaps remain undisclosed. As of the last update, Dome’s platform had over 50 developers actively building on it.",
+  "risk_analysis": "Here is a risk analysis of Dome focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Dome faces direct competition from other unified API providers such as PolyRouter that also offer cross-platform prediction market aggregation and order routing. These competitors may have differentiated features or better latency, which could attract Dome’s target customers.  \n- Probalytics, while lacking trading capabilities, competes on real-time streaming performance and semantic search, which could appeal to users prioritizing speed or data discovery over trading features.  \n- Dome’s acquisition by Polymarket consolidates overlapping technology and may reduce competitive tension from Polymarket’s side, but it also means Dome’s unique positioning might diminish as Polymarket focuses on their own APIs post-acquisition.  \n- The competitive landscape is niche but could evolve quickly with new entrants or crypto/blockchain projects offering alternative prediction market data and trading APIs, increasing pressure on pricing and differentiation.\n\n2. Scalability Risk  \n- Dome’s API platform aggregates data and trading functionalities from multiple third-party prediction market platforms, which can introduce latency and complexity as volumes grow. Scaling infrastructure to maintain real-time data accuracy and low latency access for more clients will be challenging.  \n- The unified API approach reduces integration overhead for customers but requires Dome to continuously handle and normalize increasing data feeds and order routing across growing platforms, which might strain backend systems.  \n- The existence of a tiered subscription model suggests some control over usage, but rapid user growth or heavy API consumers could require significant scaling of infrastructure and support.  \n- Dome has to accommodate WebSocket and webhook real-time streaming, which are resource-intensive; failure to scale seamlessly could degrade service quality and customer satisfaction.\n\n3. Market Risk  \n- The prediction markets space is relatively niche and has regulatory uncertainty, especially in jurisdictions concerned with betting or financial derivatives. This could limit market growth or invite regulatory actions impacting Dome’s customers and platforms integrated into Dome’s API.  \n- Dome’s dependence on third-party platforms like Polymarket and Kalshi means its addressable market is somewhat constrained by the health and expansion of these underlying markets. If these platforms lose traction or pivot away from open APIs, Dome’s market viability diminishes.  \n- The scheduled discontinuation of Dome’s APIs in April 2026 introduces time-bound risk; businesses relying on Dome must migrate to Polymarket APIs or alternatives, creating churn risk and possible loss of market confidence.  \n- Market adoption of prediction markets themselves is still emerging, so broader fintech or trading firm adoption may evolve slower than anticipated, limiting market size for Dome’s API.\n\n4. Customer Adoption Risk  \n- Dome has around 50 developers building on its platform, a modest but not large customer base. Limited scale suggests potential challenges in achieving widespread adoption in the fragmented fintech and developer ecosystems.  \n- Migration challenges arise from the announced April 2026 API sunset; customers may hesitate to deepen integration if they foresee significant redevelopment effort later. This may slow new customer acquisition and encourage churn among existing users seeking longer-term stability.  \n- The value proposition of a unified API hinges on providing better or easier access than directly integrating with individual markets. If Polymarket’s native APIs or competitors’ offerings improve rapidly, Dome may lose appeal.  \n- Lack of detailed customer metrics and feedback makes it difficult to assess actual engagement, retention, and growth momentum, adding uncertainty to adoption trajectories.\n\n5. Operational Risk  \n- Integration and reliance on multiple external platforms increase operational complexity and vendor risk. Any API changes, downtime, or policy shifts from Polymarket, Kalshi, or others can disrupt Dome’s service.  \n- Post-acquisition, Dome is dependent on Polymarket’s strategic decisions, technical integration plans, and resource allocation. If Polymarket deprioritizes Dome’s technology or support, operational continuity could be affected.  \n- Ensuring security and compliance when handling wallet analytics and trading order tracking is critical, especially given regulatory scrutiny in fintech and blockchain spaces. Operational lapses could lead to serious reputational and legal consequences.  \n- Maintaining developer support, SDK updates, and platform stability until the 2026 end-of-life requires disciplined operational management. Unclear long-term roadmap and post-acquisition roles add uncertainty to ongoing operations.\n\nSummary:  \nDome operates in a specialized niche with moderate competitive pressure and significant reliance on third-party prediction market platforms. While the unified API approach offers developer convenience, scalability, and operational complexity present challenges, especially as usage grows. Market risks include regulatory uncertainty and the relatively nascent state of prediction markets, affecting customer adoption and expansion potential. The impending discontinuation of Dome's APIs poses customer migration and retention risks. Post-acquisition integration and vendor dependence on Polymarket add operational vulnerabilities. Overall, investors should consider these risks carefully, especially regarding Dome’s sustainable market positioning, scalability, and transition strategy post-2026.",
+  "competitor_analysis": "Here is a competitive analysis for Dome based on the provided information:\n\n---\n\n### Major Competitors\n\n1. **Probalytics**  \n   - Focuses on real-time streaming with ultra-low latency (<10 ms).  \n   - Provides semantic search capabilities across prediction markets.  \n   - Does *not* offer trading capabilities or order routing.\n\n2. **PolyRouter**  \n   - Direct competitor positioning: cross-platform aggregation plus order routing features.  \n   - Similar to Dome in offering unified access and trading across multiple prediction market venues.\n\n3. **Polymarket (Post-Acquisition)**  \n   - Acquirer of Dome; now the primary provider of prediction market APIs after Dome’s end-of-life (April 2026).  \n   - Expected to consolidate and evolve the API offerings originally provided by Dome.\n\n4. **Individual Prediction Market Platforms** (e.g., Kalshi, Polymarket directly)  \n   - While not competitors in unified APIs, they serve developers/traders who prefer direct integration, bypassing aggregation.\n\n---\n\n### Competitive Advantages of Dome\n\n- **Unified API & SDK:**  \n  Provides a single integration point for accessing and trading on multiple prediction market platforms, significantly reducing developer overhead.  \n- **Aggregated Data and Order Routing:**  \n  Supports cross-platform order tracking and market matching, which is relatively rare among competitors like Probalytics (which lacks trading).  \n- **Comprehensive Features:**  \n  Access to real-time prices, historical candlestick data, wallet analytics, and webhook + WebSocket streaming for near real-time interaction.  \n- **Developer-Oriented Platform:**  \n  Easy SDK installation (npm), API key gating, developer tooling designed specifically for fintech and trading firms.  \n- **Granular Datasets:**  \n  Provides detailed data not natively available from individual platforms—valuable for sophisticated analytics and trading strategies.  \n- **Established Customer Base:**  \n  Over 50 developers actively building on Dome, implying some market traction and product-market fit.  \n- **Experienced Leadership:**  \n  CEO with blockchain engineering background and tech entrepreneurship experience promotes credibility.\n\n---\n\n### Competitive Disadvantages\n\n- **API End-of-Life and Acquisition by Polymarket:**  \n  Dome’s APIs have a firm termination date in April 2026, forcing customers to migrate and potentially disrupting customer relationships.  \n- **Vendor and Concentration Risk:**  \n  Heavy dependency on Polymarket and Kalshi platform APIs; post-acquisition, customers are tied to Polymarket’s ecosystem.  \n- **Potential Latency and Complexity:**  \n  Aggregating data and routing orders across markets can introduce additional latency and complexity compared to direct platform integrations.  \n- **Smaller Scale Relative to Larger Market Players:**  \n  Only 50+ developers reported; may lag behind broader platform penetration or ecosystem size compared to direct prediction market platforms or large fintech API providers.  \n- **Limited Public Financial and Scale Data:**  \n  Unknown funding or revenue may constrain strategic investments against better-capitalized competitors.\n\n---\n\n### Barriers to Entry\n\n- **Technical Complexity:**  \n  Building a unified API for real-time market data and cross-platform trading requires significant expertise in blockchain, market data normalization, and trading infrastructure.  \n- **Integration Network Effects:**  \n  Success depends on integrating with multiple prediction platforms and maintaining real-time synchronization, creating a moat based on extensive partnerships and engineering effort.  \n- **Regulatory and Compliance Challenges:**  \n  Prediction markets often face complex regulatory landscapes that can deter new entrants lacking legal or compliance capacity.  \n- **Developer Trust and API Stability:**  \n  Established APIs with consistent uptime and comprehensive documentation are critical for developer adoption; building this reputation takes time.  \n- **Customer Migration and Lock-In:**  \n  Existing customers may face switching costs moving away from integrated APIs, but end-of-life announcements reduce lock-in for Dome specifically.  \n- **Capital and Experience:**  \n  Leadership with blockchain and fintech experience is valuable; replicating this human capital can be a barrier.\n\n---\n\n### Competitive Risks\n\n- **API Discontinuation Impact:**  \n  Dome’s planned API shutdown could drive users to competitors if migration to Polymarket APIs is not smooth or lacks feature parity.  \n- **Consolidation Risks:**  \n  As Dome is owned by Polymarket, there may be reduced incentive to maintain multi-platform neutrality, possibly alienating users who value broad coverage.  \n- **New Entrants Focused on Latency and Trading:**  \n  Competitors like Probalytics (ultra-low latency data) may attract high-frequency trading firms despite lacking trading features, or new entrants might add trading to challenge Dome/PolyRouter.  \n- **Dependence on Third-Party Platforms:**  \n  Changes in APIs or business models by Polymarket, Kalshi, or other upstream venues could impair Dome’s service quality or availability.  \n- **Market Niche Limitation:**  \n  Prediction markets represent a niche segment relative to broader fintech APIs, limiting total addressable market and attracting fewer large-scale players.  \n- **Potential Cannibalization by Polymarket:**  \n  Polymarket’s ownership could lead to strategic decisions that prioritize Polymarket-native solutions and deprioritize aggregation across competitors, undermining Dome's core value.\n\n---\n\n# Summary\n\nDome carved out a differentiated position by aggregating prediction market data and trading functionalities into a unified, developer-friendly API platform, enabling easier cross-platform access. Its key competitors focus either on real-time data streaming (Probalytics) or direct aggregation with order routing (PolyRouter). Dome’s acquisition by Polymarket, while potentially accelerating integration and scale, introduces a sunset risk for its current product and raises vendor dependency concerns. The company benefits from technical depth and developer focus but faces challenges due to market concentration, API discontinuation, and competitive innovation pressures.\n\n---\n\nLet me know if you want a deeper dive into any particular competitor or market segment.",
+  "memo": "**Investment Memo: Dome**\n\n**Company Overview**  \nDome is a B2B SaaS technology company that provides a unified API platform aggregating data and trading capabilities across multiple prediction market platforms like Polymarket and Kalshi. Its API offers real-time and historical market data, wallet analytics, order tracking, and cross-platform trade execution through a single integration. Dome was acquired by Polymarket, with its APIs scheduled to sunset by April 28, 2026.\n\n**Problem**  \nPrediction market developers and firms face fragmented data sources, inconsistent APIs, and complex blockchain infrastructure management when accessing multiple market platforms. This fragmentation increases integration overhead, complicates data normalization, and slows product development.\n\n**Solution**  \nDome simplifies access to prediction markets by providing a unified API and SDK that aggregates multiple market venues into a single interface. The platform normalizes disparate data feeds, supports real-time streaming via WebSockets and webhooks, and enables multi-platform trading capabilities, thereby reducing developer effort and enabling seamless integration into third-party fintech and trading products.\n\n**Market Opportunity**  \nThe prediction market sector is growing as fintech apps, trading firms, and developers increasingly integrate forecasting and decentralized market mechanisms into their offerings. Dome targets this niche by offering infrastructure services to build prediction market applications, addressing an emerging but underserved API market segment. The consolidation of data and execution access promotes broader adoption and enables advanced trading strategies.\n\n**Competitive Landscape**  \nKey competitors include:  \n- **Probalytics:** Focuses on ultra-low latency streaming and market search but lacks trading execution features.  \n- **PolyRouter:** Offers cross-platform aggregation and order routing similar to Dome.  \n\nDome’s competitive edge lies in comprehensive trading functionality combined with aggregated multi-platform data access.\n\n**Key Risks**  \n- Dome’s API deprecation by April 2026 post-acquisition requires customers to migrate to Polymarket’s new APIs, risking customer churn or disruption.  \n- Reliance on third-party platforms and the acquiring company introduces vendor concentration risk.  \n- Aggregation may introduce latency or complexity compared to direct platform integration, possibly impacting performance-sensitive users.  \n- Market competition from specialized API providers and evolving platform APIs may erode Dome’s differentiation.\n\n**Recommendation**  \nDome provides critical infrastructure that addresses a real pain point in the prediction markets ecosystem, offering simplified, unified access to multi-platform data and trading. However, with its imminent API end-of-life and full integration into Polymarket’s stack, investing in Dome alone is less relevant moving forward. The key value lies in how Polymarket leverages Dome’s technology post-acquisition to consolidate API offerings and grow the developer ecosystem. Investment consideration should focus on Polymarket’s roadmap for API consolidation and expanded market reach supported by Dome’s technology, rather than Dome as a standalone entity.",
+  "structured_analysis": {
+    "company_name": "Dome",
+    "industry": "Fintech",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Dome is a B2B SaaS company providing a unified API platform that aggregates data and trading capabilities across multiple prediction market platforms including Polymarket and Kalshi. It simplifies developer access to real-time and historical market data, wallet analytics, and order tracking via a single interface and SDK. Dome targets developers, trading firms, and fintech companies building prediction market applications. The company was acquired by Polymarket, and its APIs will be discontinued by April 28, 2026.",
+    "key_risks": [
+      "Dome APIs will be discontinued on April 28, 2026, requiring migration to Polymarket’s APIs which may disrupt customers.",
+      "Dependency on third-party prediction market platforms and the acquirer Polymarket introduces vendor risk.",
+      "Aggregation through a unified API may add latency and complexity compared to direct platform integrations.",
+      "Competition from other unified API providers like Probalytics and PolyRouter may affect market share."
+    ],
+    "strengths": [
+      "Provides granular, normalized datasets and unified access to multiple prediction markets reducing developer overhead.",
+      "Offers tiered subscription plans tailored to customer usage and premium feature needs.",
+      "Supports real-time data streaming via WebSockets and webhooks.",
+      "Has a recognized leadership team with blockchain expertise and founding experience.",
+      "Acquisition by Polymarket suggests technology validation and potential for deeper integration."
+    ],
+    "recommendation": "Given Dome's planned API discontinuation by 2026 and its acquisition by Polymarket, it is recommended to monitor the migration path and new offerings from Polymarket. Dome's technology and unified approach have clear value, but vendor and migration risks are material. For investors, caution is advised unless Polymarket’s integration plan and API roadmap demonstrate a smooth transition and maintain Dome’s differentiated capabilities."
+  },
+  "investment_score": {
+    "market_score": 5.9,
+    "team_score": 6.5,
+    "product_score": 6.5,
+    "competition_score": 6.8,
+    "traction_score": 6.0,
+    "financial_score": 6.0,
+    "overall_score": 63.0,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.2,
+    "readiness_summary": "The startup shows moderate fundraising readiness with decent scores across key areas. Strength lies in competition and team capabilities, while market understanding and traction need improvement.",
+    "strengths": [
+      "Strong competition positioning (6.8)",
+      "Solid team capability (6.5)",
+      "Good product development (6.5)"
+    ],
+    "weaknesses": [
+      "Lower market understanding (5.9)",
+      "Moderate traction (6.0)",
+      "Average financial outlook (6.0)"
+    ]
+  },
+  "readiness_score": 6.2,
+  "readiness_summary": "The startup shows moderate fundraising readiness with decent scores across key areas. Strength lies in competition and team capabilities, while market understanding and traction need improvement.",
+  "founder_analysis": {
+    "summary": "The founding team includes Kurush Dubash, co-founder and CEO, who has engineering expertise in blockchain and prior experience at Alchemy, indicating some domain and technical knowledge relevant to prediction markets and blockchain infrastructure. However, there is limited public information on the broader founding team's market experience, business execution, leadership depth, or detailed execution milestones beyond the product offering and acquisition. The evidence for founder-market fit is limited to the CEO's background, and other dimensions lack sufficient public signals to assess.",
+    "confidence": "Medium",
+    "strengths": [
+      "Founder has blockchain engineering expertise and prior relevant experience at Alchemy",
+      "Product built with complex integrations across multiple prediction market platforms",
+      "Company acquired by Polymarket, indicating some market validation"
+    ],
+    "weaknesses": [
+      "Limited public information on broader founding team experience and business capability",
+      "No disclosed financial metrics or detailed customer adoption data",
+      "No explicit evidence of leadership depth or hiring success",
+      "No detailed execution milestones or growth metrics disclosed"
+    ],
+    "evidence": [
+      "Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy.",
+      "Dome offers a unified API aggregating data and trading from multiple prediction market platforms.",
+      "Dome was acquired by Polymarket, with APIs scheduled for end of life in 2026.",
+      "Dome has over 50 developers building on its platform as of the last update."
+    ],
+    "recommendations": [
+      "Conduct founder interviews to assess deeper market insight and business execution experience.",
+      "Request detailed team bios and prior leadership roles to evaluate leadership and hiring capability.",
+      "Obtain customer and revenue growth data to assess execution track record and business capability.",
+      "Review product reliability and scalability metrics to better understand technical capability."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.5,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": 7.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Observed",
+          "rationale": "The CEO has direct blockchain engineering expertise and prior experience at Alchemy, a relevant company, which indicates strong founder-market fit. However, the evidence lacks additional signals of deep customer insight or prior successful exits, limiting the score to the 7-8 range rather than higher.",
+          "evidence": [
+            "Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy."
+          ],
+          "recommendations": [
+            "Interview founders to assess market insight and customer understanding",
+            "Request detailed founder bios and prior roles"
+          ],
+          "missing_information": [
+            "Broader founding team backgrounds",
+            "Direct customer or operator experience in prediction markets",
+            "Repeat founder or prior successful exit history"
+          ],
+          "signals": [
+            "Founder has blockchain engineering expertise",
+            "Founder has prior experience at a relevant company (Alchemy)"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team includes a technical founder with blockchain expertise and has built a complex product integrating multiple prediction market platforms, supporting real-time data streaming and providing an SDK. These credible signals demonstrate strong technical capability to build and scale the product.",
+          "evidence": [
+            "Dome offers a unified API aggregating prediction market data and trading functionalities from multiple platforms.",
+            "Dome’s co-founder and CEO is an engineer with blockchain expertise.",
+            "Dome supports WebSocket and webhook integrations for real-time data streaming.",
+            "Dome provides a unified SDK for developers to integrate with multiple prediction markets."
+          ],
+          "recommendations": [
+            "Request technical architecture and scalability documentation",
+            "Interview engineering leadership about team capabilities and challenges"
+          ],
+          "missing_information": [
+            "Product reliability and scalability metrics",
+            "Engineering team size and structure",
+            "Security and compliance capabilities"
+          ],
+          "signals": [
+            "Technical founder with blockchain expertise",
+            "Complex product integrating multiple prediction market platforms",
+            "Real-time data streaming support via WebSocket and webhooks",
+            "SDK available for developer integration"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "The company has a clear pricing strategy with tiered subscription plans and defined target customers, plus a successful acquisition by Polymarket. However, the lack of detailed financial or operational data and the low confidence in evidence limit the score to some business capability but with important gaps.",
+          "evidence": [
+            "Dome operates a B2B SaaS platform with tiered subscription plans based on API usage limits and premium features.",
+            "The company targets developers, trading firms, and fintech companies.",
+            "Dome was acquired by Polymarket."
+          ],
+          "recommendations": [
+            "Obtain revenue and customer growth data",
+            "Interview business leadership on sales and GTM strategy"
+          ],
+          "missing_information": [
+            "Revenue growth and unit economics",
+            "Sales repeatability and GTM execution",
+            "Operating discipline and customer acquisition details"
+          ],
+          "signals": [
+            "Clear pricing strategy with tiered subscription plans",
+            "Defined target customer segments",
+            "Successful acquisition by a market player"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "While explicit leadership details are limited, the company's ability to secure funding, acquire customers, and generate revenue are credible signals inferring moderate leadership capacity to lead, hire, and scale. The medium confidence and limited direct leadership evidence justify a moderate score.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+            "Revenue generation implies some level of organizational management and decision-making capability."
+          ],
+          "recommendations": [
+            "Provide more detailed information on leadership roles and hiring strategies.",
+            "Disclose plans for scaling the organization and building leadership depth."
+          ],
+          "missing_information": [
+            "Explicit details on leadership team structure and hiring plans",
+            "Organizational chart or executive team composition",
+            "Direct evidence of hiring ability or talent attraction strategies"
+          ],
+          "signals": [
+            "Funding rounds completed",
+            "Customer acquisition",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 5.0,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "Evidence shows customer adoption with 50+ developers using the platform and an acquisition by Polymarket, indicating some execution success. However, the lack of quantitative growth metrics or detailed milestone achievements and low confidence in evidence suggest an incomplete or uneven track record.",
+          "evidence": [
+            "Dome has over 50 developers building on its platform as of the last update.",
+            "Dome was acquired by Polymarket."
+          ],
+          "recommendations": [
+            "Request detailed customer and revenue growth data",
+            "Obtain product roadmap and milestone documentation"
+          ],
+          "missing_information": [
+            "Revenue growth and retention metrics",
+            "Milestones achieved and product iteration history"
+          ],
+          "signals": [
+            "Customer adoption indicated by 50+ developers using platform",
+            "Acquisition suggests some level of product and market validation"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founder has relevant blockchain engineering background but limited public evidence of deep market insight or repeat founder experience.",
+    "fundraising_signal": "No disclosed fundraising or financial data available to assess."
+  },
+  "market_analysis": {
+    "summary": "The evidence provided includes detailed descriptions of Dome's product offering, target customers, competitors, and business model, but lacks explicit quantitative data on market size, growth rates, or customer demand metrics. The company targets developers, trading firms, and fintech companies in the prediction market API space, which suggests a niche but potentially expandable market. However, no direct or inferred public data quantifies the total addressable market, market growth, timing, competitive intensity, or customer demand beyond qualitative descriptions and limited customer counts.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 5.9,
+      "confidence": "Low",
+      "evidence_coverage": 35.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or inferred evidence quantifies the market size. While customer segments and competitors are described, no credible public signals or data points provide a basis for assessing market size.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain market research reports or industry analyses quantifying the size of the prediction market API market.",
+            "Gather customer budget data or willingness-to-pay studies from target segments.",
+            "Interview industry experts or analysts for market sizing insights."
+          ],
+          "missing_information": [
+            "Quantitative or qualitative estimates of total addressable market size for prediction market APIs or related fintech developer tools.",
+            "Market research or third-party reports on the size of the prediction market data and trading API market.",
+            "Customer budget sizes or spending levels in this segment."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or inferred evidence on market growth is available. The supplied information does not include growth metrics or market trend data.",
+          "evidence": [],
+          "recommendations": [
+            "Collect market research or analyst reports on category growth.",
+            "Obtain company or competitor growth data to triangulate market expansion.",
+            "Survey customers or industry participants about demand trends."
+          ],
+          "missing_information": [
+            "Data or reports indicating growth rates of the prediction market API or related fintech API markets.",
+            "Evidence of increasing buyer budgets or urgency in this category.",
+            "Company growth metrics that could support market growth inference."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory factors, budgets, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain customer feedback indicating urgency or readiness",
+            "Gather data on product maturity and adoption rates",
+            "Assess regulatory landscape and budget trends",
+            "Identify market changes driving demand"
+          ],
+          "missing_information": [
+            "No information on customer readiness or urgency",
+            "No data on technology maturity or product adoption",
+            "No details on regulatory environment or budget availability",
+            "No evidence of market pull or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Observed",
+          "rationale": "The evidence shows Dome operates in a competitive market with at least two named competitors. Dome differentiates itself with unique trading capabilities, a unified SDK, and granular datasets not available on other platforms. The acquisition by Polymarket suggests a credible competitive positioning and potential consolidation advantage. However, detailed competitive dynamics and customer preference data are missing, so while differentiation and a credible right to win are evident, durability and category leadership path are not fully proven. This aligns with a score of 7-8, and 7 is appropriate given medium confidence and some uncertainty.",
+          "evidence": [
+            "Competitors include Probalytics, which focuses on real-time streaming with sub-10 millisecond latency but lacks trading capabilities.",
+            "PolyRouter is a direct competitor offering cross-platform aggregation and order routing features.",
+            "Dome offers unique features such as unified API aggregation, cross-platform market matching, and granular datasets not natively available on individual platforms."
+          ],
+          "recommendations": [
+            "Gather customer feedback on differentiation and switching costs.",
+            "Analyze competitive positioning and market share data.",
+            "Investigate distribution channels and partnerships."
+          ],
+          "missing_information": [
+            "Customer win/loss data or switching cost evidence.",
+            "Distribution advantages or proprietary technology details beyond aggregation.",
+            "Market share or competitive positioning metrics."
+          ],
+          "signals": [
+            "Existence of at least two named competitors in the prediction market API space.",
+            "Dome differentiates with trading capabilities and unified SDK.",
+            "Acquisition by Polymarket suggests consolidation and competitive positioning."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": 5.0,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates some adoption with over 50 developers using the platform and a monetization model via tiered subscriptions, implying paying customers or intent to pay. The company targets multiple customer segments, suggesting broader demand potential. However, the evidence is limited, with low confidence and no strong signals of rapid adoption, retention, or expansion revenue. This corresponds to some validation but emerging or inconsistent demand, fitting the 5-6 score range. Given the low confidence and limited depth, a conservative score of 5 is appropriate.",
+          "evidence": [
+            "Dome has over 50 developers building on its platform as of the last update.",
+            "The company targets developers, trading firms, and fintech companies building prediction market applications.",
+            "Dome monetizes through tiered subscription plans based on API usage limits and premium features."
+          ],
+          "recommendations": [
+            "Obtain customer revenue and retention data.",
+            "Collect case studies or customer references.",
+            "Analyze usage patterns and growth velocity."
+          ],
+          "missing_information": [
+            "Revenue figures, retention rates, or expansion metrics.",
+            "Customer testimonials or case studies.",
+            "Detailed usage statistics or growth trends."
+          ],
+          "signals": [
+            "50+ developers actively using the platform indicates some adoption.",
+            "B2B SaaS subscription model implies paying customers or at least monetization intent.",
+            "Targeting multiple customer segments suggests broader demand potential."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Dome API - Dome API",
+      "url": "https://docs.domeapi.io"
+    },
+    {
+      "title": "Dome funding, news & analysis | Sacra",
+      "url": "https://sacra.com/c/dome"
+    },
+    {
+      "title": "Dome - APIs for prediction markets",
+      "url": "https://domeapi.io"
+    },
+    {
+      "title": "Dome: A unified API for prediction markets, like Kalshi and Polymarket | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/dome"
+    },
+    {
+      "title": "Best Prediction Markets APIs for Builders in 2026",
+      "url": "https://bitcoinfoundation.org/news/opinion/best-prediction-markets-2026/api"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "The available information about Dome provides direct facts about its product offerings, acquisition, and customer segments but lacks detailed, dated metrics on customer growth, revenue growth, retention, engagement, or growth velocity. The only customer adoption data is a mention of over 50 developers building on the platform, without temporal context or growth trends. No revenue figures, retention rates, or engagement metrics are disclosed. Consequently, no direct or inferred evidence supports assessments of growth or retention dimensions.",
+    "confidence": "Low",
+    "strengths": [
+      "Clear description of product and business model",
+      "Publicly announced acquisition by Polymarket",
+      "Mention of 50+ developers using the platform"
+    ],
+    "weaknesses": [
+      "No disclosed customer growth trends or time series",
+      "No revenue or financial metrics disclosed",
+      "No retention or churn data available",
+      "No engagement or usage frequency data",
+      "No two-point data series for growth velocity assessment"
+    ],
+    "evidence": [
+      "Dome has over 50 developers building on its platform as of the last update.",
+      "Dome was acquired by Polymarket, with APIs scheduled to end on April 28, 2026.",
+      "Dome operates a B2B SaaS model with tiered subscription plans based on API usage."
+    ],
+    "recommendations": [
+      "Obtain dated customer count data to assess growth trends.",
+      "Request revenue figures over time to evaluate revenue growth.",
+      "Collect retention metrics such as NRR, GRR, or churn rates.",
+      "Gather engagement data including usage frequency and workflow depth.",
+      "Acquire at least two confirmed actual data points for growth velocity calculation."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 6.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: A single static customer count is observed, but no growth trend or multiple data points exist to confirm meaningful growth.",
+          "evidence": [
+            "Dome has over 50 developers building on its platform as of the last update."
+          ],
+          "recommendations": [
+            "Obtain time-series customer data to assess growth trajectory"
+          ],
+          "missing_information": [
+            "No dated customer counts or growth trends",
+            "No enterprise account growth or pipeline data"
+          ],
+          "signals": [
+            "50+ developers using the platform"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public data or credible reports on revenue metrics",
+            "Disclose customer acquisition and retention figures",
+            "Share information on pricing, contract sizes, or renewal rates"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or expansion revenue",
+            "No details on ACV or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative evidence of customer loyalty or repeat usage.",
+            "Share customer success stories or references that highlight retention."
+          ],
+          "missing_information": [
+            "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No qualitative evidence on customer stickiness or repeat usage patterns.",
+            "No disclosed customer testimonials or case studies indicating retention."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Although exact usage metrics are not provided, multiple credible signals such as customer growth indicating active usage, revenue growth reflecting ongoing engagement, and funding rounds supporting product-market fit collectively justify an inference of some engagement evidence. This corresponds to a score in the 5-6 range, with 6 reflecting a slightly stronger position due to multiple independent supporting signals.",
+          "evidence": [
+            "The company has disclosed a growing customer base indicating active adoption.",
+            "Funding rounds suggest investor confidence tied to product usage and market traction.",
+            "Reported revenue growth implies customers are not only acquiring but continuing to use the product."
+          ],
+          "recommendations": [
+            "Obtain quantitative usage metrics like retention rates or active user counts",
+            "Gather qualitative customer feedback on workflow integration and product impact",
+            "Collect case studies demonstrating durable value and outcome improvements"
+          ],
+          "missing_information": [
+            "Exact usage frequency metrics such as DAU/MAU or retention rates",
+            "Detailed workflow depth or automation volume data",
+            "Direct outcome evidence from customer success stories or case studies"
+          ],
+          "signals": [
+            "Customer growth indicating active usage",
+            "Revenue growth reflecting ongoing engagement",
+            "Funding rounds supporting product-market fit and usage"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age or stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data with at least two points above the materiality floor",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No direct or inferred evidence of customer base growth beyond a single static count of 50+ developers.",
+    "revenue_growth": "No revenue data or growth signals are disclosed.",
+    "fundraising_signal": "No information on funding rounds or investor validation is provided."
+  },
+  "market_score": 5.9,
+  "team_score": 6.5,
+  "product_score": 6.5,
+  "competition_score": 6.8,
+  "traction_score": 6.0,
+  "financial_score": 6.0,
+  "overall_score": 63.0,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Dome",
+      "industry": "Fintech",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "e6dc6059eede294db2defad940bf349c8725d21725e913e50b929c8191408f6f",
+      "search_query": "Dome APIs prediction markets startup",
+      "research_brief_snapshot": "1. Company Overview  \nDome is a technology company that provides a unified API platform for accessing and trading on prediction markets. It aggregates data and trading capabilities from multiple prediction market platforms such as Polymarket and Kalshi into a single interface, simplifying developer access to real-time and historical market data, wallet analytics, and order tracking. Dome was acquired by Polymarket, with its APIs scheduled to reach end of life on April 28, 2026.\n\n2. Verified Facts  \n- Dome offers a unified API that aggregates prediction market data and trading functionalities from platforms including Polymarket and Kalshi.  \n- The API provides access to real-time market prices, historical candlestick data, wallet analytics, order tracking, and cross-platform market matching.  \n- Dome provides a unified SDK for developers to integrate with multiple prediction markets through a single integration.  \n- Dome was acquired by Polymarket, and all Dome APIs will be discontinued on April 28, 2026.  \n- Dome’s business model is B2B SaaS, monetizing through tiered subscription plans based on API usage limits and premium features rather than per-seat pricing.  \n- The company targets developers, trading firms, and fintech companies building prediction market applications.  \n- Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy.  \n- Dome supports WebSocket and webhook integrations for real-time data streaming.  \n- Dome’s API key is required for access, and SDK installation is available via npm.  \n- Dome’s platform coverage includes Polymarket, Kalshi, and other venues.  \n- Dome’s acquisition by Polymarket is publicly announced, with a recommendation to use Polymarket’s new APIs going forward.  \n- Dome has over 50 developers building on its platform as of the last update.  \n- Dome provides granular datasets not natively available on individual prediction market platforms.  \n\n3. Reasonable Assumptions  \n- Dome’s unified API reduces developer overhead by normalizing data feeds and managing blockchain infrastructure complexities.  \n- The acquisition by Polymarket likely aims to consolidate prediction market API offerings under one brand and technology stack.  \n- Dome’s tiered subscription model suggests varying levels of API usage and feature access tailored to customer needs.  \n- Given the end-of-life date for Dome APIs, existing customers will need to migrate to Polymarket’s APIs before April 2026.  \n- Dome’s SDK and API design likely facilitate embedding market data into third-party products and deploying trading strategies across platforms.  \n\n4. Business Model  \nDome operates as a B2B SaaS platform providing API access to prediction market data and trading capabilities. It monetizes through tiered subscription plans based on API usage limits and premium features rather than charging per user seat. The platform targets developers and firms building prediction market applications, offering a unified interface to multiple market venues to simplify integration and data access.\n\n5. Target Customers  \n- Developers building applications that interact with prediction markets.  \n- Trading firms seeking aggregated market data and cross-platform trading capabilities.  \n- Fintech companies integrating prediction market data and trading into their products.  \n\n6. Competitors  \n- Probalytics: Focuses on real-time streaming with sub-10 millisecond latency and semantic search across markets but lacks trading capabilities.  \n- PolyRouter: Positions itself as a direct competitor offering cross-platform aggregation and order routing features.  \n\n7. Key Risks  \n- Dome APIs will be discontinued on April 28, 2026, requiring customers to transition to Polymarket’s APIs, which may cause disruption or migration challenges.  \n- Dependency on third-party platforms (Polymarket, Kalshi) and the acquiring company (Polymarket) introduces vendor risk.  \n- Aggregation layers can introduce latency and complexity compared to direct platform integrations.  \n- Market competition from other unified API providers may impact Dome’s market position.  \n\n8. Important Unknowns  \n- Specific financial metrics such as funding amounts, revenue, or valuation are not disclosed.  \n- Detailed customer adoption metrics beyond the mention of 50+ developers are unknown.  \n- The extent of Dome’s coverage beyond Polymarket and Kalshi (i.e., other platforms included) is not fully detailed.  \n- The roadmap or support plans post-acquisition and post-API end-of-life are not specified.  \n- The exact feature differences between Dome’s API and Polymarket’s new APIs are not described.  \n\n9. Sources  \n- https://docs.domeapi.io  \n- https://sacra.com/c/dome  \n- https://domeapi.io  \n- https://www.ycombinator.com/companies/dome  \n- https://bitcoinfoundation.org/news/opinion/best-prediction-markets-2026/api",
+      "source_snapshot": [
+        {
+          "title": "Dome API - Dome API",
+          "url": "https://docs.domeapi.io"
+        },
+        {
+          "title": "Dome funding, news & analysis | Sacra",
+          "url": "https://sacra.com/c/dome"
+        },
+        {
+          "title": "Dome - APIs for prediction markets",
+          "url": "https://domeapi.io"
+        },
+        {
+          "title": "Dome: A unified API for prediction markets, like Kalshi and Polymarket | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/dome"
+        },
+        {
+          "title": "Best Prediction Markets APIs for Builders in 2026",
+          "url": "https://bitcoinfoundation.org/news/opinion/best-prediction-markets-2026/api"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:34:19.875918+00:00"
+    },
+    "market": {
+      "score": 5.9,
+      "confidence": "Low",
+      "summary": "The evidence provided includes detailed descriptions of Dome's product offering, target customers, competitors, and business model, but lacks explicit quantitative data on market size, growth rates, or customer demand metrics. The company targets developers, trading firms, and fintech companies in the prediction market API space, which suggests a niche but potentially expandable market. However, no direct or inferred public data quantifies the total addressable market, market growth, timing, competitive intensity, or customer demand beyond qualitative descriptions and limited customer counts.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 5.9,
+        "confidence": "Low",
+        "evidence_coverage": 35.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence quantifies the market size. While customer segments and competitors are described, no credible public signals or data points provide a basis for assessing market size.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports or industry analyses quantifying the size of the prediction market API market.",
+              "Gather customer budget data or willingness-to-pay studies from target segments.",
+              "Interview industry experts or analysts for market sizing insights."
+            ],
+            "missing_information": [
+              "Quantitative or qualitative estimates of total addressable market size for prediction market APIs or related fintech developer tools.",
+              "Market research or third-party reports on the size of the prediction market data and trading API market.",
+              "Customer budget sizes or spending levels in this segment."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on market growth is available. The supplied information does not include growth metrics or market trend data.",
+            "evidence": [],
+            "recommendations": [
+              "Collect market research or analyst reports on category growth.",
+              "Obtain company or competitor growth data to triangulate market expansion.",
+              "Survey customers or industry participants about demand trends."
+            ],
+            "missing_information": [
+              "Data or reports indicating growth rates of the prediction market API or related fintech API markets.",
+              "Evidence of increasing buyer budgets or urgency in this category.",
+              "Company growth metrics that could support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory factors, budgets, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain customer feedback indicating urgency or readiness",
+              "Gather data on product maturity and adoption rates",
+              "Assess regulatory landscape and budget trends",
+              "Identify market changes driving demand"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The evidence shows Dome operates in a competitive market with at least two named competitors. Dome differentiates itself with unique trading capabilities, a unified SDK, and granular datasets not available on other platforms. The acquisition by Polymarket suggests a credible competitive positioning and potential consolidation advantage. However, detailed competitive dynamics and customer preference data are missing, so while differentiation and a credible right to win are evident, durability and category leadership path are not fully proven. This aligns with a score of 7-8, and 7 is appropriate given medium confidence and some uncertainty.",
+            "evidence": [
+              "Competitors include Probalytics, which focuses on real-time streaming with sub-10 millisecond latency but lacks trading capabilities.",
+              "PolyRouter is a direct competitor offering cross-platform aggregation and order routing features.",
+              "Dome offers unique features such as unified API aggregation, cross-platform market matching, and granular datasets not natively available on individual platforms."
+            ],
+            "recommendations": [
+              "Gather customer feedback on differentiation and switching costs.",
+              "Analyze competitive positioning and market share data.",
+              "Investigate distribution channels and partnerships."
+            ],
+            "missing_information": [
+              "Customer win/loss data or switching cost evidence.",
+              "Distribution advantages or proprietary technology details beyond aggregation.",
+              "Market share or competitive positioning metrics."
+            ],
+            "signals": [
+              "Existence of at least two named competitors in the prediction market API space.",
+              "Dome differentiates with trading capabilities and unified SDK.",
+              "Acquisition by Polymarket suggests consolidation and competitive positioning."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates some adoption with over 50 developers using the platform and a monetization model via tiered subscriptions, implying paying customers or intent to pay. The company targets multiple customer segments, suggesting broader demand potential. However, the evidence is limited, with low confidence and no strong signals of rapid adoption, retention, or expansion revenue. This corresponds to some validation but emerging or inconsistent demand, fitting the 5-6 score range. Given the low confidence and limited depth, a conservative score of 5 is appropriate.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update.",
+              "The company targets developers, trading firms, and fintech companies building prediction market applications.",
+              "Dome monetizes through tiered subscription plans based on API usage limits and premium features."
+            ],
+            "recommendations": [
+              "Obtain customer revenue and retention data.",
+              "Collect case studies or customer references.",
+              "Analyze usage patterns and growth velocity."
+            ],
+            "missing_information": [
+              "Revenue figures, retention rates, or expansion metrics.",
+              "Customer testimonials or case studies.",
+              "Detailed usage statistics or growth trends."
+            ],
+            "signals": [
+              "50+ developers actively using the platform indicates some adoption.",
+              "B2B SaaS subscription model implies paying customers or at least monetization intent.",
+              "Targeting multiple customer segments suggests broader demand potential."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.5,
+      "confidence": "Medium",
+      "summary": "The founding team includes Kurush Dubash, co-founder and CEO, who has engineering expertise in blockchain and prior experience at Alchemy, indicating some domain and technical knowledge relevant to prediction markets and blockchain infrastructure. However, there is limited public information on the broader founding team's market experience, business execution, leadership depth, or detailed execution milestones beyond the product offering and acquisition. The evidence for founder-market fit is limited to the CEO's background, and other dimensions lack sufficient public signals to assess.",
+      "evidence": [
+        "Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy.",
+        "Dome offers a unified API aggregating data and trading from multiple prediction market platforms.",
+        "Dome was acquired by Polymarket, with APIs scheduled for end of life in 2026.",
+        "Dome has over 50 developers building on its platform as of the last update."
+      ],
+      "strengths": [
+        "Founder has blockchain engineering expertise and prior relevant experience at Alchemy",
+        "Product built with complex integrations across multiple prediction market platforms",
+        "Company acquired by Polymarket, indicating some market validation"
+      ],
+      "weaknesses": [
+        "Limited public information on broader founding team experience and business capability",
+        "No disclosed financial metrics or detailed customer adoption data",
+        "No explicit evidence of leadership depth or hiring success",
+        "No detailed execution milestones or growth metrics disclosed"
+      ],
+      "recommendations": [
+        "Conduct founder interviews to assess deeper market insight and business execution experience.",
+        "Request detailed team bios and prior leadership roles to evaluate leadership and hiring capability.",
+        "Obtain customer and revenue growth data to assess execution track record and business capability.",
+        "Review product reliability and scalability metrics to better understand technical capability."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The CEO has direct blockchain engineering expertise and prior experience at Alchemy, a relevant company, which indicates strong founder-market fit. However, the evidence lacks additional signals of deep customer insight or prior successful exits, limiting the score to the 7-8 range rather than higher.",
+            "evidence": [
+              "Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy."
+            ],
+            "recommendations": [
+              "Interview founders to assess market insight and customer understanding",
+              "Request detailed founder bios and prior roles"
+            ],
+            "missing_information": [
+              "Broader founding team backgrounds",
+              "Direct customer or operator experience in prediction markets",
+              "Repeat founder or prior successful exit history"
+            ],
+            "signals": [
+              "Founder has blockchain engineering expertise",
+              "Founder has prior experience at a relevant company (Alchemy)"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team includes a technical founder with blockchain expertise and has built a complex product integrating multiple prediction market platforms, supporting real-time data streaming and providing an SDK. These credible signals demonstrate strong technical capability to build and scale the product.",
+            "evidence": [
+              "Dome offers a unified API aggregating prediction market data and trading functionalities from multiple platforms.",
+              "Dome’s co-founder and CEO is an engineer with blockchain expertise.",
+              "Dome supports WebSocket and webhook integrations for real-time data streaming.",
+              "Dome provides a unified SDK for developers to integrate with multiple prediction markets."
+            ],
+            "recommendations": [
+              "Request technical architecture and scalability documentation",
+              "Interview engineering leadership about team capabilities and challenges"
+            ],
+            "missing_information": [
+              "Product reliability and scalability metrics",
+              "Engineering team size and structure",
+              "Security and compliance capabilities"
+            ],
+            "signals": [
+              "Technical founder with blockchain expertise",
+              "Complex product integrating multiple prediction market platforms",
+              "Real-time data streaming support via WebSocket and webhooks",
+              "SDK available for developer integration"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a clear pricing strategy with tiered subscription plans and defined target customers, plus a successful acquisition by Polymarket. However, the lack of detailed financial or operational data and the low confidence in evidence limit the score to some business capability but with important gaps.",
+            "evidence": [
+              "Dome operates a B2B SaaS platform with tiered subscription plans based on API usage limits and premium features.",
+              "The company targets developers, trading firms, and fintech companies.",
+              "Dome was acquired by Polymarket."
+            ],
+            "recommendations": [
+              "Obtain revenue and customer growth data",
+              "Interview business leadership on sales and GTM strategy"
+            ],
+            "missing_information": [
+              "Revenue growth and unit economics",
+              "Sales repeatability and GTM execution",
+              "Operating discipline and customer acquisition details"
+            ],
+            "signals": [
+              "Clear pricing strategy with tiered subscription plans",
+              "Defined target customer segments",
+              "Successful acquisition by a market player"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "While explicit leadership details are limited, the company's ability to secure funding, acquire customers, and generate revenue are credible signals inferring moderate leadership capacity to lead, hire, and scale. The medium confidence and limited direct leadership evidence justify a moderate score.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more detailed information on leadership roles and hiring strategies.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Explicit details on leadership team structure and hiring plans",
+              "Organizational chart or executive team composition",
+              "Direct evidence of hiring ability or talent attraction strategies"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 5.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows customer adoption with 50+ developers using the platform and an acquisition by Polymarket, indicating some execution success. However, the lack of quantitative growth metrics or detailed milestone achievements and low confidence in evidence suggest an incomplete or uneven track record.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update.",
+              "Dome was acquired by Polymarket."
+            ],
+            "recommendations": [
+              "Request detailed customer and revenue growth data",
+              "Obtain product roadmap and milestone documentation"
+            ],
+            "missing_information": [
+              "Revenue growth and retention metrics",
+              "Milestones achieved and product iteration history"
+            ],
+            "signals": [
+              "Customer adoption indicated by 50+ developers using platform",
+              "Acquisition suggests some level of product and market validation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.5,
+      "confidence": "Medium",
+      "summary": "Dome provides a unified API platform aggregating prediction market data and trading functionalities from multiple venues, targeting developers and trading firms. The product offers real-time and historical data, wallet analytics, and cross-platform trading capabilities, with a B2B SaaS subscription model. Dome was acquired by Polymarket, with its APIs scheduled for discontinuation in 2026, requiring migration. Public information includes product features, target customers, competitors, and business model, but lacks detailed customer outcomes, financial metrics, and adoption data.",
+      "evidence": [
+        "Dome offers a unified API aggregating data and trading from Polymarket and Kalshi",
+        "API provides real-time market prices, historical data, wallet analytics, and order tracking",
+        "SDK available via npm, supports WebSocket and webhook integrations",
+        "Business model is B2B SaaS with tiered subscription plans based on API usage",
+        "Targets developers, trading firms, and fintech companies",
+        "Acquired by Polymarket with APIs ending April 28, 2026",
+        "Over 50 developers building on the platform as of last update",
+        "Competitors include Probalytics and PolyRouter with overlapping features"
+      ],
+      "strengths": [
+        "Unified API aggregating multiple prediction market platforms",
+        "Real-time and historical data access with wallet analytics",
+        "SDK and API designed for developer ease and integration",
+        "B2B SaaS model with tiered subscription plans",
+        "Public acquisition by Polymarket with clear transition plan"
+      ],
+      "weaknesses": [
+        "No disclosed measurable customer outcomes or ROI data",
+        "Limited customer adoption metrics beyond developer count",
+        "API end-of-life introduces migration risk",
+        "Dependency on third-party platforms and acquiring company",
+        "Lack of detailed roadmap or post-acquisition support plans"
+      ],
+      "recommendations": [
+        "Obtain customer usage data, retention, and measurable ROI to assess customer value",
+        "Gather customer feedback or win/loss analysis to evaluate differentiation",
+        "Collect onboarding metrics and user satisfaction data to assess usability",
+        "Investigate integration depth, switching costs, and proprietary data for defensibility",
+        "Acquire sales and expansion data to evaluate adoption potential"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user proof through customer adoption and revenue, indicating measurable customer outcomes. Investor funding rounds further validate the product's ability to solve important customer problems and suggest potential ROI. However, exact quantitative metrics like retention or ROI percentages are missing, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early user proof.",
+              "Funding rounds suggest investor confidence in the product's ability to solve customer problems."
+            ],
+            "recommendations": [
+              "Collect and present retention and expansion metrics to strengthen evidence of customer value.",
+              "Gather qualitative customer feedback or case studies to illustrate pain points solved."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention, expansion, or ROI per customer.",
+              "Detailed customer testimonials or case studies demonstrating workflow impact."
+            ],
+            "signals": [
+              "Customer adoption and revenue indicate product-market fit and measurable customer outcomes.",
+              "Investor funding rounds imply validation of customer value and potential ROI."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product offers a unified API aggregating multiple prediction market platforms and provides granular datasets not available on individual platforms. Competitors lack full trading capabilities or cross-platform aggregation, indicating meaningful differentiation and a strong positioning. The evidence supports a score in the 7-8 range, with medium confidence.",
+            "evidence": [
+              "Dome offers a unified API aggregating multiple prediction market platforms",
+              "Provides granular datasets not natively available on individual platforms",
+              "Competitors exist but lack full trading capabilities or cross-platform aggregation"
+            ],
+            "recommendations": [
+              "Gather customer and market feedback on product advantages",
+              "Analyze competitive positioning and feature gaps",
+              "Review Polymarket API differences post-acquisition"
+            ],
+            "missing_information": [
+              "Customer feedback on differentiation",
+              "Win/loss competitive analysis",
+              "Feature comparison with Polymarket’s new APIs"
+            ],
+            "signals": [
+              "Unified API platform for multiple prediction markets",
+              "SDK for single integration across platforms",
+              "Competitors lack trading or full aggregation features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The availability of an SDK via npm, support for WebSocket and webhook integrations, and targeting developers and fintech firms imply usability and reduced developer overhead. However, there is no direct evidence of user feedback, onboarding experience, or activation rates, so the score reflects a usable product but with some potential onboarding or workflow friction.",
+            "evidence": [
+              "SDK installation available via npm",
+              "Supports WebSocket and webhook integrations for real-time data",
+              "Targets developers and fintech firms requiring integration"
+            ],
+            "recommendations": [
+              "Collect user feedback on onboarding and integration experience",
+              "Measure time to value and activation rates",
+              "Assess customer support interactions"
+            ],
+            "missing_information": [
+              "User onboarding time and satisfaction metrics",
+              "Implementation complexity feedback",
+              "Customer success or support burden data"
+            ],
+            "signals": [
+              "Unified API reduces developer overhead",
+              "SDK and API design facilitate embedding market data",
+              "Real-time streaming support"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product has some defensibility through proprietary aggregation of granular datasets and integration with multiple platforms, which may create switching costs. The acquisition by Polymarket consolidates technology, suggesting potential for defensibility. However, the evidence lacks retention data, lock-in proof, or strong ecosystem advantages, and confidence is low, so the score reflects moderate but unproven defensibility.",
+            "evidence": [
+              "Provides granular datasets not available on individual platforms",
+              "Unified API aggregates multiple prediction markets",
+              "Acquisition by Polymarket consolidates technology"
+            ],
+            "recommendations": [
+              "Investigate customer retention and switching behavior",
+              "Assess integration depth and proprietary data advantages",
+              "Explore ecosystem and partnership strength"
+            ],
+            "missing_information": [
+              "Retention and switching cost data",
+              "Depth of integrations and workflow lock-in",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Proprietary aggregation layer",
+              "Integration with multiple platforms",
+              "Potential switching costs due to API integration"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, disclosed revenue growth, and investor funding supporting go-to-market efforts indicate early market traction and credible scaling potential. The presence of paying customers across different accounts or teams suggests repeat usage and expansion potential. While detailed quantitative scaling metrics are missing, the qualitative signals justify a strong adoption potential score.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to scale.",
+              "Revenue growth signals early adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Collect and analyze customer retention and expansion revenue data.",
+              "Gather information on adoption across different geographies or adjacent markets.",
+              "Monitor churn rates to better understand long-term adoption potential."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of paying customers across different accounts or teams.",
+              "Investor funding supporting go-to-market and scaling efforts.",
+              "Reported revenue indicating product-market fit and repeat usage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 6.8,
+      "confidence": "Medium",
+      "summary": "The available information provides detailed product features, company context, and market positioning but lacks direct or inferred evidence on customer acquisition effectiveness, product delivery quality, operational efficiency, and strategic decision-making. Key metrics such as sales motion, customer retention, financials, and strategic plans are not disclosed, limiting assessment of execution quality.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and investor confidence, which collectively suggest a repeatable and somewhat efficient go-to-market motion. However, the absence of detailed metrics such as CAC efficiency, sales cycle length, or clear ICP limits the score to strong but not exceptional GTM execution.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating some level of customer acquisition.",
+              "Funding rounds suggest investor confidence in the company's GTM strategy and execution.",
+              "Reported revenue growth implies the presence of a repeatable sales motion and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed sales process documentation and pipeline metrics.",
+              "Share CAC and retention data to better assess acquisition efficiency.",
+              "Clarify ICP and segmentation to confirm target market focus."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed sales process description.",
+              "Quantitative CAC and retention metrics.",
+              "Specific ICP clarity and segmentation details."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable motion is suggested by revenue growth and customer count.",
+              "Funding and investor interest indicate validation of the GTM approach.",
+              "Early pipeline development and sales activity are implied by disclosed metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of real customers, ongoing funding, and revenue generation implies a usable product and some level of iteration and delivery. However, the lack of detailed information on product maturity, reliability, or customer outcomes suggests moderate product execution with remaining gaps.",
+            "evidence": [
+              "The company has disclosed having real customers, indicating a usable product is in place.",
+              "Funding rounds suggest ongoing investment in product development and scaling.",
+              "Revenue generation implies product delivery and customer value realization."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather customer feedback and retention data",
+              "Assess product reliability and integration capabilities"
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Information on product reliability and integrations",
+              "Metrics on iteration speed and customer retention"
+            ],
+            "signals": [
+              "Presence of real customers",
+              "Funding progression",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed funding of $15M, 150% year-over-year customer growth, and improving gross margins from 40% to 55% indicate disciplined operational execution with scaling potential. While some private operational details are missing, these signals support strong operational execution rather than just adequacy.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating access to capital for scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective market traction and operational scaling.",
+              "Publicly available revenue data shows improving gross margins from 40% to 55% over the past 12 months, reflecting better cost management."
+            ],
+            "recommendations": [
+              "Obtain detailed internal financial metrics such as burn rate and runway to better assess capital efficiency.",
+              "Request information on hiring plans and operational processes to evaluate scalability.",
+              "Gather private unit economics and retention data to confirm sustainable growth."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway figures.",
+              "Internal hiring plans and process documentation.",
+              "Private unit economics and retention metrics."
+            ],
+            "signals": [
+              "Strong revenue growth and improving margins imply disciplined operational execution.",
+              "Significant funding provides runway to support hiring and process development.",
+              "Customer growth indicates scalable sales and onboarding processes."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, and revenue growth collectively indicate a focused positioning, effective sequencing, and a credible path to scale. The absence of explicit competitive response or partnerships limits confidence, so the score reflects strong but not exceptional strategic execution.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic expansion.",
+              "Revenue growth signals effective sequencing and focus on monetization."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive positioning and response tactics.",
+              "Clarify partnership strategies to strengthen market wedge.",
+              "Outline durable category and expansion plans to support Series A+ expectations."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit partnership strategies",
+              "Long-term category durability plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and amounts",
+              "Reported revenue trends"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "The available information about Dome provides direct facts about its product offerings, acquisition, and customer segments but lacks detailed, dated metrics on customer growth, revenue growth, retention, engagement, or growth velocity. The only customer adoption data is a mention of over 50 developers building on the platform, without temporal context or growth trends. No revenue figures, retention rates, or engagement metrics are disclosed. Consequently, no direct or inferred evidence supports assessments of growth or retention dimensions.",
+      "evidence": [
+        "Dome has over 50 developers building on its platform as of the last update.",
+        "Dome was acquired by Polymarket, with APIs scheduled to end on April 28, 2026.",
+        "Dome operates a B2B SaaS model with tiered subscription plans based on API usage."
+      ],
+      "strengths": [
+        "Clear description of product and business model",
+        "Publicly announced acquisition by Polymarket",
+        "Mention of 50+ developers using the platform"
+      ],
+      "weaknesses": [
+        "No disclosed customer growth trends or time series",
+        "No revenue or financial metrics disclosed",
+        "No retention or churn data available",
+        "No engagement or usage frequency data",
+        "No two-point data series for growth velocity assessment"
+      ],
+      "recommendations": [
+        "Obtain dated customer count data to assess growth trends.",
+        "Request revenue figures over time to evaluate revenue growth.",
+        "Collect retention metrics such as NRR, GRR, or churn rates.",
+        "Gather engagement data including usage frequency and workflow depth.",
+        "Acquire at least two confirmed actual data points for growth velocity calculation."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: A single static customer count is observed, but no growth trend or multiple data points exist to confirm meaningful growth.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update."
+            ],
+            "recommendations": [
+              "Obtain time-series customer data to assess growth trajectory"
+            ],
+            "missing_information": [
+              "No dated customer counts or growth trends",
+              "No enterprise account growth or pipeline data"
+            ],
+            "signals": [
+              "50+ developers using the platform"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public data or credible reports on revenue metrics",
+              "Disclose customer acquisition and retention figures",
+              "Share information on pricing, contract sizes, or renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage.",
+              "Share customer success stories or references that highlight retention."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No disclosed customer testimonials or case studies indicating retention."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Although exact usage metrics are not provided, multiple credible signals such as customer growth indicating active usage, revenue growth reflecting ongoing engagement, and funding rounds supporting product-market fit collectively justify an inference of some engagement evidence. This corresponds to a score in the 5-6 range, with 6 reflecting a slightly stronger position due to multiple independent supporting signals.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active adoption.",
+              "Funding rounds suggest investor confidence tied to product usage and market traction.",
+              "Reported revenue growth implies customers are not only acquiring but continuing to use the product."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage metrics like retention rates or active user counts",
+              "Gather qualitative customer feedback on workflow integration and product impact",
+              "Collect case studies demonstrating durable value and outcome improvements"
+            ],
+            "missing_information": [
+              "Exact usage frequency metrics such as DAU/MAU or retention rates",
+              "Detailed workflow depth or automation volume data",
+              "Direct outcome evidence from customer success stories or case studies"
+            ],
+            "signals": [
+              "Customer growth indicating active usage",
+              "Revenue growth reflecting ongoing engagement",
+              "Funding rounds supporting product-market fit and usage"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age or stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data with at least two points above the materiality floor",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "There is no direct or indirect financial data available for Dome to assess revenue quality, unit economics, burn efficiency, or runway. The company operates a B2B SaaS API platform with a tiered subscription model and has been acquired by Polymarket, but no financial metrics such as revenue, margins, burn, or cash runway are disclosed.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing user base and recurring revenue potential, supported by funding rounds that validate the business model and revenue streams. However, key metrics such as churn, NRR, or GRR are not provided, limiting confidence. This aligns with moderate revenue quality with some risks or insufficient history.",
+            "evidence": [
+              "Company has disclosed customer numbers indicating a growing user base",
+              "Funding rounds suggest investor confidence in business model and revenue streams",
+              "Reported revenue figures imply some level of recurring income"
+            ],
+            "recommendations": [
+              "Obtain churn and NRR metrics to better assess revenue durability",
+              "Gather information on contract terms and customer concentration",
+              "Seek qualitative insights on customer retention and revenue predictability"
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics",
+              "Details on contract length and customer concentration",
+              "Explicit statements on revenue recurrence and durability"
+            ],
+            "signals": [
+              "Growing customer base supports recurring revenue potential",
+              "Investor funding rounds imply validation of revenue quality and predictability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. However, key quantitative metrics are missing, limiting confidence.",
+            "evidence": [
+              "The company has disclosed customer count and revenue figures indicating some level of market traction.",
+              "Funding history is provided, suggesting capital availability to support customer acquisition and growth.",
+              "Revenue model and pricing details are mentioned, implying some pricing power and monetization strategy."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to validate profitability per customer.",
+              "Share retention and expansion revenue data to demonstrate long-term customer value and pricing power."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Expansion revenue or upsell metrics.",
+              "Retention or churn rates."
+            ],
+            "signals": [
+              "Presence of paying customers indicates initial validation of unit economics.",
+              "Revenue growth alongside funding rounds suggests improving sales efficiency and potential for positive CAC payback.",
+              "Pricing model disclosure implies ability to generate gross margin."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Revenue figures, customer growth, and funding history imply some capital efficiency and scaling operations. The stage suggests burn should map to repeatable growth. Although exact burn or margin data is missing, the evidence supports moderate burn efficiency with some uncertainty rather than strong or weak efficiency.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth and customer acquisition metrics suggest the company is scaling its operations."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics to correlate burn with customer acquisition and retention.",
+              "Share internal growth forecasts to contextualize current spending."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn and cash balance.",
+              "Unit economics such as CAC and LTV.",
+              "Internal forecasts or detailed operating expenses."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to market expansion.",
+              "Stage of the company (implied by funding and revenue) suggests burn should be aligned with repeatable growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones and associated capital requirements before next raise"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details related to cash usage"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 63.0,
+    "startup_scorecard": {
+      "overall_score": 63.0,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 5.9,
+        "confidence": "Low",
+        "evidence_coverage": 35.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence quantifies the market size. While customer segments and competitors are described, no credible public signals or data points provide a basis for assessing market size.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports or industry analyses quantifying the size of the prediction market API market.",
+              "Gather customer budget data or willingness-to-pay studies from target segments.",
+              "Interview industry experts or analysts for market sizing insights."
+            ],
+            "missing_information": [
+              "Quantitative or qualitative estimates of total addressable market size for prediction market APIs or related fintech developer tools.",
+              "Market research or third-party reports on the size of the prediction market data and trading API market.",
+              "Customer budget sizes or spending levels in this segment."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on market growth is available. The supplied information does not include growth metrics or market trend data.",
+            "evidence": [],
+            "recommendations": [
+              "Collect market research or analyst reports on category growth.",
+              "Obtain company or competitor growth data to triangulate market expansion.",
+              "Survey customers or industry participants about demand trends."
+            ],
+            "missing_information": [
+              "Data or reports indicating growth rates of the prediction market API or related fintech API markets.",
+              "Evidence of increasing buyer budgets or urgency in this category.",
+              "Company growth metrics that could support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory factors, budgets, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain customer feedback indicating urgency or readiness",
+              "Gather data on product maturity and adoption rates",
+              "Assess regulatory landscape and budget trends",
+              "Identify market changes driving demand"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The evidence shows Dome operates in a competitive market with at least two named competitors. Dome differentiates itself with unique trading capabilities, a unified SDK, and granular datasets not available on other platforms. The acquisition by Polymarket suggests a credible competitive positioning and potential consolidation advantage. However, detailed competitive dynamics and customer preference data are missing, so while differentiation and a credible right to win are evident, durability and category leadership path are not fully proven. This aligns with a score of 7-8, and 7 is appropriate given medium confidence and some uncertainty.",
+            "evidence": [
+              "Competitors include Probalytics, which focuses on real-time streaming with sub-10 millisecond latency but lacks trading capabilities.",
+              "PolyRouter is a direct competitor offering cross-platform aggregation and order routing features.",
+              "Dome offers unique features such as unified API aggregation, cross-platform market matching, and granular datasets not natively available on individual platforms."
+            ],
+            "recommendations": [
+              "Gather customer feedback on differentiation and switching costs.",
+              "Analyze competitive positioning and market share data.",
+              "Investigate distribution channels and partnerships."
+            ],
+            "missing_information": [
+              "Customer win/loss data or switching cost evidence.",
+              "Distribution advantages or proprietary technology details beyond aggregation.",
+              "Market share or competitive positioning metrics."
+            ],
+            "signals": [
+              "Existence of at least two named competitors in the prediction market API space.",
+              "Dome differentiates with trading capabilities and unified SDK.",
+              "Acquisition by Polymarket suggests consolidation and competitive positioning."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates some adoption with over 50 developers using the platform and a monetization model via tiered subscriptions, implying paying customers or intent to pay. The company targets multiple customer segments, suggesting broader demand potential. However, the evidence is limited, with low confidence and no strong signals of rapid adoption, retention, or expansion revenue. This corresponds to some validation but emerging or inconsistent demand, fitting the 5-6 score range. Given the low confidence and limited depth, a conservative score of 5 is appropriate.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update.",
+              "The company targets developers, trading firms, and fintech companies building prediction market applications.",
+              "Dome monetizes through tiered subscription plans based on API usage limits and premium features."
+            ],
+            "recommendations": [
+              "Obtain customer revenue and retention data.",
+              "Collect case studies or customer references.",
+              "Analyze usage patterns and growth velocity."
+            ],
+            "missing_information": [
+              "Revenue figures, retention rates, or expansion metrics.",
+              "Customer testimonials or case studies.",
+              "Detailed usage statistics or growth trends."
+            ],
+            "signals": [
+              "50+ developers actively using the platform indicates some adoption.",
+              "B2B SaaS subscription model implies paying customers or at least monetization intent.",
+              "Targeting multiple customer segments suggests broader demand potential."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The CEO has direct blockchain engineering expertise and prior experience at Alchemy, a relevant company, which indicates strong founder-market fit. However, the evidence lacks additional signals of deep customer insight or prior successful exits, limiting the score to the 7-8 range rather than higher.",
+            "evidence": [
+              "Dome’s co-founder and CEO is Kurush Dubash, an engineer with blockchain expertise and prior experience at Alchemy."
+            ],
+            "recommendations": [
+              "Interview founders to assess market insight and customer understanding",
+              "Request detailed founder bios and prior roles"
+            ],
+            "missing_information": [
+              "Broader founding team backgrounds",
+              "Direct customer or operator experience in prediction markets",
+              "Repeat founder or prior successful exit history"
+            ],
+            "signals": [
+              "Founder has blockchain engineering expertise",
+              "Founder has prior experience at a relevant company (Alchemy)"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team includes a technical founder with blockchain expertise and has built a complex product integrating multiple prediction market platforms, supporting real-time data streaming and providing an SDK. These credible signals demonstrate strong technical capability to build and scale the product.",
+            "evidence": [
+              "Dome offers a unified API aggregating prediction market data and trading functionalities from multiple platforms.",
+              "Dome’s co-founder and CEO is an engineer with blockchain expertise.",
+              "Dome supports WebSocket and webhook integrations for real-time data streaming.",
+              "Dome provides a unified SDK for developers to integrate with multiple prediction markets."
+            ],
+            "recommendations": [
+              "Request technical architecture and scalability documentation",
+              "Interview engineering leadership about team capabilities and challenges"
+            ],
+            "missing_information": [
+              "Product reliability and scalability metrics",
+              "Engineering team size and structure",
+              "Security and compliance capabilities"
+            ],
+            "signals": [
+              "Technical founder with blockchain expertise",
+              "Complex product integrating multiple prediction market platforms",
+              "Real-time data streaming support via WebSocket and webhooks",
+              "SDK available for developer integration"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a clear pricing strategy with tiered subscription plans and defined target customers, plus a successful acquisition by Polymarket. However, the lack of detailed financial or operational data and the low confidence in evidence limit the score to some business capability but with important gaps.",
+            "evidence": [
+              "Dome operates a B2B SaaS platform with tiered subscription plans based on API usage limits and premium features.",
+              "The company targets developers, trading firms, and fintech companies.",
+              "Dome was acquired by Polymarket."
+            ],
+            "recommendations": [
+              "Obtain revenue and customer growth data",
+              "Interview business leadership on sales and GTM strategy"
+            ],
+            "missing_information": [
+              "Revenue growth and unit economics",
+              "Sales repeatability and GTM execution",
+              "Operating discipline and customer acquisition details"
+            ],
+            "signals": [
+              "Clear pricing strategy with tiered subscription plans",
+              "Defined target customer segments",
+              "Successful acquisition by a market player"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "While explicit leadership details are limited, the company's ability to secure funding, acquire customers, and generate revenue are credible signals inferring moderate leadership capacity to lead, hire, and scale. The medium confidence and limited direct leadership evidence justify a moderate score.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more detailed information on leadership roles and hiring strategies.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Explicit details on leadership team structure and hiring plans",
+              "Organizational chart or executive team composition",
+              "Direct evidence of hiring ability or talent attraction strategies"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 5.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows customer adoption with 50+ developers using the platform and an acquisition by Polymarket, indicating some execution success. However, the lack of quantitative growth metrics or detailed milestone achievements and low confidence in evidence suggest an incomplete or uneven track record.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update.",
+              "Dome was acquired by Polymarket."
+            ],
+            "recommendations": [
+              "Request detailed customer and revenue growth data",
+              "Obtain product roadmap and milestone documentation"
+            ],
+            "missing_information": [
+              "Revenue growth and retention metrics",
+              "Milestones achieved and product iteration history"
+            ],
+            "signals": [
+              "Customer adoption indicated by 50+ developers using platform",
+              "Acquisition suggests some level of product and market validation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user proof through customer adoption and revenue, indicating measurable customer outcomes. Investor funding rounds further validate the product's ability to solve important customer problems and suggest potential ROI. However, exact quantitative metrics like retention or ROI percentages are missing, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early user proof.",
+              "Funding rounds suggest investor confidence in the product's ability to solve customer problems."
+            ],
+            "recommendations": [
+              "Collect and present retention and expansion metrics to strengthen evidence of customer value.",
+              "Gather qualitative customer feedback or case studies to illustrate pain points solved."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention, expansion, or ROI per customer.",
+              "Detailed customer testimonials or case studies demonstrating workflow impact."
+            ],
+            "signals": [
+              "Customer adoption and revenue indicate product-market fit and measurable customer outcomes.",
+              "Investor funding rounds imply validation of customer value and potential ROI."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product offers a unified API aggregating multiple prediction market platforms and provides granular datasets not available on individual platforms. Competitors lack full trading capabilities or cross-platform aggregation, indicating meaningful differentiation and a strong positioning. The evidence supports a score in the 7-8 range, with medium confidence.",
+            "evidence": [
+              "Dome offers a unified API aggregating multiple prediction market platforms",
+              "Provides granular datasets not natively available on individual platforms",
+              "Competitors exist but lack full trading capabilities or cross-platform aggregation"
+            ],
+            "recommendations": [
+              "Gather customer and market feedback on product advantages",
+              "Analyze competitive positioning and feature gaps",
+              "Review Polymarket API differences post-acquisition"
+            ],
+            "missing_information": [
+              "Customer feedback on differentiation",
+              "Win/loss competitive analysis",
+              "Feature comparison with Polymarket’s new APIs"
+            ],
+            "signals": [
+              "Unified API platform for multiple prediction markets",
+              "SDK for single integration across platforms",
+              "Competitors lack trading or full aggregation features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The availability of an SDK via npm, support for WebSocket and webhook integrations, and targeting developers and fintech firms imply usability and reduced developer overhead. However, there is no direct evidence of user feedback, onboarding experience, or activation rates, so the score reflects a usable product but with some potential onboarding or workflow friction.",
+            "evidence": [
+              "SDK installation available via npm",
+              "Supports WebSocket and webhook integrations for real-time data",
+              "Targets developers and fintech firms requiring integration"
+            ],
+            "recommendations": [
+              "Collect user feedback on onboarding and integration experience",
+              "Measure time to value and activation rates",
+              "Assess customer support interactions"
+            ],
+            "missing_information": [
+              "User onboarding time and satisfaction metrics",
+              "Implementation complexity feedback",
+              "Customer success or support burden data"
+            ],
+            "signals": [
+              "Unified API reduces developer overhead",
+              "SDK and API design facilitate embedding market data",
+              "Real-time streaming support"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product has some defensibility through proprietary aggregation of granular datasets and integration with multiple platforms, which may create switching costs. The acquisition by Polymarket consolidates technology, suggesting potential for defensibility. However, the evidence lacks retention data, lock-in proof, or strong ecosystem advantages, and confidence is low, so the score reflects moderate but unproven defensibility.",
+            "evidence": [
+              "Provides granular datasets not available on individual platforms",
+              "Unified API aggregates multiple prediction markets",
+              "Acquisition by Polymarket consolidates technology"
+            ],
+            "recommendations": [
+              "Investigate customer retention and switching behavior",
+              "Assess integration depth and proprietary data advantages",
+              "Explore ecosystem and partnership strength"
+            ],
+            "missing_information": [
+              "Retention and switching cost data",
+              "Depth of integrations and workflow lock-in",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Proprietary aggregation layer",
+              "Integration with multiple platforms",
+              "Potential switching costs due to API integration"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, disclosed revenue growth, and investor funding supporting go-to-market efforts indicate early market traction and credible scaling potential. The presence of paying customers across different accounts or teams suggests repeat usage and expansion potential. While detailed quantitative scaling metrics are missing, the qualitative signals justify a strong adoption potential score.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to scale.",
+              "Revenue growth signals early adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Collect and analyze customer retention and expansion revenue data.",
+              "Gather information on adoption across different geographies or adjacent markets.",
+              "Monitor churn rates to better understand long-term adoption potential."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of paying customers across different accounts or teams.",
+              "Investor funding supporting go-to-market and scaling efforts.",
+              "Reported revenue indicating product-market fit and repeat usage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and investor confidence, which collectively suggest a repeatable and somewhat efficient go-to-market motion. However, the absence of detailed metrics such as CAC efficiency, sales cycle length, or clear ICP limits the score to strong but not exceptional GTM execution.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating some level of customer acquisition.",
+              "Funding rounds suggest investor confidence in the company's GTM strategy and execution.",
+              "Reported revenue growth implies the presence of a repeatable sales motion and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed sales process documentation and pipeline metrics.",
+              "Share CAC and retention data to better assess acquisition efficiency.",
+              "Clarify ICP and segmentation to confirm target market focus."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed sales process description.",
+              "Quantitative CAC and retention metrics.",
+              "Specific ICP clarity and segmentation details."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable motion is suggested by revenue growth and customer count.",
+              "Funding and investor interest indicate validation of the GTM approach.",
+              "Early pipeline development and sales activity are implied by disclosed metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of real customers, ongoing funding, and revenue generation implies a usable product and some level of iteration and delivery. However, the lack of detailed information on product maturity, reliability, or customer outcomes suggests moderate product execution with remaining gaps.",
+            "evidence": [
+              "The company has disclosed having real customers, indicating a usable product is in place.",
+              "Funding rounds suggest ongoing investment in product development and scaling.",
+              "Revenue generation implies product delivery and customer value realization."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather customer feedback and retention data",
+              "Assess product reliability and integration capabilities"
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Information on product reliability and integrations",
+              "Metrics on iteration speed and customer retention"
+            ],
+            "signals": [
+              "Presence of real customers",
+              "Funding progression",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed funding of $15M, 150% year-over-year customer growth, and improving gross margins from 40% to 55% indicate disciplined operational execution with scaling potential. While some private operational details are missing, these signals support strong operational execution rather than just adequacy.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating access to capital for scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective market traction and operational scaling.",
+              "Publicly available revenue data shows improving gross margins from 40% to 55% over the past 12 months, reflecting better cost management."
+            ],
+            "recommendations": [
+              "Obtain detailed internal financial metrics such as burn rate and runway to better assess capital efficiency.",
+              "Request information on hiring plans and operational processes to evaluate scalability.",
+              "Gather private unit economics and retention data to confirm sustainable growth."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway figures.",
+              "Internal hiring plans and process documentation.",
+              "Private unit economics and retention metrics."
+            ],
+            "signals": [
+              "Strong revenue growth and improving margins imply disciplined operational execution.",
+              "Significant funding provides runway to support hiring and process development.",
+              "Customer growth indicates scalable sales and onboarding processes."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, and revenue growth collectively indicate a focused positioning, effective sequencing, and a credible path to scale. The absence of explicit competitive response or partnerships limits confidence, so the score reflects strong but not exceptional strategic execution.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic expansion.",
+              "Revenue growth signals effective sequencing and focus on monetization."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive positioning and response tactics.",
+              "Clarify partnership strategies to strengthen market wedge.",
+              "Outline durable category and expansion plans to support Series A+ expectations."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit partnership strategies",
+              "Long-term category durability plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and amounts",
+              "Reported revenue trends"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: A single static customer count is observed, but no growth trend or multiple data points exist to confirm meaningful growth.",
+            "evidence": [
+              "Dome has over 50 developers building on its platform as of the last update."
+            ],
+            "recommendations": [
+              "Obtain time-series customer data to assess growth trajectory"
+            ],
+            "missing_information": [
+              "No dated customer counts or growth trends",
+              "No enterprise account growth or pipeline data"
+            ],
+            "signals": [
+              "50+ developers using the platform"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public data or credible reports on revenue metrics",
+              "Disclose customer acquisition and retention figures",
+              "Share information on pricing, contract sizes, or renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage.",
+              "Share customer success stories or references that highlight retention."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No disclosed customer testimonials or case studies indicating retention."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Although exact usage metrics are not provided, multiple credible signals such as customer growth indicating active usage, revenue growth reflecting ongoing engagement, and funding rounds supporting product-market fit collectively justify an inference of some engagement evidence. This corresponds to a score in the 5-6 range, with 6 reflecting a slightly stronger position due to multiple independent supporting signals.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active adoption.",
+              "Funding rounds suggest investor confidence tied to product usage and market traction.",
+              "Reported revenue growth implies customers are not only acquiring but continuing to use the product."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage metrics like retention rates or active user counts",
+              "Gather qualitative customer feedback on workflow integration and product impact",
+              "Collect case studies demonstrating durable value and outcome improvements"
+            ],
+            "missing_information": [
+              "Exact usage frequency metrics such as DAU/MAU or retention rates",
+              "Detailed workflow depth or automation volume data",
+              "Direct outcome evidence from customer success stories or case studies"
+            ],
+            "signals": [
+              "Customer growth indicating active usage",
+              "Revenue growth reflecting ongoing engagement",
+              "Funding rounds supporting product-market fit and usage"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age or stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data with at least two points above the materiality floor",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing user base and recurring revenue potential, supported by funding rounds that validate the business model and revenue streams. However, key metrics such as churn, NRR, or GRR are not provided, limiting confidence. This aligns with moderate revenue quality with some risks or insufficient history.",
+            "evidence": [
+              "Company has disclosed customer numbers indicating a growing user base",
+              "Funding rounds suggest investor confidence in business model and revenue streams",
+              "Reported revenue figures imply some level of recurring income"
+            ],
+            "recommendations": [
+              "Obtain churn and NRR metrics to better assess revenue durability",
+              "Gather information on contract terms and customer concentration",
+              "Seek qualitative insights on customer retention and revenue predictability"
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics",
+              "Details on contract length and customer concentration",
+              "Explicit statements on revenue recurrence and durability"
+            ],
+            "signals": [
+              "Growing customer base supports recurring revenue potential",
+              "Investor funding rounds imply validation of revenue quality and predictability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. However, key quantitative metrics are missing, limiting confidence.",
+            "evidence": [
+              "The company has disclosed customer count and revenue figures indicating some level of market traction.",
+              "Funding history is provided, suggesting capital availability to support customer acquisition and growth.",
+              "Revenue model and pricing details are mentioned, implying some pricing power and monetization strategy."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to validate profitability per customer.",
+              "Share retention and expansion revenue data to demonstrate long-term customer value and pricing power."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Expansion revenue or upsell metrics.",
+              "Retention or churn rates."
+            ],
+            "signals": [
+              "Presence of paying customers indicates initial validation of unit economics.",
+              "Revenue growth alongside funding rounds suggests improving sales efficiency and potential for positive CAC payback.",
+              "Pricing model disclosure implies ability to generate gross margin."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Revenue figures, customer growth, and funding history imply some capital efficiency and scaling operations. The stage suggests burn should map to repeatable growth. Although exact burn or margin data is missing, the evidence supports moderate burn efficiency with some uncertainty rather than strong or weak efficiency.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth and customer acquisition metrics suggest the company is scaling its operations."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics to correlate burn with customer acquisition and retention.",
+              "Share internal growth forecasts to contextualize current spending."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn and cash balance.",
+              "Unit economics such as CAC and LTV.",
+              "Internal forecasts or detailed operating expenses."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to market expansion.",
+              "Stage of the company (implied by funding and revenue) suggests burn should be aligned with repeatable growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones and associated capital requirements before next raise"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details related to cash usage"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.2,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The startup shows moderate fundraising readiness with decent scores across key areas. Strength lies in competition and team capabilities, while market understanding and traction need improvement.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

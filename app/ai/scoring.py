@@ -173,6 +173,70 @@ def create_subscores(
     ]
 
 
+# Methodology V2.1 (Phase 10.8B, Part 11): confidence and score quality
+# answer different questions -- "how strong does this look" vs. "how
+# defensible is that judgment" -- and v2.0 kept them fully independent:
+# a Low-confidence, 15%-evidence-coverage Traction subscore could still
+# reach 8.0 and count in the weighted average exactly like a fully-
+# evidenced one. Phase 10.8's real-company validation and Phase 10.8A's
+# audit found this in production data (docs/validation/
+# SPS_DISCRIMINATION_AUDIT.md, Sections 10-11).
+#
+# This does not "multiply SPS by confidence" (explicitly rejected by
+# Part 11) and does not touch dimensions that are already within their
+# cap. It implements the "confidence remains separate but low-evidence
+# claims cannot reach high anchors" option: a High score is still
+# possible from thin evidence only up to a defensible ceiling; only
+# High-confidence evidence (which already requires >=80% pillar
+# coverage AND >=40% Observed-status weight, see
+# calculate_pillar_confidence below) can support a 9-10 dimension score.
+CONFIDENCE_SCORE_CAPS: dict[str, float] = {
+    "Low": 6.0,
+    "Medium": 8.5,
+    "High": 10.0,
+}
+
+
+def apply_confidence_score_cap(
+    subscores: list[Subscore],
+) -> list[Subscore]:
+    """
+    Deterministic post-processing step: no subscore may exceed the
+    defensible ceiling for its own (already-decided, Stage-1) confidence
+    level. Never raises a score, never touches score=None/Unavailable
+    dimensions, and never touches a score already at or below its cap.
+    """
+    capped: list[Subscore] = []
+
+    for subscore in subscores:
+        if subscore.score is None:
+            capped.append(subscore)
+            continue
+
+        cap = CONFIDENCE_SCORE_CAPS.get(subscore.confidence, 10.0)
+
+        if subscore.score <= cap:
+            capped.append(subscore)
+            continue
+
+        capped.append(
+            subscore.model_copy(
+                update={
+                    "score": cap,
+                    "score_corrected": True,
+                    "rationale": (
+                        f"[Confidence cap applied -- Methodology V2.1, Part 11] "
+                        f"Score reduced to {cap}, the maximum defensible score for "
+                        f"{subscore.confidence}-confidence evidence. "
+                        f"Original scoring rationale: {subscore.rationale}"
+                    ),
+                }
+            )
+        )
+
+    return capped
+
+
 def finalize_pillar_score(
     score_breakdown: PillarScoreBreakdown,
 ) -> PillarScoreBreakdown:

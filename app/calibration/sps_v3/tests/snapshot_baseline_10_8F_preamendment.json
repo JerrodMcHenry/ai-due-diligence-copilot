@@ -1,0 +1,1172 @@
+{
+  "A": {
+    "company_id": "SYNTH_EXCEPTIONAL_HIGH_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "83.9",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "9.5"
+      },
+      "capital_efficiency": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "commercial_validation": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_demand": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_value": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "execution_track_record_team": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "9.5"
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "gtm_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "8.5"
+      },
+      "revenue_quality": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": true,
+    "sps": "68.1"
+  },
+  "B": {
+    "company_id": "SYNTH_EXCEPTIONAL_MEDIUM_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "31.0",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "customer_adoption": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_demand": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_value": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "execution_track_record_team": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "growth_trajectory": {
+        "availability": "UNAVAILABLE_INSUFFICIENT",
+        "score": null
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "retention_engagement": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": false,
+    "sps": null
+  },
+  "C": {
+    "company_id": "SYNTH_EXCEPTIONAL_INSUFFICIENT_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "8.0",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "current_scale": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_adoption": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "growth_trajectory": {
+        "availability": "UNAVAILABLE_INSUFFICIENT",
+        "score": null
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "retention_engagement": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": false,
+    "sps": null
+  },
+  "D": {
+    "company_id": "SYNTH_ORDINARY_HIGH_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "48.0",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "commercial_validation": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "5.0"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "revenue_quality": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": true,
+    "sps": "56.7"
+  },
+  "E": {
+    "company_id": "SYNTH_WEAK_HIGH_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "43.8",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "5.0"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "founder_market_fit": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": true,
+    "sps": "45.0"
+  },
+  "F": {
+    "company_id": "SYNTH_WEAK_LOW_COVERAGE",
+    "confidence": "MEDIUM",
+    "coverage": "10.0",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "5.0"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "founder_market_fit": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "growth_trajectory": {
+        "availability": "UNAVAILABLE_INSUFFICIENT",
+        "score": null
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "retention_engagement": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": false,
+    "sps": null
+  },
+  "G": {
+    "company_id": "SYNTH_EXCEPTIONAL_PRE_SEED",
+    "confidence": "MEDIUM",
+    "coverage": "30.2",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "current_scale": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_adoption": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "execution_track_record_team": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "growth_trajectory": {
+        "availability": "UNAVAILABLE_INSUFFICIENT",
+        "score": null
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "retention_engagement": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": false,
+    "sps": null
+  },
+  "H": {
+    "company_id": "SYNTH_WEAK_GROWTH",
+    "confidence": "MEDIUM",
+    "coverage": "24.3",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "9.5"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "founder_market_fit": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "revenue_quality": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "strategic_execution": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "technical_capability": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": false,
+    "sps": null
+  },
+  "I": {
+    "company_id": "SYNTH_STRONG_FINHEALTH_UNAVAILABLE",
+    "confidence": "MEDIUM",
+    "coverage": "72.4",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      },
+      "commercial_validation": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_demand": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_value": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "execution_track_record_team": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "gtm_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "leadership": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_growth": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "8.5"
+      },
+      "revenue_quality": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": true,
+    "sps": "62.8"
+  },
+  "J": {
+    "company_id": "SYNTH_ABUNDANT_NEGATIVE",
+    "confidence": "MEDIUM",
+    "coverage": "49.7",
+    "dimensions": {
+      "adoption_potential": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "business_capability": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "capital_efficiency": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "commercial_validation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "competitive_intensity": {
+        "availability": "SCORABLE",
+        "score": "7.5"
+      },
+      "current_scale": {
+        "availability": "SCORABLE",
+        "score": "9.5"
+      },
+      "customer_adoption": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "customer_demand": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "customer_value": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "defensibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "differentiation": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "execution_track_record_team": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "founder_market_fit": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "growth_trajectory": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "gtm_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "leadership": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "market_growth": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "market_size": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "market_timing": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "operating_discipline": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_accessibility": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "product_execution": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "retention_engagement": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "revenue_quality": {
+        "availability": "SCORABLE",
+        "score": "2.0"
+      },
+      "strategic_execution": {
+        "availability": "UNAVAILABLE_NO_EVIDENCE",
+        "score": null
+      },
+      "technical_capability": {
+        "availability": "SCORABLE",
+        "score": "5.5"
+      },
+      "unit_economics": {
+        "availability": "UNAVAILABLE_PRIVATE_INFORMATION",
+        "score": null
+      }
+    },
+    "publishable": true,
+    "sps": "48.7"
+  }
+}

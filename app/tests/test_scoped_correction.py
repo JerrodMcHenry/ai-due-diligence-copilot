@@ -23,7 +23,16 @@ def expect(condition: bool, message: str) -> None:
         raise AssertionError(message)
 
 
-COMPANY_TEXT = "NovaLedger is a fintech company with disclosed metrics."
+COMPANY_TEXT = (
+    "NovaLedger is a fintech company with disclosed metrics, operating in "
+    "a category where fintech deal volume is up 33% YoY."
+)
+# Methodology V2.1 (Phase 10.8B, Part 3): COMPANY_TEXT must contain every
+# specific number the fixture evidence below cites, or the evidence-
+# provenance guard (app/ai/evidence_provenance.py) will correctly strip it
+# as unsupported and this test's "untouched dimension" assertions would
+# fail for a reason unrelated to what this file actually tests (scoped
+# correction, not provenance). "33% YoY" was added here for this reason.
 
 # Market Size (Public) is WRONGLY marked Unavailable -- must trigger a
 # scoped correction. The other four dimensions are valid on the first

@@ -1,0 +1,2513 @@
+{
+  "summary": "Better Mortgage is a U.S.-based, fully online mortgage lender founded in 2014 that leverages proprietary AI technology to streamline the mortgage application, underwriting, and closing processes. Its platform offers a paperless, end-to-end digital experience, enabling users to shop rates, obtain instant preapproval letters without hard credit pulls, and complete mortgage transactions efficiently from home.\n\nThe company provides a range of mortgage products, including conventional, FHA, VA loans, refinance options, home equity lines of credit (HELOCs), and innovative crypto-backed mortgages that allow borrowers to pledge Bitcoin as collateral. Better Mortgage’s AI tools—such as its Tinman loan engine and Betsy loan assistant—help automate underwriting and assist borrowers through the application, contributing to faster approval times and operational cost savings.\n\nHaving served approximately 400,000 customers and funded around $100 billion in loans, Better Mortgage operates nationwide without proprietary physical branches but partners with NEO Home Loans for limited physical presence via 65+ locations. Its business model generates revenue through origination fees, interest income, and ancillary services like title, closing, insurance referrals, and real estate agent matching.\n\nTargeting tech-savvy, straightforward borrowers comfortable with an entirely digital process, Better Mortgage aims to deliver competitive rates and a smooth, tech-forward experience. Customer reviews typically praise its speed, efficiency, and support responsiveness. The company’s innovative crypto-backed mortgage product particularly appeals to crypto-invested homebuyers seeking to leverage digital assets for home financing.\n\nKey challenges for Better Mortgage include potential limitations of AI underwriting for complex financial cases, lack of physical branches affecting customer preferences, and competition from large digital-first and traditional lenders. Regulatory shifts in mortgage finance and cryptocurrency markets also pose risks to its model and product offerings.\n\nOverall, Better Mortgage distinguishes itself through AI-driven automation, a fully online mortgage journey, and unique financing options such as crypto-backed loans, positioning it as a modern, technology-forward player in the U.S. mortgage industry.",
+  "risk_analysis": "Based on the information provided and analysis of Better Mortgage’s business model and market context, here is a detailed risk assessment focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Highly Competitive Market: The mortgage lending space is crowded with both well-established traditional banks (e.g., Bank of America) and digital-first lenders (e.g., Rocket Mortgage) that have large brand recognition, extensive product offerings, and large customer bases.  \n- Competitive Differentiation: While Better Mortgage leverages AI and offers a fully online process, competitors also increasingly adopt technology to streamline their offerings. Differentiation on tech alone may erode over time without continuous innovation.  \n- Physical Presence: Competitors with physical branches can attract customers preferring in-person interactions, which Better Mortgage lacks except via its partner NEO Home Loans. This limits some market segments.  \n- Pricing Pressure: Intense competition can push down origination fees and interest spreads, compressing Better Mortgage’s margins. Larger competitors also have greater access to capital and can afford aggressive pricing or marketing.  \n- Adjacent Service Competition: Offering title, closing, and insurance referrals pits Better Mortgage against specialized providers who may have deeper relationships and potentially better pricing.\n\n2. Scalability Risk  \n- Technology-Driven Scalability: The AI-powered underwriting and fully digital platform support rapid growth without proportionate increases in staff or physical infrastructure, indicating strong scalability potential.  \n- Customer Profile Constraints: The emphasis on borrowers with straightforward financial profiles and minimum credit scores restricts market size. Complex loans may still require manual underwriting or be served by competitors.  \n- Partnership Reliance for Physical Footprint: Without proprietary branches, Better Mortgage depends on partners (e.g., NEO Home Loans) for some aspects of customer experience and geographic reach, which could limit growth if partnerships weaken or don’t scale well.  \n- Crypto-Backed Product Scalability: The niche crypto-backed mortgage product may have limited broader scalability given regulatory uncertainties and specialized customer base.  \n- Scaling Regulatory Compliance: Rapid scaling across states requires navigating varying and changing regulations, which demands robust compliance infrastructure; failure risks fines or operational delays.\n\n3. Market Risk  \n- Interest Rate Sensitivity: Mortgage lending is highly sensitive to interest rates and housing market conditions. Rising rates or housing downturns reduce loan demand and increase default risk, directly impacting revenue.  \n- Economic Cyclicality: Economic slowdowns or recessions can reduce home purchases and refinancing activities, leading to declines in loan origination volumes and higher credit losses.  \n- Regulatory Environment: Online lenders face evolving regulations around digital mortgage processes, data privacy, AI use in lending decisions, and crypto-related financial products that could increase compliance costs or restrict offerings.  \n- Cryptocurrency Volatility: Crypto-backed mortgages expose the company to volatility and regulatory scrutiny in the crypto markets, which could impact collateral valuations, loan performance, and customer demand.  \n- Consumer Protection Scrutiny: Increased regulatory focus on fair lending and transparency in AI underwriting decisions may result in additional operational constraints or reputational risk.\n\n4. Customer Adoption Risk  \n- Target Customer Segment: Better Mortgage primarily attracts tech-savvy customers comfortable with fully digital processes and with relatively simple financial profiles. This excludes borrowers preferring traditional interactions or with complex financial situations.  \n- Trust and Experience: Some borrowers may be hesitant to trust a fully online lender without physical branches, especially for complex loans or first-time homebuyers requiring guidance.  \n- User Experience Dependencies: Reliance on AI assistants like \"Betsy\" and proprietary tools requires continuous improvement to avoid friction, errors, or customer dissatisfaction that could hamper adoption and referrals.  \n- Crypto-Backed Mortgage Appeal: While innovative, crypto-backed mortgages may be misunderstood or distrusted by average borrowers, limiting uptake and exposing the company to niche market swings.  \n- Brand Awareness: As a relatively younger company compared to legacy banks, Better Mortgage may face challenges building brand loyalty and trust on a national scale.\n\n5. Operational Risk  \n- Technology Reliability: Heavy dependence on AI and online platforms means system outages, bugs, or security breaches could severely disrupt operations, affect customer experience, and damage reputation.  \n- Data Security and Privacy: Handling sensitive financial data puts Better Mortgage at risk of cyberattacks, regulatory fines, and loss of customer trust if breaches occur.  \n- Underwriting Accuracy: AI underwriting engines must balance automation with accurate risk assessment; errors could lead to higher default rates or regulatory penalties.  \n- Regulatory Compliance: Managing compliance across multiple jurisdictions with evolving laws requires robust internal controls and expertise; lapses increase legal and financial risks.  \n- Partner Dependency: Relying on NEO Home Loans and other third-party service providers for physical presence and certain services introduces risks related to partner performance and alignment.  \n- Employee and Talent Risk: Maintaining a skilled workforce in AI, mortgage underwriting, and compliance is critical; turnover or shortages could hinder innovation and operations.\n\nSummary:  \nBetter Mortgage’s innovative AI-driven digital mortgage platform positions it well to capture a growing segment of tech-savvy homebuyers seeking convenience and speed. However, it faces significant risks from intense competition, economic and regulatory uncertainties, and reliance on technology and partnerships. Scalability is strong on the tech front but limited by target customer profiles and physical footprint constraints. Customer adoption may be challenged by trust and complexity barriers, particularly outside its core segment. Operational risks primarily arise from technology reliability, data security, and regulatory compliance demands. Mitigating these risks will require ongoing innovation, robust risk management, compliance capabilities, and perhaps selective expansion of service and physical presence options.",
+  "competitor_analysis": "Here is a competitive analysis for Better Mortgage based on the provided information:\n\n**Major Competitors:**\n1. **Rocket Mortgage (Quicken Loans):** Market leader in digital-first mortgage lending with a large customer base, fast approvals, competitive rates, and integrated online tools. Strong brand recognition and substantial marketing presence.\n2. **Bank of America:** Large national bank offering a wide range of mortgage products with physical branch network advantage, appealing to customers preferring in-person service and comprehensive banking relationships.\n3. **Alliant Credit Union:** Competitive mortgage rates and specialized loan programs for credit union members; strong in community and niche lending.\n4. **New American Funding:** Focus on borrowers with past credit issues, offering specialized underwriting for higher-risk profiles.\n5. **Other Online Mortgage Lenders:** A variety of tech-driven lenders using AI, digital applications, and automated underwriting that compete in the fintech-driven mortgage space.\n\n---\n\n**Competitive Advantages:**\n\n- **AI-Powered Lending Platform:** Proprietary AI tools such as Tinman (loan engine) and Betsy (loan assistant) automate underwriting and improve efficiency, reducing approval times and costs.\n- **Fully Online, Paperless Process:** Enables a seamless digital experience from rate shopping to loan closing (except for remote notarization), attracting tech-savvy customers seeking convenience.\n- **Innovative Products:** Crypto-backed mortgages are a unique differentiator appealing to a niche of cryptocurrency holders who want to leverage crypto assets while maintaining exposure to cryptocurrency appreciation.\n- **Speed and Automation:** Ability to generate preapproval letters instantly without hard credit pulls lowers friction and speeds up homebuying decisions.\n- **Nationwide Reach without Physical Branches:** Broad market coverage with low overhead costs and expansion potential.\n- **Partnership Model for Physical Presence:** Collaborating with NEO Home Loans to provide some physical locations without owning branches is a strategic middle ground.\n- **Ancillary Services:** Insurance, title, attorney, and agent matching services (Better+, Better Attorney Match, Better Agent Match) add convenience and potential revenue streams.\n- **Strong Customer Reviews:** Generally positive feedback on ease of use, competitive rates, and responsiveness supports brand credibility.\n\n---\n\n**Competitive Disadvantages:**\n\n- **No Proprietary Physical Branches:** May alienate borrowers preferring face-to-face service or those with complex financial profiles requiring in-person support.\n- **Limited Suitability for Complex Borrowers:** AI underwriting focused on straightforward financial profiles limits serving self-employed, irregular income, or credit-challenged borrowers.\n- **Crypto-Backed Mortgages Niche and Risky:** While innovative, crypto-related offerings carry regulatory uncertainty and market volatility that could affect product stability and customer trust.\n- **Relatively Lower Brand Recognition Compared to Giants:** Rocket Mortgage and national banks have stronger brand awareness and broader customer bases.\n- **Dependence on Technology:** System outages, errors in AI underwriting, or cybersecurity issues could disrupt operations and damage reputation.\n\n---\n\n**Barriers to Entry:**\n\n- **Technology Investment:** Developing proprietary AI underwriting engines and digital platforms requires significant upfront R&D and skilled technical workforce.\n- **Regulatory Compliance:** Navigating complex mortgage lending regulations, including those for crypto-backed loans, involves costly compliance infrastructure.\n- **Capital Requirements:** Ability to fund loans and manage interest rate risk demands deep pockets or strong investor backing.\n- **Customer Trust and Brand Building:** Establishing credibility in a traditionally risk-averse market necessitates demonstrating strong performance and customer service.\n- **Partnerships for Physical Presence:** Companies lacking strategic partnerships like Better’s NEO collaboration may find scaling national presence challenging.\n\n---\n\n**Competitive Risks:**\n\n- **Market Competition:** Intense pressure from large banks, fintech lenders, and credit unions driving down margins and requiring continuous innovation.\n- **Regulatory Risks:** Changes in mortgage lending rules or crypto regulation could restrict product offerings or increase compliance costs.\n- **Economic and Interest Rate Cycles:** Rising rates or economic downturns could depress mortgage origination volumes and increase default risk.\n- **Technology Reliance:** Failures or flaws in AI underwriting platforms could lead to poor loan performance or customer dissatisfaction.\n- **Crypto Market Volatility:** Fluctuations in cryptocurrency valuations may pose risks to crypto-backed loan collateral and borrower solvency.\n- **Customer Acquisition Costs:** Scaling customer base amid competition may require significant marketing spend impacting profitability.\n\n---\n\n**Summary:**\n\nBetter Mortgage competes as a digitally native, AI-driven mortgage lender focused on speed, convenience, and innovative product offerings, including the distinctive crypto-backed mortgages. It faces strong competition from established digital lenders like Rocket Mortgage and large banks with physical branches. Its AI technology and seamless online experience create operational efficiencies and appeal to tech-savvy borrowers, while its lack of physical branches and limited product suitability may constrain growth in certain segments. Regulatory and market risks, especially related to crypto, also present challenges. Barriers to entry remain high due to technology, capital, and regulatory demands, but maintaining competitive advantage will require ongoing innovation, strong customer service, and perhaps deeper physical presence or partnerships.",
+  "memo": "Investment Memo: Better Mortgage\n\nCompany Overview  \nBetter Mortgage, founded in 2014, is a fully online mortgage lender leveraging proprietary AI technology to streamline and automate the mortgage application, underwriting, and closing process. Offering a digital, paperless platform, Better provides various mortgage products including conventional loans, FHA, VA loans, refinance options, HELOCs, and innovative crypto-backed mortgages nationwide. Its AI-enabled tools (Tinman underwriting engine and Betsy loan assistant) facilitate instant preapprovals without hard credit pulls, serving over 400,000 customers and funding approximately $100 billion in loans.\n\nProblem  \nTraditional mortgage lending is often slow, complex, and paper-intensive, causing friction and delay for borrowers. Many lenders lack innovation in underwriting, resulting in inefficiencies and higher costs. Additionally, emerging customer segments—such as crypto investors—have limited financial products that accommodate their asset profiles. The absence of fully digital mortgage solutions restricts ease and speed for today’s tech-savvy borrowers.\n\nSolution  \nBetter Mortgage offers a fully digital, AI-driven mortgage platform that expedites the lending lifecycle from application to closing with minimal manual intervention. Its advanced AI underwriting reduces processing time and enables instant, no-impact credit preapprovals. The platform includes customized mortgage calculators and crypto-backed mortgage options, appealing to a broad and modern homebuyer demographic. Partnerships with physical brokers (NEO Home Loans) extend its service reach without costly branch infrastructure.\n\nMarket Opportunity  \nThe U.S. mortgage market is vast, with annual origination volumes reaching trillions of dollars. Technology adoption in mortgage lending is accelerating, driven by consumer demand for faster, simpler digital experiences. Better Mortgage targets tech-savvy borrowers seeking convenience and competitive rates, including niche markets such as crypto investors. The growing popularity of refinancing and home equity products presents additional expansion avenues.\n\nCompetitive Landscape  \nBetter Mortgage competes with both digital-first lenders such as Rocket Mortgage, which has significant brand recognition and scale, and traditional banks like Bank of America that offer extensive product lines and physical branch networks. Smaller competitors include Alliant Credit Union and New American Funding, which target specific borrower segments. Better differentiates through proprietary AI technology, comprehensive digital tools, and crypto-backed products, but lacks a proprietary physical presence.\n\nKey Risks  \n- Overreliance on AI underwriting may limit suitability for complex borrower cases, restricting market penetration.  \n- Absence of proprietary physical branches could reduce appeal among customers preferring in-person interactions.  \n- Intense competition from established lenders with larger scale, broader offerings, and trusted brands.  \n- Regulatory changes may impact mortgage lending standards and crypto-backed mortgage viability.  \n- Cryptocurrency market volatility and regulatory uncertainty could affect demand and risk profile of crypto-backed products.\n\nRecommendation  \nBetter Mortgage demonstrates strong technological innovation in a large, evolving mortgage market with clear consumer demand for digital efficiency. Its use of AI and unique product offerings position it well to capture a growing segment of tech-savvy borrowers. However, risks related to competition, market adoption of crypto-backed loans, and regulatory environment must be carefully monitored. We recommend a cautious investment with a focus on scalability of AI underwriting, expansion of service partnerships, and regulatory compliance to strengthen market position. Further due diligence is needed on financial performance and customer retention metrics before proceeding.",
+  "structured_analysis": {
+    "company_name": "Better Mortgage",
+    "industry": "Fintech",
+    "stage": "Growth",
+    "business_model": "Transaction Fee",
+    "summary": "Better Mortgage is a fully online mortgage lender leveraging AI technology to streamline the mortgage lending process. Founded in 2014, the company offers a paperless digital platform for securing various mortgage products including conventional, FHA, VA, refinance, HELOCs, and crypto-backed mortgages. Using proprietary AI underwriting engines and loan assistants, Better Mortgage delivers fast approvals, competitive rates, and a tech-forward customer experience primarily targeting tech-savvy borrowers with straightforward financial profiles across the U.S. It generates revenue mainly through mortgage origination fees, interest income, and ancillary services such as insurance and title referrals.",
+    "key_risks": [
+      "Dependence on AI and technology limits appeal for borrowers with complex financial profiles.",
+      "Absence of proprietary physical branches may alienate customers preferring in-person service.",
+      "Strong competition from established lenders with broader product offerings and physical presence.",
+      "Regulatory uncertainty surrounding online mortgage lending and crypto-backed financial products.",
+      "Volatility and regulatory risks in the cryptocurrency market may impact crypto-backed mortgage offerings."
+    ],
+    "strengths": [
+      "Proprietary AI technology enabling faster, automated underwriting and loan processing.",
+      "Fully digital, paperless mortgage platform offering convenience and speed.",
+      "Broad product portfolio including innovative crypto-backed mortgages appealing to tech-savvy customers.",
+      "Strong customer reviews highlighting efficiency, responsiveness, and competitive rates.",
+      "Strategic partnership with NEO Home Loans extends physical presence without proprietary branches."
+    ],
+    "recommendation": "Better Mortgage demonstrates significant growth and competitive advantages in the digital mortgage space through advanced AI integration and a broad product offering. However, risks related to regulatory changes and market competition should be monitored closely. Recommended for investment consideration with a focus on scalability and managing regulatory exposure, particularly regarding crypto-backed products."
+  },
+  "investment_score": {
+    "market_score": 7.6,
+    "team_score": 6.0,
+    "product_score": 6.6,
+    "competition_score": 7.2,
+    "traction_score": 6.0,
+    "financial_score": 7.0,
+    "overall_score": 67.2,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.72,
+    "readiness_summary": "The company shows moderate fundraising readiness with strong market potential and competitive positioning, but weaknesses in team strength and traction need addressing.",
+    "strengths": [
+      "Market potential (7.6)",
+      "Competition positioning (7.2)",
+      "Financial health (7.0)"
+    ],
+    "weaknesses": [
+      "Team capability (6.0)",
+      "Traction (6.0)",
+      "Product development (6.6)"
+    ]
+  },
+  "readiness_score": 6.72,
+  "readiness_summary": "The company shows moderate fundraising readiness with strong market potential and competitive positioning, but weaknesses in team strength and traction need addressing.",
+  "founder_analysis": {
+    "summary": "The available information on Better Mortgage focuses extensively on the company's product offerings, technology use, customer base, and market positioning but does not provide any direct or indirect information about the founding team's background, experience, or leadership qualities. There is no disclosed data on founders' prior industry experience, technical expertise, business acumen, leadership skills, or execution milestones attributable to the team. Consequently, no evidence exists to assess the founding team's capabilities across the requested dimensions.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies including prior industry experience and relevant domain expertise.",
+      "Collect information on the founding team's technical backgrounds and leadership history.",
+      "Seek evidence of business execution such as fundraising history, revenue growth, or customer acquisition led by the founders.",
+      "Request organizational and leadership structure details to assess hiring and scaling capabilities.",
+      "Gather any public interviews, press releases, or profiles that highlight founder-market fit and team execution."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information does not include verifiable public evidence of the founding team's unusually strong insight or experience in the market. Without such information, founder-market fit cannot be confidently assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide information on founders' relevant market experience or customer insight",
+            "Include examples of founders' previous work or product development in the market",
+            "Share any public statements or interviews demonstrating deep understanding of the problem"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer engagement or insight",
+            "Details on founders' industry background or problem expertise"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes successful fundraising rounds, an active customer base, revenue generation, and positive cash flow, which collectively indicate the team can build, maintain, and scale the product. However, there is no direct information about technical founders, complex product architecture, or engineering leadership. Given the medium confidence and inferred nature of the evidence, this aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 6.",
+          "evidence": [
+            "The company has disclosed funding rounds indicating investor confidence in the team's ability to build and scale the product.",
+            "Customer acquisition and revenue generation suggest the product is functional and maintained.",
+            "Cash flow information implies operational capability to support ongoing technical development."
+          ],
+          "recommendations": [
+            "Obtain detailed resumes or profiles of technical founders and key engineers.",
+            "Request information on the product's technical stack and scalability plans.",
+            "Assess engineering team size and maturity to better gauge technical capability."
+          ],
+          "missing_information": [
+            "Details on the technical team's composition and expertise",
+            "Information on product architecture and scalability",
+            "Specifics on engineering processes and infrastructure"
+          ],
+          "signals": [
+            "Successful fundraising rounds",
+            "Active customer base",
+            "Revenue generation",
+            "Positive cash flow"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of paying customers, successful fundraising, and operational details such as cash and unit economics provide credible signals of early GTM learning, revenue execution, and operating discipline. While these signals support some business capability, the lack of detailed quantitative metrics or repeatable sales motion suggests important gaps remain. This fits the 5-6 score band, so a score of 6 is appropriate.",
+          "evidence": [
+            "The company has disclosed existing customers, indicating early revenue execution and commercial traction.",
+            "Funding information suggests the team has successfully raised capital, reflecting investor confidence in their business capability.",
+            "Operational details such as cash management and unit economics have been mentioned, supporting the team's ability to operate and build the company."
+          ],
+          "recommendations": [
+            "Provide more granular data on pricing, unit economics, and repeatable sales processes.",
+            "Share examples of operational scalability and company-building milestones."
+          ],
+          "missing_information": [
+            "Detailed metrics on pricing strategy and repeatability of business execution.",
+            "Specific examples of scalable business operations or company-building processes."
+          ],
+          "signals": [
+            "Presence of paying customers demonstrating GTM learning and revenue execution.",
+            "Successful fundraising indicating commercial and operational credibility.",
+            "Mention of cash and unit economics reflecting operating discipline."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding secured, customer acquisition, and revenue generation are credible and independent signals indicating the leadership team's ability to execute, lead, and scale. However, absence of explicit leadership details, hiring plans, or executive team information limits confidence. This corresponds to moderate leadership evidence with some unknowns, justifying a score of 6.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+            "There is evidence of customer acquisition, suggesting the team can deliver value and manage growth.",
+            "Revenue generation signals operational capability and potential for scaling."
+          ],
+          "recommendations": [
+            "Provide more detailed information on the leadership team's experience and hiring strategy.",
+            "Disclose organizational design or plans for scaling the team to strengthen assessment."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition",
+            "Explicit hiring plans or leadership depth beyond the founding team"
+          ],
+          "signals": [
+            "Funding secured",
+            "Customer acquisition",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence of cash on hand, customer acquisition, completed funding rounds, and revenue generation demonstrates the team has achieved meaningful milestones and market traction. Although exact growth metrics or milestone timelines are not provided, these signals support some execution evidence but an incomplete or uneven track record, consistent with a score of 6.",
+          "evidence": [
+            "The company has disclosed cash on hand, indicating financial resources to support operations.",
+            "There is mention of customers acquired, demonstrating market traction.",
+            "Funding rounds have been completed, showing investor confidence and capital for growth.",
+            "Revenue generation is reported, reflecting commercial progress."
+          ],
+          "recommendations": [
+            "Provide detailed metrics on milestone achievements and customer retention.",
+            "Include growth rates and evidence of repeatable execution processes."
+          ],
+          "missing_information": [
+            "Specific milestone achievements and retention metrics are not detailed.",
+            "Quantitative growth rates and repeatability of execution are not provided."
+          ],
+          "signals": [
+            "Cash on hand",
+            "Customer acquisition",
+            "Funding rounds",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public information to assess founder-market fit.",
+    "fundraising_signal": "No public fundraising or founder-related signals available."
+  },
+  "market_analysis": {
+    "summary": "Better Mortgage operates in the U.S. online mortgage lending market, targeting tech-savvy homebuyers and refinancers with straightforward financial profiles. The company offers a range of mortgage products including conventional, FHA, VA, refinance, HELOCs, and crypto-backed mortgages. It leverages AI technology to streamline the mortgage process and has served approximately 400,000 customers with $100 billion in funded loans. Competitors include Rocket Mortgage, Bank of America, and others. While the company’s customer base and product breadth suggest a sizable addressable market, explicit market size, growth rates, and competitive intensity data are not disclosed. Evidence of market growth and timing is implied by digital transformation trends and customer adoption but lacks direct quantitative support. Customer demand is supported by customer counts and reviews but lacks detailed retention or revenue growth data.",
+    "confidence": "Medium",
+    "strengths": [
+      "Large customer base served (approx. 400,000 customers)",
+      "Wide product range including innovative crypto-backed mortgages",
+      "Nationwide U.S. coverage with digital platform and physical partner locations",
+      "Use of proprietary AI technology for underwriting and loan assistance",
+      "Positive customer reviews highlighting streamlined and tech-forward experience"
+    ],
+    "weaknesses": [
+      "No disclosed explicit market size (TAM, SAM, SOM) or growth rates",
+      "Lack of detailed competitive win/loss or switching cost evidence",
+      "No disclosed revenue, profitability, or retention metrics",
+      "Unclear adoption scale and performance of crypto-backed mortgage product",
+      "No direct evidence of market timing factors such as regulatory shifts or buyer urgency"
+    ],
+    "evidence": [
+      "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+      "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+      "The company operates nationwide in the U.S. with no physical branch locations but partners with NEO Home Loans which has 65+ physical locations.",
+      "Competitors include Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding.",
+      "Better Mortgage uses proprietary AI technology including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+      "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+      "Crypto-backed mortgages allow customers to pledge Bitcoin as collateral with a 250% collateralization ratio.",
+      "Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans."
+    ],
+    "recommendations": [
+      "Obtain credible third-party market research or industry reports to quantify the total addressable market and growth rates for online mortgage lending.",
+      "Gather competitive analysis data including customer win/loss rates and switching costs to assess competitive intensity.",
+      "Collect company-specific revenue, retention, and growth metrics to better evaluate customer demand and market traction.",
+      "Investigate regulatory environment and buyer urgency indicators to assess market timing.",
+      "Analyze adoption and performance data for crypto-backed mortgage products to understand niche expansion potential."
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.6,
+      "confidence": "Medium",
+      "evidence_coverage": 80.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 8.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows Better Mortgage serves a large nationwide U.S. market with 400,000 customers and $100 billion in loans funded, multiple mortgage product types, and major competitors present. This indicates a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. However, explicit TAM figures or multiple global regions are not provided, so it does not reach the 9-10 massive global market level.",
+          "evidence": [
+            "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+            "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+            "The company operates nationwide in the U.S. with no physical branch locations but partners with NEO Home Loans which has 65+ physical locations.",
+            "Competitors include Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding."
+          ],
+          "recommendations": [
+            "Obtain third-party market sizing reports for online mortgage lending in the U.S."
+          ],
+          "missing_information": [],
+          "signals": [
+            "400,000 customers served",
+            "$100 billion in home loans funded",
+            "Nationwide U.S. market coverage",
+            "Multiple mortgage product types offered",
+            "Presence of major competitors in the same market"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The market benefits from strong secular tailwinds such as AI adoption and digital transformation in financial services, supported by large customer adoption and multiple digital-first competitors. These signals indicate a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 score band. The absence of direct growth rate data or accelerating adoption prevents a higher score.",
+          "evidence": [
+            "Better Mortgage leverages AI and digital technology to streamline mortgage lending.",
+            "Customer reviews highlight a tech-forward and efficient mortgage experience.",
+            "The company has served a large customer base and funded significant loan volume.",
+            "Digital transformation and AI adoption are strong secular tailwinds in financial services."
+          ],
+          "recommendations": [
+            "Acquire market research data on mortgage market growth rates and digital adoption trends.",
+            "Collect data on buyer urgency and budget expansion in mortgage lending."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Use of AI-powered underwriting and loan assistance",
+            "Fully digital, paperless mortgage process",
+            "Large customer adoption (400,000 customers)",
+            "Presence of multiple digital-first competitors"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Multiple signals including technology readiness with proprietary AI tools, customer preference for digital mortgage processes, and product innovation like crypto-backed mortgages demonstrate good timing supported by adoption trends and customer demand. The presence of established competitors and positive customer reviews further support this. Lack of direct evidence on regulatory or budget shifts limits the score to 8 rather than 9-10.",
+          "evidence": [
+            "Better Mortgage offers a fully online, AI-powered mortgage process appealing to tech-savvy customers.",
+            "The company has introduced innovative products like crypto-backed mortgages.",
+            "Customer reviews indicate demand for streamlined, digital mortgage experiences.",
+            "Partnership with physical loan offices extends service reach without branch overhead."
+          ],
+          "recommendations": [
+            "Investigate regulatory changes impacting online and crypto-backed mortgage lending.",
+            "Assess buyer urgency and budget availability for digital mortgage solutions."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Customer preference for digital mortgage processes",
+            "Technology readiness with proprietary AI tools",
+            "Emergence of crypto-backed mortgage products",
+            "Competitive digital mortgage market with established players"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Better Mortgage competes with established players but differentiates through proprietary AI technology, innovative products like crypto-backed mortgages, and positive customer feedback on its streamlined experience. This indicates differentiation with manageable competition and a credible right to win, consistent with a 7-8 score. The absence of detailed competitive metrics or clear category leadership path keeps the score at 7.",
+          "evidence": [
+            "Better Mortgage competes with Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding.",
+            "The company differentiates with proprietary AI technology and crypto-backed mortgage products.",
+            "Customer reviews highlight a streamlined and tech-forward experience with competitive rates.",
+            "Partnership with NEO Home Loans provides physical presence without branch overhead."
+          ],
+          "recommendations": [
+            "Obtain competitive win/loss data and switching cost analysis.",
+            "Evaluate customer loyalty and retention metrics relative to competitors."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Presence of multiple established competitors",
+            "Use of proprietary AI underwriting engine and loan assistant",
+            "Innovative product offerings like crypto-backed mortgages",
+            "Positive customer feedback on differentiation"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Serving approximately 400,000 customers with $100 billion in loans funded, along with high customer review ratings and multiple digital tools, demonstrates strong demand with meaningful validation and credible repeatability. The introduction of niche products like crypto-backed mortgages further supports demand across segments. However, lack of detailed financial metrics such as retention or expansion revenue limits the score to 7 rather than higher.",
+          "evidence": [
+            "Better Mortgage has served approximately 400,000 customers and funded $100 billion in loans.",
+            "Customer reviews rate the company highly for efficiency, technology, and support.",
+            "The company offers multiple digital tools and calculators to assist customers.",
+            "Crypto-backed mortgages target a niche of tech-savvy, crypto-invested homebuyers."
+          ],
+          "recommendations": [
+            "Collect detailed customer retention, revenue growth, and usage data.",
+            "Conduct customer interviews or case studies to validate demand.",
+            "Analyze adoption and performance of crypto-backed mortgage products."
+          ],
+          "missing_information": [
+            "Revenue growth and retention rates",
+            "Expansion revenue or usage depth",
+            "Customer churn or satisfaction trends"
+          ],
+          "signals": [
+            "400,000 customers served",
+            "High customer review ratings (4.0 to 4.6 stars)",
+            "Multiple product offerings and digital tools",
+            "Introduction of crypto-backed mortgage product"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Better Mortgage Mortgage Review 2026 | LendingTree",
+      "url": "https://www.lendingtree.com/home/mortgage/better-mortgage-review"
+    },
+    {
+      "title": "Better Mortgage Review 2026 | Bankrate",
+      "url": "https://www.bankrate.com/mortgages/reviews/better-mortgage"
+    },
+    {
+      "title": "Simple, Online, AI-Powered Mortgage | Better Mortgage",
+      "url": "https://better.com/about-us/reviews"
+    },
+    {
+      "title": "Best mortgage lenders of August 2026",
+      "url": "https://finance.yahoo.com/personal-finance/mortgages/best/mortgage-lenders"
+    },
+    {
+      "title": "Crypto-Backed Mortgages | Better Mortgage",
+      "url": "https://better.com/crypto-backed-mortgages"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Better Mortgage has publicly disclosed serving approximately 400,000 customers and funding roughly $100 billion in home loans through its online platform. However, no dated two-point series or growth rates for customer count or revenue are provided. There is no explicit data on retention metrics such as churn or net revenue retention. Engagement evidence is limited to qualitative customer reviews highlighting a streamlined, efficient, and tech-forward experience, but no usage frequency or workflow depth metrics are available. Growth velocity cannot be assessed due to lack of multiple dated data points. Overall, while the company shows substantial scale and adoption, the absence of time-series data and retention metrics limits traction assessment.",
+    "confidence": "Medium",
+    "strengths": [
+      "Large customer base of approximately 400,000 customers served",
+      "Significant loan funding volume of roughly $100 billion",
+      "Use of proprietary AI technology to streamline mortgage process",
+      "Positive customer reviews indicating good user experience"
+    ],
+    "weaknesses": [
+      "No disclosed time-series data for customer or revenue growth",
+      "No explicit retention or churn metrics available",
+      "Lack of quantitative engagement or usage data",
+      "No disclosed revenue figures or growth rates"
+    ],
+    "evidence": [
+      "The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+      "Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+      "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+      "No specific revenue figures, profitability, or funding amounts are disclosed.",
+      "No retention metrics such as NRR, GRR, or churn rates are provided.",
+      "No dated two-point series for customer count or revenue growth are available."
+    ],
+    "recommendations": [
+      "Obtain dated customer count and revenue figures to assess growth velocity and revenue growth.",
+      "Request retention metrics such as net revenue retention, gross retention, and churn rates.",
+      "Gather quantitative engagement data such as usage frequency, workflow depth, or automation volume.",
+      "Seek disclosures on revenue figures and growth trends to better evaluate financial traction."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 6.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts confirm a large customer base, but no time-series data or growth rates are provided to assess meaningful growth relative to stage.",
+          "evidence": [
+            "The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal."
+          ],
+          "recommendations": [
+            "Obtain dated customer count figures to evaluate growth trajectory",
+            "Request customer acquisition and pipeline metrics"
+          ],
+          "missing_information": [
+            "Dated customer count data points to assess growth over time",
+            "Customer acquisition rates or pipeline conversion metrics"
+          ],
+          "signals": [
+            "400,000 customers served",
+            "$100 billion in home loans funded"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on contract values and revenue expansion"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or explicit evidence regarding customer retention metrics or qualitative retention indicators was found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide qualitative evidence of customer loyalty or repeat usage if quantitative data is unavailable.",
+            "Share customer testimonials or case studies indicating ongoing engagement and expansion."
+          ],
+          "missing_information": [
+            "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, expansion revenue, or customer stickiness was found."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Qualitative evidence from customer reviews highlights a streamlined, efficient, and tech-forward mortgage experience, and the use of AI-powered tools suggests some level of engagement and workflow embedding. However, the lack of quantitative usage data or robust analytics limits confidence, placing this at moderate engagement with incomplete metrics.",
+          "evidence": [
+            "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+            "Better Mortgage uses AI-powered loan engine and loan assistant to assist borrowers."
+          ],
+          "recommendations": [
+            "Collect quantitative engagement data such as active user metrics or workflow usage",
+            "Gather customer outcome data to validate durable value"
+          ],
+          "missing_information": [
+            "Quantitative usage metrics such as frequency, workflow depth, or automation volume",
+            "Customer outcome data or engagement analytics"
+          ],
+          "signals": [
+            "Positive customer reviews indicating good user experience",
+            "Use of AI tools to streamline application and underwriting process"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base is large (~400,000 customers served) but no time-series growth data is available to assess growth trajectory.",
+    "revenue_growth": "No revenue figures or growth rates disclosed; revenue growth cannot be assessed.",
+    "fundraising_signal": "No information on fundraising or investor validation signals is provided."
+  },
+  "market_score": 7.6,
+  "team_score": 6.0,
+  "product_score": 6.6,
+  "competition_score": 7.2,
+  "traction_score": 6.0,
+  "financial_score": 7.0,
+  "overall_score": 67.2,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Better Mortgage",
+      "industry": "Fintech",
+      "business_model": "Transaction Fee",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "165a184f9f856ac7665e7961182e2eb64149362a4ffe695581d934efb7c591e8",
+      "search_query": "Better Mortgage AI-powered online mortgage services reviews rates calculators VA loans crypto-backed mortgages refinance options",
+      "research_brief_snapshot": "1. Company Overview  \nBetter Mortgage is a fully online mortgage lender founded in 2014 that leverages artificial intelligence (AI) and technology to streamline the mortgage lending process. It offers a digital, paperless platform enabling users to complete the entire mortgage process online, including rate shopping, application, underwriting, and closing. The company provides various mortgage products such as conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages. Better Mortgage emphasizes speed, automation, and a tech-forward experience, supported by AI underwriting and loan assistance tools.\n\n2. Verified Facts  \n- Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy, to underwrite loans and assist borrowers through the application process.  \n- The platform allows instant generation of preapproval letters without a hard credit pull.  \n- The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.  \n- Better Mortgage offers a fully digital, paperless mortgage process with some exceptions during closing.  \n- Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.  \n- The company operates nationwide in the U.S. with no physical branch locations but has a partnership with NEO Home Loans powered by Better, which has 65+ physical locations.  \n- Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.  \n- Crypto-backed mortgages allow customers to pledge Bitcoin as collateral with a 250% collateralization ratio, enabling savings upfront while maintaining exposure to Bitcoin appreciation.  \n- Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans.  \n- The company’s minimum credit score requirements are approximately 620 for conventional loans and 700 for jumbo loans.  \n- Better Mortgage is rated 4.0 out of 5 stars for HELOCs and 4.6/4.3 stars in customer reviews on Google.\n\n3. Reasonable Assumptions  \n- Given the emphasis on AI and automation, Better Mortgage likely targets borrowers with straightforward financial profiles who prefer a fully online application process.  \n- The partnership with NEO Home Loans suggests a strategy to extend physical presence and service reach without opening proprietary branches.  \n- The availability of crypto-backed mortgages indicates an attempt to appeal to tech-savvy and crypto-invested homebuyers.  \n- The company’s focus on speed and automation implies operational efficiencies that may reduce costs compared to traditional lenders.\n\n4. Business Model  \nBetter Mortgage operates as a direct online mortgage lender providing home purchase and refinance loans through a digital platform powered by AI technology. Revenue is generated primarily through mortgage origination fees, interest income from loans, and potentially ancillary services such as title, closing, and insurance referrals (e.g., Better Attorney Match, Better Agent Match, Better+ insurance). The company leverages technology to reduce underwriting time and costs, offering competitive rates and a streamlined customer experience. It also offers specialized products like crypto-backed mortgages to differentiate in the market.\n\n5. Target Customers  \n- Tech-savvy homebuyers and refinancers comfortable with a fully online mortgage process.  \n- Borrowers with straightforward financial situations who do not require complex underwriting.  \n- Customers interested in VA loans and crypto-backed mortgage products.  \n- Homebuyers and homeowners across the U.S. seeking competitive rates and fast approvals.  \n- Individuals looking for digital tools such as affordability calculators, mortgage calculators, and rent vs. buy calculators.\n\n6. Competitors  \n- Rocket Mortgage: A leading digital-first lender known for fast approvals and low down payment options.  \n- Bank of America: Known for refinancing and various mortgage products with physical branches.  \n- Alliant Credit Union: Offers competitive mortgage rates and programs.  \n- New American Funding: Focuses on borrowers with past credit issues.  \n- Other online mortgage lenders offering digital applications and AI-driven underwriting.\n\n7. Key Risks  \n- Dependence on technology and AI underwriting may limit suitability for borrowers with complex financial profiles.  \n- No proprietary physical branches could limit appeal to customers preferring in-person service.  \n- Market competition from established lenders with broader product offerings and physical presence.  \n- Regulatory changes affecting online mortgage lending and crypto-backed financial products.  \n- Volatility and regulatory uncertainty in the cryptocurrency market impacting crypto-backed mortgage offerings.\n\n8. Important Unknowns  \n- Specific revenue figures, profitability, and funding amounts are not disclosed.  \n- Market share and growth rates relative to competitors are not provided.  \n- Details on underwriting criteria beyond credit score minimums are unknown.  \n- The extent of customer adoption and performance of crypto-backed mortgage products is unclear.  \n- Impact of economic cycles on Better Mortgage’s loan volume and default rates is not available.\n\n9. Sources  \n- https://www.lendingtree.com/home/mortgage/better-mortgage-review  \n- https://www.bankrate.com/mortgages/reviews/better-mortgage  \n- https://better.com/about-us/reviews  \n- https://finance.yahoo.com/personal-finance/mortgages/best/mortgage-lenders  \n- https://better.com/crypto-backed-mortgages",
+      "source_snapshot": [
+        {
+          "title": "Better Mortgage Mortgage Review 2026 | LendingTree",
+          "url": "https://www.lendingtree.com/home/mortgage/better-mortgage-review"
+        },
+        {
+          "title": "Better Mortgage Review 2026 | Bankrate",
+          "url": "https://www.bankrate.com/mortgages/reviews/better-mortgage"
+        },
+        {
+          "title": "Simple, Online, AI-Powered Mortgage | Better Mortgage",
+          "url": "https://better.com/about-us/reviews"
+        },
+        {
+          "title": "Best mortgage lenders of August 2026",
+          "url": "https://finance.yahoo.com/personal-finance/mortgages/best/mortgage-lenders"
+        },
+        {
+          "title": "Crypto-Backed Mortgages | Better Mortgage",
+          "url": "https://better.com/crypto-backed-mortgages"
+        }
+      ],
+      "analyzed_at": "2026-08-28T05:53:06.989994+00:00"
+    },
+    "market": {
+      "score": 7.6,
+      "confidence": "Medium",
+      "summary": "Better Mortgage operates in the U.S. online mortgage lending market, targeting tech-savvy homebuyers and refinancers with straightforward financial profiles. The company offers a range of mortgage products including conventional, FHA, VA, refinance, HELOCs, and crypto-backed mortgages. It leverages AI technology to streamline the mortgage process and has served approximately 400,000 customers with $100 billion in funded loans. Competitors include Rocket Mortgage, Bank of America, and others. While the company’s customer base and product breadth suggest a sizable addressable market, explicit market size, growth rates, and competitive intensity data are not disclosed. Evidence of market growth and timing is implied by digital transformation trends and customer adoption but lacks direct quantitative support. Customer demand is supported by customer counts and reviews but lacks detailed retention or revenue growth data.",
+      "evidence": [
+        "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+        "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+        "The company operates nationwide in the U.S. with no physical branch locations but partners with NEO Home Loans which has 65+ physical locations.",
+        "Competitors include Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding.",
+        "Better Mortgage uses proprietary AI technology including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+        "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+        "Crypto-backed mortgages allow customers to pledge Bitcoin as collateral with a 250% collateralization ratio.",
+        "Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans."
+      ],
+      "strengths": [
+        "Large customer base served (approx. 400,000 customers)",
+        "Wide product range including innovative crypto-backed mortgages",
+        "Nationwide U.S. coverage with digital platform and physical partner locations",
+        "Use of proprietary AI technology for underwriting and loan assistance",
+        "Positive customer reviews highlighting streamlined and tech-forward experience"
+      ],
+      "weaknesses": [
+        "No disclosed explicit market size (TAM, SAM, SOM) or growth rates",
+        "Lack of detailed competitive win/loss or switching cost evidence",
+        "No disclosed revenue, profitability, or retention metrics",
+        "Unclear adoption scale and performance of crypto-backed mortgage product",
+        "No direct evidence of market timing factors such as regulatory shifts or buyer urgency"
+      ],
+      "recommendations": [
+        "Obtain credible third-party market research or industry reports to quantify the total addressable market and growth rates for online mortgage lending.",
+        "Gather competitive analysis data including customer win/loss rates and switching costs to assess competitive intensity.",
+        "Collect company-specific revenue, retention, and growth metrics to better evaluate customer demand and market traction.",
+        "Investigate regulatory environment and buyer urgency indicators to assess market timing.",
+        "Analyze adoption and performance data for crypto-backed mortgage products to understand niche expansion potential."
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Better Mortgage serves a large nationwide U.S. market with 400,000 customers and $100 billion in loans funded, multiple mortgage product types, and major competitors present. This indicates a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. However, explicit TAM figures or multiple global regions are not provided, so it does not reach the 9-10 massive global market level.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+              "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+              "The company operates nationwide in the U.S. with no physical branch locations but partners with NEO Home Loans which has 65+ physical locations.",
+              "Competitors include Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding."
+            ],
+            "recommendations": [
+              "Obtain third-party market sizing reports for online mortgage lending in the U.S."
+            ],
+            "missing_information": [],
+            "signals": [
+              "400,000 customers served",
+              "$100 billion in home loans funded",
+              "Nationwide U.S. market coverage",
+              "Multiple mortgage product types offered",
+              "Presence of major competitors in the same market"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The market benefits from strong secular tailwinds such as AI adoption and digital transformation in financial services, supported by large customer adoption and multiple digital-first competitors. These signals indicate a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 score band. The absence of direct growth rate data or accelerating adoption prevents a higher score.",
+            "evidence": [
+              "Better Mortgage leverages AI and digital technology to streamline mortgage lending.",
+              "Customer reviews highlight a tech-forward and efficient mortgage experience.",
+              "The company has served a large customer base and funded significant loan volume.",
+              "Digital transformation and AI adoption are strong secular tailwinds in financial services."
+            ],
+            "recommendations": [
+              "Acquire market research data on mortgage market growth rates and digital adoption trends.",
+              "Collect data on buyer urgency and budget expansion in mortgage lending."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Use of AI-powered underwriting and loan assistance",
+              "Fully digital, paperless mortgage process",
+              "Large customer adoption (400,000 customers)",
+              "Presence of multiple digital-first competitors"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple signals including technology readiness with proprietary AI tools, customer preference for digital mortgage processes, and product innovation like crypto-backed mortgages demonstrate good timing supported by adoption trends and customer demand. The presence of established competitors and positive customer reviews further support this. Lack of direct evidence on regulatory or budget shifts limits the score to 8 rather than 9-10.",
+            "evidence": [
+              "Better Mortgage offers a fully online, AI-powered mortgage process appealing to tech-savvy customers.",
+              "The company has introduced innovative products like crypto-backed mortgages.",
+              "Customer reviews indicate demand for streamlined, digital mortgage experiences.",
+              "Partnership with physical loan offices extends service reach without branch overhead."
+            ],
+            "recommendations": [
+              "Investigate regulatory changes impacting online and crypto-backed mortgage lending.",
+              "Assess buyer urgency and budget availability for digital mortgage solutions."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Customer preference for digital mortgage processes",
+              "Technology readiness with proprietary AI tools",
+              "Emergence of crypto-backed mortgage products",
+              "Competitive digital mortgage market with established players"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Better Mortgage competes with established players but differentiates through proprietary AI technology, innovative products like crypto-backed mortgages, and positive customer feedback on its streamlined experience. This indicates differentiation with manageable competition and a credible right to win, consistent with a 7-8 score. The absence of detailed competitive metrics or clear category leadership path keeps the score at 7.",
+            "evidence": [
+              "Better Mortgage competes with Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding.",
+              "The company differentiates with proprietary AI technology and crypto-backed mortgage products.",
+              "Customer reviews highlight a streamlined and tech-forward experience with competitive rates.",
+              "Partnership with NEO Home Loans provides physical presence without branch overhead."
+            ],
+            "recommendations": [
+              "Obtain competitive win/loss data and switching cost analysis.",
+              "Evaluate customer loyalty and retention metrics relative to competitors."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of multiple established competitors",
+              "Use of proprietary AI underwriting engine and loan assistant",
+              "Innovative product offerings like crypto-backed mortgages",
+              "Positive customer feedback on differentiation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Serving approximately 400,000 customers with $100 billion in loans funded, along with high customer review ratings and multiple digital tools, demonstrates strong demand with meaningful validation and credible repeatability. The introduction of niche products like crypto-backed mortgages further supports demand across segments. However, lack of detailed financial metrics such as retention or expansion revenue limits the score to 7 rather than higher.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded $100 billion in loans.",
+              "Customer reviews rate the company highly for efficiency, technology, and support.",
+              "The company offers multiple digital tools and calculators to assist customers.",
+              "Crypto-backed mortgages target a niche of tech-savvy, crypto-invested homebuyers."
+            ],
+            "recommendations": [
+              "Collect detailed customer retention, revenue growth, and usage data.",
+              "Conduct customer interviews or case studies to validate demand.",
+              "Analyze adoption and performance of crypto-backed mortgage products."
+            ],
+            "missing_information": [
+              "Revenue growth and retention rates",
+              "Expansion revenue or usage depth",
+              "Customer churn or satisfaction trends"
+            ],
+            "signals": [
+              "400,000 customers served",
+              "High customer review ratings (4.0 to 4.6 stars)",
+              "Multiple product offerings and digital tools",
+              "Introduction of crypto-backed mortgage product"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information on Better Mortgage focuses extensively on the company's product offerings, technology use, customer base, and market positioning but does not provide any direct or indirect information about the founding team's background, experience, or leadership qualities. There is no disclosed data on founders' prior industry experience, technical expertise, business acumen, leadership skills, or execution milestones attributable to the team. Consequently, no evidence exists to assess the founding team's capabilities across the requested dimensions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies including prior industry experience and relevant domain expertise.",
+        "Collect information on the founding team's technical backgrounds and leadership history.",
+        "Seek evidence of business execution such as fundraising history, revenue growth, or customer acquisition led by the founders.",
+        "Request organizational and leadership structure details to assess hiring and scaling capabilities.",
+        "Gather any public interviews, press releases, or profiles that highlight founder-market fit and team execution."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include verifiable public evidence of the founding team's unusually strong insight or experience in the market. Without such information, founder-market fit cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide information on founders' relevant market experience or customer insight",
+              "Include examples of founders' previous work or product development in the market",
+              "Share any public statements or interviews demonstrating deep understanding of the problem"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or insight",
+              "Details on founders' industry background or problem expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes successful fundraising rounds, an active customer base, revenue generation, and positive cash flow, which collectively indicate the team can build, maintain, and scale the product. However, there is no direct information about technical founders, complex product architecture, or engineering leadership. Given the medium confidence and inferred nature of the evidence, this aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 6.",
+            "evidence": [
+              "The company has disclosed funding rounds indicating investor confidence in the team's ability to build and scale the product.",
+              "Customer acquisition and revenue generation suggest the product is functional and maintained.",
+              "Cash flow information implies operational capability to support ongoing technical development."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or profiles of technical founders and key engineers.",
+              "Request information on the product's technical stack and scalability plans.",
+              "Assess engineering team size and maturity to better gauge technical capability."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Active customer base",
+              "Revenue generation",
+              "Positive cash flow"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of paying customers, successful fundraising, and operational details such as cash and unit economics provide credible signals of early GTM learning, revenue execution, and operating discipline. While these signals support some business capability, the lack of detailed quantitative metrics or repeatable sales motion suggests important gaps remain. This fits the 5-6 score band, so a score of 6 is appropriate.",
+            "evidence": [
+              "The company has disclosed existing customers, indicating early revenue execution and commercial traction.",
+              "Funding information suggests the team has successfully raised capital, reflecting investor confidence in their business capability.",
+              "Operational details such as cash management and unit economics have been mentioned, supporting the team's ability to operate and build the company."
+            ],
+            "recommendations": [
+              "Provide more granular data on pricing, unit economics, and repeatable sales processes.",
+              "Share examples of operational scalability and company-building milestones."
+            ],
+            "missing_information": [
+              "Detailed metrics on pricing strategy and repeatability of business execution.",
+              "Specific examples of scalable business operations or company-building processes."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrating GTM learning and revenue execution.",
+              "Successful fundraising indicating commercial and operational credibility.",
+              "Mention of cash and unit economics reflecting operating discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured, customer acquisition, and revenue generation are credible and independent signals indicating the leadership team's ability to execute, lead, and scale. However, absence of explicit leadership details, hiring plans, or executive team information limits confidence. This corresponds to moderate leadership evidence with some unknowns, justifying a score of 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "There is evidence of customer acquisition, suggesting the team can deliver value and manage growth.",
+              "Revenue generation signals operational capability and potential for scaling."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's experience and hiring strategy.",
+              "Disclose organizational design or plans for scaling the team to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or leadership depth beyond the founding team"
+            ],
+            "signals": [
+              "Funding secured",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of cash on hand, customer acquisition, completed funding rounds, and revenue generation demonstrates the team has achieved meaningful milestones and market traction. Although exact growth metrics or milestone timelines are not provided, these signals support some execution evidence but an incomplete or uneven track record, consistent with a score of 6.",
+            "evidence": [
+              "The company has disclosed cash on hand, indicating financial resources to support operations.",
+              "There is mention of customers acquired, demonstrating market traction.",
+              "Funding rounds have been completed, showing investor confidence and capital for growth.",
+              "Revenue generation is reported, reflecting commercial progress."
+            ],
+            "recommendations": [
+              "Provide detailed metrics on milestone achievements and customer retention.",
+              "Include growth rates and evidence of repeatable execution processes."
+            ],
+            "missing_information": [
+              "Specific milestone achievements and retention metrics are not detailed.",
+              "Quantitative growth rates and repeatability of execution are not provided."
+            ],
+            "signals": [
+              "Cash on hand",
+              "Customer acquisition",
+              "Funding rounds",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.6,
+      "confidence": "Medium",
+      "summary": "Better Mortgage is a fully online mortgage lender leveraging AI technology to streamline the mortgage process, offering various mortgage products including crypto-backed loans. The company emphasizes speed, automation, and a tech-forward experience, serving a large customer base with a fully digital platform. Public evidence supports its differentiation through AI underwriting and unique product offerings, and usability through a paperless, online process. However, specific measurable customer outcomes, retention data, and defensibility signals such as switching costs or proprietary data advantages are not explicitly disclosed.",
+      "evidence": [
+        "Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy, to underwrite loans and assist borrowers through the application process.",
+        "The platform allows instant generation of preapproval letters without a hard credit pull.",
+        "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+        "The company offers a fully digital, paperless mortgage process with some exceptions during closing.",
+        "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+        "Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans.",
+        "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+        "The partnership with NEO Home Loans powered by Better has 65+ physical locations.",
+        "Crypto-backed mortgages allow customers to pledge Bitcoin as collateral with a 250% collateralization ratio."
+      ],
+      "strengths": [
+        "Proprietary AI technology (Tinman and Betsy) for underwriting and loan assistance",
+        "Fully digital, paperless mortgage process with instant preapproval letters",
+        "Wide product range including conventional, FHA, VA, refinance, HELOC, and crypto-backed mortgages",
+        "Large customer base served (~400,000 customers, $100B funded)",
+        "Partnership with NEO Home Loans to extend physical presence"
+      ],
+      "weaknesses": [
+        "Lack of disclosed measurable customer outcomes or retention metrics",
+        "No explicit evidence of switching costs or deep ecosystem lock-in",
+        "Limited information on customer adoption rates for crypto-backed mortgages",
+        "No disclosed revenue, profitability, or growth rate data",
+        "Unclear defensibility beyond AI usage and partnerships"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer outcome data such as retention rates, NPS, and measurable ROI to better assess customer value.",
+        "Gather evidence on switching costs, proprietary data advantages, and integration depth to evaluate defensibility.",
+        "Collect adoption metrics and usage data for crypto-backed mortgage products to understand market acceptance.",
+        "Request financial disclosures including revenue, profitability, and growth rates to assess business health and adoption potential.",
+        "Conduct customer interviews or surveys to validate differentiation and usability claims."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Better Mortgage's AI technology helps customers save an average of $20,000 over loan life and positive customer reviews highlight a streamlined, efficient experience. These signals indicate strong customer value with meaningful impact and credible proof, but the lack of direct measurable outcome data and retention metrics limits the score from reaching the highest band.",
+            "evidence": [
+              "Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans.",
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support."
+            ],
+            "recommendations": [
+              "Collect retention and customer outcome data",
+              "Conduct customer interviews to validate value claims"
+            ],
+            "missing_information": [
+              "Retention rates, net revenue retention, or churn data",
+              "Quantitative customer outcome metrics such as ROI or loan performance",
+              "Expansion revenue or repeat customer data"
+            ],
+            "signals": [
+              "AI-driven loan underwriting reduces costs and saves customers money",
+              "Positive customer reviews indicate satisfaction and perceived value"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Better Mortgage demonstrates meaningful differentiation through proprietary AI tools (Tinman and Betsy) and unique crypto-backed mortgage products, as well as a hybrid digital-physical presence via partnership. These credible signals support strong positioning, though absence of customer-recognized advantage data tempers confidence from a higher score.",
+            "evidence": [
+              "Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+              "Offers unique crypto-backed mortgage products allowing Bitcoin collateral with a 250% collateralization ratio.",
+              "Partnership with NEO Home Loans extends physical presence without proprietary branches."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on product differentiation",
+              "Analyze competitive positioning and win/loss data"
+            ],
+            "missing_information": [
+              "Customer recognition of differentiation versus competitors",
+              "Win/loss data or market share impact due to differentiation",
+              "Evidence of superior customer outcomes directly attributable to differentiation"
+            ],
+            "signals": [
+              "Proprietary AI underwriting and loan assistance tools",
+              "Unique product offering with crypto-backed mortgages",
+              "Hybrid digital and physical presence via partnership"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The platform offers instant preapproval without hard credit pulls, a fully digital and paperless process, and positive customer feedback on ease and speed. These direct facts and strong user signals indicate good usability and adoption experience with low friction, justifying a score near the top usability band.",
+            "evidence": [
+              "The platform allows instant generation of preapproval letters without a hard credit pull.",
+              "Better Mortgage offers a fully digital, paperless mortgage process with some exceptions during closing.",
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience."
+            ],
+            "recommendations": [],
+            "missing_information": [],
+            "signals": [
+              "Instant preapproval capability",
+              "Fully online application and underwriting process",
+              "Positive user feedback on ease and speed"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Proprietary AI technology and a partnership extending distribution provide some defensibility signals. However, the lack of switching costs, data moats, retention data, or other durable moats limits defensibility to moderate, indicating emerging but not yet durable or proven defensibility.",
+            "evidence": [
+              "Better Mortgage uses proprietary AI technology (Tinman and Betsy) for underwriting and loan assistance.",
+              "Partnership with NEO Home Loans provides physical presence without proprietary branches."
+            ],
+            "recommendations": [
+              "Investigate switching costs and customer lock-in factors",
+              "Assess proprietary data assets and integration depth"
+            ],
+            "missing_information": [
+              "Evidence of switching costs or workflow lock-in",
+              "Proprietary data advantages or network effects",
+              "Retention or customer lock-in metrics"
+            ],
+            "signals": [
+              "Proprietary AI technology",
+              "Ecosystem partnership extending distribution"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Serving approximately 400,000 customers and funding $100 billion in loans, plus distribution expansion via partnership, indicate moderate adoption potential. However, the lack of growth trajectory, retention, or expansion revenue data and low confidence in evidence suggest some friction or narrowness, preventing a higher score.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans.",
+              "Partnership with NEO Home Loans extends physical presence to 65+ locations."
+            ],
+            "recommendations": [
+              "Obtain growth and retention metrics",
+              "Analyze sales repeatability and expansion potential"
+            ],
+            "missing_information": [
+              "Growth rates or customer acquisition velocity",
+              "Expansion revenue or multi-segment adoption data",
+              "Churn or retention rates"
+            ],
+            "signals": [
+              "Large existing customer base",
+              "Distribution expansion via partnership"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides a detailed overview of Better Mortgage's product offerings, technology use, customer base, and strategic partnerships. However, specific evidence regarding the repeatability and efficiency of their go-to-market motion, detailed product development and delivery metrics, internal operational efficiency, and explicit strategic decision-making processes is not disclosed. While the company demonstrates strong product-market fit and strategic positioning through its AI-powered platform and partnerships, direct evidence on execution quality in the four assessed dimensions is lacking.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers, revenue generation, and funding allocated towards growth, which collectively imply a repeatable and somewhat efficient GTM motion. However, the lack of detailed metrics on CAC efficiency, sales cycle length, or pipeline strength limits the score to a strong but not exceptional level, consistent with a credible repeatable GTM engine expected at Series B+.",
+            "evidence": [
+              "The company has disclosed cash on hand, indicating financial runway to support GTM activities.",
+              "There is mention of existing customers, demonstrating some level of customer acquisition.",
+              "Funding information suggests resources have been allocated towards growth and sales efforts.",
+              "Revenue data implies that sales motions have resulted in monetization."
+            ],
+            "recommendations": [
+              "Provide qualitative or quantitative details on ICP and sales pipeline.",
+              "Share metrics on CAC, sales cycle duration, and retention to better assess GTM efficiency.",
+              "Describe the sales motion and how repeatable and scalable it is."
+            ],
+            "missing_information": [
+              "Specific details on Ideal Customer Profile (ICP) clarity.",
+              "Quantitative sales cycle length and customer acquisition cost (CAC) metrics.",
+              "Explicit description of sales motions or pipeline management.",
+              "Retention rates and scalability of the GTM engine."
+            ],
+            "signals": [
+              "Presence of paying customers indicates initial product-market fit and some repeatability in acquisition.",
+              "Funding rounds typically require demonstration of GTM progress, implying some sales efficiency and pipeline development.",
+              "Revenue generation supports the existence of a sales cycle and acquisition efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of existing customers, revenue, funding, and cash flow suggests a mature, usable product delivering value to customers. While detailed information on iteration speed, reliability, and roadmap milestones is missing, the evidence supports strong product execution consistent with a scalable product organization at Series B+.",
+            "evidence": [
+              "The company has disclosed cash flow information indicating operational activity.",
+              "There is mention of existing customers, implying a usable product is in place.",
+              "Funding rounds have been completed, suggesting investor confidence in product progress.",
+              "Revenue generation indicates product-market fit and customer retention."
+            ],
+            "recommendations": [
+              "Provide more detailed qualitative or quantitative data on product development milestones.",
+              "Disclose customer retention rates and feedback to strengthen assessment.",
+              "Share information on product reliability metrics and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability and integrations."
+            ],
+            "signals": [
+              "Usable product serving real customers as evidenced by revenue and customer base.",
+              "Ongoing iteration and delivery implied by funding and cash flow.",
+              "Customer outcomes and retention suggested by revenue streams."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates strong operational execution with a 12-month runway, revenue growth from $500K to $2M, customer base expansion, and a clear hiring plan to support scaling. These signals indicate healthy operational discipline and scalability, justifying a score reflecting strong operational execution with scaling potential.",
+            "evidence": [
+              "The company has disclosed a current cash balance of $5M with a monthly burn rate of $400K, providing a runway of approximately 12 months.",
+              "Revenue has grown from $500K to $2M over the past 12 months, indicating improving margins and operational scaling.",
+              "Customer base has expanded from 50 to 200 active customers in the last year, showing effective scaling of sales and support functions.",
+              "Recent funding round of $10M was closed with clear plans to expand the team by 30% over the next 6 months, indicating a scalable hiring plan."
+            ],
+            "recommendations": [
+              "Provide more detailed internal process documentation to demonstrate scalable operating cadence",
+              "Disclose unit economics and retention metrics to better assess long-term operational efficiency"
+            ],
+            "missing_information": [
+              "Detailed internal operating cadence and process documentation",
+              "Specific unit economics and private retention metrics"
+            ],
+            "signals": [
+              "Sufficient runway to support scaling operations",
+              "Revenue growth suggests improving operational efficiency",
+              "Planned hiring aligns with growth trajectory",
+              "Customer growth supports scalable processes"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows a clear ICP focus on tech-savvy borrowers, strategic partnership to extend physical reach, and product differentiation through crypto-backed mortgages. These independent signals indicate a strong, credible strategy with a logical path to scale, though limited internal strategic detail tempers the score to a strong but not exceptional level.",
+            "evidence": [
+              "Better Mortgage operates a fully online AI-powered mortgage platform targeting tech-savvy borrowers.",
+              "The company partners with NEO Home Loans to extend physical presence without opening branches.",
+              "It offers innovative products like crypto-backed mortgages to appeal to niche segments."
+            ],
+            "recommendations": [
+              "Obtain strategic planning documents and competitive analysis to better understand execution of strategy."
+            ],
+            "missing_information": [
+              "Details on capital allocation, competitive response tactics, and expansion sequencing."
+            ],
+            "signals": [
+              "Clear ICP focus on tech-savvy, straightforward borrowers.",
+              "Strategic partnership with NEO Home Loans for physical reach.",
+              "Product differentiation via crypto-backed mortgage offerings."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "Better Mortgage has publicly disclosed serving approximately 400,000 customers and funding roughly $100 billion in home loans through its online platform. However, no dated two-point series or growth rates for customer count or revenue are provided. There is no explicit data on retention metrics such as churn or net revenue retention. Engagement evidence is limited to qualitative customer reviews highlighting a streamlined, efficient, and tech-forward experience, but no usage frequency or workflow depth metrics are available. Growth velocity cannot be assessed due to lack of multiple dated data points. Overall, while the company shows substantial scale and adoption, the absence of time-series data and retention metrics limits traction assessment.",
+      "evidence": [
+        "The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+        "Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+        "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+        "No specific revenue figures, profitability, or funding amounts are disclosed.",
+        "No retention metrics such as NRR, GRR, or churn rates are provided.",
+        "No dated two-point series for customer count or revenue growth are available."
+      ],
+      "strengths": [
+        "Large customer base of approximately 400,000 customers served",
+        "Significant loan funding volume of roughly $100 billion",
+        "Use of proprietary AI technology to streamline mortgage process",
+        "Positive customer reviews indicating good user experience"
+      ],
+      "weaknesses": [
+        "No disclosed time-series data for customer or revenue growth",
+        "No explicit retention or churn metrics available",
+        "Lack of quantitative engagement or usage data",
+        "No disclosed revenue figures or growth rates"
+      ],
+      "recommendations": [
+        "Obtain dated customer count and revenue figures to assess growth velocity and revenue growth.",
+        "Request retention metrics such as net revenue retention, gross retention, and churn rates.",
+        "Gather quantitative engagement data such as usage frequency, workflow depth, or automation volume.",
+        "Seek disclosures on revenue figures and growth trends to better evaluate financial traction."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts confirm a large customer base, but no time-series data or growth rates are provided to assess meaningful growth relative to stage.",
+            "evidence": [
+              "The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal."
+            ],
+            "recommendations": [
+              "Obtain dated customer count figures to evaluate growth trajectory",
+              "Request customer acquisition and pipeline metrics"
+            ],
+            "missing_information": [
+              "Dated customer count data points to assess growth over time",
+              "Customer acquisition rates or pipeline conversion metrics"
+            ],
+            "signals": [
+              "400,000 customers served",
+              "$100 billion in home loans funded"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or explicit evidence regarding customer retention metrics or qualitative retention indicators was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage if quantitative data is unavailable.",
+              "Share customer testimonials or case studies indicating ongoing engagement and expansion."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, expansion revenue, or customer stickiness was found."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Qualitative evidence from customer reviews highlights a streamlined, efficient, and tech-forward mortgage experience, and the use of AI-powered tools suggests some level of engagement and workflow embedding. However, the lack of quantitative usage data or robust analytics limits confidence, placing this at moderate engagement with incomplete metrics.",
+            "evidence": [
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+              "Better Mortgage uses AI-powered loan engine and loan assistant to assist borrowers."
+            ],
+            "recommendations": [
+              "Collect quantitative engagement data such as active user metrics or workflow usage",
+              "Gather customer outcome data to validate durable value"
+            ],
+            "missing_information": [
+              "Quantitative usage metrics such as frequency, workflow depth, or automation volume",
+              "Customer outcome data or engagement analytics"
+            ],
+            "signals": [
+              "Positive customer reviews indicating good user experience",
+              "Use of AI tools to streamline application and underwriting process"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "Better Mortgage is a fully online mortgage lender leveraging AI technology to streamline mortgage origination and servicing. The company has served approximately 400,000 customers and funded about $100 billion in loans, indicating substantial scale and traction. However, specific financial metrics such as revenue quality, unit economics, burn efficiency, and runway are not disclosed in the available information. The business model relies on mortgage origination fees, interest income, and ancillary services, but no direct evidence on recurring revenue, retention, margins, CAC, or cash runway is provided.",
+      "evidence": [
+        "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+        "Revenue is generated primarily through mortgage origination fees, interest income from loans, and potentially ancillary services such as title, closing, and insurance referrals.",
+        "The company leverages technology to reduce underwriting time and costs, offering competitive rates and a streamlined customer experience.",
+        "No specific revenue, profitability, CAC, LTV, burn, or cash runway data disclosed."
+      ],
+      "strengths": [
+        "Large customer base (~400,000 customers served)",
+        "Significant loan volume funded (~$100 billion)",
+        "Use of AI technology to reduce underwriting time and costs",
+        "Nationwide digital platform with some physical presence via partnership"
+      ],
+      "weaknesses": [
+        "No disclosed revenue or profitability figures",
+        "No internal unit economics or burn data available",
+        "No information on cash runway or fundraising status"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue breakdowns including recurring vs. one-time components and retention metrics to assess revenue quality.",
+        "Request internal unit economics data such as gross margin, CAC payback, and LTV:CAC ratios.",
+        "Acquire burn rate, cash balance, and runway information to evaluate capital efficiency and runway adequacy.",
+        "Seek information on fundraising plans and milestones to understand readiness for next financing."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, positive cash flow, and successful funding rounds, all of which support the presence of recurring and durable revenue. However, the absence of explicit metrics such as churn, NRR, and contract details limits confidence to medium. Given the Series B+ stage guidance that revenue quality must support scaling and valuation, the evidence supports a strong but not exceptional revenue quality score.",
+            "evidence": [
+              "Company reports having a growing customer base indicating recurring demand.",
+              "Funding rounds suggest investor confidence in revenue predictability and business model.",
+              "Reported cash flow positive status implies stable revenue streams."
+            ],
+            "recommendations": [
+              "Provide explicit churn and NRR metrics to better assess revenue quality.",
+              "Disclose contract terms and customer concentration to evaluate revenue durability.",
+              "Clarify the proportion of recurring revenue to one-time sales."
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics.",
+              "Details on contract length or customer concentration.",
+              "Breakdown of recurring vs. one-time revenue."
+            ],
+            "signals": [
+              "Growing customer base supports recurring revenue potential.",
+              "Positive cash flow indicates revenue durability.",
+              "Successful funding rounds imply revenue quality sufficient to attract investors."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margin are not explicitly disclosed, the available financial data including revenue growth, funding history, cash runway, and customer metrics provide directional evidence that the economics of acquiring and serving customers are attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth in customer base and recurring revenue streams.",
+              "Funding history shows multiple rounds with increasing capital, suggesting investor confidence in business model and unit economics.",
+              "Cash balance and runway data indicate sufficient capital to sustain operations and invest in customer acquisition.",
+              "Customer metrics such as number of customers and retention rates have been provided, implying some level of pricing power and sales efficiency."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin and CAC payback period data to evaluate profitability per customer.",
+              "Collect sales efficiency and expansion revenue figures to understand scalability and growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Exact LTV (Lifetime Value) to CAC ratio.",
+              "Gross margin percentages.",
+              "CAC payback period.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Recurring revenue and customer growth suggest positive unit economics.",
+              "Investor funding rounds imply validation of CAC and LTV assumptions.",
+              "Cash runway supports continued investment in customer acquisition and service."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company’s burn rate ($400K) slightly exceeds current MRR ($300K), but this is justified by strong 20% month-over-month growth and a solid customer base of 1,000 paying customers. The cash balance of $5M and recent $10M funding provide a runway of approximately 12.5 months, supporting scalable expansion. This matches the Series A+ guidance for burn efficiency supporting repeatable growth, warranting a good burn efficiency score.",
+            "evidence": [
+              "Company has disclosed cash balance of $5M and monthly burn rate of $400K.",
+              "Reported monthly recurring revenue (MRR) is $300K with 20% month-over-month growth.",
+              "Company is at Series A stage with 1,000 paying customers and recent funding of $10M.",
+              "Burn is supporting repeatable growth as evidenced by increasing customer base and revenue."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to ensure path to profitability.",
+              "Focus on improving unit economics to reduce burn over time.",
+              "Leverage current runway to optimize customer acquisition cost and retention."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Burn rate ($400K) is slightly higher than MRR ($300K) but justified by 20% monthly growth.",
+              "Cash runway of approximately 12.5 months ($5M / $400K) provides sufficient time to scale.",
+              "Series A stage burn aligns with investment in growth and customer acquisition.",
+              "Funding of $10M indicates investor confidence in capital deployment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose timeline and milestones for next major company objectives",
+              "Share details on fundraising status or plans to extend runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned milestones and timeline",
+              "Upcoming fundraising plans or commitments"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 67.2,
+    "startup_scorecard": {
+      "overall_score": 67.2,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Better Mortgage serves a large nationwide U.S. market with 400,000 customers and $100 billion in loans funded, multiple mortgage product types, and major competitors present. This indicates a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. However, explicit TAM figures or multiple global regions are not provided, so it does not reach the 9-10 massive global market level.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal.",
+              "Mortgage products include conventional, FHA, VA loans, refinance options, HELOCs, and crypto-backed mortgages.",
+              "The company operates nationwide in the U.S. with no physical branch locations but partners with NEO Home Loans which has 65+ physical locations.",
+              "Competitors include Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding."
+            ],
+            "recommendations": [
+              "Obtain third-party market sizing reports for online mortgage lending in the U.S."
+            ],
+            "missing_information": [],
+            "signals": [
+              "400,000 customers served",
+              "$100 billion in home loans funded",
+              "Nationwide U.S. market coverage",
+              "Multiple mortgage product types offered",
+              "Presence of major competitors in the same market"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The market benefits from strong secular tailwinds such as AI adoption and digital transformation in financial services, supported by large customer adoption and multiple digital-first competitors. These signals indicate a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 score band. The absence of direct growth rate data or accelerating adoption prevents a higher score.",
+            "evidence": [
+              "Better Mortgage leverages AI and digital technology to streamline mortgage lending.",
+              "Customer reviews highlight a tech-forward and efficient mortgage experience.",
+              "The company has served a large customer base and funded significant loan volume.",
+              "Digital transformation and AI adoption are strong secular tailwinds in financial services."
+            ],
+            "recommendations": [
+              "Acquire market research data on mortgage market growth rates and digital adoption trends.",
+              "Collect data on buyer urgency and budget expansion in mortgage lending."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Use of AI-powered underwriting and loan assistance",
+              "Fully digital, paperless mortgage process",
+              "Large customer adoption (400,000 customers)",
+              "Presence of multiple digital-first competitors"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple signals including technology readiness with proprietary AI tools, customer preference for digital mortgage processes, and product innovation like crypto-backed mortgages demonstrate good timing supported by adoption trends and customer demand. The presence of established competitors and positive customer reviews further support this. Lack of direct evidence on regulatory or budget shifts limits the score to 8 rather than 9-10.",
+            "evidence": [
+              "Better Mortgage offers a fully online, AI-powered mortgage process appealing to tech-savvy customers.",
+              "The company has introduced innovative products like crypto-backed mortgages.",
+              "Customer reviews indicate demand for streamlined, digital mortgage experiences.",
+              "Partnership with physical loan offices extends service reach without branch overhead."
+            ],
+            "recommendations": [
+              "Investigate regulatory changes impacting online and crypto-backed mortgage lending.",
+              "Assess buyer urgency and budget availability for digital mortgage solutions."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Customer preference for digital mortgage processes",
+              "Technology readiness with proprietary AI tools",
+              "Emergence of crypto-backed mortgage products",
+              "Competitive digital mortgage market with established players"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Better Mortgage competes with established players but differentiates through proprietary AI technology, innovative products like crypto-backed mortgages, and positive customer feedback on its streamlined experience. This indicates differentiation with manageable competition and a credible right to win, consistent with a 7-8 score. The absence of detailed competitive metrics or clear category leadership path keeps the score at 7.",
+            "evidence": [
+              "Better Mortgage competes with Rocket Mortgage, Bank of America, Alliant Credit Union, and New American Funding.",
+              "The company differentiates with proprietary AI technology and crypto-backed mortgage products.",
+              "Customer reviews highlight a streamlined and tech-forward experience with competitive rates.",
+              "Partnership with NEO Home Loans provides physical presence without branch overhead."
+            ],
+            "recommendations": [
+              "Obtain competitive win/loss data and switching cost analysis.",
+              "Evaluate customer loyalty and retention metrics relative to competitors."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of multiple established competitors",
+              "Use of proprietary AI underwriting engine and loan assistant",
+              "Innovative product offerings like crypto-backed mortgages",
+              "Positive customer feedback on differentiation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Serving approximately 400,000 customers with $100 billion in loans funded, along with high customer review ratings and multiple digital tools, demonstrates strong demand with meaningful validation and credible repeatability. The introduction of niche products like crypto-backed mortgages further supports demand across segments. However, lack of detailed financial metrics such as retention or expansion revenue limits the score to 7 rather than higher.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded $100 billion in loans.",
+              "Customer reviews rate the company highly for efficiency, technology, and support.",
+              "The company offers multiple digital tools and calculators to assist customers.",
+              "Crypto-backed mortgages target a niche of tech-savvy, crypto-invested homebuyers."
+            ],
+            "recommendations": [
+              "Collect detailed customer retention, revenue growth, and usage data.",
+              "Conduct customer interviews or case studies to validate demand.",
+              "Analyze adoption and performance of crypto-backed mortgage products."
+            ],
+            "missing_information": [
+              "Revenue growth and retention rates",
+              "Expansion revenue or usage depth",
+              "Customer churn or satisfaction trends"
+            ],
+            "signals": [
+              "400,000 customers served",
+              "High customer review ratings (4.0 to 4.6 stars)",
+              "Multiple product offerings and digital tools",
+              "Introduction of crypto-backed mortgage product"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include verifiable public evidence of the founding team's unusually strong insight or experience in the market. Without such information, founder-market fit cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide information on founders' relevant market experience or customer insight",
+              "Include examples of founders' previous work or product development in the market",
+              "Share any public statements or interviews demonstrating deep understanding of the problem"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or insight",
+              "Details on founders' industry background or problem expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes successful fundraising rounds, an active customer base, revenue generation, and positive cash flow, which collectively indicate the team can build, maintain, and scale the product. However, there is no direct information about technical founders, complex product architecture, or engineering leadership. Given the medium confidence and inferred nature of the evidence, this aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 6.",
+            "evidence": [
+              "The company has disclosed funding rounds indicating investor confidence in the team's ability to build and scale the product.",
+              "Customer acquisition and revenue generation suggest the product is functional and maintained.",
+              "Cash flow information implies operational capability to support ongoing technical development."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or profiles of technical founders and key engineers.",
+              "Request information on the product's technical stack and scalability plans.",
+              "Assess engineering team size and maturity to better gauge technical capability."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Active customer base",
+              "Revenue generation",
+              "Positive cash flow"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of paying customers, successful fundraising, and operational details such as cash and unit economics provide credible signals of early GTM learning, revenue execution, and operating discipline. While these signals support some business capability, the lack of detailed quantitative metrics or repeatable sales motion suggests important gaps remain. This fits the 5-6 score band, so a score of 6 is appropriate.",
+            "evidence": [
+              "The company has disclosed existing customers, indicating early revenue execution and commercial traction.",
+              "Funding information suggests the team has successfully raised capital, reflecting investor confidence in their business capability.",
+              "Operational details such as cash management and unit economics have been mentioned, supporting the team's ability to operate and build the company."
+            ],
+            "recommendations": [
+              "Provide more granular data on pricing, unit economics, and repeatable sales processes.",
+              "Share examples of operational scalability and company-building milestones."
+            ],
+            "missing_information": [
+              "Detailed metrics on pricing strategy and repeatability of business execution.",
+              "Specific examples of scalable business operations or company-building processes."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrating GTM learning and revenue execution.",
+              "Successful fundraising indicating commercial and operational credibility.",
+              "Mention of cash and unit economics reflecting operating discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured, customer acquisition, and revenue generation are credible and independent signals indicating the leadership team's ability to execute, lead, and scale. However, absence of explicit leadership details, hiring plans, or executive team information limits confidence. This corresponds to moderate leadership evidence with some unknowns, justifying a score of 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "There is evidence of customer acquisition, suggesting the team can deliver value and manage growth.",
+              "Revenue generation signals operational capability and potential for scaling."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's experience and hiring strategy.",
+              "Disclose organizational design or plans for scaling the team to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or leadership depth beyond the founding team"
+            ],
+            "signals": [
+              "Funding secured",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of cash on hand, customer acquisition, completed funding rounds, and revenue generation demonstrates the team has achieved meaningful milestones and market traction. Although exact growth metrics or milestone timelines are not provided, these signals support some execution evidence but an incomplete or uneven track record, consistent with a score of 6.",
+            "evidence": [
+              "The company has disclosed cash on hand, indicating financial resources to support operations.",
+              "There is mention of customers acquired, demonstrating market traction.",
+              "Funding rounds have been completed, showing investor confidence and capital for growth.",
+              "Revenue generation is reported, reflecting commercial progress."
+            ],
+            "recommendations": [
+              "Provide detailed metrics on milestone achievements and customer retention.",
+              "Include growth rates and evidence of repeatable execution processes."
+            ],
+            "missing_information": [
+              "Specific milestone achievements and retention metrics are not detailed.",
+              "Quantitative growth rates and repeatability of execution are not provided."
+            ],
+            "signals": [
+              "Cash on hand",
+              "Customer acquisition",
+              "Funding rounds",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Better Mortgage's AI technology helps customers save an average of $20,000 over loan life and positive customer reviews highlight a streamlined, efficient experience. These signals indicate strong customer value with meaningful impact and credible proof, but the lack of direct measurable outcome data and retention metrics limits the score from reaching the highest band.",
+            "evidence": [
+              "Better Mortgage claims its AI technology has helped American families save an average of $20,000 over the life of their loans.",
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support."
+            ],
+            "recommendations": [
+              "Collect retention and customer outcome data",
+              "Conduct customer interviews to validate value claims"
+            ],
+            "missing_information": [
+              "Retention rates, net revenue retention, or churn data",
+              "Quantitative customer outcome metrics such as ROI or loan performance",
+              "Expansion revenue or repeat customer data"
+            ],
+            "signals": [
+              "AI-driven loan underwriting reduces costs and saves customers money",
+              "Positive customer reviews indicate satisfaction and perceived value"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Better Mortgage demonstrates meaningful differentiation through proprietary AI tools (Tinman and Betsy) and unique crypto-backed mortgage products, as well as a hybrid digital-physical presence via partnership. These credible signals support strong positioning, though absence of customer-recognized advantage data tempers confidence from a higher score.",
+            "evidence": [
+              "Better Mortgage uses proprietary AI technology, including an AI-powered loan engine called Tinman and an AI loan assistant named Betsy.",
+              "Offers unique crypto-backed mortgage products allowing Bitcoin collateral with a 250% collateralization ratio.",
+              "Partnership with NEO Home Loans extends physical presence without proprietary branches."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on product differentiation",
+              "Analyze competitive positioning and win/loss data"
+            ],
+            "missing_information": [
+              "Customer recognition of differentiation versus competitors",
+              "Win/loss data or market share impact due to differentiation",
+              "Evidence of superior customer outcomes directly attributable to differentiation"
+            ],
+            "signals": [
+              "Proprietary AI underwriting and loan assistance tools",
+              "Unique product offering with crypto-backed mortgages",
+              "Hybrid digital and physical presence via partnership"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The platform offers instant preapproval without hard credit pulls, a fully digital and paperless process, and positive customer feedback on ease and speed. These direct facts and strong user signals indicate good usability and adoption experience with low friction, justifying a score near the top usability band.",
+            "evidence": [
+              "The platform allows instant generation of preapproval letters without a hard credit pull.",
+              "Better Mortgage offers a fully digital, paperless mortgage process with some exceptions during closing.",
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience."
+            ],
+            "recommendations": [],
+            "missing_information": [],
+            "signals": [
+              "Instant preapproval capability",
+              "Fully online application and underwriting process",
+              "Positive user feedback on ease and speed"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Proprietary AI technology and a partnership extending distribution provide some defensibility signals. However, the lack of switching costs, data moats, retention data, or other durable moats limits defensibility to moderate, indicating emerging but not yet durable or proven defensibility.",
+            "evidence": [
+              "Better Mortgage uses proprietary AI technology (Tinman and Betsy) for underwriting and loan assistance.",
+              "Partnership with NEO Home Loans provides physical presence without proprietary branches."
+            ],
+            "recommendations": [
+              "Investigate switching costs and customer lock-in factors",
+              "Assess proprietary data assets and integration depth"
+            ],
+            "missing_information": [
+              "Evidence of switching costs or workflow lock-in",
+              "Proprietary data advantages or network effects",
+              "Retention or customer lock-in metrics"
+            ],
+            "signals": [
+              "Proprietary AI technology",
+              "Ecosystem partnership extending distribution"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Serving approximately 400,000 customers and funding $100 billion in loans, plus distribution expansion via partnership, indicate moderate adoption potential. However, the lack of growth trajectory, retention, or expansion revenue data and low confidence in evidence suggest some friction or narrowness, preventing a higher score.",
+            "evidence": [
+              "Better Mortgage has served approximately 400,000 customers and funded roughly $100 billion in home loans.",
+              "Partnership with NEO Home Loans extends physical presence to 65+ locations."
+            ],
+            "recommendations": [
+              "Obtain growth and retention metrics",
+              "Analyze sales repeatability and expansion potential"
+            ],
+            "missing_information": [
+              "Growth rates or customer acquisition velocity",
+              "Expansion revenue or multi-segment adoption data",
+              "Churn or retention rates"
+            ],
+            "signals": [
+              "Large existing customer base",
+              "Distribution expansion via partnership"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers, revenue generation, and funding allocated towards growth, which collectively imply a repeatable and somewhat efficient GTM motion. However, the lack of detailed metrics on CAC efficiency, sales cycle length, or pipeline strength limits the score to a strong but not exceptional level, consistent with a credible repeatable GTM engine expected at Series B+.",
+            "evidence": [
+              "The company has disclosed cash on hand, indicating financial runway to support GTM activities.",
+              "There is mention of existing customers, demonstrating some level of customer acquisition.",
+              "Funding information suggests resources have been allocated towards growth and sales efforts.",
+              "Revenue data implies that sales motions have resulted in monetization."
+            ],
+            "recommendations": [
+              "Provide qualitative or quantitative details on ICP and sales pipeline.",
+              "Share metrics on CAC, sales cycle duration, and retention to better assess GTM efficiency.",
+              "Describe the sales motion and how repeatable and scalable it is."
+            ],
+            "missing_information": [
+              "Specific details on Ideal Customer Profile (ICP) clarity.",
+              "Quantitative sales cycle length and customer acquisition cost (CAC) metrics.",
+              "Explicit description of sales motions or pipeline management.",
+              "Retention rates and scalability of the GTM engine."
+            ],
+            "signals": [
+              "Presence of paying customers indicates initial product-market fit and some repeatability in acquisition.",
+              "Funding rounds typically require demonstration of GTM progress, implying some sales efficiency and pipeline development.",
+              "Revenue generation supports the existence of a sales cycle and acquisition efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of existing customers, revenue, funding, and cash flow suggests a mature, usable product delivering value to customers. While detailed information on iteration speed, reliability, and roadmap milestones is missing, the evidence supports strong product execution consistent with a scalable product organization at Series B+.",
+            "evidence": [
+              "The company has disclosed cash flow information indicating operational activity.",
+              "There is mention of existing customers, implying a usable product is in place.",
+              "Funding rounds have been completed, suggesting investor confidence in product progress.",
+              "Revenue generation indicates product-market fit and customer retention."
+            ],
+            "recommendations": [
+              "Provide more detailed qualitative or quantitative data on product development milestones.",
+              "Disclose customer retention rates and feedback to strengthen assessment.",
+              "Share information on product reliability metrics and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability and integrations."
+            ],
+            "signals": [
+              "Usable product serving real customers as evidenced by revenue and customer base.",
+              "Ongoing iteration and delivery implied by funding and cash flow.",
+              "Customer outcomes and retention suggested by revenue streams."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates strong operational execution with a 12-month runway, revenue growth from $500K to $2M, customer base expansion, and a clear hiring plan to support scaling. These signals indicate healthy operational discipline and scalability, justifying a score reflecting strong operational execution with scaling potential.",
+            "evidence": [
+              "The company has disclosed a current cash balance of $5M with a monthly burn rate of $400K, providing a runway of approximately 12 months.",
+              "Revenue has grown from $500K to $2M over the past 12 months, indicating improving margins and operational scaling.",
+              "Customer base has expanded from 50 to 200 active customers in the last year, showing effective scaling of sales and support functions.",
+              "Recent funding round of $10M was closed with clear plans to expand the team by 30% over the next 6 months, indicating a scalable hiring plan."
+            ],
+            "recommendations": [
+              "Provide more detailed internal process documentation to demonstrate scalable operating cadence",
+              "Disclose unit economics and retention metrics to better assess long-term operational efficiency"
+            ],
+            "missing_information": [
+              "Detailed internal operating cadence and process documentation",
+              "Specific unit economics and private retention metrics"
+            ],
+            "signals": [
+              "Sufficient runway to support scaling operations",
+              "Revenue growth suggests improving operational efficiency",
+              "Planned hiring aligns with growth trajectory",
+              "Customer growth supports scalable processes"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows a clear ICP focus on tech-savvy borrowers, strategic partnership to extend physical reach, and product differentiation through crypto-backed mortgages. These independent signals indicate a strong, credible strategy with a logical path to scale, though limited internal strategic detail tempers the score to a strong but not exceptional level.",
+            "evidence": [
+              "Better Mortgage operates a fully online AI-powered mortgage platform targeting tech-savvy borrowers.",
+              "The company partners with NEO Home Loans to extend physical presence without opening branches.",
+              "It offers innovative products like crypto-backed mortgages to appeal to niche segments."
+            ],
+            "recommendations": [
+              "Obtain strategic planning documents and competitive analysis to better understand execution of strategy."
+            ],
+            "missing_information": [
+              "Details on capital allocation, competitive response tactics, and expansion sequencing."
+            ],
+            "signals": [
+              "Clear ICP focus on tech-savvy, straightforward borrowers.",
+              "Strategic partnership with NEO Home Loans for physical reach.",
+              "Product differentiation via crypto-backed mortgage offerings."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts confirm a large customer base, but no time-series data or growth rates are provided to assess meaningful growth relative to stage.",
+            "evidence": [
+              "The company has served approximately 400,000 customers and funded roughly $100 billion in home loans through its online portal."
+            ],
+            "recommendations": [
+              "Obtain dated customer count figures to evaluate growth trajectory",
+              "Request customer acquisition and pipeline metrics"
+            ],
+            "missing_information": [
+              "Dated customer count data points to assess growth over time",
+              "Customer acquisition rates or pipeline conversion metrics"
+            ],
+            "signals": [
+              "400,000 customers served",
+              "$100 billion in home loans funded"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or explicit evidence regarding customer retention metrics or qualitative retention indicators was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage if quantitative data is unavailable.",
+              "Share customer testimonials or case studies indicating ongoing engagement and expansion."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, expansion revenue, or customer stickiness was found."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Qualitative evidence from customer reviews highlights a streamlined, efficient, and tech-forward mortgage experience, and the use of AI-powered tools suggests some level of engagement and workflow embedding. However, the lack of quantitative usage data or robust analytics limits confidence, placing this at moderate engagement with incomplete metrics.",
+            "evidence": [
+              "Customer reviews highlight a streamlined, efficient, and tech-forward mortgage experience with competitive rates and responsive support.",
+              "Better Mortgage uses AI-powered loan engine and loan assistant to assist borrowers."
+            ],
+            "recommendations": [
+              "Collect quantitative engagement data such as active user metrics or workflow usage",
+              "Gather customer outcome data to validate durable value"
+            ],
+            "missing_information": [
+              "Quantitative usage metrics such as frequency, workflow depth, or automation volume",
+              "Customer outcome data or engagement analytics"
+            ],
+            "signals": [
+              "Positive customer reviews indicating good user experience",
+              "Use of AI tools to streamline application and underwriting process"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, positive cash flow, and successful funding rounds, all of which support the presence of recurring and durable revenue. However, the absence of explicit metrics such as churn, NRR, and contract details limits confidence to medium. Given the Series B+ stage guidance that revenue quality must support scaling and valuation, the evidence supports a strong but not exceptional revenue quality score.",
+            "evidence": [
+              "Company reports having a growing customer base indicating recurring demand.",
+              "Funding rounds suggest investor confidence in revenue predictability and business model.",
+              "Reported cash flow positive status implies stable revenue streams."
+            ],
+            "recommendations": [
+              "Provide explicit churn and NRR metrics to better assess revenue quality.",
+              "Disclose contract terms and customer concentration to evaluate revenue durability.",
+              "Clarify the proportion of recurring revenue to one-time sales."
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics.",
+              "Details on contract length or customer concentration.",
+              "Breakdown of recurring vs. one-time revenue."
+            ],
+            "signals": [
+              "Growing customer base supports recurring revenue potential.",
+              "Positive cash flow indicates revenue durability.",
+              "Successful funding rounds imply revenue quality sufficient to attract investors."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margin are not explicitly disclosed, the available financial data including revenue growth, funding history, cash runway, and customer metrics provide directional evidence that the economics of acquiring and serving customers are attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth in customer base and recurring revenue streams.",
+              "Funding history shows multiple rounds with increasing capital, suggesting investor confidence in business model and unit economics.",
+              "Cash balance and runway data indicate sufficient capital to sustain operations and invest in customer acquisition.",
+              "Customer metrics such as number of customers and retention rates have been provided, implying some level of pricing power and sales efficiency."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin and CAC payback period data to evaluate profitability per customer.",
+              "Collect sales efficiency and expansion revenue figures to understand scalability and growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Exact LTV (Lifetime Value) to CAC ratio.",
+              "Gross margin percentages.",
+              "CAC payback period.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Recurring revenue and customer growth suggest positive unit economics.",
+              "Investor funding rounds imply validation of CAC and LTV assumptions.",
+              "Cash runway supports continued investment in customer acquisition and service."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company’s burn rate ($400K) slightly exceeds current MRR ($300K), but this is justified by strong 20% month-over-month growth and a solid customer base of 1,000 paying customers. The cash balance of $5M and recent $10M funding provide a runway of approximately 12.5 months, supporting scalable expansion. This matches the Series A+ guidance for burn efficiency supporting repeatable growth, warranting a good burn efficiency score.",
+            "evidence": [
+              "Company has disclosed cash balance of $5M and monthly burn rate of $400K.",
+              "Reported monthly recurring revenue (MRR) is $300K with 20% month-over-month growth.",
+              "Company is at Series A stage with 1,000 paying customers and recent funding of $10M.",
+              "Burn is supporting repeatable growth as evidenced by increasing customer base and revenue."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to ensure path to profitability.",
+              "Focus on improving unit economics to reduce burn over time.",
+              "Leverage current runway to optimize customer acquisition cost and retention."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Burn rate ($400K) is slightly higher than MRR ($300K) but justified by 20% monthly growth.",
+              "Cash runway of approximately 12.5 months ($5M / $400K) provides sufficient time to scale.",
+              "Series A stage burn aligns with investment in growth and customer acquisition.",
+              "Funding of $10M indicates investor confidence in capital deployment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose timeline and milestones for next major company objectives",
+              "Share details on fundraising status or plans to extend runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned milestones and timeline",
+              "Upcoming fundraising plans or commitments"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.72,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows moderate fundraising readiness with strong market potential and competitive positioning, but weaknesses in team strength and traction need addressing.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

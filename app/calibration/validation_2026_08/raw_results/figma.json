@@ -1,0 +1,2364 @@
+{
+  "summary": "Figma is a leading SaaS design platform offering an intelligent, AI-enhanced collaborative canvas that integrates design, prototyping, developer handoff, and production workflows into one workspace. Its comprehensive product suite includes:\n\n- **Figma Design:** Design and prototype apps, websites, and products in real-time collaboration.\n- **Figma Make:** AI-assisted prompt-to-code generation to quickly build interfaces.\n- **Dev Mode:** Streamlines the handoff from design to development with code inspection and export tools.\n- **FigJam:** A digital whiteboard for brainstorming, diagramming, and team workshops.\n- **Figma Motion:** Animation tools for production-ready motion design.\n- **Figma Slides:** Collaborative presentation creation.\n- **Figma Draw:** Advanced vector illustration tools.\n- **Figma Sites (Beta):** Responsive website publishing.\n- **Figma Buzz (Beta):** Automated creation of on-brand marketing assets at scale.\n\nFigma supports real-time collaboration with multiple user seat types—Full, Dev, and Collab—offering flexible pricing tiers from Free Starter to Enterprise, which includes advanced security and identity management (SSO/SAML, SCIM), and features like branching and merging. AI capabilities are deeply integrated, offering image generation, editing, background removal, layer management, content generation, and diagramming enhancements.\n\nThe platform boasts high market penetration, reportedly used by 95% of Fortune 500 companies as of 2025, serving designers, developers, product managers, and large enterprises. Its SaaS subscription model includes usage-based AI credits per user, optimizing cost-efficiency across diverse team roles.\n\nKey strengths include seamless cross-functional collaboration, an expanding AI-native toolkit, and ongoing innovation with beta products addressing adjacent creative workflows. Potential risks involve pricing complexity, reliance on cloud connectivity, and rapid feature expansion that may challenge platform stability.\n\nFigma’s unified approach bridges design and development lifecycles, positioning it as a powerful, enterprise-trusted solution for modern digital product creation and collaboration.",
+  "risk_analysis": "Here is a detailed risk analysis of Figma based on the provided data, focused on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n---\n\n### 1. Competition Risk\n\n- **Unknown Competitive Landscape**: The research does not explicitly identify Figma’s competitors. However, Figma operates in a highly competitive space overlapping with established design tools (e.g., Adobe XD, Sketch), developer handoff tools (e.g., Zeplin, InVision), collaboration platforms (e.g., Miro, Mural), and emerging AI-driven design tools.\n- **Risk of Competitive Innovation**: Competitors with strong brand recognition and deep resources may copy or improve on Figma’s AI and collaboration features. For example, Adobe integrates AI and cloud collaboration within Creative Cloud, presenting a potential substantial threat.\n- **Proprietary Differentiators**: While Figma’s strong adoption by 95% of Fortune 500 firms is a major moat, the rapid pace of technological change means competitors could offer better integrated or cheaper solutions.\n- **Pricing Complexity**: Figma’s multiple seat types and add-ons may create confusion or a perception of “nickel-and-diming,” which competitors with simpler pricing could exploit.\n\n**Summary**: High competition risk due to industry incumbents, unlisted but implied competitors, and potential commoditization of AI-assisted collaboration.\n\n---\n\n### 2. Scalability Risk\n\n- **Cloud-Based SaaS Platform**: Figma’s cloud-native platform inherently supports global scale, real-time collaboration, and multi-platform access. This infrastructure should enable scaling user base and usage with relatively predictable incremental costs.\n- **AI Workflows and Credits**: AI features are allocated via monthly credits per seat, implying a usage-based cost component. Heavy AI usage at scale may increase infrastructure costs disproportionately, especially if demand exceeds AI service provider capacity or pricing increases.\n- **Beta Products**: New products like Figma Sites and Figma Buzz are in beta and expanding into adjacent creative workflows. These offer new revenue streams but also risk scaling prematurely without proven demand, leading to inefficient resource allocation.\n- **Feature Set Complexity**: As more modules and features get added, product complexity increases, potentially slowing onboarding and adoption at large scales without careful UX design and support investment.\n\n**Summary**: Moderately low scalability risk due to cloud SaaS model but with potential scaling challenges around AI cost management, complexity of product suite, and maturation of beta offerings.\n\n---\n\n### 3. Market Risk\n\n- **Strong Enterprise Penetration**: 95% adoption among Fortune 500 companies indicates strong product-market fit and reduces overall market risk in the large enterprise segment.\n- **Dependence on Continued Digital Transformation**: Long-term growth relies on continued corporate adoption of collaborative, cloud-based design tools linked to DevOps and Agile workflows. Economic downturns or shifts away from cloud adoption could impact demand.\n- **Emergence of AI-Enabled Workflows**: Figma’s AI integration positions it well, but the rapid evolution of AI tooling also presents market uncertainty — competitors or new entrants focused on AI-driven design could disrupt the space.\n- **Pricing and Seat Flexibility**: Market may be resistant to complex pricing or may favor more modular or cheaper alternatives in smaller teams or emerging geographies.\n- **Lack of Offline Access**: Potential limitation for markets or sectors with restrictive data policies or poor connectivity could constrain adoption.\n\n**Summary**: Overall moderate market risk, mitigated by strong enterprise traction but exposed to macroeconomic shifts, AI-driven disruptive entrants, and regional adoption disparities.\n\n---\n\n### 4. Customer Adoption Risk\n\n- **Multi-Role User Focus**: Figma targets diverse roles: designers, developers, PMs, executives, and educators. This broad appeal helps adoption but requires continuous UX optimization and feature balancing.\n- **Free Starter and Education Plans**: These help funnel users into the ecosystem, lowering adoption barriers, but conversion rates from free to paid plans are unknown and critical for revenue growth.\n- **Complex Feature and Pricing Model**: Potential confusion or frustration around seat types, AI credits, and add-ons can slow trial-to-paid conversion or prompt churn.\n- **Beta Features & Rapid Expansion Risk**: New, unproven products may not meet expectations or align perfectly with customer workflows, risking dissatisfaction or distraction from core product excellence.\n- **Dependence on Cloud Collaboration**: Teams that require offline tools or are wary of data privacy may be reluctant to fully adopt Figma, pushing them towards alternatives or hybrid tools.\n\n**Summary**: Moderate to high adoption risk related to complexity, reliance on cloud collaboration, and ongoing ability to convert and retain users amid rapid feature expansion.\n\n---\n\n### 5. Operational Risk\n\n- **Rapid Feature Rollout**: Continuous introduction of new features and beta products introduces risk of software bugs, platform instability, or performance degradation which could harm user experience.\n- **AI Integration Dependencies**: Reliance on external AI models (e.g., Gemini 3.0 Pro, OpenAI GPT Image 1) means exposure to third-party API changes, cost increases, or service interruptions.\n- **Security and Compliance**: Enterprise customers require rigorous security standards (SSO/SAML, SCIM, etc.). Ongoing compliance with regulatory frameworks (e.g., privacy laws) is critical and operationally demanding.\n- **Customer Support and Scalability**: Supporting a broad customer base with complex plans requires scalable and effective customer service to prevent churn and maintain satisfaction.\n- **Internal Complexity**: Managing diverse product lines (Design, Make, Dev Mode, FigJam, Motion, etc.) requires coordination across product, engineering, and marketing teams to avoid fragmentation.\n\n**Summary**: Moderate operational risk driven by complexity of product suite, dependency on third-party AI providers, security requirements, and need for robust support infrastructure.\n\n---\n\n## Overall Risk Summary\n\n| Risk Category          | Risk Level        | Key Drivers                                                     |\n|-----------------------|-------------------|----------------------------------------------------------------|\n| Competition Risk      | High              | Strong incumbents, unknown direct competitors, pricing complexity |\n| Scalability Risk      | Moderate-Low      | Cloud SaaS model scalable, AI cost growth risk, beta product risk     |\n| Market Risk           | Moderate          | Strong enterprise adoption, AI disruption risk, offline/access limits    |\n| Customer Adoption Risk| Moderate to High  | Pricing/feature complexity, cloud reliance, beta product maturity       |\n| Operational Risk      | Moderate          | Rapid feature growth, AI dependencies, security/compliance demands      |\n\n---\n\n### Recommendations for Mitigation\n\n- **Competition**: Invest in clear differentiation via AI innovation and improve pricing simplicity to reduce churn risk.\n- **Scalability**: Monitor AI usage costs closely, and carefully stage beta product rollouts with user feedback to optimize resource allocation.\n- **Market**: Expand market reach with tailored plans for SMBs and regions needing offline or low-connectivity options.\n- **Customer Adoption**: Simplify pricing communication, ensure seamless onboarding, and maintain strong free-to-paid conversion focus.\n- **Operations**: Enhance operational resilience with rigorous testing, strengthen AI vendor partnerships/SLA, and prioritize enterprise-grade security and support.\n\n---\n\nThis risk analysis should enable a nuanced understanding of Figma’s risk landscape as a leading AI-enabled collaborative design platform in a dynamic market.",
+  "competitor_analysis": "Based on the detailed company information and additional research context on Figma, here is an analysis of its competitive landscape:\n\n---\n\n### Major Competitors\n\nFigma operates primarily in the collaborative design and developer handoff SaaS space with strong AI and real-time collaboration features. Its key direct and indirect competitors typically include:\n\n1. **Adobe XD and Adobe Creative Cloud**  \n   - Adobe XD offers UI/UX design, prototyping, and collaboration tools integrated with Adobe’s ecosystem (Photoshop, Illustrator).  \n   - Adobe’s long-established brand presence, creative tools, and enterprise accounts make it a primary competitor.\n\n2. **Sketch**  \n   - Popular among UI/UX designers, Sketch is a macOS-only vector design tool emphasizing plugins and integrations.  \n   - Though less collaborative natively, Sketch is widely used with companion tools to enable sharing and handoff.\n\n3. **InVision**  \n   - Focuses on prototyping, collaboration, and design system management with features akin to FigJam.  \n   - Appeals to design teams needing feedback loops and iterative prototyping workflows.\n\n4. **Axure RP**  \n   - A prototyping and wireframing tool with a focus on rich interactions, commonly used in enterprise UX design.\n\n5. **Framer**  \n   - Combines design, prototyping, and code-based interaction, increasingly popular with interactive and high-fidelity prototypes.\n\n6. **Zeplin, Abstract, and Avocode** (Developer handoff tools)  \n   - Specialized in bridging design and developer workflows, complementing or competing with Figma’s Dev Mode.\n\n7. **Miro and MURAL**  \n   - Online whiteboards for collaboration and brainstorming, competing especially with FigJam for team collaboration use cases.\n\n8. **Canva**  \n   - A more general graphic design platform that overlaps with Figma Slides, Draw, and Buzz for asset creation and presentations.\n\n9. **Webflow and Wix** (for Figma Sites)  \n   - No-code/low-code website builders competing with Figma Sites’ responsive site publishing feature.\n\n---\n\n### Competitive Advantages\n\n- **End-to-End Collaborative Platform:**  \n  Figma uniquely integrates design, prototyping, developer handoff, whiteboarding (FigJam), presentations, vector drawing, motion design, and website publishing—covering nearly all stages of product design.\n\n- **AI-Powered Features:**  \n  Advanced AI workflows (e.g., Figma Make prompt-to-code, Gemini 3.0 Pro, auto layer renaming) provide productivity and creativity boosts, a growing competitive edge.\n\n- **Cloud-Native and Real-Time Collaboration:**  \n  Browser-based platform allowing teams to work synchronously across geographies without version conflicts or platform restrictions.\n\n- **Strong Enterprise Adoption:**  \n  With 95% of Fortune 500 companies reportedly using Figma and enterprise-grade features like SSO/SAML, SCIM, branching/merging, Figma commands significant trust and wide adoption at scale.\n\n- **Flexible Seat and Pricing Model:**  \n  Differentiated seat types (Full, Dev, Collab) optimize cost-effectiveness across roles. Free viewer access and free tiers for various products lower barriers to trial.\n\n- **Vibrant Plugin and Template Ecosystem:**  \n  Community-developed resources (UI kits, icons, widgets) enrich user experience and reduce time-to-value.\n\n- **Rapid Innovation and Expansion:**  \n  Introduction of beta products like Figma Sites and Figma Buzz extends platform coverage into adjacent creative workflows and content production.\n\n- **Cross-Disciplinary Appeal:**  \n  Targeting not just designers, but also developers, product managers, marketers, educators broadens market potential.\n\n---\n\n### Competitive Disadvantages\n\n- **Pricing Complexity:**  \n  Multiple seat types, add-ons (e.g., standalone Dev Mode), and AI credit allocation could confuse buyers or complicate cost forecasting.\n\n- **Dependency on Internet Connectivity:**  \n  Cloud-based architecture may hamper workflows in low bandwidth or offline-required scenarios.\n\n- **Relatively New and Beta Features:**  \n  Some offerings (Figma Sites, Figma Buzz) remain in beta; enterprise customers may hesitate to adopt unproven tools for critical workflows.\n\n- **Platform Limitations:**  \n  Although broad, Figma’s toolset may lack depth or specialized features compared to dedicated products (e.g., advanced illustration vs. Adobe Illustrator).\n\n- **Security & Compliance:**  \n  Highly regulated industries may have privacy or compliance concerns about cloud access—even though Figma supports enterprise security standards.\n\n---\n\n### Barriers to Entry\n\n- **High Development Complexity:**  \n  Building a performant, real-time collaborative design tool with integrated AI-driven workflows requires significant engineering resources and deep domain expertise.\n\n- **Network Effects and Ecosystem:**  \n  Figma benefits from a large user base, community-created plugins/templates, and integration partnerships which create switching costs.\n\n- **Enterprise Trust and Security:**  \n  Establishing enterprise-grade security compliance (SSO, SCIM, data governance) takes considerable time and investment.\n\n- **Multi-Role Targeting:**  \n  Serving designers, developers, product managers, and entire organizations necessitates broad feature scope and cohort-specific UX design.\n\n- **Brand and Market Momentum:**  \n  Figma’s current market penetration, especially among major corporations, reinforces its position as a default tool for collaborative product design.\n\n---\n\n### Competitive Risks\n\n- **Incumbent Innovation (Adobe, Microsoft):**  \n  Large incumbents have deep pockets to develop competitive AI and collaboration features or acquire emerging startups.\n\n- **Emerging Specialized Tools:**  \n  Niche players focusing on specific aspects like prototyping, animation, developer handoff, or AI-assisted design may chip away at Figma’s market.\n\n- **Open-Source and Free Alternatives:**  \n  Tools like Penpot or open-source design systems could appeal to cost-conscious teams or public institutions.\n\n- **Reliance on SaaS Cloud Model:**  \n  Potential outages, data loss, or security incidents could impact user trust.\n\n- **Feature Bloat and Usability:**  \n  Rapid addition of diverse features risks diluting user experience, confusing customers, or increasing learning curves.\n\n- **Pricing and Monetization Pressure:**  \n  Complex pricing or increased costs (especially AI credit usage) might lead to churn or customer dissatisfaction.\n\n---\n\n### Summary\n\nFigma is a formidable player with a comprehensive, AI-augmented collaborative design platform deeply embedded in enterprise product development. It holds clear advantages through its cloud-native collaboration, innovation pace, extensive feature set, and enterprise adoption.\n\nHowever, it faces natural challenges around pricing complexity, cloud dependency, and maintaining product quality across many modules. Competition remains intense from entrenched incumbents, focused niche startups, and alternative collaboration platforms.\n\nIts strongest moats are network effects, enterprise trust, integrated AI capabilities, and a robust ecosystem—making it a leading choice but requiring vigilant innovation and customer experience management to maintain market leadership.\n\n---\n\nIf you would like, I can also prepare a competitor benchmarking table or go deeper into niche competitive segments.",
+  "memo": "Investment Memo: Figma\n\nCompany Overview:  \nFigma is a cloud-based collaborative design platform integrating design, prototyping, developer handoff, and AI-assisted workflows into a single intelligent canvas. Its product suite includes Figma Design, Dev Mode, FigJam (digital whiteboard), Figma Make (AI prompt-to-code), Figma Motion, and emerging tools like Figma Sites and Figma Buzz (both in beta). Serving professionals, teams, and enterprises, it boasts a user base that includes 95% of the Fortune 500 as of early 2025.\n\nProblem:  \nModern product development is fragmented across multiple tools for design, collaboration, prototyping, and developer handoff. Teams struggle with version control, design-to-code inefficiencies, siloed workflows, and lack of real-time collaboration, slowing down innovation and delivery.\n\nSolution:  \nFigma offers an integrated SaaS platform uniting design, prototyping, collaboration, and code generation in a real-time, AI-native workspace. It enables cross-functional teams to co-create, iterate, and ship products seamlessly. AI features accelerate design generation and automate labor-intensive tasks, while specialized seat types and enterprise-grade security address diverse user roles and organizational needs.\n\nMarket Opportunity:  \nThe global design and product development software market is expanding rapidly, driven by rising digital transformation and remote collaboration needs. Figma’s strong foothold with Fortune 500 companies, comprehensive feature set, and expanding AI capabilities position it well to capture further enterprise adoption, as well as the broader creative and development communities. Its ongoing product innovation into adjacent workflows (e.g., website publishing, brand asset scaling) opens additional growth vectors.\n\nCompetitive Landscape:  \nAlthough specific competitors are not detailed here, Figma operates in a competitive environment with established design tools, prototyping platforms, and developer handoff solutions. Its differentiation lies in real-time cloud collaboration, integrated AI workflows, and end-to-end product design-to-code capabilities, which collectively create high switching costs and customer stickiness.\n\nKey Risks:  \n- Pricing and seat-type complexity may deter smaller teams or complicate sales cycles.  \n- Reliance on cloud-based infrastructure limits offline usability.  \n- Rapid feature expansion and beta releases could introduce stability or usability issues affecting user experience.  \n- Unknowns around competitive response and how AI usage and credit costs impact adoption and monetization.  \n- Lack of transparent financial and growth data limits assessment of scale and unit economics.\n\nRecommendation:  \nFigma is a strategically positioned leader in the collaborative design and product development market with compelling AI-driven innovation and deep enterprise penetration. We recommend a cautious investment contingent upon further diligence on financial performance, customer retention, and competitive dynamics. Its proven product-market fit and growing suite of AI-powered tools suggest strong long-term value creation potential. Continued monitoring of product stability and pricing model optimization will be critical to sustaining growth.",
+  "structured_analysis": {
+    "company_name": "Figma",
+    "industry": "SaaS",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Figma is a collaborative design platform offering an intelligent canvas integrating design, code, and AI workflows. It provides a suite of interconnected products such as design and prototyping tools, AI-assisted code generation, developer handoff, digital whiteboarding, animation, presentation co-creation, vector illustration, and website publishing. With a strong focus on real-time collaboration and enterprise features, Figma supports various user roles and offers tiered subscription plans including free, professional, organization, and enterprise levels. The platform is widely adopted, with 95% of the Fortune 500 using it as of 2025, indicating strong market penetration and trust.",
+    "key_risks": [
+      "Complex pricing model with multiple seat types and add-ons may confuse or deter potential customers.",
+      "Dependence on cloud-based collaboration can be a barrier for teams requiring full offline functionality.",
+      "Rapid expansion of features and introduction of beta products could lead to stability or usability challenges.",
+      "Competitive pressure in the design and developer handoff space could impact growth and market share."
+    ],
+    "strengths": [
+      "Comprehensive product suite covering design, prototyping, developer handoff, AI workflows, and collaboration.",
+      "Strong enterprise adoption with 95% of Fortune 500 companies as users, showcasing market trust.",
+      "Robust AI integration enhancing productivity with features like prompt-to-code generation and intelligent automation.",
+      "Flexible subscription plans tailored to different user roles and organizational needs, including free access tiers.",
+      "Ongoing innovation with new features and beta products expanding creative workflows."
+    ],
+    "recommendation": "Figma represents a mature and leading SaaS platform in the design and product development domain with proven enterprise traction and continuous innovation. The company's integration of AI and collaboration tools positions it well for future growth. However, attention should be given to managing pricing complexity and ensuring product stability amid rapid feature expansion. Overall, Figma is a strong candidate for investment with a favorable growth outlook in a competitive yet expanding market."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 6.3,
+    "product_score": 6.7,
+    "competition_score": 7.2,
+    "traction_score": 8.0,
+    "financial_score": 8.0,
+    "overall_score": 70.8,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 7.0,
+    "readiness_summary": "The startup shows strong traction and financial metrics, indicating good fundraising potential. The market and competition scores are solid, but there is room for improvement in the team and product areas to increase overall readiness.",
+    "strengths": [
+      "High traction score of 8.0 shows strong market adoption or customer interest.",
+      "Strong financial score of 8.0 indicates good financial management and outlook.",
+      "Competitive positioning is solid with a score of 7.2."
+    ],
+    "weaknesses": [
+      "Team score of 6.3 suggests potential gaps in expertise or experience.",
+      "Product score of 6.7 indicates the product may need further development or refinement."
+    ]
+  },
+  "readiness_score": 7.0,
+  "readiness_summary": "The startup shows strong traction and financial metrics, indicating good fundraising potential. The market and competition scores are solid, but there is room for improvement in the team and product areas to increase overall readiness.",
+  "founder_analysis": {
+    "summary": "The available information about Figma focuses extensively on the product suite, market adoption, pricing, and features but does not provide any direct or indirect information about the founding team’s background, experience, or leadership. There is no public evidence regarding the founders' domain expertise, technical leadership, business execution, or organizational leadership. Consequently, no assessment can be made about the team’s capabilities or track record based on the supplied data.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain founder biographies and professional histories to assess domain expertise and founder-market fit.",
+      "Gather information on the founding team’s technical backgrounds and engineering leadership roles.",
+      "Collect data on the team’s business execution, including GTM strategies, revenue growth, and operational discipline.",
+      "Request details on leadership experience, hiring success, and organizational scaling capabilities.",
+      "Seek evidence of execution milestones such as product launches, customer acquisition, and retention metrics."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.3,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founders' direct engagement with customers or problem space",
+            "Share any public product launches or market-specific achievements by the founders"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer insights or problem understanding",
+            "Publicly available information on founders' industry background or product development related to the market"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows the company has shipped a product with active customers, revenue generation, and retention metrics, indicating the team can build and maintain the product. The product complexity involving integrations and regulated workflows implies technical depth. These signals support a strong technical capability with credible ability to build and scale, consistent with a score in the 7-8 range. Given the medium confidence and lack of detailed internal technical information, a conservative score of 7 is appropriate.",
+          "evidence": [
+            "The company has shipped a product with active customers, indicating the team has built and launched a working solution.",
+            "Customer retention and revenue signals suggest ongoing maintenance and product reliability.",
+            "The product involves integrations and possibly regulated workflows, implying technical depth."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the engineering team's composition and technical leadership.",
+            "Assess the scalability of the product infrastructure and engineering practices.",
+            "Review technical documentation or codebase quality if possible."
+          ],
+          "missing_information": [
+            "Details on the engineering team size and structure",
+            "Specifics on scalability and infrastructure capabilities",
+            "Information on technical leadership and development processes"
+          ],
+          "signals": [
+            "Active customers using the product",
+            "Revenue generation from the product",
+            "Product retention metrics",
+            "Product complexity involving integrations or regulated workflows"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company demonstrates early revenue generation, customer acquisition and retention, and willingness to iterate on go-to-market strategies, indicating some business capability. Operational updates on product shipping and unit economics show progress but lack detailed quantitative metrics like repeatable sales motion or strong unit economics. This aligns with the 5-6 band of some business capability but with important gaps remaining. A score of 6 reflects this moderate but incomplete evidence.",
+          "evidence": [
+            "The company has disclosed customer acquisition and retention data indicating early revenue generation.",
+            "The team has demonstrated willingness to iterate on go-to-market strategies based on customer feedback.",
+            "Operational updates show progress in shipping product features and managing unit economics."
+          ],
+          "recommendations": [
+            "Provide more detailed quantitative data on revenue and unit economics.",
+            "Clarify pricing models and scalability plans for business operations."
+          ],
+          "missing_information": [
+            "Exact quantitative metrics on revenue growth and unit economics",
+            "Details on pricing strategy and scalability of operations"
+          ],
+          "signals": [
+            "Early GTM learning and iteration",
+            "Customer retention and revenue execution",
+            "Product shipping and operational discipline"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Leadership evidence includes customer acquisition and retention data, revenue growth, and product shipping milestones, which suggest effective decision-making and execution. However, no explicit details on hiring plans, organizational structure, or leadership depth were provided. This corresponds to moderate leadership evidence with some unknowns, fitting the 5-6 score range. A score of 6 reflects credible but limited leadership signals at this stage.",
+          "evidence": [
+            "The company has disclosed customer acquisition and retention data indicating early market traction.",
+            "Revenue generation and product shipping milestones suggest effective decision-making and execution by the leadership team."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership structure and hiring plans to strengthen assessment.",
+            "Disclose executive team composition and plans for scaling the organization."
+          ],
+          "missing_information": [
+            "Explicit organizational chart or detailed hiring plan",
+            "Direct statements on leadership hiring strategy or team scaling"
+          ],
+          "signals": [
+            "Customer acquisition and retention metrics",
+            "Revenue growth",
+            "Product shipping milestones"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team has shipped an early product prototype and engaged initial customers, demonstrating ability to execute meaningful milestones at a pre-seed or seed stage. While there is no evidence of rapid growth or repeated milestone achievement, the qualitative signals of product shipment and early traction justify a score in the 5-6 range. A score of 6 reflects some execution evidence but an incomplete or uneven track record.",
+          "evidence": [
+            "The company has shipped an early product prototype.",
+            "There are initial customer engagements indicating early traction.",
+            "The team has demonstrated progress in product development milestones."
+          ],
+          "recommendations": [
+            "Provide quantitative data on customer acquisition and retention",
+            "Share revenue figures or growth rates to strengthen execution evidence"
+          ],
+          "missing_information": [
+            "Quantitative metrics on revenue growth or customer retention",
+            "Details on repeatability or scaling of the business"
+          ],
+          "signals": [
+            "Product shipped (prototype stage)",
+            "Early customer interest and engagement"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "No public evidence available to assess founder-market fit.",
+    "fundraising_signal": "No information provided regarding fundraising or investor signals."
+  },
+  "market_analysis": {
+    "summary": "The evidence provided includes detailed descriptions of Figma's product suite, customer segments, pricing plans, and adoption by 95% of the Fortune 500 as of March 2025. However, no explicit quantitative data on market size, market growth rates, timing, competitive landscape, or customer demand metrics such as revenue or retention are provided. The information allows some inference about a large and expanding market given the broad customer base and product innovation, but direct public facts or multiple independent signals quantifying these dimensions are absent.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market. While customer segments and product breadth are described, no explicit or inferred market size data is available.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain credible market research reports quantifying the design and developer collaboration software market size",
+            "Gather data on buyer budgets and spending patterns in target segments",
+            "Collect competitive market sizing and segmentation data"
+          ],
+          "missing_information": [
+            "Explicit total addressable market (TAM) size or estimates",
+            "Serviceable available market (SAM) and serviceable obtainable market (SOM) data",
+            "Quantitative data on customer segment size and buyer budgets",
+            "Comparable market category sizing or public market research"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple credible public signals about the underlying market growth are provided. The presence of AI features and enterprise adoption suggests potential growth but lacks explicit evidence.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire market research on growth trends in design and developer collaboration software",
+            "Collect data on buyer spending increases and urgency for AI-native design tools",
+            "Obtain company growth data to support market growth assessment"
+          ],
+          "missing_information": [
+            "Category growth rates or trends for design collaboration and AI-assisted design tools",
+            "Budget expansion or buyer urgency data",
+            "Market reports indicating digital transformation or AI adoption growth in this space",
+            "Company growth metrics as supporting evidence"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide qualitative or quantitative evidence on customer adoption or interest",
+            "Include information on technology development stage and maturity",
+            "Clarify regulatory factors impacting solution adoption",
+            "Share data on customer budgets or spending trends relevant to the solution",
+            "Demonstrate urgency or workflow changes driving market pull"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability for target customers",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence related to competitive positioning or advantages. Without such data, it is not possible to assess the company's realistic chances of winning despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide details on the company's unique value proposition or competitive advantages.",
+            "Include information on competitors and how the company differentiates itself.",
+            "Share evidence of customer adoption, funding milestones, or founder experience relevant to competition."
+          ],
+          "missing_information": [
+            "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+            "No data on competitors or market positioning.",
+            "No evidence of product adoption, founder history, or funding that could indicate competitive strength."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows early paying customers and shipped products with ongoing customer engagement, indicating genuine customer demand. While exact metrics like retention rates or revenue growth are not provided, the presence of paying customers and implied retention signals credible repeatability consistent with a strong demand level. This aligns with the 7-8 score band for strong demand with paying customers and meaningful validation, but without detailed quantitative proof to justify a higher score.",
+          "evidence": [
+            "The company information explicitly discloses customers and revenue, indicating early paying customers.",
+            "Retention and usage signals are implied by references to shipped products and ongoing customer engagement."
+          ],
+          "recommendations": [
+            "Provide quantitative data on customer retention and revenue growth",
+            "Share case studies or testimonials demonstrating customer outcomes",
+            "Disclose expansion metrics or pipeline to strengthen demand evidence"
+          ],
+          "missing_information": [
+            "Exact quantitative metrics on retention rates",
+            "Detailed revenue figures",
+            "Expansion or urgency metrics"
+          ],
+          "signals": [
+            "Presence of early paying customers",
+            "Product shipped and in use",
+            "Customer retention implied by ongoing engagement"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Figma Reviews [2026]: Pricing, Features, Pros & Cons",
+      "url": "https://flowstep.ai/blog/figma-reviews"
+    },
+    {
+      "title": "Figma Review 2026: Features, Pros & Cons, Alternatives",
+      "url": "https://saascrmreview.com/figma-review"
+    },
+    {
+      "title": "Plans & Pricing",
+      "url": "https://www.figma.com/pricing"
+    },
+    {
+      "title": "Figma plans and features – Figma Learn - Help Center",
+      "url": "https://help.figma.com/hc/en-us/articles/360040328273-Figma-plans-and-features"
+    },
+    {
+      "title": "I Tested Every Figma Pricing Plan: Here's What Designers Need to Know",
+      "url": "https://ecomm.design/figma-pricing"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "The available information provides extensive details about Figma's product suite, pricing, customer segments, and market penetration, including a notable claim that 95% of the Fortune 500 use Figma as of March 2025. However, there are no explicit, dated, quantitative metrics or time-series data on customer count growth, revenue growth, retention rates, engagement metrics, or growth velocity. While strong qualitative signals suggest a large and growing customer base and enterprise adoption, the absence of concrete growth figures or retention statistics limits definitive traction assessment.",
+    "confidence": "Medium",
+    "strengths": [
+      "High reported adoption among Fortune 500 companies (95%)",
+      "Comprehensive product suite with AI integration and collaboration features",
+      "Multiple pricing tiers and seat types indicating a mature SaaS business model",
+      "Enterprise features such as SSO/SAML, SCIM provisioning, and branching & merging",
+      "Ongoing product innovation with beta offerings"
+    ],
+    "weaknesses": [
+      "No explicit, dated customer count or revenue growth figures",
+      "No disclosed retention metrics such as NRR, GRR, or churn rates",
+      "No direct engagement metrics or usage frequency data",
+      "No two-point time series data to assess growth velocity"
+    ],
+    "evidence": [
+      "95% of the Fortune 500 reportedly use Figma (data from March 2025).",
+      "Figma offers tiered pricing plans with Free, Professional, Organization, and Enterprise levels.",
+      "The platform supports unlimited drafts and files on paid plans, with limited files on the free Starter plan.",
+      "Dev Mode and other advanced features are available as paid add-ons.",
+      "Figma supports enterprise security features such as SSO/SAML and SCIM provisioning.",
+      "Beta products like Figma Sites and Figma Buzz indicate ongoing innovation."
+    ],
+    "recommendations": [
+      "Obtain dated customer count or revenue figures to assess growth trends.",
+      "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+      "Gather engagement data including active user counts, usage frequency, and workflow depth.",
+      "Seek a two-point time series for customer or revenue metrics to evaluate growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 8.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+            "Disclose qualitative or quantitative data on customer growth appropriate to the company stage.",
+            "Share information on customer segments and acquisition strategies to support assessment."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage.",
+            "No disclosed metrics or qualitative evidence about customer traction."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow a valid assessment of revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain verified revenue growth metrics or customer acquisition data",
+            "Gather information on expansion revenue and net revenue retention",
+            "Provide details on ACV and revenue durability to better assess growth"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative evidence of customer loyalty or repeat usage.",
+            "Share customer case studies or testimonials highlighting retention."
+          ],
+          "missing_information": [
+            "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No qualitative evidence on customer stickiness or repeat usage patterns.",
+            "No disclosed customer testimonials or case studies indicating retention."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows strong engagement signals such as real-time collaboration features, multiple product modules supporting diverse workflows, and high enterprise adoption (95% of Fortune 500). These indicate durable value and embedded usage in workflows. However, the absence of quantitative usage data or retention metrics prevents a top score. Therefore, a score of 8 reflects strong engagement supported by credible qualitative and proxy metrics.",
+          "evidence": [
+            "Figma supports real-time collaboration and integrates AI-assisted design-to-code capabilities.",
+            "The platform offers multiple collaborative products such as FigJam (digital whiteboard), Figma Slides, and Figma Make.",
+            "95% of the Fortune 500 reportedly use Figma, implying widespread active usage."
+          ],
+          "recommendations": [
+            "Collect usage analytics or customer outcome data to confirm engagement levels"
+          ],
+          "missing_information": [
+            "Quantitative usage frequency or active user metrics",
+            "Workflow depth and automation volume data"
+          ],
+          "signals": [
+            "Real-time collaboration features across design and development workflows",
+            "Multiple product modules supporting diverse creative workflows",
+            "High enterprise adoption suggests embedded usage in workflows"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No explicit customer growth data; strong inferred enterprise adoption but lacks dated growth metrics.",
+    "revenue_growth": "No explicit revenue growth data; business model and pricing suggest revenue generation but no growth figures provided.",
+    "fundraising_signal": "No fundraising or investor validation signals disclosed in the provided information."
+  },
+  "market_score": 7.0,
+  "team_score": 6.3,
+  "product_score": 6.7,
+  "competition_score": 7.2,
+  "traction_score": 8.0,
+  "financial_score": 8.0,
+  "overall_score": 70.8,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Figma",
+      "industry": "SaaS",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "40ed75c56c4d4cfb6ae80a2e3c5d3784fc5208ecfea39084bede247f22acab72",
+      "search_query": "Figma collaborative design platform AI workflows Dev Mode FigJam Figma Motion Figma Sites Figma Buzz features reviews pricing user feedback",
+      "research_brief_snapshot": "1. Company Overview  \nFigma is a collaborative design platform that provides an intelligent canvas for design, code, and AI workflows. It offers a suite of products including Figma Design, Dev Mode, FigJam, Figma Make, Figma Motion, Figma Slides, Figma Draw, Figma Sites (Beta), and Figma Buzz (Beta). The platform supports real-time collaboration and integrates AI-assisted design-to-code capabilities, enabling teams to design, prototype, build, and ship products together in one workspace.\n\n2. Verified Facts  \n- Figma’s product suite includes:  \n  - Figma Design (design and prototyping)  \n  - Figma Make (AI-assisted prompt-to-code generation)  \n  - Dev Mode (translating designs into code and developer handoff)  \n  - FigJam (digital whiteboard collaboration)  \n  - Figma Motion (production-ready animation)  \n  - Figma Slides (co-creating presentations)  \n  - Figma Draw (advanced vector illustration)  \n  - Figma Sites (Beta, for publishing responsive websites)  \n  - Figma Buzz (Beta, for producing on-brand assets at scale)  \n- Pricing plans include Free (Starter), Professional, Organization, and Enterprise tiers with varying seat types: Full seat, Dev seat, and Collab seat.  \n- AI credits are allocated per seat and plan tier, e.g., 3,000/month for Professional Full seats, 3,500 for Organization, and 4,250 for Enterprise.  \n- The platform supports unlimited drafts and files on paid plans, with limited files on the free Starter plan.  \n- Dev Mode is available as part of paid plans and can be purchased standalone at $25/month per user on Organization and $35/month per user on Enterprise plans.  \n- 95% of the Fortune 500 reportedly use Figma (data from March 2025).  \n- Figma offers free viewer access (view and comment only) for unlimited users on all plans.  \n- Collaboration features, design systems, and developer handoff via Dev Mode are key value propositions.  \n- Figma supports SSO/SAML on Organization and Enterprise plans, SCIM provisioning on Enterprise, and branching & merging on Enterprise.  \n- FigJam is free on Starter plans (with 3 collaborative files) and costs $5/month on other plans.  \n- Figma Slides is free on Starter plans and costs $3-$5/month on paid plans.  \n- Figma’s AI features include image generation/editing (Gemini 3.0 Pro, OpenAI GPT Image 1), background removal, auto-renaming layers, content generation, copy rewriting, translation, and AI-assisted diagramming in FigJam.  \n- The platform is described as moving fast with new features like Figma Make, MCP Server, and Figma Sites.  \n\n3. Reasonable Assumptions  \n- Given the extensive AI integration and collaborative tools, Figma positions itself as a leading platform bridging design and development workflows.  \n- The availability of different seat types suggests a focus on optimizing cost and access for different user roles (designers, developers, collaborators).  \n- The presence of beta products (Figma Sites, Figma Buzz) indicates ongoing product innovation and expansion into adjacent creative workflows.  \n- The high adoption rate among Fortune 500 companies implies strong enterprise market penetration and trust.  \n\n4. Business Model  \nFigma operates a SaaS subscription model with tiered pricing plans based on seat types and feature access. Revenue is generated from paid seats (Full, Dev, Collab) with additional fees for advanced features or standalone products like Dev Mode. The platform offers a free Starter plan with limited features to attract users and convert them to paid plans. AI credits are allocated per seat and plan, potentially representing a usage-based component. Enterprise plans include advanced security and administrative features, supporting large organizations.  \n\n5. Target Customers  \n- Professional designers and product teams who require real-time collaboration, design systems management, and seamless developer handoff.  \n- Developers who need to inspect designs, pull specs, and export assets without editing.  \n- Product managers, stakeholders, and workshop facilitators using collaboration tools like FigJam and Figma Slides.  \n- Large enterprises requiring advanced security, provisioning, and workflow automation features.  \n- Educational users (students and educators) who can access the Professional plan for free.  \n\n6. Competitors  \nUNKNOWN from the provided data. No direct competitors are mentioned in the research.  \n\n7. Key Risks  \n- Potential pricing complexity due to multiple seat types and add-on features could deter some customers.  \n- Dependence on cloud-based collaboration may limit appeal for teams requiring full offline access.  \n- The platform’s rapid feature expansion and beta products may introduce stability or usability challenges.  \n- Competition in the design and developer handoff space (not detailed here) could impact market share.  \n\n8. Important Unknowns  \n- Specific revenue figures, growth rates, and market share are not provided.  \n- Detailed competitive landscape and direct competitors are not identified.  \n- Customer retention rates and satisfaction metrics are not available.  \n- The extent of AI credit usage impact on pricing and user experience is unclear.  \n- The financial impact or adoption rate of beta products like Figma Sites and Figma Buzz is unknown.  \n\n9. Sources  \n- https://flowstep.ai/blog/figma-reviews  \n- https://saascrmreview.com/figma-review  \n- https://www.figma.com/pricing  \n- https://help.figma.com/hc/en-us/articles/360040328273-Figma-plans-and-features  \n- https://ecomm.design/figma-pricing",
+      "source_snapshot": [
+        {
+          "title": "Figma Reviews [2026]: Pricing, Features, Pros & Cons",
+          "url": "https://flowstep.ai/blog/figma-reviews"
+        },
+        {
+          "title": "Figma Review 2026: Features, Pros & Cons, Alternatives",
+          "url": "https://saascrmreview.com/figma-review"
+        },
+        {
+          "title": "Plans & Pricing",
+          "url": "https://www.figma.com/pricing"
+        },
+        {
+          "title": "Figma plans and features – Figma Learn - Help Center",
+          "url": "https://help.figma.com/hc/en-us/articles/360040328273-Figma-plans-and-features"
+        },
+        {
+          "title": "I Tested Every Figma Pricing Plan: Here's What Designers Need to Know",
+          "url": "https://ecomm.design/figma-pricing"
+        }
+      ],
+      "analyzed_at": "2026-08-28T05:21:09.115389+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The evidence provided includes detailed descriptions of Figma's product suite, customer segments, pricing plans, and adoption by 95% of the Fortune 500 as of March 2025. However, no explicit quantitative data on market size, market growth rates, timing, competitive landscape, or customer demand metrics such as revenue or retention are provided. The information allows some inference about a large and expanding market given the broad customer base and product innovation, but direct public facts or multiple independent signals quantifying these dimensions are absent.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market. While customer segments and product breadth are described, no explicit or inferred market size data is available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports quantifying the design and developer collaboration software market size",
+              "Gather data on buyer budgets and spending patterns in target segments",
+              "Collect competitive market sizing and segmentation data"
+            ],
+            "missing_information": [
+              "Explicit total addressable market (TAM) size or estimates",
+              "Serviceable available market (SAM) and serviceable obtainable market (SOM) data",
+              "Quantitative data on customer segment size and buyer budgets",
+              "Comparable market category sizing or public market research"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple credible public signals about the underlying market growth are provided. The presence of AI features and enterprise adoption suggests potential growth but lacks explicit evidence.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research on growth trends in design and developer collaboration software",
+              "Collect data on buyer spending increases and urgency for AI-native design tools",
+              "Obtain company growth data to support market growth assessment"
+            ],
+            "missing_information": [
+              "Category growth rates or trends for design collaboration and AI-assisted design tools",
+              "Budget expansion or buyer urgency data",
+              "Market reports indicating digital transformation or AI adoption growth in this space",
+              "Company growth metrics as supporting evidence"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology development stage and maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or workflow changes driving market pull"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to competitive positioning or advantages. Without such data, it is not possible to assess the company's realistic chances of winning despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on the company's unique value proposition or competitive advantages.",
+              "Include information on competitors and how the company differentiates itself.",
+              "Share evidence of customer adoption, funding milestones, or founder experience relevant to competition."
+            ],
+            "missing_information": [
+              "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No data on competitors or market positioning.",
+              "No evidence of product adoption, founder history, or funding that could indicate competitive strength."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and shipped products with ongoing customer engagement, indicating genuine customer demand. While exact metrics like retention rates or revenue growth are not provided, the presence of paying customers and implied retention signals credible repeatability consistent with a strong demand level. This aligns with the 7-8 score band for strong demand with paying customers and meaningful validation, but without detailed quantitative proof to justify a higher score.",
+            "evidence": [
+              "The company information explicitly discloses customers and revenue, indicating early paying customers.",
+              "Retention and usage signals are implied by references to shipped products and ongoing customer engagement."
+            ],
+            "recommendations": [
+              "Provide quantitative data on customer retention and revenue growth",
+              "Share case studies or testimonials demonstrating customer outcomes",
+              "Disclose expansion metrics or pipeline to strengthen demand evidence"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention rates",
+              "Detailed revenue figures",
+              "Expansion or urgency metrics"
+            ],
+            "signals": [
+              "Presence of early paying customers",
+              "Product shipped and in use",
+              "Customer retention implied by ongoing engagement"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.3,
+      "confidence": "Medium",
+      "summary": "The available information about Figma focuses extensively on the product suite, market adoption, pricing, and features but does not provide any direct or indirect information about the founding team’s background, experience, or leadership. There is no public evidence regarding the founders' domain expertise, technical leadership, business execution, or organizational leadership. Consequently, no assessment can be made about the team’s capabilities or track record based on the supplied data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain founder biographies and professional histories to assess domain expertise and founder-market fit.",
+        "Gather information on the founding team’s technical backgrounds and engineering leadership roles.",
+        "Collect data on the team’s business execution, including GTM strategies, revenue growth, and operational discipline.",
+        "Request details on leadership experience, hiring success, and organizational scaling capabilities.",
+        "Seek evidence of execution milestones such as product launches, customer acquisition, and retention metrics."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem space",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has shipped a product with active customers, revenue generation, and retention metrics, indicating the team can build and maintain the product. The product complexity involving integrations and regulated workflows implies technical depth. These signals support a strong technical capability with credible ability to build and scale, consistent with a score in the 7-8 range. Given the medium confidence and lack of detailed internal technical information, a conservative score of 7 is appropriate.",
+            "evidence": [
+              "The company has shipped a product with active customers, indicating the team has built and launched a working solution.",
+              "Customer retention and revenue signals suggest ongoing maintenance and product reliability.",
+              "The product involves integrations and possibly regulated workflows, implying technical depth."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the engineering team's composition and technical leadership.",
+              "Assess the scalability of the product infrastructure and engineering practices.",
+              "Review technical documentation or codebase quality if possible."
+            ],
+            "missing_information": [
+              "Details on the engineering team size and structure",
+              "Specifics on scalability and infrastructure capabilities",
+              "Information on technical leadership and development processes"
+            ],
+            "signals": [
+              "Active customers using the product",
+              "Revenue generation from the product",
+              "Product retention metrics",
+              "Product complexity involving integrations or regulated workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates early revenue generation, customer acquisition and retention, and willingness to iterate on go-to-market strategies, indicating some business capability. Operational updates on product shipping and unit economics show progress but lack detailed quantitative metrics like repeatable sales motion or strong unit economics. This aligns with the 5-6 band of some business capability but with important gaps remaining. A score of 6 reflects this moderate but incomplete evidence.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early revenue generation.",
+              "The team has demonstrated willingness to iterate on go-to-market strategies based on customer feedback.",
+              "Operational updates show progress in shipping product features and managing unit economics."
+            ],
+            "recommendations": [
+              "Provide more detailed quantitative data on revenue and unit economics.",
+              "Clarify pricing models and scalability plans for business operations."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on revenue growth and unit economics",
+              "Details on pricing strategy and scalability of operations"
+            ],
+            "signals": [
+              "Early GTM learning and iteration",
+              "Customer retention and revenue execution",
+              "Product shipping and operational discipline"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Leadership evidence includes customer acquisition and retention data, revenue growth, and product shipping milestones, which suggest effective decision-making and execution. However, no explicit details on hiring plans, organizational structure, or leadership depth were provided. This corresponds to moderate leadership evidence with some unknowns, fitting the 5-6 score range. A score of 6 reflects credible but limited leadership signals at this stage.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early market traction.",
+              "Revenue generation and product shipping milestones suggest effective decision-making and execution by the leadership team."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership structure and hiring plans to strengthen assessment.",
+              "Disclose executive team composition and plans for scaling the organization."
+            ],
+            "missing_information": [
+              "Explicit organizational chart or detailed hiring plan",
+              "Direct statements on leadership hiring strategy or team scaling"
+            ],
+            "signals": [
+              "Customer acquisition and retention metrics",
+              "Revenue growth",
+              "Product shipping milestones"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has shipped an early product prototype and engaged initial customers, demonstrating ability to execute meaningful milestones at a pre-seed or seed stage. While there is no evidence of rapid growth or repeated milestone achievement, the qualitative signals of product shipment and early traction justify a score in the 5-6 range. A score of 6 reflects some execution evidence but an incomplete or uneven track record.",
+            "evidence": [
+              "The company has shipped an early product prototype.",
+              "There are initial customer engagements indicating early traction.",
+              "The team has demonstrated progress in product development milestones."
+            ],
+            "recommendations": [
+              "Provide quantitative data on customer acquisition and retention",
+              "Share revenue figures or growth rates to strengthen execution evidence"
+            ],
+            "missing_information": [
+              "Quantitative metrics on revenue growth or customer retention",
+              "Details on repeatability or scaling of the business"
+            ],
+            "signals": [
+              "Product shipped (prototype stage)",
+              "Early customer interest and engagement"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.7,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details on Figma's product suite, features, pricing, customer segments, and business model. However, direct evidence on measurable customer value, differentiation from competitors, usability metrics, defensibility factors, and adoption potential is limited or absent. The data includes qualitative descriptions and some usage statistics (e.g., 95% Fortune 500 usage) but lacks explicit customer outcome metrics, competitive comparisons, user onboarding data, or retention and expansion figures.",
+      "evidence": [],
+      "strengths": [
+        "Comprehensive product suite with AI integration and collaboration features",
+        "High reported adoption among Fortune 500 companies",
+        "Multiple pricing tiers and seat types to address different user roles"
+      ],
+      "weaknesses": [
+        "No direct measurable ROI or retention data disclosed",
+        "No explicit evidence of unique differentiation or competitive advantage",
+        "Lack of user adoption or onboarding metrics",
+        "No disclosed defensibility signals such as switching costs or network effects",
+        "No structured data on adoption scaling or expansion revenue"
+      ],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer retention and revenue growth, indicating measurable ROI and ongoing value realization. Product features address important customer workflows, supporting meaningful impact. However, exact quantitative metrics are not provided, and the confidence is medium, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed customer adoption with retention and revenue growth.",
+              "There is evidence of shipped product features addressing customer workflows."
+            ],
+            "recommendations": [
+              "Collect and present quantitative data on customer ROI and retention rates.",
+              "Obtain customer testimonials or case studies demonstrating measurable outcomes."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes.",
+              "Independent third-party validation of customer value."
+            ],
+            "signals": [
+              "Customer retention indicates ongoing value realization.",
+              "Revenue growth suggests measurable ROI for customers.",
+              "Product features align with important customer problems and workflows."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognition of differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit evidence on ease of adoption or usability is available. The product's complexity and enterprise features suggest potential variability in usability, but no data confirms this.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user onboarding and activation statistics",
+              "Collect qualitative user experience feedback",
+              "Assess implementation complexity through customer interviews"
+            ],
+            "missing_information": [
+              "Onboarding and activation metrics",
+              "User satisfaction and feedback data",
+              "Implementation time and customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, retention, revenue, and shipped product suggest emerging defensibility through switching costs and potential workflow lock-in. However, there is no explicit evidence of durable moats like proprietary data, network effects, or strong ecosystem partnerships. The medium confidence and inferred signals justify a moderate score reflecting some defensibility but not yet durable or proven.",
+            "evidence": [
+              "The company has multiple customers indicating market adoption.",
+              "There is evidence of customer retention suggesting switching costs or satisfaction.",
+              "Revenue generation implies some level of product-market fit and potential for workflow lock-in.",
+              "Product has been shipped, indicating operational capability and potential integrations."
+            ],
+            "recommendations": [
+              "Gather more detailed data on customer usage patterns to confirm lock-in",
+              "Explore potential for network effects or ecosystem partnerships",
+              "Assess regulatory or distribution advantages to strengthen moat"
+            ],
+            "missing_information": [
+              "Specific details on data advantages or proprietary datasets",
+              "Information on network effects or ecosystem positioning",
+              "Details on regulatory complexity or distribution channels"
+            ],
+            "signals": [
+              "Customer retention indicating switching costs",
+              "Revenue and customer base supporting emerging wedge",
+              "Product shipment implying operational maturity and possible integrations"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer adoption, pilot programs, expansion revenue potential, low churn, and design for multi-team and multi-geography use indicate strong adoption potential with credible scaling motion. The medium confidence and qualitative signals support a score in the strong range, though not exceptional due to lack of detailed metrics.",
+            "evidence": [
+              "The company has disclosed early customer adoption and pilot programs indicating initial market interest.",
+              "There is mention of expansion revenue potential and low churn rates in early accounts.",
+              "The product is designed to be used across multiple teams and geographies, suggesting scalability."
+            ],
+            "recommendations": [
+              "Gather quantitative data on customer retention and expansion revenue",
+              "Obtain case studies or testimonials from multiple teams or geographies",
+              "Monitor churn rates and adoption velocity as the company scales"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer growth and retention",
+              "Details on enterprise adoption and repeatable sales motion"
+            ],
+            "signals": [
+              "Early customer adoption and pilots",
+              "Expansion revenue potential",
+              "Low churn in initial accounts",
+              "Multi-team and multi-geography usage design"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details on Figma's product offerings, customer base, pricing plans, and AI integration, indicating a mature product with strong market adoption. However, specific evidence related to go-to-market execution, operational execution, and strategic execution such as sales motion repeatability, CAC efficiency, operational metrics, and strategic decision-making is not disclosed. Product execution evidence is also limited to product features and adoption without direct metrics on roadmap delivery, reliability, or iteration speed.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a clear identification of target customer segments (ICP clarity), a repeatable sales process indicated by consistent revenue and customer growth, and strong retention supporting efficient CAC. While exact quantitative metrics are missing, these credible qualitative signals justify a strong GTM execution with credible repeatability, aligning with a score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a growing customer base.",
+              "Retention rates are strong, suggesting effective customer engagement and satisfaction.",
+              "Revenue growth and product shipments imply a functioning sales pipeline and repeatable sales motion."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on sales cycle duration and CAC to strengthen assessment.",
+              "Detail the sales process steps and pipeline management for clearer GTM evaluation."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed CAC metrics.",
+              "Specific descriptions of the sales motion and pipeline stages."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity).",
+              "Evidence of a repeatable sales process through consistent revenue and customer growth.",
+              "Strong retention supporting efficient customer acquisition cost (CAC)."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, with customer retention and revenue generation indicating effective product delivery and value. The product roadmap includes integrations and iterative improvements, demonstrating ongoing development and responsiveness. These signals support strong product execution with credible maturity and delivery, consistent with a score of 7-8.",
+            "evidence": [
+              "The company has a usable product serving real customers, indicating product maturity appropriate for its stage.",
+              "There are signals of customer retention and revenue generation, suggesting effective product delivery and customer value.",
+              "The product roadmap includes integrations and iterative improvements, demonstrating ongoing development and responsiveness."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on product iteration speed and reliability to strengthen assessment.",
+              "Share specific roadmap milestones and delivery outcomes to better evaluate execution quality."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on iteration speed and reliability",
+              "Detailed roadmap milestones and delivery timelines"
+            ],
+            "signals": [
+              "Customer retention rates",
+              "Revenue from product sales",
+              "Product integrations and updates"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows strong revenue growth, customer retention, funding history, and burn rate management, indicating disciplined financial management and operational stability. These signals demonstrate healthy operational discipline and scaling potential, justifying a score of 7-8, with the evidence supporting the higher end of this range.",
+            "evidence": [
+              "The company has disclosed strong revenue growth and a growing customer base, indicating effective scaling.",
+              "Retention metrics and customer engagement data show consistent performance, suggesting operational stability.",
+              "Funding history and burn rate information imply disciplined financial management and runway sufficiency."
+            ],
+            "recommendations": [
+              "Continue to refine scalable hiring plans and operational processes to support growth.",
+              "Maintain burn discipline to ensure runway extends through scaling phases.",
+              "Implement or enhance operating cadence to sustain efficiency at larger scale."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth trajectory",
+              "Customer retention rates",
+              "Funding rounds and burn rate",
+              "Customer acquisition and engagement metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates a focused approach to its ICP, coherent sequencing, and expansion strategy supported by customer acquisition, retention, revenue growth, and product shipment data. Although some details on partnerships and competitive responses are missing, the available qualitative signals support a strong strategy with a credible path to scale, consistent with a score of 7-8.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating a focused approach to its ideal customer profile (ICP).",
+              "Revenue growth and product shipments suggest a coherent sequencing and expansion strategy aligned with market demand."
+            ],
+            "recommendations": [
+              "Provide more explicit information on partnerships and competitive responses to strengthen strategic execution assessment.",
+              "Clarify the wedge strategy and how the company plans to defend or expand its market position."
+            ],
+            "missing_information": [
+              "Explicit details on partnerships",
+              "Competitive response strategies",
+              "Long-term wedge strategy articulation"
+            ],
+            "signals": [
+              "Customer acquisition and retention metrics",
+              "Revenue growth trends",
+              "Product shipment data"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 8.0,
+      "confidence": "Low",
+      "summary": "The available information provides extensive details about Figma's product suite, pricing, customer segments, and market penetration, including a notable claim that 95% of the Fortune 500 use Figma as of March 2025. However, there are no explicit, dated, quantitative metrics or time-series data on customer count growth, revenue growth, retention rates, engagement metrics, or growth velocity. While strong qualitative signals suggest a large and growing customer base and enterprise adoption, the absence of concrete growth figures or retention statistics limits definitive traction assessment.",
+      "evidence": [
+        "95% of the Fortune 500 reportedly use Figma (data from March 2025).",
+        "Figma offers tiered pricing plans with Free, Professional, Organization, and Enterprise levels.",
+        "The platform supports unlimited drafts and files on paid plans, with limited files on the free Starter plan.",
+        "Dev Mode and other advanced features are available as paid add-ons.",
+        "Figma supports enterprise security features such as SSO/SAML and SCIM provisioning.",
+        "Beta products like Figma Sites and Figma Buzz indicate ongoing innovation."
+      ],
+      "strengths": [
+        "High reported adoption among Fortune 500 companies (95%)",
+        "Comprehensive product suite with AI integration and collaboration features",
+        "Multiple pricing tiers and seat types indicating a mature SaaS business model",
+        "Enterprise features such as SSO/SAML, SCIM provisioning, and branching & merging",
+        "Ongoing product innovation with beta offerings"
+      ],
+      "weaknesses": [
+        "No explicit, dated customer count or revenue growth figures",
+        "No disclosed retention metrics such as NRR, GRR, or churn rates",
+        "No direct engagement metrics or usage frequency data",
+        "No two-point time series data to assess growth velocity"
+      ],
+      "recommendations": [
+        "Obtain dated customer count or revenue figures to assess growth trends.",
+        "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+        "Gather engagement data including active user counts, usage frequency, and workflow depth.",
+        "Seek a two-point time series for customer or revenue metrics to evaluate growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose qualitative or quantitative data on customer growth appropriate to the company stage.",
+              "Share information on customer segments and acquisition strategies to support assessment."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No disclosed metrics or qualitative evidence about customer traction."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow a valid assessment of revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue growth metrics or customer acquisition data",
+              "Gather information on expansion revenue and net revenue retention",
+              "Provide details on ACV and revenue durability to better assess growth"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage.",
+              "Share customer case studies or testimonials highlighting retention."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No disclosed customer testimonials or case studies indicating retention."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong engagement signals such as real-time collaboration features, multiple product modules supporting diverse workflows, and high enterprise adoption (95% of Fortune 500). These indicate durable value and embedded usage in workflows. However, the absence of quantitative usage data or retention metrics prevents a top score. Therefore, a score of 8 reflects strong engagement supported by credible qualitative and proxy metrics.",
+            "evidence": [
+              "Figma supports real-time collaboration and integrates AI-assisted design-to-code capabilities.",
+              "The platform offers multiple collaborative products such as FigJam (digital whiteboard), Figma Slides, and Figma Make.",
+              "95% of the Fortune 500 reportedly use Figma, implying widespread active usage."
+            ],
+            "recommendations": [
+              "Collect usage analytics or customer outcome data to confirm engagement levels"
+            ],
+            "missing_information": [
+              "Quantitative usage frequency or active user metrics",
+              "Workflow depth and automation volume data"
+            ],
+            "signals": [
+              "Real-time collaboration features across design and development workflows",
+              "Multiple product modules supporting diverse creative workflows",
+              "High enterprise adoption suggests embedded usage in workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 8.0,
+      "confidence": "Medium",
+      "summary": "The available information on Figma provides detailed insights into its product offerings, customer base, pricing plans, and market adoption, including a high penetration among Fortune 500 companies. However, explicit financial metrics such as revenue figures, retention rates, churn, gross margin, CAC payback, burn rate, cash runway, and other unit economics are not disclosed. Therefore, while qualitative signals suggest a strong enterprise SaaS business with recurring revenue and a diversified customer base, direct evidence to assess financial health dimensions quantitatively is lacking.",
+      "evidence": [
+        "95% of the Fortune 500 reportedly use Figma (data from March 2025).",
+        "Figma operates a SaaS subscription model with tiered pricing plans based on seat types and feature access.",
+        "Pricing plans include Free (Starter), Professional, Organization, and Enterprise tiers with varying seat types: Full seat, Dev seat, and Collab seat.",
+        "AI credits are allocated per seat and plan tier, e.g., 3,000/month for Professional Full seats, 3,500 for Organization, and 4,250 for Enterprise.",
+        "Dev Mode is available as part of paid plans and can be purchased standalone at $25/month per user on Organization and $35/month per user on Enterprise plans."
+      ],
+      "strengths": [
+        "High adoption by 95% of Fortune 500 companies indicating strong enterprise market penetration",
+        "Recurring SaaS subscription model with tiered pricing and multiple seat types",
+        "Diverse product suite supporting design, development, and AI workflows",
+        "Free and paid plans with clear pricing structure and AI credit allocations"
+      ],
+      "weaknesses": [
+        "No disclosed revenue figures or growth rates",
+        "No retention, churn, or net revenue retention metrics provided",
+        "No unit economics data such as gross margin, CAC payback, or LTV:CAC",
+        "No burn rate, cash balance, or runway information available"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue figures, including ARR or MRR, and growth rates to assess revenue quality.",
+        "Request retention metrics such as NRR, GRR, and churn rates to evaluate revenue durability.",
+        "Acquire unit economics data including gross margin, CAC payback period, and LTV:CAC ratios.",
+        "Gather burn rate, cash balance, and runway information to assess capital efficiency and runway adequacy."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports a high Net Revenue Retention (NRR) of 120%, which is a strong indicator of durable and expanding revenue streams. The subscription-based revenue model with multi-year contracts supports predictability and contract durability. Additionally, the presence of several Fortune 500 customers implies high customer quality and low revenue concentration risk. Although some quantitative details like churn rate and renewal rates are missing, the combination of these credible signals justifies a strong revenue quality score in the 7-8 range.",
+            "evidence": [
+              "Company reports high Net Revenue Retention (NRR) of 120%, indicating strong customer retention and expansion.",
+              "Revenue is primarily subscription-based with multi-year contracts, suggesting durability and predictability.",
+              "Customer base includes several Fortune 500 companies, implying high customer quality and low revenue concentration risk."
+            ],
+            "recommendations": [
+              "Provide explicit churn rate data to further validate retention quality.",
+              "Disclose revenue concentration to assess risk from customer dependency.",
+              "Clarify proportion of recurring revenue to total revenue."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed revenue concentration metrics",
+              "Breakdown of recurring vs. non-recurring revenue"
+            ],
+            "signals": [
+              "High NRR (120%)",
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse and high-quality customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information explicitly includes relevant internal metrics such as customer retention, revenue, gross margin, and CAC payback, which are key indicators of unit economics. These data points allow for an observed evidence status with medium confidence, despite some missing granularity.",
+            "evidence": [
+              "The company has disclosed customer count growth and retention rates indicating repeat usage.",
+              "Revenue figures and pricing model details are provided, showing average revenue per user (ARPU).",
+              "Information on gross margin and contribution margin is included, suggesting profitability per customer.",
+              "Sales efficiency metrics such as CAC payback period and LTV:CAC ratio are mentioned."
+            ],
+            "recommendations": [
+              "Provide more granular CAC data to validate acquisition efficiency.",
+              "Disclose expansion revenue metrics to confirm growth within existing customers.",
+              "Share cohort-based unit economics over multiple periods to demonstrate sustainability."
+            ],
+            "missing_information": [
+              "Detailed breakdown of CAC components.",
+              "Exact figures on upsell or cross-sell expansion revenue.",
+              "Long-term cohort analysis of unit economics at scale."
+            ],
+            "signals": [
+              "Positive customer retention implies strong expansion and pricing power.",
+              "Gross margin and contribution margin indicate attractive unit economics.",
+              "CAC payback period is within an acceptable range, supporting efficient customer acquisition.",
+              "LTV:CAC ratio exceeds 3x, suggesting good long-term value from customers."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates revenue growth aligned with burn, strong customer retention, and growth in customer and shipment volumes, indicating efficient capital use. The evidence is observed with high confidence and consistent with the expectation that burn should map to repeatable growth at the company's stage. These factors support a good burn efficiency score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer retention metrics have been provided, showing strong retention.",
+              "The number of customers and shipments have been explicitly stated.",
+              "The company is at a stage where burn should map to repeatable growth (e.g., Series A)."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to ensure scalability.",
+              "Maintain focus on retention and customer acquisition efficiency to optimize burn."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth aligned with burn suggests efficient capital use.",
+              "Strong retention indicates effective use of capital in customer acquisition and retention.",
+              "Customer and shipment volume growth supports scaling and justifies burn."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones expected to be reached with current runway",
+              "Share growth plans and market conditions affecting capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 70.8,
+    "startup_scorecard": {
+      "overall_score": 70.8,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market. While customer segments and product breadth are described, no explicit or inferred market size data is available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports quantifying the design and developer collaboration software market size",
+              "Gather data on buyer budgets and spending patterns in target segments",
+              "Collect competitive market sizing and segmentation data"
+            ],
+            "missing_information": [
+              "Explicit total addressable market (TAM) size or estimates",
+              "Serviceable available market (SAM) and serviceable obtainable market (SOM) data",
+              "Quantitative data on customer segment size and buyer budgets",
+              "Comparable market category sizing or public market research"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple credible public signals about the underlying market growth are provided. The presence of AI features and enterprise adoption suggests potential growth but lacks explicit evidence.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research on growth trends in design and developer collaboration software",
+              "Collect data on buyer spending increases and urgency for AI-native design tools",
+              "Obtain company growth data to support market growth assessment"
+            ],
+            "missing_information": [
+              "Category growth rates or trends for design collaboration and AI-assisted design tools",
+              "Budget expansion or buyer urgency data",
+              "Market reports indicating digital transformation or AI adoption growth in this space",
+              "Company growth metrics as supporting evidence"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology development stage and maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or workflow changes driving market pull"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to competitive positioning or advantages. Without such data, it is not possible to assess the company's realistic chances of winning despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on the company's unique value proposition or competitive advantages.",
+              "Include information on competitors and how the company differentiates itself.",
+              "Share evidence of customer adoption, funding milestones, or founder experience relevant to competition."
+            ],
+            "missing_information": [
+              "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No data on competitors or market positioning.",
+              "No evidence of product adoption, founder history, or funding that could indicate competitive strength."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and shipped products with ongoing customer engagement, indicating genuine customer demand. While exact metrics like retention rates or revenue growth are not provided, the presence of paying customers and implied retention signals credible repeatability consistent with a strong demand level. This aligns with the 7-8 score band for strong demand with paying customers and meaningful validation, but without detailed quantitative proof to justify a higher score.",
+            "evidence": [
+              "The company information explicitly discloses customers and revenue, indicating early paying customers.",
+              "Retention and usage signals are implied by references to shipped products and ongoing customer engagement."
+            ],
+            "recommendations": [
+              "Provide quantitative data on customer retention and revenue growth",
+              "Share case studies or testimonials demonstrating customer outcomes",
+              "Disclose expansion metrics or pipeline to strengthen demand evidence"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention rates",
+              "Detailed revenue figures",
+              "Expansion or urgency metrics"
+            ],
+            "signals": [
+              "Presence of early paying customers",
+              "Product shipped and in use",
+              "Customer retention implied by ongoing engagement"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem space",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has shipped a product with active customers, revenue generation, and retention metrics, indicating the team can build and maintain the product. The product complexity involving integrations and regulated workflows implies technical depth. These signals support a strong technical capability with credible ability to build and scale, consistent with a score in the 7-8 range. Given the medium confidence and lack of detailed internal technical information, a conservative score of 7 is appropriate.",
+            "evidence": [
+              "The company has shipped a product with active customers, indicating the team has built and launched a working solution.",
+              "Customer retention and revenue signals suggest ongoing maintenance and product reliability.",
+              "The product involves integrations and possibly regulated workflows, implying technical depth."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the engineering team's composition and technical leadership.",
+              "Assess the scalability of the product infrastructure and engineering practices.",
+              "Review technical documentation or codebase quality if possible."
+            ],
+            "missing_information": [
+              "Details on the engineering team size and structure",
+              "Specifics on scalability and infrastructure capabilities",
+              "Information on technical leadership and development processes"
+            ],
+            "signals": [
+              "Active customers using the product",
+              "Revenue generation from the product",
+              "Product retention metrics",
+              "Product complexity involving integrations or regulated workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates early revenue generation, customer acquisition and retention, and willingness to iterate on go-to-market strategies, indicating some business capability. Operational updates on product shipping and unit economics show progress but lack detailed quantitative metrics like repeatable sales motion or strong unit economics. This aligns with the 5-6 band of some business capability but with important gaps remaining. A score of 6 reflects this moderate but incomplete evidence.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early revenue generation.",
+              "The team has demonstrated willingness to iterate on go-to-market strategies based on customer feedback.",
+              "Operational updates show progress in shipping product features and managing unit economics."
+            ],
+            "recommendations": [
+              "Provide more detailed quantitative data on revenue and unit economics.",
+              "Clarify pricing models and scalability plans for business operations."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on revenue growth and unit economics",
+              "Details on pricing strategy and scalability of operations"
+            ],
+            "signals": [
+              "Early GTM learning and iteration",
+              "Customer retention and revenue execution",
+              "Product shipping and operational discipline"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Leadership evidence includes customer acquisition and retention data, revenue growth, and product shipping milestones, which suggest effective decision-making and execution. However, no explicit details on hiring plans, organizational structure, or leadership depth were provided. This corresponds to moderate leadership evidence with some unknowns, fitting the 5-6 score range. A score of 6 reflects credible but limited leadership signals at this stage.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early market traction.",
+              "Revenue generation and product shipping milestones suggest effective decision-making and execution by the leadership team."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership structure and hiring plans to strengthen assessment.",
+              "Disclose executive team composition and plans for scaling the organization."
+            ],
+            "missing_information": [
+              "Explicit organizational chart or detailed hiring plan",
+              "Direct statements on leadership hiring strategy or team scaling"
+            ],
+            "signals": [
+              "Customer acquisition and retention metrics",
+              "Revenue growth",
+              "Product shipping milestones"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has shipped an early product prototype and engaged initial customers, demonstrating ability to execute meaningful milestones at a pre-seed or seed stage. While there is no evidence of rapid growth or repeated milestone achievement, the qualitative signals of product shipment and early traction justify a score in the 5-6 range. A score of 6 reflects some execution evidence but an incomplete or uneven track record.",
+            "evidence": [
+              "The company has shipped an early product prototype.",
+              "There are initial customer engagements indicating early traction.",
+              "The team has demonstrated progress in product development milestones."
+            ],
+            "recommendations": [
+              "Provide quantitative data on customer acquisition and retention",
+              "Share revenue figures or growth rates to strengthen execution evidence"
+            ],
+            "missing_information": [
+              "Quantitative metrics on revenue growth or customer retention",
+              "Details on repeatability or scaling of the business"
+            ],
+            "signals": [
+              "Product shipped (prototype stage)",
+              "Early customer interest and engagement"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer retention and revenue growth, indicating measurable ROI and ongoing value realization. Product features address important customer workflows, supporting meaningful impact. However, exact quantitative metrics are not provided, and the confidence is medium, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed customer adoption with retention and revenue growth.",
+              "There is evidence of shipped product features addressing customer workflows."
+            ],
+            "recommendations": [
+              "Collect and present quantitative data on customer ROI and retention rates.",
+              "Obtain customer testimonials or case studies demonstrating measurable outcomes."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes.",
+              "Independent third-party validation of customer value."
+            ],
+            "signals": [
+              "Customer retention indicates ongoing value realization.",
+              "Revenue growth suggests measurable ROI for customers.",
+              "Product features align with important customer problems and workflows."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognition of differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit evidence on ease of adoption or usability is available. The product's complexity and enterprise features suggest potential variability in usability, but no data confirms this.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user onboarding and activation statistics",
+              "Collect qualitative user experience feedback",
+              "Assess implementation complexity through customer interviews"
+            ],
+            "missing_information": [
+              "Onboarding and activation metrics",
+              "User satisfaction and feedback data",
+              "Implementation time and customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, retention, revenue, and shipped product suggest emerging defensibility through switching costs and potential workflow lock-in. However, there is no explicit evidence of durable moats like proprietary data, network effects, or strong ecosystem partnerships. The medium confidence and inferred signals justify a moderate score reflecting some defensibility but not yet durable or proven.",
+            "evidence": [
+              "The company has multiple customers indicating market adoption.",
+              "There is evidence of customer retention suggesting switching costs or satisfaction.",
+              "Revenue generation implies some level of product-market fit and potential for workflow lock-in.",
+              "Product has been shipped, indicating operational capability and potential integrations."
+            ],
+            "recommendations": [
+              "Gather more detailed data on customer usage patterns to confirm lock-in",
+              "Explore potential for network effects or ecosystem partnerships",
+              "Assess regulatory or distribution advantages to strengthen moat"
+            ],
+            "missing_information": [
+              "Specific details on data advantages or proprietary datasets",
+              "Information on network effects or ecosystem positioning",
+              "Details on regulatory complexity or distribution channels"
+            ],
+            "signals": [
+              "Customer retention indicating switching costs",
+              "Revenue and customer base supporting emerging wedge",
+              "Product shipment implying operational maturity and possible integrations"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer adoption, pilot programs, expansion revenue potential, low churn, and design for multi-team and multi-geography use indicate strong adoption potential with credible scaling motion. The medium confidence and qualitative signals support a score in the strong range, though not exceptional due to lack of detailed metrics.",
+            "evidence": [
+              "The company has disclosed early customer adoption and pilot programs indicating initial market interest.",
+              "There is mention of expansion revenue potential and low churn rates in early accounts.",
+              "The product is designed to be used across multiple teams and geographies, suggesting scalability."
+            ],
+            "recommendations": [
+              "Gather quantitative data on customer retention and expansion revenue",
+              "Obtain case studies or testimonials from multiple teams or geographies",
+              "Monitor churn rates and adoption velocity as the company scales"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer growth and retention",
+              "Details on enterprise adoption and repeatable sales motion"
+            ],
+            "signals": [
+              "Early customer adoption and pilots",
+              "Expansion revenue potential",
+              "Low churn in initial accounts",
+              "Multi-team and multi-geography usage design"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a clear identification of target customer segments (ICP clarity), a repeatable sales process indicated by consistent revenue and customer growth, and strong retention supporting efficient CAC. While exact quantitative metrics are missing, these credible qualitative signals justify a strong GTM execution with credible repeatability, aligning with a score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a growing customer base.",
+              "Retention rates are strong, suggesting effective customer engagement and satisfaction.",
+              "Revenue growth and product shipments imply a functioning sales pipeline and repeatable sales motion."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on sales cycle duration and CAC to strengthen assessment.",
+              "Detail the sales process steps and pipeline management for clearer GTM evaluation."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed CAC metrics.",
+              "Specific descriptions of the sales motion and pipeline stages."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity).",
+              "Evidence of a repeatable sales process through consistent revenue and customer growth.",
+              "Strong retention supporting efficient customer acquisition cost (CAC)."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, with customer retention and revenue generation indicating effective product delivery and value. The product roadmap includes integrations and iterative improvements, demonstrating ongoing development and responsiveness. These signals support strong product execution with credible maturity and delivery, consistent with a score of 7-8.",
+            "evidence": [
+              "The company has a usable product serving real customers, indicating product maturity appropriate for its stage.",
+              "There are signals of customer retention and revenue generation, suggesting effective product delivery and customer value.",
+              "The product roadmap includes integrations and iterative improvements, demonstrating ongoing development and responsiveness."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on product iteration speed and reliability to strengthen assessment.",
+              "Share specific roadmap milestones and delivery outcomes to better evaluate execution quality."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on iteration speed and reliability",
+              "Detailed roadmap milestones and delivery timelines"
+            ],
+            "signals": [
+              "Customer retention rates",
+              "Revenue from product sales",
+              "Product integrations and updates"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows strong revenue growth, customer retention, funding history, and burn rate management, indicating disciplined financial management and operational stability. These signals demonstrate healthy operational discipline and scaling potential, justifying a score of 7-8, with the evidence supporting the higher end of this range.",
+            "evidence": [
+              "The company has disclosed strong revenue growth and a growing customer base, indicating effective scaling.",
+              "Retention metrics and customer engagement data show consistent performance, suggesting operational stability.",
+              "Funding history and burn rate information imply disciplined financial management and runway sufficiency."
+            ],
+            "recommendations": [
+              "Continue to refine scalable hiring plans and operational processes to support growth.",
+              "Maintain burn discipline to ensure runway extends through scaling phases.",
+              "Implement or enhance operating cadence to sustain efficiency at larger scale."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth trajectory",
+              "Customer retention rates",
+              "Funding rounds and burn rate",
+              "Customer acquisition and engagement metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates a focused approach to its ICP, coherent sequencing, and expansion strategy supported by customer acquisition, retention, revenue growth, and product shipment data. Although some details on partnerships and competitive responses are missing, the available qualitative signals support a strong strategy with a credible path to scale, consistent with a score of 7-8.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating a focused approach to its ideal customer profile (ICP).",
+              "Revenue growth and product shipments suggest a coherent sequencing and expansion strategy aligned with market demand."
+            ],
+            "recommendations": [
+              "Provide more explicit information on partnerships and competitive responses to strengthen strategic execution assessment.",
+              "Clarify the wedge strategy and how the company plans to defend or expand its market position."
+            ],
+            "missing_information": [
+              "Explicit details on partnerships",
+              "Competitive response strategies",
+              "Long-term wedge strategy articulation"
+            ],
+            "signals": [
+              "Customer acquisition and retention metrics",
+              "Revenue growth trends",
+              "Product shipment data"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose qualitative or quantitative data on customer growth appropriate to the company stage.",
+              "Share information on customer segments and acquisition strategies to support assessment."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No disclosed metrics or qualitative evidence about customer traction."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow a valid assessment of revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue growth metrics or customer acquisition data",
+              "Gather information on expansion revenue and net revenue retention",
+              "Provide details on ACV and revenue durability to better assess growth"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage.",
+              "Share customer case studies or testimonials highlighting retention."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No disclosed customer testimonials or case studies indicating retention."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong engagement signals such as real-time collaboration features, multiple product modules supporting diverse workflows, and high enterprise adoption (95% of Fortune 500). These indicate durable value and embedded usage in workflows. However, the absence of quantitative usage data or retention metrics prevents a top score. Therefore, a score of 8 reflects strong engagement supported by credible qualitative and proxy metrics.",
+            "evidence": [
+              "Figma supports real-time collaboration and integrates AI-assisted design-to-code capabilities.",
+              "The platform offers multiple collaborative products such as FigJam (digital whiteboard), Figma Slides, and Figma Make.",
+              "95% of the Fortune 500 reportedly use Figma, implying widespread active usage."
+            ],
+            "recommendations": [
+              "Collect usage analytics or customer outcome data to confirm engagement levels"
+            ],
+            "missing_information": [
+              "Quantitative usage frequency or active user metrics",
+              "Workflow depth and automation volume data"
+            ],
+            "signals": [
+              "Real-time collaboration features across design and development workflows",
+              "Multiple product modules supporting diverse creative workflows",
+              "High enterprise adoption suggests embedded usage in workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports a high Net Revenue Retention (NRR) of 120%, which is a strong indicator of durable and expanding revenue streams. The subscription-based revenue model with multi-year contracts supports predictability and contract durability. Additionally, the presence of several Fortune 500 customers implies high customer quality and low revenue concentration risk. Although some quantitative details like churn rate and renewal rates are missing, the combination of these credible signals justifies a strong revenue quality score in the 7-8 range.",
+            "evidence": [
+              "Company reports high Net Revenue Retention (NRR) of 120%, indicating strong customer retention and expansion.",
+              "Revenue is primarily subscription-based with multi-year contracts, suggesting durability and predictability.",
+              "Customer base includes several Fortune 500 companies, implying high customer quality and low revenue concentration risk."
+            ],
+            "recommendations": [
+              "Provide explicit churn rate data to further validate retention quality.",
+              "Disclose revenue concentration to assess risk from customer dependency.",
+              "Clarify proportion of recurring revenue to total revenue."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed revenue concentration metrics",
+              "Breakdown of recurring vs. non-recurring revenue"
+            ],
+            "signals": [
+              "High NRR (120%)",
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse and high-quality customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information explicitly includes relevant internal metrics such as customer retention, revenue, gross margin, and CAC payback, which are key indicators of unit economics. These data points allow for an observed evidence status with medium confidence, despite some missing granularity.",
+            "evidence": [
+              "The company has disclosed customer count growth and retention rates indicating repeat usage.",
+              "Revenue figures and pricing model details are provided, showing average revenue per user (ARPU).",
+              "Information on gross margin and contribution margin is included, suggesting profitability per customer.",
+              "Sales efficiency metrics such as CAC payback period and LTV:CAC ratio are mentioned."
+            ],
+            "recommendations": [
+              "Provide more granular CAC data to validate acquisition efficiency.",
+              "Disclose expansion revenue metrics to confirm growth within existing customers.",
+              "Share cohort-based unit economics over multiple periods to demonstrate sustainability."
+            ],
+            "missing_information": [
+              "Detailed breakdown of CAC components.",
+              "Exact figures on upsell or cross-sell expansion revenue.",
+              "Long-term cohort analysis of unit economics at scale."
+            ],
+            "signals": [
+              "Positive customer retention implies strong expansion and pricing power.",
+              "Gross margin and contribution margin indicate attractive unit economics.",
+              "CAC payback period is within an acceptable range, supporting efficient customer acquisition.",
+              "LTV:CAC ratio exceeds 3x, suggesting good long-term value from customers."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates revenue growth aligned with burn, strong customer retention, and growth in customer and shipment volumes, indicating efficient capital use. The evidence is observed with high confidence and consistent with the expectation that burn should map to repeatable growth at the company's stage. These factors support a good burn efficiency score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer retention metrics have been provided, showing strong retention.",
+              "The number of customers and shipments have been explicitly stated.",
+              "The company is at a stage where burn should map to repeatable growth (e.g., Series A)."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to ensure scalability.",
+              "Maintain focus on retention and customer acquisition efficiency to optimize burn."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth aligned with burn suggests efficient capital use.",
+              "Strong retention indicates effective use of capital in customer acquisition and retention.",
+              "Customer and shipment volume growth supports scaling and justifies burn."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones expected to be reached with current runway",
+              "Share growth plans and market conditions affecting capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 7.0,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The startup shows strong traction and financial metrics, indicating good fundraising potential. The market and competition scores are solid, but there is room for improvement in the team and product areas to increase overall readiness.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

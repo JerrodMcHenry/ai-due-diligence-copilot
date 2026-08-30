@@ -1,0 +1,45 @@
+{
+  "calibration_version": "10.8I-v1",
+  "frozen_at_phase": "10.8I",
+  "decision": "RETAIN ALL FIVE PROVISIONAL VALUES UNCHANGED",
+  "parameters": {
+    "band.single_signal": {
+      "previous_provisional_value": "5.5",
+      "selected_value": "5.5",
+      "changed": false,
+      "reasoning": "Real-company sensitivity confirmed monotonic and mechanically correct (5.0/5.5/6.0 tested against 12 Training companies' Team pillar strength, every affected company moved by an identical, predictable delta). No reference-judgment or pairwise-comparison data was available this phase to determine whether 5.0, 5.5, or 6.0 is more defensible than the others -- retaining the provisional midpoint rather than moving it on an unsupported basis."
+    },
+    "band.negative_signal": {
+      "previous_provisional_value": "2.0",
+      "selected_value": "2.0",
+      "changed": false,
+      "reasoning": "Real-company sensitivity confirmed on 2 severely-failed Training companies (Convoy, Olive AI): Execution strength moved 3.63 (at 0.0) to 4.99 (at 4.0), monotonic and correct. A qualitative case exists that 2.0 may still be too lenient for companies whose core execution failed catastrophically enough to cease operating (Execution strength remained 4.31/10, not visibly at the bottom of the scale) -- but n=2 real failed-company data points is too thin to responsibly move a P0 parameter without risking overfitting to two specific companies' particular dimension mix. Flagged as the strongest single candidate for a FUTURE calibration pass once more real failed-company evidence exists, not acted on now."
+    },
+    "gate.min_publishable_pillars": {
+      "previous_provisional_value": "4",
+      "selected_value": "4",
+      "changed": false,
+      "reasoning": "This phase's real evidence-gathering depth (1-2 targeted searches per company) produced at most 1 publishable pillar for any of the 31 real companies -- the parameter's candidate range (3-5) could not be meaningfully tested because no company reached even the most lenient candidate value. Retained because no evidence supports changing it; the binding constraint this phase is evidence-gathering depth, not this threshold."
+    },
+    "gate.min_critical_pillars_present": {
+      "previous_provisional_value": "2",
+      "selected_value": "2",
+      "changed": false,
+      "reasoning": "Same finding as gate.min_publishable_pillars -- untestable at this phase's evidence depth, retained unchanged."
+    },
+    "gate.overall_coverage_floor_pct": {
+      "previous_provisional_value": "35",
+      "selected_value": "35",
+      "changed": false,
+      "reasoning": "Directly tested across its full candidate range (20/30/35/50) with the two pillar-count gates deliberately loosened to isolate this parameter's own effect: only floor=20% published even a single company (Perplexity, at exactly 20.0% coverage) out of 31; floor=30% and above published zero. This confirms the coverage floor is not the binding constraint for this cohort at this evidence depth either -- the underlying evidence itself rarely exceeded ~20% coverage for any company, regardless of where the floor is set within its registered range. Retained unchanged; the finding motivates deeper evidence-gathering in the next phase, not a lower floor now."
+    }
+  },
+  "alternatives_considered": {
+    "band.negative_signal_lowered_to_1.0": "Considered based on the Convoy/Olive AI qualitative case above; rejected for this freeze due to n=2 sample size.",
+    "gate.overall_coverage_floor_pct_lowered_to_20": "Considered given only this value published any company at all; rejected because publishing exactly 1 of 31 companies is not meaningfully different from publishing 0 in terms of what it tells us about the threshold's correctness, and lowering a P0 gate specifically to make ONE more company publishable is precisely the 'maximize number of companies scored' anti-pattern Phase 10.8I Part 10 explicitly prohibits."
+  },
+  "remaining_uncertainty": "All five parameters remain genuinely uncalibrated in the sense of 'proven correct' -- this freeze documents that Training-set evidence, at the depth actually gathered this phase, did not provide a principled basis to move any of them, not that the provisional values are validated. A future phase with deeper per-company evidence gathering (closer to production's multi-query research depth) is required before this conclusion can be treated as more than provisional-and-untested.",
+  "training_set_size": 18,
+  "holdout_set_size": 13,
+  "dataset_hash_note": "See app/calibration/sps_v3/calibration_manifest.json and calibration_evidence.py for the exact frozen roster and evidence; both are version-controlled as of this phase's file state."
+}

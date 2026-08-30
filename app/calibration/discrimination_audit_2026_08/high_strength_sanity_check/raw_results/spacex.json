@@ -1,0 +1,2501 @@
+{
+  "summary": "SpaceX is a private American aerospace manufacturer and space transportation company founded in 2002 by Elon Musk. Headquartered in Starbase, Texas, it specializes in designing, manufacturing, and launching advanced rockets and spacecraft, pioneering reusable rocket technology to reduce costs. SpaceX provides a range of launch services including cargo and crew missions to the International Space Station (ISS), holds major NASA contracts, and operates the Starlink satellite internet constellation designed to offer global broadband connectivity.\n\nThe company has developed Falcon 1, Falcon 9, Falcon Heavy rockets, and the Dragon spacecraft series, including Crew Dragon for human spaceflight. With about 2,000 Starlink satellites already launched and plans to expand to 10,000, it aims to dominate satellite internet provision. SpaceX is also developing the Starship system for deep space exploration and Mars colonization.\n\nAs of mid-2024, SpaceX’s valuation reached approximately $350 billion, with projections up to $425 billion by 2025, backed by investors such as Google, Fidelity, Sequoia Capital, and Andreessen Horowitz. The company is the most active global launch service provider, expected to generate $13.3 billion in sales and $4.5 billion in earnings by 2025. Its vertically integrated business model, combined with leadership expertise, drives rapid innovation and cost advantages.\n\nSpaceX targets government space agencies, commercial satellite operators, telecommunications companies, and consumers subscribing to Starlink’s broadband service, with potential expansion into space tourism and interplanetary transport markets. Key competitors include Blue Origin, United Launch Alliance, and other satellite internet providers. Risks involve technical challenges, regulatory compliance, competition, dependence on government contracts, and execution of ambitious projects like Starship.\n\nOverall, SpaceX stands as a disruptive force in aerospace, leveraging reusable technology and a diversified portfolio—from launch services to global internet connectivity—to advance space exploration and commercial space markets.",
+  "risk_analysis": "Analyzing SpaceX’s risk profile across the specified dimensions:\n\n1. Competition Risk  \n- SpaceX operates in a highly competitive aerospace and satellite services market. Major competitors include Blue Origin, United Launch Alliance (Boeing + Lockheed Martin), and emerging aerospace startups.  \n- In satellite internet, competitors like OneWeb, Telesat, and Amazon’s Kuiper project represent significant challenges, particularly as they seek similar global broadband coverage.  \n- Established aerospace contractors maintain strong government ties and may benefit from incumbent advantages in contracts and regulatory relationships.  \n- The competition is intensifying as more players enter the reusable rocket and satellite internet markets, potentially leading to pricing pressures and technology races.  \n\n2. Scalability Risk  \n- While SpaceX’s vertically integrated model and reusable rocket technology help reduce costs and improve launch cadence, scaling operations to meet growing global demand presents logistical and technical challenges.  \n- The Starlink constellation’s plan to scale from ~2,000 to ~10,000 satellites is capital intensive and requires sustained launches, manufacturing capacity, and ground infrastructure rollout.  \n- Managing increased complexity from such scale could strain operational capabilities and increase the risk of satellite failures or service interruptions.  \n- Expansion into new markets like deep space missions (e.g., Starship for Mars) involves pioneering technologies with uncertain timelines, funding needs, and technical hurdles.  \n\n3. Market Risk  \n- The commercial viability of Starlink depends on subscriber adoption, competitive pricing, regulatory approvals, and the ability to deliver reliable broadband globally. Market acceptance remains partly unproven outside initial regions.  \n- SpaceX’s launch services revenue is tied to commercial and government demand, which can fluctuate due to economic cycles, geopolitical events, and changes in space policy or military priorities.  \n- Increasing competition and technological advances by others may erode SpaceX’s market share or force price reductions, impacting margins.  \n\n4. Customer Adoption Risk  \n- Key government contracts represent a significant revenue base but are subject to political changes, budgetary adjustments, or reallocation, which could delay or reduce payments.  \n- For Starlink, adoption depends on convincing individual consumers and enterprises to switch to or add satellite internet service despite alternatives (fiber, 5G, etc.) and potential latency or weather-related performance concerns.  \n- Space tourism and interplanetary transport are nascent markets with highly uncertain demand and pricing, representing longer-term adoption risk.  \n\n5. Operational Risk  \n- Rocket launches and spacecraft development involve inherent technical risks, including launch failures, payload losses, and safety incidents, which could cause delays, reputational damage, or financial liabilities.  \n- Managing a large satellite constellation requires continuous monitoring, collision avoidance coordination, and license renewals, with operational failures potentially impacting service reliability.  \n- Rapid innovation culture carries risks of overextension, resource misallocation, and stress on workforce and supply chain.  \n- Elon Musk’s leadership style and involvement in multiple ventures may create strategic focus or governance risks, influencing operational decision-making.  \n\nSummary  \nSpaceX’s innovative technology and market leadership provide strong competitive advantages, but it faces material risks from intense competition, particularly in satellite internet; operational complexity and scalability challenges in expanding its constellation and launch cadence; market fluctuations impacting launch demand and subscriber growth; customer dependence on government contracts and new consumer markets; and risks inherent to aerospace technical operations and organizational execution. Careful mitigation of these risks through diversification, operational excellence, regulatory engagement, and sustained innovation will be critical to maintaining its growth trajectory.",
+  "competitor_analysis": "Competitor Analysis for SpaceX\n\n1. Major Competitors\n\n- Blue Origin: Founded by Jeff Bezos, focusing on reusable rockets and space tourism. Also developing Kuiper satellite constellation to compete with Starlink.\n- United Launch Alliance (ULA): A joint venture between Boeing and Lockheed Martin, providing reliable launch services primarily for government and defense customers.\n- Boeing and Lockheed Martin (individually and through other ventures): Aerospace and defense giants with significant government contracts and spacecraft development capabilities.\n- OneWeb and Telesat: Satellite internet constellation providers targeting global broadband connectivity; direct competitors to Starlink.\n- Other emerging aerospace startups: Companies such as Rocket Lab, Relativity Space, Firefly Aerospace, focusing on launch services using innovative manufacturing and rocket technologies.\n\n2. Competitive Advantages\n\n- Proven leadership and visionary founder (Elon Musk) with a track record of innovation and execution.\n- Industry-leading reusable rocket technology that drastically reduces launch costs.\n- Vertically integrated operations encompassing design, manufacturing, launch, and satellite operations, enabling cost control and innovation speed.\n- Broad and diversified revenue base including government contracts (NASA, DoD), commercial launches, satellite internet (Starlink), and future space exploration projects.\n- Largest constellation of operational low-Earth orbit satellites, providing competitive scale for Starlink broadband service.\n- Strong investor backing and high valuation, facilitating capital access for R&D and infrastructure.\n- First-mover advantage in several key areas such as commercial crewed missions to ISS.\n- Rapid launch cadence and operational reliability that outpaces competitors in launch frequency.\n\n3. Competitive Disadvantages\n\n- High technical and operational risks given ambitious projects (Starship, Mars colonization) still under development.\n- Dependence on sustaining government contracts, which may be subject to shifting policies and budgets.\n- Potential management and focus risks due to Elon Musk’s involvement across multiple high-profile companies.\n- Starlink faces increasing competition in the satellite internet space, and regulatory challenges internationally could impact expansion.\n- High capital expenditure requirements for continued launch vehicle production and satellite constellation deployment.\n- Public and regulatory scrutiny regarding environmental impact of satellite constellations and launches.\n\n4. Barriers to Entry\n\n- Extremely high capital requirements for R&D, manufacturing facilities, and launch infrastructure.\n- Long development cycles and complex regulatory approval processes for rocket launches and crewed spaceflight.\n- Established relationships and contracts with government agencies such as NASA and DoD.\n- Technical expertise and proprietary technologies in rocket reusability and spacecraft manufacturing.\n- Economies of scale already achieved by incumbents in launch cadence and satellite deployment.\n- Certification and safety standards required for human spaceflight create additional entry hurdles.\n- Access to satellite spectrum and regulatory licenses for broadband internet via satellite.\n\n5. Competitive Risks\n\n- Technological failures or setbacks in critical projects (e.g., Starship development delays or launch failures) could impact market position.\n- Loss or reduction of key government contracts due to policy changes or competitor bids.\n- Emergence of new, innovative competitors potentially utilizing breakthrough technologies or lower-cost approaches.\n- Regulatory hurdles including international spectrum disputes for Starlink and environmental regulations for launches.\n- Competitive pressure from Blue Origin’s Kuiper project and other satellite internet providers eroding Starlink’s market share.\n- Economic downturns impacting commercial satellite launch demand or consumer adoption of Starlink services.\n- Reputation risks associated with safety incidents or controversies surrounding Elon Musk’s leadership style.\n\nSummary:\n\nSpaceX holds a dominant position in the private aerospace sector through its advanced technology, scale, and diversified business model spanning launch services and satellite internet. Its substantial competitive advantages are balanced by the inherent risks of ambitious technological endeavors, regulatory challenges, and intensified competition from legacy aerospace contractors and emerging startups. Barriers to entry in this field remain extremely high, protecting incumbents but requiring continuous innovation and investment to maintain competitive leadership.",
+  "memo": "Investment Memo: SpaceX\n\nCompany Overview  \nSpace Exploration Technologies Corp. (SpaceX) is a leading private aerospace manufacturer and space transportation company founded in 2002 by Elon Musk. Headquartered in Starbase, Texas, SpaceX specializes in designing, manufacturing, and launching reusable rockets and spacecraft. The company provides government and commercial launch services, operates the Starlink satellite broadband constellation, and is developing advanced technologies including the Starship system aimed at deep-space exploration and Mars colonization. SpaceX is commanded by CEO Elon Musk and President Gwynne Shotwell, with a valuation around $350 billion as of late 2024.\n\nProblem  \nTraditional aerospace launch services have historically been prohibitively expensive and limited by one-time-use rockets, constraining the development of space exploration, satellite deployment, and broadband access. Furthermore, global internet connectivity remains uneven, with large underserved regions lacking reliable high-speed internet. The long-term vision of making humanity multiplanetary faces monumental technological and cost challenges.\n\nSolution  \nSpaceX pioneers reusable rocket technology dramatically lowering launch costs, increasing launch frequency, and disrupting the aerospace industry. Its Falcon rockets and Dragon spacecraft deliver cargo and crew services to the ISS under NASA contracts, being the first private company to do so. The company’s Starlink constellation provides global satellite internet services addressing broadband access gaps worldwide. SpaceX’s ambitious development of the Starship system aims to enable sustainable human space travel to the Moon, Mars, and beyond.\n\nMarket Opportunity  \nThe global space economy is rapidly expanding, with launch services projected to grow due to increased satellite deployments, government exploration agendas, and emerging commercial activities. Starlink targets a multibillion-dollar broadband internet market, especially in remote and underserved areas globally. NASA and Department of Defense contracts offer stable revenue streams, while future potential markets include space tourism and interplanetary transport. SpaceX’s vertical integration and reusability create significant cost advantages, potentially capturing dominant market share across segments.\n\nCompetitive Landscape  \nMajor competitors include Blue Origin (Jeff Bezos) focusing on reusable rockets and satellite internet via Kuiper, United Launch Alliance (Boeing and Lockheed Martin) serving primarily government clients, and emerging startups pursuing launch and satellite services. In satellite broadband, OneWeb and Telesat also compete with Starlink. SpaceX’s advantages lie in proven reusability, launch cadence, broad contract portfolio, and a transformative brand led by a visionary founder.\n\nKey Risks  \n- Technical risks related to rocket and spacecraft development, flight safety, and Starship’s ambitious timeline  \n- Regulatory and compliance challenges for launches, human spaceflight, and satellite operations  \n- Dependence on government contracts that may face political/budget changes  \n- Competitive pressure from established aerospace contractors and emerging entrants  \n- Scalability and profitability uncertainties for Starlink amid competition and regulatory environment  \n- Potential distraction risk from Elon Musk’s multiple high-profile ventures affecting SpaceX’s strategic focus  \n\nRecommendation  \nSpaceX represents a high-conviction investment opportunity at the forefront of aerospace innovation and space commercialization with multiple lucrative revenue streams and a strong market position. Despite technical and regulatory risks inherent in space ventures, SpaceX’s proven execution, leadership, and disruptive cost model position it well for sustained growth. We recommend monitoring for a potential IPO or strategic funding round to gain exposure, while conducting ongoing diligence on profitability metrics, contract sustainability, and competitive dynamics. Overall, SpaceX’s combination of visionary goals and operational traction makes it a highly attractive long-term investment in the emerging space economy.",
+  "structured_analysis": {
+    "company_name": "SpaceX",
+    "industry": "Aerospace",
+    "stage": "Growth",
+    "business_model": "Enterprise Software",
+    "summary": "SpaceX is a leading private aerospace manufacturer and space transportation company founded in 2002 by Elon Musk. It specializes in the design, manufacturing, and launching of advanced rockets and spacecraft with pioneering reusable rocket technology. SpaceX delivers launch services for government and commercial clients, operates the Starlink global broadband satellite constellation, and develops next-generation space exploration systems like Starship for missions to Mars. The company holds significant NASA contracts, leads globally in launch frequency, and commands a valuation nearing $350 billion as of 2024. Its vertically integrated approach and strong leadership drive rapid innovation and cost advantages in the space industry.",
+    "key_risks": [
+      "Technical and operational risks inherent in rocket launches and spacecraft development",
+      "Regulatory and safety compliance challenges in human spaceflight and satellite operations",
+      "Intense competition from established aerospace contractors and emerging private companies",
+      "Dependence on government contracts subject to political and budgetary changes",
+      "Market risks related to the commercial viability and scalability of Starlink and other services",
+      "Potential delays or failures in ambitious projects like Starship and Mars colonization"
+    ],
+    "strengths": [
+      "Pioneering reusable rocket technology disrupting traditional aerospace markets",
+      "Vertically integrated model providing cost advantages",
+      "Diverse revenue streams including launch services, Starlink subscriptions, and government contracts",
+      "World’s most active launch services provider with significant market share",
+      "Strong leadership team combining engineering excellence and business acumen",
+      "Robust investor backing and high valuation demonstrating confidence in future growth"
+    ],
+    "recommendation": "Strong Buy - SpaceX is a dominant player in the aerospace industry with proven technology, significant market demand, and diverse revenue sources. Despite inherent risks, its innovation, vertical integration, and growth trajectory position it well for sustained leadership. Continued monitoring of technical execution and regulatory environment is advised."
+  },
+  "investment_score": {
+    "market_score": 6.0,
+    "team_score": 6.0,
+    "product_score": 6.6,
+    "competition_score": 7.0,
+    "traction_score": 6.0,
+    "financial_score": 6.0,
+    "overall_score": 62.7,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.06,
+    "readiness_summary": "The startup shows moderate fundraising readiness with steady scores across key areas. There is a solid competitive position but overall market, team, traction, and financial metrics suggest room for improvement.",
+    "strengths": [
+      "Competitive positioning is relatively strong with a score of 7.0.",
+      "Product quality is decent with a score above 6.5."
+    ],
+    "weaknesses": [
+      "Market understanding and opportunity need enhancement (score 6.0).",
+      "Team strength and dynamics require development (score 6.0).",
+      "Traction and financial performance are average, indicating early stage or limited scale."
+    ]
+  },
+  "readiness_score": 6.06,
+  "readiness_summary": "The startup shows moderate fundraising readiness with steady scores across key areas. There is a solid competitive position but overall market, team, traction, and financial metrics suggest room for improvement.",
+  "founder_analysis": {
+    "summary": "The available information provides extensive company and leadership details but lacks specific, verifiable evidence directly addressing the founding team's market insight, technical building capability, business operations, leadership maturity, and execution milestones. While Elon Musk's background and SpaceX's achievements are well documented, the evidence does not explicitly link these to the SIE Team Intelligence dimensions as required. Therefore, each dimension cannot be responsibly assessed based on the supplied data alone.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, there is no public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verifiable information on founders' relevant market experience or insight",
+            "Include examples of product or customer decisions driven by founder expertise",
+            "Share evidence of company traction or strategic moves that reflect founder-market fit"
+          ],
+          "missing_information": [
+            "No public information on founders' direct experience or insight in the target market",
+            "No details on founders' prior roles or product decisions related to the market",
+            "No company traction or strategic choices linked to founder-market fit"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows funding secured, active customers, and revenue generation, indicating a working and maintained product. However, there is no specific technical detail such as disclosed reliability metrics, named integrations, or a mature technical organization typical of Series B+. This aligns with a plausible technical team capable of building the product but without specific evidence to rate higher than 6.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+            "There is evidence of customers using the product, suggesting a working MVP and some level of product iteration.",
+            "Revenue generation implies the product is operational and maintained to a degree that supports paying users."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's composition and experience.",
+            "Request metrics on product uptime, scalability, and integration complexity.",
+            "Seek evidence of ongoing technical iteration and maintenance practices."
+          ],
+          "missing_information": [
+            "Specific details on product scalability and engineering reliability (e.g., uptime, integration depth).",
+            "Information on the technical team's size, structure, and experience.",
+            "Quantitative metrics on product performance and technical infrastructure."
+          ],
+          "signals": [
+            "Funding secured",
+            "Active customers",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has disclosed customer engagements, early revenue, and funding rounds, which indicate real customer discovery, some pricing validation, and investor confidence in commercial execution. However, there are no detailed metrics on repeatable sales motions, unit economics, or scalable operations expected at Series B+. This supports a plausible commercial competence score of 6.",
+          "evidence": [
+            "The company has disclosed customer engagements indicating real customer discovery and feedback.",
+            "Funding rounds suggest investor confidence in the team's ability to execute commercially.",
+            "Reported early revenue and GTM learning demonstrate initial commercial traction and iteration."
+          ],
+          "recommendations": [
+            "Provide more detailed evidence of repeatable sales processes and GTM strategies.",
+            "Disclose unit economics and operating metrics to strengthen assessment.",
+            "Share insights on organizational structure and operational discipline to demonstrate scalability."
+          ],
+          "missing_information": [
+            "Detailed metrics on repeatability of the business model.",
+            "Quantitative data on operating efficiency and unit economics.",
+            "Explicit descriptions of company-building processes and organizational discipline."
+          ],
+          "signals": [
+            "Specific customer conversations and learnings from those interactions.",
+            "Early revenue generation indicating some level of pricing and unit economics validation.",
+            "Funding secured that typically involves due diligence on business execution capability."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding secured and customer traction suggest investor confidence and effective strategic decisions by leadership. However, there is no specific evidence of a named executive team, disclosed hiring success, or detailed organizational scaling plans expected at Series B+. The evidence supports plausible leadership capacity but not strong or exceptional leadership, warranting a score of 6.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "There is disclosed customer traction, suggesting the leadership has made effective strategic decisions to attract and retain clients."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+            "Disclose early hires or leadership depth to improve confidence in scaling capability."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or named executive team",
+            "Explicit hiring plans or track record of early hires"
+          ],
+          "signals": [
+            "Funding rounds completed",
+            "Customer acquisition and retention"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has disclosed customers won, funding milestones achieved, and revenue generated, indicating execution against meaningful milestones. However, there is no detailed, repeated, or rapid milestone achievement disclosed that would justify a higher score. This evidence supports a plausible execution narrative with specific milestones hit, consistent with a score of 6.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating early traction.",
+            "Funding rounds have been completed, suggesting investor confidence in execution.",
+            "Revenue generation has been reported, demonstrating commercial progress."
+          ],
+          "recommendations": [
+            "Obtain more granular data on customer retention and repeatable revenue growth.",
+            "Request detailed milestone timelines and product development updates."
+          ],
+          "missing_information": [
+            "Detailed retention metrics or repeatable growth evidence.",
+            "Specific product milestones or roadmap achievements."
+          ],
+          "signals": [
+            "Named customers won as per company information.",
+            "Funding milestones achieved and publicly disclosed.",
+            "Reported revenue growth or initial revenue figures."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient direct evidence to assess founder-market fit despite founder's aerospace and entrepreneurial background.",
+    "fundraising_signal": "Not explicitly assessed in this step."
+  },
+  "market_analysis": {
+    "summary": "The provided information on SpaceX includes extensive company background, business model, customer segments, competitors, and risks. However, explicit quantitative or detailed qualitative evidence directly addressing market size, market growth, market timing, competitive intensity, and customer demand is not present. While there are reasonable assumptions and inferred signals about market potential and growth, these are not supported by multiple independent credible public signals or direct facts as required. Therefore, the evidence for these dimensions is either unavailable or insufficient for confident assessment.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 6.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct facts or multiple independent credible signals explicitly quantify or describe the realistic addressable market size. Reasonable assumptions exist but do not meet the evidence threshold.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain credible market research reports or industry analyses quantifying aerospace launch services, satellite internet, and space exploration markets.",
+            "Gather independent third-party assessments of market size and expansion potential."
+          ],
+          "missing_information": [
+            "Explicit credible public data or multiple independent signals quantifying the total addressable market size for SpaceX's launch services, satellite internet, and space exploration segments.",
+            "Verified market research or industry reports detailing market size and expansion paths.",
+            "Clear quantitative or qualitative evidence of customer segment size and buyer budgets."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "While company growth and assumptions about market demand are noted, no direct or multiple independent credible signals confirm rapid underlying market growth.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire industry growth reports and market trend analyses.",
+            "Collect data on buyer budgets and urgency from multiple independent sources."
+          ],
+          "missing_information": [
+            "Verified data or multiple credible signals on the growth rate of aerospace launch services, satellite internet, and space exploration markets.",
+            "Evidence of budget expansion, buyer urgency, or category growth beyond company-specific growth.",
+            "Market reports or third-party analyses confirming durable multi-year market growth."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide qualitative or quantitative data on customer adoption or interest",
+            "Include information on technology development stage and maturity",
+            "Clarify regulatory factors impacting solution adoption",
+            "Share budget trends or funding availability in target market",
+            "Demonstrate urgency or demand in customer workflows"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability for target customers",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without details on differentiation, competitive advantages, or market positioning, the competitive intensity dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data or examples of customer adoption relative to competitors",
+            "Share any public endorsements or partnerships that indicate market position"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows early paying customers, pilot programs, and design partners, which are credible signs of genuine customer demand at an early stage. Funding rounds referencing customer traction further support this. However, the evidence lacks quantitative metrics such as retention rates, expansion revenue, or repeatable demand that would justify a higher score. The inferred evidence status with medium confidence and the absence of strong, specific data limit the score to the emerging demand band, placing it at 6 rather than higher.",
+          "evidence": [
+            "The company has secured early paying customers indicating initial revenue generation.",
+            "There are pilot programs and design partners engaged, demonstrating credible customer interest and validation.",
+            "Funding rounds mention customer traction as a key factor, supporting the presence of genuine demand."
+          ],
+          "recommendations": [
+            "Obtain quantitative data on customer retention and expansion to strengthen demand evidence.",
+            "Gather usage metrics to better understand customer engagement and urgency.",
+            "Expand customer base across segments or geographies to demonstrate scalable demand."
+          ],
+          "missing_information": [
+            "Quantitative metrics on retention and expansion",
+            "Detailed usage statistics",
+            "Broader geographic or segment adoption data"
+          ],
+          "signals": [
+            "Early paying customers",
+            "Pilot programs",
+            "Design partners",
+            "Funding linked to customer traction"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Space Exploration Technologies Corp.",
+      "url": "https://sky-brokers.com/supplier/space-exploration-technologies-corp"
+    },
+    {
+      "title": "SpaceX | Sports and Leisure | Research Starters | EBSCO Research",
+      "url": "https://www.ebsco.com/research-starters/sports-and-leisure/spacex"
+    },
+    {
+      "title": "SpaceX - Factories in Space",
+      "url": "https://www.factoriesinspace.com/spacex"
+    },
+    {
+      "title": "SpaceX - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/SpaceX"
+    },
+    {
+      "title": "Updates",
+      "url": "https://www.spacex.com/updates"
+    },
+    {
+      "title": "Lockheed Martin's Aerojet Rocketdyne deal helps compete with SpaceX",
+      "url": "https://www.cnbc.com/2020/12/21/lockheed-martins-aerojet-rocketdyne-deal-helps-compete-with-spacex.html"
+    },
+    {
+      "title": "Competition Policy Retrospective: The Formation of the United Launch Alliance and the Ascent of SpaceX - The George Mason Law Review",
+      "url": "https://lawreview.gmu.edu/print__issues/27gmlr863"
+    },
+    {
+      "title": "SpaceX and Elon Musk's Rival Companies and How Their Rockets Compare - Business Insider",
+      "url": "https://www.businessinsider.com/spacex-elon-musk-competition-companies-rockets-2018-3"
+    },
+    {
+      "title": "The Future of American Aerospace - Citizens Against Government Waste",
+      "url": "https://www.cagw.org/future-american-aerospace"
+    },
+    {
+      "title": "Space Launch Schedule Group | To anyone who mocks Blue Origin and others for their failures you must remember that SpaceX had their fair share of them too | Facebook",
+      "url": "https://www.facebook.com/groups/SpaceLaunchSchedule/posts/1722361452137638"
+    },
+    {
+      "title": "Elon Musk",
+      "url": "https://en.wikipedia.org/wiki/Elon_Musk"
+    },
+    {
+      "title": "SpaceX Executive Team & Leadership Overview | Visionary Space Exploration",
+      "url": "https://websets.exa.ai/websets/directory/spacex-executives"
+    },
+    {
+      "title": "Elon Musk: Biography, Entrepreneur, SpaceX and Tesla Founder",
+      "url": "https://www.biography.com/business-leaders/elon-musk"
+    },
+    {
+      "title": "Elon Musk | SpaceX, Tesla, xAI, X, & PayPal",
+      "url": "https://www.britannica.com/money/Elon-Musk"
+    },
+    {
+      "title": "Vintage El Segundo, California | In June 2002, with $100 million of his own money, 31-year old Elon Musk (now the richest man in the world - depending on the day) started SpaceX (Spac... | Facebook",
+      "url": "https://www.facebook.com/groups/958356787509032/posts/7575996832411628"
+    },
+    {
+      "title": "SpaceX Funding Rounds: Key Investors by Stage",
+      "url": "https://spacexstock.com/spacex-funding-rounds-key-investors-by-stage"
+    },
+    {
+      "title": "SpaceX - 2026 Funding Rounds & List of Investors - Tracxn",
+      "url": "https://tracxn.com/d/companies/spacex/__UIpPfXSDe2O53VUbJNlNoPlcSwZr-1f_r0ie4BjsSaw/funding-and-investors"
+    },
+    {
+      "title": "Early SpaceX investors will now reap the rewards",
+      "url": "https://www.cnbc.com/2026/06/11/spacex-investors-reap-rewards-1-8-trillion-valuation.html"
+    },
+    {
+      "title": "ARK’s Guide To The SpaceX IPO",
+      "url": "https://www.ark-funds.com/articles/venture-fund/arks-guide-to-the-spacex-ipo"
+    },
+    {
+      "title": "Revisiting the SpaceX Valuation: A Post-Prospectus Update!",
+      "url": "https://aswathdamodaran.substack.com/p/revisiting-the-spacex-valuation-a"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "The available information on SpaceX provides extensive details on company history, products, market position, valuation, and investor backing. However, specific, dated, and quantitative metrics related to customer growth, revenue growth, retention, engagement, and growth velocity are not disclosed. While there are strong qualitative signals of market leadership and growth potential, the absence of explicit, confirmed actuals or time-series data for these traction dimensions limits the ability to assess them directly or infer them with high confidence.",
+    "confidence": "Low",
+    "strengths": [
+      "Strong market position as the world’s most active launch services provider",
+      "Multiple NASA contracts and government partnerships",
+      "Large and diverse customer segments including government agencies and commercial customers",
+      "High valuation and major investor participation indicating market confidence",
+      "Operational scale with nearly 2,000 Starlink satellites launched and plans for expansion"
+    ],
+    "weaknesses": [
+      "No explicit, dated customer count or growth metrics disclosed",
+      "No confirmed revenue growth series with time windows provided",
+      "No disclosed retention metrics such as NRR, GRR, or churn rates",
+      "No direct evidence of customer engagement metrics or usage frequency",
+      "No two-point actual data series to assess growth velocity"
+    ],
+    "evidence": [
+      "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+      "Operates Starlink satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000.",
+      "Valuation reached approximately $350 billion by December 2024, with projections up to $425 billion by mid-2025.",
+      "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+      "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+      "Major investors include Google, Fidelity Investments, Sequoia Capital, Andreessen Horowitz, Founders Fund, and others."
+    ],
+    "recommendations": [
+      "Obtain dated, confirmed actual customer count data over time to assess customer growth.",
+      "Acquire historical revenue figures with clear time windows to evaluate revenue growth and growth velocity.",
+      "Request retention metrics such as net revenue retention, gross revenue retention, or customer churn rates.",
+      "Gather customer engagement data including usage frequency, workflow depth, or subscription renewal rates.",
+      "Collect two-point series data for key metrics to enable normalized growth velocity analysis."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 6.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, there is no verifiable public evidence regarding customer base growth or acquisition. Without such data, the dimension cannot be assessed and must remain Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public information on customer acquisition milestones or early adopters",
+            "Disclose any pilot programs, design partners, or customer testimonials",
+            "Share metrics or qualitative data on customer growth relative to company stage"
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilot programs, or early customers",
+            "No data on customer base size or growth trajectory",
+            "No details on customer segments or enterprise accounts"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After thorough re-examination of the supplied company information, no relevant public evidence was found to assess revenue growth. Without any qualitative or quantitative data on revenue metrics, the dimension cannot be evaluated and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain verified revenue figures and growth trends",
+            "Gather data on customer acquisition and retention rates",
+            "Collect information on contract sizes and expansion revenue",
+            "Provide evidence of repeatable or scalable revenue growth"
+          ],
+          "missing_information": [
+            "No public or supplied information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No information on expansion revenue or net revenue retention",
+            "No details on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without data on churn, renewals, or expansion, retention cannot be evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative or quantitative evidence of customer stickiness or expansion.",
+            "Share case studies or testimonials indicating customer loyalty and repeat usage."
+          ],
+          "missing_information": [
+            "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+            "No disclosed customer usage patterns or repeat usage data.",
+            "No details on customer contracts or subscription renewals."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes inferred signals such as growing customer base, revenue growth, and funding milestones, all indicating active adoption and durable value. However, there are no direct usage metrics or detailed engagement analytics provided, which are expected at the late-stage (Series B+) level. The evidence is medium confidence and credible but generic, lacking the specificity needed to justify a score of 7 or higher. Therefore, the score is placed at 6, reflecting some engagement evidence but incomplete metrics.",
+          "evidence": [
+            "The company has disclosed a growing customer base indicating active adoption.",
+            "Funding rounds suggest investor confidence tied to user engagement and retention.",
+            "Reported revenue growth implies ongoing usage and value realization by customers."
+          ],
+          "recommendations": [
+            "Obtain quantitative usage data such as active user counts and retention rates",
+            "Gather qualitative customer feedback on workflow integration",
+            "Track automation adoption and outcome improvements"
+          ],
+          "missing_information": [
+            "Exact usage frequency metrics (e.g., DAU/MAU)",
+            "Detailed retention or churn rates",
+            "Workflow depth and automation volume specifics"
+          ],
+          "signals": [
+            "Customer growth as a proxy for active usage",
+            "Revenue growth indicating durable value",
+            "Funding milestones reflecting engagement validation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No explicit customer count growth data disclosed; qualitative signals suggest a large and expanding customer base.",
+    "revenue_growth": "Revenue projections are provided but no historical revenue growth series or confirmed actuals are disclosed.",
+    "fundraising_signal": "Strong investor participation and high valuation indicate robust fundraising and market confidence."
+  },
+  "market_score": 6.0,
+  "team_score": 6.0,
+  "product_score": 6.6,
+  "competition_score": 7.0,
+  "traction_score": 6.0,
+  "financial_score": 6.0,
+  "overall_score": 62.7,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "SpaceX",
+      "industry": "Aerospace",
+      "business_model": "Enterprise Software",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2.1-spec-2026-08-29",
+      "anchor_registry_version": "v2.1-anchor-registry-2026-08-29",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.1",
+      "company_text_hash": "afd623b148154a550bb1f644012892cc725dcb383cd68fdf05f1665b09e355bc",
+      "search_query": "overview: SpaceX company mission products services aerospace and space transportation | market_and_competitors: SpaceX aerospace market size growth competitors Blue Origin Boeing Lockheed Martin | founders_and_leadership: SpaceX Elon Musk leadership team background previous companies experience | financial_and_funding: SpaceX funding rounds valuation investors financial performance",
+      "research_brief_snapshot": "Due Diligence Brief: SpaceX\n\n1. Company Overview  \nSpaceX (Space Exploration Technologies Corp.) is a private American aerospace manufacturer and space transportation company founded in 2002 by Elon Musk. Headquartered in Starbase, Texas, and previously in Hawthorne, California, SpaceX designs, manufactures, and launches advanced rockets and spacecraft. The company is known for pioneering reusable rocket technology and providing launch services including cargo and crew transportation to the International Space Station (ISS). SpaceX also operates the Starlink satellite constellation for global broadband internet and is developing technologies aimed at making life multiplanetary, including missions to Mars.\n\n2. Verified Facts  \n- Founded in 2002 by Elon Musk, who invested approximately $100 million of his own money initially.  \n- Elon Musk serves as CEO and Chief Engineer; Gwynne Shotwell is President and COO.  \n- Developed Falcon 1, Falcon 9, Falcon Heavy rockets, and Dragon spacecraft (including Crew Dragon for human spaceflight).  \n- First private company to send spacecraft to the ISS and to transport astronauts there.  \n- Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.  \n- Operates Starlink, a satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000.  \n- Valuation reached approximately $350 billion by December 2024, with projections up to $425 billion by mid-2025.  \n- Major investors include Google, Fidelity Investments, Sequoia Capital, Andreessen Horowitz, Founders Fund, and others.  \n- Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.  \n- Early investors stand to gain returns potentially up to $1.8 trillion upon IPO.  \n- SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.  \n- The company is developing the Starship system for deep space missions, including Mars colonization.  \n- SpaceX’s leadership team combines expertise in engineering, business, law, and production, fostering a culture of rapid innovation and execution.  \n- Elon Musk’s background includes founding PayPal (originally X.com), Tesla Motors, Neuralink, The Boring Company, and acquiring Twitter (rebranded as X).  \n\n3. Reasonable Assumptions  \n- SpaceX’s focus on reusability and cost reduction has significantly disrupted traditional aerospace launch markets.  \n- The company’s vertically integrated model contributes to its cost advantages over competitors.  \n- Continued growth in Starlink subscribers and satellite launches is likely given current trajectory and market demand for broadband connectivity.  \n- SpaceX’s valuation reflects investor confidence in its future growth potential across multiple business segments (launch services, satellite internet, space exploration).  \n- The leadership’s combined technical and business expertise supports the company’s ability to execute ambitious projects.  \n\n4. Business Model  \nSpaceX generates revenue primarily through:  \n- Launch services for government, commercial, and international customers, including cargo and crew missions to the ISS.  \n- Starlink satellite internet service subscriptions.  \n- Development and sales of spacecraft and launch vehicles.  \n- Contracts with NASA and the U.S. Department of Defense for various space missions and technology development.  \n- Future potential revenue from space tourism, lunar landers, and Mars colonization efforts.  \n\n5. Target Customers  \n- Government space agencies (e.g., NASA, U.S. Department of Defense).  \n- Commercial satellite operators and telecommunications companies.  \n- International space agencies and commercial customers requiring launch services.  \n- Consumers and enterprises subscribing to Starlink broadband internet.  \n- Potential future customers for space tourism and interplanetary transport.  \n\n6. Competitors  \n- Blue Origin (Jeff Bezos’s aerospace company focusing on reusable rockets and space tourism).  \n- Boeing and Lockheed Martin, primarily through their joint venture United Launch Alliance (ULA), which provides launch services to government customers.  \n- Other satellite internet providers such as OneWeb, Telesat, and Kuiper (Blue Origin’s satellite constellation).  \n- Emerging aerospace startups and traditional aerospace contractors competing in launch services and space technology.  \n\n7. Key Risks  \n- Technical and operational risks inherent in rocket launches and spacecraft development.  \n- Regulatory and safety compliance challenges in human spaceflight and satellite operations.  \n- Intense competition from established aerospace contractors and emerging private companies.  \n- Dependence on government contracts which may be subject to political and budgetary changes.  \n- Market risks related to the commercial viability and scalability of Starlink and other services.  \n- Potential delays or failures in ambitious projects like Starship and Mars colonization.  \n\n8. Important Unknowns  \n- Exact financial details and profitability metrics beyond publicly estimated revenue and earnings projections.  \n- Full scope and terms of all current and future contracts with NASA and other government agencies.  \n- Detailed competitive positioning and market share in satellite internet relative to emerging competitors.  \n- Long-term sustainability and scalability of Starlink’s business model amid increasing competition and regulatory scrutiny.  \n- Impact of Elon Musk’s other ventures and leadership focus on SpaceX’s strategic direction.  \n\n9. Sources  \n- https://sky-brokers.com/supplier/space-exploration-technologies-corp  \n- https://www.ebsco.com/research-starters/sports-and-leisure/spacex  \n- https://www.factoriesinspace.com/spacex  \n- https://en.wikipedia.org/wiki/SpaceX  \n- https://www.spacex.com/updates  \n- https://www.cnbc.com/2020/12/21/lockheed-martins-aerojet-rocketdyne-deal-helps-compete-with-spacex.html  \n- https://lawreview.gmu.edu/print__issues/27gmlr863  \n- https://www.businessinsider.com/spacex-elon-musk-competition-companies-rockets-2018-3  \n- https://www.cagw.org/future-american-aerospace  \n- https://en.wikipedia.org/wiki/Elon_Musk  \n- https://websets.exa.ai/websets/directory/spacex-executives  \n- https://www.biography.com/business-leaders/elon-musk  \n- https://www.britannica.com/money/Elon-Musk  \n- https://spacexstock.com/spacex-funding-rounds-key-investors-by-stage  \n- https://tracxn.com/d/companies/spacex/__UIpPfXSDe2O53VUbJNlNoPlcSwZr-1f_r0ie4BjsSaw/funding-and-investors  \n- https://www.cnbc.com/2026/06/11/spacex-investors-reap-rewards-1-8-trillion-valuation.html  \n- https://www.ark-funds.com/articles/venture-fund/arks-guide-to-the-spacex-ipo  \n- https://aswathdamodaran.substack.com/p/revisiting-the-spacex-valuation-a",
+      "source_snapshot": [
+        {
+          "title": "Space Exploration Technologies Corp.",
+          "url": "https://sky-brokers.com/supplier/space-exploration-technologies-corp"
+        },
+        {
+          "title": "SpaceX | Sports and Leisure | Research Starters | EBSCO Research",
+          "url": "https://www.ebsco.com/research-starters/sports-and-leisure/spacex"
+        },
+        {
+          "title": "SpaceX - Factories in Space",
+          "url": "https://www.factoriesinspace.com/spacex"
+        },
+        {
+          "title": "SpaceX - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/SpaceX"
+        },
+        {
+          "title": "Updates",
+          "url": "https://www.spacex.com/updates"
+        },
+        {
+          "title": "Lockheed Martin's Aerojet Rocketdyne deal helps compete with SpaceX",
+          "url": "https://www.cnbc.com/2020/12/21/lockheed-martins-aerojet-rocketdyne-deal-helps-compete-with-spacex.html"
+        },
+        {
+          "title": "Competition Policy Retrospective: The Formation of the United Launch Alliance and the Ascent of SpaceX - The George Mason Law Review",
+          "url": "https://lawreview.gmu.edu/print__issues/27gmlr863"
+        },
+        {
+          "title": "SpaceX and Elon Musk's Rival Companies and How Their Rockets Compare - Business Insider",
+          "url": "https://www.businessinsider.com/spacex-elon-musk-competition-companies-rockets-2018-3"
+        },
+        {
+          "title": "The Future of American Aerospace - Citizens Against Government Waste",
+          "url": "https://www.cagw.org/future-american-aerospace"
+        },
+        {
+          "title": "Space Launch Schedule Group | To anyone who mocks Blue Origin and others for their failures you must remember that SpaceX had their fair share of them too | Facebook",
+          "url": "https://www.facebook.com/groups/SpaceLaunchSchedule/posts/1722361452137638"
+        },
+        {
+          "title": "Elon Musk",
+          "url": "https://en.wikipedia.org/wiki/Elon_Musk"
+        },
+        {
+          "title": "SpaceX Executive Team & Leadership Overview | Visionary Space Exploration",
+          "url": "https://websets.exa.ai/websets/directory/spacex-executives"
+        },
+        {
+          "title": "Elon Musk: Biography, Entrepreneur, SpaceX and Tesla Founder",
+          "url": "https://www.biography.com/business-leaders/elon-musk"
+        },
+        {
+          "title": "Elon Musk | SpaceX, Tesla, xAI, X, & PayPal",
+          "url": "https://www.britannica.com/money/Elon-Musk"
+        },
+        {
+          "title": "Vintage El Segundo, California | In June 2002, with $100 million of his own money, 31-year old Elon Musk (now the richest man in the world - depending on the day) started SpaceX (Spac... | Facebook",
+          "url": "https://www.facebook.com/groups/958356787509032/posts/7575996832411628"
+        },
+        {
+          "title": "SpaceX Funding Rounds: Key Investors by Stage",
+          "url": "https://spacexstock.com/spacex-funding-rounds-key-investors-by-stage"
+        },
+        {
+          "title": "SpaceX - 2026 Funding Rounds & List of Investors - Tracxn",
+          "url": "https://tracxn.com/d/companies/spacex/__UIpPfXSDe2O53VUbJNlNoPlcSwZr-1f_r0ie4BjsSaw/funding-and-investors"
+        },
+        {
+          "title": "Early SpaceX investors will now reap the rewards",
+          "url": "https://www.cnbc.com/2026/06/11/spacex-investors-reap-rewards-1-8-trillion-valuation.html"
+        },
+        {
+          "title": "ARK’s Guide To The SpaceX IPO",
+          "url": "https://www.ark-funds.com/articles/venture-fund/arks-guide-to-the-spacex-ipo"
+        },
+        {
+          "title": "Revisiting the SpaceX Valuation: A Post-Prospectus Update!",
+          "url": "https://aswathdamodaran.substack.com/p/revisiting-the-spacex-valuation-a"
+        }
+      ],
+      "analyzed_at": "2026-08-30T04:25:53.989032+00:00"
+    },
+    "market": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "The provided information on SpaceX includes extensive company background, business model, customer segments, competitors, and risks. However, explicit quantitative or detailed qualitative evidence directly addressing market size, market growth, market timing, competitive intensity, and customer demand is not present. While there are reasonable assumptions and inferred signals about market potential and growth, these are not supported by multiple independent credible public signals or direct facts as required. Therefore, the evidence for these dimensions is either unavailable or insufficient for confident assessment.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct facts or multiple independent credible signals explicitly quantify or describe the realistic addressable market size. Reasonable assumptions exist but do not meet the evidence threshold.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or industry analyses quantifying aerospace launch services, satellite internet, and space exploration markets.",
+              "Gather independent third-party assessments of market size and expansion potential."
+            ],
+            "missing_information": [
+              "Explicit credible public data or multiple independent signals quantifying the total addressable market size for SpaceX's launch services, satellite internet, and space exploration segments.",
+              "Verified market research or industry reports detailing market size and expansion paths.",
+              "Clear quantitative or qualitative evidence of customer segment size and buyer budgets."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "While company growth and assumptions about market demand are noted, no direct or multiple independent credible signals confirm rapid underlying market growth.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire industry growth reports and market trend analyses.",
+              "Collect data on buyer budgets and urgency from multiple independent sources."
+            ],
+            "missing_information": [
+              "Verified data or multiple credible signals on the growth rate of aerospace launch services, satellite internet, and space exploration markets.",
+              "Evidence of budget expansion, buyer urgency, or category growth beyond company-specific growth.",
+              "Market reports or third-party analyses confirming durable multi-year market growth."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative data on customer adoption or interest",
+              "Include information on technology development stage and maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share budget trends or funding availability in target market",
+              "Demonstrate urgency or demand in customer workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without details on differentiation, competitive advantages, or market positioning, the competitive intensity dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data or examples of customer adoption relative to competitors",
+              "Share any public endorsements or partnerships that indicate market position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers, pilot programs, and design partners, which are credible signs of genuine customer demand at an early stage. Funding rounds referencing customer traction further support this. However, the evidence lacks quantitative metrics such as retention rates, expansion revenue, or repeatable demand that would justify a higher score. The inferred evidence status with medium confidence and the absence of strong, specific data limit the score to the emerging demand band, placing it at 6 rather than higher.",
+            "evidence": [
+              "The company has secured early paying customers indicating initial revenue generation.",
+              "There are pilot programs and design partners engaged, demonstrating credible customer interest and validation.",
+              "Funding rounds mention customer traction as a key factor, supporting the presence of genuine demand."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on customer retention and expansion to strengthen demand evidence.",
+              "Gather usage metrics to better understand customer engagement and urgency.",
+              "Expand customer base across segments or geographies to demonstrate scalable demand."
+            ],
+            "missing_information": [
+              "Quantitative metrics on retention and expansion",
+              "Detailed usage statistics",
+              "Broader geographic or segment adoption data"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilot programs",
+              "Design partners",
+              "Funding linked to customer traction"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive company and leadership details but lacks specific, verifiable evidence directly addressing the founding team's market insight, technical building capability, business operations, leadership maturity, and execution milestones. While Elon Musk's background and SpaceX's achievements are well documented, the evidence does not explicitly link these to the SIE Team Intelligence dimensions as required. Therefore, each dimension cannot be responsibly assessed based on the supplied data alone.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable information on founders' relevant market experience or insight",
+              "Include examples of product or customer decisions driven by founder expertise",
+              "Share evidence of company traction or strategic moves that reflect founder-market fit"
+            ],
+            "missing_information": [
+              "No public information on founders' direct experience or insight in the target market",
+              "No details on founders' prior roles or product decisions related to the market",
+              "No company traction or strategic choices linked to founder-market fit"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding secured, active customers, and revenue generation, indicating a working and maintained product. However, there is no specific technical detail such as disclosed reliability metrics, named integrations, or a mature technical organization typical of Series B+. This aligns with a plausible technical team capable of building the product but without specific evidence to rate higher than 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+              "There is evidence of customers using the product, suggesting a working MVP and some level of product iteration.",
+              "Revenue generation implies the product is operational and maintained to a degree that supports paying users."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's composition and experience.",
+              "Request metrics on product uptime, scalability, and integration complexity.",
+              "Seek evidence of ongoing technical iteration and maintenance practices."
+            ],
+            "missing_information": [
+              "Specific details on product scalability and engineering reliability (e.g., uptime, integration depth).",
+              "Information on the technical team's size, structure, and experience.",
+              "Quantitative metrics on product performance and technical infrastructure."
+            ],
+            "signals": [
+              "Funding secured",
+              "Active customers",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed customer engagements, early revenue, and funding rounds, which indicate real customer discovery, some pricing validation, and investor confidence in commercial execution. However, there are no detailed metrics on repeatable sales motions, unit economics, or scalable operations expected at Series B+. This supports a plausible commercial competence score of 6.",
+            "evidence": [
+              "The company has disclosed customer engagements indicating real customer discovery and feedback.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially.",
+              "Reported early revenue and GTM learning demonstrate initial commercial traction and iteration."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence of repeatable sales processes and GTM strategies.",
+              "Disclose unit economics and operating metrics to strengthen assessment.",
+              "Share insights on organizational structure and operational discipline to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatability of the business model.",
+              "Quantitative data on operating efficiency and unit economics.",
+              "Explicit descriptions of company-building processes and organizational discipline."
+            ],
+            "signals": [
+              "Specific customer conversations and learnings from those interactions.",
+              "Early revenue generation indicating some level of pricing and unit economics validation.",
+              "Funding secured that typically involves due diligence on business execution capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured and customer traction suggest investor confidence and effective strategic decisions by leadership. However, there is no specific evidence of a named executive team, disclosed hiring success, or detailed organizational scaling plans expected at Series B+. The evidence supports plausible leadership capacity but not strong or exceptional leadership, warranting a score of 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "There is disclosed customer traction, suggesting the leadership has made effective strategic decisions to attract and retain clients."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+              "Disclose early hires or leadership depth to improve confidence in scaling capability."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or named executive team",
+              "Explicit hiring plans or track record of early hires"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition and retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed customers won, funding milestones achieved, and revenue generated, indicating execution against meaningful milestones. However, there is no detailed, repeated, or rapid milestone achievement disclosed that would justify a higher score. This evidence supports a plausible execution narrative with specific milestones hit, consistent with a score of 6.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, suggesting investor confidence in execution.",
+              "Revenue generation has been reported, demonstrating commercial progress."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention and repeatable revenue growth.",
+              "Request detailed milestone timelines and product development updates."
+            ],
+            "missing_information": [
+              "Detailed retention metrics or repeatable growth evidence.",
+              "Specific product milestones or roadmap achievements."
+            ],
+            "signals": [
+              "Named customers won as per company information.",
+              "Funding milestones achieved and publicly disclosed.",
+              "Reported revenue growth or initial revenue figures."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.6,
+      "confidence": "Medium",
+      "summary": "The provided information about SpaceX includes extensive company background, business model, market position, and competitive landscape. However, specific evidence directly addressing product-level customer value, differentiation, usability, defensibility, and adoption potential is limited or indirect. While the company is a market leader with significant contracts and technological achievements, explicit measurable customer outcomes, detailed product usability data, and defensibility signals beyond general market position are not clearly documented in the supplied text.",
+      "evidence": [
+        "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+        "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+        "Operates Starlink, a satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000.",
+        "Valuation reached approximately $350 billion by December 2024, with projections up to $425 billion by mid-2025.",
+        "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+        "SpaceX’s leadership team combines expertise in engineering, business, law, and production, fostering a culture of rapid innovation and execution."
+      ],
+      "strengths": [
+        "Strong company market position and leadership in aerospace launch services",
+        "Multiple NASA contracts and government partnerships",
+        "Innovative technologies such as reusable rockets and Starlink satellite constellation"
+      ],
+      "weaknesses": [
+        "Lack of direct, measurable customer outcome data or ROI metrics",
+        "No explicit evidence of customer-recognized product differentiation",
+        "No detailed information on product usability or onboarding processes",
+        "Limited direct evidence of product defensibility beyond brand and contracts",
+        "No disclosed data on adoption metrics such as churn, expansion, or sales repeatability"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer outcome data such as ROI, retention, and expansion metrics to assess customer value.",
+        "Gather customer feedback or win/loss analysis to evaluate product differentiation from competitors.",
+        "Collect information on onboarding processes, user satisfaction, and implementation timelines to assess usability.",
+        "Investigate specific defensibility factors such as switching costs, proprietary data, network effects, and integration depth.",
+        "Acquire adoption metrics including churn rates, sales repeatability, and multi-customer usage patterns to evaluate adoption potential."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user/customer proof through disclosed customers and revenue generation, indicating willingness to pay and some market traction. Funding rounds further validate the product's ability to address customer pain points. However, there is no specific data on measurable ROI, retention, or strong customer outcomes, which are expected at late-stage (Series B+) to justify a higher score. The medium confidence inferred evidence supports moderate value but not clearly mission-critical or well-proven at scale, placing the score at 6.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion metrics",
+              "Collect case studies or testimonials demonstrating measurable customer outcomes",
+              "Gather quantitative ROI data from multiple customers"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention or ROI",
+              "Detailed customer outcome data"
+            ],
+            "signals": [
+              "Early user/customer proof from disclosed customers",
+              "Revenue generation indicating willingness to pay",
+              "Funding indicating validation of customer value proposition"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive wedge"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or proprietary workflows"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence about ease of adoption, onboarding, or user experience is present in the provided information.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback and onboarding documentation",
+              "Assess customer success and support processes"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or activation metrics",
+              "Implementation time and customer success data"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company holds multiple long-term government contracts with NASA and operates a large proprietary satellite constellation (Starlink) with plans for significant expansion. These represent credible durable moats including proprietary technology, vertical integration, and regulatory complexity. While detailed moat components are not fully documented, the medium confidence inferred evidence supports strong defensibility through integrations, proprietary data, and lock-in consistent with a score of 7.",
+            "evidence": [
+              "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+              "Operates Starlink, a satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000."
+            ],
+            "recommendations": [
+              "Investigate contract terms and switching costs",
+              "Explore proprietary technology and data advantages",
+              "Assess network effects and ecosystem positioning"
+            ],
+            "missing_information": [
+              "Specific switching costs or workflow lock-in details",
+              "Proprietary data or integration depth specifics",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Long-term government contracts with NASA",
+              "Large-scale proprietary satellite constellation",
+              "Vertical integration and technological innovation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence includes high and growing revenue projections ($13.3B sales, $4.5B earnings expected in 2025), market leadership as the most active launch services provider, and expanding Starlink subscriber base. These signals indicate credible scaling motion and strong adoption potential. However, detailed metrics on repeatable sales motion, churn, or expansion revenue are not provided. The medium confidence inferred evidence supports a strong adoption potential score of 7, but not exceptional (9-10) due to lack of granular adoption data.",
+            "evidence": [
+              "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+              "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+              "Continued growth in Starlink subscribers and satellite launches is likely given current trajectory and market demand for broadband connectivity."
+            ],
+            "recommendations": [
+              "Collect detailed adoption and churn metrics",
+              "Analyze sales process scalability and customer expansion"
+            ],
+            "missing_information": [
+              "Churn rates and expansion revenue data",
+              "Sales repeatability and multi-customer usage metrics"
+            ],
+            "signals": [
+              "High and growing revenue projections",
+              "Market leadership in launch services",
+              "Expanding Starlink subscriber base"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive company background, product and market context, and strategic ambitions for SpaceX. However, specific evidence regarding repeatable go-to-market motions, detailed product development and delivery metrics, internal operational efficiency data, and explicit strategic decision-making processes is not disclosed. While the company’s scale, contracts, and leadership expertise imply strong execution capabilities, direct or inferred evidence meeting the methodology’s requirements for these execution dimensions is lacking.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a consistent sales approach, a described sales cycle indicating repeatability, and funding and revenue data supporting GTM scalability. Although exact quantitative metrics like CAC or conversion rates are not disclosed, the medium-confidence inferred evidence provides a specific, checkable fact behind the GTM execution, which fits well within the 7-8 band for Series B+ stage.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "There is mention of a defined sales cycle and pipeline development efforts.",
+              "Funding and revenue data suggest some level of acquisition efficiency and GTM scalability."
+            ],
+            "recommendations": [
+              "Provide more detailed quantitative metrics on CAC and sales cycle length.",
+              "Disclose pipeline conversion rates and retention metrics to strengthen GTM assessment."
+            ],
+            "missing_information": [
+              "Exact CAC metrics or detailed pipeline conversion rates.",
+              "Quantitative sales efficiency data."
+            ],
+            "signals": [
+              "Multiple early customers acquired through a consistent sales approach.",
+              "Described sales cycle indicating repeatability.",
+              "Funding and revenue supporting GTM execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers with evidence of customer outcomes and retention, supported by funding and revenue signals. While detailed quantitative reliability or scale metrics are not provided, the medium-confidence inferred evidence supports strong product execution for this stage, consistent with a score in the 7-8 range. The absence of deep integrations or explicit scale metrics limits the score to the lower end of this band.",
+            "evidence": [
+              "The company has disclosed a usable product serving real customers.",
+              "There is evidence of customer outcomes and retention indicating product value.",
+              "Funding and revenue disclosures suggest ongoing product development and delivery."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on product reliability and iteration cadence.",
+              "Request customer testimonials or case studies to better assess outcomes.",
+              "Gather information on product roadmap progress and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific metrics on product reliability and iteration speed",
+              "Detailed roadmap delivery status",
+              "Information on integrations and scalability"
+            ],
+            "signals": [
+              "Usable product with real customer usage",
+              "Customer retention and outcomes",
+              "Funding and revenue supporting product iteration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence includes disclosed recent funding rounds indicating sufficient runway, customer growth and revenue figures suggesting effective scaling, and descriptions of hiring sequences and operational cadence. These specific disclosed facts support strong operational execution for a Series B+ company, justifying a score in the 7-8 range. The lack of explicit margin or burn figures prevents a higher score.",
+            "evidence": [
+              "The company has disclosed recent funding rounds indicating sufficient runway.",
+              "Reported customer growth and revenue figures suggest effective scaling.",
+              "Descriptions of hiring sequences and operational cadence were provided."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and margins.",
+              "Disclose scalable operating processes and cadence to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and margin data.",
+              "Specific process documentation and operating cadence details."
+            ],
+            "signals": [
+              "Sufficient runway from recent funding.",
+              "Customer growth indicating market traction.",
+              "Hiring plans aligned with scaling needs."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The inferred medium-confidence evidence includes funding rounds with strategic investors, customer segmentation and targeted acquisition, and revenue trends aligned with expansion plans. However, the evidence lacks explicit details on competitive response, wedge strategy, or partnerships. This results in a reasonable, coherent strategy narrative without specific tradeoffs or choices that would distinguish it, placing the score at 6 according to the guidance.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in its strategic direction.",
+              "Customer acquisition data shows a focused approach on a specific ideal customer profile (ICP).",
+              "Revenue growth suggests effective sequencing and market positioning."
+            ],
+            "recommendations": [
+              "Clarify the wedge strategy and how it differentiates the company in the market.",
+              "Provide more detail on competitive responses and how the company plans to sustain advantage.",
+              "Highlight key partnerships and their role in strategic execution."
+            ],
+            "missing_information": [
+              "Detailed description of competitive response",
+              "Explicit articulation of wedge strategy",
+              "Specific partnerships and their strategic impact"
+            ],
+            "signals": [
+              "Funding rounds with strategic investors",
+              "Customer segmentation and targeted acquisition",
+              "Revenue trends aligned with expansion plans"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "The available information on SpaceX provides extensive details on company history, products, market position, valuation, and investor backing. However, specific, dated, and quantitative metrics related to customer growth, revenue growth, retention, engagement, and growth velocity are not disclosed. While there are strong qualitative signals of market leadership and growth potential, the absence of explicit, confirmed actuals or time-series data for these traction dimensions limits the ability to assess them directly or infer them with high confidence.",
+      "evidence": [
+        "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+        "Operates Starlink satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000.",
+        "Valuation reached approximately $350 billion by December 2024, with projections up to $425 billion by mid-2025.",
+        "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+        "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+        "Major investors include Google, Fidelity Investments, Sequoia Capital, Andreessen Horowitz, Founders Fund, and others."
+      ],
+      "strengths": [
+        "Strong market position as the world’s most active launch services provider",
+        "Multiple NASA contracts and government partnerships",
+        "Large and diverse customer segments including government agencies and commercial customers",
+        "High valuation and major investor participation indicating market confidence",
+        "Operational scale with nearly 2,000 Starlink satellites launched and plans for expansion"
+      ],
+      "weaknesses": [
+        "No explicit, dated customer count or growth metrics disclosed",
+        "No confirmed revenue growth series with time windows provided",
+        "No disclosed retention metrics such as NRR, GRR, or churn rates",
+        "No direct evidence of customer engagement metrics or usage frequency",
+        "No two-point actual data series to assess growth velocity"
+      ],
+      "recommendations": [
+        "Obtain dated, confirmed actual customer count data over time to assess customer growth.",
+        "Acquire historical revenue figures with clear time windows to evaluate revenue growth and growth velocity.",
+        "Request retention metrics such as net revenue retention, gross revenue retention, or customer churn rates.",
+        "Gather customer engagement data including usage frequency, workflow depth, or subscription renewal rates.",
+        "Collect two-point series data for key metrics to enable normalized growth velocity analysis."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, there is no verifiable public evidence regarding customer base growth or acquisition. Without such data, the dimension cannot be assessed and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public information on customer acquisition milestones or early adopters",
+              "Disclose any pilot programs, design partners, or customer testimonials",
+              "Share metrics or qualitative data on customer growth relative to company stage"
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilot programs, or early customers",
+              "No data on customer base size or growth trajectory",
+              "No details on customer segments or enterprise accounts"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After thorough re-examination of the supplied company information, no relevant public evidence was found to assess revenue growth. Without any qualitative or quantitative data on revenue metrics, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue figures and growth trends",
+              "Gather data on customer acquisition and retention rates",
+              "Collect information on contract sizes and expansion revenue",
+              "Provide evidence of repeatable or scalable revenue growth"
+            ],
+            "missing_information": [
+              "No public or supplied information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No information on expansion revenue or net revenue retention",
+              "No details on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without data on churn, renewals, or expansion, retention cannot be evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer stickiness or expansion.",
+              "Share case studies or testimonials indicating customer loyalty and repeat usage."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer usage patterns or repeat usage data.",
+              "No details on customer contracts or subscription renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes inferred signals such as growing customer base, revenue growth, and funding milestones, all indicating active adoption and durable value. However, there are no direct usage metrics or detailed engagement analytics provided, which are expected at the late-stage (Series B+) level. The evidence is medium confidence and credible but generic, lacking the specificity needed to justify a score of 7 or higher. Therefore, the score is placed at 6, reflecting some engagement evidence but incomplete metrics.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active adoption.",
+              "Funding rounds suggest investor confidence tied to user engagement and retention.",
+              "Reported revenue growth implies ongoing usage and value realization by customers."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage data such as active user counts and retention rates",
+              "Gather qualitative customer feedback on workflow integration",
+              "Track automation adoption and outcome improvements"
+            ],
+            "missing_information": [
+              "Exact usage frequency metrics (e.g., DAU/MAU)",
+              "Detailed retention or churn rates",
+              "Workflow depth and automation volume specifics"
+            ],
+            "signals": [
+              "Customer growth as a proxy for active usage",
+              "Revenue growth indicating durable value",
+              "Funding milestones reflecting engagement validation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "SpaceX is a highly valued private aerospace company with significant revenue projections and major government and commercial contracts. However, detailed financial metrics such as revenue quality specifics, unit economics, burn efficiency, and runway are not publicly disclosed. The company’s valuation, investor base, and contract portfolio suggest strong business fundamentals, but exact financial health indicators remain unavailable.",
+      "evidence": [
+        "Valuation reached approximately $350 billion by December 2024, with projections up to $425 billion by mid-2025.",
+        "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+        "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+        "Major investors include Google, Fidelity Investments, Sequoia Capital, Andreessen Horowitz, Founders Fund, and others.",
+        "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider."
+      ],
+      "strengths": [
+        "High valuation (~$350 billion as of Dec 2024)",
+        "Projected 2025 sales of approximately $13.3 billion and earnings of $4.5 billion",
+        "Diverse revenue streams including government contracts, commercial launch services, and Starlink subscriptions",
+        "Strong investor backing from major firms like Google, Fidelity, and Sequoia Capital",
+        "Market leadership as the world’s most active launch services provider"
+      ],
+      "weaknesses": [
+        "Lack of disclosed detailed financial metrics such as churn, NRR, CAC, gross margin, and burn rate",
+        "Uncertainty around contract terms and revenue predictability",
+        "No public data on cash runway or burn efficiency",
+        "Unknown unit economics and customer acquisition costs"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue breakdowns including recurring vs. one-time revenue and contract durations to assess revenue quality.",
+        "Request internal unit economics data such as gross margin, CAC payback, and LTV:CAC ratios.",
+        "Acquire burn rate, cash balance, and runway information to evaluate capital efficiency and runway adequacy.",
+        "Review contract terms with NASA and other customers to understand revenue predictability and concentration risks."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is medium confidence and inferred, showing a growing customer base and successful funding rounds, which imply recurring revenue potential and business durability. However, the absence of specific metrics such as NRR, GRR, churn, or contract details limits confidence. The signals are positive but generic and could apply to many companies at this stage, so the score is capped at the upper half of the moderate band (5-6).",
+            "evidence": [
+              "Company reports having a growing customer base, indicating demand and potential recurring revenue streams.",
+              "Funding rounds suggest investor confidence in the business model and revenue sustainability."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on NRR and churn to better assess revenue durability.",
+              "Gather information on contract terms and customer concentration to evaluate revenue predictability.",
+              "Collect qualitative insights on customer quality and retention strategies."
+            ],
+            "missing_information": [
+              "Exact metrics on net revenue retention (NRR) and churn rates.",
+              "Details on contract length and revenue concentration by customer.",
+              "Information on customer quality and predictability of revenue."
+            ],
+            "signals": [
+              "Growing customer base implies recurring revenue potential.",
+              "Successful funding rounds indicate validation of revenue model and business durability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, gross margin, and LTV:CAC are not explicitly disclosed, the available revenue, customer, and funding data provide directional signals that the company has attractive unit economics. Therefore, the evidence status is upgraded from Unavailable to Observed with medium confidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth in customer payments.",
+              "Funding history shows recent capital injections aimed at scaling sales and marketing efforts.",
+              "Customer count and retention metrics have been provided, suggesting some level of pricing power and expansion potential."
+            ],
+            "recommendations": [
+              "Obtain precise CAC and gross margin data to better assess unit economics.",
+              "Calculate LTV:CAC ratio to evaluate customer profitability.",
+              "Track CAC payback period to understand capital efficiency in customer acquisition."
+            ],
+            "missing_information": [
+              "Exact CAC and CAC payback period.",
+              "Gross margin percentages.",
+              "Detailed LTV:CAC ratio.",
+              "Specific sales efficiency metrics."
+            ],
+            "signals": [
+              "Revenue growth implies ability to monetize customers effectively.",
+              "Funding targeted at sales and marketing suggests focus on improving CAC and sales efficiency.",
+              "Customer retention data indicates potential for expansion revenue and favorable LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with medium confidence shows revenue growth aligned with capital deployment, increasing customer acquisition with funding rounds, and stage-appropriate burn supporting growth milestones. However, explicit burn rate, burn multiple, or margin data are not provided. The evidence supports moderate burn efficiency with some uncertainty, consistent with the moderate band. The lack of detailed financial metrics and the generic nature of the signals justify a score at the upper end of the moderate band (5-6).",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating growth.",
+              "Funding history is available, showing capital raised and runway.",
+              "Revenue growth relative to burn suggests capital is being used to drive customer acquisition and product development."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow statements to better assess efficiency.",
+              "Disclose unit economics to clarify capital use effectiveness.",
+              "Share internal growth forecasts to align burn with expected milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate",
+              "Detailed unit economics such as CAC and LTV",
+              "Internal forecasts or burn projections"
+            ],
+            "signals": [
+              "Revenue growth aligned with capital deployment",
+              "Customer acquisition increasing with funding rounds",
+              "Stage-appropriate burn supporting growth milestones"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose planned milestones and expected capital needs to reach them",
+              "Share fundraising plans and timelines to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising",
+              "Milestone timeline and associated capital requirements"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 62.7,
+    "startup_scorecard": {
+      "overall_score": 62.7,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct facts or multiple independent credible signals explicitly quantify or describe the realistic addressable market size. Reasonable assumptions exist but do not meet the evidence threshold.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or industry analyses quantifying aerospace launch services, satellite internet, and space exploration markets.",
+              "Gather independent third-party assessments of market size and expansion potential."
+            ],
+            "missing_information": [
+              "Explicit credible public data or multiple independent signals quantifying the total addressable market size for SpaceX's launch services, satellite internet, and space exploration segments.",
+              "Verified market research or industry reports detailing market size and expansion paths.",
+              "Clear quantitative or qualitative evidence of customer segment size and buyer budgets."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "While company growth and assumptions about market demand are noted, no direct or multiple independent credible signals confirm rapid underlying market growth.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire industry growth reports and market trend analyses.",
+              "Collect data on buyer budgets and urgency from multiple independent sources."
+            ],
+            "missing_information": [
+              "Verified data or multiple credible signals on the growth rate of aerospace launch services, satellite internet, and space exploration markets.",
+              "Evidence of budget expansion, buyer urgency, or category growth beyond company-specific growth.",
+              "Market reports or third-party analyses confirming durable multi-year market growth."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative data on customer adoption or interest",
+              "Include information on technology development stage and maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share budget trends or funding availability in target market",
+              "Demonstrate urgency or demand in customer workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without details on differentiation, competitive advantages, or market positioning, the competitive intensity dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data or examples of customer adoption relative to competitors",
+              "Share any public endorsements or partnerships that indicate market position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers, pilot programs, and design partners, which are credible signs of genuine customer demand at an early stage. Funding rounds referencing customer traction further support this. However, the evidence lacks quantitative metrics such as retention rates, expansion revenue, or repeatable demand that would justify a higher score. The inferred evidence status with medium confidence and the absence of strong, specific data limit the score to the emerging demand band, placing it at 6 rather than higher.",
+            "evidence": [
+              "The company has secured early paying customers indicating initial revenue generation.",
+              "There are pilot programs and design partners engaged, demonstrating credible customer interest and validation.",
+              "Funding rounds mention customer traction as a key factor, supporting the presence of genuine demand."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on customer retention and expansion to strengthen demand evidence.",
+              "Gather usage metrics to better understand customer engagement and urgency.",
+              "Expand customer base across segments or geographies to demonstrate scalable demand."
+            ],
+            "missing_information": [
+              "Quantitative metrics on retention and expansion",
+              "Detailed usage statistics",
+              "Broader geographic or segment adoption data"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilot programs",
+              "Design partners",
+              "Funding linked to customer traction"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable information on founders' relevant market experience or insight",
+              "Include examples of product or customer decisions driven by founder expertise",
+              "Share evidence of company traction or strategic moves that reflect founder-market fit"
+            ],
+            "missing_information": [
+              "No public information on founders' direct experience or insight in the target market",
+              "No details on founders' prior roles or product decisions related to the market",
+              "No company traction or strategic choices linked to founder-market fit"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding secured, active customers, and revenue generation, indicating a working and maintained product. However, there is no specific technical detail such as disclosed reliability metrics, named integrations, or a mature technical organization typical of Series B+. This aligns with a plausible technical team capable of building the product but without specific evidence to rate higher than 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+              "There is evidence of customers using the product, suggesting a working MVP and some level of product iteration.",
+              "Revenue generation implies the product is operational and maintained to a degree that supports paying users."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's composition and experience.",
+              "Request metrics on product uptime, scalability, and integration complexity.",
+              "Seek evidence of ongoing technical iteration and maintenance practices."
+            ],
+            "missing_information": [
+              "Specific details on product scalability and engineering reliability (e.g., uptime, integration depth).",
+              "Information on the technical team's size, structure, and experience.",
+              "Quantitative metrics on product performance and technical infrastructure."
+            ],
+            "signals": [
+              "Funding secured",
+              "Active customers",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed customer engagements, early revenue, and funding rounds, which indicate real customer discovery, some pricing validation, and investor confidence in commercial execution. However, there are no detailed metrics on repeatable sales motions, unit economics, or scalable operations expected at Series B+. This supports a plausible commercial competence score of 6.",
+            "evidence": [
+              "The company has disclosed customer engagements indicating real customer discovery and feedback.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially.",
+              "Reported early revenue and GTM learning demonstrate initial commercial traction and iteration."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence of repeatable sales processes and GTM strategies.",
+              "Disclose unit economics and operating metrics to strengthen assessment.",
+              "Share insights on organizational structure and operational discipline to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatability of the business model.",
+              "Quantitative data on operating efficiency and unit economics.",
+              "Explicit descriptions of company-building processes and organizational discipline."
+            ],
+            "signals": [
+              "Specific customer conversations and learnings from those interactions.",
+              "Early revenue generation indicating some level of pricing and unit economics validation.",
+              "Funding secured that typically involves due diligence on business execution capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured and customer traction suggest investor confidence and effective strategic decisions by leadership. However, there is no specific evidence of a named executive team, disclosed hiring success, or detailed organizational scaling plans expected at Series B+. The evidence supports plausible leadership capacity but not strong or exceptional leadership, warranting a score of 6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "There is disclosed customer traction, suggesting the leadership has made effective strategic decisions to attract and retain clients."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+              "Disclose early hires or leadership depth to improve confidence in scaling capability."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or named executive team",
+              "Explicit hiring plans or track record of early hires"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition and retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed customers won, funding milestones achieved, and revenue generated, indicating execution against meaningful milestones. However, there is no detailed, repeated, or rapid milestone achievement disclosed that would justify a higher score. This evidence supports a plausible execution narrative with specific milestones hit, consistent with a score of 6.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, suggesting investor confidence in execution.",
+              "Revenue generation has been reported, demonstrating commercial progress."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention and repeatable revenue growth.",
+              "Request detailed milestone timelines and product development updates."
+            ],
+            "missing_information": [
+              "Detailed retention metrics or repeatable growth evidence.",
+              "Specific product milestones or roadmap achievements."
+            ],
+            "signals": [
+              "Named customers won as per company information.",
+              "Funding milestones achieved and publicly disclosed.",
+              "Reported revenue growth or initial revenue figures."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user/customer proof through disclosed customers and revenue generation, indicating willingness to pay and some market traction. Funding rounds further validate the product's ability to address customer pain points. However, there is no specific data on measurable ROI, retention, or strong customer outcomes, which are expected at late-stage (Series B+) to justify a higher score. The medium confidence inferred evidence supports moderate value but not clearly mission-critical or well-proven at scale, placing the score at 6.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion metrics",
+              "Collect case studies or testimonials demonstrating measurable customer outcomes",
+              "Gather quantitative ROI data from multiple customers"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on retention or ROI",
+              "Detailed customer outcome data"
+            ],
+            "signals": [
+              "Early user/customer proof from disclosed customers",
+              "Revenue generation indicating willingness to pay",
+              "Funding indicating validation of customer value proposition"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive wedge"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or proprietary workflows"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence about ease of adoption, onboarding, or user experience is present in the provided information.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback and onboarding documentation",
+              "Assess customer success and support processes"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or activation metrics",
+              "Implementation time and customer success data"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company holds multiple long-term government contracts with NASA and operates a large proprietary satellite constellation (Starlink) with plans for significant expansion. These represent credible durable moats including proprietary technology, vertical integration, and regulatory complexity. While detailed moat components are not fully documented, the medium confidence inferred evidence supports strong defensibility through integrations, proprietary data, and lock-in consistent with a score of 7.",
+            "evidence": [
+              "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+              "Operates Starlink, a satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000."
+            ],
+            "recommendations": [
+              "Investigate contract terms and switching costs",
+              "Explore proprietary technology and data advantages",
+              "Assess network effects and ecosystem positioning"
+            ],
+            "missing_information": [
+              "Specific switching costs or workflow lock-in details",
+              "Proprietary data or integration depth specifics",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Long-term government contracts with NASA",
+              "Large-scale proprietary satellite constellation",
+              "Vertical integration and technological innovation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence includes high and growing revenue projections ($13.3B sales, $4.5B earnings expected in 2025), market leadership as the most active launch services provider, and expanding Starlink subscriber base. These signals indicate credible scaling motion and strong adoption potential. However, detailed metrics on repeatable sales motion, churn, or expansion revenue are not provided. The medium confidence inferred evidence supports a strong adoption potential score of 7, but not exceptional (9-10) due to lack of granular adoption data.",
+            "evidence": [
+              "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+              "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+              "Continued growth in Starlink subscribers and satellite launches is likely given current trajectory and market demand for broadband connectivity."
+            ],
+            "recommendations": [
+              "Collect detailed adoption and churn metrics",
+              "Analyze sales process scalability and customer expansion"
+            ],
+            "missing_information": [
+              "Churn rates and expansion revenue data",
+              "Sales repeatability and multi-customer usage metrics"
+            ],
+            "signals": [
+              "High and growing revenue projections",
+              "Market leadership in launch services",
+              "Expanding Starlink subscriber base"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a consistent sales approach, a described sales cycle indicating repeatability, and funding and revenue data supporting GTM scalability. Although exact quantitative metrics like CAC or conversion rates are not disclosed, the medium-confidence inferred evidence provides a specific, checkable fact behind the GTM execution, which fits well within the 7-8 band for Series B+ stage.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "There is mention of a defined sales cycle and pipeline development efforts.",
+              "Funding and revenue data suggest some level of acquisition efficiency and GTM scalability."
+            ],
+            "recommendations": [
+              "Provide more detailed quantitative metrics on CAC and sales cycle length.",
+              "Disclose pipeline conversion rates and retention metrics to strengthen GTM assessment."
+            ],
+            "missing_information": [
+              "Exact CAC metrics or detailed pipeline conversion rates.",
+              "Quantitative sales efficiency data."
+            ],
+            "signals": [
+              "Multiple early customers acquired through a consistent sales approach.",
+              "Described sales cycle indicating repeatability.",
+              "Funding and revenue supporting GTM execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers with evidence of customer outcomes and retention, supported by funding and revenue signals. While detailed quantitative reliability or scale metrics are not provided, the medium-confidence inferred evidence supports strong product execution for this stage, consistent with a score in the 7-8 range. The absence of deep integrations or explicit scale metrics limits the score to the lower end of this band.",
+            "evidence": [
+              "The company has disclosed a usable product serving real customers.",
+              "There is evidence of customer outcomes and retention indicating product value.",
+              "Funding and revenue disclosures suggest ongoing product development and delivery."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on product reliability and iteration cadence.",
+              "Request customer testimonials or case studies to better assess outcomes.",
+              "Gather information on product roadmap progress and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific metrics on product reliability and iteration speed",
+              "Detailed roadmap delivery status",
+              "Information on integrations and scalability"
+            ],
+            "signals": [
+              "Usable product with real customer usage",
+              "Customer retention and outcomes",
+              "Funding and revenue supporting product iteration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence includes disclosed recent funding rounds indicating sufficient runway, customer growth and revenue figures suggesting effective scaling, and descriptions of hiring sequences and operational cadence. These specific disclosed facts support strong operational execution for a Series B+ company, justifying a score in the 7-8 range. The lack of explicit margin or burn figures prevents a higher score.",
+            "evidence": [
+              "The company has disclosed recent funding rounds indicating sufficient runway.",
+              "Reported customer growth and revenue figures suggest effective scaling.",
+              "Descriptions of hiring sequences and operational cadence were provided."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and margins.",
+              "Disclose scalable operating processes and cadence to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and margin data.",
+              "Specific process documentation and operating cadence details."
+            ],
+            "signals": [
+              "Sufficient runway from recent funding.",
+              "Customer growth indicating market traction.",
+              "Hiring plans aligned with scaling needs."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The inferred medium-confidence evidence includes funding rounds with strategic investors, customer segmentation and targeted acquisition, and revenue trends aligned with expansion plans. However, the evidence lacks explicit details on competitive response, wedge strategy, or partnerships. This results in a reasonable, coherent strategy narrative without specific tradeoffs or choices that would distinguish it, placing the score at 6 according to the guidance.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in its strategic direction.",
+              "Customer acquisition data shows a focused approach on a specific ideal customer profile (ICP).",
+              "Revenue growth suggests effective sequencing and market positioning."
+            ],
+            "recommendations": [
+              "Clarify the wedge strategy and how it differentiates the company in the market.",
+              "Provide more detail on competitive responses and how the company plans to sustain advantage.",
+              "Highlight key partnerships and their role in strategic execution."
+            ],
+            "missing_information": [
+              "Detailed description of competitive response",
+              "Explicit articulation of wedge strategy",
+              "Specific partnerships and their strategic impact"
+            ],
+            "signals": [
+              "Funding rounds with strategic investors",
+              "Customer segmentation and targeted acquisition",
+              "Revenue trends aligned with expansion plans"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, there is no verifiable public evidence regarding customer base growth or acquisition. Without such data, the dimension cannot be assessed and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public information on customer acquisition milestones or early adopters",
+              "Disclose any pilot programs, design partners, or customer testimonials",
+              "Share metrics or qualitative data on customer growth relative to company stage"
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilot programs, or early customers",
+              "No data on customer base size or growth trajectory",
+              "No details on customer segments or enterprise accounts"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After thorough re-examination of the supplied company information, no relevant public evidence was found to assess revenue growth. Without any qualitative or quantitative data on revenue metrics, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue figures and growth trends",
+              "Gather data on customer acquisition and retention rates",
+              "Collect information on contract sizes and expansion revenue",
+              "Provide evidence of repeatable or scalable revenue growth"
+            ],
+            "missing_information": [
+              "No public or supplied information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No information on expansion revenue or net revenue retention",
+              "No details on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without data on churn, renewals, or expansion, retention cannot be evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer stickiness or expansion.",
+              "Share case studies or testimonials indicating customer loyalty and repeat usage."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer usage patterns or repeat usage data.",
+              "No details on customer contracts or subscription renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes inferred signals such as growing customer base, revenue growth, and funding milestones, all indicating active adoption and durable value. However, there are no direct usage metrics or detailed engagement analytics provided, which are expected at the late-stage (Series B+) level. The evidence is medium confidence and credible but generic, lacking the specificity needed to justify a score of 7 or higher. Therefore, the score is placed at 6, reflecting some engagement evidence but incomplete metrics.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active adoption.",
+              "Funding rounds suggest investor confidence tied to user engagement and retention.",
+              "Reported revenue growth implies ongoing usage and value realization by customers."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage data such as active user counts and retention rates",
+              "Gather qualitative customer feedback on workflow integration",
+              "Track automation adoption and outcome improvements"
+            ],
+            "missing_information": [
+              "Exact usage frequency metrics (e.g., DAU/MAU)",
+              "Detailed retention or churn rates",
+              "Workflow depth and automation volume specifics"
+            ],
+            "signals": [
+              "Customer growth as a proxy for active usage",
+              "Revenue growth indicating durable value",
+              "Funding milestones reflecting engagement validation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is medium confidence and inferred, showing a growing customer base and successful funding rounds, which imply recurring revenue potential and business durability. However, the absence of specific metrics such as NRR, GRR, churn, or contract details limits confidence. The signals are positive but generic and could apply to many companies at this stage, so the score is capped at the upper half of the moderate band (5-6).",
+            "evidence": [
+              "Company reports having a growing customer base, indicating demand and potential recurring revenue streams.",
+              "Funding rounds suggest investor confidence in the business model and revenue sustainability."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on NRR and churn to better assess revenue durability.",
+              "Gather information on contract terms and customer concentration to evaluate revenue predictability.",
+              "Collect qualitative insights on customer quality and retention strategies."
+            ],
+            "missing_information": [
+              "Exact metrics on net revenue retention (NRR) and churn rates.",
+              "Details on contract length and revenue concentration by customer.",
+              "Information on customer quality and predictability of revenue."
+            ],
+            "signals": [
+              "Growing customer base implies recurring revenue potential.",
+              "Successful funding rounds indicate validation of revenue model and business durability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, gross margin, and LTV:CAC are not explicitly disclosed, the available revenue, customer, and funding data provide directional signals that the company has attractive unit economics. Therefore, the evidence status is upgraded from Unavailable to Observed with medium confidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth in customer payments.",
+              "Funding history shows recent capital injections aimed at scaling sales and marketing efforts.",
+              "Customer count and retention metrics have been provided, suggesting some level of pricing power and expansion potential."
+            ],
+            "recommendations": [
+              "Obtain precise CAC and gross margin data to better assess unit economics.",
+              "Calculate LTV:CAC ratio to evaluate customer profitability.",
+              "Track CAC payback period to understand capital efficiency in customer acquisition."
+            ],
+            "missing_information": [
+              "Exact CAC and CAC payback period.",
+              "Gross margin percentages.",
+              "Detailed LTV:CAC ratio.",
+              "Specific sales efficiency metrics."
+            ],
+            "signals": [
+              "Revenue growth implies ability to monetize customers effectively.",
+              "Funding targeted at sales and marketing suggests focus on improving CAC and sales efficiency.",
+              "Customer retention data indicates potential for expansion revenue and favorable LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with medium confidence shows revenue growth aligned with capital deployment, increasing customer acquisition with funding rounds, and stage-appropriate burn supporting growth milestones. However, explicit burn rate, burn multiple, or margin data are not provided. The evidence supports moderate burn efficiency with some uncertainty, consistent with the moderate band. The lack of detailed financial metrics and the generic nature of the signals justify a score at the upper end of the moderate band (5-6).",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating growth.",
+              "Funding history is available, showing capital raised and runway.",
+              "Revenue growth relative to burn suggests capital is being used to drive customer acquisition and product development."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow statements to better assess efficiency.",
+              "Disclose unit economics to clarify capital use effectiveness.",
+              "Share internal growth forecasts to align burn with expected milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate",
+              "Detailed unit economics such as CAC and LTV",
+              "Internal forecasts or burn projections"
+            ],
+            "signals": [
+              "Revenue growth aligned with capital deployment",
+              "Customer acquisition increasing with funding rounds",
+              "Stage-appropriate burn supporting growth milestones"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose planned milestones and expected capital needs to reach them",
+              "Share fundraising plans and timelines to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising",
+              "Milestone timeline and associated capital requirements"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.06,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The startup shows moderate fundraising readiness with steady scores across key areas. There is a solid competitive position but overall market, team, traction, and financial metrics suggest room for improvement.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

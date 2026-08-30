@@ -73,7 +73,12 @@ def test_deterministic_dimension_names_exact() -> None:
 
 
 def test_methodology_version_stamped() -> None:
-    expect(METHODOLOGY_VERSION == "v2-spec-2026-08-23", f"Unexpected methodology version: {METHODOLOGY_VERSION}")
+    # Bumped for Methodology V2.1 (Phase 10.8B, 2026-08-29) -- see
+    # docs/validation/SPS_METHODOLOGY_V2_1_CHANGELOG.md. The 28-dimension
+    # architecture this file otherwise tests is unchanged; only the
+    # version string moved, deliberately, per Part 17's "version
+    # honestly" instruction.
+    expect(METHODOLOGY_VERSION == "v2.1-spec-2026-08-29", f"Unexpected methodology version: {METHODOLOGY_VERSION}")
 
 
 def test_removed_and_unscored_dimensions_not_in_v2_list() -> None:

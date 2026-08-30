@@ -1,0 +1,1307 @@
+[
+  {
+    "company": "Notion Labs",
+    "website": "https://www.notion.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:13:06.999565+00:00",
+    "status": "completed",
+    "website_text_length": 2561,
+    "finished_at": "2026-08-28T05:16:57.445265+00:00",
+    "overall_score": 69.9,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/notion_labs.json",
+    "elapsed_seconds": 230.5
+  },
+  {
+    "company": "Figma",
+    "website": "https://www.figma.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (pre-IPO)",
+    "started_at": "2026-08-28T05:16:57.457541+00:00",
+    "status": "completed",
+    "website_text_length": 3975,
+    "finished_at": "2026-08-28T05:21:09.116250+00:00",
+    "overall_score": 70.8,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/figma.json",
+    "elapsed_seconds": 251.7
+  },
+  {
+    "company": "Databricks",
+    "website": "https://www.databricks.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:21:09.131424+00:00",
+    "status": "completed",
+    "website_text_length": 11671,
+    "finished_at": "2026-08-28T05:25:00.034764+00:00",
+    "overall_score": 67.7,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "AI",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      },
+      "team": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/databricks.json",
+    "elapsed_seconds": 230.9
+  },
+  {
+    "company": "Deel",
+    "website": "https://www.deel.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:25:00.046908+00:00",
+    "status": "completed",
+    "website_text_length": 5963,
+    "finished_at": "2026-08-28T05:28:38.928429+00:00",
+    "overall_score": 68.5,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/deel.json",
+    "elapsed_seconds": 218.9
+  },
+  {
+    "company": "Rippling",
+    "website": "https://www.rippling.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:28:38.941004+00:00",
+    "status": "completed",
+    "website_text_length": 9464,
+    "finished_at": "2026-08-28T05:32:50.397597+00:00",
+    "overall_score": 76.0,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 8.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/rippling.json",
+    "elapsed_seconds": 251.5
+  },
+  {
+    "company": "Faire",
+    "website": "https://www.faire.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:32:50.889422+00:00",
+    "status": "completed",
+    "website_text_length": 5012,
+    "finished_at": "2026-08-28T05:37:00.348522+00:00",
+    "overall_score": 69.5,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Marketplace",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/faire.json",
+    "elapsed_seconds": 249.5
+  },
+  {
+    "company": "Klaviyo",
+    "website": "https://www.klaviyo.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Public (Growth)",
+    "started_at": "2026-08-28T05:37:00.360909+00:00",
+    "status": "completed",
+    "website_text_length": 14766,
+    "finished_at": "2026-08-28T05:40:55.843802+00:00",
+    "overall_score": 73.9,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.7,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/klaviyo.json",
+    "elapsed_seconds": 235.5
+  },
+  {
+    "company": "Abnormal Security",
+    "website": "https://abnormalsecurity.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Growth (Series D+, late private)",
+    "started_at": "2026-08-28T05:40:56.489967+00:00",
+    "status": "completed",
+    "website_text_length": 11305,
+    "finished_at": "2026-08-28T05:44:52.237963+00:00",
+    "overall_score": 73.1,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Cybersecurity",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 8.1,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/abnormal_security.json",
+    "elapsed_seconds": 235.8
+  },
+  {
+    "company": "Plaid",
+    "website": "https://plaid.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:44:52.249964+00:00",
+    "status": "completed",
+    "website_text_length": 5518,
+    "finished_at": "2026-08-28T05:49:02.027107+00:00",
+    "overall_score": 68.2,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Fintech",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 5.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/plaid.json",
+    "elapsed_seconds": 249.8
+  },
+  {
+    "company": "Better.com",
+    "website": "https://better.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Public (via SPAC)",
+    "started_at": "2026-08-28T05:49:02.041854+00:00",
+    "status": "completed",
+    "website_text_length": 1276,
+    "finished_at": "2026-08-28T05:53:06.991003+00:00",
+    "overall_score": 67.2,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Fintech",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/better_com.json",
+    "elapsed_seconds": 244.9
+  },
+  {
+    "company": "Toast, Inc.",
+    "website": "https://www.toasttab.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Public (Growth)",
+    "started_at": "2026-08-28T05:56:13.851904+00:00",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 403).",
+    "elapsed_seconds": 0.7
+  },
+  {
+    "company": "Chime",
+    "website": "https://www.chime.com",
+    "expected_group": "A",
+    "stage_hypothesis": "Public/late-stage (Growth)",
+    "started_at": "2026-08-28T05:56:14.547761+00:00",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 403).",
+    "elapsed_seconds": 0.1
+  },
+  {
+    "company": "Bolt",
+    "website": "https://www.bolt.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:56:14.688288+00:00",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 429).",
+    "elapsed_seconds": 0.1
+  },
+  {
+    "company": "Gopuff",
+    "website": "https://www.gopuff.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Growth (late private)",
+    "started_at": "2026-08-28T05:56:14.822336+00:00",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 403).",
+    "elapsed_seconds": 0.1
+  },
+  {
+    "company": "Loom",
+    "website": "https://www.loom.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Acquired (by Atlassian, 2023)",
+    "started_at": "2026-08-28T05:56:14.914246+00:00",
+    "status": "completed",
+    "website_text_length": 5079,
+    "finished_at": "2026-08-28T05:59:54.793456+00:00",
+    "overall_score": 69.1,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Series B+",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/loom.json",
+    "elapsed_seconds": 219.9
+  },
+  {
+    "company": "WeWork",
+    "website": "https://www.wework.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Post-restructuring (private)",
+    "started_at": "2026-08-28T05:59:54.807850+00:00",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 403).",
+    "elapsed_seconds": 0.5
+  },
+  {
+    "company": "Away",
+    "website": "https://www.awaytravel.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Growth (private)",
+    "started_at": "2026-08-28T05:59:55.353749+00:00",
+    "status": "completed",
+    "website_text_length": 10105,
+    "finished_at": "2026-08-28T06:04:21.652753+00:00",
+    "overall_score": 67.9,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Consumer",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/away.json",
+    "elapsed_seconds": 266.3
+  },
+  {
+    "company": "Clubhouse",
+    "website": "https://www.joinclubhouse.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Growth (private)",
+    "started_at": "2026-08-28T06:04:21.664819+00:00",
+    "status": "completed",
+    "website_text_length": 260,
+    "finished_at": "2026-08-28T06:08:24.364073+00:00",
+    "overall_score": 64.9,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Consumer",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/clubhouse.json",
+    "elapsed_seconds": 242.7
+  },
+  {
+    "company": "Bumble Inc.",
+    "website": "https://bumble.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Public",
+    "started_at": "2026-08-28T06:08:24.379029+00:00",
+    "status": "completed",
+    "website_text_length": 2632,
+    "finished_at": "2026-08-28T06:12:50.777558+00:00",
+    "overall_score": 69.8,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Consumer",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 6.2,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.4,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 6.2,
+        "confidence": "Low",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/bumble_inc.json",
+    "elapsed_seconds": 266.4
+  },
+  {
+    "company": "Peloton Interactive",
+    "website": "https://www.onepeloton.com",
+    "expected_group": "B",
+    "stage_hypothesis": "Public",
+    "started_at": "2026-08-28T06:12:50.795451+00:00",
+    "status": "completed",
+    "website_text_length": 8945,
+    "finished_at": "2026-08-28T06:17:12.451487+00:00",
+    "overall_score": 68.5,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Consumer",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/peloton_interactive.json",
+    "elapsed_seconds": 261.7
+  },
+  {
+    "company": "Rivet",
+    "website": "https://rivet.design",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:17:12.465577+00:00",
+    "status": "completed",
+    "website_text_length": 59,
+    "finished_at": "2026-08-28T06:21:23.045673+00:00",
+    "overall_score": 69.6,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/rivet.json",
+    "elapsed_seconds": 250.6
+  },
+  {
+    "company": "Openroll",
+    "website": "https://www.openroll.com",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:21:23.057387+00:00",
+    "status": "completed",
+    "website_text_length": 4516,
+    "finished_at": "2026-08-28T06:25:48.587959+00:00",
+    "overall_score": 69.2,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/openroll.json",
+    "elapsed_seconds": 265.5
+  },
+  {
+    "company": "Fixpoint",
+    "website": "https://www.fixpoint.co",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:25:48.601549+00:00",
+    "status": "completed",
+    "website_text_length": 270,
+    "finished_at": "2026-08-28T06:29:54.598435+00:00",
+    "overall_score": 69.1,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "AI",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/fixpoint.json",
+    "elapsed_seconds": 246.0
+  },
+  {
+    "company": "Dome",
+    "website": "https://www.domeapi.io",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:29:54.611885+00:00",
+    "status": "completed",
+    "website_text_length": 34,
+    "finished_at": "2026-08-28T06:34:19.876789+00:00",
+    "overall_score": 63.0,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "industry_extracted": "Fintech",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 5.9,
+        "confidence": "Low",
+        "evidence_coverage": 35.0
+      },
+      "team": {
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/dome.json",
+    "elapsed_seconds": 265.3
+  },
+  {
+    "company": "LunaBill",
+    "website": "https://www.lunabill.com",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:34:19.894444+00:00",
+    "status": "completed",
+    "website_text_length": 7514,
+    "finished_at": "2026-08-28T06:39:16.418509+00:00",
+    "overall_score": 69.5,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Series A",
+    "industry_extracted": "Healthcare",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.9,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/lunabill.json",
+    "elapsed_seconds": 296.5
+  },
+  {
+    "company": "Relaw",
+    "website": "https://www.relaw.ai",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:39:16.434221+00:00",
+    "status": "completed",
+    "website_text_length": 10663,
+    "finished_at": "2026-08-28T06:44:42.047281+00:00",
+    "overall_score": 72.5,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.9,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "team": {
+        "score": 6.3,
+        "confidence": "Low",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/relaw.json",
+    "elapsed_seconds": 325.6
+  },
+  {
+    "company": "Sourcebot",
+    "website": "https://www.sourcebot.dev",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:44:42.063060+00:00",
+    "status": "completed",
+    "website_text_length": 3670,
+    "finished_at": "2026-08-28T06:49:35.170887+00:00",
+    "overall_score": 70.5,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.9,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/sourcebot.json",
+    "elapsed_seconds": 293.1
+  },
+  {
+    "company": "Bear AI",
+    "website": "https://www.usebear.ai",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:49:35.188605+00:00",
+    "status": "completed",
+    "website_text_length": 469,
+    "finished_at": "2026-08-28T06:53:34.100236+00:00",
+    "overall_score": 65.6,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "AI",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/bear_ai.json",
+    "elapsed_seconds": 238.9
+  },
+  {
+    "company": "Bravi",
+    "website": "https://www.bravi.app",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:53:34.114097+00:00",
+    "status": "completed",
+    "website_text_length": 5159,
+    "finished_at": "2026-08-28T06:57:48.503070+00:00",
+    "overall_score": 71.2,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Series A",
+    "industry_extracted": "SaaS",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.3,
+        "confidence": "Low",
+        "evidence_coverage": 65.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 7.6,
+        "confidence": "Low",
+        "evidence_coverage": 80.0
+      },
+      "execution": {
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/bravi.json",
+    "elapsed_seconds": 254.4
+  },
+  {
+    "company": "Denki",
+    "website": "https://www.denki.ai",
+    "expected_group": "C",
+    "stage_hypothesis": "Pre-Seed/Seed (YC F25)",
+    "started_at": "2026-08-28T06:57:48.518516+00:00",
+    "status": "completed",
+    "website_text_length": 36,
+    "finished_at": "2026-08-28T07:01:54.791104+00:00",
+    "overall_score": 68.1,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Seed",
+    "industry_extracted": "AI",
+    "methodology_version": "v2-spec-2026-08-23",
+    "scoring_version": "2.0",
+    "pillars": {
+      "market": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      },
+      "team": {
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "raw_results/denki.json",
+    "elapsed_seconds": 246.3
+  }
+]

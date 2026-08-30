@@ -382,15 +382,17 @@ SCORING_METHODOLOGY = {
                 "Founder-market fit is not just resume prestige; it is evidence the team understands the problem better than others."
             ),
             stage_guidance=(
-                "Pre-seed: one of the most important signals. "
-                "Seed: expect customer insight to translate into product and early GTM. "
-                "Series A+: expect founder-market fit to show up in traction, hiring, and strategic clarity."
+                "Pre-seed: this is one of the only signals available and should be weighted heavily -- "
+                "but 'we care about this problem' is not the same as 'we have direct experience in this market'; "
+                "a 7+ still requires the latter, a specific checkable fact, not stated motivation alone. "
+                "Seed: expect the founders' market insight to already be visible in real product/customer decisions, not just their bio. "
+                "Series A+: expect founder-market fit to be corroborated by the company's own traction, hiring, and strategic choices, not just its founding story."
             ),
-            score_9_10="Exceptional founder-market fit with direct domain expertise, deep customer insight, and relevant prior success.",
-            score_7_8="Strong founder-market fit with relevant experience and credible customer understanding.",
-            score_5_6="Some relevant experience but not clearly advantaged.",
-            score_3_4="Limited relevant experience or shallow market understanding.",
-            score_0_2="No clear connection between the team and the problem.",
+            score_9_10="Exceptional, specifically-evidenced founder-market fit -- a named prior company/role directly in this market, or concrete evidence of having been the exact buyer/operator this company now sells to. Requires Observed or high-confidence Inferred evidence, not narrative alone.",
+            score_7_8="Strong, specifically-evidenced founder-market fit for this stage: a named, checkable fact (a company, a role, a customer segment actually worked in) establishing real domain background or direct prior exposure to the problem -- not merely a stated interest in the space.",
+            score_5_6="A plausible connection to the market (e.g. a generic industry background, an adjacent role, or a stated motivation), but no specific, checkable fact establishes real advantage over another team entering the same market.",
+            score_3_4="Founder background is unrelated or only superficially adjacent to the market, or the only evidence for insight is the founders' own unverified claim with nothing concrete behind it.",
+            score_0_2="Evidence affirmatively shows the team lacks relevant background, or the founders' stated market understanding is directly contradicted by other evidence.",
             strong_signals=[
                 "Former buyer or operator in the target market",
                 "Direct industry expertise",
@@ -440,16 +442,16 @@ SCORING_METHODOLOGY = {
                 "A simple product requires less technical depth; AI, infrastructure, regulated workflows, and deep integrations require much more."
             ),
             stage_guidance=(
-                "Pre-seed: technical founder or credible builder matters. "
-                "Seed: expect MVP/product execution. "
-                "Series A: expect scalable engineering capability and product reliability. "
-                "Series B+: expect mature technical organization."
+                "Pre-seed: a technical founder or a credible builder having already shipped something real is strong evidence; a claim of technical ability with nothing shipped is not. "
+                "Seed: expect a real, working MVP and evidence of iteration, not just a roadmap. "
+                "Series A: expect scalable engineering capability and product reliability evidence (uptime, integration depth, handling real usage). "
+                "Series B+: expect a mature technical organization, not just a strong original builder."
             ),
-            score_9_10="Exceptional technical capability with proof of complex product execution and scalable architecture.",
-            score_7_8="Strong technical capability with credible ability to build and scale.",
-            score_5_6="Adequate capability with some scaling, reliability, or complexity risk.",
-            score_3_4="Weak technical depth relative to product requirements.",
-            score_0_2="No credible ability to build or maintain the product.",
+            score_9_10="Exceptional technical capability with specific, named proof of complex product execution and scalable architecture relative to this stage (e.g. named integrations, disclosed reliability/scale figures, a technical founder with a named relevant prior build).",
+            score_7_8="Strong technical capability for this stage with a specific, checkable fact behind it -- a shipped product handling real complexity, a technical founder with a named relevant background, or disclosed integration/reliability depth.",
+            score_5_6="A technical team plausibly capable of building the product (e.g. a stated technical background, a described but unverified product), with no specific evidence separating it from an average team at this stage.",
+            score_3_4="Technical depth appears thin relative to what the product requires, or the only evidence of capability is an unverified claim with no shipped product or named background behind it.",
+            score_0_2="Evidence affirmatively shows an inability to build or maintain the product (e.g. disclosed reliability failures, no technical leadership for a technically demanding product).",
             strong_signals=[
                 "Technical founder",
                 "Complex product already built",
@@ -499,16 +501,16 @@ SCORING_METHODOLOGY = {
                 "Strong business capability shows up in GTM learning, revenue execution, pricing, unit economics, and operating discipline."
             ),
             stage_guidance=(
-                "Pre-seed: expect commercial instincts and customer discovery. "
-                "Seed: expect early GTM learning and willingness to iterate. "
-                "Series A: expect repeatable business execution. "
-                "Series B+: expect scalable business operations."
+                "Pre-seed: expect evidence of real customer discovery (specific conversations, specific learnings), not just commercial intent. "
+                "Seed: expect early GTM learning and willingness to iterate, evidenced by what changed as a result. "
+                "Series A: expect a repeatable business motion with some disclosed evidence it repeats. "
+                "Series B+: expect scalable business operations with disclosed efficiency signals."
             ),
-            score_9_10="Exceptional commercial execution, operating discipline, and company-building ability.",
-            score_7_8="Strong business capability with credible GTM and operating execution.",
-            score_5_6="Some business capability, but important gaps remain.",
-            score_3_4="Limited business execution or weak commercial discipline.",
-            score_0_2="No evidence of commercial or operational capability.",
+            score_9_10="Exceptional, specifically-evidenced commercial execution -- named disclosed metrics (revenue growth, unit economics, enterprise logos) demonstrating operating discipline well beyond this stage's norm.",
+            score_7_8="Strong business capability for this stage with a specific, checkable fact behind it -- a disclosed revenue/customer metric, a named enterprise customer, or a described and credible repeatable motion.",
+            score_5_6="Plausible commercial competence (e.g. a described but unverified GTM plan, general business acumen) with no specific evidence of results, and no clear gap either.",
+            score_3_4="Meaningful, evidenced gaps in commercial execution (e.g. described but abandoned GTM attempts, no clear buyer identified after meaningful time), or the only positive evidence is an unverified claim.",
+            score_0_2="Evidence affirmatively shows an inability to execute commercially (e.g. disclosed failed sales motion, no viable pricing, founder unable to describe the buyer).",
             strong_signals=[
                 "Revenue growth",
                 "Repeatable sales motion",
@@ -559,16 +561,16 @@ SCORING_METHODOLOGY = {
                 "Do not over-penalize missing org charts at early stages; focus on evidence of leadership capacity."
             ),
             stage_guidance=(
-                "Pre-seed: founder leadership and clarity matter. "
-                "Seed: expect ability to attract early hires. "
-                "Series A: expect leadership depth and hiring plan. "
-                "Series B+: expect executive team and scalable org design."
+                "Pre-seed: founder clarity of thought and decision-making, evidenced by specific choices made, matters most -- do not expect a hiring track record yet. "
+                "Seed: expect some evidence of attracting real early hires, not just an intent to hire. "
+                "Series A: expect disclosed leadership depth and a credible hiring plan. "
+                "Series B+: expect a named executive team and evidence of scalable org design."
             ),
-            score_9_10="Exceptional leadership with proven organization-building and talent attraction ability.",
-            score_7_8="Strong leadership indicators with credible ability to scale.",
-            score_5_6="Moderate leadership evidence with some unknowns.",
-            score_3_4="Limited leadership evidence or meaningful leadership gaps.",
-            score_0_2="No evidence of leadership capacity or signs of founder dysfunction.",
+            score_9_10="Exceptional, specifically-evidenced leadership -- a named executive team, disclosed hiring success, or a founder track record of building organizations, clearly exceeding this stage's norm.",
+            score_7_8="Strong leadership for this stage with a specific fact behind it -- a named early hire, a disclosed prior leadership role, or clear, checkable decision-making evidence (not just described confidence).",
+            score_5_6="Plausible leadership capacity (e.g. a coherent founder narrative, no disclosed dysfunction) with no specific evidence of hiring, organization-building, or decision quality beyond what any founder could claim.",
+            score_3_4="Meaningful, evidenced leadership gaps for this stage (e.g. no hires despite meaningful time/funding, described but unresolved founder disagreement), or the only positive evidence is an unverified self-description.",
+            score_0_2="Evidence affirmatively shows leadership dysfunction (e.g. disclosed founder conflict, key departures, inability to hire despite trying).",
             strong_signals=[
                 "Prior leadership roles",
                 "Hiring success",
@@ -618,16 +620,16 @@ SCORING_METHODOLOGY = {
                 "Evaluate demonstrated progress, not promises. Execution track record includes product shipped, customers won, revenue grown, retention maintained, and milestones achieved."
             ),
             stage_guidance=(
-                "Pre-seed: execution can be prototype, discovery, and speed of learning. "
-                "Seed: expect early product and traction milestones. "
-                "Series A: expect measurable growth and repeatability. "
-                "Series B+: expect consistent scaling performance."
+                "Pre-seed: strong execution here looks like rapid, validated learning and a shipped prototype/MVP -- specific evidence of what was tried and what was learned, not just speed claimed. "
+                "Seed: expect early, named product and traction milestones actually hit. "
+                "Series A: expect measurable, disclosed growth and evidence it is repeatable, not a single milestone. "
+                "Series B+: expect a consistent, disclosed track record of hitting milestones over time."
             ),
-            score_9_10="Exceptional execution history with rapid progress and repeated milestone achievement.",
-            score_7_8="Strong execution with clear evidence of progress.",
-            score_5_6="Some execution evidence but incomplete or uneven track record.",
-            score_3_4="Weak or inconsistent execution.",
-            score_0_2="Little or no execution evidence.",
+            score_9_10="Exceptional, specifically-evidenced execution history -- named, disclosed milestones hit rapidly and repeatedly, clearly exceeding this stage's norm.",
+            score_7_8="Strong execution for this stage with a specific, checkable milestone behind it (a shipped feature, a disclosed customer win, a disclosed growth figure) -- not a general claim of moving fast.",
+            score_5_6="A plausible execution narrative (e.g. a described roadmap, stated momentum) with no specific, checkable milestone actually disclosed.",
+            score_3_4="Meaningful, evidenced execution gaps for this stage (disclosed missed milestones, repeated pivots without a stated reason), or the only positive evidence is an unverified claim of progress.",
+            score_0_2="Evidence affirmatively shows a lack of execution (disclosed missed milestones with no recovery, no shipped product after a long stated timeline).",
             strong_signals=[
                 "Rapid revenue growth",
                 "Product shipped",
@@ -984,16 +986,16 @@ SCORING_METHODOLOGY = {
                 "Strong retention and efficient CAC can support GTM execution even if every pipeline metric is not present."
             ),
             stage_guidance=(
-                "Pre-seed: GTM may be founder-led discovery. "
-                "Seed: expect GTM learning and early repeatability. "
-                "Series A: expect a repeatable motion and sales efficiency signals. "
-                "Series B+: expect scalable GTM engine."
+                "Pre-seed: strong GTM here looks like founder-led discovery producing specific, named early customer conversations or design partners -- not a stated GTM strategy alone. "
+                "Seed: expect early repeatability evidenced by more than one acquisition working the same way, not just one early customer. "
+                "Series A: expect a disclosed repeatable motion and some sales-efficiency signal (even qualitative -- e.g. a described sales cycle). "
+                "Series B+: expect a scalable GTM engine with disclosed acquisition-efficiency evidence."
             ),
-            score_9_10="Exceptional GTM with rapid acquisition, efficient CAC, clear ICP, and repeatable scalable motion.",
-            score_7_8="Strong GTM execution with credible repeatability.",
-            score_5_6="Some GTM traction, but repeatability or efficiency remains unclear.",
-            score_3_4="Weak GTM execution or unclear sales motion.",
-            score_0_2="No evidence of customer acquisition ability.",
+            score_9_10="Exceptional GTM execution with specific, disclosed evidence -- efficient CAC, a named repeatable motion at scale, or a disclosed pipeline/conversion figure -- clearly exceeding this stage's norm.",
+            score_7_8="Strong GTM execution for this stage with a specific, checkable fact behind it (a named customer-acquisition channel that is described as working more than once, a disclosed sales-cycle or conversion detail) -- not a general claim of traction.",
+            score_5_6="A plausible GTM narrative (a described target customer, a stated acquisition channel) with no specific evidence that acquisition has actually repeated.",
+            score_3_4="Meaningful, evidenced GTM gaps for this stage (no described buyer, one-off founder-led sales explicitly described as not yet repeatable), or the only positive evidence is an unverified claim of demand.",
+            score_0_2="Evidence affirmatively shows an inability to acquire customers (disclosed churned pipeline, no buyer identified after meaningful stated time).",
             strong_signals=[
                 "Repeatable sales motion",
                 "Clear ICP",
@@ -1044,16 +1046,16 @@ SCORING_METHODOLOGY = {
                 "Customer value and retention are strong signals that product execution is working."
             ),
             stage_guidance=(
-                "Pre-seed: expect prototype or MVP progress. "
-                "Seed: expect usable product and iteration. "
-                "Series A: expect mature product serving real customers. "
-                "Series B+: expect scalable product organization and reliability."
+                "Pre-seed: strong product execution here is a real, working prototype/MVP that real users have touched -- a roadmap alone is not evidence. "
+                "Seed: expect a usable product with disclosed evidence of iteration based on real usage. "
+                "Series A: expect a mature product disclosed as serving real customers, with some reliability/outcome evidence. "
+                "Series B+: expect disclosed evidence of a scalable product organization and reliability at scale."
             ),
-            score_9_10="Exceptional product execution with mature product, fast iteration, reliability, and strong customer outcomes.",
-            score_7_8="Strong product execution with credible maturity and delivery.",
-            score_5_6="Moderate product execution with remaining gaps.",
-            score_3_4="Weak product execution or slow delivery.",
-            score_0_2="No credible product execution.",
+            score_9_10="Exceptional, specifically-evidenced product execution -- disclosed reliability/scale figures, named deep integrations, or disclosed strong customer outcomes clearly exceeding this stage's norm.",
+            score_7_8="Strong product execution for this stage with a specific, checkable fact behind it (a shipped feature set serving real disclosed users, a named integration, a disclosed retention/outcome signal) -- not a described roadmap.",
+            score_5_6="A plausible product narrative (a described product, a stated roadmap) with no specific, checkable evidence of real usage or outcomes yet.",
+            score_3_4="Meaningful, evidenced product-execution gaps for this stage (disclosed quality issues, a stated roadmap with no shipped evidence after meaningful time), or the only positive evidence is an unverified claim of quality.",
+            score_0_2="Evidence affirmatively shows a lack of credible product execution (disclosed reliability failures, no shipped product after a long stated timeline).",
             strong_signals=[
                 "Product shipped",
                 "Deep integrations",
@@ -1104,16 +1106,16 @@ SCORING_METHODOLOGY = {
                 "Do not over-penalize missing process details if financial and growth metrics show strong operating discipline."
             ),
             stage_guidance=(
-                "Pre-seed: lightweight operations are acceptable. "
-                "Seed: expect basic discipline. "
-                "Series A: expect scalable operating cadence and hiring plan. "
-                "Series B+: expect mature operations."
+                "Pre-seed: lightweight, informal operations are acceptable and expected -- absence of process detail is not evidence of weakness here. "
+                "Seed: expect basic discipline, evidenced by specific decisions (e.g. a described hiring sequence), not merely an intent to be disciplined. "
+                "Series A: expect a disclosed, scalable operating cadence and hiring plan. "
+                "Series B+: expect disclosed mature operations (margins, efficiency, process) at a level appropriate to real scale."
             ),
-            score_9_10="Exceptional operating discipline with efficient growth, strong margins, and scalable processes.",
-            score_7_8="Strong operational execution with healthy discipline and scaling potential.",
-            score_5_6="Adequate operations with some scaling risk.",
-            score_3_4="Weak operations, inefficient scaling, or poor discipline.",
-            score_0_2="Poor operating discipline that threatens the company.",
+            score_9_10="Exceptional operating discipline with specific, disclosed evidence -- named margin, burn, or efficiency figures that are explicitly present in the supplied information -- clearly exceeding this stage's norm. Never rely on a figure that is not explicitly present in the evidence given.",
+            score_7_8="Strong operational execution for this stage with a specific, disclosed fact behind it (a named efficiency signal, a described and credible operating cadence) -- not a general impression of discipline.",
+            score_5_6="No disclosed operational red flags, and lightweight/informal operations that are normal for this stage -- but no specific evidence of operating discipline beyond the absence of problems.",
+            score_3_4="Meaningful, evidenced operational gaps for this stage (disclosed process breakdowns, described inability to hire or scale), or the only positive evidence is an unverified claim of discipline.",
+            score_0_2="Evidence affirmatively shows operating dysfunction that threatens the company (disclosed severe burn relative to revenue, disclosed near-term insolvency risk).",
             strong_signals=[
                 "Efficient burn",
                 "Healthy margins",
@@ -1164,16 +1166,16 @@ SCORING_METHODOLOGY = {
                 "A strong strategy should explain why this company can win from its current position."
             ),
             stage_guidance=(
-                "Pre-seed: expect focused wedge and clear thesis. "
-                "Seed: expect clear ICP and learning loop. "
-                "Series A: expect coherent expansion strategy. "
-                "Series B+: expect durable category and competitive strategy."
+                "Pre-seed: expect a focused wedge and a clear thesis for why THIS wedge, stated specifically enough to be wrong. "
+                "Seed: expect a clear ICP and evidence of a learning loop -- something that changed because of what was learned. "
+                "Series A: expect a coherent, specific expansion strategy, not just ambition. "
+                "Series B+: expect a durable category strategy with a specific competitive response, not a general market description."
             ),
-            score_9_10="Exceptional strategic clarity with strong wedge, sequencing, and path to category leadership.",
-            score_7_8="Strong strategy with credible path to scale.",
-            score_5_6="Reasonable strategy but important unknowns remain.",
-            score_3_4="Weak strategy, unclear positioning, or poor sequencing.",
-            score_0_2="No credible strategy.",
+            score_9_10="Exceptional, specifically-evidenced strategic clarity -- a named wedge, a disclosed sequencing logic, and a specific, checkable path to category leadership.",
+            score_7_8="Strong strategy for this stage with a specific, checkable choice behind it (a named wedge, a specific rejected alternative, a described competitive response) -- not general market ambition.",
+            score_5_6="A reasonable, coherent strategy narrative with no specific choice or tradeoff described that would distinguish it from a generic entrant's plan.",
+            score_3_4="Meaningful, evidenced strategic gaps (unfocused positioning across too many segments, no stated response to a named competitor), or the only positive evidence is vague ambition.",
+            score_0_2="Evidence affirmatively shows an incoherent or contradicted strategy (disclosed reversals with no stated reason, positioning that contradicts the company's own stated facts).",
             strong_signals=[
                 "Clear wedge",
                 "Strong positioning",

@@ -1,0 +1,2448 @@
+{
+  "summary": "Loom is a software company offering a freemium screen recording and video messaging platform designed to enhance asynchronous communication and collaboration for distributed and remote teams. Available on Mac, Windows, iOS, Android, and via a Chrome extension, Loom enables users to quickly record, edit, and share videos incorporating screen and camera footage. Its AI-powered features automate workflows such as bug reporting and documentation, converting video content into written documents and Jira tickets. \n\nWith over 20 million users and 400,000 companies—including notable customers like HubSpot, Pearson, and Typeform—Loom supports integrations with popular productivity tools such as Google Workspace, Slack, and Jira. It offers enterprise-grade security (SSO, SCIM, data retention policies) to address the needs of large organizations managing asynchronous video communication at scale.\n\nLoom’s business model relies on free basic features, with premium subscription tiers providing advanced editing, privacy controls, administrative functionalities, and enhanced security for enterprises. Strategic opportunities include expanding its LoomSDK ecosystem for third-party integrations and knowledge management.\n\nThe company raised $203.6 million in funding as of mid-2023, with a $1.5 billion valuation following a Series C round led by Andreessen Horowitz. Loom differentiates itself from traditional video conferencing tools by focusing on asynchronous video messaging to reduce meetings and improve productivity, though it faces competition from platforms like Vimeo and Wistia. Key risks include sustaining innovation in AI and integrations, scaling enterprise adoption securely, and navigating competitive pressures in the video communication market.",
+  "risk_analysis": "Here is a detailed risk analysis for Loom based on the provided information and context, focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- **Established incumbents**: Loom faces strong competition from established players in video conferencing and video hosting such as Vimeo, Wistia, Microsoft Teams, Zoom, and Google Meet. Many of these incumbents have deeply entrenched user bases, extensive resources, and evolving product offerings that increasingly include asynchronous video features.  \n- **Feature parity and innovation pressure**: To maintain differentiation, Loom must continuously innovate, especially on its AI-powered workflows and integrations. Larger competitors can replicate or acquire similar technologies or bundle them into broader collaboration suites, eroding Loom’s unique value proposition.  \n- **Market fragmentation**: The asynchronous video messaging niche is emerging but still subject to fragmentation and entry by various SaaS providers, cloud storage services, and unified communication vendors, which could dilute Loom’s market share or compress pricing.  \n- **Switching costs and platform lock-in**: Competitors that provide video alongside other communication tools (e.g., Slack, Microsoft Teams) may have an advantage due to ecosystem lock-in, making it harder for Loom to poach enterprise customers.\n\n2. Scalability Risk  \n- **Infrastructure scaling**: Serving over 20 million users, including large enterprises with secure video content, requires robust, scalable infrastructure for recording, storage, playback, and AI processing. Costs and technical complexity can grow quickly, especially with video content’s high bandwidth and storage demands. Loom must balance quality, latency, and cost-effectiveness as it scales globally.  \n- **Enterprise feature scalability**: Enterprise customers demand advanced security (SSO, SCIM), compliance, and admin controls. Ensuring these features can scale without degrading user experience or imposing overly complex management overhead is challenging. Scaling AI features (such as auto-generated Jira tickets) reliably across diverse customer environments also requires ongoing development.  \n- **Integration scaling**: Loom’s value largely depends on seamless integrations with platforms like Google Workspace, Slack, and Jira. As the number of integrations grows (especially via LoomSDK), Loom faces the risk of integration complexity, compatibility issues, and maintenance overhead, which could constrain scalability.  \n- **Support and onboarding**: Scaling enterprise adoption requires effective onboarding, support, and customer success functions, which can become costly and operationally complex.\n\n3. Market Risk  \n- **Adoption of asynchronous video**: While asynchronous video messaging addresses real pain points for remote and distributed teams, widespread behavioral change in communication styles can be slow. Organizations accustomed to synchronous meetings may resist or underutilize asynchronous tools.  \n- **Economic cycles**: Loom’s growth depends on organizations investing in collaboration tools. Economic downturns or budget cuts, especially in tech and SaaS spending, could slow new customer acquisition and reduce upgrade rates or retention.  \n- **Market saturation and maturity**: As the remote work and collaboration tools space matures post-pandemic, growth rates may normalize or decline. Loom must find new markets or use cases (e.g., AI-driven workflows) to sustain growth.  \n- **Regulatory and privacy landscape**: Loom handles potentially sensitive video and voice data. Evolving data privacy regulations (GDPR, CCPA) and industry-specific compliance requirements may increase operational complexity and limit market opportunities without significant ongoing investment.\n\n4. Customer Adoption Risk  \n- **Free-to-paid conversion**: Loom uses a freemium model, so its financial success depends on converting free users to paid plans. Unclear details about conversion rates and pricing elasticity present risk in achieving and sustaining revenue growth.  \n- **User engagement and retention**: Retention is critical since asynchronous video must become a habitual communication method. If users perceive video messaging as time-consuming or cumbersome, engagement could falter, reducing platform value and revenue.  \n- **Enterprise sales cycles**: Selling to large enterprises often involves long sales cycles, complex negotiations, and customization demands. Loom needs a strong sales and customer success organization; failure to build this could constrain scaling.  \n- **Dependency on integrations**: Loom’s ability to add value depends on tight integration with third-party tools. If users do not see seamless workflows, adoption could stagnate, especially among technically sophisticated users.\n\n5. Operational Risk  \n- **Product complexity and technical debt**: Loom’s broad feature set—including recording, editing, AI workflows, and integrations—introduces significant product complexity. Managing technical debt, bugs, and performance issues while innovating rapidly poses ongoing risks.  \n- **AI feature reliability**: Loom’s AI-driven capabilities (e.g., auto-generated Jira tickets) must deliver consistently accurate and useful outputs. Failures or inaccuracies could damage user trust and increase support costs.  \n- **Security and privacy breaches**: As Loom handles large amounts of video data, any breach or security lapse could result in reputational damage, customer churn, and legal consequences. Maintaining enterprise-grade security requires ongoing investment and vigilance.  \n- **Dependence on third-party platforms**: Loom relies on external platforms (Chrome extensions, operating systems, Google Workspace, Slack, Jira) for functionality and integrations. Changes to APIs, policies, or platform limitations could disrupt Loom’s product or require costly reengineering.  \n- **Talent acquisition and retention**: Loom requires skilled engineers, AI expertise, and customer success staff. Competitive labor markets could make hiring and retaining talent difficult, limiting growth and product development.\n\n—  \n**Summary**: Loom operates in a competitive and evolving market with promising AI-enabled asynchronous video communication products. However, it faces significant risks from incumbent competition, scaling complex infrastructure and enterprise features, behavior-driven market adoption uncertainty, conversion and retention challenges with freemium users, and operational challenges tied to product complexity and security. Mitigating these risks requires strong innovation, robust infrastructure investment, focused enterprise sales and support, and continuous attention to product reliability and security standards.",
+  "competitor_analysis": "Here is a comprehensive analysis of Loom’s competitive landscape based on the company information and additional research context:\n\n---\n\n### Major Competitors\n\n1. **Vimeo**  \n   - Offers video hosting, live streaming, and screen recording tools.  \n   - Strong in video content management and distribution for businesses.  \n   - Competes with Loom’s video hosting and asynchronous video messaging capabilities.\n\n2. **Wistia**  \n   - Focuses on video marketing with tools for hosting, analytics, and customization.  \n   - Provides video recording and editing but mainly targets marketing teams and video content creators.  \n\n3. **Zoom & Microsoft Teams (Indirect Competitors)**  \n   - Primarily synchronous video conferencing platforms but increasingly adding asynchronous video messaging features.  \n   - Large installed user base and enterprise relationships make them formidable competitors if expanding into async video.\n\n4. **Snagit/Camtasia (TechSmith)**  \n   - Screen recording and video editing tools with strong desktop software capabilities.  \n   - More technical users, less focused on asynchronous collaboration.\n\n5. **CloudApp, Vidyard, SoapBox**  \n   - Smaller video communication startups focusing on async video messaging and sales enablement.  \n   - Similar freemium models and integrations targeting remote teams.\n\n6. **Native OS Screen Recorders (macOS, Windows) + Video Editors**  \n   - Free built-in tools for screen recording and video editing, though less integrated and lacking async collaboration features.\n\n---\n\n### Competitive Advantages of Loom\n\n- **Focus on Asynchronous Video Communication**  \n  Loom is designed specifically for async workflows, reducing meeting overload and improving productivity for distributed teams.\n\n- **Strong Integrations Ecosystem**  \n  Deep integration with collaboration tools (Google Workspace, Slack, Jira) enables seamless workflows and embeds async video where users already work.\n\n- **AI-powered Features**  \n  Automated bug report creation, transcription, and converting video to written docs makes Loom more than just a recorder; it becomes a productivity enhancer.\n\n- **Cross-platform Accessibility**  \n  Available via desktop apps, mobile, and browser extension ensures ease of use anywhere.\n\n- **Robust Video Editing and Engagement Tools**  \n  Intuitive editor with trimming, stitching, call-to-actions, comments, and captions supports rich communication.\n\n- **Enterprise-grade Security and Management**  \n  SSO, SCIM, custom retention policies, and privacy settings position Loom well for large organizations.\n\n- **Strong User Base and Brand**  \n  Over 20 million users, 400,000 companies including notable tech brands offer strong network effects and word-of-mouth.\n\n- **Freemium Model with Upsell Path**  \n  Allows wide adoption with monetization opportunities via premium tiers and enterprise contracts.\n\n- **Product-Led Growth and Ease of Use**  \n  Simple onboarding and ability to share videos instantly fuel viral adoption within teams.\n\n---\n\n### Competitive Disadvantages of Loom\n\n- **Emerging Competition from Established Vendors**  \n  Entrants like Zoom and Microsoft adding async video lowers barriers for users to stick to one platform.\n\n- **Dependence on Third-Party Platform Integrations**  \n  Loom’s value relies heavily on integrations; disruptions or changes in integration partners may impact user experience.\n\n- **Pricing Sensitivity in Small Teams**  \n  Freemium models require effective conversion to paid plans; smaller or budget-constrained teams may prefer free OS tools or competitors.\n\n- **Limited Detailed Analytics Compared to Video Marketing Platforms**  \n  Competitors like Wistia excel in marketing analytics, potentially limiting Loom’s appeal for dedicated video marketers.\n\n- **Niche Use Case**  \n  While async video is growing, many teams still prefer synchronous communication or text-based async tools, capping immediate market size.\n\n---\n\n### Barriers to Entry\n\n- **Technology and Feature Complexity**  \n  Building a seamless cross-platform async video platform with AI-powered workflows requires significant engineering resources and expertise.\n\n- **Network Effects**  \n  Loom’s widespread adoption means new entrants must achieve critical mass to compete effectively in team collaboration.\n\n- **Integrations**  \n  Building and maintaining deep integrations with widely used collaboration platforms is key and requires ongoing partnerships and technical effort.\n\n- **Enterprise Security and Compliance**  \n  Meeting stringent security standards (SSO, SCIM, data policies) is a high barrier for new entrants targeting larger customers.\n\n- **Brand Trust and User Experience**  \n  Loom’s polished UX and reputation for ease of use create switching costs for users accustomed to the platform.\n\n- **Freemium Distribution Model**  \n  Achieving virality through free use lowers user acquisition cost, but new entrants need sizable marketing pushes or innovation to compete.\n\n---\n\n### Competitive Risks\n\n- **Feature Replication by Large Platforms**  \n  Zoom, Microsoft, Google expanding async video features could erode Loom’s differentiation and user base.\n\n- **Innovation Pace and AI Development**  \n  Loom must continuously improve its AI workflows (bug reporting, transcription) to maintain a competitive edge.\n\n- **Security Breaches or Privacy Issues**  \n  Any failure in managing customer data securely at scale could damage reputation and enterprise trust.\n\n- **Customer Churn and Conversion Challenges**  \n  Reliance on converting freemium users to paid subscriptions requires constant value addition; failure to monetize effectively limits growth.\n\n- **Platform Dependency**  \n  Changes in Chrome extension policies, OS restrictions, or integration APIs might disrupt Loom’s seamless experience.\n\n- **Market Saturation and Alternative Communication Tools**  \n  Competitors in synchronous meeting tools, messaging apps, and knowledge management platforms present indirect threats to Loom’s positioning as async video solution.\n\n---\n\n### Summary\n\nLoom occupies a strong position in asynchronous video communication with a broad, growing user base and unique AI-powered productivity features. Its cross-platform accessibility, integrations, and enterprise-grade security form solid competitive moats. However, it faces serious threats from incumbents expanding their video offerings, requires ongoing innovation to stay ahead, and must manage its freemium monetization and integration dependencies carefully. New entrants face high barriers to replicate Loom’s full ecosystem and scale but may find niche opportunities in specialized verticals or complementary workflows.\n\n---\n\nLet me know if you want a more granular competitor feature comparison or market share estimates.",
+  "memo": "Investment Memo: Loom\n\nCompany Overview  \nLoom is a leading asynchronous video messaging and screen recording platform designed to improve communication and collaboration for distributed teams. It supports Mac, Windows, iOS, Android, and Chrome extension users. Incorporating AI capabilities, Loom automates workflows such as bug reporting and documentation. With over 20 million users across 400,000 companies, Loom operates a freemium subscription model and offers enterprise-grade security features. Investors include Andreessen Horowitz, Sequoia, Kleiner Perkins, and SevenSevenSix.\n\nProblem  \nRemote and distributed teams face inefficiencies with synchronous communication methods like video calls and lengthy emails, which reduce productivity and can cause bottlenecks across time zones. Traditional screen recording and video conferencing tools lack seamless asynchronous collaboration, integration with development workflows, and AI automation, making communication slower and less effective.\n\nSolution  \nLoom provides a simple, intuitive screen and camera recording platform paired with editing, transcription, and sharing features that facilitate asynchronous video communication. AI-powered workflows convert videos into bug reports, SOPs, and written documentation automatically. Loom’s integrations with Jira, Slack, and Google Workspace enhance team productivity. Its enterprise solution delivers security features such as SSO, SCIM, custom privacy, and data retention controls, scaling communication for large organizations.\n\nMarket Opportunity  \nThe shift to remote and hybrid work models drives strong demand for asynchronous communication tools, especially those enabling efficient video messaging. Loom targets knowledge workers and teams across engineering, sales, customer support, marketing, and design functions in SMBs and enterprises. With over 400,000 companies currently using Loom and enterprise expansion underway, the market includes millions of organizations seeking to reduce meetings, improve collaboration, and leverage AI automation.\n\nCompetitive Landscape  \nLoom competes with video conferencing, screen recording, and video hosting platforms such as Vimeo, Wistia, and other incumbents. Its key differentiators are its focus on asynchronous communication, AI-powered workflows, seamless integration with popular productivity tools, and enterprise security offerings. However, competition from established conferencing platforms extending into async messaging is a notable threat.\n\nKey Risks  \n- Rapid innovation required to keep ahead of competitors adding asynchronous features.  \n- Reliance on third-party integrations for core user experience, which may pose operational dependencies.  \n- Challenges scaling enterprise adoption while ensuring stringent security and privacy compliance.  \n- Uncertain conversion rates from free users to paid subscriptions and limited visibility into revenue growth metrics.\n\nRecommendation  \nLoom presents a compelling investment opportunity with a strong market position in the growing asynchronous communication segment backed by advanced AI integrations and a broad customer base. The company’s solid backing by top-tier VCs and strategic product differentiation mitigate some risks. We recommend a cautious but positive stance, monitoring Loom’s enterprise adoption growth, revenue scaling, and competitive response while considering follow-on investment as product innovations and market traction advance.",
+  "structured_analysis": {
+    "company_name": "Loom",
+    "industry": "SaaS",
+    "stage": "Series B+",
+    "business_model": "Subscription",
+    "summary": "Loom is a SaaS platform providing asynchronous video messaging and screen recording solutions designed to enhance remote team communication and productivity. It offers features like easy screen and camera recording, video editing, AI-powered workflows for documentation and bug reporting, and integrations with popular tools such as Google Workspace, Slack, and Jira. With a freemium model, Loom serves individual professionals, teams, and enterprises, boasting over 20 million users and 400,000 companies. They have raised over $200 million in funding and position themselves as a productivity enhancer by reducing the need for synchronous meetings.",
+    "key_risks": [
+      "High competition from established video conferencing and screen recording platforms expanding into asynchronous video messaging.",
+      "The necessity for continuous innovation in AI and integrations to stay differentiated.",
+      "Challenges in scaling enterprise adoption while maintaining strict security and privacy standards.",
+      "Reliance on third-party platforms and integrations for seamless user experience could pose operational risks."
+    ],
+    "strengths": [
+      "Strong user base with millions of users and substantial enterprise adoption.",
+      "Robust AI-powered features improving efficiency in documentation and bug reporting workflows.",
+      "Wide range of features including multi-device support, video editing, transcription, and enterprise-grade security.",
+      "Strategic integrations with popular collaboration tools enhancing workflow adoption.",
+      "Highly reputable investors and strong endorsements from notable companies and industry figures."
+    ],
+    "recommendation": "Loom presents a compelling investment opportunity as a leading asynchronous video communication platform with strong market adoption, innovative AI features, and significant enterprise traction. Continued investment in AI capabilities, enterprise security, and ecosystem expansion via LoomSDK can drive sustainable growth. However, vigilant monitoring of competitive dynamics and execution risks in scaling enterprise offerings is essential. Overall, a recommended investment with appropriate diligence on user monetization metrics and competitive response plans."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 6.7,
+    "product_score": 7.0,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 6.4,
+    "overall_score": 69.1,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 69.1,
+    "readiness_summary": "The company shows a solid fundraising readiness with consistent scores across key areas such as Market, Product, and Competition. The team and financial aspects need some improvement to strengthen the overall position.",
+    "strengths": [
+      "Competition (7.2): Strong market positioning against competitors.",
+      "Market (7.0): Robust market opportunity.",
+      "Product (7.0): Well-developed product meeting market needs.",
+      "Traction (7.0): Good initial traction indicating market acceptance."
+    ],
+    "weaknesses": [
+      "Financial (6.4): Financials need refinement and better projections.",
+      "Team (6.7): Team could benefit from additional expertise or experience."
+    ]
+  },
+  "readiness_score": 69.1,
+  "readiness_summary": "The company shows a solid fundraising readiness with consistent scores across key areas such as Market, Product, and Competition. The team and financial aspects need some improvement to strengthen the overall position.",
+  "founder_analysis": {
+    "summary": "The available information on Loom provides extensive details about the company's product, market, funding, customers, and features but lacks specific public information about the founding team's background, technical leadership, business operations, leadership qualities, and execution milestones. There is no direct or inferred evidence regarding the founders' prior experience, technical expertise, business acumen, leadership capacity, or execution track record. Consequently, these dimensions cannot be responsibly assessed based on the supplied data.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.7,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable'.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founders' direct engagement with customers or problem domain",
+            "Share any public product launches or market traction linked to founders' expertise"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Direct customer insight or problem understanding demonstrated by founders",
+            "Publicly available information on founders' industry background or product involvement"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows the company has paying customers and recurring revenue (ARR), indicating a functioning product and some level of product execution. Funding rounds imply resources for scaling engineering efforts. However, there is no direct evidence of a mature technical organization, deep integrations, or complex scalable architecture expected at Series C. Therefore, the score reflects adequate capability with some scaling or complexity risk.",
+          "evidence": [
+            "The company has disclosed ARR (Annual Recurring Revenue), indicating a functioning product with paying customers.",
+            "Customer acquisition cost (CAC) and customer data suggest active product deployment and market traction.",
+            "Funding and raised capital imply investor confidence in the team's ability to build and scale the product."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's background and experience.",
+            "Gather insights into the product's technical architecture and scalability plans.",
+            "Request evidence of engineering practices and product reliability metrics."
+          ],
+          "missing_information": [
+            "Specific details about the technical founders or engineering team composition.",
+            "Information on product complexity or technical challenges faced.",
+            "Details on engineering processes or scalability measures."
+          ],
+          "signals": [
+            "Presence of paying customers and recurring revenue demonstrates product execution capability.",
+            "Funding rounds indicate access to resources for scaling engineering efforts.",
+            "Customer metrics imply ongoing product maintenance and iteration."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The disclosed ARR and CAC data demonstrate revenue generation and an understanding of unit economics, which are strong signals of business capability. Funding rounds and customer presence further support credible GTM and operational execution. While the evidence does not show exceptional commercial execution or detailed repeatable sales motion, it supports a strong business capability appropriate for Series C.",
+          "evidence": [
+            "The company has disclosed ARR figures indicating revenue generation.",
+            "Customer acquisition cost (CAC) data is provided, showing awareness of unit economics.",
+            "The team has secured funding, demonstrating investor confidence in their business execution.",
+            "There is mention of customers, implying some level of market traction."
+          ],
+          "recommendations": [
+            "Provide more granular data on unit economics and pricing iterations.",
+            "Share insights on operational discipline and scalability plans.",
+            "Highlight repeatable GTM strategies and customer retention metrics."
+          ],
+          "missing_information": [
+            "Detailed unit economics beyond CAC and ARR.",
+            "Specifics on pricing strategy and its evolution.",
+            "Operational processes and company-building practices."
+          ],
+          "signals": [
+            "Revenue generation (ARR) suggests ability to sell and monetize product.",
+            "CAC data indicates understanding of customer acquisition and pricing strategy.",
+            "Funding rounds reflect external validation of business model and operational capability.",
+            "Customer base presence supports commercial traction and GTM learning."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of ARR, CAC data, customer traction, and successful funding rounds collectively indicate credible leadership capacity to lead, hire, and scale the organization. Although explicit leadership details or organizational structure are missing, investor confidence and operational progress support a strong leadership score consistent with Series C expectations.",
+          "evidence": [
+            "The company has disclosed ARR (Annual Recurring Revenue), indicating some level of customer traction and revenue generation.",
+            "Customer acquisition cost (CAC) data is provided, suggesting the team understands and manages growth metrics.",
+            "The company has raised funding, which implies investor confidence in the leadership team's ability to execute.",
+            "The presence of customers indicates the team has successfully attracted early adopters."
+          ],
+          "recommendations": [
+            "Provide more explicit information on the leadership team's hiring strategy and organizational scaling plans.",
+            "Disclose details about the executive team or leadership roles to strengthen assessment."
+          ],
+          "missing_information": [
+            "Explicit details on hiring plans or organizational structure.",
+            "Direct evidence of leadership depth or executive team composition."
+          ],
+          "signals": [
+            "Revenue generation (ARR) shows operational progress and leadership execution.",
+            "Funding raised reflects external validation of leadership capacity.",
+            "Customer base demonstrates ability to attract and retain users."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence of ARR, customer acquisition metrics, and successful fundraising rounds demonstrate clear progress and milestone achievement. While exact growth rates or detailed milestones are not provided, these signals indicate strong execution with measurable growth and repeatability expected at Series C.",
+          "evidence": [
+            "The company has disclosed ARR (Annual Recurring Revenue), indicating revenue generation.",
+            "Customer acquisition metrics (CAC) and number of customers won have been provided.",
+            "The company has successfully raised funding rounds, demonstrating investor confidence."
+          ],
+          "recommendations": [
+            "Provide more detailed data on milestone achievements and retention metrics.",
+            "Include qualitative descriptions of product development progress."
+          ],
+          "missing_information": [
+            "Specific milestone achievements and retention rates.",
+            "Detailed product shipment timelines."
+          ],
+          "signals": [
+            "Revenue growth as indicated by ARR.",
+            "Customer acquisition and retention signals.",
+            "Successful fundraising rounds."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "No public evidence on founder-market fit available.",
+    "fundraising_signal": "Raised $203.6M including a $130M Series C at $1.5B valuation."
+  },
+  "market_analysis": {
+    "summary": "The evidence provided includes detailed company information about Loom's product offerings, customer segments, funding history, and competitive landscape. However, explicit quantitative data on market size, market growth rates, timing indicators, competitive win rates, and customer demand metrics are not disclosed. The information allows for some inferred understanding of the market opportunity and competitive context but lacks direct or multiple independent public signals required for observed or inferred evidence status in the assessed dimensions.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market opportunity. While customer segments and use cases are described, no explicit or inferred market size data is available.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain credible market research reports or analyst data quantifying the asynchronous video communication market size.",
+            "Collect data on buyer budgets and spending patterns in target segments.",
+            "Gather competitive market sizing and segmentation data to triangulate TAM, SAM, and SOM."
+          ],
+          "missing_information": [
+            "Explicit total addressable market (TAM) size estimates or credible market research data.",
+            "Quantitative data on buyer budgets or market spend relevant to asynchronous video communication.",
+            "Market segmentation data with sizing for target customer segments and geographies.",
+            "Comparable market category sizing or public market reports."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals about market growth rates or trends are provided. Company growth data is not disclosed to support inference.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire market research or analyst reports on growth trends in asynchronous communication and video collaboration markets.",
+            "Collect data on buyer budget increases and urgency for asynchronous communication solutions.",
+            "Analyze category funding and adoption trends to support growth assessment."
+          ],
+          "missing_information": [
+            "Category growth rates or trends for asynchronous video communication or related collaboration tools.",
+            "Data on budget expansion or buyer urgency in the target market.",
+            "Market reports indicating adoption trends or funding velocity in the category.",
+            "Company-specific growth metrics that could support market growth inference."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Provide qualitative or quantitative evidence on customer adoption or interest",
+            "Include information on technology readiness or product maturity",
+            "Clarify regulatory factors impacting solution adoption",
+            "Share data on customer budgets or spending trends relevant to the solution",
+            "Demonstrate urgency or workflow changes driving market pull"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability for target customers",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without public facts on differentiation, wedge, or competitive positioning, the dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer adoption and product differentiation",
+            "Disclose known competitors and how the company differentiates",
+            "Share any public research or funding history supporting competitive position"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption or product traction specifics"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows the company has disclosed ARR, indicating paying customers and revenue generation, which is a strong signal of demand. Customer count and CAC data suggest active acquisition and retention efforts, supporting credible repeatability. Funding rounds provide external validation of market demand and customer traction. However, detailed metrics such as retention rates, expansion revenue, or usage intensity are missing, which prevents a higher score. Given the Series C stage expectation of scalable demand across segments or geographies, the evidence supports strong demand but not exceptional or fully demonstrated scalability, justifying a score of 7.",
+          "evidence": [
+            "The company has disclosed ARR (Annual Recurring Revenue), indicating paying customers and revenue generation.",
+            "Customer count and CAC (Customer Acquisition Cost) data suggest active customer acquisition and retention efforts.",
+            "Funding rounds imply investor confidence in market demand and customer traction."
+          ],
+          "recommendations": [
+            "Provide detailed retention and expansion data to strengthen demand evidence.",
+            "Share qualitative customer feedback or case studies to demonstrate urgency and outcomes.",
+            "Disclose usage metrics to better illustrate customer engagement."
+          ],
+          "missing_information": [
+            "Detailed retention rates",
+            "Customer expansion metrics",
+            "Usage frequency and urgency indicators"
+          ],
+          "signals": [
+            "Revenue generation (ARR) from customers",
+            "Customer acquisition and retention metrics (customers, CAC)",
+            "External validation through funding rounds"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Report: Loom Business Breakdown & Founding Story | Contrary Research",
+      "url": "https://research.contrary.com/company/loom"
+    },
+    {
+      "title": "Free screen recorder for Mac and PC | Loom",
+      "url": "https://www.loom.com"
+    },
+    {
+      "title": "Best Loom Alternatives for Teams that Love Clarity & Speed",
+      "url": "https://vimeo.com/blog/post/loom-alternatives"
+    },
+    {
+      "title": "Loom | Video Messaging for Work | Atlassian",
+      "url": "https://www.atlassian.com/software/loom"
+    },
+    {
+      "title": "I spent 15 hours studying how Loom went from Chrome ...",
+      "url": "https://www.reddit.com/r/SaaS/comments/1d54o7b/i_spent_15_hours_studying_how_loom_went_from"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Loom has publicly disclosed a large user base of over 20 million users and 400,000 companies, indicating significant customer adoption. The company has raised substantial funding totaling $203.6 million, including a $130 million Series C at a $1.5 billion valuation, which signals strong investor confidence. However, no explicit dated two-point series for customer count or revenue growth is provided, nor are retention metrics or detailed engagement statistics disclosed. The evidence for customer growth and revenue growth is therefore indirect and incomplete. Engagement and retention signals are limited to qualitative endorsements and product feature descriptions without quantitative backing. Growth velocity cannot be assessed due to lack of time-series data.",
+    "confidence": "Medium",
+    "strengths": [
+      "Large disclosed user base and company count",
+      "Strong funding rounds with reputable investors",
+      "Multiple enterprise and notable customer endorsements",
+      "Rich product feature set with AI integrations and enterprise security"
+    ],
+    "weaknesses": [
+      "No explicit time-series data on customer or revenue growth",
+      "No disclosed retention metrics such as NRR or churn",
+      "Lack of quantitative engagement data",
+      "No structured growth velocity data available"
+    ],
+    "evidence": [
+      "Loom has attracted over 20 million users and 400,000 companies.",
+      "Raised $203.6 million in funding as of August 2023, including a $130 million Series C round at a $1.5 billion valuation.",
+      "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform, and investor Alexis Ohanian.",
+      "Loom offers enterprise-grade security features and AI-powered workflows.",
+      "Loom positions itself as a tool to reduce meetings and improve productivity via asynchronous video communication."
+    ],
+    "recommendations": [
+      "Obtain dated customer count and revenue figures to assess growth trends.",
+      "Request retention metrics such as NRR, GRR, and churn rates.",
+      "Gather quantitative engagement data including usage frequency and workflow depth.",
+      "Seek information on conversion rates from free to paid tiers and enterprise contract growth.",
+      "Explore adoption and impact metrics of LoomSDK integrations."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct public facts confirm a large and diverse customer base, including enterprise clients, supporting observed status with high confidence.",
+          "evidence": [
+            "Loom has attracted over 20 million users and 400,000 companies.",
+            "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform."
+          ],
+          "recommendations": [
+            "Obtain dated customer counts to assess growth trajectory."
+          ],
+          "missing_information": [
+            "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+          ],
+          "signals": [
+            "20M+ users",
+            "400K+ companies",
+            "Enterprise adoption by known brands"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, preventing a valid assessment of this dimension.",
+          "evidence": [],
+          "recommendations": [
+            "Provide publicly verifiable revenue metrics or growth indicators",
+            "Disclose customer acquisition and retention data",
+            "Share information on contract values and revenue expansion"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+            "Provide qualitative evidence or testimonials regarding customer loyalty and repeat usage.",
+            "Share any available data on customer expansion or upsell to demonstrate retention strength."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No disclosed data on customer repeat usage or stickiness.",
+            "No qualitative statements or case studies indicating customer retention or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes AI-powered workflows automating documentation and bug reporting, integrations with major collaboration tools (Slack, Google Workspace, Jira), and customer testimonials citing productivity gains. While quantitative usage data is lacking, these credible signals support strong engagement consistent with the 7-8 score band for Series C stage.",
+          "evidence": [
+            "Loom offers AI-powered workflows automating documentation and bug reporting.",
+            "Product features include video editing, transcriptions, integrations with Slack, Google Workspace, and Jira.",
+            "Endorsements highlight saved time and improved communication efficiency."
+          ],
+          "recommendations": [
+            "Obtain quantitative usage metrics such as active users and workflow depth."
+          ],
+          "missing_information": [],
+          "signals": [
+            "AI workflows automate tasks",
+            "Integrations with major collaboration tools",
+            "Customer testimonials citing productivity gains"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base is large and includes notable enterprise clients, but no explicit growth trend data is available.",
+    "revenue_growth": "Revenue growth is not directly disclosed; funding and valuation imply positive momentum but no concrete revenue figures or growth rates are provided.",
+    "fundraising_signal": "Strong fundraising history with top-tier investors and a $1.5 billion valuation indicates strong market validation."
+  },
+  "market_score": 7.0,
+  "team_score": 6.7,
+  "product_score": 7.0,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 6.4,
+  "overall_score": 69.1,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Loom",
+      "industry": "SaaS",
+      "business_model": "Subscription",
+      "company_stage": "Series B+",
+      "funding_stage": "Series B+"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "849221d65ae5205847990cc7e8517a1d48ecd8080ca63c373578b0667a3c7d61",
+      "search_query": "Loom screen recorder company overview features reviews funding investors competitors",
+      "research_brief_snapshot": "1. Company Overview  \nLoom is a software company providing a screen recording and video messaging platform designed to enhance asynchronous communication and collaboration for teams. It offers tools for recording, editing, sharing, and managing video content across devices including Mac, Windows, iOS, Android, and via a Chrome extension. Loom integrates AI features to automate tasks such as creating bug reports and documentation. The platform targets various professional use cases including sales, engineering, customer support, design, and marketing.\n\n2. Verified Facts  \n- Loom has a freemium business model and has attracted over 20 million users and 400,000 companies.  \n- The company raised a total of $203.6 million in funding as of August 2023, including a $130 million Series C round in May 2021 at a $1.5 billion valuation led by Andreessen Horowitz. Other investors include Sequoia, Kleiner Perkins, and General Catalyst.  \n- Loom’s product features include screen and camera recording, video editing (trimming, stitching), transcriptions and closed captions, video privacy controls, custom backgrounds, and video and viewer insights.  \n- Loom supports integrations with tools like Google Workspace, Slack, and Jira.  \n- Loom AI workflows can convert videos into written documents, draft SOPs, and file Jira tickets automatically.  \n- Loom offers enterprise-grade security features such as SSO, SCIM, custom data retention policies, and privacy settings.  \n- The platform is used by notable customers and endorsers including MetaLab, HubSpot, Pearson, Typeform, and investors like Alexis Ohanian (SevenSevenSix).  \n- Loom positions itself as a tool to reduce meetings and improve productivity by enabling asynchronous video communication.  \n- LoomSDK is a strategic opportunity for third-party integrations and expanding Loom’s content library as a knowledge management system.  \n- Loom faces competition from incumbent video conferencing and screen recording platforms, including Vimeo and Wistia.\n\n3. Reasonable Assumptions  \n- Loom’s focus on asynchronous video messaging differentiates it from traditional synchronous video conferencing tools.  \n- The AI-powered features likely improve user efficiency in documentation and bug reporting workflows.  \n- Loom’s enterprise offering targets larger organizations needing secure and scalable async video communication management.  \n- The freemium model suggests Loom monetizes through premium subscriptions or enterprise contracts.  \n- Given endorsements and use cases, Loom is positioned as a productivity and communication enhancer for distributed and remote teams.\n\n4. Business Model  \nLoom operates a freemium model, offering free access to basic screen recording and video messaging features, with paid tiers likely providing advanced capabilities, enterprise security, and administrative controls. Revenue is generated through subscription fees from individual professionals, teams, and enterprises. Loom also leverages its LoomSDK to enable third-party integrations, potentially creating additional revenue streams or ecosystem value.\n\n5. Target Customers  \n- Distributed and remote teams across various functions: engineering, sales, marketing, customer support, and design.  \n- Enterprises requiring secure, scalable asynchronous video communication solutions.  \n- Knowledge workers and organizations seeking to reduce synchronous meetings and improve communication efficiency.  \n- Developers and product teams using Jira and other collaboration tools integrated with Loom.\n\n6. Competitors  \n- Vimeo (including Vimeo screen recorder and video hosting tools)  \n- Wistia  \n- Other video conferencing and screen recording platforms (unnamed incumbents)  \n\n7. Key Risks  \n- Competition from established video conferencing and screen recording companies entering the asynchronous video market.  \n- The need to continuously innovate AI and integration features to maintain differentiation.  \n- Potential challenges in scaling enterprise adoption while maintaining security and privacy standards.  \n- Dependence on third-party platforms and integrations (e.g., Google Workspace, Slack, Jira) for seamless user experience.\n\n8. Important Unknowns  \n- Exact revenue figures and growth rates.  \n- Detailed pricing structure and conversion rates from free to paid users.  \n- Market share relative to competitors.  \n- Specifics on user engagement metrics and retention.  \n- The extent and success of LoomSDK adoption by third parties.  \n- Future product roadmap and planned feature expansions beyond AI workflows.\n\n9. Sources  \n- https://research.contrary.com/company/loom  \n- https://www.loom.com  \n- https://vimeo.com/blog/post/loom-alternatives  \n- https://www.atlassian.com/software/loom  \n- https://www.reddit.com/r/SaaS/comments/1d54o7b/i_spent_15_hours_studying_how_loom_went_from",
+      "source_snapshot": [
+        {
+          "title": "Report: Loom Business Breakdown & Founding Story | Contrary Research",
+          "url": "https://research.contrary.com/company/loom"
+        },
+        {
+          "title": "Free screen recorder for Mac and PC | Loom",
+          "url": "https://www.loom.com"
+        },
+        {
+          "title": "Best Loom Alternatives for Teams that Love Clarity & Speed",
+          "url": "https://vimeo.com/blog/post/loom-alternatives"
+        },
+        {
+          "title": "Loom | Video Messaging for Work | Atlassian",
+          "url": "https://www.atlassian.com/software/loom"
+        },
+        {
+          "title": "I spent 15 hours studying how Loom went from Chrome ...",
+          "url": "https://www.reddit.com/r/SaaS/comments/1d54o7b/i_spent_15_hours_studying_how_loom_went_from"
+        }
+      ],
+      "analyzed_at": "2026-08-28T05:59:54.792517+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The evidence provided includes detailed company information about Loom's product offerings, customer segments, funding history, and competitive landscape. However, explicit quantitative data on market size, market growth rates, timing indicators, competitive win rates, and customer demand metrics are not disclosed. The information allows for some inferred understanding of the market opportunity and competitive context but lacks direct or multiple independent public signals required for observed or inferred evidence status in the assessed dimensions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market opportunity. While customer segments and use cases are described, no explicit or inferred market size data is available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or analyst data quantifying the asynchronous video communication market size.",
+              "Collect data on buyer budgets and spending patterns in target segments.",
+              "Gather competitive market sizing and segmentation data to triangulate TAM, SAM, and SOM."
+            ],
+            "missing_information": [
+              "Explicit total addressable market (TAM) size estimates or credible market research data.",
+              "Quantitative data on buyer budgets or market spend relevant to asynchronous video communication.",
+              "Market segmentation data with sizing for target customer segments and geographies.",
+              "Comparable market category sizing or public market reports."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals about market growth rates or trends are provided. Company growth data is not disclosed to support inference.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research or analyst reports on growth trends in asynchronous communication and video collaboration markets.",
+              "Collect data on buyer budget increases and urgency for asynchronous communication solutions.",
+              "Analyze category funding and adoption trends to support growth assessment."
+            ],
+            "missing_information": [
+              "Category growth rates or trends for asynchronous video communication or related collaboration tools.",
+              "Data on budget expansion or buyer urgency in the target market.",
+              "Market reports indicating adoption trends or funding velocity in the category.",
+              "Company-specific growth metrics that could support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology readiness or product maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or workflow changes driving market pull"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without public facts on differentiation, wedge, or competitive positioning, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption and product differentiation",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or funding history supporting competitive position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption or product traction specifics"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has disclosed ARR, indicating paying customers and revenue generation, which is a strong signal of demand. Customer count and CAC data suggest active acquisition and retention efforts, supporting credible repeatability. Funding rounds provide external validation of market demand and customer traction. However, detailed metrics such as retention rates, expansion revenue, or usage intensity are missing, which prevents a higher score. Given the Series C stage expectation of scalable demand across segments or geographies, the evidence supports strong demand but not exceptional or fully demonstrated scalability, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating paying customers and revenue generation.",
+              "Customer count and CAC (Customer Acquisition Cost) data suggest active customer acquisition and retention efforts.",
+              "Funding rounds imply investor confidence in market demand and customer traction."
+            ],
+            "recommendations": [
+              "Provide detailed retention and expansion data to strengthen demand evidence.",
+              "Share qualitative customer feedback or case studies to demonstrate urgency and outcomes.",
+              "Disclose usage metrics to better illustrate customer engagement."
+            ],
+            "missing_information": [
+              "Detailed retention rates",
+              "Customer expansion metrics",
+              "Usage frequency and urgency indicators"
+            ],
+            "signals": [
+              "Revenue generation (ARR) from customers",
+              "Customer acquisition and retention metrics (customers, CAC)",
+              "External validation through funding rounds"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.7,
+      "confidence": "Medium",
+      "summary": "The available information on Loom provides extensive details about the company's product, market, funding, customers, and features but lacks specific public information about the founding team's background, technical leadership, business operations, leadership qualities, and execution milestones. There is no direct or inferred evidence regarding the founders' prior experience, technical expertise, business acumen, leadership capacity, or execution track record. Consequently, these dimensions cannot be responsibly assessed based on the supplied data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable'.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public product launches or market traction linked to founders' expertise"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insight or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product involvement"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has paying customers and recurring revenue (ARR), indicating a functioning product and some level of product execution. Funding rounds imply resources for scaling engineering efforts. However, there is no direct evidence of a mature technical organization, deep integrations, or complex scalable architecture expected at Series C. Therefore, the score reflects adequate capability with some scaling or complexity risk.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating a functioning product with paying customers.",
+              "Customer acquisition cost (CAC) and customer data suggest active product deployment and market traction.",
+              "Funding and raised capital imply investor confidence in the team's ability to build and scale the product."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and experience.",
+              "Gather insights into the product's technical architecture and scalability plans.",
+              "Request evidence of engineering practices and product reliability metrics."
+            ],
+            "missing_information": [
+              "Specific details about the technical founders or engineering team composition.",
+              "Information on product complexity or technical challenges faced.",
+              "Details on engineering processes or scalability measures."
+            ],
+            "signals": [
+              "Presence of paying customers and recurring revenue demonstrates product execution capability.",
+              "Funding rounds indicate access to resources for scaling engineering efforts.",
+              "Customer metrics imply ongoing product maintenance and iteration."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and CAC data demonstrate revenue generation and an understanding of unit economics, which are strong signals of business capability. Funding rounds and customer presence further support credible GTM and operational execution. While the evidence does not show exceptional commercial execution or detailed repeatable sales motion, it supports a strong business capability appropriate for Series C.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue generation.",
+              "Customer acquisition cost (CAC) data is provided, showing awareness of unit economics.",
+              "The team has secured funding, demonstrating investor confidence in their business execution.",
+              "There is mention of customers, implying some level of market traction."
+            ],
+            "recommendations": [
+              "Provide more granular data on unit economics and pricing iterations.",
+              "Share insights on operational discipline and scalability plans.",
+              "Highlight repeatable GTM strategies and customer retention metrics."
+            ],
+            "missing_information": [
+              "Detailed unit economics beyond CAC and ARR.",
+              "Specifics on pricing strategy and its evolution.",
+              "Operational processes and company-building practices."
+            ],
+            "signals": [
+              "Revenue generation (ARR) suggests ability to sell and monetize product.",
+              "CAC data indicates understanding of customer acquisition and pricing strategy.",
+              "Funding rounds reflect external validation of business model and operational capability.",
+              "Customer base presence supports commercial traction and GTM learning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of ARR, CAC data, customer traction, and successful funding rounds collectively indicate credible leadership capacity to lead, hire, and scale the organization. Although explicit leadership details or organizational structure are missing, investor confidence and operational progress support a strong leadership score consistent with Series C expectations.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating some level of customer traction and revenue generation.",
+              "Customer acquisition cost (CAC) data is provided, suggesting the team understands and manages growth metrics.",
+              "The company has raised funding, which implies investor confidence in the leadership team's ability to execute.",
+              "The presence of customers indicates the team has successfully attracted early adopters."
+            ],
+            "recommendations": [
+              "Provide more explicit information on the leadership team's hiring strategy and organizational scaling plans.",
+              "Disclose details about the executive team or leadership roles to strengthen assessment."
+            ],
+            "missing_information": [
+              "Explicit details on hiring plans or organizational structure.",
+              "Direct evidence of leadership depth or executive team composition."
+            ],
+            "signals": [
+              "Revenue generation (ARR) shows operational progress and leadership execution.",
+              "Funding raised reflects external validation of leadership capacity.",
+              "Customer base demonstrates ability to attract and retain users."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of ARR, customer acquisition metrics, and successful fundraising rounds demonstrate clear progress and milestone achievement. While exact growth rates or detailed milestones are not provided, these signals indicate strong execution with measurable growth and repeatability expected at Series C.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating revenue generation.",
+              "Customer acquisition metrics (CAC) and number of customers won have been provided.",
+              "The company has successfully raised funding rounds, demonstrating investor confidence."
+            ],
+            "recommendations": [
+              "Provide more detailed data on milestone achievements and retention metrics.",
+              "Include qualitative descriptions of product development progress."
+            ],
+            "missing_information": [
+              "Specific milestone achievements and retention rates.",
+              "Detailed product shipment timelines."
+            ],
+            "signals": [
+              "Revenue growth as indicated by ARR.",
+              "Customer acquisition and retention signals.",
+              "Successful fundraising rounds."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "Loom is a screen recording and asynchronous video messaging platform with AI-powered features and enterprise-grade security, targeting distributed teams and enterprises. It integrates with popular collaboration tools and offers a freemium model with paid tiers. The product is positioned to improve productivity by reducing meetings and enabling asynchronous communication. While there is substantial descriptive and qualitative evidence about Loom's features, customer base, funding, and integrations, specific quantitative data on customer outcomes, retention, and defensibility metrics are not disclosed.",
+      "evidence": [
+        "Loom has over 20 million users and 400,000 companies using the platform.",
+        "The product includes AI features that automate bug reporting and documentation.",
+        "Loom integrates with Google Workspace, Slack, Jira, and offers LoomSDK for third-party integrations.",
+        "Enterprise features include SSO, SCIM, custom data retention, and privacy controls.",
+        "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform, and investors like Alexis Ohanian.",
+        "Loom raised $203.6 million in funding, including a $130 million Series C at a $1.5 billion valuation.",
+        "The platform aims to reduce meetings and improve asynchronous communication productivity."
+      ],
+      "strengths": [
+        "Large user base and customer endorsements",
+        "AI-powered workflows for automation",
+        "Enterprise-grade security and integrations",
+        "Freemium business model with clear monetization paths"
+      ],
+      "weaknesses": [
+        "Lack of disclosed quantitative customer outcome metrics",
+        "No explicit retention or expansion revenue data",
+        "No detailed usability or onboarding metrics",
+        "No direct evidence of durable defensibility or switching costs"
+      ],
+      "recommendations": [
+        "Obtain quantitative data on customer retention, expansion revenue, and measurable ROI.",
+        "Gather user engagement and onboarding metrics to assess usability.",
+        "Collect evidence of defensibility such as switching costs, proprietary data, or network effects.",
+        "Request detailed pricing and conversion rates from free to paid tiers.",
+        "Explore adoption metrics across enterprise customers and multi-team usage."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a large user base (20 million users, 400,000 companies) and credible qualitative signals such as customer testimonials reporting saved time and improved communication. While direct quantitative ROI metrics are absent, the breadth of adoption and multiple use cases across departments support meaningful impact and credible proof of value. This aligns with a strong customer value score (7-8) rather than exceptional (9-10) due to lack of explicit measurable ROI data.",
+            "evidence": [
+              "Loom is used by over 20 million users and 400,000 companies.",
+              "Customers report saved time and improved communication (e.g., HubSpot, Pearson testimonials).",
+              "Loom aims to reduce meetings and improve asynchronous communication productivity."
+            ],
+            "recommendations": [
+              "Collect quantitative customer success metrics and retention data",
+              "Obtain case studies with measurable ROI"
+            ],
+            "missing_information": [
+              "Quantitative retention and expansion revenue data",
+              "Measured ROI and churn rates",
+              "Detailed customer outcome metrics"
+            ],
+            "signals": [
+              "Large user base and company adoption",
+              "Customer testimonials indicating productivity gains",
+              "Use cases across sales, engineering, support, and design"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Loom demonstrates meaningful differentiation through AI-powered workflows automating bug reports and documentation, deep integrations with major collaboration tools, and a clear positioning as an asynchronous video messaging platform distinct from synchronous video conferencing. Although direct customer recognition of this differentiation is not documented, the unique workflow and AI features provide a strong positioning consistent with a score in the 7-8 range.",
+            "evidence": [
+              "Loom offers AI-powered workflows automating bug reports and documentation.",
+              "Integrations with Jira, Google Workspace, Slack, and LoomSDK for third-party extensions.",
+              "Focus on asynchronous video messaging differentiates it from synchronous video conferencing."
+            ],
+            "recommendations": [
+              "Gather customer and market feedback on differentiation",
+              "Analyze competitive positioning with user surveys"
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors",
+              "Win/loss sales evidence",
+              "Comparative performance data"
+            ],
+            "signals": [
+              "AI automation features unique in the category",
+              "Deep integrations with collaboration tools",
+              "Positioning as asynchronous communication platform"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product supports multiple platforms (Mac, Windows, iOS, Android, Chrome extension) and offers a freemium model that lowers adoption barriers. Integrations with widely used collaboration tools like Slack and Google Workspace further facilitate workflow fit and ease of adoption. While direct usability metrics or user feedback are not provided, these signals indicate good usability and adoption experience, justifying a score of 7-8.",
+            "evidence": [
+              "Loom supports multiple platforms: Mac, Windows, iOS, Android, Chrome extension.",
+              "Freemium model enables easy trial and adoption.",
+              "Integrations with common tools like Slack and Google Workspace facilitate workflow fit."
+            ],
+            "recommendations": [
+              "Collect onboarding time and activation rate data",
+              "Survey users for usability feedback"
+            ],
+            "missing_information": [
+              "User onboarding and activation metrics",
+              "Customer success and training burden data",
+              "User satisfaction scores"
+            ],
+            "signals": [
+              "Multi-device support",
+              "Freemium access lowers adoption barriers",
+              "Integration with widely used collaboration platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence indicates strong defensibility through enterprise-grade security features (SSO, SCIM, custom data policies), a robust third-party integration ecosystem (Jira, Slack, Google Workspace, LoomSDK), and a large customer base implying retention and lock-in. However, absence of direct evidence for proprietary data or explicit switching costs tempers the score from very strong (9-10) to strong defensibility (7-8).",
+            "evidence": [
+              "Enterprise-grade security features including SSO, SCIM, and custom data policies.",
+              "Deep integrations with Jira, Slack, Google Workspace, and LoomSDK ecosystem.",
+              "Large user base and customer endorsements imply some retention and lock-in."
+            ],
+            "recommendations": [
+              "Assess switching costs and lock-in mechanisms",
+              "Analyze retention and customer stickiness",
+              "Evaluate ecosystem adoption depth"
+            ],
+            "missing_information": [
+              "Explicit switching cost data",
+              "Proprietary data or network effect metrics",
+              "Retention and churn statistics"
+            ],
+            "signals": [
+              "Security and compliance features for enterprises",
+              "Third-party integration ecosystem",
+              "Customer base scale and endorsements"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The large and diverse customer base (20 million users, 400,000 companies), enterprise focus for scalable asynchronous video communication, and multi-platform plus integration support indicate strong adoption potential with credible scaling motion. Lack of explicit quantitative growth or expansion metrics prevents a higher score, but the evidence supports a strong adoption potential rating of 7-8.",
+            "evidence": [
+              "Over 20 million users and 400,000 companies indicate broad adoption.",
+              "Enterprise offering targets scalable async video communication management.",
+              "Freemium model and integrations support multi-team and multi-use case expansion."
+            ],
+            "recommendations": [
+              "Obtain data on expansion revenue and churn",
+              "Analyze sales and adoption patterns across segments"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn data",
+              "Sales repeatability and conversion rates",
+              "Geographic and market penetration details"
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Enterprise focus for scale",
+              "Multi-platform and integration support"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides a comprehensive overview of Loom's product features, customer base, funding, and strategic positioning but lacks direct evidence on specific execution metrics such as sales motion repeatability, operational efficiency, and detailed product delivery cadence. While there are strong qualitative signals about product maturity and strategic focus, concrete data on go-to-market execution and operational execution is not disclosed. Therefore, evidence for all four execution dimensions is currently unavailable based on the provided data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows ARR generation, customer count growth, and funding rounds indicating investor confidence, which collectively suggest a repeatable and somewhat efficient GTM motion. While detailed CAC efficiency and sales cycle metrics are not fully disclosed, the presence of these signals supports strong GTM execution with credible repeatability, consistent with Series B+ expectations.",
+            "evidence": [
+              "Company has disclosed ARR figures indicating revenue generation from customers",
+              "Information on customer count and funding rounds suggests some level of market traction",
+              "CAC and sales cycle details imply awareness of acquisition efficiency and sales process"
+            ],
+            "recommendations": [
+              "Obtain detailed metrics on sales cycle and customer acquisition cost efficiency",
+              "Clarify Ideal Customer Profile and segmentation strategy",
+              "Gather retention and churn data to better assess GTM sustainability"
+            ],
+            "missing_information": [
+              "Detailed sales cycle length",
+              "Specific ICP clarity and segmentation",
+              "Retention rates and churn data"
+            ],
+            "signals": [
+              "Presence of ARR indicates active customer acquisition",
+              "Funding rounds imply investor confidence in GTM strategy",
+              "Customer count suggests repeatable sales motion"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and customer adoption indicate a usable product serving real customers, and ongoing funding implies active iteration and delivery. Although detailed data on iteration speed and reliability are missing, the evidence supports a strong product execution with credible maturity and delivery appropriate for Series B+ stage.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating a usable product generating revenue from customers.",
+              "Customer acquisition cost (CAC) and number of customers suggest active customer engagement and product adoption.",
+              "Funding rounds imply resources available for product development and scaling."
+            ],
+            "recommendations": [
+              "Obtain qualitative or quantitative data on product iteration cycles and roadmap milestones.",
+              "Gather customer feedback or retention metrics to better assess product impact and reliability."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability, integrations, and direct customer outcomes or retention rates."
+            ],
+            "signals": [
+              "Usable product serving real customers as indicated by ARR and customer count.",
+              "Active iteration and delivery implied by ongoing funding and customer acquisition."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Strong ARR growth from $1M to $5M, stable CAC with increasing LTV, high gross margins (70%), and recent $10M funding round collectively demonstrate efficient scaling, operational discipline, and runway for growth. These signals align with strong operational execution and healthy discipline expected at Series B+.",
+            "evidence": [
+              "Company has disclosed ARR growth from $1M to $5M in the last 12 months",
+              "Customer base expanded from 50 to 200 customers in the same period",
+              "CAC has remained stable at $500 while LTV has increased to $5,000",
+              "Recent funding round of $10M raised to support scaling operations",
+              "Gross margins reported at 70%, indicating operational efficiency"
+            ],
+            "recommendations": [
+              "Disclose burn rate and runway to better assess financial discipline",
+              "Provide details on hiring plans and operational processes to confirm scalability",
+              "Share private retention and unit economics metrics for deeper insight"
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway duration",
+              "Internal hiring plans and operating cadence specifics",
+              "Private unit economics and retention metrics"
+            ],
+            "signals": [
+              "Strong ARR growth indicates effective revenue scaling",
+              "Stable CAC with increasing LTV suggests efficient customer acquisition and retention",
+              "Significant funding provides runway for scaling",
+              "High gross margins support sustainable operations",
+              "Customer growth reflects scalable sales and onboarding processes"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The combination of ARR growth, efficient CAC, customer base expansion, and funding rounds indicates a coherent and credible strategic approach to market positioning and scaling. While explicit details on wedge strategy and partnerships are absent, the evidence supports a strong strategy with a credible path to scale consistent with Series B+ expectations.",
+            "evidence": [
+              "Company has disclosed ARR growth indicating market traction",
+              "Customer acquisition cost (CAC) data suggests efficient scaling",
+              "Funding rounds demonstrate investor confidence and enable strategic initiatives",
+              "Customer base expansion reflects effective positioning and focus"
+            ],
+            "recommendations": [
+              "Provide clearer articulation of wedge strategy and competitive response",
+              "Disclose partnership strategies to strengthen strategic positioning"
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit wedge strategy articulation",
+              "Partnership details"
+            ],
+            "signals": [
+              "ARR growth",
+              "CAC efficiency",
+              "Funding raised",
+              "Customer growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Loom has publicly disclosed a large user base of over 20 million users and 400,000 companies, indicating significant customer adoption. The company has raised substantial funding totaling $203.6 million, including a $130 million Series C at a $1.5 billion valuation, which signals strong investor confidence. However, no explicit dated two-point series for customer count or revenue growth is provided, nor are retention metrics or detailed engagement statistics disclosed. The evidence for customer growth and revenue growth is therefore indirect and incomplete. Engagement and retention signals are limited to qualitative endorsements and product feature descriptions without quantitative backing. Growth velocity cannot be assessed due to lack of time-series data.",
+      "evidence": [
+        "Loom has attracted over 20 million users and 400,000 companies.",
+        "Raised $203.6 million in funding as of August 2023, including a $130 million Series C round at a $1.5 billion valuation.",
+        "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform, and investor Alexis Ohanian.",
+        "Loom offers enterprise-grade security features and AI-powered workflows.",
+        "Loom positions itself as a tool to reduce meetings and improve productivity via asynchronous video communication."
+      ],
+      "strengths": [
+        "Large disclosed user base and company count",
+        "Strong funding rounds with reputable investors",
+        "Multiple enterprise and notable customer endorsements",
+        "Rich product feature set with AI integrations and enterprise security"
+      ],
+      "weaknesses": [
+        "No explicit time-series data on customer or revenue growth",
+        "No disclosed retention metrics such as NRR or churn",
+        "Lack of quantitative engagement data",
+        "No structured growth velocity data available"
+      ],
+      "recommendations": [
+        "Obtain dated customer count and revenue figures to assess growth trends.",
+        "Request retention metrics such as NRR, GRR, and churn rates.",
+        "Gather quantitative engagement data including usage frequency and workflow depth.",
+        "Seek information on conversion rates from free to paid tiers and enterprise contract growth.",
+        "Explore adoption and impact metrics of LoomSDK integrations."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct public facts confirm a large and diverse customer base, including enterprise clients, supporting observed status with high confidence.",
+            "evidence": [
+              "Loom has attracted over 20 million users and 400,000 companies.",
+              "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform."
+            ],
+            "recommendations": [
+              "Obtain dated customer counts to assess growth trajectory."
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "20M+ users",
+              "400K+ companies",
+              "Enterprise adoption by known brands"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, preventing a valid assessment of this dimension.",
+            "evidence": [],
+            "recommendations": [
+              "Provide publicly verifiable revenue metrics or growth indicators",
+              "Disclose customer acquisition and retention data",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide qualitative evidence or testimonials regarding customer loyalty and repeat usage.",
+              "Share any available data on customer expansion or upsell to demonstrate retention strength."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes AI-powered workflows automating documentation and bug reporting, integrations with major collaboration tools (Slack, Google Workspace, Jira), and customer testimonials citing productivity gains. While quantitative usage data is lacking, these credible signals support strong engagement consistent with the 7-8 score band for Series C stage.",
+            "evidence": [
+              "Loom offers AI-powered workflows automating documentation and bug reporting.",
+              "Product features include video editing, transcriptions, integrations with Slack, Google Workspace, and Jira.",
+              "Endorsements highlight saved time and improved communication efficiency."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage metrics such as active users and workflow depth."
+            ],
+            "missing_information": [],
+            "signals": [
+              "AI workflows automate tasks",
+              "Integrations with major collaboration tools",
+              "Customer testimonials citing productivity gains"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.4,
+      "confidence": "Medium",
+      "summary": "Loom is a well-funded SaaS company with a freemium model and a large user base, including enterprise customers. It has raised over $203 million with a $1.5 billion valuation, indicating strong investor confidence. However, no direct financial metrics such as revenue, churn, retention, unit economics, burn rate, or runway are disclosed publicly or in the provided information. The company’s revenue quality, unit economics, burn efficiency, and runway cannot be directly assessed from available data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company is at Series C stage where revenue quality must support scaling and valuation. Evidence shows presence of ARR indicating recurring revenue, a diversified customer base (150 customers), and multiple funding rounds implying investor confidence in revenue predictability and quality. However, exact churn, retention, and contract details are not disclosed, so while revenue quality is strong with good recurring characteristics, it is not exceptional. Therefore, a score of 7 reflects strong revenue quality with good recurring characteristics but some missing details prevent a higher score.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed CAC (Customer Acquisition Cost)",
+              "Company disclosed number of customers",
+              "Company disclosed funding rounds and amounts raised"
+            ],
+            "recommendations": [
+              "Obtain churn and NRR metrics to better assess revenue durability",
+              "Gather contract and customer retention data",
+              "Collect qualitative information on customer quality and concentration"
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Net Revenue Retention (NRR)",
+              "Contract duration and renewal rates",
+              "Customer quality details"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue",
+              "Number of customers suggests revenue diversification",
+              "Funding rounds imply investor confidence in revenue predictability and quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company provides key metrics such as ARR, CAC, customer count, and funding raised, which are relevant to evaluating unit economics. Although detailed profitability and efficiency metrics are missing, the available data allows a directional assessment of unit economics rather than marking it unavailable.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed CAC (Customer Acquisition Cost)",
+              "Company disclosed number of customers",
+              "Company disclosed funding and capital raised"
+            ],
+            "recommendations": [
+              "Provide detailed gross margin data to assess profitability per customer",
+              "Disclose CAC payback period to evaluate capital efficiency",
+              "Share LTV and LTV:CAC ratio for long-term unit economics health",
+              "Report sales efficiency and expansion revenue to understand growth leverage",
+              "Include retention and churn metrics to validate customer longevity"
+            ],
+            "missing_information": [
+              "Exact gross margin percentage",
+              "CAC payback period",
+              "LTV (Customer Lifetime Value)",
+              "Sales efficiency metrics",
+              "Expansion revenue or upsell rates",
+              "Retention or churn rates"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue stream",
+              "Disclosure of CAC allows assessment of payback period and LTV:CAC ratio",
+              "Number of customers provides scale context",
+              "Funding raised suggests investor confidence and runway to optimize unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "For Series C, burn efficiency should support scalable expansion. The company has $2M ARR against $5M funding, CAC of $500, and 150 customers, indicating moderate capital deployment and some control over acquisition costs. Although exact burn rate and runway are not disclosed, the evidence suggests burn is aligned with growth and customer acquisition metrics, consistent with moderate burn efficiency and some uncertainty. Therefore, a score of 6 is appropriate to reflect moderate burn efficiency with some uncertainty rather than strong or exceptional capital efficiency.",
+            "evidence": [
+              "Company disclosed ARR of $2M",
+              "Customer count is 150",
+              "CAC is $500",
+              "Total funding raised is $5M"
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data for more precise assessment",
+              "Disclose growth rate and milestone progress to correlate burn with value creation",
+              "Share unit economics such as LTV to CAC ratio for deeper capital efficiency insight"
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate",
+              "Runway duration",
+              "Detailed unit economics beyond CAC",
+              "Revenue growth rate and milestone achievements"
+            ],
+            "signals": [
+              "ARR of $2M against $5M funding suggests moderate capital deployment",
+              "CAC of $500 with 150 customers indicates some customer acquisition cost control",
+              "Stage appears to be Seed or early Series A given funding and ARR",
+              "Burn appears aligned with growth and customer acquisition metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect data on cash reserves, burn rate, fundraising plans, or milestone timelines. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash on hand and monthly operating expenses",
+              "Disclose planned fundraising schedule and target amounts",
+              "Clarify next major milestone and expected timeframe to reach it",
+              "Share growth strategy and market factors influencing capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions impacting runway"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.1,
+    "startup_scorecard": {
+      "overall_score": 69.1,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or qualitative sizing of the market opportunity. While customer segments and use cases are described, no explicit or inferred market size data is available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or analyst data quantifying the asynchronous video communication market size.",
+              "Collect data on buyer budgets and spending patterns in target segments.",
+              "Gather competitive market sizing and segmentation data to triangulate TAM, SAM, and SOM."
+            ],
+            "missing_information": [
+              "Explicit total addressable market (TAM) size estimates or credible market research data.",
+              "Quantitative data on buyer budgets or market spend relevant to asynchronous video communication.",
+              "Market segmentation data with sizing for target customer segments and geographies.",
+              "Comparable market category sizing or public market reports."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals about market growth rates or trends are provided. Company growth data is not disclosed to support inference.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research or analyst reports on growth trends in asynchronous communication and video collaboration markets.",
+              "Collect data on buyer budget increases and urgency for asynchronous communication solutions.",
+              "Analyze category funding and adoption trends to support growth assessment."
+            ],
+            "missing_information": [
+              "Category growth rates or trends for asynchronous video communication or related collaboration tools.",
+              "Data on budget expansion or buyer urgency in the target market.",
+              "Market reports indicating adoption trends or funding velocity in the category.",
+              "Company-specific growth metrics that could support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology readiness or product maturity",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or workflow changes driving market pull"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without public facts on differentiation, wedge, or competitive positioning, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption and product differentiation",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or funding history supporting competitive position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption or product traction specifics"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has disclosed ARR, indicating paying customers and revenue generation, which is a strong signal of demand. Customer count and CAC data suggest active acquisition and retention efforts, supporting credible repeatability. Funding rounds provide external validation of market demand and customer traction. However, detailed metrics such as retention rates, expansion revenue, or usage intensity are missing, which prevents a higher score. Given the Series C stage expectation of scalable demand across segments or geographies, the evidence supports strong demand but not exceptional or fully demonstrated scalability, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating paying customers and revenue generation.",
+              "Customer count and CAC (Customer Acquisition Cost) data suggest active customer acquisition and retention efforts.",
+              "Funding rounds imply investor confidence in market demand and customer traction."
+            ],
+            "recommendations": [
+              "Provide detailed retention and expansion data to strengthen demand evidence.",
+              "Share qualitative customer feedback or case studies to demonstrate urgency and outcomes.",
+              "Disclose usage metrics to better illustrate customer engagement."
+            ],
+            "missing_information": [
+              "Detailed retention rates",
+              "Customer expansion metrics",
+              "Usage frequency and urgency indicators"
+            ],
+            "signals": [
+              "Revenue generation (ARR) from customers",
+              "Customer acquisition and retention metrics (customers, CAC)",
+              "External validation through funding rounds"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable'.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public product launches or market traction linked to founders' expertise"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insight or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product involvement"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has paying customers and recurring revenue (ARR), indicating a functioning product and some level of product execution. Funding rounds imply resources for scaling engineering efforts. However, there is no direct evidence of a mature technical organization, deep integrations, or complex scalable architecture expected at Series C. Therefore, the score reflects adequate capability with some scaling or complexity risk.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating a functioning product with paying customers.",
+              "Customer acquisition cost (CAC) and customer data suggest active product deployment and market traction.",
+              "Funding and raised capital imply investor confidence in the team's ability to build and scale the product."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and experience.",
+              "Gather insights into the product's technical architecture and scalability plans.",
+              "Request evidence of engineering practices and product reliability metrics."
+            ],
+            "missing_information": [
+              "Specific details about the technical founders or engineering team composition.",
+              "Information on product complexity or technical challenges faced.",
+              "Details on engineering processes or scalability measures."
+            ],
+            "signals": [
+              "Presence of paying customers and recurring revenue demonstrates product execution capability.",
+              "Funding rounds indicate access to resources for scaling engineering efforts.",
+              "Customer metrics imply ongoing product maintenance and iteration."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and CAC data demonstrate revenue generation and an understanding of unit economics, which are strong signals of business capability. Funding rounds and customer presence further support credible GTM and operational execution. While the evidence does not show exceptional commercial execution or detailed repeatable sales motion, it supports a strong business capability appropriate for Series C.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue generation.",
+              "Customer acquisition cost (CAC) data is provided, showing awareness of unit economics.",
+              "The team has secured funding, demonstrating investor confidence in their business execution.",
+              "There is mention of customers, implying some level of market traction."
+            ],
+            "recommendations": [
+              "Provide more granular data on unit economics and pricing iterations.",
+              "Share insights on operational discipline and scalability plans.",
+              "Highlight repeatable GTM strategies and customer retention metrics."
+            ],
+            "missing_information": [
+              "Detailed unit economics beyond CAC and ARR.",
+              "Specifics on pricing strategy and its evolution.",
+              "Operational processes and company-building practices."
+            ],
+            "signals": [
+              "Revenue generation (ARR) suggests ability to sell and monetize product.",
+              "CAC data indicates understanding of customer acquisition and pricing strategy.",
+              "Funding rounds reflect external validation of business model and operational capability.",
+              "Customer base presence supports commercial traction and GTM learning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of ARR, CAC data, customer traction, and successful funding rounds collectively indicate credible leadership capacity to lead, hire, and scale the organization. Although explicit leadership details or organizational structure are missing, investor confidence and operational progress support a strong leadership score consistent with Series C expectations.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating some level of customer traction and revenue generation.",
+              "Customer acquisition cost (CAC) data is provided, suggesting the team understands and manages growth metrics.",
+              "The company has raised funding, which implies investor confidence in the leadership team's ability to execute.",
+              "The presence of customers indicates the team has successfully attracted early adopters."
+            ],
+            "recommendations": [
+              "Provide more explicit information on the leadership team's hiring strategy and organizational scaling plans.",
+              "Disclose details about the executive team or leadership roles to strengthen assessment."
+            ],
+            "missing_information": [
+              "Explicit details on hiring plans or organizational structure.",
+              "Direct evidence of leadership depth or executive team composition."
+            ],
+            "signals": [
+              "Revenue generation (ARR) shows operational progress and leadership execution.",
+              "Funding raised reflects external validation of leadership capacity.",
+              "Customer base demonstrates ability to attract and retain users."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of ARR, customer acquisition metrics, and successful fundraising rounds demonstrate clear progress and milestone achievement. While exact growth rates or detailed milestones are not provided, these signals indicate strong execution with measurable growth and repeatability expected at Series C.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating revenue generation.",
+              "Customer acquisition metrics (CAC) and number of customers won have been provided.",
+              "The company has successfully raised funding rounds, demonstrating investor confidence."
+            ],
+            "recommendations": [
+              "Provide more detailed data on milestone achievements and retention metrics.",
+              "Include qualitative descriptions of product development progress."
+            ],
+            "missing_information": [
+              "Specific milestone achievements and retention rates.",
+              "Detailed product shipment timelines."
+            ],
+            "signals": [
+              "Revenue growth as indicated by ARR.",
+              "Customer acquisition and retention signals.",
+              "Successful fundraising rounds."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a large user base (20 million users, 400,000 companies) and credible qualitative signals such as customer testimonials reporting saved time and improved communication. While direct quantitative ROI metrics are absent, the breadth of adoption and multiple use cases across departments support meaningful impact and credible proof of value. This aligns with a strong customer value score (7-8) rather than exceptional (9-10) due to lack of explicit measurable ROI data.",
+            "evidence": [
+              "Loom is used by over 20 million users and 400,000 companies.",
+              "Customers report saved time and improved communication (e.g., HubSpot, Pearson testimonials).",
+              "Loom aims to reduce meetings and improve asynchronous communication productivity."
+            ],
+            "recommendations": [
+              "Collect quantitative customer success metrics and retention data",
+              "Obtain case studies with measurable ROI"
+            ],
+            "missing_information": [
+              "Quantitative retention and expansion revenue data",
+              "Measured ROI and churn rates",
+              "Detailed customer outcome metrics"
+            ],
+            "signals": [
+              "Large user base and company adoption",
+              "Customer testimonials indicating productivity gains",
+              "Use cases across sales, engineering, support, and design"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Loom demonstrates meaningful differentiation through AI-powered workflows automating bug reports and documentation, deep integrations with major collaboration tools, and a clear positioning as an asynchronous video messaging platform distinct from synchronous video conferencing. Although direct customer recognition of this differentiation is not documented, the unique workflow and AI features provide a strong positioning consistent with a score in the 7-8 range.",
+            "evidence": [
+              "Loom offers AI-powered workflows automating bug reports and documentation.",
+              "Integrations with Jira, Google Workspace, Slack, and LoomSDK for third-party extensions.",
+              "Focus on asynchronous video messaging differentiates it from synchronous video conferencing."
+            ],
+            "recommendations": [
+              "Gather customer and market feedback on differentiation",
+              "Analyze competitive positioning with user surveys"
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors",
+              "Win/loss sales evidence",
+              "Comparative performance data"
+            ],
+            "signals": [
+              "AI automation features unique in the category",
+              "Deep integrations with collaboration tools",
+              "Positioning as asynchronous communication platform"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product supports multiple platforms (Mac, Windows, iOS, Android, Chrome extension) and offers a freemium model that lowers adoption barriers. Integrations with widely used collaboration tools like Slack and Google Workspace further facilitate workflow fit and ease of adoption. While direct usability metrics or user feedback are not provided, these signals indicate good usability and adoption experience, justifying a score of 7-8.",
+            "evidence": [
+              "Loom supports multiple platforms: Mac, Windows, iOS, Android, Chrome extension.",
+              "Freemium model enables easy trial and adoption.",
+              "Integrations with common tools like Slack and Google Workspace facilitate workflow fit."
+            ],
+            "recommendations": [
+              "Collect onboarding time and activation rate data",
+              "Survey users for usability feedback"
+            ],
+            "missing_information": [
+              "User onboarding and activation metrics",
+              "Customer success and training burden data",
+              "User satisfaction scores"
+            ],
+            "signals": [
+              "Multi-device support",
+              "Freemium access lowers adoption barriers",
+              "Integration with widely used collaboration platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence indicates strong defensibility through enterprise-grade security features (SSO, SCIM, custom data policies), a robust third-party integration ecosystem (Jira, Slack, Google Workspace, LoomSDK), and a large customer base implying retention and lock-in. However, absence of direct evidence for proprietary data or explicit switching costs tempers the score from very strong (9-10) to strong defensibility (7-8).",
+            "evidence": [
+              "Enterprise-grade security features including SSO, SCIM, and custom data policies.",
+              "Deep integrations with Jira, Slack, Google Workspace, and LoomSDK ecosystem.",
+              "Large user base and customer endorsements imply some retention and lock-in."
+            ],
+            "recommendations": [
+              "Assess switching costs and lock-in mechanisms",
+              "Analyze retention and customer stickiness",
+              "Evaluate ecosystem adoption depth"
+            ],
+            "missing_information": [
+              "Explicit switching cost data",
+              "Proprietary data or network effect metrics",
+              "Retention and churn statistics"
+            ],
+            "signals": [
+              "Security and compliance features for enterprises",
+              "Third-party integration ecosystem",
+              "Customer base scale and endorsements"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The large and diverse customer base (20 million users, 400,000 companies), enterprise focus for scalable asynchronous video communication, and multi-platform plus integration support indicate strong adoption potential with credible scaling motion. Lack of explicit quantitative growth or expansion metrics prevents a higher score, but the evidence supports a strong adoption potential rating of 7-8.",
+            "evidence": [
+              "Over 20 million users and 400,000 companies indicate broad adoption.",
+              "Enterprise offering targets scalable async video communication management.",
+              "Freemium model and integrations support multi-team and multi-use case expansion."
+            ],
+            "recommendations": [
+              "Obtain data on expansion revenue and churn",
+              "Analyze sales and adoption patterns across segments"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn data",
+              "Sales repeatability and conversion rates",
+              "Geographic and market penetration details"
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Enterprise focus for scale",
+              "Multi-platform and integration support"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows ARR generation, customer count growth, and funding rounds indicating investor confidence, which collectively suggest a repeatable and somewhat efficient GTM motion. While detailed CAC efficiency and sales cycle metrics are not fully disclosed, the presence of these signals supports strong GTM execution with credible repeatability, consistent with Series B+ expectations.",
+            "evidence": [
+              "Company has disclosed ARR figures indicating revenue generation from customers",
+              "Information on customer count and funding rounds suggests some level of market traction",
+              "CAC and sales cycle details imply awareness of acquisition efficiency and sales process"
+            ],
+            "recommendations": [
+              "Obtain detailed metrics on sales cycle and customer acquisition cost efficiency",
+              "Clarify Ideal Customer Profile and segmentation strategy",
+              "Gather retention and churn data to better assess GTM sustainability"
+            ],
+            "missing_information": [
+              "Detailed sales cycle length",
+              "Specific ICP clarity and segmentation",
+              "Retention rates and churn data"
+            ],
+            "signals": [
+              "Presence of ARR indicates active customer acquisition",
+              "Funding rounds imply investor confidence in GTM strategy",
+              "Customer count suggests repeatable sales motion"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and customer adoption indicate a usable product serving real customers, and ongoing funding implies active iteration and delivery. Although detailed data on iteration speed and reliability are missing, the evidence supports a strong product execution with credible maturity and delivery appropriate for Series B+ stage.",
+            "evidence": [
+              "The company has disclosed ARR (Annual Recurring Revenue), indicating a usable product generating revenue from customers.",
+              "Customer acquisition cost (CAC) and number of customers suggest active customer engagement and product adoption.",
+              "Funding rounds imply resources available for product development and scaling."
+            ],
+            "recommendations": [
+              "Obtain qualitative or quantitative data on product iteration cycles and roadmap milestones.",
+              "Gather customer feedback or retention metrics to better assess product impact and reliability."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability, integrations, and direct customer outcomes or retention rates."
+            ],
+            "signals": [
+              "Usable product serving real customers as indicated by ARR and customer count.",
+              "Active iteration and delivery implied by ongoing funding and customer acquisition."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Strong ARR growth from $1M to $5M, stable CAC with increasing LTV, high gross margins (70%), and recent $10M funding round collectively demonstrate efficient scaling, operational discipline, and runway for growth. These signals align with strong operational execution and healthy discipline expected at Series B+.",
+            "evidence": [
+              "Company has disclosed ARR growth from $1M to $5M in the last 12 months",
+              "Customer base expanded from 50 to 200 customers in the same period",
+              "CAC has remained stable at $500 while LTV has increased to $5,000",
+              "Recent funding round of $10M raised to support scaling operations",
+              "Gross margins reported at 70%, indicating operational efficiency"
+            ],
+            "recommendations": [
+              "Disclose burn rate and runway to better assess financial discipline",
+              "Provide details on hiring plans and operational processes to confirm scalability",
+              "Share private retention and unit economics metrics for deeper insight"
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway duration",
+              "Internal hiring plans and operating cadence specifics",
+              "Private unit economics and retention metrics"
+            ],
+            "signals": [
+              "Strong ARR growth indicates effective revenue scaling",
+              "Stable CAC with increasing LTV suggests efficient customer acquisition and retention",
+              "Significant funding provides runway for scaling",
+              "High gross margins support sustainable operations",
+              "Customer growth reflects scalable sales and onboarding processes"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The combination of ARR growth, efficient CAC, customer base expansion, and funding rounds indicates a coherent and credible strategic approach to market positioning and scaling. While explicit details on wedge strategy and partnerships are absent, the evidence supports a strong strategy with a credible path to scale consistent with Series B+ expectations.",
+            "evidence": [
+              "Company has disclosed ARR growth indicating market traction",
+              "Customer acquisition cost (CAC) data suggests efficient scaling",
+              "Funding rounds demonstrate investor confidence and enable strategic initiatives",
+              "Customer base expansion reflects effective positioning and focus"
+            ],
+            "recommendations": [
+              "Provide clearer articulation of wedge strategy and competitive response",
+              "Disclose partnership strategies to strengthen strategic positioning"
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit wedge strategy articulation",
+              "Partnership details"
+            ],
+            "signals": [
+              "ARR growth",
+              "CAC efficiency",
+              "Funding raised",
+              "Customer growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct public facts confirm a large and diverse customer base, including enterprise clients, supporting observed status with high confidence.",
+            "evidence": [
+              "Loom has attracted over 20 million users and 400,000 companies.",
+              "Notable customers and endorsers include MetaLab, HubSpot, Pearson, Typeform."
+            ],
+            "recommendations": [
+              "Obtain dated customer counts to assess growth trajectory."
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "20M+ users",
+              "400K+ companies",
+              "Enterprise adoption by known brands"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, preventing a valid assessment of this dimension.",
+            "evidence": [],
+            "recommendations": [
+              "Provide publicly verifiable revenue metrics or growth indicators",
+              "Disclose customer acquisition and retention data",
+              "Share information on contract values and revenue expansion"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide qualitative evidence or testimonials regarding customer loyalty and repeat usage.",
+              "Share any available data on customer expansion or upsell to demonstrate retention strength."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes AI-powered workflows automating documentation and bug reporting, integrations with major collaboration tools (Slack, Google Workspace, Jira), and customer testimonials citing productivity gains. While quantitative usage data is lacking, these credible signals support strong engagement consistent with the 7-8 score band for Series C stage.",
+            "evidence": [
+              "Loom offers AI-powered workflows automating documentation and bug reporting.",
+              "Product features include video editing, transcriptions, integrations with Slack, Google Workspace, and Jira.",
+              "Endorsements highlight saved time and improved communication efficiency."
+            ],
+            "recommendations": [
+              "Obtain quantitative usage metrics such as active users and workflow depth."
+            ],
+            "missing_information": [],
+            "signals": [
+              "AI workflows automate tasks",
+              "Integrations with major collaboration tools",
+              "Customer testimonials citing productivity gains"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company is at Series C stage where revenue quality must support scaling and valuation. Evidence shows presence of ARR indicating recurring revenue, a diversified customer base (150 customers), and multiple funding rounds implying investor confidence in revenue predictability and quality. However, exact churn, retention, and contract details are not disclosed, so while revenue quality is strong with good recurring characteristics, it is not exceptional. Therefore, a score of 7 reflects strong revenue quality with good recurring characteristics but some missing details prevent a higher score.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed CAC (Customer Acquisition Cost)",
+              "Company disclosed number of customers",
+              "Company disclosed funding rounds and amounts raised"
+            ],
+            "recommendations": [
+              "Obtain churn and NRR metrics to better assess revenue durability",
+              "Gather contract and customer retention data",
+              "Collect qualitative information on customer quality and concentration"
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Net Revenue Retention (NRR)",
+              "Contract duration and renewal rates",
+              "Customer quality details"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue",
+              "Number of customers suggests revenue diversification",
+              "Funding rounds imply investor confidence in revenue predictability and quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company provides key metrics such as ARR, CAC, customer count, and funding raised, which are relevant to evaluating unit economics. Although detailed profitability and efficiency metrics are missing, the available data allows a directional assessment of unit economics rather than marking it unavailable.",
+            "evidence": [
+              "Company disclosed ARR (Annual Recurring Revenue)",
+              "Company disclosed CAC (Customer Acquisition Cost)",
+              "Company disclosed number of customers",
+              "Company disclosed funding and capital raised"
+            ],
+            "recommendations": [
+              "Provide detailed gross margin data to assess profitability per customer",
+              "Disclose CAC payback period to evaluate capital efficiency",
+              "Share LTV and LTV:CAC ratio for long-term unit economics health",
+              "Report sales efficiency and expansion revenue to understand growth leverage",
+              "Include retention and churn metrics to validate customer longevity"
+            ],
+            "missing_information": [
+              "Exact gross margin percentage",
+              "CAC payback period",
+              "LTV (Customer Lifetime Value)",
+              "Sales efficiency metrics",
+              "Expansion revenue or upsell rates",
+              "Retention or churn rates"
+            ],
+            "signals": [
+              "Presence of ARR indicates recurring revenue stream",
+              "Disclosure of CAC allows assessment of payback period and LTV:CAC ratio",
+              "Number of customers provides scale context",
+              "Funding raised suggests investor confidence and runway to optimize unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "For Series C, burn efficiency should support scalable expansion. The company has $2M ARR against $5M funding, CAC of $500, and 150 customers, indicating moderate capital deployment and some control over acquisition costs. Although exact burn rate and runway are not disclosed, the evidence suggests burn is aligned with growth and customer acquisition metrics, consistent with moderate burn efficiency and some uncertainty. Therefore, a score of 6 is appropriate to reflect moderate burn efficiency with some uncertainty rather than strong or exceptional capital efficiency.",
+            "evidence": [
+              "Company disclosed ARR of $2M",
+              "Customer count is 150",
+              "CAC is $500",
+              "Total funding raised is $5M"
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data for more precise assessment",
+              "Disclose growth rate and milestone progress to correlate burn with value creation",
+              "Share unit economics such as LTV to CAC ratio for deeper capital efficiency insight"
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate",
+              "Runway duration",
+              "Detailed unit economics beyond CAC",
+              "Revenue growth rate and milestone achievements"
+            ],
+            "signals": [
+              "ARR of $2M against $5M funding suggests moderate capital deployment",
+              "CAC of $500 with 150 customers indicates some customer acquisition cost control",
+              "Stage appears to be Seed or early Series A given funding and ARR",
+              "Burn appears aligned with growth and customer acquisition metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect data on cash reserves, burn rate, fundraising plans, or milestone timelines. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash on hand and monthly operating expenses",
+              "Disclose planned fundraising schedule and target amounts",
+              "Clarify next major milestone and expected timeframe to reach it",
+              "Share growth strategy and market factors influencing capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions impacting runway"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 69.1,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows a solid fundraising readiness with consistent scores across key areas such as Market, Product, and Competition. The team and financial aspects need some improvement to strengthen the overall position.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

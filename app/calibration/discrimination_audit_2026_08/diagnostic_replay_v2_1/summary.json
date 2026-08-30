@@ -1,0 +1,278 @@
+[
+  {
+    "company": "Rippling",
+    "website": "https://www.rippling.com",
+    "frozen_v2_sps": 76.0,
+    "started_at": "2026-08-30T03:44:52.930428+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T03:49:04.837570+00:00",
+    "overall_score_v2_1": 73.2,
+    "recommendation_v2_1": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 7.9,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/rippling.json",
+    "elapsed_seconds": 251.9
+  },
+  {
+    "company": "Databricks",
+    "website": "https://www.databricks.com",
+    "frozen_v2_sps": 67.7,
+    "started_at": "2026-08-30T03:49:04.850856+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T03:53:48.388024+00:00",
+    "overall_score_v2_1": 72.0,
+    "recommendation_v2_1": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": 8.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/databricks.json",
+    "elapsed_seconds": 283.6
+  },
+  {
+    "company": "Plaid",
+    "website": "https://plaid.com",
+    "frozen_v2_sps": 68.2,
+    "started_at": "2026-08-30T03:53:48.400544+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T03:57:17.816725+00:00",
+    "overall_score_v2_1": 69.2,
+    "recommendation_v2_1": "Speculative",
+    "company_stage_extracted": "Growth",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": 7.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 4.9,
+        "confidence": "Low",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/plaid.json",
+    "elapsed_seconds": 209.4
+  },
+  {
+    "company": "Clubhouse",
+    "website": "https://www.joinclubhouse.com",
+    "frozen_v2_sps": 64.9,
+    "started_at": "2026-08-30T03:57:17.828734+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T04:00:40.857351+00:00",
+    "overall_score_v2_1": 62.9,
+    "recommendation_v2_1": "Speculative",
+    "company_stage_extracted": "Series B+",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": null,
+        "confidence": "Low",
+        "evidence_coverage": 0.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 5.2,
+        "confidence": "Low",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.7,
+        "confidence": "Low",
+        "evidence_coverage": 50.0
+      },
+      "financial_health": {
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/clubhouse.json",
+    "elapsed_seconds": 203.0
+  },
+  {
+    "company": "Relaw",
+    "website": "https://www.relaw.ai",
+    "frozen_v2_sps": 72.5,
+    "started_at": "2026-08-30T04:00:40.869502+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T04:04:50.685636+00:00",
+    "overall_score_v2_1": 64.2,
+    "recommendation_v2_1": "Speculative",
+    "company_stage_extracted": "Seed",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      },
+      "team": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0
+      },
+      "product": {
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "execution": {
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/relaw.json",
+    "elapsed_seconds": 249.8
+  },
+  {
+    "company": "Dome",
+    "website": "https://www.domeapi.io",
+    "frozen_v2_sps": 63.0,
+    "started_at": "2026-08-30T04:04:50.698009+00:00",
+    "status": "completed",
+    "finished_at": "2026-08-30T04:08:33.737908+00:00",
+    "overall_score_v2_1": 64.8,
+    "recommendation_v2_1": "Speculative",
+    "company_stage_extracted": "Seed",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars_v2_1": {
+      "market": {
+        "score": 7.4,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "team": {
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "product": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0
+      },
+      "execution": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0
+      },
+      "traction": {
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0
+      },
+      "financial_health": {
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0
+      }
+    },
+    "raw_report_path": "diagnostic_replay_v2_1/raw_results/dome.json",
+    "elapsed_seconds": 223.1
+  }
+]

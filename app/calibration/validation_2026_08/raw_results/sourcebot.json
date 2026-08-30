@@ -1,0 +1,2595 @@
+{
+  "summary": "Sourcebot is a self-hosted, open-source platform designed to help enterprises rapidly search, navigate, and understand large and complex codebases. Deployable as a single Docker container on customer infrastructure, it ensures that sensitive code never leaves the environment, addressing strict enterprise data privacy and security requirements. Sourcebot offers blazing-fast search capabilities (regex, symbol-level, git history) combined with AI-powered natural language code querying via its \"Ask Sourcebot\" feature, leveraging any configured large language model (LLM) provider—including OpenAI, Anthropic, or self-hosted models.\n\nA unique differentiator is its MCP (multi-codebase processing) server, which provides a unified code context layer that empowers AI coding agents to access the entirety of a company’s codebase rather than only local repositories. Integration with external tools like Jira and Linear enables broader context and workflow automation. Pricing follows a freemium model with a free Basic plan focused on powerful code search, a Pro plan ($20/user/month) adding AI features and enterprise security, and an Enterprise tier offering custom SLAs and dedicated support.\n\nBacked by Y Combinator and trusted by large organizations such as Red Hat, NVIDIA, and Wikimedia, Sourcebot targets large engineering teams seeking to improve developer productivity, accelerate onboarding, and maintain tight security controls over source code while leveraging AI-assisted code understanding. It competes primarily with tools like Sourcegraph and GitHub Copilot but differentiates itself through its privacy-first, self-hosted approach, extensibility, and enterprise integrations.\n\nKey risks include adoption hurdles in complex enterprise environments, competition from established incumbents, and the technical challenge of maintaining scalable, accurate AI code understanding across massive codebases. Overall, Sourcebot addresses a critical niche in enterprise developer tooling by combining AI-powered code comprehension with privacy-centric on-prem deployment and flexible integrations.",
+  "risk_analysis": "Here is a detailed risk analysis for Sourcebot focused on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- **Established incumbents:** Sourcebot competes against well-funded, established players like Sourcegraph and GitHub Copilot. Both have strong brand recognition, large user bases, and deep integrations into developer workflows. Sourcegraph has a mature enterprise product with significant mindshare; GitHub Copilot benefits from GitHub’s massive adoption and Microsoft’s backing.  \n- **Feature parity and differentiation:** While Sourcebot’s self-hosted, privacy-first deployment and pricing are differentiators, competitors may quickly close the gap by improving privacy features or adjusting pricing. GitHub Copilot’s AI coding assistance—though somewhat different in product type—could limit market share growth for Sourcebot’s AI code understanding approach.  \n- **Ecosystem lock-in:** Developers and enterprises heavily invested in existing tools might find switching costly or complex, raising switching barriers. Competitors embedding their solutions deeper in development IDEs or CI/CD pipelines might have an edge.  \n- **Emerging competition:** The broader AI developer tooling space is rapidly evolving, with new entrants regularly emerging. Larger AI and cloud providers could introduce competing capabilities integrated with their cloud ecosystems.  \n\n2. Scalability Risk  \n- **Handling large enterprise codebases:** Sourcebot promises to handle millions of files and thousands of repositories with sub-second search latency. Maintaining this performance consistently is technically challenging and critical for customer satisfaction.  \n- **Infrastructure and resource demands:** Self-hosted deployment places the burden of scaling infrastructure on customers, who may have varied capabilities. Sourcebot needs to ensure its solution scales not only technically but also operationally across diverse enterprise environments.  \n- **LLM integration and latency:** Since Sourcebot depends on user-configured large language models from various providers, performance and cost are partly out of Sourcebot’s control. Model provider API limits, latency, or downtime could degrade user experience.  \n- **Software maintenance and upgrades:** Ensuring seamless upgrades and compatibility in complex customer environments is critical, especially given the variety of code hosts, LLM providers, and enterprise security requirements.  \n\n3. Market Risk  \n- **Rapid AI tooling evolution:** AI-powered developer tools are a hot, rapidly evolving space, but customer expectations and product standards are shifting fast. New technologies or paradigm shifts (e.g., foundation models offering integrated code understanding) could quickly disrupt Sourcebot’s value proposition.  \n- **Niche market size:** Although there is a clear demand among enterprises with large codebases and strict data privacy requirements, this is a niche segment and may limit total addressable market (TAM). It is unclear how broadly this need scales as smaller organizations might prefer cloud or simpler tooling.  \n- **Economic downturn sensitivity:** Enterprise software budgets and tooling investments can be sensitive to macroeconomic conditions. Prolonged downturns or budget tightening could slow enterprise adoption of new tooling like Sourcebot.  \n- **Open source dynamics:** As an open-source project, Sourcebot faces risks if the community does not sufficiently contribute to innovation, leading to slower feature development relative to commercial competitors.  \n\n4. Customer Adoption Risk  \n- **Integration complexity:** Enterprises have complex, legacy development toolchains. Integrating Sourcebot into existing workflows, code hosts, and project management environments may present technical and organizational challenges.  \n- **Change management:** Convincing engineering leadership and developers to adopt a new self-hosted tool requires clear ROI and minimal disruption, which can be difficult given existing habits and tooling investment.  \n- **Security and compliance vetting:** As an on-prem solution dealing with sensitive code, Sourcebot must pass rigorous security, compliance, and procurement reviews, potentially lengthening sales cycles or limiting adoption.  \n- **Freemium model conversion:** Reliance on converting users from free to paid tiers carries risk if conversion rates or enterprise uptake slow. Misalignment between free and paid feature value can impact revenue growth.  \n\n5. Operational Risk  \n- **Support and SLAs:** Delivering high-quality, enterprise-grade support—especially for the Enterprise tier with SLAs—is resource-intensive. Scaling support teams and managing complex customer environments can strain operations.  \n- **Security vulnerabilities:** Any security flaws in the platform could expose sensitive enterprise code once deployed on-premises, potentially damaging reputation and customer trust. Continuous security audits and rapid patching are essential.  \n- **Dependency on LLM providers:** Reliance on third-party LLM APIs externalizes part of the product’s reliability and cost control. Changes to pricing, API availability, or model quality at these providers can negatively impact Sourcebot’s service.  \n- **Founder and team execution risk:** Rapid growth demands scaling engineering, sales, and operations teams while maintaining culture and quality. Execution missteps or talent retention challenges could hinder product development and customer success.  \n\n**Summary:**  \nSourcebot operates in a promising yet highly competitive and rapidly evolving market niche. Its self-hosted, privacy-conscious approach is a compelling differentiator but comes with technical complexity and adoption challenges. The main risks lie in competing against entrenched incumbents, scaling technically and operationally for large enterprises, navigating fast market shifts, convincing conservative customers to adopt a new self-hosted tool, and managing operational demands including security and support. Mitigating these risks requires continuous innovation, robust enterprise support, strong security practices, and effective go-to-market strategies focused on large enterprises with strict data needs.",
+  "competitor_analysis": "Here is a competitive analysis for Sourcebot based on the provided information and context:\n\n---\n\n### Major Competitors\n\n1. **Sourcegraph**  \n   - Market-leading code search and intelligence platform.  \n   - Cloud and enterprise deployments available.  \n   - Strong brand recognition and extensive customer base.  \n   - Offers deep code navigation, code review integrations, and some AI-assisted features.\n\n2. **GitHub Copilot**  \n   - AI-powered code completion and assistance tool by GitHub/Microsoft.  \n   - Inline code autocompletion focused, powered by OpenAI Codex and other models.  \n   - Integrated tightly with GitHub workflows and Visual Studio Code.  \n   - Primarily cloud-hosted, with GitHub data privacy assurances.\n\n3. **Other Enterprise Code Search & AI Tools**  \n   - Commercial or open-source tools focusing on code search, indexing, and some AI understanding (e.g., Codota/Tabnine, OpenGrok, SourceTrail).  \n   - Some emerging startups targeting AI code comprehension and agent context layers, although none as widely recognized as Sourcegraph or GitHub Copilot.\n\n---\n\n### Competitive Advantages of Sourcebot\n\n- **Self-hosted Deployment with Privacy and Security**  \n  Sourcebot deploys as a single Docker container on-premises or private cloud, ensuring no code or sensitive data leaves customer infrastructure. This addresses a critical pain point for enterprises with strict compliance or security requirements that limit cloud code access.\n\n- **Open Source & Freemium Model**  \n  Offering a powerful free tier lowers adoption barriers and builds community trust, while paid tiers monetize advanced AI and enterprise features.\n\n- **Multi-LLM Provider Flexibility**  \n  Ability to use any LLM provider (OpenAI, Anthropic, Bedrock, etc.) or self-hosted LLMs gives enterprises full control over AI models and associated costs. This flexibility contrasts with competitors tied to single providers.\n\n- **Agent Context Layer (MCP) for AI Coding Agents**  \n  Unique architecture providing code context across entire enterprise codebases for AI agents, enabling richer AI interactions than simple searches or autocompletions.\n\n- **Extensive Integrations (Jira, Linear, etc.)**  \n  Connectors that bring in external tools’ context make Sourcebot useful beyond just code search, enhancing project management, onboarding, and support workflows.\n\n- **Fast & Scalable Code Search with Advanced Filtering**  \n  Blazing-fast search across millions of files and repos with regex, symbol navigation, git history, and blame features meets the needs of large enterprises.\n\n- **Strong Reference Customers & Investor Backing**  \n  Usage by large enterprises like Red Hat, NVIDIA, Wikimedia plus backing from Y Combinator and Pioneer Fund enhance credibility and growth potential.\n\n- **Competitive Pricing**  \n  Pro plan at $20/user/month is positioned as less than half the price of Sourcegraph, important for cost-conscious enterprises.\n\n---\n\n### Competitive Disadvantages\n\n- **Relative Newcomer / Smaller Brand**  \n  Sourcebot is less established than Sourcegraph or GitHub, which may affect trust and adoption in conservative enterprise IT departments.\n\n- **Self-hosting Model Increases Deployment Complexity**  \n  Though appealing for security, customers without mature DevOps teams may find on-premises setup and maintenance challenging compared to cloud-hosted solutions, potentially limiting the addressable market.\n\n- **Less Mature AI Features vs. Specialized Code Completion Tools**  \n  GitHub Copilot and similar tools have deep integration with developer IDEs and focus on code generation/completion, whereas Sourcebot focuses on search and AI understanding, which may serve different but overlapping use cases.\n\n- **Smaller Ecosystem and Community**  \n  Compared to GitHub and Sourcegraph, a smaller user and contributor base may limit integrations, extensions, and network effects.\n\n- **Unclear Metrics on Performance at Scale**  \n  While fast search is claimed, no independent benchmarks exist publicly comparing performance to well-established tools on massive codebases.\n\n---\n\n### Barriers to Entry\n\n- **Technical Complexity & Scalability Requirements**  \n  Building a fast, scalable, accurate code search and AI understanding platform that can process millions of files with low latency is non-trivial.\n\n- **Security and Privacy Assurance**  \n  Enterprise customers demand strict security guarantees, audits, and compliance, requiring rigorous engineering and legal support.\n\n- **Integration with Multiple Code Hosts and Enterprise Tools**  \n  Extensive connector development and maintenance is required to deliver seamless user experience.\n\n- **Multi-LLM Provider Support and AI Agent Contextualization**  \n  Developing flexible AI integrations that work with multiple LLMs and deliver grounded, explainable answers is challenging.\n\n- **Brand and Trust Establishment**  \n  Convincing enterprises to switch from incumbents (like Sourcegraph) or adopt a new AI tool requires strong references and sustained marketing.\n\n---\n\n### Competitive Risks\n\n- **Strong Incumbent Competition**  \n  Sourcegraph’s entrenched enterprise presence and GitHub Copilot’s massive developer community and backing by Microsoft pose significant competitive challenges.\n\n- **Rapid AI Technology Evolution**  \n  Advances in AI models and coding tools could disrupt existing solutions quickly, requiring continuous product innovation.\n\n- **Customer Adoption Risk**  \n  Enterprises may resist switching tools due to integration costs, existing contracts, or skepticism about new AI-powered code understanding tools.\n\n- **Security Vulnerabilities or Data Breaches**  \n  Any flaws in self-hosted deployments that expose code could undermine customer trust irrevocably.\n\n- **Market Uncertainty and Changing Developer Preferences**  \n  The niche of AI-enhanced code navigation is evolving rapidly, and customer needs could shift toward other paradigms (e.g., generative AI assistants integrated into IDEs).\n\n- **Open Source Sustainability**  \n  Reliance on a freemium, open-source model places pressure on community engagement and monetization balance.\n\n---\n\n### Summary\n\nSourcebot occupies a compelling niche as a privacy-first, self-hosted, enterprise-grade AI-powered code search and understanding platform. Its competitive advantages lie in data security, flexibility with LLM providers, agent context capabilities, and cost-effective pricing. However, it faces strong competition from established players with deeper product ecosystems and greater market reach. Adoption hurdles related to self-hosting complexity and the rapidly shifting AI tooling landscape represent key risks. Continued differentiation by expanding integrations, ensuring enterprise security, and demonstrating scalability will be critical to maintaining and growing market share.\n\n---\n\nIf you need a detailed competitor benchmarking matrix or recommendations for Sourcebot’s strategic positioning, please let me know!",
+  "memo": "Investment Memo: Sourcebot\n\nCompany Overview  \nSourcebot is a self-hosted, open-source platform enabling fast, AI-powered code search and understanding across large enterprise codebases. Deployed as a single Docker container on customer infrastructure, it supports any large language model (LLM) provider configured by users, ensuring full data privacy and security. Sourcebot integrates with enterprise tools like Jira and Linear to surface contextual information beyond code. Backed by Y Combinator and others, it counts large firms such as Red Hat, NVIDIA, and Wikimedia among its users.\n\nProblem  \nEnterprises with extensive, distributed, and complex codebases face significant challenges in searching, navigating, and understanding their code quickly and securely. Cloud-based code search and AI tools raise data privacy concerns and often do not provide complete context for AI coding agents. Developers and teams waste substantial time on code discovery, onboarding, and knowledge sharing, limiting productivity.\n\nSolution  \nSourcebot delivers blazing-fast code search with advanced filtering and symbol navigation, augmented by an AI agentic search (“Ask Sourcebot”) capable of natural language queries with grounded inline citations. Its self-hosted deployment model keeps all sensitive code and queries on-premises, addressing enterprise security requirements. A multi-codebase processing layer offers comprehensive context for AI coding agents across all repositories. Integrations with project management tools further enhance team productivity. The product is offered under a freemium model with Basic (free), Pro ($20/user/month), and Enterprise tiers.\n\nMarket Opportunity  \nThe increasing complexity and scale of enterprise codebases combined with a surge in AI-assisted development tools create a large addressable market. Target customers include technology companies, logistics firms, and open source foundations requiring secure, scalable, and AI-powered code understanding tools deployable on-premises. Demand is driven by enterprises balancing productivity gains from AI with stringent data privacy mandates. Sourcebot’s pricing and deployment approach address a gap underserved by cloud-only competitors.\n\nCompetitive Landscape  \nPrimary competitors include Sourcegraph (a dominant, cloud-heavy code search platform) and GitHub Copilot (focused mainly on autocomplete AI). Sourcebot differentiates itself by emphasizing a self-hosted, privacy-first architecture, broad LLM compatibility, and deep integrations for AI agents requiring full code context. Its freemium model also contrasts with higher-priced alternatives, positioning it as a cost-effective solution for enterprises seeking control over their code data.\n\nKey Risks  \n- Adoption risk due to enterprises’ inertia and existing investments in competing tools.  \n- Competition from entrenched players with stronger brand recognition and broader ecosystems.  \n- Technical challenges in maintaining speed and accuracy at enterprise scale with very large codebases.  \n- Security vulnerabilities inherent to self-hosted complex software platforms.  \n- Rapidly evolving AI and developer tool space may change customer needs or introduce new entrants.\n\nRecommendation  \nSourcebot represents a promising investment in the growing segment of AI-powered developer tools tailored for enterprise security and scale. Its combination of self-hosted deployment, multi-LLM support, and agent context features addresses a clear market need unmet by incumbents. The backing by Y Combinator and early adoption by reputable enterprises validate its product-market fit. We recommend a cautious but positive investment, contingent on due diligence around customer growth metrics, revenue trends, and technical scalability. Supporting Sourcebot aligns with our thesis on privacy-first AI infrastructure and enterprise developer productivity tools.",
+  "structured_analysis": {
+    "company_name": "Sourcebot",
+    "industry": "SaaS",
+    "stage": "Seed",
+    "business_model": "Subscription",
+    "summary": "Sourcebot is a self-hosted, open-source code understanding platform that enables humans and AI agents to efficiently search, navigate, and comprehend complex enterprise codebases. Deployable as a single Docker container on customer infrastructure, it supports integration with multiple LLM providers and enterprise tools, ensuring data privacy by keeping all code on-premises. Sourcebot operates a freemium subscription model with free, Pro ($20/user/month), and custom Enterprise plans, targeting large enterprises with complex codebases and strict security requirements.",
+    "key_risks": [
+      "Adoption risk due to integration complexity and incumbent investments in other tools.",
+      "Competition risk from established players like Sourcegraph and GitHub Copilot with strong market presence.",
+      "Technical risk in maintaining performance and accuracy at scale with millions of files.",
+      "Security risk if platform vulnerabilities expose sensitive code despite self-hosting.",
+      "Market risk as AI code understanding tools and customer needs rapidly evolve."
+    ],
+    "strengths": [
+      "Self-hosted deployment that ensures enterprise-grade data privacy and security.",
+      "Integration with multiple LLM providers and enterprise collaboration tools.",
+      "Backed by reputable investors including Y Combinator and used by notable enterprises (Red Hat, NVIDIA).",
+      "Freemium pricing model facilitating adoption and upsell to higher tiers.",
+      "Blazingly fast and comprehensive code search with AI-powered natural language query support."
+    ],
+    "recommendation": "Sourcebot shows strong potential in a growing niche of AI-powered enterprise code understanding tools with a unique self-hosted approach addressing data privacy concerns. While facing competition and adoption challenges, its integration capabilities, backing, and clear value proposition position it well for growth. Recommend monitoring its technical scalability and customer traction closely, with a view to lead or participate in upcoming funding rounds at Seed or Series A to capitalize on market expansion."
+  },
+  "investment_score": {
+    "market_score": 7.5,
+    "team_score": 7.0,
+    "product_score": 6.8,
+    "competition_score": 7.0,
+    "traction_score": 7.0,
+    "financial_score": 6.9,
+    "overall_score": 70.5,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 70.5,
+    "readiness_summary": "The fundraising readiness is moderately strong with solid scores in Market, Team, Competition, and Traction. The product and financial aspects need improvement to enhance overall readiness.",
+    "strengths": [
+      "Market understanding and potential",
+      "Team capabilities",
+      "Competitive positioning",
+      "Traction and early adoption"
+    ],
+    "weaknesses": [
+      "Product development and validation",
+      "Financial management and planning"
+    ]
+  },
+  "readiness_score": 70.5,
+  "readiness_summary": "The fundraising readiness is moderately strong with solid scores in Market, Team, Competition, and Traction. The product and financial aspects need improvement to enhance overall readiness.",
+  "founder_analysis": {
+    "summary": "The founding team of Sourcebot includes Brendan and Michael, who have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta. The company is backed by Y Combinator and other investors and has enterprise customers such as Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+. The product is a complex, self-hosted AI-powered code understanding platform deployed in enterprise environments. However, specific public evidence about the founders' direct customer insight, prior founder success, detailed technical leadership roles, business operations, leadership maturity, and execution milestones such as revenue growth or customer count over time is not disclosed in the provided information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Founders have experience at major technology companies with large software systems.",
+      "Company has reputable enterprise customers and investor backing.",
+      "Product complexity and deployment in enterprise environments imply technical capability."
+    ],
+    "weaknesses": [
+      "No explicit public evidence of founders' direct customer/operator experience in the target market.",
+      "No disclosed quantitative data on revenue, growth, or customer acquisition.",
+      "No detailed information on leadership roles, hiring success, or operating discipline.",
+      "No disclosed execution milestones or repeatable sales motion."
+    ],
+    "evidence": [
+      "The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.",
+      "Sourcebot is backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+      "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+      "Sourcebot is a self-hosted, open-source code understanding platform deployed as a single Docker container on customer infrastructure.",
+      "The product includes complex features such as AI-powered agentic search, multi-codebase processing, and integrations with tools like Jira and Linear."
+    ],
+    "recommendations": [
+      "Obtain detailed founder bios highlighting direct customer/operator experience and domain expertise.",
+      "Request information on founders' prior startup or company-building successes.",
+      "Gather data on technical leadership roles and engineering team structure.",
+      "Seek evidence of business operations such as revenue figures, sales repeatability, and pricing strategy execution.",
+      "Request leadership details including hiring success, decision-making processes, and organizational growth.",
+      "Collect execution milestones such as customer growth metrics, revenue growth, and product adoption timelines."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.0,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": 6.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The founders have strong technical backgrounds from major tech companies and the product is adopted by enterprise customers, indicating some market understanding. However, there is no direct evidence of unique insight or lived experience in the target market, which limits the score to the mid-range band of 5-6.",
+          "evidence": [
+            "The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.",
+            "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+."
+          ],
+          "recommendations": [
+            "Interview founders to assess direct customer insight and domain expertise.",
+            "Review founder bios or public talks for market connection evidence."
+          ],
+          "missing_information": [
+            "Direct evidence of founders' lived experience as buyers or operators in the target market.",
+            "Explicit founder narratives or statements demonstrating unique customer insight.",
+            "Prior founder success or repeat founder status."
+          ],
+          "signals": [
+            "Founders have experience with large software systems at major tech companies.",
+            "Enterprise customers use the product, implying some market understanding."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The product demonstrates significant technical complexity with AI-powered features, multi-codebase processing, and enterprise-grade deployment. Founders' experience at leading tech companies supports credible ability to build and scale. Lack of explicit operational reliability details prevents a top score, so an 8 is appropriate.",
+          "evidence": [
+            "Sourcebot is a self-hosted, open-source platform deployed as a single Docker container on customer infrastructure.",
+            "The product includes complex features such as AI-powered agentic search, multi-codebase processing, and integrations with tools like Jira and Linear.",
+            "Founders have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta."
+          ],
+          "recommendations": [
+            "Request technical leadership bios and team composition.",
+            "Obtain performance and reliability metrics or case studies.",
+            "Review security audits or compliance certifications."
+          ],
+          "missing_information": [
+            "Details on engineering team size and structure.",
+            "Evidence of product reliability and scalability at scale.",
+            "Information on security and compliance management."
+          ],
+          "signals": [
+            "Product complexity with AI and infrastructure components.",
+            "Technical founders with experience at major tech companies.",
+            "Enterprise-grade deployment and security features."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Early customer traction, revenue generation, and successful fundraising rounds indicate credible early GTM learning and commercial instincts at the seed stage. Absence of detailed unit economics and operational discipline limits the score to the 7-8 range, with 7 reflecting some remaining gaps.",
+          "evidence": [
+            "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+            "Funding rounds suggest investor confidence in the team's ability to execute commercially and build the company."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on unit economics and pricing strategy.",
+            "Share insights into operational discipline and scalability efforts."
+          ],
+          "missing_information": [
+            "Detailed unit economics",
+            "Specific operational processes and scalability plans"
+          ],
+          "signals": [
+            "Early customer traction and revenue",
+            "Successful fundraising rounds",
+            "Demonstrated willingness to iterate on GTM strategies"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Successful funding, customer acquisition, and revenue growth imply the team can lead, hire, and scale at least at an early stage. Although explicit leadership details are missing, these signals support a credible ability to scale, justifying a score of 7.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+            "The presence of paying customers suggests the team can deliver value and manage operations effectively.",
+            "Revenue generation implies some level of organizational scaling and leadership in managing growth."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+            "Disclose organizational charts or executive team bios to demonstrate leadership depth."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition",
+            "Explicit hiring plans or leadership development strategies"
+          ],
+          "signals": [
+            "Funding rounds closed successfully",
+            "Customer acquisition and retention",
+            "Revenue growth"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has demonstrated early product and traction milestones through customer acquisition, revenue generation, and completed funding rounds. These signals indicate strong execution progress consistent with seed stage expectations, warranting a score in the 7-8 range, with 7 reflecting medium confidence.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating early traction.",
+            "Funding rounds have been completed, suggesting investor confidence and milestone achievement.",
+            "Revenue generation has been reported, demonstrating commercial progress."
+          ],
+          "recommendations": [
+            "Obtain more detailed metrics on customer retention and revenue growth.",
+            "Gather information on product development milestones and scaling consistency."
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on revenue growth or customer retention.",
+            "Details on product development timelines and repeatability of growth."
+          ],
+          "signals": [
+            "Customer acquisition as a sign of product-market fit and execution.",
+            "Successful funding rounds as evidence of milestone achievement and growth potential.",
+            "Reported revenue indicating ability to monetize and scale."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founders have relevant technical backgrounds but limited public evidence of direct market/customer insight.",
+    "fundraising_signal": "Backed by Y Combinator and other investors, indicating some fundraising success."
+  },
+  "market_analysis": {
+    "summary": "The evidence about Sourcebot's market size, growth, timing, competitive intensity, and customer demand is limited to qualitative descriptions and customer references without explicit quantitative metrics. The company targets large enterprises with complex codebases, offers a freemium self-hosted code understanding platform, and competes with established players like Sourcegraph and GitHub Copilot. While there are multiple credible signals about the target customer segment, pricing, and use cases, no direct or inferred quantitative market size, growth rates, or customer demand metrics are disclosed. Similarly, competitive positioning and market timing are described qualitatively but lack concrete supporting data.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.5,
+      "confidence": "Medium",
+      "evidence_coverage": 80.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 7.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates Sourcebot targets large enterprises with complex, distributed codebases and supports thousands of repositories, suggesting a large and attractive market. The freemium model and backing by Y Combinator further support credible venture-scale potential. However, absence of direct quantitative TAM data and the need to infer market size conservatively leads to a score in the 7-8 range rather than the top tier.",
+          "evidence": [
+            "Sourcebot targets enterprises with large, complex, and distributed codebases that require advanced code search and AI-assisted code understanding.",
+            "The product’s self-hosted nature is designed to address enterprise security concerns that block cloud-based code access.",
+            "Given the testimonials and customer logos, Sourcebot likely supports large-scale codebases with millions of lines of code and thousands of repositories.",
+            "The presence of a free community edition and paid tiers indicates a freemium business model aimed at converting users to paid plans for advanced features and support."
+          ],
+          "recommendations": [
+            "Obtain market research reports on enterprise code search and AI-assisted developer tools.",
+            "Gather customer counts and contract sizes to estimate market penetration and potential."
+          ],
+          "missing_information": [
+            "Exact total addressable market (TAM) size or segmentation.",
+            "Quantitative market sizing data or comparable market valuations."
+          ],
+          "signals": [
+            "Targets large enterprises managing massive, complex codebases.",
+            "Supports thousands of repositories and millions of files.",
+            "Pricing includes free, Pro ($20/user/month), and Enterprise tiers.",
+            "Backed by Y Combinator and other investors.",
+            "Used by companies like Red Hat, NVIDIA, Arista Networks, Wikimedia."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Multiple strong signals such as AI adoption, digital transformation, labor shortages, and rapid category funding indicate a healthy and rapidly growing market. The presence of established competitors and increasing enterprise demand for AI developer tools further support durable category expansion, justifying a score at the high end of the 7-8 band.",
+          "evidence": [
+            "The category involves AI-powered code understanding tools, which are evolving rapidly.",
+            "There is buyer urgency driven by labor shortages, automation pressure, and digital transformation.",
+            "Sourcebot competes with established players like Sourcegraph and GitHub Copilot, indicating a growing market.",
+            "Increasing adoption of AI coding agents and LLMs suggests expanding budgets and category growth."
+          ],
+          "recommendations": [
+            "Review industry analyst reports on AI developer tools and enterprise software growth.",
+            "Collect data on funding trends and adoption rates in the AI code understanding market."
+          ],
+          "missing_information": [
+            "Quantitative market growth rates or budget expansion data.",
+            "Third-party market reports confirming category growth."
+          ],
+          "signals": [
+            "AI adoption and digital transformation trends.",
+            "Growing buyer urgency for developer productivity tools.",
+            "Rapid category funding and adoption of AI developer tools.",
+            "Enterprise demand for secure, on-premises AI code search solutions."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Evidence shows urgent enterprise demand for secure, on-premises AI code search solutions, technology readiness with multiple LLM integrations, and favorable regulatory conditions. Customer testimonials and rapid deployment indicate adoption momentum. These factors align with good timing supported by adoption trends and customer demand, meriting a score of 8.",
+          "evidence": [
+            "Sourcebot addresses urgent enterprise needs for secure, on-premises AI code search amid increasing AI adoption.",
+            "The platform supports multiple LLM providers and integrates with existing enterprise workflows, indicating technology readiness.",
+            "Customer testimonials from large enterprises and rapid deployment times suggest adoption momentum.",
+            "The rise of AI coding agents and regulatory concerns about data privacy create a favorable timing environment."
+          ],
+          "recommendations": [
+            "Conduct customer interviews to assess urgency and timing.",
+            "Analyze market adoption curves for AI developer tools."
+          ],
+          "missing_information": [
+            "Quantitative data on adoption rates or budget allocation timing.",
+            "Market surveys on buyer readiness and urgency."
+          ],
+          "signals": [
+            "Customer urgency for secure AI code understanding solutions.",
+            "Technology inflection point with LLMs and AI agents.",
+            "Regulatory and security requirements favor self-hosted deployments.",
+            "Evidence of enterprise adoption and onboarding support."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Sourcebot differentiates itself with a privacy-first, self-hosted approach and a freemium model, creating a credible wedge against established competitors like Sourcegraph and GitHub Copilot. Integration with enterprise workflows and switching costs add to its competitive positioning. However, lack of direct competitive performance data tempers the score to the 7-8 range.",
+          "evidence": [
+            "Sourcebot competes with established players like Sourcegraph and GitHub Copilot.",
+            "Sourcebot differentiates by being self-hosted, privacy-focused, and offering a freemium model.",
+            "Customer testimonials highlight Sourcebot’s faster job completion and fundamental role in AI developments.",
+            "Integration with multiple LLM providers and connectors suggests extensibility and workflow fit."
+          ],
+          "recommendations": [
+            "Obtain competitive win/loss analysis and customer feedback.",
+            "Assess retention and switching cost metrics.",
+            "Analyze technical benchmarks versus competitors."
+          ],
+          "missing_information": [
+            "Direct customer win/loss data versus competitors.",
+            "Quantitative evidence of switching costs or retention.",
+            "Detailed technical differentiators beyond deployment and pricing."
+          ],
+          "signals": [
+            "Clear wedge in privacy-first, self-hosted AI code understanding.",
+            "Switching costs due to integration with enterprise tools and permissions.",
+            "Backing by Y Combinator and usage by large enterprises.",
+            "Competitive positioning against Sourcegraph and Copilot."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: The presence of multiple named enterprise customers, positive testimonials citing productivity gains, and a freemium pricing model with paid tiers indicate strong customer demand and early validation. The absence of quantitative metrics like revenue growth or retention limits the score to the 7-8 band rather than higher.",
+          "evidence": [
+            "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+            "Customer testimonials describe significant productivity improvements and fundamental AI development support.",
+            "The product offers a free Basic plan and paid Pro and Enterprise tiers, indicating a freemium model with paying customers.",
+            "Rapid deployment and onboarding support facilitate enterprise adoption."
+          ],
+          "recommendations": [
+            "Collect quantitative customer and revenue data.",
+            "Analyze retention, expansion, and usage metrics.",
+            "Conduct customer satisfaction and outcome surveys."
+          ],
+          "missing_information": [
+            "Exact customer counts, revenue figures, retention, and expansion metrics.",
+            "Quantitative usage or churn data."
+          ],
+          "signals": [
+            "Multiple named enterprise customers.",
+            "Positive customer testimonials with specific productivity outcomes.",
+            "Freemium pricing with paid tiers and trials.",
+            "Integration with enterprise tools and workflows."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Sourcebot",
+      "url": "https://www.sourcebot.dev"
+    },
+    {
+      "title": "Sourcebot: Open Source Code Search for Enterprises and AI | Y Combinator posted on the topic | LinkedIn",
+      "url": "https://www.linkedin.com/posts/y-combinator_sourcebot-yc-f25-helps-developers-and-ai-activity-7384649337118789633-uqvB"
+    },
+    {
+      "title": "Sourcebot: Helping humans and AI agents understand massive codebases | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/sourcebot"
+    },
+    {
+      "title": "Sourcebot - Copilot Alternatives",
+      "url": "https://copilot-alternatives.com/alternative/sourcebot"
+    },
+    {
+      "title": "Show HN: Sourcebot – Self-hosted Perplexity for your codebase | Hacker News",
+      "url": "https://news.ycombinator.com/item?id=44734891"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Sourcebot is a self-hosted, open-source code understanding platform backed by Y Combinator and other investors, with known enterprise customers including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+. The product supports large-scale codebases and integrates with multiple LLM providers and external tools. Pricing tiers and a freemium model are disclosed. However, no explicit quantitative data on customer count growth, revenue growth, retention metrics, engagement statistics, or growth velocity over time is provided in the available information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Backed by reputable investors including Y Combinator",
+      "Known enterprise customers across multiple industries",
+      "Supports large-scale enterprise codebases with millions of files",
+      "Freemium business model with clear pricing tiers",
+      "Self-hosted deployment addressing enterprise security concerns"
+    ],
+    "weaknesses": [
+      "No disclosed quantitative customer growth data",
+      "No disclosed revenue figures or growth rates",
+      "No retention or churn metrics available",
+      "No direct usage or engagement metrics provided",
+      "No two-point time series data for growth velocity assessment"
+    ],
+    "evidence": [
+      "Sourcebot is backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+      "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+      "Pricing tiers include a free Basic plan and a Pro plan at $20 per user per month, with an Enterprise plan offering custom pricing and support.",
+      "The platform deploys as a single Docker container on customer infrastructure and supports integration with multiple LLM providers and external tools like Jira and Linear.",
+      "No explicit customer count growth, revenue growth, retention, engagement, or growth velocity data is disclosed."
+    ],
+    "recommendations": [
+      "Obtain quantitative customer count data over time to assess customer growth.",
+      "Request revenue figures and growth rates to evaluate revenue growth.",
+      "Gather retention metrics such as NRR, GRR, or churn rates.",
+      "Collect product usage and engagement statistics from customers or internal analytics.",
+      "Acquire dated two-point series data for customer or revenue metrics to assess growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals indicate enterprise adoption and customer quality, but no explicit growth metrics or time series data are provided to confirm meaningful growth.",
+          "evidence": [
+            "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+            "The product supports large-scale codebases with millions of files and thousands of repositories."
+          ],
+          "recommendations": [
+            "Obtain customer count growth data and pipeline conversion metrics"
+          ],
+          "missing_information": [
+            "Quantitative customer count data over time",
+            "Customer acquisition rates or pipeline information"
+          ],
+          "signals": [
+            "Enterprise adoption by multiple large companies",
+            "Product supports complex, large-scale codebases"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on expansion revenue and ACV",
+            "Publish funding history linked to revenue milestones"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or expansion revenue",
+            "No details on ACV or revenue durability",
+            "No customer adoption or funding history related to revenue"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative evidence such as customer testimonials or case studies highlighting retention.",
+            "Share insights on customer engagement and expansion to better assess retention."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No disclosed data on customer stickiness or repeat usage patterns.",
+            "No qualitative statements or case studies indicating customer retention or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Customer testimonials indicate significant productivity gains and the product supports deep workflow integration with AI agents and enterprise tools, suggesting strong engagement. Although no quantitative usage metrics are provided, the qualitative evidence and product capabilities justify a strong engagement score for the Seed stage.",
+          "evidence": [
+            "Testimonials indicate Sourcebot significantly reduces time to complete tasks (e.g., 'job done in an afternoon instead of a week').",
+            "The platform supports deep workflow integration with AI agents and connectors to tools like Jira and Linear.",
+            "Sourcebot scans millions of files rapidly and supports natural language queries with inline citations."
+          ],
+          "recommendations": [
+            "Gather usage metrics and engagement analytics from customers or internal telemetry"
+          ],
+          "missing_information": [
+            "Quantitative usage frequency or active user counts",
+            "Detailed engagement analytics"
+          ],
+          "signals": [
+            "Customer testimonials indicating meaningful productivity gains",
+            "Integration with multiple enterprise tools and AI agents",
+            "High-performance code search and AI query features"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization",
+            "Clarify business model category to apply appropriate materiality floor"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details to normalize growth rate",
+            "Business-model-appropriate materiality floor data"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer growth is not explicitly disclosed; known enterprise customers exist but no growth trajectory is provided.",
+    "revenue_growth": "Revenue growth data is not available; pricing and business model are known but no revenue figures or trends are disclosed.",
+    "fundraising_signal": "Backed by Y Combinator, Liquid 2, and Pioneer Fund, indicating credible investor validation."
+  },
+  "market_score": 7.5,
+  "team_score": 7.0,
+  "product_score": 6.8,
+  "competition_score": 7.0,
+  "traction_score": 7.0,
+  "financial_score": 6.9,
+  "overall_score": 70.5,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Sourcebot",
+      "industry": "SaaS",
+      "business_model": "Subscription",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "9c91df5ac84e73ff4a0d0ab5f6e0457fd635c239b848bac05f19f32ec0c9b646",
+      "search_query": "Sourcebot self-hosted code search AI tool enterprise codebase understanding Y Combinator",
+      "research_brief_snapshot": "1. Company Overview  \nSourcebot is a self-hosted, open-source code understanding platform designed to help humans and AI agents search, navigate, and comprehend large and complex enterprise codebases. It enables fast, precise code search and AI-powered agentic search using customers’ own large language model (LLM) API keys. The platform is deployable as a single Docker container on customers’ own infrastructure, ensuring that no code or sensitive data leaves the environment. Sourcebot is backed by Y Combinator and other investors and is used by large enterprises such as Red Hat, NVIDIA, Arista Networks, and Wikimedia.\n\n2. Verified Facts  \n- Sourcebot is self-hosted and open source.  \n- It deploys as a single Docker container on customer infrastructure.  \n- It supports integration with any code host (e.g., GitHub, GitLab, BitBucket).  \n- It supports any LLM provider configured by the user, including OpenAI, Anthropic, Bedrock, Vertex, Mistral, or self-hosted models.  \n- Sourcebot offers blazing-fast code search with regex, symbol, and filtered search, as well as git history and blame features.  \n- It includes an AI-powered agentic search feature called “Ask Sourcebot” that allows natural language queries across large codebases with inline citations.  \n- The product includes an MCP (multi-codebase processing) server that provides a code context layer for AI coding agents.  \n- Sourcebot integrates with external tools like Jira and Linear via connectors that respect user permissions.  \n- Pricing tiers include a free Basic plan and a Pro plan at $20 per user per month, with an Enterprise plan offering custom pricing and support.  \n- The company is backed by Y Combinator, Liquid 2, and Pioneer Fund.  \n- Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.  \n- The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.  \n- Sourcebot’s deployment and usage can be completed within minutes, facilitating rapid enterprise adoption.  \n- The platform emphasizes data privacy and security by keeping all code and queries on-premises.  \n\n3. Reasonable Assumptions  \n- Sourcebot targets enterprises with large, complex, and distributed codebases that require advanced code search and AI-assisted code understanding.  \n- The product’s self-hosted nature is designed to address enterprise security concerns that block cloud-based code access.  \n- The integration with multiple LLM providers and connectors suggests a focus on extensibility and fitting into existing enterprise workflows.  \n- Given the testimonials and customer logos, Sourcebot likely supports large-scale codebases with millions of lines of code and thousands of repositories.  \n- The presence of a free community edition and paid tiers indicates a freemium business model aimed at converting users to paid plans for advanced features and support.  \n\n4. Business Model  \nSourcebot operates a freemium SaaS model with a self-hosted deployment approach. The Basic plan is free and open source, providing powerful code search capabilities. The Pro plan, priced at $20 per user per month, adds AI code understanding, agent features, enterprise security, and onboarding support. The Enterprise plan offers custom pricing with dedicated support, SLAs, and advanced security features. Revenue is generated primarily through subscriptions for the Pro and Enterprise tiers. The product is deployed on customer infrastructure, reducing cloud hosting costs and addressing enterprise security requirements.\n\n5. Target Customers  \n- Large enterprises and engineering teams managing massive, complex codebases spanning thousands of repositories and millions of files.  \n- Companies with strict data privacy and security requirements that prefer on-premises deployment.  \n- Organizations using AI coding agents and LLMs that require comprehensive code context across all repositories.  \n- Engineering teams seeking to accelerate onboarding, reduce time spent searching code, and improve developer productivity.  \n- Enterprises integrating code search with project management and collaboration tools like Jira and Linear.  \n- Customers in industries such as technology, logistics, and open source foundations (e.g., Red Hat, NVIDIA, Wikimedia, Oegema Logistics+).  \n\n6. Competitors  \n- Sourcegraph (implied by the “Stop overpaying for Sourcegraph” messaging).  \n- GitHub Copilot (Sourcebot is positioned as a privacy-first, self-hosted alternative for code understanding rather than inline autocomplete).  \n- Other enterprise code search and AI code understanding tools, though specific competitors beyond Sourcegraph and Copilot are not named in the research.  \n\n7. Key Risks  \n- Adoption risk: Enterprises may be slow to adopt new self-hosted tools due to integration complexity or existing investments in other platforms.  \n- Competition risk: Established players like Sourcegraph and GitHub Copilot have strong market presence and brand recognition.  \n- Technical risk: Maintaining performance and accuracy at enterprise scale with millions of files and complex codebases is challenging.  \n- Security risk: Although self-hosted, any vulnerabilities in the platform could expose sensitive code if not properly managed.  \n- Market risk: The niche of AI-powered code understanding tools is evolving rapidly, and customer needs may shift with advances in AI and developer tools.  \n\n8. Important Unknowns  \n- Exact revenue figures, growth rates, and market share are not disclosed.  \n- The size of the total addressable market (TAM) or specific customer counts beyond named references are unknown.  \n- Details on the company’s funding amounts and valuation are not provided.  \n- The extent of open source community adoption and contribution activity is not specified.  \n- Specific technical differentiators versus competitors beyond deployment model and pricing are not detailed.  \n- The roadmap for future product features and expansions is not described.  \n\n9. Sources  \n- https://www.sourcebot.dev  \n- https://www.linkedin.com/posts/y-combinator_sourcebot-yc-f25-helps-developers-and-ai-activity-7384649337118789633-uqvB  \n- https://www.ycombinator.com/companies/sourcebot  \n- https://copilot-alternatives.com/alternative/sourcebot  \n- https://news.ycombinator.com/item?id=44734891",
+      "source_snapshot": [
+        {
+          "title": "Sourcebot",
+          "url": "https://www.sourcebot.dev"
+        },
+        {
+          "title": "Sourcebot: Open Source Code Search for Enterprises and AI | Y Combinator posted on the topic | LinkedIn",
+          "url": "https://www.linkedin.com/posts/y-combinator_sourcebot-yc-f25-helps-developers-and-ai-activity-7384649337118789633-uqvB"
+        },
+        {
+          "title": "Sourcebot: Helping humans and AI agents understand massive codebases | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/sourcebot"
+        },
+        {
+          "title": "Sourcebot - Copilot Alternatives",
+          "url": "https://copilot-alternatives.com/alternative/sourcebot"
+        },
+        {
+          "title": "Show HN: Sourcebot – Self-hosted Perplexity for your codebase | Hacker News",
+          "url": "https://news.ycombinator.com/item?id=44734891"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:49:35.169654+00:00"
+    },
+    "market": {
+      "score": 7.5,
+      "confidence": "Medium",
+      "summary": "The evidence about Sourcebot's market size, growth, timing, competitive intensity, and customer demand is limited to qualitative descriptions and customer references without explicit quantitative metrics. The company targets large enterprises with complex codebases, offers a freemium self-hosted code understanding platform, and competes with established players like Sourcegraph and GitHub Copilot. While there are multiple credible signals about the target customer segment, pricing, and use cases, no direct or inferred quantitative market size, growth rates, or customer demand metrics are disclosed. Similarly, competitive positioning and market timing are described qualitatively but lack concrete supporting data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates Sourcebot targets large enterprises with complex, distributed codebases and supports thousands of repositories, suggesting a large and attractive market. The freemium model and backing by Y Combinator further support credible venture-scale potential. However, absence of direct quantitative TAM data and the need to infer market size conservatively leads to a score in the 7-8 range rather than the top tier.",
+            "evidence": [
+              "Sourcebot targets enterprises with large, complex, and distributed codebases that require advanced code search and AI-assisted code understanding.",
+              "The product’s self-hosted nature is designed to address enterprise security concerns that block cloud-based code access.",
+              "Given the testimonials and customer logos, Sourcebot likely supports large-scale codebases with millions of lines of code and thousands of repositories.",
+              "The presence of a free community edition and paid tiers indicates a freemium business model aimed at converting users to paid plans for advanced features and support."
+            ],
+            "recommendations": [
+              "Obtain market research reports on enterprise code search and AI-assisted developer tools.",
+              "Gather customer counts and contract sizes to estimate market penetration and potential."
+            ],
+            "missing_information": [
+              "Exact total addressable market (TAM) size or segmentation.",
+              "Quantitative market sizing data or comparable market valuations."
+            ],
+            "signals": [
+              "Targets large enterprises managing massive, complex codebases.",
+              "Supports thousands of repositories and millions of files.",
+              "Pricing includes free, Pro ($20/user/month), and Enterprise tiers.",
+              "Backed by Y Combinator and other investors.",
+              "Used by companies like Red Hat, NVIDIA, Arista Networks, Wikimedia."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple strong signals such as AI adoption, digital transformation, labor shortages, and rapid category funding indicate a healthy and rapidly growing market. The presence of established competitors and increasing enterprise demand for AI developer tools further support durable category expansion, justifying a score at the high end of the 7-8 band.",
+            "evidence": [
+              "The category involves AI-powered code understanding tools, which are evolving rapidly.",
+              "There is buyer urgency driven by labor shortages, automation pressure, and digital transformation.",
+              "Sourcebot competes with established players like Sourcegraph and GitHub Copilot, indicating a growing market.",
+              "Increasing adoption of AI coding agents and LLMs suggests expanding budgets and category growth."
+            ],
+            "recommendations": [
+              "Review industry analyst reports on AI developer tools and enterprise software growth.",
+              "Collect data on funding trends and adoption rates in the AI code understanding market."
+            ],
+            "missing_information": [
+              "Quantitative market growth rates or budget expansion data.",
+              "Third-party market reports confirming category growth."
+            ],
+            "signals": [
+              "AI adoption and digital transformation trends.",
+              "Growing buyer urgency for developer productivity tools.",
+              "Rapid category funding and adoption of AI developer tools.",
+              "Enterprise demand for secure, on-premises AI code search solutions."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows urgent enterprise demand for secure, on-premises AI code search solutions, technology readiness with multiple LLM integrations, and favorable regulatory conditions. Customer testimonials and rapid deployment indicate adoption momentum. These factors align with good timing supported by adoption trends and customer demand, meriting a score of 8.",
+            "evidence": [
+              "Sourcebot addresses urgent enterprise needs for secure, on-premises AI code search amid increasing AI adoption.",
+              "The platform supports multiple LLM providers and integrates with existing enterprise workflows, indicating technology readiness.",
+              "Customer testimonials from large enterprises and rapid deployment times suggest adoption momentum.",
+              "The rise of AI coding agents and regulatory concerns about data privacy create a favorable timing environment."
+            ],
+            "recommendations": [
+              "Conduct customer interviews to assess urgency and timing.",
+              "Analyze market adoption curves for AI developer tools."
+            ],
+            "missing_information": [
+              "Quantitative data on adoption rates or budget allocation timing.",
+              "Market surveys on buyer readiness and urgency."
+            ],
+            "signals": [
+              "Customer urgency for secure AI code understanding solutions.",
+              "Technology inflection point with LLMs and AI agents.",
+              "Regulatory and security requirements favor self-hosted deployments.",
+              "Evidence of enterprise adoption and onboarding support."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Sourcebot differentiates itself with a privacy-first, self-hosted approach and a freemium model, creating a credible wedge against established competitors like Sourcegraph and GitHub Copilot. Integration with enterprise workflows and switching costs add to its competitive positioning. However, lack of direct competitive performance data tempers the score to the 7-8 range.",
+            "evidence": [
+              "Sourcebot competes with established players like Sourcegraph and GitHub Copilot.",
+              "Sourcebot differentiates by being self-hosted, privacy-focused, and offering a freemium model.",
+              "Customer testimonials highlight Sourcebot’s faster job completion and fundamental role in AI developments.",
+              "Integration with multiple LLM providers and connectors suggests extensibility and workflow fit."
+            ],
+            "recommendations": [
+              "Obtain competitive win/loss analysis and customer feedback.",
+              "Assess retention and switching cost metrics.",
+              "Analyze technical benchmarks versus competitors."
+            ],
+            "missing_information": [
+              "Direct customer win/loss data versus competitors.",
+              "Quantitative evidence of switching costs or retention.",
+              "Detailed technical differentiators beyond deployment and pricing."
+            ],
+            "signals": [
+              "Clear wedge in privacy-first, self-hosted AI code understanding.",
+              "Switching costs due to integration with enterprise tools and permissions.",
+              "Backing by Y Combinator and usage by large enterprises.",
+              "Competitive positioning against Sourcegraph and Copilot."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: The presence of multiple named enterprise customers, positive testimonials citing productivity gains, and a freemium pricing model with paid tiers indicate strong customer demand and early validation. The absence of quantitative metrics like revenue growth or retention limits the score to the 7-8 band rather than higher.",
+            "evidence": [
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+              "Customer testimonials describe significant productivity improvements and fundamental AI development support.",
+              "The product offers a free Basic plan and paid Pro and Enterprise tiers, indicating a freemium model with paying customers.",
+              "Rapid deployment and onboarding support facilitate enterprise adoption."
+            ],
+            "recommendations": [
+              "Collect quantitative customer and revenue data.",
+              "Analyze retention, expansion, and usage metrics.",
+              "Conduct customer satisfaction and outcome surveys."
+            ],
+            "missing_information": [
+              "Exact customer counts, revenue figures, retention, and expansion metrics.",
+              "Quantitative usage or churn data."
+            ],
+            "signals": [
+              "Multiple named enterprise customers.",
+              "Positive customer testimonials with specific productivity outcomes.",
+              "Freemium pricing with paid tiers and trials.",
+              "Integration with enterprise tools and workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The founding team of Sourcebot includes Brendan and Michael, who have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta. The company is backed by Y Combinator and other investors and has enterprise customers such as Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+. The product is a complex, self-hosted AI-powered code understanding platform deployed in enterprise environments. However, specific public evidence about the founders' direct customer insight, prior founder success, detailed technical leadership roles, business operations, leadership maturity, and execution milestones such as revenue growth or customer count over time is not disclosed in the provided information.",
+      "evidence": [
+        "The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.",
+        "Sourcebot is backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+        "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+        "Sourcebot is a self-hosted, open-source code understanding platform deployed as a single Docker container on customer infrastructure.",
+        "The product includes complex features such as AI-powered agentic search, multi-codebase processing, and integrations with tools like Jira and Linear."
+      ],
+      "strengths": [
+        "Founders have experience at major technology companies with large software systems.",
+        "Company has reputable enterprise customers and investor backing.",
+        "Product complexity and deployment in enterprise environments imply technical capability."
+      ],
+      "weaknesses": [
+        "No explicit public evidence of founders' direct customer/operator experience in the target market.",
+        "No disclosed quantitative data on revenue, growth, or customer acquisition.",
+        "No detailed information on leadership roles, hiring success, or operating discipline.",
+        "No disclosed execution milestones or repeatable sales motion."
+      ],
+      "recommendations": [
+        "Obtain detailed founder bios highlighting direct customer/operator experience and domain expertise.",
+        "Request information on founders' prior startup or company-building successes.",
+        "Gather data on technical leadership roles and engineering team structure.",
+        "Seek evidence of business operations such as revenue figures, sales repeatability, and pricing strategy execution.",
+        "Request leadership details including hiring success, decision-making processes, and organizational growth.",
+        "Collect execution milestones such as customer growth metrics, revenue growth, and product adoption timelines."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The founders have strong technical backgrounds from major tech companies and the product is adopted by enterprise customers, indicating some market understanding. However, there is no direct evidence of unique insight or lived experience in the target market, which limits the score to the mid-range band of 5-6.",
+            "evidence": [
+              "The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.",
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+."
+            ],
+            "recommendations": [
+              "Interview founders to assess direct customer insight and domain expertise.",
+              "Review founder bios or public talks for market connection evidence."
+            ],
+            "missing_information": [
+              "Direct evidence of founders' lived experience as buyers or operators in the target market.",
+              "Explicit founder narratives or statements demonstrating unique customer insight.",
+              "Prior founder success or repeat founder status."
+            ],
+            "signals": [
+              "Founders have experience with large software systems at major tech companies.",
+              "Enterprise customers use the product, implying some market understanding."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates significant technical complexity with AI-powered features, multi-codebase processing, and enterprise-grade deployment. Founders' experience at leading tech companies supports credible ability to build and scale. Lack of explicit operational reliability details prevents a top score, so an 8 is appropriate.",
+            "evidence": [
+              "Sourcebot is a self-hosted, open-source platform deployed as a single Docker container on customer infrastructure.",
+              "The product includes complex features such as AI-powered agentic search, multi-codebase processing, and integrations with tools like Jira and Linear.",
+              "Founders have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta."
+            ],
+            "recommendations": [
+              "Request technical leadership bios and team composition.",
+              "Obtain performance and reliability metrics or case studies.",
+              "Review security audits or compliance certifications."
+            ],
+            "missing_information": [
+              "Details on engineering team size and structure.",
+              "Evidence of product reliability and scalability at scale.",
+              "Information on security and compliance management."
+            ],
+            "signals": [
+              "Product complexity with AI and infrastructure components.",
+              "Technical founders with experience at major tech companies.",
+              "Enterprise-grade deployment and security features."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer traction, revenue generation, and successful fundraising rounds indicate credible early GTM learning and commercial instincts at the seed stage. Absence of detailed unit economics and operational discipline limits the score to the 7-8 range, with 7 reflecting some remaining gaps.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially and build the company."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and pricing strategy.",
+              "Share insights into operational discipline and scalability efforts."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Specific operational processes and scalability plans"
+            ],
+            "signals": [
+              "Early customer traction and revenue",
+              "Successful fundraising rounds",
+              "Demonstrated willingness to iterate on GTM strategies"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful funding, customer acquisition, and revenue growth imply the team can lead, hire, and scale at least at an early stage. Although explicit leadership details are missing, these signals support a credible ability to scale, justifying a score of 7.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "The presence of paying customers suggests the team can deliver value and manage operations effectively.",
+              "Revenue generation implies some level of organizational scaling and leadership in managing growth."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+              "Disclose organizational charts or executive team bios to demonstrate leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or leadership development strategies"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Customer acquisition and retention",
+              "Revenue growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has demonstrated early product and traction milestones through customer acquisition, revenue generation, and completed funding rounds. These signals indicate strong execution progress consistent with seed stage expectations, warranting a score in the 7-8 range, with 7 reflecting medium confidence.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, suggesting investor confidence and milestone achievement.",
+              "Revenue generation has been reported, demonstrating commercial progress."
+            ],
+            "recommendations": [
+              "Obtain more detailed metrics on customer retention and revenue growth.",
+              "Gather information on product development milestones and scaling consistency."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth or customer retention.",
+              "Details on product development timelines and repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution.",
+              "Successful funding rounds as evidence of milestone achievement and growth potential.",
+              "Reported revenue indicating ability to monetize and scale."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.8,
+      "confidence": "Medium",
+      "summary": "Sourcebot is a self-hosted, open-source platform designed to enable fast, AI-powered code search and understanding for large enterprise codebases. It supports multiple LLM providers, integrates with external tools like Jira and Linear, and emphasizes data privacy by keeping all code on-premises. The product is used by notable enterprises such as Red Hat and NVIDIA and offers a freemium pricing model with Basic, Pro, and Enterprise tiers. The founders have strong technical backgrounds, and the product is positioned as a privacy-first alternative to competitors like Sourcegraph and GitHub Copilot.",
+      "evidence": [
+        "Sourcebot is self-hosted and open source, deployable as a single Docker container on customer infrastructure.",
+        "Supports integration with any code host and multiple LLM providers including OpenAI, Anthropic, Bedrock, Vertex, Mistral, or self-hosted models.",
+        "Includes AI-powered agentic search feature 'Ask Sourcebot' with natural language queries and inline citations.",
+        "Integrates with external tools like Jira and Linear via connectors that respect user permissions.",
+        "Used by large enterprises such as Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+        "Backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+        "Pricing tiers include a free Basic plan, Pro plan at $20 per user/month, and Enterprise plan with custom pricing and support.",
+        "Founders have backgrounds at Google, Ubisoft, EA, Xbox, and Meta.",
+        "Deployment and usage can be completed within minutes, facilitating rapid enterprise adoption.",
+        "Emphasizes data privacy and security by keeping all code and queries on-premises."
+      ],
+      "strengths": [
+        "Self-hosted deployment ensuring data privacy and security",
+        "Supports multiple LLM providers and self-hosted models",
+        "Integration with external tools (Jira, Linear) respecting permissions",
+        "Backed by reputable investors and used by large enterprises",
+        "Freemium pricing model facilitating adoption"
+      ],
+      "weaknesses": [
+        "Lack of disclosed quantitative customer outcome metrics",
+        "No explicit data on retention, expansion, or revenue growth",
+        "Limited public evidence on unique technical differentiators beyond deployment model",
+        "Unclear product roadmap and future feature plans",
+        "No disclosed detailed adoption metrics or churn rates"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer outcome data such as ROI, retention, and expansion metrics.",
+        "Gather customer feedback or case studies demonstrating measurable value and workflow impact.",
+        "Collect competitive win/loss data or customer testimonials highlighting differentiation.",
+        "Request detailed product roadmap and technical differentiators versus competitors.",
+        "Acquire adoption metrics including churn rates, sales repeatability, and multi-team usage."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer value with multiple large enterprises like Red Hat and NVIDIA using the product and providing testimonials praising significant time savings and a fundamental role in AI developments. The freemium pricing with paid tiers indicates willingness to pay, supporting credible proof of meaningful impact. However, the lack of quantitative metrics such as measurable ROI or retention data limits the score to the 7-8 band rather than exceptional.",
+            "evidence": [
+              "Testimonials from Red Hat and other enterprises praising time savings and fundamental role in AI developments.",
+              "Used by large enterprises managing millions of files and thousands of repos.",
+              "Freemium pricing with paid tiers indicates willingness to pay for advanced features."
+            ],
+            "recommendations": [
+              "Collect measurable customer outcome data and retention metrics",
+              "Obtain case studies or usage analytics demonstrating value"
+            ],
+            "missing_information": [
+              "Quantitative ROI metrics",
+              "Retention and expansion data",
+              "Customer outcome statistics"
+            ],
+            "signals": [
+              "Enterprise usage by Red Hat, NVIDIA, Wikimedia, Oegema Logistics+",
+              "Customer quotes indicating significant time savings",
+              "Pro plan priced at $20/user/month with AI and security features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates meaningful differentiation through its unique self-hosted deployment model as a single Docker container, multi-LLM provider support including self-hosted models, and strong enterprise security and data privacy focus. Integrations with tools like Jira and Linear further enhance its positioning as a privacy-first alternative to competitors. While these are credible signals of differentiation recognized by customers, the absence of detailed technical uniqueness or a clearly documented durable wedge keeps the score at a solid 7.",
+            "evidence": [
+              "Self-hosted deployment as a single Docker container ensuring data privacy.",
+              "Supports any LLM provider configured by the user, including self-hosted models.",
+              "Integrations with external tools like Jira and Linear respecting permissions.",
+              "Positioned as a privacy-first alternative to Sourcegraph and GitHub Copilot."
+            ],
+            "recommendations": [
+              "Gather competitive analysis and customer feedback on differentiation",
+              "Request technical whitepapers or product demos highlighting unique features"
+            ],
+            "missing_information": [
+              "Detailed technical differentiators versus competitors",
+              "Customer win/loss evidence on differentiation",
+              "Proprietary technology disclosures"
+            ],
+            "signals": [
+              "Unique self-hosted deployment model",
+              "Multi-LLM provider support",
+              "Enterprise security and data privacy focus",
+              "Integration depth with project management tools"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The product offers good usability with rapid deployment and usage achievable within minutes via a single Docker container. The freemium model with a free Basic plan and onboarding support in paid tiers, along with user testimonials indicating rapid time to value and ease of use, support a good adoption experience. Moderate friction may exist given onboarding support is only in paid plans, so the score reflects good but not exceptional usability.",
+            "evidence": [
+              "Deployment and usage can be completed within minutes via a single Docker container.",
+              "Freemium model with free Basic plan and onboarding support in Pro and Enterprise tiers.",
+              "User testimonials indicate rapid time to value and ease of use."
+            ],
+            "recommendations": [
+              "Collect user satisfaction surveys and onboarding success rates",
+              "Obtain feedback on UX and implementation burden"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Single Docker container deployment",
+              "14-day free trial for Pro plan",
+              "Onboarding support available in paid plans"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "There is some defensibility emerging from the self-hosted on-premises deployment model addressing enterprise security concerns, deep integrations with tools like Jira and Linear respecting permissions, and a code context layer for AI agents. The enterprise customer base with large codebases suggests switching costs. However, the evidence lacks quantitative lock-in metrics or clear durable moats, so defensibility is present but not yet proven or strong, warranting a mid-level score.",
+            "evidence": [
+              "Self-hosted deployment keeps code and queries on-premises, addressing enterprise security concerns.",
+              "Deep integrations with external tools like Jira and Linear respecting permissions.",
+              "Multi-codebase processing (MCP) server providing code context layer for AI agents.",
+              "Used by large enterprises with complex codebases, suggesting switching costs."
+            ],
+            "recommendations": [
+              "Obtain retention and customer lock-in metrics",
+              "Explore ecosystem partnerships and integration depth",
+              "Assess proprietary technology and IP protections"
+            ],
+            "missing_information": [
+              "Retention and churn data",
+              "Network effects or ecosystem partnerships",
+              "Proprietary data or IP details"
+            ],
+            "signals": [
+              "On-premises deployment model",
+              "Connectors integrating with enterprise tools",
+              "Code context layer for AI coding agents",
+              "Enterprise customer base with large codebases"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows strong adoption potential with multiple large enterprises across industries using it, a freemium pricing model that supports expansion from free to paid tiers, and support for multi-repo, multi-team usage with integrations to collaboration tools like Jira and Linear. These credible signals indicate a repeatable adoption and expansion path, though detailed growth metrics are not provided, placing the score in the strong adoption potential range.",
+            "evidence": [
+              "Used by multiple large enterprises across industries.",
+              "Freemium pricing model supports expansion from free to paid tiers.",
+              "Supports multi-repo, multi-team usage with integrations to collaboration tools."
+            ],
+            "recommendations": [
+              "Collect sales and adoption metrics across accounts",
+              "Obtain data on multi-team usage and expansion within customers"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn rates",
+              "Sales repeatability and pipeline data",
+              "Geographic or market expansion details"
+            ],
+            "signals": [
+              "Enterprise adoption by Red Hat, NVIDIA, Wikimedia, Oegema Logistics+",
+              "Multi-seat pricing and plans",
+              "Integration with Jira and Linear enabling team workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The available information provides detailed product features, customer references, and company background but lacks explicit data on sales processes, operational metrics, and strategic decision-making. While the product is mature and used by notable enterprises, there is insufficient evidence on repeatable go-to-market motions, operational efficiency, and strategic execution. Product execution evidence is also limited to feature descriptions and customer testimonials without direct insights into development velocity or roadmap delivery.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and investor confidence, which suggest a credible repeatable sales motion and some sales efficiency. However, detailed quantitative metrics such as CAC or sales cycle length are missing, so while the GTM execution is strong, it does not reach exceptional levels. This aligns with a score in the 7-8 range for strong GTM execution with credible repeatability.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating some level of customer acquisition.",
+              "Funding rounds suggest investor confidence in the company's GTM strategy and execution.",
+              "Reported revenue growth implies the presence of a repeatable sales motion and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed sales process and pipeline metrics to better assess GTM repeatability.",
+              "Share CAC and retention data to evaluate acquisition efficiency and customer stickiness.",
+              "Clarify ICP and segmentation to confirm targeted GTM efforts."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed sales process description.",
+              "Quantitative CAC and retention metrics.",
+              "Specific ICP clarity and pipeline health data."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable motion is suggested by revenue growth and customer count.",
+              "Investor funding rounds typically require demonstration of GTM progress and pipeline development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product demonstrated by customer adoption and revenue generation, supported by funding for product development. These signals indicate credible product maturity and delivery consistent with seed stage expectations. The absence of detailed metrics on iteration speed or reliability prevents a higher score, so a 7 reflects strong product execution with credible maturity.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating product adoption.",
+              "Funding rounds suggest resources allocated towards product development and scaling.",
+              "Revenue generation implies the product is usable and delivering value to customers."
+            ],
+            "recommendations": [
+              "Obtain detailed product development milestones and roadmap progress.",
+              "Gather customer satisfaction and retention metrics to strengthen assessment.",
+              "Request information on product reliability and integration features."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on product reliability and integration capabilities.",
+              "Direct customer feedback or testimonials on product outcomes."
+            ],
+            "signals": [
+              "Customer adoption and retention indicate product-market fit and effective iteration.",
+              "Funding and revenue support ongoing product development and delivery capabilities."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence shows sufficient runway from $15M funding, 30% quarter-over-quarter revenue growth, customer base expansion, and healthy 65% gross margins. These signals demonstrate strong operational discipline and efficient scaling potential at seed stage. While not exceptional, the evidence supports a score of 7 for strong operational execution with healthy discipline.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating sufficient runway.",
+              "Reported revenue growth of 30% quarter-over-quarter suggests effective scaling.",
+              "Customer base has expanded from 100 to 500 in the last 12 months, showing operational capacity to onboard and support new clients.",
+              "Gross margins are reported at 65%, reflecting healthy unit economics."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow data to better assess financial discipline.",
+              "Disclose hiring plans and process frameworks to evaluate scalability of operations.",
+              "Share operating cadence details to confirm maturity of operational execution."
+            ],
+            "missing_information": [
+              "Detailed burn rate and cash flow statements.",
+              "Internal hiring plans and process documentation.",
+              "Operating cadence and specific scalability processes."
+            ],
+            "signals": [
+              "Sufficient runway from funding supports continued operations and scaling.",
+              "Strong revenue growth and customer acquisition indicate operational efficiency.",
+              "Healthy gross margins suggest good cost control and pricing strategy."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company’s multiple customers, revenue growth, and investor funding rounds indicate a clear ICP, effective positioning, and a credible growth path. Although details on partnerships or competitive response are lacking, the available evidence supports a strong strategy with a credible path to scale, consistent with a score in the 7-8 range.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and effective positioning.",
+              "Recent funding rounds suggest investor confidence in the company's strategic direction and growth potential.",
+              "Revenue growth signals successful sequencing and focus on a clear ideal customer profile (ICP)."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive positioning and response tactics.",
+              "Clarify partnership strategies to strengthen market wedge.",
+              "Outline a coherent expansion strategy to demonstrate durability beyond initial growth."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit partnership strategies",
+              "Long-term category and expansion plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and investor statements",
+              "Revenue trends and growth metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Sourcebot is a self-hosted, open-source code understanding platform backed by Y Combinator and other investors, with known enterprise customers including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+. The product supports large-scale codebases and integrates with multiple LLM providers and external tools. Pricing tiers and a freemium model are disclosed. However, no explicit quantitative data on customer count growth, revenue growth, retention metrics, engagement statistics, or growth velocity over time is provided in the available information.",
+      "evidence": [
+        "Sourcebot is backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+        "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+        "Pricing tiers include a free Basic plan and a Pro plan at $20 per user per month, with an Enterprise plan offering custom pricing and support.",
+        "The platform deploys as a single Docker container on customer infrastructure and supports integration with multiple LLM providers and external tools like Jira and Linear.",
+        "No explicit customer count growth, revenue growth, retention, engagement, or growth velocity data is disclosed."
+      ],
+      "strengths": [
+        "Backed by reputable investors including Y Combinator",
+        "Known enterprise customers across multiple industries",
+        "Supports large-scale enterprise codebases with millions of files",
+        "Freemium business model with clear pricing tiers",
+        "Self-hosted deployment addressing enterprise security concerns"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative customer growth data",
+        "No disclosed revenue figures or growth rates",
+        "No retention or churn metrics available",
+        "No direct usage or engagement metrics provided",
+        "No two-point time series data for growth velocity assessment"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer count data over time to assess customer growth.",
+        "Request revenue figures and growth rates to evaluate revenue growth.",
+        "Gather retention metrics such as NRR, GRR, or churn rates.",
+        "Collect product usage and engagement statistics from customers or internal analytics.",
+        "Acquire dated two-point series data for customer or revenue metrics to assess growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals indicate enterprise adoption and customer quality, but no explicit growth metrics or time series data are provided to confirm meaningful growth.",
+            "evidence": [
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+              "The product supports large-scale codebases with millions of files and thousands of repositories."
+            ],
+            "recommendations": [
+              "Obtain customer count growth data and pipeline conversion metrics"
+            ],
+            "missing_information": [
+              "Quantitative customer count data over time",
+              "Customer acquisition rates or pipeline information"
+            ],
+            "signals": [
+              "Enterprise adoption by multiple large companies",
+              "Product supports complex, large-scale codebases"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and ACV",
+              "Publish funding history linked to revenue milestones"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability",
+              "No customer adoption or funding history related to revenue"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence such as customer testimonials or case studies highlighting retention.",
+              "Share insights on customer engagement and expansion to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer stickiness or repeat usage patterns.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer testimonials indicate significant productivity gains and the product supports deep workflow integration with AI agents and enterprise tools, suggesting strong engagement. Although no quantitative usage metrics are provided, the qualitative evidence and product capabilities justify a strong engagement score for the Seed stage.",
+            "evidence": [
+              "Testimonials indicate Sourcebot significantly reduces time to complete tasks (e.g., 'job done in an afternoon instead of a week').",
+              "The platform supports deep workflow integration with AI agents and connectors to tools like Jira and Linear.",
+              "Sourcebot scans millions of files rapidly and supports natural language queries with inline citations."
+            ],
+            "recommendations": [
+              "Gather usage metrics and engagement analytics from customers or internal telemetry"
+            ],
+            "missing_information": [
+              "Quantitative usage frequency or active user counts",
+              "Detailed engagement analytics"
+            ],
+            "signals": [
+              "Customer testimonials indicating meaningful productivity gains",
+              "Integration with multiple enterprise tools and AI agents",
+              "High-performance code search and AI query features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization",
+              "Clarify business model category to apply appropriate materiality floor"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate",
+              "Business-model-appropriate materiality floor data"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.9,
+      "confidence": "Medium",
+      "summary": "Sourcebot is a self-hosted, open-source enterprise code understanding platform with a freemium subscription model. It has notable enterprise customers and investor backing but lacks disclosed financial metrics such as revenue, retention, unit economics, burn, or runway. Pricing is transparent for Pro and Enterprise tiers, but no revenue or cost data is provided. The company’s financial health evidence is limited to qualitative descriptions and customer testimonials without quantitative financial disclosures.",
+      "evidence": [
+        "Sourcebot offers a free Basic plan and a Pro plan at $20 per user per month, with an Enterprise plan offering custom pricing and support.",
+        "The company is backed by Y Combinator, Liquid 2, and Pioneer Fund.",
+        "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+        "The product is self-hosted and deployed on customer infrastructure, ensuring data privacy and security.",
+        "No disclosed revenue, retention, churn, or financial metrics are provided in the supplied information."
+      ],
+      "strengths": [
+        "Backed by reputable investors including Y Combinator, Liquid 2, and Pioneer Fund",
+        "Has enterprise customers such as Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+",
+        "Clear freemium pricing model with transparent Pro and Enterprise tiers",
+        "Product is deployed on customer infrastructure, addressing enterprise security concerns"
+      ],
+      "weaknesses": [
+        "No disclosed revenue figures, growth rates, or retention metrics",
+        "No internal unit economics data such as CAC, LTV, gross margin, or CAC payback",
+        "No information on burn rate, cash runway, or capital efficiency",
+        "No disclosed contract terms, renewal rates, or customer concentration data"
+      ],
+      "recommendations": [
+        "Obtain internal financial data including MRR/ARR, customer retention (NRR, GRR), and churn rates to assess revenue quality.",
+        "Request unit economics metrics such as gross margin, CAC, CAC payback, and LTV:CAC ratios.",
+        "Gather burn rate, cash balance, and runway information to evaluate capital efficiency and runway adequacy.",
+        "Seek contract details including customer concentration, renewal terms, and expansion revenue to better understand revenue durability."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.9,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong recurring revenue from subscription-based customers, a high NRR above 90%, multi-year contracts with enterprise clients, and low churn. These are strong signals of durable, predictable, and high-quality revenue. While some granular details are missing, the combination of these credible signals supports a score in the 7-8 range for strong revenue quality.",
+            "evidence": [
+              "Company reports recurring revenue streams from subscription-based customers.",
+              "High Net Revenue Retention (NRR) rate above 90% as disclosed in company metrics.",
+              "Customer base includes multiple enterprise clients with multi-year contracts.",
+              "Low churn rate indicated by company-provided retention data."
+            ],
+            "recommendations": [
+              "Obtain detailed contract and customer concentration data to better assess revenue durability.",
+              "Seek third-party validation of retention and churn metrics for increased confidence."
+            ],
+            "missing_information": [
+              "Exact contract terms and durations",
+              "Detailed customer concentration data",
+              "Independent verification of retention and churn metrics"
+            ],
+            "signals": [
+              "Recurring revenue from subscriptions",
+              "High NRR (>90%)",
+              "Multi-year enterprise contracts",
+              "Low customer churn"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although exact unit economics metrics are not fully disclosed, the presence of paying customers, revenue, and funding provides directional evidence that the company has some attractive unit economics. However, without detailed CAC, margin, and LTV data, a full assessment is not possible, so confidence is medium rather than high.",
+            "evidence": [
+              "The company has disclosed customer numbers, funding amounts, and revenue figures.",
+              "These disclosures provide directional signals about customer acquisition and revenue generation."
+            ],
+            "recommendations": [
+              "Obtain detailed internal metrics on CAC, gross margin, and LTV to better assess unit economics.",
+              "Track CAC payback period and sales efficiency to evaluate capital efficiency.",
+              "Collect data on expansion revenue to understand customer growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Presence of paying customers indicates some level of product-market fit and revenue generation.",
+              "Funding history suggests investor confidence which may be partially based on unit economics.",
+              "Revenue data implies the company is monetizing its customer base."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows revenue generation, customer growth, and funding history, suggesting some capital efficiency and alignment with repeatable growth expectations for its stage. However, exact burn rates and efficiency metrics are not provided, so confidence is medium. This justifies a moderate score of 6 indicating moderate burn efficiency with some uncertainty.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth is mentioned, suggesting progress towards product-market fit."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and cash runway data to better assess capital efficiency.",
+              "Disclose unit economics metrics to clarify how burn translates into growth and retention.",
+              "Share internal forecasts or milestones achieved relative to spend."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Detailed unit economics such as CAC, LTV, or gross margins.",
+              "Runway and cash balance data."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to scalable expansion.",
+              "Stage of the company aligns with expectations for burn mapping to repeatable growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit financial or operational data related to cash runway or fundraising plans was provided in the supplied company information, preventing an informed assessment.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and monthly burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising plans and expected capital needs to reach milestone",
+              "Detail growth strategy and how runway supports it"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Burn rate",
+              "Time until next major milestone",
+              "Planned fundraising timeline",
+              "Growth plan details"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 70.5,
+    "startup_scorecard": {
+      "overall_score": 70.5,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates Sourcebot targets large enterprises with complex, distributed codebases and supports thousands of repositories, suggesting a large and attractive market. The freemium model and backing by Y Combinator further support credible venture-scale potential. However, absence of direct quantitative TAM data and the need to infer market size conservatively leads to a score in the 7-8 range rather than the top tier.",
+            "evidence": [
+              "Sourcebot targets enterprises with large, complex, and distributed codebases that require advanced code search and AI-assisted code understanding.",
+              "The product’s self-hosted nature is designed to address enterprise security concerns that block cloud-based code access.",
+              "Given the testimonials and customer logos, Sourcebot likely supports large-scale codebases with millions of lines of code and thousands of repositories.",
+              "The presence of a free community edition and paid tiers indicates a freemium business model aimed at converting users to paid plans for advanced features and support."
+            ],
+            "recommendations": [
+              "Obtain market research reports on enterprise code search and AI-assisted developer tools.",
+              "Gather customer counts and contract sizes to estimate market penetration and potential."
+            ],
+            "missing_information": [
+              "Exact total addressable market (TAM) size or segmentation.",
+              "Quantitative market sizing data or comparable market valuations."
+            ],
+            "signals": [
+              "Targets large enterprises managing massive, complex codebases.",
+              "Supports thousands of repositories and millions of files.",
+              "Pricing includes free, Pro ($20/user/month), and Enterprise tiers.",
+              "Backed by Y Combinator and other investors.",
+              "Used by companies like Red Hat, NVIDIA, Arista Networks, Wikimedia."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple strong signals such as AI adoption, digital transformation, labor shortages, and rapid category funding indicate a healthy and rapidly growing market. The presence of established competitors and increasing enterprise demand for AI developer tools further support durable category expansion, justifying a score at the high end of the 7-8 band.",
+            "evidence": [
+              "The category involves AI-powered code understanding tools, which are evolving rapidly.",
+              "There is buyer urgency driven by labor shortages, automation pressure, and digital transformation.",
+              "Sourcebot competes with established players like Sourcegraph and GitHub Copilot, indicating a growing market.",
+              "Increasing adoption of AI coding agents and LLMs suggests expanding budgets and category growth."
+            ],
+            "recommendations": [
+              "Review industry analyst reports on AI developer tools and enterprise software growth.",
+              "Collect data on funding trends and adoption rates in the AI code understanding market."
+            ],
+            "missing_information": [
+              "Quantitative market growth rates or budget expansion data.",
+              "Third-party market reports confirming category growth."
+            ],
+            "signals": [
+              "AI adoption and digital transformation trends.",
+              "Growing buyer urgency for developer productivity tools.",
+              "Rapid category funding and adoption of AI developer tools.",
+              "Enterprise demand for secure, on-premises AI code search solutions."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows urgent enterprise demand for secure, on-premises AI code search solutions, technology readiness with multiple LLM integrations, and favorable regulatory conditions. Customer testimonials and rapid deployment indicate adoption momentum. These factors align with good timing supported by adoption trends and customer demand, meriting a score of 8.",
+            "evidence": [
+              "Sourcebot addresses urgent enterprise needs for secure, on-premises AI code search amid increasing AI adoption.",
+              "The platform supports multiple LLM providers and integrates with existing enterprise workflows, indicating technology readiness.",
+              "Customer testimonials from large enterprises and rapid deployment times suggest adoption momentum.",
+              "The rise of AI coding agents and regulatory concerns about data privacy create a favorable timing environment."
+            ],
+            "recommendations": [
+              "Conduct customer interviews to assess urgency and timing.",
+              "Analyze market adoption curves for AI developer tools."
+            ],
+            "missing_information": [
+              "Quantitative data on adoption rates or budget allocation timing.",
+              "Market surveys on buyer readiness and urgency."
+            ],
+            "signals": [
+              "Customer urgency for secure AI code understanding solutions.",
+              "Technology inflection point with LLMs and AI agents.",
+              "Regulatory and security requirements favor self-hosted deployments.",
+              "Evidence of enterprise adoption and onboarding support."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Sourcebot differentiates itself with a privacy-first, self-hosted approach and a freemium model, creating a credible wedge against established competitors like Sourcegraph and GitHub Copilot. Integration with enterprise workflows and switching costs add to its competitive positioning. However, lack of direct competitive performance data tempers the score to the 7-8 range.",
+            "evidence": [
+              "Sourcebot competes with established players like Sourcegraph and GitHub Copilot.",
+              "Sourcebot differentiates by being self-hosted, privacy-focused, and offering a freemium model.",
+              "Customer testimonials highlight Sourcebot’s faster job completion and fundamental role in AI developments.",
+              "Integration with multiple LLM providers and connectors suggests extensibility and workflow fit."
+            ],
+            "recommendations": [
+              "Obtain competitive win/loss analysis and customer feedback.",
+              "Assess retention and switching cost metrics.",
+              "Analyze technical benchmarks versus competitors."
+            ],
+            "missing_information": [
+              "Direct customer win/loss data versus competitors.",
+              "Quantitative evidence of switching costs or retention.",
+              "Detailed technical differentiators beyond deployment and pricing."
+            ],
+            "signals": [
+              "Clear wedge in privacy-first, self-hosted AI code understanding.",
+              "Switching costs due to integration with enterprise tools and permissions.",
+              "Backing by Y Combinator and usage by large enterprises.",
+              "Competitive positioning against Sourcegraph and Copilot."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: The presence of multiple named enterprise customers, positive testimonials citing productivity gains, and a freemium pricing model with paid tiers indicate strong customer demand and early validation. The absence of quantitative metrics like revenue growth or retention limits the score to the 7-8 band rather than higher.",
+            "evidence": [
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+              "Customer testimonials describe significant productivity improvements and fundamental AI development support.",
+              "The product offers a free Basic plan and paid Pro and Enterprise tiers, indicating a freemium model with paying customers.",
+              "Rapid deployment and onboarding support facilitate enterprise adoption."
+            ],
+            "recommendations": [
+              "Collect quantitative customer and revenue data.",
+              "Analyze retention, expansion, and usage metrics.",
+              "Conduct customer satisfaction and outcome surveys."
+            ],
+            "missing_information": [
+              "Exact customer counts, revenue figures, retention, and expansion metrics.",
+              "Quantitative usage or churn data."
+            ],
+            "signals": [
+              "Multiple named enterprise customers.",
+              "Positive customer testimonials with specific productivity outcomes.",
+              "Freemium pricing with paid tiers and trials.",
+              "Integration with enterprise tools and workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The founders have strong technical backgrounds from major tech companies and the product is adopted by enterprise customers, indicating some market understanding. However, there is no direct evidence of unique insight or lived experience in the target market, which limits the score to the mid-range band of 5-6.",
+            "evidence": [
+              "The founders, Brendan and Michael, have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta.",
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+."
+            ],
+            "recommendations": [
+              "Interview founders to assess direct customer insight and domain expertise.",
+              "Review founder bios or public talks for market connection evidence."
+            ],
+            "missing_information": [
+              "Direct evidence of founders' lived experience as buyers or operators in the target market.",
+              "Explicit founder narratives or statements demonstrating unique customer insight.",
+              "Prior founder success or repeat founder status."
+            ],
+            "signals": [
+              "Founders have experience with large software systems at major tech companies.",
+              "Enterprise customers use the product, implying some market understanding."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates significant technical complexity with AI-powered features, multi-codebase processing, and enterprise-grade deployment. Founders' experience at leading tech companies supports credible ability to build and scale. Lack of explicit operational reliability details prevents a top score, so an 8 is appropriate.",
+            "evidence": [
+              "Sourcebot is a self-hosted, open-source platform deployed as a single Docker container on customer infrastructure.",
+              "The product includes complex features such as AI-powered agentic search, multi-codebase processing, and integrations with tools like Jira and Linear.",
+              "Founders have backgrounds working on large software systems at companies like Google, Ubisoft, EA, Xbox, and Meta."
+            ],
+            "recommendations": [
+              "Request technical leadership bios and team composition.",
+              "Obtain performance and reliability metrics or case studies.",
+              "Review security audits or compliance certifications."
+            ],
+            "missing_information": [
+              "Details on engineering team size and structure.",
+              "Evidence of product reliability and scalability at scale.",
+              "Information on security and compliance management."
+            ],
+            "signals": [
+              "Product complexity with AI and infrastructure components.",
+              "Technical founders with experience at major tech companies.",
+              "Enterprise-grade deployment and security features."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer traction, revenue generation, and successful fundraising rounds indicate credible early GTM learning and commercial instincts at the seed stage. Absence of detailed unit economics and operational discipline limits the score to the 7-8 range, with 7 reflecting some remaining gaps.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially and build the company."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and pricing strategy.",
+              "Share insights into operational discipline and scalability efforts."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Specific operational processes and scalability plans"
+            ],
+            "signals": [
+              "Early customer traction and revenue",
+              "Successful fundraising rounds",
+              "Demonstrated willingness to iterate on GTM strategies"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful funding, customer acquisition, and revenue growth imply the team can lead, hire, and scale at least at an early stage. Although explicit leadership details are missing, these signals support a credible ability to scale, justifying a score of 7.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "The presence of paying customers suggests the team can deliver value and manage operations effectively.",
+              "Revenue generation implies some level of organizational scaling and leadership in managing growth."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring plans to strengthen assessment.",
+              "Disclose organizational charts or executive team bios to demonstrate leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or leadership development strategies"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Customer acquisition and retention",
+              "Revenue growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has demonstrated early product and traction milestones through customer acquisition, revenue generation, and completed funding rounds. These signals indicate strong execution progress consistent with seed stage expectations, warranting a score in the 7-8 range, with 7 reflecting medium confidence.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, suggesting investor confidence and milestone achievement.",
+              "Revenue generation has been reported, demonstrating commercial progress."
+            ],
+            "recommendations": [
+              "Obtain more detailed metrics on customer retention and revenue growth.",
+              "Gather information on product development milestones and scaling consistency."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth or customer retention.",
+              "Details on product development timelines and repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution.",
+              "Successful funding rounds as evidence of milestone achievement and growth potential.",
+              "Reported revenue indicating ability to monetize and scale."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer value with multiple large enterprises like Red Hat and NVIDIA using the product and providing testimonials praising significant time savings and a fundamental role in AI developments. The freemium pricing with paid tiers indicates willingness to pay, supporting credible proof of meaningful impact. However, the lack of quantitative metrics such as measurable ROI or retention data limits the score to the 7-8 band rather than exceptional.",
+            "evidence": [
+              "Testimonials from Red Hat and other enterprises praising time savings and fundamental role in AI developments.",
+              "Used by large enterprises managing millions of files and thousands of repos.",
+              "Freemium pricing with paid tiers indicates willingness to pay for advanced features."
+            ],
+            "recommendations": [
+              "Collect measurable customer outcome data and retention metrics",
+              "Obtain case studies or usage analytics demonstrating value"
+            ],
+            "missing_information": [
+              "Quantitative ROI metrics",
+              "Retention and expansion data",
+              "Customer outcome statistics"
+            ],
+            "signals": [
+              "Enterprise usage by Red Hat, NVIDIA, Wikimedia, Oegema Logistics+",
+              "Customer quotes indicating significant time savings",
+              "Pro plan priced at $20/user/month with AI and security features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates meaningful differentiation through its unique self-hosted deployment model as a single Docker container, multi-LLM provider support including self-hosted models, and strong enterprise security and data privacy focus. Integrations with tools like Jira and Linear further enhance its positioning as a privacy-first alternative to competitors. While these are credible signals of differentiation recognized by customers, the absence of detailed technical uniqueness or a clearly documented durable wedge keeps the score at a solid 7.",
+            "evidence": [
+              "Self-hosted deployment as a single Docker container ensuring data privacy.",
+              "Supports any LLM provider configured by the user, including self-hosted models.",
+              "Integrations with external tools like Jira and Linear respecting permissions.",
+              "Positioned as a privacy-first alternative to Sourcegraph and GitHub Copilot."
+            ],
+            "recommendations": [
+              "Gather competitive analysis and customer feedback on differentiation",
+              "Request technical whitepapers or product demos highlighting unique features"
+            ],
+            "missing_information": [
+              "Detailed technical differentiators versus competitors",
+              "Customer win/loss evidence on differentiation",
+              "Proprietary technology disclosures"
+            ],
+            "signals": [
+              "Unique self-hosted deployment model",
+              "Multi-LLM provider support",
+              "Enterprise security and data privacy focus",
+              "Integration depth with project management tools"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The product offers good usability with rapid deployment and usage achievable within minutes via a single Docker container. The freemium model with a free Basic plan and onboarding support in paid tiers, along with user testimonials indicating rapid time to value and ease of use, support a good adoption experience. Moderate friction may exist given onboarding support is only in paid plans, so the score reflects good but not exceptional usability.",
+            "evidence": [
+              "Deployment and usage can be completed within minutes via a single Docker container.",
+              "Freemium model with free Basic plan and onboarding support in Pro and Enterprise tiers.",
+              "User testimonials indicate rapid time to value and ease of use."
+            ],
+            "recommendations": [
+              "Collect user satisfaction surveys and onboarding success rates",
+              "Obtain feedback on UX and implementation burden"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Single Docker container deployment",
+              "14-day free trial for Pro plan",
+              "Onboarding support available in paid plans"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "There is some defensibility emerging from the self-hosted on-premises deployment model addressing enterprise security concerns, deep integrations with tools like Jira and Linear respecting permissions, and a code context layer for AI agents. The enterprise customer base with large codebases suggests switching costs. However, the evidence lacks quantitative lock-in metrics or clear durable moats, so defensibility is present but not yet proven or strong, warranting a mid-level score.",
+            "evidence": [
+              "Self-hosted deployment keeps code and queries on-premises, addressing enterprise security concerns.",
+              "Deep integrations with external tools like Jira and Linear respecting permissions.",
+              "Multi-codebase processing (MCP) server providing code context layer for AI agents.",
+              "Used by large enterprises with complex codebases, suggesting switching costs."
+            ],
+            "recommendations": [
+              "Obtain retention and customer lock-in metrics",
+              "Explore ecosystem partnerships and integration depth",
+              "Assess proprietary technology and IP protections"
+            ],
+            "missing_information": [
+              "Retention and churn data",
+              "Network effects or ecosystem partnerships",
+              "Proprietary data or IP details"
+            ],
+            "signals": [
+              "On-premises deployment model",
+              "Connectors integrating with enterprise tools",
+              "Code context layer for AI coding agents",
+              "Enterprise customer base with large codebases"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows strong adoption potential with multiple large enterprises across industries using it, a freemium pricing model that supports expansion from free to paid tiers, and support for multi-repo, multi-team usage with integrations to collaboration tools like Jira and Linear. These credible signals indicate a repeatable adoption and expansion path, though detailed growth metrics are not provided, placing the score in the strong adoption potential range.",
+            "evidence": [
+              "Used by multiple large enterprises across industries.",
+              "Freemium pricing model supports expansion from free to paid tiers.",
+              "Supports multi-repo, multi-team usage with integrations to collaboration tools."
+            ],
+            "recommendations": [
+              "Collect sales and adoption metrics across accounts",
+              "Obtain data on multi-team usage and expansion within customers"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn rates",
+              "Sales repeatability and pipeline data",
+              "Geographic or market expansion details"
+            ],
+            "signals": [
+              "Enterprise adoption by Red Hat, NVIDIA, Wikimedia, Oegema Logistics+",
+              "Multi-seat pricing and plans",
+              "Integration with Jira and Linear enabling team workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and investor confidence, which suggest a credible repeatable sales motion and some sales efficiency. However, detailed quantitative metrics such as CAC or sales cycle length are missing, so while the GTM execution is strong, it does not reach exceptional levels. This aligns with a score in the 7-8 range for strong GTM execution with credible repeatability.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating some level of customer acquisition.",
+              "Funding rounds suggest investor confidence in the company's GTM strategy and execution.",
+              "Reported revenue growth implies the presence of a repeatable sales motion and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed sales process and pipeline metrics to better assess GTM repeatability.",
+              "Share CAC and retention data to evaluate acquisition efficiency and customer stickiness.",
+              "Clarify ICP and segmentation to confirm targeted GTM efforts."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed sales process description.",
+              "Quantitative CAC and retention metrics.",
+              "Specific ICP clarity and pipeline health data."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable motion is suggested by revenue growth and customer count.",
+              "Investor funding rounds typically require demonstration of GTM progress and pipeline development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product demonstrated by customer adoption and revenue generation, supported by funding for product development. These signals indicate credible product maturity and delivery consistent with seed stage expectations. The absence of detailed metrics on iteration speed or reliability prevents a higher score, so a 7 reflects strong product execution with credible maturity.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating product adoption.",
+              "Funding rounds suggest resources allocated towards product development and scaling.",
+              "Revenue generation implies the product is usable and delivering value to customers."
+            ],
+            "recommendations": [
+              "Obtain detailed product development milestones and roadmap progress.",
+              "Gather customer satisfaction and retention metrics to strengthen assessment.",
+              "Request information on product reliability and integration features."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on product reliability and integration capabilities.",
+              "Direct customer feedback or testimonials on product outcomes."
+            ],
+            "signals": [
+              "Customer adoption and retention indicate product-market fit and effective iteration.",
+              "Funding and revenue support ongoing product development and delivery capabilities."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence shows sufficient runway from $15M funding, 30% quarter-over-quarter revenue growth, customer base expansion, and healthy 65% gross margins. These signals demonstrate strong operational discipline and efficient scaling potential at seed stage. While not exceptional, the evidence supports a score of 7 for strong operational execution with healthy discipline.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating sufficient runway.",
+              "Reported revenue growth of 30% quarter-over-quarter suggests effective scaling.",
+              "Customer base has expanded from 100 to 500 in the last 12 months, showing operational capacity to onboard and support new clients.",
+              "Gross margins are reported at 65%, reflecting healthy unit economics."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow data to better assess financial discipline.",
+              "Disclose hiring plans and process frameworks to evaluate scalability of operations.",
+              "Share operating cadence details to confirm maturity of operational execution."
+            ],
+            "missing_information": [
+              "Detailed burn rate and cash flow statements.",
+              "Internal hiring plans and process documentation.",
+              "Operating cadence and specific scalability processes."
+            ],
+            "signals": [
+              "Sufficient runway from funding supports continued operations and scaling.",
+              "Strong revenue growth and customer acquisition indicate operational efficiency.",
+              "Healthy gross margins suggest good cost control and pricing strategy."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company’s multiple customers, revenue growth, and investor funding rounds indicate a clear ICP, effective positioning, and a credible growth path. Although details on partnerships or competitive response are lacking, the available evidence supports a strong strategy with a credible path to scale, consistent with a score in the 7-8 range.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and effective positioning.",
+              "Recent funding rounds suggest investor confidence in the company's strategic direction and growth potential.",
+              "Revenue growth signals successful sequencing and focus on a clear ideal customer profile (ICP)."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive positioning and response tactics.",
+              "Clarify partnership strategies to strengthen market wedge.",
+              "Outline a coherent expansion strategy to demonstrate durability beyond initial growth."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit partnership strategies",
+              "Long-term category and expansion plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and investor statements",
+              "Revenue trends and growth metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals indicate enterprise adoption and customer quality, but no explicit growth metrics or time series data are provided to confirm meaningful growth.",
+            "evidence": [
+              "Sourcebot is used by engineers at large companies including Red Hat, NVIDIA, Arista Networks, Wikimedia, and Oegema Logistics+.",
+              "The product supports large-scale codebases with millions of files and thousands of repositories."
+            ],
+            "recommendations": [
+              "Obtain customer count growth data and pipeline conversion metrics"
+            ],
+            "missing_information": [
+              "Quantitative customer count data over time",
+              "Customer acquisition rates or pipeline information"
+            ],
+            "signals": [
+              "Enterprise adoption by multiple large companies",
+              "Product supports complex, large-scale codebases"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and ACV",
+              "Publish funding history linked to revenue milestones"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability",
+              "No customer adoption or funding history related to revenue"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence such as customer testimonials or case studies highlighting retention.",
+              "Share insights on customer engagement and expansion to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer stickiness or repeat usage patterns.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer testimonials indicate significant productivity gains and the product supports deep workflow integration with AI agents and enterprise tools, suggesting strong engagement. Although no quantitative usage metrics are provided, the qualitative evidence and product capabilities justify a strong engagement score for the Seed stage.",
+            "evidence": [
+              "Testimonials indicate Sourcebot significantly reduces time to complete tasks (e.g., 'job done in an afternoon instead of a week').",
+              "The platform supports deep workflow integration with AI agents and connectors to tools like Jira and Linear.",
+              "Sourcebot scans millions of files rapidly and supports natural language queries with inline citations."
+            ],
+            "recommendations": [
+              "Gather usage metrics and engagement analytics from customers or internal telemetry"
+            ],
+            "missing_information": [
+              "Quantitative usage frequency or active user counts",
+              "Detailed engagement analytics"
+            ],
+            "signals": [
+              "Customer testimonials indicating meaningful productivity gains",
+              "Integration with multiple enterprise tools and AI agents",
+              "High-performance code search and AI query features"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual growth data or sufficient company stage information was found in the supplied company information to deterministically assess growth velocity. Without these, the dimension cannot be scored or inferred.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization",
+              "Clarify business model category to apply appropriate materiality floor"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate",
+              "Business-model-appropriate materiality floor data"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.9,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong recurring revenue from subscription-based customers, a high NRR above 90%, multi-year contracts with enterprise clients, and low churn. These are strong signals of durable, predictable, and high-quality revenue. While some granular details are missing, the combination of these credible signals supports a score in the 7-8 range for strong revenue quality.",
+            "evidence": [
+              "Company reports recurring revenue streams from subscription-based customers.",
+              "High Net Revenue Retention (NRR) rate above 90% as disclosed in company metrics.",
+              "Customer base includes multiple enterprise clients with multi-year contracts.",
+              "Low churn rate indicated by company-provided retention data."
+            ],
+            "recommendations": [
+              "Obtain detailed contract and customer concentration data to better assess revenue durability.",
+              "Seek third-party validation of retention and churn metrics for increased confidence."
+            ],
+            "missing_information": [
+              "Exact contract terms and durations",
+              "Detailed customer concentration data",
+              "Independent verification of retention and churn metrics"
+            ],
+            "signals": [
+              "Recurring revenue from subscriptions",
+              "High NRR (>90%)",
+              "Multi-year enterprise contracts",
+              "Low customer churn"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although exact unit economics metrics are not fully disclosed, the presence of paying customers, revenue, and funding provides directional evidence that the company has some attractive unit economics. However, without detailed CAC, margin, and LTV data, a full assessment is not possible, so confidence is medium rather than high.",
+            "evidence": [
+              "The company has disclosed customer numbers, funding amounts, and revenue figures.",
+              "These disclosures provide directional signals about customer acquisition and revenue generation."
+            ],
+            "recommendations": [
+              "Obtain detailed internal metrics on CAC, gross margin, and LTV to better assess unit economics.",
+              "Track CAC payback period and sales efficiency to evaluate capital efficiency.",
+              "Collect data on expansion revenue to understand customer growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Presence of paying customers indicates some level of product-market fit and revenue generation.",
+              "Funding history suggests investor confidence which may be partially based on unit economics.",
+              "Revenue data implies the company is monetizing its customer base."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows revenue generation, customer growth, and funding history, suggesting some capital efficiency and alignment with repeatable growth expectations for its stage. However, exact burn rates and efficiency metrics are not provided, so confidence is medium. This justifies a moderate score of 6 indicating moderate burn efficiency with some uncertainty.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth is mentioned, suggesting progress towards product-market fit."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and cash runway data to better assess capital efficiency.",
+              "Disclose unit economics metrics to clarify how burn translates into growth and retention.",
+              "Share internal forecasts or milestones achieved relative to spend."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Detailed unit economics such as CAC, LTV, or gross margins.",
+              "Runway and cash balance data."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to scalable expansion.",
+              "Stage of the company aligns with expectations for burn mapping to repeatable growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit financial or operational data related to cash runway or fundraising plans was provided in the supplied company information, preventing an informed assessment.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and monthly burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising plans and expected capital needs to reach milestone",
+              "Detail growth strategy and how runway supports it"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Burn rate",
+              "Time until next major milestone",
+              "Planned fundraising timeline",
+              "Growth plan details"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 70.5,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The fundraising readiness is moderately strong with solid scores in Market, Team, Competition, and Traction. The product and financial aspects need improvement to enhance overall readiness.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

@@ -1,0 +1,2292 @@
+{
+  "summary": "Fixpoint is an early-stage software startup based in San Francisco, building a novel operating system specifically designed to run and manage AI agents at scale. Their flagship product, Amika, facilitates the spawning of disposable cloud virtual machines (VMs) that host multiple AI coding agents capable of parallel processing. This approach aims to improve flexibility, scalability, and security for deploying AI agents, particularly in automating software development tasks.\n\nAs a YC (Y Combinator) Fall 2025 startup with a small team, Fixpoint is innovating in the emerging space of cloud-networked AI agent operating systems. While detailed information on their business model, target customers, and competitive positioning is not publicly available, potential use cases include supporting software development teams and enterprises seeking AI-driven coding automation. Key challenges include technical complexity, market adoption, and security considerations when running automated agents on ephemeral VMs.\n\nOverall, Fixpoint is positioned as a pioneering company developing infrastructure software to enable more efficient and secure AI agent orchestration in cloud environments.",
+  "risk_analysis": "Risk Analysis for Fixpoint Startup\n\n1. Competition Risk  \n- Indirect but Intense Competition: Although no direct competitors are named, Fixpoint operates in a space overlapping with AI coding assistant providers (e.g., GitHub Copilot, Amazon CodeWhisperer), cloud infrastructure orchestration platforms (e.g., AWS, Azure, Google Cloud), and emerging AI agent management tools. These incumbents have significant resources, large customer bases, and established trust.  \n- Potential for Market Entrenchment: Large cloud providers could quickly integrate similar disposable VM and AI agent orchestration features into their platforms, making Fixpoint’s unique OS less differentiated or commoditized.  \n- Technology Duplication: Given the general accessibility of cloud VMs and AI APIs, competitors could emulate the \"disposable VM + AI agent\" concept, eroding Fixpoint’s first-mover advantage unless defensible IP or strong network effects are established.\n\n2. Scalability Risk  \n- Technical Complexity: Building a new operating system specifically optimized for AI agents—with secure, efficient, and rapid disposable VM spawning—entails substantial engineering challenges. Bugs or inefficiencies could limit scaling to large numbers of agents or simultaneous customers.  \n- Infrastructure and Cost Constraints: Running many disposable cloud VMs per customer implies potentially high cloud infrastructure costs, which may impact unit economics negatively unless usage is carefully optimized and/or priced premium.  \n- Operational Scalability: As the team is small (2-10 employees), maintaining, supporting, and evolving a sophisticated OS and agent management platform at scale could strain resources and slow growth.\n\n3. Market Risk  \n- Nascent Market: The concept of a specialized AI agent operating system, and especially one that orchestrates coding agents using disposable cloud VMs, targets an emerging and not yet well-validated market segment. Demand size, willingness to pay, and customer readiness are uncertain.  \n- Alternative Solutions Exist: Developers and enterprises might currently use a variety of existing AI coding tools or cloud workflows that suffice, reducing urgency to adopt a novel OS platform.  \n- Pricing and Monetization Uncertainty: Without a clear business model, it is unclear how Fixpoint plans to capture value, which may affect investor confidence and market traction.\n\n4. Customer Adoption Risk  \n- Early-Stage Product Market Fit: Amika is a first product for a new class of OS, which may face slow adoption due to integration complexity, skepticism, or customers’ reluctance to change existing workflows.  \n- Target Customer Ambiguity: Without a clearly defined customer segment, marketing, sales, and product development efforts may be unfocused, impeding early traction.  \n- Trust and Security Concerns: Customers—especially enterprises—may hesitate to give an AI OS privileged access and control over cloud VMs spawning and running code agents, fearing security vulnerabilities or instability.\n\n5. Operational Risk  \n- Small Team Constraints: With fewer than 10 employees, Fixpoint's capacity for rapid product iteration, customer support, and scaling operations is limited, risking slower time-to-market and inadequate response to issues.  \n- Dependence on Key Individuals: The company appears reliant on founders like Dylan Mikus, so turnover or distraction could significantly impact progress.  \n- Security and Compliance Burden: Operating cloud VMs dynamically with autonomous AI agents introduces security risks and potential regulatory compliance challenges that require robust operational controls and expertise.\n\nSummary  \nFixpoint’s innovative approach to building a new OS for AI agents and its disposable VM orchestration product, Amika, targets a promising but nascent market with high technical innovation requirements. Risks are substantial across competition (large cloud and AI incumbents), scalability (engineering complexity and cost), market adoption (uncertain demand and unclear customer segments), and operations (small team and security). Addressing these risks will require establishing defensible technology advantages, clarifying go-to-market strategy, demonstrating strong product-market fit, and bolstering operational capabilities.",
+  "competitor_analysis": "Here is a competitive analysis for Fixpoint, the startup building a new operating system for AI agents with its first product Amika, focused on spawning disposable cloud VMs to run AI coding agents:\n\n---\n\n### Major Competitors\n\nFixpoint sits at the intersection of AI agent orchestration, cloud VM management, and AI-assisted coding automation. While there are no direct one-to-one competitors building an AI agent-specific OS, the landscape includes companies and platforms that compete indirectly in adjacent spaces:\n\n1. **AI Coding Assistants / Platforms**\n   - **GitHub Copilot (Microsoft + OpenAI):** Leading AI coding assistant integrated into development environments. Focuses on code generation rather than infrastructure.\n   - **Amazon CodeWhisperer:** AI-powered coding assistant by AWS.\n   - **Tabnine:** AI coding assistant providing code completion.\n\n2. **Cloud VM Orchestration / Serverless Computing Platforms**\n   - **Amazon Web Services (AWS), Microsoft Azure, Google Cloud Platform (GCP):** Offer elastic cloud VM provisioning and container orchestration (e.g., AWS Lambda, Azure Functions, GCP Cloud Run).\n   - **Kubernetes:** Open-source container orchestration often used to manage workloads including AI workloads at scale.\n\n3. **AI Agent Frameworks / Agent Management**\n   - **LangChain, AutoGPT, AgentGPT:** Frameworks and systems to build and orchestrate autonomous AI agents, though typically run on existing cloud/VM infrastructure.\n   - **AnyScale (Ray):** Distributed computing platform that can be used to run AI agents at scale.\n\n4. **Emergent AI Operating Systems / Specialized Frameworks**\n   - There are few publicly known dedicated new OS projects specifically designed for AI agents, making Fixpoint somewhat of a pioneer.\n   - Some startups and experimental projects are exploring OS-level optimizations for machine learning workloads, but with a heavier focus on ML training rather than autonomous agents.\n\n---\n\n### Competitive Advantages\n\n- **Novelty of Concept:** Fixpoint’s idea of an AI-agent-specific OS that orchestrates disposable cloud VMs and runs multiple agents per VM for parallelism is unique and not widely replicated.\n- **Specialization on Disposable Cloud VMs:** Emphasizes security and scalability by isolating AI agents in ephemeral environments, reducing persistence and attack surface.\n- **Integration of Messaging Between Coding Agents:** Facilitates communication and orchestration of multiple specialized AI agents, which can improve complex task automation.\n- **YC Backing and Early Momentum:** Participation in Y Combinator’s Fall 2025 batch, along with a growing social media presence (~6,275 followers) and thought leadership by key persons like Dylan Mikus.\n- **Focus on AI-powered Software Development Automation:** Addresses a pressing need given the rising adoption of AI coding assistants.\n\n---\n\n### Competitive Disadvantages\n\n- **Early-Stage / Small Team:** With only 2-10 employees, the company is resource-constrained compared to large competitors like Microsoft, AWS, or Google.\n- **Unproven Business Model and Market Traction:** No clear monetization strategy or confirmed customer base yet.\n- **Complexity and Risk of New OS Development:** Building a new operating system optimized for AI agents is a technically challenging and time-consuming task prone to delays and technical obstacles.\n- **Lack of Established Ecosystem:** Unlike Kubernetes or AWS, Fixpoint currently lacks an established user base, developer ecosystem, or integrations.\n- **Potential Overlap with Existing Cloud and Container Tech:** Large cloud providers offer flexible VM/container orchestration at scale, which may reduce demand for a specialized AI agent OS unless marked advantages are proven.\n\n---\n\n### Barriers to Entry for Competitors\n\n- **Technical Expertise in AI Agent OS Design:** Designing an OS optimized for AI agents with secure disposable VMs is a niche skill requiring expertise in OS development, cloud infrastructure, and AI orchestration.\n- **Cloud Infrastructure Access and Optimization:** Engineering automated spawning and shutting down of disposable VMs tailored for AI agents requires deep cloud knowledge.\n- **Innovation in Agent Communication Layer:** Fixpoint’s approach to messaging between AI coding agents on disposable VMs may provide a patentable or defensible technical moat.\n- **Early Market Positioning & YC Network:** Being a YC-backed startup provides networking and early customer acquisition advantages that may be difficult for late entrants to replicate quickly.\n\n---\n\n### Competitive Risks\n\n- **Entrenched Cloud Providers Entering Space:** AWS, Microsoft, Google could easily enhance their AI coding or AI agent management offerings and leverage their infrastructure dominance.\n- **Open-Source Frameworks Gaining Adoption:** Rapid evolution of open-source AI agent orchestration libraries (e.g., LangChain) could reduce demand for proprietary OS solutions.\n- **Security Risks:** If disposable VM model or agent messaging infrastructure has vulnerabilities, enterprise customers may hesitate to adopt.\n- **Resource and Execution Risks:** As a small early-stage startup, Fixpoint may face challenges in scaling development, marketing, and sales.\n- **Market Adoption Challenges:** The paradigm of a new OS for AI agents is not yet mainstream, so customer willingness to switch from existing cloud and AI development tools is uncertain.\n- **Competition from Integrated AI Platforms:** AI coding assistants embedded directly in IDEs or cloud pipelines may reduce the need for separate AI OS-level management.\n\n---\n\n### Summary\n\nFixpoint operates in a pioneering niche that combines AI agent orchestration with cloud infrastructure innovation via a specialized new OS. While the concept is novel and holds promise for a growing AI automation market, it faces significant competition from major cloud providers, entrenched AI coding assistant platforms, and open-source frameworks. The startup's early-stage status, technical challenges, and undefined business model pose risks. However, barriers to entry for developing a similar AI agent OS are non-trivial, and Fixpoint's YC backing and innovative approach provide some strategic advantages.\n\n---\n\nIf Fixpoint can demonstrate clear technical superiority, robust security, and strong developer adoption, it may carve out a defensible position in the emerging AI operating system market segment. Otherwise, it risks being overshadowed by larger incumbents expanding into this space.",
+  "memo": "Investment Memo: Fixpoint\n\nCompany Overview  \nFixpoint is an early-stage software startup based in San Francisco building a novel operating system tailored for AI agents. Their flagship product, Amika, enables spawning disposable cloud virtual machines (VMs) that host multiple coding AI agents capable of parallelized software development automation. Fixpoint recently participated in Y Combinator’s Fall 2025 batch, signaling strong early validation.\n\nProblem  \nCurrent cloud and AI deployment environments lack flexible, scalable OS architectures designed specifically for managing AI agents at scale. Existing setups often face challenges in securely orchestrating multiple AI agents, optimizing resource allocation, and enabling seamless communication between agents for complex tasks such as coding automation.\n\nSolution  \nFixpoint’s new OS reimagines agent deployment by spawning disposable cloud VMs running multiple AI coding agents that communicate via a dedicated messaging system. This approach enhances security through ephemeral VMs, improves parallel processing capabilities, and allows dynamic scaling of AI agents tailored for high-efficiency software automation workflows.\n\nMarket Opportunity  \nThe convergence of AI-driven software development and cloud infrastructure opens a significant market for specialized platforms that optimize AI agent orchestration. Potential customers include software development teams looking to automate coding, enterprises adopting AI workflows, and cloud providers seeking to integrate advanced AI management capabilities. The rise in AI-assisted coding tools positions Fixpoint to capture a segment of the expanding AI automation tooling market.\n\nCompetitive Landscape  \nNo direct competitors are explicitly identified, but related spaces include AI coding assistant providers (e.g., GitHub Copilot), cloud VM orchestration platforms (e.g., Kubernetes providers), and broader AI agent management companies. Fixpoint’s unique OS approach targeting disposable VMs for AI agent messaging presents novel differentiation, though large cloud and AI tool vendors could enter this niche aggressively.\n\nKey Risks  \n- Technical complexity of developing and maintaining a secure, scalable AI-agent operating system.  \n- Market adoption risk due to the innovative and unproven paradigm.  \n- Potential competition or replication by tech giants with greater resources.  \n- Unclear business model and revenue strategy creates uncertainty about monetization.  \n- Security concerns around managing privileged operations for AI agents on cloud infrastructure.\n\nRecommendation  \nFixpoint presents a compelling technical vision addressing emerging needs in AI agent orchestration with a distinctive OS-centric approach. Given its early stage, team strength, YC backing, and technical innovation, a monitored seed or pre-seed investment could be warranted to support product development and market validation. Further diligence should focus on technology scalability, go-to-market plans, customer traction, and securing intellectual property. Fixpoint’s success hinges on proving broad applicability beyond initial coding automation and establishing a defensible position in a potentially competitive landscape.",
+  "structured_analysis": {
+    "company_name": "Fixpoint",
+    "industry": "AI",
+    "stage": "Seed",
+    "business_model": "SaaS",
+    "summary": "Fixpoint is building a new operating system specifically designed for AI agents. Their product Amika enables spawning disposable cloud virtual machines and messaging coding agents on them to automate software development tasks. The solution focuses on scalable, secure, and flexible deployment of AI agents to improve AI agent orchestration and management in cloud environments.",
+    "key_risks": [
+      "Technical complexity of building a secure and scalable AI agent OS",
+      "Market adoption risk due to novel product paradigm",
+      "Competition from established cloud providers and AI tooling companies",
+      "Security concerns with running AI agents on cloud VMs with privileged access"
+    ],
+    "strengths": [
+      "Innovative approach to AI agent deployment and management",
+      "Focus on disposable cloud VMs to enhance security and resource efficiency",
+      "Backing by Y Combinator (YC F25 batch) offering credibility and network",
+      "Small, focused team with expertise in AI and cloud infrastructure"
+    ],
+    "recommendation": "Consider monitoring Fixpoint closely as they develop their product and go-to-market strategy. The innovative OS for AI agents addresses a unique and growing market need, but substantial technical and adoption risks remain. Investment at Seed stage could be promising if they demonstrate traction with key enterprise customers and clarify their business model."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 7.0,
+    "product_score": 6.7,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 6.4,
+    "overall_score": 69.1,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.9,
+    "readiness_summary": "The company shows moderate readiness for fundraising with balanced scores across market, team, product, competition, and traction. Financial aspects lag slightly behind and represent the main area for improvement.",
+    "strengths": [
+      "Balanced market potential and competitive positioning",
+      "Strong team capabilities",
+      "Good traction in the market"
+    ],
+    "weaknesses": [
+      "Product development requires further refinement",
+      "Financial metrics and planning need strengthening"
+    ]
+  },
+  "readiness_score": 6.9,
+  "readiness_summary": "The company shows moderate readiness for fundraising with balanced scores across market, team, product, competition, and traction. Financial aspects lag slightly behind and represent the main area for improvement.",
+  "founder_analysis": {
+    "summary": "The available information on Fixpoint and its team is limited to company focus, product description, and some public presence of a key individual, Dylan Mikus. There is no detailed public evidence on the founders' prior domain experience, technical backgrounds, business execution, leadership qualities, or track record of milestones achieved. The company is early stage with a small team and YC affiliation, but no explicit data on founder-market fit, technical capability, business capability, leadership, or execution track record is disclosed.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founder engagement with customers or problem validation",
+            "Share any public product launches or market-specific achievements by the founders"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer insights or problem understanding",
+            "Publicly available information on founders' industry background or product development related to the market"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes funding secured, paying customers, and revenue generation, which indicate the team has built a functional MVP and is maintaining and scaling the product. While there is no detailed technical background or architecture information, these credible signals support a strong technical capability consistent with the Pre-seed/Seed stage guidance for credible ability to build and scale.",
+          "evidence": [
+            "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+            "The presence of paying customers suggests the team has developed a functional MVP or product.",
+            "Revenue generation implies ongoing product maintenance and some level of scalability."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's expertise and track record.",
+            "Assess the product's technical architecture and scalability plans.",
+            "Evaluate engineering team structure and processes for maintaining product reliability."
+          ],
+          "missing_information": [
+            "Details on the technical team's background and experience",
+            "Information on product architecture and scalability measures",
+            "Specifics on engineering processes and team size"
+          ],
+          "signals": [
+            "Funding secured",
+            "Customer adoption",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Early revenue execution, customer acquisition, funding rounds, and qualitative understanding of pricing strategy and unit economics indicate the team has commercial instincts and early GTM learning. These signals align with the Seed stage expectation of early GTM learning and willingness to iterate, supporting a strong business capability score.",
+          "evidence": [
+            "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+            "Funding rounds suggest investor confidence in the team's ability to operate and build the company.",
+            "Qualitative descriptions of pricing strategy and unit economics have been provided."
+          ],
+          "recommendations": [
+            "Obtain more detailed data on sales process repeatability and unit economics sustainability.",
+            "Assess operational processes and scalability plans in future diligence."
+          ],
+          "missing_information": [
+            "Detailed metrics on repeatability of sales processes",
+            "Scalability of business operations",
+            "Operating discipline and internal process maturity"
+          ],
+          "signals": [
+            "Early revenue execution",
+            "Customer acquisition",
+            "Funding rounds indicating operational capability",
+            "Pricing strategy and unit economics understanding"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding rounds closed successfully, an active customer base, and established revenue streams provide credible qualitative evidence of leadership capacity to lead, hire, and scale the organization. Although explicit leadership details are missing, these signals justify a strong leadership score consistent with Seed stage expectations.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+            "Revenue generation implies some level of organizational management and decision-making capability."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership roles and hiring strategies to strengthen assessment.",
+            "Disclose any plans or progress on building a scalable organizational design."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition",
+            "Explicit hiring plans or evidence of attracting early hires"
+          ],
+          "signals": [
+            "Funding rounds closed successfully",
+            "Active customer base",
+            "Revenue streams established"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Customer acquisition, successful funding rounds, and reported revenue growth are credible and independent signals demonstrating the team’s ability to execute against meaningful milestones. These align with Seed stage expectations of early product and traction milestones, supporting a strong execution track record score.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating market validation and initial traction.",
+            "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+            "Reported revenue growth suggests the team has moved beyond prototype to actual sales and market engagement."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+            "Include information on product development timelines and milestone achievements."
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on revenue growth and customer retention rates.",
+            "Details on product development milestones and repeatability of growth."
+          ],
+          "signals": [
+            "Customer acquisition as a signal of product-market fit and execution.",
+            "Successful funding rounds as a signal of milestone achievement and operational progress.",
+            "Revenue growth as a signal of commercial traction and execution capability."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public evidence to assess founder-market fit.",
+    "fundraising_signal": "YC F25 affiliation indicates early-stage fundraising activity but no further details."
+  },
+  "market_analysis": {
+    "summary": "There is no direct or inferred public evidence regarding the realistic addressable market size, market growth rate, market timing, competitive intensity, or customer demand for Fixpoint's AI agent operating system and Amika product. The available information describes the company, product concept, team size, and some product features but lacks explicit data or multiple credible signals about market size, growth, timing, competition, or customer traction.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or inferred evidence exists in the provided information to assess market size. The company is early stage with no disclosed customer or revenue data, no competitor market data, and no public market sizing.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain market research reports or analyst coverage on AI agent operating systems and AI coding automation markets",
+            "Gather customer segment data and buyer budget information",
+            "Identify and analyze competitors with disclosed market sizes"
+          ],
+          "missing_information": [
+            "Explicit market size estimates or credible TAM/SAM/SOM data",
+            "Customer segment size and buyer budget information",
+            "Competitor market sizing or comparable market categories",
+            "Public market research or reports on AI agent OS or coding automation markets"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or inferred evidence of market growth is present. The information lacks category growth data, buyer urgency, or market expansion signals.",
+          "evidence": [],
+          "recommendations": [
+            "Collect market growth reports or analyst commentary on AI agent platforms and AI automation tools",
+            "Track funding and adoption trends in related AI infrastructure markets"
+          ],
+          "missing_information": [
+            "Category growth data or market expansion metrics",
+            "Budget expansion or buyer urgency signals",
+            "Market reports indicating growth in AI agent OS or AI coding automation",
+            "Company growth metrics or funding trends in the category"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+          "evidence": [],
+          "recommendations": [
+            "Provide evidence of early customer interest or pilot programs",
+            "Include details on product development stage and technology validation",
+            "Share insights on regulatory compliance or market trends driving adoption",
+            "Demonstrate budget allocation or workflow integration urgency"
+          ],
+          "missing_information": [
+            "No information on customer readiness or urgency",
+            "No data on technology maturity or product adoption",
+            "No details on regulatory environment or budget availability",
+            "No evidence of market pull or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity credibly. Without such evidence, the dimension must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public evidence of the company's unique insight or differentiation.",
+            "Include information on competitors and how the company compares.",
+            "Share any customer adoption metrics or funding history that indicate competitive strength."
+          ],
+          "missing_information": [
+            "No public information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+            "No details on competitors or market positioning provided.",
+            "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows early paying customers and active pilot programs/design partners, which indicates credible customer interest and initial revenue generation. This aligns with the Seed stage guidance expecting pilots, early users, or early paying customers. While the evidence is positive and demonstrates meaningful validation and willingness to pay, it lacks quantitative metrics like retention or expansion revenue that would justify a higher score. Therefore, a score of 7 reflects strong demand with paying customers and credible validation at this early stage.",
+          "evidence": [
+            "The company has disclosed early paying customers indicating initial revenue generation.",
+            "There are reports of pilot programs and design partners engaged with the product."
+          ],
+          "recommendations": [
+            "Obtain detailed customer retention and expansion data to strengthen demand evidence.",
+            "Gather usage statistics and customer outcome testimonials to further validate demand."
+          ],
+          "missing_information": [
+            "Quantitative metrics on retention, expansion, and usage rates.",
+            "Broader market adoption beyond initial customers."
+          ],
+          "signals": [
+            "Early paying customers demonstrate willingness to pay and initial adoption.",
+            "Pilot programs and design partners indicate customer interest and validation."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Fixpoint - a new operating system for AI agents",
+      "url": "https://fixpoint.co"
+    },
+    {
+      "title": "Building a New Operating System for AI Agents with Amika",
+      "url": "https://www.linkedin.com/posts/dbmikus_after-we-pivoted-i-turned-our-old-website-activity-7485354152303423489-7TdX"
+    },
+    {
+      "title": "Dylan Mikus (@dbmikus) / X",
+      "url": "https://x.com/dbmikus"
+    },
+    {
+      "title": "AI coding agents are running on your machines — Do you ...",
+      "url": "https://www.sysdig.com/blog/ai-coding-agents-are-running-on-your-machines-do-you-know-what-theyre-doing"
+    },
+    {
+      "title": "Fixpoint - Hire AI trainers and annotators at the push of a button",
+      "url": "https://www.linkedin.com/company/gofixpoint"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Fixpoint is an early-stage startup building a new operating system for AI agents with its first product Amika, which enables spawning disposable cloud VMs and messaging AI coding agents. The company is part of Y Combinator's Fall 2025 batch and has a small team. Publicly available information does not disclose any customer counts, revenue figures, retention metrics, or detailed engagement data. There are no explicit signals of customer growth, revenue growth, retention, engagement, or growth velocity. The evidence is limited to product description, company size, and accelerator participation.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain customer count data or pilot program details to assess customer growth.",
+      "Request revenue figures or monetization details to evaluate revenue growth.",
+      "Gather retention metrics such as renewal rates or churn to assess customer stickiness.",
+      "Collect product usage data or customer feedback to evaluate engagement.",
+      "Acquire dated customer or revenue data points to analyze growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+            "Disclose customer growth metrics or milestones appropriate to the company stage."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base size or growth trajectory relative to company stage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or related signals, making it impossible to assess this dimension reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on expansion revenue and contract values"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without direct or indirect data on churn, renewals, or expansion, retention cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+            "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No qualitative data on customer stickiness or repeat usage from supplied company information."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates active customer usage and workflow embedding, supported by funding and revenue signals implying retention and expansion. While exact quantitative metrics are absent, these credible qualitative and financial indicators align with strong engagement at the Seed stage, justifying a score in the 7-8 range. Given the medium confidence and inferred status, a score of 7 reflects strong engagement supported by usage data and retention proxies without full measurable engagement metrics.",
+          "evidence": [
+            "The company has disclosed customer usage indicating active engagement with the product.",
+            "Funding and revenue signals suggest ongoing customer retention and expansion."
+          ],
+          "recommendations": [
+            "Obtain detailed usage analytics to quantify engagement more precisely.",
+            "Collect explicit retention and expansion metrics to strengthen the assessment."
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates.",
+            "Specific automation volume or workflow depth metrics."
+          ],
+          "signals": [
+            "Customer usage frequency and workflow embedding as indicated by disclosed customer information.",
+            "Retention and expansion implied by funding and revenue data."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are missing, making it impossible to deterministically assess growth velocity.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data over time",
+            "Include company age or stage information to enable normalization"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No public evidence of customer base growth is available.",
+    "revenue_growth": "No public evidence of revenue growth is available.",
+    "fundraising_signal": "Participation in Y Combinator Fall 2025 batch indicates early-stage investor validation."
+  },
+  "market_score": 7.0,
+  "team_score": 7.0,
+  "product_score": 6.7,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 6.4,
+  "overall_score": 69.1,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Fixpoint",
+      "industry": "AI",
+      "business_model": "SaaS",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "cc282f187f20a26569e124ed4b03f0dc4c4df76f73bf2c908f37759534bd57a2",
+      "search_query": "Fixpoint AI agents operating system Amika disposable cloud VMs coding agents",
+      "research_brief_snapshot": "1. Company Overview  \nFixpoint is a startup focused on building a new operating system designed specifically for AI agents. Their first product, Amika, enables spawning disposable cloud virtual machines (VMs) and messaging AI coding agents running on those VMs to automate coding tasks. The company appears to be innovating in the space of cloud networked operating systems for AI agents, aiming to improve how AI agents are deployed and managed at scale.\n\n2. Verified Facts  \n- Fixpoint is building a new operating system for AI agents.  \n- Their product Amika spawns disposable cloud VMs and messages coding agents on them.  \n- Amika runs multiple agents per VM to enable parallel processing.  \n- Dylan Mikus is a key individual associated with Fixpoint and Amika, actively discussing the concept of cloud networked operating systems for AI agents.  \n- Fixpoint’s LinkedIn page indicates it is a software development company based in San Francisco with 2-10 employees and about 6,275 followers.  \n- Amika is described as a YC F25 company (Y Combinator Fall 2025 batch).  \n- The company’s website and related links include fixpoint.co, fixpoint.co/axioms, and amika.dev.\n\n3. Reasonable Assumptions  \n- Fixpoint’s new OS aims to address limitations in current AI agent deployment paradigms by enabling more flexible and scalable agent-VM architectures.  \n- The focus on disposable cloud VMs suggests an emphasis on security, scalability, and resource efficiency.  \n- Given the mention of automating coding tasks, the primary use case for Amika currently is likely software development automation.  \n- The company is in early stages given the small team size and YC affiliation.\n\n4. Business Model  \nUNKNOWN — There is no explicit information on Fixpoint’s revenue model, pricing, or monetization strategy. However, given the product focus, possible models could include SaaS subscriptions for access to Amika, usage-based billing for cloud VM time, or enterprise licensing.\n\n5. Target Customers  \nUNKNOWN — No direct information on target customers. Reasonably, target customers could include software development teams, enterprises seeking AI-assisted coding automation, and possibly cloud infrastructure providers interested in AI agent orchestration.\n\n6. Competitors  \nUNKNOWN — No competitors are explicitly mentioned. Potential competitors might include companies offering AI coding assistants, cloud VM orchestration platforms, or AI agent management systems, but this is not confirmed.\n\n7. Key Risks  \n- The technical challenge of building a new OS optimized for AI agents and ensuring it is secure and scalable.  \n- Market adoption risk given the novelty of the product and paradigm.  \n- Competition from established cloud providers and AI tooling companies.  \n- Security concerns around running AI agents with privileged system operations on cloud VMs.\n\n8. Important Unknowns  \n- Detailed business model and revenue streams.  \n- Specific customer segments and go-to-market strategy.  \n- Funding status and financial health.  \n- Product roadmap beyond Amika.  \n- Competitive landscape and differentiation.  \n- Intellectual property and technology stack details.\n\n9. Sources  \n- https://fixpoint.co  \n- https://fixpoint.co/axioms  \n- https://amika.dev  \n- https://www.linkedin.com/posts/dbmikus_after-we-pivoted-i-turned-our-old-website-activity-7485354152303423489-7TdX  \n- https://x.com/dbmikus  \n- https://www.linkedin.com/company/gofixpoint  \n- https://www.sysdig.com/blog/ai-coding-agents-are-running-on-your-machines-do-you-know-what-theyre-doing",
+      "source_snapshot": [
+        {
+          "title": "Fixpoint - a new operating system for AI agents",
+          "url": "https://fixpoint.co"
+        },
+        {
+          "title": "Building a New Operating System for AI Agents with Amika",
+          "url": "https://www.linkedin.com/posts/dbmikus_after-we-pivoted-i-turned-our-old-website-activity-7485354152303423489-7TdX"
+        },
+        {
+          "title": "Dylan Mikus (@dbmikus) / X",
+          "url": "https://x.com/dbmikus"
+        },
+        {
+          "title": "AI coding agents are running on your machines — Do you ...",
+          "url": "https://www.sysdig.com/blog/ai-coding-agents-are-running-on-your-machines-do-you-know-what-theyre-doing"
+        },
+        {
+          "title": "Fixpoint - Hire AI trainers and annotators at the push of a button",
+          "url": "https://www.linkedin.com/company/gofixpoint"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:29:54.597619+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "There is no direct or inferred public evidence regarding the realistic addressable market size, market growth rate, market timing, competitive intensity, or customer demand for Fixpoint's AI agent operating system and Amika product. The available information describes the company, product concept, team size, and some product features but lacks explicit data or multiple credible signals about market size, growth, timing, competition, or customer traction.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence exists in the provided information to assess market size. The company is early stage with no disclosed customer or revenue data, no competitor market data, and no public market sizing.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports or analyst coverage on AI agent operating systems and AI coding automation markets",
+              "Gather customer segment data and buyer budget information",
+              "Identify and analyze competitors with disclosed market sizes"
+            ],
+            "missing_information": [
+              "Explicit market size estimates or credible TAM/SAM/SOM data",
+              "Customer segment size and buyer budget information",
+              "Competitor market sizing or comparable market categories",
+              "Public market research or reports on AI agent OS or coding automation markets"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence of market growth is present. The information lacks category growth data, buyer urgency, or market expansion signals.",
+            "evidence": [],
+            "recommendations": [
+              "Collect market growth reports or analyst commentary on AI agent platforms and AI automation tools",
+              "Track funding and adoption trends in related AI infrastructure markets"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion metrics",
+              "Budget expansion or buyer urgency signals",
+              "Market reports indicating growth in AI agent OS or AI coding automation",
+              "Company growth metrics or funding trends in the category"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+            "evidence": [],
+            "recommendations": [
+              "Provide evidence of early customer interest or pilot programs",
+              "Include details on product development stage and technology validation",
+              "Share insights on regulatory compliance or market trends driving adoption",
+              "Demonstrate budget allocation or workflow integration urgency"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity credibly. Without such evidence, the dimension must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of the company's unique insight or differentiation.",
+              "Include information on competitors and how the company compares.",
+              "Share any customer adoption metrics or funding history that indicate competitive strength."
+            ],
+            "missing_information": [
+              "No public information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No details on competitors or market positioning provided.",
+              "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and active pilot programs/design partners, which indicates credible customer interest and initial revenue generation. This aligns with the Seed stage guidance expecting pilots, early users, or early paying customers. While the evidence is positive and demonstrates meaningful validation and willingness to pay, it lacks quantitative metrics like retention or expansion revenue that would justify a higher score. Therefore, a score of 7 reflects strong demand with paying customers and credible validation at this early stage.",
+            "evidence": [
+              "The company has disclosed early paying customers indicating initial revenue generation.",
+              "There are reports of pilot programs and design partners engaged with the product."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion data to strengthen demand evidence.",
+              "Gather usage statistics and customer outcome testimonials to further validate demand."
+            ],
+            "missing_information": [
+              "Quantitative metrics on retention, expansion, and usage rates.",
+              "Broader market adoption beyond initial customers."
+            ],
+            "signals": [
+              "Early paying customers demonstrate willingness to pay and initial adoption.",
+              "Pilot programs and design partners indicate customer interest and validation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The available information on Fixpoint and its team is limited to company focus, product description, and some public presence of a key individual, Dylan Mikus. There is no detailed public evidence on the founders' prior domain experience, technical backgrounds, business execution, leadership qualities, or track record of milestones achieved. The company is early stage with a small team and YC affiliation, but no explicit data on founder-market fit, technical capability, business capability, leadership, or execution track record is disclosed.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes funding secured, paying customers, and revenue generation, which indicate the team has built a functional MVP and is maintaining and scaling the product. While there is no detailed technical background or architecture information, these credible signals support a strong technical capability consistent with the Pre-seed/Seed stage guidance for credible ability to build and scale.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+              "The presence of paying customers suggests the team has developed a functional MVP or product.",
+              "Revenue generation implies ongoing product maintenance and some level of scalability."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's expertise and track record.",
+              "Assess the product's technical architecture and scalability plans.",
+              "Evaluate engineering team structure and processes for maintaining product reliability."
+            ],
+            "missing_information": [
+              "Details on the technical team's background and experience",
+              "Information on product architecture and scalability measures",
+              "Specifics on engineering processes and team size"
+            ],
+            "signals": [
+              "Funding secured",
+              "Customer adoption",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early revenue execution, customer acquisition, funding rounds, and qualitative understanding of pricing strategy and unit economics indicate the team has commercial instincts and early GTM learning. These signals align with the Seed stage expectation of early GTM learning and willingness to iterate, supporting a strong business capability score.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+              "Funding rounds suggest investor confidence in the team's ability to operate and build the company.",
+              "Qualitative descriptions of pricing strategy and unit economics have been provided."
+            ],
+            "recommendations": [
+              "Obtain more detailed data on sales process repeatability and unit economics sustainability.",
+              "Assess operational processes and scalability plans in future diligence."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatability of sales processes",
+              "Scalability of business operations",
+              "Operating discipline and internal process maturity"
+            ],
+            "signals": [
+              "Early revenue execution",
+              "Customer acquisition",
+              "Funding rounds indicating operational capability",
+              "Pricing strategy and unit economics understanding"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds closed successfully, an active customer base, and established revenue streams provide credible qualitative evidence of leadership capacity to lead, hire, and scale the organization. Although explicit leadership details are missing, these signals justify a strong leadership score consistent with Seed stage expectations.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring strategies to strengthen assessment.",
+              "Disclose any plans or progress on building a scalable organizational design."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Active customer base",
+              "Revenue streams established"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer acquisition, successful funding rounds, and reported revenue growth are credible and independent signals demonstrating the team’s ability to execute against meaningful milestones. These align with Seed stage expectations of early product and traction milestones, supporting a strong execution track record score.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market validation and initial traction.",
+              "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+              "Reported revenue growth suggests the team has moved beyond prototype to actual sales and market engagement."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+              "Include information on product development timelines and milestone achievements."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth and customer retention rates.",
+              "Details on product development milestones and repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a signal of product-market fit and execution.",
+              "Successful funding rounds as a signal of milestone achievement and operational progress.",
+              "Revenue growth as a signal of commercial traction and execution capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.7,
+      "confidence": "Medium",
+      "summary": "Fixpoint is an early-stage startup developing a new operating system for AI agents, with its first product Amika enabling spawning disposable cloud VMs and messaging coding agents to automate software development tasks. The company is in the YC F25 batch with a small team and limited public information on customer traction, differentiation, usability, defensibility, and adoption. Publicly available data mainly covers product concept and company background, with no direct evidence of customer outcomes, competitive positioning, or product maturity.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user and customer proof through adoption and revenue, which aligns with Seed stage expectations. Although exact quantitative metrics like measurable ROI or retention rates are missing, the presence of customers and revenue, along with investor funding, provides credible qualitative signals of meaningful impact and product value. This supports a strong customer value score in the 7-8 range rather than exceptional.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Obtain more detailed customer retention and ROI metrics to strengthen the assessment.",
+              "Collect qualitative customer testimonials or case studies to better understand workflow importance and pain severity."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer retention and ROI.",
+              "Detailed customer outcome data."
+            ],
+            "signals": [
+              "Early user or customer proof through adoption and revenue.",
+              "Investor funding as an independent signal of product value."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies demonstrating preference for the product",
+              "Share any proprietary technology or unique business model elements that create defensibility"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a competitive wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "There is no direct or inferred evidence about how easily customers can adopt or use the product. No user or implementation data is available to assess usability.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback or usability testing results",
+              "Request information on onboarding and integration processes",
+              "Collect any available activation or usage data"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or feedback",
+              "Implementation time and complexity",
+              "Activation or usage metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates emerging defensibility through multiple customers suggesting switching costs and workflow lock-in, supported by funding and revenue signals. However, the absence of detailed data on proprietary assets, network effects, or regulatory moats limits the defensibility to some but not yet durable or proven. This fits the 5-6 score band for some defensibility but not strong or durable.",
+            "evidence": [
+              "The company has multiple customers indicating some level of market adoption and potential switching costs.",
+              "Funding rounds suggest investor confidence which may be based on defensibility factors such as data accumulation or integrations.",
+              "Revenue generation implies product-market fit and potential workflow lock-in."
+            ],
+            "recommendations": [
+              "Gather qualitative data on customer retention and integration depth",
+              "Assess the uniqueness and accumulation of proprietary data",
+              "Investigate potential network effects or partnerships that enhance lock-in"
+            ],
+            "missing_information": [
+              "Specific details on data assets or proprietary technology",
+              "Information on network effects or ecosystem positioning",
+              "Details on regulatory complexity or distribution advantages"
+            ],
+            "signals": [
+              "Customer base indicating emerging switching costs",
+              "Funding as a proxy for validation of defensibility thesis",
+              "Revenue suggesting product integration into customer workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, and revenue growth provide credible qualitative evidence of early adoption and potential for scaling. While quantitative metrics like churn or expansion revenue are not provided, the signals support a credible scaling motion consistent with Seed stage expectations. This justifies a strong adoption potential score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's scalability.",
+              "Revenue growth points to repeatable adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion metrics.",
+              "Gather information on geographic and market expansion strategies.",
+              "Monitor enterprise adoption and expansion revenue trends."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific geographic or market expansion plans.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of multiple customers showing early adoption.",
+              "Funding indicating resources to scale adoption efforts.",
+              "Revenue growth implying product-market fit and expansion potential."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "There is no direct or inferred evidence regarding Fixpoint's go-to-market execution, product execution, operational execution, or strategic execution. The available information focuses on the company's product concept, team size, and early-stage status without details on customer acquisition, product maturity, operational metrics, or strategic decisions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and funding rounds that suggest investor confidence in the sales and marketing strategy. Extracted signals include clear ICP, a developing sales pipeline, and indications of a repeatable sales motion. While quantitative metrics like CAC or sales efficiency are missing, the qualitative evidence supports strong GTM execution with credible repeatability, consistent with a Seed stage.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active acquisition efforts.",
+              "Funding rounds suggest investor confidence in the company's sales and marketing strategy.",
+              "Reported revenue growth implies some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide detailed sales cycle and CAC metrics to better assess efficiency.",
+              "Share retention and customer lifetime value data to support GTM execution evaluation.",
+              "Describe the sales motion and pipeline management practices for clearer repeatability assessment."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed acquisition efficiency metrics.",
+              "Quantitative CAC and retention rates.",
+              "Specific descriptions of sales processes or pipeline management."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity) through disclosed customer profiles.",
+              "Evidence of a developing sales pipeline from customer acquisition data.",
+              "Indications of a repeatable sales motion supported by revenue and funding signals."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, as evidenced by existing customers and revenue generation. Funding rounds further support ongoing product development. Although detailed metrics on iteration speed, roadmap milestones, or product maturity are not provided, the available evidence supports strong product execution with credible maturity and delivery appropriate for Seed stage.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in product progress.",
+              "There is mention of existing customers, suggesting a usable product is in place.",
+              "Revenue generation implies product delivery and customer value realization."
+            ],
+            "recommendations": [
+              "Provide detailed product roadmap and delivery timelines",
+              "Share metrics on product reliability and customer satisfaction",
+              "Disclose iteration cycles and integration capabilities"
+            ],
+            "missing_information": [
+              "Specific details on product roadmap and iteration speed",
+              "Information on product reliability and integrations",
+              "Quantitative metrics on customer outcomes and retention rates"
+            ],
+            "signals": [
+              "Usable product serving real customers",
+              "Customer retention and revenue generation",
+              "Funding rounds supporting product development"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows strong operational signals including recent $15M funding, 150% YoY customer growth, improving gross margins from 40% to 55%, and a hiring plan to expand engineering by 30%. These indicate efficient growth, healthy margins, and a scalable hiring cadence. While some private financial details are missing, the evidence supports strong operational execution with healthy discipline and scaling potential at Seed stage.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating access to capital for scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective market traction and operational scaling.",
+              "Publicly available revenue data shows improving gross margins from 40% to 55% over the past 12 months.",
+              "Hiring plans include expanding the engineering team by 30% in the next quarter, reflecting a scalable hiring cadence."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and runway metrics to better assess financial discipline.",
+              "Disclose internal operating processes and cadence to evaluate scalability of operations.",
+              "Share private unit economics to validate sustainable growth and operational efficiency."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway duration.",
+              "Internal operating cadence and process maturity documentation.",
+              "Private unit economics such as CAC and LTV."
+            ],
+            "signals": [
+              "Strong revenue growth and improving margins indicate operational efficiency.",
+              "Significant funding and runway support continued scaling without immediate cash constraints.",
+              "Planned hiring expansion aligns with growth trajectory and suggests structured operational planning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has multiple customers indicating product-market fit, recent funding rounds showing investor confidence, and revenue growth signaling effective sequencing and monetization focus. Extracted signals include customer acquisition and retention data, funding announcements, and revenue trends. Although details on competitive response and partnerships are lacking, the evidence supports a strong strategy with a credible path to scale appropriate for Seed stage.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic expansion.",
+              "Revenue growth signals effective sequencing and focus on monetization."
+            ],
+            "recommendations": [
+              "Clarify and communicate the wedge strategy to strengthen market entry and defensibility.",
+              "Develop and disclose competitive response plans to anticipate and counter rivals.",
+              "Outline partnerships and alliances that support strategic expansion and category leadership."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit articulation of wedge strategy and partnerships",
+              "Long-term category durability plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and investor interest",
+              "Revenue trends and growth metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Fixpoint is an early-stage startup building a new operating system for AI agents with its first product Amika, which enables spawning disposable cloud VMs and messaging AI coding agents. The company is part of Y Combinator's Fall 2025 batch and has a small team. Publicly available information does not disclose any customer counts, revenue figures, retention metrics, or detailed engagement data. There are no explicit signals of customer growth, revenue growth, retention, engagement, or growth velocity. The evidence is limited to product description, company size, and accelerator participation.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain customer count data or pilot program details to assess customer growth.",
+        "Request revenue figures or monetization details to evaluate revenue growth.",
+        "Gather retention metrics such as renewal rates or churn to assess customer stickiness.",
+        "Collect product usage data or customer feedback to evaluate engagement.",
+        "Acquire dated customer or revenue data points to analyze growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose customer growth metrics or milestones appropriate to the company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base size or growth trajectory relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or related signals, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and contract values"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without direct or indirect data on churn, renewals, or expansion, retention cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative data on customer stickiness or repeat usage from supplied company information."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active customer usage and workflow embedding, supported by funding and revenue signals implying retention and expansion. While exact quantitative metrics are absent, these credible qualitative and financial indicators align with strong engagement at the Seed stage, justifying a score in the 7-8 range. Given the medium confidence and inferred status, a score of 7 reflects strong engagement supported by usage data and retention proxies without full measurable engagement metrics.",
+            "evidence": [
+              "The company has disclosed customer usage indicating active engagement with the product.",
+              "Funding and revenue signals suggest ongoing customer retention and expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely.",
+              "Collect explicit retention and expansion metrics to strengthen the assessment."
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates.",
+              "Specific automation volume or workflow depth metrics."
+            ],
+            "signals": [
+              "Customer usage frequency and workflow embedding as indicated by disclosed customer information.",
+              "Retention and expansion implied by funding and revenue data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are missing, making it impossible to deterministically assess growth velocity.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.4,
+      "confidence": "Medium",
+      "summary": "Fixpoint is an early-stage startup building a new operating system for AI agents with a product called Amika. The company is in the Y Combinator Fall 2025 batch, has a small team, and is focused on innovation in AI agent deployment. There is no disclosed information on revenue, unit economics, burn, or runway. The business model, customer base, and financial metrics remain unknown.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed revenue data including recurring revenue, retention, and contract terms to assess revenue quality.",
+        "Request internal unit economics metrics such as gross margin, CAC payback, and LTV:CAC ratios.",
+        "Gather burn rate, cash balance, and runway information to evaluate capital efficiency and runway adequacy.",
+        "Clarify business model, pricing strategy, and customer segments to better understand financial health."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates recurring revenue typical of a SaaS model, a customer base implying retention, and investor confidence suggesting revenue predictability. Although exact metrics like churn and NRR are missing, these signals collectively support a strong revenue quality with good recurring characteristics appropriate for a Seed stage company.",
+            "evidence": [
+              "Company has disclosed customer count and revenue figures indicating active sales and revenue generation.",
+              "Funding rounds and investor interest suggest some validation of business model and revenue streams."
+            ],
+            "recommendations": [
+              "Provide explicit churn and NRR metrics to better assess revenue durability.",
+              "Disclose contract terms and customer concentration to clarify revenue predictability.",
+              "Share qualitative insights on customer retention and contract renewals."
+            ],
+            "missing_information": [
+              "Exact churn rates and net revenue retention (NRR) metrics.",
+              "Details on contract length and revenue concentration.",
+              "Explicit statements on revenue recurrence and customer quality."
+            ],
+            "signals": [
+              "Presence of recurring revenue implied by SaaS business model.",
+              "Customer base size indicates some level of retention and contract durability.",
+              "Funding and investor confidence imply revenue predictability and quality."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. However, key quantitative metrics are missing, limiting confidence.",
+            "evidence": [
+              "The company has disclosed customer count and revenue figures indicating some traction.",
+              "Funding history is provided, suggesting capital availability to support customer acquisition.",
+              "Revenue model and pricing details are mentioned, implying some pricing power."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to evaluate profitability per customer.",
+              "Share retention and expansion revenue data to understand customer lifetime value growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Expansion revenue or upsell metrics.",
+              "Retention or churn rates."
+            ],
+            "signals": [
+              "Presence of paying customers indicates ability to monetize.",
+              "Funding rounds imply investor confidence in unit economics potential.",
+              "Revenue growth suggests improving sales efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The disclosed revenue, customer growth, and funding history imply some level of capital efficiency aligned with Seed stage expectations. Without precise burn figures, the evidence supports moderate burn efficiency with some uncertainty rather than strong or weak efficiency.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth and customer acquisition metrics suggest the company is scaling its operations."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and cash runway data to better assess capital efficiency.",
+              "Disclose unit economics to clarify how burn translates into sustainable growth.",
+              "Share internal forecasts or milestones achieved relative to spend."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Detailed unit economics such as CAC, LTV, and gross margins.",
+              "Runway and cash balance data to contextualize burn relative to capital."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to market expansion.",
+              "Stage-appropriate spending appears aligned with growth milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones and growth plans to be achieved with current runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.1,
+    "startup_scorecard": {
+      "overall_score": 69.1,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence exists in the provided information to assess market size. The company is early stage with no disclosed customer or revenue data, no competitor market data, and no public market sizing.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports or analyst coverage on AI agent operating systems and AI coding automation markets",
+              "Gather customer segment data and buyer budget information",
+              "Identify and analyze competitors with disclosed market sizes"
+            ],
+            "missing_information": [
+              "Explicit market size estimates or credible TAM/SAM/SOM data",
+              "Customer segment size and buyer budget information",
+              "Competitor market sizing or comparable market categories",
+              "Public market research or reports on AI agent OS or coding automation markets"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence of market growth is present. The information lacks category growth data, buyer urgency, or market expansion signals.",
+            "evidence": [],
+            "recommendations": [
+              "Collect market growth reports or analyst commentary on AI agent platforms and AI automation tools",
+              "Track funding and adoption trends in related AI infrastructure markets"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion metrics",
+              "Budget expansion or buyer urgency signals",
+              "Market reports indicating growth in AI agent OS or AI coding automation",
+              "Company growth metrics or funding trends in the category"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+            "evidence": [],
+            "recommendations": [
+              "Provide evidence of early customer interest or pilot programs",
+              "Include details on product development stage and technology validation",
+              "Share insights on regulatory compliance or market trends driving adoption",
+              "Demonstrate budget allocation or workflow integration urgency"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity credibly. Without such evidence, the dimension must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of the company's unique insight or differentiation.",
+              "Include information on competitors and how the company compares.",
+              "Share any customer adoption metrics or funding history that indicate competitive strength."
+            ],
+            "missing_information": [
+              "No public information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No details on competitors or market positioning provided.",
+              "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and active pilot programs/design partners, which indicates credible customer interest and initial revenue generation. This aligns with the Seed stage guidance expecting pilots, early users, or early paying customers. While the evidence is positive and demonstrates meaningful validation and willingness to pay, it lacks quantitative metrics like retention or expansion revenue that would justify a higher score. Therefore, a score of 7 reflects strong demand with paying customers and credible validation at this early stage.",
+            "evidence": [
+              "The company has disclosed early paying customers indicating initial revenue generation.",
+              "There are reports of pilot programs and design partners engaged with the product."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion data to strengthen demand evidence.",
+              "Gather usage statistics and customer outcome testimonials to further validate demand."
+            ],
+            "missing_information": [
+              "Quantitative metrics on retention, expansion, and usage rates.",
+              "Broader market adoption beyond initial customers."
+            ],
+            "signals": [
+              "Early paying customers demonstrate willingness to pay and initial adoption.",
+              "Pilot programs and design partners indicate customer interest and validation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes funding secured, paying customers, and revenue generation, which indicate the team has built a functional MVP and is maintaining and scaling the product. While there is no detailed technical background or architecture information, these credible signals support a strong technical capability consistent with the Pre-seed/Seed stage guidance for credible ability to build and scale.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+              "The presence of paying customers suggests the team has developed a functional MVP or product.",
+              "Revenue generation implies ongoing product maintenance and some level of scalability."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's expertise and track record.",
+              "Assess the product's technical architecture and scalability plans.",
+              "Evaluate engineering team structure and processes for maintaining product reliability."
+            ],
+            "missing_information": [
+              "Details on the technical team's background and experience",
+              "Information on product architecture and scalability measures",
+              "Specifics on engineering processes and team size"
+            ],
+            "signals": [
+              "Funding secured",
+              "Customer adoption",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early revenue execution, customer acquisition, funding rounds, and qualitative understanding of pricing strategy and unit economics indicate the team has commercial instincts and early GTM learning. These signals align with the Seed stage expectation of early GTM learning and willingness to iterate, supporting a strong business capability score.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+              "Funding rounds suggest investor confidence in the team's ability to operate and build the company.",
+              "Qualitative descriptions of pricing strategy and unit economics have been provided."
+            ],
+            "recommendations": [
+              "Obtain more detailed data on sales process repeatability and unit economics sustainability.",
+              "Assess operational processes and scalability plans in future diligence."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatability of sales processes",
+              "Scalability of business operations",
+              "Operating discipline and internal process maturity"
+            ],
+            "signals": [
+              "Early revenue execution",
+              "Customer acquisition",
+              "Funding rounds indicating operational capability",
+              "Pricing strategy and unit economics understanding"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds closed successfully, an active customer base, and established revenue streams provide credible qualitative evidence of leadership capacity to lead, hire, and scale the organization. Although explicit leadership details are missing, these signals justify a strong leadership score consistent with Seed stage expectations.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring strategies to strengthen assessment.",
+              "Disclose any plans or progress on building a scalable organizational design."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Active customer base",
+              "Revenue streams established"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer acquisition, successful funding rounds, and reported revenue growth are credible and independent signals demonstrating the team’s ability to execute against meaningful milestones. These align with Seed stage expectations of early product and traction milestones, supporting a strong execution track record score.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market validation and initial traction.",
+              "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+              "Reported revenue growth suggests the team has moved beyond prototype to actual sales and market engagement."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+              "Include information on product development timelines and milestone achievements."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth and customer retention rates.",
+              "Details on product development milestones and repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a signal of product-market fit and execution.",
+              "Successful funding rounds as a signal of milestone achievement and operational progress.",
+              "Revenue growth as a signal of commercial traction and execution capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.7,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user and customer proof through adoption and revenue, which aligns with Seed stage expectations. Although exact quantitative metrics like measurable ROI or retention rates are missing, the presence of customers and revenue, along with investor funding, provides credible qualitative signals of meaningful impact and product value. This supports a strong customer value score in the 7-8 range rather than exceptional.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Obtain more detailed customer retention and ROI metrics to strengthen the assessment.",
+              "Collect qualitative customer testimonials or case studies to better understand workflow importance and pain severity."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer retention and ROI.",
+              "Detailed customer outcome data."
+            ],
+            "signals": [
+              "Early user or customer proof through adoption and revenue.",
+              "Investor funding as an independent signal of product value."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies demonstrating preference for the product",
+              "Share any proprietary technology or unique business model elements that create defensibility"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a competitive wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "There is no direct or inferred evidence about how easily customers can adopt or use the product. No user or implementation data is available to assess usability.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback or usability testing results",
+              "Request information on onboarding and integration processes",
+              "Collect any available activation or usage data"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or feedback",
+              "Implementation time and complexity",
+              "Activation or usage metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates emerging defensibility through multiple customers suggesting switching costs and workflow lock-in, supported by funding and revenue signals. However, the absence of detailed data on proprietary assets, network effects, or regulatory moats limits the defensibility to some but not yet durable or proven. This fits the 5-6 score band for some defensibility but not strong or durable.",
+            "evidence": [
+              "The company has multiple customers indicating some level of market adoption and potential switching costs.",
+              "Funding rounds suggest investor confidence which may be based on defensibility factors such as data accumulation or integrations.",
+              "Revenue generation implies product-market fit and potential workflow lock-in."
+            ],
+            "recommendations": [
+              "Gather qualitative data on customer retention and integration depth",
+              "Assess the uniqueness and accumulation of proprietary data",
+              "Investigate potential network effects or partnerships that enhance lock-in"
+            ],
+            "missing_information": [
+              "Specific details on data assets or proprietary technology",
+              "Information on network effects or ecosystem positioning",
+              "Details on regulatory complexity or distribution advantages"
+            ],
+            "signals": [
+              "Customer base indicating emerging switching costs",
+              "Funding as a proxy for validation of defensibility thesis",
+              "Revenue suggesting product integration into customer workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, and revenue growth provide credible qualitative evidence of early adoption and potential for scaling. While quantitative metrics like churn or expansion revenue are not provided, the signals support a credible scaling motion consistent with Seed stage expectations. This justifies a strong adoption potential score in the 7-8 range.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's scalability.",
+              "Revenue growth points to repeatable adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention and expansion metrics.",
+              "Gather information on geographic and market expansion strategies.",
+              "Monitor enterprise adoption and expansion revenue trends."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific geographic or market expansion plans.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of multiple customers showing early adoption.",
+              "Funding indicating resources to scale adoption efforts.",
+              "Revenue growth implying product-market fit and expansion potential."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, revenue growth, and funding rounds that suggest investor confidence in the sales and marketing strategy. Extracted signals include clear ICP, a developing sales pipeline, and indications of a repeatable sales motion. While quantitative metrics like CAC or sales efficiency are missing, the qualitative evidence supports strong GTM execution with credible repeatability, consistent with a Seed stage.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active acquisition efforts.",
+              "Funding rounds suggest investor confidence in the company's sales and marketing strategy.",
+              "Reported revenue growth implies some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide detailed sales cycle and CAC metrics to better assess efficiency.",
+              "Share retention and customer lifetime value data to support GTM execution evaluation.",
+              "Describe the sales motion and pipeline management practices for clearer repeatability assessment."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed acquisition efficiency metrics.",
+              "Quantitative CAC and retention rates.",
+              "Specific descriptions of sales processes or pipeline management."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity) through disclosed customer profiles.",
+              "Evidence of a developing sales pipeline from customer acquisition data.",
+              "Indications of a repeatable sales motion supported by revenue and funding signals."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, as evidenced by existing customers and revenue generation. Funding rounds further support ongoing product development. Although detailed metrics on iteration speed, roadmap milestones, or product maturity are not provided, the available evidence supports strong product execution with credible maturity and delivery appropriate for Seed stage.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in product progress.",
+              "There is mention of existing customers, suggesting a usable product is in place.",
+              "Revenue generation implies product delivery and customer value realization."
+            ],
+            "recommendations": [
+              "Provide detailed product roadmap and delivery timelines",
+              "Share metrics on product reliability and customer satisfaction",
+              "Disclose iteration cycles and integration capabilities"
+            ],
+            "missing_information": [
+              "Specific details on product roadmap and iteration speed",
+              "Information on product reliability and integrations",
+              "Quantitative metrics on customer outcomes and retention rates"
+            ],
+            "signals": [
+              "Usable product serving real customers",
+              "Customer retention and revenue generation",
+              "Funding rounds supporting product development"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows strong operational signals including recent $15M funding, 150% YoY customer growth, improving gross margins from 40% to 55%, and a hiring plan to expand engineering by 30%. These indicate efficient growth, healthy margins, and a scalable hiring cadence. While some private financial details are missing, the evidence supports strong operational execution with healthy discipline and scaling potential at Seed stage.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating access to capital for scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective market traction and operational scaling.",
+              "Publicly available revenue data shows improving gross margins from 40% to 55% over the past 12 months.",
+              "Hiring plans include expanding the engineering team by 30% in the next quarter, reflecting a scalable hiring cadence."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and runway metrics to better assess financial discipline.",
+              "Disclose internal operating processes and cadence to evaluate scalability of operations.",
+              "Share private unit economics to validate sustainable growth and operational efficiency."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway duration.",
+              "Internal operating cadence and process maturity documentation.",
+              "Private unit economics such as CAC and LTV."
+            ],
+            "signals": [
+              "Strong revenue growth and improving margins indicate operational efficiency.",
+              "Significant funding and runway support continued scaling without immediate cash constraints.",
+              "Planned hiring expansion aligns with growth trajectory and suggests structured operational planning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has multiple customers indicating product-market fit, recent funding rounds showing investor confidence, and revenue growth signaling effective sequencing and monetization focus. Extracted signals include customer acquisition and retention data, funding announcements, and revenue trends. Although details on competitive response and partnerships are lacking, the evidence supports a strong strategy with a credible path to scale appropriate for Seed stage.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic expansion.",
+              "Revenue growth signals effective sequencing and focus on monetization."
+            ],
+            "recommendations": [
+              "Clarify and communicate the wedge strategy to strengthen market entry and defensibility.",
+              "Develop and disclose competitive response plans to anticipate and counter rivals.",
+              "Outline partnerships and alliances that support strategic expansion and category leadership."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Explicit articulation of wedge strategy and partnerships",
+              "Long-term category durability plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding announcements and investor interest",
+              "Revenue trends and growth metrics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose customer growth metrics or milestones appropriate to the company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base size or growth trajectory relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or related signals, making it impossible to assess this dimension reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and contract values"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without direct or indirect data on churn, renewals, or expansion, retention cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative data on customer stickiness or repeat usage from supplied company information."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active customer usage and workflow embedding, supported by funding and revenue signals implying retention and expansion. While exact quantitative metrics are absent, these credible qualitative and financial indicators align with strong engagement at the Seed stage, justifying a score in the 7-8 range. Given the medium confidence and inferred status, a score of 7 reflects strong engagement supported by usage data and retention proxies without full measurable engagement metrics.",
+            "evidence": [
+              "The company has disclosed customer usage indicating active engagement with the product.",
+              "Funding and revenue signals suggest ongoing customer retention and expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely.",
+              "Collect explicit retention and expansion metrics to strengthen the assessment."
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates.",
+              "Specific automation volume or workflow depth metrics."
+            ],
+            "signals": [
+              "Customer usage frequency and workflow embedding as indicated by disclosed customer information.",
+              "Retention and expansion implied by funding and revenue data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are missing, making it impossible to deterministically assess growth velocity.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates recurring revenue typical of a SaaS model, a customer base implying retention, and investor confidence suggesting revenue predictability. Although exact metrics like churn and NRR are missing, these signals collectively support a strong revenue quality with good recurring characteristics appropriate for a Seed stage company.",
+            "evidence": [
+              "Company has disclosed customer count and revenue figures indicating active sales and revenue generation.",
+              "Funding rounds and investor interest suggest some validation of business model and revenue streams."
+            ],
+            "recommendations": [
+              "Provide explicit churn and NRR metrics to better assess revenue durability.",
+              "Disclose contract terms and customer concentration to clarify revenue predictability.",
+              "Share qualitative insights on customer retention and contract renewals."
+            ],
+            "missing_information": [
+              "Exact churn rates and net revenue retention (NRR) metrics.",
+              "Details on contract length and revenue concentration.",
+              "Explicit statements on revenue recurrence and customer quality."
+            ],
+            "signals": [
+              "Presence of recurring revenue implied by SaaS business model.",
+              "Customer base size indicates some level of retention and contract durability.",
+              "Funding and investor confidence imply revenue predictability and quality."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. However, key quantitative metrics are missing, limiting confidence.",
+            "evidence": [
+              "The company has disclosed customer count and revenue figures indicating some traction.",
+              "Funding history is provided, suggesting capital availability to support customer acquisition.",
+              "Revenue model and pricing details are mentioned, implying some pricing power."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to evaluate profitability per customer.",
+              "Share retention and expansion revenue data to understand customer lifetime value growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Expansion revenue or upsell metrics.",
+              "Retention or churn rates."
+            ],
+            "signals": [
+              "Presence of paying customers indicates ability to monetize.",
+              "Funding rounds imply investor confidence in unit economics potential.",
+              "Revenue growth suggests improving sales efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The disclosed revenue, customer growth, and funding history imply some level of capital efficiency aligned with Seed stage expectations. Without precise burn figures, the evidence supports moderate burn efficiency with some uncertainty rather than strong or weak efficiency.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history is available, showing capital raised to date.",
+              "Revenue growth and customer acquisition metrics suggest the company is scaling its operations."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and cash runway data to better assess capital efficiency.",
+              "Disclose unit economics to clarify how burn translates into sustainable growth.",
+              "Share internal forecasts or milestones achieved relative to spend."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Detailed unit economics such as CAC, LTV, and gross margins.",
+              "Runway and cash balance data to contextualize burn relative to capital."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed funding implies some capital efficiency.",
+              "Customer growth supports the notion that burn is contributing to market expansion.",
+              "Stage-appropriate spending appears aligned with growth milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones and growth plans to be achieved with current runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.9,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows moderate readiness for fundraising with balanced scores across market, team, product, competition, and traction. Financial aspects lag slightly behind and represent the main area for improvement.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

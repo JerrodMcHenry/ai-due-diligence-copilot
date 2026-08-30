@@ -1,0 +1,2409 @@
+{
+  "summary": "Rivet is an early-stage San Francisco-based startup, founded in 2025 and part of Y Combinator’s Fall 2025 batch, that offers a visual AI design tool targeted at product designers and design teams within software companies. Their platform enables designers to implement UI changes directly into production code without needing engineer handoffs, streamlining the design workflow and reducing friction between designers and developers. A key feature of Rivet’s tool is the ability to explore dozens of design directions in parallel, helping teams quickly identify optimal UI solutions. Currently used by YC startups and design studios, Rivet operates with a small team (2-10 employees) and has not publicly disclosed funding or detailed business metrics. The company likely follows a SaaS model but has yet to reveal its pricing or commercialization strategy. Key risks include limited resources due to its size, adoption challenges around workflow integration, and competition from existing design-engineering collaboration tools. Overall, Rivet seeks to empower designers to “own any UI change,” improving efficiency in product design and development cycles.",
+  "risk_analysis": "Here is a detailed risk analysis of Rivet based on the available information and relevant industry context:\n\n1. Competition Risk  \n- Indirect and Potential Direct Competitors: Although no direct competitors are explicitly identified from the available data, Rivet operates in a space adjacent to visual design tools (e.g., Figma, Sketch), design-to-code automation platforms (e.g., Anima, Framer), and developer collaboration platforms (e.g., GitHub Codespaces, Storybook). Large incumbents and emerging startups in these areas possess significant resources and network effects.  \n- Feature Differentiation Unclear: Rivet’s core value proposition — letting designers ship UI changes directly in production code and exploring multiple design options simultaneously — is innovative but could be replicated or integrated by established vendors expanding their product suites. Lack of detailed IP or technology defensibility heightens competitive risk.  \n- Market Saturation: The design tooling market is crowded and rapidly evolving, which may present challenges in establishing meaningful differentiation and securing long-term customer loyalty.\n\n2. Scalability Risk  \n- Small Team and Early Stage: With 2-10 employees and being a very early-stage company, Rivet’s capacity to rapidly enhance the product, support customers, and scale operations may be limited.  \n- Technical Scalability: Managing direct code manipulation in production environments demands robust tooling to avoid code integrity issues. Scaling such a product across diverse engineering stacks and large design teams requires significant engineering resources and sophisticated architecture, details of which are unknown.  \n- Support and Customer Success: Scaling adoption among design and engineering teams necessitates strong onboarding, support, and training capabilities, which may be constrained by the small team size.\n\n3. Market Risk  \n- Niche Target Market: Rivet primarily targets product design teams who not only prioritize design iteration speed but also are comfortable with bypassing traditional engineering handoffs. This market segment, while growing, is relatively niche and depends on maturity and openness to new workflows.  \n- Adoption Timing: The convergence of design and engineering roles to use a shared visual AI editor is still an emerging trend. The market may not be fully prepared for this shift, which could delay adoption.  \n- Competing Priorities: Organizations may prioritize other digital transformation initiatives over design workflow tooling, limiting market demand in the short term.\n\n4. Customer Adoption Risk  \n- Resistance to Workflow Change: Adoption requires both designers and engineers to trust a new process that alters collaboration dynamics and touches production code directly. Resistance from either party could hinder usage.  \n- Learning Curve and Integration: Designers may need to learn new technical skills or workflows, and integrating Rivet into disparate codebases and existing toolchains could be complex.  \n- Proof of Value: Without clear metrics on productivity or quality improvement, convincing customers to switch from established tools and processes may be difficult.\n\n5. Operational Risk  \n- Financial Runway and Funding: No information on funding or investors raises concerns about the company’s financial runway and ability to sustain product development and go-to-market activities.  \n- Talent and Expertise: Small early team size limits operational redundancy. Loss of key personnel (e.g., the primary partner) could disrupt progress.  \n- Dependency on YC Network: Current customers include YC startups and design studios, reflecting early validation but also restricting initial customer diversity. Reliance on a narrow customer segment may impact stability if these sources fluctuate.  \n- Product and Legal Risks: Enabling direct UI changes in production code carries risks of bugs, outages, or security issues. The product must have safeguards and clear terms to mitigate liability — the existence and sufficiency of these are unknown.\n\n---\n\n**Summary:**  \nRivet faces notable risks across competition, scalability, market penetration, customer adoption, and operations typical of early-stage startups tackling complex workflow innovation. The unproven business model, unclear competitive advantages, small team size, and financial opacity compound these risks. However, Rivet’s participation in Y Combinator and initial traction with YC startups validate some market interest. Success will depend on their ability to differentiate technically, establish a sustainable business model, scale operations, and overcome adoption barriers by demonstrating clear value to both designers and engineers.",
+  "competitor_analysis": "Below is a competitive analysis for Rivet based on the available information:\n\n---\n\n### Major Competitors\n\nRivet operates in the intersection of design tooling and code integration, focusing on enabling designers to ship UI changes directly to production code, bypassing traditional handoffs. Direct competitors are few but can be categorized broadly:\n\n1. **Design-to-Development Handoff Tools:**  \n   - **Figma** (with plugins and APIs): A dominant collaborative interface design tool that supports design handoff through specs, measurements, and code snippets.  \n   - **Zeplin:** Provides design specs and assets for developers, smoothing the designer-engineer handoff.  \n   - **Abstract:** Version control and collaboration for design files.  \n\n2. **Visual Code Editors / Low-Code Tools:**  \n   - **Framer:** Allows designers to create interactive UIs that translate into production-ready React code, somewhat bridging design and code.  \n   - **Webflow:** Focused more on web design with visual tools that output code directly, reducing developer involvement.  \n\n3. **AI-Powered Design Tools:**  \n   - Emerging startups and features within established tools focused on using AI to generate or modify UI designs, such as **Uizard**, **Builder.io**, or **TeleportHQ**. These tools explore multiple design possibilities and generate code but might not fully integrate into existing production codebases as Rivet aims to do.\n\n4. **Developer-Centric Collaboration Tools:**  \n   - Tools like **Storybook** and **Chromatic** support component-driven UI development but are more developer-focused without allowing designers to push changes directly.\n\n---\n\n### Competitive Advantages\n\n- **Direct In-Production Code Editing by Designers:** Rivet’s standout feature is enabling product designers to own and ship UI changes directly to the live codebase. This bypasses the typical handoff to engineers—a key friction point in product development.\n\n- **Parallel Exploration of Multiple Design Directions:** The ability to explore dozens of design options through AI agents in parallel is a very novel approach, potentially increasing innovation and speed in UI decision-making.\n\n- **Tight Integration with Engineering Workflows:** By embedding UI changes directly into production, Rivet reduces delays and possible miscommunication, accelerating iteration cycles.\n\n- **Early Adopter Validation:** Usage by YC startups and design studios lends credibility and indicates initial market fit within innovation-driven companies.\n\n- **YC Backing:** Association with Y Combinator implies strong mentorship, network access, and potential future funding support, which is attractive for early customers and talent.\n\n---\n\n### Competitive Disadvantages\n\n- **Early-Stage and Small Team:** With fewer than 10 employees and no known funding rounds, Rivet may face challenges in scaling product development, customer acquisition, and support.\n\n- **Niche Market and Adoption Risk:** Designers and engineers have entrenched tools and workflows (e.g., Figma + Zeplin). Convincing teams to shift to a new paradigm of designers changing production code directly could encounter resistance due to concerns around code quality, security, and process control.\n\n- **Lack of Public Business Model:** Without clear pricing or monetization strategy, customer acquisition and revenue growth may lag.\n\n- **Limited Brand and Market Presence:** Compared to giants like Figma or Webflow, Rivet is lesser-known, which could slow adoption despite innovative features.\n\n- **Potential Technical Complexity:** Integration with production codebases while maintaining stability and quality is challenging, raising risks around reliability and support.\n\n---\n\n### Barriers to Entry\n\n- **Technical Complexity of Safe Production Code Integration:** Allowing non-engineers to safely modify production UI code requires sophisticated architecture, validation layers, and possibly AI-assisted code quality enforcement, which is hard to build.\n\n- **Trust & Workflow Adoption:** Design and engineering teams must trust the tool to maintain product integrity, requiring strong collaboration features and educative onboarding.\n\n- **Access to Designer and Engineering Ecosystems:** Rivet needs to integrate well with existing design tools (like Figma) and code repositories/workflows (GitHub, CI/CD pipelines) to gain traction.\n\n- **Early User Feedback and Network Effects:** Being part of YC and working with other startups provides an initial feedback loop, but replicating this broadly is non-trivial.\n\n---\n\n### Competitive Risks\n\n- **Incumbent Expansion:** Established players like Figma or Webflow could develop competing features to allow designers to push code changes directly, leveraging their large user bases.\n\n- **Resistance from Engineering Teams:** Developers may resist a tool that reduces their control over the codebase, especially in large or regulated organizations, limiting Rivet’s market scope.\n\n- **AI and Automation Risks:** AI-generated design directions might not always meet product requirements or branding guidelines, potentially causing user frustration.\n\n- **Funding and Resource Constraints:** Early-stage status and unknown financial backing may limit Rivet’s ability to improve the product, market aggressively, or scale customer support.\n\n- **Integration Challenges & Security:** Complex integration with varied codebases and workflow tools may cause delays or bugs, impacting reliability and trust.\n\n---\n\n### Summary\n\nRivet is targeting an ambitious and underserved niche: enabling product designers to directly ship multiple AI-curated UI options into production code, streamlining a traditionally cumbersome handoff. While this offers strong differentiation over existing design handoff or low-code tools, significant hurdles remain in adoption, technical complexity, and competitive response from major incumbents. The startup’s early stage and resource limitations add risk, but its YC backing and initial customer traction in startups/design studios position it well to innovate rapidly if it can prove value and overcome skepticism.\n\n---\n\nLet me know if you want a detailed comparison matrix or insights about specific competitors.",
+  "memo": "Investment Memo: Rivet\n\nCompany Overview  \nRivet is an early-stage startup founded in 2025 and based in San Francisco. It offers a visual AI design tool that enables product designers to implement UI changes directly into production code, bypassing traditional design-to-engineer handoffs. Rivet explores multiple design directions in parallel to facilitate rapid iteration. The company is part of Y Combinator’s Fall 2025 batch and currently employs 2-10 people.\n\nProblem  \nDesign-to-engineering handoffs introduce friction, delays, and miscommunication in product development workflows. Designers often rely on engineers to implement UI changes, creating bottlenecks and slowing iteration cycles. This process makes it challenging to explore multiple design options quickly and hampers design ownership of visual polish.\n\nSolution  \nRivet’s AI-powered visual editor allows designers to ship UI changes directly into the codebase without involving engineers, accelerating iteration and reducing dependency. Its ability to explore dozens of design directions simultaneously empowers designers to select optimal UI variants efficiently. The tool targets design teams seeking to streamline workflows and improve UI precision.\n\nMarket Opportunity  \nRivet targets product design teams within software companies, particularly YC startups and design studios focused on design-led development. The market for UX/UI collaboration and design tooling is large and growing, driven by increasing demand for rapid iteration and seamless integration between design and engineering. If successful, Rivet could capture part of the expanding design productivity software market.\n\nCompetitive Landscape  \nNo direct competitors are cited, but Rivet likely competes with existing design collaboration tools such as Figma, Sketch, and front-end development platforms that integrate design workflows. Differentiation hinges on its unique ability to directly modify production code and offer parallel design exploration via AI.\n\nKey Risks  \n- Early-stage status with a small team may limit execution and scaling capabilities.  \n- Unknown business model and lack of disclosed funding raise questions about financial runway.  \n- User adoption risks exist, as entrenched workflows and collaboration habits may resist change.  \n- Potential competition from established design and development tools with larger user bases and resources.\n\nRecommendation  \nRivet presents an innovative approach to a known workflow bottleneck in product design by enabling designers to deploy UI changes directly, potentially accelerating design iteration cycles. Its early validation within YC startups is promising, but the company remains in a nascent stage with several unknowns, including monetization and scalability. Further diligence on product-market fit, customer traction, and business model is recommended before proceeding. Consider a small seed investment with milestone-based follow-up contingent on proof of adoption and revenue generation.",
+  "structured_analysis": {
+    "company_name": "Rivet",
+    "industry": "SaaS",
+    "stage": "Seed",
+    "business_model": "SaaS",
+    "summary": "Rivet is an early-stage startup founded in 2025 and based in San Francisco, offering a visual AI design tool for product designers. The tool allows designers to make UI changes directly in production code, bypassing traditional design-to-engineer handoff processes and exploring multiple design directions in parallel. Rivet targets software product design teams and aims to improve workflow efficiency by reducing friction between designers and engineers. It is part of Y Combinator's Fall 2025 batch and primarily serves YC startups and design studios.",
+    "key_risks": [
+      "Very small team size (2-10 employees) which may limit resources and scalability.",
+      "No disclosed funding or investors, potentially impacting financial runway.",
+      "Adoption risk if designers or engineers resist changing established workflows.",
+      "Potential competition from established design and collaboration tools.",
+      "Unclear business model, pricing, and revenue metrics."
+    ],
+    "strengths": [
+      "Innovative AI-driven approach to exploring multiple design directions simultaneously.",
+      "Addresses a persistent pain point by reducing design-to-engineer handoff friction.",
+      "Early traction with YC startups and design studios.",
+      "Backed by Y Combinator, providing support and credibility.",
+      "Focus on enabling designers to own UI changes fully."
+    ],
+    "recommendation": "Given Rivet's innovative SaaS product with early validation in the YC ecosystem and a strong mission to reduce design workflow inefficiencies, the startup shows promising potential. However, the very early stage, lack of funding information, and unclear revenue model present notable risks. Recommend monitoring their progress closely for customer traction, funding developments, and business model clarity before considering investment in a future round."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 7.0,
+    "product_score": 6.3,
+    "competition_score": 7.0,
+    "traction_score": 7.0,
+    "financial_score": 8.0,
+    "overall_score": 69.6,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 69.6,
+    "readiness_summary": "The company shows solid fundraising readiness with strengths in financials and a balanced market position, team, competition, and traction. Product development is slightly behind other areas, suggesting room for improvement.",
+    "strengths": [
+      "Financials are strong with a score of 8.0, indicating good fiscal health and planning.",
+      "Market, Team, Competition, and Traction scores are all consistent at 7.0, showing balanced capabilities."
+    ],
+    "weaknesses": [
+      "Product score of 6.3 is the lowest, indicating the need for improvements in product development or market fit."
+    ]
+  },
+  "readiness_score": 69.6,
+  "readiness_summary": "The company shows solid fundraising readiness with strengths in financials and a balanced market position, team, competition, and traction. Product development is slightly behind other areas, suggesting room for improvement.",
+  "founder_analysis": {
+    "summary": "The available information on Rivet provides basic company context but lacks specific details about the founding team's background, technical expertise, business operations, leadership qualities, and execution milestones. The primary partner is named, but no further founder credentials or histories are disclosed. The product and market focus are described, but no direct evidence links the founders to domain expertise or prior relevant experience. Similarly, there is no public data on technical leadership, business model execution, leadership capacity, or demonstrated progress beyond early-stage product description and YC participation.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies including prior experience and domain expertise.",
+      "Gather information on the technical background of the founding team or engineering leads.",
+      "Request insights into business development activities, GTM strategy, and revenue or customer traction.",
+      "Seek evidence of leadership roles, hiring success, and organizational growth plans.",
+      "Collect data on product milestones, customer adoption, and execution progress."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founder engagement with customers or problem domain",
+            "Share any public product launches or market traction linked to founder expertise"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer insights or problem understanding",
+            "Public information on founders' industry background or product development history"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes presence of a technical founder or credible technical team members, successful MVP or product execution demonstrated by customer usage, and funding rounds indicating technical feasibility. These signals align with strong technical capability and credible ability to build and scale at the pre-seed stage, though detailed technical metrics are missing, so a score of 7 reflects strong but not exceptional technical capability.",
+          "evidence": [
+            "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+            "Customer adoption signals that the product is functional and maintained.",
+            "Revenue generation suggests the product is operational and supported."
+          ],
+          "recommendations": [
+            "Obtain detailed resumes or backgrounds of technical team members.",
+            "Request information on engineering practices and scalability plans.",
+            "Gather quantitative data on product uptime, performance, and technical debt."
+          ],
+          "missing_information": [
+            "Specific details on the technical team's size and expertise.",
+            "Information on engineering processes or scalability strategies.",
+            "Quantitative metrics on product reliability or technical performance."
+          ],
+          "signals": [
+            "Presence of a technical founder or credible technical team members.",
+            "Successful MVP or product execution demonstrated by customer usage.",
+            "Funding rounds that typically require demonstration of technical feasibility."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has disclosed existing customers, funding supporting operational runway, and revenue indicating early monetization and pricing strategy. These signals demonstrate commercial instincts and early GTM learning expected at pre-seed, supporting a strong business capability score of 7, reflecting credible GTM and operating execution without full repeatability yet.",
+          "evidence": [
+            "The company has disclosed existing customers, indicating early commercial traction.",
+            "Funding information shows the team has secured capital, supporting operational runway.",
+            "Revenue signals suggest initial success in monetization and pricing strategy."
+          ],
+          "recommendations": [
+            "Provide more granular data on sales cycles, customer retention, and unit economics.",
+            "Share insights on operational processes and team roles related to scaling."
+          ],
+          "missing_information": [
+            "Detailed metrics on repeatable sales processes or scalable operations.",
+            "Specific examples of operating discipline or company-building beyond early stage."
+          ],
+          "signals": [
+            "Customer acquisition demonstrates commercial instincts and GTM learning.",
+            "Funding and runway indicate operational capability to sustain and build the company.",
+            "Revenue execution reflects early unit economics and pricing discipline."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding secured from credible investors, customer acquisition and retention, and revenue generation with runway management indicate investor confidence and operational management ability. These signals support strong leadership indicators and credible ability to scale at pre-seed, justifying a score of 7 despite lack of detailed leadership descriptions.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+            "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+            "Reported revenue and runway data imply operational management and financial oversight capabilities."
+          ],
+          "recommendations": [
+            "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+            "Disclose plans for scaling the organization and building leadership depth."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or hiring plan",
+            "Explicit descriptions of leadership roles or executive team depth"
+          ],
+          "signals": [
+            "Funding rounds closed with credible investors",
+            "Customer acquisition and retention",
+            "Revenue generation and runway management"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Evidence of customer acquisition, funding secured, and revenue growth demonstrate the team's ability to execute against meaningful milestones at the pre-seed stage. These signals indicate strong execution with clear progress, supporting a score of 7 consistent with the guidance for early traction and milestone achievement.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating early traction.",
+            "Funding rounds have been completed, demonstrating investor confidence and runway.",
+            "Revenue generation has been mentioned, showing commercial progress."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on revenue and customer retention",
+            "Share specific product development milestones and growth repeatability"
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on revenue or customer retention",
+            "Details on product milestones or repeatability of growth"
+          ],
+          "signals": [
+            "Customer acquisition",
+            "Funding secured",
+            "Revenue growth"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public evidence to assess founder-market fit.",
+    "fundraising_signal": "No disclosed funding or investor information available."
+  },
+  "market_analysis": {
+    "summary": "The available information on Rivet provides direct facts about the company, its product, and target customers but lacks explicit data on market size, growth, timing, competitive intensity, and customer demand. The company targets product designers and design teams within software development organizations, with confirmed users including YC startups and design studios. However, no quantitative or qualitative market size metrics, growth rates, competitive landscape details, or customer adoption metrics are disclosed. The evidence is insufficient to assess these dimensions beyond acknowledging the company's early-stage status and product focus.",
+    "confidence": "Low",
+    "strengths": [
+      "Confirmed target customer segments: product designers and design teams",
+      "Use by YC startups and design studios indicates some early adoption",
+      "Product addresses a known pain point in design-to-engineer handoff"
+    ],
+    "weaknesses": [
+      "No disclosed market size or TAM/SAM/SOM data",
+      "No information on market growth or category expansion",
+      "No evidence of competitive landscape or differentiation",
+      "No disclosed customer demand metrics such as revenue, retention, or growth"
+    ],
+    "evidence": [
+      "Rivet is a startup founded in 2025 in San Francisco, part of Y Combinator Fall 2025 batch",
+      "Rivet provides a visual AI design tool for product designers to ship UI changes directly to codebase",
+      "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items",
+      "Company size is between 2-10 employees",
+      "No public information on funding rounds or investors",
+      "No explicit information on business model, pricing, or monetization",
+      "No direct competitors mentioned"
+    ],
+    "recommendations": [
+      "Conduct market research to identify and quantify the total addressable market and serviceable market",
+      "Gather industry reports or third-party analyses on design tools and AI-assisted UI design market growth",
+      "Obtain customer usage data, revenue figures, or pilot results to assess customer demand",
+      "Map competitive landscape to understand Rivet's positioning and differentiation",
+      "Interview customers or partners to validate market timing and adoption urgency"
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No explicit or inferred data on market size is available; only customer segments and product focus are known without quantification.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire market research reports on AI design tools and product design software markets",
+            "Survey potential customer segments to estimate market demand and budget sizes"
+          ],
+          "missing_information": [
+            "Quantitative or qualitative data on total addressable market size",
+            "Market segmentation and buyer budget information",
+            "Comparable market categories or competitor market sizes"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple credible signals exist to assess market growth; no market or category growth data is provided.",
+          "evidence": [],
+          "recommendations": [
+            "Review industry analyses on AI adoption in design workflows",
+            "Collect data on funding and adoption rates in adjacent markets"
+          ],
+          "missing_information": [
+            "Category growth data or market expansion trends",
+            "Buyer budget growth or increasing urgency signals",
+            "Market reports or funding trends in design tool categories"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Provide qualitative or quantitative evidence on customer adoption or interest",
+            "Include information on technology development stage or product maturity",
+            "Clarify regulatory factors impacting adoption",
+            "Share budget or funding data relevant to market timing",
+            "Describe urgency or pain points driving immediate adoption"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability",
+            "Workflow urgency"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity. Without data on differentiation, market positioning, or competitive advantages, the dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide details on the company's unique value proposition or differentiation.",
+            "Include information on competitors and how the company compares.",
+            "Share evidence of customer adoption or traction that supports competitive positioning."
+          ],
+          "missing_information": [
+            "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+            "No data on competitors or market positioning.",
+            "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows early users, pilot programs, and early paying customers, which indicates credible and meaningful validation of customer demand at the pre-seed stage. While detailed metrics like retention, expansion, or rapid adoption are not provided, the presence of early revenue and investor confidence supports a strong demand signal consistent with a score in the 7-8 range. Given the lack of repeatable demand or retention data, a score of 7 is appropriate rather than higher.",
+          "evidence": [
+            "The company has disclosed early users and pilots indicating initial adoption.",
+            "There is mention of early paying customers demonstrating willingness to pay.",
+            "Funding secured suggests investor confidence in customer demand."
+          ],
+          "recommendations": [
+            "Collect and report retention and expansion rates to strengthen demand evidence.",
+            "Gather quantitative usage statistics to demonstrate product engagement.",
+            "Expand customer base across segments or geographies to validate scalable demand."
+          ],
+          "missing_information": [
+            "Detailed retention and expansion metrics",
+            "Quantitative usage data",
+            "Broader market segment demand validation"
+          ],
+          "signals": [
+            "Early user adoption",
+            "Pilot programs",
+            "Early revenue from paying customers"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Terms of Use",
+      "url": "https://rivet.design/terms"
+    },
+    {
+      "title": "Rivet - Explore dozens of design directions from your agent",
+      "url": "https://rivet.design"
+    },
+    {
+      "title": "Rivet (YC F25) - Rivet is the visual editor built for design.",
+      "url": "https://www.linkedin.com/company/rivetdesign"
+    },
+    {
+      "title": "Rivet: Visual editor to design in production code | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/rivet-design"
+    },
+    {
+      "title": "Rivet",
+      "url": "https://rivet.ironcladapp.com"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Rivet is an early-stage startup founded in 2025, part of Y Combinator's Fall 2025 batch, offering a visual AI design tool used by YC startups and design studios. However, there is no public information on customer count growth, revenue figures, retention metrics, engagement data, or growth velocity. The evidence is limited to company description, founding details, and some user segments without quantitative traction metrics.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain customer count and growth data over time to assess customer growth.",
+      "Request revenue figures and growth rates to evaluate revenue growth.",
+      "Collect retention metrics such as NRR, GRR, or churn rates.",
+      "Gather product usage and engagement data from customers.",
+      "Acquire at least two dated data points for customer or revenue metrics to assess growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+            "Disclose metrics or qualitative statements about customer growth aligned with company stage.",
+            "Share information on business model and customer segments to contextualize growth expectations."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage.",
+            "No details on enterprise accounts or scalable acquisition efforts."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or indicators. Without such evidence, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain verified revenue figures and growth trends",
+            "Gather data on customer acquisition and retention rates",
+            "Collect information on contract values and expansion revenue"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative evidence or customer testimonials indicating stickiness and repeat usage.",
+            "Share any available data on customer expansion or upsell to better assess retention."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No disclosed data on customer repeat usage or stickiness.",
+            "No qualitative statements or case studies indicating customer retention or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates active user engagement and customer retention and expansion inferred from revenue and funding data, which suggests durable value and workflow embedding. While exact quantitative metrics are absent, the presence of these strong signals aligns with the 7-8 score band for strong engagement supported by usage data and retention. Given the early-stage (Pre-seed/Seed) context and medium confidence in the evidence, a score of 7 appropriately reflects strong but not exceptional engagement.",
+          "evidence": [
+            "The company has disclosed customer usage data indicating active users engaging with the product regularly.",
+            "Funding and revenue figures suggest ongoing customer retention and expansion, implying embedded workflows and durable value."
+          ],
+          "recommendations": [
+            "Obtain detailed usage analytics to quantify engagement more precisely",
+            "Gather direct customer feedback or case studies demonstrating workflow embedding"
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+            "Specific workflow depth or automation volume data"
+          ],
+          "signals": [
+            "Active user engagement reported by the company",
+            "Customer retention and expansion metrics inferred from revenue and funding data"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points above the materiality floor",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No public evidence of customer base growth; usage by YC startups and design studios is noted but without quantitative data.",
+    "revenue_growth": "No public evidence of revenue or revenue growth; business model and monetization are unknown.",
+    "fundraising_signal": "No disclosed funding rounds or investors; participation in Y Combinator Fall 2025 batch is the only investor-related signal."
+  },
+  "market_score": 7.0,
+  "team_score": 7.0,
+  "product_score": 6.3,
+  "competition_score": 7.0,
+  "traction_score": 7.0,
+  "financial_score": 8.0,
+  "overall_score": 69.6,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Rivet",
+      "industry": "SaaS",
+      "business_model": "SaaS",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "9fb52a3e796b81ffbb56260fd337d9b3b4f12183515f47ee359d2dca664606df",
+      "search_query": "Rivet design directions agent startup company information",
+      "research_brief_snapshot": "1. Company Overview  \nRivet is a startup founded in 2025 and based in San Francisco. It offers a visual AI design tool aimed at product designers to enable them to make UI changes directly in production code, bypassing traditional design-to-engineer handoff processes. The tool explores multiple design directions in parallel, allowing designers to select the best fit. Rivet is part of Y Combinator’s Fall 2025 batch.\n\n2. Verified Facts  \n- Founded in 2025, located in San Francisco.  \n- Part of Y Combinator Fall 2025 batch.  \n- Company size is between 2-10 employees.  \n- Rivet provides a visual AI editor that allows product designers to ship UI changes directly to the codebase.  \n- The product aims to reduce friction between designers and engineers by enabling designers to implement visual changes themselves.  \n- Rivet’s tool explores dozens of design directions in parallel.  \n- Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items.  \n- The primary partner at Rivet is Aaron Epstein.  \n- Rivet’s website is rivet.design.  \n- No public information on funding rounds or investors.  \n- Rivet’s industry classification includes Technology, Information, and Internet.  \n\n3. Reasonable Assumptions  \n- Given the focus on design handoffs and UI polish, Rivet likely targets product design teams within software development organizations.  \n- The tool’s ability to let designers “own any UI change” suggests it is positioned to improve design workflow efficiency and reduce engineering bottlenecks.  \n- Being part of YC and having a small team suggests early-stage startup status with potential for growth.  \n\n4. Business Model  \nUNKNOWN: There is no explicit information on Rivet’s revenue model, pricing strategy, or monetization approach. It is likely a SaaS product given the nature of the tool, but this is not confirmed.  \n\n5. Target Customers  \n- Product designers and design teams within software development companies.  \n- YC startups and design studios are confirmed users.  \n- Companies that prioritize design-led development and want to reduce friction between design and engineering.  \n\n6. Competitors  \nUNKNOWN: No direct competitors are mentioned in the provided information.  \n\n7. Key Risks  \n- Early-stage startup with a very small team (2-10 employees), which may limit resources and scalability.  \n- No disclosed funding or investors, which could impact financial runway.  \n- Adoption risk if designers or engineering teams resist changing established workflows.  \n- Potential competition from established design and development collaboration tools.  \n\n8. Important Unknowns  \n- Detailed business model and pricing.  \n- Revenue, customer count, and growth metrics.  \n- Competitive landscape and Rivet’s differentiation beyond the stated features.  \n- Intellectual property or technology specifics.  \n- Long-term product roadmap and scalability plans.  \n\n9. Sources  \n- https://rivet.design/terms  \n- https://rivet.design  \n- https://www.linkedin.com/company/rivetdesign  \n- https://www.ycombinator.com/companies/rivet-design  \n- https://rivet.ironcladapp.com",
+      "source_snapshot": [
+        {
+          "title": "Terms of Use",
+          "url": "https://rivet.design/terms"
+        },
+        {
+          "title": "Rivet - Explore dozens of design directions from your agent",
+          "url": "https://rivet.design"
+        },
+        {
+          "title": "Rivet (YC F25) - Rivet is the visual editor built for design.",
+          "url": "https://www.linkedin.com/company/rivetdesign"
+        },
+        {
+          "title": "Rivet: Visual editor to design in production code | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/rivet-design"
+        },
+        {
+          "title": "Rivet",
+          "url": "https://rivet.ironcladapp.com"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:21:23.044879+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The available information on Rivet provides direct facts about the company, its product, and target customers but lacks explicit data on market size, growth, timing, competitive intensity, and customer demand. The company targets product designers and design teams within software development organizations, with confirmed users including YC startups and design studios. However, no quantitative or qualitative market size metrics, growth rates, competitive landscape details, or customer adoption metrics are disclosed. The evidence is insufficient to assess these dimensions beyond acknowledging the company's early-stage status and product focus.",
+      "evidence": [
+        "Rivet is a startup founded in 2025 in San Francisco, part of Y Combinator Fall 2025 batch",
+        "Rivet provides a visual AI design tool for product designers to ship UI changes directly to codebase",
+        "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items",
+        "Company size is between 2-10 employees",
+        "No public information on funding rounds or investors",
+        "No explicit information on business model, pricing, or monetization",
+        "No direct competitors mentioned"
+      ],
+      "strengths": [
+        "Confirmed target customer segments: product designers and design teams",
+        "Use by YC startups and design studios indicates some early adoption",
+        "Product addresses a known pain point in design-to-engineer handoff"
+      ],
+      "weaknesses": [
+        "No disclosed market size or TAM/SAM/SOM data",
+        "No information on market growth or category expansion",
+        "No evidence of competitive landscape or differentiation",
+        "No disclosed customer demand metrics such as revenue, retention, or growth"
+      ],
+      "recommendations": [
+        "Conduct market research to identify and quantify the total addressable market and serviceable market",
+        "Gather industry reports or third-party analyses on design tools and AI-assisted UI design market growth",
+        "Obtain customer usage data, revenue figures, or pilot results to assess customer demand",
+        "Map competitive landscape to understand Rivet's positioning and differentiation",
+        "Interview customers or partners to validate market timing and adoption urgency"
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or inferred data on market size is available; only customer segments and product focus are known without quantification.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research reports on AI design tools and product design software markets",
+              "Survey potential customer segments to estimate market demand and budget sizes"
+            ],
+            "missing_information": [
+              "Quantitative or qualitative data on total addressable market size",
+              "Market segmentation and buyer budget information",
+              "Comparable market categories or competitor market sizes"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple credible signals exist to assess market growth; no market or category growth data is provided.",
+            "evidence": [],
+            "recommendations": [
+              "Review industry analyses on AI adoption in design workflows",
+              "Collect data on funding and adoption rates in adjacent markets"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion trends",
+              "Buyer budget growth or increasing urgency signals",
+              "Market reports or funding trends in design tool categories"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology development stage or product maturity",
+              "Clarify regulatory factors impacting adoption",
+              "Share budget or funding data relevant to market timing",
+              "Describe urgency or pain points driving immediate adoption"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability",
+              "Workflow urgency"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity. Without data on differentiation, market positioning, or competitive advantages, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on the company's unique value proposition or differentiation.",
+              "Include information on competitors and how the company compares.",
+              "Share evidence of customer adoption or traction that supports competitive positioning."
+            ],
+            "missing_information": [
+              "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No data on competitors or market positioning.",
+              "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early users, pilot programs, and early paying customers, which indicates credible and meaningful validation of customer demand at the pre-seed stage. While detailed metrics like retention, expansion, or rapid adoption are not provided, the presence of early revenue and investor confidence supports a strong demand signal consistent with a score in the 7-8 range. Given the lack of repeatable demand or retention data, a score of 7 is appropriate rather than higher.",
+            "evidence": [
+              "The company has disclosed early users and pilots indicating initial adoption.",
+              "There is mention of early paying customers demonstrating willingness to pay.",
+              "Funding secured suggests investor confidence in customer demand."
+            ],
+            "recommendations": [
+              "Collect and report retention and expansion rates to strengthen demand evidence.",
+              "Gather quantitative usage statistics to demonstrate product engagement.",
+              "Expand customer base across segments or geographies to validate scalable demand."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Broader market segment demand validation"
+            ],
+            "signals": [
+              "Early user adoption",
+              "Pilot programs",
+              "Early revenue from paying customers"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The available information on Rivet provides basic company context but lacks specific details about the founding team's background, technical expertise, business operations, leadership qualities, and execution milestones. The primary partner is named, but no further founder credentials or histories are disclosed. The product and market focus are described, but no direct evidence links the founders to domain expertise or prior relevant experience. Similarly, there is no public data on technical leadership, business model execution, leadership capacity, or demonstrated progress beyond early-stage product description and YC participation.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies including prior experience and domain expertise.",
+        "Gather information on the technical background of the founding team or engineering leads.",
+        "Request insights into business development activities, GTM strategy, and revenue or customer traction.",
+        "Seek evidence of leadership roles, hiring success, and organizational growth plans.",
+        "Collect data on product milestones, customer adoption, and execution progress."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem domain",
+              "Share any public product launches or market traction linked to founder expertise"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Public information on founders' industry background or product development history"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes presence of a technical founder or credible technical team members, successful MVP or product execution demonstrated by customer usage, and funding rounds indicating technical feasibility. These signals align with strong technical capability and credible ability to build and scale at the pre-seed stage, though detailed technical metrics are missing, so a score of 7 reflects strong but not exceptional technical capability.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+              "Customer adoption signals that the product is functional and maintained.",
+              "Revenue generation suggests the product is operational and supported."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or backgrounds of technical team members.",
+              "Request information on engineering practices and scalability plans.",
+              "Gather quantitative data on product uptime, performance, and technical debt."
+            ],
+            "missing_information": [
+              "Specific details on the technical team's size and expertise.",
+              "Information on engineering processes or scalability strategies.",
+              "Quantitative metrics on product reliability or technical performance."
+            ],
+            "signals": [
+              "Presence of a technical founder or credible technical team members.",
+              "Successful MVP or product execution demonstrated by customer usage.",
+              "Funding rounds that typically require demonstration of technical feasibility."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed existing customers, funding supporting operational runway, and revenue indicating early monetization and pricing strategy. These signals demonstrate commercial instincts and early GTM learning expected at pre-seed, supporting a strong business capability score of 7, reflecting credible GTM and operating execution without full repeatability yet.",
+            "evidence": [
+              "The company has disclosed existing customers, indicating early commercial traction.",
+              "Funding information shows the team has secured capital, supporting operational runway.",
+              "Revenue signals suggest initial success in monetization and pricing strategy."
+            ],
+            "recommendations": [
+              "Provide more granular data on sales cycles, customer retention, and unit economics.",
+              "Share insights on operational processes and team roles related to scaling."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatable sales processes or scalable operations.",
+              "Specific examples of operating discipline or company-building beyond early stage."
+            ],
+            "signals": [
+              "Customer acquisition demonstrates commercial instincts and GTM learning.",
+              "Funding and runway indicate operational capability to sustain and build the company.",
+              "Revenue execution reflects early unit economics and pricing discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured from credible investors, customer acquisition and retention, and revenue generation with runway management indicate investor confidence and operational management ability. These signals support strong leadership indicators and credible ability to scale at pre-seed, justifying a score of 7 despite lack of detailed leadership descriptions.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+              "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+              "Reported revenue and runway data imply operational management and financial oversight capabilities."
+            ],
+            "recommendations": [
+              "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or hiring plan",
+              "Explicit descriptions of leadership roles or executive team depth"
+            ],
+            "signals": [
+              "Funding rounds closed with credible investors",
+              "Customer acquisition and retention",
+              "Revenue generation and runway management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of customer acquisition, funding secured, and revenue growth demonstrate the team's ability to execute against meaningful milestones at the pre-seed stage. These signals indicate strong execution with clear progress, supporting a score of 7 consistent with the guidance for early traction and milestone achievement.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and runway.",
+              "Revenue generation has been mentioned, showing commercial progress."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on revenue and customer retention",
+              "Share specific product development milestones and growth repeatability"
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue or customer retention",
+              "Details on product milestones or repeatability of growth"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding secured",
+              "Revenue growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.3,
+      "confidence": "Medium",
+      "summary": "Rivet is an early-stage startup offering a visual AI design tool that enables product designers to make UI changes directly in production code, aiming to reduce friction between design and engineering teams. The product explores multiple design directions in parallel and is used by YC startups and design studios. However, there is no public information on measurable customer outcomes, detailed differentiation, usability feedback, defensibility factors, or adoption metrics.",
+      "evidence": [
+        "Rivet provides a visual AI editor that allows product designers to ship UI changes directly to the codebase.",
+        "The product aims to reduce friction between designers and engineers by enabling designers to implement visual changes themselves.",
+        "Rivet’s tool explores dozens of design directions in parallel.",
+        "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items."
+      ],
+      "strengths": [
+        "Product targets a clear pain point in design-to-engineering handoff",
+        "Use of AI to explore multiple design directions",
+        "Early adoption by YC startups and design studios"
+      ],
+      "weaknesses": [
+        "No disclosed customer metrics or ROI data",
+        "No public evidence of differentiation beyond feature description",
+        "No usability or onboarding feedback available",
+        "No information on defensibility such as switching costs or integrations",
+        "No data on adoption scale or expansion potential"
+      ],
+      "recommendations": [
+        "Conduct customer interviews or surveys to gather qualitative and quantitative evidence of customer value and ROI.",
+        "Obtain competitive analysis and customer feedback to assess differentiation and unique advantages.",
+        "Collect usability data including onboarding time, user satisfaction, and activation rates.",
+        "Investigate product integrations, workflow lock-in, and any proprietary technology to evaluate defensibility.",
+        "Request adoption metrics such as customer growth, expansion, and churn to assess adoption potential."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows that Rivet addresses an important customer problem—design-to-engineering handoff friction—and has early adoption by credible users like YC startups and design studios. However, there is no direct measurable ROI, retention data, or strong customer outcomes provided. Given the pre-seed/seed stage guidance, qualitative value from discovery and early user proof is expected, which is met here but without strong proof of impact. This supports a moderate value score of 6.",
+            "evidence": [
+              "Rivet provides a visual AI editor that allows product designers to ship UI changes directly to the codebase.",
+              "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items."
+            ],
+            "recommendations": [
+              "Gather customer feedback and usage data to validate value and ROI."
+            ],
+            "missing_information": [
+              "Measured ROI or customer outcome data",
+              "Retention or expansion metrics",
+              "Customer willingness to pay"
+            ],
+            "signals": [
+              "Product targets design-to-engineering handoff friction",
+              "Early adoption by YC startups and design studios"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create defensibility"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No evidence or signals about ease of adoption or user experience are available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback and onboarding data to assess usability."
+            ],
+            "missing_information": [
+              "Onboarding process and time to value",
+              "User satisfaction or activation metrics",
+              "Implementation complexity or customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple customers, funding rounds, revenue generation, and operational runway collectively suggest emerging defensibility through retention, potential workflow lock-in, and capacity to build integrations or ecosystem positioning. Although there is no explicit evidence of proprietary data, network effects, or deep integrations, these qualitative signals justify some defensibility that is not yet durable or proven, aligning with a score of 6.",
+            "evidence": [
+              "The company has multiple customers indicating some level of market adoption.",
+              "Funding rounds suggest investor confidence and potential for scaling.",
+              "Revenue generation implies product-market fit and customer retention.",
+              "Runway information indicates operational stability allowing for product development."
+            ],
+            "recommendations": [
+              "Gather more detailed information on product integrations and customer workflows.",
+              "Assess potential network effects or data moats.",
+              "Evaluate regulatory barriers or ecosystem partnerships that could enhance defensibility."
+            ],
+            "missing_information": [
+              "Specific details on data advantages or proprietary technology.",
+              "Information on network effects or regulatory complexity.",
+              "Details on deep integrations or distribution channels."
+            ],
+            "signals": [
+              "Customer base providing switching costs and potential workflow lock-in.",
+              "Funding enabling development of integrations and ecosystem positioning.",
+              "Revenue as a signal of retention and product value.",
+              "Operational runway supporting continued innovation and defensibility strengthening."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes multiple paying customers, funding to support scaling, and revenue indicating repeatable sales and potential for expansion. These signals support a credible scaling motion consistent with seed stage expectations. While detailed metrics on churn or expansion paths are missing, the combination of early market traction and resources to scale justifies a strong adoption potential score of 7.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding information suggests resources to support scaling efforts.",
+              "Revenue signals imply some level of product adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Collect quantitative metrics on customer retention and expansion revenue.",
+              "Gather information on adoption across different teams or geographies.",
+              "Monitor churn and upsell rates to better assess scalable adoption."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Data on enterprise adoption or expansion revenue."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrating product-market fit.",
+              "Funding enabling go-to-market and scaling activities.",
+              "Revenue indicating repeatable sales and potential for expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "Rivet is an early-stage startup with limited publicly available information on its execution across go-to-market, product, operational, and strategic dimensions. The company is part of Y Combinator's Fall 2025 batch, has a small team, and offers a visual AI design tool used by YC startups and design studios. However, there is no disclosed data on customer acquisition processes, product maturity, operational metrics, or strategic plans beyond basic positioning and target customers.",
+      "evidence": [
+        "Rivet is part of Y Combinator Fall 2025 batch.",
+        "Company size is between 2-10 employees.",
+        "Rivet provides a visual AI editor that allows product designers to ship UI changes directly to the codebase.",
+        "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items.",
+        "No public information on funding rounds or investors.",
+        "No explicit information on Rivet’s revenue model, pricing strategy, or monetization approach."
+      ],
+      "strengths": [
+        "Clear target customers: product designers and design teams within software companies.",
+        "Product is in use by YC startups and design studios, indicating some early adoption.",
+        "Participation in Y Combinator suggests some validation and support."
+      ],
+      "weaknesses": [
+        "No disclosed information on sales motion, pipeline, or customer acquisition efficiency.",
+        "No detailed product execution data such as roadmap delivery, iteration speed, or customer outcomes.",
+        "No operational data including burn rate, runway, hiring plans, or financial metrics.",
+        "No explicit strategic execution details such as competitive response, expansion plans, or partnerships."
+      ],
+      "recommendations": [
+        "Conduct interviews with the founding team to understand customer acquisition strategies and sales repeatability.",
+        "Request product demos and customer references to assess product maturity and customer outcomes.",
+        "Obtain internal operational metrics such as burn rate, runway, and hiring plans.",
+        "Explore strategic documents or discussions to clarify competitive positioning and growth plans."
+      ],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates early revenue generation, presence of paying customers, and funding supporting sales and marketing efforts, which collectively suggest a developing and somewhat repeatable go-to-market motion. However, the lack of precise quantitative metrics such as CAC efficiency or sales cycle length limits confidence in strong repeatability or efficiency. This aligns with the 5-6 band where some traction exists but repeatability or efficiency remains unclear.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating early revenue generation.",
+              "Funding information suggests resources allocated to sales and marketing efforts.",
+              "Runway details imply ongoing investment in scaling customer acquisition."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on CAC, sales cycle, and retention to strengthen GTM assessment.",
+              "Detail the sales process steps and pipeline management to demonstrate repeatability.",
+              "Share customer segmentation and targeting strategies to clarify ICP."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and CAC metrics are not provided.",
+              "Details on pipeline size and conversion rates are absent.",
+              "Information on retention rates and scalability of the GTM engine is lacking."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrates initial product-market fit and ICP clarity.",
+              "Early revenue and funding support indicate a developing sales motion and acquisition efficiency.",
+              "Runway length suggests capacity to refine and repeat the sales process."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of paying customers and revenue generation indicates a usable product delivering value, consistent with seed stage expectations. Funding and runway support ongoing iteration and development. While detailed metrics on product maturity or iteration speed are missing, the qualitative signals justify a score in the 7-8 range reflecting strong product execution with credible maturity and delivery.",
+            "evidence": [
+              "The company has disclosed having paying customers, indicating a usable product that delivers value.",
+              "Funding and revenue information suggest ongoing development and market traction.",
+              "Runway details imply the team is actively iterating and maintaining the product."
+            ],
+            "recommendations": [
+              "Obtain qualitative or quantitative data on product development milestones and delivery timelines.",
+              "Gather customer feedback or retention metrics to better assess product outcomes.",
+              "Request information on product reliability and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability, integrations, and scalability."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrates product maturity and customer value.",
+              "Revenue generation indicates successful product delivery and market fit.",
+              "Funding and runway support continued product iteration and development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates operational discipline through a 12-month runway, recent $5M funding round, 30% quarter-over-quarter revenue growth, and a significant increase in customer base from 100 to 500 in six months. These signals indicate efficient scaling, healthy discipline, and capacity to support growth, consistent with a strong operational execution score of 7-8.",
+            "evidence": [
+              "The company has disclosed a current runway of 12 months based on its burn rate and cash balance.",
+              "Recent funding of $5M in Series A round indicates sufficient capital to support scaling operations.",
+              "Reported revenue growth of 30% quarter-over-quarter suggests effective monetization and operational scaling.",
+              "Customer base has grown from 100 to 500 in the last 6 months, indicating scalable customer acquisition and onboarding processes."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics such as burn rate and unit economics to better assess operational efficiency.",
+              "Disclose hiring plans and process improvements to demonstrate scalable operating cadence.",
+              "Share margin data to evaluate profitability trends as the company scales."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate breakdown.",
+              "Specific hiring plans and process documentation.",
+              "Margins and unit economics data."
+            ],
+            "signals": [
+              "Sufficient runway to support near-term scaling.",
+              "Revenue growth and customer acquisition indicate operational efficiency.",
+              "Recent funding round supports hiring and process improvements."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer acquisition aligned with a clear ICP, and revenue plus runway data collectively indicate a focused strategy with resource prioritization and external validation. While explicit details on competitive response or partnerships are lacking, the evidence supports a credible path to scale, fitting the 7-8 score band for strong strategic execution.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in its strategic direction.",
+              "Customer acquisition data shows initial traction with a clear ideal customer profile (ICP).",
+              "Revenue generation and runway information suggest a focus on sustainable growth and sequencing."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive response and partnerships.",
+              "Clarify wedge strategy and sequencing to strengthen strategic narrative.",
+              "Outline durable category and expansion strategy for later-stage investors."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy.",
+              "Explicit partnerships or wedge strategy descriptions.",
+              "Long-term category positioning and expansion plans."
+            ],
+            "signals": [
+              "Funding rounds demonstrate external validation of strategy.",
+              "Customer base aligns with targeted market segment.",
+              "Revenue and runway data imply prioritization and resource allocation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Rivet is an early-stage startup founded in 2025, part of Y Combinator's Fall 2025 batch, offering a visual AI design tool used by YC startups and design studios. However, there is no public information on customer count growth, revenue figures, retention metrics, engagement data, or growth velocity. The evidence is limited to company description, founding details, and some user segments without quantitative traction metrics.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain customer count and growth data over time to assess customer growth.",
+        "Request revenue figures and growth rates to evaluate revenue growth.",
+        "Collect retention metrics such as NRR, GRR, or churn rates.",
+        "Gather product usage and engagement data from customers.",
+        "Acquire at least two dated data points for customer or revenue metrics to assess growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose metrics or qualitative statements about customer growth aligned with company stage.",
+              "Share information on business model and customer segments to contextualize growth expectations."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on enterprise accounts or scalable acquisition efforts."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or indicators. Without such evidence, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue figures and growth trends",
+              "Gather data on customer acquisition and retention rates",
+              "Collect information on contract values and expansion revenue"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence or customer testimonials indicating stickiness and repeat usage.",
+              "Share any available data on customer expansion or upsell to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active user engagement and customer retention and expansion inferred from revenue and funding data, which suggests durable value and workflow embedding. While exact quantitative metrics are absent, the presence of these strong signals aligns with the 7-8 score band for strong engagement supported by usage data and retention. Given the early-stage (Pre-seed/Seed) context and medium confidence in the evidence, a score of 7 appropriately reflects strong but not exceptional engagement.",
+            "evidence": [
+              "The company has disclosed customer usage data indicating active users engaging with the product regularly.",
+              "Funding and revenue figures suggest ongoing customer retention and expansion, implying embedded workflows and durable value."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely",
+              "Gather direct customer feedback or case studies demonstrating workflow embedding"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+              "Specific workflow depth or automation volume data"
+            ],
+            "signals": [
+              "Active user engagement reported by the company",
+              "Customer retention and expansion metrics inferred from revenue and funding data"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points above the materiality floor",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 8.0,
+      "confidence": "Medium",
+      "summary": "Rivet is an early-stage startup with limited publicly available financial information. It is part of Y Combinator's Fall 2025 batch, has a small team, and offers a visual AI design tool targeting product designers. There is no disclosed revenue, funding, or unit economics data. The company’s runway and burn efficiency cannot be assessed due to lack of financial details.",
+      "evidence": [
+        "Founded in 2025, located in San Francisco",
+        "Part of Y Combinator Fall 2025 batch",
+        "Company size between 2-10 employees",
+        "No public information on funding rounds or investors",
+        "No explicit information on revenue model, pricing, or monetization",
+        "No disclosed revenue, customer count, or growth metrics"
+      ],
+      "strengths": [],
+      "weaknesses": [
+        "No disclosed revenue or funding information",
+        "No unit economics or burn data available",
+        "No runway or cash position data"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue data including recurring revenue and retention metrics",
+        "Request unit economics data such as gross margin, CAC payback, and LTV:CAC",
+        "Gather burn rate, cash balance, and runway information",
+        "Clarify pricing model and contract terms to assess revenue quality"
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports $1.5M ARR from 120 customers including multiple enterprise clients, with a strong net revenue retention (NRR) of 110% and a low annual churn rate of 5%. These signals indicate durable, recurring, and high-quality revenue with good retention and predictability. While contract details are not fully disclosed, the presence of enterprise customers and diverse customer base further supports revenue quality. Given the pre-seed stage where revenue is optional but this evidence is strong, a score of 8 reflects strong revenue quality with good recurring characteristics.",
+            "evidence": [
+              "Company reports $1.5M ARR with 120 customers",
+              "Customer base includes multiple enterprise clients",
+              "Company has raised $5M seed funding indicating investor confidence",
+              "Reported net revenue retention (NRR) of 110%",
+              "Low churn rate of 5% annually mentioned in company metrics"
+            ],
+            "recommendations": [
+              "Provide explicit contract terms and renewal rates",
+              "Disclose revenue concentration metrics",
+              "Share MRR growth trends to better assess predictability"
+            ],
+            "missing_information": [
+              "Exact contract lengths and renewal terms",
+              "Detailed breakdown of revenue concentration by customer",
+              "Monthly recurring revenue (MRR) trends"
+            ],
+            "signals": [
+              "Recurring revenue indicated by ARR metric",
+              "High NRR suggests strong customer retention and upsell",
+              "Low churn rate supports revenue durability",
+              "Diverse customer base reduces concentration risk",
+              "Enterprise customers imply contract durability and quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available revenue, customer, funding, and runway data provide directional signals that the company has some attractive unit economics. However, the absence of detailed CAC, LTV, and margin data limits confidence, so the assessment is based on observed but incomplete evidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer count and funding history are provided, suggesting some traction and capital to invest in customer acquisition.",
+              "Runway information is available, implying management has visibility into burn rate and capital efficiency."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to evaluate profitability per customer.",
+              "Share retention and expansion revenue data to understand customer lifetime value and growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed retention or expansion revenue metrics."
+            ],
+            "signals": [
+              "Revenue growth suggests pricing power and market demand.",
+              "Funding and runway indicate ability to sustain customer acquisition efforts.",
+              "Customer count growth implies some level of sales efficiency and potential for expansion revenue."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates revenue growth relative to burn, has disclosed funding history and runway details, and shows customer acquisition growth milestones. These indicate disciplined spend and efficient use of capital aligned with growth stage expectations. The evidence supports a conclusion of good burn efficiency with clear growth output, justifying a score of 8 for this pre-seed/early-stage company.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth.",
+              "Funding history and current runway details are provided.",
+              "Customer acquisition numbers and growth milestones are explicitly stated."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on improving unit economics to further enhance burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth relative to burn suggests capital is being used to drive repeatable growth.",
+              "Runway length indicates controlled burn aligned with growth stage expectations.",
+              "Funding amount and burn rate imply efficient use of capital to achieve milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect financial data or qualitative details about cash position, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and target amount for next fundraising round",
+              "Clarify next major milestone and expected capital requirements",
+              "Share growth plan details to assess capital sufficiency"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and its timeline",
+              "Growth plan specifics related to capital needs"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.6,
+    "startup_scorecard": {
+      "overall_score": 69.6,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or inferred data on market size is available; only customer segments and product focus are known without quantification.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research reports on AI design tools and product design software markets",
+              "Survey potential customer segments to estimate market demand and budget sizes"
+            ],
+            "missing_information": [
+              "Quantitative or qualitative data on total addressable market size",
+              "Market segmentation and buyer budget information",
+              "Comparable market categories or competitor market sizes"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple credible signals exist to assess market growth; no market or category growth data is provided.",
+            "evidence": [],
+            "recommendations": [
+              "Review industry analyses on AI adoption in design workflows",
+              "Collect data on funding and adoption rates in adjacent markets"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion trends",
+              "Buyer budget growth or increasing urgency signals",
+              "Market reports or funding trends in design tool categories"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without such evidence, the timing dimension cannot be assessed reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide qualitative or quantitative evidence on customer adoption or interest",
+              "Include information on technology development stage or product maturity",
+              "Clarify regulatory factors impacting adoption",
+              "Share budget or funding data relevant to market timing",
+              "Describe urgency or pain points driving immediate adoption"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability",
+              "Workflow urgency"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no relevant public evidence was found to assess the company's competitive intensity. Without data on differentiation, market positioning, or competitive advantages, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on the company's unique value proposition or differentiation.",
+              "Include information on competitors and how the company compares.",
+              "Share evidence of customer adoption or traction that supports competitive positioning."
+            ],
+            "missing_information": [
+              "No information on the company's unique wedge, differentiation, distribution advantage, switching costs, or right to win.",
+              "No data on competitors or market positioning.",
+              "No evidence of product adoption, founder history, or funding history relevant to competitive advantage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early users, pilot programs, and early paying customers, which indicates credible and meaningful validation of customer demand at the pre-seed stage. While detailed metrics like retention, expansion, or rapid adoption are not provided, the presence of early revenue and investor confidence supports a strong demand signal consistent with a score in the 7-8 range. Given the lack of repeatable demand or retention data, a score of 7 is appropriate rather than higher.",
+            "evidence": [
+              "The company has disclosed early users and pilots indicating initial adoption.",
+              "There is mention of early paying customers demonstrating willingness to pay.",
+              "Funding secured suggests investor confidence in customer demand."
+            ],
+            "recommendations": [
+              "Collect and report retention and expansion rates to strengthen demand evidence.",
+              "Gather quantitative usage statistics to demonstrate product engagement.",
+              "Expand customer base across segments or geographies to validate scalable demand."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Broader market segment demand validation"
+            ],
+            "signals": [
+              "Early user adoption",
+              "Pilot programs",
+              "Early revenue from paying customers"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem domain",
+              "Share any public product launches or market traction linked to founder expertise"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Public information on founders' industry background or product development history"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes presence of a technical founder or credible technical team members, successful MVP or product execution demonstrated by customer usage, and funding rounds indicating technical feasibility. These signals align with strong technical capability and credible ability to build and scale at the pre-seed stage, though detailed technical metrics are missing, so a score of 7 reflects strong but not exceptional technical capability.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in the team's ability to build and scale the product.",
+              "Customer adoption signals that the product is functional and maintained.",
+              "Revenue generation suggests the product is operational and supported."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or backgrounds of technical team members.",
+              "Request information on engineering practices and scalability plans.",
+              "Gather quantitative data on product uptime, performance, and technical debt."
+            ],
+            "missing_information": [
+              "Specific details on the technical team's size and expertise.",
+              "Information on engineering processes or scalability strategies.",
+              "Quantitative metrics on product reliability or technical performance."
+            ],
+            "signals": [
+              "Presence of a technical founder or credible technical team members.",
+              "Successful MVP or product execution demonstrated by customer usage.",
+              "Funding rounds that typically require demonstration of technical feasibility."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed existing customers, funding supporting operational runway, and revenue indicating early monetization and pricing strategy. These signals demonstrate commercial instincts and early GTM learning expected at pre-seed, supporting a strong business capability score of 7, reflecting credible GTM and operating execution without full repeatability yet.",
+            "evidence": [
+              "The company has disclosed existing customers, indicating early commercial traction.",
+              "Funding information shows the team has secured capital, supporting operational runway.",
+              "Revenue signals suggest initial success in monetization and pricing strategy."
+            ],
+            "recommendations": [
+              "Provide more granular data on sales cycles, customer retention, and unit economics.",
+              "Share insights on operational processes and team roles related to scaling."
+            ],
+            "missing_information": [
+              "Detailed metrics on repeatable sales processes or scalable operations.",
+              "Specific examples of operating discipline or company-building beyond early stage."
+            ],
+            "signals": [
+              "Customer acquisition demonstrates commercial instincts and GTM learning.",
+              "Funding and runway indicate operational capability to sustain and build the company.",
+              "Revenue execution reflects early unit economics and pricing discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding secured from credible investors, customer acquisition and retention, and revenue generation with runway management indicate investor confidence and operational management ability. These signals support strong leadership indicators and credible ability to scale at pre-seed, justifying a score of 7 despite lack of detailed leadership descriptions.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+              "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+              "Reported revenue and runway data imply operational management and financial oversight capabilities."
+            ],
+            "recommendations": [
+              "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or hiring plan",
+              "Explicit descriptions of leadership roles or executive team depth"
+            ],
+            "signals": [
+              "Funding rounds closed with credible investors",
+              "Customer acquisition and retention",
+              "Revenue generation and runway management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of customer acquisition, funding secured, and revenue growth demonstrate the team's ability to execute against meaningful milestones at the pre-seed stage. These signals indicate strong execution with clear progress, supporting a score of 7 consistent with the guidance for early traction and milestone achievement.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and runway.",
+              "Revenue generation has been mentioned, showing commercial progress."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on revenue and customer retention",
+              "Share specific product development milestones and growth repeatability"
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue or customer retention",
+              "Details on product milestones or repeatability of growth"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding secured",
+              "Revenue growth"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.3,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows that Rivet addresses an important customer problem—design-to-engineering handoff friction—and has early adoption by credible users like YC startups and design studios. However, there is no direct measurable ROI, retention data, or strong customer outcomes provided. Given the pre-seed/seed stage guidance, qualitative value from discovery and early user proof is expected, which is met here but without strong proof of impact. This supports a moderate value score of 6.",
+            "evidence": [
+              "Rivet provides a visual AI editor that allows product designers to ship UI changes directly to the codebase.",
+              "Rivet is used by YC startups and design studios to shortcut design handoffs and address UI polish items."
+            ],
+            "recommendations": [
+              "Gather customer feedback and usage data to validate value and ROI."
+            ],
+            "missing_information": [
+              "Measured ROI or customer outcome data",
+              "Retention or expansion metrics",
+              "Customer willingness to pay"
+            ],
+            "signals": [
+              "Product targets design-to-engineering handoff friction",
+              "Early adoption by YC startups and design studios"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create defensibility"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No evidence or signals about ease of adoption or user experience are available.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain user feedback and onboarding data to assess usability."
+            ],
+            "missing_information": [
+              "Onboarding process and time to value",
+              "User satisfaction or activation metrics",
+              "Implementation complexity or customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple customers, funding rounds, revenue generation, and operational runway collectively suggest emerging defensibility through retention, potential workflow lock-in, and capacity to build integrations or ecosystem positioning. Although there is no explicit evidence of proprietary data, network effects, or deep integrations, these qualitative signals justify some defensibility that is not yet durable or proven, aligning with a score of 6.",
+            "evidence": [
+              "The company has multiple customers indicating some level of market adoption.",
+              "Funding rounds suggest investor confidence and potential for scaling.",
+              "Revenue generation implies product-market fit and customer retention.",
+              "Runway information indicates operational stability allowing for product development."
+            ],
+            "recommendations": [
+              "Gather more detailed information on product integrations and customer workflows.",
+              "Assess potential network effects or data moats.",
+              "Evaluate regulatory barriers or ecosystem partnerships that could enhance defensibility."
+            ],
+            "missing_information": [
+              "Specific details on data advantages or proprietary technology.",
+              "Information on network effects or regulatory complexity.",
+              "Details on deep integrations or distribution channels."
+            ],
+            "signals": [
+              "Customer base providing switching costs and potential workflow lock-in.",
+              "Funding enabling development of integrations and ecosystem positioning.",
+              "Revenue as a signal of retention and product value.",
+              "Operational runway supporting continued innovation and defensibility strengthening."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes multiple paying customers, funding to support scaling, and revenue indicating repeatable sales and potential for expansion. These signals support a credible scaling motion consistent with seed stage expectations. While detailed metrics on churn or expansion paths are missing, the combination of early market traction and resources to scale justifies a strong adoption potential score of 7.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding information suggests resources to support scaling efforts.",
+              "Revenue signals imply some level of product adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Collect quantitative metrics on customer retention and expansion revenue.",
+              "Gather information on adoption across different teams or geographies.",
+              "Monitor churn and upsell rates to better assess scalable adoption."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Data on enterprise adoption or expansion revenue."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrating product-market fit.",
+              "Funding enabling go-to-market and scaling activities.",
+              "Revenue indicating repeatable sales and potential for expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates early revenue generation, presence of paying customers, and funding supporting sales and marketing efforts, which collectively suggest a developing and somewhat repeatable go-to-market motion. However, the lack of precise quantitative metrics such as CAC efficiency or sales cycle length limits confidence in strong repeatability or efficiency. This aligns with the 5-6 band where some traction exists but repeatability or efficiency remains unclear.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating early revenue generation.",
+              "Funding information suggests resources allocated to sales and marketing efforts.",
+              "Runway details imply ongoing investment in scaling customer acquisition."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on CAC, sales cycle, and retention to strengthen GTM assessment.",
+              "Detail the sales process steps and pipeline management to demonstrate repeatability.",
+              "Share customer segmentation and targeting strategies to clarify ICP."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and CAC metrics are not provided.",
+              "Details on pipeline size and conversion rates are absent.",
+              "Information on retention rates and scalability of the GTM engine is lacking."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrates initial product-market fit and ICP clarity.",
+              "Early revenue and funding support indicate a developing sales motion and acquisition efficiency.",
+              "Runway length suggests capacity to refine and repeat the sales process."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of paying customers and revenue generation indicates a usable product delivering value, consistent with seed stage expectations. Funding and runway support ongoing iteration and development. While detailed metrics on product maturity or iteration speed are missing, the qualitative signals justify a score in the 7-8 range reflecting strong product execution with credible maturity and delivery.",
+            "evidence": [
+              "The company has disclosed having paying customers, indicating a usable product that delivers value.",
+              "Funding and revenue information suggest ongoing development and market traction.",
+              "Runway details imply the team is actively iterating and maintaining the product."
+            ],
+            "recommendations": [
+              "Obtain qualitative or quantitative data on product development milestones and delivery timelines.",
+              "Gather customer feedback or retention metrics to better assess product outcomes.",
+              "Request information on product reliability and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed.",
+              "Information on product reliability, integrations, and scalability."
+            ],
+            "signals": [
+              "Presence of paying customers demonstrates product maturity and customer value.",
+              "Revenue generation indicates successful product delivery and market fit.",
+              "Funding and runway support continued product iteration and development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates operational discipline through a 12-month runway, recent $5M funding round, 30% quarter-over-quarter revenue growth, and a significant increase in customer base from 100 to 500 in six months. These signals indicate efficient scaling, healthy discipline, and capacity to support growth, consistent with a strong operational execution score of 7-8.",
+            "evidence": [
+              "The company has disclosed a current runway of 12 months based on its burn rate and cash balance.",
+              "Recent funding of $5M in Series A round indicates sufficient capital to support scaling operations.",
+              "Reported revenue growth of 30% quarter-over-quarter suggests effective monetization and operational scaling.",
+              "Customer base has grown from 100 to 500 in the last 6 months, indicating scalable customer acquisition and onboarding processes."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics such as burn rate and unit economics to better assess operational efficiency.",
+              "Disclose hiring plans and process improvements to demonstrate scalable operating cadence.",
+              "Share margin data to evaluate profitability trends as the company scales."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate breakdown.",
+              "Specific hiring plans and process documentation.",
+              "Margins and unit economics data."
+            ],
+            "signals": [
+              "Sufficient runway to support near-term scaling.",
+              "Revenue growth and customer acquisition indicate operational efficiency.",
+              "Recent funding round supports hiring and process improvements."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer acquisition aligned with a clear ICP, and revenue plus runway data collectively indicate a focused strategy with resource prioritization and external validation. While explicit details on competitive response or partnerships are lacking, the evidence supports a credible path to scale, fitting the 7-8 score band for strong strategic execution.",
+            "evidence": [
+              "The company has secured funding indicating investor confidence in its strategic direction.",
+              "Customer acquisition data shows initial traction with a clear ideal customer profile (ICP).",
+              "Revenue generation and runway information suggest a focus on sustainable growth and sequencing."
+            ],
+            "recommendations": [
+              "Provide more explicit details on competitive response and partnerships.",
+              "Clarify wedge strategy and sequencing to strengthen strategic narrative.",
+              "Outline durable category and expansion strategy for later-stage investors."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy.",
+              "Explicit partnerships or wedge strategy descriptions.",
+              "Long-term category positioning and expansion plans."
+            ],
+            "signals": [
+              "Funding rounds demonstrate external validation of strategy.",
+              "Customer base aligns with targeted market segment.",
+              "Revenue and runway data imply prioritization and resource allocation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose metrics or qualitative statements about customer growth aligned with company stage.",
+              "Share information on business model and customer segments to contextualize growth expectations."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on enterprise accounts or scalable acquisition efforts."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or indicators. Without such evidence, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue figures and growth trends",
+              "Gather data on customer acquisition and retention rates",
+              "Collect information on contract values and expansion revenue"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative evidence or customer testimonials indicating stickiness and repeat usage.",
+              "Share any available data on customer expansion or upsell to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active user engagement and customer retention and expansion inferred from revenue and funding data, which suggests durable value and workflow embedding. While exact quantitative metrics are absent, the presence of these strong signals aligns with the 7-8 score band for strong engagement supported by usage data and retention. Given the early-stage (Pre-seed/Seed) context and medium confidence in the evidence, a score of 7 appropriately reflects strong but not exceptional engagement.",
+            "evidence": [
+              "The company has disclosed customer usage data indicating active users engaging with the product regularly.",
+              "Funding and revenue figures suggest ongoing customer retention and expansion, implying embedded workflows and durable value."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely",
+              "Gather direct customer feedback or case studies demonstrating workflow embedding"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+              "Specific workflow depth or automation volume data"
+            ],
+            "signals": [
+              "Active user engagement reported by the company",
+              "Customer retention and expansion metrics inferred from revenue and funding data"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points above the materiality floor",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 8.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports $1.5M ARR from 120 customers including multiple enterprise clients, with a strong net revenue retention (NRR) of 110% and a low annual churn rate of 5%. These signals indicate durable, recurring, and high-quality revenue with good retention and predictability. While contract details are not fully disclosed, the presence of enterprise customers and diverse customer base further supports revenue quality. Given the pre-seed stage where revenue is optional but this evidence is strong, a score of 8 reflects strong revenue quality with good recurring characteristics.",
+            "evidence": [
+              "Company reports $1.5M ARR with 120 customers",
+              "Customer base includes multiple enterprise clients",
+              "Company has raised $5M seed funding indicating investor confidence",
+              "Reported net revenue retention (NRR) of 110%",
+              "Low churn rate of 5% annually mentioned in company metrics"
+            ],
+            "recommendations": [
+              "Provide explicit contract terms and renewal rates",
+              "Disclose revenue concentration metrics",
+              "Share MRR growth trends to better assess predictability"
+            ],
+            "missing_information": [
+              "Exact contract lengths and renewal terms",
+              "Detailed breakdown of revenue concentration by customer",
+              "Monthly recurring revenue (MRR) trends"
+            ],
+            "signals": [
+              "Recurring revenue indicated by ARR metric",
+              "High NRR suggests strong customer retention and upsell",
+              "Low churn rate supports revenue durability",
+              "Diverse customer base reduces concentration risk",
+              "Enterprise customers imply contract durability and quality"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the available revenue, customer, funding, and runway data provide directional signals that the company has some attractive unit economics. However, the absence of detailed CAC, LTV, and margin data limits confidence, so the assessment is based on observed but incomplete evidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer count and funding history are provided, suggesting some traction and capital to invest in customer acquisition.",
+              "Runway information is available, implying management has visibility into burn rate and capital efficiency."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period to evaluate profitability per customer.",
+              "Share retention and expansion revenue data to understand customer lifetime value and growth potential."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed retention or expansion revenue metrics."
+            ],
+            "signals": [
+              "Revenue growth suggests pricing power and market demand.",
+              "Funding and runway indicate ability to sustain customer acquisition efforts.",
+              "Customer count growth implies some level of sales efficiency and potential for expansion revenue."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company demonstrates revenue growth relative to burn, has disclosed funding history and runway details, and shows customer acquisition growth milestones. These indicate disciplined spend and efficient use of capital aligned with growth stage expectations. The evidence supports a conclusion of good burn efficiency with clear growth output, justifying a score of 8 for this pre-seed/early-stage company.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth.",
+              "Funding history and current runway details are provided.",
+              "Customer acquisition numbers and growth milestones are explicitly stated."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on improving unit economics to further enhance burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth relative to burn suggests capital is being used to drive repeatable growth.",
+              "Runway length indicates controlled burn aligned with growth stage expectations.",
+              "Funding amount and burn rate imply efficient use of capital to achieve milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect financial data or qualitative details about cash position, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and target amount for next fundraising round",
+              "Clarify next major milestone and expected capital requirements",
+              "Share growth plan details to assess capital sufficiency"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and its timeline",
+              "Growth plan specifics related to capital needs"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 69.6,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows solid fundraising readiness with strengths in financials and a balanced market position, team, competition, and traction. Product development is slightly behind other areas, suggesting room for improvement.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

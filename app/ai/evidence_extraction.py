@@ -23,6 +23,7 @@ from typing import Any
 from app.ai.scoring import get_scoring_dimensions
 from app.ai.scoring_methodology import SCORING_METHODOLOGY
 from app.ai.sie_v2_methodology import deterministic_dimension_names
+from app.ai.evidence_provenance import apply_provenance_guard
 from app.models.evidence_analysis import EvidenceAnalysis, PillarEvidenceAnalysis
 
 from app.ai.pillar_shared import (
@@ -769,9 +770,22 @@ def extract_pillar_evidence(
                 f"only -- every other dimension is unaffected."
             )
 
+    ordered_dimensions = [dimensions[name] for name in expected_dimensions]
+
+    # Methodology V2.1 (Phase 10.8B, Part 3): deterministic, Python-side
+    # guard against fabricated quantitative evidence -- see
+    # app/ai/evidence_provenance.py's module docstring for the Loom/Plaid/
+    # Rippling cases from the Phase 10.8 validation cohort that motivated
+    # this. Runs after all model calls for this pillar are done, so it
+    # can never be talked out of its check by a correction prompt.
+    ordered_dimensions, provenance_altered_names = apply_provenance_guard(
+        ordered_dimensions, company_text
+    )
+    corrected_names = corrected_names | provenance_altered_names
+
     pillar_evidence = PillarEvidenceAnalysis(
         pillar=pillar,
-        dimensions=[dimensions[name] for name in expected_dimensions],
+        dimensions=ordered_dimensions,
     )
 
     return pillar_evidence, narrative_fields, corrected_names

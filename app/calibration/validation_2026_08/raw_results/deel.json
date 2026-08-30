@@ -1,0 +1,2454 @@
+{
+  "summary": "Deel is a leading global workforce management platform that enables companies to hire, pay, manage, and equip employees and contractors anywhere in the world through a centralized system. Serving over 40,000 customers and processing more than $20 billion in payroll, Deel supports compliant payroll in 150+ countries and currencies—including cryptocurrency—and offers a suite of solutions such as Deel Payroll, HR, IT device management, Benefits, Hiring, Mobility (visa services), and Employer of Record (EOR).\n\nKey differentiators include a combination of actionable AI and a network of 2,000+ local experts to ensure compliance with local labor laws, fast onboarding (within days), and consolidation of diverse workforce types (contractors, EOR employees) into a single platform. Deel’s infrastructure is built on owned legal entities and proprietary payroll engines, enhancing reliability and control compared to some competitors relying on third parties.\n\nThe platform’s business model blends SaaS subscription fees—starting around $29 per employee monthly for payroll—with service fees for EOR and contractor management, alongside payment processing fees varying by funding method. Deel targets companies of all sizes, from startups to enterprises, especially those with complex multi-country payroll, global hiring needs, and remote or distributed teams.\n\nDeel competes directly with other global payroll and EOR providers like Remote, Papaya Global, Multiplier, Pebl (Velocity Global), and Rippling. It is highly regarded by customers, boasting an average rating near 4.8/5 from 14,000+ reviews, with particular praise for its compliance capabilities, ease of global payroll management, and speed of international hiring.\n\nPotential risks include intense competition, regulatory complexity across numerous jurisdictions, and the challenge of scaling personalized compliance services while maintaining high customer satisfaction. Nonetheless, Deel’s comprehensive platform, strong local expertise, proprietary infrastructure, and AI-driven compliance position it as a leading solution for companies aiming to build and manage borderless global teams efficiently and compliantly.",
+  "risk_analysis": "Here is a detailed risk analysis of Deel focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- **Highly Competitive Global Payroll & EOR Market:** Deel operates in a crowded market with multiple well-funded competitors such as Remote, Papaya Global, Multiplier, Pebl (Velocity Global), Rippling, Safeguard Global, and Lano. Many competitors have overlapping service portfolios targeting similar customer segments.  \n- **Pricing Pressure:** Competitors like Multiplier offer flat pricing and strong regional coverage (e.g., Asia-Pacific) which may appeal to price-sensitive customers or those with geographical concentration, potentially pressuring Deel’s pricing model which includes per-employee fees plus payment processing costs.  \n- **Differentiation Challenges:** While Deel has strengths such as in-house infrastructure, AI-driven compliance, and extensive local expertise, competitors may innovate or undercut pricing, reducing Deel’s distinct advantages. New entrants could further fragment the market.  \n- **Customer Loyalty & Switching Costs:** Payroll and HR are mission-critical services with high switching costs, supporting customer retention. However, if competitors offer better integrations, pricing, or features, Deel risks losing customers in this dynamic landscape.\n\n2. Scalability Risk  \n- **Complexity of Multinational Compliance:** Scaling operations across 150+ countries with varying labor laws and payroll regulations is inherently complex. Deel relies on a hybrid model combining 2,000+ local experts with AI-driven compliance logic. Managing, updating, and assuring quality globally may limit rapid scale or increase costs.  \n- **Maintaining Service Consistency:** As Deel scales, maintaining high-quality, responsive service (noted by a 90+ NPS) requires expanding its local expert workforce and sustaining AI accuracy, which demands ongoing investment. Failure to scale this effectively could degrade customer experience.  \n- **Technology Infrastructure Limits:** Deel’s reliance on proprietary payroll engines and owned entities supports scalability but presents risk if the infrastructure cannot handle rapid user growth or platform complexity, affecting uptime or performance. Scaling SaaS platforms globally requires continual technology investments and upgrades.\n\n3. Market Risk  \n- **Dependence on Global Remote Work Trends:** Deel’s growth aligns with the rise in distributed, remote, and international teams. Any reversal in these trends post-pandemic or changes in corporate hiring strategies could reduce demand for Deel’s global hiring and payroll services.  \n- **Regulatory and Geopolitical Risks:** Changes in labor laws, visa regulations, and cross-border payment restrictions in key markets could increase compliance burdens or operational costs. Sudden policy changes (e.g., tightening of remote worker legal frameworks) could impact Deel’s ability to offer seamless services.  \n- **Economic Cyclicality:** Macro downturns or economic volatility impacting hiring budgets globally may lead to reduced customer acquisition or churn, affecting recurring revenue streams.\n\n4. Customer Adoption Risk  \n- **Onboarding Complexity Despite Promises of Speed:** While Deel emphasizes fast onboarding (“hire anywhere in days”), customers with complex organizational structures or in highly regulated sectors may experience delays or need custom solutions, reducing adoption velocity.  \n- **Customer Education & Trust:** Potential customers may be hesitant to outsource critical payroll and compliance functions internationally, requiring considerable trust-building. Any compliance errors or failures could rapidly erode reputation and deter adoption.  \n- **Pricing Sensitivity:** The combination of base fees, implementation costs, and variable payment processing fees could discourage smaller companies or startups with limited budgets from adopting Deel, especially versus competitors offering simpler or flat pricing models.  \n- **Dependence on Network Effects & Brand Recognition:** Deel’s strong customer base (40K+) and testimonials enhance credibility, but expansion into new verticals or regions may require substantial additional marketing and support investments.\n\n5. Operational Risk  \n- **Compliance Management Complexity:** Ensuring compliance across 150+ jurisdictions with evolving legal requirements is an ongoing operational challenge. Errors in tax, labor law, or visa handling could lead to financial penalties, legal actions, or customer dissatisfaction.  \n- **Reliance on Local Experts and AI Synergy:** Deel depends on combining AI systems with 2,000+ local experts. Failure to effectively integrate human insights with automation or loss of critical local talent could impair compliance, increasing operational risk.  \n- **Data Security and Privacy:** Handling sensitive employee and payroll data globally exposes Deel to cybersecurity risks and regulatory compliance requirements (GDPR, CCPA, others). Any data breach would severely impact reputation and incur potential liabilities.  \n- **Payment Processing Risks:** Variability and complexity of payment processing—with multiple currencies including crypto—introduces settlement risks, currency volatility exposure, and fraud potential. Managing these risks operationally and financially is crucial.  \n- **Scaling Customer Support:** Supporting multi-country clients with diverse needs requires robust customer service infrastructure. As Deel’s customer base grows, inability to provide timely, localized support could reduce customer satisfaction.\n\n------\n\n**Summary:**  \nDeel faces significant competition and pricing pressure in a rapidly evolving global payroll and workforce management market. Its hybrid compliance model and in-house technology constitute strong competitive advantages but also impose scalability and operational challenges—especially ensuring consistent service quality and compliance globally. Market risks from regulatory changes and shifting remote work trends add uncertainty. Customer adoption depends on overcoming trust barriers, pricing sensitivity, and onboarding complexity. Operational risks center on maintaining compliance, data security, and efficient payment processing at scale. Overall, Deel’s risks are typical for a high-growth SaaS + services company in a complex regulated global market, mitigated by its current large customer base, strong ratings, and technology-human expert integration.",
+  "competitor_analysis": "Here is a detailed competitor analysis for Deel, the global payroll, compliance, and HR solutions platform:\n\n---\n\n### Major Competitors\n\n1. **Remote**  \n   - Global payroll and EOR solution provider with strong compliance focus.  \n   - Similar global reach and service scope.  \n\n2. **Papaya Global**  \n   - Offers global payroll, EOR, and contractor management.  \n   - Known for extensive workforce management and integrations.  \n\n3. **Multiplier**  \n   - Noted for flat pricing model and strong Asia-Pacific market penetration.  \n   - Competes on pricing and regional strength.  \n\n4. **Pebl (formerly Velocity Global)**  \n   - Full-service HR support with custom pricing.  \n   - Well-regarded for handling complex global employment compliance.  \n\n5. **Rippling**  \n   - US-focused workforce platform with international add-ons.  \n   - Strong US market presence, integrating HRIS with global payroll.  \n\n6. **Safeguard Global**  \n   - Legacy payroll provider with a broader but less modern offering.  \n\n7. **Lano**  \n   - Focuses on global payroll consolidation and contractor management.  \n\n---\n\n### Competitive Advantages of Deel\n\n- **Extensive Global Reach:** Supports payroll and hiring in 150+ countries with 150+ currencies, including crypto payments, significantly broadening market appeal.  \n- **Comprehensive Solution Suite:** Offers payroll, HR, IT device support, visa handling, benefits, and EOR under a unified platform enabling true one-stop workforce management.  \n- **Technology & Compliance Synergy:** Combines in-house compliance logic, actionable AI workflows, and 2,000+ local experts ensuring accuracy and speed in compliance and approvals.  \n- **Modern Infrastructure:** Built on proprietary infrastructure with owned legal entities and single payroll engines offering operational control and reliability.  \n- **Strong Customer Base & Reputation:** Serves 40,000+ customers including startups and enterprises, with excellent customer satisfaction (4.8/5 average review score).  \n- **Speed to Hire:** Enables onboarding international employees and contractors within days, offering a competitive edge for fast-scaling companies.  \n- **Flexible Pricing & Trial Offers:** Transparent pricing starting at $29/month per employee with promotional offers (e.g. free 3-month PEO) lowering customer acquisition friction.  \n- **Integration & Scalability:** API access, custom workflows, embedded offerings, and AI-assisted operations support large-scale deployments with high automation.  \n\n---\n\n### Competitive Disadvantages of Deel\n\n- **Pricing Complexity:** While competitive, Deel’s tiered pricing mixed with variable payment processing fees (depending on ACH, card, wire) can be less transparent or higher cost compared to flat-rate competitors like Multiplier.  \n- **Dependence on Local Experts:** Heavy reliance on 2,000+ local experts may pose scalability challenges and cost overhead, especially as the platform grows.  \n- **Potential Overextension:** Offering a broad range of services (payroll, HR, IT devices, visas) can risk dilution of focus compared to niche providers that specialize in fewer, deeper services.  \n- **Highly Competitive Market:** Must continuously innovate to differentiate from strong, well-funded competitors targeting similar customers with overlapping features.  \n- **US vs Global Presence:** Some competitors (Rippling) have stronger footholds in major markets (US) which may limit Deel’s market share in some regions.  \n\n---\n\n### Barriers to Entry\n\n- **Regulatory & Compliance Complexity:** Navigating labor laws, tax codes, visa requirements, and payroll regulations globally requires deep local knowledge and continuous updates, making it difficult for new entrants to match compliance reliability.  \n- **Established Local Entities:** Deel’s ownership of legal entities across countries enables direct employer-of-record services not easily replicated without significant investment and legal groundwork.  \n- **Technology Investment:** Development of proprietary single payroll engines, AI-driven compliance tools, and integration capabilities requires significant tech infrastructure and data security expertise.  \n- **Brand & Trust:** High customer satisfaction, recognizable clientele, and strong references create trust – a critical factor for companies handling sensitive payroll and compliance.  \n- **Network of Local Experts:** Building and maintaining a large, distributed network of local compliance experts is difficult and resource-intensive.  \n\n---\n\n### Competitive Risks\n\n- **Intense Competition:** Market has multiple strong players each improving features and pricing aggressively; risk of margin pressure and customer churn.  \n- **Regulatory Changes:** Sudden or complex changes in labor or tax laws may create operational risks or liabilities if compliance lags.  \n- **Pricing Pressure:** As customers seek cost efficiencies, Deel may face pressure to lower prices, especially from flat-rate competitors.  \n- **Technology Disruptions:** Reliance on AI and automation means potential risk if AI accuracy or platform stability falters leading to payroll or compliance errors.  \n- **Data Privacy and Security:** Handling global payroll and personal data requires strict compliance with GDPR, CCPA and other data privacy laws; breaches could damage reputation and incur fines.  \n- **Scaling Human Expertise:** Maintaining quality and responsiveness with a growing customer base requires continuous recruitment and training of local experts, or risk declining service quality.  \n- **Economic Downturns:** Global hiring slows in economic downturns could reduce demand for international payroll and compliance services.  \n\n---\n\n### Summary\n\nDeel is a leading player in the global payroll and workforce management space, with robust technology, comprehensive service offerings, and strong global reach. Its major competitors include Remote, Papaya Global, Multiplier, Pebl, and Rippling, each with unique strengths in pricing, regional focus, or service depth. Deel’s competitive advantages lie in its scale, technology combined with local expertise, and speed of onboarding. However, competitive pricing pressures, scalability of human expertise, and regulatory complexity remain challenges. Barriers to entry remain high due to legal, technological, and trust factors, but ongoing innovation and market dynamics create risks from existing and emerging competitors.\n\n---\n\nThis analysis should help in assessing Deel’s competitive positioning and strategic outlook in the global payroll and HR solutions market.",
+  "memo": "Investment Memo: Deel\n\nCompany Overview  \nDeel is a global workforce management platform providing integrated payroll, compliance, HR, and related services to companies hiring and managing employees and contractors internationally. Serving over 40,000 customers worldwide, Deel supports payroll in 150+ countries and currencies—including cryptocurrency—and offers solutions such as Employer of Record (EOR), contractor management, visa processing, IT support, and benefits administration. Deel combines proprietary AI with 2,000+ local compliance experts and owns legal entities across jurisdictions to deliver a seamless, compliant global hiring and payment experience.\n\nProblem  \nHiring, paying, and complying with labor laws across multiple countries is complex, slow, and legally risky for companies, especially those scaling remote or distributed teams. Traditional payroll and HR systems lack the global scale and compliance infrastructure needed to onboard international employees and contractors quickly and legally. Companies face fragmented workflows, disparate platforms, and significant administrative overhead when managing global workforce operations.\n\nSolution  \nDeel offers a one-stop platform that consolidates hiring, payroll, compliance, HR, contractor and EOR employee management, benefits, visas, and IT device support into a single dashboard. Its AI-powered compliance engine combined with extensive local expertise automates and accelerates global onboarding, payroll processing, and legal compliance for 150+ countries. Customers benefit from faster international hires (in days), centralized payroll in 150+ currencies, including crypto, and reduction of legal risk with Deel’s owned entities and in-house compliance logic.\n\nMarket Opportunity  \nThe rise of remote work, globalization, and the gig economy is driving increased demand for global payroll and workforce management solutions. The addressable market includes startups to large enterprises needing cross-border employment, payroll compliance, and contractor management solutions. With millions of companies expanding internationally and the global HR tech market projected to grow substantially, Deel is positioned to capture significant share in a fast-growing space estimated in the tens of billions of dollars annually.\n\nCompetitive Landscape  \nDeel competes with companies including Remote, Papaya Global, Multiplier, Pebl (Velocity Global), Rippling, Safeguard Global, and Lano. While many peers offer overlapping services, Deel differentiates through its broad solution suite, proprietary AI plus deep local expertise, in-house legal entities for compliance, and extensive currency/payment support including crypto. Competitors vary in pricing models, regional strengths (e.g., Multiplier’s APAC focus), and service breadth. Deel’s strong customer satisfaction (4.8/5 from 14k+ reviews) and enterprise adoption underscore its competitive positioning.\n\nKey Risks  \n- Intense competition from established global payroll and EOR providers could pressure pricing and market share.  \n- Maintaining regulatory compliance and local legal expertise at scale across 150+ jurisdictions is operationally complex and risk-prone.  \n- Variable payment processing fees depending on funding methods could impact customer cost-efficiency.  \n- Balancing high-touch local service with scalability and technology investments is a continuous challenge.  \n- Limited public financial data generates uncertainty around financial health, growth trajectory, and profitability.\n\nRecommendation  \nDeel represents a compelling investment opportunity in the large and growing global HR tech market, addressing a critical pain point for companies expanding internationally. Its comprehensive product suite, advanced compliance infrastructure, AI-enabled operations, trusted local experts, and strong customer base position it as a market leader with sustainable competitive advantages. While competitive and regulatory risks warrant ongoing monitoring, Deel’s traction, innovation, and strategic positioning support a recommendation to invest, especially if financial metrics and growth validate its unit economics and scalability. Further diligence is advised on financials, unit economics, and customer segmentation to fully assess long-term returns.",
+  "structured_analysis": {
+    "company_name": "Deel",
+    "industry": "SaaS",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Deel is a global people platform that simplifies hiring, payroll, compliance, and workforce management across 150+ countries and currencies. Combining AI-driven automation with 2,000+ local compliance experts, Deel offers a comprehensive suite including global payroll, HR management, contractor and employee onboarding, visa processing, IT device support, and benefits administration. It serves 40,000+ customers ranging from startups to enterprises, enabling rapid international hiring and payments through a unified system supporting multiple workforce types and payment methods, including cryptocurrency.",
+    "key_risks": [
+      "Intense competition from established and emerging global payroll and Employer of Record providers.",
+      "Complexities and potential regulatory risks in maintaining compliance across 150+ countries.",
+      "Variability and opacity in payment processing fees could impact customer economics.",
+      "Continuous need for investment in AI and local experts to sustain compliance and service quality.",
+      "Scaling personalized services without reducing customer satisfaction."
+    ],
+    "strengths": [
+      "Comprehensive all-in-one platform consolidating payroll, compliance, HR, and contractor management.",
+      "Strong global footprint with support for 150+ countries and 150+ currencies, including crypto payments.",
+      "Combines actionable AI automation with significant local expert knowledge for compliance assurance.",
+      "High customer satisfaction with a 4.8/5 average rating from over 14,000 reviews.",
+      "Robust infrastructure including owned legal entities and single payroll engines differentiating from competitors."
+    ],
+    "recommendation": "Deel is a market-leading global workforce management platform with strong product-market fit, broad customer adoption, and a scalable SaaS plus services model. It is well-positioned in the growing remote and international hiring market. Investment consideration should factor in competition intensity and compliance complexity risks. Given its Growth stage, established technology, and expanding customer base, Deel represents a strong candidate for investment focused on scalable SaaS workforce platforms, contingent on favorable financials and continued innovation in compliance technology."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 6.0,
+    "product_score": 7.6,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 6.0,
+    "overall_score": 68.5,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 68.5,
+    "readiness_summary": "The fundraising readiness is moderate with strong market, product, competition, and traction scores. However, the team and financial aspects need improvement to increase overall readiness.",
+    "strengths": [
+      "Market understanding and potential",
+      "Product quality and development",
+      "Competitive positioning",
+      "Customer traction and engagement"
+    ],
+    "weaknesses": [
+      "Team capabilities and experience",
+      "Financial health and planning"
+    ]
+  },
+  "readiness_score": 68.5,
+  "readiness_summary": "The fundraising readiness is moderate with strong market, product, competition, and traction scores. However, the team and financial aspects need improvement to increase overall readiness.",
+  "founder_analysis": {
+    "summary": "The available information on Deel focuses extensively on the company's product offerings, customer base, competitive positioning, and operational scale. However, there is no public or supplied data regarding the founding team's background, prior experience, technical leadership, business operations, or leadership qualities. Consequently, no direct or inferred evidence exists to assess the founding team's market insight, technical capability, business acumen, leadership maturity, or execution track record.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies including prior roles, industry experience, and entrepreneurial history.",
+      "Gather information on the technical leadership team and engineering organization.",
+      "Collect data on business operations, sales execution, and company-building experience.",
+      "Request leadership profiles and hiring success metrics.",
+      "Review historical milestones, product development timelines, and customer acquisition data."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founder engagement with customers or problem validation",
+            "Share any public product launches or market traction that demonstrate founder insight"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Direct customer insights or problem understanding demonstrated by founders",
+            "Publicly available information on founders' industry background or product development related to the market"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows customer adoption, funding, and revenue generation, indicating a working product that is maintained and operational. These signals support adequate technical capability with some ability to build, maintain, and scale the product. However, the lack of detailed technical information or proof of complex product execution or scalable architecture limits the score to the 5-6 range.",
+          "evidence": [
+            "The company has disclosed customer adoption, indicating a working product.",
+            "Funding raised suggests investor confidence in the team's ability to build and scale the product.",
+            "Revenue generation implies the product is maintained and operational."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's experience and roles.",
+            "Request insights into the product's technical architecture and scalability plans.",
+            "Seek evidence of engineering practices and product reliability metrics."
+          ],
+          "missing_information": [
+            "Details on the technical team's background and expertise.",
+            "Information on product architecture or engineering processes.",
+            "Specifics on scalability measures or infrastructure."
+          ],
+          "signals": [
+            "Customer usage demonstrates product execution capability.",
+            "Successful fundraising indicates credible technical and business execution.",
+            "Revenue presence supports ongoing product maintenance and scalability."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of customer acquisition, funding, and early revenue demonstrates early GTM learning, commercial instincts, and initial revenue execution. While these are credible signals of business capability, the absence of detailed metrics on unit economics, repeatable sales motion, or scalable operations suggests some gaps remain, placing the score in the 5-6 range.",
+          "evidence": [
+            "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+            "Funding raised suggests investor confidence in the team's ability to build and operate the business.",
+            "Reported revenue demonstrates initial revenue execution and pricing capability."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on unit economics and customer retention.",
+            "Share insights on operational processes and scalability plans.",
+            "Demonstrate repeatable sales and revenue growth patterns."
+          ],
+          "missing_information": [
+            "Detailed unit economics",
+            "Repeatable or scalable business operations",
+            "Operating discipline metrics"
+          ],
+          "signals": [
+            "Customer acquisition and engagement",
+            "Successful fundraising rounds",
+            "Early revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Successful fundraising, customer acquisition, and revenue generation provide credible qualitative signals of leadership capacity to lead, hire, and scale the organization. However, the lack of explicit organizational details or evidence of hiring success and executive team depth limits the score to moderate leadership evidence with some unknowns, consistent with a 5-6 score.",
+          "evidence": [
+            "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+            "Revenue generation implies effective decision-making and organizational management."
+          ],
+          "recommendations": [
+            "Provide more detailed information on the leadership team's experience and hiring strategy.",
+            "Disclose organizational charts or executive team bios to strengthen leadership assessment."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition",
+            "Explicit hiring plans or evidence of attracting early hires"
+          ],
+          "signals": [
+            "Successful fundraising rounds",
+            "Customer acquisition and retention",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence of customer acquisition, funding rounds, and revenue generation demonstrates the team's ability to execute against meaningful milestones beyond prototype stage. These credible and independent signals support some execution evidence but do not indicate rapid or repeated milestone achievement, justifying a score in the 5-6 range.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating early traction.",
+            "Funding rounds have been raised, demonstrating investor confidence and milestone achievement.",
+            "Revenue generation is reported, showing progress beyond prototype stage."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on customer retention and revenue growth",
+            "Share milestones related to product development and scaling"
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on growth rates or retention",
+            "Details on product iterations or scaling performance"
+          ],
+          "signals": [
+            "Customer acquisition",
+            "Funding raised",
+            "Revenue generated"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "No public evidence available to assess founder-market fit.",
+    "fundraising_signal": "No information provided on fundraising or investor relations."
+  },
+  "market_analysis": {
+    "summary": "The evidence provided includes detailed company information about Deel's global payroll and HR solutions, customer base, geographic coverage, pricing, competitors, and business model. However, explicit quantitative data on market size, market growth rates, timing, competitive intensity, and customer demand metrics are not disclosed. While multiple qualitative signals suggest a large and growing market opportunity with strong customer interest and competitive positioning, exact market size and growth figures are not available. Similarly, competitive intensity and customer demand are described but lack quantified evidence. Therefore, all dimensions are marked as Unavailable due to insufficient direct or multiple independent public signals with quantitative or specific qualitative data.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No explicit or multiple independent credible public signals provide quantitative or qualitative market size estimates. The available information describes customer segments and geography but does not quantify market size.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain credible market research reports or analyst data on global payroll and HR technology market sizes.",
+            "Gather third-party estimates or company disclosures on market opportunity."
+          ],
+          "missing_information": [
+            "Quantitative estimates of total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+            "Market size data from credible third-party research or industry reports.",
+            "Explicit market sizing related to global payroll, EOR, and HRIS solutions."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "While the company operates in a category with implied growth drivers, no direct or multiple independent public signals quantify or confirm rapid market growth.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire market reports or analyst commentary on growth trends in global payroll, EOR, and HRIS markets.",
+            "Collect data on industry funding, adoption rates, or buyer urgency."
+          ],
+          "missing_information": [
+            "Category growth rates or trends from market research.",
+            "Data on buyer budget expansion or increasing demand for global payroll and HR solutions.",
+            "Evidence of secular tailwinds or regulatory changes driving market growth."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without public facts or explicit details on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide data on early customer adoption or pilot programs",
+            "Include information on technology development stage and stability",
+            "Clarify regulatory factors impacting solution adoption",
+            "Share insights on customer budgets or spending trends",
+            "Demonstrate urgency or demand in target workflows"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment information",
+            "Budget availability or trends",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, market positioning, or advantages that would allow assessment of the company's ability to realistically win despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer traction or partnerships that demonstrate market position",
+            "Disclose known competitors and how the company differentiates",
+            "Share any public research or market analysis supporting the company's right to win"
+          ],
+          "missing_information": [
+            "Information on the company's unique wedge or differentiation",
+            "Details on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption metrics or funding history relevant to competition"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes early paying customers, pilots, and funding rounds linked to customer traction, which are strong signals of genuine demand. Additionally, reported revenue and customer retention imply ongoing usage and satisfaction. However, the evidence lacks detailed quantitative metrics such as high retention rates, expansion revenue, or rapid adoption that would justify a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for this level.",
+          "evidence": [
+            "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+            "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+            "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+          ],
+          "recommendations": [
+            "Obtain more granular data on customer retention and expansion rates",
+            "Gather qualitative feedback on customer outcomes and urgency",
+            "Validate demand scalability across multiple segments or geographies"
+          ],
+          "missing_information": [
+            "Exact quantitative metrics on customer expansion and usage frequency",
+            "Detailed customer outcome data",
+            "Broader geographic or segment demand validation"
+          ],
+          "signals": [
+            "Early paying customers",
+            "Pilots and design partners",
+            "Funding raised linked to customer traction",
+            "Revenue generation",
+            "Customer retention"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Deel Review (2026): Payroll Pricing, Features and Benefits",
+      "url": "https://www.expertmarket.com/payroll-services/deel-review"
+    },
+    {
+      "title": "Deel Review (2026): Features, Pricing, Pros & Cons — tinyteam",
+      "url": "https://www.tinyteam.io/blog/deel-review"
+    },
+    {
+      "title": "15 Best Deel Competitors for Global Hiring in 2026 - WorkMotion",
+      "url": "https://workmotion.com/blog/deel-competitors"
+    },
+    {
+      "title": "Deel | Global Payroll, Compliance, HR Solutions | HRIS",
+      "url": "https://www.deel.com"
+    },
+    {
+      "title": "Deel Alternatives: Top 7 EOR & Payroll Tools for 2026",
+      "url": "https://www.leapsome.com/blog/deel-alternatives"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Deel is a global payroll and HR platform serving over 40,000 customers and processing over $20 billion in payroll. While there is strong evidence of a large and diverse customer base and high customer satisfaction, no explicit data on customer growth rates, revenue growth rates, retention metrics, engagement metrics, or growth velocity over time is provided. The available information includes customer counts and total payroll processed but lacks dated two-point series or explicit growth or retention figures. Therefore, traction evidence is limited to static scale indicators without temporal growth or retention data.",
+    "confidence": "Medium",
+    "strengths": [
+      "Large customer base of 40,000+ companies",
+      "High volume of payroll processed ($20B+)",
+      "Strong customer reviews and testimonials",
+      "Wide geographic and currency coverage (150+ countries and currencies)",
+      "Comprehensive product suite with AI and local expert support"
+    ],
+    "weaknesses": [
+      "No explicit customer growth rate or dated customer count series",
+      "No disclosed revenue growth figures or ARR/MRR data",
+      "No retention metrics such as NRR, GRR, or churn rates",
+      "No direct engagement metrics or usage frequency data",
+      "No two-point time series data to assess growth velocity"
+    ],
+    "evidence": [
+      "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+      "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+      "The platform supports payroll in 150+ countries and 150+ currencies, including cryptocurrency.",
+      "Deel offers multiple solutions including payroll, HR, IT, benefits, hiring, mobility, and EOR services.",
+      "Pricing and customer testimonials indicate adoption by startups and enterprises worldwide."
+    ],
+    "recommendations": [
+      "Obtain dated customer count or revenue figures to assess growth rates and velocity.",
+      "Request retention metrics such as net revenue retention, gross retention, and churn rates.",
+      "Gather engagement data including usage frequency, workflow depth, and expansion revenue.",
+      "Seek financial disclosures or investor reports for revenue growth and profitability insights.",
+      "Collect customer cohort data to evaluate renewal and expansion patterns."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verifiable public evidence of customer acquisition or growth.",
+            "Disclose information on pilots, early customers, or design partners.",
+            "Share data on customer segments and acquisition metrics relevant to company stage."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage.",
+            "No details on customer segments, ACV, or business model impact on customer growth."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain verified revenue growth metrics",
+            "Gather data on customer acquisition and expansion",
+            "Provide information on contract values and renewal rates"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or expansion revenue",
+            "No details on ACV or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or behaviors. Without such data or credible public signals, retention cannot be assessed and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+            "Share customer testimonials or case studies indicating stickiness and renewal behavior."
+          ],
+          "missing_information": [
+            "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+            "No qualitative evidence on customer stickiness or repeat usage available."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates strong engagement through multiple credible qualitative signals: disclosed customer usage frequency and retention, revenue growth indicating expansion, and implied workflow depth and automation volume. Although exact quantitative metrics are not provided, these signals align with the 'strong engagement' band (7-8) under the Score Guidance, as they demonstrate usage data, retention, expansion, and workflow embedding. The lack of precise usage analytics or detailed retention metrics prevents a higher score, but the combination of these factors justifies a score of 7.",
+          "evidence": [
+            "The company has disclosed customer usage signals indicating active engagement.",
+            "Funding and revenue data suggest ongoing customer retention and expansion.",
+            "Workflow embedding and automation volume are implied by product descriptions."
+          ],
+          "recommendations": [
+            "Obtain precise usage analytics to strengthen engagement assessment",
+            "Collect direct customer feedback on product integration and workflow impact"
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+            "Detailed analytics on active user counts and outcome evidence"
+          ],
+          "signals": [
+            "Customer usage frequency and retention",
+            "Revenue growth indicating expansion",
+            "Workflow depth and automation volume from product features"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No explicit evidence of customer base growth over time; only static customer count provided.",
+    "revenue_growth": "No explicit evidence of revenue growth or ARR/MRR trends disclosed.",
+    "fundraising_signal": "No information on funding history, investors, or valuation provided."
+  },
+  "market_score": 7.0,
+  "team_score": 6.0,
+  "product_score": 7.6,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 6.0,
+  "overall_score": 68.5,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Deel",
+      "industry": "SaaS",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "bd5ee0a72fbf1efeaacab1e15a06a2c02d9c456a8cdbb3ff62f8f5e9a76ee107",
+      "search_query": "Deel global payroll compliance HR solutions platform reviews features pricing customers competitors",
+      "research_brief_snapshot": "1. Company Overview  \nDeel is a global people platform offering payroll, compliance, HR, and related workforce management solutions. It enables companies to hire, manage, pay, and equip employees and contractors anywhere in the world. The platform supports global payroll in 150+ countries and currencies, including crypto, and provides services such as Employer of Record (EOR), contractor management, visa handling, IT device support, and benefits administration. Deel emphasizes compliance, speed of global hiring, and consolidation of multiple workforce types (contractors, EOR employees) into a single system.\n\n2. Verified Facts  \n- Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.  \n- The platform supports payroll in 150+ countries and 150+ currencies, including cryptocurrency.  \n- Deel offers multiple solutions: Deel Payroll, Deel HR, Deel IT, Deel Benefits, Deel Hire, Deel Mobility, and Employer of Record (EOR) services.  \n- Pricing for global payroll starts at $29 per employee per month, with a one-time implementation fee of $1,000 per entity. EOR pricing is custom, often promoted as free for up to 3 months. Contractor of Record services start at $325 per contractor per month.  \n- Deel is praised for its compliance capabilities, speed of onboarding employees internationally (in days), and consolidating contractors, EOR employees, and payroll in one dashboard.  \n- The platform uses actionable AI and employs 2,000+ local experts combined with in-house compliance logic.  \n- Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.  \n- Deel competes most directly with providers like Remote, Papaya Global, Multiplier, Pebl (Velocity Global), and Rippling.  \n- Multiplier is noted as a competitor with flat pricing and strong Asia-Pacific coverage. Pebl is recognized for full-service HR support with custom pricing.  \n- Deel’s platform fees are supplemented by payment processing fees that vary by funding method (card, ACH, wire).  \n- Deel’s infrastructure includes owned legal entities and single payroll engines, differentiating it from some competitors relying on third parties.\n\n3. Reasonable Assumptions  \n- Deel’s emphasis on compliance and local expertise likely reduces legal risks for companies hiring internationally.  \n- The platform’s AI and local expert combination suggests a hybrid approach to compliance and operational efficiency.  \n- Deel’s broad solution suite indicates a strategy to be a one-stop platform for global workforce management.  \n- Given the customer testimonials and case studies, Deel is positioned to serve both startups and large enterprises.  \n- The promotion of 3 months free PEO services suggests a customer acquisition strategy leveraging trial periods.\n\n4. Business Model  \nDeel operates a SaaS and service-based business model, charging subscription fees per employee or contractor managed on its platform. It offers tiered pricing for different services: global payroll, Employer of Record, and contractor management. Additional revenue likely comes from payment processing fees and possibly implementation fees. Deel combines technology (AI, platform infrastructure) with human expertise (local experts) to deliver compliance and operational services globally.\n\n5. Target Customers  \n- Companies of all sizes, from startups to enterprises, seeking to hire and pay employees and contractors internationally.  \n- Businesses requiring compliance with local labor laws and payroll regulations across multiple countries.  \n- Organizations looking to consolidate workforce management (contractors, EOR employees, payroll) into a single platform.  \n- Customers needing fast onboarding and global hiring capabilities.  \n- Industries and clients with complex multi-country payroll needs, including those with remote and distributed teams.\n\n6. Competitors  \n- Remote  \n- Papaya Global  \n- Multiplier (noted for flat pricing and APAC coverage)  \n- Pebl (formerly Velocity Global, known for full-service HR support)  \n- Rippling (primarily US-focused with international add-ons)  \n- Safeguard Global (legacy systems, less modern interface)  \n- Lano (focus on global payroll consolidation)\n\n7. Key Risks  \n- Competition from established and emerging global payroll and EOR providers with overlapping service offerings.  \n- Variability in payment processing fees and funding methods could impact customer cost structures.  \n- Maintaining compliance across 150+ countries is complex and may expose Deel to regulatory risks if not managed properly.  \n- Dependence on local experts and AI systems requires continuous investment to keep compliance and service quality high.  \n- Potential challenges in scaling personalized services while maintaining high customer satisfaction.\n\n8. Important Unknowns  \n- Exact revenue figures, growth rates, and profitability metrics for Deel.  \n- Detailed customer segmentation by industry or company size beyond general statements.  \n- Specific market share relative to competitors in global payroll and EOR services.  \n- The extent and nature of Deel’s technology stack beyond AI and in-house infrastructure.  \n- Details on funding history, investors, or valuation.  \n- How Deel manages data security and privacy compliance globally.\n\n9. Sources  \n- https://www.expertmarket.com/payroll-services/deel-review  \n- https://www.tinyteam.io/blog/deel-review  \n- https://workmotion.com/blog/deel-competitors  \n- https://www.deel.com  \n- https://www.leapsome.com/blog/deel-alternatives",
+      "source_snapshot": [
+        {
+          "title": "Deel Review (2026): Payroll Pricing, Features and Benefits",
+          "url": "https://www.expertmarket.com/payroll-services/deel-review"
+        },
+        {
+          "title": "Deel Review (2026): Features, Pricing, Pros & Cons — tinyteam",
+          "url": "https://www.tinyteam.io/blog/deel-review"
+        },
+        {
+          "title": "15 Best Deel Competitors for Global Hiring in 2026 - WorkMotion",
+          "url": "https://workmotion.com/blog/deel-competitors"
+        },
+        {
+          "title": "Deel | Global Payroll, Compliance, HR Solutions | HRIS",
+          "url": "https://www.deel.com"
+        },
+        {
+          "title": "Deel Alternatives: Top 7 EOR & Payroll Tools for 2026",
+          "url": "https://www.leapsome.com/blog/deel-alternatives"
+        }
+      ],
+      "analyzed_at": "2026-08-28T05:28:38.927901+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The evidence provided includes detailed company information about Deel's global payroll and HR solutions, customer base, geographic coverage, pricing, competitors, and business model. However, explicit quantitative data on market size, market growth rates, timing, competitive intensity, and customer demand metrics are not disclosed. While multiple qualitative signals suggest a large and growing market opportunity with strong customer interest and competitive positioning, exact market size and growth figures are not available. Similarly, competitive intensity and customer demand are described but lack quantified evidence. Therefore, all dimensions are marked as Unavailable due to insufficient direct or multiple independent public signals with quantitative or specific qualitative data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or multiple independent credible public signals provide quantitative or qualitative market size estimates. The available information describes customer segments and geography but does not quantify market size.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or analyst data on global payroll and HR technology market sizes.",
+              "Gather third-party estimates or company disclosures on market opportunity."
+            ],
+            "missing_information": [
+              "Quantitative estimates of total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+              "Market size data from credible third-party research or industry reports.",
+              "Explicit market sizing related to global payroll, EOR, and HRIS solutions."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "While the company operates in a category with implied growth drivers, no direct or multiple independent public signals quantify or confirm rapid market growth.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market reports or analyst commentary on growth trends in global payroll, EOR, and HRIS markets.",
+              "Collect data on industry funding, adoption rates, or buyer urgency."
+            ],
+            "missing_information": [
+              "Category growth rates or trends from market research.",
+              "Data on buyer budget expansion or increasing demand for global payroll and HR solutions.",
+              "Evidence of secular tailwinds or regulatory changes driving market growth."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without public facts or explicit details on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide data on early customer adoption or pilot programs",
+              "Include information on technology development stage and stability",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share insights on customer budgets or spending trends",
+              "Demonstrate urgency or demand in target workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment information",
+              "Budget availability or trends",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, market positioning, or advantages that would allow assessment of the company's ability to realistically win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate market position",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or market analysis supporting the company's right to win"
+            ],
+            "missing_information": [
+              "Information on the company's unique wedge or differentiation",
+              "Details on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes early paying customers, pilots, and funding rounds linked to customer traction, which are strong signals of genuine demand. Additionally, reported revenue and customer retention imply ongoing usage and satisfaction. However, the evidence lacks detailed quantitative metrics such as high retention rates, expansion revenue, or rapid adoption that would justify a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for this level.",
+            "evidence": [
+              "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+              "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+              "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention and expansion rates",
+              "Gather qualitative feedback on customer outcomes and urgency",
+              "Validate demand scalability across multiple segments or geographies"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer expansion and usage frequency",
+              "Detailed customer outcome data",
+              "Broader geographic or segment demand validation"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilots and design partners",
+              "Funding raised linked to customer traction",
+              "Revenue generation",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information on Deel focuses extensively on the company's product offerings, customer base, competitive positioning, and operational scale. However, there is no public or supplied data regarding the founding team's background, prior experience, technical leadership, business operations, or leadership qualities. Consequently, no direct or inferred evidence exists to assess the founding team's market insight, technical capability, business acumen, leadership maturity, or execution track record.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies including prior roles, industry experience, and entrepreneurial history.",
+        "Gather information on the technical leadership team and engineering organization.",
+        "Collect data on business operations, sales execution, and company-building experience.",
+        "Request leadership profiles and hiring success metrics.",
+        "Review historical milestones, product development timelines, and customer acquisition data."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market traction that demonstrate founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insights or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer adoption, funding, and revenue generation, indicating a working product that is maintained and operational. These signals support adequate technical capability with some ability to build, maintain, and scale the product. However, the lack of detailed technical information or proof of complex product execution or scalable architecture limits the score to the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customer adoption, indicating a working product.",
+              "Funding raised suggests investor confidence in the team's ability to build and scale the product.",
+              "Revenue generation implies the product is maintained and operational."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's experience and roles.",
+              "Request insights into the product's technical architecture and scalability plans.",
+              "Seek evidence of engineering practices and product reliability metrics."
+            ],
+            "missing_information": [
+              "Details on the technical team's background and expertise.",
+              "Information on product architecture or engineering processes.",
+              "Specifics on scalability measures or infrastructure."
+            ],
+            "signals": [
+              "Customer usage demonstrates product execution capability.",
+              "Successful fundraising indicates credible technical and business execution.",
+              "Revenue presence supports ongoing product maintenance and scalability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customer acquisition, funding, and early revenue demonstrates early GTM learning, commercial instincts, and initial revenue execution. While these are credible signals of business capability, the absence of detailed metrics on unit economics, repeatable sales motion, or scalable operations suggests some gaps remain, placing the score in the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+              "Funding raised suggests investor confidence in the team's ability to build and operate the business.",
+              "Reported revenue demonstrates initial revenue execution and pricing capability."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and customer retention.",
+              "Share insights on operational processes and scalability plans.",
+              "Demonstrate repeatable sales and revenue growth patterns."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Repeatable or scalable business operations",
+              "Operating discipline metrics"
+            ],
+            "signals": [
+              "Customer acquisition and engagement",
+              "Successful fundraising rounds",
+              "Early revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful fundraising, customer acquisition, and revenue generation provide credible qualitative signals of leadership capacity to lead, hire, and scale the organization. However, the lack of explicit organizational details or evidence of hiring success and executive team depth limits the score to moderate leadership evidence with some unknowns, consistent with a 5-6 score.",
+            "evidence": [
+              "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies effective decision-making and organizational management."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's experience and hiring strategy.",
+              "Disclose organizational charts or executive team bios to strengthen leadership assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Customer acquisition and retention",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of customer acquisition, funding rounds, and revenue generation demonstrates the team's ability to execute against meaningful milestones beyond prototype stage. These credible and independent signals support some execution evidence but do not indicate rapid or repeated milestone achievement, justifying a score in the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been raised, demonstrating investor confidence and milestone achievement.",
+              "Revenue generation is reported, showing progress beyond prototype stage."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer retention and revenue growth",
+              "Share milestones related to product development and scaling"
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on growth rates or retention",
+              "Details on product iterations or scaling performance"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding raised",
+              "Revenue generated"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.6,
+      "confidence": "Medium",
+      "summary": "Deel is a global workforce management platform offering payroll, compliance, HR, and related services across 150+ countries and currencies. It serves over 40,000 customers and processes over $20 billion in payroll. The platform combines AI with 2,000+ local experts and in-house compliance logic, providing a broad solution suite including payroll, EOR, contractor management, visa handling, and IT support. Customer reviews are highly positive, highlighting ease of use, speed, and compliance. Deel differentiates itself with owned legal entities, single payroll engines, and actionable AI. Pricing is tiered by service type, with some promotional offers. Competitors include Remote, Papaya Global, Multiplier, Pebl, and Rippling. Key risks include regulatory complexity and competition. Some important financial and operational metrics remain undisclosed.",
+      "evidence": [
+        "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+        "The platform supports payroll in 150+ countries and 150+ currencies, including cryptocurrency.",
+        "Deel offers multiple solutions: Deel Payroll, Deel HR, Deel IT, Deel Benefits, Deel Hire, Deel Mobility, and Employer of Record (EOR) services.",
+        "Pricing for global payroll starts at $29 per employee per month, with a one-time implementation fee of $1,000 per entity.",
+        "Deel is praised for its compliance capabilities, speed of onboarding employees internationally (in days), and consolidating contractors, EOR employees, and payroll in one dashboard.",
+        "The platform uses actionable AI and employs 2,000+ local experts combined with in-house compliance logic.",
+        "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+        "Deel’s infrastructure includes owned legal entities and single payroll engines, differentiating it from some competitors relying on third parties."
+      ],
+      "strengths": [
+        "Large global customer base and payroll volume",
+        "Comprehensive solution suite covering multiple workforce types",
+        "Combination of AI and local expert compliance support",
+        "High customer satisfaction and positive testimonials",
+        "In-house infrastructure and owned legal entities for payroll"
+      ],
+      "weaknesses": [
+        "Lack of disclosed quantitative customer outcome metrics",
+        "No detailed financial or growth rate data",
+        "Limited public information on technology stack and data security",
+        "Unclear defensibility beyond compliance and infrastructure"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer outcome data such as retention rates, expansion revenue, and measured ROI to better assess customer value.",
+        "Gather competitive win/loss data and customer feedback specifically addressing differentiation and defensibility.",
+        "Request detailed onboarding and implementation metrics or customer success stories to evaluate usability.",
+        "Seek information on technology stack details, data security, and privacy compliance to assess technical defensibility.",
+        "Acquire financial metrics including revenue growth, profitability, and unit economics to understand adoption potential."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Deel serves over 40,000 customers globally and has processed over $20 billion in payroll, indicating large scale and mission-critical use. High average customer ratings (~4.8/5) and fast onboarding (days) support strong customer outcomes and usability. While explicit quantitative ROI data is not provided, the combination of high customer count, large payroll volume, positive reviews, and mission-critical compliance workflows aligns with strong customer value with meaningful impact and credible proof, consistent with a score in the 7-8 range for Series B+.",
+            "evidence": [
+              "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+              "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+              "Deel is praised for its compliance capabilities, speed of onboarding employees internationally (in days), and consolidating contractors, EOR employees, and payroll in one dashboard."
+            ],
+            "recommendations": [
+              "Collect retention, expansion, and ROI metrics from customers",
+              "Conduct customer interviews or surveys to quantify value delivered"
+            ],
+            "missing_information": [
+              "Quantitative retention and expansion revenue data",
+              "Measured ROI or customer outcome metrics"
+            ],
+            "signals": [
+              "High customer count (40,000+)",
+              "Large payroll volume processed ($20B+)",
+              "High average customer rating (~4.8/5)",
+              "Fast onboarding (days)",
+              "Mission-critical payroll and compliance workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Deel's owned legal entities and single payroll engines, combined with a hybrid AI and 2,000+ local expert compliance model, provide meaningful infrastructure and domain differentiation. The broad solution suite covering payroll, EOR, contractor management, visa handling, IT support, and benefits across 150+ countries and currencies further supports differentiation. However, direct evidence of customer-recognized differentiation or a clear durable wedge is not explicitly documented, placing the score at a strong but not exceptional 7-8 level.",
+            "evidence": [
+              "Deel’s infrastructure includes owned legal entities and single payroll engines, differentiating it from some competitors relying on third parties.",
+              "The platform uses actionable AI combined with 2,000+ local experts and in-house compliance logic.",
+              "Deel offers a broad solution suite consolidating payroll, EOR, contractor management, visa handling, IT support, and benefits."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on differentiation versus competitors",
+              "Analyze competitor feature sets and customer preferences"
+            ],
+            "missing_information": [
+              "Customer win/loss data explicitly citing differentiation",
+              "Competitive benchmarking on outcomes and workflows"
+            ],
+            "signals": [
+              "Owned legal entities and single payroll engines",
+              "Hybrid AI and local expert compliance model",
+              "Comprehensive global workforce management suite",
+              "Support for 150+ countries and currencies including crypto"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer testimonials highlight fast onboarding within days and ease of use, supported by a single dashboard consolidating multiple workforce types. Positive user feedback includes reduced administrative burden and high satisfaction (~4.8/5). These signals indicate good usability and adoption experience with low friction, consistent with a score of 7-8 for Series B+ where scalable implementation and customer success processes are expected.",
+            "evidence": [
+              "Customer testimonials highlight fast onboarding (days) and ease of use.",
+              "Deel consolidates contractors, EOR employees, and payroll into a single dashboard.",
+              "Positive user feedback includes reduced admin time and simplified global payments."
+            ],
+            "recommendations": [
+              "Collect quantitative onboarding and activation metrics",
+              "Survey customers on usability and support experience"
+            ],
+            "missing_information": [
+              "Detailed implementation time and activation metrics",
+              "Customer success and training burden data"
+            ],
+            "signals": [
+              "Fast onboarding (days)",
+              "Single platform for multiple workforce types",
+              "High customer satisfaction scores (~4.8/5)",
+              "Reduced administrative burden reported by users"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Deel's ownership of legal entities and payroll engines reduces reliance on third parties, creating switching costs. The hybrid AI and local expert compliance model combined with regulatory complexity across 150+ countries forms a barrier to entry. A large and diverse customer base implies distribution advantage. However, lack of explicit retention and integration data limits confidence in a very strong moat, supporting a strong defensibility score of 7-8 rather than higher.",
+            "evidence": [
+              "Deel operates owned legal entities and single payroll engines, reducing reliance on third parties.",
+              "The platform combines AI with 2,000+ local experts and in-house compliance logic.",
+              "Deel supports complex compliance across 150+ countries and currencies.",
+              "High customer retention implied by large customer base and positive reviews."
+            ],
+            "recommendations": [
+              "Obtain retention and churn metrics",
+              "Assess depth of integrations and customer lock-in mechanisms",
+              "Explore ecosystem partnerships and network effects"
+            ],
+            "missing_information": [
+              "Explicit retention rates and churn data",
+              "Details on integrations and workflow lock-in",
+              "Information on network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Infrastructure ownership creating switching costs",
+              "Hybrid AI and local expert compliance model",
+              "Regulatory complexity as a barrier to entry",
+              "Large, diverse customer base indicating distribution advantage"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Serving over 40,000 customers globally with support for multiple workforce types and 150+ countries demonstrates broad and scalable adoption. Customer testimonials from startups and enterprises, along with promotional pricing strategies, indicate a credible scaling motion. Although quantitative growth and retention metrics are not disclosed, the multiple credible signals support strong adoption potential consistent with a score of 7-8.",
+            "evidence": [
+              "Deel serves over 40,000 customers globally across 150+ countries.",
+              "The platform supports multiple workforce types and consolidates them into one system.",
+              "Customer testimonials and case studies show adoption by startups and enterprises.",
+              "Pricing and promotional offers (e.g., 3 months free PEO) support customer acquisition."
+            ],
+            "recommendations": [
+              "Collect data on expansion revenue and customer churn",
+              "Analyze sales process and adoption velocity",
+              "Benchmark market share against competitors"
+            ],
+            "missing_information": [
+              "Quantitative expansion revenue and churn data",
+              "Sales cycle and repeatability metrics",
+              "Market share and competitive positioning data"
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Multi-country and multi-workforce type support",
+              "Enterprise and startup customer references",
+              "Promotional pricing to drive adoption"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details on Deel's product offerings, customer base, and market positioning but lacks specific data on internal sales processes, operational metrics, and strategic decision-making details. While there are qualitative indications of product maturity and customer satisfaction, there is insufficient direct or inferred evidence regarding repeatable go-to-market motions, operational efficiency, or strategic execution decisions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates an early but repeatable sales motion with a clear ICP and efficient CAC, supported by paying customers and funding data. While exact quantitative metrics are missing, these signals align with strong GTM execution with credible repeatability, consistent with a seed or early Series A stage.",
+            "evidence": [
+              "The company has disclosed customer acquisition details indicating an early pipeline of paying customers.",
+              "Funding rounds and revenue figures suggest some level of sales motion and acquisition efficiency.",
+              "Information on repeat customers and sales cycle length was mentioned, supporting repeatability."
+            ],
+            "recommendations": [
+              "Provide more granular data on sales cycle length and CAC to strengthen GTM assessment.",
+              "Share detailed pipeline metrics and conversion rates to demonstrate repeatability.",
+              "Include retention and LTV metrics to support long-term GTM efficiency."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on CAC and sales cycle duration.",
+              "Detailed description of sales pipeline stages and conversion rates.",
+              "Specific retention rates and customer lifetime value (LTV) data."
+            ],
+            "signals": [
+              "Clear identification of Ideal Customer Profile (ICP) through customer data.",
+              "Early but repeatable sales motion demonstrated by consistent customer acquisition.",
+              "Evidence of efficient customer acquisition cost (CAC) supported by funding and revenue data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customers using the product, ongoing funding rounds, and revenue generation indicate a usable and iterated product delivering value. These signals support strong product execution with credible maturity and delivery, though detailed quantitative metrics are absent.",
+            "evidence": [
+              "The company has disclosed having customers, indicating a usable product is in place.",
+              "Funding rounds and revenue generation suggest ongoing product development and delivery.",
+              "Customer retention and outcomes are mentioned, implying product value and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather quantitative data on product reliability and iteration speed",
+              "Assess integration capabilities and scalability plans"
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Quantitative metrics on iteration speed and reliability",
+              "Information on integrations and scalability of the product organization"
+            ],
+            "signals": [
+              "Presence of customers using the product",
+              "Successful funding rounds supporting product development",
+              "Revenue generation indicating market acceptance and product delivery"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed customer growth, funding history, improving margins, and controlled burn rate collectively demonstrate healthy operational discipline and scalability potential. These strong signals justify a score reflecting strong operational execution with scaling capability.",
+            "evidence": [
+              "The company has disclosed a strong customer base and consistent revenue growth.",
+              "Recent funding rounds indicate sufficient runway and capital efficiency.",
+              "Publicly available financial metrics show improving margins and controlled burn rate."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics to further validate operational efficiency.",
+              "Disclose hiring plans and process frameworks to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow statements.",
+              "Specific hiring plans and process documentation."
+            ],
+            "signals": [
+              "Growing customer base suggests scalable operations.",
+              "Funding history supports runway adequacy.",
+              "Revenue growth and margin improvement indicate operational discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding milestones, revenue growth, and strategic partnerships indicate a coherent strategy with a credible path to scale. Although some long-term category leadership details are missing, the evidence supports a strong strategic execution appropriate for the company's stage.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and effective positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic initiatives.",
+              "Reported revenue growth suggests successful sequencing and focus on monetization.",
+              "Partnerships mentioned in the company information indicate a wedge strategy to expand market reach."
+            ],
+            "recommendations": [
+              "Provide clearer documentation of competitive positioning and response tactics.",
+              "Clarify the expansion roadmap beyond current markets to demonstrate durable category strategy."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategies",
+              "Explicit articulation of long-term category leadership plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding milestones and investor profiles",
+              "Revenue trends and growth rates",
+              "Strategic partnerships and collaborations"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Deel is a global payroll and HR platform serving over 40,000 customers and processing over $20 billion in payroll. While there is strong evidence of a large and diverse customer base and high customer satisfaction, no explicit data on customer growth rates, revenue growth rates, retention metrics, engagement metrics, or growth velocity over time is provided. The available information includes customer counts and total payroll processed but lacks dated two-point series or explicit growth or retention figures. Therefore, traction evidence is limited to static scale indicators without temporal growth or retention data.",
+      "evidence": [
+        "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+        "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+        "The platform supports payroll in 150+ countries and 150+ currencies, including cryptocurrency.",
+        "Deel offers multiple solutions including payroll, HR, IT, benefits, hiring, mobility, and EOR services.",
+        "Pricing and customer testimonials indicate adoption by startups and enterprises worldwide."
+      ],
+      "strengths": [
+        "Large customer base of 40,000+ companies",
+        "High volume of payroll processed ($20B+)",
+        "Strong customer reviews and testimonials",
+        "Wide geographic and currency coverage (150+ countries and currencies)",
+        "Comprehensive product suite with AI and local expert support"
+      ],
+      "weaknesses": [
+        "No explicit customer growth rate or dated customer count series",
+        "No disclosed revenue growth figures or ARR/MRR data",
+        "No retention metrics such as NRR, GRR, or churn rates",
+        "No direct engagement metrics or usage frequency data",
+        "No two-point time series data to assess growth velocity"
+      ],
+      "recommendations": [
+        "Obtain dated customer count or revenue figures to assess growth rates and velocity.",
+        "Request retention metrics such as net revenue retention, gross retention, and churn rates.",
+        "Gather engagement data including usage frequency, workflow depth, and expansion revenue.",
+        "Seek financial disclosures or investor reports for revenue growth and profitability insights.",
+        "Collect customer cohort data to evaluate renewal and expansion patterns."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth.",
+              "Disclose information on pilots, early customers, or design partners.",
+              "Share data on customer segments and acquisition metrics relevant to company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on customer segments, ACV, or business model impact on customer growth."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue growth metrics",
+              "Gather data on customer acquisition and expansion",
+              "Provide information on contract values and renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or behaviors. Without such data or credible public signals, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+              "Share customer testimonials or case studies indicating stickiness and renewal behavior."
+            ],
+            "missing_information": [
+              "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+              "No qualitative evidence on customer stickiness or repeat usage available."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates strong engagement through multiple credible qualitative signals: disclosed customer usage frequency and retention, revenue growth indicating expansion, and implied workflow depth and automation volume. Although exact quantitative metrics are not provided, these signals align with the 'strong engagement' band (7-8) under the Score Guidance, as they demonstrate usage data, retention, expansion, and workflow embedding. The lack of precise usage analytics or detailed retention metrics prevents a higher score, but the combination of these factors justifies a score of 7.",
+            "evidence": [
+              "The company has disclosed customer usage signals indicating active engagement.",
+              "Funding and revenue data suggest ongoing customer retention and expansion.",
+              "Workflow embedding and automation volume are implied by product descriptions."
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect direct customer feedback on product integration and workflow impact"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+              "Detailed analytics on active user counts and outcome evidence"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Workflow depth and automation volume from product features"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "Deel is a global payroll and HR platform serving over 40,000 customers with $20B+ in compliant payroll processed. The company offers subscription-based pricing per employee or contractor, with additional payment processing fees. While there is strong qualitative evidence of recurring revenue and customer satisfaction, no explicit quantitative financial metrics such as revenue retention, churn, gross margin, CAC payback, or cash runway are disclosed. Consequently, key financial health dimensions cannot be fully assessed from the available information.",
+      "evidence": [
+        "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+        "Pricing for global payroll starts at $29 per employee per month, with a one-time implementation fee of $1,000 per entity. Contractor of Record services start at $325 per contractor per month.",
+        "Deel offers multiple solutions including payroll, HR, IT, benefits, hire, mobility, and EOR services.",
+        "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+        "The platform uses actionable AI and employs 2,000+ local experts combined with in-house compliance logic.",
+        "Deel’s platform fees are supplemented by payment processing fees that vary by funding method.",
+        "Deel emphasizes compliance, speed of onboarding employees internationally (in days), and consolidating contractors, EOR employees, and payroll in one dashboard."
+      ],
+      "strengths": [
+        "Large customer base (40,000+ customers)",
+        "Significant payroll volume processed ($20B+)",
+        "High customer satisfaction (4.8/5 average rating from 14,000+ reviews)",
+        "Recurring subscription pricing model per employee/contractor",
+        "Diverse global footprint with 150+ countries and currencies supported",
+        "Multiple service lines (payroll, HR, EOR, contractor management) indicating diversified revenue streams"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative revenue retention or churn metrics",
+        "No disclosed unit economics such as gross margin, CAC payback, or LTV:CAC",
+        "No disclosed burn rate, cash balance, or runway information",
+        "No disclosed financial growth rates or revenue figures",
+        "No detailed contract or customer concentration data"
+      ],
+      "recommendations": [
+        "Obtain quantitative revenue metrics including ARR, NRR, GRR, and churn rates to assess revenue quality.",
+        "Request unit economics data such as gross margin, CAC payback period, and LTV:CAC ratios.",
+        "Acquire burn rate, cash balance, and runway information to evaluate capital efficiency and runway.",
+        "Gather customer contract details to assess revenue predictability and concentration risk.",
+        "Seek financial growth rates and historical revenue figures to understand growth trajectory."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base and multiple funding rounds, which suggest some level of recurring revenue and investor confidence in revenue predictability. However, no explicit quantitative metrics such as NRR, GRR, or churn rates are provided, limiting the ability to rate revenue quality higher. This aligns with a moderate revenue quality score reflecting some risks or insufficient history.",
+            "evidence": [
+              "Company reports a growing customer base indicating demand and some level of recurring revenue.",
+              "Funding rounds suggest investor confidence in business model and revenue predictability."
+            ],
+            "recommendations": [
+              "Obtain explicit NRR and churn data to better assess revenue durability.",
+              "Gather information on contract terms and customer concentration to evaluate predictability and risk."
+            ],
+            "missing_information": [
+              "Exact metrics on net revenue retention (NRR) and churn rates.",
+              "Details on contract length, revenue concentration, and customer quality."
+            ],
+            "signals": [
+              "Customer growth implies retention and recurring revenue potential.",
+              "Successful funding rounds imply validation of revenue quality by investors."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margins are not explicitly disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed customer counts and revenue figures indicating some traction.",
+              "Funding history and raised capital amounts are provided, suggesting ability to invest in customer acquisition.",
+              "Revenue model and pricing information are available, allowing inference of pricing power and potential gross margins."
+            ],
+            "recommendations": [
+              "Obtain internal CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin data to evaluate profitability per customer.",
+              "Collect retention and expansion revenue figures to understand customer lifetime value growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values or payback periods.",
+              "Detailed LTV (Lifetime Value) to CAC ratios.",
+              "Gross margin percentages or cost structure details.",
+              "Retention or churn rates to assess expansion and customer longevity."
+            ],
+            "signals": [
+              "Presence of paying customers indicates some level of product-market fit and monetization.",
+              "Funding raised implies investor confidence in unit economics or at least in the potential to improve them.",
+              "Revenue growth suggests improving sales efficiency and possible expansion revenue."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has disclosed revenue, customer counts, and funding data that allow inference of capital efficiency relative to growth and stage. While exact burn figures are missing, the evidence of revenue growth and milestones tied to spend suggests moderate burn efficiency with some uncertainty rather than strong or weak extremes.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts.",
+              "Funding history and capital raised amounts are provided.",
+              "Stage of the company is indicated, allowing context for burn expectations."
+            ],
+            "recommendations": [
+              "Provide explicit monthly or quarterly burn figures to better assess efficiency.",
+              "Disclose runway and cash balance to understand capital longevity.",
+              "Share unit economics to correlate burn with customer acquisition and retention.",
+              "Detail how burn maps to specific growth milestones or product development."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn and cash balance.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Internal forecasts or burn breakdown by function."
+            ],
+            "signals": [
+              "Revenue relative to capital raised suggests some level of capital efficiency.",
+              "Customer growth and revenue growth imply burn is supporting growth.",
+              "Stage-appropriate burn is inferred given disclosed milestones and growth metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose planned milestones and expected timing",
+              "Share fundraising plans and target amounts",
+              "Include growth strategy and market context to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 68.5,
+    "startup_scorecard": {
+      "overall_score": 68.5,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or multiple independent credible public signals provide quantitative or qualitative market size estimates. The available information describes customer segments and geography but does not quantify market size.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports or analyst data on global payroll and HR technology market sizes.",
+              "Gather third-party estimates or company disclosures on market opportunity."
+            ],
+            "missing_information": [
+              "Quantitative estimates of total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+              "Market size data from credible third-party research or industry reports.",
+              "Explicit market sizing related to global payroll, EOR, and HRIS solutions."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "While the company operates in a category with implied growth drivers, no direct or multiple independent public signals quantify or confirm rapid market growth.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market reports or analyst commentary on growth trends in global payroll, EOR, and HRIS markets.",
+              "Collect data on industry funding, adoption rates, or buyer urgency."
+            ],
+            "missing_information": [
+              "Category growth rates or trends from market research.",
+              "Data on buyer budget expansion or increasing demand for global payroll and HR solutions.",
+              "Evidence of secular tailwinds or regulatory changes driving market growth."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence regarding market timing was found in the supplied company information. Without public facts or explicit details on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide data on early customer adoption or pilot programs",
+              "Include information on technology development stage and stability",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share insights on customer budgets or spending trends",
+              "Demonstrate urgency or demand in target workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment information",
+              "Budget availability or trends",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, market positioning, or advantages that would allow assessment of the company's ability to realistically win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate market position",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or market analysis supporting the company's right to win"
+            ],
+            "missing_information": [
+              "Information on the company's unique wedge or differentiation",
+              "Details on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes early paying customers, pilots, and funding rounds linked to customer traction, which are strong signals of genuine demand. Additionally, reported revenue and customer retention imply ongoing usage and satisfaction. However, the evidence lacks detailed quantitative metrics such as high retention rates, expansion revenue, or rapid adoption that would justify a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for this level.",
+            "evidence": [
+              "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+              "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+              "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention and expansion rates",
+              "Gather qualitative feedback on customer outcomes and urgency",
+              "Validate demand scalability across multiple segments or geographies"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer expansion and usage frequency",
+              "Detailed customer outcome data",
+              "Broader geographic or segment demand validation"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilots and design partners",
+              "Funding raised linked to customer traction",
+              "Revenue generation",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market traction that demonstrate founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insights or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer adoption, funding, and revenue generation, indicating a working product that is maintained and operational. These signals support adequate technical capability with some ability to build, maintain, and scale the product. However, the lack of detailed technical information or proof of complex product execution or scalable architecture limits the score to the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customer adoption, indicating a working product.",
+              "Funding raised suggests investor confidence in the team's ability to build and scale the product.",
+              "Revenue generation implies the product is maintained and operational."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's experience and roles.",
+              "Request insights into the product's technical architecture and scalability plans.",
+              "Seek evidence of engineering practices and product reliability metrics."
+            ],
+            "missing_information": [
+              "Details on the technical team's background and expertise.",
+              "Information on product architecture or engineering processes.",
+              "Specifics on scalability measures or infrastructure."
+            ],
+            "signals": [
+              "Customer usage demonstrates product execution capability.",
+              "Successful fundraising indicates credible technical and business execution.",
+              "Revenue presence supports ongoing product maintenance and scalability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customer acquisition, funding, and early revenue demonstrates early GTM learning, commercial instincts, and initial revenue execution. While these are credible signals of business capability, the absence of detailed metrics on unit economics, repeatable sales motion, or scalable operations suggests some gaps remain, placing the score in the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+              "Funding raised suggests investor confidence in the team's ability to build and operate the business.",
+              "Reported revenue demonstrates initial revenue execution and pricing capability."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and customer retention.",
+              "Share insights on operational processes and scalability plans.",
+              "Demonstrate repeatable sales and revenue growth patterns."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Repeatable or scalable business operations",
+              "Operating discipline metrics"
+            ],
+            "signals": [
+              "Customer acquisition and engagement",
+              "Successful fundraising rounds",
+              "Early revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful fundraising, customer acquisition, and revenue generation provide credible qualitative signals of leadership capacity to lead, hire, and scale the organization. However, the lack of explicit organizational details or evidence of hiring success and executive team depth limits the score to moderate leadership evidence with some unknowns, consistent with a 5-6 score.",
+            "evidence": [
+              "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies effective decision-making and organizational management."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's experience and hiring strategy.",
+              "Disclose organizational charts or executive team bios to strengthen leadership assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Customer acquisition and retention",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence of customer acquisition, funding rounds, and revenue generation demonstrates the team's ability to execute against meaningful milestones beyond prototype stage. These credible and independent signals support some execution evidence but do not indicate rapid or repeated milestone achievement, justifying a score in the 5-6 range.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been raised, demonstrating investor confidence and milestone achievement.",
+              "Revenue generation is reported, showing progress beyond prototype stage."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer retention and revenue growth",
+              "Share milestones related to product development and scaling"
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on growth rates or retention",
+              "Details on product iterations or scaling performance"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding raised",
+              "Revenue generated"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Deel serves over 40,000 customers globally and has processed over $20 billion in payroll, indicating large scale and mission-critical use. High average customer ratings (~4.8/5) and fast onboarding (days) support strong customer outcomes and usability. While explicit quantitative ROI data is not provided, the combination of high customer count, large payroll volume, positive reviews, and mission-critical compliance workflows aligns with strong customer value with meaningful impact and credible proof, consistent with a score in the 7-8 range for Series B+.",
+            "evidence": [
+              "Deel serves over 40,000 customers globally and has processed over $20 billion in compliant payroll.",
+              "Customer reviews rate Deel highly, with an average rating of approximately 4.8/5 from over 14,000 reviews.",
+              "Deel is praised for its compliance capabilities, speed of onboarding employees internationally (in days), and consolidating contractors, EOR employees, and payroll in one dashboard."
+            ],
+            "recommendations": [
+              "Collect retention, expansion, and ROI metrics from customers",
+              "Conduct customer interviews or surveys to quantify value delivered"
+            ],
+            "missing_information": [
+              "Quantitative retention and expansion revenue data",
+              "Measured ROI or customer outcome metrics"
+            ],
+            "signals": [
+              "High customer count (40,000+)",
+              "Large payroll volume processed ($20B+)",
+              "High average customer rating (~4.8/5)",
+              "Fast onboarding (days)",
+              "Mission-critical payroll and compliance workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Deel's owned legal entities and single payroll engines, combined with a hybrid AI and 2,000+ local expert compliance model, provide meaningful infrastructure and domain differentiation. The broad solution suite covering payroll, EOR, contractor management, visa handling, IT support, and benefits across 150+ countries and currencies further supports differentiation. However, direct evidence of customer-recognized differentiation or a clear durable wedge is not explicitly documented, placing the score at a strong but not exceptional 7-8 level.",
+            "evidence": [
+              "Deel’s infrastructure includes owned legal entities and single payroll engines, differentiating it from some competitors relying on third parties.",
+              "The platform uses actionable AI combined with 2,000+ local experts and in-house compliance logic.",
+              "Deel offers a broad solution suite consolidating payroll, EOR, contractor management, visa handling, IT support, and benefits."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on differentiation versus competitors",
+              "Analyze competitor feature sets and customer preferences"
+            ],
+            "missing_information": [
+              "Customer win/loss data explicitly citing differentiation",
+              "Competitive benchmarking on outcomes and workflows"
+            ],
+            "signals": [
+              "Owned legal entities and single payroll engines",
+              "Hybrid AI and local expert compliance model",
+              "Comprehensive global workforce management suite",
+              "Support for 150+ countries and currencies including crypto"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer testimonials highlight fast onboarding within days and ease of use, supported by a single dashboard consolidating multiple workforce types. Positive user feedback includes reduced administrative burden and high satisfaction (~4.8/5). These signals indicate good usability and adoption experience with low friction, consistent with a score of 7-8 for Series B+ where scalable implementation and customer success processes are expected.",
+            "evidence": [
+              "Customer testimonials highlight fast onboarding (days) and ease of use.",
+              "Deel consolidates contractors, EOR employees, and payroll into a single dashboard.",
+              "Positive user feedback includes reduced admin time and simplified global payments."
+            ],
+            "recommendations": [
+              "Collect quantitative onboarding and activation metrics",
+              "Survey customers on usability and support experience"
+            ],
+            "missing_information": [
+              "Detailed implementation time and activation metrics",
+              "Customer success and training burden data"
+            ],
+            "signals": [
+              "Fast onboarding (days)",
+              "Single platform for multiple workforce types",
+              "High customer satisfaction scores (~4.8/5)",
+              "Reduced administrative burden reported by users"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Deel's ownership of legal entities and payroll engines reduces reliance on third parties, creating switching costs. The hybrid AI and local expert compliance model combined with regulatory complexity across 150+ countries forms a barrier to entry. A large and diverse customer base implies distribution advantage. However, lack of explicit retention and integration data limits confidence in a very strong moat, supporting a strong defensibility score of 7-8 rather than higher.",
+            "evidence": [
+              "Deel operates owned legal entities and single payroll engines, reducing reliance on third parties.",
+              "The platform combines AI with 2,000+ local experts and in-house compliance logic.",
+              "Deel supports complex compliance across 150+ countries and currencies.",
+              "High customer retention implied by large customer base and positive reviews."
+            ],
+            "recommendations": [
+              "Obtain retention and churn metrics",
+              "Assess depth of integrations and customer lock-in mechanisms",
+              "Explore ecosystem partnerships and network effects"
+            ],
+            "missing_information": [
+              "Explicit retention rates and churn data",
+              "Details on integrations and workflow lock-in",
+              "Information on network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Infrastructure ownership creating switching costs",
+              "Hybrid AI and local expert compliance model",
+              "Regulatory complexity as a barrier to entry",
+              "Large, diverse customer base indicating distribution advantage"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Serving over 40,000 customers globally with support for multiple workforce types and 150+ countries demonstrates broad and scalable adoption. Customer testimonials from startups and enterprises, along with promotional pricing strategies, indicate a credible scaling motion. Although quantitative growth and retention metrics are not disclosed, the multiple credible signals support strong adoption potential consistent with a score of 7-8.",
+            "evidence": [
+              "Deel serves over 40,000 customers globally across 150+ countries.",
+              "The platform supports multiple workforce types and consolidates them into one system.",
+              "Customer testimonials and case studies show adoption by startups and enterprises.",
+              "Pricing and promotional offers (e.g., 3 months free PEO) support customer acquisition."
+            ],
+            "recommendations": [
+              "Collect data on expansion revenue and customer churn",
+              "Analyze sales process and adoption velocity",
+              "Benchmark market share against competitors"
+            ],
+            "missing_information": [
+              "Quantitative expansion revenue and churn data",
+              "Sales cycle and repeatability metrics",
+              "Market share and competitive positioning data"
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Multi-country and multi-workforce type support",
+              "Enterprise and startup customer references",
+              "Promotional pricing to drive adoption"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates an early but repeatable sales motion with a clear ICP and efficient CAC, supported by paying customers and funding data. While exact quantitative metrics are missing, these signals align with strong GTM execution with credible repeatability, consistent with a seed or early Series A stage.",
+            "evidence": [
+              "The company has disclosed customer acquisition details indicating an early pipeline of paying customers.",
+              "Funding rounds and revenue figures suggest some level of sales motion and acquisition efficiency.",
+              "Information on repeat customers and sales cycle length was mentioned, supporting repeatability."
+            ],
+            "recommendations": [
+              "Provide more granular data on sales cycle length and CAC to strengthen GTM assessment.",
+              "Share detailed pipeline metrics and conversion rates to demonstrate repeatability.",
+              "Include retention and LTV metrics to support long-term GTM efficiency."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on CAC and sales cycle duration.",
+              "Detailed description of sales pipeline stages and conversion rates.",
+              "Specific retention rates and customer lifetime value (LTV) data."
+            ],
+            "signals": [
+              "Clear identification of Ideal Customer Profile (ICP) through customer data.",
+              "Early but repeatable sales motion demonstrated by consistent customer acquisition.",
+              "Evidence of efficient customer acquisition cost (CAC) supported by funding and revenue data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customers using the product, ongoing funding rounds, and revenue generation indicate a usable and iterated product delivering value. These signals support strong product execution with credible maturity and delivery, though detailed quantitative metrics are absent.",
+            "evidence": [
+              "The company has disclosed having customers, indicating a usable product is in place.",
+              "Funding rounds and revenue generation suggest ongoing product development and delivery.",
+              "Customer retention and outcomes are mentioned, implying product value and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather quantitative data on product reliability and iteration speed",
+              "Assess integration capabilities and scalability plans"
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Quantitative metrics on iteration speed and reliability",
+              "Information on integrations and scalability of the product organization"
+            ],
+            "signals": [
+              "Presence of customers using the product",
+              "Successful funding rounds supporting product development",
+              "Revenue generation indicating market acceptance and product delivery"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed customer growth, funding history, improving margins, and controlled burn rate collectively demonstrate healthy operational discipline and scalability potential. These strong signals justify a score reflecting strong operational execution with scaling capability.",
+            "evidence": [
+              "The company has disclosed a strong customer base and consistent revenue growth.",
+              "Recent funding rounds indicate sufficient runway and capital efficiency.",
+              "Publicly available financial metrics show improving margins and controlled burn rate."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics to further validate operational efficiency.",
+              "Disclose hiring plans and process frameworks to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow statements.",
+              "Specific hiring plans and process documentation."
+            ],
+            "signals": [
+              "Growing customer base suggests scalable operations.",
+              "Funding history supports runway adequacy.",
+              "Revenue growth and margin improvement indicate operational discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding milestones, revenue growth, and strategic partnerships indicate a coherent strategy with a credible path to scale. Although some long-term category leadership details are missing, the evidence supports a strong strategic execution appropriate for the company's stage.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and effective positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic initiatives.",
+              "Reported revenue growth suggests successful sequencing and focus on monetization.",
+              "Partnerships mentioned in the company information indicate a wedge strategy to expand market reach."
+            ],
+            "recommendations": [
+              "Provide clearer documentation of competitive positioning and response tactics.",
+              "Clarify the expansion roadmap beyond current markets to demonstrate durable category strategy."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategies",
+              "Explicit articulation of long-term category leadership plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding milestones and investor profiles",
+              "Revenue trends and growth rates",
+              "Strategic partnerships and collaborations"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth.",
+              "Disclose information on pilots, early customers, or design partners.",
+              "Share data on customer segments and acquisition metrics relevant to company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on customer segments, ACV, or business model impact on customer growth."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain verified revenue growth metrics",
+              "Gather data on customer acquisition and expansion",
+              "Provide information on contract values and renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or behaviors. Without such data or credible public signals, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+              "Share customer testimonials or case studies indicating stickiness and renewal behavior."
+            ],
+            "missing_information": [
+              "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+              "No qualitative evidence on customer stickiness or repeat usage available."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates strong engagement through multiple credible qualitative signals: disclosed customer usage frequency and retention, revenue growth indicating expansion, and implied workflow depth and automation volume. Although exact quantitative metrics are not provided, these signals align with the 'strong engagement' band (7-8) under the Score Guidance, as they demonstrate usage data, retention, expansion, and workflow embedding. The lack of precise usage analytics or detailed retention metrics prevents a higher score, but the combination of these factors justifies a score of 7.",
+            "evidence": [
+              "The company has disclosed customer usage signals indicating active engagement.",
+              "Funding and revenue data suggest ongoing customer retention and expansion.",
+              "Workflow embedding and automation volume are implied by product descriptions."
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect direct customer feedback on product integration and workflow impact"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+              "Detailed analytics on active user counts and outcome evidence"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Workflow depth and automation volume from product features"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base and multiple funding rounds, which suggest some level of recurring revenue and investor confidence in revenue predictability. However, no explicit quantitative metrics such as NRR, GRR, or churn rates are provided, limiting the ability to rate revenue quality higher. This aligns with a moderate revenue quality score reflecting some risks or insufficient history.",
+            "evidence": [
+              "Company reports a growing customer base indicating demand and some level of recurring revenue.",
+              "Funding rounds suggest investor confidence in business model and revenue predictability."
+            ],
+            "recommendations": [
+              "Obtain explicit NRR and churn data to better assess revenue durability.",
+              "Gather information on contract terms and customer concentration to evaluate predictability and risk."
+            ],
+            "missing_information": [
+              "Exact metrics on net revenue retention (NRR) and churn rates.",
+              "Details on contract length, revenue concentration, and customer quality."
+            ],
+            "signals": [
+              "Customer growth implies retention and recurring revenue potential.",
+              "Successful funding rounds imply validation of revenue quality by investors."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margins are not explicitly disclosed, the available evidence on customers, revenue, and funding provides directional signals that the economics of acquiring and serving customers may be attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed customer counts and revenue figures indicating some traction.",
+              "Funding history and raised capital amounts are provided, suggesting ability to invest in customer acquisition.",
+              "Revenue model and pricing information are available, allowing inference of pricing power and potential gross margins."
+            ],
+            "recommendations": [
+              "Obtain internal CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin data to evaluate profitability per customer.",
+              "Collect retention and expansion revenue figures to understand customer lifetime value growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values or payback periods.",
+              "Detailed LTV (Lifetime Value) to CAC ratios.",
+              "Gross margin percentages or cost structure details.",
+              "Retention or churn rates to assess expansion and customer longevity."
+            ],
+            "signals": [
+              "Presence of paying customers indicates some level of product-market fit and monetization.",
+              "Funding raised implies investor confidence in unit economics or at least in the potential to improve them.",
+              "Revenue growth suggests improving sales efficiency and possible expansion revenue."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has disclosed revenue, customer counts, and funding data that allow inference of capital efficiency relative to growth and stage. While exact burn figures are missing, the evidence of revenue growth and milestones tied to spend suggests moderate burn efficiency with some uncertainty rather than strong or weak extremes.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts.",
+              "Funding history and capital raised amounts are provided.",
+              "Stage of the company is indicated, allowing context for burn expectations."
+            ],
+            "recommendations": [
+              "Provide explicit monthly or quarterly burn figures to better assess efficiency.",
+              "Disclose runway and cash balance to understand capital longevity.",
+              "Share unit economics to correlate burn with customer acquisition and retention.",
+              "Detail how burn maps to specific growth milestones or product development."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn and cash balance.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Internal forecasts or burn breakdown by function."
+            ],
+            "signals": [
+              "Revenue relative to capital raised suggests some level of capital efficiency.",
+              "Customer growth and revenue growth imply burn is supporting growth.",
+              "Stage-appropriate burn is inferred given disclosed milestones and growth metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose planned milestones and expected timing",
+              "Share fundraising plans and target amounts",
+              "Include growth strategy and market context to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 68.5,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The fundraising readiness is moderate with strong market, product, competition, and traction scores. However, the team and financial aspects need improvement to increase overall readiness.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

@@ -37,7 +37,13 @@ client = OpenAI(
 # Bumped for this sprint since the pipeline is now two stages instead of
 # one, a materially different prompt shape from v1.0.
 PILLAR_ANALYSIS_MODEL = "gpt-4.1-mini"
-PILLAR_PROMPT_VERSION = "2.0"
+# Bumped for Methodology V2.1 (Phase 10.8B): the scoring-stage prompt rules
+# changed materially (the "do not lower a score for sparse evidence" rule
+# was removed and replaced -- see app/ai/pillar_scoring.py), and evidence
+# extraction is now followed by a deterministic provenance guard
+# (app/ai/evidence_provenance.py). See docs/validation/
+# SPS_METHODOLOGY_V2_1_CHANGELOG.md.
+PILLAR_PROMPT_VERSION = "2.1"
 
 
 # Deterministic terms indicating the supplied company information likely

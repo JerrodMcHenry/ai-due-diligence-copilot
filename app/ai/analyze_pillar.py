@@ -22,7 +22,11 @@ internal implementation is now two calls instead of one, with
 per-dimension scoped correction instead of whole-pillar correction.
 """
 
-from app.ai.scoring import finalize_pillar_score, get_scoring_dimensions
+from app.ai.scoring import (
+    apply_confidence_score_cap,
+    finalize_pillar_score,
+    get_scoring_dimensions,
+)
 from app.ai.evidence_extraction import extract_pillar_evidence
 from app.ai.pillar_scoring import score_pillar_evidence
 from app.models.scoring import PillarScoreBreakdown, Subscore
@@ -406,6 +410,15 @@ def analyze_pillar(
         evidence_corrected_names=evidence_corrected_names,
         score_corrected_names=score_corrected_names,
     )
+
+    # Methodology V2.1, Part 11: no LLM-scored subscore may exceed the
+    # defensible ceiling for its own (Stage-1-decided) confidence level.
+    # Applied before the Deterministic override below is harmless either
+    # way -- apply_deterministic_overrides() unconditionally replaces
+    # every Deterministic-named subscore's score AND confidence with its
+    # own Python-computed values, so this cap never has the final say for
+    # those dimensions regardless of ordering.
+    subscores = apply_confidence_score_cap(subscores)
 
     # SIE Methodology v2, Part 8: Deterministic dimensions' final score must
     # be Python-computed, never the LLM scoring stage's judgment, whenever

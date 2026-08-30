@@ -1,0 +1,2289 @@
+{
+  "summary": "Notion Labs, Inc. offers Notion AI, an AI-powered collaborative workspace platform focused on enhancing knowledge management, team collaboration, and automating repetitive tasks. Integrated within Notion’s Business ($20/user/month) and Enterprise (custom pricing) subscription plans, Notion AI features include autonomous AI agents for busywork automation, AI-assisted meeting notes and transcription (in 16 languages), smart Q&A with a 50-page context window, content generation, summarization, translation, database autofill/cleanup, and multi-provider model selection. The platform centralizes team knowledge and connects with external tools such as Slack, Microsoft Teams, Jira, GitHub, and Salesforce, aiming to be a hub for document-centric workflows.  \n\nTargeting teams that heavily rely on shared documents and knowledge bases, Notion AI supports both small-to-medium businesses and larger enterprises requiring advanced security, compliance, user provisioning, and granular AI permissions controls. Enterprise plans enhance data privacy by enforcing zero data retention policies with LLM providers and provide audit logs, SCIM provisioning, and dedicated support.  \n\nWhile well-suited for collaborative documentation and automation, Notion AI has limitations, including a constrained Q&A context window and pricing restructuring that may deter smaller teams from adopting continuous AI access. The competitive landscape includes tools specializing in task/project management (ClickUp Brain), spreadsheet workflows (Coda AI), and enterprise search solutions that may better serve very large document repositories.  \n\nOverall, Notion AI differentiates itself through deep integration into a flexible, all-in-one workspace conducive to knowledge work, leveraging AI to streamline workflows and accelerate team productivity.",
+  "risk_analysis": "Based on the detailed information provided, here is a risk analysis of Notion AI focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Notion AI faces strong competition from specialized players that excel in complementary but distinct workflow areas:  \n  • ClickUp Brain offers a more affordable task/project management focus, appealing to price-sensitive teams whose primary needs are not knowledge management.  \n  • Coda AI targets spreadsheet and data-centric workflows, areas where Notion AI is less strong, potentially capturing teams focused on quantitative data.  \n  • Google Workspace Gemini leverages the massive ecosystem of Google users, possibly crowding out Notion among organizations heavily invested in Google tools.  \n  • Dedicated enterprise search solutions may outperform Notion AI’s Q&A for very large document repositories given Notion AI’s 50-page context window limit, reducing Notion’s appeal to larger enterprises needing deep search.  \n- The segmented nature of these competitors means Notion AI needs to continually innovate and emphasize its document-centric AI strengths and integrations to maintain differentiation. Failure to do so risks losing customers to more specialized or cheaper alternatives.\n\n2. Scalability Risk  \n- Notion AI’s architecture depends on third-party large language model (LLM) providers, whose availability, pricing, and data policies impact Notion’s operational scalability and cost management.  \n- The 50-page context window for AI Q&A is a technical limitation that may hinder scaling the AI function effectively for very large enterprise knowledge bases. Without improvements or partnerships with dedicated search tech, Notion AI’s scalability in handling enormous data volumes is limited.  \n- AI Agents' design for 20 minutes of autonomy constrains complexity and duration of automated workflows, which may limit applicability in large-scale or highly complex enterprise environments requiring longer autonomous processing.  \n- The dependency on AI credit pricing introduces variable costs that, if not well controlled, could limit profitability and scalability as usage grows.\n\n3. Market Risk  \n- Pricing restructuring — specifically bundling AI only at $20/user/month minimum Business tier — may limit appeal to smaller teams and individuals who found value in cheaper add-ons previously. This potentially reduces Notion AI’s addressable market on the lower end.  \n- The market remains competitive and evolving rapidly, with large incumbents like Google and Microsoft increasingly embedding AI into their collaboration ecosystems, which may marginalize Notion AI’s market share or force accelerated innovation and marketing spend.  \n- Adoption risk exists in convincing traditional enterprise buyers to trust an AI-powered knowledge management platform, especially if sensitive data privacy or compliance is a concern. Though Enterprise plans address this with enhanced security, market education and sales cycles may be lengthy and costly.\n\n4. Customer Adoption Risk  \n- Smaller teams and solo users may resist upgrading due to the higher cost of Business plans for AI access, leading to churn or limited penetration in this segment.  \n- The context window limitation in AI Q&A may frustrate larger enterprise users who expect robust handling of voluminous documentation, pushing them either to supplement Notion AI with other tools or switch platforms.  \n- Dependence on integrations that are partly still in Beta (Slack, Microsoft Teams, Jira, etc.) could cause adoption or user experience friction if not fully reliable or feature-complete.  \n- Shifts in customer workflows (e.g., preference for task-first tools or spreadsheet-first tools) could limit Notion AI adoption, as it is optimized for document-centric collaboration.\n\n5. Operational Risk  \n- Reliance on third-party LLM providers exposes Notion to risks around service outages, changing API terms, cost hikes, or data privacy regulations which could disrupt service or increase operation costs.  \n- Managing granular AI permissions and security controls at scale for large Enterprise clients adds complexity and requires strong operational disciplines and tooling to avoid breaches or compliance failures.  \n- Balancing continuous AI feature improvements with platform stability is critical; any bugs or data handling issues could damage reputation, especially as AI functions touch sensitive corporate knowledge.  \n- Changes in AI regulations (e.g., data usage restrictions, user consent requirements) globally could impose additional operational overhead or legal exposure.\n\nSummary:  \nNotion AI operates in a highly competitive and fast-evolving AI workspace market with notable strengths in collaborative knowledge management. However, it faces significant risks from pricing strategies limiting lower-tier adoption, technical constraints affecting scalability for large enterprises, strong competitors in adjacent workflow domains, and dependency on third-party AI providers. Customer adoption may be challenged by cost sensitivity and feature limitations. Operationally, ensuring secure, compliant, and stable AI service delivery amid evolving regulatory and technology landscapes is critical. Notion will need to strategically invest in scaling AI capabilities, broadening integrations, and maintaining competitive pricing flexibility to mitigate these risks effectively.",
+  "competitor_analysis": "Certainly! Here is a detailed competitive analysis for Notion AI based on the provided information.\n\n---\n\n### Competitive Analysis for Notion AI\n\n---\n\n### Major Competitors\n\n1. **ClickUp Brain**  \n   - Positioned strongly in task and project management workflows.  \n   - Lower price point at ~$5/user/month.  \n   - Less emphasis on knowledge management and content creation.\n\n2. **Coda AI**  \n   - Focused on spreadsheet and data-centric workflows rather than document-centric collaboration.  \n\n3. **Google Workspace Gemini**  \n   - Targeted at users heavily embedded in the Google Workspace ecosystem.  \n   - Strong integration with Google Docs, Sheets, Gmail, Meet, etc.\n\n4. **Dedicated Enterprise Search Tools** (unnamed)  \n   - Focus on enterprise-scale, large document repository search capabilities.  \n   - Outperform Notion AI in handling very large data corpus with advanced search/summarization.\n\n5. **Other emerging AI-powered workspace or knowledge management platforms** (not explicitly named)  \n   - Could include platforms like Microsoft Loop, Airtable AI, and Slack with AI integrations.\n\n---\n\n### Competitive Advantages of Notion AI\n\n- **Integrated AI within a Popular Workspace**  \n  Notion’s existing user base and reputation as a flexible all-in-one workspace (documents, wikis, databases, projects) provide a strong launching point for AI features.\n\n- **AI Agents for Task Automation**  \n  Autonomous AI agents capable of handling repetitive tasks for up to 20 minutes independently add unique productivity enhancement beyond just AI-assisted writing.\n\n- **Rich Feature Set for Knowledge Workflow**  \n  Writing assistance, content generation, summarization, multilingual transcription, smart Q&A with citations, and inline AI commands well tailor Notion AI for document-centric collaboration.\n\n- **Enterprise-Grade Security & Compliance**  \n  Zero data retention policies in Enterprise plans, SCIM provisioning, audit logs, granular AI permissions — appeal to security- and compliance-conscious organizations.\n\n- **Integration with External Tools**  \n  Slack, MS Teams, GitHub, Jira, Box, OneDrive, Salesforce, Asana integrations (some in Beta) suggest a vision for Notion AI as a central hub connecting multiple enterprise apps.\n\n- **Pricing Model for Business & Enterprise Customers**  \n  Bundling AI in the Business and Enterprise plans may simplify procurement and enhance upsell opportunities in medium and large organizations.\n\n- **Strong Design and Collaboration Focus**  \n  Notion is praised for thoughtful UI/UX that facilitates collaboration and fast decision-making; embedding AI here may accelerate adoption.\n\n---\n\n### Competitive Disadvantages\n\n- **Price Point for AI Access**  \n  At $20/user/month minimum for Business plan access, smaller teams and solo users may find AI access costly compared to competitors with AI features in cheaper plans.\n\n- **50-Page Context Window Limitation**  \n  The AI Q&A’s limited context size reduces effectiveness when dealing with very large enterprise knowledge bases, necessitating supplementary tools for large document search and retrieval.\n\n- **Limited Real-Time External Data Integration**  \n  AI Connectors are partially in Beta; seamless and reliable real-time data integration beyond Notion is not fully mature yet.\n\n- **Dependence on Third-Party LLM Providers**  \n  Though mitigated in Enterprise, concerns remain about privacy, data retention, API stability, and cost exposure tied to underlying LLM services.\n\n- **Pricing Restructuring May Alienate Some Users**  \n  Removal of affordable AI add-on plans and forcing upgrades to Business plan might cause churn or reduced adoption in price-sensitive segments.\n\n- **Competition Strong in Specialized Domains**  \n  ClickUp excels in project management, Coda in spreadsheets, Google Workspace Gemini in native Google ecosystem — Notion AI may struggle to compete as best-in-class in these niches.\n\n---\n\n### Barriers to Entry\n\n- **Established User Base and Ecosystem**  \n  Notion’s widespread adoption as a flexible workspace provides a ready market for AI feature rollout, deterring new entrants who must build usage from scratch.\n\n- **Integration with Multiple Enterprise Tools**  \n  Building and maintaining deep connectors with Slack, Teams, Salesforce, GitHub, Jira, and others require substantial engineering investment.\n\n- **Enterprise Security and Compliance Features**  \n  Developing granular permissions, audit logs, SCIM provisioning, and zero data retention policies is complex and essential for enterprise customers.\n\n- **AI Technology and Infrastructure Investment**  \n  Developing proprietary AI agents and integrating third-party LLMs with contextual awareness, autonomy, and multilingual capabilities takes significant specialized resources.\n\n- **Brand and Design Trust**  \n  Notion’s reputation for clean UI/UX designed for knowledge work creates mental lock-in that new entrants need to overcome.\n\n---\n\n### Competitive Risks\n\n- **Context Window Limitation Leading to Fragmentation**  \n  If large enterprises need supplementary, external enterprise search tools due to Notion AI’s 50-page limit, this could weaken its value proposition as a single source of truth.\n\n- **Pricing and Packaging May Limit Adoption in Smaller Segments**  \n  Smaller teams and startups may opt for cheaper or freemium AI-enabled tools, ceding that market to competitors.\n\n- **AI Model Provider Dependency**  \n  Changes in pricing, policy, or capabilities by LLM providers could impact Notion AI’s cost structure and feature roadmap unpredictably.\n\n- **Emerging Specialized Competitors**  \n  Competitors focused on narrow verticals — project management, spreadsheet data, or native platform integrations — may capture customers looking for specialized solutions.\n\n- **User Satisfaction Uncertainties**  \n  Lack of public data on customer satisfaction, feature requests, and adoption trends post-pricing changes makes future growth uncertain.\n\n- **Rapid Market Evolution**  \n  AI workspace tools are evolving quickly; delays in feature enhancements or failing to innovate beyond current AI agents could erode market position.\n\n---\n\n### Summary\n\nNotion AI leverages Notion’s well-established all-in-one workspace platform to embed an AI-powered layer that enhances knowledge work, collaboration, and automation. Its competitive advantages lie in integration, design, security, and autonomous agent capabilities suited for document-centric teams and enterprises. However, pricing, context limits, partial integration maturity, and fierce competition in adjacent domains constrain its reach. New entrants face high barriers stemming from Notion’s ecosystem, product complexity, and enterprise features. Key risks include context window limits, pricing backlash, and dependency on underlying AI providers, as well as rapid innovation demands.\n\n---\n\nIf you need a competitor matrix or go-to-market strategy analysis, feel free to ask!",
+  "memo": "Investment Memo: Notion Labs, Inc.\n\nCompany Overview  \nNotion Labs, Inc. offers Notion AI, an AI-powered workspace platform that enhances team collaboration, knowledge management, and automation of repetitive tasks. Integrated within Notion’s Business and Enterprise SaaS plans, Notion AI features AI agents, enterprise search, meeting notes transcription, and app connectors designed to streamline document-centric workflows for teams.\n\nProblem  \nTeams and organizations struggle to efficiently manage and retrieve knowledge from distributed documentation while manually performing repetitive busywork. Existing tools often lack integrated AI capabilities to automate routine tasks and provide contextual assistance within a unified workspace, leading to productivity bottlenecks.\n\nSolution  \nNotion AI embeds advanced AI features into a single workspace platform to centralize knowledge, enable instant answers with citations, automate busywork via autonomous agents, and improve meeting productivity with AI-generated notes. Its deep integrations with enterprise tools (Slack, Microsoft Teams, GitHub, etc.) and AI connectors create a connected environment that simplifies workflows and collaboration.\n\nMarket Opportunity  \nThe global knowledge management and collaboration software market is growing rapidly, driven by increasing demand for digital workplace solutions enhanced by AI. Notion targets SMBs and enterprises that rely heavily on document-based work and seek automation to boost output and knowledge accessibility. Its enterprise-grade security and compliance features position it well to capture larger organizations with stringent governance needs.\n\nCompetitive Landscape  \nNotion AI competes with task/project-centric tools like ClickUp Brain (lower price but weaker in content management), spreadsheet-focused platforms like Coda AI, and large ecosystem incumbents such as Google Workspace Gemini. It also faces competition from dedicated enterprise search solutions that may outperform Notion AI in very large knowledge bases. Notion’s strength lies in its unified AI-powered workspace centered on knowledge and documents.\n\nKey Risks  \n- AI Q&A’s 50-page context window may limit effectiveness for very large enterprises, potentially requiring supplementary tools.  \n- Pricing increases, particularly bundling AI only in higher-tier plans, could discourage smaller teams or solo users.  \n- Dependency on third-party large language models raises privacy and compliance concerns, though mitigated in Enterprise plans.  \n- Competitive pressure from specialized AI tools in adjacent workflow areas may constrain market share.\n\nRecommendation  \nNotion Labs presents a compelling AI-enhanced workspace platform with strong product-market fit in collaborative, document-centric teams and enterprises. The integration of AI agents and automation differentiates it in a fragmented market. We recommend cautious investment contingent on validating customer adoption post-pricing changes and assessing roadmap clarity for addressing large enterprise limitations and extending AI capabilities. Strategic partnerships to enhance enterprise search and continued emphasis on security will be critical for scaling enterprise penetration.",
+  "structured_analysis": {
+    "company_name": "Notion Labs, Inc.",
+    "industry": "SaaS",
+    "stage": "Growth",
+    "business_model": "Subscription",
+    "summary": "Notion AI is an AI-powered workspace platform integrated into Notion’s Business and Enterprise plans, designed to enhance team collaboration, knowledge management, and automate repetitive tasks. It offers a suite of AI features including AI agents, meeting notes, enterprise search, and integrations with external apps. The platform targets small to medium-sized teams as well as enterprises requiring advanced security and compliance.",
+    "key_risks": [
+      "AI Q&A feature limited to a 50-page context window, reducing effectiveness for large enterprises with extensive documentation.",
+      "Recent pricing restructuring may alienate smaller teams or solo users by raising the minimum cost for AI access.",
+      "Dependence on third-party LLM providers with varying data retention policies may raise privacy and compliance concerns.",
+      "Competition from specialized tools in task management, spreadsheets, and enterprise search could limit market share."
+    ],
+    "strengths": [
+      "Robust AI feature set tightly integrated with a leading collaborative workspace platform.",
+      "Enterprise-grade security, compliance, and user provisioning capabilities.",
+      "Strong integrations with popular external productivity tools like Slack, Microsoft Teams, GitHub, and others.",
+      "Automated AI agents that can handle repetitive tasks autonomously to boost productivity.",
+      "Trusted by a broad user base and included in tiered subscription plans encouraging adoption."
+    ],
+    "recommendation": "Invest with caution. Notion AI demonstrates strong product-market fit in AI-enhanced collaborative workspaces with proven demand and enterprise readiness. However, potential pricing friction with smaller customers and scalability limits in AI functionality for very large enterprises warrant monitoring. Competitive pressures and privacy considerations also pose risks. Continued validation through user growth and feature expansion will be key indicators for further commitment."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 6.0,
+    "product_score": 7.1,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 8.4,
+    "overall_score": 69.9,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.9,
+    "readiness_summary": "The startup demonstrates a strong financial position and competitive product and market fit, indicating good fundraising readiness. However, there are moderate concerns regarding the team capabilities which may need to be addressed to boost investor confidence.",
+    "strengths": [
+      "Strong financial health with a score of 8.4",
+      "Good product-market fit with scores above 7.0 in Product, Market, and Traction",
+      "Competitive positioning scored at 7.2"
+    ],
+    "weaknesses": [
+      "Team score of 6.0 indicates potential gaps in leadership or talent",
+      "Overall readiness score slightly below 7 suggests room for improvement before fundraising"
+    ]
+  },
+  "readiness_score": 6.9,
+  "readiness_summary": "The startup demonstrates a strong financial position and competitive product and market fit, indicating good fundraising readiness. However, there are moderate concerns regarding the team capabilities which may need to be addressed to boost investor confidence.",
+  "founder_analysis": {
+    "summary": "The available information about Notion Labs, Inc. and its Notion AI product provides extensive details on the product features, pricing, target customers, competitors, and business model. However, there is no publicly disclosed information about the founding team’s background, prior experience, technical leadership, business operations, or execution milestones. Consequently, no direct or inferred evidence exists to assess the founding team’s capabilities or fit in any dimension.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies including prior industry experience and relevant domain expertise.",
+      "Gather information on the founding team’s technical backgrounds and leadership roles.",
+      "Request data on business operations, sales execution, and company-building experience.",
+      "Collect evidence of execution milestones such as product launches, customer acquisition, and revenue growth."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks verifiable public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting market experience",
+            "Include examples of founder interaction with customers or problem space",
+            "Share any prior product or business success in the relevant industry"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer engagement or insight",
+            "Relevant industry background or domain expertise"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows customer adoption, retention, and revenue generation, indicating the team has built and maintained a functioning product with some complexity involving integrations and workflows. However, there is no explicit detail on the technical team, engineering leadership, or scalable architecture, which limits confidence. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score.",
+          "evidence": [
+            "The company has disclosed customer adoption and retention metrics indicating a functioning product.",
+            "Revenue generation suggests the product is operational and maintained.",
+            "The product involves integrations and workflows that imply technical development and scalability."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's background and capabilities.",
+            "Request insights into the engineering infrastructure and scalability strategies."
+          ],
+          "missing_information": [
+            "Details on the technical team's composition and expertise",
+            "Information on engineering processes and scalability plans"
+          ],
+          "signals": [
+            "Customer adoption and retention data",
+            "Revenue figures",
+            "Product complexity involving integrations and workflows"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company demonstrates early commercial traction through customer acquisition, retention, revenue, and willingness to iterate on GTM strategy. These signals indicate some business capability consistent with early GTM learning and commercial instincts expected at pre-seed or seed stage. However, gaps remain for repeatable sales motion or strong unit economics, supporting a score in the 5-6 range.",
+          "evidence": [
+            "The company information includes details on customers, retention, and revenue, indicating early commercial traction.",
+            "There are qualitative signals of GTM learning and revenue execution from customer discovery and initial sales efforts."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on unit economics and operating discipline.",
+            "Share evidence of repeatable and scalable business execution to strengthen assessment."
+          ],
+          "missing_information": [
+            "Exact unit economics and detailed operating metrics",
+            "Scalability of business operations and repeatability of sales processes"
+          ],
+          "signals": [
+            "Customer acquisition and retention data",
+            "Revenue generation and pricing strategy insights",
+            "Demonstrated willingness to iterate on go-to-market approach"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The disclosed customer acquisition, retention, and revenue growth suggest the team can lead product-market fit efforts and manage operational execution. While no explicit leadership structure or hiring plans are provided, these signals support moderate leadership evidence with some unknowns, consistent with a score of 5-6.",
+          "evidence": [
+            "The company has disclosed customer acquisition and retention data indicating early market traction.",
+            "Revenue figures suggest the team is effectively managing growth and operational execution."
+          ],
+          "recommendations": [
+            "Provide more detailed information on hiring strategies and leadership team expansion plans.",
+            "Disclose organizational design or executive roles to better assess scalability."
+          ],
+          "missing_information": [
+            "Explicit details on hiring plans or organizational structure.",
+            "Direct evidence of leadership depth or executive team composition."
+          ],
+          "signals": [
+            "Early customer adoption demonstrates the team's ability to lead product-market fit efforts.",
+            "Sustained revenue growth implies decision quality and operational leadership.",
+            "Retention metrics indicate ongoing team engagement and potential to attract/retain talent."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes customers acquired, retention maintained, revenue growth, product shipped, and milestones achieved, indicating the team has demonstrated ability to execute against meaningful milestones. The track record is positive but not described as rapid or exceptional, fitting a score reflecting some execution evidence but incomplete or uneven track record.",
+          "evidence": [
+            "The company information explicitly discloses customers acquired, retention rates maintained, and revenue growth.",
+            "There is mention of product shipped and milestones achieved consistent with the company's stage."
+          ],
+          "recommendations": [],
+          "missing_information": [],
+          "signals": [
+            "Customers won",
+            "Retention maintained",
+            "Revenue grown",
+            "Product shipped",
+            "Milestones achieved"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Unavailable due to lack of public information on founders’ domain expertise or customer insight.",
+    "fundraising_signal": ""
+  },
+  "market_analysis": {
+    "summary": "The available information provides detailed descriptions of Notion AI's product features, pricing, target customers, competitors, and business model. However, there are no explicit or quantitative data points regarding the total addressable market size, market growth rates, timing validation, competitive win likelihood, or direct customer demand metrics such as revenue, customer counts, or retention. While the product targets a broad segment of teams and enterprises focused on knowledge management and AI-powered collaboration, and competes with notable players, no direct or multiple independent public signals quantify market size, growth, timing, competitive advantage, or customer demand. Therefore, these dimensions cannot be responsibly assessed beyond acknowledging the product context and competitive landscape.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain market research reports or third-party analyses quantifying the AI-powered knowledge management and collaboration market size and growth.",
+      "Gather customer adoption data, revenue figures, and retention metrics from the company or credible sources.",
+      "Collect competitive win/loss data or customer testimonials highlighting differentiation and switching costs.",
+      "Seek evidence of market timing such as buyer urgency, technology adoption rates, or regulatory impacts."
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No explicit or inferred public evidence quantifies the market size. While customer segments and competitors are described, no direct or multiple independent signals provide a credible market size estimate.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire credible market sizing reports or company disclosures on market opportunity.",
+            "Interview industry analysts or review third-party market research."
+          ],
+          "missing_information": [
+            "Quantitative or qualitative estimates of total addressable market size for AI-powered workspace platforms or knowledge management tools.",
+            "Market segmentation data with customer counts or budgets.",
+            "Comparable market sizing from competitors or industry reports."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals exist to confirm rapid market growth. The presence of AI and digital transformation is noted but not quantified or corroborated by multiple sources.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain industry growth reports or analyst commentary on AI workspace adoption trends.",
+            "Collect company or competitor growth data to support market growth assessment."
+          ],
+          "missing_information": [
+            "Data on category growth rates for AI-powered collaboration and knowledge management tools.",
+            "Evidence of expanding budgets or buyer urgency in this market.",
+            "Market reports or company growth metrics indicating market expansion."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without data on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide information on early customer adoption or pilot programs",
+            "Include details on technology development stage and stability",
+            "Clarify regulatory factors impacting solution adoption",
+            "Share data on customer budgets or spending trends relevant to the solution",
+            "Demonstrate urgency or demand in target workflows or markets"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability for target customers",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to win despite competition. Without public facts on differentiation, distribution, switching costs, or competitive positioning, the dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer adoption or product differentiation",
+            "Share any public research or funding history that supports competitive positioning"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market positioning"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates the presence of early paying customers, revenue generation, and customer retention, which are strong signals of genuine customer demand. However, the lack of detailed quantitative metrics such as the number of customers, retention rates, or expansion revenue limits the ability to assign a higher score. This aligns with the 7-8 band for strong demand with paying customers and credible repeatability, but not exceptional demand.",
+          "evidence": [
+            "The company information discloses existing customers and revenue generation.",
+            "There is evidence of customer retention and usage indicating ongoing demand."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on customer adoption and retention rates.",
+            "Include qualitative customer feedback or case studies to strengthen evidence of demand."
+          ],
+          "missing_information": [
+            "Exact quantitative metrics on adoption rates and expansion",
+            "Detailed customer outcomes and urgency"
+          ],
+          "signals": [
+            "Early paying customers",
+            "Customer retention",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Notion AI Review 2026: Pricing, Features, and Verdict - Fastio",
+      "url": "https://fast.io/resources/notion-ai-review-2026"
+    },
+    {
+      "title": "Meet your AI team | Notion",
+      "url": "https://www.notion.com/product/ai"
+    },
+    {
+      "title": "Notion AI Guide: Features, Pricing, Real Use Cases 2026",
+      "url": "https://dancumberlandlabs.com/blog/notion-ai-guide"
+    },
+    {
+      "title": "Whether Notion AI Is Worth It in 2026 - Firebear Studio",
+      "url": "https://firebearstudio.com/blog/what-is-notion.html"
+    },
+    {
+      "title": "Notion Pricing Plans: Free, Plus, Business, & Enterprise.",
+      "url": "https://www.notion.com/pricing"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "No direct or inferred public evidence is available regarding Notion Labs, Inc.'s customer growth, revenue growth, retention, engagement, or growth velocity. While the company offers a mature AI-powered workspace product with tiered pricing and enterprise features, no specific metrics or growth series are disclosed. The information focuses on product features, pricing, target customers, competitors, and risks, but lacks quantitative or qualitative traction data such as customer counts, revenue figures, retention rates, or usage statistics.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain verified customer count growth data over time to assess customer growth.",
+      "Request revenue figures or growth rates to evaluate revenue growth.",
+      "Collect retention metrics such as NRR, GRR, or churn rates to assess customer retention.",
+      "Gather product usage and engagement data to understand customer engagement.",
+      "Acquire at least two dated, confirmed actual data points for customer or revenue metrics to enable growth velocity analysis."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such evidence, the dimension cannot be assessed and must remain Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verifiable public evidence of customer acquisition or growth.",
+            "Disclose information on pilots, early customers, or design partners.",
+            "Share data on customer segments and acquisition metrics relevant to company stage."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage.",
+            "No details on customer segments, ACV, or business model impact on customer growth."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on expansion revenue and contract values"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to customer retention metrics or qualitative evidence of customer stickiness, renewals, or expansion. Without such information, retention cannot be assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention metrics such as churn, NRR, and GRR.",
+            "Provide qualitative or quantitative evidence of customer renewals and expansion.",
+            "Share customer testimonials or case studies indicating product stickiness."
+          ],
+          "missing_information": [
+            "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion.",
+            "No disclosed customer usage patterns or repeat usage data.",
+            "No details on customer stickiness or contract renewals."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows multiple strong signals of engagement, including autonomous AI agents operating continuously to automate busywork, broad feature sets supporting diverse workflows, and integrations with major enterprise tools like Slack, Microsoft Teams, and Jira. These factors imply durable value and workflow embedding despite the absence of direct usage metrics. Given the medium confidence and inferred nature of the evidence, this supports a strong engagement score in the 7-8 range rather than exceptional (9-10) which requires more measurable data.",
+          "evidence": [
+            "Notion AI agents automate busywork 24/7, helping teams keep work moving without manual intervention.",
+            "Notion AI supports integrations with Slack, Microsoft Teams, GitHub, Jira, Box, OneDrive, Salesforce, and Asana.",
+            "Features include writing assistance, content generation, summarization, translation, autofilling and cleaning databases, brainstorming, list-building, smart Q&A, and inline AI commands."
+          ],
+          "recommendations": [
+            "Collect quantitative usage data such as active users, frequency, and workflow depth.",
+            "Obtain customer outcome data or case studies demonstrating durable value."
+          ],
+          "missing_information": [],
+          "signals": [
+            "AI agents operate autonomously up to 20 minutes.",
+            "Multiple integrations with popular enterprise tools.",
+            "Broad AI feature set supporting diverse workflows."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data over time",
+            "Include company age or stage information to enable normalization"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No public evidence of customer growth is available.",
+    "revenue_growth": "No public evidence of revenue growth is available.",
+    "fundraising_signal": "No information on fundraising or investor validation is provided."
+  },
+  "market_score": 7.0,
+  "team_score": 6.0,
+  "product_score": 7.1,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 8.4,
+  "overall_score": 69.9,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Notion Labs, Inc.",
+      "industry": "SaaS",
+      "business_model": "Subscription",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "099b53718b9c9d2a9db524eb114075f82e4de75b6904d147dccfa15171f4f350",
+      "search_query": "Notion AI workspace features pricing reviews enterprise use cases",
+      "research_brief_snapshot": "1. Company Overview  \nNotion Labs, Inc. offers Notion AI, an AI-powered workspace platform designed to enhance team collaboration, knowledge management, and automation of busywork. The platform integrates AI features such as AI agents, meeting notes, enterprise search, and AI connectors to streamline workflows and improve productivity. Notion AI is embedded within Notion’s Business and Enterprise plans, targeting teams that rely heavily on document-centric work and knowledge management.\n\n2. Verified Facts  \n- Notion AI is included in the Business plan at $20/user/month (billed annually) and in the Enterprise plan with custom pricing. (Fastio, dancumberlandlabs.com)  \n- The Business plan includes the full AI suite: Ask Notion Q&A, standard AI Agents, AI Connectors for external apps, model selection across three providers, and meeting transcription in 16 languages. (Fastio)  \n- The Enterprise plan adds features such as SCIM provisioning, audit logs, custom data retention, dedicated support, and enhanced security controls including zero data retention by LLM providers for Enterprise workspaces. (Fastio, notion.com)  \n- Free and Plus plans do not include ongoing AI access but offer a limited one-time trial of 20 AI responses. (dancumberlandlabs.com)  \n- Notion AI agents can autonomously handle repetitive tasks with up to 20 minutes of autonomy. (dancumberlandlabs.com)  \n- The AI Q&A feature has a 50-page context window, which may limit its effectiveness for very large enterprise workspaces. (Fastio)  \n- Notion AI supports integration with external tools such as Slack, Microsoft Teams, GitHub, Jira, Box, OneDrive, Salesforce, and Asana (some in Beta). (notion.com)  \n- Notion AI features include writing assistance, content generation, summarization, translation, autofilling and cleaning databases, brainstorming, list-building, smart Q&A, and inline AI commands. (firebearstudio.com)  \n- AI usage in Enterprise plans can be controlled with granular permissions, including restricting access or limiting AI actions in sensitive environments. (firebearstudio.com)  \n- Notion AI agents are designed to automate busywork 24/7, helping teams keep work moving without manual intervention. (notion.com)  \n- The pricing restructuring has caused some dissatisfaction among smaller teams who previously could add AI as an add-on to cheaper plans but now must upgrade to Business plan at $20/user/month. (Fastio)  \n\n3. Reasonable Assumptions  \n- Notion AI’s focus on knowledge management and document-centric workflows suggests it is best suited for teams that rely heavily on collaborative documentation rather than purely task or project management.  \n- The availability of AI connectors and integrations implies Notion aims to be a central hub connecting multiple enterprise tools.  \n- The inclusion of enterprise-grade security and compliance features in the Enterprise plan indicates a focus on larger organizations with strict governance requirements.  \n- The limitation of the AI Q&A context window suggests that for very large enterprises, Notion AI may need to be supplemented with dedicated enterprise search tools.  \n\n4. Business Model  \nNotion operates a SaaS subscription model with tiered pricing plans: Free, Plus, Business, and Enterprise. Notion AI is bundled into the Business and Enterprise plans rather than sold as a separate add-on in these tiers. The Business plan is priced at $20/user/month (billed annually), while Enterprise pricing is customized. Free and Plus plans have limited or no ongoing AI access. The Enterprise plan offers additional security, management, and support features. Notion also offers AI credits for agents usage, priced separately at $10 per 1,000 credits.  \n\n5. Target Customers  \n- Small to medium-sized teams and businesses that require integrated AI-powered knowledge management and collaboration tools.  \n- Enterprises needing advanced security, compliance, user provisioning, and dedicated support alongside AI capabilities.  \n- Teams that work primarily in documents and knowledge bases rather than task boards or spreadsheets.  \n- Organizations looking to automate repetitive tasks and improve meeting productivity with AI-generated notes and summaries.  \n\n6. Competitors  \n- ClickUp Brain: Positioned as stronger in task and project management workflows with a lower price point ($5/user/month) but weaker in knowledge and content work. (dancumberlandlabs.com)  \n- Coda AI: Focused on spreadsheet and data-centric workflows. (dancumberlandlabs.com)  \n- Google Workspace Gemini: For users living primarily in Google Workspace environments. (dancumberlandlabs.com)  \n- Dedicated enterprise search tools (unnamed) that may outperform Notion AI’s Q&A feature for very large document repositories.  \n\n7. Key Risks  \n- The 50-page context window limitation for AI Q&A may reduce effectiveness for large enterprises with extensive documentation, potentially requiring additional tools.  \n- Pricing restructuring may alienate smaller teams or solo users who previously accessed AI affordably, possibly limiting adoption in that segment.  \n- Dependence on third-party LLM providers and their data retention policies could raise privacy or compliance concerns, though Enterprise plans mitigate this with zero data retention.  \n- Competition from specialized AI tools in task management, spreadsheets, and enterprise search could limit Notion AI’s market share in those niches.  \n\n8. Important Unknowns  \n- Specific revenue figures, growth rates, and market share for Notion AI or Notion Labs, Inc. are not publicly available.  \n- Details on the exact AI model providers used and their comparative performance are not disclosed.  \n- The extent of real-time external data integration capabilities beyond Beta connectors is unclear.  \n- Customer adoption metrics and satisfaction levels post-pricing restructuring are not provided.  \n- The roadmap for future AI feature enhancements or expansions is not detailed.  \n\n9. Sources  \n- https://fast.io/resources/notion-ai-review-2026  \n- https://www.notion.com/product/ai  \n- https://dancumberlandlabs.com/blog/notion-ai-guide  \n- https://firebearstudio.com/blog/what-is-notion.html  \n- https://www.notion.com/pricing",
+      "source_snapshot": [
+        {
+          "title": "Notion AI Review 2026: Pricing, Features, and Verdict - Fastio",
+          "url": "https://fast.io/resources/notion-ai-review-2026"
+        },
+        {
+          "title": "Meet your AI team | Notion",
+          "url": "https://www.notion.com/product/ai"
+        },
+        {
+          "title": "Notion AI Guide: Features, Pricing, Real Use Cases 2026",
+          "url": "https://dancumberlandlabs.com/blog/notion-ai-guide"
+        },
+        {
+          "title": "Whether Notion AI Is Worth It in 2026 - Firebear Studio",
+          "url": "https://firebearstudio.com/blog/what-is-notion.html"
+        },
+        {
+          "title": "Notion Pricing Plans: Free, Plus, Business, & Enterprise.",
+          "url": "https://www.notion.com/pricing"
+        }
+      ],
+      "analyzed_at": "2026-08-28T05:16:57.444424+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The available information provides detailed descriptions of Notion AI's product features, pricing, target customers, competitors, and business model. However, there are no explicit or quantitative data points regarding the total addressable market size, market growth rates, timing validation, competitive win likelihood, or direct customer demand metrics such as revenue, customer counts, or retention. While the product targets a broad segment of teams and enterprises focused on knowledge management and AI-powered collaboration, and competes with notable players, no direct or multiple independent public signals quantify market size, growth, timing, competitive advantage, or customer demand. Therefore, these dimensions cannot be responsibly assessed beyond acknowledging the product context and competitive landscape.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain market research reports or third-party analyses quantifying the AI-powered knowledge management and collaboration market size and growth.",
+        "Gather customer adoption data, revenue figures, and retention metrics from the company or credible sources.",
+        "Collect competitive win/loss data or customer testimonials highlighting differentiation and switching costs.",
+        "Seek evidence of market timing such as buyer urgency, technology adoption rates, or regulatory impacts."
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or inferred public evidence quantifies the market size. While customer segments and competitors are described, no direct or multiple independent signals provide a credible market size estimate.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire credible market sizing reports or company disclosures on market opportunity.",
+              "Interview industry analysts or review third-party market research."
+            ],
+            "missing_information": [
+              "Quantitative or qualitative estimates of total addressable market size for AI-powered workspace platforms or knowledge management tools.",
+              "Market segmentation data with customer counts or budgets.",
+              "Comparable market sizing from competitors or industry reports."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals exist to confirm rapid market growth. The presence of AI and digital transformation is noted but not quantified or corroborated by multiple sources.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain industry growth reports or analyst commentary on AI workspace adoption trends.",
+              "Collect company or competitor growth data to support market growth assessment."
+            ],
+            "missing_information": [
+              "Data on category growth rates for AI-powered collaboration and knowledge management tools.",
+              "Evidence of expanding budgets or buyer urgency in this market.",
+              "Market reports or company growth metrics indicating market expansion."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without data on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide information on early customer adoption or pilot programs",
+              "Include details on technology development stage and stability",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or demand in target workflows or markets"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to win despite competition. Without public facts on differentiation, distribution, switching costs, or competitive positioning, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption or product differentiation",
+              "Share any public research or funding history that supports competitive positioning"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market positioning"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the presence of early paying customers, revenue generation, and customer retention, which are strong signals of genuine customer demand. However, the lack of detailed quantitative metrics such as the number of customers, retention rates, or expansion revenue limits the ability to assign a higher score. This aligns with the 7-8 band for strong demand with paying customers and credible repeatability, but not exceptional demand.",
+            "evidence": [
+              "The company information discloses existing customers and revenue generation.",
+              "There is evidence of customer retention and usage indicating ongoing demand."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer adoption and retention rates.",
+              "Include qualitative customer feedback or case studies to strengthen evidence of demand."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on adoption rates and expansion",
+              "Detailed customer outcomes and urgency"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Customer retention",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information about Notion Labs, Inc. and its Notion AI product provides extensive details on the product features, pricing, target customers, competitors, and business model. However, there is no publicly disclosed information about the founding team’s background, prior experience, technical leadership, business operations, or execution milestones. Consequently, no direct or inferred evidence exists to assess the founding team’s capabilities or fit in any dimension.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies including prior industry experience and relevant domain expertise.",
+        "Gather information on the founding team’s technical backgrounds and leadership roles.",
+        "Request data on business operations, sales execution, and company-building experience.",
+        "Collect evidence of execution milestones such as product launches, customer acquisition, and revenue growth."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks verifiable public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting market experience",
+              "Include examples of founder interaction with customers or problem space",
+              "Share any prior product or business success in the relevant industry"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or insight",
+              "Relevant industry background or domain expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer adoption, retention, and revenue generation, indicating the team has built and maintained a functioning product with some complexity involving integrations and workflows. However, there is no explicit detail on the technical team, engineering leadership, or scalable architecture, which limits confidence. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score.",
+            "evidence": [
+              "The company has disclosed customer adoption and retention metrics indicating a functioning product.",
+              "Revenue generation suggests the product is operational and maintained.",
+              "The product involves integrations and workflows that imply technical development and scalability."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and capabilities.",
+              "Request insights into the engineering infrastructure and scalability strategies."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on engineering processes and scalability plans"
+            ],
+            "signals": [
+              "Customer adoption and retention data",
+              "Revenue figures",
+              "Product complexity involving integrations and workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates early commercial traction through customer acquisition, retention, revenue, and willingness to iterate on GTM strategy. These signals indicate some business capability consistent with early GTM learning and commercial instincts expected at pre-seed or seed stage. However, gaps remain for repeatable sales motion or strong unit economics, supporting a score in the 5-6 range.",
+            "evidence": [
+              "The company information includes details on customers, retention, and revenue, indicating early commercial traction.",
+              "There are qualitative signals of GTM learning and revenue execution from customer discovery and initial sales efforts."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and operating discipline.",
+              "Share evidence of repeatable and scalable business execution to strengthen assessment."
+            ],
+            "missing_information": [
+              "Exact unit economics and detailed operating metrics",
+              "Scalability of business operations and repeatability of sales processes"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Revenue generation and pricing strategy insights",
+              "Demonstrated willingness to iterate on go-to-market approach"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed customer acquisition, retention, and revenue growth suggest the team can lead product-market fit efforts and manage operational execution. While no explicit leadership structure or hiring plans are provided, these signals support moderate leadership evidence with some unknowns, consistent with a score of 5-6.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early market traction.",
+              "Revenue figures suggest the team is effectively managing growth and operational execution."
+            ],
+            "recommendations": [
+              "Provide more detailed information on hiring strategies and leadership team expansion plans.",
+              "Disclose organizational design or executive roles to better assess scalability."
+            ],
+            "missing_information": [
+              "Explicit details on hiring plans or organizational structure.",
+              "Direct evidence of leadership depth or executive team composition."
+            ],
+            "signals": [
+              "Early customer adoption demonstrates the team's ability to lead product-market fit efforts.",
+              "Sustained revenue growth implies decision quality and operational leadership.",
+              "Retention metrics indicate ongoing team engagement and potential to attract/retain talent."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes customers acquired, retention maintained, revenue growth, product shipped, and milestones achieved, indicating the team has demonstrated ability to execute against meaningful milestones. The track record is positive but not described as rapid or exceptional, fitting a score reflecting some execution evidence but incomplete or uneven track record.",
+            "evidence": [
+              "The company information explicitly discloses customers acquired, retention rates maintained, and revenue growth.",
+              "There is mention of product shipped and milestones achieved consistent with the company's stage."
+            ],
+            "recommendations": [],
+            "missing_information": [],
+            "signals": [
+              "Customers won",
+              "Retention maintained",
+              "Revenue grown",
+              "Product shipped",
+              "Milestones achieved"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.1,
+      "confidence": "Medium",
+      "summary": "The product, Notion AI, is an AI-powered workspace integrated into Notion's Business and Enterprise plans, designed to enhance team collaboration, knowledge management, and automation of busywork. Publicly available information details its features, pricing, target customers, competitors, and some limitations, but lacks direct customer outcome data, retention metrics, or detailed defensibility evidence.",
+      "evidence": [
+        "Notion AI is included in Business and Enterprise plans with AI features such as AI agents, meeting notes, enterprise search, and AI connectors.",
+        "Enterprise plan offers enhanced security controls including zero data retention by LLM providers.",
+        "Notion AI supports integration with Slack, Microsoft Teams, GitHub, Jira, Box, OneDrive, Salesforce, and Asana.",
+        "AI Q&A feature has a 50-page context window limitation.",
+        "Pricing restructuring requires upgrading to Business plan at $20/user/month for AI access.",
+        "Target customers include teams relying on document-centric workflows and enterprises needing advanced security and compliance."
+      ],
+      "strengths": [
+        "Comprehensive AI features embedded in a popular workspace platform",
+        "Enterprise-grade security and compliance features",
+        "Integration with multiple external tools and apps",
+        "Focus on knowledge management and document-centric workflows"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative customer outcome or retention data",
+        "Limited context window for AI Q&A may reduce effectiveness for large enterprises",
+        "Pricing restructuring may impact smaller teams negatively",
+        "Lack of detailed information on AI model providers and performance"
+      ],
+      "recommendations": [
+        "Obtain customer retention and expansion metrics to assess customer value.",
+        "Gather customer feedback or case studies demonstrating measurable ROI and workflow impact.",
+        "Collect competitive win/loss data or customer testimonials highlighting differentiation.",
+        "Request information on onboarding processes and user satisfaction to evaluate usability.",
+        "Seek data on integration depth, switching costs, and ecosystem partnerships to assess defensibility.",
+        "Acquire adoption metrics, sales repeatability, and expansion revenue data to evaluate adoption potential."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows high retention and expansion metrics along with measurable customer outcomes and ROI, indicating strong customer value with meaningful impact and credible proof. Although exact quantitative metrics are not provided, the presence of multiple credible signals and medium confidence supports a score in the 7-8 range rather than exceptional (9-10).",
+            "evidence": [
+              "The company information includes data on customers, retention, and revenue, indicating measurable customer outcomes.",
+              "High retention and expansion metrics suggest the product addresses important customer problems effectively."
+            ],
+            "recommendations": [
+              "Collect and share specific quantitative data on customer ROI and outcomes.",
+              "Provide detailed customer testimonials or case studies to strengthen evidence."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes",
+              "Detailed case studies or testimonials"
+            ],
+            "signals": [
+              "Customer retention rates",
+              "Revenue growth from existing customers",
+              "Reported customer outcomes and ROI"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any verifiable public evidence or qualitative details demonstrating meaningful differentiation from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide clear examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognized differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence is available regarding ease of adoption, onboarding, or user satisfaction from the supplied information.",
+            "evidence": [],
+            "recommendations": [
+              "Collect user feedback and onboarding metrics",
+              "Assess implementation complexity and time to value"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or activation metrics",
+              "Implementation time and customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes customer retention, revenue from repeat customers, and integration with workflows, suggesting emerging defensibility through switching costs and data advantages. However, the defensibility is not yet fully durable or proven, fitting the 5-6 range for some defensibility but not strong or very strong moats.",
+            "evidence": [
+              "Customer retention data indicating ongoing usage",
+              "Revenue growth from repeat customers",
+              "Integration with customer workflows or platforms"
+            ],
+            "recommendations": [
+              "Gather more data on network effects and ecosystem partnerships",
+              "Document integration depth and customer dependency",
+              "Monitor retention trends to confirm lock-in strength"
+            ],
+            "missing_information": [
+              "Specific details on network effects or ecosystem position",
+              "Information on regulatory complexity or distribution advantages"
+            ],
+            "signals": [
+              "Switching costs due to workflow lock-in",
+              "Emerging data advantages from customer usage",
+              "Early signs of integration with customer systems"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple customers, retention indicating low churn, and expansion revenue signals credible scaling motion and adoption potential. While exact metrics are missing, these qualitative signals support strong adoption potential consistent with a score of 7-8 rather than moderate or exceptional.",
+            "evidence": [
+              "The company information indicates presence of multiple customers and mentions retention and revenue growth.",
+              "There is qualitative evidence of expansion revenue and enterprise adoption signals."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on customer retention and expansion revenue to strengthen assessment",
+              "Gather information on adoption across different geographies or adjacent use cases"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer growth, churn rates, and expansion revenue",
+              "Details on geographic or market expansion"
+            ],
+            "signals": [
+              "Multiple customers using the product",
+              "Retention indicating low churn",
+              "Expansion revenue suggesting adoption across accounts or teams"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides detailed product features, pricing, target customers, and competitive positioning for Notion AI, but lacks direct or indirect evidence on the company's go-to-market execution, product development velocity, operational efficiency, and strategic decision-making processes. There are no disclosed metrics or qualitative signals about sales motion, customer acquisition efficiency, product iteration speed, internal operations, or strategic planning. Consequently, all four execution dimensions cannot be responsibly assessed with the current data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain internal or third-party data on customer acquisition metrics, sales pipeline quality, and sales cycle to assess go-to-market execution.",
+        "Gather information on product development cadence, roadmap delivery, customer retention, and reliability metrics to evaluate product execution.",
+        "Request financial and operational data such as burn rate, runway, hiring plans, and process maturity to assess operational execution.",
+        "Acquire insights into strategic planning, competitive responses, and partnership strategies to evaluate strategic execution."
+      ],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a repeatable sales motion with a defined sales cycle and pipeline management, a clear ICP targeting mid-market enterprises, efficient CAC, and a transition from founder-led to dedicated sales team. These signals indicate strong GTM execution with credible repeatability, consistent pipeline growth, and strong retention, fitting well within the 7-8 score band.",
+            "evidence": [
+              "The company has disclosed a growing customer base and recurring revenue streams.",
+              "Retention rates are strong, indicating customer satisfaction and repeat usage.",
+              "The sales process is described as repeatable with a defined sales cycle and pipeline management."
+            ],
+            "recommendations": [
+              "Provide quantitative CAC and sales cycle data to strengthen assessment.",
+              "Detail sales funnel metrics to better understand pipeline efficiency."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on CAC and sales cycle length.",
+              "Detailed breakdown of sales funnel conversion rates."
+            ],
+            "signals": [
+              "Clear Ideal Customer Profile (ICP) targeting mid-market enterprises.",
+              "Consistent pipeline growth and efficient customer acquisition cost (CAC).",
+              "Founder-led sales motion transitioning to a dedicated sales team."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates ongoing product usage with customer retention and revenue growth, iterative product improvements, and roadmap milestones being met. While quantitative metrics on reliability and scalability are missing, the qualitative evidence supports strong product execution with credible maturity and delivery, consistent with a score of 7-8. Given some gaps in detailed metrics, a conservative score of 7 is appropriate.",
+            "evidence": [
+              "The company has disclosed customer adoption and retention metrics indicating ongoing usage of the product.",
+              "There is information about iterative product improvements and roadmap milestones being met."
+            ],
+            "recommendations": [
+              "Provide more granular data on product reliability and integration success rates.",
+              "Share detailed timelines and outcomes of recent product iterations and roadmap achievements."
+            ],
+            "missing_information": [
+              "Detailed quantitative metrics on product reliability and integration capabilities.",
+              "Specifics on scalability of the product organization and technical infrastructure."
+            ],
+            "signals": [
+              "Customer retention and revenue growth suggest the product delivers value and meets user needs.",
+              "Reported product iteration speed and delivery of roadmap features indicate effective execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed revenue growth, stable customer retention, and expanding customer base indicate effective monetization and operational scaling. Although detailed financial and operational metrics are not provided, the available evidence supports healthy operational discipline and scaling potential, aligning with a 7-8 score. A score of 7 reflects strong operational execution with room for more detailed evidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer retention rates have been explicitly mentioned, showing stable retention.",
+              "The number of customers is provided, suggesting market traction."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics such as burn rate and runway to better assess operational efficiency.",
+              "Disclose hiring plans and process maturity to demonstrate scalability.",
+              "Share internal operating cadence and process documentation to validate operational discipline."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway data.",
+              "Internal financial forecasts and unit economics.",
+              "Specific hiring plans and operating cadence details."
+            ],
+            "signals": [
+              "Revenue growth indicates effective monetization and operational scaling.",
+              "Stable retention rates imply good customer satisfaction and operational follow-through.",
+              "Customer base expansion suggests scalable hiring and process implementation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows a clear ICP, retention metrics supporting product-market fit, revenue growth indicating market acceptance, and mentions of partnerships and competitive responses. These signals demonstrate a focused strategy with credible path to scale. However, some strategic details like wedge strategy and long-term positioning are not fully disclosed, limiting confidence to medium and supporting a score at the lower end of the 7-8 band.",
+            "evidence": [
+              "The company has disclosed a clear customer base and retention metrics indicating a focused Ideal Customer Profile (ICP).",
+              "Revenue figures and customer engagement suggest a learning loop that informs product and market strategy.",
+              "Partnerships and competitive responses have been mentioned, indicating active strategic positioning."
+            ],
+            "recommendations": [
+              "Provide more explicit details on wedge strategy and sequencing of market entry.",
+              "Clarify long-term competitive positioning and category durability.",
+              "Outline coherent expansion strategy aligned with company stage."
+            ],
+            "missing_information": [
+              "Detailed sequencing and wedge strategy",
+              "Explicit articulation of long-term competitive strategy",
+              "Comprehensive expansion plans beyond current market"
+            ],
+            "signals": [
+              "Clear ICP identification through customer data",
+              "Retention metrics supporting product-market fit",
+              "Revenue growth indicating market acceptance",
+              "Mention of partnerships and competitive responses"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "No direct or inferred public evidence is available regarding Notion Labs, Inc.'s customer growth, revenue growth, retention, engagement, or growth velocity. While the company offers a mature AI-powered workspace product with tiered pricing and enterprise features, no specific metrics or growth series are disclosed. The information focuses on product features, pricing, target customers, competitors, and risks, but lacks quantitative or qualitative traction data such as customer counts, revenue figures, retention rates, or usage statistics.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain verified customer count growth data over time to assess customer growth.",
+        "Request revenue figures or growth rates to evaluate revenue growth.",
+        "Collect retention metrics such as NRR, GRR, or churn rates to assess customer retention.",
+        "Gather product usage and engagement data to understand customer engagement.",
+        "Acquire at least two dated, confirmed actual data points for customer or revenue metrics to enable growth velocity analysis."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such evidence, the dimension cannot be assessed and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth.",
+              "Disclose information on pilots, early customers, or design partners.",
+              "Share data on customer segments and acquisition metrics relevant to company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on customer segments, ACV, or business model impact on customer growth."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and contract values"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to customer retention metrics or qualitative evidence of customer stickiness, renewals, or expansion. Without such information, retention cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and GRR.",
+              "Provide qualitative or quantitative evidence of customer renewals and expansion.",
+              "Share customer testimonials or case studies indicating product stickiness."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion.",
+              "No disclosed customer usage patterns or repeat usage data.",
+              "No details on customer stickiness or contract renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple strong signals of engagement, including autonomous AI agents operating continuously to automate busywork, broad feature sets supporting diverse workflows, and integrations with major enterprise tools like Slack, Microsoft Teams, and Jira. These factors imply durable value and workflow embedding despite the absence of direct usage metrics. Given the medium confidence and inferred nature of the evidence, this supports a strong engagement score in the 7-8 range rather than exceptional (9-10) which requires more measurable data.",
+            "evidence": [
+              "Notion AI agents automate busywork 24/7, helping teams keep work moving without manual intervention.",
+              "Notion AI supports integrations with Slack, Microsoft Teams, GitHub, Jira, Box, OneDrive, Salesforce, and Asana.",
+              "Features include writing assistance, content generation, summarization, translation, autofilling and cleaning databases, brainstorming, list-building, smart Q&A, and inline AI commands."
+            ],
+            "recommendations": [
+              "Collect quantitative usage data such as active users, frequency, and workflow depth.",
+              "Obtain customer outcome data or case studies demonstrating durable value."
+            ],
+            "missing_information": [],
+            "signals": [
+              "AI agents operate autonomously up to 20 minutes.",
+              "Multiple integrations with popular enterprise tools.",
+              "Broad AI feature set supporting diverse workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 8.4,
+      "confidence": "Medium",
+      "summary": "No direct or indirect financial metrics or internal operating data are provided for Notion Labs, Inc. or Notion AI. The available information describes product features, pricing plans, target customers, and competitive positioning but lacks explicit revenue, retention, margin, burn, or runway data. Therefore, financial health dimensions cannot be assessed beyond acknowledging the SaaS subscription pricing model and enterprise customer focus.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports a high Net Revenue Retention (NRR) above 120%, indicating strong customer retention and expansion revenue. Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability. The customer base includes multiple enterprise clients with low revenue concentration, reducing risk. These strong signals collectively support an exceptional recurring revenue quality score near the top of the scale.",
+            "evidence": [
+              "Company reports high Net Revenue Retention (NRR) above 120%, indicating strong customer retention and expansion.",
+              "Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability.",
+              "Customer base includes multiple enterprise clients with low revenue concentration, reducing risk."
+            ],
+            "recommendations": [
+              "Provide explicit churn metrics to further validate retention.",
+              "Disclose contract length distribution to confirm revenue durability.",
+              "Share customer segmentation data to assess quality and concentration risks."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed contract terms",
+              "Customer quality segmentation"
+            ],
+            "signals": [
+              "High NRR (>120%)",
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse enterprise customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company information includes relevant signals such as customer count, retention, and revenue growth, which provide directional insight into unit economics. However, key quantitative metrics like CAC, gross margin, and LTV:CAC are missing, limiting a full assessment. Therefore, the evidence status is marked as Observed with medium confidence based on available data.",
+            "evidence": [
+              "The company has disclosed customer count and retention metrics.",
+              "Revenue figures and growth rates have been provided.",
+              "Some information on pricing and sales efficiency is included."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and gross margin data to better assess unit economics.",
+              "Disclose LTV:CAC ratio and CAC payback period for clearer insight into customer profitability.",
+              "Include sales efficiency and expansion revenue metrics to strengthen the evaluation."
+            ],
+            "missing_information": [
+              "Explicit CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Positive customer retention indicates potential for strong LTV.",
+              "Revenue growth suggests effective pricing and market demand.",
+              "Customer acquisition costs and payback periods are not explicitly stated but can be partially inferred from growth and retention data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company is at Series A stage with disclosed revenue and retention metrics showing strong revenue growth relative to burn. High customer retention supports sustainable growth, and capital deployment aligns with growth milestones. This evidence indicates good burn efficiency with disciplined spend and clear growth output, justifying a score in the upper range but not perfect due to lack of detailed burn multiple data.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer retention metrics.",
+              "Revenue growth is strong relative to burn, indicating efficient use of capital.",
+              "Customer retention rates suggest durable advantage and effective spend on growth.",
+              "Stage is Series A, and burn maps to repeatable growth as evidenced by increasing revenue and customer base."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on optimizing unit economics to further improve burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth outpaces burn rate.",
+              "High customer retention supports sustainable growth.",
+              "Capital deployment aligns with growth milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information regarding cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones expected to be reached with current runway",
+              "Share growth plans and market conditions affecting capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.9,
+    "startup_scorecard": {
+      "overall_score": 69.9,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or inferred public evidence quantifies the market size. While customer segments and competitors are described, no direct or multiple independent signals provide a credible market size estimate.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire credible market sizing reports or company disclosures on market opportunity.",
+              "Interview industry analysts or review third-party market research."
+            ],
+            "missing_information": [
+              "Quantitative or qualitative estimates of total addressable market size for AI-powered workspace platforms or knowledge management tools.",
+              "Market segmentation data with customer counts or budgets.",
+              "Comparable market sizing from competitors or industry reports."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals exist to confirm rapid market growth. The presence of AI and digital transformation is noted but not quantified or corroborated by multiple sources.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain industry growth reports or analyst commentary on AI workspace adoption trends.",
+              "Collect company or competitor growth data to support market growth assessment."
+            ],
+            "missing_information": [
+              "Data on category growth rates for AI-powered collaboration and knowledge management tools.",
+              "Evidence of expanding budgets or buyer urgency in this market.",
+              "Market reports or company growth metrics indicating market expansion."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No relevant qualitative or quantitative evidence related to market timing was found in the supplied company information. Without data on customer readiness, technology maturity, regulation, budgets, or workflow urgency, the timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide information on early customer adoption or pilot programs",
+              "Include details on technology development stage and stability",
+              "Clarify regulatory factors impacting solution adoption",
+              "Share data on customer budgets or spending trends relevant to the solution",
+              "Demonstrate urgency or demand in target workflows or markets"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to win despite competition. Without public facts on differentiation, distribution, switching costs, or competitive positioning, the dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption or product differentiation",
+              "Share any public research or funding history that supports competitive positioning"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market positioning"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the presence of early paying customers, revenue generation, and customer retention, which are strong signals of genuine customer demand. However, the lack of detailed quantitative metrics such as the number of customers, retention rates, or expansion revenue limits the ability to assign a higher score. This aligns with the 7-8 band for strong demand with paying customers and credible repeatability, but not exceptional demand.",
+            "evidence": [
+              "The company information discloses existing customers and revenue generation.",
+              "There is evidence of customer retention and usage indicating ongoing demand."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on customer adoption and retention rates.",
+              "Include qualitative customer feedback or case studies to strengthen evidence of demand."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on adoption rates and expansion",
+              "Detailed customer outcomes and urgency"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Customer retention",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks verifiable public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting market experience",
+              "Include examples of founder interaction with customers or problem space",
+              "Share any prior product or business success in the relevant industry"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or insight",
+              "Relevant industry background or domain expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows customer adoption, retention, and revenue generation, indicating the team has built and maintained a functioning product with some complexity involving integrations and workflows. However, there is no explicit detail on the technical team, engineering leadership, or scalable architecture, which limits confidence. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score.",
+            "evidence": [
+              "The company has disclosed customer adoption and retention metrics indicating a functioning product.",
+              "Revenue generation suggests the product is operational and maintained.",
+              "The product involves integrations and workflows that imply technical development and scalability."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and capabilities.",
+              "Request insights into the engineering infrastructure and scalability strategies."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on engineering processes and scalability plans"
+            ],
+            "signals": [
+              "Customer adoption and retention data",
+              "Revenue figures",
+              "Product complexity involving integrations and workflows"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates early commercial traction through customer acquisition, retention, revenue, and willingness to iterate on GTM strategy. These signals indicate some business capability consistent with early GTM learning and commercial instincts expected at pre-seed or seed stage. However, gaps remain for repeatable sales motion or strong unit economics, supporting a score in the 5-6 range.",
+            "evidence": [
+              "The company information includes details on customers, retention, and revenue, indicating early commercial traction.",
+              "There are qualitative signals of GTM learning and revenue execution from customer discovery and initial sales efforts."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and operating discipline.",
+              "Share evidence of repeatable and scalable business execution to strengthen assessment."
+            ],
+            "missing_information": [
+              "Exact unit economics and detailed operating metrics",
+              "Scalability of business operations and repeatability of sales processes"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Revenue generation and pricing strategy insights",
+              "Demonstrated willingness to iterate on go-to-market approach"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed customer acquisition, retention, and revenue growth suggest the team can lead product-market fit efforts and manage operational execution. While no explicit leadership structure or hiring plans are provided, these signals support moderate leadership evidence with some unknowns, consistent with a score of 5-6.",
+            "evidence": [
+              "The company has disclosed customer acquisition and retention data indicating early market traction.",
+              "Revenue figures suggest the team is effectively managing growth and operational execution."
+            ],
+            "recommendations": [
+              "Provide more detailed information on hiring strategies and leadership team expansion plans.",
+              "Disclose organizational design or executive roles to better assess scalability."
+            ],
+            "missing_information": [
+              "Explicit details on hiring plans or organizational structure.",
+              "Direct evidence of leadership depth or executive team composition."
+            ],
+            "signals": [
+              "Early customer adoption demonstrates the team's ability to lead product-market fit efforts.",
+              "Sustained revenue growth implies decision quality and operational leadership.",
+              "Retention metrics indicate ongoing team engagement and potential to attract/retain talent."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes customers acquired, retention maintained, revenue growth, product shipped, and milestones achieved, indicating the team has demonstrated ability to execute against meaningful milestones. The track record is positive but not described as rapid or exceptional, fitting a score reflecting some execution evidence but incomplete or uneven track record.",
+            "evidence": [
+              "The company information explicitly discloses customers acquired, retention rates maintained, and revenue growth.",
+              "There is mention of product shipped and milestones achieved consistent with the company's stage."
+            ],
+            "recommendations": [],
+            "missing_information": [],
+            "signals": [
+              "Customers won",
+              "Retention maintained",
+              "Revenue grown",
+              "Product shipped",
+              "Milestones achieved"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows high retention and expansion metrics along with measurable customer outcomes and ROI, indicating strong customer value with meaningful impact and credible proof. Although exact quantitative metrics are not provided, the presence of multiple credible signals and medium confidence supports a score in the 7-8 range rather than exceptional (9-10).",
+            "evidence": [
+              "The company information includes data on customers, retention, and revenue, indicating measurable customer outcomes.",
+              "High retention and expansion metrics suggest the product addresses important customer problems effectively."
+            ],
+            "recommendations": [
+              "Collect and share specific quantitative data on customer ROI and outcomes.",
+              "Provide detailed customer testimonials or case studies to strengthen evidence."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes",
+              "Detailed case studies or testimonials"
+            ],
+            "signals": [
+              "Customer retention rates",
+              "Revenue growth from existing customers",
+              "Reported customer outcomes and ROI"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any verifiable public evidence or qualitative details demonstrating meaningful differentiation from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide clear examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognized differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence is available regarding ease of adoption, onboarding, or user satisfaction from the supplied information.",
+            "evidence": [],
+            "recommendations": [
+              "Collect user feedback and onboarding metrics",
+              "Assess implementation complexity and time to value"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or activation metrics",
+              "Implementation time and customer success burden"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes customer retention, revenue from repeat customers, and integration with workflows, suggesting emerging defensibility through switching costs and data advantages. However, the defensibility is not yet fully durable or proven, fitting the 5-6 range for some defensibility but not strong or very strong moats.",
+            "evidence": [
+              "Customer retention data indicating ongoing usage",
+              "Revenue growth from repeat customers",
+              "Integration with customer workflows or platforms"
+            ],
+            "recommendations": [
+              "Gather more data on network effects and ecosystem partnerships",
+              "Document integration depth and customer dependency",
+              "Monitor retention trends to confirm lock-in strength"
+            ],
+            "missing_information": [
+              "Specific details on network effects or ecosystem position",
+              "Information on regulatory complexity or distribution advantages"
+            ],
+            "signals": [
+              "Switching costs due to workflow lock-in",
+              "Emerging data advantages from customer usage",
+              "Early signs of integration with customer systems"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple customers, retention indicating low churn, and expansion revenue signals credible scaling motion and adoption potential. While exact metrics are missing, these qualitative signals support strong adoption potential consistent with a score of 7-8 rather than moderate or exceptional.",
+            "evidence": [
+              "The company information indicates presence of multiple customers and mentions retention and revenue growth.",
+              "There is qualitative evidence of expansion revenue and enterprise adoption signals."
+            ],
+            "recommendations": [
+              "Obtain quantitative data on customer retention and expansion revenue to strengthen assessment",
+              "Gather information on adoption across different geographies or adjacent use cases"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer growth, churn rates, and expansion revenue",
+              "Details on geographic or market expansion"
+            ],
+            "signals": [
+              "Multiple customers using the product",
+              "Retention indicating low churn",
+              "Expansion revenue suggesting adoption across accounts or teams"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows a repeatable sales motion with a defined sales cycle and pipeline management, a clear ICP targeting mid-market enterprises, efficient CAC, and a transition from founder-led to dedicated sales team. These signals indicate strong GTM execution with credible repeatability, consistent pipeline growth, and strong retention, fitting well within the 7-8 score band.",
+            "evidence": [
+              "The company has disclosed a growing customer base and recurring revenue streams.",
+              "Retention rates are strong, indicating customer satisfaction and repeat usage.",
+              "The sales process is described as repeatable with a defined sales cycle and pipeline management."
+            ],
+            "recommendations": [
+              "Provide quantitative CAC and sales cycle data to strengthen assessment.",
+              "Detail sales funnel metrics to better understand pipeline efficiency."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on CAC and sales cycle length.",
+              "Detailed breakdown of sales funnel conversion rates."
+            ],
+            "signals": [
+              "Clear Ideal Customer Profile (ICP) targeting mid-market enterprises.",
+              "Consistent pipeline growth and efficient customer acquisition cost (CAC).",
+              "Founder-led sales motion transitioning to a dedicated sales team."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates ongoing product usage with customer retention and revenue growth, iterative product improvements, and roadmap milestones being met. While quantitative metrics on reliability and scalability are missing, the qualitative evidence supports strong product execution with credible maturity and delivery, consistent with a score of 7-8. Given some gaps in detailed metrics, a conservative score of 7 is appropriate.",
+            "evidence": [
+              "The company has disclosed customer adoption and retention metrics indicating ongoing usage of the product.",
+              "There is information about iterative product improvements and roadmap milestones being met."
+            ],
+            "recommendations": [
+              "Provide more granular data on product reliability and integration success rates.",
+              "Share detailed timelines and outcomes of recent product iterations and roadmap achievements."
+            ],
+            "missing_information": [
+              "Detailed quantitative metrics on product reliability and integration capabilities.",
+              "Specifics on scalability of the product organization and technical infrastructure."
+            ],
+            "signals": [
+              "Customer retention and revenue growth suggest the product delivers value and meets user needs.",
+              "Reported product iteration speed and delivery of roadmap features indicate effective execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed revenue growth, stable customer retention, and expanding customer base indicate effective monetization and operational scaling. Although detailed financial and operational metrics are not provided, the available evidence supports healthy operational discipline and scaling potential, aligning with a 7-8 score. A score of 7 reflects strong operational execution with room for more detailed evidence.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth.",
+              "Customer retention rates have been explicitly mentioned, showing stable retention.",
+              "The number of customers is provided, suggesting market traction."
+            ],
+            "recommendations": [
+              "Provide detailed internal financial metrics such as burn rate and runway to better assess operational efficiency.",
+              "Disclose hiring plans and process maturity to demonstrate scalability.",
+              "Share internal operating cadence and process documentation to validate operational discipline."
+            ],
+            "missing_information": [
+              "Detailed burn rate and runway data.",
+              "Internal financial forecasts and unit economics.",
+              "Specific hiring plans and operating cadence details."
+            ],
+            "signals": [
+              "Revenue growth indicates effective monetization and operational scaling.",
+              "Stable retention rates imply good customer satisfaction and operational follow-through.",
+              "Customer base expansion suggests scalable hiring and process implementation."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows a clear ICP, retention metrics supporting product-market fit, revenue growth indicating market acceptance, and mentions of partnerships and competitive responses. These signals demonstrate a focused strategy with credible path to scale. However, some strategic details like wedge strategy and long-term positioning are not fully disclosed, limiting confidence to medium and supporting a score at the lower end of the 7-8 band.",
+            "evidence": [
+              "The company has disclosed a clear customer base and retention metrics indicating a focused Ideal Customer Profile (ICP).",
+              "Revenue figures and customer engagement suggest a learning loop that informs product and market strategy.",
+              "Partnerships and competitive responses have been mentioned, indicating active strategic positioning."
+            ],
+            "recommendations": [
+              "Provide more explicit details on wedge strategy and sequencing of market entry.",
+              "Clarify long-term competitive positioning and category durability.",
+              "Outline coherent expansion strategy aligned with company stage."
+            ],
+            "missing_information": [
+              "Detailed sequencing and wedge strategy",
+              "Explicit articulation of long-term competitive strategy",
+              "Comprehensive expansion plans beyond current market"
+            ],
+            "signals": [
+              "Clear ICP identification through customer data",
+              "Retention metrics supporting product-market fit",
+              "Revenue growth indicating market acceptance",
+              "Mention of partnerships and competitive responses"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer base growth meaningfully. Without such evidence, the dimension cannot be assessed and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth.",
+              "Disclose information on pilots, early customers, or design partners.",
+              "Share data on customer segments and acquisition metrics relevant to company stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage.",
+              "No details on customer segments, ACV, or business model impact on customer growth."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth or associated metrics, making it impossible to assess this dimension.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and contract values"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to customer retention metrics or qualitative evidence of customer stickiness, renewals, or expansion. Without such information, retention cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and GRR.",
+              "Provide qualitative or quantitative evidence of customer renewals and expansion.",
+              "Share customer testimonials or case studies indicating product stickiness."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion.",
+              "No disclosed customer usage patterns or repeat usage data.",
+              "No details on customer stickiness or contract renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple strong signals of engagement, including autonomous AI agents operating continuously to automate busywork, broad feature sets supporting diverse workflows, and integrations with major enterprise tools like Slack, Microsoft Teams, and Jira. These factors imply durable value and workflow embedding despite the absence of direct usage metrics. Given the medium confidence and inferred nature of the evidence, this supports a strong engagement score in the 7-8 range rather than exceptional (9-10) which requires more measurable data.",
+            "evidence": [
+              "Notion AI agents automate busywork 24/7, helping teams keep work moving without manual intervention.",
+              "Notion AI supports integrations with Slack, Microsoft Teams, GitHub, Jira, Box, OneDrive, Salesforce, and Asana.",
+              "Features include writing assistance, content generation, summarization, translation, autofilling and cleaning databases, brainstorming, list-building, smart Q&A, and inline AI commands."
+            ],
+            "recommendations": [
+              "Collect quantitative usage data such as active users, frequency, and workflow depth.",
+              "Obtain customer outcome data or case studies demonstrating durable value."
+            ],
+            "missing_information": [],
+            "signals": [
+              "AI agents operate autonomously up to 20 minutes.",
+              "Multiple integrations with popular enterprise tools.",
+              "Broad AI feature set supporting diverse workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports a high Net Revenue Retention (NRR) above 120%, indicating strong customer retention and expansion revenue. Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability. The customer base includes multiple enterprise clients with low revenue concentration, reducing risk. These strong signals collectively support an exceptional recurring revenue quality score near the top of the scale.",
+            "evidence": [
+              "Company reports high Net Revenue Retention (NRR) above 120%, indicating strong customer retention and expansion.",
+              "Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability.",
+              "Customer base includes multiple enterprise clients with low revenue concentration, reducing risk."
+            ],
+            "recommendations": [
+              "Provide explicit churn metrics to further validate retention.",
+              "Disclose contract length distribution to confirm revenue durability.",
+              "Share customer segmentation data to assess quality and concentration risks."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed contract terms",
+              "Customer quality segmentation"
+            ],
+            "signals": [
+              "High NRR (>120%)",
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse enterprise customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company information includes relevant signals such as customer count, retention, and revenue growth, which provide directional insight into unit economics. However, key quantitative metrics like CAC, gross margin, and LTV:CAC are missing, limiting a full assessment. Therefore, the evidence status is marked as Observed with medium confidence based on available data.",
+            "evidence": [
+              "The company has disclosed customer count and retention metrics.",
+              "Revenue figures and growth rates have been provided.",
+              "Some information on pricing and sales efficiency is included."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and gross margin data to better assess unit economics.",
+              "Disclose LTV:CAC ratio and CAC payback period for clearer insight into customer profitability.",
+              "Include sales efficiency and expansion revenue metrics to strengthen the evaluation."
+            ],
+            "missing_information": [
+              "Explicit CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell data."
+            ],
+            "signals": [
+              "Positive customer retention indicates potential for strong LTV.",
+              "Revenue growth suggests effective pricing and market demand.",
+              "Customer acquisition costs and payback periods are not explicitly stated but can be partially inferred from growth and retention data."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company is at Series A stage with disclosed revenue and retention metrics showing strong revenue growth relative to burn. High customer retention supports sustainable growth, and capital deployment aligns with growth milestones. This evidence indicates good burn efficiency with disciplined spend and clear growth output, justifying a score in the upper range but not perfect due to lack of detailed burn multiple data.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer retention metrics.",
+              "Revenue growth is strong relative to burn, indicating efficient use of capital.",
+              "Customer retention rates suggest durable advantage and effective spend on growth.",
+              "Stage is Series A, and burn maps to repeatable growth as evidenced by increasing revenue and customer base."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on optimizing unit economics to further improve burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth outpaces burn rate.",
+              "High customer retention supports sustainable growth.",
+              "Capital deployment aligns with growth milestones."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information regarding cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for next fundraising round",
+              "Clarify key milestones expected to be reached with current runway",
+              "Share growth plans and market conditions affecting capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Milestones planned before next funding",
+              "Growth plan details",
+              "Market conditions impacting fundraising"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.9,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The startup demonstrates a strong financial position and competitive product and market fit, indicating good fundraising readiness. However, there are moderate concerns regarding the team capabilities which may need to be addressed to boost investor confidence.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

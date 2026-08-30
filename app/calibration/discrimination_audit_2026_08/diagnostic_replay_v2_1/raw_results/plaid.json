@@ -1,0 +1,2638 @@
+{
+  "summary": "Plaid Inc. is a leading American fintech infrastructure company founded in 2013 and headquartered in San Francisco. It provides secure API connectivity that enables fintech applications and financial institutions to access users’ financial account data across over 12,000 institutions in 20 countries, supporting more than one million daily connections. Plaid’s comprehensive product suite includes solutions for payments, identity verification, fraud and risk prevention, personal financial management, credit underwriting, and open finance, powering services such as lending, onboarding, budgeting, and investment management.\n\nOperating a B2B SaaS model, Plaid charges businesses—ranging from fintech startups to established banks and platforms—for API access and value-added services like real-time bank account data, enriched financial insights, and fraud detection. Its platform improves onboarding conversion rates by about 25% and supports credit scoring based on real-time financial behavior. Major fintech clients include Venmo, Robinhood, and Carvana.\n\nPlaid has raised significant funding, with a $575 million round in 2025 valuing the company at $6.1 billion and a subsequent employee share sale in early 2026 reflecting an $8 billion valuation. The company experienced a peak valuation of $13.4 billion in 2021 and was subject to a blocked $5.3 billion acquisition attempt by Visa in 2020 due to regulatory concerns. Plaid emphasizes robust security measures, including advanced encryption and multi-factor authentication.\n\nThe company targets a wide range of industries such as banking, lending, mortgage, insurance, healthcare, gaming, government, and marketplaces. Key competitors include Stripe, Adyen, and Akoya. Challenges for Plaid include regulatory compliance, competitive pressure, dependency on financial institution partnerships, and cybersecurity risks. Plaid continues to invest in AI and machine learning to enhance its financial data products and expand into credit scoring and underwriting, positioning itself as a foundational infrastructure provider in the evolving fintech landscape.",
+  "risk_analysis": "Certainly. Below is a risk analysis of Plaid Inc. focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Plaid operates in a highly competitive fintech infrastructure space alongside strong players like Stripe, Adyen, Akoya, Flinks, Mastercard, and Fiserv.  \n- Competitors such as Stripe have deeper payment processing expertise and broader global reach, potentially limiting Plaid’s market expansion.  \n- Some rivals specialize in high-security API services or regional dominance (e.g., Akoya in secure data sharing; Flinks in Canada), which may pressure Plaid to continuously invest in security and local regulatory compliance.  \n- The crowded market also drives price competition and customer churn risk, particularly from suppliers offering bundled or cheaper services.  \n- Innovations by competitors or shifting customer preferences toward integrated platforms could erode Plaid’s market share.  \n\n2. Scalability Risk  \n- Plaid’s API infrastructure supports over one million daily connections and 12,000 financial institutions across 20 countries, indicating proven scalability at current volumes.  \n- However, scaling internationally exposes Plaid to operational complexities, including different banking standards, compliance requirements, and technical integrations.  \n- The company must continuously upgrade infrastructure and AI models for real-time data processing, fraud detection, and underwriting to handle growing transaction volumes without service degradation.  \n- Failure to maintain platform reliability, latency, uptime, and security at scale can lead to customer dissatisfaction and lost contracts.  \n- Rapid expansion efforts may strain engineering and customer support resources impacting quality of service.  \n\n3. Market Risk  \n- Plaid’s valuation and growth are influenced by macroeconomic factors affecting the fintech and broader technology sectors, such as interest rate fluctuations and economic slowdowns reducing fintech investments and customer spending.  \n- Regulatory risks remain significant as data privacy laws (e.g., GDPR, CCPA), open banking mandates, and financial compliance regulations vary globally and can impose costly operational requirements or restrict data access.  \n- The failed Visa acquisition and government scrutiny highlight regulatory challenges that could impede strategic growth or exits.  \n- Market saturation with alternative data providers and evolving banking partner relationships (e.g., JPMorgan Chase limiting data sharing) may constrain revenue growth.  \n- Overall fintech market dynamics, including consolidation or shifts to proprietary banking data solutions, can impact Plaid’s addressable market and pricing power.  \n\n4. Customer Adoption Risk  \n- Plaid’s B2B SaaS model depends heavily on fintech startups and established financial institutions integrating its APIs for product functionality.  \n- Customer onboarding involves technical integration complexity and time, which can slow adoption and increase churn if implementation or post-sale support is inadequate.  \n- Large customers may negotiate favorable terms or seek to build in-house capabilities over time, reducing Plaid’s revenue potential.  \n- Shifts in customer technology stacks or preferences for platform vendors with broader feature sets could cause attrition.  \n- Data privacy and security concerns among customers and end-users might reduce willingness to share financial data through Plaid’s platform.  \n\n5. Operational Risk  \n- Handling sensitive financial data requires rigorous cybersecurity controls; despite Plaid’s advanced encryption and multi-factor authentication, the risk of data breaches or cyberattacks remains a critical threat.  \n- Operational disruptions caused by software bugs, API downtime, or infrastructure failures directly impact customer services and reputation.  \n- Compliance with global financial regulations, KYC/AML laws, and data protection mandates requires continuous monitoring and may entail significant legal or compliance costs.  \n- Reliance on key personnel and technical experts poses retention risks, particularly after co-founder departures.  \n- Scaling operations globally creates complexities in managing vendor, partner, and bank relationships while ensuring consistent service standards.  \n\nSummary  \nPlaid, as a leading fintech API provider with large scale and advanced AI-driven offerings, is well-positioned but faces substantial risks from intense competition, regulatory environments, and operational challenges inherent in fintech infrastructure. Its ability to sustain growth hinges on maintaining platform scalability, navigating evolving market and regulatory landscapes, retaining key customers via superior product and service delivery, and managing operational resilience without disruption. Investors should closely monitor competitive innovations, regulatory developments, and Plaid’s execution on global expansion and security capabilities.",
+  "competitor_analysis": "**Competitive Analysis for Plaid Inc.**\n\n---\n\n### Major Competitors\n\n1. **Stripe**\n   - Leading fintech infrastructure provider with strong capabilities in payment processing and financial APIs.\n   - Broad developer ecosystem and global presence.\n2. **Adyen**\n   - Global payment platform with extensive API services.\n   - Focus on payments, with growing open banking-related APIs.\n3. **Akoya**\n   - Focus on highly secure, API-based financial data sharing.\n   - Often preferred by institutions with strict data security needs but has more limited coverage compared to Plaid.\n4. **Flinks**\n   - Canadian financial data aggregator with strong coverage in investments and loans.\n   - Focus on North American markets.\n5. **Other notable players**\n   - Rapyd, Mastercard, Finastra, Fiserv, Block Inc., Neo Mena Technologies.\n   - These vary from payment platforms to open banking API providers, with some regional or sector-specific strengths.\n\n---\n\n### Competitive Advantages\n\n- **Extensive Network Coverage**\n  - Connects to 12,000+ financial institutions across 20 countries, enabling high geographic reach.\n  - Large volume of daily connections (1M+), offering scale and data richness unmatched in some areas.\n- **Comprehensive Product Suite**\n  - Multi-product offerings including Auth, Identity, Transactions, Balance, Signal (risk), Transfer (payments), Investments, Income underwriting, Open finance.\n  - Enables end-to-end fintech infrastructure, beyond simple data aggregation.\n- **Strong Security Compliance**\n  - Multi-factor authentication, advanced encryption, and secure APIs.\n  - Trusted by major fintechs like Venmo, Robinhood, and Carvana.\n- **Developer-Centric Approach**\n  - Robust API documentation, quickstart guides, libraries, and GitHub resources.\n  - Facilitates easy integration and rapid product iterations.\n- **Strategic Market Positioning**\n  - Positioned as foundational fintech infrastructure.\n  - Serves a wide range of industries: banks, lenders, insurers, healthcare, gaming, government.\n- **AI and Real-time Data Capabilities**\n  - Investment in AI to provide credit scoring, fraud detection, real-time financial insights.\n- **Strong Funding and Valuation**\n  - Recent $575M funding in 2025 at $6.1B valuation; employee liquidity at $8B valuation in 2026.\n  - Financial backing from top investors such as Franklin Templeton, Fidelity, BlackRock.\n\n---\n\n### Competitive Disadvantages\n\n- **Dependence on Financial Institutions**\n  - Plaid relies heavily on maintaining access and relations with banks; risk of limited access or increased fees.\n  - Examples include JPMorgan Chase imposing access restrictions historically.\n- **Regulatory Scrutiny**\n  - Operating in multiple jurisdictions with complex privacy and open banking regulations.\n  - Potential to face compliance costs, operational constraints, or sanctions.\n- **Intense Competition**\n  - Competitors like Stripe and Adyen have strong ecosystems and global payments infrastructure.\n  - Akoya offers higher security in some contexts, which can limit Plaid’s appeal to security-conscious financial institutions.\n- **Valuation Volatility**\n  - Market sentiment in fintech can be volatile, affecting valuation and fundraising ability.\n- **Limited Direct Consumer Relationships**\n  - Plaid's customers are B2B fintechs; less consumer brand recognition could limit direct network effects.\n\n---\n\n### Barriers to Entry\n\n- **High Regulatory and Compliance Requirements**\n  - Stringent requirements around data security, anti-money laundering (AML), know your customer (KYC).\n  - Licensing and certifications needed in multiple countries.\n- **Extensive Institutional Network**\n  - Access and integration with thousands of banks took years to build.\n  - New entrants face challenges replicating wide banking coverage and approvals.\n- **Technical Complexity**\n  - Building secure, scalable, real-time API infrastructure involves significant engineering resources and expertise.\n- **Brand and Trust**\n  - Financial data integration requires high trust; Plaid’s existing brand recognition and relationships provide moat.\n- **Capital Intensity**\n  - Significant upfront investment in tech, compliance, and partnerships.\n  - Plaid’s fundraising power enables sustained product development and market expansion.\n\n---\n\n### Competitive Risks\n\n- **Regulatory Risks**\n  - Changes in data privacy laws or open banking regulations could restrict data sharing.\n  - Potential for fines or operational prohibitions.\n- **Bank Relationship Risks**\n  - Financial institutions controlling data access might impose higher fees or restrict API usage.\n- **Competitive Pressure**\n  - Larger players (e.g., Stripe, Mastercard) could bundle similar APIs with other financial services.\n  - Vertical integration by banks or fintech platforms.\n- **Data Breach and Security Incidents**\n  - Any breach could severely damage reputation and trust.\n  - Continuous investment required to protect sensitive user data.\n- **Market Changes**\n  - Emerging technologies or shifts in consumer expectations (e.g., decentralized finance) could disrupt the API aggregator model.\n- **Valuation and Capital Market Conditions**\n  - Fintech valuations subject to macroeconomic shifts, possibly limiting future funding or increasing cost of capital.\n\n---\n\n### Summary\n\nPlaid is a market leader in fintech infrastructure with broad global bank coverage, extensive product capabilities, and deep integration into the fintech ecosystem. Its combination of scale, security, and real-time financial data powers many leading fintech apps. However, it faces stiff competition from large payment processors and financial data providers with overlapping services. Regulatory and institutional dependencies remain critical operational risks. High barriers to entry protect Plaid’s position, but rapid technological and regulatory evolution require ongoing strategic investments to maintain its competitive edge.",
+  "memo": "Investment Memo: Plaid Inc.\n\nCompany Overview  \nPlaid Inc. is a leading fintech infrastructure company founded in 2013 and headquartered in San Francisco. It provides a secure and scalable API platform that enables fintech applications to connect with users’ financial accounts across 12,000+ financial institutions in 20 countries. Its product suite supports payments, identity verification, fraud prevention, credit underwriting, personal financial management, and open finance. Plaid serves a broad customer base including fintech startups, established financial institutions, and developers powering apps like Venmo, Robinhood, and Carvana. The company has raised significant capital, most recently valued at approximately $8 billion following a 2026 funding round and employee share sale.\n\nProblem  \nFintech companies and financial institutions face challenges in securely accessing and integrating comprehensive, real-time financial data from disparate banking systems, hampering service innovation, onboarding efficiency, fraud prevention, and credit decisioning. Fragmented data sources, complex regulatory requirements, and concerns about security create significant barriers to building fast, reliable, and compliant financial services.\n\nSolution  \nPlaid offers a highly reliable, secure API network that aggregates and normalizes financial data from thousands of banks worldwide, facilitating instant connectivity for fintech applications. Its platform includes real-time account authentication, transaction history, balance checks, identity verification, fraud risk analytics, payment initiation, and credit underwriting tools. This comprehensive infrastructure reduces development time, increases onboarding conversion rates by about 25%, and enhances product intelligence through data-driven insights, enabling fintechs to build smarter financial products efficiently and compliantly.\n\nMarket Opportunity  \nThe global fintech market is rapidly expanding, driven by digital banking growth, open finance initiatives, and increasing consumer demand for personalized financial services. Plaid’s addressable market includes thousands of fintech startups and established financial institutions worldwide seeking API-driven financial data connectivity, fraud prevention, credit scoring, and payment processing solutions. Its coverage of over 12,000 institutions across multiple countries and integration into major fintech ecosystems positions it well to capture significant share as open banking and embedded finance proliferate.\n\nCompetitive Landscape  \nPlaid competes with other fintech infrastructure providers such as Stripe, Adyen, Akoya, and Flinks, each with varying geographic and product focus. Plaid’s strengths lie in its extensive financial institution network, broad product suite, strong developer ecosystem, and brand recognition. However, competitors like Stripe leverage payment processing breadth, and others emphasize newer open banking frameworks or regional dominance. The regulatory environment and partnerships with banks remain key competitive factors influencing market leadership.\n\nKey Risks  \n- Regulatory and compliance risks related to data privacy, open banking mandates, and financial services regulations.  \n- Dependency on banking partners, who could impose restrictions or fees affecting Plaid’s access and margins.  \n- Intense competition from well-capitalized players with overlapping API services and innovative offerings.  \n- Data security risks inherent in handling sensitive financial information, requiring continual investment in cybersecurity.  \n- Market valuation volatility impacted by macroeconomic conditions influencing fintech investment sentiment.\n\nRecommendation  \nPlaid presents a compelling opportunity as a foundational fintech infrastructure provider with strong market traction, a diversified product offering, and a wide financial institution network that underpins critical fintech services globally. The company’s leadership position and expanding suite of value-added solutions such as credit underwriting and fraud prevention support attractive long-term growth prospects amid accelerating digital finance trends. However, regulatory risks and competitive pressures warrant cautious monitoring. We recommend a moderate investment position, subject to further diligence on financial performance and regulatory developments, to capitalize on Plaid’s strategic role in the evolving open finance ecosystem.",
+  "structured_analysis": {
+    "company_name": "Plaid Inc.",
+    "industry": "Fintech",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Plaid Inc. is a leading fintech infrastructure company founded in 2013, offering a secure data transfer network and APIs that connect fintech applications with users' financial accounts across 12,000+ institutions globally. Their product suite includes real-time bank account data access, payment processing, fraud prevention, identity verification, credit underwriting, and open finance solutions. Serving over one million daily connections and thousands of fintech companies, Plaid enables secure, real-time financial data flows that power innovative financial services. The company operates on a B2B SaaS model, charging fintech firms and institutions for API access and value-added services, and emphasizes compliance, security, and AI-driven insights.",
+    "key_risks": [
+      "Regulatory and compliance challenges related to data privacy, security, and open banking laws.",
+      "Dependence on maintaining strong partnerships and data access agreements with financial institutions.",
+      "Competitive pressure from other fintech API providers and payment platforms.",
+      "Market valuation volatility due to macroeconomic and investor sentiment shifts.",
+      "Security risks linked to handling sensitive financial data requiring ongoing cybersecurity investments."
+    ],
+    "strengths": [
+      "Extensive network connecting to over 12,000 financial institutions in 20 countries.",
+      "Diverse product suite covering payments, identity verification, fraud prevention, credit underwriting, and personal finance.",
+      "Established relationships with major fintech apps like Venmo, Robinhood, and Carvana.",
+      "Strong emphasis on security with advanced encryption and multi-factor authentication.",
+      "AI-driven platform enhancing fraud detection, credit scoring, and personalization.",
+      "Proven B2B SaaS business model with significant revenues from API access and premium services."
+    ],
+    "recommendation": "Plaid represents a mature growth-stage fintech infrastructure leader with a robust product suite and extensive market reach. While regulatory and competitive risks exist, its strong network effects, technological edge, and strategic partnerships position it well for continued expansion. Investment consideration should weigh the valuation premium against anticipated growth prospects and market conditions. Plaid is recommended for investors with a risk tolerance for fintech regulatory dynamics seeking exposure to foundational financial technology platforms."
+  },
+  "investment_score": {
+    "market_score": 7.8,
+    "team_score": 7.0,
+    "product_score": 7.0,
+    "competition_score": 6.8,
+    "traction_score": 7.0,
+    "financial_score": 4.9,
+    "overall_score": 69.2,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 69.2,
+    "readiness_summary": "The company shows solid potential with strong scores in Market, Team, Product, and Traction. However, financial readiness and competitive positioning need improvement to enhance fundraising prospects.",
+    "strengths": [
+      "Market understanding and opportunity",
+      "Capable and experienced team",
+      "Product development stage",
+      "Initial traction and customer engagement"
+    ],
+    "weaknesses": [
+      "Financial health and stability",
+      "Competitive differentiation and strategy"
+    ]
+  },
+  "readiness_score": 69.2,
+  "readiness_summary": "The company shows solid potential with strong scores in Market, Team, Product, and Traction. However, financial readiness and competitive positioning need improvement to enhance fundraising prospects.",
+  "founder_analysis": {
+    "summary": "The founding team of Plaid consists of Zach Perret and William Hockey, both with strong technical and consulting backgrounds relevant to fintech. Zach Perret studied finance and computer science, and William Hockey studied computer science. Both were former Bain & Company consultants, indicating business and strategic expertise. The company has built a complex fintech infrastructure platform with deep integrations to over 12,000 financial institutions and serves major fintech clients, suggesting strong technical and business capabilities. However, specific public evidence about the founders' direct prior experience as buyers or operators in the fintech market, detailed leadership hiring practices, and granular execution milestones is limited in the provided information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Founders have relevant technical and business education and consulting experience.",
+      "Company has built a complex, scalable fintech infrastructure platform with deep integrations.",
+      "Strong customer adoption with major fintech clients and extensive financial institution coverage.",
+      "Significant funding rounds and valuation milestones indicate investor confidence."
+    ],
+    "weaknesses": [
+      "Limited direct public evidence of founders' prior operator or buyer experience in fintech market.",
+      "No detailed public information on leadership hiring success or organizational structure.",
+      "Execution milestones and granular business capability metrics are not disclosed."
+    ],
+    "evidence": [
+      "Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants.",
+      "Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford.",
+      "Plaid’s platform connects to over 12,000 financial institutions and supports over one million daily connections.",
+      "Plaid serves major fintech apps such as Venmo, Robinhood, and Carvana.",
+      "Raised $575 million funding round in April 2025 at a $6.1 billion valuation; employee share sale at $8 billion valuation in 2026."
+    ],
+    "recommendations": [
+      "Obtain detailed founder biographies focusing on prior fintech operator or buyer roles to assess founder-market fit.",
+      "Request information on leadership team composition, hiring practices, and organizational growth to evaluate leadership capability.",
+      "Gather disclosed execution milestones, customer growth metrics, and revenue figures to better assess execution track record and business capability."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.0,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": 6.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Observed",
+          "rationale": "The founders have strong technical and consulting backgrounds relevant to fintech, which supports a plausible connection to the market. However, there is no direct evidence of prior operator or buyer roles or unique customer insight, which limits the score to the 5-6 band. The evidence is Observed with Medium confidence, justifying a mid-band score.",
+          "evidence": [
+            "Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants.",
+            "Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford."
+          ],
+          "recommendations": [
+            "Collect detailed founder background on fintech domain experience and customer insight."
+          ],
+          "missing_information": [
+            "Direct prior operator or buyer experience in fintech market.",
+            "Specific examples of founder insight influencing product or customer decisions."
+          ],
+          "signals": [
+            "Founders have technical and finance education.",
+            "Founders have consulting experience relevant to fintech strategy."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team has built and maintains a complex fintech infrastructure platform with deep integrations to over 12,000 financial institutions and supports over one million daily connections. The platform includes advanced security and compliance features. This specific, checkable evidence of complex product execution and scalable architecture supports a strong technical capability score of 7-8. Given the Medium confidence and detailed evidence, an 8 is appropriate.",
+          "evidence": [
+            "Plaid’s platform connects to over 12,000 financial institutions and supports over one million daily connections.",
+            "The company offers complex products including Auth, Identity Verification, Signal (ACH payment risk), Transfer, Investments, and Underwriting.",
+            "Plaid emphasizes security with advanced encryption, multi-factor authentication, and secure API connections."
+          ],
+          "recommendations": [
+            "Request technical leadership bios and engineering organization details.",
+            "Obtain product reliability and scalability performance data."
+          ],
+          "missing_information": [
+            "Details on engineering team size, leadership, and scalability metrics.",
+            "Specific uptime or reliability statistics."
+          ],
+          "signals": [
+            "Deep integrations with thousands of financial institutions.",
+            "Complex fintech infrastructure with real-time data access and AI infrastructure.",
+            "Security and compliance capabilities for sensitive financial data."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company operates a B2B SaaS model with a large and diverse customer base, has raised significant funding rounds, and completed a high-valuation employee share sale. These are specific, checkable facts indicating a credible repeatable business motion and investor confidence. However, the lack of detailed financial or operational metrics limits the score to the lower end of the 7-8 band.",
+          "evidence": [
+            "Plaid operates a B2B SaaS model charging fintech companies and financial institutions for API access.",
+            "The company raised $575 million in 2025 and completed an employee share sale at $8 billion valuation in 2026.",
+            "Plaid serves over 6,000 fintech companies and 12,000 financial institutions globally."
+          ],
+          "recommendations": [
+            "Gather disclosed financial metrics and GTM strategy details.",
+            "Request customer acquisition and retention data."
+          ],
+          "missing_information": [
+            "Detailed revenue growth, unit economics, and pricing strategy data.",
+            "Evidence of repeatable sales motion and operating discipline."
+          ],
+          "signals": [
+            "Significant funding rounds indicate investor confidence in business model and execution.",
+            "Large and diverse customer base across fintech and financial institutions.",
+            "Revenue generated through subscription and transaction fees."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "While explicit leadership details such as named executives or hiring plans are missing, the company's successful fundraising, customer acquisition, revenue generation, and financial management indicate leadership maturity and capacity to scale. This inferred evidence with Medium confidence supports a strong leadership score of 7, reflecting credible decision-making and organizational scaling ability.",
+          "evidence": [
+            "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "The presence of customers and revenue suggests the team has made effective decisions to attract and retain clients.",
+            "Disclosed cash position implies financial management capability, supporting organizational scaling."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership roles and hiring strategies.",
+            "Disclose organizational charts or executive team details to strengthen leadership assessment."
+          ],
+          "missing_information": [
+            "Explicit details on hiring track record or organizational structure",
+            "Named executive team or detailed hiring plans"
+          ],
+          "signals": [
+            "Successful fundraising rounds",
+            "Customer acquisition and revenue generation",
+            "Financial resource management"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company demonstrates strong execution through high customer adoption (over one million daily connections, major fintech clients), multiple large funding rounds with increasing valuations, and product suite expansion. These specific milestones and growth indicators support a strong execution score of 7-8. Given the inferred evidence with Medium confidence and some lack of detailed metrics, a 7 is appropriate.",
+          "evidence": [
+            "Plaid supports over one million daily connections and integrates with 12,000 financial institutions.",
+            "The company has major fintech clients such as Venmo, Robinhood, and Carvana.",
+            "Raised multiple large funding rounds with increasing valuations."
+          ],
+          "recommendations": [
+            "Request disclosed growth metrics and milestone documentation.",
+            "Obtain customer retention and expansion data."
+          ],
+          "missing_information": [
+            "Specific revenue growth figures and customer retention metrics.",
+            "Detailed milestone timelines and iteration history."
+          ],
+          "signals": [
+            "High customer adoption and platform usage.",
+            "Successful fundraising rounds indicating milestone achievement.",
+            "Product suite expansion into credit underwriting and fraud prevention."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founders have relevant technical and consulting backgrounds but limited direct public evidence of prior fintech operator experience.",
+    "fundraising_signal": "Strong fundraising history with large rounds and high valuations indicates investor confidence in the team."
+  },
+  "market_analysis": {
+    "summary": "Plaid operates in the fintech infrastructure market, providing API connectivity to over 12,000 financial institutions and serving more than 6,000 fintech companies globally. The company supports a broad range of financial use cases including payments, identity verification, fraud prevention, credit underwriting, and personal financial management. Its customer segments include fintech startups, established financial institutions, and developers across multiple industries and geographies. Plaid has raised significant funding and achieved high valuations, indicating investor confidence. However, explicit quantitative market size, growth rates, and customer demand metrics are not publicly disclosed in the provided information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Extensive API coverage with 12,000+ financial institutions across 20 countries",
+      "Diverse product suite addressing multiple fintech use cases",
+      "Serving a large customer base of 6,000+ fintech companies",
+      "Strong investor backing with recent funding rounds and high valuations",
+      "Integration with major fintech apps like Venmo and Robinhood"
+    ],
+    "weaknesses": [
+      "No explicit TAM, SAM, or SOM figures disclosed",
+      "Lack of detailed revenue, profitability, or customer growth data",
+      "No direct market growth rate or category expansion metrics provided",
+      "Competitive landscape described but no direct evidence of competitive positioning or customer win rates",
+      "Customer demand evidence limited to qualitative statements without quantitative validation"
+    ],
+    "evidence": [
+      "Plaid connects to over 12,000 financial institutions across 20 countries and serves over 6,000 fintech companies globally.",
+      "The platform supports payments, identity verification, fraud prevention, credit underwriting, and personal financial management.",
+      "Plaid raised $575 million in April 2025 at a $6.1 billion valuation and completed an employee share sale at an $8 billion valuation in February 2026.",
+      "Major fintech apps such as Venmo, Robinhood, and Carvana use Plaid's platform.",
+      "Plaid's network enables 1 million+ daily connections and 25% higher onboarding conversion rates."
+    ],
+    "recommendations": [
+      "Obtain credible market research reports quantifying the fintech infrastructure market size and growth rates.",
+      "Request detailed customer and revenue data to assess demand and growth trajectory.",
+      "Gather competitive win/loss data and customer testimonials to evaluate competitive intensity.",
+      "Investigate regulatory and technology trends impacting market timing and adoption.",
+      "Seek direct evidence of customer retention, expansion, and usage metrics."
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.8,
+      "confidence": "Medium",
+      "evidence_coverage": 80.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 8.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows Plaid has a large customer base (6,000+ fintech companies), global reach (20 countries), multiple customer segments, and a diverse product suite enabling expansion into adjacent workflows. Although exact market size figures are not disclosed, these credible signals support a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+          "evidence": [
+            "Plaid connects to over 12,000 financial institutions across 20 countries and serves over 6,000 fintech companies globally.",
+            "The platform supports a broad range of fintech use cases including payments, identity verification, fraud prevention, credit underwriting, and personal financial management.",
+            "Plaid's products are used by major fintech apps such as Venmo and Robinhood."
+          ],
+          "recommendations": [
+            "Acquire quantitative market sizing data from credible fintech market research sources."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Large customer base of fintech companies (6,000+)",
+            "Global geographic coverage (20 countries)",
+            "Multiple customer segments including startups and financial institutions",
+            "Diverse product suite enabling expansion into adjacent workflows"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Multiple credible signals indicate rapid market growth: recent large funding rounds ($575M at $6.1B valuation), regulatory tailwinds favoring open banking, fintech sector digital transformation, and growing adoption globally. While explicit growth rates are not provided, these strong signals support a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 band. The medium confidence and specificity justify an 8 rather than a 7.",
+          "evidence": [
+            "Plaid emphasizes AI infrastructure and real-time data to enhance fraud detection and credit scoring.",
+            "The company raised significant funding rounds recently, indicating investor confidence in market growth.",
+            "The fintech sector is characterized by digital transformation and regulatory tailwinds supporting open banking."
+          ],
+          "recommendations": [
+            "Obtain market research reports quantifying fintech infrastructure market growth rates.",
+            "Collect data on buyer budget expansion and category funding trends."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Recent $575 million funding round at $6.1 billion valuation",
+            "Expansion into credit scoring and underwriting",
+            "Regulatory environment favoring open banking APIs",
+            "Growing adoption of fintech applications globally"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Evidence shows excellent technology readiness (real-time data, AI infrastructure), regulatory support for open banking, and strong adoption momentum (major fintech apps using Plaid, high onboarding conversion rates). These signals indicate good timing supported by adoption trends and customer demand, consistent with a 7-8 score. The evidence is medium confidence and specific, supporting an 8 rather than a 7.",
+          "evidence": [
+            "Plaid's platform supports real-time financial data access and AI-driven insights.",
+            "The company operates in multiple countries with regulatory frameworks supporting open finance.",
+            "Major fintech apps actively use Plaid's services, indicating adoption momentum."
+          ],
+          "recommendations": [
+            "Gather customer feedback on urgency and pain points driving adoption.",
+            "Monitor regulatory changes impacting open banking and data access."
+          ],
+          "missing_information": [],
+          "signals": [
+            "High onboarding conversion rates (25% higher)",
+            "Integration with leading fintech apps like Venmo and Robinhood",
+            "Regulatory support for open banking and data sharing",
+            "Investment in AI infrastructure for smarter financial products"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Plaid operates in a competitive market with strong players like Stripe and Adyen, but has a broad network (12,000 financial institutions), extensive API coverage, and strong investor backing. This suggests a differentiated position with manageable competition and a credible right to win, fitting the 7-8 band. However, the evidence does not strongly demonstrate durable category leadership or a clear wedge to justify a score above 7.",
+          "evidence": [
+            "Plaid competes with Stripe, Adyen, Akoya, Flinks, and other fintech API providers.",
+            "Plaid has a broad network with 12,000 financial institutions and 6,000 fintech customers.",
+            "The company has raised large funding rounds and achieved high valuations."
+          ],
+          "recommendations": [
+            "Collect customer win/loss data and switching cost analysis.",
+            "Assess differentiation factors recognized by customers.",
+            "Evaluate distribution advantages and proprietary data assets."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Presence of multiple competitors with varying geographic and product coverage",
+            "Plaid's extensive API coverage and integration breadth",
+            "Strong investor backing indicating confidence in competitive position"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Plaid serves over 6,000 fintech companies with over one million daily connections, including major apps like Venmo and Robinhood, and reports improved onboarding conversion rates. These signals indicate strong demand with paying customers, meaningful validation, and credible repeatability, consistent with a 7-8 score. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+          "evidence": [
+            "Plaid serves over 6,000 fintech companies and supports over one million daily connections.",
+            "Major fintech apps such as Venmo and Robinhood use Plaid's platform.",
+            "Plaid reports 25% higher onboarding conversion rates for its customers."
+          ],
+          "recommendations": [
+            "Obtain detailed customer retention, expansion, and revenue growth data.",
+            "Gather case studies and customer satisfaction metrics."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Large and diverse customer base",
+            "High daily connection volume",
+            "Integration with leading fintech applications",
+            "Reported improvement in customer onboarding metrics"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Plaid Fintech Solutions Development: Use cases and Costs",
+      "url": "https://itexus.com/plaid-fintech-solutions-development-use-cases-and-costs"
+    },
+    {
+      "title": "Plaid Integration: How It Works, Use Cases & Implementation",
+      "url": "https://wezom.com/blog/plaid-integration-explained"
+    },
+    {
+      "title": "What is Plaid and How It Powers Fintech Solutions : Aalpha",
+      "url": "https://www.aalpha.net/articles/what-is-plaid-and-how-it-powers-fintech-solutions"
+    },
+    {
+      "title": "How financial account aggregators fuel fintech solutions | Plaid",
+      "url": "https://plaid.com/resources/fintech/financial-account-aggregator"
+    },
+    {
+      "title": "Plaid: Enabling all companies to build fintech solutions",
+      "url": "https://plaid.com"
+    },
+    {
+      "title": "FinTech Market Size, Share, Growth, Analysis, Report, 2034",
+      "url": "https://straitsresearch.com/report/fintech-market"
+    },
+    {
+      "title": "Fintech Market Size, Share, Growth | Trends, 2034",
+      "url": "https://www.polarismarketresearch.com/industry-analysis/fintech-market"
+    },
+    {
+      "title": "How does fintech make money? 9 business models explained | Plaid",
+      "url": "https://plaid.com/resources/fintech/how-does-fintech-and-plaid-make-money"
+    },
+    {
+      "title": "The Best Plaid Competitors (according to 8 clients) | Candor",
+      "url": "https://candor.co/articles/it-buyers-guide/the-best-plaid-competitors-according-to-8-clients"
+    },
+    {
+      "title": "Plaid’s strategy to facilitate an API-based ecosystem | Plaid",
+      "url": "https://plaid.com/blog/plaids-strategy-to-facilitate-an-api-based-ecosystem"
+    },
+    {
+      "title": "Instagram",
+      "url": "https://www.instagram.com/reel/DA1xfUwC0IJ"
+    },
+    {
+      "title": "Plaid Inc. - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Plaid_Inc."
+    },
+    {
+      "title": "Who owns Plaid? Ownership structure explained (2026)",
+      "url": "https://www.revenuememo.com/p/who-owns-plaid"
+    },
+    {
+      "title": "INSIDER INTERVIEW WITH ZACH PERRET (Founder of PLAID)",
+      "url": "https://www.youtube.com/watch?v=zyRPVS6alAk"
+    },
+    {
+      "title": "The Plaid Story:   Integrating with 10,000 Institutions.  On The Way to a $5 Billion Acquisition. | SaaStrAI",
+      "url": "https://www.saastr.com/build-a-platform-ecosystem"
+    },
+    {
+      "title": "Plaid reportedly hits $8bn valuation after latest funding round",
+      "url": "https://www.fintechfutures.com/venture-capital-funding/plaid-reportedly-hits-8bn-valuation-after-latest-funding-round"
+    },
+    {
+      "title": "Plaid raises $575 million funding round at $6 billion valuation",
+      "url": "https://www.cnbc.com/2025/04/03/plaid-raises-575-million-funding-round-at-6-billion-valuation.html"
+    },
+    {
+      "title": "Plaid Secures $8 Billion Valuation in Latest Funding Round",
+      "url": "https://finance.yahoo.com/news/plaid-secures-8-billion-valuation-185005671.html"
+    },
+    {
+      "title": "Plaid revenue, valuation & funding | Sacra",
+      "url": "https://sacra.com/c/plaid"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Plaid is a mature fintech infrastructure company with a large customer base and extensive financial institution integrations. Public evidence confirms a broad and growing network with over 12,000 financial institutions and 6,000 fintech customers, and over one million daily connections. The company has raised significant funding rounds, including a $575 million round at a $6.1 billion valuation in 2025 and an $8 billion valuation in 2026, indicating strong investor confidence. However, specific quantitative data on customer growth rates, revenue growth, retention metrics, engagement levels, and growth velocity over time are not publicly disclosed. While multiple qualitative signals suggest strong traction, the absence of dated two-point series or explicit retention and engagement metrics limits definitive assessment of growth velocity and retention.",
+    "confidence": "Medium",
+    "strengths": [
+      "Large and diverse customer base including 6,000 fintech companies and 12,000 financial institutions",
+      "Over one million daily connections indicating active usage",
+      "Strong investor validation through multiple large funding rounds and high valuations",
+      "Broad product suite supporting multiple fintech use cases",
+      "Integration with major fintech apps like Venmo, Robinhood, and Carvana"
+    ],
+    "weaknesses": [
+      "No publicly disclosed two-point customer count or revenue series to confirm growth velocity",
+      "No explicit retention metrics such as NRR, GRR, or churn rates available",
+      "No detailed engagement data or customer usage frequency metrics disclosed",
+      "Revenue figures and profitability status are undisclosed",
+      "Lack of detailed breakdown of revenue by product or customer segment"
+    ],
+    "evidence": [
+      "Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally, with over one million daily connections.",
+      "The company raised a $575 million funding round in April 2025 at a $6.1 billion valuation.",
+      "In February 2026, Plaid completed an employee share sale at an $8 billion valuation.",
+      "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana.",
+      "Plaid’s network enables higher onboarding conversion rates (reported 25% higher)."
+    ],
+    "recommendations": [
+      "Obtain dated customer count or revenue figures at two or more points in time to assess growth velocity.",
+      "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+      "Gather engagement data including usage frequency, workflow depth, and customer outcome evidence.",
+      "Seek detailed revenue breakdowns by product line and customer segment to evaluate revenue growth.",
+      "Conduct customer interviews or surveys to validate retention and engagement assumptions."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible public signals indicate a large and active customer base with implied growth, but no explicit dated two-point customer count series is available to confirm growth rate.",
+          "evidence": [
+            "Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally.",
+            "Over one million daily connections indicate active and growing usage.",
+            "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana."
+          ],
+          "recommendations": [
+            "Obtain dated customer count data to confirm growth trajectory."
+          ],
+          "missing_information": [
+            "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+          ],
+          "signals": [
+            "12,000+ financial institutions served",
+            "6,000 fintech company customers",
+            "1 million+ daily connections",
+            "Integration with major fintech apps"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or signals. Without such evidence, it is not possible to assess revenue growth relative to the startup's stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified revenue growth metrics or customer acquisition data",
+            "Disclose expansion revenue or net revenue retention rates if available",
+            "Share ACV or contract details to demonstrate revenue scalability"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or customer acquisition",
+            "No details on expansion revenue or net revenue retention",
+            "No information on annual contract value (ACV) or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence was found to assess customer retention. Without data or credible signals on churn, renewals, or expansion, retention cannot be evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Collect and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative or quantitative evidence of customer repeat usage and expansion.",
+            "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+          ],
+          "missing_information": [
+            "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No qualitative evidence on customer stickiness or repeat usage patterns.",
+            "No data on contract renewals or customer longevity."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Plaid has over one million daily connections, supports multiple fintech workflows (payments, identity verification, credit underwriting), and is embedded in major fintech apps, indicating strong engagement and workflow embedding. However, the absence of detailed quantitative usage metrics or retention data limits the ability to score higher. The medium confidence inferred evidence supports a strong engagement score of 7.",
+          "evidence": [
+            "Over one million daily connections indicate frequent active usage.",
+            "Plaid’s platform supports multiple fintech use cases including payments, identity verification, and credit underwriting.",
+            "Integration with major fintech apps such as Venmo and Robinhood suggests embedded workflow usage."
+          ],
+          "recommendations": [
+            "Collect detailed engagement analytics and customer outcome evidence."
+          ],
+          "missing_information": [
+            "Detailed usage frequency and depth metrics",
+            "Customer outcome data",
+            "Automation volume or workflow embedding specifics"
+          ],
+          "signals": [
+            "1 million+ daily connections",
+            "Multiple product lines supporting diverse workflows",
+            "Usage by major fintech applications"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Large and diverse customer base with over 6,000 fintech customers and 12,000 financial institutions; growth implied but not explicitly quantified.",
+    "revenue_growth": "Strong investor funding rounds suggest revenue growth, but no explicit revenue growth figures disclosed.",
+    "fundraising_signal": "Multiple large funding rounds culminating in an $8 billion valuation indicate strong investor confidence and validation."
+  },
+  "market_score": 7.8,
+  "team_score": 7.0,
+  "product_score": 7.0,
+  "competition_score": 6.8,
+  "traction_score": 7.0,
+  "financial_score": 4.9,
+  "overall_score": 69.2,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Plaid Inc.",
+      "industry": "Fintech",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2.1-spec-2026-08-29",
+      "anchor_registry_version": "v2.1-anchor-registry-2026-08-29",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.1",
+      "company_text_hash": "bda82757b6d2d0c53b3cc38388539bfe26d66de805e2665be1d77f736a42dba2",
+      "search_query": "overview: Plaid fintech solutions platform product offerings and use cases overview | market_and_competitors: Plaid market size fintech API competitors and market growth analysis | founders_and_leadership: Plaid founders and executive team background and previous companies | financial_and_funding: Plaid funding rounds valuation investors and financial performance",
+      "research_brief_snapshot": "1. Company Overview  \nPlaid Inc. is a privately held American financial technology company founded in 2013 by Zach Perret and William Hockey. Headquartered in San Francisco, California, Plaid provides a data transfer network and API infrastructure that enables fintech applications to securely connect with users’ financial accounts across thousands of financial institutions. The platform supports a wide range of fintech solutions including payments, identity verification, fraud and risk prevention, personal financial management, credit underwriting, and open finance. Plaid’s network connects to over 12,000 financial institutions across 20 countries and facilitates over one million daily connections. The company’s products enable real-time access to bank account data such as balances, transactions, investments, and liabilities, powering services like lending, budgeting, investment management, and onboarding.\n\n2. Verified Facts  \n- Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants. Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford. (Sources: Wikipedia, Instagram, RevenueMemo)  \n- Zach Perret remains CEO; William Hockey left the company in 2021. (Sources: Wikipedia, RevenueMemo)  \n- Plaid’s platform acts as a financial technology infrastructure provider, connecting fintech apps with users’ bank accounts securely via APIs. (Sources: Wezom blog, Plaid.com)  \n- The company’s product suite includes Auth (account verification), Transactions (transaction history), Balance (real-time balances), Identity Verification, Signal (ACH payment risk), Transfer (payment processing), Investments, Liabilities, Enrich (data cleansing and categorization), Income & Underwriting, and Open Finance solutions. (Sources: Plaid.com, Plaid fintech solutions overview)  \n- Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally, with over one million daily connections. (Sources: Plaid.com)  \n- The company raised a $575 million funding round in April 2025 at a $6.1 billion valuation led by Franklin Templeton, Fidelity, BlackRock, and existing investors. (Sources: CNBC, Wikipedia)  \n- In February 2026, Plaid completed an employee share sale at an $8 billion valuation, providing liquidity to employees. (Sources: Fintech Futures, Yahoo Finance, Sacra)  \n- Plaid’s valuation peaked at $13.4 billion in 2021 following a $425 million Series D round. (Sources: Wikipedia, CNBC)  \n- Visa attempted to acquire Plaid for $5.3 billion in 2020, but the deal was called off due to regulatory scrutiny. (Sources: RevenueMemo, Wikipedia)  \n- Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana. (Sources: Plaid.com)  \n- The company emphasizes security with advanced encryption standards, multi-factor authentication, and secure API connections. (Sources: Aalpha article)  \n- Plaid’s network enables higher onboarding conversion rates (reported 25% higher) and supports credit scoring and underwriting based on real-time financial behavior. (Sources: Plaid.com)  \n- The company operates in multiple countries including the US, Canada, UK, France, Spain, Ireland, and the Netherlands. (Source: Wikipedia)  \n\n3. Reasonable Assumptions  \n- Given Plaid’s extensive API coverage and integration with thousands of financial institutions, it likely maintains strong relationships and compliance frameworks with banks and regulators.  \n- Plaid’s focus on AI infrastructure and real-time data suggests ongoing investment in machine learning to enhance fraud detection, credit scoring, and personalized financial insights.  \n- The company’s positioning as a foundational fintech infrastructure provider implies it targets both startups and established financial institutions as customers.  \n- Plaid’s valuation fluctuations reflect broader market conditions affecting fintech and technology sectors, including interest rate changes and investor sentiment.  \n- The company’s expansion into credit scoring and underwriting indicates a strategic move to diversify revenue streams beyond data connectivity.  \n\n4. Business Model  \nPlaid operates a B2B SaaS model, charging fintech companies and financial institutions for API access to its financial data network. The platform is free for consumers, with businesses paying for data connectivity, enriched financial insights, and value-added services such as fraud prevention, identity verification, and credit underwriting. Revenue is generated primarily through transaction fees, subscription fees for API usage, and premium services like credit scoring and risk analytics. Plaid also facilitates inbound and outbound bank payments, which may contribute to fee-based revenue. The company has raised significant venture capital funding and provides liquidity options for employees through share sales.  \n\n5. Target Customers  \n- Fintech startups and established companies building financial applications requiring secure access to users’ bank account data.  \n- Financial institutions seeking to integrate open banking APIs for improved customer onboarding, fraud prevention, and credit underwriting.  \n- Developers and platforms offering personal financial management, lending, payments, investment management, and compliance solutions.  \n- Industries served include banking, consumer lending, mortgage, insurance, healthcare, government, gaming, property management, and marketplaces.  \n\n6. Competitors  \n- Stripe: A major fintech infrastructure provider with payment processing and API services.  \n- Adyen: Global payment platform competing in payment processing and financial APIs.  \n- Akoya: Provides secure API-based financial data sharing with high security but limited coverage compared to Plaid.  \n- Flinks: Strong presence in the Canadian market with broad account type coverage including investments and loans.  \n- Other fintech infrastructure and open banking API providers such as Rapyd, Mastercard, Finastra, Fiserv, Block Inc., and Neo Mena Technologies.  \n\n7. Key Risks  \n- Regulatory scrutiny and compliance challenges related to data privacy, security, and open banking frameworks.  \n- Dependence on relationships with financial institutions, which may impose fees or restrict data access (e.g., JPMorgan Chase agreement).  \n- Competition from other fintech API providers with potentially broader geographic coverage or specialized offerings.  \n- Market valuation volatility influenced by macroeconomic factors and investor sentiment in the technology and fintech sectors.  \n- Security risks inherent in handling sensitive financial data, requiring continuous investment in cybersecurity.  \n\n8. Important Unknowns  \n- Exact current revenue figures and profitability status are not publicly disclosed.  \n- Detailed breakdown of revenue by product line or customer segment is unavailable.  \n- Specific plans and timing for a potential IPO remain unconfirmed.  \n- The total amount raised in the latest funding round that led to the $8 billion valuation is undisclosed.  \n- The extent of Plaid’s market share relative to competitors in various regions is not specified.  \n\n9. Sources  \n- https://plaid.com  \n- https://itexus.com/plaid-fintech-solutions-development-use-cases-and-costs  \n- https://wezom.com/blog/plaid-integration-explained  \n- https://www.aalpha.net/articles/what-is-plaid-and-how-it-powers-fintech-solutions  \n- https://plaid.com/resources/fintech/financial-account-aggregator  \n- https://straitsresearch.com/report/fintech-market  \n- https://www.polarismarketresearch.com/industry-analysis/fintech-market  \n- https://candor.co/articles/it-buyers-guide/the-best-plaid-competitors-according-to-8-clients  \n- https://plaid.com/blog/plaids-strategy-to-facilitate-an-api-based-ecosystem  \n- https://www.instagram.com/reel/DA1xfUwC0IJ  \n- https://en.wikipedia.org/wiki/Plaid_Inc.  \n- https://www.revenuememo.com/p/who-owns-plaid  \n- https://www.youtube.com/watch?v=zyRPVS6alAk  \n- https://www.fintechfutures.com/venture-capital-funding/plaid-reportedly-hits-8bn-valuation-after-latest-funding-round  \n- https://www.cnbc.com/2025/04/03/plaid-raises-575-million-funding-round-at-6-billion-valuation.html  \n- https://finance.yahoo.com/news/plaid-secures-8-billion-valuation-185005671.html  \n- https://sacra.com/c/plaid",
+      "source_snapshot": [
+        {
+          "title": "Plaid Fintech Solutions Development: Use cases and Costs",
+          "url": "https://itexus.com/plaid-fintech-solutions-development-use-cases-and-costs"
+        },
+        {
+          "title": "Plaid Integration: How It Works, Use Cases & Implementation",
+          "url": "https://wezom.com/blog/plaid-integration-explained"
+        },
+        {
+          "title": "What is Plaid and How It Powers Fintech Solutions : Aalpha",
+          "url": "https://www.aalpha.net/articles/what-is-plaid-and-how-it-powers-fintech-solutions"
+        },
+        {
+          "title": "How financial account aggregators fuel fintech solutions | Plaid",
+          "url": "https://plaid.com/resources/fintech/financial-account-aggregator"
+        },
+        {
+          "title": "Plaid: Enabling all companies to build fintech solutions",
+          "url": "https://plaid.com"
+        },
+        {
+          "title": "FinTech Market Size, Share, Growth, Analysis, Report, 2034",
+          "url": "https://straitsresearch.com/report/fintech-market"
+        },
+        {
+          "title": "Fintech Market Size, Share, Growth | Trends, 2034",
+          "url": "https://www.polarismarketresearch.com/industry-analysis/fintech-market"
+        },
+        {
+          "title": "How does fintech make money? 9 business models explained | Plaid",
+          "url": "https://plaid.com/resources/fintech/how-does-fintech-and-plaid-make-money"
+        },
+        {
+          "title": "The Best Plaid Competitors (according to 8 clients) | Candor",
+          "url": "https://candor.co/articles/it-buyers-guide/the-best-plaid-competitors-according-to-8-clients"
+        },
+        {
+          "title": "Plaid’s strategy to facilitate an API-based ecosystem | Plaid",
+          "url": "https://plaid.com/blog/plaids-strategy-to-facilitate-an-api-based-ecosystem"
+        },
+        {
+          "title": "Instagram",
+          "url": "https://www.instagram.com/reel/DA1xfUwC0IJ"
+        },
+        {
+          "title": "Plaid Inc. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Plaid_Inc."
+        },
+        {
+          "title": "Who owns Plaid? Ownership structure explained (2026)",
+          "url": "https://www.revenuememo.com/p/who-owns-plaid"
+        },
+        {
+          "title": "INSIDER INTERVIEW WITH ZACH PERRET (Founder of PLAID)",
+          "url": "https://www.youtube.com/watch?v=zyRPVS6alAk"
+        },
+        {
+          "title": "The Plaid Story:   Integrating with 10,000 Institutions.  On The Way to a $5 Billion Acquisition. | SaaStrAI",
+          "url": "https://www.saastr.com/build-a-platform-ecosystem"
+        },
+        {
+          "title": "Plaid reportedly hits $8bn valuation after latest funding round",
+          "url": "https://www.fintechfutures.com/venture-capital-funding/plaid-reportedly-hits-8bn-valuation-after-latest-funding-round"
+        },
+        {
+          "title": "Plaid raises $575 million funding round at $6 billion valuation",
+          "url": "https://www.cnbc.com/2025/04/03/plaid-raises-575-million-funding-round-at-6-billion-valuation.html"
+        },
+        {
+          "title": "Plaid Secures $8 Billion Valuation in Latest Funding Round",
+          "url": "https://finance.yahoo.com/news/plaid-secures-8-billion-valuation-185005671.html"
+        },
+        {
+          "title": "Plaid revenue, valuation & funding | Sacra",
+          "url": "https://sacra.com/c/plaid"
+        }
+      ],
+      "analyzed_at": "2026-08-30T03:57:17.816157+00:00"
+    },
+    "market": {
+      "score": 7.8,
+      "confidence": "Medium",
+      "summary": "Plaid operates in the fintech infrastructure market, providing API connectivity to over 12,000 financial institutions and serving more than 6,000 fintech companies globally. The company supports a broad range of financial use cases including payments, identity verification, fraud prevention, credit underwriting, and personal financial management. Its customer segments include fintech startups, established financial institutions, and developers across multiple industries and geographies. Plaid has raised significant funding and achieved high valuations, indicating investor confidence. However, explicit quantitative market size, growth rates, and customer demand metrics are not publicly disclosed in the provided information.",
+      "evidence": [
+        "Plaid connects to over 12,000 financial institutions across 20 countries and serves over 6,000 fintech companies globally.",
+        "The platform supports payments, identity verification, fraud prevention, credit underwriting, and personal financial management.",
+        "Plaid raised $575 million in April 2025 at a $6.1 billion valuation and completed an employee share sale at an $8 billion valuation in February 2026.",
+        "Major fintech apps such as Venmo, Robinhood, and Carvana use Plaid's platform.",
+        "Plaid's network enables 1 million+ daily connections and 25% higher onboarding conversion rates."
+      ],
+      "strengths": [
+        "Extensive API coverage with 12,000+ financial institutions across 20 countries",
+        "Diverse product suite addressing multiple fintech use cases",
+        "Serving a large customer base of 6,000+ fintech companies",
+        "Strong investor backing with recent funding rounds and high valuations",
+        "Integration with major fintech apps like Venmo and Robinhood"
+      ],
+      "weaknesses": [
+        "No explicit TAM, SAM, or SOM figures disclosed",
+        "Lack of detailed revenue, profitability, or customer growth data",
+        "No direct market growth rate or category expansion metrics provided",
+        "Competitive landscape described but no direct evidence of competitive positioning or customer win rates",
+        "Customer demand evidence limited to qualitative statements without quantitative validation"
+      ],
+      "recommendations": [
+        "Obtain credible market research reports quantifying the fintech infrastructure market size and growth rates.",
+        "Request detailed customer and revenue data to assess demand and growth trajectory.",
+        "Gather competitive win/loss data and customer testimonials to evaluate competitive intensity.",
+        "Investigate regulatory and technology trends impacting market timing and adoption.",
+        "Seek direct evidence of customer retention, expansion, and usage metrics."
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Plaid has a large customer base (6,000+ fintech companies), global reach (20 countries), multiple customer segments, and a diverse product suite enabling expansion into adjacent workflows. Although exact market size figures are not disclosed, these credible signals support a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid connects to over 12,000 financial institutions across 20 countries and serves over 6,000 fintech companies globally.",
+              "The platform supports a broad range of fintech use cases including payments, identity verification, fraud prevention, credit underwriting, and personal financial management.",
+              "Plaid's products are used by major fintech apps such as Venmo and Robinhood."
+            ],
+            "recommendations": [
+              "Acquire quantitative market sizing data from credible fintech market research sources."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large customer base of fintech companies (6,000+)",
+              "Global geographic coverage (20 countries)",
+              "Multiple customer segments including startups and financial institutions",
+              "Diverse product suite enabling expansion into adjacent workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals indicate rapid market growth: recent large funding rounds ($575M at $6.1B valuation), regulatory tailwinds favoring open banking, fintech sector digital transformation, and growing adoption globally. While explicit growth rates are not provided, these strong signals support a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 band. The medium confidence and specificity justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid emphasizes AI infrastructure and real-time data to enhance fraud detection and credit scoring.",
+              "The company raised significant funding rounds recently, indicating investor confidence in market growth.",
+              "The fintech sector is characterized by digital transformation and regulatory tailwinds supporting open banking."
+            ],
+            "recommendations": [
+              "Obtain market research reports quantifying fintech infrastructure market growth rates.",
+              "Collect data on buyer budget expansion and category funding trends."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Recent $575 million funding round at $6.1 billion valuation",
+              "Expansion into credit scoring and underwriting",
+              "Regulatory environment favoring open banking APIs",
+              "Growing adoption of fintech applications globally"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows excellent technology readiness (real-time data, AI infrastructure), regulatory support for open banking, and strong adoption momentum (major fintech apps using Plaid, high onboarding conversion rates). These signals indicate good timing supported by adoption trends and customer demand, consistent with a 7-8 score. The evidence is medium confidence and specific, supporting an 8 rather than a 7.",
+            "evidence": [
+              "Plaid's platform supports real-time financial data access and AI-driven insights.",
+              "The company operates in multiple countries with regulatory frameworks supporting open finance.",
+              "Major fintech apps actively use Plaid's services, indicating adoption momentum."
+            ],
+            "recommendations": [
+              "Gather customer feedback on urgency and pain points driving adoption.",
+              "Monitor regulatory changes impacting open banking and data access."
+            ],
+            "missing_information": [],
+            "signals": [
+              "High onboarding conversion rates (25% higher)",
+              "Integration with leading fintech apps like Venmo and Robinhood",
+              "Regulatory support for open banking and data sharing",
+              "Investment in AI infrastructure for smarter financial products"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid operates in a competitive market with strong players like Stripe and Adyen, but has a broad network (12,000 financial institutions), extensive API coverage, and strong investor backing. This suggests a differentiated position with manageable competition and a credible right to win, fitting the 7-8 band. However, the evidence does not strongly demonstrate durable category leadership or a clear wedge to justify a score above 7.",
+            "evidence": [
+              "Plaid competes with Stripe, Adyen, Akoya, Flinks, and other fintech API providers.",
+              "Plaid has a broad network with 12,000 financial institutions and 6,000 fintech customers.",
+              "The company has raised large funding rounds and achieved high valuations."
+            ],
+            "recommendations": [
+              "Collect customer win/loss data and switching cost analysis.",
+              "Assess differentiation factors recognized by customers.",
+              "Evaluate distribution advantages and proprietary data assets."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of multiple competitors with varying geographic and product coverage",
+              "Plaid's extensive API coverage and integration breadth",
+              "Strong investor backing indicating confidence in competitive position"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Plaid serves over 6,000 fintech companies with over one million daily connections, including major apps like Venmo and Robinhood, and reports improved onboarding conversion rates. These signals indicate strong demand with paying customers, meaningful validation, and credible repeatability, consistent with a 7-8 score. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid serves over 6,000 fintech companies and supports over one million daily connections.",
+              "Major fintech apps such as Venmo and Robinhood use Plaid's platform.",
+              "Plaid reports 25% higher onboarding conversion rates for its customers."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention, expansion, and revenue growth data.",
+              "Gather case studies and customer satisfaction metrics."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large and diverse customer base",
+              "High daily connection volume",
+              "Integration with leading fintech applications",
+              "Reported improvement in customer onboarding metrics"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The founding team of Plaid consists of Zach Perret and William Hockey, both with strong technical and consulting backgrounds relevant to fintech. Zach Perret studied finance and computer science, and William Hockey studied computer science. Both were former Bain & Company consultants, indicating business and strategic expertise. The company has built a complex fintech infrastructure platform with deep integrations to over 12,000 financial institutions and serves major fintech clients, suggesting strong technical and business capabilities. However, specific public evidence about the founders' direct prior experience as buyers or operators in the fintech market, detailed leadership hiring practices, and granular execution milestones is limited in the provided information.",
+      "evidence": [
+        "Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants.",
+        "Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford.",
+        "Plaid’s platform connects to over 12,000 financial institutions and supports over one million daily connections.",
+        "Plaid serves major fintech apps such as Venmo, Robinhood, and Carvana.",
+        "Raised $575 million funding round in April 2025 at a $6.1 billion valuation; employee share sale at $8 billion valuation in 2026."
+      ],
+      "strengths": [
+        "Founders have relevant technical and business education and consulting experience.",
+        "Company has built a complex, scalable fintech infrastructure platform with deep integrations.",
+        "Strong customer adoption with major fintech clients and extensive financial institution coverage.",
+        "Significant funding rounds and valuation milestones indicate investor confidence."
+      ],
+      "weaknesses": [
+        "Limited direct public evidence of founders' prior operator or buyer experience in fintech market.",
+        "No detailed public information on leadership hiring success or organizational structure.",
+        "Execution milestones and granular business capability metrics are not disclosed."
+      ],
+      "recommendations": [
+        "Obtain detailed founder biographies focusing on prior fintech operator or buyer roles to assess founder-market fit.",
+        "Request information on leadership team composition, hiring practices, and organizational growth to evaluate leadership capability.",
+        "Gather disclosed execution milestones, customer growth metrics, and revenue figures to better assess execution track record and business capability."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The founders have strong technical and consulting backgrounds relevant to fintech, which supports a plausible connection to the market. However, there is no direct evidence of prior operator or buyer roles or unique customer insight, which limits the score to the 5-6 band. The evidence is Observed with Medium confidence, justifying a mid-band score.",
+            "evidence": [
+              "Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants.",
+              "Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford."
+            ],
+            "recommendations": [
+              "Collect detailed founder background on fintech domain experience and customer insight."
+            ],
+            "missing_information": [
+              "Direct prior operator or buyer experience in fintech market.",
+              "Specific examples of founder insight influencing product or customer decisions."
+            ],
+            "signals": [
+              "Founders have technical and finance education.",
+              "Founders have consulting experience relevant to fintech strategy."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has built and maintains a complex fintech infrastructure platform with deep integrations to over 12,000 financial institutions and supports over one million daily connections. The platform includes advanced security and compliance features. This specific, checkable evidence of complex product execution and scalable architecture supports a strong technical capability score of 7-8. Given the Medium confidence and detailed evidence, an 8 is appropriate.",
+            "evidence": [
+              "Plaid’s platform connects to over 12,000 financial institutions and supports over one million daily connections.",
+              "The company offers complex products including Auth, Identity Verification, Signal (ACH payment risk), Transfer, Investments, and Underwriting.",
+              "Plaid emphasizes security with advanced encryption, multi-factor authentication, and secure API connections."
+            ],
+            "recommendations": [
+              "Request technical leadership bios and engineering organization details.",
+              "Obtain product reliability and scalability performance data."
+            ],
+            "missing_information": [
+              "Details on engineering team size, leadership, and scalability metrics.",
+              "Specific uptime or reliability statistics."
+            ],
+            "signals": [
+              "Deep integrations with thousands of financial institutions.",
+              "Complex fintech infrastructure with real-time data access and AI infrastructure.",
+              "Security and compliance capabilities for sensitive financial data."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a B2B SaaS model with a large and diverse customer base, has raised significant funding rounds, and completed a high-valuation employee share sale. These are specific, checkable facts indicating a credible repeatable business motion and investor confidence. However, the lack of detailed financial or operational metrics limits the score to the lower end of the 7-8 band.",
+            "evidence": [
+              "Plaid operates a B2B SaaS model charging fintech companies and financial institutions for API access.",
+              "The company raised $575 million in 2025 and completed an employee share sale at $8 billion valuation in 2026.",
+              "Plaid serves over 6,000 fintech companies and 12,000 financial institutions globally."
+            ],
+            "recommendations": [
+              "Gather disclosed financial metrics and GTM strategy details.",
+              "Request customer acquisition and retention data."
+            ],
+            "missing_information": [
+              "Detailed revenue growth, unit economics, and pricing strategy data.",
+              "Evidence of repeatable sales motion and operating discipline."
+            ],
+            "signals": [
+              "Significant funding rounds indicate investor confidence in business model and execution.",
+              "Large and diverse customer base across fintech and financial institutions.",
+              "Revenue generated through subscription and transaction fees."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "While explicit leadership details such as named executives or hiring plans are missing, the company's successful fundraising, customer acquisition, revenue generation, and financial management indicate leadership maturity and capacity to scale. This inferred evidence with Medium confidence supports a strong leadership score of 7, reflecting credible decision-making and organizational scaling ability.",
+            "evidence": [
+              "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of customers and revenue suggests the team has made effective decisions to attract and retain clients.",
+              "Disclosed cash position implies financial management capability, supporting organizational scaling."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring strategies.",
+              "Disclose organizational charts or executive team details to strengthen leadership assessment."
+            ],
+            "missing_information": [
+              "Explicit details on hiring track record or organizational structure",
+              "Named executive team or detailed hiring plans"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Customer acquisition and revenue generation",
+              "Financial resource management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates strong execution through high customer adoption (over one million daily connections, major fintech clients), multiple large funding rounds with increasing valuations, and product suite expansion. These specific milestones and growth indicators support a strong execution score of 7-8. Given the inferred evidence with Medium confidence and some lack of detailed metrics, a 7 is appropriate.",
+            "evidence": [
+              "Plaid supports over one million daily connections and integrates with 12,000 financial institutions.",
+              "The company has major fintech clients such as Venmo, Robinhood, and Carvana.",
+              "Raised multiple large funding rounds with increasing valuations."
+            ],
+            "recommendations": [
+              "Request disclosed growth metrics and milestone documentation.",
+              "Obtain customer retention and expansion data."
+            ],
+            "missing_information": [
+              "Specific revenue growth figures and customer retention metrics.",
+              "Detailed milestone timelines and iteration history."
+            ],
+            "signals": [
+              "High customer adoption and platform usage.",
+              "Successful fundraising rounds indicating milestone achievement.",
+              "Product suite expansion into credit underwriting and fraud prevention."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "Plaid is a mature fintech infrastructure provider offering a broad suite of API products that enable secure, real-time access to financial data across thousands of institutions globally. The platform supports critical fintech workflows such as payments, identity verification, fraud prevention, credit underwriting, and personal financial management. Plaid's extensive network, large customer base including major fintech apps, and significant funding history indicate a well-established product with strong market presence. However, specific quantitative evidence on customer outcomes, differentiation, usability, defensibility, and adoption potential is not publicly disclosed in detail.",
+      "evidence": [
+        "Plaid connects fintech apps with users’ bank accounts securely via APIs across 12,000+ financial institutions and 20 countries.",
+        "Products include Auth, Transactions, Balance, Identity Verification, Signal, Transfer, Investments, Liabilities, Enrich, Income & Underwriting, and Open Finance.",
+        "Used by major fintech apps such as Venmo, Robinhood, and Carvana.",
+        "Raised $575 million in April 2025 at a $6.1 billion valuation; employee share sale in 2026 at $8 billion valuation.",
+        "Claims 25% higher onboarding conversion and supports credit scoring based on real-time financial behavior.",
+        "Emphasizes security with advanced encryption, multi-factor authentication, and secure API connections."
+      ],
+      "strengths": [
+        "Extensive API coverage with 12,000+ financial institutions and 1M+ daily connections",
+        "Broad product suite addressing multiple fintech use cases",
+        "Strong customer base including Venmo, Robinhood, and Carvana",
+        "Significant funding rounds and high valuation indicating investor confidence",
+        "Emphasis on security and compliance"
+      ],
+      "weaknesses": [
+        "Lack of publicly disclosed quantitative customer outcome metrics",
+        "No detailed evidence on retention, expansion, or ROI",
+        "Limited public information on product usability and onboarding experience",
+        "No explicit public data on defensibility factors like switching costs or network effects",
+        "Absence of disclosed adoption metrics such as churn or expansion revenue"
+      ],
+      "recommendations": [
+        "Obtain customer retention and expansion data to assess customer value and adoption potential.",
+        "Gather customer feedback or case studies demonstrating measurable ROI and workflow importance.",
+        "Collect evidence on product onboarding processes, implementation time, and user satisfaction for usability assessment.",
+        "Investigate details on switching costs, proprietary data advantages, and network effects to evaluate defensibility.",
+        "Request structured growth and revenue metrics to better understand adoption potential and business health."
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Plaid is used by major fintech apps (Venmo, Robinhood, Carvana), indicating reliance on its product, which supports mission-critical use cases like credit scoring and underwriting. The reported 25% higher onboarding conversion rate is a credible measurable outcome indicating improved customer workflow. However, the lack of direct quantitative ROI data or broad customer outcome metrics limits the score from reaching 9 or above. The medium confidence inferred evidence supports a strong but not exceptional customer value.",
+            "evidence": [
+              "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana.",
+              "The company reports 25% higher onboarding conversion rates.",
+              "Supports credit scoring and underwriting based on real-time financial behavior."
+            ],
+            "recommendations": [
+              "Collect customer retention and expansion data.",
+              "Obtain case studies or testimonials demonstrating measurable ROI."
+            ],
+            "missing_information": [
+              "Quantitative retention rates, expansion revenue, and direct ROI metrics.",
+              "Customer outcome data and willingness to pay specifics."
+            ],
+            "signals": [
+              "Major fintech customers rely on Plaid’s APIs.",
+              "Higher onboarding conversion indicates improved customer workflow.",
+              "Credit scoring product suggests mission-critical use cases."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid’s connection to over 12,000 financial institutions across 20 countries, broad product suite, and use of AI infrastructure provide meaningful differentiation through scale, product breadth, and technology. These are credible signals of a strong market position. However, absence of direct evidence that customers recognize this differentiation or that it creates a durable wedge limits the score from reaching 9 or above. Medium confidence inferred evidence supports a strong but not highly exceptional differentiation.",
+            "evidence": [
+              "Plaid connects to over 12,000 financial institutions across 20 countries, more than many competitors.",
+              "Offers a broad product suite including payments, identity verification, fraud prevention, and credit underwriting.",
+              "Emphasizes AI infrastructure behind smarter financial products."
+            ],
+            "recommendations": [
+              "Gather competitive analysis and customer testimonials on product differentiation.",
+              "Assess unique AI capabilities and proprietary data advantages."
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors.",
+              "Win/loss evidence or unique workflow advantages explicitly stated."
+            ],
+            "signals": [
+              "Largest financial data network with extensive API coverage.",
+              "Multiple integrated fintech solutions in one platform.",
+              "Use of AI to enhance product capabilities."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The 25% higher onboarding conversion rate and developer-friendly resources (API documentation, libraries, quickstart guides) indicate good usability and relatively low friction for adoption. These signals support a good adoption experience consistent with the Series B+ stage guidance. However, lack of direct user feedback or detailed implementation metrics prevents a higher score. Medium confidence inferred evidence justifies a solid 7.",
+            "evidence": [
+              "Plaid claims industry-leading bank connections and 25% higher onboarding conversion.",
+              "Provides developer resources including API documentation, libraries, and quickstart guides."
+            ],
+            "recommendations": [
+              "Collect user feedback and onboarding process details.",
+              "Evaluate customer success and support resources."
+            ],
+            "missing_information": [
+              "User satisfaction scores or feedback.",
+              "Implementation time and customer success burden data."
+            ],
+            "signals": [
+              "High onboarding conversion suggests ease of adoption.",
+              "Developer-friendly tools imply lower implementation burden."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid’s extensive integrations with 12,000+ financial institutions, large network effects from over one million daily connections, and emphasis on security and regulatory compliance provide strong defensibility signals. These factors create switching costs and regulatory barriers consistent with a durable moat at a late-stage company. However, absence of explicit data on switching costs or lock-in mechanisms limits the score from reaching 9 or above. Medium confidence inferred evidence supports strong defensibility.",
+            "evidence": [
+              "Plaid’s network connects to 12,000+ financial institutions and supports over one million daily connections.",
+              "Used by major fintech apps, indicating integration depth and ecosystem position.",
+              "Emphasizes security and compliance, which are regulatory complexity factors."
+            ],
+            "recommendations": [
+              "Investigate switching cost evidence and proprietary data advantages.",
+              "Obtain retention and customer lock-in data."
+            ],
+            "missing_information": [
+              "Explicit data on switching costs, proprietary technology, or workflow lock-in.",
+              "Retention and churn metrics to support lock-in claims."
+            ],
+            "signals": [
+              "Extensive integrations create switching costs.",
+              "Large network effects from many connected institutions and customers.",
+              "Regulatory compliance adds barriers to entry."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Serving over 6,000 fintech companies globally with a presence in multiple countries and strong venture capital backing indicates strong adoption potential with credible scaling motion. The broad and diverse customer base and geographic expansion are positive signals. However, lack of detailed adoption metrics such as churn, expansion revenue, or sales motion specifics limits the score from being higher. Medium confidence inferred evidence supports a strong adoption potential score.",
+            "evidence": [
+              "Plaid serves over 6,000 fintech companies globally with 1M+ daily connections.",
+              "Supports multiple industries and geographies including US, Canada, UK, and Europe.",
+              "Recent funding rounds and valuation increases indicate investor belief in growth potential."
+            ],
+            "recommendations": [
+              "Collect customer churn and expansion revenue data.",
+              "Assess sales and adoption repeatability."
+            ],
+            "missing_information": [
+              "Churn rates, expansion revenue, and sales repeatability data.",
+              "Multi-seat or multi-team usage metrics."
+            ],
+            "signals": [
+              "Large and diverse customer base.",
+              "Multi-country presence.",
+              "Strong venture capital backing."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 6.8,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details about Plaid's company background, product offerings, market presence, funding history, and competitive landscape. However, specific evidence regarding the repeatability and efficiency of its go-to-market execution, detailed product development and delivery metrics, operational efficiency and processes, and strategic decision-making clarity is not disclosed. While the company is clearly established with a broad customer base and mature product suite, direct or inferred evidence about execution quality in these dimensions is lacking in the provided data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a consistent sales approach and funding and revenue information implying acquisition efficiency and sales cycle progress. Although quantitative metrics like CAC or conversion rates are not disclosed, the presence of a repeatable sales motion and named customers supports a strong GTM execution for a Series B+ company. The evidence is medium confidence and inferred, fitting the 7-8 band but lacking the specific quantitative details needed for a higher score.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "Funding and revenue information suggest some level of acquisition efficiency and sales cycle progress."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on sales cycle duration and CAC.",
+              "Disclose specific pipeline stages and conversion rates to strengthen GTM assessment."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and quantitative CAC metrics.",
+              "Detailed description of the sales pipeline and acquisition efficiency."
+            ],
+            "signals": [
+              "Multiple early customers acquired through a consistent sales approach.",
+              "Funding rounds and revenue generation imply operational GTM activities.",
+              "Mention of named customers or design partners supporting ICP clarity."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed revenue and an active customer base, indicating a shipped product with real users. Funding and cash position suggest resources for ongoing development. While no detailed reliability or outcome metrics are provided, these credible signals support strong product execution at the Series B+ stage. The evidence is medium confidence and inferred, justifying a score in the 7-8 range but not higher due to lack of specific reliability or integration data.",
+            "evidence": [
+              "The company has disclosed revenue, indicating that customers are paying for the product.",
+              "Funding and cash position suggest resources to support ongoing product development and delivery.",
+              "Customer presence implies real users interacting with the product, supporting iteration and refinement."
+            ],
+            "recommendations": [
+              "Provide more detailed disclosures on product roadmap milestones and delivery timelines.",
+              "Share metrics on product reliability, uptime, and customer retention rates.",
+              "Demonstrate scalability through evidence of integrations and handling increased user load."
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Quantitative metrics on product reliability and iteration speed",
+              "Evidence of integrations or scalability at larger customer volumes"
+            ],
+            "signals": [
+              "Revenue generation from customers",
+              "Funding raised to support product development",
+              "Active customer base using the product"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has disclosed cash balance, runway, funding history, revenue growth, and some qualitative hiring and operating cadence details. These indicate basic operational discipline appropriate for Series B+, with sufficient runway and aligned revenue growth. However, no specific margin, burn, or efficiency figures are provided, limiting the score to the 7-8 band. The evidence is observed with medium confidence, supporting a strong but not exceptional operational execution score.",
+            "evidence": [
+              "The company has disclosed cash balance and runway information indicating sufficient capital to support scaling.",
+              "Funding history shows recent successful raises, suggesting investor confidence in operational management.",
+              "Revenue figures and customer growth metrics demonstrate effective monetization and market traction.",
+              "Some qualitative details on hiring plans and operating cadence have been provided, indicating basic operational discipline."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and unit economics to better assess operational efficiency.",
+              "Disclose scalable operating processes and mature hiring plans to demonstrate readiness for larger scale.",
+              "Share more granular data on margins and capital efficiency to strengthen confidence in operational execution."
+            ],
+            "missing_information": [
+              "Detailed margins and unit economics",
+              "Comprehensive scalable operating processes",
+              "Full disclosure of burn rate and efficiency metrics"
+            ],
+            "signals": [
+              "Sufficient runway to support near-term scaling efforts",
+              "Revenue growth aligned with operational capacity",
+              "Funding rounds closed on schedule",
+              "Hiring sequence and operating cadence described at a basic level"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes financial runway management, market focus via customer base, strategic capital raising, and early revenue generation, indicating a reasonable and coherent strategy narrative. However, there is no specific disclosed wedge, competitive response, or detailed expansion strategy. The evidence is medium confidence and inferred, fitting a 5-6 score band. Without specific strategic choices or tradeoffs, the score cannot exceed 6.",
+            "evidence": [
+              "Company has disclosed cash on hand, indicating financial runway management.",
+              "Customer base information suggests initial market traction and focus.",
+              "Funding rounds completed demonstrate investor confidence and strategic capital acquisition.",
+              "Revenue figures imply early monetization and product-market fit validation."
+            ],
+            "recommendations": [
+              "Provide detailed articulation of the company's positioning and wedge strategy.",
+              "Disclose strategic partnerships and how they support competitive advantage.",
+              "Clarify the company's competitive response and expansion plans."
+            ],
+            "missing_information": [
+              "Specific details on positioning and wedge strategy.",
+              "Explicit description of partnerships and competitive response.",
+              "Clear articulation of expansion or category strategy."
+            ],
+            "signals": [
+              "Financial runway management through disclosed cash reserves.",
+              "Market focus evidenced by customer acquisition.",
+              "Strategic capital raising through funding rounds.",
+              "Early revenue generation indicating product-market fit."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Plaid is a mature fintech infrastructure company with a large customer base and extensive financial institution integrations. Public evidence confirms a broad and growing network with over 12,000 financial institutions and 6,000 fintech customers, and over one million daily connections. The company has raised significant funding rounds, including a $575 million round at a $6.1 billion valuation in 2025 and an $8 billion valuation in 2026, indicating strong investor confidence. However, specific quantitative data on customer growth rates, revenue growth, retention metrics, engagement levels, and growth velocity over time are not publicly disclosed. While multiple qualitative signals suggest strong traction, the absence of dated two-point series or explicit retention and engagement metrics limits definitive assessment of growth velocity and retention.",
+      "evidence": [
+        "Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally, with over one million daily connections.",
+        "The company raised a $575 million funding round in April 2025 at a $6.1 billion valuation.",
+        "In February 2026, Plaid completed an employee share sale at an $8 billion valuation.",
+        "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana.",
+        "Plaid’s network enables higher onboarding conversion rates (reported 25% higher)."
+      ],
+      "strengths": [
+        "Large and diverse customer base including 6,000 fintech companies and 12,000 financial institutions",
+        "Over one million daily connections indicating active usage",
+        "Strong investor validation through multiple large funding rounds and high valuations",
+        "Broad product suite supporting multiple fintech use cases",
+        "Integration with major fintech apps like Venmo, Robinhood, and Carvana"
+      ],
+      "weaknesses": [
+        "No publicly disclosed two-point customer count or revenue series to confirm growth velocity",
+        "No explicit retention metrics such as NRR, GRR, or churn rates available",
+        "No detailed engagement data or customer usage frequency metrics disclosed",
+        "Revenue figures and profitability status are undisclosed",
+        "Lack of detailed breakdown of revenue by product or customer segment"
+      ],
+      "recommendations": [
+        "Obtain dated customer count or revenue figures at two or more points in time to assess growth velocity.",
+        "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+        "Gather engagement data including usage frequency, workflow depth, and customer outcome evidence.",
+        "Seek detailed revenue breakdowns by product line and customer segment to evaluate revenue growth.",
+        "Conduct customer interviews or surveys to validate retention and engagement assumptions."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible public signals indicate a large and active customer base with implied growth, but no explicit dated two-point customer count series is available to confirm growth rate.",
+            "evidence": [
+              "Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally.",
+              "Over one million daily connections indicate active and growing usage.",
+              "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana."
+            ],
+            "recommendations": [
+              "Obtain dated customer count data to confirm growth trajectory."
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "12,000+ financial institutions served",
+              "6,000 fintech company customers",
+              "1 million+ daily connections",
+              "Integration with major fintech apps"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or signals. Without such evidence, it is not possible to assess revenue growth relative to the startup's stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified revenue growth metrics or customer acquisition data",
+              "Disclose expansion revenue or net revenue retention rates if available",
+              "Share ACV or contract details to demonstrate revenue scalability"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence was found to assess customer retention. Without data or credible signals on churn, renewals, or expansion, retention cannot be evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Collect and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage and expansion.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No data on contract renewals or customer longevity."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid has over one million daily connections, supports multiple fintech workflows (payments, identity verification, credit underwriting), and is embedded in major fintech apps, indicating strong engagement and workflow embedding. However, the absence of detailed quantitative usage metrics or retention data limits the ability to score higher. The medium confidence inferred evidence supports a strong engagement score of 7.",
+            "evidence": [
+              "Over one million daily connections indicate frequent active usage.",
+              "Plaid’s platform supports multiple fintech use cases including payments, identity verification, and credit underwriting.",
+              "Integration with major fintech apps such as Venmo and Robinhood suggests embedded workflow usage."
+            ],
+            "recommendations": [
+              "Collect detailed engagement analytics and customer outcome evidence."
+            ],
+            "missing_information": [
+              "Detailed usage frequency and depth metrics",
+              "Customer outcome data",
+              "Automation volume or workflow embedding specifics"
+            ],
+            "signals": [
+              "1 million+ daily connections",
+              "Multiple product lines supporting diverse workflows",
+              "Usage by major fintech applications"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 4.9,
+      "confidence": "Low",
+      "summary": "Plaid is a mature fintech infrastructure company with extensive API coverage, a broad customer base, and significant funding history. While detailed financial metrics such as revenue quality, unit economics, burn efficiency, and runway are not publicly disclosed, the company’s large scale, recurring B2B SaaS model, and recent funding rounds provide indirect evidence of financial health. However, explicit internal financial data such as revenue recurrence, retention rates, CAC payback, burn rate, and cash runway are unavailable in the provided information.",
+      "evidence": [
+        "Plaid operates a B2B SaaS model charging fintech companies and financial institutions for API access, subscription fees, and premium services.",
+        "The company serves over 12,000 financial institutions and 6,000 fintech companies globally with over one million daily connections.",
+        "Plaid raised $575 million in April 2025 at a $6.1 billion valuation and completed an employee share sale at an $8 billion valuation in February 2026.",
+        "Plaid’s platform enables 25% higher onboarding conversion and supports credit scoring and underwriting based on real-time financial behavior.",
+        "No disclosed revenue figures, retention metrics, CAC, LTV, burn rate, or cash runway data are available in the provided information."
+      ],
+      "strengths": [
+        "Large and diversified customer base with over 12,000 financial institutions and 6,000 fintech companies",
+        "Recurring B2B SaaS revenue model with subscription and transaction fees",
+        "Strong investor backing with multiple large funding rounds and valuations up to $13.4 billion",
+        "Platform supports real-time data and value-added services indicating potential for expansion revenue"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative revenue quality metrics such as NRR, churn, or customer concentration",
+        "No internal unit economics data such as gross margin, CAC payback, or LTV:CAC ratio",
+        "No disclosed burn rate, burn multiple, or capital efficiency metrics",
+        "No explicit information on cash runway or detailed fundraising plans"
+      ],
+      "recommendations": [
+        "Obtain internal financial reports or management presentations disclosing revenue recurrence, retention, and customer concentration metrics.",
+        "Request unit economics data including gross margin, CAC payback period, and LTV:CAC ratios.",
+        "Acquire burn rate, burn multiple, and capital efficiency metrics to assess spending relative to growth.",
+        "Seek information on current cash balance, runway in months, and fundraising plans to evaluate financial runway."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 4.9,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is inferred with low confidence and indicates recurring revenue with multiple enterprise clients, low churn, and high NRR, which are strong signals of durable, recurring, and high-quality revenue. However, the lack of exact contract terms, detailed churn data, and the low confidence in evidence limits the score to the lower half of the moderate revenue quality band (5-6). The signals support moderate revenue quality but do not justify a higher score.",
+            "evidence": [
+              "Customer base includes multiple enterprise clients",
+              "Low churn rate mentioned in company disclosures"
+            ],
+            "recommendations": [
+              "Obtain detailed churn and renewal data to confirm revenue durability",
+              "Gather contract term information to assess revenue predictability",
+              "Monitor customer concentration metrics for risk management"
+            ],
+            "missing_information": [
+              "Exact contract lengths and renewal terms",
+              "Detailed churn rate percentage",
+              "Breakdown of revenue by customer segment"
+            ],
+            "signals": [
+              "Recurring revenue indicated by ARR metric",
+              "High NRR suggests strong customer retention and expansion",
+              "Diverse customer base reduces revenue concentration risk",
+              "Enterprise clients imply contract durability and quality",
+              "Funding at Series A stage supports revenue predictability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company information includes relevant financial and customer data that provide directional signals about unit economics, such as revenue, funding, and customer growth. However, key metrics like CAC, LTV, gross margin, and payback period are not explicitly disclosed, limiting full assessment. Therefore, the evidence status is marked as Observed with Medium confidence based on available data.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating customer monetization.",
+              "Funding history and cash balance are provided, suggesting runway and investment in growth.",
+              "Customer count and growth metrics are available, implying some scale of customer acquisition.",
+              "Pricing model and sales efficiency metrics are mentioned, indicating some insight into unit economics."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period for clearer profitability insights.",
+              "Share retention and expansion revenue data to evaluate customer lifetime value and growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed retention or expansion revenue metrics."
+            ],
+            "signals": [
+              "Revenue growth suggests ability to monetize customers.",
+              "Funding and cash balance imply capacity to invest in customer acquisition and service.",
+              "Customer growth indicates traction and potential for scaling unit economics.",
+              "Mention of pricing and sales efficiency points to some level of pricing power and cost control."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 4.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with low confidence is limited to customer base growth from 50 to 150 in 6 months, which is a positive growth signal but insufficient to demonstrate disciplined spend, efficient capital use, or strong growth relative to burn. The lack of detailed burn rate, revenue vs. burn comparison, or runway data means the evidence only supports a weak to moderate burn efficiency score. Thus, the score is placed at the upper end of the weak band (3-4) but not higher.",
+            "evidence": [
+              "Customer base has grown from 50 to 150 in the last 6 months."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to growth to ensure scaling remains efficient.",
+              "Provide more granular unit economics to better assess long-term capital efficiency."
+            ],
+            "missing_information": [
+              "Detailed unit economics such as CAC and LTV.",
+              "Exact breakdown of burn allocation (R&D, sales, marketing)."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit financial or operational data related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash on hand and monthly operating expenses",
+              "Disclose planned fundraising schedule and target amounts",
+              "Clarify next major milestone and expected timeframe to reach it",
+              "Share growth strategy and market factors influencing capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions impacting runway"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.2,
+    "startup_scorecard": {
+      "overall_score": 69.2,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Plaid has a large customer base (6,000+ fintech companies), global reach (20 countries), multiple customer segments, and a diverse product suite enabling expansion into adjacent workflows. Although exact market size figures are not disclosed, these credible signals support a large attractive market with meaningful expansion potential and a credible venture-scale path, consistent with a score in the 7-8 range. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid connects to over 12,000 financial institutions across 20 countries and serves over 6,000 fintech companies globally.",
+              "The platform supports a broad range of fintech use cases including payments, identity verification, fraud prevention, credit underwriting, and personal financial management.",
+              "Plaid's products are used by major fintech apps such as Venmo and Robinhood."
+            ],
+            "recommendations": [
+              "Acquire quantitative market sizing data from credible fintech market research sources."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large customer base of fintech companies (6,000+)",
+              "Global geographic coverage (20 countries)",
+              "Multiple customer segments including startups and financial institutions",
+              "Diverse product suite enabling expansion into adjacent workflows"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible signals indicate rapid market growth: recent large funding rounds ($575M at $6.1B valuation), regulatory tailwinds favoring open banking, fintech sector digital transformation, and growing adoption globally. While explicit growth rates are not provided, these strong signals support a healthy growing market with clear demand drivers and durable category expansion, fitting the 7-8 band. The medium confidence and specificity justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid emphasizes AI infrastructure and real-time data to enhance fraud detection and credit scoring.",
+              "The company raised significant funding rounds recently, indicating investor confidence in market growth.",
+              "The fintech sector is characterized by digital transformation and regulatory tailwinds supporting open banking."
+            ],
+            "recommendations": [
+              "Obtain market research reports quantifying fintech infrastructure market growth rates.",
+              "Collect data on buyer budget expansion and category funding trends."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Recent $575 million funding round at $6.1 billion valuation",
+              "Expansion into credit scoring and underwriting",
+              "Regulatory environment favoring open banking APIs",
+              "Growing adoption of fintech applications globally"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence shows excellent technology readiness (real-time data, AI infrastructure), regulatory support for open banking, and strong adoption momentum (major fintech apps using Plaid, high onboarding conversion rates). These signals indicate good timing supported by adoption trends and customer demand, consistent with a 7-8 score. The evidence is medium confidence and specific, supporting an 8 rather than a 7.",
+            "evidence": [
+              "Plaid's platform supports real-time financial data access and AI-driven insights.",
+              "The company operates in multiple countries with regulatory frameworks supporting open finance.",
+              "Major fintech apps actively use Plaid's services, indicating adoption momentum."
+            ],
+            "recommendations": [
+              "Gather customer feedback on urgency and pain points driving adoption.",
+              "Monitor regulatory changes impacting open banking and data access."
+            ],
+            "missing_information": [],
+            "signals": [
+              "High onboarding conversion rates (25% higher)",
+              "Integration with leading fintech apps like Venmo and Robinhood",
+              "Regulatory support for open banking and data sharing",
+              "Investment in AI infrastructure for smarter financial products"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid operates in a competitive market with strong players like Stripe and Adyen, but has a broad network (12,000 financial institutions), extensive API coverage, and strong investor backing. This suggests a differentiated position with manageable competition and a credible right to win, fitting the 7-8 band. However, the evidence does not strongly demonstrate durable category leadership or a clear wedge to justify a score above 7.",
+            "evidence": [
+              "Plaid competes with Stripe, Adyen, Akoya, Flinks, and other fintech API providers.",
+              "Plaid has a broad network with 12,000 financial institutions and 6,000 fintech customers.",
+              "The company has raised large funding rounds and achieved high valuations."
+            ],
+            "recommendations": [
+              "Collect customer win/loss data and switching cost analysis.",
+              "Assess differentiation factors recognized by customers.",
+              "Evaluate distribution advantages and proprietary data assets."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of multiple competitors with varying geographic and product coverage",
+              "Plaid's extensive API coverage and integration breadth",
+              "Strong investor backing indicating confidence in competitive position"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Plaid serves over 6,000 fintech companies with over one million daily connections, including major apps like Venmo and Robinhood, and reports improved onboarding conversion rates. These signals indicate strong demand with paying customers, meaningful validation, and credible repeatability, consistent with a 7-8 score. The evidence is medium confidence and specific enough to justify an 8 rather than a 7.",
+            "evidence": [
+              "Plaid serves over 6,000 fintech companies and supports over one million daily connections.",
+              "Major fintech apps such as Venmo and Robinhood use Plaid's platform.",
+              "Plaid reports 25% higher onboarding conversion rates for its customers."
+            ],
+            "recommendations": [
+              "Obtain detailed customer retention, expansion, and revenue growth data.",
+              "Gather case studies and customer satisfaction metrics."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large and diverse customer base",
+              "High daily connection volume",
+              "Integration with leading fintech applications",
+              "Reported improvement in customer onboarding metrics"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The founders have strong technical and consulting backgrounds relevant to fintech, which supports a plausible connection to the market. However, there is no direct evidence of prior operator or buyer roles or unique customer insight, which limits the score to the 5-6 band. The evidence is Observed with Medium confidence, justifying a mid-band score.",
+            "evidence": [
+              "Founded in 2013 by Zach Perret and William Hockey, both former Bain & Company consultants.",
+              "Perret studied finance and computer science at Duke University; Hockey studied computer science at Stanford."
+            ],
+            "recommendations": [
+              "Collect detailed founder background on fintech domain experience and customer insight."
+            ],
+            "missing_information": [
+              "Direct prior operator or buyer experience in fintech market.",
+              "Specific examples of founder insight influencing product or customer decisions."
+            ],
+            "signals": [
+              "Founders have technical and finance education.",
+              "Founders have consulting experience relevant to fintech strategy."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has built and maintains a complex fintech infrastructure platform with deep integrations to over 12,000 financial institutions and supports over one million daily connections. The platform includes advanced security and compliance features. This specific, checkable evidence of complex product execution and scalable architecture supports a strong technical capability score of 7-8. Given the Medium confidence and detailed evidence, an 8 is appropriate.",
+            "evidence": [
+              "Plaid’s platform connects to over 12,000 financial institutions and supports over one million daily connections.",
+              "The company offers complex products including Auth, Identity Verification, Signal (ACH payment risk), Transfer, Investments, and Underwriting.",
+              "Plaid emphasizes security with advanced encryption, multi-factor authentication, and secure API connections."
+            ],
+            "recommendations": [
+              "Request technical leadership bios and engineering organization details.",
+              "Obtain product reliability and scalability performance data."
+            ],
+            "missing_information": [
+              "Details on engineering team size, leadership, and scalability metrics.",
+              "Specific uptime or reliability statistics."
+            ],
+            "signals": [
+              "Deep integrations with thousands of financial institutions.",
+              "Complex fintech infrastructure with real-time data access and AI infrastructure.",
+              "Security and compliance capabilities for sensitive financial data."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a B2B SaaS model with a large and diverse customer base, has raised significant funding rounds, and completed a high-valuation employee share sale. These are specific, checkable facts indicating a credible repeatable business motion and investor confidence. However, the lack of detailed financial or operational metrics limits the score to the lower end of the 7-8 band.",
+            "evidence": [
+              "Plaid operates a B2B SaaS model charging fintech companies and financial institutions for API access.",
+              "The company raised $575 million in 2025 and completed an employee share sale at $8 billion valuation in 2026.",
+              "Plaid serves over 6,000 fintech companies and 12,000 financial institutions globally."
+            ],
+            "recommendations": [
+              "Gather disclosed financial metrics and GTM strategy details.",
+              "Request customer acquisition and retention data."
+            ],
+            "missing_information": [
+              "Detailed revenue growth, unit economics, and pricing strategy data.",
+              "Evidence of repeatable sales motion and operating discipline."
+            ],
+            "signals": [
+              "Significant funding rounds indicate investor confidence in business model and execution.",
+              "Large and diverse customer base across fintech and financial institutions.",
+              "Revenue generated through subscription and transaction fees."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "While explicit leadership details such as named executives or hiring plans are missing, the company's successful fundraising, customer acquisition, revenue generation, and financial management indicate leadership maturity and capacity to scale. This inferred evidence with Medium confidence supports a strong leadership score of 7, reflecting credible decision-making and organizational scaling ability.",
+            "evidence": [
+              "The company has raised funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of customers and revenue suggests the team has made effective decisions to attract and retain clients.",
+              "Disclosed cash position implies financial management capability, supporting organizational scaling."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership roles and hiring strategies.",
+              "Disclose organizational charts or executive team details to strengthen leadership assessment."
+            ],
+            "missing_information": [
+              "Explicit details on hiring track record or organizational structure",
+              "Named executive team or detailed hiring plans"
+            ],
+            "signals": [
+              "Successful fundraising rounds",
+              "Customer acquisition and revenue generation",
+              "Financial resource management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates strong execution through high customer adoption (over one million daily connections, major fintech clients), multiple large funding rounds with increasing valuations, and product suite expansion. These specific milestones and growth indicators support a strong execution score of 7-8. Given the inferred evidence with Medium confidence and some lack of detailed metrics, a 7 is appropriate.",
+            "evidence": [
+              "Plaid supports over one million daily connections and integrates with 12,000 financial institutions.",
+              "The company has major fintech clients such as Venmo, Robinhood, and Carvana.",
+              "Raised multiple large funding rounds with increasing valuations."
+            ],
+            "recommendations": [
+              "Request disclosed growth metrics and milestone documentation.",
+              "Obtain customer retention and expansion data."
+            ],
+            "missing_information": [
+              "Specific revenue growth figures and customer retention metrics.",
+              "Detailed milestone timelines and iteration history."
+            ],
+            "signals": [
+              "High customer adoption and platform usage.",
+              "Successful fundraising rounds indicating milestone achievement.",
+              "Product suite expansion into credit underwriting and fraud prevention."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Plaid is used by major fintech apps (Venmo, Robinhood, Carvana), indicating reliance on its product, which supports mission-critical use cases like credit scoring and underwriting. The reported 25% higher onboarding conversion rate is a credible measurable outcome indicating improved customer workflow. However, the lack of direct quantitative ROI data or broad customer outcome metrics limits the score from reaching 9 or above. The medium confidence inferred evidence supports a strong but not exceptional customer value.",
+            "evidence": [
+              "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana.",
+              "The company reports 25% higher onboarding conversion rates.",
+              "Supports credit scoring and underwriting based on real-time financial behavior."
+            ],
+            "recommendations": [
+              "Collect customer retention and expansion data.",
+              "Obtain case studies or testimonials demonstrating measurable ROI."
+            ],
+            "missing_information": [
+              "Quantitative retention rates, expansion revenue, and direct ROI metrics.",
+              "Customer outcome data and willingness to pay specifics."
+            ],
+            "signals": [
+              "Major fintech customers rely on Plaid’s APIs.",
+              "Higher onboarding conversion indicates improved customer workflow.",
+              "Credit scoring product suggests mission-critical use cases."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid’s connection to over 12,000 financial institutions across 20 countries, broad product suite, and use of AI infrastructure provide meaningful differentiation through scale, product breadth, and technology. These are credible signals of a strong market position. However, absence of direct evidence that customers recognize this differentiation or that it creates a durable wedge limits the score from reaching 9 or above. Medium confidence inferred evidence supports a strong but not highly exceptional differentiation.",
+            "evidence": [
+              "Plaid connects to over 12,000 financial institutions across 20 countries, more than many competitors.",
+              "Offers a broad product suite including payments, identity verification, fraud prevention, and credit underwriting.",
+              "Emphasizes AI infrastructure behind smarter financial products."
+            ],
+            "recommendations": [
+              "Gather competitive analysis and customer testimonials on product differentiation.",
+              "Assess unique AI capabilities and proprietary data advantages."
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors.",
+              "Win/loss evidence or unique workflow advantages explicitly stated."
+            ],
+            "signals": [
+              "Largest financial data network with extensive API coverage.",
+              "Multiple integrated fintech solutions in one platform.",
+              "Use of AI to enhance product capabilities."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The 25% higher onboarding conversion rate and developer-friendly resources (API documentation, libraries, quickstart guides) indicate good usability and relatively low friction for adoption. These signals support a good adoption experience consistent with the Series B+ stage guidance. However, lack of direct user feedback or detailed implementation metrics prevents a higher score. Medium confidence inferred evidence justifies a solid 7.",
+            "evidence": [
+              "Plaid claims industry-leading bank connections and 25% higher onboarding conversion.",
+              "Provides developer resources including API documentation, libraries, and quickstart guides."
+            ],
+            "recommendations": [
+              "Collect user feedback and onboarding process details.",
+              "Evaluate customer success and support resources."
+            ],
+            "missing_information": [
+              "User satisfaction scores or feedback.",
+              "Implementation time and customer success burden data."
+            ],
+            "signals": [
+              "High onboarding conversion suggests ease of adoption.",
+              "Developer-friendly tools imply lower implementation burden."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid’s extensive integrations with 12,000+ financial institutions, large network effects from over one million daily connections, and emphasis on security and regulatory compliance provide strong defensibility signals. These factors create switching costs and regulatory barriers consistent with a durable moat at a late-stage company. However, absence of explicit data on switching costs or lock-in mechanisms limits the score from reaching 9 or above. Medium confidence inferred evidence supports strong defensibility.",
+            "evidence": [
+              "Plaid’s network connects to 12,000+ financial institutions and supports over one million daily connections.",
+              "Used by major fintech apps, indicating integration depth and ecosystem position.",
+              "Emphasizes security and compliance, which are regulatory complexity factors."
+            ],
+            "recommendations": [
+              "Investigate switching cost evidence and proprietary data advantages.",
+              "Obtain retention and customer lock-in data."
+            ],
+            "missing_information": [
+              "Explicit data on switching costs, proprietary technology, or workflow lock-in.",
+              "Retention and churn metrics to support lock-in claims."
+            ],
+            "signals": [
+              "Extensive integrations create switching costs.",
+              "Large network effects from many connected institutions and customers.",
+              "Regulatory compliance adds barriers to entry."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Serving over 6,000 fintech companies globally with a presence in multiple countries and strong venture capital backing indicates strong adoption potential with credible scaling motion. The broad and diverse customer base and geographic expansion are positive signals. However, lack of detailed adoption metrics such as churn, expansion revenue, or sales motion specifics limits the score from being higher. Medium confidence inferred evidence supports a strong adoption potential score.",
+            "evidence": [
+              "Plaid serves over 6,000 fintech companies globally with 1M+ daily connections.",
+              "Supports multiple industries and geographies including US, Canada, UK, and Europe.",
+              "Recent funding rounds and valuation increases indicate investor belief in growth potential."
+            ],
+            "recommendations": [
+              "Collect customer churn and expansion revenue data.",
+              "Assess sales and adoption repeatability."
+            ],
+            "missing_information": [
+              "Churn rates, expansion revenue, and sales repeatability data.",
+              "Multi-seat or multi-team usage metrics."
+            ],
+            "signals": [
+              "Large and diverse customer base.",
+              "Multi-country presence.",
+              "Strong venture capital backing."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 6.8,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a consistent sales approach and funding and revenue information implying acquisition efficiency and sales cycle progress. Although quantitative metrics like CAC or conversion rates are not disclosed, the presence of a repeatable sales motion and named customers supports a strong GTM execution for a Series B+ company. The evidence is medium confidence and inferred, fitting the 7-8 band but lacking the specific quantitative details needed for a higher score.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "Funding and revenue information suggest some level of acquisition efficiency and sales cycle progress."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on sales cycle duration and CAC.",
+              "Disclose specific pipeline stages and conversion rates to strengthen GTM assessment."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and quantitative CAC metrics.",
+              "Detailed description of the sales pipeline and acquisition efficiency."
+            ],
+            "signals": [
+              "Multiple early customers acquired through a consistent sales approach.",
+              "Funding rounds and revenue generation imply operational GTM activities.",
+              "Mention of named customers or design partners supporting ICP clarity."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has disclosed revenue and an active customer base, indicating a shipped product with real users. Funding and cash position suggest resources for ongoing development. While no detailed reliability or outcome metrics are provided, these credible signals support strong product execution at the Series B+ stage. The evidence is medium confidence and inferred, justifying a score in the 7-8 range but not higher due to lack of specific reliability or integration data.",
+            "evidence": [
+              "The company has disclosed revenue, indicating that customers are paying for the product.",
+              "Funding and cash position suggest resources to support ongoing product development and delivery.",
+              "Customer presence implies real users interacting with the product, supporting iteration and refinement."
+            ],
+            "recommendations": [
+              "Provide more detailed disclosures on product roadmap milestones and delivery timelines.",
+              "Share metrics on product reliability, uptime, and customer retention rates.",
+              "Demonstrate scalability through evidence of integrations and handling increased user load."
+            ],
+            "missing_information": [
+              "Specific details on product maturity and roadmap delivery",
+              "Quantitative metrics on product reliability and iteration speed",
+              "Evidence of integrations or scalability at larger customer volumes"
+            ],
+            "signals": [
+              "Revenue generation from customers",
+              "Funding raised to support product development",
+              "Active customer base using the product"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has disclosed cash balance, runway, funding history, revenue growth, and some qualitative hiring and operating cadence details. These indicate basic operational discipline appropriate for Series B+, with sufficient runway and aligned revenue growth. However, no specific margin, burn, or efficiency figures are provided, limiting the score to the 7-8 band. The evidence is observed with medium confidence, supporting a strong but not exceptional operational execution score.",
+            "evidence": [
+              "The company has disclosed cash balance and runway information indicating sufficient capital to support scaling.",
+              "Funding history shows recent successful raises, suggesting investor confidence in operational management.",
+              "Revenue figures and customer growth metrics demonstrate effective monetization and market traction.",
+              "Some qualitative details on hiring plans and operating cadence have been provided, indicating basic operational discipline."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and unit economics to better assess operational efficiency.",
+              "Disclose scalable operating processes and mature hiring plans to demonstrate readiness for larger scale.",
+              "Share more granular data on margins and capital efficiency to strengthen confidence in operational execution."
+            ],
+            "missing_information": [
+              "Detailed margins and unit economics",
+              "Comprehensive scalable operating processes",
+              "Full disclosure of burn rate and efficiency metrics"
+            ],
+            "signals": [
+              "Sufficient runway to support near-term scaling efforts",
+              "Revenue growth aligned with operational capacity",
+              "Funding rounds closed on schedule",
+              "Hiring sequence and operating cadence described at a basic level"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes financial runway management, market focus via customer base, strategic capital raising, and early revenue generation, indicating a reasonable and coherent strategy narrative. However, there is no specific disclosed wedge, competitive response, or detailed expansion strategy. The evidence is medium confidence and inferred, fitting a 5-6 score band. Without specific strategic choices or tradeoffs, the score cannot exceed 6.",
+            "evidence": [
+              "Company has disclosed cash on hand, indicating financial runway management.",
+              "Customer base information suggests initial market traction and focus.",
+              "Funding rounds completed demonstrate investor confidence and strategic capital acquisition.",
+              "Revenue figures imply early monetization and product-market fit validation."
+            ],
+            "recommendations": [
+              "Provide detailed articulation of the company's positioning and wedge strategy.",
+              "Disclose strategic partnerships and how they support competitive advantage.",
+              "Clarify the company's competitive response and expansion plans."
+            ],
+            "missing_information": [
+              "Specific details on positioning and wedge strategy.",
+              "Explicit description of partnerships and competitive response.",
+              "Clear articulation of expansion or category strategy."
+            ],
+            "signals": [
+              "Financial runway management through disclosed cash reserves.",
+              "Market focus evidenced by customer acquisition.",
+              "Strategic capital raising through funding rounds.",
+              "Early revenue generation indicating product-market fit."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible public signals indicate a large and active customer base with implied growth, but no explicit dated two-point customer count series is available to confirm growth rate.",
+            "evidence": [
+              "Plaid serves over 12,000 financial institutions and 6,000 fintech companies globally.",
+              "Over one million daily connections indicate active and growing usage.",
+              "Plaid’s platform is used by major fintech apps such as Venmo, Robinhood, and Carvana."
+            ],
+            "recommendations": [
+              "Obtain dated customer count data to confirm growth trajectory."
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "12,000+ financial institutions served",
+              "6,000 fintech company customers",
+              "1 million+ daily connections",
+              "Integration with major fintech apps"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public or explicit data related to revenue growth metrics or signals. Without such evidence, it is not possible to assess revenue growth relative to the startup's stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified revenue growth metrics or customer acquisition data",
+              "Disclose expansion revenue or net revenue retention rates if available",
+              "Share ACV or contract details to demonstrate revenue scalability"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No details on expansion revenue or net revenue retention",
+              "No information on annual contract value (ACV) or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence was found to assess customer retention. Without data or credible signals on churn, renewals, or expansion, retention cannot be evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Collect and disclose retention-related metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage and expansion.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative evidence on customer stickiness or repeat usage patterns.",
+              "No data on contract renewals or customer longevity."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Plaid has over one million daily connections, supports multiple fintech workflows (payments, identity verification, credit underwriting), and is embedded in major fintech apps, indicating strong engagement and workflow embedding. However, the absence of detailed quantitative usage metrics or retention data limits the ability to score higher. The medium confidence inferred evidence supports a strong engagement score of 7.",
+            "evidence": [
+              "Over one million daily connections indicate frequent active usage.",
+              "Plaid’s platform supports multiple fintech use cases including payments, identity verification, and credit underwriting.",
+              "Integration with major fintech apps such as Venmo and Robinhood suggests embedded workflow usage."
+            ],
+            "recommendations": [
+              "Collect detailed engagement analytics and customer outcome evidence."
+            ],
+            "missing_information": [
+              "Detailed usage frequency and depth metrics",
+              "Customer outcome data",
+              "Automation volume or workflow embedding specifics"
+            ],
+            "signals": [
+              "1 million+ daily connections",
+              "Multiple product lines supporting diverse workflows",
+              "Usage by major fintech applications"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 4.9,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is inferred with low confidence and indicates recurring revenue with multiple enterprise clients, low churn, and high NRR, which are strong signals of durable, recurring, and high-quality revenue. However, the lack of exact contract terms, detailed churn data, and the low confidence in evidence limits the score to the lower half of the moderate revenue quality band (5-6). The signals support moderate revenue quality but do not justify a higher score.",
+            "evidence": [
+              "Customer base includes multiple enterprise clients",
+              "Low churn rate mentioned in company disclosures"
+            ],
+            "recommendations": [
+              "Obtain detailed churn and renewal data to confirm revenue durability",
+              "Gather contract term information to assess revenue predictability",
+              "Monitor customer concentration metrics for risk management"
+            ],
+            "missing_information": [
+              "Exact contract lengths and renewal terms",
+              "Detailed churn rate percentage",
+              "Breakdown of revenue by customer segment"
+            ],
+            "signals": [
+              "Recurring revenue indicated by ARR metric",
+              "High NRR suggests strong customer retention and expansion",
+              "Diverse customer base reduces revenue concentration risk",
+              "Enterprise clients imply contract durability and quality",
+              "Funding at Series A stage supports revenue predictability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The company information includes relevant financial and customer data that provide directional signals about unit economics, such as revenue, funding, and customer growth. However, key metrics like CAC, LTV, gross margin, and payback period are not explicitly disclosed, limiting full assessment. Therefore, the evidence status is marked as Observed with Medium confidence based on available data.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating customer monetization.",
+              "Funding history and cash balance are provided, suggesting runway and investment in growth.",
+              "Customer count and growth metrics are available, implying some scale of customer acquisition.",
+              "Pricing model and sales efficiency metrics are mentioned, indicating some insight into unit economics."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and LTV metrics to better assess unit economics.",
+              "Disclose gross margin and CAC payback period for clearer profitability insights.",
+              "Share retention and expansion revenue data to evaluate customer lifetime value and growth."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Detailed retention or expansion revenue metrics."
+            ],
+            "signals": [
+              "Revenue growth suggests ability to monetize customers.",
+              "Funding and cash balance imply capacity to invest in customer acquisition and service.",
+              "Customer growth indicates traction and potential for scaling unit economics.",
+              "Mention of pricing and sales efficiency points to some level of pricing power and cost control."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 4.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with low confidence is limited to customer base growth from 50 to 150 in 6 months, which is a positive growth signal but insufficient to demonstrate disciplined spend, efficient capital use, or strong growth relative to burn. The lack of detailed burn rate, revenue vs. burn comparison, or runway data means the evidence only supports a weak to moderate burn efficiency score. Thus, the score is placed at the upper end of the weak band (3-4) but not higher.",
+            "evidence": [
+              "Customer base has grown from 50 to 150 in the last 6 months."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to growth to ensure scaling remains efficient.",
+              "Provide more granular unit economics to better assess long-term capital efficiency."
+            ],
+            "missing_information": [
+              "Detailed unit economics such as CAC and LTV.",
+              "Exact breakdown of burn allocation (R&D, sales, marketing)."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit financial or operational data related to cash runway, burn rate, fundraising plans, or milestone timelines was found in the supplied company information. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash on hand and monthly operating expenses",
+              "Disclose planned fundraising schedule and target amounts",
+              "Clarify next major milestone and expected timeframe to reach it",
+              "Share growth strategy and market factors influencing capital needs"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and expected timeline",
+              "Growth plan specifics and market conditions impacting runway"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 69.2,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows solid potential with strong scores in Market, Team, Product, and Traction. However, financial readiness and competitive positioning need improvement to enhance fundraising prospects.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

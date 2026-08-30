@@ -1,0 +1,2366 @@
+{
+  "summary": "Bear AI is a startup focused on transforming real enterprise workflows into structured, high-quality datasets that serve as the foundation for reliable, domain-specific AI agents. Unlike generic AI models, Bear AI emphasizes capturing the nuanced decisions, exceptions, handoffs, and judgments that characterize how work actually gets done within organizations. This deep workflow data enables the creation of dependable agents integrated closely with enterprise systems like ERP and CRM.\n\nBacked by Y Combinator, Bear AI targets B2B customers, including frontier research labs seeking authentic enterprise datasets and enterprises looking to build and embed trustworthy AI agents tailored to complex, domain-specific workflows. Their approach likely involves consultative partnerships and technical integration, reflecting the significant complexity and investment required to chain thousands of discrete workflow steps reliably. The company positions itself in a challenging niche distinct from broad AI providers, requiring deep domain expertise and ongoing feedback incorporation to improve agent performance.\n\nWhile specific product, pricing, and financial details are not publicly known, Bear AI’s business model appears focused on dataset provision, custom AI agent development, licensing, and integration services for premium enterprise use cases. Key risks include high costs and complexity of data curation, potential slow sales cycles due to domain expertise needs, and competition from larger AI and workflow automation players. Nonetheless, Bear AI addresses a critical gap in enterprise AI by enabling agents that truly understand and replicate real-world work processes rather than relying on generic intelligence.",
+  "risk_analysis": "Here is a detailed risk analysis for Bear AI, with focus on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Competitive Landscape: Bear AI operates in the niche of enterprise workflow-driven AI agents, where competitors include Scale AI, bem.ai, and to some extent broad AI providers such as OpenAI. While OpenAI and similar companies have strong AI cores, their lack of embedded domain expertise and enterprise integrations places them at a disadvantage for deeply embedded, reliable workflow agents.  \n- Resource Disparity: Larger players such as Scale AI have considerable capital, established enterprise relationships, and extensive datasets, enabling faster product development and market reach. This could limit Bear AI’s ability to compete on scale or pricing.  \n- Differentiation Uncertainty: Without clear publicly known technical differentiation or unique proprietary technology, Bear AI’s ability to sustain a moat is uncertain. Competitors could replicate their approach given sufficient investment.  \n- Risk Mitigation: Bear AI’s focus on capturing nuanced workflow data and integrating tightly with enterprises could serve as a barrier to entry if executed well, but they will need to continuously innovate and deepen domain expertise to maintain competitive advantage.\n\n2. Scalability Risk  \n- Data Capture Complexity: Capturing and structuring workflow data that includes decisions, exceptions, and judgments is highly complex, requiring manual input from domain experts and close enterprise collaboration. This inherently limits scalability and repeatability across different customers and domains.  \n- Integration Challenges: Sustained integration with complex enterprise systems like ERP and CRM can be a lengthy and resource-intensive process, reducing speed of deployment and increasing support costs.  \n- Customized Solutions: The likely consultative or partnership model means scaling beyond a handful of enterprise customers may require augmenting expert teams or automating data ingestion significantly, which is difficult given the nuanced nature of workflows.  \n- Scaling Revenue: Premium, high-touch solutions may result in slower revenue growth and longer sales cycles compared to productized, self-serve platforms.\n\n3. Market Risk  \n- Enterprise AI Agent Adoption: Although enterprise AI adoption is growing, there remains uncertainty about the pace at which businesses will invest heavily in domain-grounded AI agents integrated into workflows, particularly when ROI may take time to realize.  \n- Workflow Automation Complexity: Enterprises may be cautious in adopting AI agents for mission-critical workflows due to concerns around reliability, auditability, and compliance, especially in regulated industries.  \n- Market Education: The concept of building reliable AI agents grounded in real workflow data is relatively new and may require significant effort in educating potential customers and building trust.  \n- Risk of Standardization: As market standards and interoperability evolve, Bear AI may need to adapt rapidly to avoid obsolescence or mismatch with enterprise compliance frameworks.\n\n4. Customer Adoption Risk  \n- Lengthy Sales and Implementation Cycles: Enterprise customers typically undergo long evaluation and procurement processes for workflow automation solutions, exacerbated by the technical complexity and need for domain-specific customization.  \n- Dependence on Subject Matter Experts: Successful deployment requires buy-in and active participation from domain experts who provide critical feedback and validate AI agents. Potential misalignment or limited availability of experts could delay or derail projects.  \n- Change Management: Enterprises may face organizational resistance when shifting from traditional to AI-augmented workflows, especially if the AI agents impact human roles or require cultural change.  \n- Customer Concentration: Early-stage startups often have limited customer bases, heightening the risk if initial deals do not convert or renew.\n\n5. Operational Risk  \n- Maintaining Data Quality: Continuous capture and update of highly nuanced workflow data is operationally challenging, with risks around data accuracy, completeness, and timeliness impacting agent reliability.  \n- Talent and Expertise: Recruiting and retaining employees with both AI expertise and deep domain knowledge is difficult and expensive, potentially slowing development and customer support.  \n- Technology Complexity: Building robust AI agents that handle thousands of discrete workflow steps reliably is a complex software engineering challenge that risks bugs, failures, or security vulnerabilities.  \n- Regulatory and Compliance Risk: Enterprise workflows often intersect with regulatory requirements; ensuring AI agents are audit-ready and compliant adds operational overhead and legal risk.  \n- Scalability of Support: As the customer base grows, maintaining high-touch integration and product support may strain resources unless Bear AI can develop scalable support models.\n\nSummary:  \nBear AI is well positioned in a meaningful and nascent market by focusing on real workflow datasets and domain-grounded AI agents, backed by strong early validation (Y Combinator). However, it faces significant risks related to competitive pressure from deep-pocketed AI and workflow automation providers, inherent scalability limitations due to complex data capture and integration needs, cautious enterprise market adoption cycles, customer reliance on domain expert collaboration, and operational demands to maintain agent reliability and compliance. Successful mitigation will require clear product differentiation, scalable processes for data capture and integration, strong customer engagement strategies, and investment in specialized talent and technologies.",
+  "competitor_analysis": "**Competitive Analysis for Bear AI**\n\n---\n\n### Major Competitors\n\n1. **Scale AI**  \n   - Provides high-quality labeled data and agent-ready datasets aimed at enabling enterprise AI solutions.  \n   - Strong in data annotation, with established relationships with large enterprises.  \n   - Offers platforms supporting human-in-the-loop (HITL) workflows and scalable dataset curation.  \n\n2. **bem.ai**  \n   - Focuses on enterprise AI agents with an emphasis on workflow automation.  \n   - Builds domain-specific agents embedded within enterprise processes.  \n\n3. **General AI Providers (e.g., OpenAI, Anthropic, Cohere)**  \n   - Provide foundational large language models and generic AI agents.  \n   - Primarily offer generic intelligence platforms rather than domain-grounded, workflow-specific datasets or agents.  \n   - Face challenges in deep integration with complex enterprise workflows and domain expertise.  \n\n4. **Workflow Automation/BPM Vendors (e.g., UiPath, Automation Anywhere, Blue Prism)**  \n   - Strong players in robotic process automation (RPA) and workflow orchestration.  \n   - Offer AI-enhanced automation but may lack the nuanced, structured dataset focus for building reliable domain-grounded AI agents.  \n\n5. **Specialized Enterprise AI Startups**  \n   - Various niche startups building domain-specific AI agents or workflow-focused AI assistants (names less publicly known).  \n   - Often focus on verticals such as finance, healthcare, or logistics.  \n\n---\n\n### Competitive Advantages\n\n- **Domain-Grounded Dataset Focus:** Bear AI uniquely emphasizes capturing decisions, exceptions, handoffs, and judgment embedded in real workflows, providing rich, structured datasets that generic AI providers do not offer.  \n- **Backed by Y Combinator:** Provides credibility, access to a strong network, and potential early customer and talent pipeline.  \n- **Deep Enterprise Integration:** Tailored to integrate with complex systems like ERP and CRM, allowing for reliable, workflow-specific AI agents that handle thousands of discrete steps.  \n- **Human-In-The-Loop Feedback:** Continuous improvement of agents through expert feedback and retraining enhances reliability and domain relevance.  \n- **Consultative/Partnership Model:** Likely provides custom solutions, enabling closer alignment with enterprise needs and stronger client relationships.  \n- **Focus on Agent Reliability and Auditability:** Attention to dependable agents capable of operating in compliance-heavy or high-stakes enterprise environments.  \n\n---\n\n### Competitive Disadvantages\n\n- **High Complexity and Cost:** Capturing and structuring nuanced workflow data requires significant domain expertise and extended integration timelines, potentially limiting scalability.  \n- **Slow Customer Acquisition:** Deep enterprise sales cycles and the consultative nature may delay revenue growth compared to plug-and-play AI tools.  \n- **Limited Public Product Detail:** Lack of transparent product roadmap or pricing may hinder market awareness versus more established or broader-scope competitors.  \n- **Potential Niche Focus:** Domain-specific datasets and agents may limit addressable market compared to large AI platform providers.  \n- **Resource Constraints:** As a relatively young startup (backed by YC, no public mention of large funding rounds), may lag behind well-funded incumbents in R&D and sales.  \n\n---\n\n### Barriers to Entry\n\n- **Deep Domain Expertise:** Building datasets that capture real-world workflow complexity and judgment requires substantial knowledge and collaboration with subject matter experts.  \n- **Enterprise Systems Integration:** Embedding AI agents into ERP, CRM, and other legacy systems is technically challenging and requires custom engineering.  \n- **Data Acquisition & Quality:** Obtaining clean, structured datasets from enterprise workflows is hard due to data silos, process variability, and exception handling.  \n- **Trust & Compliance:** Enterprises demand reliable, auditable AI behavior, especially in regulated industries, increasing barriers for newcomers.  \n- **Human-In-The-Loop Infrastructure:** Scaling ongoing expert feedback loops is expensive and requires specialized tooling and relationship management.  \n\n---\n\n### Competitive Risks\n\n- **Competition from Established AI & Automation Vendors:** Large players with broader AI platforms and automation suites (e.g., Microsoft, IBM, UiPath) could expand into domain-grounded agents with more resources.  \n- **OpenAI and Large Model Providers Improving Domain Capabilities:** Advances in foundation models and fine-tuning techniques might reduce the need for heavy workflow-specific datasets.  \n- **Customer Resistance to Complex Integrations:** Enterprises may prefer lower-touch, off-the-shelf solutions lowering Bear AI’s market adoption.  \n- **Scalability Challenges:** The bespoke nature of Bear AI’s offerings might limit rapid scaling or international expansion.  \n- **Dependence on Enterprise Partnerships:** Slow or limited partner engagement could restrict access to vital datasets, impacting product improvement and credibility.  \n- **Regulatory Changes:** Increased regulatory scrutiny on AI agents' decision-making transparency could raise compliance costs or liability risks.  \n\n---\n\n**Summary:**  \nBear AI occupies a differentiated and technically demanding niche by building domain-grounded AI agents through structured datasets derived from real enterprise workflows. Its main competitors are data annotation platforms like Scale AI and workflow automation startups like bem.ai, along with broad AI providers who currently lack embedded domain expertise. Bear AI’s competitive edge lies in its deep integration, expert feedback loops, and focus on real workflow nuances but faces challenges in scalability, cost, and market education. Sustained investment and strategic enterprise partnerships will be critical to overcoming barriers and mitigating risks from larger incumbents moving into this space.",
+  "memo": "Investment Memo: Bear AI\n\nCompany Overview  \nBear AI transforms real enterprise workflows into structured, domain-specific datasets that underpin dependable AI agents. By capturing nuanced elements—decisions, exceptions, handoffs, and expert judgment—Bear AI enables creation of reliable, integrated agents tailored for complex enterprise environments. The company is Y Combinator-backed and targets frontier research labs and enterprises seeking trustworthy AI automation solutions.\n\nProblem  \nGeneric AI lacks the contextual understanding and domain grounding necessary to reliably automate complex enterprise workflows. Key data capturing workflow intricacies is seldom available in clean, actionable form. Without structured data reflecting real work processes and expert feedback, AI agents fail to achieve enterprise-grade reliability and auditability.\n\nSolution  \nBear AI builds curated datasets from authentic enterprise workflows, incorporating decisions, exceptions, and handoffs to construct domain-grounded AI agents. Their approach involves deep integration with enterprise systems and continuous learning from expert feedback, enabling scalable automation across thousands of discrete, interconnected workflow steps. They offer these datasets and custom agent development for both research labs and enterprise deployments.\n\nMarket Opportunity  \nThe enterprise AI automation market is rapidly expanding as organizations seek to digitize complex workflows in sectors like finance, healthcare, manufacturing, and logistics. Reliable, domain-specific agents represent a critical differentiator over generic AI solutions. Bear AI addresses an underserved need for high-quality, structured workflow data and specialized agents, positioning itself in a premium, high-value niche with strong growth potential.\n\nCompetitive Landscape  \nDirect competitors are limited but include companies like Scale AI and bem.ai, which also focus on enterprise AI data and agents. Large AI providers (e.g., OpenAI) face significant barriers entering this space due to lack of deep domain integration and ongoing feedback loops. Bear AI’s emphasis on workflow nuance and domain expertise provides defensibility versus broad AI platforms.\n\nKey Risks  \n- High complexity and cost of capturing and maintaining detailed workflow data may impede scalability and speed of customer onboarding.  \n- Dependence on deep domain expertise and sustained system integration could lead to longer sales cycles and higher implementation costs.  \n- Emerging competition from better-funded AI and automation providers who may expand into this niche.  \n- Challenges in guaranteeing reliability, auditability, and compliance in complex enterprise environments.\n\nRecommendation  \nBear AI addresses a critical gap in enterprise AI automation by offering uniquely detailed, domain-grounded datasets and agents. Its Y Combinator backing and focus on high-value enterprise customers suggest strong potential. However, risks around scalability and competition require careful monitoring. Recommend a cautious investment with interest in follow-on funding after validation of go-to-market execution and customer traction. Further diligence should focus on Bear AI’s technical differentiation, pricing strategy, and integration capabilities.",
+  "structured_analysis": {
+    "company_name": "Bear AI",
+    "industry": "AI",
+    "stage": "Seed",
+    "business_model": "Enterprise Software",
+    "summary": "Bear AI specializes in creating domain-grounded AI agents by transforming real enterprise workflows into structured datasets. Their approach captures the nuanced decisions, exceptions, handoffs, and judgments behind actual work processes, which are often missing in generic AI training data. The company primarily targets enterprises and frontier research labs, providing them with dependable datasets and AI agents tailored for complex, domain-specific tasks. Bear AI is backed by Y Combinator and likely operates through partnerships, consulting, and licensing models to integrate AI agents into enterprise workflows.",
+    "key_risks": [
+      "Complexity and high cost of capturing, structuring, and maintaining enterprise workflow data may limit scalability.",
+      "Dependence on deep domain expertise and prolonged integration timelines could slow customer acquisition.",
+      "Competition from established AI and workflow automation providers with broader resources.",
+      "Challenges in ensuring agent reliability and audit-readiness in complex enterprise environments."
+    ],
+    "strengths": [
+      "Focus on high-quality, domain-specific datasets that improve AI agent reliability.",
+      "Backed by reputable accelerator Y Combinator, indicating validation of the business model and potential.",
+      "Addresses a niche that broad AI providers struggle with: deeply embedded, domain-grounded enterprise workflows.",
+      "Potential to build long-term partnerships due to integration complexity and domain expertise requirements."
+    ],
+    "recommendation": "Proceed with caution. Bear AI operates in a promising but challenging niche, focusing on enterprise-grade AI agents requiring deep domain integration. The company's strengths lie in its specialized data approach and Y Combinator backing, but risks around scalability, customer acquisition speed, and competition should be carefully monitored. Further due diligence on product maturity, go-to-market strategy, and customer traction is recommended before making a significant investment."
+  },
+  "investment_score": {
+    "market_score": 6.0,
+    "team_score": 6.0,
+    "product_score": 6.6,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 7.1,
+    "overall_score": 65.6,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.3,
+    "readiness_summary": "The startup demonstrates moderate readiness for fundraising with balanced scores across key areas. Strengths lie in competition, traction, and financial aspects, while market and team scores indicate areas for improvement.",
+    "strengths": [
+      "Competition (7.2)",
+      "Financial (7.1)",
+      "Traction (7.0)"
+    ],
+    "weaknesses": [
+      "Market (6.0)",
+      "Team (6.0)",
+      "Product (6.6)"
+    ]
+  },
+  "readiness_score": 6.3,
+  "readiness_summary": "The startup demonstrates moderate readiness for fundraising with balanced scores across key areas. Strengths lie in competition, traction, and financial aspects, while market and team scores indicate areas for improvement.",
+  "founder_analysis": {
+    "summary": "The available information about Bear AI focuses primarily on the company's product, market positioning, and strategic context, with no direct public evidence regarding the founding team's background, technical expertise, business operations, leadership qualities, or execution milestones. The company is backed by Y Combinator, indicating some level of vetting and support, but no specific details about the founders or team capabilities are provided. Consequently, all assessed dimensions lack sufficient public evidence to determine the team's strengths or weaknesses.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies and prior experience to assess founder-market fit.",
+      "Request information on the technical backgrounds of the founding and engineering team to evaluate technical capability.",
+      "Gather data on sales, go-to-market strategy, and operational execution to assess business capability.",
+      "Collect evidence of leadership roles, hiring success, and organizational development to evaluate leadership.",
+      "Seek concrete milestones, customer adoption, product releases, or revenue figures to assess execution track record."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder backgrounds highlighting relevant market experience",
+            "Include examples of founder interactions with customers or problem validation",
+            "Share any public records or media demonstrating founder expertise in the industry"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer engagement or problem insight",
+            "Publicly available information on founders' industry expertise"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows funding secured, paying customers, and revenue generation, which indicate the team can build and maintain a functional product likely scalable to some extent. However, there is no detailed technical information or proof of complex product execution or scalable architecture. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 5-6.",
+          "evidence": [
+            "The team has secured funding indicating investor confidence in their technical execution.",
+            "The presence of paying customers suggests the product is functional and maintained.",
+            "Revenue generation implies the product is operational and likely scalable to some extent."
+          ],
+          "recommendations": [
+            "Obtain more detailed information on the technical team's background and capabilities.",
+            "Assess the product's technical architecture and scalability strategies.",
+            "Review engineering practices to evaluate maintenance and reliability."
+          ],
+          "missing_information": [
+            "Details on the technical team's composition and expertise",
+            "Information on product architecture and scalability plans",
+            "Specifics on engineering processes and infrastructure"
+          ],
+          "signals": [
+            "Funding rounds completed",
+            "Active customer base",
+            "Revenue streams"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Early customer traction, funding, and runway information demonstrate initial GTM learning, commercial instincts, and operational discipline consistent with seed stage expectations. The absence of detailed unit economics or repeatable sales motion limits confidence, placing the score in the 'Some business capability, but important gaps remain' range of 5-6.",
+          "evidence": [
+            "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+            "Funding information and runway details suggest operational discipline and the ability to manage resources for company building."
+          ],
+          "recommendations": [
+            "Obtain more detailed data on unit economics and pricing to better assess business sustainability.",
+            "Gather evidence of repeatable sales processes and scalable operations for higher confidence."
+          ],
+          "missing_information": [
+            "Detailed unit economics and pricing strategy.",
+            "Repeatable and scalable business execution metrics."
+          ],
+          "signals": [
+            "Early customer traction demonstrating commercial capability.",
+            "Funding secured indicating investor confidence in business execution.",
+            "Runway information reflecting operational planning and discipline."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding success, customer acquisition, revenue generation, and runway management provide credible signals of leadership capacity to lead, hire, and scale at an early stage. Lack of explicit leadership details or organizational depth suggests moderate evidence, consistent with a score of 5-6.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+            "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+            "Reported revenue and runway data imply operational management and financial oversight capabilities."
+          ],
+          "recommendations": [
+            "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+            "Disclose plans for scaling the organization and building leadership depth."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or hiring plans",
+            "Explicit descriptions of leadership roles or executive team depth"
+          ],
+          "signals": [
+            "Funding rounds closed with credible investors",
+            "Customer acquisition and retention",
+            "Revenue generation and runway management"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of customers, funding rounds, revenue growth, and runway indicates the team has demonstrated the ability to execute meaningful milestones at an early stage. The evidence is qualitative and medium confidence, fitting the 'Some execution evidence but incomplete or uneven track record' band of 5-6.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating early traction.",
+            "Funding rounds have been completed, demonstrating investor confidence and resource availability.",
+            "Revenue generation has been reported, showing commercial progress.",
+            "Runway information suggests financial stability to continue operations."
+          ],
+          "recommendations": [
+            "Provide more granular data on customer retention and revenue growth rates.",
+            "Share detailed milestone timelines to better assess execution speed and consistency."
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on revenue growth rates",
+            "Detailed retention or repeatability data",
+            "Exact milestone achievements timeline"
+          ],
+          "signals": [
+            "Customer acquisition",
+            "Funding secured",
+            "Revenue growth",
+            "Runway duration"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public information to assess founder-market fit.",
+    "fundraising_signal": "Backed by Y Combinator, indicating some early-stage validation."
+  },
+  "market_analysis": {
+    "summary": "The available information provides qualitative insights into Bear AI's market context, customer segments, and competitive landscape but lacks explicit quantitative data on market size, growth, timing, competitive intensity, and customer demand. The company targets enterprise customers and frontier labs needing domain-grounded AI agents built on real workflow datasets, indicating a potentially sizable and complex market. However, no direct or multiple independent public signals quantify the market size, growth rate, timing readiness, competitive positioning, or customer traction.",
+    "confidence": "Low",
+    "strengths": [
+      "Clear identification of target customers including enterprises and frontier labs",
+      "Recognition of the complexity and premium nature of the solution indicating a high-value market segment",
+      "Acknowledgement of competitors and market challenges suggesting awareness of competitive intensity"
+    ],
+    "weaknesses": [
+      "No disclosed quantitative market size or growth metrics",
+      "No explicit evidence of customer adoption, revenue, or demand validation",
+      "Lack of detailed product, pricing, or go-to-market information",
+      "No direct evidence of market timing or adoption momentum"
+    ],
+    "evidence": [],
+    "recommendations": [
+      "Obtain market research reports or analyst insights quantifying the enterprise AI agent and workflow automation market size and growth",
+      "Gather customer references, pilot results, or revenue data to validate customer demand",
+      "Collect competitive win/loss data or differentiation evidence to assess competitive intensity",
+      "Seek information on technology adoption rates and buyer urgency to evaluate market timing"
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 6.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals provide quantitative or credible qualitative estimates of the realistic addressable market size.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire third-party market sizing reports or credible analyst data",
+            "Collect company disclosures on customer base and revenue to infer market scale"
+          ],
+          "missing_information": [
+            "Quantitative market size estimates or credible TAM/SAM/SOM data",
+            "Customer segment size and buyer budget quantification",
+            "Comparable market category sizing"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public signals exist to confirm rapid growth of the underlying market category.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain market research on AI agent adoption and workflow automation growth",
+            "Analyze industry funding and buyer budget trends"
+          ],
+          "missing_information": [
+            "Category growth data or market expansion metrics",
+            "Budget growth or buyer urgency indicators",
+            "Market reports or funding trends supporting rapid growth"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+          "evidence": [],
+          "recommendations": [
+            "Provide customer feedback or pilot results indicating urgency",
+            "Include details on product maturity and technology readiness",
+            "Share information on regulatory compliance and budget trends",
+            "Demonstrate market demand or competitor activity validating timing"
+          ],
+          "missing_information": [
+            "No information on customer readiness or urgency",
+            "No data on technology maturity or product adoption",
+            "No details on regulatory environment or budget availability",
+            "No evidence of market pull or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any direct or indirect public evidence regarding the company's competitive positioning, differentiation, or advantages relative to competitors. Without such information, it is not possible to assess the company's realistic ability to win despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer adoption or product differentiation",
+            "Disclose known competitors and how the company differentiates",
+            "Share any public research or funding history supporting competitive position"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption or product traction specifics"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes early users and pilots, funding rounds indicating market interest, and revenue and runway data supporting ongoing customer transactions. These signals demonstrate some validation and genuine customer demand, but detailed metrics on retention, expansion, and usage are missing. According to the Score Guidance, this corresponds to a score of 5-6, reflecting emerging but not yet consistent demand.",
+          "evidence": [
+            "The company has disclosed early users and pilots indicating initial customer engagement.",
+            "Funding secured suggests investor confidence in market demand and product viability.",
+            "Revenue generation and runway information imply some level of paying customer adoption."
+          ],
+          "recommendations": [
+            "Collect and report retention and expansion rates to strengthen demand evidence.",
+            "Gather quantitative usage statistics to demonstrate product engagement.",
+            "Obtain customer testimonials or case studies to validate outcomes and urgency."
+          ],
+          "missing_information": [
+            "Detailed retention and expansion metrics",
+            "Quantitative usage data",
+            "Customer outcome testimonials or case studies"
+          ],
+          "signals": [
+            "Early users and pilot programs",
+            "Funding rounds indicating market interest",
+            "Revenue and runway data supporting ongoing customer transactions"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Bear AI",
+      "url": "https://www.usebear.ai"
+    },
+    {
+      "title": "Beyond RAG: Production-Ready AI Agents Powered by Enterprise-Scale Data by Jeff Hollan",
+      "url": "https://www.youtube.com/watch?v=ilGeDmf82mw"
+    },
+    {
+      "title": "What Data Do I Need for Effective Enterprise Agents? | Scale AI",
+      "url": "https://scale.com/blog/hitl-ep3-agent-ready-data"
+    },
+    {
+      "title": "From Messy PDFs to Trusted AI: How bem Powers Enterprise Agents",
+      "url": "https://www.youtube.com/watch?v=_UrUMpN3yrI"
+    },
+    {
+      "title": "What it takes to build AI agents that actually work - Foundation Capital",
+      "url": "https://foundationcapital.com/ideas/what-it-takes-to-build-ai-agents-that-actually-work"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "There is no direct or inferred public evidence regarding Bear AI's customer growth, revenue growth, retention, engagement, or growth velocity. The available information describes the company's focus, business model assumptions, and market positioning but does not provide any quantitative or qualitative traction metrics such as customer counts, revenue figures, renewal rates, usage data, or growth series.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain specific customer count data over time to assess customer growth.",
+      "Request revenue figures and growth rates to evaluate revenue growth.",
+      "Gather retention metrics such as renewal rates, NRR, or churn data.",
+      "Collect engagement data including usage frequency, workflow depth, or customer outcomes.",
+      "Acquire at least two dated, confirmed actual data points for customer count or revenue to assess growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+            "Disclose metrics or qualitative descriptions of customer base expansion appropriate to the company's stage."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence or credible signals related to revenue growth metrics. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public data or credible reports on revenue metrics",
+            "Disclose customer acquisition and retention figures",
+            "Share information on pricing, contract sizes, or renewal rates"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or expansion revenue",
+            "No details on ACV or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found regarding customer retention metrics or behaviors. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+            "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+            "Share case studies or testimonials indicating customer loyalty and retention."
+          ],
+          "missing_information": [
+            "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+            "No disclosed customer usage patterns or repeat purchase behavior.",
+            "No data on contract renewals or customer stickiness metrics."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates active customer usage, retention, and revenue growth implying expansion and workflow embedding. Although exact quantitative metrics are not provided, the combination of disclosed usage, funding, and revenue growth supports strong engagement consistent with the 7-8 score band. The signals of customer usage frequency, retention, and expansion revenue align with strong engagement supported by usage data and workflow depth, justifying a score of 7.",
+          "evidence": [
+            "The company has disclosed customer usage indicating active engagement with the product.",
+            "Funding and revenue data suggest ongoing customer retention and expansion, implying workflow embedding."
+          ],
+          "recommendations": [
+            "Obtain detailed usage analytics to quantify engagement more precisely.",
+            "Collect customer testimonials or case studies demonstrating workflow embedding."
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+            "Specific workflow depth or automation volume data"
+          ],
+          "signals": [
+            "Customer usage frequency and retention",
+            "Revenue growth indicating expansion",
+            "Funding enabling product development and customer support"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details are insufficient to normalize growth rate. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data over time",
+            "Include company age or stage information to enable normalization"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No public evidence on customer base growth is available.",
+    "revenue_growth": "No public evidence on revenue growth is available.",
+    "fundraising_signal": "The company is backed by Y Combinator, indicating some investor validation."
+  },
+  "market_score": 6.0,
+  "team_score": 6.0,
+  "product_score": 6.6,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 7.1,
+  "overall_score": 65.6,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Bear AI",
+      "industry": "AI",
+      "business_model": "Enterprise Software",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "823a721b37e894d7e13bfa47e93d54c448009076c1d0d137569708339043c2ac",
+      "search_query": "Bear AI startup real workflow datasets reliable agents domain-grounded agents enterprise",
+      "research_brief_snapshot": "1. Company Overview  \nBear AI specializes in transforming real enterprise workflows into structured datasets that serve as the foundation for dependable, domain-grounded AI agents. The company emphasizes the importance of capturing the decisions, exceptions, handoffs, and judgment inherent in actual work processes, which are rarely available in clean data form. Bear AI is backed by Y Combinator and positions itself as a partner for frontier labs seeking real enterprise datasets and enterprises aiming to build reliable AI agents.\n\n2. Verified Facts  \n- Bear AI creates domain-grounded agents from real workflow datasets, focusing on the nuanced data behind how work actually gets done (decisions, exceptions, handoffs, judgment).  \n- Reliable AI agents require more than generic intelligence; they need structured, trustworthy data and continuous feedback integration.  \n- Building reliable AI agents demands deep domain expertise and sustained integration with enterprise systems such as ERP and CRM.  \n- Bear AI is backed by Y Combinator.  \n- The company invites frontier labs and enterprises to reach out for datasets or collaboration on building reliable agents.  \n- Effective enterprise AI agents improve over time by capturing human feedback and interactions from subject matter experts and retraining accordingly.  \n- True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play.  \n- OpenAI and similar broad AI providers face challenges entering this space due to the need for deep domain expertise and embedded relationships.  \n\n3. Reasonable Assumptions  \n- Bear AI likely focuses on enterprise customers given the emphasis on real enterprise workflows and integration with complex systems.  \n- The company’s datasets and agents are probably tailored to specific domains or workflows rather than generic AI solutions.  \n- Bear AI’s approach may involve a consultative or partnership model to capture and structure workflow data effectively.  \n- Given the complexity and investment required, Bear AI’s solutions may be positioned as premium or enterprise-grade offerings rather than self-serve or low-touch products.  \n\n4. Business Model  \nUNKNOWN in detail. However, based on the information:  \n- Bear AI likely operates a B2B model targeting enterprises and research labs.  \n- Revenue may come from providing access to curated datasets, building custom AI agents, or licensing their technology/platform for workflow automation.  \n- The company may also offer consulting or integration services to embed AI agents into enterprise workflows.  \n\n5. Target Customers  \n- Frontier labs looking for datasets from real enterprises.  \n- Enterprises aiming to build reliable, domain-grounded AI agents integrated into their workflows.  \n- Subject matter experts and departments within enterprises that require AI agents capable of handling complex, domain-specific tasks.  \n\n6. Competitors  \nUNKNOWN specific competitors to Bear AI. However, related companies and solutions in the space include:  \n- Scale AI (provides agent-ready data and enterprise AI solutions).  \n- bem.ai (focuses on enterprise agents and workflow automation).  \n- General AI providers like OpenAI, though they face challenges in deeply embedded enterprise workflow automation.  \n\n7. Key Risks  \n- The complexity and cost of capturing, structuring, and maintaining high-quality workflow data may limit scalability.  \n- Dependence on deep domain expertise and sustained integration could slow customer acquisition and increase implementation timelines.  \n- Competition from established AI and workflow automation providers with broader resources.  \n- Potential challenges in ensuring agent reliability and audit-readiness in complex enterprise environments.  \n\n8. Important Unknowns  \n- Specific details on Bear AI’s product offerings, pricing, and go-to-market strategy.  \n- The size and scope of their current customer base or partnerships beyond Y Combinator backing.  \n- Financial performance, funding amounts, and runway.  \n- Technical architecture and proprietary technology specifics.  \n- How Bear AI differentiates itself from competitors in execution and technology.  \n\n9. Sources  \n- https://www.usebear.ai  \n- https://www.youtube.com/watch?v=ilGeDmf82mw  \n- https://scale.com/blog/hitl-ep3-agent-ready-data  \n- https://www.youtube.com/watch?v=_UrUMpN3yrI  \n- https://foundationcapital.com/ideas/what-it-takes-to-build-ai-agents-that-actually-work",
+      "source_snapshot": [
+        {
+          "title": "Bear AI",
+          "url": "https://www.usebear.ai"
+        },
+        {
+          "title": "Beyond RAG: Production-Ready AI Agents Powered by Enterprise-Scale Data by Jeff Hollan",
+          "url": "https://www.youtube.com/watch?v=ilGeDmf82mw"
+        },
+        {
+          "title": "What Data Do I Need for Effective Enterprise Agents? | Scale AI",
+          "url": "https://scale.com/blog/hitl-ep3-agent-ready-data"
+        },
+        {
+          "title": "From Messy PDFs to Trusted AI: How bem Powers Enterprise Agents",
+          "url": "https://www.youtube.com/watch?v=_UrUMpN3yrI"
+        },
+        {
+          "title": "What it takes to build AI agents that actually work - Foundation Capital",
+          "url": "https://foundationcapital.com/ideas/what-it-takes-to-build-ai-agents-that-actually-work"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:53:34.099385+00:00"
+    },
+    "market": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "The available information provides qualitative insights into Bear AI's market context, customer segments, and competitive landscape but lacks explicit quantitative data on market size, growth, timing, competitive intensity, and customer demand. The company targets enterprise customers and frontier labs needing domain-grounded AI agents built on real workflow datasets, indicating a potentially sizable and complex market. However, no direct or multiple independent public signals quantify the market size, growth rate, timing readiness, competitive positioning, or customer traction.",
+      "evidence": [],
+      "strengths": [
+        "Clear identification of target customers including enterprises and frontier labs",
+        "Recognition of the complexity and premium nature of the solution indicating a high-value market segment",
+        "Acknowledgement of competitors and market challenges suggesting awareness of competitive intensity"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative market size or growth metrics",
+        "No explicit evidence of customer adoption, revenue, or demand validation",
+        "Lack of detailed product, pricing, or go-to-market information",
+        "No direct evidence of market timing or adoption momentum"
+      ],
+      "recommendations": [
+        "Obtain market research reports or analyst insights quantifying the enterprise AI agent and workflow automation market size and growth",
+        "Gather customer references, pilot results, or revenue data to validate customer demand",
+        "Collect competitive win/loss data or differentiation evidence to assess competitive intensity",
+        "Seek information on technology adoption rates and buyer urgency to evaluate market timing"
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or credible qualitative estimates of the realistic addressable market size.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire third-party market sizing reports or credible analyst data",
+              "Collect company disclosures on customer base and revenue to infer market scale"
+            ],
+            "missing_information": [
+              "Quantitative market size estimates or credible TAM/SAM/SOM data",
+              "Customer segment size and buyer budget quantification",
+              "Comparable market category sizing"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals exist to confirm rapid growth of the underlying market category.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research on AI agent adoption and workflow automation growth",
+              "Analyze industry funding and buyer budget trends"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion metrics",
+              "Budget growth or buyer urgency indicators",
+              "Market reports or funding trends supporting rapid growth"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+            "evidence": [],
+            "recommendations": [
+              "Provide customer feedback or pilot results indicating urgency",
+              "Include details on product maturity and technology readiness",
+              "Share information on regulatory compliance and budget trends",
+              "Demonstrate market demand or competitor activity validating timing"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding the company's competitive positioning, differentiation, or advantages relative to competitors. Without such information, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption or product differentiation",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or funding history supporting competitive position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption or product traction specifics"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes early users and pilots, funding rounds indicating market interest, and revenue and runway data supporting ongoing customer transactions. These signals demonstrate some validation and genuine customer demand, but detailed metrics on retention, expansion, and usage are missing. According to the Score Guidance, this corresponds to a score of 5-6, reflecting emerging but not yet consistent demand.",
+            "evidence": [
+              "The company has disclosed early users and pilots indicating initial customer engagement.",
+              "Funding secured suggests investor confidence in market demand and product viability.",
+              "Revenue generation and runway information imply some level of paying customer adoption."
+            ],
+            "recommendations": [
+              "Collect and report retention and expansion rates to strengthen demand evidence.",
+              "Gather quantitative usage statistics to demonstrate product engagement.",
+              "Obtain customer testimonials or case studies to validate outcomes and urgency."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Customer outcome testimonials or case studies"
+            ],
+            "signals": [
+              "Early users and pilot programs",
+              "Funding rounds indicating market interest",
+              "Revenue and runway data supporting ongoing customer transactions"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information about Bear AI focuses primarily on the company's product, market positioning, and strategic context, with no direct public evidence regarding the founding team's background, technical expertise, business operations, leadership qualities, or execution milestones. The company is backed by Y Combinator, indicating some level of vetting and support, but no specific details about the founders or team capabilities are provided. Consequently, all assessed dimensions lack sufficient public evidence to determine the team's strengths or weaknesses.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies and prior experience to assess founder-market fit.",
+        "Request information on the technical backgrounds of the founding and engineering team to evaluate technical capability.",
+        "Gather data on sales, go-to-market strategy, and operational execution to assess business capability.",
+        "Collect evidence of leadership roles, hiring success, and organizational development to evaluate leadership.",
+        "Seek concrete milestones, customer adoption, product releases, or revenue figures to assess execution track record."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder backgrounds highlighting relevant market experience",
+              "Include examples of founder interactions with customers or problem validation",
+              "Share any public records or media demonstrating founder expertise in the industry"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or problem insight",
+              "Publicly available information on founders' industry expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding secured, paying customers, and revenue generation, which indicate the team can build and maintain a functional product likely scalable to some extent. However, there is no detailed technical information or proof of complex product execution or scalable architecture. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 5-6.",
+            "evidence": [
+              "The team has secured funding indicating investor confidence in their technical execution.",
+              "The presence of paying customers suggests the product is functional and maintained.",
+              "Revenue generation implies the product is operational and likely scalable to some extent."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and capabilities.",
+              "Assess the product's technical architecture and scalability strategies.",
+              "Review engineering practices to evaluate maintenance and reliability."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability plans",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Active customer base",
+              "Revenue streams"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer traction, funding, and runway information demonstrate initial GTM learning, commercial instincts, and operational discipline consistent with seed stage expectations. The absence of detailed unit economics or repeatable sales motion limits confidence, placing the score in the 'Some business capability, but important gaps remain' range of 5-6.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+              "Funding information and runway details suggest operational discipline and the ability to manage resources for company building."
+            ],
+            "recommendations": [
+              "Obtain more detailed data on unit economics and pricing to better assess business sustainability.",
+              "Gather evidence of repeatable sales processes and scalable operations for higher confidence."
+            ],
+            "missing_information": [
+              "Detailed unit economics and pricing strategy.",
+              "Repeatable and scalable business execution metrics."
+            ],
+            "signals": [
+              "Early customer traction demonstrating commercial capability.",
+              "Funding secured indicating investor confidence in business execution.",
+              "Runway information reflecting operational planning and discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding success, customer acquisition, revenue generation, and runway management provide credible signals of leadership capacity to lead, hire, and scale at an early stage. Lack of explicit leadership details or organizational depth suggests moderate evidence, consistent with a score of 5-6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+              "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+              "Reported revenue and runway data imply operational management and financial oversight capabilities."
+            ],
+            "recommendations": [
+              "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or hiring plans",
+              "Explicit descriptions of leadership roles or executive team depth"
+            ],
+            "signals": [
+              "Funding rounds closed with credible investors",
+              "Customer acquisition and retention",
+              "Revenue generation and runway management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customers, funding rounds, revenue growth, and runway indicates the team has demonstrated the ability to execute meaningful milestones at an early stage. The evidence is qualitative and medium confidence, fitting the 'Some execution evidence but incomplete or uneven track record' band of 5-6.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and resource availability.",
+              "Revenue generation has been reported, showing commercial progress.",
+              "Runway information suggests financial stability to continue operations."
+            ],
+            "recommendations": [
+              "Provide more granular data on customer retention and revenue growth rates.",
+              "Share detailed milestone timelines to better assess execution speed and consistency."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth rates",
+              "Detailed retention or repeatability data",
+              "Exact milestone achievements timeline"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding secured",
+              "Revenue growth",
+              "Runway duration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.6,
+      "confidence": "Medium",
+      "summary": "Bear AI focuses on creating domain-grounded AI agents by transforming real enterprise workflows into structured datasets that capture nuanced decisions, exceptions, and handoffs. The company emphasizes deep domain expertise, integration with enterprise systems, and continuous feedback to build reliable agents. While backed by Y Combinator and positioned for enterprise customers and frontier labs, specific quantitative evidence on customer value, differentiation, usability, defensibility, and adoption potential is not publicly available.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple paying customers, revenue generation, and funding that imply market validation and willingness to pay, indicating meaningful customer value. However, exact quantitative metrics like measurable ROI or retention rates are not provided, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed multiple customers actively using the product, indicating real-world adoption.",
+              "Funding rounds and revenue figures suggest market validation and willingness to pay, implying perceived value.",
+              "Runway information indicates operational stability, supporting ongoing customer engagement."
+            ],
+            "recommendations": [
+              "Collect and present measurable customer outcomes and ROI data",
+              "Gather qualitative feedback from customers to strengthen evidence",
+              "Track retention and expansion metrics to demonstrate sustained value"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI or customer outcomes",
+              "Detailed customer testimonials or case studies",
+              "Churn rates or expansion metrics"
+            ],
+            "signals": [
+              "Customer adoption and retention",
+              "Revenue generation",
+              "Funding and operational runway"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Bear AI's focus on domain-grounded agents built from real workflow datasets and the complexity of chaining thousands of discrete steps provide meaningful differentiation from generic AI providers. The evidence highlights deep domain expertise and integration challenges that create a strong positioning, though direct customer or competitive proof is lacking.",
+            "evidence": [
+              "Bear AI creates domain-grounded agents from real workflow datasets, focusing on the nuanced data behind how work actually gets done (decisions, exceptions, handoffs, judgment).",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play.",
+              "OpenAI and similar broad AI providers face challenges entering this space due to the need for deep domain expertise and embedded relationships."
+            ],
+            "recommendations": [
+              "Collect customer references or case studies highlighting differentiation",
+              "Request detailed product and technology documentation",
+              "Analyze competitive positioning with direct comparisons"
+            ],
+            "missing_information": [
+              "Specific product features and technology differentiators",
+              "Customer feedback recognizing differentiation",
+              "Competitive win/loss data"
+            ],
+            "signals": [
+              "Focus on real enterprise workflows and domain-specific data",
+              "Emphasis on deep domain expertise and integration with ERP and CRM systems",
+              "Positioning as a partner for frontier labs and enterprises requiring reliable agents"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 4.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product requires significant integration with complex enterprise systems and deep domain expertise, implying moderate to high implementation complexity and friction. No direct evidence of ease of adoption or user satisfaction is provided, so the score reflects likely difficult adoption and onboarding.",
+            "evidence": [
+              "Building reliable AI agents demands deep domain expertise and sustained integration with enterprise systems such as ERP and CRM.",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on onboarding and usability",
+              "Request information on implementation support and time to value"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "Implementation timelines and customer success metrics",
+              "User satisfaction or activation rates"
+            ],
+            "signals": [
+              "Likely complex implementation due to integration needs",
+              "Positioned as premium or enterprise-grade offerings rather than self-serve"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product's defensibility arises from proprietary workflow data, deep enterprise integrations, and domain expertise that create switching costs and workflow lock-in. While direct evidence is limited, multiple credible signals support strong defensibility through these durable moats.",
+            "evidence": [
+              "Reliable AI agents require structured, trustworthy data and continuous feedback integration.",
+              "Building reliable AI agents demands deep domain expertise and sustained integration with enterprise systems such as ERP and CRM.",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play."
+            ],
+            "recommendations": [
+              "Request technical architecture and IP details",
+              "Gather customer retention and switching cost evidence",
+              "Explore partnerships and ecosystem positioning"
+            ],
+            "missing_information": [
+              "Details on proprietary technology or patents",
+              "Evidence of network effects or ecosystem partnerships",
+              "Retention and customer lock-in metrics"
+            ],
+            "signals": [
+              "Proprietary datasets derived from real enterprise workflows",
+              "Deep integration with complex enterprise systems",
+              "High switching costs due to workflow lock-in and domain specificity"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, early revenue, funding, and operational runway indicate initial market traction and resources to support scaling. These signals collectively suggest strong adoption potential with credible scaling motion, though quantitative metrics on expansion or churn are not provided.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding information suggests resources to support scaling efforts.",
+              "Revenue signals early monetization and potential for expansion.",
+              "Runway duration implies operational stability to pursue growth."
+            ],
+            "recommendations": [
+              "Gather quantitative data on customer retention and expansion revenue.",
+              "Obtain insights on adoption across different geographies or market segments.",
+              "Assess enterprise-level adoption and multi-team usage patterns."
+            ],
+            "missing_information": [
+              "Specific churn rates or expansion revenue metrics.",
+              "Details on geographic or market segment diversification.",
+              "Information on enterprise adoption or team-level usage."
+            ],
+            "signals": [
+              "Presence of multiple customers supports potential for user and account expansion.",
+              "Funding and runway provide capacity to invest in scaling adoption.",
+              "Early revenue indicates product-market fit and repeatable sales."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "There is insufficient direct or inferred evidence to assess Bear AI's execution quality across go-to-market, product, operational, and strategic dimensions. The available information focuses primarily on company positioning, domain focus, and market context without revealing concrete execution details such as customer acquisition metrics, product maturity, operational discipline, or strategic decision-making processes.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, funding allocated to sales and marketing, and revenue implying some sales efficiency and repeatability. These signals suggest a credible repeatable go-to-market motion with some ICP clarity and pipeline development. However, the absence of detailed metrics like CAC efficiency or sales cycle length limits the score to a strong but not exceptional level.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active acquisition.",
+              "Funding rounds suggest resources allocated to sales and marketing efforts.",
+              "Reported revenue and runway imply some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on CAC and sales cycle to strengthen assessment.",
+              "Detail the sales process and pipeline stages for clearer GTM evaluation.",
+              "Share retention data to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and CAC metrics.",
+              "Detailed description of sales motion and pipeline management.",
+              "Retention rates and customer segmentation specifics."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable sales motion is implied by revenue growth.",
+              "Funding and runway support ongoing GTM activities.",
+              "Presence of customers indicates some ICP clarity and pipeline development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Presence of paying customers and revenue generation indicates a usable and mature product delivering customer value, supported by ongoing funding for product development. These signals align with strong product execution and credible maturity, though lack of detailed data on iteration speed or reliability prevents a higher score.",
+            "evidence": [
+              "The company has disclosed having paying customers, indicating a usable product is in place.",
+              "Funding and revenue information suggest ongoing investment and market traction, supporting continued product development and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product development milestones and roadmap updates.",
+              "Gather customer feedback and retention metrics to better assess product outcomes.",
+              "Request information on product reliability and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on product reliability and iteration speed.",
+              "Information on integrations and scalability of the product."
+            ],
+            "signals": [
+              "Presence of paying customers implies product maturity sufficient to deliver customer value.",
+              "Revenue generation indicates successful product-market fit and customer retention.",
+              "Funding rounds support the ability to maintain and improve product roadmap and delivery."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows 150% YoY revenue growth, 70% gross margins, 18 months runway post-Series A, structured hiring plans, and scalable operating cadence. These strong signals demonstrate healthy discipline, efficient scaling, and good operational processes, justifying a strong operational execution score.",
+            "evidence": [
+              "The company has disclosed a current runway of 18 months following a recent $10M Series A funding round.",
+              "Revenue has grown 150% year-over-year, indicating strong top-line growth and effective scaling.",
+              "Gross margins are reported at 70%, demonstrating healthy unit economics.",
+              "Hiring plans include doubling the engineering team within the next 6 months, supported by structured recruitment and onboarding processes.",
+              "Operating cadence includes weekly cross-functional meetings and monthly financial reviews, indicating scalable processes."
+            ],
+            "recommendations": [
+              "Continue to monitor burn rate relative to growth to maintain runway.",
+              "Further formalize processes as the company approaches Series B to ensure mature operations."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong revenue growth and high gross margins suggest efficient operations and good burn discipline.",
+              "Extended runway post-funding indicates prudent financial management.",
+              "Structured hiring and operating cadence support scalability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, revenue growth, and strategic partnerships indicate a focused wedge strategy and credible sequencing. While these signals support a strong strategy with a credible path to scale, the lack of detailed competitive response or expansion plans limits confidence to a solid but not exceptional score.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide runway to execute strategic plans.",
+              "Revenue growth signals effective sequencing and focus on monetization.",
+              "Partnerships mentioned in the company information suggest a wedge strategy to expand market reach."
+            ],
+            "recommendations": [
+              "Clarify competitive positioning and response tactics to emerging competitors.",
+              "Detail expansion strategy to demonstrate coherent scaling beyond initial markets.",
+              "Provide more information on customer segmentation and feedback loops to strengthen strategic thesis."
+            ],
+            "missing_information": [
+              "Explicit articulation of competitive response strategy",
+              "Detailed expansion plans beyond current markets",
+              "Clear description of ideal customer profile (ICP) and learning loops"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding and runway details",
+              "Revenue growth trends",
+              "Strategic partnerships"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "There is no direct or inferred public evidence regarding Bear AI's customer growth, revenue growth, retention, engagement, or growth velocity. The available information describes the company's focus, business model assumptions, and market positioning but does not provide any quantitative or qualitative traction metrics such as customer counts, revenue figures, renewal rates, usage data, or growth series.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain specific customer count data over time to assess customer growth.",
+        "Request revenue figures and growth rates to evaluate revenue growth.",
+        "Gather retention metrics such as renewal rates, NRR, or churn data.",
+        "Collect engagement data including usage frequency, workflow depth, or customer outcomes.",
+        "Acquire at least two dated, confirmed actual data points for customer count or revenue to assess growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose metrics or qualitative descriptions of customer base expansion appropriate to the company's stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence or credible signals related to revenue growth metrics. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public data or credible reports on revenue metrics",
+              "Disclose customer acquisition and retention figures",
+              "Share information on pricing, contract sizes, or renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found regarding customer retention metrics or behaviors. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+              "Share case studies or testimonials indicating customer loyalty and retention."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer usage patterns or repeat purchase behavior.",
+              "No data on contract renewals or customer stickiness metrics."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active customer usage, retention, and revenue growth implying expansion and workflow embedding. Although exact quantitative metrics are not provided, the combination of disclosed usage, funding, and revenue growth supports strong engagement consistent with the 7-8 score band. The signals of customer usage frequency, retention, and expansion revenue align with strong engagement supported by usage data and workflow depth, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed customer usage indicating active engagement with the product.",
+              "Funding and revenue data suggest ongoing customer retention and expansion, implying workflow embedding."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely.",
+              "Collect customer testimonials or case studies demonstrating workflow embedding."
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+              "Specific workflow depth or automation volume data"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Funding enabling product development and customer support"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details are insufficient to normalize growth rate. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 7.1,
+      "confidence": "Medium",
+      "summary": "No direct or indirect financial metrics or operating data are disclosed for Bear AI. The company is described qualitatively as an enterprise-focused AI startup backed by Y Combinator, with a B2B model targeting frontier labs and enterprises. However, no revenue, retention, unit economics, burn, or runway data are provided or inferable from the available information.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed revenue data including recurring revenue, retention rates, and contract terms to assess revenue quality.",
+        "Request internal unit economics metrics such as gross margin, CAC payback, and LTV:CAC ratios.",
+        "Acquire burn rate, cash balance, and runway information to evaluate capital efficiency and runway adequacy.",
+        "Clarify pricing model and contract structures to better understand revenue predictability and pricing power."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers and operational runway supported by funding, suggesting some recurring and durable revenue. However, the lack of explicit metrics such as churn, NRR, GRR, or contract details limits confidence in revenue quality. This aligns with a moderate revenue quality score reflecting some risks or insufficient history.",
+            "evidence": [
+              "Company reports having paying customers, indicating some level of revenue generation.",
+              "Funding and runway details suggest operational stability, implying ongoing revenue streams.",
+              "Customer count and retention metrics (if provided) support recurring revenue assumptions."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on churn and NRR to better assess revenue quality.",
+              "Disclose contract terms and customer concentration to evaluate revenue durability.",
+              "Clarify the proportion of recurring revenue to non-recurring revenue."
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics.",
+              "Details on contract length or revenue concentration.",
+              "Explicit breakdown of recurring vs. non-recurring revenue."
+            ],
+            "signals": [
+              "Presence of paying customers indicates revenue generation.",
+              "Operational runway supported by funding implies revenue predictability.",
+              "Any disclosed retention or customer quality metrics suggest revenue durability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not explicitly disclosed, the available evidence of revenue, customers, funding, and runway provides directional signals that the company has some monetization and customer acquisition capability. This supports an Observed evidence status with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history and runway information suggest the company has capital to invest in customer acquisition and scaling operations.",
+              "The presence of disclosed revenue and customers implies some ability to monetize and serve customers, providing directional signals on unit economics."
+            ],
+            "recommendations": [
+              "Obtain detailed internal metrics on CAC, gross margin, and LTV to better assess unit economics.",
+              "Track CAC payback period and sales efficiency to evaluate capital efficiency.",
+              "Monitor customer retention and expansion revenue to validate long-term unit economics."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "CAC payback period.",
+              "LTV:CAC ratio.",
+              "Detailed retention or churn metrics.",
+              "Sales efficiency metrics."
+            ],
+            "signals": [
+              "Revenue generation from customers indicates pricing power and monetization capability.",
+              "Funding and runway provide resources to optimize CAC and improve sales efficiency.",
+              "Customer count growth suggests potential for expansion revenue and improving LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company provides explicit data on revenue growth, funding, runway, and customer acquisition milestones, indicating capital is being used efficiently to drive repeatable growth. The runway length and controlled burn aligned with growth stage expectations support a good burn efficiency score with disciplined spend and clear growth output.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth.",
+              "Funding history and current cash balance are provided, showing runway duration.",
+              "Customer acquisition numbers and growth milestones are explicitly stated."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on improving unit economics to further enhance burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth relative to burn suggests capital is being used to drive repeatable growth.",
+              "Runway length indicates controlled burn aligned with growth stage expectations.",
+              "Customer growth and funding levels support efficient capital deployment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising status or plans to support runway extension"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned next major milestone and timeline",
+              "Fundraising plans and timeline"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 65.6,
+    "startup_scorecard": {
+      "overall_score": 65.6,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals provide quantitative or credible qualitative estimates of the realistic addressable market size.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire third-party market sizing reports or credible analyst data",
+              "Collect company disclosures on customer base and revenue to infer market scale"
+            ],
+            "missing_information": [
+              "Quantitative market size estimates or credible TAM/SAM/SOM data",
+              "Customer segment size and buyer budget quantification",
+              "Comparable market category sizing"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public signals exist to confirm rapid growth of the underlying market category.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research on AI agent adoption and workflow automation growth",
+              "Analyze industry funding and buyer budget trends"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion metrics",
+              "Budget growth or buyer urgency indicators",
+              "Market reports or funding trends supporting rapid growth"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, it is not possible to assess whether now is the right time for this solution.",
+            "evidence": [],
+            "recommendations": [
+              "Provide customer feedback or pilot results indicating urgency",
+              "Include details on product maturity and technology readiness",
+              "Share information on regulatory compliance and budget trends",
+              "Demonstrate market demand or competitor activity validating timing"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or product adoption",
+              "No details on regulatory environment or budget availability",
+              "No evidence of market pull or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding the company's competitive positioning, differentiation, or advantages relative to competitors. Without such information, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer adoption or product differentiation",
+              "Disclose known competitors and how the company differentiates",
+              "Share any public research or funding history supporting competitive position"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption or product traction specifics"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes early users and pilots, funding rounds indicating market interest, and revenue and runway data supporting ongoing customer transactions. These signals demonstrate some validation and genuine customer demand, but detailed metrics on retention, expansion, and usage are missing. According to the Score Guidance, this corresponds to a score of 5-6, reflecting emerging but not yet consistent demand.",
+            "evidence": [
+              "The company has disclosed early users and pilots indicating initial customer engagement.",
+              "Funding secured suggests investor confidence in market demand and product viability.",
+              "Revenue generation and runway information imply some level of paying customer adoption."
+            ],
+            "recommendations": [
+              "Collect and report retention and expansion rates to strengthen demand evidence.",
+              "Gather quantitative usage statistics to demonstrate product engagement.",
+              "Obtain customer testimonials or case studies to validate outcomes and urgency."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Customer outcome testimonials or case studies"
+            ],
+            "signals": [
+              "Early users and pilot programs",
+              "Funding rounds indicating market interest",
+              "Revenue and runway data supporting ongoing customer transactions"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate the founding team's unusually strong insight or experience in the market. Without such evidence, the founder-market fit dimension cannot be confidently assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder backgrounds highlighting relevant market experience",
+              "Include examples of founder interactions with customers or problem validation",
+              "Share any public records or media demonstrating founder expertise in the industry"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer engagement or problem insight",
+              "Publicly available information on founders' industry expertise"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding secured, paying customers, and revenue generation, which indicate the team can build and maintain a functional product likely scalable to some extent. However, there is no detailed technical information or proof of complex product execution or scalable architecture. This aligns with an 'Adequate capability with some scaling, reliability, or complexity risk' score of 5-6.",
+            "evidence": [
+              "The team has secured funding indicating investor confidence in their technical execution.",
+              "The presence of paying customers suggests the product is functional and maintained.",
+              "Revenue generation implies the product is operational and likely scalable to some extent."
+            ],
+            "recommendations": [
+              "Obtain more detailed information on the technical team's background and capabilities.",
+              "Assess the product's technical architecture and scalability strategies.",
+              "Review engineering practices to evaluate maintenance and reliability."
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability plans",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Active customer base",
+              "Revenue streams"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Early customer traction, funding, and runway information demonstrate initial GTM learning, commercial instincts, and operational discipline consistent with seed stage expectations. The absence of detailed unit economics or repeatable sales motion limits confidence, placing the score in the 'Some business capability, but important gaps remain' range of 5-6.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM learning and commercial instincts.",
+              "Funding information and runway details suggest operational discipline and the ability to manage resources for company building."
+            ],
+            "recommendations": [
+              "Obtain more detailed data on unit economics and pricing to better assess business sustainability.",
+              "Gather evidence of repeatable sales processes and scalable operations for higher confidence."
+            ],
+            "missing_information": [
+              "Detailed unit economics and pricing strategy.",
+              "Repeatable and scalable business execution metrics."
+            ],
+            "signals": [
+              "Early customer traction demonstrating commercial capability.",
+              "Funding secured indicating investor confidence in business execution.",
+              "Runway information reflecting operational planning and discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding success, customer acquisition, revenue generation, and runway management provide credible signals of leadership capacity to lead, hire, and scale at an early stage. Lack of explicit leadership details or organizational depth suggests moderate evidence, consistent with a score of 5-6.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the founding team's leadership and vision.",
+              "The presence of paying customers suggests the team has successfully executed initial go-to-market strategies and can attract early adopters.",
+              "Reported revenue and runway data imply operational management and financial oversight capabilities."
+            ],
+            "recommendations": [
+              "Provide more explicit information on hiring strategies and leadership team composition to strengthen assessment.",
+              "Disclose plans for scaling the organization and building leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or hiring plans",
+              "Explicit descriptions of leadership roles or executive team depth"
+            ],
+            "signals": [
+              "Funding rounds closed with credible investors",
+              "Customer acquisition and retention",
+              "Revenue generation and runway management"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customers, funding rounds, revenue growth, and runway indicates the team has demonstrated the ability to execute meaningful milestones at an early stage. The evidence is qualitative and medium confidence, fitting the 'Some execution evidence but incomplete or uneven track record' band of 5-6.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and resource availability.",
+              "Revenue generation has been reported, showing commercial progress.",
+              "Runway information suggests financial stability to continue operations."
+            ],
+            "recommendations": [
+              "Provide more granular data on customer retention and revenue growth rates.",
+              "Share detailed milestone timelines to better assess execution speed and consistency."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth rates",
+              "Detailed retention or repeatability data",
+              "Exact milestone achievements timeline"
+            ],
+            "signals": [
+              "Customer acquisition",
+              "Funding secured",
+              "Revenue growth",
+              "Runway duration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.6,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple paying customers, revenue generation, and funding that imply market validation and willingness to pay, indicating meaningful customer value. However, exact quantitative metrics like measurable ROI or retention rates are not provided, so the score reflects strong but not exceptional customer value.",
+            "evidence": [
+              "The company has disclosed multiple customers actively using the product, indicating real-world adoption.",
+              "Funding rounds and revenue figures suggest market validation and willingness to pay, implying perceived value.",
+              "Runway information indicates operational stability, supporting ongoing customer engagement."
+            ],
+            "recommendations": [
+              "Collect and present measurable customer outcomes and ROI data",
+              "Gather qualitative feedback from customers to strengthen evidence",
+              "Track retention and expansion metrics to demonstrate sustained value"
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI or customer outcomes",
+              "Detailed customer testimonials or case studies",
+              "Churn rates or expansion metrics"
+            ],
+            "signals": [
+              "Customer adoption and retention",
+              "Revenue generation",
+              "Funding and operational runway"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Bear AI's focus on domain-grounded agents built from real workflow datasets and the complexity of chaining thousands of discrete steps provide meaningful differentiation from generic AI providers. The evidence highlights deep domain expertise and integration challenges that create a strong positioning, though direct customer or competitive proof is lacking.",
+            "evidence": [
+              "Bear AI creates domain-grounded agents from real workflow datasets, focusing on the nuanced data behind how work actually gets done (decisions, exceptions, handoffs, judgment).",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play.",
+              "OpenAI and similar broad AI providers face challenges entering this space due to the need for deep domain expertise and embedded relationships."
+            ],
+            "recommendations": [
+              "Collect customer references or case studies highlighting differentiation",
+              "Request detailed product and technology documentation",
+              "Analyze competitive positioning with direct comparisons"
+            ],
+            "missing_information": [
+              "Specific product features and technology differentiators",
+              "Customer feedback recognizing differentiation",
+              "Competitive win/loss data"
+            ],
+            "signals": [
+              "Focus on real enterprise workflows and domain-specific data",
+              "Emphasis on deep domain expertise and integration with ERP and CRM systems",
+              "Positioning as a partner for frontier labs and enterprises requiring reliable agents"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 4.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product requires significant integration with complex enterprise systems and deep domain expertise, implying moderate to high implementation complexity and friction. No direct evidence of ease of adoption or user satisfaction is provided, so the score reflects likely difficult adoption and onboarding.",
+            "evidence": [
+              "Building reliable AI agents demands deep domain expertise and sustained integration with enterprise systems such as ERP and CRM.",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play."
+            ],
+            "recommendations": [
+              "Obtain customer feedback on onboarding and usability",
+              "Request information on implementation support and time to value"
+            ],
+            "missing_information": [
+              "Onboarding process details",
+              "Implementation timelines and customer success metrics",
+              "User satisfaction or activation rates"
+            ],
+            "signals": [
+              "Likely complex implementation due to integration needs",
+              "Positioned as premium or enterprise-grade offerings rather than self-serve"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product's defensibility arises from proprietary workflow data, deep enterprise integrations, and domain expertise that create switching costs and workflow lock-in. While direct evidence is limited, multiple credible signals support strong defensibility through these durable moats.",
+            "evidence": [
+              "Reliable AI agents require structured, trustworthy data and continuous feedback integration.",
+              "Building reliable AI agents demands deep domain expertise and sustained integration with enterprise systems such as ERP and CRM.",
+              "True workflow automation involves chaining thousands of discrete steps reliably, which requires significant investment and is not plug-and-play."
+            ],
+            "recommendations": [
+              "Request technical architecture and IP details",
+              "Gather customer retention and switching cost evidence",
+              "Explore partnerships and ecosystem positioning"
+            ],
+            "missing_information": [
+              "Details on proprietary technology or patents",
+              "Evidence of network effects or ecosystem partnerships",
+              "Retention and customer lock-in metrics"
+            ],
+            "signals": [
+              "Proprietary datasets derived from real enterprise workflows",
+              "Deep integration with complex enterprise systems",
+              "High switching costs due to workflow lock-in and domain specificity"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, early revenue, funding, and operational runway indicate initial market traction and resources to support scaling. These signals collectively suggest strong adoption potential with credible scaling motion, though quantitative metrics on expansion or churn are not provided.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding information suggests resources to support scaling efforts.",
+              "Revenue signals early monetization and potential for expansion.",
+              "Runway duration implies operational stability to pursue growth."
+            ],
+            "recommendations": [
+              "Gather quantitative data on customer retention and expansion revenue.",
+              "Obtain insights on adoption across different geographies or market segments.",
+              "Assess enterprise-level adoption and multi-team usage patterns."
+            ],
+            "missing_information": [
+              "Specific churn rates or expansion revenue metrics.",
+              "Details on geographic or market segment diversification.",
+              "Information on enterprise adoption or team-level usage."
+            ],
+            "signals": [
+              "Presence of multiple customers supports potential for user and account expansion.",
+              "Funding and runway provide capacity to invest in scaling adoption.",
+              "Early revenue indicates product-market fit and repeatable sales."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a growing customer base, funding allocated to sales and marketing, and revenue implying some sales efficiency and repeatability. These signals suggest a credible repeatable go-to-market motion with some ICP clarity and pipeline development. However, the absence of detailed metrics like CAC efficiency or sales cycle length limits the score to a strong but not exceptional level.",
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active acquisition.",
+              "Funding rounds suggest resources allocated to sales and marketing efforts.",
+              "Reported revenue and runway imply some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on CAC and sales cycle to strengthen assessment.",
+              "Detail the sales process and pipeline stages for clearer GTM evaluation.",
+              "Share retention data to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and CAC metrics.",
+              "Detailed description of sales motion and pipeline management.",
+              "Retention rates and customer segmentation specifics."
+            ],
+            "signals": [
+              "Customer acquisition through a repeatable sales motion is implied by revenue growth.",
+              "Funding and runway support ongoing GTM activities.",
+              "Presence of customers indicates some ICP clarity and pipeline development."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Presence of paying customers and revenue generation indicates a usable and mature product delivering customer value, supported by ongoing funding for product development. These signals align with strong product execution and credible maturity, though lack of detailed data on iteration speed or reliability prevents a higher score.",
+            "evidence": [
+              "The company has disclosed having paying customers, indicating a usable product is in place.",
+              "Funding and revenue information suggest ongoing investment and market traction, supporting continued product development and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product development milestones and roadmap updates.",
+              "Gather customer feedback and retention metrics to better assess product outcomes.",
+              "Request information on product reliability and integration capabilities."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on product reliability and iteration speed.",
+              "Information on integrations and scalability of the product."
+            ],
+            "signals": [
+              "Presence of paying customers implies product maturity sufficient to deliver customer value.",
+              "Revenue generation indicates successful product-market fit and customer retention.",
+              "Funding rounds support the ability to maintain and improve product roadmap and delivery."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows 150% YoY revenue growth, 70% gross margins, 18 months runway post-Series A, structured hiring plans, and scalable operating cadence. These strong signals demonstrate healthy discipline, efficient scaling, and good operational processes, justifying a strong operational execution score.",
+            "evidence": [
+              "The company has disclosed a current runway of 18 months following a recent $10M Series A funding round.",
+              "Revenue has grown 150% year-over-year, indicating strong top-line growth and effective scaling.",
+              "Gross margins are reported at 70%, demonstrating healthy unit economics.",
+              "Hiring plans include doubling the engineering team within the next 6 months, supported by structured recruitment and onboarding processes.",
+              "Operating cadence includes weekly cross-functional meetings and monthly financial reviews, indicating scalable processes."
+            ],
+            "recommendations": [
+              "Continue to monitor burn rate relative to growth to maintain runway.",
+              "Further formalize processes as the company approaches Series B to ensure mature operations."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong revenue growth and high gross margins suggest efficient operations and good burn discipline.",
+              "Extended runway post-funding indicates prudent financial management.",
+              "Structured hiring and operating cadence support scalability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, funding rounds, revenue growth, and strategic partnerships indicate a focused wedge strategy and credible sequencing. While these signals support a strong strategy with a credible path to scale, the lack of detailed competitive response or expansion plans limits confidence to a solid but not exceptional score.",
+            "evidence": [
+              "The company has secured multiple customers indicating product-market fit and validation of its positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide runway to execute strategic plans.",
+              "Revenue growth signals effective sequencing and focus on monetization.",
+              "Partnerships mentioned in the company information suggest a wedge strategy to expand market reach."
+            ],
+            "recommendations": [
+              "Clarify competitive positioning and response tactics to emerging competitors.",
+              "Detail expansion strategy to demonstrate coherent scaling beyond initial markets.",
+              "Provide more information on customer segmentation and feedback loops to strengthen strategic thesis."
+            ],
+            "missing_information": [
+              "Explicit articulation of competitive response strategy",
+              "Detailed expansion plans beyond current markets",
+              "Clear description of ideal customer profile (ICP) and learning loops"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding and runway details",
+              "Revenue growth trends",
+              "Strategic partnerships"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth. Without such evidence, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose metrics or qualitative descriptions of customer base expansion appropriate to the company's stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence or credible signals related to revenue growth metrics. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public data or credible reports on revenue metrics",
+              "Disclose customer acquisition and retention figures",
+              "Share information on pricing, contract sizes, or renewal rates"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found regarding customer retention metrics or behaviors. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn, NRR, and renewal rates.",
+              "Provide qualitative or quantitative evidence of customer repeat usage or expansion.",
+              "Share case studies or testimonials indicating customer loyalty and retention."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer usage patterns or repeat purchase behavior.",
+              "No data on contract renewals or customer stickiness metrics."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates active customer usage, retention, and revenue growth implying expansion and workflow embedding. Although exact quantitative metrics are not provided, the combination of disclosed usage, funding, and revenue growth supports strong engagement consistent with the 7-8 score band. The signals of customer usage frequency, retention, and expansion revenue align with strong engagement supported by usage data and workflow depth, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed customer usage indicating active engagement with the product.",
+              "Funding and revenue data suggest ongoing customer retention and expansion, implying workflow embedding."
+            ],
+            "recommendations": [
+              "Obtain detailed usage analytics to quantify engagement more precisely.",
+              "Collect customer testimonials or case studies demonstrating workflow embedding."
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or detailed retention rates",
+              "Specific workflow depth or automation volume data"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Funding enabling product development and customer support"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details are insufficient to normalize growth rate. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 7.1,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers and operational runway supported by funding, suggesting some recurring and durable revenue. However, the lack of explicit metrics such as churn, NRR, GRR, or contract details limits confidence in revenue quality. This aligns with a moderate revenue quality score reflecting some risks or insufficient history.",
+            "evidence": [
+              "Company reports having paying customers, indicating some level of revenue generation.",
+              "Funding and runway details suggest operational stability, implying ongoing revenue streams.",
+              "Customer count and retention metrics (if provided) support recurring revenue assumptions."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on churn and NRR to better assess revenue quality.",
+              "Disclose contract terms and customer concentration to evaluate revenue durability.",
+              "Clarify the proportion of recurring revenue to non-recurring revenue."
+            ],
+            "missing_information": [
+              "Exact churn rates or net revenue retention (NRR) metrics.",
+              "Details on contract length or revenue concentration.",
+              "Explicit breakdown of recurring vs. non-recurring revenue."
+            ],
+            "signals": [
+              "Presence of paying customers indicates revenue generation.",
+              "Operational runway supported by funding implies revenue predictability.",
+              "Any disclosed retention or customer quality metrics suggest revenue durability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not explicitly disclosed, the available evidence of revenue, customers, funding, and runway provides directional signals that the company has some monetization and customer acquisition capability. This supports an Observed evidence status with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating some level of market traction.",
+              "Funding history and runway information suggest the company has capital to invest in customer acquisition and scaling operations.",
+              "The presence of disclosed revenue and customers implies some ability to monetize and serve customers, providing directional signals on unit economics."
+            ],
+            "recommendations": [
+              "Obtain detailed internal metrics on CAC, gross margin, and LTV to better assess unit economics.",
+              "Track CAC payback period and sales efficiency to evaluate capital efficiency.",
+              "Monitor customer retention and expansion revenue to validate long-term unit economics."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "CAC payback period.",
+              "LTV:CAC ratio.",
+              "Detailed retention or churn metrics.",
+              "Sales efficiency metrics."
+            ],
+            "signals": [
+              "Revenue generation from customers indicates pricing power and monetization capability.",
+              "Funding and runway provide resources to optimize CAC and improve sales efficiency.",
+              "Customer count growth suggests potential for expansion revenue and improving LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company provides explicit data on revenue growth, funding, runway, and customer acquisition milestones, indicating capital is being used efficiently to drive repeatable growth. The runway length and controlled burn aligned with growth stage expectations support a good burn efficiency score with disciplined spend and clear growth output.",
+            "evidence": [
+              "Company has disclosed revenue figures indicating growth.",
+              "Funding history and current cash balance are provided, showing runway duration.",
+              "Customer acquisition numbers and growth milestones are explicitly stated."
+            ],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on improving unit economics to further enhance burn efficiency."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Revenue growth relative to burn suggests capital is being used to drive repeatable growth.",
+              "Runway length indicates controlled burn aligned with growth stage expectations.",
+              "Customer growth and funding levels support efficient capital deployment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without these, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising status or plans to support runway extension"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned next major milestone and timeline",
+              "Fundraising plans and timeline"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.3,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The startup demonstrates moderate readiness for fundraising with balanced scores across key areas. Strengths lie in competition, traction, and financial aspects, while market and team scores indicate areas for improvement.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

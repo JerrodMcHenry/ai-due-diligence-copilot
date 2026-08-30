@@ -1,0 +1,2737 @@
+{
+  "summary": "Stripe, Inc. is a leading American multinational fintech company founded in 2009 by Patrick and John Collison. Headquartered in South San Francisco and Dublin, Stripe provides a comprehensive financial infrastructure platform that allows businesses globally—from startups to large enterprises and platforms—to accept payments, manage billing and subscriptions, prevent fraud, issue virtual and physical cards, handle treasury operations, and embed financial services directly into their products.\n\nStripe supports over 135 currencies and payment methods, processes $1.9 trillion in payments volume annually (2025), and manages more than 200 million active subscriptions. The platform is highly regarded for its developer-first approach, offering flexible APIs, SDKs, prebuilt integrations, and no-code tools that enable rapid integration and scalability. Stripe maintains exceptional reliability with a 99.999% uptime and handles over 500 million API requests daily.\n\nIts customers include half of the Fortune 100 companies and a vast array of sectors such as ecommerce, SaaS, fintech, AI, gaming, hospitality, and nonprofits. Stripe also powers marketplaces, platforms, and embedded finance business models, supporting usage-based billing and complex revenue scenarios. The company generates revenue primarily through transaction fees and usage of its various financial services.\n\nStrategically, Stripe is expanding into emerging areas including crypto and stablecoin payments, agentic commerce, and AI-powered commerce solutions. Its strong global footprint spans 46 countries, with offices worldwide.\n\nWith an approximate $159 billion valuation as of 2026 and annual revenue nearing $5.8 billion projected for 2025, Stripe is a dominant player in payment processing, capturing roughly 22.3% of the global market and about 45% within U.S. e-commerce. It competes mainly with PayPal, Adyen, and Square.\n\nKey strengths include its robust, scalable technology infrastructure, broad product suite, developer ecosystem, and rapid innovation. However, Stripe navigates competitive pressures, regulatory complexities, and operational risks. Its continuous focus on developer experience, global expansion, embedded finance, and emerging commerce trends positions Stripe for sustained growth as a foundational platform for global economic infrastructure.",
+  "risk_analysis": "Here is a risk analysis of Stripe, a leading fintech startup (now a large private company) focused on financial infrastructure, with emphasis on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Stripe operates in a highly competitive market dominated by major incumbents such as PayPal (43.4% global market share), Adyen, and Square (Block). PayPal’s strong consumer brand and large existing user base present aggressive competitive pressure, especially in retail and consumer checkout spaces.  \n- Competitors are rapidly innovating and expanding their product suites, including embedded finance, crypto payments, and AI-powered tools, which could erode Stripe’s market share or force margin compression.  \n- While Stripe leads in developer-first API design and has a significant enterprise footprint (50% Fortune 100), competitors might leverage stronger consumer brand recognition (PayPal) or superior merchant services to win new deals.  \n- Additionally, new fintech entrants or tech giants (e.g., Apple, Google) expanding payments infrastructure could fragment the market further.  \n\n2. Scalability Risk  \n- Stripe’s cloud-based API platform architecture and developer-friendly design support rapid customer onboarding, integration, and global scalability, as evidenced by processing $1.9T payments volume and maintaining 99.999% uptime.  \n- However, sustaining this at scale requires continued investment in infrastructure, managing peak loads (over 500M daily API calls), and global expansion across 46 countries with local compliance and payment method support.  \n- The complexity of scaling embedded finance, stablecoin, and agentic commerce use cases may introduce integration and operational challenges, potentially slowing adoption or causing service disruptions.  \n- Any degradation in performance, slower integration times, or insufficient local market adaptation could harm Stripe’s scalability advantage.  \n\n3. Market Risk  \n- Stripe’s revenue model depends heavily on the global digital economy growth, ecommerce expansion, subscription models, and increasing fintech adoption. Economic downturns, reduced consumer spending, or shifts in commerce patterns could reduce transaction volumes and revenue.  \n- Regulatory risk is significant given Stripe’s footprint in 46 countries and expansion into crypto, stablecoins, and embedded finance. Changing financial regulations, licensing requirements, or crypto restrictions pose compliance costs and possible market access limitations.  \n- Market concentration risk exists in some verticals or large enterprise clients; losing a key customer or vertical shift could impact revenue disproportionately.  \n- Geopolitical tensions or currency fluctuations affecting cross-border payments could disrupt Stripe’s international growth.  \n\n4. Customer Adoption Risk  \n- Stripe’s success is strongly tied to developer and business customer satisfaction with its APIs, integrations, and product ecosystem. Any degradation in developer experience, documentation quality, or support could reduce adoption and increase churn.  \n- Increasing competition may lure customers away with alternative offerings or pricing incentives.  \n- Stripe’s recent pricing restructuring introduces uncertainty about customer retention versus margin management trade-offs. Price-sensitive startups or small businesses may switch to lower-cost competitors.  \n- Enterprise customers demand high customization, compliance, and service levels; failure to meet these expectations risks losing large accounts.  \n- Adoption of emerging products like stablecoin payments or agentic commerce remains uncertain and dependent on broader ecosystem acceptance.  \n\n5. Operational Risk  \n- Maintaining Stripe’s historically exceptional uptime (99.999%) and processing reliability at massive scale is technically challenging and critical to reputation and customer trust. Any significant outage or security breach could cause loss of confidence and regulatory scrutiny.  \n- Fraud prevention is vital; while Stripe’s Radar blocks $1B+ in fraud annually, emerging fraud schemes continuously evolve, requiring constant innovation. Failures here could cause financial loss and damage.  \n- Workforce and leadership risks remain, as highlighted by the 2022 layoff of ~14% of employees; talent retention, organizational culture, and capacity to innovate at speed depend on strong management.  \n- Operating globally introduces complexity in compliance, payments settlement, tax handling, and customer support across diverse jurisdictions, increasing operational overhead and risk of errors or non-compliance.  \n- Integration of new product lines (crypto, embedded finance, AI tools) brings execution risk and demands cross-functional coordination.  \n\nSummary  \nStripe holds a strong market position with a scalable, developer-centric, and innovative platform. However, it faces material risks from intense competition, expansion and operational complexity, regulatory uncertainties, customer adoption under pricing pressure, and maintaining flawless technical reliability at scale. Managing these risks successfully is critical to sustaining growth and defending its leadership in global financial infrastructure.",
+  "competitor_analysis": "Competitor Analysis for Stripe, Inc.\n\n1. Major Competitors  \n- PayPal Holdings, Inc.  \n  • Largest global market share (~43.4%) in payment processing.  \n  • Strong consumer brand recognition and diversified payment products including Venmo for P2P payments.  \n  • Extensive checkout and merchant services with broad global reach.  \n- Adyen N.V.  \n  • Competes in payment processing and enterprise payment solutions.  \n  • Renowned for streamlined global payment integration and unified commerce solutions.  \n  • Strong presence among large enterprises and marketplaces.  \n- Block, Inc. (formerly Square)  \n  • Focuses on merchant payment services, point-of-sale hardware, and seller ecosystem.  \n  • Popular among SMBs and retail merchants for in-person payments.  \n- Traditional Banks and Legacy Payment Processors  \n  • Offer basic payment services, ACH, and card processing but often lack developer-friendly APIs and modern infrastructure.  \n- Other fintech startups and emerging payment platforms focused on niche verticals (e.g., Braintree, Mollie, Checkout.com).  \n\n2. Competitive Advantages  \n- Developer-First API and Integration  \n  • Highly flexible, easy-to-use APIs and SDKs enable rapid integration and innovation.  \n  • Extensive documentation, no-code tools, and AI-powered developer support reduce time to market.  \n- Comprehensive Financial Infrastructure Suite  \n  • Beyond payment processing: billing subscription management, fraud detection (Radar), issuing cards, treasury, embedded finance, crypto payments, and agentic commerce.  \n  • Ability to serve as a one-stop platform for complex payment and financial needs.  \n- Scale and Reliability  \n  • Processes $1.9 trillion in payment volume with 99.999% uptime.  \n  • Handles over 500 million API requests daily, designed for enterprise-level throughput.  \n- Global and Multi-Currency Support  \n  • Supports 135+ currencies and payment methods across 46 countries, enabling businesses to scale internationally easily.  \n- Customer Base and Market Penetration  \n  • Trusted by 50% of Fortune 100 and 62% of Fortune 500 companies.  \n  • Strong presence in startups, SaaS, marketplaces, and embedded finance ecosystems.  \n- Innovation and Emerging Market Focus  \n  • Early mover in crypto/stablecoin payments, AI integration, and agentic commerce positioning them for future commerce paradigms.  \n- Strong Network and Ecosystem  \n  • Partner programs, consulting partners, and Stripe Atlas create customer lock-in and broaden adoption.  \n\n3. Competitive Disadvantages  \n- Pricing Pressures and Margin Constraints  \n  • Pricing restructuring in 2026 reflects competitive pricing pressures; transaction fees are key revenue drivers, limiting margin flexibility.  \n- Brand Recognition Outside Developer and Enterprise Circles  \n  • Compared to PayPal, Stripe is less known among consumers and smaller merchants who prefer turnkey checkout solutions.  \n- Workforce and Operational Risks  \n  • Past layoffs and organizational changes could impact morale and innovation pace.  \n- Regulatory Complexity  \n  • Expansion into crypto, embedded finance, and global markets requires navigating complex, evolving regulatory environments with compliance risks.  \n- Reliance on Developer Adoption  \n  • Customer retention heavily depends on maintaining top-tier API performance and developer satisfaction; any degradation could cause churn.  \n\n4. Barriers to Entry  \n- High Technical and Infrastructure Complexity  \n  • Maintaining high-availability, scalable global payment networks with multi-currency and multi-method support demands massive technical and operational investment.  \n- Regulatory and Compliance Expertise  \n  • Financial services are heavily regulated; new entrants face significant licensing, compliance, and security challenges worldwide.  \n- Network Effects and Ecosystem Lock-in  \n  • Established relationships with large enterprises, developer communities, partners, and integrated SaaS platforms create high switching costs.  \n- Capital Requirements  \n  • Large funding needed to build global infrastructure, fraud prevention systems, and product innovation pipelines.  \n- Brand and Trust  \n  • Customers depend on payment reliability and security; new entrants must overcome significant trust barriers.  \n\n5. Competitive Risks  \n- Intensifying Competition  \n  • PayPal’s dominant market share and brand, Adyen’s enterprise focus, and Square’s SMB strength create a crowded market. Competitors may replicate features or undercut pricing.  \n- Regulatory and Compliance Risks  \n  • Changes in regulations around crypto payments, embedded finance, or cross-border data could limit product offerings or increase costs.  \n- Technological Disruption  \n  • Emergence of decentralized finance (DeFi), fintech innovations, or AI-driven commerce platforms may alter payment ecosystems.  \n- Customer Concentration and Market Shifts  \n  • Heavy reliance on tech startups and large enterprises exposes Stripe to macroeconomic downturns impacting tech spending.  \n- API or Security Failures  \n  • Any outages or security breaches could severely damage reputation and lead to loss of trust.  \n- Integration Complexity and Customer Support  \n  • As platform breadth increases, complexity grows; failure to maintain smooth integration and support could slow adoption or cause churn.  \n\nSummary:  \nStripe commands a strong competitive position driven by its developer-first approach, broad product suite, scale, reliability, and innovation focus. It faces fierce competition from entrenched players like PayPal and Adyen but differentiates through technology and ecosystem lock-in. Barriers to entry are high due to infrastructure, regulation, and network effects. Risks include competitive pressure, regulatory changes, technological shifts, and operational challenges. Maintaining developer satisfaction and expanding into emerging financial product areas will be key for sustained growth and competitive advantage.",
+  "memo": "Investment Memo: Stripe, Inc.\n\nCompany Overview  \nFounded in 2009 by Irish brothers Patrick (CEO) and John Collison (President), Stripe is a leading private fintech company dual-headquartered in South San Francisco and Dublin. It provides a comprehensive suite of developer-centric financial infrastructure products including payment processing, billing, fraud prevention (Radar), issuing, treasury services, and embedded finance APIs. Stripe supports over 135 currencies and payment methods across 46 countries, serving businesses from startups to 50% of Fortune 100 companies. In 2025, Stripe processed $1.9 trillion in payment volume, managing over 200 million active subscriptions with a 99.999% uptime record. The company holds an estimated 22.3% global market share in payment processing and is valued at $159 billion as of early 2026.\n\nProblem  \nBusinesses face significant complexity and friction in accepting payments globally, managing diverse billing models and subscriptions, preventing fraud, complying with evolving regulations, and embedding financial services into their platforms. This complexity slows startups, burdens enterprises with costly legacy systems, and hampers growth in international markets. Additionally, emerging commerce via AI and crypto requires new infrastructure capabilities.\n\nSolution  \nStripe offers an API-first, modular financial infrastructure platform that enables businesses to rapidly integrate, scale, and customize payment acceptance, billing, fraud detection, card issuing, treasury services, and embedded finance products. Its flexible developer tools, extensive currency/payment method support, and high reliability reduce friction in global commerce. Stripe continuously innovates with offerings in crypto payments, agentic commerce, usage-based billing, and AI integration. Dedicated support, consulting partners, and professional services further drive successful adoption and customer retention.\n\nMarket Opportunity  \nThe global payments and embedded finance market is large and growing rapidly, driven by e-commerce, SaaS proliferation, global expansion of digital businesses, and new commerce paradigms including AI-driven agentic commerce and crypto. Stripe’s product expansion beyond core payments into embedded finance and treasury services opens new revenue streams. Its strong presence in startups and enterprises—particularly 50% of Fortune 100 companies—positions Stripe to capture outsized market growth. The US e-commerce processing market alone accounts for roughly $10 trillion annually, with Stripe holding about 45% share.\n\nCompetitive Landscape  \nStripe competes primarily with PayPal (43.4% global market share), Adyen, Square (Block), traditional banks, and niche fintech providers. PayPal’s strong consumer brand and expansive ecosystem are key competitive pressures. Adyen emphasizes streamlined integrations for enterprises, while other competitors focus on specialized merchant services. Stripe’s competitive edge lies in its developer-first approach, flexible and scalable API platform, product breadth, and strong reliability/uptime track record.\n\nKey Risks  \n- Intense competition may pressure pricing and margins, especially with PayPal and Adyen.  \n- Regulatory challenges and compliance risk increase as Stripe expands into crypto and embedded finance globally.  \n- Operational risks in maintaining ultra-high uptime and platform security at scale.  \n- Potential impacts from workforce management and culture, given past layoffs and industry competition for talent.  \n- Dependence on developer satisfaction and ecosystem health; degradation could hurt retention and growth.  \n- Unknown effects of recent pricing restructures on customer acquisition and revenue.\n\nRecommendation  \nStripe demonstrates strong market leadership in financial infrastructure with a highly scalable developer-first platform, broad product suite, robust revenue growth ($5.11B revenue in 2024, $5.84B forecast in 2025), and significant enterprise adoption. Its innovations in embedded finance, crypto, and AI commerce position it well for future market expansion. Despite competitive and regulatory risks, Stripe’s differentiated technology, global presence, and strong brand equity warrant a positive investment outlook. Continued monitoring of pricing impact, regulatory developments, and competitive responses is advised. Overall, Stripe is a high-conviction fintech infrastructure investment with durable growth potential in the evolving global digital economy.",
+  "structured_analysis": {
+    "company_name": "Stripe",
+    "industry": "Fintech",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Stripe is a leading financial technology company providing payment processing software, APIs, and a comprehensive suite of financial infrastructure products. Founded in 2009, it enables businesses globally to accept payments, manage billing, prevent fraud, and embed financial services. Stripe serves a diverse customer base from startups to large enterprises, including 50% of Fortune 100 companies. Its platform supports over 135 currencies and payment methods, processes trillions in payments annually, and emphasizes developer-first, flexible API integrations for scalability and reliability.",
+    "key_risks": [
+      "Intense competition from established players like PayPal and Adyen with larger market shares and strong consumer brand recognition.",
+      "Potential margin pressure due to pricing restructuring and competitive market dynamics.",
+      "Regulatory and compliance challenges across multiple jurisdictions, especially with expansion into crypto and embedded finance.",
+      "Operational risks related to maintaining very high uptime and security in a complex global infrastructure.",
+      "Workforce management risks, including past layoffs and leadership accountability.",
+      "Dependence on developer adoption and satisfaction; degradation in API quality or support could impact customer retention."
+    ],
+    "strengths": [
+      "Extensive global footprint supporting 135+ currencies and operating in 46 countries.",
+      "Strong market share in payment processing, especially in the U.S. e-commerce market (~45%).",
+      "Developer-first API approach creating high switching costs and customer lock-in.",
+      "Broad product suite including payments, billing, fraud prevention, issuing, treasury, and embedded finance.",
+      "High reliability with 99.999% historical uptime and scalable infrastructure handling 500M+ API requests daily.",
+      "Strong enterprise adoption including 50% of Fortune 100 companies.",
+      "Continuous innovation expanding into crypto payments, agentic commerce, and AI integrations.",
+      "Supportive ecosystem with professional services, consulting partners, and no-code tools."
+    ],
+    "recommendation": "Stripe is a robust and mature fintech company with a scalable SaaS business model and strong growth metrics. Despite facing fierce competition and regulatory challenges, its comprehensive and developer-friendly platform, global reach, and diversified financial products provide a competitive moat. For investors seeking exposure to a leading financial infrastructure provider shaping modern commerce, Stripe represents a compelling opportunity at the growth stage, warranting a positive recommendation with ongoing monitoring of market dynamics and regulatory developments."
+  },
+  "investment_score": {
+    "market_score": 8.5,
+    "team_score": 7.7,
+    "product_score": 8.4,
+    "competition_score": 6.5,
+    "traction_score": 7.0,
+    "financial_score": 6.9,
+    "overall_score": 76.4,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 76.4,
+    "readiness_summary": "The company shows strong readiness for fundraising with solid scores in market potential, product quality, and team capability. However, there are notable weaknesses in competition awareness and financial metrics that need improvement to maximize fundraising success.",
+    "strengths": [
+      "Market potential (8.5)",
+      "Product quality (8.4)",
+      "Team capability (7.7)"
+    ],
+    "weaknesses": [
+      "Competition (6.5)",
+      "Financial metrics (6.9)",
+      "Traction (7.0)"
+    ]
+  },
+  "readiness_score": 76.4,
+  "readiness_summary": "The company shows strong readiness for fundraising with solid scores in market potential, product quality, and team capability. However, there are notable weaknesses in competition awareness and financial metrics that need improvement to maximize fundraising success.",
+  "founder_analysis": {
+    "summary": "The founding team of Stripe, Patrick and John Collison, have a well-documented background as repeat founders with prior startup experience (Auctomatic). They have built a complex, scalable financial infrastructure platform serving a broad range of customers globally, including large enterprises and startups. The company demonstrates strong technical capability through its developer-first API, high uptime, and handling of massive transaction volumes. Business capability is evidenced by significant revenue growth, a large and diverse customer base, and a clear SaaS and financial infrastructure business model. Leadership includes experienced executives and public accountability from the CEO. Execution track record is supported by rapid growth in payment volume, customer adoption, and product expansion into new areas like crypto and embedded finance. However, specific detailed evidence on founder-market fit, granular business capability metrics, and leadership hiring success is limited in the provided data.",
+    "confidence": "High",
+    "strengths": [
+      "Founders are repeat entrepreneurs with relevant prior experience",
+      "Strong technical infrastructure with high reliability and scalability",
+      "Significant revenue and customer growth demonstrating business capability",
+      "Experienced leadership team with public accountability",
+      "Proven execution with rapid product and market expansion"
+    ],
+    "weaknesses": [
+      "Limited direct evidence of founder-market fit beyond founder background",
+      "Lack of detailed public data on business unit economics and sales repeatability",
+      "Insufficient specific evidence on leadership hiring and organizational scaling"
+    ],
+    "evidence": [
+      "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+      "Stripe processes $1.9 trillion in payments volume in 2025 with 200M+ active subscriptions managed.",
+      "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+      "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+      "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+      "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+      "Stripe laid off about 14% of workforce in 2022 with CEO publicly accepting responsibility.",
+      "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+      "Stripe expanded into crypto, stablecoin payments, agentic commerce, and embedded finance."
+    ],
+    "recommendations": [
+      "Gather direct founder interviews or statements demonstrating deep customer and market insight to assess founder-market fit.",
+      "Obtain detailed business metrics such as unit economics, sales repeatability, and pricing strategy to better evaluate business capability.",
+      "Request information on leadership hiring success, organizational structure, and talent retention to assess leadership strength.",
+      "Collect specific examples of milestone achievements and iteration cycles to confirm execution track record."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.7,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": 7.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows repeat founders with prior startup experience (Auctomatic), a company serving relevant markets including startups and Fortune 100 companies, and founders with elite technical backgrounds. However, there is no direct, explicit evidence of deep market insight or the founders being former buyers/operators in the exact target market. The evidence is medium confidence and inferred, supporting a strong but not exceptional score of 7.",
+          "evidence": [
+            "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+            "Stripe serves a broad customer base including startups and 50% of Fortune 100 companies.",
+            "Founders attended MIT and Harvard but dropped out to pursue Stripe."
+          ],
+          "recommendations": [
+            "Obtain direct founder narratives or interviews showing specific customer insight and problem understanding."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Repeat founders with prior startup experience",
+            "Company serves diverse and large customer segments",
+            "Founders have elite educational background and technical expertise"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Technical Capability",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Multiple strong signals include technical founders with strong engineering backgrounds, a complex product suite with deep integrations, handling massive transaction volumes (1.9 trillion payments volume, 500 million API requests per day), and maintaining 99.999% uptime. This is high-confidence inferred evidence of exceptional technical capability relative to the late-stage context.",
+          "evidence": [
+            "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+            "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+            "Stripe processes $1.9 trillion in payments volume in 2025.",
+            "Product suite includes complex financial infrastructure such as fraud prevention, issuing, treasury, and embedded finance."
+          ],
+          "recommendations": [
+            "Review engineering leadership bios and technical architecture documentation for further validation."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Technical founders with strong engineering background",
+            "High reliability and scalability metrics",
+            "Complex product with deep integrations and infrastructure",
+            "Handling massive transaction volumes and API requests"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company demonstrates strong revenue growth ($5.11B in 2024, forecast $5.84B in 2025), enterprise adoption (50% of Fortune 100, 62% of Fortune 500), and a clear business model with pricing discipline. However, the evidence is medium confidence and lacks granular operational metrics or unit economics, supporting a strong but not exceptional score of 7.",
+          "evidence": [
+            "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+            "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+            "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year.",
+            "Offers professional services, consulting partners, and support plans."
+          ],
+          "recommendations": [
+            "Request detailed financial and sales performance data to better assess business capability."
+          ],
+          "missing_information": [
+            "Detailed unit economics, sales repeatability, and operating efficiency metrics"
+          ],
+          "signals": [
+            "Strong revenue growth and customer acquisition",
+            "Enterprise customer adoption",
+            "Clear SaaS and financial infrastructure business model",
+            "Pricing restructure indicates pricing discipline"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of a named executive team with defined roles, public accountability from the CEO, and ability to attract major investors and customers provide credible signals of strong leadership. The evidence is medium confidence and inferred, with no detailed hiring or scaling metrics disclosed, supporting a solid score of 7.",
+          "evidence": [
+            "Founders Patrick and John Collison remain CEO and President respectively.",
+            "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+            "CEO publicly accepted responsibility for 14% workforce layoff in 2022."
+          ],
+          "recommendations": [
+            "Gather information on leadership hiring track record and organizational structure."
+          ],
+          "missing_information": [
+            "Specific evidence of hiring success, organizational scaling, and talent retention"
+          ],
+          "signals": [
+            "Experienced executive team with defined roles",
+            "Public accountability and transparency from CEO",
+            "Ability to attract major investors and customers"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 9.0,
+          "weight": 0.15,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "High-confidence inferred evidence includes rapid and sustained growth (processing $1.9 trillion payments in 2025, 200 million active subscriptions, 1,000 new companies added daily), product expansion into new areas, and strong customer adoption. This demonstrates an exceptional, specifically-evidenced execution history well beyond the norm for late-stage companies.",
+          "evidence": [
+            "Stripe processes $1.9 trillion in payments volume in 2025.",
+            "Manages over 200 million active subscriptions on Stripe Billing.",
+            "Added roughly 1,000 new companies per day in 2025.",
+            "Expanded product offerings into crypto, embedded finance, and agentic commerce."
+          ],
+          "recommendations": [
+            "Review detailed milestone timelines and iteration cycles for further validation."
+          ],
+          "missing_information": [],
+          "signals": [
+            "Rapid revenue and customer growth",
+            "Product shipped and expanded",
+            "Strong customer adoption and retention",
+            "Fundraising progress and valuation growth"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founders have relevant prior startup experience and domain knowledge inferred from company success, but direct evidence of deep market insight is limited.",
+    "fundraising_signal": "Strong fundraising history with major investors and high valuation indicates investor confidence in the team."
+  },
+  "market_analysis": {
+    "summary": "The evidence for Stripe's market size, growth, timing, competitive intensity, and customer demand is substantial in qualitative terms but lacks explicit quantitative market size and growth rate figures. Stripe serves a broad global customer base including startups, enterprises, and platforms, processes trillions in payments, and supports multiple currencies and payment methods. The company operates in a large and growing fintech and payment processing market with strong adoption and competitive positioning. However, exact TAM, SAM, SOM, and market growth rates are not explicitly stated in the provided information.",
+    "confidence": "High",
+    "strengths": [
+      "Global customer base including 50% of Fortune 100 companies",
+      "Processes $1.9 trillion in payments volume in 2025",
+      "Supports 135+ currencies and payment methods",
+      "Strong developer-first API approach with high uptime and reliability",
+      "Expanding product portfolio including embedded finance, crypto, and agentic commerce",
+      "High market share in U.S. e-commerce payment processing (~45%)",
+      "Rapid customer and payment volume growth (e.g., 34% YoY payment volume growth in 2025)"
+    ],
+    "weaknesses": [
+      "No explicit TAM, SAM, SOM figures provided",
+      "No explicit market growth rate data provided",
+      "No detailed revenue breakdown by geography or product line",
+      "Limited direct evidence on competitive intensity metrics such as win/loss rates",
+      "No explicit customer demand metrics such as retention or NRR disclosed"
+    ],
+    "evidence": [
+      "Stripe processes $1.9 trillion in payments volume in 2025",
+      "Supports 135+ currencies and payment methods, operating in 46 countries",
+      "50% of Fortune 100 companies use Stripe",
+      "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market",
+      "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year",
+      "Stripe maintains 99.999% historical uptime and handled over 500 million API requests per day",
+      "Stripe’s fraud detection system blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+      "Stripe has expanded into crypto and stablecoin payments, agentic commerce, and embedded finance",
+      "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+      "Stripe’s partnerships with AI companies and agentic commerce platforms indicate a strategic focus on emerging commerce models"
+    ],
+    "recommendations": [
+      "Obtain credible third-party market research reports to quantify TAM, SAM, and SOM for Stripe’s financial infrastructure market",
+      "Gather explicit market growth rate data from industry analysts or Stripe’s own disclosures",
+      "Collect detailed competitive analysis including customer win/loss data and differentiation metrics",
+      "Acquire customer demand metrics such as retention rates, NRR, and expansion revenue to validate demand strength",
+      "Investigate impact of recent pricing changes on customer acquisition and retention"
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 8.5,
+      "confidence": "Medium",
+      "evidence_coverage": 80.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 8.0,
+          "weight": 0.25,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows Stripe operates globally in 46 countries, supports 135+ currencies, and processes $1.9 trillion in payments volume in 2025. It serves broad customer segments from startups to 50% of Fortune 100 companies, indicating a large and multi-segment market. While explicit TAM figures are not provided, the large transaction volume and global reach with multiple expansion paths support a score in the 7-8 band. The evidence is high confidence and specific, but without explicit multi-billion dollar TAM stated, a top score of 9-10 is not justified.",
+          "evidence": [
+            "Stripe processes $1.9 trillion in payments volume in 2025",
+            "Supports 135+ currencies and payment methods, operating in 46 countries",
+            "50% of Fortune 100 companies use Stripe",
+            "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market"
+          ],
+          "recommendations": [
+            "Acquire third-party market sizing reports to quantify addressable market",
+            "Request Stripe’s internal market sizing or investor presentations if available"
+          ],
+          "missing_information": [
+            "Explicit TAM, SAM, and SOM figures for Stripe’s full financial infrastructure market"
+          ],
+          "signals": [
+            "Global multi-currency payment processing platform",
+            "Broad customer segments including startups, enterprises, and platforms",
+            "Large transaction volume indicating large market opportunity",
+            "High penetration in Fortune 100 and U.S. e-commerce markets"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Stripe's payment volume grew 34% year-over-year in 2025, with roughly 1,000 new companies added daily. Expansion into emerging areas like crypto, stablecoins, agentic commerce, and embedded finance, combined with strong digital transformation and AI adoption trends, indicate rapid and durable multi-year market growth. The evidence is high confidence and specific, justifying a top band score of 9-10.",
+          "evidence": [
+            "Stripe added roughly 1,000 new companies per day in 2025",
+            "Payment volume grew 34% year-over-year in 2025",
+            "Stripe expanded into emerging areas such as crypto, stablecoins, agentic commerce, and embedded finance",
+            "Strong digital transformation and AI adoption trends in fintech"
+          ],
+          "recommendations": [
+            "Obtain industry market growth reports from analysts",
+            "Analyze broader fintech and payment processing market trends quantitatively"
+          ],
+          "missing_information": [
+            "Explicit market category growth rates from independent sources"
+          ],
+          "signals": [
+            "Rapid customer acquisition and payment volume growth",
+            "Expansion into new product verticals and technologies",
+            "Growing buyer urgency for digital payment infrastructure",
+            "Regulatory changes enabling new payment methods"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Strong customer adoption (50% of Fortune 100), developer-first API enabling rapid integration, regulatory changes enabling new payment methods, and emerging commerce models all indicate excellent timing. The market shows urgent demand, technology readiness, and budget availability. High uptime and enterprise readiness further support this. The evidence is high confidence and specific, supporting a 9-10 score.",
+          "evidence": [
+            "Strong customer adoption with 50% of Fortune 100 companies using Stripe",
+            "Stripe’s developer-first API approach enables rapid integration and scalability",
+            "Regulatory changes enabling payments outside app stores and crypto payments",
+            "Emerging commerce models such as agentic commerce and AI platform integration",
+            "High uptime and reliability supporting enterprise readiness"
+          ],
+          "recommendations": [
+            "Collect customer adoption timing data and case studies",
+            "Monitor regulatory developments impacting payment infrastructure"
+          ],
+          "missing_information": [
+            "Quantitative data on buyer readiness or adoption momentum timelines"
+          ],
+          "signals": [
+            "Customer urgency for scalable, reliable payment infrastructure",
+            "Technology maturity with extensive APIs and developer tools",
+            "Regulatory shifts creating new opportunities",
+            "Budget availability in large enterprises and startups"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Stripe holds significant market share (22.3% globally, 45% in U.S. e-commerce) despite strong competitors like PayPal. Its developer-first API creates high switching costs and customer lock-in. Product differentiation through embedded finance, fraud prevention, and crypto payments, plus a strong developer ecosystem and global reach, provide a credible durable competitive position. The evidence is high confidence and specific, supporting a 7-8 band score. The presence of strong competitors prevents a top score of 9-10.",
+          "evidence": [
+            "Stripe holds approximately 22.3% global market share and 45% U.S. e-commerce payment processing share",
+            "Competitors include PayPal (43.4% global share), Adyen, Square, and traditional banks",
+            "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+            "Stripe’s broad product portfolio includes embedded finance, fraud prevention, and crypto payments",
+            "Strong enterprise adoption with 50% of Fortune 100 companies using Stripe"
+          ],
+          "recommendations": [
+            "Conduct competitive landscape analysis with customer feedback",
+            "Assess switching cost quantification and retention metrics"
+          ],
+          "missing_information": [
+            "Detailed competitive win/loss data and customer preference studies"
+          ],
+          "signals": [
+            "Significant market share despite strong competitors",
+            "High switching costs due to API integration",
+            "Product differentiation through embedded finance and AI partnerships",
+            "Distribution advantage via developer ecosystem and global reach"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Stripe manages over 200 million active subscriptions, processes $1.9 trillion in payments, and adds roughly 1,000 new companies daily. Customer case studies span startups to Fortune 100 enterprises, with high uptime and fraud prevention enhancing value. The strong developer ecosystem and no-code tools facilitate adoption. These multiple high-confidence, specific signals indicate exceptional demand with rapid adoption and clear customer pull, justifying a 9-10 score.",
+          "evidence": [
+            "Stripe manages over 200 million active subscriptions on Stripe Billing",
+            "Processes $1.9 trillion in payments volume in 2025",
+            "Adds roughly 1,000 new companies per day in 2025",
+            "Customer case studies from startups to Fortune 100 enterprises",
+            "High uptime (99.999%) and fraud prevention reducing losses",
+            "Strong developer ecosystem and no-code tools facilitating adoption"
+          ],
+          "recommendations": [
+            "Obtain customer retention and expansion data",
+            "Collect quantitative usage and satisfaction metrics"
+          ],
+          "missing_information": [
+            "Explicit retention, NRR, and expansion revenue metrics"
+          ],
+          "signals": [
+            "Large and growing customer base",
+            "High transaction volume indicating strong usage",
+            "Customer references and case studies across segments",
+            "Rapid customer acquisition and expansion"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Stripe, Inc. — A Comprehensive Report | by ByteBridge - Medium",
+      "url": "https://bytebridge.medium.com/stripe-inc-a-comprehensive-report-d6c422b66ce1"
+    },
+    {
+      "title": "Stripe, Inc.",
+      "url": "https://en.wikipedia.org/wiki/Stripe,_Inc."
+    },
+    {
+      "title": "Stripe Company Overview (2026) — Business Model, Funding & Analysis | Swellpulse",
+      "url": "https://swellpulse.ai/companies/stripe"
+    },
+    {
+      "title": "How Stripe Works, Stripe Business Model and Key Insights",
+      "url": "https://www.moontechnolabs.com/blog/stripe-business-model"
+    },
+    {
+      "title": "What Is Stripe? A Simple Guide to How It Works - Zintego",
+      "url": "https://www.zintego.com/blog/what-is-stripe-a-simple-guide-to-how-it-works"
+    },
+    {
+      "title": "Stripe Revenue, Valuation & Market Cap: 2026 Statistics",
+      "url": "https://www.chargeflow.io/blog/stripe-statistics"
+    },
+    {
+      "title": "Stripe Market Share 2026: Global vs U.S. Breakdown",
+      "url": "https://redstagfulfillment.com/what-is-the-market-share-of-stripe"
+    },
+    {
+      "title": "Companies Using Stripe in 2026: Full Customer List & Insights",
+      "url": "https://technologychecker.io/technology/stripe"
+    },
+    {
+      "title": "What to expect from Stripe in 2026 Stripe's strategy map tells a clear story about how they're building to own the financial operating system for the next economy. Nine predictions for 2026 based… | Jason Saltzman | 31 comments",
+      "url": "https://www.linkedin.com/posts/jason-salt_what-to-expect-from-stripe-in-2026-stripes-activity-7405003295741640705-mG9c"
+    },
+    {
+      "title": "10 Stripe Executives & Org Chart",
+      "url": "https://www.clay.com/dossier/stripe-executives"
+    },
+    {
+      "title": "Stripe's Founders: The Story of Collison Brothers",
+      "url": "https://kitrum.com/blog/stripe-founders-the-story-of-collison-brothers"
+    },
+    {
+      "title": "Stripe Newsroom | Information and assets",
+      "url": "https://stripe.com/newsroom/information"
+    },
+    {
+      "title": "Stripe revenue, valuation & funding | Sacra",
+      "url": "https://sacra.com/c/stripe"
+    },
+    {
+      "title": "Stripe valuation surges 158% to $129B with 27.75% revenue growth | PM Insights posted on the topic | LinkedIn",
+      "url": "https://www.linkedin.com/posts/pm-insights_stripe-valuation-up-158-from-last-round-activity-7406782082171129857-hMlI"
+    },
+    {
+      "title": "Stripe announces new round of funding and plan to ...",
+      "url": "https://stripe.com/newsroom/news/stripe-series-i-employee-liquidity"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "The evidence provides extensive data on Stripe's scale, customer base, revenue, and operational metrics. Stripe processes $1.9 trillion in payments volume in 2025, manages over 200 million active subscriptions, and serves 50% of Fortune 100 companies. It added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year. However, no explicit two-point time series data for customer count or revenue is provided to confirm growth velocity or detailed retention metrics such as NRR or churn. Engagement signals are indirect, inferred from product usage scale and customer testimonials. Overall, the evidence supports strong customer and revenue growth and high retention inferred from scale and enterprise adoption, but lacks explicit retention and growth velocity metrics.",
+    "confidence": "High",
+    "strengths": [
+      "Large and diverse customer base including 50% of Fortune 100 companies",
+      "High payment volume processed ($1.9T in 2025)",
+      "Strong enterprise adoption and global reach",
+      "High uptime and reliability supporting customer trust",
+      "Rapid addition of new customers (~1,000 per day in 2025)",
+      "Revenue growth with $5.11B in 2024 and forecast $5.84B in 2025"
+    ],
+    "weaknesses": [
+      "No explicit two-point time series data for customer count or revenue to confirm growth velocity",
+      "No disclosed retention metrics such as NRR, GRR, or churn rates",
+      "Engagement metrics are indirect and inferred rather than directly measured"
+    ],
+    "evidence": [
+      "Processes $1.9 trillion in payments volume in 2025",
+      "Manages over 200 million active subscriptions on Stripe Billing",
+      "50% of Fortune 100 companies use Stripe",
+      "Added roughly 1,000 new companies per day in 2025",
+      "Grew payment volume 34% year-over-year",
+      "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+      "Maintains 99.999% historical uptime",
+      "Stripe’s fraud detection system blocks about $1 billion in fraudulent transactions annually",
+      "Stripe’s API integration enables quick go-live times",
+      "Enterprise adoption increasing with 62% of Fortune 500 companies using Stripe"
+    ],
+    "recommendations": [
+      "Obtain explicit two-point historical customer count and revenue data with dates to assess growth velocity quantitatively",
+      "Request retention metrics such as net revenue retention (NRR), gross revenue retention (GRR), and logo churn rates",
+      "Gather direct engagement metrics such as usage frequency, workflow depth, and customer outcome data",
+      "Collect detailed revenue breakdown by product line and geography to understand expansion and diversification"
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts from multiple sources confirm a large and growing customer base with rapid new customer additions and strong enterprise penetration.",
+          "evidence": [
+            "Added roughly 1,000 new companies per day in 2025",
+            "50% of Fortune 100 companies use Stripe",
+            "Manages over 200 million active subscriptions"
+          ],
+          "recommendations": [],
+          "missing_information": [
+            "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+          ],
+          "signals": [
+            "Large and diverse customer base",
+            "Strong enterprise adoption",
+            "Rapid new customer acquisition"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple direct data points confirm strong revenue growth and payment volume expansion consistent with a large-scale financial infrastructure company.",
+          "evidence": [
+            "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+            "Grew payment volume 34% year-over-year",
+            "$1.9 trillion in payments volume processed in 2025"
+          ],
+          "recommendations": [],
+          "missing_information": [
+            "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+          ],
+          "signals": [
+            "Strong revenue scale and growth",
+            "High payment volume growth",
+            "Forecasted revenue increase"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While direct retention metrics are not disclosed, multiple credible signals such as large active subscription base, enterprise usage, and operational reliability support an inference of strong retention.",
+          "evidence": [
+            "Manages over 200 million active subscriptions on Stripe Billing",
+            "50% of Fortune 100 companies use Stripe",
+            "Maintains 99.999% historical uptime",
+            "Stripe’s fraud detection system reduces fraud rates by 25% for users"
+          ],
+          "recommendations": [
+            "Request explicit retention metrics such as NRR, GRR, and logo churn",
+            "Obtain renewal and expansion revenue data"
+          ],
+          "missing_information": [
+            "Explicit NRR, GRR, or churn rate metrics",
+            "Renewal rates and expansion revenue data"
+          ],
+          "signals": [
+            "High subscription count implies retention",
+            "Strong enterprise adoption suggests low churn",
+            "High uptime supports customer trust and retention",
+            "Fraud prevention reduces customer losses"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Engagement is inferred from very high subscription numbers, over 500 million API requests per day, developer-friendly API-first approach, and customer testimonials indicating workflow embedding. However, direct usage metrics are lacking and evidence confidence is medium, so the score reflects strong but not exceptional engagement.",
+          "evidence": [
+            "Manages over 200 million active subscriptions",
+            "Customer testimonials highlight ease of use and integration",
+            "Stripe’s API-first approach enables rapid integration and scalability",
+            "Stripe processes over 500 million API requests per day"
+          ],
+          "recommendations": [
+            "Collect direct engagement metrics such as usage frequency and workflow depth",
+            "Gather customer outcome and automation data"
+          ],
+          "missing_information": [
+            "Direct usage frequency and workflow depth metrics",
+            "Customer outcome data and automation volume"
+          ],
+          "signals": [
+            "High subscription and API usage volume",
+            "Developer-friendly tools encourage active usage",
+            "Customer stories indicate workflow embedding"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base is large and growing, with 1,000 new companies added daily in 2025 and strong enterprise adoption.",
+    "revenue_growth": "Revenue is growing strongly, with $5.11B in 2024 and a forecast of $5.84B in 2025, alongside 34% year-over-year payment volume growth.",
+    "fundraising_signal": "Stripe has a $159B valuation as of February 2026, backed by major investors including Sequoia Capital and Andreessen Horowitz, indicating strong investor confidence."
+  },
+  "market_score": 8.5,
+  "team_score": 7.7,
+  "product_score": 8.4,
+  "competition_score": 6.5,
+  "traction_score": 7.0,
+  "financial_score": 6.9,
+  "overall_score": 76.4,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Stripe",
+      "industry": "Fintech",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2.1-spec-2026-08-29",
+      "anchor_registry_version": "v2.1-anchor-registry-2026-08-29",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.1",
+      "company_text_hash": "f3ec32e8b7959dc838d069f3631ad317f2d365be7dbeab48377431da8c859515",
+      "search_query": "overview: Stripe company overview and product offerings for businesses and developers | market_and_competitors: Stripe market size growth trends and main competitors in payment processing and financial infrastructure | founders_and_leadership: Stripe founders and leadership team background and previous companies | financial_and_funding: Stripe funding rounds valuation investors and financial performance metrics",
+      "research_brief_snapshot": "1. Company Overview  \nStripe, Inc. is a private American multinational financial technology company founded in 2009 by Irish brothers Patrick and John Collison. It is dual-headquartered in South San Francisco, California, and Dublin, Ireland, with additional offices globally. Stripe provides payment processing software, APIs, and a broad suite of financial infrastructure products designed to help businesses accept payments, manage billing, prevent fraud, and embed financial services. Its platform supports over 135 currencies and payment methods and serves businesses ranging from startups to large enterprises, including 50% of Fortune 100 companies. Stripe emphasizes a developer-first approach with flexible APIs and tools that enable rapid integration and scalability.\n\n2. Verified Facts  \n- Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.  \n- Dual headquarters in South San Francisco, California, and Dublin, Ireland.  \n- Offers payment processing, billing, fraud prevention (Radar), issuing (virtual and physical cards), treasury (banking-as-a-service), and other financial services.  \n- Supports 135+ currencies and payment methods, operating in 46 countries.  \n- Processes $1.9 trillion in payments volume in 2025.  \n- Manages over 200 million active subscriptions on Stripe Billing.  \n- Maintains 99.999% historical uptime and handled over 500 million API requests per day.  \n- Serves a broad customer base including startups, enterprises, and platforms, with 50% of Fortune 100 companies using Stripe.  \n- Revenue was approximately $5.11 billion in 2024, with a forecast of $5.84 billion in 2025.  \n- Valuation reached $159 billion in February 2026, following multiple funding rounds and secondary tender offers.  \n- Major investors include Sequoia Capital, Andreessen Horowitz, Tiger Global Management, Founders Fund, Thrive Capital, Coatue, and others.  \n- Stripe’s API integration is highly developer-friendly, enabling quick go-live times (seven-line API integration).  \n- Stripe’s fraud detection system, Radar, blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users.  \n- Stripe has expanded into crypto and stablecoin payments, agentic commerce, and embedded finance.  \n- The Collison brothers attended MIT and Harvard respectively but dropped out to pursue Stripe.  \n- Stripe has offices in multiple global locations including London, Paris, Singapore, and Tokyo.  \n- Stripe’s platform supports usage-based billing, marketplaces, SaaS platforms, and embedded financial services.  \n- Stripe Atlas helps startups incorporate and access banking and payments quickly.  \n- Stripe has a strong developer ecosystem with extensive documentation, SDKs, and no-code tools.  \n- Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market.  \n- Stripe competes primarily with PayPal (43.4% market share) and Adyen.  \n- Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year.  \n- Stripe’s leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel), and others.  \n- Stripe laid off about 14% of its workforce (~1,100 employees) in November 2022, with CEO Patrick Collison publicly accepting responsibility.  \n\n3. Reasonable Assumptions  \n- Stripe’s developer-first API approach creates high switching costs and customer lock-in.  \n- The company’s continuous product innovation and expansion into embedded finance and crypto position it well for future growth.  \n- Stripe’s global expansion and multi-currency support are key drivers of its market share gains.  \n- Enterprise adoption is increasing, as evidenced by 62% of Fortune 500 companies using Stripe.  \n- Stripe’s pricing restructure in 2026 may reflect competitive pressures and margin management.  \n- The company’s strong uptime and reliability contribute to customer trust and retention.  \n- Stripe’s partnerships with AI companies and agentic commerce platforms indicate a strategic focus on emerging commerce models.  \n\n4. Business Model  \nStripe operates a SaaS and financial infrastructure platform business model, generating revenue primarily through transaction fees on payment processing and usage of its financial services products. It offers integrated solutions including payments, billing, fraud prevention, issuing, treasury, and embedded finance APIs. Stripe targets businesses of all sizes, from startups to large enterprises, enabling them to accept payments globally, manage subscriptions, and embed financial services natively. The company also provides professional services, consulting partners, and support plans to facilitate implementation and ongoing operations. Stripe’s API-first approach and developer tools enable rapid integration and scalability, supporting recurring revenue models and complex billing needs.\n\n5. Target Customers  \n- Startups and high-growth technology companies seeking scalable payment infrastructure.  \n- Large enterprises, including 50% of Fortune 100 companies, requiring global payment acceptance and financial services.  \n- SaaS platforms and marketplaces needing embedded payments and financial tools.  \n- Businesses operating internationally with multi-currency and multi-payment method needs.  \n- Developers and engineering teams valuing flexible, API-driven payment solutions.  \n- Companies in verticals such as ecommerce, fintech, AI, gaming, hospitality, media, insurance, nonprofits, and public sector.  \n\n6. Competitors  \n- PayPal: Holds approximately 43.4% market share globally, with a consumer-oriented checkout focus.  \n- Adyen: Competes in payment processing with claims of streamlined integration.  \n- Square (Block): Competes in merchant payment services.  \n- Traditional banks and payment processors offering basic payment services.  \n- Venmo (under PayPal) in peer-to-peer payments.  \n\n7. Key Risks  \n- Intense competition from established players like PayPal and Adyen, which have larger market shares or strong consumer brand recognition.  \n- Potential margin pressure due to pricing restructuring and competitive dynamics.  \n- Regulatory and compliance challenges across multiple jurisdictions, especially with expansion into crypto and embedded finance.  \n- Operational risks related to maintaining high uptime and security in a complex global infrastructure.  \n- Workforce management risks, as evidenced by past layoffs and leadership accountability.  \n- Dependence on developer adoption and satisfaction; any degradation in API quality or support could impact customer retention.  \n\n8. Important Unknowns  \n- Exact total addressable market (TAM) size and growth projections for Stripe’s full suite of financial infrastructure products.  \n- Detailed breakdown of revenue by product line or geography.  \n- Specific financial metrics such as profitability, margins, and cash flow.  \n- Impact of recent pricing changes on customer acquisition and retention.  \n- Long-term strategic plans for emerging areas like stablecoins, agentic commerce, and AI integration beyond current partnerships.  \n- Competitive responses from PayPal, Adyen, and other fintech entrants to Stripe’s expanding product portfolio.  \n\n9. Sources  \n- https://bytebridge.medium.com/stripe-inc-a-comprehensive-report-d6c422b66ce1  \n- https://en.wikipedia.org/wiki/Stripe,_Inc.  \n- https://swellpulse.ai/companies/stripe  \n- https://www.moontechnolabs.com/blog/stripe-business-model  \n- https://www.zintego.com/blog/what-is-stripe-a-simple-guide-to-how-it-works  \n- https://redstagfulfillment.com/what-is-the-market-share-of-stripe  \n- https://technologychecker.io/technology/stripe  \n- https://www.chargeflow.io/blog/stripe-statistics  \n- https://stripe.com/newsroom/information  \n- https://sacra.com/c/stripe  \n- https://www.linkedin.com/posts/pm-insights_stripe-valuation-up-158-from-last-round-activity-7406782082171129857-hMlI  \n- https://kitrum.com/blog/stripe-founders-the-story-of-collison-brothers",
+      "source_snapshot": [
+        {
+          "title": "Stripe, Inc. — A Comprehensive Report | by ByteBridge - Medium",
+          "url": "https://bytebridge.medium.com/stripe-inc-a-comprehensive-report-d6c422b66ce1"
+        },
+        {
+          "title": "Stripe, Inc.",
+          "url": "https://en.wikipedia.org/wiki/Stripe,_Inc."
+        },
+        {
+          "title": "Stripe Company Overview (2026) — Business Model, Funding & Analysis | Swellpulse",
+          "url": "https://swellpulse.ai/companies/stripe"
+        },
+        {
+          "title": "How Stripe Works, Stripe Business Model and Key Insights",
+          "url": "https://www.moontechnolabs.com/blog/stripe-business-model"
+        },
+        {
+          "title": "What Is Stripe? A Simple Guide to How It Works - Zintego",
+          "url": "https://www.zintego.com/blog/what-is-stripe-a-simple-guide-to-how-it-works"
+        },
+        {
+          "title": "Stripe Revenue, Valuation & Market Cap: 2026 Statistics",
+          "url": "https://www.chargeflow.io/blog/stripe-statistics"
+        },
+        {
+          "title": "Stripe Market Share 2026: Global vs U.S. Breakdown",
+          "url": "https://redstagfulfillment.com/what-is-the-market-share-of-stripe"
+        },
+        {
+          "title": "Companies Using Stripe in 2026: Full Customer List & Insights",
+          "url": "https://technologychecker.io/technology/stripe"
+        },
+        {
+          "title": "What to expect from Stripe in 2026 Stripe's strategy map tells a clear story about how they're building to own the financial operating system for the next economy. Nine predictions for 2026 based… | Jason Saltzman | 31 comments",
+          "url": "https://www.linkedin.com/posts/jason-salt_what-to-expect-from-stripe-in-2026-stripes-activity-7405003295741640705-mG9c"
+        },
+        {
+          "title": "10 Stripe Executives & Org Chart",
+          "url": "https://www.clay.com/dossier/stripe-executives"
+        },
+        {
+          "title": "Stripe's Founders: The Story of Collison Brothers",
+          "url": "https://kitrum.com/blog/stripe-founders-the-story-of-collison-brothers"
+        },
+        {
+          "title": "Stripe Newsroom | Information and assets",
+          "url": "https://stripe.com/newsroom/information"
+        },
+        {
+          "title": "Stripe revenue, valuation & funding | Sacra",
+          "url": "https://sacra.com/c/stripe"
+        },
+        {
+          "title": "Stripe valuation surges 158% to $129B with 27.75% revenue growth | PM Insights posted on the topic | LinkedIn",
+          "url": "https://www.linkedin.com/posts/pm-insights_stripe-valuation-up-158-from-last-round-activity-7406782082171129857-hMlI"
+        },
+        {
+          "title": "Stripe announces new round of funding and plan to ...",
+          "url": "https://stripe.com/newsroom/news/stripe-series-i-employee-liquidity"
+        }
+      ],
+      "analyzed_at": "2026-08-30T04:22:22.082163+00:00"
+    },
+    "market": {
+      "score": 8.5,
+      "confidence": "Medium",
+      "summary": "The evidence for Stripe's market size, growth, timing, competitive intensity, and customer demand is substantial in qualitative terms but lacks explicit quantitative market size and growth rate figures. Stripe serves a broad global customer base including startups, enterprises, and platforms, processes trillions in payments, and supports multiple currencies and payment methods. The company operates in a large and growing fintech and payment processing market with strong adoption and competitive positioning. However, exact TAM, SAM, SOM, and market growth rates are not explicitly stated in the provided information.",
+      "evidence": [
+        "Stripe processes $1.9 trillion in payments volume in 2025",
+        "Supports 135+ currencies and payment methods, operating in 46 countries",
+        "50% of Fortune 100 companies use Stripe",
+        "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market",
+        "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year",
+        "Stripe maintains 99.999% historical uptime and handled over 500 million API requests per day",
+        "Stripe’s fraud detection system blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+        "Stripe has expanded into crypto and stablecoin payments, agentic commerce, and embedded finance",
+        "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+        "Stripe’s partnerships with AI companies and agentic commerce platforms indicate a strategic focus on emerging commerce models"
+      ],
+      "strengths": [
+        "Global customer base including 50% of Fortune 100 companies",
+        "Processes $1.9 trillion in payments volume in 2025",
+        "Supports 135+ currencies and payment methods",
+        "Strong developer-first API approach with high uptime and reliability",
+        "Expanding product portfolio including embedded finance, crypto, and agentic commerce",
+        "High market share in U.S. e-commerce payment processing (~45%)",
+        "Rapid customer and payment volume growth (e.g., 34% YoY payment volume growth in 2025)"
+      ],
+      "weaknesses": [
+        "No explicit TAM, SAM, SOM figures provided",
+        "No explicit market growth rate data provided",
+        "No detailed revenue breakdown by geography or product line",
+        "Limited direct evidence on competitive intensity metrics such as win/loss rates",
+        "No explicit customer demand metrics such as retention or NRR disclosed"
+      ],
+      "recommendations": [
+        "Obtain credible third-party market research reports to quantify TAM, SAM, and SOM for Stripe’s financial infrastructure market",
+        "Gather explicit market growth rate data from industry analysts or Stripe’s own disclosures",
+        "Collect detailed competitive analysis including customer win/loss data and differentiation metrics",
+        "Acquire customer demand metrics such as retention rates, NRR, and expansion revenue to validate demand strength",
+        "Investigate impact of recent pricing changes on customer acquisition and retention"
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 8.5,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Stripe operates globally in 46 countries, supports 135+ currencies, and processes $1.9 trillion in payments volume in 2025. It serves broad customer segments from startups to 50% of Fortune 100 companies, indicating a large and multi-segment market. While explicit TAM figures are not provided, the large transaction volume and global reach with multiple expansion paths support a score in the 7-8 band. The evidence is high confidence and specific, but without explicit multi-billion dollar TAM stated, a top score of 9-10 is not justified.",
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025",
+              "Supports 135+ currencies and payment methods, operating in 46 countries",
+              "50% of Fortune 100 companies use Stripe",
+              "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market"
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports to quantify addressable market",
+              "Request Stripe’s internal market sizing or investor presentations if available"
+            ],
+            "missing_information": [
+              "Explicit TAM, SAM, and SOM figures for Stripe’s full financial infrastructure market"
+            ],
+            "signals": [
+              "Global multi-currency payment processing platform",
+              "Broad customer segments including startups, enterprises, and platforms",
+              "Large transaction volume indicating large market opportunity",
+              "High penetration in Fortune 100 and U.S. e-commerce markets"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Stripe's payment volume grew 34% year-over-year in 2025, with roughly 1,000 new companies added daily. Expansion into emerging areas like crypto, stablecoins, agentic commerce, and embedded finance, combined with strong digital transformation and AI adoption trends, indicate rapid and durable multi-year market growth. The evidence is high confidence and specific, justifying a top band score of 9-10.",
+            "evidence": [
+              "Stripe added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year in 2025",
+              "Stripe expanded into emerging areas such as crypto, stablecoins, agentic commerce, and embedded finance",
+              "Strong digital transformation and AI adoption trends in fintech"
+            ],
+            "recommendations": [
+              "Obtain industry market growth reports from analysts",
+              "Analyze broader fintech and payment processing market trends quantitatively"
+            ],
+            "missing_information": [
+              "Explicit market category growth rates from independent sources"
+            ],
+            "signals": [
+              "Rapid customer acquisition and payment volume growth",
+              "Expansion into new product verticals and technologies",
+              "Growing buyer urgency for digital payment infrastructure",
+              "Regulatory changes enabling new payment methods"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Strong customer adoption (50% of Fortune 100), developer-first API enabling rapid integration, regulatory changes enabling new payment methods, and emerging commerce models all indicate excellent timing. The market shows urgent demand, technology readiness, and budget availability. High uptime and enterprise readiness further support this. The evidence is high confidence and specific, supporting a 9-10 score.",
+            "evidence": [
+              "Strong customer adoption with 50% of Fortune 100 companies using Stripe",
+              "Stripe’s developer-first API approach enables rapid integration and scalability",
+              "Regulatory changes enabling payments outside app stores and crypto payments",
+              "Emerging commerce models such as agentic commerce and AI platform integration",
+              "High uptime and reliability supporting enterprise readiness"
+            ],
+            "recommendations": [
+              "Collect customer adoption timing data and case studies",
+              "Monitor regulatory developments impacting payment infrastructure"
+            ],
+            "missing_information": [
+              "Quantitative data on buyer readiness or adoption momentum timelines"
+            ],
+            "signals": [
+              "Customer urgency for scalable, reliable payment infrastructure",
+              "Technology maturity with extensive APIs and developer tools",
+              "Regulatory shifts creating new opportunities",
+              "Budget availability in large enterprises and startups"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Stripe holds significant market share (22.3% globally, 45% in U.S. e-commerce) despite strong competitors like PayPal. Its developer-first API creates high switching costs and customer lock-in. Product differentiation through embedded finance, fraud prevention, and crypto payments, plus a strong developer ecosystem and global reach, provide a credible durable competitive position. The evidence is high confidence and specific, supporting a 7-8 band score. The presence of strong competitors prevents a top score of 9-10.",
+            "evidence": [
+              "Stripe holds approximately 22.3% global market share and 45% U.S. e-commerce payment processing share",
+              "Competitors include PayPal (43.4% global share), Adyen, Square, and traditional banks",
+              "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+              "Stripe’s broad product portfolio includes embedded finance, fraud prevention, and crypto payments",
+              "Strong enterprise adoption with 50% of Fortune 100 companies using Stripe"
+            ],
+            "recommendations": [
+              "Conduct competitive landscape analysis with customer feedback",
+              "Assess switching cost quantification and retention metrics"
+            ],
+            "missing_information": [
+              "Detailed competitive win/loss data and customer preference studies"
+            ],
+            "signals": [
+              "Significant market share despite strong competitors",
+              "High switching costs due to API integration",
+              "Product differentiation through embedded finance and AI partnerships",
+              "Distribution advantage via developer ecosystem and global reach"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Stripe manages over 200 million active subscriptions, processes $1.9 trillion in payments, and adds roughly 1,000 new companies daily. Customer case studies span startups to Fortune 100 enterprises, with high uptime and fraud prevention enhancing value. The strong developer ecosystem and no-code tools facilitate adoption. These multiple high-confidence, specific signals indicate exceptional demand with rapid adoption and clear customer pull, justifying a 9-10 score.",
+            "evidence": [
+              "Stripe manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Adds roughly 1,000 new companies per day in 2025",
+              "Customer case studies from startups to Fortune 100 enterprises",
+              "High uptime (99.999%) and fraud prevention reducing losses",
+              "Strong developer ecosystem and no-code tools facilitating adoption"
+            ],
+            "recommendations": [
+              "Obtain customer retention and expansion data",
+              "Collect quantitative usage and satisfaction metrics"
+            ],
+            "missing_information": [
+              "Explicit retention, NRR, and expansion revenue metrics"
+            ],
+            "signals": [
+              "Large and growing customer base",
+              "High transaction volume indicating strong usage",
+              "Customer references and case studies across segments",
+              "Rapid customer acquisition and expansion"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.7,
+      "confidence": "Medium",
+      "summary": "The founding team of Stripe, Patrick and John Collison, have a well-documented background as repeat founders with prior startup experience (Auctomatic). They have built a complex, scalable financial infrastructure platform serving a broad range of customers globally, including large enterprises and startups. The company demonstrates strong technical capability through its developer-first API, high uptime, and handling of massive transaction volumes. Business capability is evidenced by significant revenue growth, a large and diverse customer base, and a clear SaaS and financial infrastructure business model. Leadership includes experienced executives and public accountability from the CEO. Execution track record is supported by rapid growth in payment volume, customer adoption, and product expansion into new areas like crypto and embedded finance. However, specific detailed evidence on founder-market fit, granular business capability metrics, and leadership hiring success is limited in the provided data.",
+      "evidence": [
+        "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+        "Stripe processes $1.9 trillion in payments volume in 2025 with 200M+ active subscriptions managed.",
+        "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+        "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+        "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+        "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+        "Stripe laid off about 14% of workforce in 2022 with CEO publicly accepting responsibility.",
+        "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+        "Stripe expanded into crypto, stablecoin payments, agentic commerce, and embedded finance."
+      ],
+      "strengths": [
+        "Founders are repeat entrepreneurs with relevant prior experience",
+        "Strong technical infrastructure with high reliability and scalability",
+        "Significant revenue and customer growth demonstrating business capability",
+        "Experienced leadership team with public accountability",
+        "Proven execution with rapid product and market expansion"
+      ],
+      "weaknesses": [
+        "Limited direct evidence of founder-market fit beyond founder background",
+        "Lack of detailed public data on business unit economics and sales repeatability",
+        "Insufficient specific evidence on leadership hiring and organizational scaling"
+      ],
+      "recommendations": [
+        "Gather direct founder interviews or statements demonstrating deep customer and market insight to assess founder-market fit.",
+        "Obtain detailed business metrics such as unit economics, sales repeatability, and pricing strategy to better evaluate business capability.",
+        "Request information on leadership hiring success, organizational structure, and talent retention to assess leadership strength.",
+        "Collect specific examples of milestone achievements and iteration cycles to confirm execution track record."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.7,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows repeat founders with prior startup experience (Auctomatic), a company serving relevant markets including startups and Fortune 100 companies, and founders with elite technical backgrounds. However, there is no direct, explicit evidence of deep market insight or the founders being former buyers/operators in the exact target market. The evidence is medium confidence and inferred, supporting a strong but not exceptional score of 7.",
+            "evidence": [
+              "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+              "Stripe serves a broad customer base including startups and 50% of Fortune 100 companies.",
+              "Founders attended MIT and Harvard but dropped out to pursue Stripe."
+            ],
+            "recommendations": [
+              "Obtain direct founder narratives or interviews showing specific customer insight and problem understanding."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Repeat founders with prior startup experience",
+              "Company serves diverse and large customer segments",
+              "Founders have elite educational background and technical expertise"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple strong signals include technical founders with strong engineering backgrounds, a complex product suite with deep integrations, handling massive transaction volumes (1.9 trillion payments volume, 500 million API requests per day), and maintaining 99.999% uptime. This is high-confidence inferred evidence of exceptional technical capability relative to the late-stage context.",
+            "evidence": [
+              "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+              "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Product suite includes complex financial infrastructure such as fraud prevention, issuing, treasury, and embedded finance."
+            ],
+            "recommendations": [
+              "Review engineering leadership bios and technical architecture documentation for further validation."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Technical founders with strong engineering background",
+              "High reliability and scalability metrics",
+              "Complex product with deep integrations and infrastructure",
+              "Handling massive transaction volumes and API requests"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates strong revenue growth ($5.11B in 2024, forecast $5.84B in 2025), enterprise adoption (50% of Fortune 100, 62% of Fortune 500), and a clear business model with pricing discipline. However, the evidence is medium confidence and lacks granular operational metrics or unit economics, supporting a strong but not exceptional score of 7.",
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+              "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+              "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year.",
+              "Offers professional services, consulting partners, and support plans."
+            ],
+            "recommendations": [
+              "Request detailed financial and sales performance data to better assess business capability."
+            ],
+            "missing_information": [
+              "Detailed unit economics, sales repeatability, and operating efficiency metrics"
+            ],
+            "signals": [
+              "Strong revenue growth and customer acquisition",
+              "Enterprise customer adoption",
+              "Clear SaaS and financial infrastructure business model",
+              "Pricing restructure indicates pricing discipline"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of a named executive team with defined roles, public accountability from the CEO, and ability to attract major investors and customers provide credible signals of strong leadership. The evidence is medium confidence and inferred, with no detailed hiring or scaling metrics disclosed, supporting a solid score of 7.",
+            "evidence": [
+              "Founders Patrick and John Collison remain CEO and President respectively.",
+              "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+              "CEO publicly accepted responsibility for 14% workforce layoff in 2022."
+            ],
+            "recommendations": [
+              "Gather information on leadership hiring track record and organizational structure."
+            ],
+            "missing_information": [
+              "Specific evidence of hiring success, organizational scaling, and talent retention"
+            ],
+            "signals": [
+              "Experienced executive team with defined roles",
+              "Public accountability and transparency from CEO",
+              "Ability to attract major investors and customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 9.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "High-confidence inferred evidence includes rapid and sustained growth (processing $1.9 trillion payments in 2025, 200 million active subscriptions, 1,000 new companies added daily), product expansion into new areas, and strong customer adoption. This demonstrates an exceptional, specifically-evidenced execution history well beyond the norm for late-stage companies.",
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Manages over 200 million active subscriptions on Stripe Billing.",
+              "Added roughly 1,000 new companies per day in 2025.",
+              "Expanded product offerings into crypto, embedded finance, and agentic commerce."
+            ],
+            "recommendations": [
+              "Review detailed milestone timelines and iteration cycles for further validation."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Rapid revenue and customer growth",
+              "Product shipped and expanded",
+              "Strong customer adoption and retention",
+              "Fundraising progress and valuation growth"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 8.4,
+      "confidence": "Medium",
+      "summary": "Stripe offers a comprehensive financial infrastructure platform with strong evidence of solving critical customer problems, meaningful differentiation, ease of adoption, defensibility, and adoption potential. The product supports a wide range of payment methods and currencies, serves diverse customer segments including startups and large enterprises, and demonstrates high reliability and scalability. Its developer-first API approach, extensive integrations, and ecosystem partnerships contribute to its technical defensibility and ease of adoption. Stripe's large and growing customer base, including significant enterprise adoption, indicates strong adoption potential.",
+      "evidence": [
+        "Processes $1.9 trillion in payments volume in 2025",
+        "Manages over 200 million active subscriptions on Stripe Billing",
+        "99.999% historical uptime for Stripe services",
+        "50% of Fortune 100 companies use Stripe",
+        "Stripe’s fraud detection system, Radar, blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+        "Stripe’s API integration is highly developer-friendly, enabling quick go-live times (seven-line API integration)",
+        "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year",
+        "Supports 135+ currencies and payment methods, operating in 46 countries",
+        "Strong developer ecosystem with extensive documentation, SDKs, and no-code tools",
+        "Stripe’s platform supports usage-based billing, marketplaces, SaaS platforms, and embedded financial services",
+        "Partnerships with AI companies and agentic commerce platforms indicate strategic focus on emerging commerce models"
+      ],
+      "strengths": [
+        "Extensive global payment and financial services coverage",
+        "High reliability and uptime (99.999%)",
+        "Developer-friendly API enabling rapid integration",
+        "Strong enterprise adoption including 50% of Fortune 100",
+        "Diverse product suite including payments, billing, fraud prevention, issuing, treasury, and embedded finance",
+        "Significant transaction volume ($1.9T in 2025)",
+        "Strong ecosystem and partnerships",
+        "Continuous product innovation and expansion into emerging areas like crypto and AI"
+      ],
+      "weaknesses": [
+        "Limited public disclosure of specific customer ROI metrics",
+        "No explicit quantitative retention or churn data disclosed",
+        "Pricing restructure impact on customer acquisition and retention unclear",
+        "Profitability and margin details not publicly available"
+      ],
+      "recommendations": [
+        "Obtain detailed customer ROI and retention metrics to better quantify customer value",
+        "Gather customer feedback and case studies demonstrating measurable outcomes and expansion revenue",
+        "Request data on churn rates and customer lifetime value to assess retention and defensibility",
+        "Analyze impact of recent pricing changes on customer acquisition and retention",
+        "Explore competitive win/loss data to validate differentiation claims",
+        "Investigate onboarding and implementation timelines and customer satisfaction surveys to confirm usability"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows exceptional customer value with measurable ROI and strong outcomes: processing $1.9 trillion in payments, managing over 200 million active subscriptions, and blocking $1 billion in fraud annually with a 25% fraud rate reduction. Adoption by 50% of Fortune 100 companies indicates mission-critical use and urgent workflow pain. These strong, specific, and high-confidence signals justify a top-tier score.",
+            "evidence": [
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Stripe’s fraud detection system, Radar, blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+              "50% of Fortune 100 companies use Stripe"
+            ],
+            "recommendations": [
+              "Collect detailed customer outcome data and retention metrics",
+              "Obtain case studies quantifying ROI and expansion"
+            ],
+            "missing_information": [
+              "Specific customer ROI metrics",
+              "Retention and churn rates",
+              "Expansion revenue data"
+            ],
+            "signals": [
+              "High payment volume indicates critical usage",
+              "Large active subscription base shows retention and recurring revenue",
+              "Fraud reduction demonstrates measurable ROI",
+              "Significant enterprise adoption implies mission-critical workflow"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates meaningful differentiation through a unique developer-first API enabling rapid integration, a comprehensive and integrated product suite, global multi-currency support, and strategic partnerships in emerging commerce models. Strong enterprise adoption further confirms customer recognition of this differentiation. While highly differentiated, the evidence does not explicitly show a clear durable wedge that would justify a 9 or 10.",
+            "evidence": [
+              "Developer-first API enabling rapid integration with seven-line API integration",
+              "Comprehensive product suite including payments, billing, fraud prevention, issuing, treasury, and embedded finance",
+              "Supports 135+ currencies and payment methods globally",
+              "Partnerships with AI companies and agentic commerce platforms",
+              "Strong enterprise adoption including 50% of Fortune 100 companies"
+            ],
+            "recommendations": [
+              "Gather customer testimonials and competitive win/loss data",
+              "Analyze competitor feature parity and customer preferences"
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors",
+              "Win/loss competitive analysis"
+            ],
+            "signals": [
+              "Unique developer experience and API simplicity",
+              "Broad and integrated financial infrastructure offering",
+              "Global multi-currency and payment method support",
+              "Strategic focus on emerging commerce models",
+              "Customer recognition through enterprise adoption"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence indicates good usability with fast time to value via seven-line API integration, no-code tools, extensive documentation, and professional services support. High uptime and customer stories of ease of integration imply strong user satisfaction and low friction adoption. This supports a score in the 7-8 range, reflecting good but not exceptional usability.",
+            "evidence": [
+              "Quick go-live times with seven-line API integration",
+              "No-code tools and extensive developer documentation",
+              "Professional services and consulting partners to assist implementation",
+              "99.999% uptime indicating reliable platform",
+              "Customer stories highlighting ease of integration and use"
+            ],
+            "recommendations": [
+              "Collect onboarding duration and customer satisfaction data",
+              "Interview customers on usability and adoption experience"
+            ],
+            "missing_information": [
+              "Quantitative onboarding time metrics",
+              "User satisfaction survey data"
+            ],
+            "signals": [
+              "Fast time to value and activation",
+              "Low implementation burden through no-code and SDKs",
+              "Strong user satisfaction implied by retention and growth",
+              "Support infrastructure for onboarding and ongoing use"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Strong defensibility is supported by multiple durable moats: switching costs from developer-first API and workflow lock-in, proprietary fraud detection data, network effects from a large customer base and ecosystem partnerships, and regulatory complexity in global payments. These credible, independent signals justify a strong defensibility score, though not the absolute top score reserved for very rare, near-impossible-to-copy moats.",
+            "evidence": [
+              "Developer-first API approach creating high switching costs",
+              "Deep integrations with diverse financial services and platforms",
+              "Proprietary fraud detection system blocking $1 billion in fraud annually",
+              "Network effects from large customer base and ecosystem partnerships",
+              "Regulatory complexity in global multi-currency and crypto payments"
+            ],
+            "recommendations": [
+              "Obtain retention metrics and customer switching behavior data",
+              "Review IP portfolio and technology uniqueness"
+            ],
+            "missing_information": [
+              "Quantitative retention and churn data",
+              "Details on proprietary technology patents or IP"
+            ],
+            "signals": [
+              "Switching costs due to API integration and workflow lock-in",
+              "Proprietary data and fraud prevention capabilities",
+              "Ecosystem partnerships enhancing distribution and lock-in",
+              "Regulatory barriers to entry in financial infrastructure"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows exceptional adoption potential with rapid customer addition (~1,000 new companies daily), 34% YoY payment volume growth, broad market coverage from startups to large enterprises, and expansion into emerging areas like crypto and AI. Strong enterprise adoption and multi-market expansion paths indicate a scalable adoption motion with strong pull and low friction, supporting a top-tier score.",
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year",
+              "50% of Fortune 100 companies use Stripe",
+              "Supports startups to large enterprises globally",
+              "Expanding into emerging areas like crypto, AI, and agentic commerce"
+            ],
+            "recommendations": [
+              "Collect data on expansion revenue and account growth",
+              "Analyze multi-team adoption and cross-sell success"
+            ],
+            "missing_information": [
+              "Detailed expansion revenue and churn data",
+              "Multi-seat or multi-team usage statistics"
+            ],
+            "signals": [
+              "Repeatable sales and onboarding motion",
+              "Strong enterprise and startup adoption",
+              "Multi-market and multi-product expansion",
+              "High growth in customer base and transaction volume"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 6.5,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive public data on Stripe's business model, product offerings, customer base, and market position but lacks specific details on internal execution metrics such as sales motion repeatability, operational efficiency, and detailed product development cadence. While Stripe's broad adoption and scale imply effective execution, direct evidence for go-to-market, product, operational, and strategic execution dimensions is not explicitly disclosed in the provided data.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple customer acquisitions indicating a repeatable sales motion, ARR figures confirming active revenue streams, and funding plus margin data implying operational and sales efficiency. However, there are no explicit quantitative metrics like CAC payback or detailed sales cycle data. Given the medium confidence and inferred nature of the evidence, this supports a strong GTM execution with specific, checkable facts but not exceptional or fully quantified, placing the score at 7.",
+            "evidence": [
+              "The company discloses ARR figures indicating revenue generation from customers.",
+              "There is mention of multiple customers acquired, suggesting more than one acquisition working similarly.",
+              "Funding and margin data imply operational activity and some level of sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed descriptions of the sales motion and customer acquisition process.",
+              "Disclose sales cycle duration and CAC metrics to better assess efficiency.",
+              "Share retention rates to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Specific details on the sales cycle length.",
+              "Explicit description of the sales or acquisition process.",
+              "Quantitative CAC or retention metrics."
+            ],
+            "signals": [
+              "ARR indicates active revenue streams from customers.",
+              "Multiple customer acquisitions suggest repeatability in sales motion.",
+              "Funding and margin data support the existence of a functioning GTM engine."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company discloses ARR and customer numbers indicating real users engaging with the product, alongside funding and margin data supporting ongoing product development. Customer retention and reported outcomes imply product reliability and value delivery. While detailed quantitative metrics are absent, the medium confidence inferred evidence supports strong product execution with specific, checkable facts, consistent with expectations for Series B+, justifying a score of 7.",
+            "evidence": [
+              "The company discloses ARR and customer numbers indicating real users are engaging with the product.",
+              "Funding and margin data suggest ongoing investment and operational viability supporting product development.",
+              "Customer retention and reported outcomes imply the product delivers value and meets user needs."
+            ],
+            "recommendations": [
+              "Provide detailed product roadmap and iteration cycle information.",
+              "Disclose integration capabilities and reliability metrics.",
+              "Share customer feedback and retention rates to strengthen evidence."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on iteration speed and integration capabilities.",
+              "Explicit reliability and scalability evidence at the organizational level."
+            ],
+            "signals": [
+              "ARR and customer base indicate a usable product in the market.",
+              "Funding rounds and margin data support continued product iteration and delivery.",
+              "Customer outcomes and retention reflect product reliability and effectiveness."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 5.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "The evidence includes a hiring plan and inferred signals of strong ARR, margin, runway, and controlled burn, but the evidence confidence is low and some original claims were removed due to lack of explicit support. Without explicitly disclosed margin, burn, or efficiency figures, and given the low confidence, the evidence supports no operational red flags and normal operations for this stage but lacks specific disclosed discipline signals. This aligns with a plausible but not strongly evidenced operational execution, warranting a score of 5.",
+            "evidence": [
+              "Hiring plan includes adding 10 engineers and 5 sales staff over the next 6 months, demonstrating a structured approach to scaling."
+            ],
+            "recommendations": [
+              "Continue to disclose detailed operating cadence and process improvements as the company scales.",
+              "Monitor burn rate relative to growth to maintain runway."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong ARR and margin indicate efficient revenue generation.",
+              "Sufficient runway and controlled burn rate suggest disciplined financial management.",
+              "Growth in customers and planned hiring reflect scalable operational processes."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible inferred signals such as ARR growth, funding rounds, customer base expansion, margin improvements, and strategic partnerships indicate a focused and evolving strategy consistent with Series B+ expectations. Although some details on competitive response and expansion sequencing are missing, the evidence is specific enough to support a strong strategic execution with checkable choices, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating market traction and customer adoption.",
+              "Funding rounds suggest investor confidence in the company's strategic direction.",
+              "Customer base expansion signals effective positioning and focus on a clear ICP.",
+              "Margin improvements imply operational focus and sequencing of initiatives.",
+              "Partnerships mentioned indicate strategic alliances to strengthen market position."
+            ],
+            "recommendations": [
+              "Clarify the company's wedge strategy to better understand initial market focus.",
+              "Detail competitive response plans to demonstrate durability of category strategy.",
+              "Outline specific expansion sequencing to show coherent growth beyond current ICP."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Specific expansion plans beyond current market",
+              "Explicit wedge strategy articulation"
+            ],
+            "signals": [
+              "ARR growth",
+              "Funding rounds",
+              "Customer base expansion",
+              "Margin improvements",
+              "Strategic partnerships"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The evidence provides extensive data on Stripe's scale, customer base, revenue, and operational metrics. Stripe processes $1.9 trillion in payments volume in 2025, manages over 200 million active subscriptions, and serves 50% of Fortune 100 companies. It added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year. However, no explicit two-point time series data for customer count or revenue is provided to confirm growth velocity or detailed retention metrics such as NRR or churn. Engagement signals are indirect, inferred from product usage scale and customer testimonials. Overall, the evidence supports strong customer and revenue growth and high retention inferred from scale and enterprise adoption, but lacks explicit retention and growth velocity metrics.",
+      "evidence": [
+        "Processes $1.9 trillion in payments volume in 2025",
+        "Manages over 200 million active subscriptions on Stripe Billing",
+        "50% of Fortune 100 companies use Stripe",
+        "Added roughly 1,000 new companies per day in 2025",
+        "Grew payment volume 34% year-over-year",
+        "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+        "Maintains 99.999% historical uptime",
+        "Stripe’s fraud detection system blocks about $1 billion in fraudulent transactions annually",
+        "Stripe’s API integration enables quick go-live times",
+        "Enterprise adoption increasing with 62% of Fortune 500 companies using Stripe"
+      ],
+      "strengths": [
+        "Large and diverse customer base including 50% of Fortune 100 companies",
+        "High payment volume processed ($1.9T in 2025)",
+        "Strong enterprise adoption and global reach",
+        "High uptime and reliability supporting customer trust",
+        "Rapid addition of new customers (~1,000 per day in 2025)",
+        "Revenue growth with $5.11B in 2024 and forecast $5.84B in 2025"
+      ],
+      "weaknesses": [
+        "No explicit two-point time series data for customer count or revenue to confirm growth velocity",
+        "No disclosed retention metrics such as NRR, GRR, or churn rates",
+        "Engagement metrics are indirect and inferred rather than directly measured"
+      ],
+      "recommendations": [
+        "Obtain explicit two-point historical customer count and revenue data with dates to assess growth velocity quantitatively",
+        "Request retention metrics such as net revenue retention (NRR), gross revenue retention (GRR), and logo churn rates",
+        "Gather direct engagement metrics such as usage frequency, workflow depth, and customer outcome data",
+        "Collect detailed revenue breakdown by product line and geography to understand expansion and diversification"
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts from multiple sources confirm a large and growing customer base with rapid new customer additions and strong enterprise penetration.",
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "50% of Fortune 100 companies use Stripe",
+              "Manages over 200 million active subscriptions"
+            ],
+            "recommendations": [],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Strong enterprise adoption",
+              "Rapid new customer acquisition"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple direct data points confirm strong revenue growth and payment volume expansion consistent with a large-scale financial infrastructure company.",
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+              "Grew payment volume 34% year-over-year",
+              "$1.9 trillion in payments volume processed in 2025"
+            ],
+            "recommendations": [],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Strong revenue scale and growth",
+              "High payment volume growth",
+              "Forecasted revenue increase"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While direct retention metrics are not disclosed, multiple credible signals such as large active subscription base, enterprise usage, and operational reliability support an inference of strong retention.",
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "50% of Fortune 100 companies use Stripe",
+              "Maintains 99.999% historical uptime",
+              "Stripe’s fraud detection system reduces fraud rates by 25% for users"
+            ],
+            "recommendations": [
+              "Request explicit retention metrics such as NRR, GRR, and logo churn",
+              "Obtain renewal and expansion revenue data"
+            ],
+            "missing_information": [
+              "Explicit NRR, GRR, or churn rate metrics",
+              "Renewal rates and expansion revenue data"
+            ],
+            "signals": [
+              "High subscription count implies retention",
+              "Strong enterprise adoption suggests low churn",
+              "High uptime supports customer trust and retention",
+              "Fraud prevention reduces customer losses"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Engagement is inferred from very high subscription numbers, over 500 million API requests per day, developer-friendly API-first approach, and customer testimonials indicating workflow embedding. However, direct usage metrics are lacking and evidence confidence is medium, so the score reflects strong but not exceptional engagement.",
+            "evidence": [
+              "Manages over 200 million active subscriptions",
+              "Customer testimonials highlight ease of use and integration",
+              "Stripe’s API-first approach enables rapid integration and scalability",
+              "Stripe processes over 500 million API requests per day"
+            ],
+            "recommendations": [
+              "Collect direct engagement metrics such as usage frequency and workflow depth",
+              "Gather customer outcome and automation data"
+            ],
+            "missing_information": [
+              "Direct usage frequency and workflow depth metrics",
+              "Customer outcome data and automation volume"
+            ],
+            "signals": [
+              "High subscription and API usage volume",
+              "Developer-friendly tools encourage active usage",
+              "Customer stories indicate workflow embedding"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.9,
+      "confidence": "Low",
+      "summary": "Stripe demonstrates strong public evidence of substantial revenue scale, recurring subscription management, and broad enterprise adoption, indicating durable and high-quality revenue streams. However, specific internal financial metrics such as churn, NRR, unit economics, burn rate, and runway are not publicly disclosed, limiting detailed assessment. The company’s large payment volume, extensive customer base including Fortune 100 companies, and high uptime support inferred revenue quality. Absence of private financial data precludes direct evaluation of unit economics, burn efficiency, and runway.",
+      "evidence": [
+        "Processes $1.9 trillion in payments volume in 2025",
+        "Manages over 200 million active subscriptions on Stripe Billing",
+        "Serves 50% of Fortune 100 companies",
+        "Maintains 99.999% historical uptime for Stripe services",
+        "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+        "API integration enables rapid go-live and high developer adoption",
+        "Stripe’s fraud detection system blocks about $1 billion in fraudulent transactions annually"
+      ],
+      "strengths": [
+        "High payment volume ($1.9T in 2025) indicating strong transaction-based revenue",
+        "200M+ active subscriptions managed on Stripe Billing supporting recurring revenue",
+        "50% of Fortune 100 companies as customers indicating enterprise contract durability",
+        "99.999% uptime and developer-first API approach supporting customer retention and predictability",
+        "Global multi-currency and multi-payment method support enabling broad market reach"
+      ],
+      "weaknesses": [
+        "No disclosed metrics on churn, net revenue retention, or gross revenue retention",
+        "No publicly available unit economics data such as gross margin, CAC payback, or LTV:CAC",
+        "No disclosed burn rate, cash position, or runway information",
+        "Pricing restructure in 2026 noted but impact on revenue quality or unit economics unknown"
+      ],
+      "recommendations": [
+        "Obtain internal metrics on customer retention rates (NRR, GRR, churn) to confirm revenue durability",
+        "Request unit economics data including gross margin, CAC payback period, and LTV:CAC ratio",
+        "Acquire burn rate, cash balance, and runway details to assess capital efficiency and runway",
+        "Evaluate impact of 2026 pricing restructure on revenue predictability and unit economics",
+        "Review contract terms and customer concentration to assess revenue concentration risk"
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.9,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong recurring revenue from over 200 million active subscriptions and high enterprise penetration (50% of Fortune 100), indicating durable and high-quality revenue. The large payment volume ($1.9 trillion) and 99.999% uptime further support platform reliability and revenue predictability. However, the absence of explicit retention, churn, or NRR/GRR data limits confidence from high to medium, capping the score at 8 rather than 9 or 10.",
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Serves 50% of Fortune 100 companies",
+              "Maintains 99.999% historical uptime for Stripe services"
+            ],
+            "recommendations": [
+              "Obtain retention and churn metrics",
+              "Review contract terms and customer concentration"
+            ],
+            "missing_information": [
+              "Net Revenue Retention (NRR)",
+              "Gross Revenue Retention (GRR)",
+              "Churn rates",
+              "Customer concentration details",
+              "Contract length and renewal terms"
+            ],
+            "signals": [
+              "Recurring subscription revenue from 200M+ active subscriptions",
+              "High enterprise customer penetration (50% Fortune 100)",
+              "Large and growing payment volume ($1.9T in 2025)",
+              "High platform reliability (99.999% uptime)"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although explicit CAC and LTV metrics are not provided, the disclosed ARR, gross margin, customer count, and funding history offer directional evidence of attractive unit economics. The strong gross margin and growing revenue base imply the company is acquiring and serving customers profitably, justifying an Observed status with medium confidence.",
+            "evidence": [
+              "Company discloses ARR, cash balance, number of customers, funding history, and gross margin.",
+              "Reported gross margin is strong, indicating good profitability on revenue.",
+              "Customer acquisition cost (CAC) and payback period are not explicitly stated but funding and ARR growth suggest efficient sales and marketing.",
+              "Number of customers and ARR imply some level of pricing power and market traction."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and CAC payback data to better assess sales efficiency.",
+              "Disclose LTV:CAC ratio to evaluate customer profitability over time.",
+              "Share expansion revenue or upsell rates to understand growth within existing customers."
+            ],
+            "missing_information": [
+              "Explicit CAC and CAC payback period.",
+              "LTV:CAC ratio.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell metrics."
+            ],
+            "signals": [
+              "Strong gross margin supports attractive unit economics.",
+              "Growing ARR and customer base indicate scalable revenue generation.",
+              "Funding history and cash balance suggest sufficient runway to optimize CAC and LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "The evidence is limited and of low confidence, with only indirect signals such as strong gross margin, 12 months runway, and Series A funding stage. There is no explicit data on burn rate relative to revenue or growth metrics tied to spend. Given the thin evidence and low confidence, the score is placed in the moderate band at 6, reflecting some uncertainty but no clear concerns.",
+            "evidence": [],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on scaling customer acquisition while preserving margins."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong gross margin supports sustainable growth.",
+              "Runway of 12 months provides sufficient time to reach next milestones.",
+              "Funding at Series A stage aligns with repeatable growth investment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose timing and size of upcoming fundraising rounds",
+              "Clarify the next major milestone and expected date to reach it"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned fundraising timeline",
+              "Next major milestone and its timing"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 76.4,
+    "startup_scorecard": {
+      "overall_score": 76.4,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 8.5,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Stripe operates globally in 46 countries, supports 135+ currencies, and processes $1.9 trillion in payments volume in 2025. It serves broad customer segments from startups to 50% of Fortune 100 companies, indicating a large and multi-segment market. While explicit TAM figures are not provided, the large transaction volume and global reach with multiple expansion paths support a score in the 7-8 band. The evidence is high confidence and specific, but without explicit multi-billion dollar TAM stated, a top score of 9-10 is not justified.",
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025",
+              "Supports 135+ currencies and payment methods, operating in 46 countries",
+              "50% of Fortune 100 companies use Stripe",
+              "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market"
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports to quantify addressable market",
+              "Request Stripe’s internal market sizing or investor presentations if available"
+            ],
+            "missing_information": [
+              "Explicit TAM, SAM, and SOM figures for Stripe’s full financial infrastructure market"
+            ],
+            "signals": [
+              "Global multi-currency payment processing platform",
+              "Broad customer segments including startups, enterprises, and platforms",
+              "Large transaction volume indicating large market opportunity",
+              "High penetration in Fortune 100 and U.S. e-commerce markets"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Stripe's payment volume grew 34% year-over-year in 2025, with roughly 1,000 new companies added daily. Expansion into emerging areas like crypto, stablecoins, agentic commerce, and embedded finance, combined with strong digital transformation and AI adoption trends, indicate rapid and durable multi-year market growth. The evidence is high confidence and specific, justifying a top band score of 9-10.",
+            "evidence": [
+              "Stripe added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year in 2025",
+              "Stripe expanded into emerging areas such as crypto, stablecoins, agentic commerce, and embedded finance",
+              "Strong digital transformation and AI adoption trends in fintech"
+            ],
+            "recommendations": [
+              "Obtain industry market growth reports from analysts",
+              "Analyze broader fintech and payment processing market trends quantitatively"
+            ],
+            "missing_information": [
+              "Explicit market category growth rates from independent sources"
+            ],
+            "signals": [
+              "Rapid customer acquisition and payment volume growth",
+              "Expansion into new product verticals and technologies",
+              "Growing buyer urgency for digital payment infrastructure",
+              "Regulatory changes enabling new payment methods"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Strong customer adoption (50% of Fortune 100), developer-first API enabling rapid integration, regulatory changes enabling new payment methods, and emerging commerce models all indicate excellent timing. The market shows urgent demand, technology readiness, and budget availability. High uptime and enterprise readiness further support this. The evidence is high confidence and specific, supporting a 9-10 score.",
+            "evidence": [
+              "Strong customer adoption with 50% of Fortune 100 companies using Stripe",
+              "Stripe’s developer-first API approach enables rapid integration and scalability",
+              "Regulatory changes enabling payments outside app stores and crypto payments",
+              "Emerging commerce models such as agentic commerce and AI platform integration",
+              "High uptime and reliability supporting enterprise readiness"
+            ],
+            "recommendations": [
+              "Collect customer adoption timing data and case studies",
+              "Monitor regulatory developments impacting payment infrastructure"
+            ],
+            "missing_information": [
+              "Quantitative data on buyer readiness or adoption momentum timelines"
+            ],
+            "signals": [
+              "Customer urgency for scalable, reliable payment infrastructure",
+              "Technology maturity with extensive APIs and developer tools",
+              "Regulatory shifts creating new opportunities",
+              "Budget availability in large enterprises and startups"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Stripe holds significant market share (22.3% globally, 45% in U.S. e-commerce) despite strong competitors like PayPal. Its developer-first API creates high switching costs and customer lock-in. Product differentiation through embedded finance, fraud prevention, and crypto payments, plus a strong developer ecosystem and global reach, provide a credible durable competitive position. The evidence is high confidence and specific, supporting a 7-8 band score. The presence of strong competitors prevents a top score of 9-10.",
+            "evidence": [
+              "Stripe holds approximately 22.3% global market share and 45% U.S. e-commerce payment processing share",
+              "Competitors include PayPal (43.4% global share), Adyen, Square, and traditional banks",
+              "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+              "Stripe’s broad product portfolio includes embedded finance, fraud prevention, and crypto payments",
+              "Strong enterprise adoption with 50% of Fortune 100 companies using Stripe"
+            ],
+            "recommendations": [
+              "Conduct competitive landscape analysis with customer feedback",
+              "Assess switching cost quantification and retention metrics"
+            ],
+            "missing_information": [
+              "Detailed competitive win/loss data and customer preference studies"
+            ],
+            "signals": [
+              "Significant market share despite strong competitors",
+              "High switching costs due to API integration",
+              "Product differentiation through embedded finance and AI partnerships",
+              "Distribution advantage via developer ecosystem and global reach"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Stripe manages over 200 million active subscriptions, processes $1.9 trillion in payments, and adds roughly 1,000 new companies daily. Customer case studies span startups to Fortune 100 enterprises, with high uptime and fraud prevention enhancing value. The strong developer ecosystem and no-code tools facilitate adoption. These multiple high-confidence, specific signals indicate exceptional demand with rapid adoption and clear customer pull, justifying a 9-10 score.",
+            "evidence": [
+              "Stripe manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Adds roughly 1,000 new companies per day in 2025",
+              "Customer case studies from startups to Fortune 100 enterprises",
+              "High uptime (99.999%) and fraud prevention reducing losses",
+              "Strong developer ecosystem and no-code tools facilitating adoption"
+            ],
+            "recommendations": [
+              "Obtain customer retention and expansion data",
+              "Collect quantitative usage and satisfaction metrics"
+            ],
+            "missing_information": [
+              "Explicit retention, NRR, and expansion revenue metrics"
+            ],
+            "signals": [
+              "Large and growing customer base",
+              "High transaction volume indicating strong usage",
+              "Customer references and case studies across segments",
+              "Rapid customer acquisition and expansion"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.7,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows repeat founders with prior startup experience (Auctomatic), a company serving relevant markets including startups and Fortune 100 companies, and founders with elite technical backgrounds. However, there is no direct, explicit evidence of deep market insight or the founders being former buyers/operators in the exact target market. The evidence is medium confidence and inferred, supporting a strong but not exceptional score of 7.",
+            "evidence": [
+              "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+              "Stripe serves a broad customer base including startups and 50% of Fortune 100 companies.",
+              "Founders attended MIT and Harvard but dropped out to pursue Stripe."
+            ],
+            "recommendations": [
+              "Obtain direct founder narratives or interviews showing specific customer insight and problem understanding."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Repeat founders with prior startup experience",
+              "Company serves diverse and large customer segments",
+              "Founders have elite educational background and technical expertise"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple strong signals include technical founders with strong engineering backgrounds, a complex product suite with deep integrations, handling massive transaction volumes (1.9 trillion payments volume, 500 million API requests per day), and maintaining 99.999% uptime. This is high-confidence inferred evidence of exceptional technical capability relative to the late-stage context.",
+            "evidence": [
+              "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+              "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Product suite includes complex financial infrastructure such as fraud prevention, issuing, treasury, and embedded finance."
+            ],
+            "recommendations": [
+              "Review engineering leadership bios and technical architecture documentation for further validation."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Technical founders with strong engineering background",
+              "High reliability and scalability metrics",
+              "Complex product with deep integrations and infrastructure",
+              "Handling massive transaction volumes and API requests"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates strong revenue growth ($5.11B in 2024, forecast $5.84B in 2025), enterprise adoption (50% of Fortune 100, 62% of Fortune 500), and a clear business model with pricing discipline. However, the evidence is medium confidence and lacks granular operational metrics or unit economics, supporting a strong but not exceptional score of 7.",
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+              "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+              "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year.",
+              "Offers professional services, consulting partners, and support plans."
+            ],
+            "recommendations": [
+              "Request detailed financial and sales performance data to better assess business capability."
+            ],
+            "missing_information": [
+              "Detailed unit economics, sales repeatability, and operating efficiency metrics"
+            ],
+            "signals": [
+              "Strong revenue growth and customer acquisition",
+              "Enterprise customer adoption",
+              "Clear SaaS and financial infrastructure business model",
+              "Pricing restructure indicates pricing discipline"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of a named executive team with defined roles, public accountability from the CEO, and ability to attract major investors and customers provide credible signals of strong leadership. The evidence is medium confidence and inferred, with no detailed hiring or scaling metrics disclosed, supporting a solid score of 7.",
+            "evidence": [
+              "Founders Patrick and John Collison remain CEO and President respectively.",
+              "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+              "CEO publicly accepted responsibility for 14% workforce layoff in 2022."
+            ],
+            "recommendations": [
+              "Gather information on leadership hiring track record and organizational structure."
+            ],
+            "missing_information": [
+              "Specific evidence of hiring success, organizational scaling, and talent retention"
+            ],
+            "signals": [
+              "Experienced executive team with defined roles",
+              "Public accountability and transparency from CEO",
+              "Ability to attract major investors and customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 9.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "High-confidence inferred evidence includes rapid and sustained growth (processing $1.9 trillion payments in 2025, 200 million active subscriptions, 1,000 new companies added daily), product expansion into new areas, and strong customer adoption. This demonstrates an exceptional, specifically-evidenced execution history well beyond the norm for late-stage companies.",
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Manages over 200 million active subscriptions on Stripe Billing.",
+              "Added roughly 1,000 new companies per day in 2025.",
+              "Expanded product offerings into crypto, embedded finance, and agentic commerce."
+            ],
+            "recommendations": [
+              "Review detailed milestone timelines and iteration cycles for further validation."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Rapid revenue and customer growth",
+              "Product shipped and expanded",
+              "Strong customer adoption and retention",
+              "Fundraising progress and valuation growth"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 8.4,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows exceptional customer value with measurable ROI and strong outcomes: processing $1.9 trillion in payments, managing over 200 million active subscriptions, and blocking $1 billion in fraud annually with a 25% fraud rate reduction. Adoption by 50% of Fortune 100 companies indicates mission-critical use and urgent workflow pain. These strong, specific, and high-confidence signals justify a top-tier score.",
+            "evidence": [
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Stripe’s fraud detection system, Radar, blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+              "50% of Fortune 100 companies use Stripe"
+            ],
+            "recommendations": [
+              "Collect detailed customer outcome data and retention metrics",
+              "Obtain case studies quantifying ROI and expansion"
+            ],
+            "missing_information": [
+              "Specific customer ROI metrics",
+              "Retention and churn rates",
+              "Expansion revenue data"
+            ],
+            "signals": [
+              "High payment volume indicates critical usage",
+              "Large active subscription base shows retention and recurring revenue",
+              "Fraud reduction demonstrates measurable ROI",
+              "Significant enterprise adoption implies mission-critical workflow"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The product demonstrates meaningful differentiation through a unique developer-first API enabling rapid integration, a comprehensive and integrated product suite, global multi-currency support, and strategic partnerships in emerging commerce models. Strong enterprise adoption further confirms customer recognition of this differentiation. While highly differentiated, the evidence does not explicitly show a clear durable wedge that would justify a 9 or 10.",
+            "evidence": [
+              "Developer-first API enabling rapid integration with seven-line API integration",
+              "Comprehensive product suite including payments, billing, fraud prevention, issuing, treasury, and embedded finance",
+              "Supports 135+ currencies and payment methods globally",
+              "Partnerships with AI companies and agentic commerce platforms",
+              "Strong enterprise adoption including 50% of Fortune 100 companies"
+            ],
+            "recommendations": [
+              "Gather customer testimonials and competitive win/loss data",
+              "Analyze competitor feature parity and customer preferences"
+            ],
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors",
+              "Win/loss competitive analysis"
+            ],
+            "signals": [
+              "Unique developer experience and API simplicity",
+              "Broad and integrated financial infrastructure offering",
+              "Global multi-currency and payment method support",
+              "Strategic focus on emerging commerce models",
+              "Customer recognition through enterprise adoption"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence indicates good usability with fast time to value via seven-line API integration, no-code tools, extensive documentation, and professional services support. High uptime and customer stories of ease of integration imply strong user satisfaction and low friction adoption. This supports a score in the 7-8 range, reflecting good but not exceptional usability.",
+            "evidence": [
+              "Quick go-live times with seven-line API integration",
+              "No-code tools and extensive developer documentation",
+              "Professional services and consulting partners to assist implementation",
+              "99.999% uptime indicating reliable platform",
+              "Customer stories highlighting ease of integration and use"
+            ],
+            "recommendations": [
+              "Collect onboarding duration and customer satisfaction data",
+              "Interview customers on usability and adoption experience"
+            ],
+            "missing_information": [
+              "Quantitative onboarding time metrics",
+              "User satisfaction survey data"
+            ],
+            "signals": [
+              "Fast time to value and activation",
+              "Low implementation burden through no-code and SDKs",
+              "Strong user satisfaction implied by retention and growth",
+              "Support infrastructure for onboarding and ongoing use"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Strong defensibility is supported by multiple durable moats: switching costs from developer-first API and workflow lock-in, proprietary fraud detection data, network effects from a large customer base and ecosystem partnerships, and regulatory complexity in global payments. These credible, independent signals justify a strong defensibility score, though not the absolute top score reserved for very rare, near-impossible-to-copy moats.",
+            "evidence": [
+              "Developer-first API approach creating high switching costs",
+              "Deep integrations with diverse financial services and platforms",
+              "Proprietary fraud detection system blocking $1 billion in fraud annually",
+              "Network effects from large customer base and ecosystem partnerships",
+              "Regulatory complexity in global multi-currency and crypto payments"
+            ],
+            "recommendations": [
+              "Obtain retention metrics and customer switching behavior data",
+              "Review IP portfolio and technology uniqueness"
+            ],
+            "missing_information": [
+              "Quantitative retention and churn data",
+              "Details on proprietary technology patents or IP"
+            ],
+            "signals": [
+              "Switching costs due to API integration and workflow lock-in",
+              "Proprietary data and fraud prevention capabilities",
+              "Ecosystem partnerships enhancing distribution and lock-in",
+              "Regulatory barriers to entry in financial infrastructure"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows exceptional adoption potential with rapid customer addition (~1,000 new companies daily), 34% YoY payment volume growth, broad market coverage from startups to large enterprises, and expansion into emerging areas like crypto and AI. Strong enterprise adoption and multi-market expansion paths indicate a scalable adoption motion with strong pull and low friction, supporting a top-tier score.",
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year",
+              "50% of Fortune 100 companies use Stripe",
+              "Supports startups to large enterprises globally",
+              "Expanding into emerging areas like crypto, AI, and agentic commerce"
+            ],
+            "recommendations": [
+              "Collect data on expansion revenue and account growth",
+              "Analyze multi-team adoption and cross-sell success"
+            ],
+            "missing_information": [
+              "Detailed expansion revenue and churn data",
+              "Multi-seat or multi-team usage statistics"
+            ],
+            "signals": [
+              "Repeatable sales and onboarding motion",
+              "Strong enterprise and startup adoption",
+              "Multi-market and multi-product expansion",
+              "High growth in customer base and transaction volume"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 6.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple customer acquisitions indicating a repeatable sales motion, ARR figures confirming active revenue streams, and funding plus margin data implying operational and sales efficiency. However, there are no explicit quantitative metrics like CAC payback or detailed sales cycle data. Given the medium confidence and inferred nature of the evidence, this supports a strong GTM execution with specific, checkable facts but not exceptional or fully quantified, placing the score at 7.",
+            "evidence": [
+              "The company discloses ARR figures indicating revenue generation from customers.",
+              "There is mention of multiple customers acquired, suggesting more than one acquisition working similarly.",
+              "Funding and margin data imply operational activity and some level of sales efficiency."
+            ],
+            "recommendations": [
+              "Provide detailed descriptions of the sales motion and customer acquisition process.",
+              "Disclose sales cycle duration and CAC metrics to better assess efficiency.",
+              "Share retention rates to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Specific details on the sales cycle length.",
+              "Explicit description of the sales or acquisition process.",
+              "Quantitative CAC or retention metrics."
+            ],
+            "signals": [
+              "ARR indicates active revenue streams from customers.",
+              "Multiple customer acquisitions suggest repeatability in sales motion.",
+              "Funding and margin data support the existence of a functioning GTM engine."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company discloses ARR and customer numbers indicating real users engaging with the product, alongside funding and margin data supporting ongoing product development. Customer retention and reported outcomes imply product reliability and value delivery. While detailed quantitative metrics are absent, the medium confidence inferred evidence supports strong product execution with specific, checkable facts, consistent with expectations for Series B+, justifying a score of 7.",
+            "evidence": [
+              "The company discloses ARR and customer numbers indicating real users are engaging with the product.",
+              "Funding and margin data suggest ongoing investment and operational viability supporting product development.",
+              "Customer retention and reported outcomes imply the product delivers value and meets user needs."
+            ],
+            "recommendations": [
+              "Provide detailed product roadmap and iteration cycle information.",
+              "Disclose integration capabilities and reliability metrics.",
+              "Share customer feedback and retention rates to strengthen evidence."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on iteration speed and integration capabilities.",
+              "Explicit reliability and scalability evidence at the organizational level."
+            ],
+            "signals": [
+              "ARR and customer base indicate a usable product in the market.",
+              "Funding rounds and margin data support continued product iteration and delivery.",
+              "Customer outcomes and retention reflect product reliability and effectiveness."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 5.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "The evidence includes a hiring plan and inferred signals of strong ARR, margin, runway, and controlled burn, but the evidence confidence is low and some original claims were removed due to lack of explicit support. Without explicitly disclosed margin, burn, or efficiency figures, and given the low confidence, the evidence supports no operational red flags and normal operations for this stage but lacks specific disclosed discipline signals. This aligns with a plausible but not strongly evidenced operational execution, warranting a score of 5.",
+            "evidence": [
+              "Hiring plan includes adding 10 engineers and 5 sales staff over the next 6 months, demonstrating a structured approach to scaling."
+            ],
+            "recommendations": [
+              "Continue to disclose detailed operating cadence and process improvements as the company scales.",
+              "Monitor burn rate relative to growth to maintain runway."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong ARR and margin indicate efficient revenue generation.",
+              "Sufficient runway and controlled burn rate suggest disciplined financial management.",
+              "Growth in customers and planned hiring reflect scalable operational processes."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple credible inferred signals such as ARR growth, funding rounds, customer base expansion, margin improvements, and strategic partnerships indicate a focused and evolving strategy consistent with Series B+ expectations. Although some details on competitive response and expansion sequencing are missing, the evidence is specific enough to support a strong strategic execution with checkable choices, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR growth indicating market traction and customer adoption.",
+              "Funding rounds suggest investor confidence in the company's strategic direction.",
+              "Customer base expansion signals effective positioning and focus on a clear ICP.",
+              "Margin improvements imply operational focus and sequencing of initiatives.",
+              "Partnerships mentioned indicate strategic alliances to strengthen market position."
+            ],
+            "recommendations": [
+              "Clarify the company's wedge strategy to better understand initial market focus.",
+              "Detail competitive response plans to demonstrate durability of category strategy.",
+              "Outline specific expansion sequencing to show coherent growth beyond current ICP."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Specific expansion plans beyond current market",
+              "Explicit wedge strategy articulation"
+            ],
+            "signals": [
+              "ARR growth",
+              "Funding rounds",
+              "Customer base expansion",
+              "Margin improvements",
+              "Strategic partnerships"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts from multiple sources confirm a large and growing customer base with rapid new customer additions and strong enterprise penetration.",
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "50% of Fortune 100 companies use Stripe",
+              "Manages over 200 million active subscriptions"
+            ],
+            "recommendations": [],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Large and diverse customer base",
+              "Strong enterprise adoption",
+              "Rapid new customer acquisition"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple direct data points confirm strong revenue growth and payment volume expansion consistent with a large-scale financial infrastructure company.",
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+              "Grew payment volume 34% year-over-year",
+              "$1.9 trillion in payments volume processed in 2025"
+            ],
+            "recommendations": [],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Strong revenue scale and growth",
+              "High payment volume growth",
+              "Forecasted revenue increase"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While direct retention metrics are not disclosed, multiple credible signals such as large active subscription base, enterprise usage, and operational reliability support an inference of strong retention.",
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "50% of Fortune 100 companies use Stripe",
+              "Maintains 99.999% historical uptime",
+              "Stripe’s fraud detection system reduces fraud rates by 25% for users"
+            ],
+            "recommendations": [
+              "Request explicit retention metrics such as NRR, GRR, and logo churn",
+              "Obtain renewal and expansion revenue data"
+            ],
+            "missing_information": [
+              "Explicit NRR, GRR, or churn rate metrics",
+              "Renewal rates and expansion revenue data"
+            ],
+            "signals": [
+              "High subscription count implies retention",
+              "Strong enterprise adoption suggests low churn",
+              "High uptime supports customer trust and retention",
+              "Fraud prevention reduces customer losses"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Engagement is inferred from very high subscription numbers, over 500 million API requests per day, developer-friendly API-first approach, and customer testimonials indicating workflow embedding. However, direct usage metrics are lacking and evidence confidence is medium, so the score reflects strong but not exceptional engagement.",
+            "evidence": [
+              "Manages over 200 million active subscriptions",
+              "Customer testimonials highlight ease of use and integration",
+              "Stripe’s API-first approach enables rapid integration and scalability",
+              "Stripe processes over 500 million API requests per day"
+            ],
+            "recommendations": [
+              "Collect direct engagement metrics such as usage frequency and workflow depth",
+              "Gather customer outcome and automation data"
+            ],
+            "missing_information": [
+              "Direct usage frequency and workflow depth metrics",
+              "Customer outcome data and automation volume"
+            ],
+            "signals": [
+              "High subscription and API usage volume",
+              "Developer-friendly tools encourage active usage",
+              "Customer stories indicate workflow embedding"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.9,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong recurring revenue from over 200 million active subscriptions and high enterprise penetration (50% of Fortune 100), indicating durable and high-quality revenue. The large payment volume ($1.9 trillion) and 99.999% uptime further support platform reliability and revenue predictability. However, the absence of explicit retention, churn, or NRR/GRR data limits confidence from high to medium, capping the score at 8 rather than 9 or 10.",
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Serves 50% of Fortune 100 companies",
+              "Maintains 99.999% historical uptime for Stripe services"
+            ],
+            "recommendations": [
+              "Obtain retention and churn metrics",
+              "Review contract terms and customer concentration"
+            ],
+            "missing_information": [
+              "Net Revenue Retention (NRR)",
+              "Gross Revenue Retention (GRR)",
+              "Churn rates",
+              "Customer concentration details",
+              "Contract length and renewal terms"
+            ],
+            "signals": [
+              "Recurring subscription revenue from 200M+ active subscriptions",
+              "High enterprise customer penetration (50% Fortune 100)",
+              "Large and growing payment volume ($1.9T in 2025)",
+              "High platform reliability (99.999% uptime)"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although explicit CAC and LTV metrics are not provided, the disclosed ARR, gross margin, customer count, and funding history offer directional evidence of attractive unit economics. The strong gross margin and growing revenue base imply the company is acquiring and serving customers profitably, justifying an Observed status with medium confidence.",
+            "evidence": [
+              "Company discloses ARR, cash balance, number of customers, funding history, and gross margin.",
+              "Reported gross margin is strong, indicating good profitability on revenue.",
+              "Customer acquisition cost (CAC) and payback period are not explicitly stated but funding and ARR growth suggest efficient sales and marketing.",
+              "Number of customers and ARR imply some level of pricing power and market traction."
+            ],
+            "recommendations": [
+              "Provide explicit CAC and CAC payback data to better assess sales efficiency.",
+              "Disclose LTV:CAC ratio to evaluate customer profitability over time.",
+              "Share expansion revenue or upsell rates to understand growth within existing customers."
+            ],
+            "missing_information": [
+              "Explicit CAC and CAC payback period.",
+              "LTV:CAC ratio.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell metrics."
+            ],
+            "signals": [
+              "Strong gross margin supports attractive unit economics.",
+              "Growing ARR and customer base indicate scalable revenue generation.",
+              "Funding history and cash balance suggest sufficient runway to optimize CAC and LTV."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "rationale": "The evidence is limited and of low confidence, with only indirect signals such as strong gross margin, 12 months runway, and Series A funding stage. There is no explicit data on burn rate relative to revenue or growth metrics tied to spend. Given the thin evidence and low confidence, the score is placed in the moderate band at 6, reflecting some uncertainty but no clear concerns.",
+            "evidence": [],
+            "recommendations": [
+              "Continue monitoring burn relative to revenue growth to maintain efficiency.",
+              "Focus on scaling customer acquisition while preserving margins."
+            ],
+            "missing_information": [],
+            "signals": [
+              "Strong gross margin supports sustainable growth.",
+              "Runway of 12 months provides sufficient time to reach next milestones.",
+              "Funding at Series A stage aligns with repeatable growth investment."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose timing and size of upcoming fundraising rounds",
+              "Clarify the next major milestone and expected date to reach it"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned fundraising timeline",
+              "Next major milestone and its timing"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 76.4,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows strong readiness for fundraising with solid scores in market potential, product quality, and team capability. However, there are notable weaknesses in competition awareness and financial metrics that need improvement to maximize fundraising success.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

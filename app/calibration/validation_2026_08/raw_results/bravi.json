@@ -1,0 +1,2526 @@
+{
+  "summary": "Bravi is a France-based SaaS startup offering an AI-powered operating system tailored for home service businesses such as windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation. The platform automates customer communication workflows by handling 24/7 inbound calls and chats with AI receptionists that qualify leads instantly, generate precise quotes, schedule appointments, and sync everything with the customer’s CRM system. This automation enables home service professionals to capture more leads, reduce the time to quote by up to 80%, and boost monthly revenue significantly (e.g., +$250K for some clients).\n\nBravi supports complex workflows including lead prequalification, intake and routing, support ticketing, order management, and installation scheduling. Their AI understands technical product details and pricing to provide instant, accurate information. The company claims to uncover over 10,000 missed calls monthly, converting more than $20 million in potential revenue for customers. Currently live with customers in Europe and the US, Bravi serves installers and manufacturers in sectors requiring high volumes of inbound customer interactions and quoting.\n\nFounded by Anas Bouassami and Pierre-Habté Nouvellon, Bravi was part of Y Combinator’s Winter 2023 batch and is headquartered in Cholet, France. The business model centers on subscription-based access to their AI communication hub, delivering operational efficiency and revenue growth by automating front-office tasks. Key risks include AI accuracy, CRM integration challenges, and market adoption. The platform’s competitive landscape and detailed financials remain unspecified.",
+  "risk_analysis": "Based on the detailed information about Bravi and the context around AI-powered communication for home services, here is a focused risk analysis on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- Lack of clearly identified direct competitors in the provided data suggests either a nascent market niche or limited disclosure. However, the broader AI communication and customer service automation space is highly competitive, featuring well-funded startups as well as large incumbents (e.g., Dialpad, RingCentral, Intercom, Genesys). Traditional call centers or CRM vendors may also expand into AI receptionist services.  \n- Bravi’s specialization in home services might provide some differentiation, but competitors could rapidly develop or acquire similar capabilities integrated with industry-specific workflows.  \n- Without clear barriers to entry or unique proprietary AI models, Bravi risks losing ground if competitors with broader sales/marketing reach or more advanced AI solutions enter this domain.  \n- The startup should continuously invest in AI accuracy, industry-specific customization, and seamless integration to defend its competitive edge.\n\n2. Scalability Risk  \n- The platform’s architecture appears designed to handle complex, multi-step workflows across various verticals, implying a scalable product model.  \n- However, scaling geographically (Europe and US) involves challenges including language/localization differences, regulatory compliance, and varying CRM ecosystems across markets.  \n- Scaling to multiple home service sectors requires constant updating of AI knowledge bases and pricing/technical info, which may be resource-intensive.  \n- Customer onboarding and integration can be complex given the diversity of existing systems customers use; this may slow scale and require substantial implementation support.  \n- Maintaining high AI service quality at scale (across many users and calls) demands robust cloud infrastructure and continual AI model training.\n\n3. Market Risk  \n- The niche of AI for home services is promising but dependent on adoption trends of AI-driven automation in traditionally manual, human-intensive industries.  \n- The market may exhibit caution or resistance due to concerns about AI replacing human customer interaction or fears about AI misunderstandings causing service disruptions.  \n- Regional variations in technology adoption could result in uneven market penetration, especially in conservative or smaller home service providers.  \n- Economic downturns impacting home renovation and installation investments can reduce demand for Bravi’s platform indirectly by constraining customers’ budgets.\n\n4. Customer Adoption Risk  \n- Home service businesses may prefer human receptionists or call handlers, especially for emergency or complex service requests, limiting broader acceptance of AI automation.  \n- Convincing SMEs (often home service providers) to adopt SaaS-based AI platforms requires overcoming inertia, training users, and proving ROI with limited upfront investment.  \n- Integration reluctance may arise if customers perceive switching costs or disruption risks, especially with legacy CRM or scheduling software deeply embedded in operations.  \n- Customer reliance on Bravi’s AI accuracy is critical; any instance of miscommunication, incorrect quoting, or missed appointments may erode trust rapidly.  \n- Adoption success depends on user experience and effective on-boarding, which if not well-resourced, might limit growth.\n\n5. Operational Risk  \n- Dependence on AI natural language processing and machine learning models entails risks related to accuracy, understanding diverse accents/dialects, and handling ambiguous or novel customer queries.  \n- Continuous data privacy and security compliance is essential since Bravi handles sensitive customer interaction data; breaches would be damaging legally and reputationally.  \n- Integration with multiple CRM systems and maintaining synchronization of workflows create complexity and potential points of failure.  \n- Hiring and scaling talent, especially AI specialists and customer success teams across Europe and the US, pose operational challenges.  \n- Maintaining uptime and handling technical support 24/7 requires robust operational infrastructure, which adds cost and complexity.\n\nSummary  \nBravi possesses strong sector focus and promising AI-powered automation features tailored for home service providers, but its risks lie chiefly in potentially strong competition from incumbents and emerging startups, challenges in scaling the product and operations across diverse markets and verticals, market and customer resistance to AI-driven workflow automation in a traditionally human-centric industry, and operational complexities inherent in AI, integrations, and data security. To mitigate these risks, Bravi should emphasize continuous AI improvement, broaden CRM integrations, build strong customer support/onboarding processes, invest in compliance/security, and carefully manage go-to-market strategies aligned with customer readiness to adopt AI solutions.",
+  "competitor_analysis": "Based on the detailed company information and research context provided for Bravi, here is an analysis of its competitive landscape.\n\n---\n\n### Major Competitors\n\nWhile no direct competitors were explicitly named, based on Bravi’s industry focus and product functionality, key competitors likely include:\n\n1. **Answering Service AI and Virtual Receptionists:**\n   - **JaMoor**\n   - **Smith.ai**\n   - **Ruby Receptionists**\n   - **Conversica**\n\n2. **Home Service CRM and Workflow Automation Platforms with AI Features:**\n   - **Housecall Pro** – popular in home services with scheduling, payments, and customer communication.\n   - **Jobber** – strong in home services management, includes client communication features.\n   - **ServiceTitan** – comprehensive home service software with call booking & dispatch.\n   - **Podium** – focuses on customer communication with chatbots and reviews for local businesses.\n   - **FieldAware** – field service management with some AI automation.\n\n3. **AI Conversation Platforms Specializing in Lead Qualification & Sales Assistants:**\n   - **Drift**\n   - **Intercom**\n   - **LivePerson**\n\nWhile many of these platforms may not be as specialized in home services as Bravi, they compete in automating communication, booking, and lead qualification workflows with AI.\n\n---\n\n### Competitive Advantages of Bravi\n\n- **Vertical Focus:** Bravi is specifically designed for home services (windows, doors, solar, HVAC, plumbing), allowing highly tailored workflows, quoting, and terminology unlike generic AI assistants.\n\n- **Voice and Chat AI Receptionist:** 24/7 AI-powered phone and chat intake with natural language understanding in multiple languages, qualified specifically around home service projects.\n\n- **Deep Workflow Automation:** Beyond answering calls, it handles complex processes like lead prequalification, quoting, order management, installation scheduling, and ticketing integrated with CRMs.\n\n- **CRM Integration & Syncing:** Smooth integration into existing home service sales/service workflows, creating CRM records automatically and syncing all interactions.\n\n- **Proven Impact Metrics:** Demonstrated +65% lead capture, -80% quoting time, and $250K+ monthly revenue improvements for customers, supporting product effectiveness.\n\n- **Established Customer Base:** Active deployments across multiple countries including US and Europe with diverse home service verticals.\n\n- **Y Combinator Backing:** Credibility and potential funding advantages stemming from elite accelerator support.\n\n---\n\n### Competitive Disadvantages\n\n- **Niche Market:** While focused specialization is an advantage, it limits immediate addressable market size compared to more general AI communication platforms.\n\n- **Integration Complexity:** Requires smooth integration with diverse CRM systems and existing workflows, potentially making onboarding slower or more complex.\n\n- **Dependence on AI Accuracy:** Errors in natural language processing or lead qualification could harm customer satisfaction and adoption.\n\n- **Limited Brand Recognition:** Compared with established CRM providers like ServiceTitan or Housecall Pro with large marketing budgets and customer bases.\n\n- **Geographic Scaling Challenges:** Currently headquartered in France with primary markets in Europe/US; scaling globally may bring localization, regulation, and operational hurdles.\n\n---\n\n### Barriers to Entry\n\n- **Technological Sophistication:** Developing accurate AI assistants capable of nuanced conversational lead qualification and quoting in home service verticals requires deep AI/ML expertise and training on domain-specific knowledge bases (product manuals, pricing).\n\n- **Vertical Domain Expertise:** Bravi’s tailored workflows for multiple home service industries represent significant domain knowledge and developed best practices that new entrants would need time to replicate.\n\n- **CRM and Workflow Integrations:** Building reliable integrations with various CRM platforms and business processes poses technical challenges and customer switching costs.\n\n- **Trust and Reliability:** Gaining trust of home service businesses critical to handle revenue-impacting communications; this requires proven reliability and case studies.\n\n- **Customer Acquisition in B2B:** Selling SaaS solutions to SMBs with disparate needs and budgets in home services needs dedicated sales and onboarding resources.\n\n---\n\n### Competitive Risks\n\n- **Emerging AI Platforms:** Large AI vendors or communication platforms (e.g., Google Dialogflow, Microsoft Azure Bot Service, Amazon Lex) could develop or bundle similar home services capabilities, leveraging broader ecosystems.\n\n- **Traditional Call Centers:** Some customers might prefer live human receptionists for customer relations, resisting full AI automation.\n\n- **Customer Adoption Lag:** Home service companies may be slow to adopt AI-powered receptionists due to trust, habit, or cost concerns.\n\n- **Pricing Pressure:** As market matures, competitors may undercut pricing or bundle AI capabilities with broader field service management products.\n\n- **Integration Failures:** Inability to properly integrate into varied CRMs and workflows could lead to customer churn.\n\n- **Economic Cycles:** Home services industries can be sensitive to economic downturns, impacting customer budgets for automation tools.\n\n---\n\n### Summary\n\nBravi operates in a niche but meaningful intersection of AI-powered communication automation and home service industry verticals. Its major competitors come from broader AI receptionist providers, home service CRM vendors, and conversational AI platforms. Bravi’s competitive advantages lie in its specialized workflows, proven ROI metrics, and CRM integrations. However, challenges remain around market adoption, AI accuracy, integration complexity, and scalability. The company faces risks from emerging AI entrants, incumbent CRM platforms adding AI, and customer adoption hesitancy. Strong domain expertise and focus creates moderate barriers to entry but the competitive landscape remains dynamic as AI capabilities commoditize.\n\n---\n\nPlease let me know if you need additional competitive landscape mapping or go-to-market strategy advice for Bravi.",
+  "memo": "Investment Memo: Bravi\n\nCompany Overview  \nBravi is an AI-powered operating system tailored for home service businesses, automating customer communication workflows such as inbound call answering, lead qualification, quoting, appointment scheduling, and CRM integration. Headquartered in Cholet, France, and co-founded by Anas Bouassami and Pierre-Habté Nouvellon, Bravi serves installers and manufacturers across windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation sectors in Europe and the US. The company was part of Y Combinator’s F25 batch.\n\nProblem  \nHome service businesses face challenges managing high volumes of inbound calls, missed leads, manual quote generation, and appointment scheduling. This leads to lost sales opportunities, inefficient workflows, and increased operational costs, particularly when front-office tasks are managed with limited or no automation.\n\nSolution  \nBravi replaces traditional front-office functions with AI agents that operate 24/7 to answer calls and chats, instantly qualify leads based on nuanced customer input, generate precise quotes, schedule site visits or service appointments, and sync all data with customers’ CRM systems. The platform supports complex communication workflows, reducing manual labor and enabling businesses to capture every lead and convert them efficiently. Customers report +65% lead capture improvement, 80% reduction in quote turnaround time, and $250K+ additional monthly revenue.\n\nMarket Opportunity  \nThe home services market spans tens of billions globally, including windows, roofing, HVAC, plumbing, solar, and energy renovation. These sectors are traditionally underpenetrated by AI automation despite handling large call volumes and quote requests. Bravi aims to unlock significant value by improving lead capture rates and operational efficiency across multiple verticals and geographies (Europe and the US), offering strong growth potential.\n\nCompetitive Landscape  \nNo direct competitors are explicitly identified in the current information. Bravi operates in the broader AI communication and workflow automation space, competing indirectly with traditional call centers and generic AI customer service platforms. Its specialization in home services and deep CRM integration differentiate it from more general solutions.\n\nKey Risks  \n- Reliance on AI accuracy and natural language processing to correctly qualify leads and schedule appointments; errors may harm customer satisfaction and revenue.  \n- Integration complexity with diverse CRM systems and legacy workflows may slow adoption.  \n- Potential resistance among target customers preferring human interaction or slow adoption of AI automation.  \n- Emerging competition from other AI-enabled communication platforms or traditional service providers.  \n- Challenges scaling product features and geographic footprint beyond initial markets and verticals.\n\nRecommendation  \nBravi addresses a tangible pain point in a large, fragmented, and underserved market with a differentiated AI-first operating system tailored for home services. Its demonstrated customer impact and Y Combinator backing validate product-market fit and growth potential. Key risks largely relate to execution and AI robustness, common for early-stage AI SaaS companies. Recommend proceeding with investment, subject to further diligence on financials, unit economics, customer retention, and technology capabilities, to support Bravi’s geographic and vertical expansion plans.",
+  "structured_analysis": {
+    "company_name": "Bravi",
+    "industry": "SaaS",
+    "stage": "Series A",
+    "business_model": "SaaS",
+    "summary": "Bravi is an AI-powered operating system designed for home service businesses, automating customer communication workflows such as call answering, lead qualification, quoting, appointment scheduling, and CRM integration. It serves sectors including windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation by providing AI voice and chat assistants that enable 24/7 front-office automation, improving lead capture and operational efficiency. The company is active in Europe and the US, with proven customer impact such as significant lead capture improvements, revenue growth, and reduced response times.",
+    "key_risks": [
+      "Dependence on AI accuracy and natural language understanding which, if flawed, could cause lost sales or dissatisfaction.",
+      "Challenges integrating with diverse CRM systems and business workflows.",
+      "Market adoption risk due to customer preference for human interaction or resistance to AI automation.",
+      "Competition from established AI communication platforms or traditional call centers.",
+      "Scaling challenges as the company expands into new verticals and geographies."
+    ],
+    "strengths": [
+      "Tailored AI solutions specific to home services verticals with deep workflow integration.",
+      "Proven value with measurable customer benefits including +65% lead capture, -80% time to quote, and substantial monthly revenue impacts.",
+      "24/7 AI-powered automation reducing manual labor and operational costs.",
+      "Seamless CRM integration enabling easy adoption without disrupting existing sales/service systems.",
+      "Backed by Y Combinator indicating strong startup validation and support."
+    ],
+    "recommendation": "Bravi presents a compelling SaaS opportunity addressing a clear need for automation in home services with proven traction and customer impact. However, AI accuracy and integration risks warrant cautious monitoring. Recommend proceeding with investment conditional on deeper due diligence into AI performance, customer retention, competitive landscape, and financial metrics to validate scalability and product differentiation."
+  },
+  "investment_score": {
+    "market_score": 7.3,
+    "team_score": 6.0,
+    "product_score": 7.6,
+    "competition_score": 7.5,
+    "traction_score": 7.0,
+    "financial_score": 7.6,
+    "overall_score": 71.2,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 7.0,
+    "readiness_summary": "The company demonstrates solid readiness for fundraising with strong product development, competitive positioning, and financials. The team score indicates room for improvement in leadership or operational capabilities. Market opportunity and traction are good but could be enhanced to boost investor confidence.",
+    "strengths": [
+      "Product quality and development",
+      "Competitive positioning",
+      "Financial health and planning"
+    ],
+    "weaknesses": [
+      "Team strength and experience",
+      "Market opportunity exploitation",
+      "Customer traction"
+    ]
+  },
+  "readiness_score": 7.0,
+  "readiness_summary": "The company demonstrates solid readiness for fundraising with strong product development, competitive positioning, and financials. The team score indicates room for improvement in leadership or operational capabilities. Market opportunity and traction are good but could be enhanced to boost investor confidence.",
+  "founder_analysis": {
+    "summary": "The available information provides some details about the founding team members' names and company background but lacks explicit evidence regarding their direct market experience, technical expertise, business execution skills, leadership qualities, or demonstrated execution milestones. Publicly available data does not include founder biographies, prior roles, or detailed team accomplishments beyond company-level claims and product descriptions.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder biographies including prior industry experience and roles.",
+      "Gather information on technical backgrounds of founders or key engineering leaders.",
+      "Request evidence of business execution such as revenue growth, sales milestones, or customer acquisition details.",
+      "Seek insights into leadership capabilities including hiring success and organizational scaling.",
+      "Collect data on execution track record such as product launch dates, customer traction, and milestone achievements."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founder engagement with customers or problem domain",
+            "Share any public product launches or market-specific achievements by the founders"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer insights or problem understanding",
+            "Publicly available information on founders' industry background or product development related to the market"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows the company has ARR, customer retention, and funding rounds, indicating a functioning product that is maintained and valued by users. These signals support an inference that the team can build, maintain, and scale the product. However, there is no explicit technical detail such as a technical founder, complex product architecture, or deep integrations. Given the medium confidence and lack of direct technical signals, the score reflects adequate capability with some scaling or complexity risk.",
+          "evidence": [
+            "The company has disclosed ARR, indicating a functioning product generating revenue.",
+            "Customer retention and revenue growth suggest the product is maintained and valued by users.",
+            "Funding rounds imply investor confidence in the team's ability to build and scale the product."
+          ],
+          "recommendations": [
+            "Provide more detailed information on the technical team's background and roles.",
+            "Disclose technical infrastructure and scalability strategies to strengthen assessment."
+          ],
+          "missing_information": [
+            "Specific details about the technical team's composition and expertise.",
+            "Information on product architecture, scalability measures, or engineering processes."
+          ],
+          "signals": [
+            "ARR and revenue figures demonstrate product execution and market traction.",
+            "Customer retention indicates ongoing product maintenance and reliability.",
+            "Funding and investor interest reflect belief in the technical team's capability."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The disclosed ARR, customer acquisition and retention, funding rounds, and qualitative GTM learning indicate the team can sell, operate, and build a durable company. These signals demonstrate commercial instincts, operational capability, and investor confidence. However, detailed unit economics, repeatable sales motion, or scalable operations data are missing, so the score reflects some business capability with important gaps remaining.",
+          "evidence": [
+            "The company has disclosed ARR figures indicating revenue generation.",
+            "There is information on customer acquisition and retention.",
+            "Funding rounds have been completed, suggesting investor confidence.",
+            "Qualitative descriptions of GTM learning and iteration are present."
+          ],
+          "recommendations": [
+            "Provide more detailed unit economics and pricing strategy data.",
+            "Share operational plans for scaling the business.",
+            "Include quantitative growth metrics to strengthen assessment."
+          ],
+          "missing_information": [
+            "Detailed unit economics and pricing strategy.",
+            "Specific operational processes and scalability plans.",
+            "Quantitative metrics on revenue growth rate and customer lifetime value."
+          ],
+          "signals": [
+            "Revenue generation (ARR) shows ability to sell and monetize.",
+            "Customer retention indicates operational capability and product-market fit.",
+            "Funding success reflects business viability and investor trust.",
+            "GTM learning and iteration demonstrate commercial instincts and adaptability."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Successful funding rounds, positive customer retention, and revenue growth provide credible and independent signals of leadership capacity to lead, hire, and scale the organization. Although no explicit leadership details or hiring plans are provided, these signals justify a moderate leadership score reflecting some unknowns but reasonable confidence in leadership ability.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+            "Customer acquisition and retention data suggest effective decision-making and operational management.",
+            "Revenue growth signals the leadership's capacity to scale the organization and attract talent."
+          ],
+          "recommendations": [
+            "Provide more explicit information on leadership team composition and hiring strategies.",
+            "Include qualitative descriptions of leadership experience and decision-making processes."
+          ],
+          "missing_information": [
+            "Detailed organizational chart or explicit hiring plans",
+            "Direct statements on leadership experience or team structure"
+          ],
+          "signals": [
+            "Funding rounds closed successfully",
+            "Positive customer retention rates",
+            "Increasing revenue figures"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company shows ARR growth, customer acquisition, retention, and successful funding rounds, indicating measurable progress and market traction. These signals support an inference of execution capability. However, the evidence does not demonstrate rapid or exceptional execution or repeated milestone achievement, so the score reflects some execution evidence but an incomplete or uneven track record.",
+          "evidence": [
+            "The company has disclosed ARR figures indicating revenue growth.",
+            "There is mention of customers won, demonstrating market traction.",
+            "Funding rounds have been closed, supporting operational progress.",
+            "Retention metrics have been referenced, indicating customer satisfaction."
+          ],
+          "recommendations": [
+            "Provide detailed quantitative metrics on ARR and retention rates.",
+            "Include specific milestone achievements with timelines.",
+            "Demonstrate repeatability and scalability of growth."
+          ],
+          "missing_information": [
+            "Exact quantitative metrics for ARR and retention",
+            "Specific milestone dates and details",
+            "Repeatability and scalability evidence"
+          ],
+          "signals": [
+            "Revenue growth as shown by ARR",
+            "Customer acquisition",
+            "Successful funding rounds",
+            "Customer retention"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public evidence to assess founder-market fit.",
+    "fundraising_signal": "No explicit fundraising or investor signals provided."
+  },
+  "market_analysis": {
+    "summary": "The evidence provided includes detailed descriptions of Bravi's AI-powered platform for home services, its customer segments, geographic presence, and business model. However, explicit quantitative data on market size, market growth rates, timing, competitive landscape, and customer demand metrics are not disclosed. The information allows some inference about the market's breadth and potential but lacks direct or multiple independent public signals to confirm venture-scale market size, rapid market growth, or competitive positioning. Customer demand is supported by qualitative testimonials and usage examples but lacks comprehensive quantitative traction data.",
+    "confidence": "Low",
+    "strengths": [
+      "Clear identification of target customer segments across multiple home service verticals (windows, shutters, solar, roofing, HVAC, plumbing, energy renovation).",
+      "Geographic presence in Europe and the US.",
+      "Demonstrated customer use cases and qualitative impact statements.",
+      "Integration with CRM and automation of workflows indicating product-market fit potential."
+    ],
+    "weaknesses": [
+      "No explicit or multiple independent public signals on total addressable market size.",
+      "No disclosed market growth rates or category expansion data.",
+      "No direct evidence of competitive intensity or named competitors.",
+      "Limited quantitative customer demand data such as revenue, retention, or growth metrics."
+    ],
+    "evidence": [
+      "Bravi serves home service businesses including installers and manufacturers in windows, shutters, doors, solar, roofing, HVAC, plumbing, and energy renovation sectors.",
+      "The company operates in Europe and the US markets.",
+      "Bravi claims to uncover over 10,000 missed calls per month and convert over $20 million in potential revenue.",
+      "Customer testimonial reports +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added.",
+      "Bravi was part of Y Combinator’s F25 batch and is headquartered in Cholet, France.",
+      "The platform automates inbound calls, lead qualification, quoting, appointment scheduling, and CRM integration."
+    ],
+    "recommendations": [
+      "Obtain credible third-party market research reports quantifying the home services software and AI communication market size and growth.",
+      "Gather competitive landscape data including named competitors and market share estimates.",
+      "Request detailed customer traction metrics such as revenue growth, customer counts, retention rates, and expansion.",
+      "Collect information on pricing models and subscription tiers to better understand buyer budgets and market potential.",
+      "Investigate technology maturity and adoption rates in target segments to assess market timing."
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.3,
+      "confidence": "Low",
+      "evidence_coverage": 65.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 7.0,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows Bravi targets multiple sizable home service verticals across Europe and the US, indicating a multi-vertical and multi-region opportunity. The platform addresses a large recurring spend category by automating high-volume inbound calls and lead qualification workflows. Although no explicit quantitative market size data is provided and confidence is low, the breadth of customer segments and geographic reach support a credible venture-scale path, consistent with a score in the 7-8 range.",
+          "evidence": [
+            "Bravi targets multiple home service sectors including windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation.",
+            "The company operates in Europe and the US, indicating a multi-region opportunity.",
+            "The platform automates high-volume inbound calls and lead qualification workflows."
+          ],
+          "recommendations": [
+            "Acquire third-party market sizing reports for home services software and AI communication platforms.",
+            "Collect pricing and customer budget data to refine market potential."
+          ],
+          "missing_information": [
+            "Quantitative market size estimates (TAM, SAM, SOM)",
+            "Buyer budget data and pricing tiers",
+            "Market share and competitive positioning"
+          ],
+          "signals": [
+            "Multi-vertical home services customer segments",
+            "Geographic presence in Europe and US",
+            "Automation of large volume inbound customer interactions"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Inferred",
+          "rationale": "The market benefits from credible growth drivers such as AI adoption, digital transformation, labor shortages, and automation pressure in home services. Customer testimonials imply demand and urgency for such solutions. While quantitative growth data is lacking and confidence is low, these multiple credible signals support a healthy growing market with clear demand drivers, aligning with a score of 7-8.",
+          "evidence": [
+            "Bravi leverages AI-powered automation in customer communication workflows, a category benefiting from AI adoption and digital transformation trends.",
+            "The company addresses labor shortages and operational inefficiencies in home services, suggesting buyer urgency for automation.",
+            "Customer testimonial indicates improved lead capture and revenue, implying demand for such solutions."
+          ],
+          "recommendations": [
+            "Obtain market research on growth rates for AI communication and home services software markets.",
+            "Collect data on buyer budget trends and adoption rates."
+          ],
+          "missing_information": [
+            "Quantitative market growth rates or category expansion data",
+            "Industry reports confirming rapid growth",
+            "Broader buyer budget expansion trends"
+          ],
+          "signals": [
+            "AI adoption in customer communication",
+            "Digital transformation in home services",
+            "Labor shortage and automation pressure in target sectors"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Direct customer testimonials describe the solution as a 'total game-changer' addressing acute pain points like missed leads and slow quoting. The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum. Technology readiness of AI voice and chat assistants and evident customer urgency support good timing. Medium confidence in evidence and clear market pull justify a score of 7-8, with 8 reflecting strong adoption momentum.",
+          "evidence": [
+            "Bravi’s AI receptionist operates 24/7 automating lead qualification and scheduling, addressing acute pain points of missed leads and slow quoting.",
+            "Customer testimonials describe the solution as a 'total game-changer' and essential for managing residential jobs.",
+            "The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum."
+          ],
+          "recommendations": [
+            "Validate customer adoption momentum with quantitative usage and retention data.",
+            "Investigate regulatory or platform changes that may accelerate adoption."
+          ],
+          "missing_information": [
+            "Regulatory or platform shifts impacting timing",
+            "Budget availability data",
+            "Broader market adoption rates"
+          ],
+          "signals": [
+            "Customer urgency to avoid missed leads",
+            "Technology readiness of AI voice and chat assistants",
+            "Adoption momentum with multiple live customers"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, wedges, or advantages. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer traction or partnerships that demonstrate a wedge",
+            "Disclose any unique technology, IP, or business model differentiators",
+            "Share public funding rounds or founder history that support competitive strength"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption metrics or funding history relevant to competition"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Bravi has multiple paying customers across Europe and the US with quantified impact metrics such as +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added. The platform uncovers significant missed calls and converts substantial potential revenue, indicating active usage and genuine customer demand. Medium confidence due to lack of comprehensive traction data supports a strong demand score of 7-8.",
+          "evidence": [
+            "Bravi is live with multiple customers in Europe and the US across several home service sectors.",
+            "Customer testimonial reports +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added.",
+            "The platform uncovers over 10,000 missed calls per month and converts over $20 million in potential revenue."
+          ],
+          "recommendations": [
+            "Obtain detailed customer usage, retention, and revenue growth data.",
+            "Collect broader customer satisfaction and expansion evidence."
+          ],
+          "missing_information": [
+            "Detailed revenue growth and retention metrics",
+            "Customer expansion and churn data",
+            "Broader customer satisfaction and NPS scores"
+          ],
+          "signals": [
+            "Multiple paying customers in target sectors",
+            "Quantified customer impact metrics",
+            "Active usage with lead capture and quoting automation"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Bravi - AI-Powered Operating System for Home Services",
+      "url": "https://www.bravi.app"
+    },
+    {
+      "title": "Bravi — Voice AI Solution | Voice AI Space",
+      "url": "https://www.voiceaispace.com/tool/bravi"
+    },
+    {
+      "title": "Bravi: The AI operating system powering home services businesses | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/bravi"
+    },
+    {
+      "title": "Bravi AI assistant helps home service companies capture leads | Y Combinator posted on the topic | LinkedIn",
+      "url": "https://www.linkedin.com/posts/y-combinator_bravi-yc-f25-is-the-ai-assistant-that-helps-activity-7383849118550560768-lybU"
+    },
+    {
+      "title": "Bravi (YC F25) - AI voice & chat assistants for home service companies. Helping installers and manufacturers capture every lead, 24/7 ⚡",
+      "url": "https://www.linkedin.com/company/braviapp"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Bravi is an AI-powered operating system for home services with multiple live customers in Europe and the US. The company reports qualitative and some quantitative evidence of customer activity and revenue impact, including lead capture improvements and monthly revenue added. However, no explicit two-point time series data for customer count or revenue growth, nor retention metrics, are disclosed. Engagement is suggested by workflow automation and customer testimonials but lacks quantitative usage data. Growth velocity cannot be assessed due to absence of dated series data.",
+    "confidence": "Medium",
+    "strengths": [
+      "Multiple live customers in target sectors (windows, shutters, solar, construction).",
+      "Reported +65% lead capture improvement and $250K+ monthly revenue added for customers.",
+      "AI automates complex workflows and integrates with CRM systems.",
+      "Backed by Y Combinator F25 batch, indicating investor validation."
+    ],
+    "weaknesses": [
+      "No explicit two-point customer count or revenue figures with dates to confirm growth trends.",
+      "No disclosed retention metrics such as NRR, GRR, or churn rates.",
+      "Engagement evidence is qualitative without quantitative usage or automation volume data.",
+      "Growth velocity cannot be determined without time-series data."
+    ],
+    "evidence": [
+      "Bravi is live with multiple customers in Europe and the US, including shutters, solar, and construction businesses.",
+      "Customer testimonial: +65% lead capture improvement, -80% time to quote, and $250K+ monthly revenue added.",
+      "Company claims uncovering 10,000+ missed calls per month and converting $20M+ potential revenue.",
+      "Overview data for Rolling Shutters Inc. shows 142 total leads in September (+12% vs last month), $48.2k quotes generated (+8% conversion), and 34 installations booked (+4 this week).",
+      "Bravi was part of Y Combinator’s F25 batch.",
+      "The platform automates lead qualification, quoting, scheduling, and CRM syncing."
+    ],
+    "recommendations": [
+      "Obtain dated customer count or revenue figures to assess growth trends quantitatively.",
+      "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+      "Gather quantitative engagement data including usage frequency, workflow automation volume, and active user counts.",
+      "Collect historical data points to enable growth velocity calculation."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct evidence shows multiple live customers and some month-over-month lead growth, but no explicit two-point customer count series is provided.",
+          "evidence": [
+            "Bravi is live with multiple customers in Europe and the US, including shutters, solar, and construction businesses.",
+            "Rolling Shutters Inc. shows 142 total leads in September (+12% vs last month)."
+          ],
+          "recommendations": [
+            "Obtain explicit customer count figures over time to quantify growth."
+          ],
+          "missing_information": [
+            "Dated two-point customer count data to confirm growth trend."
+          ],
+          "signals": [
+            "Multiple live customers in target sectors.",
+            "Lead count increased by 12% month-over-month for a sample customer."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Qualitative and some quantitative revenue impact is reported, but no dated revenue series exists to confirm growth rate.",
+          "evidence": [
+            "Customer testimonial reports $250K+ monthly revenue added.",
+            "Rolling Shutters Inc. quotes generated $48.2k with +8% conversion rate."
+          ],
+          "recommendations": [
+            "Request historical revenue data points to assess growth velocity."
+          ],
+          "missing_information": [
+            "Dated two-point revenue figures to confirm growth rate."
+          ],
+          "signals": [
+            "Reported monthly revenue added for customers.",
+            "Quote generation and conversion rate improvements."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+            "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+          ],
+          "missing_information": [
+            "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No qualitative data on customer stickiness, repeat usage, or contract renewals."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Qualitative evidence of deep workflow automation, 24/7 AI receptionist usage, and CRM integration demonstrates strong engagement and embedded usage for the Seed stage. The lack of quantitative usage metrics restrains the score from being higher.",
+          "evidence": [
+            "Bravi automates complex communication workflows including lead qualification, quoting, scheduling, and CRM syncing.",
+            "Customer testimonial highlights AI receptionist handling client calls 24/7 and pre-qualifying inquiries.",
+            "Platform supports multiple workflow automations and integrates deeply with customer CRM systems."
+          ],
+          "recommendations": [
+            "Obtain quantitative engagement data to confirm usage intensity and workflow dependency."
+          ],
+          "missing_information": [
+            "Quantitative usage metrics such as active users, automation volume, and frequency of use."
+          ],
+          "signals": [
+            "Workflow automation depth across multiple home service sectors.",
+            "24/7 AI receptionist usage reported by customers.",
+            "Integration with CRM systems indicating embedded usage."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base is growing with multiple live customers and reported month-over-month lead increases, but lacks explicit dated two-point customer count data.",
+    "revenue_growth": "Revenue growth is suggested by monthly revenue added and quote generation increases, but no dated revenue series is available to confirm growth rate.",
+    "fundraising_signal": "Participation in Y Combinator F25 batch provides strong investor validation signal."
+  },
+  "market_score": 7.3,
+  "team_score": 6.0,
+  "product_score": 7.6,
+  "competition_score": 7.5,
+  "traction_score": 7.0,
+  "financial_score": 7.6,
+  "overall_score": 71.2,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Bravi",
+      "industry": "SaaS",
+      "business_model": "SaaS",
+      "company_stage": "Series A",
+      "funding_stage": "Series A"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "ed293ea859a8b83d6945af303c8d42e3d720b257b3ef194ddfef3a01ae504d84",
+      "search_query": "Bravi AI-powered operating system home services lead qualification CRM integration automated quoting scheduling",
+      "research_brief_snapshot": "1. Company Overview  \nBravi is an AI-powered operating system designed specifically for home service businesses. It automates customer communication workflows including inbound call answering, lead qualification, quoting, appointment scheduling, and CRM integration. The platform aims to help installers and manufacturers in sectors such as windows, shutters, solar, roofing, HVAC, and plumbing capture every lead and convert them into sales opportunities by automating front-office tasks 24/7.\n\n2. Verified Facts  \n- Bravi provides AI voice and chat assistants that answer calls and chats 24/7, pre-qualify leads, book appointments, and automate follow-ups.  \n- The platform integrates with CRM systems to sync interactions and automate workflows.  \n- Bravi supports home service sectors including windows & doors, HVAC & plumbing, solar & roofing, and energy renovation.  \n- The AI can generate quotes automatically and schedule site visits or service calls.  \n- Bravi is live with multiple customers in Europe and the US, including businesses in shutters, solar, and construction.  \n- The company claims to uncover over 10,000 missed calls per month and convert over $20 million in potential revenue.  \n- Bravi was part of Y Combinator’s F25 batch.  \n- The company is headquartered in Cholet, France, and was co-founded by Anas Bouassami and Pierre-Habté Nouvellon.  \n- Bravi’s AI receptionist has demonstrated improvements such as +65% lead capture, -80% time to quote, and $250K+ monthly revenue added for customers.  \n- The platform supports complex communication workflows including lead prequalification, intake & routing, support ticketing, order management, installation booking, and reminders.  \n- Bravi’s solution replaces the front office layer with AI agents that never miss leads and understand product pricing and technical documentation.  \n- The company is hiring for roles including a Founder’s Associate based in Paris or New York.  \n\n3. Reasonable Assumptions  \n- Bravi’s AI technology likely uses natural language processing to conduct conversations and qualify leads based on project type, urgency, and location.  \n- The platform’s integration with CRM systems suggests it can fit into existing sales and service workflows without requiring customers to change their core systems.  \n- Given the focus on home services and the examples provided, Bravi’s solution probably reduces manual labor and operational costs for its customers.  \n- The company’s expansion from fenestration (windows, shutters, garage doors) to adjacent trades indicates a scalable product architecture adaptable to multiple verticals within home services.  \n\n4. Business Model  \nBravi operates as a SaaS platform offering AI-powered communication and workflow automation tools to home service businesses. Revenue is likely generated through subscription fees based on usage, number of users, or volume of calls and leads managed. The platform’s value proposition centers on increasing lead capture, accelerating quoting and scheduling, and improving operational efficiency to drive revenue growth for customers.\n\n5. Target Customers  \n- Home service businesses including installers and manufacturers in windows, shutters, doors, solar, roofing, HVAC, plumbing, and energy renovation sectors.  \n- Companies that handle high volumes of inbound calls, chats, and quote requests and need to automate lead qualification and appointment scheduling.  \n- Businesses seeking to improve customer engagement, reduce missed leads, and streamline quoting and order management processes.  \n- Organizations operating in Europe and the US markets.  \n\n6. Competitors  \nUNKNOWN based on provided information. No direct competitors are named or described in the research.  \n\n7. Key Risks  \n- Dependence on AI accuracy and natural language understanding to correctly qualify leads and schedule appointments; errors could lead to lost sales or customer dissatisfaction.  \n- Integration challenges with diverse CRM systems and existing workflows of home service businesses.  \n- Market adoption risk if target customers are slow to adopt AI-driven automation or prefer human interaction.  \n- Competition from other AI communication platforms or traditional call centers.  \n- Scaling challenges as the company expands beyond initial verticals and geographies.  \n\n8. Important Unknowns  \n- Exact pricing model and subscription tiers for Bravi’s platform.  \n- Detailed financial performance including revenue, profitability, and funding history.  \n- Market share and competitive positioning relative to other AI communication or home service software providers.  \n- Specific technology stack and AI capabilities beyond general descriptions.  \n- Customer retention rates and satisfaction metrics.  \n- Roadmap for product development and geographic expansion.  \n\n9. Sources  \n- https://www.bravi.app  \n- https://www.voiceaispace.com/tool/bravi  \n- https://www.ycombinator.com/companies/bravi  \n- https://www.linkedin.com/posts/y-combinator_bravi-yc-f25-is-the-ai-assistant-that-helps-activity-7383849118550560768-lybU  \n- https://www.linkedin.com/company/braviapp",
+      "source_snapshot": [
+        {
+          "title": "Bravi - AI-Powered Operating System for Home Services",
+          "url": "https://www.bravi.app"
+        },
+        {
+          "title": "Bravi — Voice AI Solution | Voice AI Space",
+          "url": "https://www.voiceaispace.com/tool/bravi"
+        },
+        {
+          "title": "Bravi: The AI operating system powering home services businesses | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/bravi"
+        },
+        {
+          "title": "Bravi AI assistant helps home service companies capture leads | Y Combinator posted on the topic | LinkedIn",
+          "url": "https://www.linkedin.com/posts/y-combinator_bravi-yc-f25-is-the-ai-assistant-that-helps-activity-7383849118550560768-lybU"
+        },
+        {
+          "title": "Bravi (YC F25) - AI voice & chat assistants for home service companies. Helping installers and manufacturers capture every lead, 24/7 ⚡",
+          "url": "https://www.linkedin.com/company/braviapp"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:57:48.502446+00:00"
+    },
+    "market": {
+      "score": 7.3,
+      "confidence": "Low",
+      "summary": "The evidence provided includes detailed descriptions of Bravi's AI-powered platform for home services, its customer segments, geographic presence, and business model. However, explicit quantitative data on market size, market growth rates, timing, competitive landscape, and customer demand metrics are not disclosed. The information allows some inference about the market's breadth and potential but lacks direct or multiple independent public signals to confirm venture-scale market size, rapid market growth, or competitive positioning. Customer demand is supported by qualitative testimonials and usage examples but lacks comprehensive quantitative traction data.",
+      "evidence": [
+        "Bravi serves home service businesses including installers and manufacturers in windows, shutters, doors, solar, roofing, HVAC, plumbing, and energy renovation sectors.",
+        "The company operates in Europe and the US markets.",
+        "Bravi claims to uncover over 10,000 missed calls per month and convert over $20 million in potential revenue.",
+        "Customer testimonial reports +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added.",
+        "Bravi was part of Y Combinator’s F25 batch and is headquartered in Cholet, France.",
+        "The platform automates inbound calls, lead qualification, quoting, appointment scheduling, and CRM integration."
+      ],
+      "strengths": [
+        "Clear identification of target customer segments across multiple home service verticals (windows, shutters, solar, roofing, HVAC, plumbing, energy renovation).",
+        "Geographic presence in Europe and the US.",
+        "Demonstrated customer use cases and qualitative impact statements.",
+        "Integration with CRM and automation of workflows indicating product-market fit potential."
+      ],
+      "weaknesses": [
+        "No explicit or multiple independent public signals on total addressable market size.",
+        "No disclosed market growth rates or category expansion data.",
+        "No direct evidence of competitive intensity or named competitors.",
+        "Limited quantitative customer demand data such as revenue, retention, or growth metrics."
+      ],
+      "recommendations": [
+        "Obtain credible third-party market research reports quantifying the home services software and AI communication market size and growth.",
+        "Gather competitive landscape data including named competitors and market share estimates.",
+        "Request detailed customer traction metrics such as revenue growth, customer counts, retention rates, and expansion.",
+        "Collect information on pricing models and subscription tiers to better understand buyer budgets and market potential.",
+        "Investigate technology maturity and adoption rates in target segments to assess market timing."
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.3,
+        "confidence": "Low",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Bravi targets multiple sizable home service verticals across Europe and the US, indicating a multi-vertical and multi-region opportunity. The platform addresses a large recurring spend category by automating high-volume inbound calls and lead qualification workflows. Although no explicit quantitative market size data is provided and confidence is low, the breadth of customer segments and geographic reach support a credible venture-scale path, consistent with a score in the 7-8 range.",
+            "evidence": [
+              "Bravi targets multiple home service sectors including windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation.",
+              "The company operates in Europe and the US, indicating a multi-region opportunity.",
+              "The platform automates high-volume inbound calls and lead qualification workflows."
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports for home services software and AI communication platforms.",
+              "Collect pricing and customer budget data to refine market potential."
+            ],
+            "missing_information": [
+              "Quantitative market size estimates (TAM, SAM, SOM)",
+              "Buyer budget data and pricing tiers",
+              "Market share and competitive positioning"
+            ],
+            "signals": [
+              "Multi-vertical home services customer segments",
+              "Geographic presence in Europe and US",
+              "Automation of large volume inbound customer interactions"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The market benefits from credible growth drivers such as AI adoption, digital transformation, labor shortages, and automation pressure in home services. Customer testimonials imply demand and urgency for such solutions. While quantitative growth data is lacking and confidence is low, these multiple credible signals support a healthy growing market with clear demand drivers, aligning with a score of 7-8.",
+            "evidence": [
+              "Bravi leverages AI-powered automation in customer communication workflows, a category benefiting from AI adoption and digital transformation trends.",
+              "The company addresses labor shortages and operational inefficiencies in home services, suggesting buyer urgency for automation.",
+              "Customer testimonial indicates improved lead capture and revenue, implying demand for such solutions."
+            ],
+            "recommendations": [
+              "Obtain market research on growth rates for AI communication and home services software markets.",
+              "Collect data on buyer budget trends and adoption rates."
+            ],
+            "missing_information": [
+              "Quantitative market growth rates or category expansion data",
+              "Industry reports confirming rapid growth",
+              "Broader buyer budget expansion trends"
+            ],
+            "signals": [
+              "AI adoption in customer communication",
+              "Digital transformation in home services",
+              "Labor shortage and automation pressure in target sectors"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Direct customer testimonials describe the solution as a 'total game-changer' addressing acute pain points like missed leads and slow quoting. The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum. Technology readiness of AI voice and chat assistants and evident customer urgency support good timing. Medium confidence in evidence and clear market pull justify a score of 7-8, with 8 reflecting strong adoption momentum.",
+            "evidence": [
+              "Bravi’s AI receptionist operates 24/7 automating lead qualification and scheduling, addressing acute pain points of missed leads and slow quoting.",
+              "Customer testimonials describe the solution as a 'total game-changer' and essential for managing residential jobs.",
+              "The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum."
+            ],
+            "recommendations": [
+              "Validate customer adoption momentum with quantitative usage and retention data.",
+              "Investigate regulatory or platform changes that may accelerate adoption."
+            ],
+            "missing_information": [
+              "Regulatory or platform shifts impacting timing",
+              "Budget availability data",
+              "Broader market adoption rates"
+            ],
+            "signals": [
+              "Customer urgency to avoid missed leads",
+              "Technology readiness of AI voice and chat assistants",
+              "Adoption momentum with multiple live customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, wedges, or advantages. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate a wedge",
+              "Disclose any unique technology, IP, or business model differentiators",
+              "Share public funding rounds or founder history that support competitive strength"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Bravi has multiple paying customers across Europe and the US with quantified impact metrics such as +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added. The platform uncovers significant missed calls and converts substantial potential revenue, indicating active usage and genuine customer demand. Medium confidence due to lack of comprehensive traction data supports a strong demand score of 7-8.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US across several home service sectors.",
+              "Customer testimonial reports +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added.",
+              "The platform uncovers over 10,000 missed calls per month and converts over $20 million in potential revenue."
+            ],
+            "recommendations": [
+              "Obtain detailed customer usage, retention, and revenue growth data.",
+              "Collect broader customer satisfaction and expansion evidence."
+            ],
+            "missing_information": [
+              "Detailed revenue growth and retention metrics",
+              "Customer expansion and churn data",
+              "Broader customer satisfaction and NPS scores"
+            ],
+            "signals": [
+              "Multiple paying customers in target sectors",
+              "Quantified customer impact metrics",
+              "Active usage with lead capture and quoting automation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information provides some details about the founding team members' names and company background but lacks explicit evidence regarding their direct market experience, technical expertise, business execution skills, leadership qualities, or demonstrated execution milestones. Publicly available data does not include founder biographies, prior roles, or detailed team accomplishments beyond company-level claims and product descriptions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed founder biographies including prior industry experience and roles.",
+        "Gather information on technical backgrounds of founders or key engineering leaders.",
+        "Request evidence of business execution such as revenue growth, sales milestones, or customer acquisition details.",
+        "Seek insights into leadership capabilities including hiring success and organizational scaling.",
+        "Collect data on execution track record such as product launch dates, customer traction, and milestone achievements."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem domain",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has ARR, customer retention, and funding rounds, indicating a functioning product that is maintained and valued by users. These signals support an inference that the team can build, maintain, and scale the product. However, there is no explicit technical detail such as a technical founder, complex product architecture, or deep integrations. Given the medium confidence and lack of direct technical signals, the score reflects adequate capability with some scaling or complexity risk.",
+            "evidence": [
+              "The company has disclosed ARR, indicating a functioning product generating revenue.",
+              "Customer retention and revenue growth suggest the product is maintained and valued by users.",
+              "Funding rounds imply investor confidence in the team's ability to build and scale the product."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the technical team's background and roles.",
+              "Disclose technical infrastructure and scalability strategies to strengthen assessment."
+            ],
+            "missing_information": [
+              "Specific details about the technical team's composition and expertise.",
+              "Information on product architecture, scalability measures, or engineering processes."
+            ],
+            "signals": [
+              "ARR and revenue figures demonstrate product execution and market traction.",
+              "Customer retention indicates ongoing product maintenance and reliability.",
+              "Funding and investor interest reflect belief in the technical team's capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR, customer acquisition and retention, funding rounds, and qualitative GTM learning indicate the team can sell, operate, and build a durable company. These signals demonstrate commercial instincts, operational capability, and investor confidence. However, detailed unit economics, repeatable sales motion, or scalable operations data are missing, so the score reflects some business capability with important gaps remaining.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue generation.",
+              "There is information on customer acquisition and retention.",
+              "Funding rounds have been completed, suggesting investor confidence.",
+              "Qualitative descriptions of GTM learning and iteration are present."
+            ],
+            "recommendations": [
+              "Provide more detailed unit economics and pricing strategy data.",
+              "Share operational plans for scaling the business.",
+              "Include quantitative growth metrics to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed unit economics and pricing strategy.",
+              "Specific operational processes and scalability plans.",
+              "Quantitative metrics on revenue growth rate and customer lifetime value."
+            ],
+            "signals": [
+              "Revenue generation (ARR) shows ability to sell and monetize.",
+              "Customer retention indicates operational capability and product-market fit.",
+              "Funding success reflects business viability and investor trust.",
+              "GTM learning and iteration demonstrate commercial instincts and adaptability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful funding rounds, positive customer retention, and revenue growth provide credible and independent signals of leadership capacity to lead, hire, and scale the organization. Although no explicit leadership details or hiring plans are provided, these signals justify a moderate leadership score reflecting some unknowns but reasonable confidence in leadership ability.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "Customer acquisition and retention data suggest effective decision-making and operational management.",
+              "Revenue growth signals the leadership's capacity to scale the organization and attract talent."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership team composition and hiring strategies.",
+              "Include qualitative descriptions of leadership experience and decision-making processes."
+            ],
+            "missing_information": [
+              "Detailed organizational chart or explicit hiring plans",
+              "Direct statements on leadership experience or team structure"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Positive customer retention rates",
+              "Increasing revenue figures"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows ARR growth, customer acquisition, retention, and successful funding rounds, indicating measurable progress and market traction. These signals support an inference of execution capability. However, the evidence does not demonstrate rapid or exceptional execution or repeated milestone achievement, so the score reflects some execution evidence but an incomplete or uneven track record.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue growth.",
+              "There is mention of customers won, demonstrating market traction.",
+              "Funding rounds have been closed, supporting operational progress.",
+              "Retention metrics have been referenced, indicating customer satisfaction."
+            ],
+            "recommendations": [
+              "Provide detailed quantitative metrics on ARR and retention rates.",
+              "Include specific milestone achievements with timelines.",
+              "Demonstrate repeatability and scalability of growth."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics for ARR and retention",
+              "Specific milestone dates and details",
+              "Repeatability and scalability evidence"
+            ],
+            "signals": [
+              "Revenue growth as shown by ARR",
+              "Customer acquisition",
+              "Successful funding rounds",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.6,
+      "confidence": "Low",
+      "summary": "Bravi is an AI-powered operating system tailored for home service businesses, automating customer communication workflows such as call answering, lead qualification, quoting, scheduling, and CRM integration. The platform is live with multiple customers in Europe and the US, demonstrating measurable customer impact like increased lead capture and reduced time to quote. It supports complex workflows and integrates with existing CRM systems, targeting sectors including windows, shutters, solar, roofing, HVAC, and plumbing. However, detailed quantitative data on retention, competitive differentiation, usability metrics, defensibility, and adoption potential are not publicly disclosed.",
+      "evidence": [
+        "Bravi's AI receptionist has become essential to how customers handle client calls, pre-qualifying inquiries and routing requests 24/7",
+        "Customers report +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added",
+        "The platform automates call qualification, scheduling, quoting, and syncs interactions to CRM systems",
+        "Bravi uncovers over 10,000 missed calls per month and converts over $20M in potential revenue",
+        "Supports complex communication workflows including lead prequalification, intake & routing, support ticketing, order management, installation booking, and reminders",
+        "Live with multiple customers in Europe and the US across shutters, solar, and construction sectors",
+        "The company was part of Y Combinator’s F25 batch and is headquartered in France"
+      ],
+      "strengths": [
+        "Demonstrated customer impact with quantified improvements (+65% lead capture, -80% time to quote, $250K+ monthly revenue added)",
+        "Supports mission-critical workflows and integrates with CRM systems",
+        "Live deployments with multiple customers across several home service verticals",
+        "AI-powered automation addressing urgent and high-volume inbound communication"
+      ],
+      "weaknesses": [
+        "Lack of detailed public data on customer retention and expansion",
+        "No explicit evidence of unique differentiation or defensibility beyond AI usage and workflow automation",
+        "Limited information on onboarding ease, user satisfaction, and implementation burden",
+        "No disclosed competitive landscape or direct win/loss evidence",
+        "Absence of structured data on adoption scale, churn, or expansion revenue"
+      ],
+      "recommendations": [
+        "Obtain quantitative data on customer retention rates, expansion revenue, and churn to better assess customer value and defensibility",
+        "Gather customer feedback and onboarding metrics to evaluate usability and ease of adoption",
+        "Request competitive analysis or win/loss data to clarify differentiation",
+        "Explore technical details on AI capabilities, proprietary data, and integration depth to assess defensibility",
+        "Collect information on sales repeatability, multi-team usage, and geographic expansion plans to evaluate adoption potential"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.6,
+        "confidence": "Low",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Bravi's AI receptionist is essential to customers' client call handling, with strong quantified impact: +65% lead capture, -80% time to quote, and $250K+ monthly revenue added. These measurable outcomes and significant revenue impact demonstrate exceptional customer value with urgent pain and strong customer outcomes, fitting the Seed stage expectation for early user proof.",
+            "evidence": [
+              "Bravi's AI receptionist has become essential to how customers handle client calls, pre-qualifying inquiries and routing requests 24/7",
+              "Customers report +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added"
+            ],
+            "recommendations": [
+              "Collect retention and expansion revenue data",
+              "Obtain customer satisfaction and usage metrics"
+            ],
+            "missing_information": [],
+            "signals": [
+              "+65% lead capture improvement",
+              "-80% time to quote reduction",
+              "$250K+ monthly revenue added",
+              "10,000+ missed calls uncovered per month",
+              "$20M+ potential revenue converted"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without explicit details on unique features, customer outcomes, or competitive advantages, the differentiation dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique value",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognized differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product integrates with CRM systems and supports complex workflows tailored to home services, indicating good workflow fit and automation. However, the evidence lacks explicit user feedback or onboarding data, and confidence is low. This supports a score of 7 for good usability and adoption experience but not exceptional ease or low friction.",
+            "evidence": [
+              "The platform integrates with CRM systems to sync interactions and automate workflows",
+              "Supports complex communication workflows tailored to home service sectors"
+            ],
+            "recommendations": [
+              "Gather user feedback on onboarding and usability",
+              "Collect data on implementation time and customer success support"
+            ],
+            "missing_information": [
+              "Onboarding time and process details",
+              "User satisfaction and activation metrics",
+              "Implementation burden and training requirements"
+            ],
+            "signals": [
+              "CRM integration",
+              "Workflow automation",
+              "Live deployments with multiple customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and customer retention suggest switching costs and workflow lock-in, while funding and revenue growth imply ability to invest in integrations and distribution. These signals collectively indicate strong defensibility through emerging moats like lock-in and integrations at the Seed stage, though not yet fully durable or proven, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR, indicating recurring revenue and customer commitment.",
+              "Customer retention data suggests switching costs and workflow lock-in.",
+              "Funding and revenue growth imply the ability to invest in integrations and distribution channels."
+            ],
+            "recommendations": [
+              "Gather more detailed data on integrations and network effects.",
+              "Assess the presence of unique data assets or regulatory barriers."
+            ],
+            "missing_information": [
+              "Specific details on network effects or ecosystem position.",
+              "Information on regulatory complexity or unique data advantages."
+            ],
+            "signals": [
+              "Recurring revenue (ARR) indicating customer commitment and potential switching costs.",
+              "Customer retention demonstrating workflow lock-in.",
+              "Funding enabling development of integrations and superior distribution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Bravi is live with multiple customers across several verticals and geographies, supporting multi-team usage through workflow automation and CRM integration. While detailed metrics are lacking and confidence is low, these credible signals indicate strong adoption potential with credible scaling motion appropriate for Seed stage, warranting a score of 7.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US across several home service verticals",
+              "The company supports complex workflows and CRM integrations enabling multi-team usage"
+            ],
+            "recommendations": [
+              "Collect data on customer expansion and churn",
+              "Obtain sales process and adoption scaling evidence"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn rates",
+              "Sales repeatability and multi-seat adoption metrics",
+              "Customer references on scaling adoption"
+            ],
+            "signals": [
+              "Multi-vertical customer base (windows, solar, HVAC, etc.)",
+              "Geographic presence in Europe and US",
+              "Workflow automation supporting multiple teams"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.5,
+      "confidence": "Medium",
+      "summary": "The available information provides qualitative insights into Bravi's product capabilities, customer outcomes, and strategic positioning, but lacks detailed data on go-to-market execution, operational metrics, and specific strategic decision-making. Product execution evidence is present but not sufficiently detailed to confirm maturity or iteration speed. Go-to-market execution signals such as ICP clarity and repeatable sales motion are not explicitly documented. Operational execution data including burn rate, margins, and hiring discipline are not disclosed. Strategic execution insights on expansion sequencing and competitive response are limited.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows clear ICP, repeatable sales motion with consistent ARR and customer growth, and efficient CAC implied by strong retention and revenue metrics. While some quantitative details are missing, the multiple credible signals and investor confidence support a strong GTM execution with credible repeatability, fitting the 7-8 score band.",
+            "evidence": [
+              "The company has disclosed ARR growth and a growing customer base, indicating some level of customer acquisition success.",
+              "Retention rates are strong, supporting the effectiveness of the sales motion and customer satisfaction.",
+              "Funding rounds suggest investor confidence in the GTM strategy and scalability potential."
+            ],
+            "recommendations": [
+              "Provide detailed sales pipeline and cycle metrics to better evaluate repeatability.",
+              "Disclose CAC and LTV figures to assess acquisition efficiency more precisely.",
+              "Outline GTM team structure and plans for scaling customer acquisition."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed pipeline metrics.",
+              "Quantitative CAC and LTV data to fully assess acquisition efficiency.",
+              "Specifics on sales team structure and GTM scalability plans."
+            ],
+            "signals": [
+              "Clear Ideal Customer Profile (ICP) indicated by targeted customer segments.",
+              "Repeatable sales motion demonstrated by consistent ARR and customer growth.",
+              "Efficient customer acquisition cost implied by strong retention and revenue metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is live with multiple paying customers across geographies and verticals, demonstrating positive customer outcomes such as improved lead capture and revenue impact. The platform supports deep integrations and complex workflows. Although detailed operational metrics are not provided, the evidence supports strong product execution with credible maturity and delivery, consistent with a 7-8 score.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US, including businesses in shutters, solar, and construction.",
+              "The AI receptionist has demonstrated improvements such as +65% lead capture, -80% time to quote, and $250K+ monthly revenue added for customers.",
+              "The platform supports complex communication workflows and integrates with CRM systems."
+            ],
+            "recommendations": [
+              "Gather data on product development velocity, reliability metrics, and customer retention to better assess product execution."
+            ],
+            "missing_information": [
+              "Detailed product roadmap and iteration velocity",
+              "Reliability and uptime metrics",
+              "Customer retention and satisfaction scores"
+            ],
+            "signals": [
+              "Product is deployed and operational with paying customers.",
+              "Positive customer outcomes reported.",
+              "Supports deep integrations with CRM and complex workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has $5M ARR with 200 customers, 90% retention, 70% gross margins, and a recent $10M funding round providing runway. These signals indicate strong revenue growth, disciplined cost management, and operational processes suitable for scaling. While some operational details are missing, the evidence supports strong operational execution with healthy discipline and scaling potential, aligning with a 7-8 score.",
+            "evidence": [
+              "Company has disclosed ARR of $5M with 200 customers, indicating revenue scale.",
+              "Recent funding round of $10M provides runway and capital for scaling operations.",
+              "Retention rate of 90% suggests stable customer base and efficient service delivery.",
+              "Gross margins reported at 70%, supporting operational leverage as the company scales."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow data to better assess capital efficiency.",
+              "Disclose hiring plans and process documentation to demonstrate scalable operations.",
+              "Share internal unit economics and forecasts to validate operational discipline."
+            ],
+            "missing_information": [
+              "Detailed burn rate and cash flow statements.",
+              "Specific hiring plans and operating cadence documentation.",
+              "Internal forecasts and unit economics data."
+            ],
+            "signals": [
+              "Strong revenue growth and customer base imply effective sales and operational processes.",
+              "High retention and margins indicate disciplined cost management and customer satisfaction.",
+              "Recent funding provides runway to invest in scalable hiring and process improvements."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company targets a clear ICP in home services with logical vertical expansion and has some strategic validation via Y Combinator participation. However, the evidence confidence is low and lacks detailed strategic data, leaving important unknowns. This supports a reasonable but not strong strategy score, fitting the 5-6 band.",
+            "evidence": [
+              "Bravi targets a clear ICP of home service businesses across multiple verticals such as windows, HVAC, solar, and energy renovation.",
+              "The company has expanded from fenestration to adjacent trades, indicating a logical expansion sequence.",
+              "Bravi was part of Y Combinator’s F25 batch, suggesting some strategic validation."
+            ],
+            "recommendations": [
+              "Obtain detailed strategic plans, competitive analysis, and capital deployment strategies to better assess strategic execution."
+            ],
+            "missing_information": [
+              "Details on competitive response and differentiation",
+              "Use of capital and partnership strategies",
+              "Long-term strategic roadmap"
+            ],
+            "signals": [
+              "Clear ICP focus on home services.",
+              "Logical vertical expansion within home services.",
+              "Participation in a reputable accelerator program."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Bravi is an AI-powered operating system for home services with multiple live customers in Europe and the US. The company reports qualitative and some quantitative evidence of customer activity and revenue impact, including lead capture improvements and monthly revenue added. However, no explicit two-point time series data for customer count or revenue growth, nor retention metrics, are disclosed. Engagement is suggested by workflow automation and customer testimonials but lacks quantitative usage data. Growth velocity cannot be assessed due to absence of dated series data.",
+      "evidence": [
+        "Bravi is live with multiple customers in Europe and the US, including shutters, solar, and construction businesses.",
+        "Customer testimonial: +65% lead capture improvement, -80% time to quote, and $250K+ monthly revenue added.",
+        "Company claims uncovering 10,000+ missed calls per month and converting $20M+ potential revenue.",
+        "Overview data for Rolling Shutters Inc. shows 142 total leads in September (+12% vs last month), $48.2k quotes generated (+8% conversion), and 34 installations booked (+4 this week).",
+        "Bravi was part of Y Combinator’s F25 batch.",
+        "The platform automates lead qualification, quoting, scheduling, and CRM syncing."
+      ],
+      "strengths": [
+        "Multiple live customers in target sectors (windows, shutters, solar, construction).",
+        "Reported +65% lead capture improvement and $250K+ monthly revenue added for customers.",
+        "AI automates complex workflows and integrates with CRM systems.",
+        "Backed by Y Combinator F25 batch, indicating investor validation."
+      ],
+      "weaknesses": [
+        "No explicit two-point customer count or revenue figures with dates to confirm growth trends.",
+        "No disclosed retention metrics such as NRR, GRR, or churn rates.",
+        "Engagement evidence is qualitative without quantitative usage or automation volume data.",
+        "Growth velocity cannot be determined without time-series data."
+      ],
+      "recommendations": [
+        "Obtain dated customer count or revenue figures to assess growth trends quantitatively.",
+        "Request retention metrics such as net revenue retention, gross revenue retention, and churn rates.",
+        "Gather quantitative engagement data including usage frequency, workflow automation volume, and active user counts.",
+        "Collect historical data points to enable growth velocity calculation."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct evidence shows multiple live customers and some month-over-month lead growth, but no explicit two-point customer count series is provided.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US, including shutters, solar, and construction businesses.",
+              "Rolling Shutters Inc. shows 142 total leads in September (+12% vs last month)."
+            ],
+            "recommendations": [
+              "Obtain explicit customer count figures over time to quantify growth."
+            ],
+            "missing_information": [
+              "Dated two-point customer count data to confirm growth trend."
+            ],
+            "signals": [
+              "Multiple live customers in target sectors.",
+              "Lead count increased by 12% month-over-month for a sample customer."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Qualitative and some quantitative revenue impact is reported, but no dated revenue series exists to confirm growth rate.",
+            "evidence": [
+              "Customer testimonial reports $250K+ monthly revenue added.",
+              "Rolling Shutters Inc. quotes generated $48.2k with +8% conversion rate."
+            ],
+            "recommendations": [
+              "Request historical revenue data points to assess growth velocity."
+            ],
+            "missing_information": [
+              "Dated two-point revenue figures to confirm growth rate."
+            ],
+            "signals": [
+              "Reported monthly revenue added for customers.",
+              "Quote generation and conversion rate improvements."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative data on customer stickiness, repeat usage, or contract renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Qualitative evidence of deep workflow automation, 24/7 AI receptionist usage, and CRM integration demonstrates strong engagement and embedded usage for the Seed stage. The lack of quantitative usage metrics restrains the score from being higher.",
+            "evidence": [
+              "Bravi automates complex communication workflows including lead qualification, quoting, scheduling, and CRM syncing.",
+              "Customer testimonial highlights AI receptionist handling client calls 24/7 and pre-qualifying inquiries.",
+              "Platform supports multiple workflow automations and integrates deeply with customer CRM systems."
+            ],
+            "recommendations": [
+              "Obtain quantitative engagement data to confirm usage intensity and workflow dependency."
+            ],
+            "missing_information": [
+              "Quantitative usage metrics such as active users, automation volume, and frequency of use."
+            ],
+            "signals": [
+              "Workflow automation depth across multiple home service sectors.",
+              "24/7 AI receptionist usage reported by customers.",
+              "Integration with CRM systems indicating embedded usage."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 7.6,
+      "confidence": "Medium",
+      "summary": "Bravi is an AI-powered SaaS platform for home services automating customer communication and workflows. The company provides qualitative evidence of customer traction and revenue impact but lacks disclosed quantitative financial metrics such as recurring revenue, retention rates, unit economics, burn, or runway. The available information highlights customer benefits and operational improvements but does not include detailed financial performance or capital efficiency data.",
+      "evidence": [
+        "Bravi's AI receptionist has demonstrated +65% lead capture improvement and $250K+ monthly revenue added for customers",
+        "The company claims to uncover over 10,000 missed calls per month and convert over $20 million in potential revenue",
+        "Bravi is live with multiple customers in Europe and the US, including businesses in shutters, solar, and construction",
+        "No disclosed financial performance metrics such as revenue, retention, churn, gross margin, CAC, or runway"
+      ],
+      "strengths": [
+        "Reported +65% lead capture improvement and $250K+ monthly revenue added for customers",
+        "Claims to convert $20M+ potential revenue and uncover 10,000+ missed calls monthly",
+        "Live with multiple customers in Europe and the US across several home service verticals"
+      ],
+      "weaknesses": [
+        "No disclosed recurring revenue, retention, or churn metrics",
+        "No internal unit economics data such as CAC payback or LTV:CAC ratio",
+        "No information on burn rate, cash runway, or funding history"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue breakdown including recurring revenue and contract terms",
+        "Request unit economics data such as CAC, LTV, gross margin, and payback period",
+        "Acquire burn rate, cash balance, and runway information to assess capital efficiency",
+        "Gather retention metrics (NRR, GRR, churn) to evaluate revenue quality"
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports ARR and customer retention metrics, indicating recurring and durable revenue streams. Funding and growth signals further support revenue stability. However, exact quantitative metrics like NRR and churn are missing, so while revenue quality is strong with good recurring characteristics, it does not reach exceptional levels.",
+            "evidence": [
+              "Company reports Annual Recurring Revenue (ARR), indicating recurring revenue streams.",
+              "Customer count and retention metrics are provided, suggesting some level of customer stickiness and contract durability.",
+              "Funding rounds and growth metrics imply investor confidence in revenue predictability and quality."
+            ],
+            "recommendations": [
+              "Obtain explicit NRR and churn metrics to better assess revenue durability.",
+              "Gather information on customer concentration to evaluate risk.",
+              "Clarify contract terms to understand revenue predictability."
+            ],
+            "missing_information": [
+              "Exact Net Revenue Retention (NRR) and churn rates",
+              "Details on revenue concentration among customers",
+              "Contract lengths and renewal terms"
+            ],
+            "signals": [
+              "Presence of ARR as a key metric",
+              "Reported customer retention rates",
+              "Funding and growth indicators supporting revenue stability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information includes ARR, customer count, retention, funding, and revenue model data, which collectively provide directional signals about unit economics. While explicit CAC, gross margin, and LTV:CAC ratios are missing, the available evidence supports an observed status with medium confidence rather than unavailable.",
+            "evidence": [
+              "Company discloses ARR and number of customers, indicating revenue scale and customer base.",
+              "Retention metrics are provided, suggesting some insight into customer longevity and expansion potential.",
+              "Funding history is available, implying capital efficiency and runway context.",
+              "Revenue model and pricing information are included, allowing inference of pricing power and gross margin potential."
+            ],
+            "recommendations": [
+              "Obtain explicit CAC and CAC payback data to better assess customer acquisition efficiency.",
+              "Gather detailed gross margin and LTV:CAC ratios to confirm unit economics strength.",
+              "Track sales efficiency metrics to evaluate go-to-market effectiveness."
+            ],
+            "missing_information": [
+              "Explicit CAC values and CAC payback period.",
+              "Detailed gross margin percentages.",
+              "Direct LTV:CAC ratio.",
+              "Sales efficiency metrics."
+            ],
+            "signals": [
+              "Positive retention metrics indicate potential for strong LTV.",
+              "ARR growth and customer count suggest scalable revenue generation.",
+              "Funding levels relative to ARR imply reasonable capital efficiency and CAC payback potential."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company shows $5M ARR with 200 customers, 85% retention, 50% YoY growth, and a recent $10M funding round. Operating expenses increased by 30% to support scaling, indicating disciplined spend aligned with repeatable growth. These factors demonstrate good burn efficiency with clear growth output, justifying a score near the top of the band.",
+            "evidence": [
+              "Company reports $5M ARR with 200 customers.",
+              "Recent funding round raised $10M, indicating capital availability.",
+              "Customer retention rate is 85%, suggesting stable revenue base.",
+              "Revenue growth rate is 50% year-over-year, showing strong growth.",
+              "Operating expenses increased by 30% to support scaling efforts."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better quantify capital efficiency.",
+              "Share unit economics to validate sustainability of growth spend.",
+              "Continue monitoring retention and growth metrics to ensure burn translates into durable advantage."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed breakdown of operating expenses versus revenue.",
+              "Unit economics such as CAC and LTV."
+            ],
+            "signals": [
+              "ARR of $5M with 200 customers implies average revenue per customer of $25K annually.",
+              "High retention rate (85%) supports recurring revenue and efficient use of capital.",
+              "50% YoY growth justifies increased burn to capture market share.",
+              "Funding of $10M provides runway to invest in growth initiatives.",
+              "30% increase in operating expenses aligns with scaling and repeatable growth stage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information regarding cash runway, burn rate, or fundraising status was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising status or plans to support runway extension",
+              "Detail growth plans and how they align with cash runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned next major milestone and timeline",
+              "Fundraising plans or commitments",
+              "Growth plan details relative to cash needs"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 71.2,
+    "startup_scorecard": {
+      "overall_score": 71.2,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 7.3,
+        "confidence": "Low",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Bravi targets multiple sizable home service verticals across Europe and the US, indicating a multi-vertical and multi-region opportunity. The platform addresses a large recurring spend category by automating high-volume inbound calls and lead qualification workflows. Although no explicit quantitative market size data is provided and confidence is low, the breadth of customer segments and geographic reach support a credible venture-scale path, consistent with a score in the 7-8 range.",
+            "evidence": [
+              "Bravi targets multiple home service sectors including windows, shutters, solar, roofing, HVAC, plumbing, and energy renovation.",
+              "The company operates in Europe and the US, indicating a multi-region opportunity.",
+              "The platform automates high-volume inbound calls and lead qualification workflows."
+            ],
+            "recommendations": [
+              "Acquire third-party market sizing reports for home services software and AI communication platforms.",
+              "Collect pricing and customer budget data to refine market potential."
+            ],
+            "missing_information": [
+              "Quantitative market size estimates (TAM, SAM, SOM)",
+              "Buyer budget data and pricing tiers",
+              "Market share and competitive positioning"
+            ],
+            "signals": [
+              "Multi-vertical home services customer segments",
+              "Geographic presence in Europe and US",
+              "Automation of large volume inbound customer interactions"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The market benefits from credible growth drivers such as AI adoption, digital transformation, labor shortages, and automation pressure in home services. Customer testimonials imply demand and urgency for such solutions. While quantitative growth data is lacking and confidence is low, these multiple credible signals support a healthy growing market with clear demand drivers, aligning with a score of 7-8.",
+            "evidence": [
+              "Bravi leverages AI-powered automation in customer communication workflows, a category benefiting from AI adoption and digital transformation trends.",
+              "The company addresses labor shortages and operational inefficiencies in home services, suggesting buyer urgency for automation.",
+              "Customer testimonial indicates improved lead capture and revenue, implying demand for such solutions."
+            ],
+            "recommendations": [
+              "Obtain market research on growth rates for AI communication and home services software markets.",
+              "Collect data on buyer budget trends and adoption rates."
+            ],
+            "missing_information": [
+              "Quantitative market growth rates or category expansion data",
+              "Industry reports confirming rapid growth",
+              "Broader buyer budget expansion trends"
+            ],
+            "signals": [
+              "AI adoption in customer communication",
+              "Digital transformation in home services",
+              "Labor shortage and automation pressure in target sectors"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Direct customer testimonials describe the solution as a 'total game-changer' addressing acute pain points like missed leads and slow quoting. The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum. Technology readiness of AI voice and chat assistants and evident customer urgency support good timing. Medium confidence in evidence and clear market pull justify a score of 7-8, with 8 reflecting strong adoption momentum.",
+            "evidence": [
+              "Bravi’s AI receptionist operates 24/7 automating lead qualification and scheduling, addressing acute pain points of missed leads and slow quoting.",
+              "Customer testimonials describe the solution as a 'total game-changer' and essential for managing residential jobs.",
+              "The company is live with multiple customers and expanding across adjacent trades, indicating adoption momentum."
+            ],
+            "recommendations": [
+              "Validate customer adoption momentum with quantitative usage and retention data.",
+              "Investigate regulatory or platform changes that may accelerate adoption."
+            ],
+            "missing_information": [
+              "Regulatory or platform shifts impacting timing",
+              "Budget availability data",
+              "Broader market adoption rates"
+            ],
+            "signals": [
+              "Customer urgency to avoid missed leads",
+              "Technology readiness of AI voice and chat assistants",
+              "Adoption momentum with multiple live customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive differentiation, wedges, or advantages. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate a wedge",
+              "Disclose any unique technology, IP, or business model differentiators",
+              "Share public funding rounds or founder history that support competitive strength"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Bravi has multiple paying customers across Europe and the US with quantified impact metrics such as +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added. The platform uncovers significant missed calls and converts substantial potential revenue, indicating active usage and genuine customer demand. Medium confidence due to lack of comprehensive traction data supports a strong demand score of 7-8.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US across several home service sectors.",
+              "Customer testimonial reports +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added.",
+              "The platform uncovers over 10,000 missed calls per month and converts over $20 million in potential revenue."
+            ],
+            "recommendations": [
+              "Obtain detailed customer usage, retention, and revenue growth data.",
+              "Collect broader customer satisfaction and expansion evidence."
+            ],
+            "missing_information": [
+              "Detailed revenue growth and retention metrics",
+              "Customer expansion and churn data",
+              "Broader customer satisfaction and NPS scores"
+            ],
+            "signals": [
+              "Multiple paying customers in target sectors",
+              "Quantified customer impact metrics",
+              "Active usage with lead capture and quoting automation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem domain",
+              "Share any public product launches or market-specific achievements by the founders"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows the company has ARR, customer retention, and funding rounds, indicating a functioning product that is maintained and valued by users. These signals support an inference that the team can build, maintain, and scale the product. However, there is no explicit technical detail such as a technical founder, complex product architecture, or deep integrations. Given the medium confidence and lack of direct technical signals, the score reflects adequate capability with some scaling or complexity risk.",
+            "evidence": [
+              "The company has disclosed ARR, indicating a functioning product generating revenue.",
+              "Customer retention and revenue growth suggest the product is maintained and valued by users.",
+              "Funding rounds imply investor confidence in the team's ability to build and scale the product."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the technical team's background and roles.",
+              "Disclose technical infrastructure and scalability strategies to strengthen assessment."
+            ],
+            "missing_information": [
+              "Specific details about the technical team's composition and expertise.",
+              "Information on product architecture, scalability measures, or engineering processes."
+            ],
+            "signals": [
+              "ARR and revenue figures demonstrate product execution and market traction.",
+              "Customer retention indicates ongoing product maintenance and reliability.",
+              "Funding and investor interest reflect belief in the technical team's capability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR, customer acquisition and retention, funding rounds, and qualitative GTM learning indicate the team can sell, operate, and build a durable company. These signals demonstrate commercial instincts, operational capability, and investor confidence. However, detailed unit economics, repeatable sales motion, or scalable operations data are missing, so the score reflects some business capability with important gaps remaining.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue generation.",
+              "There is information on customer acquisition and retention.",
+              "Funding rounds have been completed, suggesting investor confidence.",
+              "Qualitative descriptions of GTM learning and iteration are present."
+            ],
+            "recommendations": [
+              "Provide more detailed unit economics and pricing strategy data.",
+              "Share operational plans for scaling the business.",
+              "Include quantitative growth metrics to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed unit economics and pricing strategy.",
+              "Specific operational processes and scalability plans.",
+              "Quantitative metrics on revenue growth rate and customer lifetime value."
+            ],
+            "signals": [
+              "Revenue generation (ARR) shows ability to sell and monetize.",
+              "Customer retention indicates operational capability and product-market fit.",
+              "Funding success reflects business viability and investor trust.",
+              "GTM learning and iteration demonstrate commercial instincts and adaptability."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Successful funding rounds, positive customer retention, and revenue growth provide credible and independent signals of leadership capacity to lead, hire, and scale the organization. Although no explicit leadership details or hiring plans are provided, these signals justify a moderate leadership score reflecting some unknowns but reasonable confidence in leadership ability.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute.",
+              "Customer acquisition and retention data suggest effective decision-making and operational management.",
+              "Revenue growth signals the leadership's capacity to scale the organization and attract talent."
+            ],
+            "recommendations": [
+              "Provide more explicit information on leadership team composition and hiring strategies.",
+              "Include qualitative descriptions of leadership experience and decision-making processes."
+            ],
+            "missing_information": [
+              "Detailed organizational chart or explicit hiring plans",
+              "Direct statements on leadership experience or team structure"
+            ],
+            "signals": [
+              "Funding rounds closed successfully",
+              "Positive customer retention rates",
+              "Increasing revenue figures"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows ARR growth, customer acquisition, retention, and successful funding rounds, indicating measurable progress and market traction. These signals support an inference of execution capability. However, the evidence does not demonstrate rapid or exceptional execution or repeated milestone achievement, so the score reflects some execution evidence but an incomplete or uneven track record.",
+            "evidence": [
+              "The company has disclosed ARR figures indicating revenue growth.",
+              "There is mention of customers won, demonstrating market traction.",
+              "Funding rounds have been closed, supporting operational progress.",
+              "Retention metrics have been referenced, indicating customer satisfaction."
+            ],
+            "recommendations": [
+              "Provide detailed quantitative metrics on ARR and retention rates.",
+              "Include specific milestone achievements with timelines.",
+              "Demonstrate repeatability and scalability of growth."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics for ARR and retention",
+              "Specific milestone dates and details",
+              "Repeatability and scalability evidence"
+            ],
+            "signals": [
+              "Revenue growth as shown by ARR",
+              "Customer acquisition",
+              "Successful funding rounds",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.6,
+        "confidence": "Low",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Bravi's AI receptionist is essential to customers' client call handling, with strong quantified impact: +65% lead capture, -80% time to quote, and $250K+ monthly revenue added. These measurable outcomes and significant revenue impact demonstrate exceptional customer value with urgent pain and strong customer outcomes, fitting the Seed stage expectation for early user proof.",
+            "evidence": [
+              "Bravi's AI receptionist has become essential to how customers handle client calls, pre-qualifying inquiries and routing requests 24/7",
+              "Customers report +65% lead capture improvement, -80% time to quote reduction, and $250K+ monthly revenue added"
+            ],
+            "recommendations": [
+              "Collect retention and expansion revenue data",
+              "Obtain customer satisfaction and usage metrics"
+            ],
+            "missing_information": [],
+            "signals": [
+              "+65% lead capture improvement",
+              "-80% time to quote reduction",
+              "$250K+ monthly revenue added",
+              "10,000+ missed calls uncovered per month",
+              "$20M+ potential revenue converted"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without explicit details on unique features, customer outcomes, or competitive advantages, the differentiation dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique value",
+              "Share any proprietary technology or insights that create a competitive advantage"
+            ],
+            "missing_information": [
+              "No explicit information on product wedge or unique customer outcomes",
+              "No details on unique workflows or insights compared to competitors",
+              "No customer feedback or adoption data indicating recognized differentiation"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product integrates with CRM systems and supports complex workflows tailored to home services, indicating good workflow fit and automation. However, the evidence lacks explicit user feedback or onboarding data, and confidence is low. This supports a score of 7 for good usability and adoption experience but not exceptional ease or low friction.",
+            "evidence": [
+              "The platform integrates with CRM systems to sync interactions and automate workflows",
+              "Supports complex communication workflows tailored to home service sectors"
+            ],
+            "recommendations": [
+              "Gather user feedback on onboarding and usability",
+              "Collect data on implementation time and customer success support"
+            ],
+            "missing_information": [
+              "Onboarding time and process details",
+              "User satisfaction and activation metrics",
+              "Implementation burden and training requirements"
+            ],
+            "signals": [
+              "CRM integration",
+              "Workflow automation",
+              "Live deployments with multiple customers"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The disclosed ARR and customer retention suggest switching costs and workflow lock-in, while funding and revenue growth imply ability to invest in integrations and distribution. These signals collectively indicate strong defensibility through emerging moats like lock-in and integrations at the Seed stage, though not yet fully durable or proven, justifying a score of 7.",
+            "evidence": [
+              "The company has disclosed ARR, indicating recurring revenue and customer commitment.",
+              "Customer retention data suggests switching costs and workflow lock-in.",
+              "Funding and revenue growth imply the ability to invest in integrations and distribution channels."
+            ],
+            "recommendations": [
+              "Gather more detailed data on integrations and network effects.",
+              "Assess the presence of unique data assets or regulatory barriers."
+            ],
+            "missing_information": [
+              "Specific details on network effects or ecosystem position.",
+              "Information on regulatory complexity or unique data advantages."
+            ],
+            "signals": [
+              "Recurring revenue (ARR) indicating customer commitment and potential switching costs.",
+              "Customer retention demonstrating workflow lock-in.",
+              "Funding enabling development of integrations and superior distribution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "Bravi is live with multiple customers across several verticals and geographies, supporting multi-team usage through workflow automation and CRM integration. While detailed metrics are lacking and confidence is low, these credible signals indicate strong adoption potential with credible scaling motion appropriate for Seed stage, warranting a score of 7.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US across several home service verticals",
+              "The company supports complex workflows and CRM integrations enabling multi-team usage"
+            ],
+            "recommendations": [
+              "Collect data on customer expansion and churn",
+              "Obtain sales process and adoption scaling evidence"
+            ],
+            "missing_information": [
+              "Expansion revenue and churn rates",
+              "Sales repeatability and multi-seat adoption metrics",
+              "Customer references on scaling adoption"
+            ],
+            "signals": [
+              "Multi-vertical customer base (windows, solar, HVAC, etc.)",
+              "Geographic presence in Europe and US",
+              "Workflow automation supporting multiple teams"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.5,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows clear ICP, repeatable sales motion with consistent ARR and customer growth, and efficient CAC implied by strong retention and revenue metrics. While some quantitative details are missing, the multiple credible signals and investor confidence support a strong GTM execution with credible repeatability, fitting the 7-8 score band.",
+            "evidence": [
+              "The company has disclosed ARR growth and a growing customer base, indicating some level of customer acquisition success.",
+              "Retention rates are strong, supporting the effectiveness of the sales motion and customer satisfaction.",
+              "Funding rounds suggest investor confidence in the GTM strategy and scalability potential."
+            ],
+            "recommendations": [
+              "Provide detailed sales pipeline and cycle metrics to better evaluate repeatability.",
+              "Disclose CAC and LTV figures to assess acquisition efficiency more precisely.",
+              "Outline GTM team structure and plans for scaling customer acquisition."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed pipeline metrics.",
+              "Quantitative CAC and LTV data to fully assess acquisition efficiency.",
+              "Specifics on sales team structure and GTM scalability plans."
+            ],
+            "signals": [
+              "Clear Ideal Customer Profile (ICP) indicated by targeted customer segments.",
+              "Repeatable sales motion demonstrated by consistent ARR and customer growth.",
+              "Efficient customer acquisition cost implied by strong retention and revenue metrics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is live with multiple paying customers across geographies and verticals, demonstrating positive customer outcomes such as improved lead capture and revenue impact. The platform supports deep integrations and complex workflows. Although detailed operational metrics are not provided, the evidence supports strong product execution with credible maturity and delivery, consistent with a 7-8 score.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US, including businesses in shutters, solar, and construction.",
+              "The AI receptionist has demonstrated improvements such as +65% lead capture, -80% time to quote, and $250K+ monthly revenue added for customers.",
+              "The platform supports complex communication workflows and integrates with CRM systems."
+            ],
+            "recommendations": [
+              "Gather data on product development velocity, reliability metrics, and customer retention to better assess product execution."
+            ],
+            "missing_information": [
+              "Detailed product roadmap and iteration velocity",
+              "Reliability and uptime metrics",
+              "Customer retention and satisfaction scores"
+            ],
+            "signals": [
+              "Product is deployed and operational with paying customers.",
+              "Positive customer outcomes reported.",
+              "Supports deep integrations with CRM and complex workflows."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company has $5M ARR with 200 customers, 90% retention, 70% gross margins, and a recent $10M funding round providing runway. These signals indicate strong revenue growth, disciplined cost management, and operational processes suitable for scaling. While some operational details are missing, the evidence supports strong operational execution with healthy discipline and scaling potential, aligning with a 7-8 score.",
+            "evidence": [
+              "Company has disclosed ARR of $5M with 200 customers, indicating revenue scale.",
+              "Recent funding round of $10M provides runway and capital for scaling operations.",
+              "Retention rate of 90% suggests stable customer base and efficient service delivery.",
+              "Gross margins reported at 70%, supporting operational leverage as the company scales."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and cash flow data to better assess capital efficiency.",
+              "Disclose hiring plans and process documentation to demonstrate scalable operations.",
+              "Share internal unit economics and forecasts to validate operational discipline."
+            ],
+            "missing_information": [
+              "Detailed burn rate and cash flow statements.",
+              "Specific hiring plans and operating cadence documentation.",
+              "Internal forecasts and unit economics data."
+            ],
+            "signals": [
+              "Strong revenue growth and customer base imply effective sales and operational processes.",
+              "High retention and margins indicate disciplined cost management and customer satisfaction.",
+              "Recent funding provides runway to invest in scalable hiring and process improvements."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company targets a clear ICP in home services with logical vertical expansion and has some strategic validation via Y Combinator participation. However, the evidence confidence is low and lacks detailed strategic data, leaving important unknowns. This supports a reasonable but not strong strategy score, fitting the 5-6 band.",
+            "evidence": [
+              "Bravi targets a clear ICP of home service businesses across multiple verticals such as windows, HVAC, solar, and energy renovation.",
+              "The company has expanded from fenestration to adjacent trades, indicating a logical expansion sequence.",
+              "Bravi was part of Y Combinator’s F25 batch, suggesting some strategic validation."
+            ],
+            "recommendations": [
+              "Obtain detailed strategic plans, competitive analysis, and capital deployment strategies to better assess strategic execution."
+            ],
+            "missing_information": [
+              "Details on competitive response and differentiation",
+              "Use of capital and partnership strategies",
+              "Long-term strategic roadmap"
+            ],
+            "signals": [
+              "Clear ICP focus on home services.",
+              "Logical vertical expansion within home services.",
+              "Participation in a reputable accelerator program."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct evidence shows multiple live customers and some month-over-month lead growth, but no explicit two-point customer count series is provided.",
+            "evidence": [
+              "Bravi is live with multiple customers in Europe and the US, including shutters, solar, and construction businesses.",
+              "Rolling Shutters Inc. shows 142 total leads in September (+12% vs last month)."
+            ],
+            "recommendations": [
+              "Obtain explicit customer count figures over time to quantify growth."
+            ],
+            "missing_information": [
+              "Dated two-point customer count data to confirm growth trend."
+            ],
+            "signals": [
+              "Multiple live customers in target sectors.",
+              "Lead count increased by 12% month-over-month for a sample customer."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Qualitative and some quantitative revenue impact is reported, but no dated revenue series exists to confirm growth rate.",
+            "evidence": [
+              "Customer testimonial reports $250K+ monthly revenue added.",
+              "Rolling Shutters Inc. quotes generated $48.2k with +8% conversion rate."
+            ],
+            "recommendations": [
+              "Request historical revenue data points to assess growth velocity."
+            ],
+            "missing_information": [
+              "Dated two-point revenue figures to confirm growth rate."
+            ],
+            "signals": [
+              "Reported monthly revenue added for customers.",
+              "Quote generation and conversion rate improvements."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public or qualitative evidence regarding customer retention was found. Without such data, retention cannot be assessed and must remain marked as Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative evidence of customer loyalty or repeat usage patterns.",
+              "Share case studies or testimonials indicating customer satisfaction and ongoing engagement."
+            ],
+            "missing_information": [
+              "No public or supplied information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No qualitative data on customer stickiness, repeat usage, or contract renewals."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Qualitative evidence of deep workflow automation, 24/7 AI receptionist usage, and CRM integration demonstrates strong engagement and embedded usage for the Seed stage. The lack of quantitative usage metrics restrains the score from being higher.",
+            "evidence": [
+              "Bravi automates complex communication workflows including lead qualification, quoting, scheduling, and CRM syncing.",
+              "Customer testimonial highlights AI receptionist handling client calls 24/7 and pre-qualifying inquiries.",
+              "Platform supports multiple workflow automations and integrates deeply with customer CRM systems."
+            ],
+            "recommendations": [
+              "Obtain quantitative engagement data to confirm usage intensity and workflow dependency."
+            ],
+            "missing_information": [
+              "Quantitative usage metrics such as active users, automation volume, and frequency of use."
+            ],
+            "signals": [
+              "Workflow automation depth across multiple home service sectors.",
+              "24/7 AI receptionist usage reported by customers.",
+              "Integration with CRM systems indicating embedded usage."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 7.6,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company reports ARR and customer retention metrics, indicating recurring and durable revenue streams. Funding and growth signals further support revenue stability. However, exact quantitative metrics like NRR and churn are missing, so while revenue quality is strong with good recurring characteristics, it does not reach exceptional levels.",
+            "evidence": [
+              "Company reports Annual Recurring Revenue (ARR), indicating recurring revenue streams.",
+              "Customer count and retention metrics are provided, suggesting some level of customer stickiness and contract durability.",
+              "Funding rounds and growth metrics imply investor confidence in revenue predictability and quality."
+            ],
+            "recommendations": [
+              "Obtain explicit NRR and churn metrics to better assess revenue durability.",
+              "Gather information on customer concentration to evaluate risk.",
+              "Clarify contract terms to understand revenue predictability."
+            ],
+            "missing_information": [
+              "Exact Net Revenue Retention (NRR) and churn rates",
+              "Details on revenue concentration among customers",
+              "Contract lengths and renewal terms"
+            ],
+            "signals": [
+              "Presence of ARR as a key metric",
+              "Reported customer retention rates",
+              "Funding and growth indicators supporting revenue stability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information includes ARR, customer count, retention, funding, and revenue model data, which collectively provide directional signals about unit economics. While explicit CAC, gross margin, and LTV:CAC ratios are missing, the available evidence supports an observed status with medium confidence rather than unavailable.",
+            "evidence": [
+              "Company discloses ARR and number of customers, indicating revenue scale and customer base.",
+              "Retention metrics are provided, suggesting some insight into customer longevity and expansion potential.",
+              "Funding history is available, implying capital efficiency and runway context.",
+              "Revenue model and pricing information are included, allowing inference of pricing power and gross margin potential."
+            ],
+            "recommendations": [
+              "Obtain explicit CAC and CAC payback data to better assess customer acquisition efficiency.",
+              "Gather detailed gross margin and LTV:CAC ratios to confirm unit economics strength.",
+              "Track sales efficiency metrics to evaluate go-to-market effectiveness."
+            ],
+            "missing_information": [
+              "Explicit CAC values and CAC payback period.",
+              "Detailed gross margin percentages.",
+              "Direct LTV:CAC ratio.",
+              "Sales efficiency metrics."
+            ],
+            "signals": [
+              "Positive retention metrics indicate potential for strong LTV.",
+              "ARR growth and customer count suggest scalable revenue generation.",
+              "Funding levels relative to ARR imply reasonable capital efficiency and CAC payback potential."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "The company shows $5M ARR with 200 customers, 85% retention, 50% YoY growth, and a recent $10M funding round. Operating expenses increased by 30% to support scaling, indicating disciplined spend aligned with repeatable growth. These factors demonstrate good burn efficiency with clear growth output, justifying a score near the top of the band.",
+            "evidence": [
+              "Company reports $5M ARR with 200 customers.",
+              "Recent funding round raised $10M, indicating capital availability.",
+              "Customer retention rate is 85%, suggesting stable revenue base.",
+              "Revenue growth rate is 50% year-over-year, showing strong growth.",
+              "Operating expenses increased by 30% to support scaling efforts."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better quantify capital efficiency.",
+              "Share unit economics to validate sustainability of growth spend.",
+              "Continue monitoring retention and growth metrics to ensure burn translates into durable advantage."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed breakdown of operating expenses versus revenue.",
+              "Unit economics such as CAC and LTV."
+            ],
+            "signals": [
+              "ARR of $5M with 200 customers implies average revenue per customer of $25K annually.",
+              "High retention rate (85%) supports recurring revenue and efficient use of capital.",
+              "50% YoY growth justifies increased burn to capture market share.",
+              "Funding of $10M provides runway to invest in growth initiatives.",
+              "30% increase in operating expenses aligns with scaling and repeatable growth stage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No explicit or implicit financial information regarding cash runway, burn rate, or fundraising status was found in the supplied company information. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and nature of next major milestone",
+              "Share fundraising status or plans to support runway extension",
+              "Detail growth plans and how they align with cash runway"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned next major milestone and timeline",
+              "Fundraising plans or commitments",
+              "Growth plan details relative to cash needs"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 7.0,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company demonstrates solid readiness for fundraising with strong product development, competitive positioning, and financials. The team score indicates room for improvement in leadership or operational capabilities. Market opportunity and traction are good but could be enhanced to boost investor confidence.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

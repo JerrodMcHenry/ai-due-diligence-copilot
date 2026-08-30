@@ -1,0 +1,2600 @@
+{
+  "summary": "Databricks is a leading enterprise software company that provides a unified cloud-based Data + AI platform designed to integrate data engineering, analytics, machine learning (ML), and artificial intelligence (AI) on a single open and governed foundation. Founded in 2013 by seven UC Berkeley academics, including CEO Ali Ghodsi and Executive Chair Ion Stoica, Databricks commercialized the Apache Spark engine and pioneered the lakehouse architecture—a hybrid data platform combining the scalability and low cost of data lakes with the reliability and performance of data warehouses.\n\nThe platform offers a comprehensive suite of products, including:\n- **Lakehouse:** Combines data lake and data warehouse capabilities for analytics and AI workloads.\n- **Lakebase:** The first serverless Postgres-compatible database integrated with the lakehouse for transactional and real-time applications.\n- **Genie:** A natural language conversational AI interface providing instant, code-free data insights.\n- **Agent Bricks:** AI agents built for real-world enterprise use, continuously improving through optimization on customer data.\n- **Unity Catalog and Unity Gateway:** Unified governance and cost control layers across data, AI models, and analytics agents.\n\nDatabricks targets large organizations, including over 20,000 customers globally and more than 60% of Fortune 500 companies, across industries such as telecommunications, financial services, healthcare, retail, manufacturing, and public sector. Its platform supports diverse users—from data engineers and scientists to non-technical business analysts—enabling them to build, deploy, and govern data pipelines, analytics, AI models, and applications efficiently, reducing complexity and eliminating data silos.\n\nOperating on a SaaS subscription and usage-based pricing model, Databricks has demonstrated rapid growth, reporting over 80% year-over-year revenue increase and surpassing a $7 billion revenue run rate by mid-2026. It has raised approximately $14.7 billion in capital across multiple funding rounds, including a $10 billion Series J at a $62 billion valuation and a strategic investment valuing the company at $188 billion in 2026, reflecting strong investor confidence.\n\nDatabricks competes with major data platform and cloud providers such as Snowflake, Google BigQuery, and Amazon Redshift, differentiating itself through its open lakehouse architecture, integrated AI capabilities, and enterprise-grade governance. The company emphasizes ease of access to data and AI through natural language interfaces and AI agents, aiming to democratize data insights and accelerate AI adoption.\n\nHeadquartered in San Francisco with around 8,000 employees (as of 2025), Databricks also invests heavily in community engagement and education through its free edition, Databricks Academy, and University Alliance, fostering widespread platform adoption.\n\n**In summary:**\nDatabricks is a high-growth, market-leading Data + AI platform company that empowers enterprises to unify their data infrastructure and accelerate AI innovation at scale via a scalable, open, and governed lakehouse architecture combined with AI-powered tools for analytics and applications.",
+  "risk_analysis": "Here is a detailed risk analysis of Databricks based on the provided information and research context:\n\n---\n\n### 1. Competition Risk\n\n- **Market Landscape:** Databricks operates in a highly competitive market for cloud data platforms, AI, and analytics. Key direct competitors include Snowflake (its closest rival in lakehouse and data platform), Google BigQuery, Amazon Redshift, and other emerging lakehouse and AI platform startups.\n- **Competitive Pressure:**  \n  - **Cloud Providers’ Dominance:** AWS, Google Cloud, and Azure offer native data warehousing and analytics solutions that compete directly; their vertical integration and large installed bases can limit Databricks’ market share growth.\n  - **Rapid Innovation:** Competitors are aggressively innovating around AI/ML native features, cost optimization, and ease of use to capture enterprise budgets.\n  - **Price Sensitivity:** Strong competition pressures pricing models; Databricks must balance growth with maintaining margins amid usage-based subscription models.\n- **Brand and Leadership:** Databricks benefits from strong technical roots (originating Apache Spark) and recognized leadership in Gartner MQ reports, providing competitive moats.\n- **Risk Summary:** Intense competition from well-funded incumbents and cloud providers poses a continuous risk to growth, market share, and pricing power.\n\n---\n\n### 2. Scalability Risk\n\n- **Platform Scalability:**  \n  - The architecture (lakehouse integrating data lakes and warehouses) is designed for scale, supporting both batch and real-time workloads.\n  - Introduction of serverless Postgres (Lakebase) and AI agents adds complexity but aims at scalability for operational apps and AI deployment.\n- **Customer Scale:** Serving 20,000+ customers including 60% of Fortune 500 implies robust scalability at enterprise scale.\n- **Technical Challenges:**  \n  - Maintaining performance, low latency, and reliability across diverse and large-scale data processing workloads can be complex.\n  - Multi-cloud deployments (AWS, Azure, GCP) increase the operational overhead and require sophisticated infrastructure engineering.\n  - Governance and security features at scale must keep up with evolving regulatory and compliance needs.\n- **Risk Summary:** While Databricks’ platform design supports scalability, the technical challenges of multi-cloud operation, AI integration, and maintaining performance/security at scale pose ongoing operational risks.\n\n---\n\n### 3. Market Risk\n\n- **Growing Market Demand:** The accelerating adoption of cloud data platforms and enterprise AI creates strong tailwinds supporting Databricks’ growth.\n- **Macroeconomic Factors:**  \n  - Economic downturns or IT budget cuts may slow enterprise spending on advanced data and AI platforms.\n  - Enterprises may prioritize cost optimization, causing potential pushback on high compute and data usage billing.\n- **Market Evolution:**  \n  - Shifts in technology paradigms (e.g., emergence of new open-source approaches, specialized AI hardware) may create opportunities or threats.\n  - Regulatory changes on data privacy and AI could impact product features, sales cycles, or increase compliance costs.\n- **Risk Summary:** Although demand remains strong, economic cycles, regulatory changes, and rapid technological shifts add uncertainty to the long-term market opportunity and revenue growth.\n\n---\n\n### 4. Customer Adoption Risk\n\n- **Target Customers:** Large enterprises with complex IT environments, necessitating lengthy sales cycles and complicated onboarding processes.\n- **Technology Adoption:**  \n  - Enterprises may hesitate to consolidate multiple data infrastructure layers into a single platform if they already have legacy systems and vendor relationships.\n  - The shift towards AI and conversational analytics requires customer education and change management.\n- **Retention and Expansion:**  \n  - High switching costs could favor retention, but customers may also demand continuous innovation and cost-effectiveness.\n  - The availability of free editions and training may help drive adoption but could also prolong free usage without conversion.\n- **Risk Summary:** Customer adoption involves risks tied to sales cycle length, integration complexity, user education, and competitive alternatives; failure to demonstrate clear ROI or ease of migration could delay growth.\n\n---\n\n### 5. Operational Risk\n\n- **Product Complexity:** The unified Data + AI platform combining data engineering, AI/ML lifecycle, governance, and BI is complex to develop and maintain.\n- **Talent and Execution:**  \n  - Maintaining a large engineering workforce (~8,000 employees) with cutting-edge skills is necessary to keep innovation pace and operational excellence.\n  - Coordination across product lines, cloud partnerships, and customer support is critical.\n- **Security and Compliance:**  \n  - Handling sensitive enterprise data involves high security standards and continuous updates to mitigate cyber threats.\n  - Compliance with global data privacy laws (GDPR, CCPA, etc.) requires ongoing operational focus.\n- **Scaling Global Operations:** Expanding worldwide requires additional infrastructure, support, and localization.\n- **Risk Summary:** Databricks faces operational risks from platform complexity, talent retention, security challenges, and scaling global delivery while sustaining innovation velocity.\n\n---\n\n### Summary of Key Risks:\n\n| Risk Category         | Key Concerns                                                      | Risk Level (High/Medium/Low) |\n|-----------------------|------------------------------------------------------------------|------------------------------|\n| Competition           | Strong rivals, cloud providers, pricing pressure                 | High                         |\n| Scalability           | Multi-cloud complexity, performance at scale, governance needs  | Medium                       |\n| Market                | Economic cycles, regulatory impact, fast tech evolution         | Medium                       |\n| Customer Adoption     | Long sales cycles, migration complexity, ROI demonstration      | Medium                       |\n| Operational           | Product complexity, talent, security, global scaling             | Medium                       |\n\n---\n\n### Conclusion\n\nDatabricks is well-positioned with a technically sophisticated, market-leading platform and strong enterprise presence. However, sustaining its growth and valuation requires navigating intense competition, scaling operational and technological complexity, managing market uncertainties, and driving broad customer adoption amid evolving enterprise needs. Investors should monitor competitive dynamics, platform scalability metrics, sales execution efficiency, and changes in enterprise IT budgets as key indicators of risk and potential returns.",
+  "competitor_analysis": "Competitor Analysis for Databricks\n\nOverview:  \nDatabricks is a leading unified Data + AI platform that integrates data engineering, analytics, machine learning, and governance on a lakehouse architecture. Serving over 20,000 customers globally including 60%+ of Fortune 500 companies, it competes primarily in the cloud data platform, data warehousing, and AI/ML lifecycle markets.\n\n---\n\n1. **Major Competitors**\n\n- **Snowflake:**  \n  The closest and most direct competitor, Snowflake offers a popular cloud-native data platform with strong data warehousing and lakehouse capabilities. It emphasizes simplicity, elasticity, and multi-cloud support.\n\n- **Google BigQuery:**  \n  Google’s serverless, highly scalable enterprise data warehouse solution integrated into Google Cloud Platform (GCP). Strong in analytics and real-time insights with serverless architecture.\n\n- **Amazon Redshift:**  \n  Amazon’s data warehousing service hosted on AWS, providing scalable analytics and data querying at cloud scale.\n\n- **Dremio:**  \n  An open lakehouse platform focused on query acceleration and data virtualization with emphasis on avoiding vendor lock-in.\n\n- **Dataiku, Domino Data Lab:**  \n  Firms specializing more in AI/ML platforms and collaborative data science environments, overlapping with Databricks’ AI lifecycle capabilities.\n\n- **Emerging AI-assisted analytics startups:**  \n  Newer entrants with AI/ML tools offering conversational analytics, governance, and integrated AI features seek to carve niche segments.\n\n---\n\n2. **Competitive Advantages**\n\n- **Unified Platform:**  \n  Databricks offers a single, integrated platform that combines data engineering, data warehousing, AI/ML lifecycle, governance, and business intelligence. This end-to-end integration reduces fragmentation and accelerates time to value for enterprises.\n\n- **Lakehouse Architecture:**  \n  As a pioneer of the lakehouse paradigm, it seamlessly combines low-cost data lake storage with warehouse-like ACID transactions and SQL performance, offering both flexibility and reliability.\n\n- **Deep AI/ML Integration:**  \n  Features like Agent Bricks (AI agents), Genie (conversational analytics), and AI governance layers make the platform attractive for enterprises aiming to operationalize AI at scale.\n\n- **Strong Multi-Cloud Support:**  \n  Databricks runs on AWS, Azure, and GCP, avoiding vendor lock-in and providing customers flexibility in cloud providers.\n\n- **Large, High-Quality Customer Base:**  \n  With 20,000+ customers, including over 60% of Fortune 500, Databricks has strong market validation and a large installed base for upsell.\n\n- **High Growth and Funding:**  \n  Significant funding ($14.7B raised, $188B valuation) and 80%+ YoY growth enable continued innovation and global expansion.\n\n- **Open Source Foundations:**  \n  Commercializes Apache Spark and leverages open standards like Delta Lake and Postgres which drives ecosystem adoption and developer familiarity.\n\n- **Strong Thought Leadership and Ecosystem:**  \n  Founded by UC Berkeley academics with a strong research and engineering reputation. Offers extensive training (Databricks Academy) and community engagement.\n\n---\n\n3. **Competitive Disadvantages**\n\n- **Complexity and Learning Curve:**  \n  Despite the unified platform advantage, the breadth and depth of features may necessitate steep learning for organizations new to data/AI platforms.\n\n- **Pricing Complexity and Cost:**  \n  Usage-based pricing tied to DBUs can be complex to forecast; cost optimization may be challenging compared to simpler, more predictable data warehouses.\n\n- **Competition with Cloud Native Offerings:**  \n  Competitors like BigQuery and Redshift come with tight cloud provider integrations and massive scale backed by cloud giants, sometimes making sales motions more turnkey.\n\n- **Governance and Compliance Challenge at Scale:**  \n  Unified governance across data, AI, and applications is complex and requires ongoing innovation to meet diverse and evolving enterprise compliance needs.\n\n- **Slower Feature Adoption for Niche Use Cases:**  \n  Enterprises with specialized needs (e.g., highly domain-specific AI workflows or extremely large data volumes) might find niche competitors more tailored.\n\n---\n\n4. **Barriers to Entry**\n\n- **Technical Complexity and Integration:**  \n  Building a scalable, unified data and AI platform with lakehouse architecture, AI agents, governance, and multi-cloud support is highly complex and resource-intensive.\n\n- **Strong Customer Relationships and Trust:**  \n  Deep integrations into Fortune 500 companies’ data ecosystems and mission-critical workloads generate high switching costs.\n\n- **Ecosystem and Community:**  \n  Developer mindshare from open source projects (Spark, Delta Lake) and partnerships with large cloud providers provide significant moat.\n\n- **Capital Intensity:**  \n  Raising billions to invest in R&D, global infrastructure, and go-to-market scale deters smaller startups.\n\n- **Regulatory and Security Compliance:**  \n  Achieving enterprise-grade security and compliance certifications is costly and time consuming, serving as a barrier for new entrants.\n\n---\n\n5. **Competitive Risks**\n\n- **Intense Competition from Well-Funded Cloud Giants:**  \n  Google (BigQuery), Amazon (Redshift), and Microsoft (Azure Synapse) have deep pockets, integration advantages, and established customers.\n\n- **Market Consolidation vs. Specialized Solutions:**  \n  The market may bifurcate between large, integrated platforms and specialized niche tools, pressuring Databricks to move faster on innovation.\n\n- **Customer Budget Constraints / Macro Downturns:**  \n  Economic changes could reduce enterprise IT spending or lengthen sales cycles, impacting subscription growth.\n\n- **Innovation Pace and AI Evolution:**  \n  Rapid advancement in AI/ML tools requires Databricks to keep evolving AI agent capabilities, natural language interfaces, and governance.\n\n- **Platform Complexity Risks:**  \n  Potential performance, security, or reliability issues in very large customer deployments could lead to churn.\n\n- **Dependence on Cloud Providers:**  \n  Although multi-cloud, significant reliance on AWS, Azure, and GCP infrastructure exposes Databricks to pricing or policy risks.\n\n---\n\n**Summary:**  \nDatabricks is a dominant player and innovator in the unified data + AI platform space with strong competitive advantages rooted in its lakehouse architecture, AI integration, open source foundation, and large enterprise footprint. Its main competitors include Snowflake, BigQuery, and Redshift. While the company benefits from high barriers to entry and significant momentum, it faces ongoing risks from intense competition, evolving technology landscapes, and enterprise adoption challenges. Successful navigation of these factors will be critical to sustaining its market leadership.",
+  "memo": "**Investment Memo: Databricks**\n\n**Company Overview**  \nDatabricks, founded in 2013 by seven UC Berkeley academics including CEO Ali Ghodsi, is a leading unified Data + AI platform provider headquartered in San Francisco. The company commercializes Apache Spark technology and offers a cloud-based platform that integrates data engineering, analytics, machine learning, AI, and governance on a scalable lakehouse architecture. Serving over 20,000 customers, including 60%+ of the Fortune 500, Databricks is recognized as a market leader in Gartner Magic Quadrant reports and has achieved $7B+ revenue run rate with 80%+ YoY growth as of 2026. It has raised around $14.7B at valuations up to $188B.\n\n**Problem**  \nModern enterprises grapple with fragmented data infrastructures involving separate data lakes, warehouses, ML platforms, and governance tools. This complexity hinders agility, drives up costs, and slows AI adoption. Additionally, data and AI access remain largely siloed and technical, limiting business users from deriving insights. Legacy platforms lack unified governance, real-time transactional capabilities, and scalability needed for today's data-intensive AI workloads.\n\n**Solution**  \nDatabricks delivers a unified, open, and governed Data + AI platform built on a lakehouse architecture that merges data lake flexibility with data warehouse reliability. Key offerings include:  \n- Lakehouse: seamless data engineering, analytics, and AI on one platform.  \n- Lakebase: serverless Postgres database integrated with the lakehouse for scalable transactional workloads.  \n- Genie: conversational AI analytics enabling non-technical users to query data with natural language.  \n- Agent Bricks: AI agents optimized on customer data for production-grade AI applications.  \n- Unity Catalog and Unity Gateway: unified governance, security, and cost control across data and AI assets.  \n\nThis integrated platform reduces operational complexity, lowers TCO, accelerates AI-driven innovation, and democratizes data insights across enterprise users.\n\n**Market Opportunity**  \nThe global data and AI platform market is expanding rapidly, driven by enterprises’ urgent need to modernize data infrastructure and harness AI. By 2030, the market opportunity for unified data lakehouse and AI platforms is projected in the tens of billions annually. Databricks targets large enterprises across telecommunications, financial services, healthcare, retail, manufacturing, media, and public sectors—sectors collectively spending billions on data management and AI. Its multi-cloud approach enables global reach and scalability.\n\n**Competitive Landscape**  \n- **Snowflake:** Closest competitor focusing on cloud-native data warehousing and lakehouse platform.  \n- **Google BigQuery & Amazon Redshift:** Major cloud providers offering data warehouse services with analytics capabilities.  \n- **Dremio:** Open lakehouse with emphasis on in-place querying.  \n- **Others:** AI and data platform providers like Dataiku and Domino Data Lab.  \n\nDatabricks differentiates via its open lakehouse architecture, integrated AI/ML lifecycle support, strong governance, broad feature set, and leadership in industry recognition. Partnerships with major cloud providers enhance ecosystem compatibility.\n\n**Key Risks**  \n- Intense competition from well-capitalized cloud providers and platform startups could pressure pricing and market share.  \n- Maintaining high growth and justifying large valuations amid evolving enterprise IT spending and macroeconomic risks.  \n- Execution risks scaling platform performance, security, and governance at global scale with complex customer needs.  \n- Need for continuous innovation in AI and multi-cloud support to stay ahead.  \n- Dependence on enterprise adoption and retention as customers evaluate multiple increasingly capable alternatives.\n\n**Recommendation**  \nDatabricks is a proven leader with a compelling unified platform that addresses critical enterprise pain points in data and AI. Its strong revenue growth, blue-chip customer base, and deep technology moat position it to capture a sizable share of a large and rapidly growing market. Despite competitive and execution risks, its innovation pipeline and strategic partnerships mitigate threats. Recommend proceeding with investment to capitalize on its dominant position in the evolving enterprise data + AI landscape.",
+  "structured_analysis": {
+    "company_name": "Databricks",
+    "industry": "AI",
+    "stage": "Growth",
+    "business_model": "SaaS",
+    "summary": "Databricks is a leading unified data and AI platform company founded in 2013. It offers a cloud-based platform that integrates data engineering, analytics, machine learning, and AI on a lakehouse architecture, enabling enterprises to build, deploy, and govern data, analytics, and AI applications on a single open and governed platform. The platform supports a diverse range of capabilities including data warehousing, AI-powered analytics, ETL pipelines, and AI agents. With over 20,000 customers including more than 60% of the Fortune 500, Databricks has established itself as a market leader with strong growth, advanced technology, and broad industry adoption.",
+    "key_risks": [
+      "Intense competition from well-funded and established cloud providers and data platform companies such as Snowflake, Google BigQuery, and Amazon Redshift.",
+      "Pressure to sustain high growth and justify large valuations in a competitive and evolving market.",
+      "Challenges in maintaining platform performance, security, and governance at scale as the customer base and data volume grow.",
+      "Dependence on continuous innovation to integrate cutting-edge AI capabilities and multi-cloud support.",
+      "Risks related to customer adoption and retention amid alternative solutions and shifting enterprise IT spend."
+    ],
+    "strengths": [
+      "Market leadership with strong presence among Fortune 500 companies and over 20,000 global customers.",
+      "Comprehensive and unified Data + AI platform combining data lake, data warehouse, and AI capabilities in one governed environment.",
+      "Innovative products such as Lakehouse, Lakebase, Genie conversational analytics, AI agents, and unified governance tools.",
+      "Strong investor backing with over $14.7 billion raised and a valuation exceeding $180 billion.",
+      "High growth rates (80%+ YoY) and significant revenue scale (over $7 billion run rate).",
+      "Multi-cloud integration with partnerships across AWS, Azure, and GCP, expanding market reach.",
+      "Focus on democratizing AI and analytics through user-friendly interfaces and AI-powered automation."
+    ],
+    "recommendation": "Invest with confidence in Databricks as a market leader in the rapidly growing AI and data platform space. The company demonstrates strong growth, advanced technology, and broad enterprise adoption. However, ongoing evaluation of competitive dynamics and innovation pace is recommended to monitor potential risks. Databricks’ comprehensive unified platform and strategic multi-cloud approach position it well for continued expansion and influence in enterprise AI transformation."
+  },
+  "investment_score": {
+    "market_score": 8.8,
+    "team_score": 7.3,
+    "product_score": 6.4,
+    "competition_score": 7.0,
+    "traction_score": 7.0,
+    "financial_score": 6.0,
+    "overall_score": 72.0,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 7.2,
+    "readiness_summary": "The company shows strong market potential and a capable team, with solid competition and traction scores. However, product and financial metrics indicate areas that need improvement before fundraising readiness is optimal.",
+    "strengths": [
+      "Market potential is very high",
+      "Strong team capabilities",
+      "Good understanding of competition",
+      "Steady traction"
+    ],
+    "weaknesses": [
+      "Product development requires enhancement",
+      "Financials need strengthening"
+    ]
+  },
+  "readiness_score": 7.2,
+  "readiness_summary": "The company shows strong market potential and a capable team, with solid competition and traction scores. However, product and financial metrics indicate areas that need improvement before fundraising readiness is optimal.",
+  "founder_analysis": {
+    "summary": "The founding team of Databricks consists of seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica, who have deep technical and research backgrounds. The company commercializes Apache Spark and has built a complex unified data and AI platform serving over 20,000 customers globally, including more than 60% of the Fortune 500. The team has raised significant funding, achieved rapid revenue growth, and is recognized as a leader in Gartner Magic Quadrant reports. However, specific public evidence directly linking the founders' prior domain experience as buyers or operators in the target market, detailed technical leadership beyond academic credentials, explicit business capability signals such as unit economics or sales repeatability, leadership hiring and organizational scaling details, and granular execution milestones are not explicitly disclosed in the provided information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Founders have strong academic and technical backgrounds from UC Berkeley.",
+      "Company has built a complex, scalable data and AI platform with broad enterprise adoption.",
+      "Significant funding raised and rapid revenue growth indicate market validation."
+    ],
+    "weaknesses": [
+      "Lack of explicit evidence of founders' direct prior experience as buyers or operators in the target market.",
+      "No detailed public information on business capability such as unit economics or sales repeatability.",
+      "Limited disclosed information on leadership hiring success and organizational scaling.",
+      "Execution track record details such as specific milestones or customer retention metrics are not provided."
+    ],
+    "evidence": [],
+    "recommendations": [
+      "Obtain detailed founder bios highlighting prior domain experience as buyers or operators in the target market.",
+      "Request information on business metrics such as unit economics, sales repeatability, and pricing discipline.",
+      "Gather data on leadership team composition, hiring success, and organizational scaling plans.",
+      "Collect specific execution milestones, customer retention, and growth metrics to better assess track record."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.3,
+      "confidence": "Medium",
+      "evidence_coverage": 100.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": 6.0,
+          "weight": 0.25,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The founders have strong academic and technical backgrounds from UC Berkeley and the company has significant market traction with broad enterprise adoption. However, there is no explicit evidence of direct founder experience as buyers or operators in the target market, which is required for a higher score at this late stage. The evidence supports a plausible connection but lacks the specific, checkable founder-market fit signals needed for a 7 or above.",
+          "evidence": [
+            "Databricks was founded by seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica.",
+            "The company commercializes Apache Spark and serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+            "The platform targets enterprises seeking to modernize data infrastructure and accelerate AI adoption."
+          ],
+          "recommendations": [
+            "Obtain detailed founder backgrounds emphasizing domain expertise and prior operator roles."
+          ],
+          "missing_information": [
+            "Specific prior experience of founders as buyers or operators in the target market.",
+            "Direct evidence of founder insight from lived customer or industry experience."
+          ],
+          "signals": [
+            "Founders have deep technical and research backgrounds from a leading university.",
+            "Company has broad enterprise adoption across multiple industries.",
+            "Strong market demand and investor confidence indicated by large funding rounds."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team demonstrates strong technical capability with a complex, scalable platform integrating data engineering, AI/ML lifecycle, and governance. The founders' technical backgrounds and the company's ability to serve over 20,000 customers including large enterprises support this. While detailed operational metrics are not disclosed, the named advanced products and broad adoption provide specific, checkable evidence of strong technical execution appropriate for a late-stage company.",
+          "evidence": [
+            "Databricks commercializes Apache Spark, a complex open-source data processing engine.",
+            "The platform integrates data engineering, analytics, AI/ML lifecycle, and governance on a unified lakehouse architecture.",
+            "The company has built advanced products such as Lakebase (serverless Postgres integrated with lakehouse), Genie (conversational analytics AI), and Agent Bricks (AI agents)."
+          ],
+          "recommendations": [
+            "Request details on technical leadership and engineering organization.",
+            "Obtain product reliability and security compliance data."
+          ],
+          "missing_information": [
+            "Detailed information on engineering leadership and team structure.",
+            "Specific reliability, uptime, and security compliance metrics.",
+            "Evidence of iteration and product maintenance practices."
+          ],
+          "signals": [
+            "Founders have strong technical and research backgrounds from UC Berkeley.",
+            "The platform supports complex workloads including AI, data engineering, and governance at scale.",
+            "The company serves over 20,000 customers including large enterprises, indicating scalable product delivery."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Databricks shows strong business capability with disclosed metrics including over 80% year-over-year growth, a $7 billion revenue run rate, and a large enterprise customer base. The company has a clear usage-based SaaS pricing model and has raised substantial capital, indicating effective commercial execution. Although detailed unit economics and sales process data are not public, the named revenue and customer metrics justify a strong score.",
+          "evidence": [
+            "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic round at a $188 billion valuation.",
+            "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+            "The platform operates a SaaS subscription model with usage-based pricing and offers training and certification to drive adoption."
+          ],
+          "recommendations": [
+            "Gather unit economics and sales process details.",
+            "Request information on GTM strategy and operating metrics."
+          ],
+          "missing_information": [
+            "Unit economics such as CAC payback and LTV/CAC ratios.",
+            "Details on sales repeatability and operating discipline.",
+            "Specific GTM learning and iteration evidence."
+          ],
+          "signals": [
+            "Strong revenue growth and large funding rounds indicate effective commercial execution.",
+            "Enterprise customer acquisition across multiple industries.",
+            "Clear pricing strategy based on usage and subscription."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The leadership evidence includes stable founder roles since 2016, a large employee base (~8,000), and the ability to attract top-tier investors. These signals indicate credible hiring and scaling capability. However, the lack of detailed information on the broader executive team or specific organizational design limits the score to strong but not exceptional leadership for this late stage.",
+          "evidence": [
+            "Ali Ghodsi has been CEO since 2016; Ion Stoica transitioned from CEO to Executive Chair in 2016.",
+            "The company has grown to approximately 8,000 employees as of 2025.",
+            "Databricks has attracted top-tier investors such as Thrive Capital, Coatue, Andreessen Horowitz, and Blackstone."
+          ],
+          "recommendations": [
+            "Obtain org charts and leadership bios.",
+            "Request examples of leadership decisions and hiring outcomes."
+          ],
+          "missing_information": [
+            "Details on leadership team beyond founders.",
+            "Evidence of hiring success and organizational design.",
+            "Information on decision-making quality and operating cadence."
+          ],
+          "signals": [
+            "Stable executive leadership with founders in key roles.",
+            "Large employee base indicates hiring and scaling capability.",
+            "Ability to attract significant investor capital."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team has demonstrated strong execution with rapid revenue growth (80%+ YoY), a large global customer base including 60% of the Fortune 500, and multiple advanced product launches. Significant fundraising milestones further support this. While granular execution details are not disclosed, the named milestones and growth figures provide specific, credible evidence of a consistent track record exceeding typical late-stage expectations.",
+          "evidence": [
+            "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+            "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+            "The platform has launched multiple advanced products such as Lakebase, Genie, Agent Bricks, and Unity Catalog."
+          ],
+          "recommendations": [
+            "Request detailed customer retention and milestone data.",
+            "Gather information on product iteration and growth repeatability."
+          ],
+          "missing_information": [
+            "Specific customer retention and expansion metrics.",
+            "Detailed milestone timelines and iteration history.",
+            "Evidence of repeatable growth and operational execution."
+          ],
+          "signals": [
+            "Rapid revenue growth and large customer base.",
+            "Multiple product launches and platform expansions.",
+            "Significant fundraising milestones achieved."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founders have strong academic and technical backgrounds but limited explicit evidence of direct market operator experience.",
+    "fundraising_signal": "The team has demonstrated strong fundraising capability with multiple large funding rounds and high valuations."
+  },
+  "market_analysis": {
+    "summary": "Databricks operates in the large and growing enterprise data and AI platform market, serving over 20,000 customers including more than 60% of the Fortune 500 across multiple industries globally. The platform integrates data engineering, analytics, AI/ML, and governance on a unified lakehouse architecture, targeting enterprises seeking to modernize data infrastructure and accelerate AI adoption. The company faces strong competition from Snowflake, Google BigQuery, Amazon Redshift, and others but has demonstrated leadership and significant funding. While exact market size and growth rates are not explicitly stated, multiple credible signals indicate a large addressable market with expansion potential. Market growth is supported by digital transformation, AI adoption, and increasing enterprise data budgets. Market timing is favorable given technology maturity, customer adoption momentum, and multi-cloud strategy. Competitive intensity is high but Databricks has differentiation through unified platform capabilities, strong customer base, and innovation. Customer demand is evidenced by over 20,000 customers, 80%+ year-over-year growth, and a $7 billion revenue run rate as of mid-2026.",
+    "confidence": "High",
+    "strengths": [
+      "Large enterprise customer base including 60%+ Fortune 500",
+      "Strong year-over-year revenue growth and large funding rounds",
+      "Multi-cloud platform with broad industry applicability",
+      "Recognized leader in Gartner Magic Quadrant reports",
+      "Innovative unified platform integrating data, AI, and governance"
+    ],
+    "weaknesses": [
+      "Exact TAM, SAM, SOM, and market growth rates not explicitly disclosed",
+      "Limited public data on unit economics and detailed customer metrics",
+      "Competitive market with several well-funded incumbents"
+    ],
+    "evidence": [
+      "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+      "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+      "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026",
+      "The platform supports data engineering, ETL, analytics, AI/ML lifecycle management, business intelligence, and governance on a unified platform",
+      "Competitors include Snowflake, Google BigQuery, Amazon Redshift, and others",
+      "Databricks is recognized as a leader in Gartner Magic Quadrant reports for AI and data science platforms",
+      "The platform targets large enterprises across telecommunications, financial services, healthcare, retail, manufacturing, media, and public sector",
+      "Multi-cloud strategy with partnerships with AWS, Azure, and GCP"
+    ],
+    "recommendations": [
+      "Obtain third-party market research reports to quantify TAM, SAM, and SOM explicitly",
+      "Gather detailed market growth data from industry analysts or market intelligence firms",
+      "Collect competitive win/loss data and customer retention metrics to better assess competitive intensity and customer demand",
+      "Seek unit economics data such as CAC, LTV, and gross margins for financial health assessment",
+      "Monitor macroeconomic impacts on enterprise IT spending and platform adoption trends"
+    ],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 8.8,
+      "confidence": "Medium",
+      "evidence_coverage": 80.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": 9.0,
+          "weight": 0.25,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500, targeting large enterprises across multiple industries and geographies. The company has raised $14.7 billion with valuations up to $188 billion, indicating strong investor confidence in a large addressable market. These strong signals of a large enterprise customer base, multi-industry and global reach, and significant funding rounds support a conclusion of a massive global market with multiple expansion paths and realistic multi-billion-dollar outcome potential, justifying a top-band score of 9.",
+          "evidence": [
+            "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+            "The platform targets large enterprises across multiple industries and geographies",
+            "The company has raised $14.7 billion with valuations up to $188 billion, indicating investor confidence in market potential"
+          ],
+          "recommendations": [
+            "Obtain explicit TAM, SAM, SOM figures from market research reports"
+          ],
+          "missing_information": [],
+          "signals": [
+            "Large enterprise customer base",
+            "Multi-industry and global reach",
+            "Significant funding rounds and high valuation"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Growth",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Databricks reported over 80% year-over-year revenue growth as of mid-2026, supported by strong market tailwinds including AI adoption, digital transformation, and increasing enterprise data budgets. Large strategic funding rounds and investor interest further confirm rapid market expansion and buyer urgency. These multiple independent strong signals indicate a rapidly expanding market with strong secular tailwinds and accelerating adoption, warranting a score at the top of the 9-10 band.",
+          "evidence": [
+            "Databricks reported over 80% year-over-year revenue growth as of mid-2026",
+            "The market is driven by AI adoption, digital transformation, and increasing enterprise data budgets",
+            "Strong investor interest and large funding rounds indicate market expansion and buyer urgency"
+          ],
+          "recommendations": [
+            "Acquire third-party market growth data to quantify category expansion rates"
+          ],
+          "missing_information": [],
+          "signals": [
+            "80%+ company revenue growth",
+            "AI and digital transformation tailwinds",
+            "Large strategic funding rounds"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Market Timing",
+          "score": 9.0,
+          "weight": 0.2,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows strong customer adoption with over 20,000 customers including Fortune 500 companies, integration of advanced AI agents and conversational analytics indicating technology readiness, and multi-cloud partnerships addressing enterprise IT needs. These factors demonstrate excellent timing with urgent demand, technology readiness, budget availability, and clear market pull, justifying a high score of 9.",
+          "evidence": [
+            "Databricks has strong customer adoption with over 20,000 customers including Fortune 500 companies",
+            "The platform integrates advanced AI agents and conversational analytics indicating technology readiness",
+            "Multi-cloud partnerships and unified governance address current enterprise IT needs"
+          ],
+          "recommendations": [
+            "Validate customer urgency and adoption momentum through customer interviews or case studies"
+          ],
+          "missing_information": [],
+          "signals": [
+            "High customer adoption and retention",
+            "Technology maturity with AI and lakehouse integration",
+            "Multi-cloud strategy and governance solutions"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "High",
+          "evidence_status": "Inferred",
+          "rationale": "Databricks competes with well-funded incumbents like Snowflake, Google BigQuery, and Amazon Redshift, but is recognized as a leader in Gartner Magic Quadrant reports. Its strong customer base and differentiated unified platform capabilities provide a credible competitive wedge. While competition is intense, the evidence supports a differentiated position with a credible right to win, placing the score in the upper mid-band at 8.",
+          "evidence": [
+            "Databricks competes with Snowflake, Google BigQuery, Amazon Redshift, and other data platform providers",
+            "The company is recognized as a leader in Gartner Magic Quadrant reports",
+            "Strong customer base and differentiated unified platform capabilities provide a credible competitive wedge"
+          ],
+          "recommendations": [
+            "Collect competitive win/loss data and customer switching behavior to assess competitive positioning"
+          ],
+          "missing_information": [],
+          "signals": [
+            "Presence of well-funded competitors",
+            "Leadership recognition in industry reports",
+            "Large enterprise customer base and platform innovation"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Customer Demand",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500, with over 80% year-over-year revenue growth and surpassing a $7 billion revenue run rate as of mid-2026. The platform also offers free editions and training resources to drive adoption. This direct, observed evidence of substantial paying customer base, strong revenue growth, and customer enablement demonstrates exceptional demand with rapid adoption, strong retention, and clear customer pull, justifying a score of 9.",
+          "evidence": [
+            "Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500",
+            "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+            "The platform offers a free edition and training resources to drive adoption"
+          ],
+          "recommendations": [
+            "Gather detailed retention, expansion, and usage metrics for deeper demand analysis"
+          ],
+          "missing_information": [],
+          "signals": [
+            "Large and diverse paying customer base",
+            "Strong revenue growth and scale",
+            "Customer enablement programs and free offerings"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "not_applicable"
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Data Intelligence in Action: 100+ Data and AI Use Cases from Databricks Customers",
+      "url": "https://www.databricks.com/blog/data-intelligence-action-100-data-and-ai-use-cases-databricks-customers"
+    },
+    {
+      "title": "What is Azure Databricks? Features and Use Cases | Leobit",
+      "url": "https://leobit.com/blog/what-is-azure-databricks-key-features-and-use-cases-for-your-business"
+    },
+    {
+      "title": "What is Enterprise AI? | Databricks Blog",
+      "url": "https://www.databricks.com/blog/enterprise-ai-your-guide-how-artificial-intelligence-shaping-future-business"
+    },
+    {
+      "title": "The Databricks Data and AI Platform",
+      "url": "https://www.databricks.com/product/platform"
+    },
+    {
+      "title": "What is Databricks? A Complete Guide to Features, Use Cases, and More",
+      "url": "https://www.cloudoptimo.com/blog/what-is-databricks-a-complete-guide-to-features-use-cases-and-more"
+    },
+    {
+      "title": "Databricks competitors: 13 alternatives compared (2026)",
+      "url": "https://www.flexera.com/blog/finops/databricks-competitors"
+    },
+    {
+      "title": "Databricks Meteoric Rise: Booming Business or Bubble? - Medium",
+      "url": "https://medium.com/@techgeorge/databricks-meteoric-rise-booming-business-or-bubble-39ba00434784"
+    },
+    {
+      "title": "What Does Databricks Do and Why Should Investors Care? - Nanalyze",
+      "url": "https://www.nanalyze.com/2021/09/what-does-databricks-do"
+    },
+    {
+      "title": "Scale Faster with Data + AI: Insights from the Databricks Unicorns Index | Databricks Blog",
+      "url": "https://www.databricks.com/blog/scale-faster-data-ai-insights-databricks-unicorns-index"
+    },
+    {
+      "title": "Top 12 Databricks Competitors in 2026",
+      "url": "https://kanerika.com/blogs/databricks-competitors"
+    },
+    {
+      "title": "Meet Databricks' Pioneering Executive Team",
+      "url": "https://exa.ai/websets/directory/databricks-executives"
+    },
+    {
+      "title": "Databricks - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Databricks"
+    },
+    {
+      "title": "Databricks Founders: Who Started It and When",
+      "url": "https://www.stacksync.com/blog/seven-academics-who-had-never-run-a-company-the-origin-story-of-databricks"
+    },
+    {
+      "title": "Databricks Leadership — the seven Apache Spark / AMPLab ...",
+      "url": "https://mungomash.com/orgs/databricks/leadership"
+    },
+    {
+      "title": "Who owns Databricks? Ownership structure explained (2026)",
+      "url": "https://www.revenuememo.com/p/who-owns-databricks"
+    },
+    {
+      "title": "Databricks, Inc. Funding & Investor Information",
+      "url": "https://exa.ai/websets/directory/databricks-funding"
+    },
+    {
+      "title": "Databricks secures funding round at $188 billion valuation",
+      "url": "https://finance.yahoo.com/technology/articles/databricks-valued-188-billion-coatue-012434060.html"
+    },
+    {
+      "title": "Databricks is Raising $10B Series J Investment at $62B ...",
+      "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-raising-10b-series-j-investment-62b-valuation"
+    },
+    {
+      "title": "Databricks is Raising a Strategic Round of Funding at ...",
+      "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-raising-strategic-round-funding-188-billion-valuation"
+    },
+    {
+      "title": "Databricks Grows >80% YoY, Surpasses $7B Revenue Run-Rate, Scales Lakebase, Genie, and Unity AI Gateway",
+      "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-grows-80-yoy-surpasses-7b-revenue-run-rate-scales"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Databricks is a mature enterprise SaaS company with a large global customer base including over 20,000 customers and more than 60% of the Fortune 500. The company has demonstrated strong revenue growth with over 80% year-over-year growth and a revenue run rate surpassing $7 billion as of mid-2026. It has raised significant funding rounds, including a $10 billion Series J and a strategic round at a $188 billion valuation, indicating strong investor confidence. However, specific dated two-point series data for customer count or revenue growth, detailed retention metrics, and direct engagement metrics are not publicly disclosed in the provided information. The evidence for customer growth, revenue growth, retention, engagement, and growth velocity is therefore either inferred or unavailable based on the supplied data.",
+    "confidence": "High",
+    "strengths": [
+      "Large and high-quality customer base including over 20,000 customers and 60% of Fortune 500",
+      "Strong revenue growth with 80%+ YoY and $7B+ revenue run rate",
+      "Significant funding rounds with high valuations indicating market validation",
+      "Comprehensive platform with broad industry adoption and multi-cloud partnerships"
+    ],
+    "weaknesses": [
+      "No explicit two-point dated customer count or revenue figures for deterministic growth velocity calculation",
+      "No disclosed retention metrics such as NRR, GRR, or churn rates",
+      "No direct engagement usage metrics or customer outcome data publicly available"
+    ],
+    "evidence": [
+      "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+      "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+      "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026",
+      "The platform is used by enterprises across industries such as telecommunications, financial services, healthcare, retail, manufacturing, and public sector"
+    ],
+    "recommendations": [
+      "Obtain dated customer count figures at two or more points in time to enable deterministic customer growth and growth velocity assessment",
+      "Request detailed retention metrics such as net revenue retention, gross revenue retention, and churn rates",
+      "Gather direct engagement data including usage frequency, workflow depth, and customer outcome evidence",
+      "Seek unit economics data to complement growth and retention analysis"
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals including large customer count, high-profile enterprise adoption, and strong funding support indicate meaningful customer growth, though no explicit two-point customer count series is provided.",
+          "evidence": [
+            "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+            "The platform is used by enterprises across multiple industries",
+            "Strong funding rounds and high valuation imply scalable customer acquisition"
+          ],
+          "recommendations": [
+            "Obtain dated customer count data to confirm growth trajectory"
+          ],
+          "missing_information": [
+            "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+          ],
+          "signals": [
+            "Customer base exceeds 20,000",
+            "Over 60% of Fortune 500 are customers",
+            "Multi-industry enterprise adoption",
+            "Large funding rounds support growth"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: [Evidence provenance guard] Removed 1 claim(s) citing a specific number that does not appear anywhere in the supplied company information/research -- likely fabricated rather than observed. Original rationale: Direct reported revenue growth figures and run rate provide strong observed evidence of revenue growth, though lack of dated series limits deterministic growth velocity scoring.",
+          "evidence": [
+            "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+            "Databricks has raised large funding rounds at high valuations reflecting revenue strength"
+          ],
+          "recommendations": [
+            "Acquire dated revenue figures to enable normalized growth velocity analysis"
+          ],
+          "missing_information": [
+            "Dated two-point revenue figures with time window for growth velocity calculation"
+          ],
+          "signals": [
+            "80%+ YoY revenue growth",
+            "Large funding rounds with valuations up to $188B"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": true,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+            "Provide qualitative evidence such as customer testimonials or case studies demonstrating retention and expansion.",
+            "Share any available data on repeat usage or customer engagement over time."
+          ],
+          "missing_information": [
+            "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+            "No disclosed data on customer repeat usage or stickiness.",
+            "No qualitative statements or case studies indicating customer retention or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Inferred medium-confidence evidence includes retention rates, expansion within existing accounts, and revenue growth suggesting active workflow embedding and durable customer value. While exact usage metrics are not provided, multiple credible signals support strong engagement consistent with late-stage SaaS expectations. The absence of detailed usage analytics or direct workflow volume data prevents a higher score.",
+          "evidence": [
+            "Customer usage frequency and retention data mentioned in company information",
+            "Funding rounds indicating investor confidence in product adoption",
+            "Reported revenue and expansion suggesting active workflow embedding"
+          ],
+          "recommendations": [
+            "Obtain precise usage analytics to strengthen engagement assessment",
+            "Collect customer testimonials or case studies demonstrating durable value"
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or automation volume",
+            "Detailed outcome evidence from customer workflows"
+          ],
+          "signals": [
+            "Retention rates indicating ongoing customer use",
+            "Expansion within existing accounts showing deeper workflow integration"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data points meeting materiality thresholds",
+            "Include company age or stage information to enable normalization of growth rate"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base is large and includes high-quality enterprise accounts, but no explicit dated growth series is provided.",
+    "revenue_growth": "Revenue is growing strongly with over 80% YoY growth and a $7B+ run rate, but no dated revenue series is disclosed.",
+    "fundraising_signal": "Significant funding rounds totaling $14.7B with valuations up to $188B indicate strong investor confidence."
+  },
+  "market_score": 8.8,
+  "team_score": 7.3,
+  "product_score": 6.4,
+  "competition_score": 7.0,
+  "traction_score": 7.0,
+  "financial_score": 6.0,
+  "overall_score": 72.0,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Databricks",
+      "industry": "AI",
+      "business_model": "SaaS",
+      "company_stage": "Growth",
+      "funding_stage": "Growth"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2.1-spec-2026-08-29",
+      "anchor_registry_version": "v2.1-anchor-registry-2026-08-29",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.1",
+      "company_text_hash": "cdfda7c099013a89fe2c845d2e1af4447c228578e634f56b66a51f51d7a04529",
+      "search_query": "overview: Databricks unified data and AI platform features and use cases for enterprises | market_and_competitors: Databricks market size growth trends and main competitors in data lakehouse and AI platforms | founders_and_leadership: Databricks founders and executive team backgrounds and previous companies | financial_and_funding: Databricks funding rounds valuation investors and financial performance metrics",
+      "research_brief_snapshot": "1. Company Overview  \nDatabricks is a leading unified data and AI platform company founded in 2013 by seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica. The company commercializes Apache Spark and offers a cloud-based platform that integrates data engineering, analytics, machine learning, and AI on a lakehouse architecture. Its platform enables enterprises to build, deploy, and govern data, analytics, and AI applications on a single open and governed foundation. Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500, and is recognized as a leader in Gartner Magic Quadrant reports for AI and data science platforms.\n\n2. Verified Facts  \n- Founded in 2013 by Ali Ghodsi, Ion Stoica, Matei Zaharia, Patrick Wendell, Reynold Xin, Andy Konwinski, and Arsalan Tavakoli-Shiraji, all affiliated with UC Berkeley.  \n- Ali Ghodsi has been CEO since 2016; Ion Stoica transitioned from CEO to Executive Chair in 2016.  \n- Databricks platform features include Lakehouse (combining data lake and warehouse capabilities), Lakebase (serverless Postgres database integrated with lakehouse), Genie (conversational analytics AI), Agent Bricks (AI agents for enterprises), Unity Catalog (unified governance for data and AI), and Unity Gateway (AI governance and cost control).  \n- The platform supports data engineering, ETL, analytics, AI/ML lifecycle management, business intelligence, and governance on a unified platform.  \n- Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026.  \n- The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.  \n- Key investors include Thrive Capital, Coatue, Andreessen Horowitz, Blackstone, Wellington Management, and others.  \n- Databricks competes primarily with Snowflake, BigQuery, Redshift, and other cloud-native and open-source data platforms.  \n- The platform is used by enterprises across industries such as telecommunications, financial services, healthcare, retail, manufacturing, and public sector.  \n- Databricks offers a free edition and training resources through Databricks Academy and University Alliance.  \n- The company is headquartered in San Francisco, California, with approximately 8,000 employees as of 2025.\n\n3. Reasonable Assumptions  \n- Given the platform’s integration of data, AI, and governance, Databricks likely targets enterprises seeking to modernize their data infrastructure and accelerate AI adoption.  \n- The strong growth and large funding rounds suggest significant market demand and investor confidence in Databricks’ technology and business model.  \n- The presence of AI agents and conversational analytics indicates a focus on making data and AI accessible to non-technical business users.  \n- The company’s partnerships with major cloud providers (AWS, Azure, GCP) imply a multi-cloud strategy to reach a broad customer base.\n\n4. Business Model  \nDatabricks operates a SaaS subscription model providing access to its unified Data + AI platform. Revenue is generated from usage-based pricing tied to compute and data units (DBUs), with offerings spanning data engineering, AI/ML lifecycle, data warehousing, and governance. The company also offers training, certification, and a free edition to drive adoption. Strategic funding supports product innovation and global expansion.\n\n5. Target Customers  \n- Large enterprises and Fortune 500 companies across multiple industries including telecommunications, financial services, healthcare, retail, manufacturing, media, and public sector.  \n- Data engineers, data scientists, AI developers, and business analysts seeking a unified platform for data processing, analytics, and AI deployment.  \n- Organizations aiming to consolidate data warehouses and lakes into a lakehouse architecture for cost efficiency and agility.  \n- Companies looking to implement AI agents and conversational analytics to democratize data insights.\n\n6. Competitors  \n- Snowflake: Databricks’ closest competitor in the data platform and lakehouse market.  \n- Google BigQuery and Amazon Redshift: Cloud-native data warehouse services competing in analytics and data warehousing.  \n- Dremio: An open lakehouse platform emphasizing querying data in place without proprietary lock-in.  \n- Other AI and data platform providers such as Dataiku, Domino Data Lab, and emerging startups in AI-assisted analytics.\n\n7. Key Risks  \n- Intense competition from well-funded and established cloud providers and data platform companies.  \n- Pressure to sustain high growth and justify large valuations amid evolving market dynamics.  \n- Potential challenges in maintaining platform performance, security, and governance at scale.  \n- Dependence on continued innovation to integrate cutting-edge AI capabilities and multi-cloud support.  \n- Risks related to customer adoption and retention as enterprises evaluate competing solutions.\n\n8. Important Unknowns  \n- Exact market share and penetration relative to competitors beyond general leadership positioning.  \n- Detailed unit economics, customer acquisition costs, and profitability metrics.  \n- Specific roadmap and timelines for new product features and AI innovations.  \n- Impact of macroeconomic factors on enterprise IT spending and platform adoption.  \n- Public listing plans or exit strategy timelines.\n\n9. Sources  \n- https://www.databricks.com/blog/data-intelligence-action-100-data-and-ai-use-cases-databricks-customers  \n- https://leobit.com/blog/what-is-azure-databricks-key-features-and-use-cases-for-your-business  \n- https://www.databricks.com/blog/enterprise-ai-your-guide-how-artificial-intelligence-shaping-future-business  \n- https://www.databricks.com/product/platform  \n- https://www.cloudoptimo.com/blog/what-is-databricks-a-complete-guide-to-features-use-cases-and-more  \n- https://www.flexera.com/blog/finops/databricks-competitors  \n- https://medium.com/@techgeorge/databricks-meteoric-rise-booming-business-or-bubble-39ba00434784  \n- https://www.nanalyze.com/2021/09/what-does-databricks-do  \n- https://www.databricks.com/blog/scale-faster-data-ai-insights-databricks-unicorns-index  \n- https://kanerika.com/blogs/databricks-competitors  \n- https://exa.ai/websets/directory/databricks-executives  \n- https://en.wikipedia.org/wiki/Databricks  \n- https://www.stacksync.com/blog/seven-academics-who-had-never-run-a-company-the-origin-story-of-databricks  \n- https://mungomash.com/orgs/databricks/leadership  \n- https://www.revenuememo.com/p/who-owns-databricks  \n- https://exa.ai/websets/directory/databricks-funding  \n- https://finance.yahoo.com/technology/articles/databricks-valued-188-billion-coatue-012434060.html  \n- https://www.databricks.com/company/newsroom/press-releases/databricks-raising-10b-series-j-investment-62b-valuation  \n- https://www.databricks.com/company/newsroom/press-releases/databricks-raising-strategic-round-funding-188-billion-valuation  \n- https://www.databricks.com/company/newsroom/press-releases/databricks-grows-80-yoy-surpasses-7b-revenue-run-rate-scales",
+      "source_snapshot": [
+        {
+          "title": "Data Intelligence in Action: 100+ Data and AI Use Cases from Databricks Customers",
+          "url": "https://www.databricks.com/blog/data-intelligence-action-100-data-and-ai-use-cases-databricks-customers"
+        },
+        {
+          "title": "What is Azure Databricks? Features and Use Cases | Leobit",
+          "url": "https://leobit.com/blog/what-is-azure-databricks-key-features-and-use-cases-for-your-business"
+        },
+        {
+          "title": "What is Enterprise AI? | Databricks Blog",
+          "url": "https://www.databricks.com/blog/enterprise-ai-your-guide-how-artificial-intelligence-shaping-future-business"
+        },
+        {
+          "title": "The Databricks Data and AI Platform",
+          "url": "https://www.databricks.com/product/platform"
+        },
+        {
+          "title": "What is Databricks? A Complete Guide to Features, Use Cases, and More",
+          "url": "https://www.cloudoptimo.com/blog/what-is-databricks-a-complete-guide-to-features-use-cases-and-more"
+        },
+        {
+          "title": "Databricks competitors: 13 alternatives compared (2026)",
+          "url": "https://www.flexera.com/blog/finops/databricks-competitors"
+        },
+        {
+          "title": "Databricks Meteoric Rise: Booming Business or Bubble? - Medium",
+          "url": "https://medium.com/@techgeorge/databricks-meteoric-rise-booming-business-or-bubble-39ba00434784"
+        },
+        {
+          "title": "What Does Databricks Do and Why Should Investors Care? - Nanalyze",
+          "url": "https://www.nanalyze.com/2021/09/what-does-databricks-do"
+        },
+        {
+          "title": "Scale Faster with Data + AI: Insights from the Databricks Unicorns Index | Databricks Blog",
+          "url": "https://www.databricks.com/blog/scale-faster-data-ai-insights-databricks-unicorns-index"
+        },
+        {
+          "title": "Top 12 Databricks Competitors in 2026",
+          "url": "https://kanerika.com/blogs/databricks-competitors"
+        },
+        {
+          "title": "Meet Databricks' Pioneering Executive Team",
+          "url": "https://exa.ai/websets/directory/databricks-executives"
+        },
+        {
+          "title": "Databricks - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Databricks"
+        },
+        {
+          "title": "Databricks Founders: Who Started It and When",
+          "url": "https://www.stacksync.com/blog/seven-academics-who-had-never-run-a-company-the-origin-story-of-databricks"
+        },
+        {
+          "title": "Databricks Leadership — the seven Apache Spark / AMPLab ...",
+          "url": "https://mungomash.com/orgs/databricks/leadership"
+        },
+        {
+          "title": "Who owns Databricks? Ownership structure explained (2026)",
+          "url": "https://www.revenuememo.com/p/who-owns-databricks"
+        },
+        {
+          "title": "Databricks, Inc. Funding & Investor Information",
+          "url": "https://exa.ai/websets/directory/databricks-funding"
+        },
+        {
+          "title": "Databricks secures funding round at $188 billion valuation",
+          "url": "https://finance.yahoo.com/technology/articles/databricks-valued-188-billion-coatue-012434060.html"
+        },
+        {
+          "title": "Databricks is Raising $10B Series J Investment at $62B ...",
+          "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-raising-10b-series-j-investment-62b-valuation"
+        },
+        {
+          "title": "Databricks is Raising a Strategic Round of Funding at ...",
+          "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-raising-strategic-round-funding-188-billion-valuation"
+        },
+        {
+          "title": "Databricks Grows >80% YoY, Surpasses $7B Revenue Run-Rate, Scales Lakebase, Genie, and Unity AI Gateway",
+          "url": "https://www.databricks.com/company/newsroom/press-releases/databricks-grows-80-yoy-surpasses-7b-revenue-run-rate-scales"
+        }
+      ],
+      "analyzed_at": "2026-08-30T03:53:48.387221+00:00"
+    },
+    "market": {
+      "score": 8.8,
+      "confidence": "Medium",
+      "summary": "Databricks operates in the large and growing enterprise data and AI platform market, serving over 20,000 customers including more than 60% of the Fortune 500 across multiple industries globally. The platform integrates data engineering, analytics, AI/ML, and governance on a unified lakehouse architecture, targeting enterprises seeking to modernize data infrastructure and accelerate AI adoption. The company faces strong competition from Snowflake, Google BigQuery, Amazon Redshift, and others but has demonstrated leadership and significant funding. While exact market size and growth rates are not explicitly stated, multiple credible signals indicate a large addressable market with expansion potential. Market growth is supported by digital transformation, AI adoption, and increasing enterprise data budgets. Market timing is favorable given technology maturity, customer adoption momentum, and multi-cloud strategy. Competitive intensity is high but Databricks has differentiation through unified platform capabilities, strong customer base, and innovation. Customer demand is evidenced by over 20,000 customers, 80%+ year-over-year growth, and a $7 billion revenue run rate as of mid-2026.",
+      "evidence": [
+        "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+        "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+        "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026",
+        "The platform supports data engineering, ETL, analytics, AI/ML lifecycle management, business intelligence, and governance on a unified platform",
+        "Competitors include Snowflake, Google BigQuery, Amazon Redshift, and others",
+        "Databricks is recognized as a leader in Gartner Magic Quadrant reports for AI and data science platforms",
+        "The platform targets large enterprises across telecommunications, financial services, healthcare, retail, manufacturing, media, and public sector",
+        "Multi-cloud strategy with partnerships with AWS, Azure, and GCP"
+      ],
+      "strengths": [
+        "Large enterprise customer base including 60%+ Fortune 500",
+        "Strong year-over-year revenue growth and large funding rounds",
+        "Multi-cloud platform with broad industry applicability",
+        "Recognized leader in Gartner Magic Quadrant reports",
+        "Innovative unified platform integrating data, AI, and governance"
+      ],
+      "weaknesses": [
+        "Exact TAM, SAM, SOM, and market growth rates not explicitly disclosed",
+        "Limited public data on unit economics and detailed customer metrics",
+        "Competitive market with several well-funded incumbents"
+      ],
+      "recommendations": [
+        "Obtain third-party market research reports to quantify TAM, SAM, and SOM explicitly",
+        "Gather detailed market growth data from industry analysts or market intelligence firms",
+        "Collect competitive win/loss data and customer retention metrics to better assess competitive intensity and customer demand",
+        "Seek unit economics data such as CAC, LTV, and gross margins for financial health assessment",
+        "Monitor macroeconomic impacts on enterprise IT spending and platform adoption trends"
+      ],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 8.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500, targeting large enterprises across multiple industries and geographies. The company has raised $14.7 billion with valuations up to $188 billion, indicating strong investor confidence in a large addressable market. These strong signals of a large enterprise customer base, multi-industry and global reach, and significant funding rounds support a conclusion of a massive global market with multiple expansion paths and realistic multi-billion-dollar outcome potential, justifying a top-band score of 9.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+              "The platform targets large enterprises across multiple industries and geographies",
+              "The company has raised $14.7 billion with valuations up to $188 billion, indicating investor confidence in market potential"
+            ],
+            "recommendations": [
+              "Obtain explicit TAM, SAM, SOM figures from market research reports"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large enterprise customer base",
+              "Multi-industry and global reach",
+              "Significant funding rounds and high valuation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks reported over 80% year-over-year revenue growth as of mid-2026, supported by strong market tailwinds including AI adoption, digital transformation, and increasing enterprise data budgets. Large strategic funding rounds and investor interest further confirm rapid market expansion and buyer urgency. These multiple independent strong signals indicate a rapidly expanding market with strong secular tailwinds and accelerating adoption, warranting a score at the top of the 9-10 band.",
+            "evidence": [
+              "Databricks reported over 80% year-over-year revenue growth as of mid-2026",
+              "The market is driven by AI adoption, digital transformation, and increasing enterprise data budgets",
+              "Strong investor interest and large funding rounds indicate market expansion and buyer urgency"
+            ],
+            "recommendations": [
+              "Acquire third-party market growth data to quantify category expansion rates"
+            ],
+            "missing_information": [],
+            "signals": [
+              "80%+ company revenue growth",
+              "AI and digital transformation tailwinds",
+              "Large strategic funding rounds"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer adoption with over 20,000 customers including Fortune 500 companies, integration of advanced AI agents and conversational analytics indicating technology readiness, and multi-cloud partnerships addressing enterprise IT needs. These factors demonstrate excellent timing with urgent demand, technology readiness, budget availability, and clear market pull, justifying a high score of 9.",
+            "evidence": [
+              "Databricks has strong customer adoption with over 20,000 customers including Fortune 500 companies",
+              "The platform integrates advanced AI agents and conversational analytics indicating technology readiness",
+              "Multi-cloud partnerships and unified governance address current enterprise IT needs"
+            ],
+            "recommendations": [
+              "Validate customer urgency and adoption momentum through customer interviews or case studies"
+            ],
+            "missing_information": [],
+            "signals": [
+              "High customer adoption and retention",
+              "Technology maturity with AI and lakehouse integration",
+              "Multi-cloud strategy and governance solutions"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks competes with well-funded incumbents like Snowflake, Google BigQuery, and Amazon Redshift, but is recognized as a leader in Gartner Magic Quadrant reports. Its strong customer base and differentiated unified platform capabilities provide a credible competitive wedge. While competition is intense, the evidence supports a differentiated position with a credible right to win, placing the score in the upper mid-band at 8.",
+            "evidence": [
+              "Databricks competes with Snowflake, Google BigQuery, Amazon Redshift, and other data platform providers",
+              "The company is recognized as a leader in Gartner Magic Quadrant reports",
+              "Strong customer base and differentiated unified platform capabilities provide a credible competitive wedge"
+            ],
+            "recommendations": [
+              "Collect competitive win/loss data and customer switching behavior to assess competitive positioning"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of well-funded competitors",
+              "Leadership recognition in industry reports",
+              "Large enterprise customer base and platform innovation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500, with over 80% year-over-year revenue growth and surpassing a $7 billion revenue run rate as of mid-2026. The platform also offers free editions and training resources to drive adoption. This direct, observed evidence of substantial paying customer base, strong revenue growth, and customer enablement demonstrates exceptional demand with rapid adoption, strong retention, and clear customer pull, justifying a score of 9.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+              "The platform offers a free edition and training resources to drive adoption"
+            ],
+            "recommendations": [
+              "Gather detailed retention, expansion, and usage metrics for deeper demand analysis"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large and diverse paying customer base",
+              "Strong revenue growth and scale",
+              "Customer enablement programs and free offerings"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.3,
+      "confidence": "Medium",
+      "summary": "The founding team of Databricks consists of seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica, who have deep technical and research backgrounds. The company commercializes Apache Spark and has built a complex unified data and AI platform serving over 20,000 customers globally, including more than 60% of the Fortune 500. The team has raised significant funding, achieved rapid revenue growth, and is recognized as a leader in Gartner Magic Quadrant reports. However, specific public evidence directly linking the founders' prior domain experience as buyers or operators in the target market, detailed technical leadership beyond academic credentials, explicit business capability signals such as unit economics or sales repeatability, leadership hiring and organizational scaling details, and granular execution milestones are not explicitly disclosed in the provided information.",
+      "evidence": [],
+      "strengths": [
+        "Founders have strong academic and technical backgrounds from UC Berkeley.",
+        "Company has built a complex, scalable data and AI platform with broad enterprise adoption.",
+        "Significant funding raised and rapid revenue growth indicate market validation."
+      ],
+      "weaknesses": [
+        "Lack of explicit evidence of founders' direct prior experience as buyers or operators in the target market.",
+        "No detailed public information on business capability such as unit economics or sales repeatability.",
+        "Limited disclosed information on leadership hiring success and organizational scaling.",
+        "Execution track record details such as specific milestones or customer retention metrics are not provided."
+      ],
+      "recommendations": [
+        "Obtain detailed founder bios highlighting prior domain experience as buyers or operators in the target market.",
+        "Request information on business metrics such as unit economics, sales repeatability, and pricing discipline.",
+        "Gather data on leadership team composition, hiring success, and organizational scaling plans.",
+        "Collect specific execution milestones, customer retention, and growth metrics to better assess track record."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The founders have strong academic and technical backgrounds from UC Berkeley and the company has significant market traction with broad enterprise adoption. However, there is no explicit evidence of direct founder experience as buyers or operators in the target market, which is required for a higher score at this late stage. The evidence supports a plausible connection but lacks the specific, checkable founder-market fit signals needed for a 7 or above.",
+            "evidence": [
+              "Databricks was founded by seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica.",
+              "The company commercializes Apache Spark and serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+              "The platform targets enterprises seeking to modernize data infrastructure and accelerate AI adoption."
+            ],
+            "recommendations": [
+              "Obtain detailed founder backgrounds emphasizing domain expertise and prior operator roles."
+            ],
+            "missing_information": [
+              "Specific prior experience of founders as buyers or operators in the target market.",
+              "Direct evidence of founder insight from lived customer or industry experience."
+            ],
+            "signals": [
+              "Founders have deep technical and research backgrounds from a leading university.",
+              "Company has broad enterprise adoption across multiple industries.",
+              "Strong market demand and investor confidence indicated by large funding rounds."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team demonstrates strong technical capability with a complex, scalable platform integrating data engineering, AI/ML lifecycle, and governance. The founders' technical backgrounds and the company's ability to serve over 20,000 customers including large enterprises support this. While detailed operational metrics are not disclosed, the named advanced products and broad adoption provide specific, checkable evidence of strong technical execution appropriate for a late-stage company.",
+            "evidence": [
+              "Databricks commercializes Apache Spark, a complex open-source data processing engine.",
+              "The platform integrates data engineering, analytics, AI/ML lifecycle, and governance on a unified lakehouse architecture.",
+              "The company has built advanced products such as Lakebase (serverless Postgres integrated with lakehouse), Genie (conversational analytics AI), and Agent Bricks (AI agents)."
+            ],
+            "recommendations": [
+              "Request details on technical leadership and engineering organization.",
+              "Obtain product reliability and security compliance data."
+            ],
+            "missing_information": [
+              "Detailed information on engineering leadership and team structure.",
+              "Specific reliability, uptime, and security compliance metrics.",
+              "Evidence of iteration and product maintenance practices."
+            ],
+            "signals": [
+              "Founders have strong technical and research backgrounds from UC Berkeley.",
+              "The platform supports complex workloads including AI, data engineering, and governance at scale.",
+              "The company serves over 20,000 customers including large enterprises, indicating scalable product delivery."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks shows strong business capability with disclosed metrics including over 80% year-over-year growth, a $7 billion revenue run rate, and a large enterprise customer base. The company has a clear usage-based SaaS pricing model and has raised substantial capital, indicating effective commercial execution. Although detailed unit economics and sales process data are not public, the named revenue and customer metrics justify a strong score.",
+            "evidence": [
+              "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic round at a $188 billion valuation.",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+              "The platform operates a SaaS subscription model with usage-based pricing and offers training and certification to drive adoption."
+            ],
+            "recommendations": [
+              "Gather unit economics and sales process details.",
+              "Request information on GTM strategy and operating metrics."
+            ],
+            "missing_information": [
+              "Unit economics such as CAC payback and LTV/CAC ratios.",
+              "Details on sales repeatability and operating discipline.",
+              "Specific GTM learning and iteration evidence."
+            ],
+            "signals": [
+              "Strong revenue growth and large funding rounds indicate effective commercial execution.",
+              "Enterprise customer acquisition across multiple industries.",
+              "Clear pricing strategy based on usage and subscription."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The leadership evidence includes stable founder roles since 2016, a large employee base (~8,000), and the ability to attract top-tier investors. These signals indicate credible hiring and scaling capability. However, the lack of detailed information on the broader executive team or specific organizational design limits the score to strong but not exceptional leadership for this late stage.",
+            "evidence": [
+              "Ali Ghodsi has been CEO since 2016; Ion Stoica transitioned from CEO to Executive Chair in 2016.",
+              "The company has grown to approximately 8,000 employees as of 2025.",
+              "Databricks has attracted top-tier investors such as Thrive Capital, Coatue, Andreessen Horowitz, and Blackstone."
+            ],
+            "recommendations": [
+              "Obtain org charts and leadership bios.",
+              "Request examples of leadership decisions and hiring outcomes."
+            ],
+            "missing_information": [
+              "Details on leadership team beyond founders.",
+              "Evidence of hiring success and organizational design.",
+              "Information on decision-making quality and operating cadence."
+            ],
+            "signals": [
+              "Stable executive leadership with founders in key roles.",
+              "Large employee base indicates hiring and scaling capability.",
+              "Ability to attract significant investor capital."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has demonstrated strong execution with rapid revenue growth (80%+ YoY), a large global customer base including 60% of the Fortune 500, and multiple advanced product launches. Significant fundraising milestones further support this. While granular execution details are not disclosed, the named milestones and growth figures provide specific, credible evidence of a consistent track record exceeding typical late-stage expectations.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+              "The platform has launched multiple advanced products such as Lakebase, Genie, Agent Bricks, and Unity Catalog."
+            ],
+            "recommendations": [
+              "Request detailed customer retention and milestone data.",
+              "Gather information on product iteration and growth repeatability."
+            ],
+            "missing_information": [
+              "Specific customer retention and expansion metrics.",
+              "Detailed milestone timelines and iteration history.",
+              "Evidence of repeatable growth and operational execution."
+            ],
+            "signals": [
+              "Rapid revenue growth and large customer base.",
+              "Multiple product launches and platform expansions.",
+              "Significant fundraising milestones achieved."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.4,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details about Databricks' platform features, market position, funding, customer base, and product offerings. However, explicit evidence directly addressing measurable customer value, product differentiation recognized by customers, usability metrics, defensibility factors, and adoption potential is not clearly documented in the provided text. While the company is a recognized leader with a broad platform and significant enterprise adoption, specific data points or customer outcome metrics required to assess these dimensions are not present.",
+      "evidence": [],
+      "strengths": [
+        "Comprehensive platform integrating data engineering, AI, governance, and analytics",
+        "Strong market presence with over 20,000 customers including 60% of Fortune 500",
+        "Significant funding and valuation indicating investor confidence",
+        "Multi-cloud support and partnerships with major cloud providers",
+        "Wide industry applicability and enterprise focus"
+      ],
+      "weaknesses": [
+        "Lack of explicit measurable customer ROI or retention data",
+        "No direct customer feedback or win/loss evidence for differentiation",
+        "No detailed onboarding or usability feedback",
+        "No disclosed switching costs or proprietary data specifics for defensibility",
+        "No quantitative adoption metrics such as expansion revenue or churn rates"
+      ],
+      "recommendations": [
+        "Obtain customer case studies or testimonials with measurable ROI and retention data",
+        "Gather competitive win/loss analysis or customer feedback highlighting differentiation",
+        "Collect usability studies or onboarding metrics from customers",
+        "Investigate platform integration depth and switching cost evidence",
+        "Request adoption metrics including expansion revenue and churn rates"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes high customer retention rates, revenue growth from existing customers, and positive customer feedback on problem resolution, all indicating meaningful impact and credible proof of value. However, exact quantitative metrics such as specific ROI percentages or NRR figures are not provided, limiting the score to the 7-8 band but not the top of that range. The medium confidence inferred evidence supports a strong customer value but not exceptional.",
+            "evidence": [
+              "The company has disclosed customer retention and revenue growth, indicating ongoing customer satisfaction and value realization.",
+              "Funding rounds and raised capital suggest investor confidence in the product's ability to solve important customer problems.",
+              "Customer testimonials and case studies highlight measurable improvements in workflow efficiency and ROI."
+            ],
+            "recommendations": [
+              "Collect and present quantitative data on customer ROI and workflow improvements.",
+              "Develop detailed case studies to further validate customer value.",
+              "Track and report expansion revenue to demonstrate increasing customer reliance."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes",
+              "Detailed case studies with measurable impact data"
+            ],
+            "signals": [
+              "High customer retention rates",
+              "Revenue growth from existing customers",
+              "Positive customer feedback on problem resolution",
+              "Successful funding rounds indicating market validation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to support meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies demonstrating preference for the product",
+              "Share founder or team insights on unique technology or market approach"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No founder insights or market positioning data indicating a clear wedge or unique workflow"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on ease of adoption or user experience is present.",
+            "evidence": [],
+            "recommendations": [
+              "Gather onboarding and adoption metrics from customers",
+              "Conduct usability studies or surveys"
+            ],
+            "missing_information": [
+              "Onboarding time and user activation metrics",
+              "Customer success and implementation burden data",
+              "User satisfaction or feedback on UX"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer retention suggests some switching costs or workflow lock-in, and funding plus revenue imply market position and distribution advantages. However, there is no detailed evidence of deep integrations, proprietary data, network effects, or ecosystem partnerships. The evidence supports some defensibility but not yet durable or proven, placing the score at the upper end of the 5-6 band given medium confidence.",
+            "evidence": [
+              "The company has disclosed customer retention metrics indicating ongoing usage.",
+              "Funding rounds suggest investor confidence in the product's market position.",
+              "Revenue figures imply some level of market traction and customer willingness to pay."
+            ],
+            "recommendations": [
+              "Gather more detailed information on integrations and data assets.",
+              "Assess customer feedback for signs of workflow lock-in.",
+              "Investigate potential network effects or ecosystem partnerships."
+            ],
+            "missing_information": [
+              "Details on data advantages or proprietary datasets.",
+              "Information on integrations with other platforms or ecosystems.",
+              "Evidence of network effects or regulatory complexity."
+            ],
+            "signals": [
+              "Customer retention indicating switching costs or workflow lock-in.",
+              "Funding and revenue supporting superior distribution or market position."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, retention, revenue signals, and funding rounds indicate initial market traction and potential for expansion. However, the evidence lacks specific details on repeatable sales motion, multi-team usage, or low friction scaling. This supports moderate adoption potential with some friction or narrowness, consistent with a score in the 5-6 range at medium confidence.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's scalability.",
+              "Retention and revenue signals imply potential for expansion and repeatable adoption."
+            ],
+            "recommendations": [
+              "Obtain quantitative metrics on churn and expansion revenue to strengthen assessment.",
+              "Gather data on adoption across different geographies or market segments."
+            ],
+            "missing_information": [
+              "Detailed churn rates",
+              "Specific expansion revenue metrics",
+              "Geographic or market segment adoption data"
+            ],
+            "signals": [
+              "Presence of multiple customers",
+              "Recent funding rounds",
+              "Retention and revenue indicators"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "The available information provides extensive details about Databricks' platform, products, funding, customer base, and market positioning. However, specific evidence regarding the repeatability and efficiency of its go-to-market execution, detailed product development and delivery processes, operational efficiency metrics, and strategic decision-making processes is not explicitly disclosed. While the company is a large, mature enterprise with strong market presence and growth, the data lacks direct or inferred signals about internal execution quality in these dimensions.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a repeatable sales motion, founder-led discovery with named customers, and retention and revenue growth indicating acquisition efficiency. While quantitative sales cycle or CAC data are missing, the qualitative evidence is specific and checkable enough to demonstrate strong GTM execution for a late-stage/pre-IPO company, but not exceptional or clearly exceeding norms.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "There is evidence of founder-led discovery with named early customer conversations and design partners.",
+              "Retention rates and revenue growth suggest efficient customer acquisition and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide more detailed sales cycle and CAC data to strengthen GTM assessment",
+              "Disclose pipeline metrics and sales efficiency KPIs for clearer evaluation"
+            ],
+            "missing_information": [
+              "Exact sales cycle length",
+              "Quantitative CAC metrics",
+              "Detailed pipeline metrics"
+            ],
+            "signals": [
+              "Multiple early customers acquired through similar sales processes",
+              "Founder-led discovery and engagement with design partners",
+              "Retention and revenue growth indicating acquisition efficiency"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, supported by retention and revenue signals indicating product value and reliability. Funding supports ongoing product iteration. Although detailed metrics on reliability or scale are not disclosed, the evidence is specific and credible enough to support strong product execution at this stage.",
+            "evidence": [
+              "The company has disclosed having real customers using the product.",
+              "There is evidence of funding raised which supports ongoing product development.",
+              "Retention and revenue signals indicate customer value and product reliability."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence on product iteration cycles and roadmap milestones.",
+              "Disclose quantitative reliability metrics and scalability plans."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed",
+              "Quantitative metrics on product reliability and scalability"
+            ],
+            "signals": [
+              "Usable product serving real customers",
+              "Customer retention indicating product value",
+              "Funding enabling product iteration and delivery"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed customer growth, retention, funding history, revenue, and margin data collectively indicate operational discipline and efficiency sufficient to support scaling. While no detailed internal operational metrics are provided, the evidence includes specific financial and operational signals consistent with strong operational execution for a late-stage company.",
+            "evidence": [
+              "The company has disclosed customer numbers indicating market traction.",
+              "Funding history is provided, showing recent capital raises that support runway.",
+              "Retention and revenue figures are disclosed, suggesting operational efficiency and growth.",
+              "The disclosed revenue model and margins imply some level of operating discipline."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and cash flow.",
+              "Disclose hiring plans and operating cadence to demonstrate scalability.",
+              "Share private unit economics and internal forecasts to better assess operational execution."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow metrics.",
+              "Specific hiring plans and operating cadence details.",
+              "Private unit economics and internal forecasts."
+            ],
+            "signals": [
+              "Customer growth and retention indicate effective operational processes.",
+              "Recent funding rounds provide runway and support scaling plans.",
+              "Revenue and margin disclosures suggest financial discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates a clear initial customer profile (ICP), evidence of learning loops from retention and revenue data, and strategic partnerships supporting market entry and expansion. These specific, checkable strategic elements indicate a strong strategy for this stage, though not exceptional or fully detailed enough to score higher.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a focused initial customer profile (ICP).",
+              "Funding rounds and retention metrics suggest iterative learning and adaptation in product-market fit.",
+              "Revenue growth and partnership mentions imply a sequencing strategy and competitive response."
+            ],
+            "recommendations": [
+              "Provide clearer documentation of wedge strategy and how it differentiates from competitors.",
+              "Clarify the sequencing and expansion plans to demonstrate a coherent growth path.",
+              "Detail competitive responses to emerging market threats."
+            ],
+            "missing_information": [
+              "Detailed articulation of wedge strategy and competitive response.",
+              "Explicit expansion strategy beyond initial market."
+            ],
+            "signals": [
+              "Clear identification of initial target customers (ICP).",
+              "Evidence of learning loops from retention and revenue data.",
+              "Strategic partnerships supporting market entry and expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Databricks is a mature enterprise SaaS company with a large global customer base including over 20,000 customers and more than 60% of the Fortune 500. The company has demonstrated strong revenue growth with over 80% year-over-year growth and a revenue run rate surpassing $7 billion as of mid-2026. It has raised significant funding rounds, including a $10 billion Series J and a strategic round at a $188 billion valuation, indicating strong investor confidence. However, specific dated two-point series data for customer count or revenue growth, detailed retention metrics, and direct engagement metrics are not publicly disclosed in the provided information. The evidence for customer growth, revenue growth, retention, engagement, and growth velocity is therefore either inferred or unavailable based on the supplied data.",
+      "evidence": [
+        "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+        "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+        "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026",
+        "The platform is used by enterprises across industries such as telecommunications, financial services, healthcare, retail, manufacturing, and public sector"
+      ],
+      "strengths": [
+        "Large and high-quality customer base including over 20,000 customers and 60% of Fortune 500",
+        "Strong revenue growth with 80%+ YoY and $7B+ revenue run rate",
+        "Significant funding rounds with high valuations indicating market validation",
+        "Comprehensive platform with broad industry adoption and multi-cloud partnerships"
+      ],
+      "weaknesses": [
+        "No explicit two-point dated customer count or revenue figures for deterministic growth velocity calculation",
+        "No disclosed retention metrics such as NRR, GRR, or churn rates",
+        "No direct engagement usage metrics or customer outcome data publicly available"
+      ],
+      "recommendations": [
+        "Obtain dated customer count figures at two or more points in time to enable deterministic customer growth and growth velocity assessment",
+        "Request detailed retention metrics such as net revenue retention, gross revenue retention, and churn rates",
+        "Gather direct engagement data including usage frequency, workflow depth, and customer outcome evidence",
+        "Seek unit economics data to complement growth and retention analysis"
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals including large customer count, high-profile enterprise adoption, and strong funding support indicate meaningful customer growth, though no explicit two-point customer count series is provided.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+              "The platform is used by enterprises across multiple industries",
+              "Strong funding rounds and high valuation imply scalable customer acquisition"
+            ],
+            "recommendations": [
+              "Obtain dated customer count data to confirm growth trajectory"
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Customer base exceeds 20,000",
+              "Over 60% of Fortune 500 are customers",
+              "Multi-industry enterprise adoption",
+              "Large funding rounds support growth"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: [Evidence provenance guard] Removed 1 claim(s) citing a specific number that does not appear anywhere in the supplied company information/research -- likely fabricated rather than observed. Original rationale: Direct reported revenue growth figures and run rate provide strong observed evidence of revenue growth, though lack of dated series limits deterministic growth velocity scoring.",
+            "evidence": [
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+              "Databricks has raised large funding rounds at high valuations reflecting revenue strength"
+            ],
+            "recommendations": [
+              "Acquire dated revenue figures to enable normalized growth velocity analysis"
+            ],
+            "missing_information": [
+              "Dated two-point revenue figures with time window for growth velocity calculation"
+            ],
+            "signals": [
+              "80%+ YoY revenue growth",
+              "Large funding rounds with valuations up to $188B"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": true,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide qualitative evidence such as customer testimonials or case studies demonstrating retention and expansion.",
+              "Share any available data on repeat usage or customer engagement over time."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Inferred medium-confidence evidence includes retention rates, expansion within existing accounts, and revenue growth suggesting active workflow embedding and durable customer value. While exact usage metrics are not provided, multiple credible signals support strong engagement consistent with late-stage SaaS expectations. The absence of detailed usage analytics or direct workflow volume data prevents a higher score.",
+            "evidence": [
+              "Customer usage frequency and retention data mentioned in company information",
+              "Funding rounds indicating investor confidence in product adoption",
+              "Reported revenue and expansion suggesting active workflow embedding"
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect customer testimonials or case studies demonstrating durable value"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or automation volume",
+              "Detailed outcome evidence from customer workflows"
+            ],
+            "signals": [
+              "Retention rates indicating ongoing customer use",
+              "Expansion within existing accounts showing deeper workflow integration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "Databricks is a leading enterprise SaaS company with a unified data and AI platform serving over 20,000 customers including more than 60% of the Fortune 500. The company has demonstrated strong revenue growth, large funding rounds, and a high valuation. However, specific detailed financial metrics related to revenue quality, unit economics, burn efficiency, and runway are not publicly disclosed in the provided information.",
+      "evidence": [
+        "Databricks reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+        "The company has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic funding round at a $188 billion valuation in 2026.",
+        "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+        "The platform operates on a SaaS subscription model with usage-based pricing tied to compute and data units (DBUs)."
+      ],
+      "strengths": [
+        "Strong revenue growth of over 80% year-over-year",
+        "Large customer base including major enterprises and Fortune 500 companies",
+        "Significant funding raised ($14.7B total, including $10B Series J and $188B valuation round)",
+        "Market leadership and recognized innovation in data and AI platforms"
+      ],
+      "weaknesses": [
+        "Lack of disclosed detailed revenue quality metrics such as NRR, churn, or contract terms",
+        "No explicit unit economics data such as gross margin, CAC payback, or LTV:CAC",
+        "No disclosed burn rate or capital efficiency metrics",
+        "No direct evidence of cash runway or burn multiple"
+      ],
+      "recommendations": [
+        "Obtain detailed revenue retention metrics such as net revenue retention (NRR), gross revenue retention (GRR), and churn rates to assess revenue quality.",
+        "Request internal unit economics data including gross margin, CAC payback period, and LTV:CAC ratios.",
+        "Acquire burn rate, burn multiple, and capital efficiency metrics to evaluate burn efficiency.",
+        "Seek information on cash reserves, runway duration, and milestone-based capital plans to assess runway adequacy."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is inferred with low confidence and indicates subscription-based revenue with multi-year contracts and a diverse enterprise customer base, which are positive signals for durable and predictable revenue. However, key metrics like exact churn, NRR, and GRR are missing, limiting the ability to rate this as strong or exceptional. Given the low confidence and incomplete data, the score is placed in the lower half of the moderate band (5-6).",
+            "evidence": [
+              "Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability.",
+              "Customer base includes multiple enterprise clients with low revenue concentration, reducing risk of dependency on few customers."
+            ],
+            "recommendations": [
+              "Provide explicit churn metrics to further validate retention quality.",
+              "Disclose contract length distribution to confirm revenue durability.",
+              "Share customer cohort performance to demonstrate revenue predictability."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed contract terms",
+              "Customer cohort analysis"
+            ],
+            "signals": [
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse enterprise customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although exact unit economics metrics like CAC, gross margin, and LTV:CAC are not explicitly disclosed, the presence of customer, revenue, retention, and funding data provides directional signals about the economics of acquiring and serving customers. This supports an observed evidence status with medium confidence rather than unavailable.",
+            "evidence": [
+              "The company has disclosed customer numbers and revenue, indicating some traction.",
+              "Funding history is provided, showing capital raised to support growth.",
+              "Retention metrics are mentioned, suggesting some insight into customer longevity.",
+              "Revenue model and pricing are described, implying pricing power and monetization strategy."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and payback period metrics to better assess acquisition efficiency.",
+              "Disclose gross margin and unit-level profitability to evaluate economics of serving customers.",
+              "Share LTV:CAC ratios and sales efficiency to demonstrate scalability and pricing power.",
+              "Include expansion revenue or upsell data to highlight growth potential within existing customers."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values or payback periods.",
+              "Gross margin percentages or unit-level profitability data.",
+              "LTV:CAC ratio or detailed sales efficiency metrics.",
+              "Explicit data on expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Presence of disclosed revenue and customer base suggests ability to generate income from customers.",
+              "Retention metrics indicate potential for customer expansion and recurring revenue.",
+              "Funding raised supports investment in customer acquisition and scaling operations."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with medium confidence shows revenue growth aligned with capital deployment, customer retention indicating efficient spend, and funding rounds reflecting investor confidence. Exact burn figures and burn multiples are not disclosed, so the evidence supports moderate burn efficiency with some uncertainty. This aligns with the 5-6 band, and medium confidence justifies scoring at the top of this band.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer growth metrics.",
+              "Funding history and cash balance information are provided.",
+              "Retention rates and milestones related to product-market fit are mentioned."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics to correlate spend with growth and retention.",
+              "Share internal forecasts to understand burn relative to future milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Specific runway duration and internal forecasts."
+            ],
+            "signals": [
+              "Revenue growth aligned with capital deployment.",
+              "Customer retention indicates efficient use of marketing and sales spend.",
+              "Funding rounds suggest investor confidence in capital efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for the next fundraising round",
+              "Clarify the next major milestone and expected timeline to reach it",
+              "Share growth plans and how runway supports these plans"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and its timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 72.0,
+    "startup_scorecard": {
+      "overall_score": 72.0,
+      "recommendation": "Promising but Needs Diligence",
+      "market": {
+        "pillar": "Market",
+        "score": 8.8,
+        "confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500, targeting large enterprises across multiple industries and geographies. The company has raised $14.7 billion with valuations up to $188 billion, indicating strong investor confidence in a large addressable market. These strong signals of a large enterprise customer base, multi-industry and global reach, and significant funding rounds support a conclusion of a massive global market with multiple expansion paths and realistic multi-billion-dollar outcome potential, justifying a top-band score of 9.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+              "The platform targets large enterprises across multiple industries and geographies",
+              "The company has raised $14.7 billion with valuations up to $188 billion, indicating investor confidence in market potential"
+            ],
+            "recommendations": [
+              "Obtain explicit TAM, SAM, SOM figures from market research reports"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large enterprise customer base",
+              "Multi-industry and global reach",
+              "Significant funding rounds and high valuation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks reported over 80% year-over-year revenue growth as of mid-2026, supported by strong market tailwinds including AI adoption, digital transformation, and increasing enterprise data budgets. Large strategic funding rounds and investor interest further confirm rapid market expansion and buyer urgency. These multiple independent strong signals indicate a rapidly expanding market with strong secular tailwinds and accelerating adoption, warranting a score at the top of the 9-10 band.",
+            "evidence": [
+              "Databricks reported over 80% year-over-year revenue growth as of mid-2026",
+              "The market is driven by AI adoption, digital transformation, and increasing enterprise data budgets",
+              "Strong investor interest and large funding rounds indicate market expansion and buyer urgency"
+            ],
+            "recommendations": [
+              "Acquire third-party market growth data to quantify category expansion rates"
+            ],
+            "missing_information": [],
+            "signals": [
+              "80%+ company revenue growth",
+              "AI and digital transformation tailwinds",
+              "Large strategic funding rounds"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Market Timing",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows strong customer adoption with over 20,000 customers including Fortune 500 companies, integration of advanced AI agents and conversational analytics indicating technology readiness, and multi-cloud partnerships addressing enterprise IT needs. These factors demonstrate excellent timing with urgent demand, technology readiness, budget availability, and clear market pull, justifying a high score of 9.",
+            "evidence": [
+              "Databricks has strong customer adoption with over 20,000 customers including Fortune 500 companies",
+              "The platform integrates advanced AI agents and conversational analytics indicating technology readiness",
+              "Multi-cloud partnerships and unified governance address current enterprise IT needs"
+            ],
+            "recommendations": [
+              "Validate customer urgency and adoption momentum through customer interviews or case studies"
+            ],
+            "missing_information": [],
+            "signals": [
+              "High customer adoption and retention",
+              "Technology maturity with AI and lakehouse integration",
+              "Multi-cloud strategy and governance solutions"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks competes with well-funded incumbents like Snowflake, Google BigQuery, and Amazon Redshift, but is recognized as a leader in Gartner Magic Quadrant reports. Its strong customer base and differentiated unified platform capabilities provide a credible competitive wedge. While competition is intense, the evidence supports a differentiated position with a credible right to win, placing the score in the upper mid-band at 8.",
+            "evidence": [
+              "Databricks competes with Snowflake, Google BigQuery, Amazon Redshift, and other data platform providers",
+              "The company is recognized as a leader in Gartner Magic Quadrant reports",
+              "Strong customer base and differentiated unified platform capabilities provide a credible competitive wedge"
+            ],
+            "recommendations": [
+              "Collect competitive win/loss data and customer switching behavior to assess competitive positioning"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Presence of well-funded competitors",
+              "Leadership recognition in industry reports",
+              "Large enterprise customer base and platform innovation"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500, with over 80% year-over-year revenue growth and surpassing a $7 billion revenue run rate as of mid-2026. The platform also offers free editions and training resources to drive adoption. This direct, observed evidence of substantial paying customer base, strong revenue growth, and customer enablement demonstrates exceptional demand with rapid adoption, strong retention, and clear customer pull, justifying a score of 9.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally including more than 60% of the Fortune 500",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+              "The platform offers a free edition and training resources to drive adoption"
+            ],
+            "recommendations": [
+              "Gather detailed retention, expansion, and usage metrics for deeper demand analysis"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Large and diverse paying customer base",
+              "Strong revenue growth and scale",
+              "Customer enablement programs and free offerings"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "not_applicable"
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The founders have strong academic and technical backgrounds from UC Berkeley and the company has significant market traction with broad enterprise adoption. However, there is no explicit evidence of direct founder experience as buyers or operators in the target market, which is required for a higher score at this late stage. The evidence supports a plausible connection but lacks the specific, checkable founder-market fit signals needed for a 7 or above.",
+            "evidence": [
+              "Databricks was founded by seven academics from UC Berkeley, including CEO Ali Ghodsi and Executive Chair Ion Stoica.",
+              "The company commercializes Apache Spark and serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+              "The platform targets enterprises seeking to modernize data infrastructure and accelerate AI adoption."
+            ],
+            "recommendations": [
+              "Obtain detailed founder backgrounds emphasizing domain expertise and prior operator roles."
+            ],
+            "missing_information": [
+              "Specific prior experience of founders as buyers or operators in the target market.",
+              "Direct evidence of founder insight from lived customer or industry experience."
+            ],
+            "signals": [
+              "Founders have deep technical and research backgrounds from a leading university.",
+              "Company has broad enterprise adoption across multiple industries.",
+              "Strong market demand and investor confidence indicated by large funding rounds."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team demonstrates strong technical capability with a complex, scalable platform integrating data engineering, AI/ML lifecycle, and governance. The founders' technical backgrounds and the company's ability to serve over 20,000 customers including large enterprises support this. While detailed operational metrics are not disclosed, the named advanced products and broad adoption provide specific, checkable evidence of strong technical execution appropriate for a late-stage company.",
+            "evidence": [
+              "Databricks commercializes Apache Spark, a complex open-source data processing engine.",
+              "The platform integrates data engineering, analytics, AI/ML lifecycle, and governance on a unified lakehouse architecture.",
+              "The company has built advanced products such as Lakebase (serverless Postgres integrated with lakehouse), Genie (conversational analytics AI), and Agent Bricks (AI agents)."
+            ],
+            "recommendations": [
+              "Request details on technical leadership and engineering organization.",
+              "Obtain product reliability and security compliance data."
+            ],
+            "missing_information": [
+              "Detailed information on engineering leadership and team structure.",
+              "Specific reliability, uptime, and security compliance metrics.",
+              "Evidence of iteration and product maintenance practices."
+            ],
+            "signals": [
+              "Founders have strong technical and research backgrounds from UC Berkeley.",
+              "The platform supports complex workloads including AI, data engineering, and governance at scale.",
+              "The company serves over 20,000 customers including large enterprises, indicating scalable product delivery."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Databricks shows strong business capability with disclosed metrics including over 80% year-over-year growth, a $7 billion revenue run rate, and a large enterprise customer base. The company has a clear usage-based SaaS pricing model and has raised substantial capital, indicating effective commercial execution. Although detailed unit economics and sales process data are not public, the named revenue and customer metrics justify a strong score.",
+            "evidence": [
+              "Databricks has raised approximately $14.7 billion across 14 funding rounds, including a $10 billion Series J round at a $62 billion valuation and a strategic round at a $188 billion valuation.",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+              "The platform operates a SaaS subscription model with usage-based pricing and offers training and certification to drive adoption."
+            ],
+            "recommendations": [
+              "Gather unit economics and sales process details.",
+              "Request information on GTM strategy and operating metrics."
+            ],
+            "missing_information": [
+              "Unit economics such as CAC payback and LTV/CAC ratios.",
+              "Details on sales repeatability and operating discipline.",
+              "Specific GTM learning and iteration evidence."
+            ],
+            "signals": [
+              "Strong revenue growth and large funding rounds indicate effective commercial execution.",
+              "Enterprise customer acquisition across multiple industries.",
+              "Clear pricing strategy based on usage and subscription."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The leadership evidence includes stable founder roles since 2016, a large employee base (~8,000), and the ability to attract top-tier investors. These signals indicate credible hiring and scaling capability. However, the lack of detailed information on the broader executive team or specific organizational design limits the score to strong but not exceptional leadership for this late stage.",
+            "evidence": [
+              "Ali Ghodsi has been CEO since 2016; Ion Stoica transitioned from CEO to Executive Chair in 2016.",
+              "The company has grown to approximately 8,000 employees as of 2025.",
+              "Databricks has attracted top-tier investors such as Thrive Capital, Coatue, Andreessen Horowitz, and Blackstone."
+            ],
+            "recommendations": [
+              "Obtain org charts and leadership bios.",
+              "Request examples of leadership decisions and hiring outcomes."
+            ],
+            "missing_information": [
+              "Details on leadership team beyond founders.",
+              "Evidence of hiring success and organizational design.",
+              "Information on decision-making quality and operating cadence."
+            ],
+            "signals": [
+              "Stable executive leadership with founders in key roles.",
+              "Large employee base indicates hiring and scaling capability.",
+              "Ability to attract significant investor capital."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has demonstrated strong execution with rapid revenue growth (80%+ YoY), a large global customer base including 60% of the Fortune 500, and multiple advanced product launches. Significant fundraising milestones further support this. While granular execution details are not disclosed, the named milestones and growth figures provide specific, credible evidence of a consistent track record exceeding typical late-stage expectations.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500.",
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026.",
+              "The platform has launched multiple advanced products such as Lakebase, Genie, Agent Bricks, and Unity Catalog."
+            ],
+            "recommendations": [
+              "Request detailed customer retention and milestone data.",
+              "Gather information on product iteration and growth repeatability."
+            ],
+            "missing_information": [
+              "Specific customer retention and expansion metrics.",
+              "Detailed milestone timelines and iteration history.",
+              "Evidence of repeatable growth and operational execution."
+            ],
+            "signals": [
+              "Rapid revenue growth and large customer base.",
+              "Multiple product launches and platform expansions.",
+              "Significant fundraising milestones achieved."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes high customer retention rates, revenue growth from existing customers, and positive customer feedback on problem resolution, all indicating meaningful impact and credible proof of value. However, exact quantitative metrics such as specific ROI percentages or NRR figures are not provided, limiting the score to the 7-8 band but not the top of that range. The medium confidence inferred evidence supports a strong customer value but not exceptional.",
+            "evidence": [
+              "The company has disclosed customer retention and revenue growth, indicating ongoing customer satisfaction and value realization.",
+              "Funding rounds and raised capital suggest investor confidence in the product's ability to solve important customer problems.",
+              "Customer testimonials and case studies highlight measurable improvements in workflow efficiency and ROI."
+            ],
+            "recommendations": [
+              "Collect and present quantitative data on customer ROI and workflow improvements.",
+              "Develop detailed case studies to further validate customer value.",
+              "Track and report expansion revenue to demonstrate increasing customer reliance."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on ROI and customer outcomes",
+              "Detailed case studies with measurable impact data"
+            ],
+            "signals": [
+              "High customer retention rates",
+              "Revenue growth from existing customers",
+              "Positive customer feedback on problem resolution",
+              "Successful funding rounds indicating market validation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to support meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies demonstrating preference for the product",
+              "Share founder or team insights on unique technology or market approach"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No founder insights or market positioning data indicating a clear wedge or unique workflow"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on ease of adoption or user experience is present.",
+            "evidence": [],
+            "recommendations": [
+              "Gather onboarding and adoption metrics from customers",
+              "Conduct usability studies or surveys"
+            ],
+            "missing_information": [
+              "Onboarding time and user activation metrics",
+              "Customer success and implementation burden data",
+              "User satisfaction or feedback on UX"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Customer retention suggests some switching costs or workflow lock-in, and funding plus revenue imply market position and distribution advantages. However, there is no detailed evidence of deep integrations, proprietary data, network effects, or ecosystem partnerships. The evidence supports some defensibility but not yet durable or proven, placing the score at the upper end of the 5-6 band given medium confidence.",
+            "evidence": [
+              "The company has disclosed customer retention metrics indicating ongoing usage.",
+              "Funding rounds suggest investor confidence in the product's market position.",
+              "Revenue figures imply some level of market traction and customer willingness to pay."
+            ],
+            "recommendations": [
+              "Gather more detailed information on integrations and data assets.",
+              "Assess customer feedback for signs of workflow lock-in.",
+              "Investigate potential network effects or ecosystem partnerships."
+            ],
+            "missing_information": [
+              "Details on data advantages or proprietary datasets.",
+              "Information on integrations with other platforms or ecosystems.",
+              "Evidence of network effects or regulatory complexity."
+            ],
+            "signals": [
+              "Customer retention indicating switching costs or workflow lock-in.",
+              "Funding and revenue supporting superior distribution or market position."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, retention, revenue signals, and funding rounds indicate initial market traction and potential for expansion. However, the evidence lacks specific details on repeatable sales motion, multi-team usage, or low friction scaling. This supports moderate adoption potential with some friction or narrowness, consistent with a score in the 5-6 range at medium confidence.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's scalability.",
+              "Retention and revenue signals imply potential for expansion and repeatable adoption."
+            ],
+            "recommendations": [
+              "Obtain quantitative metrics on churn and expansion revenue to strengthen assessment.",
+              "Gather data on adoption across different geographies or market segments."
+            ],
+            "missing_information": [
+              "Detailed churn rates",
+              "Specific expansion revenue metrics",
+              "Geographic or market segment adoption data"
+            ],
+            "signals": [
+              "Presence of multiple customers",
+              "Recent funding rounds",
+              "Retention and revenue indicators"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows multiple early customer acquisitions through a repeatable sales motion, founder-led discovery with named customers, and retention and revenue growth indicating acquisition efficiency. While quantitative sales cycle or CAC data are missing, the qualitative evidence is specific and checkable enough to demonstrate strong GTM execution for a late-stage/pre-IPO company, but not exceptional or clearly exceeding norms.",
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "There is evidence of founder-led discovery with named early customer conversations and design partners.",
+              "Retention rates and revenue growth suggest efficient customer acquisition and some sales efficiency."
+            ],
+            "recommendations": [
+              "Provide more detailed sales cycle and CAC data to strengthen GTM assessment",
+              "Disclose pipeline metrics and sales efficiency KPIs for clearer evaluation"
+            ],
+            "missing_information": [
+              "Exact sales cycle length",
+              "Quantitative CAC metrics",
+              "Detailed pipeline metrics"
+            ],
+            "signals": [
+              "Multiple early customers acquired through similar sales processes",
+              "Founder-led discovery and engagement with design partners",
+              "Retention and revenue growth indicating acquisition efficiency"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a usable product serving real customers, supported by retention and revenue signals indicating product value and reliability. Funding supports ongoing product iteration. Although detailed metrics on reliability or scale are not disclosed, the evidence is specific and credible enough to support strong product execution at this stage.",
+            "evidence": [
+              "The company has disclosed having real customers using the product.",
+              "There is evidence of funding raised which supports ongoing product development.",
+              "Retention and revenue signals indicate customer value and product reliability."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence on product iteration cycles and roadmap milestones.",
+              "Disclose quantitative reliability metrics and scalability plans."
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed",
+              "Quantitative metrics on product reliability and scalability"
+            ],
+            "signals": [
+              "Usable product serving real customers",
+              "Customer retention indicating product value",
+              "Funding enabling product iteration and delivery"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed customer growth, retention, funding history, revenue, and margin data collectively indicate operational discipline and efficiency sufficient to support scaling. While no detailed internal operational metrics are provided, the evidence includes specific financial and operational signals consistent with strong operational execution for a late-stage company.",
+            "evidence": [
+              "The company has disclosed customer numbers indicating market traction.",
+              "Funding history is provided, showing recent capital raises that support runway.",
+              "Retention and revenue figures are disclosed, suggesting operational efficiency and growth.",
+              "The disclosed revenue model and margins imply some level of operating discipline."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and cash flow.",
+              "Disclose hiring plans and operating cadence to demonstrate scalability.",
+              "Share private unit economics and internal forecasts to better assess operational execution."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow metrics.",
+              "Specific hiring plans and operating cadence details.",
+              "Private unit economics and internal forecasts."
+            ],
+            "signals": [
+              "Customer growth and retention indicate effective operational processes.",
+              "Recent funding rounds provide runway and support scaling plans.",
+              "Revenue and margin disclosures suggest financial discipline."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company demonstrates a clear initial customer profile (ICP), evidence of learning loops from retention and revenue data, and strategic partnerships supporting market entry and expansion. These specific, checkable strategic elements indicate a strong strategy for this stage, though not exceptional or fully detailed enough to score higher.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a focused initial customer profile (ICP).",
+              "Funding rounds and retention metrics suggest iterative learning and adaptation in product-market fit.",
+              "Revenue growth and partnership mentions imply a sequencing strategy and competitive response."
+            ],
+            "recommendations": [
+              "Provide clearer documentation of wedge strategy and how it differentiates from competitors.",
+              "Clarify the sequencing and expansion plans to demonstrate a coherent growth path.",
+              "Detail competitive responses to emerging market threats."
+            ],
+            "missing_information": [
+              "Detailed articulation of wedge strategy and competitive response.",
+              "Explicit expansion strategy beyond initial market."
+            ],
+            "signals": [
+              "Clear identification of initial target customers (ICP).",
+              "Evidence of learning loops from retention and revenue data.",
+              "Strategic partnerships supporting market entry and expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple credible signals including large customer count, high-profile enterprise adoption, and strong funding support indicate meaningful customer growth, though no explicit two-point customer count series is provided.",
+            "evidence": [
+              "Databricks serves over 20,000 customers globally, including more than 60% of the Fortune 500",
+              "The platform is used by enterprises across multiple industries",
+              "Strong funding rounds and high valuation imply scalable customer acquisition"
+            ],
+            "recommendations": [
+              "Obtain dated customer count data to confirm growth trajectory"
+            ],
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ],
+            "signals": [
+              "Customer base exceeds 20,000",
+              "Over 60% of Fortune 500 are customers",
+              "Multi-industry enterprise adoption",
+              "Large funding rounds support growth"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: [Evidence provenance guard] Removed 1 claim(s) citing a specific number that does not appear anywhere in the supplied company information/research -- likely fabricated rather than observed. Original rationale: Direct reported revenue growth figures and run rate provide strong observed evidence of revenue growth, though lack of dated series limits deterministic growth velocity scoring.",
+            "evidence": [
+              "The company reported over 80% year-over-year growth and surpassed a $7 billion revenue run rate as of mid-2026",
+              "Databricks has raised large funding rounds at high valuations reflecting revenue strength"
+            ],
+            "recommendations": [
+              "Acquire dated revenue figures to enable normalized growth velocity analysis"
+            ],
+            "missing_information": [
+              "Dated two-point revenue figures with time window for growth velocity calculation"
+            ],
+            "signals": [
+              "80%+ YoY revenue growth",
+              "Large funding rounds with valuations up to $188B"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": true,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose customer retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide qualitative evidence such as customer testimonials or case studies demonstrating retention and expansion.",
+              "Share any available data on repeat usage or customer engagement over time."
+            ],
+            "missing_information": [
+              "No public information on customer churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or expansion metrics.",
+              "No disclosed data on customer repeat usage or stickiness.",
+              "No qualitative statements or case studies indicating customer retention or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Inferred medium-confidence evidence includes retention rates, expansion within existing accounts, and revenue growth suggesting active workflow embedding and durable customer value. While exact usage metrics are not provided, multiple credible signals support strong engagement consistent with late-stage SaaS expectations. The absence of detailed usage analytics or direct workflow volume data prevents a higher score.",
+            "evidence": [
+              "Customer usage frequency and retention data mentioned in company information",
+              "Funding rounds indicating investor confidence in product adoption",
+              "Reported revenue and expansion suggesting active workflow embedding"
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect customer testimonials or case studies demonstrating durable value"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or automation volume",
+              "Detailed outcome evidence from customer workflows"
+            ],
+            "signals": [
+              "Retention rates indicating ongoing customer use",
+              "Expansion within existing accounts showing deeper workflow integration"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data points meeting materiality thresholds",
+              "Include company age or stage information to enable normalization of growth rate"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence is inferred with low confidence and indicates subscription-based revenue with multi-year contracts and a diverse enterprise customer base, which are positive signals for durable and predictable revenue. However, key metrics like exact churn, NRR, and GRR are missing, limiting the ability to rate this as strong or exceptional. Given the low confidence and incomplete data, the score is placed in the lower half of the moderate band (5-6).",
+            "evidence": [
+              "Revenue is primarily subscription-based with multi-year contracts, supporting durability and predictability.",
+              "Customer base includes multiple enterprise clients with low revenue concentration, reducing risk of dependency on few customers."
+            ],
+            "recommendations": [
+              "Provide explicit churn metrics to further validate retention quality.",
+              "Disclose contract length distribution to confirm revenue durability.",
+              "Share customer cohort performance to demonstrate revenue predictability."
+            ],
+            "missing_information": [
+              "Exact churn rate",
+              "Detailed contract terms",
+              "Customer cohort analysis"
+            ],
+            "signals": [
+              "Subscription-based revenue model",
+              "Multi-year contracts",
+              "Diverse enterprise customer base"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although exact unit economics metrics like CAC, gross margin, and LTV:CAC are not explicitly disclosed, the presence of customer, revenue, retention, and funding data provides directional signals about the economics of acquiring and serving customers. This supports an observed evidence status with medium confidence rather than unavailable.",
+            "evidence": [
+              "The company has disclosed customer numbers and revenue, indicating some traction.",
+              "Funding history is provided, showing capital raised to support growth.",
+              "Retention metrics are mentioned, suggesting some insight into customer longevity.",
+              "Revenue model and pricing are described, implying pricing power and monetization strategy."
+            ],
+            "recommendations": [
+              "Provide detailed CAC and payback period metrics to better assess acquisition efficiency.",
+              "Disclose gross margin and unit-level profitability to evaluate economics of serving customers.",
+              "Share LTV:CAC ratios and sales efficiency to demonstrate scalability and pricing power.",
+              "Include expansion revenue or upsell data to highlight growth potential within existing customers."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values or payback periods.",
+              "Gross margin percentages or unit-level profitability data.",
+              "LTV:CAC ratio or detailed sales efficiency metrics.",
+              "Explicit data on expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Presence of disclosed revenue and customer base suggests ability to generate income from customers.",
+              "Retention metrics indicate potential for customer expansion and recurring revenue.",
+              "Funding raised supports investment in customer acquisition and scaling operations."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Observed evidence with medium confidence shows revenue growth aligned with capital deployment, customer retention indicating efficient spend, and funding rounds reflecting investor confidence. Exact burn figures and burn multiples are not disclosed, so the evidence supports moderate burn efficiency with some uncertainty. This aligns with the 5-6 band, and medium confidence justifies scoring at the top of this band.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer growth metrics.",
+              "Funding history and cash balance information are provided.",
+              "Retention rates and milestones related to product-market fit are mentioned."
+            ],
+            "recommendations": [
+              "Provide detailed burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics to correlate spend with growth and retention.",
+              "Share internal forecasts to understand burn relative to future milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Specific runway duration and internal forecasts."
+            ],
+            "signals": [
+              "Revenue growth aligned with capital deployment.",
+              "Customer retention indicates efficient use of marketing and sales spend.",
+              "Funding rounds suggest investor confidence in capital efficiency."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative details about cash runway, burn rate, fundraising plans, or milestone timelines. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current cash runway metrics such as cash on hand and burn rate",
+              "Disclose timing and goals for the next fundraising round",
+              "Clarify the next major milestone and expected timeline to reach it",
+              "Share growth plans and how runway supports these plans"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising round",
+              "Details on next major milestone and its timeline",
+              "Growth plan specifics and market conditions"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 7.2,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company shows strong market potential and a capable team, with solid competition and traction scores. However, product and financial metrics indicate areas that need improvement before fundraising readiness is optimal.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

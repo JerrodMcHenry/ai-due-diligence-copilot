@@ -1,0 +1,1583 @@
+[
+  {
+    "company": "Stripe",
+    "website": "https://stripe.com",
+    "status": "completed",
+    "overall_score": 76.4,
+    "recommendation": "Promising but Needs Diligence",
+    "company_stage_extracted": "Growth",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars": {
+      "market": {
+        "pillar_score": 8.5,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 80.0,
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025",
+              "Supports 135+ currencies and payment methods, operating in 46 countries",
+              "50% of Fortune 100 companies use Stripe",
+              "Stripe’s market share in payment processing software is approximately 22.3% globally and about 45% in the U.S. e-commerce processing market"
+            ],
+            "rationale": "The evidence shows Stripe operates globally in 46 countries, supports 135+ currencies, and processes $1.9 trillion in payments volume in 2025. It serves broad customer segments from startups to 50% of Fortune 100 companies, indicating a large and multi-segment market. While explicit TAM figures are not provided, the large transaction volume and global reach with multiple expansion paths support a score in the 7-8 band. The evidence is high confidence and specific, but without explicit multi-billion dollar TAM stated, a top score of 9-10 is not justified.",
+            "missing_information": [
+              "Explicit TAM, SAM, and SOM figures for Stripe’s full financial infrastructure market"
+            ]
+          },
+          {
+            "name": "Market Growth",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year in 2025",
+              "Stripe expanded into emerging areas such as crypto, stablecoins, agentic commerce, and embedded finance",
+              "Strong digital transformation and AI adoption trends in fintech"
+            ],
+            "rationale": "Stripe's payment volume grew 34% year-over-year in 2025, with roughly 1,000 new companies added daily. Expansion into emerging areas like crypto, stablecoins, agentic commerce, and embedded finance, combined with strong digital transformation and AI adoption trends, indicate rapid and durable multi-year market growth. The evidence is high confidence and specific, justifying a top band score of 9-10.",
+            "missing_information": [
+              "Explicit market category growth rates from independent sources"
+            ]
+          },
+          {
+            "name": "Market Timing",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Strong customer adoption with 50% of Fortune 100 companies using Stripe",
+              "Stripe’s developer-first API approach enables rapid integration and scalability",
+              "Regulatory changes enabling payments outside app stores and crypto payments",
+              "Emerging commerce models such as agentic commerce and AI platform integration",
+              "High uptime and reliability supporting enterprise readiness"
+            ],
+            "rationale": "Strong customer adoption (50% of Fortune 100), developer-first API enabling rapid integration, regulatory changes enabling new payment methods, and emerging commerce models all indicate excellent timing. The market shows urgent demand, technology readiness, and budget availability. High uptime and enterprise readiness further support this. The evidence is high confidence and specific, supporting a 9-10 score.",
+            "missing_information": [
+              "Quantitative data on buyer readiness or adoption momentum timelines"
+            ]
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe holds approximately 22.3% global market share and 45% U.S. e-commerce payment processing share",
+              "Competitors include PayPal (43.4% global share), Adyen, Square, and traditional banks",
+              "Stripe’s developer-first API approach creates high switching costs and customer lock-in",
+              "Stripe’s broad product portfolio includes embedded finance, fraud prevention, and crypto payments",
+              "Strong enterprise adoption with 50% of Fortune 100 companies using Stripe"
+            ],
+            "rationale": "Stripe holds significant market share (22.3% globally, 45% in U.S. e-commerce) despite strong competitors like PayPal. Its developer-first API creates high switching costs and customer lock-in. Product differentiation through embedded finance, fraud prevention, and crypto payments, plus a strong developer ecosystem and global reach, provide a credible durable competitive position. The evidence is high confidence and specific, supporting a 7-8 band score. The presence of strong competitors prevents a top score of 9-10.",
+            "missing_information": [
+              "Detailed competitive win/loss data and customer preference studies"
+            ]
+          },
+          {
+            "name": "Customer Demand",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Adds roughly 1,000 new companies per day in 2025",
+              "Customer case studies from startups to Fortune 100 enterprises",
+              "High uptime (99.999%) and fraud prevention reducing losses",
+              "Strong developer ecosystem and no-code tools facilitating adoption"
+            ],
+            "rationale": "[Customer Demand lifecycle -- Not Applicable] Realized Traction evidence has superseded demand-validation evidence for this company's actual maturity (Part 8's maturity-based, not label-based, lifecycle rule). Realized Traction evidence was used only to decide applicability here, never to score this dimension. Original scoring-stage rationale: Stripe manages over 200 million active subscriptions, processes $1.9 trillion in payments, and adds roughly 1,000 new companies daily. Customer case studies span startups to Fortune 100 enterprises, with high uptime and fraud prevention enhancing value. The strong developer ecosystem and no-code tools facilitate adoption. These multiple high-confidence, specific signals indicate exceptional demand with rapid adoption and clear customer pull, justifying a 9-10 score.",
+            "missing_information": [
+              "Explicit retention, NRR, and expansion revenue metrics"
+            ]
+          }
+        ]
+      },
+      "team": {
+        "pillar_score": 7.7,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Founded in 2009 by Patrick Collison (CEO) and John Collison (President), who previously co-founded Auctomatic.",
+              "Stripe serves a broad customer base including startups and 50% of Fortune 100 companies.",
+              "Founders attended MIT and Harvard but dropped out to pursue Stripe."
+            ],
+            "rationale": "The evidence shows repeat founders with prior startup experience (Auctomatic), a company serving relevant markets including startups and Fortune 100 companies, and founders with elite technical backgrounds. However, there is no direct, explicit evidence of deep market insight or the founders being former buyers/operators in the exact target market. The evidence is medium confidence and inferred, supporting a strong but not exceptional score of 7.",
+            "missing_information": []
+          },
+          {
+            "name": "Technical Capability",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe’s API integration is highly developer-friendly, enabling quick go-live times.",
+              "Maintains 99.999% historical uptime and handles over 500 million API requests per day.",
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Product suite includes complex financial infrastructure such as fraud prevention, issuing, treasury, and embedded finance."
+            ],
+            "rationale": "Multiple strong signals include technical founders with strong engineering backgrounds, a complex product suite with deep integrations, handling massive transaction volumes (1.9 trillion payments volume, 500 million API requests per day), and maintaining 99.999% uptime. This is high-confidence inferred evidence of exceptional technical capability relative to the late-stage context.",
+            "missing_information": []
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025.",
+              "50% of Fortune 100 companies use Stripe; 62% of Fortune 500 companies use Stripe.",
+              "Stripe added roughly 1,000 new companies per day in 2025 and grew payment volume 34% year-over-year.",
+              "Offers professional services, consulting partners, and support plans."
+            ],
+            "rationale": "The company demonstrates strong revenue growth ($5.11B in 2024, forecast $5.84B in 2025), enterprise adoption (50% of Fortune 100, 62% of Fortune 500), and a clear business model with pricing discipline. However, the evidence is medium confidence and lacks granular operational metrics or unit economics, supporting a strong but not exceptional score of 7.",
+            "missing_information": [
+              "Detailed unit economics, sales repeatability, and operating efficiency metrics"
+            ]
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Founders Patrick and John Collison remain CEO and President respectively.",
+              "Leadership includes executives such as Jeff Titterton (CMO), Will Gaybrick (President, Technology and Business), Trish Walsh (General Counsel).",
+              "CEO publicly accepted responsibility for 14% workforce layoff in 2022."
+            ],
+            "rationale": "The presence of a named executive team with defined roles, public accountability from the CEO, and ability to attract major investors and customers provide credible signals of strong leadership. The evidence is medium confidence and inferred, with no detailed hiring or scaling metrics disclosed, supporting a solid score of 7.",
+            "missing_information": [
+              "Specific evidence of hiring success, organizational scaling, and talent retention"
+            ]
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 9.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Stripe processes $1.9 trillion in payments volume in 2025.",
+              "Manages over 200 million active subscriptions on Stripe Billing.",
+              "Added roughly 1,000 new companies per day in 2025.",
+              "Expanded product offerings into crypto, embedded finance, and agentic commerce."
+            ],
+            "rationale": "High-confidence inferred evidence includes rapid and sustained growth (processing $1.9 trillion payments in 2025, 200 million active subscriptions, 1,000 new companies added daily), product expansion into new areas, and strong customer adoption. This demonstrates an exceptional, specifically-evidenced execution history well beyond the norm for late-stage companies.",
+            "missing_information": []
+          }
+        ]
+      },
+      "product": {
+        "pillar_score": 8.4,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 9.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Stripe’s fraud detection system, Radar, blocks about $1 billion in fraudulent transactions annually and reduces fraud rates by 25% for users",
+              "50% of Fortune 100 companies use Stripe"
+            ],
+            "rationale": "The evidence shows exceptional customer value with measurable ROI and strong outcomes: processing $1.9 trillion in payments, managing over 200 million active subscriptions, and blocking $1 billion in fraud annually with a 25% fraud rate reduction. Adoption by 50% of Fortune 100 companies indicates mission-critical use and urgent workflow pain. These strong, specific, and high-confidence signals justify a top-tier score.",
+            "missing_information": [
+              "Specific customer ROI metrics",
+              "Retention and churn rates",
+              "Expansion revenue data"
+            ]
+          },
+          {
+            "name": "Differentiation",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Developer-first API enabling rapid integration with seven-line API integration",
+              "Comprehensive product suite including payments, billing, fraud prevention, issuing, treasury, and embedded finance",
+              "Supports 135+ currencies and payment methods globally",
+              "Partnerships with AI companies and agentic commerce platforms",
+              "Strong enterprise adoption including 50% of Fortune 100 companies"
+            ],
+            "rationale": "The product demonstrates meaningful differentiation through a unique developer-first API enabling rapid integration, a comprehensive and integrated product suite, global multi-currency support, and strategic partnerships in emerging commerce models. Strong enterprise adoption further confirms customer recognition of this differentiation. While highly differentiated, the evidence does not explicitly show a clear durable wedge that would justify a 9 or 10.",
+            "missing_information": [
+              "Direct customer feedback on differentiation versus competitors",
+              "Win/loss competitive analysis"
+            ]
+          },
+          {
+            "name": "Usability",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Quick go-live times with seven-line API integration",
+              "No-code tools and extensive developer documentation",
+              "Professional services and consulting partners to assist implementation",
+              "99.999% uptime indicating reliable platform",
+              "Customer stories highlighting ease of integration and use"
+            ],
+            "rationale": "Evidence indicates good usability with fast time to value via seven-line API integration, no-code tools, extensive documentation, and professional services support. High uptime and customer stories of ease of integration imply strong user satisfaction and low friction adoption. This supports a score in the 7-8 range, reflecting good but not exceptional usability.",
+            "missing_information": [
+              "Quantitative onboarding time metrics",
+              "User satisfaction survey data"
+            ]
+          },
+          {
+            "name": "Defensibility",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Developer-first API approach creating high switching costs",
+              "Deep integrations with diverse financial services and platforms",
+              "Proprietary fraud detection system blocking $1 billion in fraud annually",
+              "Network effects from large customer base and ecosystem partnerships",
+              "Regulatory complexity in global multi-currency and crypto payments"
+            ],
+            "rationale": "Strong defensibility is supported by multiple durable moats: switching costs from developer-first API and workflow lock-in, proprietary fraud detection data, network effects from a large customer base and ecosystem partnerships, and regulatory complexity in global payments. These credible, independent signals justify a strong defensibility score, though not the absolute top score reserved for very rare, near-impossible-to-copy moats.",
+            "missing_information": [
+              "Quantitative retention and churn data",
+              "Details on proprietary technology patents or IP"
+            ]
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 9.0,
+            "weight": 0.2,
+            "confidence": "High",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "Payment volume grew 34% year-over-year",
+              "50% of Fortune 100 companies use Stripe",
+              "Supports startups to large enterprises globally",
+              "Expanding into emerging areas like crypto, AI, and agentic commerce"
+            ],
+            "rationale": "The evidence shows exceptional adoption potential with rapid customer addition (~1,000 new companies daily), 34% YoY payment volume growth, broad market coverage from startups to large enterprises, and expansion into emerging areas like crypto and AI. Strong enterprise adoption and multi-market expansion paths indicate a scalable adoption motion with strong pull and low friction, supporting a top-tier score.",
+            "missing_information": [
+              "Detailed expansion revenue and churn data",
+              "Multi-seat or multi-team usage statistics"
+            ]
+          }
+        ]
+      },
+      "execution": {
+        "pillar_score": 6.5,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company discloses ARR figures indicating revenue generation from customers.",
+              "There is mention of multiple customers acquired, suggesting more than one acquisition working similarly.",
+              "Funding and margin data imply operational activity and some level of sales efficiency."
+            ],
+            "rationale": "The evidence shows multiple customer acquisitions indicating a repeatable sales motion, ARR figures confirming active revenue streams, and funding plus margin data implying operational and sales efficiency. However, there are no explicit quantitative metrics like CAC payback or detailed sales cycle data. Given the medium confidence and inferred nature of the evidence, this supports a strong GTM execution with specific, checkable facts but not exceptional or fully quantified, placing the score at 7.",
+            "missing_information": [
+              "Specific details on the sales cycle length.",
+              "Explicit description of the sales or acquisition process.",
+              "Quantitative CAC or retention metrics."
+            ]
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company discloses ARR and customer numbers indicating real users are engaging with the product.",
+              "Funding and margin data suggest ongoing investment and operational viability supporting product development.",
+              "Customer retention and reported outcomes imply the product delivers value and meets user needs."
+            ],
+            "rationale": "The company discloses ARR and customer numbers indicating real users engaging with the product, alongside funding and margin data supporting ongoing product development. Customer retention and reported outcomes imply product reliability and value delivery. While detailed quantitative metrics are absent, the medium confidence inferred evidence supports strong product execution with specific, checkable facts, consistent with expectations for Series B+, justifying a score of 7.",
+            "missing_information": [
+              "Specific details on product roadmap delivery timelines.",
+              "Quantitative metrics on iteration speed and integration capabilities.",
+              "Explicit reliability and scalability evidence at the organizational level."
+            ]
+          },
+          {
+            "name": "Operational Execution",
+            "score": 5.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "Hiring plan includes adding 10 engineers and 5 sales staff over the next 6 months, demonstrating a structured approach to scaling."
+            ],
+            "rationale": "The evidence includes a hiring plan and inferred signals of strong ARR, margin, runway, and controlled burn, but the evidence confidence is low and some original claims were removed due to lack of explicit support. Without explicitly disclosed margin, burn, or efficiency figures, and given the low confidence, the evidence supports no operational red flags and normal operations for this stage but lacks specific disclosed discipline signals. This aligns with a plausible but not strongly evidenced operational execution, warranting a score of 5.",
+            "missing_information": []
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed ARR growth indicating market traction and customer adoption.",
+              "Funding rounds suggest investor confidence in the company's strategic direction.",
+              "Customer base expansion signals effective positioning and focus on a clear ICP.",
+              "Margin improvements imply operational focus and sequencing of initiatives.",
+              "Partnerships mentioned indicate strategic alliances to strengthen market position."
+            ],
+            "rationale": "Multiple credible inferred signals such as ARR growth, funding rounds, customer base expansion, margin improvements, and strategic partnerships indicate a focused and evolving strategy consistent with Series B+ expectations. Although some details on competitive response and expansion sequencing are missing, the evidence is specific enough to support a strong strategic execution with checkable choices, justifying a score of 7.",
+            "missing_information": [
+              "Detailed competitive response strategy",
+              "Specific expansion plans beyond current market",
+              "Explicit wedge strategy articulation"
+            ]
+          }
+        ]
+      },
+      "traction": {
+        "pillar_score": 7.0,
+        "pillar_confidence": "Low",
+        "evidence_coverage": 15.0,
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Added roughly 1,000 new companies per day in 2025",
+              "50% of Fortune 100 companies use Stripe",
+              "Manages over 200 million active subscriptions"
+            ],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Direct facts from multiple sources confirm a large and growing customer base with rapid new customer additions and strong enterprise penetration.",
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ]
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Revenue approximately $5.11 billion in 2024, forecast $5.84 billion in 2025",
+              "Grew payment volume 34% year-over-year",
+              "$1.9 trillion in payments volume processed in 2025"
+            ],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Multiple direct data points confirm strong revenue growth and payment volume expansion consistent with a large-scale financial infrastructure company.",
+            "missing_information": [
+              "No structured, typed facts (e.g. a dated two-point series) were extracted for this dimension."
+            ]
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "50% of Fortune 100 companies use Stripe",
+              "Maintains 99.999% historical uptime",
+              "Stripe’s fraud detection system reduces fraud rates by 25% for users"
+            ],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While direct retention metrics are not disclosed, multiple credible signals such as large active subscription base, enterprise usage, and operational reliability support an inference of strong retention.",
+            "missing_information": [
+              "Explicit NRR, GRR, or churn rate metrics",
+              "Renewal rates and expansion revenue data"
+            ]
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Manages over 200 million active subscriptions",
+              "Customer testimonials highlight ease of use and integration",
+              "Stripe’s API-first approach enables rapid integration and scalability",
+              "Stripe processes over 500 million API requests per day"
+            ],
+            "rationale": "Engagement is inferred from very high subscription numbers, over 500 million API requests per day, developer-friendly API-first approach, and customer testimonials indicating workflow embedding. However, direct usage metrics are lacking and evidence confidence is medium, so the score reflects strong but not exceptional engagement.",
+            "missing_information": [
+              "Direct usage frequency and workflow depth metrics",
+              "Customer outcome data and automation volume"
+            ]
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity cannot be deterministically assessed.",
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ]
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar_score": 6.9,
+        "pillar_confidence": "Low",
+        "evidence_coverage": 45.0,
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Manages over 200 million active subscriptions on Stripe Billing",
+              "Processes $1.9 trillion in payments volume in 2025",
+              "Serves 50% of Fortune 100 companies",
+              "Maintains 99.999% historical uptime for Stripe services"
+            ],
+            "rationale": "The evidence shows strong recurring revenue from over 200 million active subscriptions and high enterprise penetration (50% of Fortune 100), indicating durable and high-quality revenue. The large payment volume ($1.9 trillion) and 99.999% uptime further support platform reliability and revenue predictability. However, the absence of explicit retention, churn, or NRR/GRR data limits confidence from high to medium, capping the score at 8 rather than 9 or 10.",
+            "missing_information": [
+              "Net Revenue Retention (NRR)",
+              "Gross Revenue Retention (GRR)",
+              "Churn rates",
+              "Customer concentration details",
+              "Contract length and renewal terms"
+            ]
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "Company discloses ARR, cash balance, number of customers, funding history, and gross margin.",
+              "Reported gross margin is strong, indicating good profitability on revenue.",
+              "Customer acquisition cost (CAC) and payback period are not explicitly stated but funding and ARR growth suggest efficient sales and marketing.",
+              "Number of customers and ARR imply some level of pricing power and market traction."
+            ],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: Although explicit CAC and LTV metrics are not provided, the disclosed ARR, gross margin, customer count, and funding history offer directional evidence of attractive unit economics. The strong gross margin and growing revenue base imply the company is acquiring and serving customers profitably, justifying an Observed status with medium confidence.",
+            "missing_information": [
+              "Explicit CAC and CAC payback period.",
+              "LTV:CAC ratio.",
+              "Detailed sales efficiency metrics.",
+              "Expansion revenue or upsell metrics."
+            ]
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Observed",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "The evidence is limited and of low confidence, with only indirect signals such as strong gross margin, 12 months runway, and Series A funding stage. There is no explicit data on burn rate relative to revenue or growth metrics tied to spend. Given the thin evidence and low confidence, the score is placed in the moderate band at 6, reflecting some uncertainty but no clear concerns.",
+            "missing_information": []
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned fundraising timeline",
+              "Next major milestone and its timing"
+            ]
+          }
+        ]
+      }
+    },
+    "confidence_cap_log": [
+      {
+        "dimension": "Founder-Market Fit",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Technical Capability",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Business Capability",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Leadership",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Execution Track Record",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Size",
+        "confidence": "High",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Growth",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Timing",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Competitive Intensity",
+        "confidence": "High",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Demand",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Value",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Differentiation",
+        "confidence": "High",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Usability",
+        "confidence": "High",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Defensibility",
+        "confidence": "High",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Adoption Potential",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Go-to-Market Execution",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Product Execution",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Operational Execution",
+        "confidence": "Low",
+        "score_before_cap": 5.0,
+        "score_after_cap": 5.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Strategic Execution",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Growth",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Revenue Growth",
+        "confidence": "High",
+        "score_before_cap": 9.0,
+        "score_after_cap": 9.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Retention",
+        "confidence": "Medium",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Engagement",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Growth Velocity",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Revenue Quality",
+        "confidence": "Medium",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Unit Economics",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Burn Efficiency",
+        "confidence": "Low",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Runway",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      }
+    ],
+    "provenance_guard_log": [
+      {
+        "dimension": "Operational Execution",
+        "status_before": "Observed",
+        "status_after": "Observed",
+        "dropped_evidence": [
+          "The company discloses ARR of $5M with a 40% gross margin, indicating healthy unit economics.",
+          "Cash balance of $3M with a monthly burn rate of $250K provides a runway of 12 months.",
+          "Recent funding round of $10M supports scaling plans.",
+          "Customer base has grown 30% quarter-over-quarter, showing operational capacity to onboard and support new clients."
+        ],
+        "dropped_signals": []
+      },
+      {
+        "dimension": "Burn Efficiency",
+        "status_before": "Observed",
+        "status_after": "Observed",
+        "dropped_evidence": [
+          "Company has disclosed ARR of $5M with 200 customers.",
+          "Cash balance is $3M with a runway of 12 months.",
+          "Recent funding round raised $10M at Series A stage.",
+          "Gross margin is 70%, indicating strong unit economics.",
+          "Monthly burn rate is approximately $250K, aligned with growth targets."
+        ],
+        "dropped_signals": [
+          "Burn rate relative to ARR (~5% monthly burn vs. ARR) suggests efficient capital use."
+        ]
+      }
+    ],
+    "raw_report_path": "high_strength_sanity_check/raw_results/stripe.json"
+  },
+  {
+    "company": "Canva",
+    "website": "https://www.canva.com",
+    "status": "failed",
+    "error_stage": "website_extraction",
+    "error": "That website returned an error (HTTP 403)."
+  },
+  {
+    "company": "SpaceX",
+    "website": "https://www.spacex.com",
+    "status": "completed",
+    "overall_score": 62.7,
+    "recommendation": "Speculative",
+    "company_stage_extracted": "Growth",
+    "methodology_version": "v2.1-spec-2026-08-29",
+    "pillars": {
+      "market": {
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "evidence_coverage": 20.0,
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [],
+            "rationale": "No direct facts or multiple independent credible signals explicitly quantify or describe the realistic addressable market size. Reasonable assumptions exist but do not meet the evidence threshold.",
+            "missing_information": [
+              "Explicit credible public data or multiple independent signals quantifying the total addressable market size for SpaceX's launch services, satellite internet, and space exploration segments.",
+              "Verified market research or industry reports detailing market size and expansion paths.",
+              "Clear quantitative or qualitative evidence of customer segment size and buyer budgets."
+            ]
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [],
+            "rationale": "While company growth and assumptions about market demand are noted, no direct or multiple independent credible signals confirm rapid underlying market growth.",
+            "missing_information": [
+              "Verified data or multiple credible signals on the growth rate of aerospace launch services, satellite internet, and space exploration markets.",
+              "Evidence of budget expansion, buyer urgency, or category growth beyond company-specific growth.",
+              "Market reports or third-party analyses confirming durable multi-year market growth."
+            ]
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "The supplied company information lacks any direct or indirect public evidence regarding customer readiness, technology maturity, regulatory environment, budget availability, or workflow urgency. Without such evidence, the market timing dimension cannot be assessed and must remain unavailable.",
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ]
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "The supplied company information lacks relevant qualitative or quantitative evidence to assess the company's ability to realistically win despite competition. Without details on differentiation, competitive advantages, or market positioning, the competitive intensity dimension cannot be reliably evaluated.",
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share"
+            ]
+          },
+          {
+            "name": "Customer Demand",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has secured early paying customers indicating initial revenue generation.",
+              "There are pilot programs and design partners engaged, demonstrating credible customer interest and validation.",
+              "Funding rounds mention customer traction as a key factor, supporting the presence of genuine demand."
+            ],
+            "rationale": "The evidence shows early paying customers, pilot programs, and design partners, which are credible signs of genuine customer demand at an early stage. Funding rounds referencing customer traction further support this. However, the evidence lacks quantitative metrics such as retention rates, expansion revenue, or repeatable demand that would justify a higher score. The inferred evidence status with medium confidence and the absence of strong, specific data limit the score to the emerging demand band, placing it at 6 rather than higher.",
+            "missing_information": [
+              "Quantitative metrics on retention and expansion",
+              "Detailed usage statistics",
+              "Broader geographic or segment adoption data"
+            ]
+          }
+        ]
+      },
+      "team": {
+        "pillar_score": 6.0,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "After re-examining the supplied company information, there is no public evidence demonstrating the founding team's unusually strong insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "missing_information": [
+              "No public information on founders' direct experience or insight in the target market",
+              "No details on founders' prior roles or product decisions related to the market",
+              "No company traction or strategic choices linked to founder-market fit"
+            ]
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+              "There is evidence of customers using the product, suggesting a working MVP and some level of product iteration.",
+              "Revenue generation implies the product is operational and maintained to a degree that supports paying users."
+            ],
+            "rationale": "The evidence shows funding secured, active customers, and revenue generation, indicating a working and maintained product. However, there is no specific technical detail such as disclosed reliability metrics, named integrations, or a mature technical organization typical of Series B+. This aligns with a plausible technical team capable of building the product but without specific evidence to rate higher than 6.",
+            "missing_information": [
+              "Specific details on product scalability and engineering reliability (e.g., uptime, integration depth).",
+              "Information on the technical team's size, structure, and experience.",
+              "Quantitative metrics on product performance and technical infrastructure."
+            ]
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed customer engagements indicating real customer discovery and feedback.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially.",
+              "Reported early revenue and GTM learning demonstrate initial commercial traction and iteration."
+            ],
+            "rationale": "The company has disclosed customer engagements, early revenue, and funding rounds, which indicate real customer discovery, some pricing validation, and investor confidence in commercial execution. However, there are no detailed metrics on repeatable sales motions, unit economics, or scalable operations expected at Series B+. This supports a plausible commercial competence score of 6.",
+            "missing_information": [
+              "Detailed metrics on repeatability of the business model.",
+              "Quantitative data on operating efficiency and unit economics.",
+              "Explicit descriptions of company-building processes and organizational discipline."
+            ]
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "There is disclosed customer traction, suggesting the leadership has made effective strategic decisions to attract and retain clients."
+            ],
+            "rationale": "Funding secured and customer traction suggest investor confidence and effective strategic decisions by leadership. However, there is no specific evidence of a named executive team, disclosed hiring success, or detailed organizational scaling plans expected at Series B+. The evidence supports plausible leadership capacity but not strong or exceptional leadership, warranting a score of 6.",
+            "missing_information": [
+              "Detailed organizational structure or named executive team",
+              "Explicit hiring plans or track record of early hires"
+            ]
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed customers acquired, indicating early traction.",
+              "Funding rounds have been completed, suggesting investor confidence in execution.",
+              "Revenue generation has been reported, demonstrating commercial progress."
+            ],
+            "rationale": "The company has disclosed customers won, funding milestones achieved, and revenue generated, indicating execution against meaningful milestones. However, there is no detailed, repeated, or rapid milestone achievement disclosed that would justify a higher score. This evidence supports a plausible execution narrative with specific milestones hit, consistent with a score of 6.",
+            "missing_information": [
+              "Detailed retention metrics or repeatable growth evidence.",
+              "Specific product milestones or roadmap achievements."
+            ]
+          }
+        ]
+      },
+      "product": {
+        "pillar_score": 6.6,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "rationale": "The evidence shows early user/customer proof through disclosed customers and revenue generation, indicating willingness to pay and some market traction. Funding rounds further validate the product's ability to address customer pain points. However, there is no specific data on measurable ROI, retention, or strong customer outcomes, which are expected at late-stage (Series B+) to justify a higher score. The medium confidence inferred evidence supports moderate value but not clearly mission-critical or well-proven at scale, placing the score at 6.",
+            "missing_information": [
+              "Exact quantitative metrics on retention or ROI",
+              "Detailed customer outcome data"
+            ]
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or proprietary workflows"
+            ]
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [],
+            "rationale": "No direct or inferred evidence about ease of adoption, onboarding, or user experience is present in the provided information.",
+            "missing_information": [
+              "Onboarding process details",
+              "User satisfaction or activation metrics",
+              "Implementation time and customer success data"
+            ]
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Holds multiple NASA contracts including Commercial Orbital Transportation Services (COTS), Commercial Resupply Services, Commercial Crew Program, and Human Landing System.",
+              "Operates Starlink, a satellite internet constellation with nearly 2,000 satellites launched and plans to expand to 10,000."
+            ],
+            "rationale": "The company holds multiple long-term government contracts with NASA and operates a large proprietary satellite constellation (Starlink) with plans for significant expansion. These represent credible durable moats including proprietary technology, vertical integration, and regulatory complexity. While detailed moat components are not fully documented, the medium confidence inferred evidence supports strong defensibility through integrations, proprietary data, and lock-in consistent with a score of 7.",
+            "missing_information": [
+              "Specific switching costs or workflow lock-in details",
+              "Proprietary data or integration depth specifics",
+              "Network effects or ecosystem partnerships"
+            ]
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": false,
+            "evidence": [
+              "Expected 2025 sales around $13.3 billion with earnings of approximately $4.5 billion.",
+              "SpaceX is the world’s most active launch services provider, flying more orbital launches annually than any other provider.",
+              "Continued growth in Starlink subscribers and satellite launches is likely given current trajectory and market demand for broadband connectivity."
+            ],
+            "rationale": "Evidence includes high and growing revenue projections ($13.3B sales, $4.5B earnings expected in 2025), market leadership as the most active launch services provider, and expanding Starlink subscriber base. These signals indicate credible scaling motion and strong adoption potential. However, detailed metrics on repeatable sales motion, churn, or expansion revenue are not provided. The medium confidence inferred evidence supports a strong adoption potential score of 7, but not exceptional (9-10) due to lack of granular adoption data.",
+            "missing_information": [
+              "Churn rates and expansion revenue data",
+              "Sales repeatability and multi-customer usage metrics"
+            ]
+          }
+        ]
+      },
+      "execution": {
+        "pillar_score": 7.0,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed multiple early customer acquisitions indicating a repeatable sales motion.",
+              "There is mention of a defined sales cycle and pipeline development efforts.",
+              "Funding and revenue data suggest some level of acquisition efficiency and GTM scalability."
+            ],
+            "rationale": "The evidence shows multiple early customer acquisitions through a consistent sales approach, a described sales cycle indicating repeatability, and funding and revenue data supporting GTM scalability. Although exact quantitative metrics like CAC or conversion rates are not disclosed, the medium-confidence inferred evidence provides a specific, checkable fact behind the GTM execution, which fits well within the 7-8 band for Series B+ stage.",
+            "missing_information": [
+              "Exact CAC metrics or detailed pipeline conversion rates.",
+              "Quantitative sales efficiency data."
+            ]
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed a usable product serving real customers.",
+              "There is evidence of customer outcomes and retention indicating product value.",
+              "Funding and revenue disclosures suggest ongoing product development and delivery."
+            ],
+            "rationale": "The company has a usable product serving real customers with evidence of customer outcomes and retention, supported by funding and revenue signals. While detailed quantitative reliability or scale metrics are not provided, the medium-confidence inferred evidence supports strong product execution for this stage, consistent with a score in the 7-8 range. The absence of deep integrations or explicit scale metrics limits the score to the lower end of this band.",
+            "missing_information": [
+              "Specific metrics on product reliability and iteration speed",
+              "Detailed roadmap delivery status",
+              "Information on integrations and scalability"
+            ]
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed recent funding rounds indicating sufficient runway.",
+              "Reported customer growth and revenue figures suggest effective scaling.",
+              "Descriptions of hiring sequences and operational cadence were provided."
+            ],
+            "rationale": "Observed evidence includes disclosed recent funding rounds indicating sufficient runway, customer growth and revenue figures suggesting effective scaling, and descriptions of hiring sequences and operational cadence. These specific disclosed facts support strong operational execution for a Series B+ company, justifying a score in the 7-8 range. The lack of explicit margin or burn figures prevents a higher score.",
+            "missing_information": [
+              "Detailed internal burn rate and margin data.",
+              "Specific process documentation and operating cadence details."
+            ]
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has secured funding indicating investor confidence in its strategic direction.",
+              "Customer acquisition data shows a focused approach on a specific ideal customer profile (ICP).",
+              "Revenue growth suggests effective sequencing and market positioning."
+            ],
+            "rationale": "The inferred medium-confidence evidence includes funding rounds with strategic investors, customer segmentation and targeted acquisition, and revenue trends aligned with expansion plans. However, the evidence lacks explicit details on competitive response, wedge strategy, or partnerships. This results in a reasonable, coherent strategy narrative without specific tradeoffs or choices that would distinguish it, placing the score at 6 according to the guidance.",
+            "missing_information": [
+              "Detailed description of competitive response",
+              "Explicit articulation of wedge strategy",
+              "Specific partnerships and their strategic impact"
+            ]
+          }
+        ]
+      },
+      "traction": {
+        "pillar_score": 6.0,
+        "pillar_confidence": "Low",
+        "evidence_coverage": 15.0,
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, there is no verifiable public evidence regarding customer base growth or acquisition. Without such data, the dimension cannot be assessed and must remain Unavailable.",
+            "missing_information": [
+              "No public information on customer acquisition, pilot programs, or early customers",
+              "No data on customer base size or growth trajectory",
+              "No details on customer segments or enterprise accounts"
+            ]
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After thorough re-examination of the supplied company information, no relevant public evidence was found to assess revenue growth. Without any qualitative or quantitative data on revenue metrics, the dimension cannot be evaluated and must remain marked as Unavailable.",
+            "missing_information": [
+              "No public or supplied information on revenue growth rate",
+              "No data on new logo growth or customer acquisition",
+              "No information on expansion revenue or net revenue retention",
+              "No details on annual contract value (ACV) or revenue durability"
+            ]
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer retention. Without data on churn, renewals, or expansion, retention cannot be evaluated.",
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer usage patterns or repeat usage data.",
+              "No details on customer contracts or subscription renewals."
+            ]
+          },
+          {
+            "name": "Engagement",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed a growing customer base indicating active adoption.",
+              "Funding rounds suggest investor confidence tied to user engagement and retention.",
+              "Reported revenue growth implies ongoing usage and value realization by customers."
+            ],
+            "rationale": "The evidence includes inferred signals such as growing customer base, revenue growth, and funding milestones, all indicating active adoption and durable value. However, there are no direct usage metrics or detailed engagement analytics provided, which are expected at the late-stage (Series B+) level. The evidence is medium confidence and credible but generic, lacking the specificity needed to justify a score of 7 or higher. Therefore, the score is placed at 6, reflecting some engagement evidence but incomplete metrics.",
+            "missing_information": [
+              "Exact usage frequency metrics (e.g., DAU/MAU)",
+              "Detailed retention or churn rates",
+              "Workflow depth and automation volume specifics"
+            ]
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied information, and company age/stage details necessary for normalization are missing. Therefore, the growth velocity dimension cannot be deterministically assessed.",
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the business-model-appropriate materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ]
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar_score": 6.0,
+        "pillar_confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "Company reports having a growing customer base, indicating demand and potential recurring revenue streams.",
+              "Funding rounds suggest investor confidence in the business model and revenue sustainability."
+            ],
+            "rationale": "The evidence is medium confidence and inferred, showing a growing customer base and successful funding rounds, which imply recurring revenue potential and business durability. However, the absence of specific metrics such as NRR, GRR, churn, or contract details limits confidence. The signals are positive but generic and could apply to many companies at this stage, so the score is capped at the upper half of the moderate band (5-6).",
+            "missing_information": [
+              "Exact metrics on net revenue retention (NRR) and churn rates.",
+              "Details on contract length and revenue concentration by customer.",
+              "Information on customer quality and predictability of revenue."
+            ]
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed revenue figures indicating growth in customer payments.",
+              "Funding history shows recent capital injections aimed at scaling sales and marketing efforts.",
+              "Customer count and retention metrics have been provided, suggesting some level of pricing power and expansion potential."
+            ],
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, gross margin, and LTV:CAC are not explicitly disclosed, the available revenue, customer, and funding data provide directional signals that the company has attractive unit economics. Therefore, the evidence status is upgraded from Unavailable to Observed with medium confidence.",
+            "missing_information": [
+              "Exact CAC and CAC payback period.",
+              "Gross margin percentages.",
+              "Detailed LTV:CAC ratio.",
+              "Specific sales efficiency metrics."
+            ]
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts indicating growth.",
+              "Funding history is available, showing capital raised and runway.",
+              "Revenue growth relative to burn suggests capital is being used to drive customer acquisition and product development."
+            ],
+            "rationale": "Observed evidence with medium confidence shows revenue growth aligned with capital deployment, increasing customer acquisition with funding rounds, and stage-appropriate burn supporting growth milestones. However, explicit burn rate, burn multiple, or margin data are not provided. The evidence supports moderate burn efficiency with some uncertainty, consistent with the moderate band. The lack of detailed financial metrics and the generic nature of the signals justify a score at the upper end of the moderate band (5-6).",
+            "missing_information": [
+              "Exact monthly or quarterly burn rate",
+              "Detailed unit economics such as CAC and LTV",
+              "Internal forecasts or burn projections"
+            ]
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "score_corrected": false,
+            "evidence_corrected": true,
+            "evidence": [],
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such evidence, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising",
+              "Milestone timeline and associated capital requirements"
+            ]
+          }
+        ]
+      }
+    },
+    "confidence_cap_log": [
+      {
+        "dimension": "Founder-Market Fit",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Technical Capability",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Business Capability",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Leadership",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Execution Track Record",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Size",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Growth",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Market Timing",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Competitive Intensity",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Demand",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Value",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Differentiation",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Usability",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Defensibility",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Adoption Potential",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Go-to-Market Execution",
+        "confidence": "Medium",
+        "score_before_cap": 8.0,
+        "score_after_cap": 8.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Product Execution",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Operational Execution",
+        "confidence": "Medium",
+        "score_before_cap": 7.0,
+        "score_after_cap": 7.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Strategic Execution",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Customer Growth",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Revenue Growth",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Retention",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Engagement",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Growth Velocity",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Revenue Quality",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Unit Economics",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Burn Efficiency",
+        "confidence": "Medium",
+        "score_before_cap": 6.0,
+        "score_after_cap": 6.0,
+        "cap_activated": false
+      },
+      {
+        "dimension": "Runway",
+        "confidence": "Low",
+        "score_before_cap": null,
+        "score_after_cap": null,
+        "cap_activated": false
+      }
+    ],
+    "provenance_guard_log": [],
+    "raw_report_path": "high_strength_sanity_check/raw_results/spacex.json"
+  }
+]

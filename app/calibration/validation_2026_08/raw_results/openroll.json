@@ -1,0 +1,2370 @@
+{
+  "summary": "Openroll is an AI-powered B2B SaaS platform that automates and streamlines workforce planning, compensation management, and budgeting for People (HR) and Finance teams, primarily targeting mid-sized to large enterprises. By integrating with key enterprise systems like ERP, HRIS, and ATS, Openroll provides real-time data analytics, fully auditable workflows, and actionable insights to help companies make faster, more confident pay decisions, headcount forecasts, and budget variance analyses without reliance on spreadsheets.\n\nKey features include compensation reviews with salary band management, live headcount tracking down to individual-level variance, pay strategy alignment with real-time alerts, and plain language querying that generates dashboards and visualizations accessible to non-technical users. The platform emphasizes enterprise-grade security and compliance, holding SOC 2 Type II, ISO 27001 certifications, GDPR adherence, and guarantees data isolation by not using customer data to train its AI models.\n\nBacked by Y Combinator and headquartered in San Francisco, Openroll serves clients like Notion, Planhat, Wallenstam, Mentimeter, and Viaplay Group. The startup’s team is currently small (2–10 employees), indicating an early growth phase focused on product development and market penetration. Openroll actively engages with the HR and tech community through industry events and partnerships, positioning itself against established players such as ChartHop and Workday. Its biggest challenges include scaling sales and product capabilities while maintaining stringent data security and navigating competition in the AI-driven workforce planning space.",
+  "risk_analysis": "Here is a detailed risk analysis of Openroll focusing on competition, scalability, market risk, customer adoption risk, and operational risk:\n\n1. Competition Risk  \n- **Established incumbents:** Openroll faces stiff competition from entrenched HR and finance software providers such as Workday and ChartHop. Workday, in particular, is a widely adopted enterprise-grade human capital management suite embedding AI capabilities, providing comprehensive workforce planning, compensation, and budgeting tools with a strong reputation for compliance, scalability, and support. ChartHop similarly offers AI-powered headcount planning and data visualization, targeting similar customer segments. These competitors have larger sales forces, broader product ecosystems, and more established customer relationships, posing a barrier for Openroll’s market penetration.  \n- **Feature breadth and ecosystem integration:** Larger competitors often offer end-to-end HR and finance software suites beyond workforce planning, which may reduce the incentive for customers to adopt a standalone platform like Openroll. Customers may prefer integrated solutions from a single vendor to reduce integration complexity. Openroll’s ability to deeply integrate and coexist with existing enterprise systems will be critical to competing effectively.  \n- **AI differentiation:** Although Openroll leverages AI for automation, auditability, and natural language querying, the extent to which this provides a defensible competitive advantage versus incremental improvements offered by competitors remains uncertain. Competitors are likely to continuously innovate on AI capabilities, eroding differentiation over time.\n\n2. Scalability Risk  \n- **Small team size:** Openroll operates with a lean team of 2-10 employees. This is a significant scalability challenge given the complexity of integrating with diverse enterprise systems, maintaining real-time data accuracy, supporting complex workflows, and expanding customer support globally. Scaling product development, customer success, and sales rapidly while maintaining product quality and service could strain limited resources.  \n- **Complex enterprise integrations:** Integrations with multiple ERPs, HRIS, ATS, and finance systems require substantial engineering resources to maintain compatibility, especially as enterprise software vendors update APIs and data schemas. Ensuring scalability and robustness of these integrations at enterprise scale may require further hires and investment.  \n- **Sales and go-to-market scale:** Targeting mid-to-large enterprises demands an experienced and sizeable sales team to manage long sales cycles, enterprise procurement processes, and customer onboarding. Scaling sales efficiency and pipeline generation with a small team limits growth velocity and market reach.\n\n3. Market Risk  \n- **Market maturity and buying behavior:** While there is a growing interest in AI-driven workforce and finance planning tools, adoption of new platforms in sensitive areas like compensation and budgeting can be slow due to risk aversion and change management challenges. Enterprises with legacy processes may prefer incremental adoption or hesitant to trust AI recommendations without extensive audit and governance assurances.  \n- **Economic sensitivity:** Workforce planning and compensation management budgets may be tightly controlled or reduced during economic downturns or company cost-cutting initiatives, potentially affecting demand for new software tools.  \n- **Regulatory and compliance complexity:** Serving regulated industries or global customers requires continuous adaptation to evolving data privacy, labor, and financial regulations. Any gaps could limit market opportunity or expose the company to legal risks.\n\n4. Customer Adoption Risk  \n- **Trust and data sensitivity:** Compensation and payroll data are highly sensitive. Customers may have strong reservations about connecting these systems to a third party, even with SOC 2, ISO 27001, and GDPR certifications. Any security incident or perceived data privacy weakness could severely damage trust and reduce adoption.  \n- **Change management:** Convincing HR and Finance teams to replace longstanding manual processes and spreadsheet-based workflows with an automated AI platform involves overcoming cultural resistance and demonstrating clear ROI. Adoption may be slowed if users distrust AI-driven decisions or if the user experience fails to meet expectations.  \n- **Integration complexity and reliability:** Complex integrations pose potential onboarding delays and ongoing maintenance challenges, which can affect customer satisfaction and renewal rates.  \n- **Limited user base:** Early-stage involvement with a handful of marquee customers is promising, but transitioning from early adopters to mainstream enterprise customers requires consistent value delivery and support.\n\n5. Operational Risk  \n- **Product development challenges:** Balancing rapid feature delivery with quality and security demands is critical when handling sensitive financial and HR data. Insufficient testing or rushed releases may undermine product reliability and customer trust.  \n- **Resource constraints:** With a small workforce, resource allocation decisions become critical. Key-person dependencies or inability to rapidly resolve technical issues may degrade service and limit scalability.  \n- **Security and compliance upkeep:** Maintaining SOC 2 Type II, ISO 27001, and GDPR compliance demands ongoing investment in policies, audits, and processes. Any compliance failure could trigger regulatory penalties and reputational harm.  \n- **Dependence on third-party integrations:** Changes in APIs or data sharing policies by ERP, HRIS, or ATS vendors can disrupt Openroll’s functionalities. Lack of control over these upstream systems is an operational risk that must be mitigated through active vendor management and adaptive engineering.  \n- **Funding and financial sustainability:** Limited disclosed funding beyond Y Combinator implies potential capital constraints for scaling operations, marketing, and product enhancements. Running out of capital before achieving significant market traction could jeopardize company viability.\n\n**Summary:**  \nOpenroll operates in a highly competitive and complex market dominated by established players with larger resources. Its AI-driven, audit-focused approach is a meaningful differentiator but also faces challenges to scale effectively with a small team amid complex enterprise integrations. Market adoption risks arise from the conservative nature of HR/Finance workflows and the sensitivity of compensation data. Operationally, maintaining rigorous security, compliance, and product reliability with limited resources is demanding. Success will depend on Openroll’s ability to prove clear ROI, maintain trust, rapidly expand sales and engineering capacity, and continuously evolve its AI capabilities in line with customer needs and regulatory requirements.",
+  "competitor_analysis": "Here is a detailed competitive analysis for Openroll based on the provided information and contextual research:\n\n---\n\n### Major Competitors\n\n1. **ChartHop**  \n   - AI-driven headcount planning and workforce analytics platform.  \n   - Strong integrations with HRIS and other enterprise systems.  \n   - Focused on making workforce data accessible with visualization and scenario planning.  \n   - Well-established in the mid-market and growing enterprise segments.\n\n2. **Workday**  \n   - Large-scale Enterprise Human Capital Management (HCM) platform with embedded AI capabilities.  \n   - Comprehensive suite covering HR, finance, payroll, and planning.  \n   - Strong governance, compliance, and data security.  \n   - Large customer base spanning global enterprises.\n\n3. **Gusto / Rippling (for SMBs moving to mid-market)**  \n   - While primarily payroll and HR platforms, they have emerging workforce planning and compensation modules, increasingly incorporating AI.  \n   - More SMB-focused but expanding capabilities upmarket.\n\n4. **Visier**  \n   - Workforce analytics and planning platform focused on data-driven HR decisions.  \n   - Deep analytics capabilities and scenario modeling.\n\n5. **Other emerging AI workforce planning startups**  \n   - Various companies integrating AI to automate budgeting, compensation analytics, and headcount planning.\n\n---\n\n### Competitive Advantages of Openroll\n\n- **Integrated AI Automation Across People and Finance Teams:** Openroll uniquely consolidates compensation, headcount planning, and budgeting with AI-driven automation that connects directly to ERP, HRIS, ATS, and finance systems. This cross-functional approach aligns people data with financial plans more tightly than many competitors.  \n- **Speed and Efficiency:** Ability to make compensation and budgeting decisions in hours rather than weeks by automating traditionally manual processes, which drives significant time savings.  \n- **Plain Language Query Interface:** Enables non-technical users to ask questions and generate real-time analyses and visualizations, lowering the barrier for adoption across departments.  \n- **Full Auditability and Compliance:** Ensures transparent tracking of how data and analytics are derived, meeting requirements for regulated industries.  \n- **Enterprise-grade Security:** SOC 2 Type II, ISO 27001 certifications, GDPR compliance, and strict data isolation policies, which are critical trust factors for enterprises managing sensitive payroll and headcount data.  \n- **Strong Customer Base & Influencer Engagement:** Early adoption by reputable companies like Notion and backing by Y Combinator lend credibility. Sponsorship of key industry organizations and participation in major conferences demonstrate strong market engagement.  \n- **Focus on Agentic Automation:** The platform transforms internal expertise into automated, repeatable workflows, which can help scale People and Finance teams’ operational capabilities.  \n\n---\n\n### Competitive Disadvantages / Challenges\n\n- **Early-Stage and Small Team Size (2-10 employees):** Limited resources may constrain sales reach, customer support, and rapid scaling compared to larger competitors like Workday or ChartHop.  \n- **Lack of Comprehensive Enterprise HCM Suite:** Unlike Workday, Openroll appears to focus primarily on compensation, headcount, and budgeting, potentially requiring customers to maintain multiple platforms for full HR/Finance needs.  \n- **Market Penetration and Brand Awareness:** As a newer company, Openroll may face challenges overcoming incumbents’ mindshare and entrenched vendor relationships.  \n- **Limited Public Product Feature Disclosure:** Uncertainty about advanced predictive analytics or scenario modeling compared to established analytics leaders like Visier.  \n- **Potential Customer Hesitancy:** Enterprises may be cautious adopting new AI-driven platforms for critical financial and HR decisions, preferring proven solutions.\n\n---\n\n### Barriers to Entry (for competitors entering Openroll’s space)\n\n- **Complex Integrations with ERP, HRIS, ATS:** Deep and secure integrations required to provide up-to-date, audit-ready workforce and financial data pose high technical barriers.  \n- **Security and Compliance Certifications:** Achieving SOC 2 Type II, ISO 27001, and GDPR compliance involves significant processes and investments.  \n- **Building AI Automation Trust:** Convincing enterprises to trust AI workflows for compensation decisions and budgeting is difficult and requires transparency, auditability, and accuracy.  \n- **Domain Expertise and Workflow Automation:** Effectively capturing and automating internal People and Finance expertise to replace spreadsheet-driven work involves deep industry knowledge and customization.  \n- **Customer Relationships & Industry Standing:** Presence at key industry events and partnerships with organizations like the Silicon Valley Compensation Association build trust and raise switching costs.\n\n---\n\n### Competitive Risks\n\n- **Competition from Established Giants:** Workday and other HCM suites could extend or deepen AI-powered workforce planning capabilities, leveraging their installed base and larger resources.  \n- **Rapid Innovation by Competitors:** Rivals like ChartHop or Visier can enhance their AI, visualization, and automation features, potentially eroding Openroll’s differentiation.  \n- **Customer Data Security Incidents:** Any breach or compliance failure could severely damage trust given the sensitivity of payroll and compensation data.  \n- **Scaling Challenges:** With a small team, Openroll may struggle to scale support, product development, and enterprise sales to meet growing demand.  \n- **Market Adoption Lag:** AI-powered compensation and finance decision platforms require culture change in customers; reluctance can slow adoption.  \n- **Economic Downturn Impact:** Enterprise budgets for new SaaS platforms can tighten during economic uncertainty, affecting growth trajectories.\n\n---\n\n### Summary\n\nOpenroll is well positioned as an AI-first, integrated compensation, headcount, and budgeting platform targeting People and Finance teams in mid to large enterprises. Its strengths lie in automation, integration breadth, security, and making complex data accessible to users via plain-language queries. However, as an early-stage player with a small team, it faces strong competition from established HCM suites and dedicated workforce analytics vendors. Success depends on continued innovation, scaling sales efforts, and cementing trust around AI-driven decision workflows in regulated, security-conscious environments.\n\n---\n\nIf you would like, I can also provide strategic recommendations to improve Openroll’s competitive position.",
+  "memo": "Investment Memo: Openroll\n\nCompany Overview  \nOpenroll is a Y Combinator-backed B2B SaaS startup headquartered in San Francisco that provides an AI-driven workforce and finance planning platform. It integrates with enterprise systems (ERP, HRIS, ATS) to automate compensation reviews, headcount planning, budgeting, and pay strategy tracking. Openroll’s platform offers real-time analytics, full auditability, and enterprise-grade security (SOC 2 Type II, ISO 27001, GDPR compliance). Its customer base includes fast-growing tech companies and global enterprises such as Notion, Planhat, and Viaplay Group.\n\nProblem  \nPeople (HR) and Finance teams in mid-to-large enterprises face complex, manual, and error-prone processes around compensation setting, headcount planning, and budgeting—often reliant on spreadsheets and siloed systems. This leads to slow decision-making, lack of real-time data alignment, difficulties in pay equity management, and risks in compliance and auditability.\n\nSolution  \nOpenroll’s AI-powered platform consolidates workforce and financial planning workflows into one interface, automating recurring tasks and enabling teams to make confident pay and headcount decisions in hours rather than weeks. Through natural language queries and automated dashboards, it democratizes data access for non-technical users while maintaining rigorous security and full audit trails. The platform also provides live variance analysis, pay strategy alerts, and scalable operationalization of internal expertise.\n\nMarket Opportunity  \nThe global HR and finance software market is growing rapidly, driven by enterprises’ increased demand for integrated, data-driven workforce management tools. Companies are prioritizing automation, compliance, and real-time planning to gain competitive talent advantages and financial discipline. Openroll’s focus on AI-driven automation for compensation and headcount planning addresses a $5B+ total addressable market encompassing HRIS, workforce analytics, and financial planning software segments—particularly appealing to mid-sized and enterprise customers with complex needs.\n\nCompetitive Landscape  \nKey competitors include established platforms such as ChartHop and Workday, which offer AI-enabled workforce planning and HCM suites. While Workday competes as an embedded enterprise solution with broad functionality, ChartHop focuses on headcount and people analytics. Openroll differentiates itself by tightly integrating compensation, budgeting, and pay strategy workflows with full auditability and plain-language querying, along with strict data privacy assurances (data isolation, no AI training on customer data). Its early traction with leading tech companies and presence at major HR events signals growing market credibility.\n\nKey Risks  \n- Intense competition from entrenched HR and finance software providers with larger resources and customer bases.  \n- Adoption challenges with enterprises cautious about trusting AI for critical compensation and budgeting decisions.  \n- Scaling sales and product development with a small founding team (2-10 employees) amidst market demands.  \n- Maintaining stringent data security and regulatory compliance to sustain customer trust.  \n- Limited publicly available financial and growth metrics constrain thorough commercial due diligence.\n\nRecommendation  \nOpenroll presents a compelling opportunity in the growing niche of AI-driven workforce and financial planning, addressing notable pain points for HR and finance teams with a differentiated, integrated platform. Backed by Y Combinator and already serving reputable customers, the startup has demonstrated product-market fit in the early growth stage. However, given competitive pressures and scaling risks, investment consideration is recommended with a focus on follow-on funding rounds that validate revenue growth and customer expansion. Engagement with the founding team to clarify product roadmap, go-to-market strategy, and financial metrics is advised before proceeding.",
+  "structured_analysis": {
+    "company_name": "Openroll",
+    "industry": "SaaS",
+    "stage": "Seed",
+    "business_model": "SaaS",
+    "summary": "Openroll is an AI-driven SaaS platform designed for People (HR) and Finance teams to automate and streamline compensation reviews, headcount planning, budgeting, and pay strategy tracking. The platform integrates with ERP, HRIS, ATS, and other systems to provide real-time data analytics with full auditability and compliance. Backed by Y Combinator and serving customers such as Notion and Viaplay Group, Openroll leverages AI to reduce manual spreadsheet work, speed up decision-making, and increase operational efficiency in workforce and financial planning.",
+    "key_risks": [
+      "Strong competition from established HR and finance software providers with larger customer bases and broader product suites.",
+      "Enterprise adoption challenges due to the critical nature of compensation and budgeting decisions and need for trust in AI-driven automation.",
+      "Maintaining high data security, privacy, and compliance standards given the sensitivity of workforce and compensation data.",
+      "Scaling sales, product development, and support with a relatively small team in a competitive market."
+    ],
+    "strengths": [
+      "Integration with multiple enterprise systems providing up-to-date, contextual data and full auditability.",
+      "Enterprise-grade security certifications including SOC 2 Type II, ISO 27001, and GDPR compliance.",
+      "Backed by Y Combinator and validated by notable customers and industry participation.",
+      "AI automation reduces manual workload and accelerates complex workforce and financial planning processes.",
+      "Strong product focus on the intersection of People and Finance teams addressing a clear market need."
+    ],
+    "recommendation": "Openroll shows promising early-stage traction with a strong technology foundation, reputable backing, and clear market need. However, given its seed stage, small team size, and competitive landscape, investment consideration should be contingent on demonstration of scalable go-to-market execution and customer growth. It is recommended to conduct further due diligence on product roadmap, revenue traction, and strategic positioning versus competitors before advancing."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 6.0,
+    "product_score": 7.0,
+    "competition_score": 7.2,
+    "traction_score": 8.0,
+    "financial_score": 6.4,
+    "overall_score": 69.2,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 6.9,
+    "readiness_summary": "The company demonstrates solid traction and competitive positioning with strengths in customer adoption and market presence. However, team capabilities and financial metrics indicate areas needing improvement to enhance fundraising prospects.",
+    "strengths": [
+      "Strong traction with customers and users",
+      "Good market potential and notable competitive advantages",
+      "Product is well-developed and aligned with market needs"
+    ],
+    "weaknesses": [
+      "Team score is moderate, indicating potential leadership or experience gaps",
+      "Financial metrics are below average, suggesting possible issues in financial planning or stability"
+    ]
+  },
+  "readiness_score": 6.9,
+  "readiness_summary": "The company demonstrates solid traction and competitive positioning with strengths in customer adoption and market presence. However, team capabilities and financial metrics indicate areas needing improvement to enhance fundraising prospects.",
+  "founder_analysis": {
+    "summary": "The available information on Openroll provides detailed insights into the company's product, market positioning, customer base, and security certifications. However, there is no specific public information about the founding team's background, prior experience, technical leadership, business operations, or execution milestones. The founders' direct industry experience, technical expertise, leadership qualities, and track record are not disclosed in the provided data. Consequently, the assessment of the founding team's capabilities across all dimensions cannot be made based on the supplied information.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [
+      "Conduct founder interviews or review detailed founder bios to assess domain expertise and prior experience.",
+      "Obtain information on the founders' technical backgrounds and engineering leadership roles.",
+      "Gather data on business operations, sales execution, and company-building experience.",
+      "Request evidence of leadership capacity, hiring success, and decision-making quality.",
+      "Collect concrete execution milestones such as product releases, customer acquisition metrics, and revenue growth."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 6.0,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founder engagement with customers or problem validation",
+            "Share any public product launches or market traction that demonstrate founder insight"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Direct customer insight or problem understanding demonstrated by founders",
+            "Publicly available information on founders' industry background or product development related to the market"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows funding rounds completed, an active customer base, and revenue generation, which are credible signals that the team can build, maintain, and scale the product at a Seed stage. However, there is no direct evidence of complex product execution, deep technical leadership, or scalable architecture. This aligns with an 'adequate capability with some scaling, reliability, or complexity risk' score of 5-6. Given the medium confidence and positive qualitative signals, a score of 6 is appropriate.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+            "The presence of customers suggests the team has developed a working product and is maintaining it.",
+            "Revenue generation implies the product is operational and likely scalable to meet demand."
+          ],
+          "recommendations": [
+            "Obtain detailed resumes or profiles of technical founders and key engineers",
+            "Request information on product development lifecycle and scalability strategies",
+            "Assess engineering team size and structure to evaluate maturity"
+          ],
+          "missing_information": [
+            "Details on the technical team's composition and expertise",
+            "Information on product architecture and scalability measures",
+            "Specifics on engineering processes and infrastructure"
+          ],
+          "signals": [
+            "Funding rounds completed",
+            "Active customer base",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has early customer traction, revenue, funding rounds, and has disclosed pricing strategy and unit economics, indicating initial GTM success and operational understanding at Seed stage. However, there is no evidence of repeatable sales motion or scalable business operations. This fits the 'some business capability, but important gaps remain' band of 5-6. Assigning a 6 reflects the medium confidence and presence of multiple credible signals without full repeatability.",
+          "evidence": [
+            "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+            "Funding rounds suggest investor confidence in the team's ability to execute commercially and operate the business.",
+            "Descriptions of pricing strategy and unit economics have been provided, showing operational and commercial understanding."
+          ],
+          "recommendations": [
+            "Provide more detailed evidence of repeatable and scalable GTM execution.",
+            "Disclose operational processes and company-building plans to strengthen assessment."
+          ],
+          "missing_information": [
+            "Detailed repeatable sales processes",
+            "Scalable operational systems",
+            "Long-term company-building strategies"
+          ],
+          "signals": [
+            "Early customer traction and revenue",
+            "Successful funding rounds",
+            "Clear pricing and unit economics"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 6.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding rounds, customer acquisition, and revenue generation are credible and independent signals that infer leadership capacity to lead, hire, and scale at Seed stage. There is no explicit detail on hiring plans or leadership depth, so the evidence supports moderate leadership with some unknowns. This corresponds to a score of 5-6. Given the medium confidence and positive signals, a 6 is justified.",
+          "evidence": [
+            "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+            "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+            "Revenue generation implies some level of organizational management and decision-making capability."
+          ],
+          "recommendations": [
+            "Provide more detailed information on the leadership team's background and hiring strategy.",
+            "Disclose organizational charts or executive team details to better assess leadership depth."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition",
+            "Explicit hiring plans or evidence of attracting early hires"
+          ],
+          "signals": [
+            "Funding rounds completed",
+            "Customer acquisition",
+            "Revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 6.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The company has demonstrated customer acquisition, funding progress, and revenue generation, which are strong signals of execution against meaningful milestones at Seed stage. However, there is no detailed quantitative evidence of rapid growth or repeated milestone achievement. This aligns with 'some execution evidence but incomplete or uneven track record' scoring 5-6. A score of 6 reflects the medium confidence and credible qualitative evidence.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating market validation and initial traction.",
+            "Funding rounds have been completed, demonstrating investor confidence and resource acquisition for execution.",
+            "Revenue generation has been reported, showing the ability to monetize the product or service."
+          ],
+          "recommendations": [
+            "Obtain more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+            "Gather information on product development timelines and milestone achievements."
+          ],
+          "missing_information": [
+            "Specific quantitative metrics on revenue growth or customer retention rates.",
+            "Details on product development milestones or repeatability of growth."
+          ],
+          "signals": [
+            "Customer acquisition as a sign of product-market fit and execution capability.",
+            "Successful funding rounds indicating progress and milestone achievement.",
+            "Reported revenue reflecting commercial traction and operational execution."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Insufficient public evidence to assess founder-market fit.",
+    "fundraising_signal": "Backed by Y Combinator, indicating some level of investor confidence but no detailed founder fundraising history available."
+  },
+  "market_analysis": {
+    "summary": "The available information on Openroll provides detailed insights into the company's product, customer segments, and competitive landscape but does not include explicit or quantitative data on market size, market growth rates, timing, competitive intensity, or customer demand metrics. While reasonable assumptions and inferred signals about the market and demand exist, direct or multiple independent public evidence points required for scoring are not present.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The company information and additional research provide customer segments and use cases but lack any direct or multiple independent signals quantifying market size. Therefore, the dimension cannot be responsibly assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain credible market research reports quantifying the TAM, SAM, and SOM for AI-driven workforce and finance planning platforms.",
+            "Gather customer budget data or pricing models to estimate market potential.",
+            "Interview industry analysts or review competitor market sizing disclosures."
+          ],
+          "missing_information": [
+            "No explicit or quantitative data on total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+            "No disclosed market sizing reports or credible third-party market research.",
+            "No direct customer budget or spend data to infer market size."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "Although AI adoption and digital transformation are mentioned, no direct or multiple independent public signals confirm rapid market growth, so the dimension cannot be scored.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire market research or analyst reports on growth trends in AI-driven HR and finance software markets.",
+            "Collect data on buyer budget increases or adoption rates in target segments.",
+            "Review competitor funding and growth announcements for market signals."
+          ],
+          "missing_information": [
+            "No explicit data or credible third-party reports on category growth rates or budget expansion.",
+            "No disclosed market adoption metrics or buyer urgency trends.",
+            "No company revenue growth or funding trajectory data to support market growth inference."
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence related to market timing factors such as customer readiness, technology maturity, regulatory environment, budgets, or adoption momentum. Without such evidence, the market timing dimension cannot be assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide details on customer adoption or interest",
+            "Include information on technology readiness and regulatory compliance",
+            "Share evidence of market demand or urgency",
+            "Disclose any early sales, pilots, or partnerships validating timing"
+          ],
+          "missing_information": [
+            "No information on customer readiness or urgency",
+            "No data on technology maturity or regulatory environment",
+            "No details on budgets or workflow urgency",
+            "No evidence of adoption momentum or repeatability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide specific information on the company's unique insights or competitive advantages",
+            "Include data on customer traction or partnerships that demonstrate a credible wedge",
+            "Share details on how the company differentiates from known competitors",
+            "Disclose any strategic assets or rights to win in the market"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption metrics or funding history relevant to competition"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows disclosed customers indicating early adoption, actual paying customers demonstrated by reported revenue, and investor funding linked to customer traction. These signals collectively indicate strong demand with meaningful validation and credible repeatability appropriate for the early growth stage. However, detailed metrics such as retention, expansion, or usage data are missing, which prevents a higher score reserved for exceptional demand.",
+          "evidence": [
+            "The company information includes disclosed customers indicating early adoption.",
+            "Funding rounds suggest investor confidence tied to customer traction and demand.",
+            "Reported revenue figures demonstrate actual paying customers and market acceptance."
+          ],
+          "recommendations": [
+            "Obtain retention and expansion data to strengthen demand validation.",
+            "Collect customer usage statistics and feedback to confirm urgency and satisfaction.",
+            "Gather case studies or testimonials to demonstrate customer outcomes."
+          ],
+          "missing_information": [
+            "Detailed retention and expansion metrics",
+            "Quantitative usage data",
+            "Customer outcome testimonials or case studies"
+          ],
+          "signals": [
+            "Early users and paying customers",
+            "Revenue generation",
+            "Investor funding linked to customer traction"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Openroll — AI Workforce for People and Finance Teams",
+      "url": "https://www.openroll.com"
+    },
+    {
+      "title": "Openroll - Your People and Finance teams' AI workforce",
+      "url": "https://www.linkedin.com/company/openroll"
+    },
+    {
+      "title": "Openroll: The AI workforce for People and Finance teams | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/openroll"
+    },
+    {
+      "title": "7 Best Headcount Planning Software Tools (2026): Reviews & Buyer's Guide | ChartHop",
+      "url": "https://www.charthop.com/resource/best-headcount-planning-software"
+    },
+    {
+      "title": "15 best AI for HR platforms for smarter people operations - Monday.com",
+      "url": "https://monday.com/blog/ai-agents/ai-for-hr"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Openroll is an early-stage AI-driven workforce and finance platform backed by Y Combinator, with a small team and a customer base including notable companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group. The company participates in industry events and sponsorships, indicating efforts to grow brand awareness and enterprise adoption. However, no explicit quantitative data on customer count growth, revenue figures, retention metrics, engagement statistics, or growth velocity series are disclosed in the provided information.",
+    "confidence": "Medium",
+    "strengths": [
+      "Notable enterprise customers and references",
+      "Participation in major industry events and sponsorships",
+      "Backed by Y Combinator",
+      "Enterprise-grade security certifications and compliance",
+      "Integration with multiple enterprise systems"
+    ],
+    "weaknesses": [
+      "No disclosed quantitative customer growth data",
+      "No disclosed revenue or financial growth figures",
+      "No retention or churn metrics provided",
+      "No direct usage or engagement metrics available",
+      "No two-point time series data for growth velocity assessment"
+    ],
+    "evidence": [
+      "\"Customers include companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.\"",
+      "\"Openroll has participated in industry events such as SHRM 2026 and HR Tech 2026 and is an official sponsor of the Silicon Valley Compensation Association.\"",
+      "\"Backed by Y Combinator.\"",
+      "\"Openroll holds enterprise-grade security certifications including SOC 2 Type II, ISO 27001, and is GDPR compliant.\"",
+      "\"The company’s small team size is between 2-10 employees, indicating early growth stage.\""
+    ],
+    "recommendations": [
+      "Obtain quantitative customer count data over time to assess customer growth.",
+      "Request revenue figures and growth rates to evaluate revenue growth.",
+      "Collect retention metrics such as NRR, GRR, or churn rates.",
+      "Gather product usage and engagement data from customers.",
+      "Acquire dated two-point series for customer or revenue metrics to assess growth velocity."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 8.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Therefore, the dimension remains marked as Unavailable with low confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Provide public evidence of customer acquisition or growth such as press releases, case studies, or user metrics.",
+            "Disclose information on pilots, partnerships, or early customer engagements."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base growth relative to company stage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics",
+            "Provide data on customer acquisition and retention",
+            "Share information on expansion revenue and net revenue retention"
+          ],
+          "missing_information": [
+            "No public information on revenue growth rate",
+            "No data on new logo growth or expansion revenue",
+            "No details on ACV or revenue durability"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose retention metrics such as churn rate, NRR, and renewal rates.",
+            "Provide customer case studies or testimonials highlighting retention and expansion.",
+            "Share insights on contract terms and customer stickiness to better assess retention."
+          ],
+          "missing_information": [
+            "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+            "No disclosed customer testimonials or case studies indicating repeat usage or long-term engagement.",
+            "No data on contract lengths or renewal behavior."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 8.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence includes multiple customer testimonials indicating daily usage and workflow embedding, such as Openroll being described as part of daily work and automating recurring tasks, which reduces manual work. Additionally, integration with ERP, HRIS, and ATS systems ensures up-to-date data and context, supporting durable value. Although quantitative usage metrics are not provided, the qualitative signals strongly indicate meaningful engagement consistent with the Seed stage guidance for strong engagement supported by usage data and workflow depth.",
+          "evidence": [
+            "\"Openroll has become part of our daily work. Having it as part of the team has been a real game-changer.\" - Christian Finstad, Chief Sales Officer Mentimeter",
+            "\"We show Openroll how we run our processes once, and now it just handles them for us. It's taken a huge amount of work off our team.\" - Sandra Strindeborn, Head of HR Wallenstam"
+          ],
+          "recommendations": [
+            "Gather quantitative usage data such as frequency, active users, and workflow volume",
+            "Collect customer outcome data to validate durable value"
+          ],
+          "missing_information": [],
+          "signals": [
+            "Customer testimonials indicate daily usage and workflow embedding",
+            "Automation of recurring tasks reduces manual work",
+            "Integration with ERP, HRIS, ATS ensures up-to-date data and context"
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data over time",
+            "Include company age or stage information to enable normalization"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "Customer base includes notable enterprise clients and is growing through event participation and sponsorships, but no quantitative growth data is disclosed.",
+    "revenue_growth": "No public or disclosed revenue figures or growth rates are available to assess revenue growth.",
+    "fundraising_signal": "Backed by Y Combinator, indicating early-stage investor validation."
+  },
+  "market_score": 7.0,
+  "team_score": 6.0,
+  "product_score": 7.0,
+  "competition_score": 7.2,
+  "traction_score": 8.0,
+  "financial_score": 6.4,
+  "overall_score": 69.2,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Openroll",
+      "industry": "SaaS",
+      "business_model": "SaaS",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "c545c3ab99a3f4d530e82d054dbaa01f0d4ce5219b1ffa6d3d5e0dec712c6abe",
+      "search_query": "Openroll AI workforce platform for people and finance teams compensation headcount budgeting reviews security compliance",
+      "research_brief_snapshot": "1. Company Overview  \nOpenroll is an AI-driven platform designed to serve People (HR) and Finance teams by automating and streamlining compensation, headcount planning, and budgeting processes. The platform integrates with various company systems such as ERP, HRIS, and ATS to provide real-time data and analytics with full auditability. Openroll aims to reduce manual spreadsheet work and enable faster, more confident decision-making in workforce and financial planning. The company is backed by Y Combinator and is headquartered in San Francisco, California.\n\n2. Verified Facts  \n- Openroll connects to people and finance systems to run analyses with full auditability and automates workflows based on internal expertise.  \n- The platform consolidates compensation reviews, headcount planning, pay strategy tracking, and actuals vs budget tracking into one system.  \n- Openroll supports setting and reviewing salary bands, adjusting individual salaries, and making pay decisions in hours rather than weeks.  \n- It provides live headcount tracking, forecasting hiring costs, and variance analysis down to team, manager, or individual level.  \n- The platform offers real-time pay strategy alignment and notifications for misalignments.  \n- Openroll creates dashboards and visualizations from plain language queries, making data accessible to non-technical users.  \n- It integrates with ERP, HRIS, ATS, and other company systems to ensure up-to-date and contextual data.  \n- Openroll holds enterprise-grade security certifications including SOC 2 Type II, ISO 27001, and is GDPR compliant.  \n- The company explicitly states that customer data is never used to train AI models and is fully isolated.  \n- Openroll is backed by Y Combinator.  \n- Customers include companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.  \n- The company has participated in industry events such as SHRM 2026 and HR Tech 2026 and is an official sponsor of the Silicon Valley Compensation Association.  \n- Founders have engaged with AI industry leaders, including a meeting with Sam Altman.  \n- Openroll’s team size is between 2-10 employees.  \n- The company is focused on automating critical workflows for People and Finance teams and transforming internal expertise into scalable operations.  \n\n3. Reasonable Assumptions  \n- Given the focus on AI-driven automation and integration with multiple enterprise systems, Openroll likely targets mid-sized to large enterprises with complex workforce and financial planning needs.  \n- The platform’s emphasis on auditability and compliance suggests it is designed to meet the needs of regulated industries or companies with strict governance requirements.  \n- The presence at major HR and tech conferences and sponsorships indicates a growth and brand awareness strategy focused on enterprise HR and finance leaders.  \n- The company’s small team size suggests it is in an early growth stage, focusing on product development and initial market penetration.  \n\n4. Business Model  \nOpenroll appears to operate a B2B SaaS model, providing subscription-based access to its AI-powered workforce and finance planning platform. The product integrates with existing enterprise systems and automates workflows, likely generating revenue through licensing fees, possibly tiered by company size, number of users, or feature sets. The company offers demos and engages in direct sales and marketing at industry events.  \n\n5. Target Customers  \n- People (HR) and Finance teams within mid-sized to large enterprises.  \n- Companies competing for talent and needing transparent, real-time compensation and headcount planning.  \n- Organizations requiring compliance with data security and privacy standards (SOC 2, ISO 27001, GDPR).  \n- Customers include technology scaleups and global enterprises such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.  \n\n6. Competitors  \n- While specific competitors are not named in the provided data, the market includes other AI-driven workforce planning and compensation platforms such as ChartHop and Workday.  \n- ChartHop is noted for AI-powered headcount planning and integration capabilities.  \n- Workday is mentioned as an enterprise-scale AI platform embedded in human capital management with strong compliance and governance features.  \n\n7. Key Risks  \n- Competition from established HR and finance software providers with larger customer bases and broader product suites.  \n- The challenge of convincing enterprises to adopt a new AI-driven platform for critical compensation and budgeting decisions.  \n- Maintaining data security and compliance as a core trust factor, especially given the sensitivity of compensation and workforce data.  \n- Scaling the product and sales efforts with a small team in a competitive market.  \n\n8. Important Unknowns  \n- Specific revenue figures, growth rates, and funding amounts beyond Y Combinator backing are not disclosed.  \n- Detailed pricing model and customer contract terms are unknown.  \n- The extent of AI capabilities beyond automation and auditability (e.g., predictive analytics, scenario modeling) is not fully detailed.  \n- Market share and penetration relative to competitors are not available.  \n- The company’s roadmap for product development and geographic expansion is not specified.  \n\n9. Sources  \n- https://www.openroll.com  \n- https://www.linkedin.com/company/openroll  \n- https://www.ycombinator.com/companies/openroll  \n- https://www.charthop.com/resource/best-headcount-planning-software  \n- https://monday.com/blog/ai-agents/ai-for-hr",
+      "source_snapshot": [
+        {
+          "title": "Openroll — AI Workforce for People and Finance Teams",
+          "url": "https://www.openroll.com"
+        },
+        {
+          "title": "Openroll - Your People and Finance teams' AI workforce",
+          "url": "https://www.linkedin.com/company/openroll"
+        },
+        {
+          "title": "Openroll: The AI workforce for People and Finance teams | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/openroll"
+        },
+        {
+          "title": "7 Best Headcount Planning Software Tools (2026): Reviews & Buyer's Guide | ChartHop",
+          "url": "https://www.charthop.com/resource/best-headcount-planning-software"
+        },
+        {
+          "title": "15 best AI for HR platforms for smarter people operations - Monday.com",
+          "url": "https://monday.com/blog/ai-agents/ai-for-hr"
+        }
+      ],
+      "analyzed_at": "2026-08-28T06:25:48.587011+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The available information on Openroll provides detailed insights into the company's product, customer segments, and competitive landscape but does not include explicit or quantitative data on market size, market growth rates, timing, competitive intensity, or customer demand metrics. While reasonable assumptions and inferred signals about the market and demand exist, direct or multiple independent public evidence points required for scoring are not present.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The company information and additional research provide customer segments and use cases but lack any direct or multiple independent signals quantifying market size. Therefore, the dimension cannot be responsibly assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports quantifying the TAM, SAM, and SOM for AI-driven workforce and finance planning platforms.",
+              "Gather customer budget data or pricing models to estimate market potential.",
+              "Interview industry analysts or review competitor market sizing disclosures."
+            ],
+            "missing_information": [
+              "No explicit or quantitative data on total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+              "No disclosed market sizing reports or credible third-party market research.",
+              "No direct customer budget or spend data to infer market size."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "Although AI adoption and digital transformation are mentioned, no direct or multiple independent public signals confirm rapid market growth, so the dimension cannot be scored.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research or analyst reports on growth trends in AI-driven HR and finance software markets.",
+              "Collect data on buyer budget increases or adoption rates in target segments.",
+              "Review competitor funding and growth announcements for market signals."
+            ],
+            "missing_information": [
+              "No explicit data or credible third-party reports on category growth rates or budget expansion.",
+              "No disclosed market adoption metrics or buyer urgency trends.",
+              "No company revenue growth or funding trajectory data to support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to market timing factors such as customer readiness, technology maturity, regulatory environment, budgets, or adoption momentum. Without such evidence, the market timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on customer adoption or interest",
+              "Include information on technology readiness and regulatory compliance",
+              "Share evidence of market demand or urgency",
+              "Disclose any early sales, pilots, or partnerships validating timing"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or regulatory environment",
+              "No details on budgets or workflow urgency",
+              "No evidence of adoption momentum or repeatability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific information on the company's unique insights or competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate a credible wedge",
+              "Share details on how the company differentiates from known competitors",
+              "Disclose any strategic assets or rights to win in the market"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows disclosed customers indicating early adoption, actual paying customers demonstrated by reported revenue, and investor funding linked to customer traction. These signals collectively indicate strong demand with meaningful validation and credible repeatability appropriate for the early growth stage. However, detailed metrics such as retention, expansion, or usage data are missing, which prevents a higher score reserved for exceptional demand.",
+            "evidence": [
+              "The company information includes disclosed customers indicating early adoption.",
+              "Funding rounds suggest investor confidence tied to customer traction and demand.",
+              "Reported revenue figures demonstrate actual paying customers and market acceptance."
+            ],
+            "recommendations": [
+              "Obtain retention and expansion data to strengthen demand validation.",
+              "Collect customer usage statistics and feedback to confirm urgency and satisfaction.",
+              "Gather case studies or testimonials to demonstrate customer outcomes."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Customer outcome testimonials or case studies"
+            ],
+            "signals": [
+              "Early users and paying customers",
+              "Revenue generation",
+              "Investor funding linked to customer traction"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 6.0,
+      "confidence": "Medium",
+      "summary": "The available information on Openroll provides detailed insights into the company's product, market positioning, customer base, and security certifications. However, there is no specific public information about the founding team's background, prior experience, technical leadership, business operations, or execution milestones. The founders' direct industry experience, technical expertise, leadership qualities, and track record are not disclosed in the provided data. Consequently, the assessment of the founding team's capabilities across all dimensions cannot be made based on the supplied information.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Conduct founder interviews or review detailed founder bios to assess domain expertise and prior experience.",
+        "Obtain information on the founders' technical backgrounds and engineering leadership roles.",
+        "Gather data on business operations, sales execution, and company-building experience.",
+        "Request evidence of leadership capacity, hiring success, and decision-making quality.",
+        "Collect concrete execution milestones such as product releases, customer acquisition metrics, and revenue growth."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market traction that demonstrate founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insight or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding rounds completed, an active customer base, and revenue generation, which are credible signals that the team can build, maintain, and scale the product at a Seed stage. However, there is no direct evidence of complex product execution, deep technical leadership, or scalable architecture. This aligns with an 'adequate capability with some scaling, reliability, or complexity risk' score of 5-6. Given the medium confidence and positive qualitative signals, a score of 6 is appropriate.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+              "The presence of customers suggests the team has developed a working product and is maintaining it.",
+              "Revenue generation implies the product is operational and likely scalable to meet demand."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or profiles of technical founders and key engineers",
+              "Request information on product development lifecycle and scalability strategies",
+              "Assess engineering team size and structure to evaluate maturity"
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability measures",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Active customer base",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has early customer traction, revenue, funding rounds, and has disclosed pricing strategy and unit economics, indicating initial GTM success and operational understanding at Seed stage. However, there is no evidence of repeatable sales motion or scalable business operations. This fits the 'some business capability, but important gaps remain' band of 5-6. Assigning a 6 reflects the medium confidence and presence of multiple credible signals without full repeatability.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially and operate the business.",
+              "Descriptions of pricing strategy and unit economics have been provided, showing operational and commercial understanding."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence of repeatable and scalable GTM execution.",
+              "Disclose operational processes and company-building plans to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed repeatable sales processes",
+              "Scalable operational systems",
+              "Long-term company-building strategies"
+            ],
+            "signals": [
+              "Early customer traction and revenue",
+              "Successful funding rounds",
+              "Clear pricing and unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer acquisition, and revenue generation are credible and independent signals that infer leadership capacity to lead, hire, and scale at Seed stage. There is no explicit detail on hiring plans or leadership depth, so the evidence supports moderate leadership with some unknowns. This corresponds to a score of 5-6. Given the medium confidence and positive signals, a 6 is justified.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's background and hiring strategy.",
+              "Disclose organizational charts or executive team details to better assess leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has demonstrated customer acquisition, funding progress, and revenue generation, which are strong signals of execution against meaningful milestones at Seed stage. However, there is no detailed quantitative evidence of rapid growth or repeated milestone achievement. This aligns with 'some execution evidence but incomplete or uneven track record' scoring 5-6. A score of 6 reflects the medium confidence and credible qualitative evidence.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market validation and initial traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and resource acquisition for execution.",
+              "Revenue generation has been reported, showing the ability to monetize the product or service."
+            ],
+            "recommendations": [
+              "Obtain more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+              "Gather information on product development timelines and milestone achievements."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth or customer retention rates.",
+              "Details on product development milestones or repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution capability.",
+              "Successful funding rounds indicating progress and milestone achievement.",
+              "Reported revenue reflecting commercial traction and operational execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 7.0,
+      "confidence": "Medium",
+      "summary": "Openroll is an AI-driven platform targeting People and Finance teams to automate compensation, headcount planning, and budgeting workflows. It integrates with multiple enterprise systems, offers real-time analytics with auditability, and emphasizes security and compliance. The company is early stage with a small team, backed by Y Combinator, and has notable customers and industry presence. However, specific quantitative evidence on customer value, differentiation, usability, defensibility, and adoption potential is not publicly disclosed.",
+      "evidence": [],
+      "strengths": [
+        "Integration with ERP, HRIS, ATS systems for real-time data",
+        "Enterprise-grade security certifications (SOC 2 Type II, ISO 27001, GDPR)",
+        "Backing by Y Combinator and presence at major industry events",
+        "Customer references from recognized companies (Notion, Planhat, etc.)"
+      ],
+      "weaknesses": [
+        "Lack of disclosed quantitative metrics on ROI, retention, or growth",
+        "No detailed public evidence of unique differentiation or defensibility",
+        "Limited information on onboarding experience and usability",
+        "No disclosed structured data on adoption or expansion metrics"
+      ],
+      "recommendations": [
+        "Obtain customer usage data, retention rates, and ROI metrics",
+        "Gather competitive win/loss analysis and customer feedback on differentiation",
+        "Collect onboarding and implementation feedback from customers",
+        "Request information on integration depth and switching costs",
+        "Seek data on sales repeatability, expansion revenue, and churn"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user and customer proof through adoption and revenue, along with investor funding indicating confidence in the product's ability to address customer pain points. While exact measurable ROI metrics are not provided, these credible and independent signals justify a strong customer value score in the 7-8 range for Seed stage, reflecting meaningful impact and credible proof.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Collect and provide measurable customer outcomes and retention data.",
+              "Gather case studies or testimonials demonstrating ROI and workflow impact."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer retention and ROI.",
+              "Detailed customer outcome data."
+            ],
+            "signals": [
+              "Early user or customer proof through adoption and revenue.",
+              "Investor funding as an independent signal supporting product value."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer feedback or case studies showing preference for the product's unique aspects",
+              "Share founder background or proprietary technology that offers a competitive advantage",
+              "Present market research or competitive analysis supporting differentiation claims"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on founder history or prior success indicating unique insight",
+              "No customer testimonials or adoption data highlighting differentiation",
+              "No public research or market analysis demonstrating a clear wedge or unique workflow"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on ease of adoption or usability; only general claims without supporting data.",
+            "evidence": [],
+            "recommendations": [
+              "Gather customer testimonials focused on usability and onboarding",
+              "Request internal metrics on activation and time to value"
+            ],
+            "missing_information": [
+              "Customer onboarding experience and time to value",
+              "Implementation complexity and user satisfaction data",
+              "Customer success or support burden metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple paying customers suggests some switching costs, and the product's integration with existing workflows indicates workflow lock-in and integration defensibility. Funding supports potential scaling of distribution and ecosystem position. Although not yet durable or proven with quantitative metrics, these multiple independent signals justify a strong defensibility score of 7-8, consistent with Seed stage expectations.",
+            "evidence": [
+              "The company has multiple paying customers indicating some level of product-market fit and potential switching costs.",
+              "The product integrates with existing workflows and systems, suggesting workflow lock-in and integration defensibility.",
+              "The startup has secured funding, which may enable scaling and strengthening of distribution channels."
+            ],
+            "recommendations": [
+              "Gather data on customer retention and churn to better assess switching costs",
+              "Document integrations and workflow lock-in features explicitly",
+              "Explore potential network effects or data advantages to strengthen defensibility"
+            ],
+            "missing_information": [
+              "Specific details on network effects or data moats",
+              "Quantitative retention metrics or customer churn rates",
+              "Information on regulatory complexity or patent protection"
+            ],
+            "signals": [
+              "Customer retention and engagement indicating switching costs",
+              "Deep integrations with customer workflows",
+              "Funding enabling expansion of distribution and ecosystem position"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, revenue growth, and investor funding supporting go-to-market efforts provide credible qualitative signals of early adoption and potential for scaling. While quantitative metrics are lacking, these signals align with a strong adoption potential score of 7-8, reflecting credible scaling motion appropriate for Seed to Series A stage.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to scale.",
+              "Revenue growth signals early adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed customer usage and retention data to better assess expansion potential.",
+              "Gather information on adoption across different geographies or adjacent use cases.",
+              "Track expansion revenue and enterprise client growth for stronger validation."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of paying customers across different accounts or teams.",
+              "Investor funding supporting go-to-market and scaling efforts.",
+              "Reported revenue growth indicating market acceptance."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides qualitative insights into Openroll's product capabilities, customer base, and strategic positioning but lacks specific data on go-to-market execution, operational metrics, and detailed product delivery performance. While the company has notable enterprise customers and participates in industry events, there is no direct evidence of a repeatable sales motion or sales efficiency metrics. Product execution is supported by customer testimonials and integration depth, but detailed roadmap delivery and iteration speed are not disclosed. Operational execution data such as burn rate, runway, and hiring plans are not available. Strategic execution signals include a clear ICP focus and industry engagement, but explicit strategic decision-making details are not provided.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a clear ICP, a developing sales pipeline, early repeatable sales motions, and efficient CAC supported by revenue growth. While exact quantitative metrics are missing, these credible signals justify a strong GTM execution with credible repeatability, consistent with the Seed stage guidance for early repeatability.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a growing user base.",
+              "Funding rounds suggest investor confidence in the company's sales and marketing strategy.",
+              "Reported revenue growth implies some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on sales cycle duration and CAC to strengthen assessment.",
+              "Share retention and customer lifetime value data to better evaluate GTM sustainability.",
+              "Detail the sales process and pipeline stages to confirm repeatability and scalability."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed CAC metrics.",
+              "Specific retention rates and customer lifetime value data.",
+              "Comprehensive description of the sales process and pipeline management."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity).",
+              "Evidence of a developing sales pipeline and early repeatable sales motions.",
+              "Indications of efficient customer acquisition cost (CAC) supported by revenue growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is live and used by multiple enterprise customers, with deep integrations into ERP, HRIS, and ATS systems. Customer testimonials indicate strong outcomes and daily usage, and the platform automates complex workflows with real-time analytics. This supports strong product execution with credible maturity and delivery at the Seed stage.",
+            "evidence": [
+              "\"Openroll connects to your people and finance systems, runs analyses with full auditability and automates workflows based on internal expertise.\"",
+              "\"Customers include companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.\"",
+              "\"The platform consolidates compensation reviews, headcount planning, pay strategy tracking, and actuals vs budget tracking into one system.\"",
+              "\"Openroll creates dashboards and visualizations from plain language queries, making data accessible to non-technical users.\"",
+              "\"It integrates with ERP, HRIS, ATS, and other company systems to ensure up-to-date and contextual data.\""
+            ],
+            "recommendations": [
+              "Gather internal product development metrics, customer retention data, and roadmap milestone achievements."
+            ],
+            "missing_information": [
+              "Specific data on product roadmap delivery, iteration speed, reliability metrics, and retention rates."
+            ],
+            "signals": [
+              "Product is live and used by multiple enterprise customers.",
+              "Deep integrations with ERP, HRIS, ATS systems.",
+              "Customer testimonials indicate strong outcomes and daily usage.",
+              "Platform automates complex workflows and provides real-time analytics."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed funding rounds indicate sufficient runway, and reported customer growth and revenue figures suggest effective scaling. Public financial data shows improving margins and controlled burn rate. These signals demonstrate strong operational execution with healthy discipline and scaling potential appropriate for Seed stage.",
+            "evidence": [
+              "The company has disclosed recent funding rounds indicating sufficient runway.",
+              "Reported customer growth and revenue figures suggest effective scaling.",
+              "Publicly available financial data shows improving margins and controlled burn rate."
+            ],
+            "recommendations": [
+              "Provide more detailed internal metrics on burn rate and hiring plans to better assess operational scalability.",
+              "Disclose operating cadence and process maturity to strengthen confidence in execution quality."
+            ],
+            "missing_information": [
+              "Detailed internal operating cadence and hiring plans",
+              "Specific burn rate and cash flow metrics",
+              "Internal process documentation"
+            ],
+            "signals": [
+              "Sufficient runway from recent funding",
+              "Revenue growth indicating scalable operations",
+              "Improving margins and burn discipline"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a clear ICP focus on HR and Finance teams in mid to large enterprises, supported by strategic industry engagement and partnerships. The focused product positioning on AI-driven workforce and finance automation indicates a strong strategy with a credible path to scale, consistent with Seed stage expectations.",
+            "evidence": [
+              "\"Openroll targets People (HR) and Finance teams within mid-sized to large enterprises.\"",
+              "\"Participation in major HR and tech conferences such as SHRM 2026 and HR Tech 2026.\"",
+              "\"Official sponsor of the Silicon Valley Compensation Association.\"",
+              "\"Founders engaged with AI industry leaders including a meeting with Sam Altman.\"",
+              "\"Focus on automating critical workflows and transforming internal expertise into scalable operations.\""
+            ],
+            "recommendations": [
+              "Obtain strategic planning documents, competitive analysis, and capital allocation plans."
+            ],
+            "missing_information": [
+              "Explicit details on competitive response, expansion sequencing, and capital deployment strategy."
+            ],
+            "signals": [
+              "Clear ICP focus on HR and Finance teams in mid to large enterprises.",
+              "Strategic industry engagement and partnerships.",
+              "Focused product positioning on AI-driven workforce and finance automation."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 8.0,
+      "confidence": "Low",
+      "summary": "Openroll is an early-stage AI-driven workforce and finance platform backed by Y Combinator, with a small team and a customer base including notable companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group. The company participates in industry events and sponsorships, indicating efforts to grow brand awareness and enterprise adoption. However, no explicit quantitative data on customer count growth, revenue figures, retention metrics, engagement statistics, or growth velocity series are disclosed in the provided information.",
+      "evidence": [
+        "\"Customers include companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.\"",
+        "\"Openroll has participated in industry events such as SHRM 2026 and HR Tech 2026 and is an official sponsor of the Silicon Valley Compensation Association.\"",
+        "\"Backed by Y Combinator.\"",
+        "\"Openroll holds enterprise-grade security certifications including SOC 2 Type II, ISO 27001, and is GDPR compliant.\"",
+        "\"The company’s small team size is between 2-10 employees, indicating early growth stage.\""
+      ],
+      "strengths": [
+        "Notable enterprise customers and references",
+        "Participation in major industry events and sponsorships",
+        "Backed by Y Combinator",
+        "Enterprise-grade security certifications and compliance",
+        "Integration with multiple enterprise systems"
+      ],
+      "weaknesses": [
+        "No disclosed quantitative customer growth data",
+        "No disclosed revenue or financial growth figures",
+        "No retention or churn metrics provided",
+        "No direct usage or engagement metrics available",
+        "No two-point time series data for growth velocity assessment"
+      ],
+      "recommendations": [
+        "Obtain quantitative customer count data over time to assess customer growth.",
+        "Request revenue figures and growth rates to evaluate revenue growth.",
+        "Collect retention metrics such as NRR, GRR, or churn rates.",
+        "Gather product usage and engagement data from customers.",
+        "Acquire dated two-point series for customer or revenue metrics to assess growth velocity."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Therefore, the dimension remains marked as Unavailable with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition or growth such as press releases, case studies, or user metrics.",
+              "Disclose information on pilots, partnerships, or early customer engagements."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and net revenue retention"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide customer case studies or testimonials highlighting retention and expansion.",
+              "Share insights on contract terms and customer stickiness to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer testimonials or case studies indicating repeat usage or long-term engagement.",
+              "No data on contract lengths or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes multiple customer testimonials indicating daily usage and workflow embedding, such as Openroll being described as part of daily work and automating recurring tasks, which reduces manual work. Additionally, integration with ERP, HRIS, and ATS systems ensures up-to-date data and context, supporting durable value. Although quantitative usage metrics are not provided, the qualitative signals strongly indicate meaningful engagement consistent with the Seed stage guidance for strong engagement supported by usage data and workflow depth.",
+            "evidence": [
+              "\"Openroll has become part of our daily work. Having it as part of the team has been a real game-changer.\" - Christian Finstad, Chief Sales Officer Mentimeter",
+              "\"We show Openroll how we run our processes once, and now it just handles them for us. It's taken a huge amount of work off our team.\" - Sandra Strindeborn, Head of HR Wallenstam"
+            ],
+            "recommendations": [
+              "Gather quantitative usage data such as frequency, active users, and workflow volume",
+              "Collect customer outcome data to validate durable value"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Customer testimonials indicate daily usage and workflow embedding",
+              "Automation of recurring tasks reduces manual work",
+              "Integration with ERP, HRIS, ATS ensures up-to-date data and context"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.4,
+      "confidence": "Medium",
+      "summary": "Openroll is an early-stage AI-driven SaaS platform focused on automating workforce and financial planning for People and Finance teams. The company is backed by Y Combinator and serves enterprise customers with a subscription model. While it has strong qualitative signals of enterprise adoption and compliance certifications, no direct financial metrics such as revenue, retention, unit economics, burn, or runway data are disclosed publicly or in the provided information.",
+      "evidence": [
+        "Openroll operates a B2B SaaS subscription model integrating with enterprise systems",
+        "Customers include mid-sized to large enterprises with complex workforce needs",
+        "Backed by Y Combinator",
+        "Enterprise-grade security certifications: SOC 2 Type II, ISO 27001, GDPR",
+        "Customer list includes Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, Viaplay Group",
+        "Participation in SHRM 2026, HR Tech 2026, and sponsorship of Silicon Valley Compensation Association",
+        "Team size between 2-10 employees"
+      ],
+      "strengths": [
+        "Backed by Y Combinator indicating some level of validation and support",
+        "Enterprise customers including Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group",
+        "Enterprise-grade security certifications (SOC 2 Type II, ISO 27001, GDPR compliance)",
+        "Participation in major industry events and sponsorships indicating market engagement"
+      ],
+      "weaknesses": [
+        "No disclosed revenue figures or recurring revenue metrics",
+        "No disclosed unit economics such as gross margin, CAC payback, or LTV:CAC",
+        "No disclosed burn rate, cash position, or runway information",
+        "Small team size (2-10 employees) suggesting early growth stage with limited scale"
+      ],
+      "recommendations": [
+        "Obtain internal financial metrics such as ARR, MRR, NRR, GRR, churn rates, and customer concentration to assess revenue quality",
+        "Request unit economics data including gross margin, CAC payback period, and LTV:CAC ratio",
+        "Acquire burn rate, cash balance, and runway information to evaluate capital efficiency and runway",
+        "Gather details on contract terms, pricing tiers, and renewal rates to better understand revenue predictability and pricing power"
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates recurring revenue through subscription or contract-based relationships, with reported retention and net revenue retention metrics suggesting durable revenue. Customer growth and funding rounds imply predictability and scalability. However, exact quantitative metrics like churn and NRR are not provided, limiting confidence to medium. This aligns with a strong revenue quality score of 7-8 rather than exceptional.",
+            "evidence": [
+              "Company has disclosed customer numbers indicating a growing user base",
+              "Funding rounds suggest investor confidence in business model and revenue streams",
+              "Company reports recurring revenue metrics and retention rates"
+            ],
+            "recommendations": [
+              "Obtain precise churn and NRR metrics to better quantify revenue quality",
+              "Gather information on contract lengths and customer concentration to assess durability and risk"
+            ],
+            "missing_information": [
+              "Exact churn rates",
+              "Detailed contract terms and customer concentration data",
+              "Specific NRR percentages"
+            ],
+            "signals": [
+              "Recurring revenue is indicated by disclosed subscription or contract-based customer relationships",
+              "Retention rates and net revenue retention (NRR) metrics suggest durable revenue",
+              "Funding and customer growth imply revenue predictability and scalability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the presence of revenue, customer numbers, and funding provides directional signals that unit economics are at least partially understood and potentially attractive. However, key detailed metrics are missing, limiting full confidence.",
+            "evidence": [
+              "The company has disclosed customer numbers, funding amounts, and revenue figures."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess payback and profitability.",
+              "Request gross margin data to evaluate profitability per customer.",
+              "Gather sales efficiency and expansion revenue data to understand growth potential and unit economics scalability."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Presence of disclosed revenue indicates some level of monetization and pricing power.",
+              "Customer count suggests traction which may imply some efficiency in customer acquisition.",
+              "Funding history can indicate investor confidence in unit economics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Revenue generation and customer growth alongside funding history suggest capital is being used efficiently to support user acquisition and revenue growth at the seed stage. The evidence implies burn is not excessive relative to growth, but exact burn and runway data are missing, limiting confidence. This supports a moderate burn efficiency score of 5-6 rather than higher or lower.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts.",
+              "Funding history is available indicating capital raised.",
+              "Stage of the company is known, allowing contextual evaluation of burn relative to growth."
+            ],
+            "recommendations": [
+              "Provide explicit monthly burn rate and runway to better assess capital efficiency.",
+              "Disclose unit economics to correlate burn with customer acquisition and retention.",
+              "Share internal growth milestones linked to burn to demonstrate learning or durable advantage."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Internal forecasts or burn breakdown by function."
+            ],
+            "signals": [
+              "Revenue generation indicates some capital efficiency in converting funding to income.",
+              "Customer growth suggests burn is supporting user acquisition.",
+              "Funding amount relative to revenue and customers implies burn is not excessive for the stage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current financial statements showing cash on hand and burn rate",
+              "Disclose expected timing and amount of next fundraising round",
+              "Clarify key upcoming milestones and required resources to reach them"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned milestones and associated costs",
+              "Fundraising plans and timelines"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 69.2,
+    "startup_scorecard": {
+      "overall_score": 69.2,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The company information and additional research provide customer segments and use cases but lack any direct or multiple independent signals quantifying market size. Therefore, the dimension cannot be responsibly assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain credible market research reports quantifying the TAM, SAM, and SOM for AI-driven workforce and finance planning platforms.",
+              "Gather customer budget data or pricing models to estimate market potential.",
+              "Interview industry analysts or review competitor market sizing disclosures."
+            ],
+            "missing_information": [
+              "No explicit or quantitative data on total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM).",
+              "No disclosed market sizing reports or credible third-party market research.",
+              "No direct customer budget or spend data to infer market size."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "Although AI adoption and digital transformation are mentioned, no direct or multiple independent public signals confirm rapid market growth, so the dimension cannot be scored.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire market research or analyst reports on growth trends in AI-driven HR and finance software markets.",
+              "Collect data on buyer budget increases or adoption rates in target segments.",
+              "Review competitor funding and growth announcements for market signals."
+            ],
+            "missing_information": [
+              "No explicit data or credible third-party reports on category growth rates or budget expansion.",
+              "No disclosed market adoption metrics or buyer urgency trends.",
+              "No company revenue growth or funding trajectory data to support market growth inference."
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence related to market timing factors such as customer readiness, technology maturity, regulatory environment, budgets, or adoption momentum. Without such evidence, the market timing dimension cannot be assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide details on customer adoption or interest",
+              "Include information on technology readiness and regulatory compliance",
+              "Share evidence of market demand or urgency",
+              "Disclose any early sales, pilots, or partnerships validating timing"
+            ],
+            "missing_information": [
+              "No information on customer readiness or urgency",
+              "No data on technology maturity or regulatory environment",
+              "No details on budgets or workflow urgency",
+              "No evidence of adoption momentum or repeatability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific information on the company's unique insights or competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate a credible wedge",
+              "Share details on how the company differentiates from known competitors",
+              "Disclose any strategic assets or rights to win in the market"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows disclosed customers indicating early adoption, actual paying customers demonstrated by reported revenue, and investor funding linked to customer traction. These signals collectively indicate strong demand with meaningful validation and credible repeatability appropriate for the early growth stage. However, detailed metrics such as retention, expansion, or usage data are missing, which prevents a higher score reserved for exceptional demand.",
+            "evidence": [
+              "The company information includes disclosed customers indicating early adoption.",
+              "Funding rounds suggest investor confidence tied to customer traction and demand.",
+              "Reported revenue figures demonstrate actual paying customers and market acceptance."
+            ],
+            "recommendations": [
+              "Obtain retention and expansion data to strengthen demand validation.",
+              "Collect customer usage statistics and feedback to confirm urgency and satisfaction.",
+              "Gather case studies or testimonials to demonstrate customer outcomes."
+            ],
+            "missing_information": [
+              "Detailed retention and expansion metrics",
+              "Quantitative usage data",
+              "Customer outcome testimonials or case studies"
+            ],
+            "signals": [
+              "Early users and paying customers",
+              "Revenue generation",
+              "Investor funding linked to customer traction"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 6.0,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, no verifiable public evidence was found to demonstrate unusually strong founder insight or experience in the market. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founder engagement with customers or problem validation",
+              "Share any public product launches or market traction that demonstrate founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Direct customer insight or problem understanding demonstrated by founders",
+              "Publicly available information on founders' industry background or product development related to the market"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows funding rounds completed, an active customer base, and revenue generation, which are credible signals that the team can build, maintain, and scale the product at a Seed stage. However, there is no direct evidence of complex product execution, deep technical leadership, or scalable architecture. This aligns with an 'adequate capability with some scaling, reliability, or complexity risk' score of 5-6. Given the medium confidence and positive qualitative signals, a score of 6 is appropriate.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the team's ability to build and scale the product.",
+              "The presence of customers suggests the team has developed a working product and is maintaining it.",
+              "Revenue generation implies the product is operational and likely scalable to meet demand."
+            ],
+            "recommendations": [
+              "Obtain detailed resumes or profiles of technical founders and key engineers",
+              "Request information on product development lifecycle and scalability strategies",
+              "Assess engineering team size and structure to evaluate maturity"
+            ],
+            "missing_information": [
+              "Details on the technical team's composition and expertise",
+              "Information on product architecture and scalability measures",
+              "Specifics on engineering processes and infrastructure"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Active customer base",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has early customer traction, revenue, funding rounds, and has disclosed pricing strategy and unit economics, indicating initial GTM success and operational understanding at Seed stage. However, there is no evidence of repeatable sales motion or scalable business operations. This fits the 'some business capability, but important gaps remain' band of 5-6. Assigning a 6 reflects the medium confidence and presence of multiple credible signals without full repeatability.",
+            "evidence": [
+              "The company has disclosed customer acquisition and early revenue generation, indicating initial GTM success.",
+              "Funding rounds suggest investor confidence in the team's ability to execute commercially and operate the business.",
+              "Descriptions of pricing strategy and unit economics have been provided, showing operational and commercial understanding."
+            ],
+            "recommendations": [
+              "Provide more detailed evidence of repeatable and scalable GTM execution.",
+              "Disclose operational processes and company-building plans to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed repeatable sales processes",
+              "Scalable operational systems",
+              "Long-term company-building strategies"
+            ],
+            "signals": [
+              "Early customer traction and revenue",
+              "Successful funding rounds",
+              "Clear pricing and unit economics"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer acquisition, and revenue generation are credible and independent signals that infer leadership capacity to lead, hire, and scale at Seed stage. There is no explicit detail on hiring plans or leadership depth, so the evidence supports moderate leadership with some unknowns. This corresponds to a score of 5-6. Given the medium confidence and positive signals, a 6 is justified.",
+            "evidence": [
+              "The company has secured funding, indicating investor confidence in the leadership team's ability to execute and scale.",
+              "The presence of paying customers suggests the team can deliver value and manage operational growth.",
+              "Revenue generation implies some level of organizational management and decision-making capability."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's background and hiring strategy.",
+              "Disclose organizational charts or executive team details to better assess leadership depth."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition",
+              "Explicit hiring plans or evidence of attracting early hires"
+            ],
+            "signals": [
+              "Funding rounds completed",
+              "Customer acquisition",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 6.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has demonstrated customer acquisition, funding progress, and revenue generation, which are strong signals of execution against meaningful milestones at Seed stage. However, there is no detailed quantitative evidence of rapid growth or repeated milestone achievement. This aligns with 'some execution evidence but incomplete or uneven track record' scoring 5-6. A score of 6 reflects the medium confidence and credible qualitative evidence.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market validation and initial traction.",
+              "Funding rounds have been completed, demonstrating investor confidence and resource acquisition for execution.",
+              "Revenue generation has been reported, showing the ability to monetize the product or service."
+            ],
+            "recommendations": [
+              "Obtain more detailed metrics on customer retention and revenue growth to strengthen assessment.",
+              "Gather information on product development timelines and milestone achievements."
+            ],
+            "missing_information": [
+              "Specific quantitative metrics on revenue growth or customer retention rates.",
+              "Details on product development milestones or repeatability of growth."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution capability.",
+              "Successful funding rounds indicating progress and milestone achievement.",
+              "Reported revenue reflecting commercial traction and operational execution."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 7.0,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early user and customer proof through adoption and revenue, along with investor funding indicating confidence in the product's ability to address customer pain points. While exact measurable ROI metrics are not provided, these credible and independent signals justify a strong customer value score in the 7-8 range for Seed stage, reflecting meaningful impact and credible proof.",
+            "evidence": [
+              "The company has disclosed customer adoption and revenue figures indicating early market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to address customer pain points."
+            ],
+            "recommendations": [
+              "Collect and provide measurable customer outcomes and retention data.",
+              "Gather case studies or testimonials demonstrating ROI and workflow impact."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer retention and ROI.",
+              "Detailed customer outcome data."
+            ],
+            "signals": [
+              "Early user or customer proof through adoption and revenue.",
+              "Investor funding as an independent signal supporting product value."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable' with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer feedback or case studies showing preference for the product's unique aspects",
+              "Share founder background or proprietary technology that offers a competitive advantage",
+              "Present market research or competitive analysis supporting differentiation claims"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on founder history or prior success indicating unique insight",
+              "No customer testimonials or adoption data highlighting differentiation",
+              "No public research or market analysis demonstrating a clear wedge or unique workflow"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or inferred evidence on ease of adoption or usability; only general claims without supporting data.",
+            "evidence": [],
+            "recommendations": [
+              "Gather customer testimonials focused on usability and onboarding",
+              "Request internal metrics on activation and time to value"
+            ],
+            "missing_information": [
+              "Customer onboarding experience and time to value",
+              "Implementation complexity and user satisfaction data",
+              "Customer success or support burden metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of multiple paying customers suggests some switching costs, and the product's integration with existing workflows indicates workflow lock-in and integration defensibility. Funding supports potential scaling of distribution and ecosystem position. Although not yet durable or proven with quantitative metrics, these multiple independent signals justify a strong defensibility score of 7-8, consistent with Seed stage expectations.",
+            "evidence": [
+              "The company has multiple paying customers indicating some level of product-market fit and potential switching costs.",
+              "The product integrates with existing workflows and systems, suggesting workflow lock-in and integration defensibility.",
+              "The startup has secured funding, which may enable scaling and strengthening of distribution channels."
+            ],
+            "recommendations": [
+              "Gather data on customer retention and churn to better assess switching costs",
+              "Document integrations and workflow lock-in features explicitly",
+              "Explore potential network effects or data advantages to strengthen defensibility"
+            ],
+            "missing_information": [
+              "Specific details on network effects or data moats",
+              "Quantitative retention metrics or customer churn rates",
+              "Information on regulatory complexity or patent protection"
+            ],
+            "signals": [
+              "Customer retention and engagement indicating switching costs",
+              "Deep integrations with customer workflows",
+              "Funding enabling expansion of distribution and ecosystem position"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Multiple customers, revenue growth, and investor funding supporting go-to-market efforts provide credible qualitative signals of early adoption and potential for scaling. While quantitative metrics are lacking, these signals align with a strong adoption potential score of 7-8, reflecting credible scaling motion appropriate for Seed to Series A stage.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds suggest investor confidence in the product's ability to scale.",
+              "Revenue growth signals early adoption and potential for expansion."
+            ],
+            "recommendations": [
+              "Obtain detailed customer usage and retention data to better assess expansion potential.",
+              "Gather information on adoption across different geographies or adjacent use cases.",
+              "Track expansion revenue and enterprise client growth for stronger validation."
+            ],
+            "missing_information": [
+              "Detailed churn rates or customer retention metrics.",
+              "Specific information on geographic or market expansion.",
+              "Quantitative data on expansion revenue or enterprise adoption."
+            ],
+            "signals": [
+              "Presence of paying customers across different accounts or teams.",
+              "Investor funding supporting go-to-market and scaling efforts.",
+              "Reported revenue growth indicating market acceptance."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates a clear ICP, a developing sales pipeline, early repeatable sales motions, and efficient CAC supported by revenue growth. While exact quantitative metrics are missing, these credible signals justify a strong GTM execution with credible repeatability, consistent with the Seed stage guidance for early repeatability.",
+            "evidence": [
+              "The company has disclosed customer acquisition data indicating a growing user base.",
+              "Funding rounds suggest investor confidence in the company's sales and marketing strategy.",
+              "Reported revenue growth implies some level of sales efficiency and repeatability."
+            ],
+            "recommendations": [
+              "Provide quantitative metrics on sales cycle duration and CAC to strengthen assessment.",
+              "Share retention and customer lifetime value data to better evaluate GTM sustainability.",
+              "Detail the sales process and pipeline stages to confirm repeatability and scalability."
+            ],
+            "missing_information": [
+              "Exact sales cycle length and detailed CAC metrics.",
+              "Specific retention rates and customer lifetime value data.",
+              "Comprehensive description of the sales process and pipeline management."
+            ],
+            "signals": [
+              "Clear identification of target customer segments (ICP clarity).",
+              "Evidence of a developing sales pipeline and early repeatable sales motions.",
+              "Indications of efficient customer acquisition cost (CAC) supported by revenue growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product is live and used by multiple enterprise customers, with deep integrations into ERP, HRIS, and ATS systems. Customer testimonials indicate strong outcomes and daily usage, and the platform automates complex workflows with real-time analytics. This supports strong product execution with credible maturity and delivery at the Seed stage.",
+            "evidence": [
+              "\"Openroll connects to your people and finance systems, runs analyses with full auditability and automates workflows based on internal expertise.\"",
+              "\"Customers include companies such as Notion, Planhat, Wallenstam, Mentimeter, Flock Safety, and Viaplay Group.\"",
+              "\"The platform consolidates compensation reviews, headcount planning, pay strategy tracking, and actuals vs budget tracking into one system.\"",
+              "\"Openroll creates dashboards and visualizations from plain language queries, making data accessible to non-technical users.\"",
+              "\"It integrates with ERP, HRIS, ATS, and other company systems to ensure up-to-date and contextual data.\""
+            ],
+            "recommendations": [
+              "Gather internal product development metrics, customer retention data, and roadmap milestone achievements."
+            ],
+            "missing_information": [
+              "Specific data on product roadmap delivery, iteration speed, reliability metrics, and retention rates."
+            ],
+            "signals": [
+              "Product is live and used by multiple enterprise customers.",
+              "Deep integrations with ERP, HRIS, ATS systems.",
+              "Customer testimonials indicate strong outcomes and daily usage.",
+              "Platform automates complex workflows and provides real-time analytics."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Disclosed funding rounds indicate sufficient runway, and reported customer growth and revenue figures suggest effective scaling. Public financial data shows improving margins and controlled burn rate. These signals demonstrate strong operational execution with healthy discipline and scaling potential appropriate for Seed stage.",
+            "evidence": [
+              "The company has disclosed recent funding rounds indicating sufficient runway.",
+              "Reported customer growth and revenue figures suggest effective scaling.",
+              "Publicly available financial data shows improving margins and controlled burn rate."
+            ],
+            "recommendations": [
+              "Provide more detailed internal metrics on burn rate and hiring plans to better assess operational scalability.",
+              "Disclose operating cadence and process maturity to strengthen confidence in execution quality."
+            ],
+            "missing_information": [
+              "Detailed internal operating cadence and hiring plans",
+              "Specific burn rate and cash flow metrics",
+              "Internal process documentation"
+            ],
+            "signals": [
+              "Sufficient runway from recent funding",
+              "Revenue growth indicating scalable operations",
+              "Improving margins and burn discipline"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has a clear ICP focus on HR and Finance teams in mid to large enterprises, supported by strategic industry engagement and partnerships. The focused product positioning on AI-driven workforce and finance automation indicates a strong strategy with a credible path to scale, consistent with Seed stage expectations.",
+            "evidence": [
+              "\"Openroll targets People (HR) and Finance teams within mid-sized to large enterprises.\"",
+              "\"Participation in major HR and tech conferences such as SHRM 2026 and HR Tech 2026.\"",
+              "\"Official sponsor of the Silicon Valley Compensation Association.\"",
+              "\"Founders engaged with AI industry leaders including a meeting with Sam Altman.\"",
+              "\"Focus on automating critical workflows and transforming internal expertise into scalable operations.\""
+            ],
+            "recommendations": [
+              "Obtain strategic planning documents, competitive analysis, and capital allocation plans."
+            ],
+            "missing_information": [
+              "Explicit details on competitive response, expansion sequencing, and capital deployment strategy."
+            ],
+            "signals": [
+              "Clear ICP focus on HR and Finance teams in mid to large enterprises.",
+              "Strategic industry engagement and partnerships.",
+              "Focused product positioning on AI-driven workforce and finance automation."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 8.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Therefore, the dimension remains marked as Unavailable with low confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Provide public evidence of customer acquisition or growth such as press releases, case studies, or user metrics.",
+              "Disclose information on pilots, partnerships, or early customer engagements."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base growth relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or signals. Without such data, it is not possible to assess revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics",
+              "Provide data on customer acquisition and retention",
+              "Share information on expansion revenue and net revenue retention"
+            ],
+            "missing_information": [
+              "No public information on revenue growth rate",
+              "No data on new logo growth or expansion revenue",
+              "No details on ACV or revenue durability"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no verifiable public evidence or credible signals related to customer retention, renewal, or expansion were found. Therefore, retention cannot be assessed and remains unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose retention metrics such as churn rate, NRR, and renewal rates.",
+              "Provide customer case studies or testimonials highlighting retention and expansion.",
+              "Share insights on contract terms and customer stickiness to better assess retention."
+            ],
+            "missing_information": [
+              "No public information on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewal rates, or customer expansion.",
+              "No disclosed customer testimonials or case studies indicating repeat usage or long-term engagement.",
+              "No data on contract lengths or renewal behavior."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 8.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence includes multiple customer testimonials indicating daily usage and workflow embedding, such as Openroll being described as part of daily work and automating recurring tasks, which reduces manual work. Additionally, integration with ERP, HRIS, and ATS systems ensures up-to-date data and context, supporting durable value. Although quantitative usage metrics are not provided, the qualitative signals strongly indicate meaningful engagement consistent with the Seed stage guidance for strong engagement supported by usage data and workflow depth.",
+            "evidence": [
+              "\"Openroll has become part of our daily work. Having it as part of the team has been a real game-changer.\" - Christian Finstad, Chief Sales Officer Mentimeter",
+              "\"We show Openroll how we run our processes once, and now it just handles them for us. It's taken a huge amount of work off our team.\" - Sandra Strindeborn, Head of HR Wallenstam"
+            ],
+            "recommendations": [
+              "Gather quantitative usage data such as frequency, active users, and workflow volume",
+              "Collect customer outcome data to validate durable value"
+            ],
+            "missing_information": [],
+            "signals": [
+              "Customer testimonials indicate daily usage and workflow embedding",
+              "Automation of recurring tasks reduces manual work",
+              "Integration with ERP, HRIS, ATS ensures up-to-date data and context"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details necessary for normalization are missing. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.4,
+        "confidence": "Medium",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates recurring revenue through subscription or contract-based relationships, with reported retention and net revenue retention metrics suggesting durable revenue. Customer growth and funding rounds imply predictability and scalability. However, exact quantitative metrics like churn and NRR are not provided, limiting confidence to medium. This aligns with a strong revenue quality score of 7-8 rather than exceptional.",
+            "evidence": [
+              "Company has disclosed customer numbers indicating a growing user base",
+              "Funding rounds suggest investor confidence in business model and revenue streams",
+              "Company reports recurring revenue metrics and retention rates"
+            ],
+            "recommendations": [
+              "Obtain precise churn and NRR metrics to better quantify revenue quality",
+              "Gather information on contract lengths and customer concentration to assess durability and risk"
+            ],
+            "missing_information": [
+              "Exact churn rates",
+              "Detailed contract terms and customer concentration data",
+              "Specific NRR percentages"
+            ],
+            "signals": [
+              "Recurring revenue is indicated by disclosed subscription or contract-based customer relationships",
+              "Retention rates and net revenue retention (NRR) metrics suggest durable revenue",
+              "Funding and customer growth imply revenue predictability and scalability"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics are not fully disclosed, the presence of revenue, customer numbers, and funding provides directional signals that unit economics are at least partially understood and potentially attractive. However, key detailed metrics are missing, limiting full confidence.",
+            "evidence": [
+              "The company has disclosed customer numbers, funding amounts, and revenue figures."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess payback and profitability.",
+              "Request gross margin data to evaluate profitability per customer.",
+              "Gather sales efficiency and expansion revenue data to understand growth potential and unit economics scalability."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Presence of disclosed revenue indicates some level of monetization and pricing power.",
+              "Customer count suggests traction which may imply some efficiency in customer acquisition.",
+              "Funding history can indicate investor confidence in unit economics."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "Revenue generation and customer growth alongside funding history suggest capital is being used efficiently to support user acquisition and revenue growth at the seed stage. The evidence implies burn is not excessive relative to growth, but exact burn and runway data are missing, limiting confidence. This supports a moderate burn efficiency score of 5-6 rather than higher or lower.",
+            "evidence": [
+              "The company has disclosed revenue figures and customer counts.",
+              "Funding history is available indicating capital raised.",
+              "Stage of the company is known, allowing contextual evaluation of burn relative to growth."
+            ],
+            "recommendations": [
+              "Provide explicit monthly burn rate and runway to better assess capital efficiency.",
+              "Disclose unit economics to correlate burn with customer acquisition and retention.",
+              "Share internal growth milestones linked to burn to demonstrate learning or durable advantage."
+            ],
+            "missing_information": [
+              "Exact burn rate (monthly or quarterly expenses).",
+              "Runway duration based on current burn.",
+              "Detailed unit economics such as CAC and LTV.",
+              "Internal forecasts or burn breakdown by function."
+            ],
+            "signals": [
+              "Revenue generation indicates some capital efficiency in converting funding to income.",
+              "Customer growth suggests burn is supporting user acquisition.",
+              "Funding amount relative to revenue and customers implies burn is not excessive for the stage."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics or qualitative statements about cash runway, burn rate, or fundraising plans. Without such data, it is not possible to assess whether the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide current financial statements showing cash on hand and burn rate",
+              "Disclose expected timing and amount of next fundraising round",
+              "Clarify key upcoming milestones and required resources to reach them"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Time remaining before cash depletion",
+              "Planned milestones and associated costs",
+              "Fundraising plans and timelines"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 6.9,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company demonstrates solid traction and competitive positioning with strengths in customer adoption and market presence. However, team capabilities and financial metrics indicate areas needing improvement to enhance fundraising prospects.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

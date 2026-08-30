@@ -21,7 +21,20 @@ from dataclasses import dataclass, field
 from enum import Enum
 
 
-METHODOLOGY_VERSION = "v2-spec-2026-08-23"
+# Methodology V2.1 (Phase 10.8B, 2026-08-29): bumped from v2-spec-2026-08-23
+# after Phase 10.8's real-company blind validation
+# (docs/validation/SPS_REAL_COMPANY_VALIDATION_REPORT.md) and Phase 10.8A's
+# discrimination audit (docs/validation/SPS_DISCRIMINATION_AUDIT.md) found
+# concrete, code-level correctness and discrimination defects -- see
+# docs/validation/SPS_METHODOLOGY_V2_1_CHANGELOG.md for the full list of
+# what changed and why. The 28-dimension architecture itself (which
+# dimensions exist, their pillar/weight/scoring-mode) is UNCHANGED; this
+# version bump reflects anchor-band, inference-rule, evidence-provenance,
+# and research-input changes, not a new dimension set. Analyses produced
+# under v2-spec-2026-08-23 are historical V2 output and are never rewritten
+# to this version -- analysis_context.methodology_version is stamped at
+# analysis time and read back from storage for every existing record.
+METHODOLOGY_VERSION = "v2.1-spec-2026-08-29"
 CANONICAL_SPEC_PATH = "app/docs/SIE_Methodology_v2_Specification.md"
 CALIBRATION_CONTRACT_VERSION = "v2-calibration-rerun-2026-08-23"
 
@@ -29,7 +42,9 @@ CALIBRATION_CONTRACT_VERSION = "v2-calibration-rerun-2026-08-23"
 # below changes, independent of the methodology_version (dimension
 # architecture) itself changing. Lets provenance distinguish "same 28
 # dimensions, refined anchor" from "different dimension set entirely".
-ANCHOR_REGISTRY_VERSION = "v2-anchor-registry-2026-08-23"
+# Bumped for V2.1's Team/Execution anchor-band rewrite (Phase 10.8B, Parts
+# 6/8/9) and the confidence-score-cap mechanism (Part 11).
+ANCHOR_REGISTRY_VERSION = "v2.1-anchor-registry-2026-08-29"
 
 
 class ScoringMode(str, Enum):

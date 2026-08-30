@@ -27,8 +27,16 @@ def expect(condition: bool, message: str) -> None:
 
 COMPANY_TEXT = (
     "NovaLedger has 40 paying customers, MRR grew from $18,000 to "
-    "$61,000, and net revenue retention is 115%."
+    "$61,000, net revenue retention is 115%, and fintech deal volume in "
+    "its category grew 33% year-over-year."
 )
+# Methodology V2.1 (Phase 10.8B, Part 3): every specific number the fixture
+# evidence below cites must actually appear in COMPANY_TEXT above -- the
+# evidence-provenance guard (app/ai/evidence_provenance.py) now strips any
+# quoted evidence bullet whose number cannot be traced to the supplied
+# company text, exactly as it should for a real fabricated figure. The
+# "33% YoY growth" fact was added to COMPANY_TEXT above for this reason
+# (it did not appear in the original fixture, which predates the guard).
 
 # All five Market dimensions correctly assessed on the first try.
 INITIAL_EVIDENCE_JSON = json.dumps({

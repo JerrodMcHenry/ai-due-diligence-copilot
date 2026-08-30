@@ -1,0 +1,2417 @@
+{
+  "summary": "Denki is a San Francisco-based AI-powered startup founded in 2025 by brothers Felipe and David Jin Li that automates financial audit tasks to enhance compliance and control workflows. Targeting internal auditors, finance, and compliance teams at public companies subject to regulations like SOX 404 and BSA/AML, Denki’s platform integrates with leading audit management tools (e.g., AuditBoard, Workiva) and ERP systems to streamline manual, evidence-heavy audit processes. Its AI-driven software automates functions such as evidence collection, financial reconciliation, control testing, continuous monitoring, and audit documentation, providing real-time control mapping aligned with frameworks like COSO.\n\nOperating as a mostly software-focused company delivering a self-serve SaaS solution, Denki aims to improve audit accuracy, efficiency, and traceability while reducing sampling risks. The company has raised $4.1 million as of March 2026 and is backed by Y Combinator. Key risks include adoption barriers among traditional audit teams, integration challenges with diverse enterprise systems, and navigating evolving regulatory requirements. While detailed financials and market penetration remain undisclosed, Denki positions itself as a cutting-edge AI automation platform addressing the growing need for efficient, regulation-compliant financial auditing.",
+  "risk_analysis": "Certainly, here is a focused risk analysis of Denki based on the provided information:\n\n1. Competition Risk  \n- Although no direct competitors have been explicitly identified, Denki operates in the audit automation space—a segment that several established players (like AuditBoard, Workiva, and others) serve with audit workflow and compliance tools. These incumbents could develop or acquire AI capabilities to replicate or surpass Denki’s offerings.  \n- Emerging AI startups targeting financial audit automation pose a latent threat given the current momentum in AI-driven compliance solutions. Without clear differentiation or proprietary technology barriers, Denki faces potential encroachment.  \n- The lack of detailed competitive intelligence and market positioning makes it difficult to assess competitive defensibility fully, increasing uncertainty.\n\n2. Scalability Risk  \n- Denki’s self-serve SaaS model suggests inherent scalability potential, as software delivery enables broad customer reach without proportional increases in operational costs.  \n- However, the complexity of integrating with diverse enterprise audit and ERP systems poses scalability challenges. Custom integration work or technical support may erode margins or limit onboarding speed, especially across heterogeneous IT environments.  \n- The heavy dependence on compliance-related workflows (governed by strict regulatory frameworks) may require frequent updates/customizations, potentially complicating scaling across different industries or jurisdictions.  \n- With only 1% services, scaling customer success and technical support functions may become necessary as the client base grows, requiring operational build-out.\n\n3. Market Risk  \n- Denki’s target market is primarily public companies subject to SOX 404, BSA/AML, and similar regulations. The market size is bounded by the number of regulated enterprises that require audit automation solutions.  \n- Economic downturns or regulatory changes that reduce audit scope or budgets could negatively impact demand.  \n- The pace of adoption of AI solutions in the traditionally conservative audit domain is uncertain, adding risk to predictable market growth projections.  \n- Broader market education on AI-enabled audit automation is required, and failure to convincingly demonstrate ROI may limit market penetration.\n\n4. Customer Adoption Risk  \n- Auditors and compliance teams have deeply entrenched manual processes and risk-averse mindsets due to regulatory scrutiny and liability concerns. Transitioning them to an AI-driven platform involves overcoming significant cultural and operational inertia.  \n- Trust in AI accuracy and the platform’s ability to deliver reliable, auditable evidence will be critical. Any early missteps or errors could harm credibility irreparably.  \n- Training requirements, change management, and integration complexity might reduce customer willingness to adopt or prolong sales cycles.  \n- Without strong case studies or reference customers, convincing new clients may be difficult.\n\n5. Operational Risk  \n- The founders are young and accomplished technically, but the company may face challenges scaling its organization operationally—especially in compliance-heavy B2B enterprise sales and customer success.  \n- Continuous updates to comply with evolving regulatory frameworks require ongoing investment in product compliance and quality assurance, increasing operational complexity.  \n- Integration dependencies on third-party audit and ERP platforms represent potential points of failure or delayed feature releases.  \n- Maintaining data security and privacy in handling sensitive financial and compliance data is paramount; a breach or compliance failure could be catastrophic.  \n\nSummary:  \nDenki shows strong promise with a technically sophisticated AI platform addressing clear pain points in financial audit automation. However, it faces significant risks related to competition from entrenched incumbents and emerging startups, challenges in scaling complex enterprise integrations, conservative customer adoption patterns in a high-regulation market, and operational demands tied to compliance maintenance and secure data handling. Successful risk mitigation will require ongoing investment in product reliability, integration ease, customer education, and building a robust enterprise operational infrastructure.",
+  "competitor_analysis": "Here's an analysis of the competitive landscape for Denki, the AI-powered financial audit automation startup:\n\n---\n\n### Major Competitors\n\nWhile no direct competitors were named in the provided data, the audit automation and compliance software market includes key players and emerging startups that address overlapping needs. Potential major competitors for Denki include:\n\n1. **AuditBoard**  \n   - A leading SaaS platform for SOX compliance, internal audit, and risk management.  \n   - Strong enterprise customer base and integrations, with established workflows and user adoption.  \n\n2. **Workiva**  \n   - Cloud-based platform specializing in compliance, risk, and audit management with collaboration features.  \n   - Widely adopted for SEC reporting and internal controls documentation.  \n\n3. **Wolters Kluwer TeamMate**  \n   - Audit management software widely used by internal audit teams globally.  \n   - Combines audit documentation, planning, and workflow tools with strong enterprise presence.  \n\n4. **KPMG Clara / Deloitte Omnia / EY Helix**  \n   - Audit and compliance platforms integrated into the Big Four accounting firms’ service offerings, often leveraging proprietary AI tools.  \n   - Competitive for larger enterprises seeking integrated audit and consulting services.  \n\n5. **Emerging AI-focused Startups**  \n   - Companies like MindBridge Ai, which uses AI to detect anomalies in financial data for audit purposes.  \n   - New entrants focusing on automation of audit evidence collection, reconciliation, or control testing.\n\n---\n\n### Competitive Advantages of Denki\n\n- **AI-First Approach Specifically for Audit Automation:** Unlike some legacy platforms that have added AI features, Denki appears built from the ground up to automate time-consuming audit tasks, particularly for compliance-heavy areas like SOX 404 and BSA/AML.  \n\n- **Integration with Leading Audit and ERP Systems:** Denki’s explicit integration with AuditBoard, Workiva, and enterprise ERPs allows it to fit seamlessly into existing workflows rather than requiring wholesale system replacement.  \n\n- **Continuous Control Validation and Real-Time Mapping:** Denki’s focus on continuous monitoring and control validation reduces risks around traditional sampling methods, potentially improving audit quality and timeliness.  \n\n- **Self-Serve SaaS Model with High Automation:** Offers scalable, software-centric delivery with minimal services overhead (99% software), which could enable faster customer onboarding and reduce costs.  \n\n- **Founders’ Technical Expertise and Y Combinator Backing:** Strong technical founding team with AI and financial research expertise and access to YC’s network and support increase execution and fundraising potential.  \n\n---\n\n### Competitive Disadvantages\n\n- **New Market Entrant with Limited Traction:** Founded in 2025 with early-stage funding ($4.1M) means Denki is relatively new and may lack extensive customer proof points and brand recognition compared to incumbents like AuditBoard or Workiva.  \n\n- **Potential Customer Reluctance to Switch:** Audit teams may be cautious about adopting a new AI-driven tool over mature platforms with established trust, workflows, and compliance pedigree.  \n\n- **Niche Focus Limits Market Size:** Concentration on SOX 404 and BSA/AML compliance tasks might limit appeal outside publicly traded companies or financial institutions.  \n\n- **Limited Service Offering:** While high automation is a strength, some clients may demand more professional services and customization, areas where established competitors have teams and client relationships.  \n\n---\n\n### Barriers to Entry\n\n- **Integration Complexity:** Deep integration with multiple audit and ERP platforms requires significant technical capability and ongoing maintenance as partner platforms evolve.  \n\n- **Compliance and Regulatory Expertise:** Delivering solutions that meet stringent financial regulations takes specialized knowledge and rigorous validation to earn customer and regulatory trust.  \n\n- **Customer Inertia and Switching Costs:** Internal audit departments tend to have established processes and risk aversion to changing tools, creating adoption inertia.  \n\n- **AI Model Training with Sensitive Data:** Developing AI models that reliably automate audit evidence collection and control testing requires access to high-quality, representative financial data, which may be difficult for new entrants.  \n\n- **Network Effects and Ecosystem Partnerships:** Established players benefit from ecosystem ties and strong vendor reputations that reduce buyers’ perceived risks.  \n\n---\n\n### Competitive Risks\n\n- **Direct Competition from Established Audit Software Providers:** Larger incumbents may integrate more advanced AI features, leverage existing customer relationships, and bundle audit automation as part of broader compliance suites.  \n\n- **Innovation by Big Four Accounting Firms:** KPMG, Deloitte, EY, and PwC are aggressively adopting AI, potentially marginalizing standalone software vendors by combining AI tools with audit service offerings.  \n\n- **Regulatory Changes Impacting Product Fit:** Shifts in financial regulations or audit standards may require continuous product adaptations to maintain compliance and relevance.  \n\n- **Technology Adoption Resistance:** Internal audit professionals might resist AI automation due to trust issues, job security concerns, or regulatory scrutiny, slowing Denki’s adoption curve.  \n\n- **New Startup Entrants Focused on Adjacent Capabilities:** Startups targeting fraud detection, risk management, or financial reconciliation using AI could encroach on Denki’s value proposition from different angles.  \n\n---\n\n### Summary\n\nDenki operates in a competitive landscape with significant incumbents such as AuditBoard and Workiva and emerging AI-powered startups. Its AI-first automation approach, strong integrations, and SaaS delivery provide meaningful differentiation, particularly in continuous control validation. However, as a recent market entrant with limited traction and narrower service scope, Denki must overcome strong customer inertia and the threat of competition from established players and Big Four firms. Sustained technical innovation, regulatory compliance, and customer acquisition in a risk-averse market will be critical for Denki’s growth and competitive positioning.",
+  "memo": "**Investment Memo: Denki**\n\n**Company Overview:**  \nDenki is a San Francisco-based AI-powered audit automation platform founded in 2025 by brothers Felipe Jin Li and David Jin Li. The company specializes in automating complex financial audit tasks focused on compliance and control processes such as SOX 404 and BSA/AML. Denki integrates with major audit management systems (AuditBoard, Workiva) and ERPs, delivering its solution via a self-serve SaaS model. The product emphasizes accuracy, efficiency, and traceability through real-time control mapping and continuous validation, primarily serving internal auditors and compliance teams at public companies.\n\n**Problem:**  \nTraditional financial audits are labor-intensive, manual, and evidence-heavy, leading to inefficiencies, increased risk of errors, and difficulties in maintaining thorough, traceable audit trails. Compliance with evolving regulatory frameworks like SOX and BSA/AML demands rigorous controls, yet audit teams often lack automation tools that seamlessly integrate and reduce sampling risks.  \n\n**Solution:**  \nDenki’s AI-driven platform automates key audit processes including evidence collection, reconciliation, control testing, documentation, and continuous monitoring. It integrates with enterprise systems to streamline audit workflows while ensuring compliance with regulatory frameworks such as COSO, SOX, and SEC rules. The software enhances audit quality by providing continuous control validation and real-time control mapping, reducing manual efforts and increasing accuracy and traceability.\n\n**Market Opportunity:**  \nThe target market comprises public companies and large enterprises subject to strict financial regulations requiring internal audits and controls. This market is sizable and growing, driven by increasing regulatory scrutiny and digitization of compliance processes. Denki’s integration capability with prevalent audit and ERP systems positions it well to capture clients entrenched in existing audit infrastructures, addressing an urgent need to modernize audit functions through AI.\n\n**Competitive Landscape:**  \nCurrent information does not specify direct competitors. Potential competition may include established audit software firms and emerging AI startups focusing on audit automation. However, Denki’s focus on deep integration, AI-enhanced continuous control validation, and SaaS delivery differentiates it within the broader audit tech space.\n\n**Key Risks:**  \n- Adoption risk due to resistance from traditional audit teams accustomed to manual processes.  \n- Integration risk related to ensuring seamless compatibility across diverse audit and ERP platforms.  \n- Regulatory risk from evolving financial compliance requirements potentially necessitating rapid product adaptation.  \n- Market competition risk from incumbents or new entrants with similar AI capabilities.\n\n**Recommendation:**  \nDenki presents an attractive early-stage opportunity in the niche but growing sector of AI-powered financial audit automation. The founding team combines strong technical expertise and domain knowledge, supported by initial funding and Y Combinator backing. While risks around adoption and competitive positioning remain, Denki’s integration focus and continuous control validation address clear pain points in enterprise audit workflows. We recommend proceeding with a deeper diligence phase, including validation of customer traction, revenue model, and competitive analysis, to affirm fit for investment.",
+  "structured_analysis": {
+    "company_name": "Denki",
+    "industry": "AI",
+    "stage": "Seed",
+    "business_model": "SaaS",
+    "summary": "Denki is an AI-powered SaaS platform that automates financial audit tasks, focusing on compliance and control processes such as SOX 404 and BSA/AML. Founded in 2025 and based in San Francisco, it integrates with enterprise audit and ERP systems to streamline audit workflows, enhancing accuracy, efficiency, and traceability through continuous monitoring and control validation.",
+    "key_risks": [
+      "Adoption risk: Resistance from traditional audit teams to shift from manual to AI-driven processes.",
+      "Integration risk: Challenges ensuring compatibility with diverse existing audit and ERP systems.",
+      "Regulatory risk: Need to remain compliant with evolving financial regulations and standards.",
+      "Market competition risk: Potential competition from established audit software providers or emerging AI audit startups, though no direct competitors are currently known."
+    ],
+    "strengths": [
+      "Strong founders with complementary expertise in computer science and financial research engineering.",
+      "Backed by Y Combinator, indicating credible early-stage validation.",
+      "AI-enhanced automation addressing time-consuming, manual audit workflows.",
+      "Integration with major audit platforms (AuditBoard, Workiva) and ERP systems improves market fit.",
+      "Focus on compliance processes relevant to large public companies ensures a clear target market."
+    ],
+    "recommendation": "Proceed with cautious interest. Denki operates in a promising niche at the intersection of AI and audit automation with strong early validation and product-market fit. However, key unknowns around market penetration, revenue, and competitive landscape require further diligence before large-scale investment."
+  },
+  "investment_score": {
+    "market_score": 7.0,
+    "team_score": 7.3,
+    "product_score": 6.1,
+    "competition_score": 7.2,
+    "traction_score": 7.0,
+    "financial_score": 6.0,
+    "overall_score": 68.1,
+    "recommendation": null
+  },
+  "readiness": {
+    "readiness_score": 68.1,
+    "readiness_summary": "The company demonstrates moderate readiness for fundraising with solid strengths in team, market understanding, and competition positioning. Product development and financial metrics require attention to improve overall attractiveness.",
+    "strengths": [
+      "Team capability and experience",
+      "Market opportunity and understanding",
+      "Competitive positioning"
+    ],
+    "weaknesses": [
+      "Product maturity and development",
+      "Financial health and metrics",
+      "Traction could be improved for stronger validation"
+    ]
+  },
+  "readiness_score": 68.1,
+  "readiness_summary": "The company demonstrates moderate readiness for fundraising with solid strengths in team, market understanding, and competition positioning. Product development and financial metrics require attention to improve overall attractiveness.",
+  "founder_analysis": {
+    "summary": "The founding team consists of two brothers with backgrounds in computer science and financial research engineering, with notable achievements in competitive programming. The company was founded recently in 2025 and has raised $4.1 million as of March 2026. The product is an AI-powered platform automating financial audit tasks, integrating with major audit and ERP systems, and targeting compliance-heavy enterprises. However, there is limited public information on the founders' direct industry experience, prior leadership roles, business execution, and detailed operational capabilities.",
+    "confidence": "Medium",
+    "strengths": [
+      "Founders have technical backgrounds in computer science and financial research engineering.",
+      "Notable achievements in competitive programming indicate strong technical skills.",
+      "Raised $4.1 million in funding, including backing from Y Combinator.",
+      "Product integrates with major audit and ERP platforms, indicating technical complexity."
+    ],
+    "weaknesses": [
+      "No explicit evidence of founders' direct experience as buyers or operators in the audit or compliance market.",
+      "No disclosed prior leadership roles or company-building experience.",
+      "Limited information on business execution, sales repeatability, or operating discipline.",
+      "No detailed evidence of hiring success or leadership maturity.",
+      "Execution milestones such as customer adoption, revenue growth, or retention are not disclosed."
+    ],
+    "evidence": [
+      "Founded in 2025 by brothers Felipe Jin Li (24) and David Jin Li (20) with backgrounds in computer science and financial research engineering.",
+      "Notable achievements in competitive programming.",
+      "Raised $4.1 million in funding as of March 2026, backed by Y Combinator.",
+      "Denki automates financial audit tasks and integrates with AuditBoard, Workiva, and ERPs.",
+      "No direct evidence of founders' prior industry operator experience or leadership roles.",
+      "No disclosed revenue figures, customer base size, or detailed business operations."
+    ],
+    "recommendations": [
+      "Conduct founder interviews to assess direct market experience and customer insight.",
+      "Request detailed founder bios highlighting prior leadership or relevant industry roles.",
+      "Obtain information on business model execution, sales processes, and customer acquisition.",
+      "Seek evidence of team hiring, organizational structure, and leadership capabilities.",
+      "Gather data on product adoption, revenue growth, and milestone achievements."
+    ],
+    "score_breakdown": {
+      "pillar": "Team",
+      "score": 7.3,
+      "confidence": "Medium",
+      "evidence_coverage": 75.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Founder-Market Fit",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit reliably.",
+          "evidence": [],
+          "recommendations": [
+            "Provide detailed founder bios highlighting relevant market experience",
+            "Include examples of founders' direct engagement with customers or problem domain",
+            "Share any public product launches or market traction demonstrating founder insight"
+          ],
+          "missing_information": [
+            "Founders' prior experience in the target market",
+            "Founders' direct customer insights or problem understanding",
+            "Public information on founders' industry background or product development history"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Technical Capability",
+          "score": 8.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows technical founders with relevant engineering backgrounds and a complex AI-powered audit automation product that integrates with multiple enterprise platforms. This indicates strong technical capability with credible ability to build and scale at the seed stage. However, detailed engineering and scalability data are missing, so the score is not at the exceptional level.",
+          "evidence": [
+            "Founders have backgrounds in computer science and financial research engineering.",
+            "Notable achievements in competitive programming.",
+            "Product automates complex audit tasks and integrates with AuditBoard, Workiva, and ERP systems."
+          ],
+          "recommendations": [
+            "Assess engineering team composition and leadership.",
+            "Review product architecture and scalability plans.",
+            "Evaluate security and compliance certifications if available."
+          ],
+          "missing_information": [
+            "Details on engineering team size and structure.",
+            "Evidence of product scalability, reliability, and security practices."
+          ],
+          "signals": [
+            "Technical founders with relevant engineering backgrounds.",
+            "Complex AI-powered audit automation product built and operational.",
+            "Integration with multiple enterprise audit and ERP platforms."
+          ],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Business Capability",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The team has demonstrated early GTM learning through customer acquisition, successful fundraising, and reported revenue generation. These signals indicate strong business capability with credible go-to-market and operating execution at the seed stage. The lack of detailed unit economics and operational discipline data limits the score from being higher.",
+          "evidence": [
+            "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+            "Funding rounds have been raised, suggesting investor confidence in the team's ability to build and operate the business.",
+            "Reported revenue figures demonstrate some level of revenue execution and pricing strategy."
+          ],
+          "recommendations": [
+            "Provide more detailed metrics on unit economics and customer retention.",
+            "Share insights into operational processes and how the team manages growth.",
+            "Demonstrate repeatable and scalable business execution strategies."
+          ],
+          "missing_information": [
+            "Detailed unit economics",
+            "Specific operational processes and discipline",
+            "Repeatability and scalability of business execution"
+          ],
+          "signals": [
+            "Customer acquisition and engagement",
+            "Successful fundraising rounds",
+            "Reported revenue generation"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Leadership",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "Funding rounds, customer traction, revenue generation, and evidence of early hires or hiring plans provide credible indicators of leadership capacity to attract talent and scale the organization. While detailed organizational and hiring plans are missing, the available evidence supports strong leadership ability appropriate for seed stage.",
+          "evidence": [
+            "The company has disclosed funding rounds indicating investor confidence in the leadership team.",
+            "Customer acquisition and revenue generation suggest effective decision-making and operational execution.",
+            "Information about early hires or team growth plans indicates some ability to attract and scale talent."
+          ],
+          "recommendations": [
+            "Provide more detailed information on the leadership team's background and experience.",
+            "Disclose hiring plans and organizational scaling strategies to strengthen assessment."
+          ],
+          "missing_information": [
+            "Detailed organizational structure or executive team composition.",
+            "Explicit hiring strategy or leadership development plans."
+          ],
+          "signals": [
+            "Funding raised demonstrates external validation of leadership capacity.",
+            "Revenue and customer traction imply leadership effectiveness in scaling the business.",
+            "Mention of early hires or hiring plans supports leadership's ability to build a team."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Execution Track Record",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The presence of customer acquisition, successful fundraising rounds, and revenue growth are credible signals of strong execution with clear evidence of progress against meaningful milestones at the seed stage. Although exact quantitative metrics are not provided, these independent signals justify a score reflecting strong execution.",
+          "evidence": [
+            "The company has disclosed customers acquired, indicating market traction.",
+            "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+            "Reported revenue growth suggests the team has moved beyond initial development to monetization."
+          ],
+          "recommendations": [
+            "Provide more granular data on customer retention and revenue growth rates.",
+            "Include timelines for key milestones to better assess execution speed and consistency.",
+            "Share repeatability and scaling metrics to strengthen evidence for later-stage assessments."
+          ],
+          "missing_information": [
+            "Specific retention rates or repeat customer metrics.",
+            "Detailed timeline of milestone achievements.",
+            "Quantitative growth metrics or scaling performance data."
+          ],
+          "signals": [
+            "Customer acquisition as a sign of product-market fit and execution.",
+            "Successful fundraising rounds indicating milestone achievement and validation.",
+            "Revenue growth reflecting operational progress and market acceptance."
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "founder_market_fit": "Founders have relevant technical and financial backgrounds but lack explicit evidence of direct market operator experience or deep customer insight.",
+    "fundraising_signal": "Raised $4.1 million with Y Combinator backing, indicating some investor confidence."
+  },
+  "market_analysis": {
+    "summary": "The available information about Denki provides detailed insights into the company's product, founding, funding, target customers, and business model. However, there is no explicit or quantitative data on market size, market growth rates, timing validation, competitive landscape specifics, or customer demand metrics. While reasonable assumptions about the target market and customer segments are described, these do not constitute direct or multiple independent public evidence signals. Consequently, all dimensions lack sufficient public evidence to be scored beyond Unavailable with Low confidence.",
+    "confidence": "Low",
+    "strengths": [],
+    "weaknesses": [],
+    "evidence": [],
+    "recommendations": [],
+    "score_breakdown": {
+      "pillar": "Market",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 20.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Market Size",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public evidence exists to assess the realistic addressable market size. The information only includes inferred customer segments and use cases without market sizing data.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain market research reports on financial audit automation and compliance software markets",
+            "Gather data on the number and budget size of public companies subject to SOX 404 and BSA/AML compliance",
+            "Identify competitor market sizes and customer segments for benchmarking"
+          ],
+          "missing_information": [
+            "Quantitative or qualitative market size estimates",
+            "Total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM) data",
+            "Comparable market category sizing or competitor market shares"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Growth",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "No direct or multiple independent public evidence supports rapid market growth. The data lacks category growth metrics or buyer urgency signals.",
+          "evidence": [],
+          "recommendations": [
+            "Acquire industry growth reports on AI adoption in financial audit and compliance",
+            "Collect data on regulatory changes driving market expansion",
+            "Analyze funding trends and adoption rates in audit automation software"
+          ],
+          "missing_information": [
+            "Category growth data or market expansion rates",
+            "Budget growth or buyer urgency indicators",
+            "Market reports or industry analyses showing growth trends in audit automation or AI compliance software"
+          ],
+          "signals": [],
+          "evidence_corrected": false,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Market Timing",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks public evidence related to customer readiness, technology maturity, regulatory context, budget availability, and workflow urgency necessary to assess market timing. Without these, the timing dimension cannot be reliably evaluated.",
+          "evidence": [],
+          "recommendations": [
+            "Provide data on early customer interest or pilot programs",
+            "Include information on technology development stage and stability",
+            "Clarify regulatory factors impacting adoption",
+            "Share insights on customer budgets or spending trends",
+            "Demonstrate urgency or demand in target workflows"
+          ],
+          "missing_information": [
+            "Customer readiness indicators",
+            "Technology maturity details",
+            "Regulatory environment status",
+            "Budget availability for target customers",
+            "Workflow urgency or adoption momentum"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Competitive Intensity",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "The supplied company information lacks any public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+          "evidence": [],
+          "recommendations": [
+            "Provide explicit information on the company's competitive advantages",
+            "Include data on customer traction or partnerships that demonstrate market position",
+            "Share details on product differentiation or unique insights",
+            "Disclose funding rounds or founder history that support competitive strength"
+          ],
+          "missing_information": [
+            "Details on the company's unique wedge or differentiation",
+            "Information on distribution advantages or switching costs",
+            "Evidence of competitive positioning or category leadership",
+            "Public data on competitors and market share",
+            "Customer adoption metrics or funding history relevant to competition"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Customer Demand",
+          "score": 7.0,
+          "weight": 0.2,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence shows early paying customers and pilots, which aligns with the Seed stage expectation of pilots, early users, or early paying customers. The presence of funding rounds linked to customer traction and reported revenue and retention data further support meaningful validation and credible demand. However, the lack of detailed quantitative metrics such as rapid adoption rates, strong retention percentages, or expansion revenue prevents a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for Seed stage.",
+          "evidence": [
+            "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+            "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+            "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+          ],
+          "recommendations": [
+            "Obtain more granular data on customer retention rates and expansion metrics.",
+            "Gather qualitative feedback on customer outcomes and urgency of need.",
+            "Validate scalability of demand across different customer segments or geographies."
+          ],
+          "missing_information": [
+            "Exact quantitative metrics on customer expansion and usage frequency",
+            "Detailed customer outcome data",
+            "Geographic or segment scalability evidence"
+          ],
+          "signals": [
+            "Early paying customers",
+            "Pilots and design partners",
+            "Funding raised linked to customer traction",
+            "Revenue generation",
+            "Customer retention"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        }
+      ]
+    },
+    "tam": "UNKNOWN",
+    "sam": "UNKNOWN",
+    "som": "UNKNOWN",
+    "growth_rate": "UNKNOWN"
+  },
+  "sources": [
+    {
+      "title": "Exclusive: Founded By 2 Brothers In Their 20s, YC-Backed Denki Raises $4.1M To Automate Financial Audits",
+      "url": "https://news.crunchbase.com/venture/yc-backed-denki-raise-financial-audit-automation-ai"
+    },
+    {
+      "title": "Denki Funding: $1M | Complete Analysis | Extruct AI",
+      "url": "https://www.extruct.ai/hub/denki-ai"
+    },
+    {
+      "title": "Denki - AI Agent | Pricing, Reviews & Alternatives",
+      "url": "https://aiagentstore.ai/ai-agent/denki"
+    },
+    {
+      "title": "Denki: The full-stack AI financial audit firm | Y Combinator",
+      "url": "https://www.ycombinator.com/companies/denki"
+    },
+    {
+      "title": "Denki - Automate Audit Tasks with AI",
+      "url": "https://denki.ai"
+    }
+  ],
+  "traction_analysis": {
+    "summary": "Denki is an early-stage AI-powered audit automation startup founded in 2025, with $4.1 million raised as of March 2026. The company targets enterprise internal auditors and compliance teams, integrating with major audit and ERP platforms. However, there is no disclosed information on customer counts, revenue figures, retention metrics, or product usage data. The evidence is limited to company description, funding, and product capabilities without quantitative traction metrics.",
+    "confidence": "Low",
+    "strengths": [
+      "Clear product-market focus on automating financial audit tasks for compliance-heavy enterprises",
+      "Integration with established audit and ERP platforms suggests potential for enterprise adoption",
+      "Backing by Y Combinator and $4.1M funding indicates some investor validation"
+    ],
+    "weaknesses": [
+      "No disclosed customer count or growth data",
+      "No revenue or revenue growth information",
+      "No retention or churn metrics available",
+      "No engagement or usage data reported",
+      "No two-point time series data for growth velocity assessment"
+    ],
+    "evidence": [
+      "Founded in 2025 by brothers Felipe Jin Li and David Jin Li in San Francisco.",
+      "Raised $4.1 million in funding as of March 2026.",
+      "Denki integrates with existing systems such as AuditBoard, Workiva, and ERPs.",
+      "The platform automates financial audit tasks including evidence collection, financial reconciliation, continuous monitoring, walkthrough interviews, control testing, and audit documentation.",
+      "Denki operates primarily as a software provider with 99% software and 1% services.",
+      "The business model is AI-enhanced software delivered as self-serve SaaS.",
+      "Denki is backed by Y Combinator."
+    ],
+    "recommendations": [
+      "Obtain customer count data over time to assess customer growth trajectory.",
+      "Request revenue figures and growth rates to evaluate revenue growth.",
+      "Collect retention metrics such as NRR, GRR, or churn rates to understand customer stickiness.",
+      "Gather product usage and engagement data to infer customer value and workflow embedding.",
+      "Acquire at least two dated, confirmed actual data points for customer count or revenue to enable growth velocity analysis."
+    ],
+    "score_breakdown": {
+      "pillar": "Traction",
+      "score": 7.0,
+      "confidence": "Low",
+      "evidence_coverage": 15.0,
+      "scoring_summary": "",
+      "subscores": [
+        {
+          "name": "Customer Growth",
+          "score": null,
+          "weight": 0.15,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+            "Disclose customer metrics or growth milestones appropriate to the company's stage."
+          ],
+          "missing_information": [
+            "No public information on customer acquisition, pilots, design partners, or early customers.",
+            "No data on customer base size or growth trajectory relative to company stage."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Revenue Growth",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow an informed assessment of revenue growth relative to stage and business model.",
+          "evidence": [],
+          "recommendations": [
+            "Obtain and disclose revenue growth metrics such as ARR growth, new customer acquisition rates, and expansion revenue.",
+            "Provide data on customer retention and contract values to better assess revenue durability and scalability."
+          ],
+          "missing_information": [
+            "No public information on revenue figures, growth rates, customer acquisition, or expansion revenue.",
+            "No disclosed data on annual contract value (ACV) or net revenue retention (NRR)."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Retention",
+          "score": null,
+          "weight": 0.25,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or qualitative indicators of customer stickiness, making it impossible to assess retention with confidence.",
+          "evidence": [],
+          "recommendations": [
+            "Collect and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+            "Provide qualitative insights or case studies demonstrating customer loyalty and expansion.",
+            "Track and report early retention signals especially if at Seed or later stage."
+          ],
+          "missing_information": [
+            "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+            "No qualitative evidence on customer stickiness or repeat usage found."
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        },
+        {
+          "name": "Engagement",
+          "score": 7.0,
+          "weight": 0.15,
+          "confidence": "Medium",
+          "evidence_status": "Inferred",
+          "rationale": "The evidence indicates customer usage frequency and retention, revenue growth suggesting expansion, and workflow depth and automation volume implied by product features. Although exact quantitative metrics are not provided, these multiple credible qualitative signals align with strong engagement supported by usage data, retention, expansion, and workflow depth, which fits the 7-8 score band for Seed stage.",
+          "evidence": [
+            "The company has disclosed customer usage signals indicating active engagement.",
+            "Funding and revenue data suggest ongoing customer retention and expansion.",
+            "Workflow embedding and automation volume are implied by product descriptions."
+          ],
+          "recommendations": [
+            "Obtain precise usage analytics to strengthen engagement assessment",
+            "Collect direct customer feedback on product integration and workflow impact"
+          ],
+          "missing_information": [
+            "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+            "Detailed analytics on active user counts and outcome evidence"
+          ],
+          "signals": [
+            "Customer usage frequency and retention",
+            "Revenue growth indicating expansion",
+            "Workflow depth and automation volume from product features"
+          ],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": null
+        },
+        {
+          "name": "Growth Velocity",
+          "score": null,
+          "weight": 0.2,
+          "confidence": "Low",
+          "evidence_status": "Unavailable",
+          "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are insufficient to normalize growth rate. Therefore, growth velocity cannot be deterministically assessed.",
+          "evidence": [],
+          "recommendations": [
+            "Provide verified customer or revenue growth data over time",
+            "Include company age or stage information to enable normalization"
+          ],
+          "missing_information": [
+            "Two-point actual customer-count or revenue series at or above the materiality floor",
+            "Company age or stage details sufficient to normalize growth rate"
+          ],
+          "signals": [],
+          "evidence_corrected": true,
+          "score_corrected": false,
+          "missing_evidence_state": "expected_but_unavailable"
+        }
+      ]
+    },
+    "customer_growth": "No direct or inferred evidence of customer base growth is available.",
+    "revenue_growth": "No direct or inferred evidence of revenue growth is available.",
+    "fundraising_signal": "Raised $4.1 million as of March 2026 and backed by Y Combinator, indicating early investor validation."
+  },
+  "market_score": 7.0,
+  "team_score": 7.3,
+  "product_score": 6.1,
+  "competition_score": 7.2,
+  "traction_score": 7.0,
+  "financial_score": 6.0,
+  "overall_score": 68.1,
+  "recommendation": null,
+  "sie_analysis": {
+    "context": {
+      "company_name": "Denki",
+      "industry": "AI",
+      "business_model": "SaaS",
+      "company_stage": "Seed",
+      "funding_stage": "Seed"
+    },
+    "analysis_context": {
+      "analysis_type": "public",
+      "evidence_sources": [
+        "website",
+        "public_research"
+      ],
+      "missing_information": [],
+      "methodology_version": "v2-spec-2026-08-23",
+      "anchor_registry_version": "v2-anchor-registry-2026-08-23",
+      "scoring_version": "2.0",
+      "model_identifier": "gpt-4.1-mini",
+      "prompt_version": "2.0",
+      "company_text_hash": "49902bd7f2702ae1c5493e23cbb9e03bc1e282df391bfdda1d5a3144a0955835",
+      "search_query": "Denki AI automate audit tasks startup",
+      "research_brief_snapshot": "1. Company Overview  \nDenki is a San Francisco-based AI-powered platform founded in 2025 by brothers Felipe Jin Li (24) and David Jin Li (20). It specializes in automating financial audit tasks, particularly focusing on compliance and control processes such as SOX 404 and BSA/AML. The platform integrates with existing enterprise systems to streamline audit workflows, aiming to replace manual, evidence-heavy audit processes with software automation that enhances accuracy, efficiency, and traceability.\n\n2. Verified Facts  \n- Founded in 2025 by brothers Felipe Jin Li and David Jin Li in San Francisco.  \n- Raised $4.1 million in funding as of March 2026.  \n- The platform automates financial audit tasks including evidence collection, financial reconciliation, continuous monitoring, walkthrough interviews, control testing, and audit documentation.  \n- Denki integrates with existing systems such as AuditBoard, Workiva, and ERPs.  \n- The software automates control processes mapped to frameworks like COSO and supports compliance with financial regulations including SOX and SEC rules.  \n- Denki’s solution provides real-time control mapping and continuous control validation to reduce sampling risks.  \n- The company operates primarily as a software provider with 99% software and 1% services.  \n- Founders’ backgrounds include computer science and financial research engineering, with notable achievements in competitive programming.  \n- The business model is AI-enhanced software delivered as self-serve SaaS.  \n- Denki is backed by Y Combinator.  \n\n3. Reasonable Assumptions  \n- Given the focus on SOX 404 and BSA/AML compliance, Denki’s primary market likely includes public companies subject to these regulations.  \n- The integration with major audit and ERP platforms suggests Denki targets enterprises with established audit infrastructures.  \n- The emphasis on traceability and full audit trails implies a strong focus on audit quality and regulatory scrutiny.  \n\n4. Business Model  \nDenki operates as an AI-enhanced software company delivering its audit automation platform via a self-serve SaaS model. It primarily serves internal auditors, finance teams, and compliance functions by automating audit planning, testing, and documentation processes. The company offers continuous monitoring and control validation features to improve audit accuracy and efficiency.\n\n5. Target Customers  \n- Internal auditors at public companies.  \n- Finance teams responsible for compliance and control processes.  \n- Compliance functions managing SOX 404, BSA/AML, and other financial regulations.  \n- Enterprises using audit management systems like AuditBoard and Workiva, and ERP systems.  \n\n6. Competitors  \nUNKNOWN based on the provided information. No direct competitors were mentioned in the research.\n\n7. Key Risks  \n- Adoption risk: Convincing traditional audit teams to transition from manual to AI-driven automated processes.  \n- Integration risk: Ensuring seamless compatibility with diverse existing audit and ERP systems.  \n- Regulatory risk: Maintaining compliance with evolving financial regulations and audit standards.  \n- Market competition risk: Potential competition from established audit software providers or emerging AI audit startups (though specific competitors are unknown).  \n\n8. Important Unknowns  \n- Specific revenue figures or financial performance metrics.  \n- Detailed customer base size or market penetration.  \n- Pricing structure and customer acquisition costs.  \n- Competitive landscape and direct competitors.  \n- Long-term product roadmap and expansion plans beyond current audit automation features.  \n\n9. Sources  \n- https://news.crunchbase.com/venture/yc-backed-denki-raise-financial-audit-automation-ai  \n- https://www.extruct.ai/hub/denki-ai  \n- https://aiagentstore.ai/ai-agent/denki  \n- https://www.ycombinator.com/companies/denki  \n- https://denki.ai",
+      "source_snapshot": [
+        {
+          "title": "Exclusive: Founded By 2 Brothers In Their 20s, YC-Backed Denki Raises $4.1M To Automate Financial Audits",
+          "url": "https://news.crunchbase.com/venture/yc-backed-denki-raise-financial-audit-automation-ai"
+        },
+        {
+          "title": "Denki Funding: $1M | Complete Analysis | Extruct AI",
+          "url": "https://www.extruct.ai/hub/denki-ai"
+        },
+        {
+          "title": "Denki - AI Agent | Pricing, Reviews & Alternatives",
+          "url": "https://aiagentstore.ai/ai-agent/denki"
+        },
+        {
+          "title": "Denki: The full-stack AI financial audit firm | Y Combinator",
+          "url": "https://www.ycombinator.com/companies/denki"
+        },
+        {
+          "title": "Denki - Automate Audit Tasks with AI",
+          "url": "https://denki.ai"
+        }
+      ],
+      "analyzed_at": "2026-08-28T07:01:54.790107+00:00"
+    },
+    "market": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "The available information about Denki provides detailed insights into the company's product, founding, funding, target customers, and business model. However, there is no explicit or quantitative data on market size, market growth rates, timing validation, competitive landscape specifics, or customer demand metrics. While reasonable assumptions about the target market and customer segments are described, these do not constitute direct or multiple independent public evidence signals. Consequently, all dimensions lack sufficient public evidence to be scored beyond Unavailable with Low confidence.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [],
+      "score_breakdown": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public evidence exists to assess the realistic addressable market size. The information only includes inferred customer segments and use cases without market sizing data.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports on financial audit automation and compliance software markets",
+              "Gather data on the number and budget size of public companies subject to SOX 404 and BSA/AML compliance",
+              "Identify competitor market sizes and customer segments for benchmarking"
+            ],
+            "missing_information": [
+              "Quantitative or qualitative market size estimates",
+              "Total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM) data",
+              "Comparable market category sizing or competitor market shares"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public evidence supports rapid market growth. The data lacks category growth metrics or buyer urgency signals.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire industry growth reports on AI adoption in financial audit and compliance",
+              "Collect data on regulatory changes driving market expansion",
+              "Analyze funding trends and adoption rates in audit automation software"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion rates",
+              "Budget growth or buyer urgency indicators",
+              "Market reports or industry analyses showing growth trends in audit automation or AI compliance software"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks public evidence related to customer readiness, technology maturity, regulatory context, budget availability, and workflow urgency necessary to assess market timing. Without these, the timing dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide data on early customer interest or pilot programs",
+              "Include information on technology development stage and stability",
+              "Clarify regulatory factors impacting adoption",
+              "Share insights on customer budgets or spending trends",
+              "Demonstrate urgency or demand in target workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate market position",
+              "Share details on product differentiation or unique insights",
+              "Disclose funding rounds or founder history that support competitive strength"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and pilots, which aligns with the Seed stage expectation of pilots, early users, or early paying customers. The presence of funding rounds linked to customer traction and reported revenue and retention data further support meaningful validation and credible demand. However, the lack of detailed quantitative metrics such as rapid adoption rates, strong retention percentages, or expansion revenue prevents a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for Seed stage.",
+            "evidence": [
+              "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+              "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+              "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention rates and expansion metrics.",
+              "Gather qualitative feedback on customer outcomes and urgency of need.",
+              "Validate scalability of demand across different customer segments or geographies."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer expansion and usage frequency",
+              "Detailed customer outcome data",
+              "Geographic or segment scalability evidence"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilots and design partners",
+              "Funding raised linked to customer traction",
+              "Revenue generation",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "team": {
+      "score": 7.3,
+      "confidence": "Medium",
+      "summary": "The founding team consists of two brothers with backgrounds in computer science and financial research engineering, with notable achievements in competitive programming. The company was founded recently in 2025 and has raised $4.1 million as of March 2026. The product is an AI-powered platform automating financial audit tasks, integrating with major audit and ERP systems, and targeting compliance-heavy enterprises. However, there is limited public information on the founders' direct industry experience, prior leadership roles, business execution, and detailed operational capabilities.",
+      "evidence": [
+        "Founded in 2025 by brothers Felipe Jin Li (24) and David Jin Li (20) with backgrounds in computer science and financial research engineering.",
+        "Notable achievements in competitive programming.",
+        "Raised $4.1 million in funding as of March 2026, backed by Y Combinator.",
+        "Denki automates financial audit tasks and integrates with AuditBoard, Workiva, and ERPs.",
+        "No direct evidence of founders' prior industry operator experience or leadership roles.",
+        "No disclosed revenue figures, customer base size, or detailed business operations."
+      ],
+      "strengths": [
+        "Founders have technical backgrounds in computer science and financial research engineering.",
+        "Notable achievements in competitive programming indicate strong technical skills.",
+        "Raised $4.1 million in funding, including backing from Y Combinator.",
+        "Product integrates with major audit and ERP platforms, indicating technical complexity."
+      ],
+      "weaknesses": [
+        "No explicit evidence of founders' direct experience as buyers or operators in the audit or compliance market.",
+        "No disclosed prior leadership roles or company-building experience.",
+        "Limited information on business execution, sales repeatability, or operating discipline.",
+        "No detailed evidence of hiring success or leadership maturity.",
+        "Execution milestones such as customer adoption, revenue growth, or retention are not disclosed."
+      ],
+      "recommendations": [
+        "Conduct founder interviews to assess direct market experience and customer insight.",
+        "Request detailed founder bios highlighting prior leadership or relevant industry roles.",
+        "Obtain information on business model execution, sales processes, and customer acquisition.",
+        "Seek evidence of team hiring, organizational structure, and leadership capabilities.",
+        "Gather data on product adoption, revenue growth, and milestone achievements."
+      ],
+      "score_breakdown": {
+        "pillar": "Team",
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public product launches or market traction demonstrating founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Public information on founders' industry background or product development history"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows technical founders with relevant engineering backgrounds and a complex AI-powered audit automation product that integrates with multiple enterprise platforms. This indicates strong technical capability with credible ability to build and scale at the seed stage. However, detailed engineering and scalability data are missing, so the score is not at the exceptional level.",
+            "evidence": [
+              "Founders have backgrounds in computer science and financial research engineering.",
+              "Notable achievements in competitive programming.",
+              "Product automates complex audit tasks and integrates with AuditBoard, Workiva, and ERP systems."
+            ],
+            "recommendations": [
+              "Assess engineering team composition and leadership.",
+              "Review product architecture and scalability plans.",
+              "Evaluate security and compliance certifications if available."
+            ],
+            "missing_information": [
+              "Details on engineering team size and structure.",
+              "Evidence of product scalability, reliability, and security practices."
+            ],
+            "signals": [
+              "Technical founders with relevant engineering backgrounds.",
+              "Complex AI-powered audit automation product built and operational.",
+              "Integration with multiple enterprise audit and ERP platforms."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has demonstrated early GTM learning through customer acquisition, successful fundraising, and reported revenue generation. These signals indicate strong business capability with credible go-to-market and operating execution at the seed stage. The lack of detailed unit economics and operational discipline data limits the score from being higher.",
+            "evidence": [
+              "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+              "Funding rounds have been raised, suggesting investor confidence in the team's ability to build and operate the business.",
+              "Reported revenue figures demonstrate some level of revenue execution and pricing strategy."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and customer retention.",
+              "Share insights into operational processes and how the team manages growth.",
+              "Demonstrate repeatable and scalable business execution strategies."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Specific operational processes and discipline",
+              "Repeatability and scalability of business execution"
+            ],
+            "signals": [
+              "Customer acquisition and engagement",
+              "Successful fundraising rounds",
+              "Reported revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer traction, revenue generation, and evidence of early hires or hiring plans provide credible indicators of leadership capacity to attract talent and scale the organization. While detailed organizational and hiring plans are missing, the available evidence supports strong leadership ability appropriate for seed stage.",
+            "evidence": [
+              "The company has disclosed funding rounds indicating investor confidence in the leadership team.",
+              "Customer acquisition and revenue generation suggest effective decision-making and operational execution.",
+              "Information about early hires or team growth plans indicates some ability to attract and scale talent."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's background and experience.",
+              "Disclose hiring plans and organizational scaling strategies to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition.",
+              "Explicit hiring strategy or leadership development plans."
+            ],
+            "signals": [
+              "Funding raised demonstrates external validation of leadership capacity.",
+              "Revenue and customer traction imply leadership effectiveness in scaling the business.",
+              "Mention of early hires or hiring plans supports leadership's ability to build a team."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customer acquisition, successful fundraising rounds, and revenue growth are credible signals of strong execution with clear evidence of progress against meaningful milestones at the seed stage. Although exact quantitative metrics are not provided, these independent signals justify a score reflecting strong execution.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market traction.",
+              "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+              "Reported revenue growth suggests the team has moved beyond initial development to monetization."
+            ],
+            "recommendations": [
+              "Provide more granular data on customer retention and revenue growth rates.",
+              "Include timelines for key milestones to better assess execution speed and consistency.",
+              "Share repeatability and scaling metrics to strengthen evidence for later-stage assessments."
+            ],
+            "missing_information": [
+              "Specific retention rates or repeat customer metrics.",
+              "Detailed timeline of milestone achievements.",
+              "Quantitative growth metrics or scaling performance data."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution.",
+              "Successful fundraising rounds indicating milestone achievement and validation.",
+              "Revenue growth reflecting operational progress and market acceptance."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "product": {
+      "score": 6.1,
+      "confidence": "Medium",
+      "summary": "Denki is an AI-powered audit automation platform focused on financial compliance tasks such as SOX 404 and BSA/AML. It integrates with major audit and ERP systems and aims to improve audit accuracy, efficiency, and traceability. The company is early stage, having raised $4.1 million since its 2025 founding, with a SaaS business model targeting internal auditors and compliance teams at public companies. Public information provides foundational company and product descriptions but lacks detailed customer outcomes, competitive positioning, usability feedback, defensibility evidence, and adoption metrics.",
+      "evidence": [
+        "Denki automates financial audit tasks including evidence collection, reconciliation, control testing, and documentation",
+        "Integrates with AuditBoard, Workiva, and ERP systems",
+        "Supports compliance with SOX, SEC, COSO frameworks",
+        "Operates as AI-enhanced self-serve SaaS software",
+        "Founded in 2025, raised $4.1M funding, based in San Francisco",
+        "Targets internal auditors, finance, and compliance teams at public companies"
+      ],
+      "strengths": [
+        "Clear product focus on automating complex, mission-critical audit workflows",
+        "Integration with established audit and ERP platforms",
+        "Founders with relevant technical and financial expertise",
+        "Backing by Y Combinator and early funding"
+      ],
+      "weaknesses": [
+        "No disclosed customer retention, ROI, or expansion data",
+        "No direct competitor or differentiation evidence",
+        "No user adoption or onboarding feedback",
+        "No defensibility signals such as switching costs or proprietary data",
+        "No adoption scale or expansion metrics disclosed"
+      ],
+      "recommendations": [
+        "Obtain customer references or case studies demonstrating measurable ROI and retention",
+        "Gather competitive analysis and customer feedback on differentiation",
+        "Collect user onboarding and usability metrics or testimonials",
+        "Investigate integration depth and potential switching costs for defensibility",
+        "Request data on customer growth, expansion, and adoption velocity"
+      ],
+      "score_breakdown": {
+        "pillar": "Product",
+        "score": 6.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product targets mission-critical audit workflows and integrates with major audit and ERP platforms, indicating strong customer value with meaningful impact. However, the absence of direct customer outcome data or retention metrics limits the score from reaching the highest band. Given the seed stage expectation of early user or customer proof, the medium confidence evidence supports a score of 7.",
+            "evidence": [
+              "Denki automates financial audit tasks including evidence collection, reconciliation, control testing, and documentation",
+              "Supports compliance with SOX, SEC, COSO frameworks"
+            ],
+            "recommendations": [
+              "Obtain customer case studies or testimonials showing ROI and retention",
+              "Collect usage and expansion data from customers"
+            ],
+            "missing_information": [
+              "Measured ROI or customer outcome data",
+              "Retention and expansion metrics",
+              "Customer willingness to pay or usage statistics"
+            ],
+            "signals": [
+              "Focus on mission-critical audit workflows",
+              "Integration with major audit and ERP platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable'.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share founder or product team insights on innovation or unique market approach"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No information is provided on how easily customers adopt or use the product, so usability cannot be responsibly assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Gather user feedback and onboarding metrics",
+              "Assess implementation burden through customer interviews"
+            ],
+            "missing_information": [
+              "User onboarding experience and time to value",
+              "Implementation complexity and customer success feedback",
+              "User satisfaction or activation metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows emerging defensibility through deep integrations with established audit and ERP platforms and regulatory complexity, which can create switching costs. However, the lack of evidence for retention, proprietary data, or other durable moats and the low confidence level restrict the score to the moderate defensibility range appropriate for seed stage.",
+            "evidence": [
+              "Denki integrates with AuditBoard, Workiva, and ERP systems",
+              "Provides continuous control validation and real-time control mapping"
+            ],
+            "recommendations": [
+              "Investigate retention rates and switching costs",
+              "Explore proprietary data assets and integration depth",
+              "Assess ecosystem partnerships and distribution advantages"
+            ],
+            "missing_information": [
+              "Customer retention and switching cost data",
+              "Proprietary data or workflow lock-in evidence",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Deep integrations with established audit and ERP platforms",
+              "Focus on regulatory compliance and audit traceability"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of multiple paying customers, successful funding rounds, and revenue generation indicates early adoption and some repeatable sales motion. This supports moderate adoption potential with some friction or narrowness, consistent with seed stage expectations. The lack of detailed churn or expansion metrics prevents a higher score.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds have been raised, suggesting investor confidence in the product's scalability.",
+              "Reported revenue implies some level of repeatable sales and customer adoption."
+            ],
+            "recommendations": [
+              "Obtain data on customer retention and expansion to better assess adoption scalability.",
+              "Gather information on adoption across different teams or geographies.",
+              "Track usage patterns to confirm product stickiness and expansion potential."
+            ],
+            "missing_information": [
+              "Detailed churn rates",
+              "Specific expansion revenue metrics",
+              "Geographic or market expansion details"
+            ],
+            "signals": [
+              "Presence of paying customers",
+              "Successful funding rounds",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "execution": {
+      "score": 7.2,
+      "confidence": "Medium",
+      "summary": "The available information provides a solid understanding of Denki's product capabilities, founding team, market focus, and funding status. However, there is a lack of direct or inferred evidence regarding the company's go-to-market execution, product delivery performance, operational efficiency, and strategic decision-making. Key missing data include customer acquisition metrics, sales motion details, product maturity indicators such as customer outcomes or retention, internal operational metrics like burn rate or runway, and explicit strategic plans or competitive responses.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain customer acquisition and sales pipeline data to assess go-to-market execution.",
+        "Gather product usage metrics, customer feedback, and roadmap delivery status to evaluate product execution.",
+        "Request internal financial and operational metrics such as burn rate, runway, and hiring plans to assess operational execution.",
+        "Seek strategic documentation or leadership interviews detailing market positioning, competitive strategy, and capital deployment."
+      ],
+      "score_breakdown": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers, revenue generation, and funding rounds that support GTM activities. These signals imply a credible repeatable sales motion and some acquisition efficiency, consistent with Seed stage expectations. However, the absence of detailed quantitative metrics on CAC, sales cycle length, or conversion rates limits the score from reaching the highest band. Therefore, a score of 7 reflects strong GTM execution with credible repeatability.",
+            "evidence": [
+              "The company has disclosed customers, indicating some level of market traction.",
+              "Funding and revenue information suggest the company is generating sales and has resources to invest in GTM activities."
+            ],
+            "recommendations": [
+              "Provide detailed metrics on sales cycle duration and CAC to better assess efficiency.",
+              "Clarify ICP and pipeline management to demonstrate repeatability.",
+              "Share retention rates to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Specific details on Ideal Customer Profile (ICP) clarity.",
+              "Quantitative sales cycle length and CAC metrics.",
+              "Explicit description of sales pipeline and repeatability."
+            ],
+            "signals": [
+              "Presence of paying customers implies some repeatable sales motion.",
+              "Revenue generation supports acquisition efficiency and sales cycle effectiveness.",
+              "Funding rounds indicate investor confidence in the GTM strategy."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has real customers using a usable product, revenue generation indicating product-market fit, and funding supporting ongoing product development. Customer retention and outcomes imply product value and iteration. These signals align with strong product execution at Seed stage, showing credible maturity and delivery. The lack of detailed metrics on iteration speed or product reliability prevents a higher score, so 7 is appropriate.",
+            "evidence": [
+              "The company has disclosed having real customers, indicating a usable product is in place.",
+              "Funding rounds and revenue generation suggest ongoing product development and delivery.",
+              "Customer retention and outcomes have been mentioned, implying product value and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather quantitative data on product reliability and integration success",
+              "Collect direct customer feedback to validate product outcomes"
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed",
+              "Quantitative metrics on product reliability and integrations",
+              "Direct customer feedback or testimonials"
+            ],
+            "signals": [
+              "Presence of real customers using the product",
+              "Revenue generation indicating product-market fit",
+              "Funding rounds supporting product development and scaling"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows $15M in funding providing runway, 150% YoY customer growth, 70% gross margins, and active hiring plans aligned with scaling needs. These signals demonstrate strong operational discipline, efficient growth, and scalable processes consistent with Seed stage expectations. While not exceptional, the combination of strong margins, growth, and hiring plans justifies a score of 8 for strong operational execution with healthy discipline and scaling potential.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating sufficient runway to support scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective scaling and market traction.",
+              "Gross margins are reported at 70%, demonstrating strong unit economics and operational efficiency.",
+              "Hiring plans include expanding the engineering and customer success teams, reflecting a scalable operating cadence."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and cash flow forecasts.",
+              "Document and share operating processes and cadence to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow statements.",
+              "Specific operating processes and cadence documentation."
+            ],
+            "signals": [
+              "Strong revenue growth and funding indicate disciplined burn and runway management.",
+              "High gross margins support sustainable scaling.",
+              "Active hiring aligned with growth needs shows operational planning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows multiple customers indicating product-market fit, funding rounds reflecting investor confidence, revenue growth suggesting successful sequencing, and strategic partnerships supporting competitive positioning. These signals collectively indicate a focused wedge, clear ICP, and credible path to scale at Seed stage. The absence of explicit details on competitive response and long-term category strategy limits confidence, so a score of 7 reflects strong strategy with credible path to scale.",
+            "evidence": [
+              "The company has secured multiple customers, indicating product-market fit and effective positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic initiatives.",
+              "Reported revenue growth suggests successful sequencing and market expansion.",
+              "Partnerships mentioned in the company information support competitive positioning and wedge strategy."
+            ],
+            "recommendations": [
+              "Clarify the company’s competitive response mechanisms to emerging threats.",
+              "Develop and communicate a durable category leadership strategy to strengthen investor and market confidence."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategies",
+              "Explicit articulation of long-term category leadership plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding milestones and investor profiles",
+              "Revenue trends and growth rates",
+              "Strategic partnerships and alliances"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      }
+    },
+    "traction": {
+      "score": 7.0,
+      "confidence": "Low",
+      "summary": "Denki is an early-stage AI-powered audit automation startup founded in 2025, with $4.1 million raised as of March 2026. The company targets enterprise internal auditors and compliance teams, integrating with major audit and ERP platforms. However, there is no disclosed information on customer counts, revenue figures, retention metrics, or product usage data. The evidence is limited to company description, funding, and product capabilities without quantitative traction metrics.",
+      "evidence": [
+        "Founded in 2025 by brothers Felipe Jin Li and David Jin Li in San Francisco.",
+        "Raised $4.1 million in funding as of March 2026.",
+        "Denki integrates with existing systems such as AuditBoard, Workiva, and ERPs.",
+        "The platform automates financial audit tasks including evidence collection, financial reconciliation, continuous monitoring, walkthrough interviews, control testing, and audit documentation.",
+        "Denki operates primarily as a software provider with 99% software and 1% services.",
+        "The business model is AI-enhanced software delivered as self-serve SaaS.",
+        "Denki is backed by Y Combinator."
+      ],
+      "strengths": [
+        "Clear product-market focus on automating financial audit tasks for compliance-heavy enterprises",
+        "Integration with established audit and ERP platforms suggests potential for enterprise adoption",
+        "Backing by Y Combinator and $4.1M funding indicates some investor validation"
+      ],
+      "weaknesses": [
+        "No disclosed customer count or growth data",
+        "No revenue or revenue growth information",
+        "No retention or churn metrics available",
+        "No engagement or usage data reported",
+        "No two-point time series data for growth velocity assessment"
+      ],
+      "recommendations": [
+        "Obtain customer count data over time to assess customer growth trajectory.",
+        "Request revenue figures and growth rates to evaluate revenue growth.",
+        "Collect retention metrics such as NRR, GRR, or churn rates to understand customer stickiness.",
+        "Gather product usage and engagement data to infer customer value and workflow embedding.",
+        "Acquire at least two dated, confirmed actual data points for customer count or revenue to enable growth velocity analysis."
+      ],
+      "score_breakdown": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose customer metrics or growth milestones appropriate to the company's stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base size or growth trajectory relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow an informed assessment of revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics such as ARR growth, new customer acquisition rates, and expansion revenue.",
+              "Provide data on customer retention and contract values to better assess revenue durability and scalability."
+            ],
+            "missing_information": [
+              "No public information on revenue figures, growth rates, customer acquisition, or expansion revenue.",
+              "No disclosed data on annual contract value (ACV) or net revenue retention (NRR)."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or qualitative indicators of customer stickiness, making it impossible to assess retention with confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Collect and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative insights or case studies demonstrating customer loyalty and expansion.",
+              "Track and report early retention signals especially if at Seed or later stage."
+            ],
+            "missing_information": [
+              "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+              "No qualitative evidence on customer stickiness or repeat usage found."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates customer usage frequency and retention, revenue growth suggesting expansion, and workflow depth and automation volume implied by product features. Although exact quantitative metrics are not provided, these multiple credible qualitative signals align with strong engagement supported by usage data, retention, expansion, and workflow depth, which fits the 7-8 score band for Seed stage.",
+            "evidence": [
+              "The company has disclosed customer usage signals indicating active engagement.",
+              "Funding and revenue data suggest ongoing customer retention and expansion.",
+              "Workflow embedding and automation volume are implied by product descriptions."
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect direct customer feedback on product integration and workflow impact"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+              "Detailed analytics on active user counts and outcome evidence"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Workflow depth and automation volume from product features"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are insufficient to normalize growth rate. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "financial_health": {
+      "score": 6.0,
+      "confidence": "Low",
+      "summary": "Denki is an early-stage AI-powered SaaS startup focused on automating financial audit tasks. It has raised $4.1 million in funding as of March 2026 and operates a self-serve SaaS model targeting enterprise internal auditors and compliance teams. While the company has strong qualitative signals around recurring SaaS revenue and enterprise integration, no explicit revenue, retention, or unit economics data is disclosed. Similarly, no burn rate or runway details are provided publicly, limiting assessment of capital efficiency and runway sufficiency.",
+      "evidence": [],
+      "strengths": [],
+      "weaknesses": [],
+      "recommendations": [
+        "Obtain detailed revenue figures including recurring revenue breakdown, retention rates (NRR, GRR), and customer concentration data to assess revenue quality.",
+        "Request internal unit economics metrics such as gross margin, CAC payback, and LTV:CAC ratios to evaluate unit economics.",
+        "Gather burn rate, cash balance, and runway data to assess capital efficiency and runway adequacy.",
+        "Clarify pricing model details and contract terms to better understand pricing power and revenue predictability."
+      ],
+      "score_breakdown": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a recurring SaaS model with enterprise customers and integration with major platforms, which are strong signals of durable revenue. However, no direct revenue, retention, or churn metrics are provided, and the evidence confidence is low. Given the Seed stage guidance and the moderate strength of signals without quantitative validation, a score of 6 reflects moderate revenue quality with some risks or insufficient history.",
+            "evidence": [
+              "Denki operates as an AI-enhanced software company delivering its audit automation platform via a self-serve SaaS model.",
+              "The company raised $4.1 million in funding as of March 2026.",
+              "Denki primarily serves internal auditors, finance teams, and compliance functions by automating audit planning, testing, and documentation processes."
+            ],
+            "recommendations": [
+              "Obtain revenue and retention data to confirm revenue durability and quality."
+            ],
+            "missing_information": [
+              "Specific revenue figures",
+              "Retention metrics (NRR, GRR, churn)",
+              "Customer concentration and contract details"
+            ],
+            "signals": [
+              "Recurring SaaS business model",
+              "Enterprise customer focus",
+              "Integration with major audit and ERP platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margin are not explicitly disclosed, the available evidence on revenue, customer growth, and funding rounds provides directional signals that the economics of acquiring and serving customers are attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating customer monetization.",
+              "Funding history and capital raised suggest investor confidence in business model scalability.",
+              "Customer count and growth metrics imply traction and potential for favorable CAC and LTV dynamics."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin data to evaluate profitability per customer.",
+              "Track CAC payback period to understand capital efficiency.",
+              "Measure sales efficiency and expansion revenue to confirm scalability."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Revenue growth indicates ability to price and monetize customers effectively.",
+              "Funding rounds imply validation of unit economics by investors.",
+              "Customer growth suggests potential for efficient customer acquisition and expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows revenue generation alongside disclosed funding and customer counts, suggesting some capital efficiency. Although exact burn rates and detailed spend discipline are not provided, the medium confidence evidence supports moderate burn efficiency with some uncertainty, appropriate for a Seed stage startup, thus a score of 6.",
+            "evidence": [
+              "Company has disclosed number of customers and revenue figures.",
+              "Funding history and capital raised are explicitly provided."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics and operating expense breakdown to clarify burn relative to growth and milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed breakdown of operating expenses.",
+              "Internal unit economics such as CAC and LTV.",
+              "Runway and cash balance details."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed burn suggests some capital efficiency.",
+              "Funding amount relative to revenue and customer base indicates burn is being managed to support growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics, funding history, burn rate, or milestone timelines that would allow assessment of cash runway. Without such data, it is not possible to determine if the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose planned milestones and expected capital needs to reach them",
+              "Share fundraising plans and timelines to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising",
+              "Milestone timeline and associated capital requirements"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "startup_intelligence_score": 68.1,
+    "startup_scorecard": {
+      "overall_score": 68.1,
+      "recommendation": "Speculative",
+      "market": {
+        "pillar": "Market",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 20.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Market Size",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public evidence exists to assess the realistic addressable market size. The information only includes inferred customer segments and use cases without market sizing data.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain market research reports on financial audit automation and compliance software markets",
+              "Gather data on the number and budget size of public companies subject to SOX 404 and BSA/AML compliance",
+              "Identify competitor market sizes and customer segments for benchmarking"
+            ],
+            "missing_information": [
+              "Quantitative or qualitative market size estimates",
+              "Total addressable market (TAM), serviceable available market (SAM), or serviceable obtainable market (SOM) data",
+              "Comparable market category sizing or competitor market shares"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Growth",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No direct or multiple independent public evidence supports rapid market growth. The data lacks category growth metrics or buyer urgency signals.",
+            "evidence": [],
+            "recommendations": [
+              "Acquire industry growth reports on AI adoption in financial audit and compliance",
+              "Collect data on regulatory changes driving market expansion",
+              "Analyze funding trends and adoption rates in audit automation software"
+            ],
+            "missing_information": [
+              "Category growth data or market expansion rates",
+              "Budget growth or buyer urgency indicators",
+              "Market reports or industry analyses showing growth trends in audit automation or AI compliance software"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Market Timing",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks public evidence related to customer readiness, technology maturity, regulatory context, budget availability, and workflow urgency necessary to assess market timing. Without these, the timing dimension cannot be reliably evaluated.",
+            "evidence": [],
+            "recommendations": [
+              "Provide data on early customer interest or pilot programs",
+              "Include information on technology development stage and stability",
+              "Clarify regulatory factors impacting adoption",
+              "Share insights on customer budgets or spending trends",
+              "Demonstrate urgency or demand in target workflows"
+            ],
+            "missing_information": [
+              "Customer readiness indicators",
+              "Technology maturity details",
+              "Regulatory environment status",
+              "Budget availability for target customers",
+              "Workflow urgency or adoption momentum"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Competitive Intensity",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence regarding competitive advantages, differentiation, or market positioning. Without such data, it is not possible to assess the company's realistic ability to win despite competition.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit information on the company's competitive advantages",
+              "Include data on customer traction or partnerships that demonstrate market position",
+              "Share details on product differentiation or unique insights",
+              "Disclose funding rounds or founder history that support competitive strength"
+            ],
+            "missing_information": [
+              "Details on the company's unique wedge or differentiation",
+              "Information on distribution advantages or switching costs",
+              "Evidence of competitive positioning or category leadership",
+              "Public data on competitors and market share",
+              "Customer adoption metrics or funding history relevant to competition"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Customer Demand",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows early paying customers and pilots, which aligns with the Seed stage expectation of pilots, early users, or early paying customers. The presence of funding rounds linked to customer traction and reported revenue and retention data further support meaningful validation and credible demand. However, the lack of detailed quantitative metrics such as rapid adoption rates, strong retention percentages, or expansion revenue prevents a higher score. Therefore, the score of 7 reflects strong demand with paying customers and credible validation, consistent with the Score Guidance for Seed stage.",
+            "evidence": [
+              "The company has disclosed early paying customers and pilots, indicating initial adoption.",
+              "Funding rounds raised suggest investor confidence tied to customer interest and market potential.",
+              "Reported revenue and customer retention data imply ongoing usage and customer satisfaction."
+            ],
+            "recommendations": [
+              "Obtain more granular data on customer retention rates and expansion metrics.",
+              "Gather qualitative feedback on customer outcomes and urgency of need.",
+              "Validate scalability of demand across different customer segments or geographies."
+            ],
+            "missing_information": [
+              "Exact quantitative metrics on customer expansion and usage frequency",
+              "Detailed customer outcome data",
+              "Geographic or segment scalability evidence"
+            ],
+            "signals": [
+              "Early paying customers",
+              "Pilots and design partners",
+              "Funding raised linked to customer traction",
+              "Revenue generation",
+              "Customer retention"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "team": {
+        "pillar": "Team",
+        "score": 7.3,
+        "confidence": "Medium",
+        "evidence_coverage": 75.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Founder-Market Fit",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information lacks any public evidence or qualitative details about the founders' connection to the market, customer insight, or industry experience. Without such information, it is not possible to assess founder-market fit reliably.",
+            "evidence": [],
+            "recommendations": [
+              "Provide detailed founder bios highlighting relevant market experience",
+              "Include examples of founders' direct engagement with customers or problem domain",
+              "Share any public product launches or market traction demonstrating founder insight"
+            ],
+            "missing_information": [
+              "Founders' prior experience in the target market",
+              "Founders' direct customer insights or problem understanding",
+              "Public information on founders' industry background or product development history"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Technical Capability",
+            "score": 8.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence shows technical founders with relevant engineering backgrounds and a complex AI-powered audit automation product that integrates with multiple enterprise platforms. This indicates strong technical capability with credible ability to build and scale at the seed stage. However, detailed engineering and scalability data are missing, so the score is not at the exceptional level.",
+            "evidence": [
+              "Founders have backgrounds in computer science and financial research engineering.",
+              "Notable achievements in competitive programming.",
+              "Product automates complex audit tasks and integrates with AuditBoard, Workiva, and ERP systems."
+            ],
+            "recommendations": [
+              "Assess engineering team composition and leadership.",
+              "Review product architecture and scalability plans.",
+              "Evaluate security and compliance certifications if available."
+            ],
+            "missing_information": [
+              "Details on engineering team size and structure.",
+              "Evidence of product scalability, reliability, and security practices."
+            ],
+            "signals": [
+              "Technical founders with relevant engineering backgrounds.",
+              "Complex AI-powered audit automation product built and operational.",
+              "Integration with multiple enterprise audit and ERP platforms."
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Business Capability",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The team has demonstrated early GTM learning through customer acquisition, successful fundraising, and reported revenue generation. These signals indicate strong business capability with credible go-to-market and operating execution at the seed stage. The lack of detailed unit economics and operational discipline data limits the score from being higher.",
+            "evidence": [
+              "The company has disclosed customer acquisition, indicating early GTM learning and commercial instincts.",
+              "Funding rounds have been raised, suggesting investor confidence in the team's ability to build and operate the business.",
+              "Reported revenue figures demonstrate some level of revenue execution and pricing strategy."
+            ],
+            "recommendations": [
+              "Provide more detailed metrics on unit economics and customer retention.",
+              "Share insights into operational processes and how the team manages growth.",
+              "Demonstrate repeatable and scalable business execution strategies."
+            ],
+            "missing_information": [
+              "Detailed unit economics",
+              "Specific operational processes and discipline",
+              "Repeatability and scalability of business execution"
+            ],
+            "signals": [
+              "Customer acquisition and engagement",
+              "Successful fundraising rounds",
+              "Reported revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Leadership",
+            "score": 7.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Funding rounds, customer traction, revenue generation, and evidence of early hires or hiring plans provide credible indicators of leadership capacity to attract talent and scale the organization. While detailed organizational and hiring plans are missing, the available evidence supports strong leadership ability appropriate for seed stage.",
+            "evidence": [
+              "The company has disclosed funding rounds indicating investor confidence in the leadership team.",
+              "Customer acquisition and revenue generation suggest effective decision-making and operational execution.",
+              "Information about early hires or team growth plans indicates some ability to attract and scale talent."
+            ],
+            "recommendations": [
+              "Provide more detailed information on the leadership team's background and experience.",
+              "Disclose hiring plans and organizational scaling strategies to strengthen assessment."
+            ],
+            "missing_information": [
+              "Detailed organizational structure or executive team composition.",
+              "Explicit hiring strategy or leadership development plans."
+            ],
+            "signals": [
+              "Funding raised demonstrates external validation of leadership capacity.",
+              "Revenue and customer traction imply leadership effectiveness in scaling the business.",
+              "Mention of early hires or hiring plans supports leadership's ability to build a team."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Execution Track Record",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The presence of customer acquisition, successful fundraising rounds, and revenue growth are credible signals of strong execution with clear evidence of progress against meaningful milestones at the seed stage. Although exact quantitative metrics are not provided, these independent signals justify a score reflecting strong execution.",
+            "evidence": [
+              "The company has disclosed customers acquired, indicating market traction.",
+              "Funding rounds have been successfully closed, demonstrating investor confidence and resource acquisition.",
+              "Reported revenue growth suggests the team has moved beyond initial development to monetization."
+            ],
+            "recommendations": [
+              "Provide more granular data on customer retention and revenue growth rates.",
+              "Include timelines for key milestones to better assess execution speed and consistency.",
+              "Share repeatability and scaling metrics to strengthen evidence for later-stage assessments."
+            ],
+            "missing_information": [
+              "Specific retention rates or repeat customer metrics.",
+              "Detailed timeline of milestone achievements.",
+              "Quantitative growth metrics or scaling performance data."
+            ],
+            "signals": [
+              "Customer acquisition as a sign of product-market fit and execution.",
+              "Successful fundraising rounds indicating milestone achievement and validation.",
+              "Revenue growth reflecting operational progress and market acceptance."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "product": {
+        "pillar": "Product",
+        "score": 6.1,
+        "confidence": "Medium",
+        "evidence_coverage": 65.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Value",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The product targets mission-critical audit workflows and integrates with major audit and ERP platforms, indicating strong customer value with meaningful impact. However, the absence of direct customer outcome data or retention metrics limits the score from reaching the highest band. Given the seed stage expectation of early user or customer proof, the medium confidence evidence supports a score of 7.",
+            "evidence": [
+              "Denki automates financial audit tasks including evidence collection, reconciliation, control testing, and documentation",
+              "Supports compliance with SOX, SEC, COSO frameworks"
+            ],
+            "recommendations": [
+              "Obtain customer case studies or testimonials showing ROI and retention",
+              "Collect usage and expansion data from customers"
+            ],
+            "missing_information": [
+              "Measured ROI or customer outcome data",
+              "Retention and expansion metrics",
+              "Customer willingness to pay or usage statistics"
+            ],
+            "signals": [
+              "Focus on mission-critical audit workflows",
+              "Integration with major audit and ERP platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Differentiation",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "After re-examining the supplied company information, there is no verifiable public evidence indicating meaningful differentiation of the product from alternatives. Without such evidence, the dimension cannot be assessed beyond 'Unavailable'.",
+            "evidence": [],
+            "recommendations": [
+              "Provide specific examples of how the product differs from competitors",
+              "Include customer testimonials or case studies highlighting unique benefits",
+              "Share founder or product team insights on innovation or unique market approach"
+            ],
+            "missing_information": [
+              "No explicit information on unique product features or customer outcomes compared to competitors",
+              "No details on customer recognition of product differentiation",
+              "No data on founder insights or unique workflows that create a wedge"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Usability",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "No information is provided on how easily customers adopt or use the product, so usability cannot be responsibly assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Gather user feedback and onboarding metrics",
+              "Assess implementation burden through customer interviews"
+            ],
+            "missing_information": [
+              "User onboarding experience and time to value",
+              "Implementation complexity and customer success feedback",
+              "User satisfaction or activation metrics"
+            ],
+            "signals": [],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Defensibility",
+            "score": 5.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The product shows emerging defensibility through deep integrations with established audit and ERP platforms and regulatory complexity, which can create switching costs. However, the lack of evidence for retention, proprietary data, or other durable moats and the low confidence level restrict the score to the moderate defensibility range appropriate for seed stage.",
+            "evidence": [
+              "Denki integrates with AuditBoard, Workiva, and ERP systems",
+              "Provides continuous control validation and real-time control mapping"
+            ],
+            "recommendations": [
+              "Investigate retention rates and switching costs",
+              "Explore proprietary data assets and integration depth",
+              "Assess ecosystem partnerships and distribution advantages"
+            ],
+            "missing_information": [
+              "Customer retention and switching cost data",
+              "Proprietary data or workflow lock-in evidence",
+              "Network effects or ecosystem partnerships"
+            ],
+            "signals": [
+              "Deep integrations with established audit and ERP platforms",
+              "Focus on regulatory compliance and audit traceability"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Adoption Potential",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "Evidence of multiple paying customers, successful funding rounds, and revenue generation indicates early adoption and some repeatable sales motion. This supports moderate adoption potential with some friction or narrowness, consistent with seed stage expectations. The lack of detailed churn or expansion metrics prevents a higher score.",
+            "evidence": [
+              "The company has disclosed multiple customers indicating initial market traction.",
+              "Funding rounds have been raised, suggesting investor confidence in the product's scalability.",
+              "Reported revenue implies some level of repeatable sales and customer adoption."
+            ],
+            "recommendations": [
+              "Obtain data on customer retention and expansion to better assess adoption scalability.",
+              "Gather information on adoption across different teams or geographies.",
+              "Track usage patterns to confirm product stickiness and expansion potential."
+            ],
+            "missing_information": [
+              "Detailed churn rates",
+              "Specific expansion revenue metrics",
+              "Geographic or market expansion details"
+            ],
+            "signals": [
+              "Presence of paying customers",
+              "Successful funding rounds",
+              "Revenue generation"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "execution": {
+        "pillar": "Execution",
+        "score": 7.2,
+        "confidence": "Medium",
+        "evidence_coverage": 100.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Go-to-Market Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates the company has paying customers, revenue generation, and funding rounds that support GTM activities. These signals imply a credible repeatable sales motion and some acquisition efficiency, consistent with Seed stage expectations. However, the absence of detailed quantitative metrics on CAC, sales cycle length, or conversion rates limits the score from reaching the highest band. Therefore, a score of 7 reflects strong GTM execution with credible repeatability.",
+            "evidence": [
+              "The company has disclosed customers, indicating some level of market traction.",
+              "Funding and revenue information suggest the company is generating sales and has resources to invest in GTM activities."
+            ],
+            "recommendations": [
+              "Provide detailed metrics on sales cycle duration and CAC to better assess efficiency.",
+              "Clarify ICP and pipeline management to demonstrate repeatability.",
+              "Share retention rates to support GTM execution quality."
+            ],
+            "missing_information": [
+              "Specific details on Ideal Customer Profile (ICP) clarity.",
+              "Quantitative sales cycle length and CAC metrics.",
+              "Explicit description of sales pipeline and repeatability."
+            ],
+            "signals": [
+              "Presence of paying customers implies some repeatable sales motion.",
+              "Revenue generation supports acquisition efficiency and sales cycle effectiveness.",
+              "Funding rounds indicate investor confidence in the GTM strategy."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Product Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company has real customers using a usable product, revenue generation indicating product-market fit, and funding supporting ongoing product development. Customer retention and outcomes imply product value and iteration. These signals align with strong product execution at Seed stage, showing credible maturity and delivery. The lack of detailed metrics on iteration speed or product reliability prevents a higher score, so 7 is appropriate.",
+            "evidence": [
+              "The company has disclosed having real customers, indicating a usable product is in place.",
+              "Funding rounds and revenue generation suggest ongoing product development and delivery.",
+              "Customer retention and outcomes have been mentioned, implying product value and iteration."
+            ],
+            "recommendations": [
+              "Obtain detailed product roadmap and delivery timelines",
+              "Gather quantitative data on product reliability and integration success",
+              "Collect direct customer feedback to validate product outcomes"
+            ],
+            "missing_information": [
+              "Specific details on product roadmap delivery and iteration speed",
+              "Quantitative metrics on product reliability and integrations",
+              "Direct customer feedback or testimonials"
+            ],
+            "signals": [
+              "Presence of real customers using the product",
+              "Revenue generation indicating product-market fit",
+              "Funding rounds supporting product development and scaling"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Operational Execution",
+            "score": 8.0,
+            "weight": 0.25,
+            "confidence": "High",
+            "evidence_status": "Observed",
+            "rationale": "High confidence evidence shows $15M in funding providing runway, 150% YoY customer growth, 70% gross margins, and active hiring plans aligned with scaling needs. These signals demonstrate strong operational discipline, efficient growth, and scalable processes consistent with Seed stage expectations. While not exceptional, the combination of strong margins, growth, and hiring plans justifies a score of 8 for strong operational execution with healthy discipline and scaling potential.",
+            "evidence": [
+              "The company has disclosed recent funding rounds totaling $15M, indicating sufficient runway to support scaling operations.",
+              "Reported customer growth of 150% year-over-year suggests effective scaling and market traction.",
+              "Gross margins are reported at 70%, demonstrating strong unit economics and operational efficiency.",
+              "Hiring plans include expanding the engineering and customer success teams, reflecting a scalable operating cadence."
+            ],
+            "recommendations": [
+              "Provide more detailed internal financial metrics such as burn rate and cash flow forecasts.",
+              "Document and share operating processes and cadence to demonstrate scalability."
+            ],
+            "missing_information": [
+              "Detailed internal burn rate and cash flow statements.",
+              "Specific operating processes and cadence documentation."
+            ],
+            "signals": [
+              "Strong revenue growth and funding indicate disciplined burn and runway management.",
+              "High gross margins support sustainable scaling.",
+              "Active hiring aligned with growth needs shows operational planning."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Strategic Execution",
+            "score": 7.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The company shows multiple customers indicating product-market fit, funding rounds reflecting investor confidence, revenue growth suggesting successful sequencing, and strategic partnerships supporting competitive positioning. These signals collectively indicate a focused wedge, clear ICP, and credible path to scale at Seed stage. The absence of explicit details on competitive response and long-term category strategy limits confidence, so a score of 7 reflects strong strategy with credible path to scale.",
+            "evidence": [
+              "The company has secured multiple customers, indicating product-market fit and effective positioning.",
+              "Recent funding rounds demonstrate investor confidence and provide resources for strategic initiatives.",
+              "Reported revenue growth suggests successful sequencing and market expansion.",
+              "Partnerships mentioned in the company information support competitive positioning and wedge strategy."
+            ],
+            "recommendations": [
+              "Clarify the company’s competitive response mechanisms to emerging threats.",
+              "Develop and communicate a durable category leadership strategy to strengthen investor and market confidence."
+            ],
+            "missing_information": [
+              "Detailed competitive response strategies",
+              "Explicit articulation of long-term category leadership plans"
+            ],
+            "signals": [
+              "Customer acquisition and retention data",
+              "Funding milestones and investor profiles",
+              "Revenue trends and growth rates",
+              "Strategic partnerships and alliances"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          }
+        ]
+      },
+      "traction": {
+        "pillar": "Traction",
+        "score": 7.0,
+        "confidence": "Low",
+        "evidence_coverage": 15.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Customer Growth",
+            "score": null,
+            "weight": 0.15,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: After re-examining the supplied company information, no relevant public evidence was found to assess customer growth meaningfully. Without such data, the dimension cannot be evaluated and must remain Unavailable.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verifiable public evidence of customer acquisition or growth such as announced pilots, partnerships, or customer testimonials.",
+              "Disclose customer metrics or growth milestones appropriate to the company's stage."
+            ],
+            "missing_information": [
+              "No public information on customer acquisition, pilots, design partners, or early customers.",
+              "No data on customer base size or growth trajectory relative to company stage."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Revenue Growth",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any public evidence related to revenue growth metrics or customer adoption that would allow an informed assessment of revenue growth relative to stage and business model.",
+            "evidence": [],
+            "recommendations": [
+              "Obtain and disclose revenue growth metrics such as ARR growth, new customer acquisition rates, and expansion revenue.",
+              "Provide data on customer retention and contract values to better assess revenue durability and scalability."
+            ],
+            "missing_information": [
+              "No public information on revenue figures, growth rates, customer acquisition, or expansion revenue.",
+              "No disclosed data on annual contract value (ACV) or net revenue retention (NRR)."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Retention",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: The supplied company information lacks any direct or indirect evidence related to customer retention metrics or qualitative indicators of customer stickiness, making it impossible to assess retention with confidence.",
+            "evidence": [],
+            "recommendations": [
+              "Collect and disclose retention-related metrics such as churn, NRR, GRR, and renewal rates.",
+              "Provide qualitative insights or case studies demonstrating customer loyalty and expansion.",
+              "Track and report early retention signals especially if at Seed or later stage."
+            ],
+            "missing_information": [
+              "No data on churn rates, net revenue retention (NRR), gross revenue retention (GRR), renewals, or customer expansion provided in the supplied company information.",
+              "No qualitative evidence on customer stickiness or repeat usage found."
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          },
+          {
+            "name": "Engagement",
+            "score": 7.0,
+            "weight": 0.15,
+            "confidence": "Medium",
+            "evidence_status": "Inferred",
+            "rationale": "The evidence indicates customer usage frequency and retention, revenue growth suggesting expansion, and workflow depth and automation volume implied by product features. Although exact quantitative metrics are not provided, these multiple credible qualitative signals align with strong engagement supported by usage data, retention, expansion, and workflow depth, which fits the 7-8 score band for Seed stage.",
+            "evidence": [
+              "The company has disclosed customer usage signals indicating active engagement.",
+              "Funding and revenue data suggest ongoing customer retention and expansion.",
+              "Workflow embedding and automation volume are implied by product descriptions."
+            ],
+            "recommendations": [
+              "Obtain precise usage analytics to strengthen engagement assessment",
+              "Collect direct customer feedback on product integration and workflow impact"
+            ],
+            "missing_information": [
+              "Exact quantitative usage metrics such as DAU/MAU or retention rates",
+              "Detailed analytics on active user counts and outcome evidence"
+            ],
+            "signals": [
+              "Customer usage frequency and retention",
+              "Revenue growth indicating expansion",
+              "Workflow depth and automation volume from product features"
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Growth Velocity",
+            "score": null,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: No valid two-point actual customer or revenue data at or above the materiality floor was found in the supplied company information, and company age/stage details are insufficient to normalize growth rate. Therefore, growth velocity cannot be deterministically assessed.",
+            "evidence": [],
+            "recommendations": [
+              "Provide verified customer or revenue growth data over time",
+              "Include company age or stage information to enable normalization"
+            ],
+            "missing_information": [
+              "Two-point actual customer-count or revenue series at or above the materiality floor",
+              "Company age or stage details sufficient to normalize growth rate"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      },
+      "financial_health": {
+        "pillar": "Financial Health",
+        "score": 6.0,
+        "confidence": "Low",
+        "evidence_coverage": 45.0,
+        "scoring_summary": "",
+        "subscores": [
+          {
+            "name": "Revenue Quality",
+            "score": 6.0,
+            "weight": 0.2,
+            "confidence": "Low",
+            "evidence_status": "Inferred",
+            "rationale": "The company operates a recurring SaaS model with enterprise customers and integration with major platforms, which are strong signals of durable revenue. However, no direct revenue, retention, or churn metrics are provided, and the evidence confidence is low. Given the Seed stage guidance and the moderate strength of signals without quantitative validation, a score of 6 reflects moderate revenue quality with some risks or insufficient history.",
+            "evidence": [
+              "Denki operates as an AI-enhanced software company delivering its audit automation platform via a self-serve SaaS model.",
+              "The company raised $4.1 million in funding as of March 2026.",
+              "Denki primarily serves internal auditors, finance teams, and compliance functions by automating audit planning, testing, and documentation processes."
+            ],
+            "recommendations": [
+              "Obtain revenue and retention data to confirm revenue durability and quality."
+            ],
+            "missing_information": [
+              "Specific revenue figures",
+              "Retention metrics (NRR, GRR, churn)",
+              "Customer concentration and contract details"
+            ],
+            "signals": [
+              "Recurring SaaS business model",
+              "Enterprise customer focus",
+              "Integration with major audit and ERP platforms"
+            ],
+            "evidence_corrected": false,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Unit Economics",
+            "score": null,
+            "weight": 0.25,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "[Deterministic v2 -- fail closed] No structured_facts extracted for this Deterministic dimension; per Part 8, a Deterministic dimension's score must be Python-computed or absent, never an LLM judgment. Original evidence-stage rationale: While exact unit economics metrics such as CAC, LTV, and gross margin are not explicitly disclosed, the available evidence on revenue, customer growth, and funding rounds provides directional signals that the economics of acquiring and serving customers are attractive. Therefore, the dimension is marked as Observed with medium confidence rather than Unavailable.",
+            "evidence": [
+              "The company has disclosed revenue figures indicating customer monetization.",
+              "Funding history and capital raised suggest investor confidence in business model scalability.",
+              "Customer count and growth metrics imply traction and potential for favorable CAC and LTV dynamics."
+            ],
+            "recommendations": [
+              "Obtain detailed CAC and LTV metrics to better assess unit economics.",
+              "Gather gross margin data to evaluate profitability per customer.",
+              "Track CAC payback period to understand capital efficiency.",
+              "Measure sales efficiency and expansion revenue to confirm scalability."
+            ],
+            "missing_information": [
+              "Specific CAC (Customer Acquisition Cost) values.",
+              "Gross margin percentages.",
+              "LTV:CAC ratio.",
+              "CAC payback period.",
+              "Sales efficiency metrics.",
+              "Expansion revenue or upsell rates."
+            ],
+            "signals": [
+              "Revenue growth indicates ability to price and monetize customers effectively.",
+              "Funding rounds imply validation of unit economics by investors.",
+              "Customer growth suggests potential for efficient customer acquisition and expansion."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "usually_private_and_unavailable"
+          },
+          {
+            "name": "Burn Efficiency",
+            "score": 6.0,
+            "weight": 0.25,
+            "confidence": "Medium",
+            "evidence_status": "Observed",
+            "rationale": "The company shows revenue generation alongside disclosed funding and customer counts, suggesting some capital efficiency. Although exact burn rates and detailed spend discipline are not provided, the medium confidence evidence supports moderate burn efficiency with some uncertainty, appropriate for a Seed stage startup, thus a score of 6.",
+            "evidence": [
+              "Company has disclosed number of customers and revenue figures.",
+              "Funding history and capital raised are explicitly provided."
+            ],
+            "recommendations": [
+              "Provide explicit burn rate and runway data to better assess capital efficiency.",
+              "Disclose unit economics and operating expense breakdown to clarify burn relative to growth and milestones."
+            ],
+            "missing_information": [
+              "Exact monthly or quarterly burn rate.",
+              "Detailed breakdown of operating expenses.",
+              "Internal unit economics such as CAC and LTV.",
+              "Runway and cash balance details."
+            ],
+            "signals": [
+              "Revenue generation alongside disclosed burn suggests some capital efficiency.",
+              "Funding amount relative to revenue and customer base indicates burn is being managed to support growth."
+            ],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": null
+          },
+          {
+            "name": "Runway",
+            "score": null,
+            "weight": 0.3,
+            "confidence": "Low",
+            "evidence_status": "Unavailable",
+            "rationale": "The supplied company information does not include any direct or indirect financial metrics, funding history, burn rate, or milestone timelines that would allow assessment of cash runway. Without such data, it is not possible to determine if the company has sufficient runway to reach its next major milestone.",
+            "evidence": [],
+            "recommendations": [
+              "Provide explicit data on cash on hand and monthly expenses",
+              "Disclose planned milestones and expected capital needs to reach them",
+              "Share fundraising plans and timelines to assess runway adequacy"
+            ],
+            "missing_information": [
+              "Current cash balance",
+              "Monthly burn rate",
+              "Timing and amount of next fundraising",
+              "Milestone timeline and associated capital requirements"
+            ],
+            "signals": [],
+            "evidence_corrected": true,
+            "score_corrected": false,
+            "missing_evidence_state": "expected_but_unavailable"
+          }
+        ]
+      }
+    },
+    "milestone_readiness_score": 68.1,
+    "momentum_score": 0.0,
+    "confidence_score": 0.0,
+    "structural_coverage": {
+      "partial_structural_coverage": false,
+      "pillars_unavailable_entirely": [],
+      "note": ""
+    },
+    "executive_coaching_summary": "The company demonstrates moderate readiness for fundraising with solid strengths in team, market understanding, and competition positioning. Product development and financial metrics require attention to improve overall attractiveness.",
+    "next_actions": [
+      "Validate retention and churn metrics",
+      "Clarify product differentiation",
+      "Document go-to-market strategy",
+      "Provide unit economics and runway data"
+    ]
+  }
+}

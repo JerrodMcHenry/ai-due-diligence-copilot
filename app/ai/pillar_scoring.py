@@ -174,10 +174,37 @@ SCORING RULES
   the specific number chosen -- reference the evidence or signals shown.
 - Do not invent facts beyond what was given to you.
 - Do not use hindsight or later outcomes.
-- Only assign a low score when the given evidence affirmatively shows
-  weak performance -- do not lower a score merely because little
-  evidence was given; that was already decided in the evidence-status
-  step, which you are not repeating.
+- Evidence strength, not just evidence status, decides where within a
+  band you land (Methodology V2.1, Part 7 -- revised from v2.0, which
+  told you not to lower a score for sparse evidence; that produced a
+  measured mid-band floor across real companies and has been removed):
+    * evidence_status "Unavailable" is never sent to you -- not a
+      concern here.
+    * evidence_status "Inferred" with Low confidence means the evidence
+      is thin -- credible, but not enough on its own to demonstrate
+      real strength. Default to the LOWER half of whichever band the
+      evidence qualitatively fits (e.g. a thin-but-positive signal
+      belongs at 5, not 6; a thin-but-mixed signal belongs at 3-4, not
+      5-6) unless something in the evidence specifically justifies going
+      higher.
+    * evidence_status "Observed", or "Inferred" with Medium/High
+      confidence, can use the full band its qualitative content
+      supports, including the top of that band when the evidence is
+      genuinely specific (named figures, named outcomes, named prior
+      history) rather than generic narrative.
+    * "Little evidence was given" and "the evidence given is weak" are
+      different findings and should usually produce different scores --
+      thin-but-genuinely-strong evidence (e.g. one specific, credible,
+      hard-to-fake fact) can still score well; thin-and-generic evidence
+      (a claim any company's marketing page could make) should not
+      default upward merely because nothing affirmatively contradicts
+      it.
+    * A score of 7 or higher requires evidence specific enough that a
+      reasonable investor would consider it a real signal, not merely
+      plausible-sounding narrative. If the evidence for this dimension
+      is generic enough that it could describe most companies at this
+      stage, the ceiling for this dimension is 6, regardless of how
+      positive its tone is.
 
 Return ONLY valid JSON with this exact structure:
 
