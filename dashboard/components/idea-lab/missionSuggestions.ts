@@ -19,9 +19,20 @@ const KNOWN_MILESTONE_SUGGESTIONS: Record<string, MissionSuggestion> = {
     relatedCategory: "validation",
     missionType: "customer_discovery",
   },
+  // Phase 14 -- Founder Journey Audit, Part 11: missionType corrected
+  // from "validation" to "pricing". This milestone is specifically about
+  // willingness-to-pay, not general customer/problem validation -- the
+  // old "validation" tag meant it resolved (via MISSION_TYPE_TO_PLAYBOOK)
+  // to Problem Validation, and even before that, via NextMoves' own
+  // category-only lookup, to Customer Discovery -- neither is the
+  // Pricing & Willingness-to-Pay playbook Phase 12 built specifically
+  // for this exact scenario ("Test willingness to pay" is that phase's
+  // own worked example of what mission_type=pricing should map to).
+  // relatedCategory stays "validation" (used only as a fallback, and for
+  // MissionsSection's WHY_IT_MATTERS blurb, which still fits).
   "Secure a first paying customer to validate willingness to pay.": {
     relatedCategory: "validation",
-    missionType: "validation",
+    missionType: "pricing",
   },
   "Define what specifically differentiates your solution from alternatives.": {
     relatedCategory: "problem_solution",

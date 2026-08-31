@@ -174,6 +174,43 @@ function test_content_avoids_filler_language(): void {
   }
 }
 
+// --- Phase 14 (Founder Journey Audit) regression: Part 11 -------------------
+//
+// missionSuggestions.ts lives outside this file's alias-free module family
+// (it imports "@/types", which plain node can't resolve -- see this file's
+// own header comment) so it can't be imported directly here. This reads its
+// source as text instead (the same cross-boundary technique the firewall
+// tests below already use) -- a lightweight guard against silently
+// regressing the exact classification this phase corrected: "Secure a
+// first paying customer to validate willingness to pay." must be tagged
+// missionType: "pricing", not "validation" -- which is what caused it to
+// resolve to the wrong playbook both as a raw Next Move (Customer
+// Discovery, via the old category-only lookup) and, even after Phase 12's
+// own mission-level fix, once turned into a Mission (Problem Validation,
+// neither of which is Pricing & Willingness-to-Pay).
+function test_willingness_to_pay_milestone_is_tagged_pricing_not_validation(): void {
+  const source = readFileSync(path.join(DASHBOARD_ROOT, "components/idea-lab/missionSuggestions.ts"), "utf-8");
+  const milestoneIndex = source.indexOf("Secure a first paying customer to validate willingness to pay.");
+  expect(milestoneIndex !== -1, "Expected milestone string not found in missionSuggestions.ts -- has it been reworded?");
+
+  const entryText = source.slice(milestoneIndex, milestoneIndex + 300);
+  expect(
+    /missionType:\s*"pricing"/.test(entryText),
+    `"Secure a first paying customer..." must be tagged missionType: "pricing" (not "validation"), got surrounding text: ${entryText}`
+  );
+}
+
+// Confirms the SAME resolution mechanism NextMoves.tsx and MissionsSection
+// use agree, by construction, for this milestone -- not just that the
+// underlying tag is correct in isolation.
+function test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbook(): void {
+  const playbook = getPlaybookForMission({ missionType: "pricing", relatedCategory: "validation" });
+  expect(
+    playbook?.slug === "pricing-validation",
+    `Expected the pricing/willingness-to-pay milestone to resolve to "pricing-validation", got: ${playbook?.slug}`
+  );
+}
+
 // --- Centralized mapping tests (Part 6/15) ----------------------------------
 
 function test_vps_category_mapping_covers_all_six_categories(): void {
@@ -322,6 +359,8 @@ const TESTS: [string, () => void][] = [
   ["test_content_completeness", test_content_completeness],
   ["test_related_playbooks_resolve", test_related_playbooks_resolve],
   ["test_journey_groups_cover_every_playbook_exactly_once", test_journey_groups_cover_every_playbook_exactly_once],
+  ["test_willingness_to_pay_milestone_is_tagged_pricing_not_validation", test_willingness_to_pay_milestone_is_tagged_pricing_not_validation],
+  ["test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbook", test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbook],
   ["test_exactly_five_phase_12_playbooks_exist", test_exactly_five_phase_12_playbooks_exist],
   ["test_no_duplicate_playbook_slugs", test_no_duplicate_playbook_slugs],
   ["test_phase_12_playbooks_have_the_deeper_structure", test_phase_12_playbooks_have_the_deeper_structure],

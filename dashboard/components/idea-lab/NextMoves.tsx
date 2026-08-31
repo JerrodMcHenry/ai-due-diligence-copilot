@@ -2,7 +2,7 @@ import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { suggestionForMilestone } from "./missionSuggestions";
-import { getPlaybookForVpsCategory } from "@/lib/playbooks/resourceMap";
+import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 
 // Phase 10.6 -- Idea Lab V2, Part 9. "Your next 3 moves" -- the EXACT
 // SAME deterministic, rule-based `next_milestones` list
@@ -41,11 +41,22 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
       <ol className="mt-3 space-y-3">
         {topThree.map((milestone, index) => {
           const alreadyMissioned = missionedMilestones.includes(milestone);
-          // Phase 10.9 -- Founder Playbooks V1, Part 5B: reuses the SAME
-          // exact-string lookup Phase 10.7 already built for "Make this a
-          // mission" (missionSuggestions.ts) rather than a second table --
-          // one milestone->category classification, two presentational uses.
-          const playbook = getPlaybookForVpsCategory(suggestionForMilestone(milestone).relatedCategory);
+          const suggestion = suggestionForMilestone(milestone);
+          // Phase 14 -- Founder Journey Audit, Part 11: resolves through
+          // getPlaybookForMission (the SAME function MissionsSection uses
+          // for the actual, created Mission), not the coarser
+          // category-only getPlaybookForVpsCategory this used to call --
+          // that mismatch was the concrete, confirmed bug this phase
+          // found: a milestone could show one "Learn how" playbook here,
+          // then a DIFFERENT one once turned into a Mission (e.g.
+          // "Secure a first paying customer..." showed Customer Discovery
+          // here but a different -- or, before Phase 12's mission_type
+          // fix, still-wrong -- playbook once missioned). Passing the
+          // full suggestion (missionType + relatedCategory) guarantees
+          // this list and the Mission card it feeds always agree, by
+          // construction, for every milestone -- not patched one string
+          // at a time.
+          const playbook = getPlaybookForMission(suggestion);
 
           return (
             <li key={milestone} className="flex items-start gap-3">

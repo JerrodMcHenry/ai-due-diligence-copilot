@@ -442,7 +442,13 @@ export default function MissionsSection({
                       missionType: primaryMission.mission_type,
                       relatedCategory: primaryMission.related_category,
                     });
-                return playbook ? <PlaybookLink slug={playbook.slug} label={`Learn: ${playbook.title} →`} /> : null;
+                // Phase 14 -- Founder Journey Audit, Part 16: "Learn how:"
+                // (not "Learn:") to match the wording every other Playbook
+                // link in the app already uses (NextMoves, VPSResultPanel,
+                // FundraisingReadinessView, PitchDeckReviewView) -- the
+                // same action had two different labels depending on where
+                // it appeared.
+                return playbook ? <PlaybookLink slug={playbook.slug} label={`Learn how: ${playbook.title} →`} /> : null;
               })()}
 
               {primaryMission.learning_summary ? (

@@ -64,7 +64,16 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
         <div className="mx-auto mt-4 max-w-md">
           <Disclosure summary="What does this score mean?">
             <ul className="space-y-1.5 text-xs leading-5 text-text-secondary">
-              <li>• VPS is <strong>modeled</strong>, not SPS — it&rsquo;s a different score for a different purpose, and the two are never comparable.</li>
+              {/* Phase 14 -- Founder Journey Audit, Part 8/10: rewritten
+                  without bare "VPS"/"SPS" acronyms. Neither term is
+                  defined anywhere else in the modeled-venture founder
+                  journey (the score is always labeled "Venture Potential
+                  Score" in the UI around it), and "SPS" specifically
+                  belongs to a completely different product surface (real,
+                  evidence-analyzed startups) a first-time founder here has
+                  no reason to have encountered yet. Same substantive
+                  distinction, plain language. */}
+              <li>• This score is <strong>modeled</strong> from your own assumptions — it&rsquo;s different from a real company&rsquo;s evidence-based Startup Power Score, and the two are never comparable.</li>
               <li>• It reflects your own stated assumptions, not verified company performance.</li>
               <li>• Missing categories are expected for an early idea — that&rsquo;s honest, not a penalty.</li>
               <li>• Validation improves as you add real observations (interviews, signups, paying customers) — not by changing assumptions alone.</li>
