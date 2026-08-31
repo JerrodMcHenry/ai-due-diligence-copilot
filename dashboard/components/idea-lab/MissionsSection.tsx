@@ -13,6 +13,7 @@ import { explainCategoryChanges } from "./categoryChangeExplain";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 import { getPlaybookBySlug } from "@/content/playbooks";
+import { resolveRecentLearning, type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 
 import {
   createVentureMission,
@@ -91,7 +92,19 @@ type MissionsSectionProps = {
   onPendingMissionConsumed: () => void;
   onVentureUpdated: (updated: VentureResponse) => void;
   onMissionTitlesChanged?: (vpsGuidanceTitles: string[]) => void;
+  // Phase 13 -- Founder Home / Venture Command Center, Part 13. Same
+  // "lift a derived summary up via callback" pattern
+  // onMissionTitlesChanged already uses -- no new fetch, no new endpoint.
+  // Reports the SINGLE most recently recorded learning_summary across
+  // ALL missions (active or completed; a completed mission's learning
+  // would otherwise vanish from view entirely once it leaves the active
+  // list), so VentureWorkspace can show it in a "Recent Learning" card
+  // positioned wherever the Command Center hierarchy wants it, independent
+  // of where this component itself renders.
+  onRecentLearningChanged?: (learning: RecentLearning | null) => void;
 };
+
+export type { RecentLearning };
 
 type LoadState = "loading" | "ready" | "error";
 
@@ -104,6 +117,7 @@ export default function MissionsSection({
   onPendingMissionConsumed,
   onVentureUpdated,
   onMissionTitlesChanged,
+  onRecentLearningChanged,
 }: MissionsSectionProps) {
   const { getToken } = useAuth();
 
@@ -170,6 +184,11 @@ export default function MissionsSection({
 
   useEffect(() => {
     onMissionTitlesChanged?.(missions.filter((m) => m.source === "vps_guidance").map((m) => m.title));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [missions]);
+
+  useEffect(() => {
+    onRecentLearningChanged?.(resolveRecentLearning(missions));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missions]);
 

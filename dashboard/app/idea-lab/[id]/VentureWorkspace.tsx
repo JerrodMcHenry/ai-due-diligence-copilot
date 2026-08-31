@@ -16,6 +16,7 @@ import VentureOverview from "@/components/idea-lab/VentureOverview";
 import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
+import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
@@ -56,6 +57,38 @@ type VentureWorkspaceProps = {
 
 function assumptionsEqual(a: VentureAssumptions, b: VentureAssumptions): boolean {
   return JSON.stringify(a) === JSON.stringify(b);
+}
+
+// Phase 13 -- Founder Home / Venture Command Center, Part 5/7. Mirrors
+// app/idea-lab/IdeaLabDashboard.tsx's own formatUpdatedAt() exactly (same
+// format string) for consistency between the venture list and this page
+// -- not extracted to a shared util, since it's one small, single-purpose
+// helper used in exactly two places, matching this file's own existing
+// "small local helper" convention (see openDisclosureAndScrollIntoView
+// below).
+function formatUpdatedAt(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+// Phase 13, Part 13. Restrained "recent learning" presentation -- exact
+// founder-written text only, never summarized or reinterpreted. Renders
+// nothing when there's nothing to show (Part 19: no fake values, no
+// invented empty-state metric).
+function RecentLearningCard({ learning }: { learning: RecentLearning }) {
+  const when = formatUpdatedAt(learning.recordedAt);
+  return (
+    <BaseCard className="p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Recent learning</p>
+      <p className="mt-2 text-sm leading-6 text-text-primary">{learning.summary}</p>
+      <p className="mt-2 text-xs text-text-muted">
+        From &ldquo;{learning.missionTitle}&rdquo;{when ? ` · ${when}` : ""}
+      </p>
+    </BaseCard>
+  );
 }
 
 export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
@@ -105,6 +138,11 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     } | null
   >(null);
   const [missionedMilestones, setMissionedMilestones] = useState<string[]>([]);
+  // Phase 13 -- Founder Home / Venture Command Center, Part 13. Fed by
+  // MissionsSection's own onRecentLearningChanged callback (same pattern
+  // as missionedMilestones above) -- no new fetch, purely a derived view
+  // of data MissionsSection already loads.
+  const [recentLearning, setRecentLearning] = useState<RecentLearning | null>(null);
 
   // Phase 11, Part 13: a deck-review "Make this a mission" click stashes
   // one fix (lib/pitchDeckMissionHandoff.ts) and navigates here -- this
@@ -321,7 +359,11 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     <>
       <PageHeader
         title={venture.name}
-        subtitle="Modeled venture — Idea Lab"
+        subtitle={
+          formatUpdatedAt(venture.updated_at)
+            ? `Modeled venture — Idea Lab · Updated ${formatUpdatedAt(venture.updated_at)}`
+            : "Modeled venture — Idea Lab"
+        }
         action={
           <Button
             type="button"
@@ -384,34 +426,14 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           }}
         /> : null}
 
-        {/* Phase 11 -- Pitch Deck Coach V2, Part 17: the Idea Lab -> Pitch
-            connection. Reuses the exact same, already-built, deliberately
-            data-decoupled teaser Founder Workspace already shows
-            (components/founder/PitchDeckCoachTeaser.tsx) -- Pitch Deck
-            Coach reviews are ownership-scoped to the founder's account,
-            never to a specific venture, so this is navigation only, same
-            as there. Shown once a venture has a model result (Idea ->
-            Model has happened), matching the stated journey order
-            (Idea -> Model -> Validate -> Missions -> Pitch -> ...)
-            without gating on "ready for real startup" -- a founder can
-            reasonably want deck coaching well before that point. */}
-        {venture.model_result ? <PitchDeckCoachTeaser /> : null}
-
-        {venture.model_result ? (
-          <NextMoves
-            milestones={venture.model_result.next_milestones}
-            missionedMilestones={missionedMilestones}
-            onMakeMission={(milestoneText) => {
-              const suggestion = suggestionForMilestone(milestoneText);
-              setPendingMission({
-                title: milestoneText,
-                relatedCategory: suggestion.relatedCategory,
-                missionType: suggestion.missionType,
-              });
-            }}
-          />
-        ) : null}
-
+        {/* Phase 13 -- Founder Home / Venture Command Center, Part 6/10.
+            Reordered so Current Mission (D) renders immediately after
+            "what matters now" (C), ahead of the fuller Next Moves list
+            (E) -- matching the spec's STATUS -> PRIORITY -> ACTION ->
+            LEARNING hierarchy. Nothing about MissionsSection itself
+            changed (same data, same firewall, same component) -- only
+            its position on the page and the addition of the
+            onRecentLearningChanged callback below. */}
         <div id="your-missions">
         <MissionsSection
           ventureId={ventureId}
@@ -428,6 +450,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           pendingMission={pendingMission}
           onPendingMissionConsumed={() => setPendingMission(null)}
           onMissionTitlesChanged={setMissionedMilestones}
+          onRecentLearningChanged={setRecentLearning}
           onVentureUpdated={(updated) => {
             setVenture(updated);
             setDraft(updated.assumptions);
@@ -436,22 +459,67 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         />
         </div>
 
-        <BaseCard className="p-5">
-          <WhatIfPanel
-            currentAssumptions={venture.assumptions}
-            onRunScenario={handleRunScenario}
-            isRunning={isPreviewing}
-          />
-        </BaseCard>
-
-        {scenario ? (
-          <ScenarioComparison
-            scenario={scenario}
-            onApply={handleSave}
-            onDiscard={() => setScenario(null)}
-            isApplying={isSaving}
+        {venture.model_result ? (
+          <NextMoves
+            milestones={venture.model_result.next_milestones}
+            missionedMilestones={missionedMilestones}
+            onMakeMission={(milestoneText) => {
+              const suggestion = suggestionForMilestone(milestoneText);
+              setPendingMission({
+                title: milestoneText,
+                relatedCategory: suggestion.relatedCategory,
+                missionType: suggestion.missionType,
+              });
+            }}
           />
         ) : null}
+
+        {/* Phase 13, Part 13/14: Recent Learning (F) -- purely derived
+            from data MissionsSection already loads; renders nothing when
+            there's nothing real to show (no invented empty state, no
+            fabricated interpretation of founder-written text). */}
+        {recentLearning ? <RecentLearningCard learning={recentLearning} /> : null}
+
+        {/* Phase 13, Part 15/17/18: Founder Tools (G) -- restrained,
+            secondary, grouped under one heading so these read as
+            supporting tools rather than competing with the primary
+            status -> priority -> action -> learning flow above. Pitch
+            Deck Coach and What If are the SAME, unmodified components
+            Phase 10.10/10.6 already built -- only their position and
+            grouping changed. The Playbooks library link is new (Phase 13
+            Part 16): general, unconditional access to the same
+            dashboard/content/playbooks the contextual "Learn how" links
+            above already point into -- no new mapping system. */}
+        <section className="space-y-3">
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Founder tools</h2>
+
+          {venture.model_result ? <PitchDeckCoachTeaser /> : null}
+
+          <BaseCard className="p-5">
+            <WhatIfPanel
+              currentAssumptions={venture.assumptions}
+              onRunScenario={handleRunScenario}
+              isRunning={isPreviewing}
+            />
+          </BaseCard>
+
+          {scenario ? (
+            <ScenarioComparison
+              scenario={scenario}
+              onApply={handleSave}
+              onDiscard={() => setScenario(null)}
+              isApplying={isSaving}
+            />
+          ) : null}
+
+          <Link
+            href="/playbooks"
+            className="flex items-center justify-between rounded-2xl border border-border bg-surface p-5 text-sm font-semibold text-text-primary transition-colors hover:border-primary"
+          >
+            Browse founder playbooks
+            <span aria-hidden="true" className="text-primary">→</span>
+          </Link>
+        </section>
 
         <Disclosure id="edit-the-full-model" summary="Edit the full model" defaultOpen={false}>
         <section>

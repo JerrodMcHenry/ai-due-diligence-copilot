@@ -22,6 +22,7 @@ import {
   getJourneyStage,
 } from "../lib/founderJourney.ts";
 import { resolveIdeaLabNextStep } from "../lib/journey/resolveIdeaLabNextStep.ts";
+import { resolveRecentLearning } from "../lib/journey/resolveRecentLearning.ts";
 import { getAllPlaybooks } from "../content/playbooks/index.ts";
 
 function expect(condition: boolean, message: string): void {
@@ -126,6 +127,49 @@ function test_resolve_next_step_is_pure_and_deterministic(): void {
   expect(JSON.stringify(first) === JSON.stringify(second), "Identical input must always produce identical output -- no hidden randomness or state");
 }
 
+// --- resolveRecentLearning (Phase 13, Part 13) --------------------------
+
+function test_recent_learning_empty_when_no_missions(): void {
+  expect(resolveRecentLearning([]) === null, "Zero missions must resolve to null, not a fabricated empty-state value");
+}
+
+function test_recent_learning_empty_when_no_mission_has_learning(): void {
+  const missions = [
+    { title: "Interview target customers", learning_summary: null, learning_recorded_at: null },
+    { title: "Test pricing", learning_summary: null, learning_recorded_at: "2026-01-01T00:00:00Z" },
+  ];
+  expect(resolveRecentLearning(missions) === null, "A mission with a recorded_at but no summary text must not surface as learning");
+}
+
+function test_recent_learning_picks_most_recent_by_recorded_at(): void {
+  const missions = [
+    { title: "Older mission", learning_summary: "Talked to 5 people, mixed signal.", learning_recorded_at: "2026-01-01T00:00:00Z" },
+    { title: "Newer mission", learning_summary: "3 of 10 customers agreed to a paid pilot.", learning_recorded_at: "2026-03-15T00:00:00Z" },
+  ];
+  const result = resolveRecentLearning(missions);
+  expect(result !== null, "Expected a real result");
+  expect(result?.missionTitle === "Newer mission", `Must pick the most recently recorded learning, got: ${result?.missionTitle}`);
+  expect(result?.summary === "3 of 10 customers agreed to a paid pilot.", "Must return the exact founder-written text, not a summary of it");
+}
+
+function test_recent_learning_considers_completed_missions_too(): void {
+  // The core Phase 13 gap this function closes: a completed mission's
+  // learning must not become invisible just because it's no longer the
+  // "active" mission MissionsSection shows inline.
+  const missions = [
+    { title: "Completed mission", learning_summary: "No useful signal yet.", learning_recorded_at: "2026-05-01T00:00:00Z" },
+  ];
+  const result = resolveRecentLearning(missions);
+  expect(result !== null && result.summary === "No useful signal yet.", "A completed mission's real learning must still surface");
+}
+
+function test_recent_learning_is_pure_and_deterministic(): void {
+  const missions = [{ title: "A mission", learning_summary: "Learned something.", learning_recorded_at: "2026-02-01T00:00:00Z" }];
+  const first = resolveRecentLearning(missions);
+  const second = resolveRecentLearning(missions);
+  expect(JSON.stringify(first) === JSON.stringify(second), "Identical input must always produce identical output");
+}
+
 // --- Firewall: journey modules touch no scoring/persistence layer -------
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -144,6 +188,7 @@ const FORBIDDEN_SUBSTRINGS = [
 const FILES_THAT_MUST_STAY_PURE = [
   "lib/founderJourney.ts",
   "lib/journey/resolveIdeaLabNextStep.ts",
+  "lib/journey/resolveRecentLearning.ts",
 ];
 
 function test_journey_modules_contain_no_scoring_or_persistence_calls(): void {
@@ -178,6 +223,11 @@ const TESTS: [string, () => void][] = [
   ["test_resolve_next_step_with_milestones", test_resolve_next_step_with_milestones],
   ["test_resolve_next_step_no_open_milestones", test_resolve_next_step_no_open_milestones],
   ["test_resolve_next_step_is_pure_and_deterministic", test_resolve_next_step_is_pure_and_deterministic],
+  ["test_recent_learning_empty_when_no_missions", test_recent_learning_empty_when_no_missions],
+  ["test_recent_learning_empty_when_no_mission_has_learning", test_recent_learning_empty_when_no_mission_has_learning],
+  ["test_recent_learning_picks_most_recent_by_recorded_at", test_recent_learning_picks_most_recent_by_recorded_at],
+  ["test_recent_learning_considers_completed_missions_too", test_recent_learning_considers_completed_missions_too],
+  ["test_recent_learning_is_pure_and_deterministic", test_recent_learning_is_pure_and_deterministic],
   ["test_journey_modules_contain_no_scoring_or_persistence_calls", test_journey_modules_contain_no_scoring_or_persistence_calls],
   ["test_venture_handoff_only_uses_sessionstorage_no_network", test_venture_handoff_only_uses_sessionstorage_no_network],
 ];
