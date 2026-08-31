@@ -8,6 +8,16 @@ import type { SPSHistoryPoint } from "@/types";
 
 type SPSHistoryProps = {
   history: SPSHistoryPoint[];
+  // Phase 10.9 verification fix: this component always tracks the legacy
+  // V2.1 startup_intelligence_score (score_history has no V3 field --
+  // see get_sps_history()'s own docstring in app/database/db.py). When
+  // the current analysis ALSO has a V3 assessment, showing a bare
+  // "SPS History" / "Current SPS" here reads as a second, competing
+  // number right next to (or directly contradicting, for LIMITED/
+  // INSUFFICIENT) the V3 assessment above it. This only changes the
+  // copy to disambiguate which methodology the number belongs to -- the
+  // data source and every number are unchanged.
+  isLegacyLabel?: boolean;
 };
 
 const CHART_WIDTH = 640;
@@ -31,13 +41,14 @@ function formatShortDate(iso: string): string {
   });
 }
 
-export default function SPSHistory({ history }: SPSHistoryProps) {
+export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistoryProps) {
   const gradientId = useId();
+  const currentLabel = isLegacyLabel ? "V2.1 SPS (legacy)" : "Current SPS";
 
   if (history.length === 0) {
     return (
       <BaseCard className="p-6">
-        <SectionHeading />
+        <SectionHeading isLegacyLabel={isLegacyLabel} />
         <p className="mt-3 text-sm text-text-muted">
           No historical analyses yet. Run another analysis for this company
           to start tracking its SPS over time.
@@ -52,11 +63,11 @@ export default function SPSHistory({ history }: SPSHistoryProps) {
   if (history.length === 1) {
     return (
       <BaseCard className="p-6">
-        <SectionHeading />
+        <SectionHeading isLegacyLabel={isLegacyLabel} />
 
         <div className="mt-4 flex flex-wrap items-end gap-x-10 gap-y-4">
           <Stat
-            label="Current SPS"
+            label={currentLabel}
             value={latest.startup_intelligence_score.toFixed(1)}
           />
           <Stat label="Historical analyses" value="1" />
@@ -64,8 +75,9 @@ export default function SPSHistory({ history }: SPSHistoryProps) {
         </div>
 
         <p className="mt-4 text-sm text-text-muted">
-          Only one canonical analysis exists for this company — a trend will
-          appear once a second analysis is recorded.
+          {isLegacyLabel
+            ? "This tracks the earlier V2.1 methodology's score history, separate from the Startup Power Score assessment above."
+            : "Only one canonical analysis exists for this company — a trend will appear once a second analysis is recorded."}
         </p>
       </BaseCard>
     );
@@ -77,11 +89,11 @@ export default function SPSHistory({ history }: SPSHistoryProps) {
 
   return (
     <BaseCard className="p-6">
-      <SectionHeading />
+      <SectionHeading isLegacyLabel={isLegacyLabel} />
 
       <div className="mt-4 flex flex-wrap items-end gap-x-10 gap-y-4">
         <Stat
-          label="Current SPS"
+          label={currentLabel}
           value={latest.startup_intelligence_score.toFixed(1)}
         />
 
@@ -95,6 +107,13 @@ export default function SPSHistory({ history }: SPSHistoryProps) {
         <Stat label="Last analysis" value={formatDate(latest.created_at)} />
       </div>
 
+      {isLegacyLabel ? (
+        <p className="mt-2 text-xs text-text-muted">
+          This chart tracks the earlier V2.1 methodology&rsquo;s score history, separate from the
+          Startup Power Score assessment above.
+        </p>
+      ) : null}
+
       <div className="mt-6">
         <SPSLineChart history={history} gradientId={gradientId} />
       </div>
@@ -102,10 +121,10 @@ export default function SPSHistory({ history }: SPSHistoryProps) {
   );
 }
 
-function SectionHeading() {
+function SectionHeading({ isLegacyLabel }: { isLegacyLabel: boolean }) {
   return (
     <h2 className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
-      SPS History
+      {isLegacyLabel ? "V2.1 SPS History" : "SPS History"}
     </h2>
   );
 }

@@ -112,7 +112,16 @@ export default async function StartupProfilePage({ params }: Props) {
         startupId={startup.startup_id}
       />
 
-      <SPSHistory history={history} />
+      {/* Phase 10.9 verification fix: SPSHistory always tracks the legacy
+          V2.1 startup_intelligence_score (see its own component docstring)
+          -- when this analysis also has a V3 assessment, that creates a
+          real "which score is current" confusion (a "Current SPS: 68.0"
+          stat sitting directly under a LIMITED/INSUFFICIENT hero that just
+          said "no overall SPS", or a second number next to a SUFFICIENT
+          V3 ring). isLegacyLabel disambiguates the copy only -- the data
+          source, the V2.1 pipeline, and V2.1's own historical record are
+          completely unchanged. */}
+      <SPSHistory history={history} isLegacyLabel={methodology.sps_v3 != null} />
 
       <IntelligencePillars methodology={methodology} />
     </div>

@@ -176,8 +176,24 @@ export function computeStrongestWeakest(
   return { strongest: strongest.label, weakest: weakest.label };
 }
 
+// Phase 10.9 verification pass: a startup with a V3 assessment that
+// is NOT "sufficient" has no real, comparable overall number (its
+// sps_v3.overall_score is null by construction) -- its V2.1
+// overall_score still exists, but comparing a real number against a
+// startup with "not enough evidence" is exactly the kind of false
+// numerical comparability Part 7 of the verification directive calls
+// out. Such a startup is excluded from this specific "are they all
+// close" check entirely (not converted to 0, not silently included as
+// if comparable) -- with fewer than 2 comparable scores left, this
+// correctly returns false rather than claiming anything about a
+// close/wide gap it can't actually support.
+function hasComparableSps(startup: ComparisonStartup): boolean {
+  return !startup.sps_v3 || startup.sps_v3.assessment_state === "sufficient";
+}
+
 export function isSpsTooCloseToRank(startups: ComparisonStartup[]): boolean {
   const scores = startups
+    .filter(hasComparableSps)
     .map((s) => s.overall_score)
     .filter((score): score is number => typeof score === "number");
 

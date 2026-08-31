@@ -135,12 +135,27 @@ def map_stage(stage_text: str | None) -> Stage:
 
 # ---------------------------------------------------------------------
 # Extraction schema -- structurally cannot carry a score. Every field is
-# either a closed enum, a bool, or a short label string, plus the
-# required verbatim_quote used by the post-call firewall below.
+# either a closed enum, a bool, or a short label string, plus
+# verbatim_quote, used by the post-call firewall below.
+#
+# verbatim_quote is `str | None` (SPS V3 local activation verification
+# pass -- found via a real live /analyze run): it is REQUIRED in spirit
+# (the system prompt insists on it, and _quote_is_grounded() below
+# treats a missing/empty quote as ungrounded, so an unquoted claim is
+# still always dropped) but declared optional in the schema so that a
+# single claim the model forgot to quote fails ONLY that one claim's
+# grounding check, not the whole pillar's Pydantic validation. Before
+# this fix, a strict `str` field meant one missing quote anywhere in a
+# pillar's claim list raised a ValidationError for the entire
+# _PillarExtraction, silently discarding every OTHER, correctly-quoted
+# claim in that same pillar too -- confirmed live: a real analysis whose
+# Team evidence contained a clean, classifiable, grounded founder-
+# background quote still produced 0 Team observations, traced to
+# exactly this failure mode via a raw-response debug capture.
 # ---------------------------------------------------------------------
 
 class _CompetitorClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     named_competitor: str
     # bool | None (not plain bool): the model sometimes emits an explicit
     # `null` for a boolean it isn't confident about, rather than omitting
@@ -153,32 +168,32 @@ class _CompetitorClaim(BaseModel):
 
 
 class _CustomerDemandClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     outcome_claim: str
     named_customer: str | None = None
 
 
 class _FounderExperienceClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     founder_role: str
     experience_type: str  # one of FounderExperienceType values
     prior_entity_name: str | None = None
 
 
 class _FounderOutcomeClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     prior_entity_name: str
     outcome_type: str  # one of FounderOutcomeType values
 
 
 class _CapabilityClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     capability_label: str
     shipped: bool | None = False
 
 
 class _ContractClaim(BaseModel):
-    verbatim_quote: str
+    verbatim_quote: str | None = None
     contract_type: str  # one of CustomerType values
     named_customer: str | None = None
     renewal_evidence: bool | None = False
@@ -235,11 +250,13 @@ def _pillar_observed_text(pillar: PillarAnalysis) -> str:
     return "\n".join(lines)
 
 
-def _quote_is_grounded(quote: str, source_text: str) -> bool:
+def _quote_is_grounded(quote: str | None, source_text: str) -> bool:
     """Post-call firewall (module docstring) -- mirrors
     app/ai/evidence_provenance.py's verify-don't-trust discipline. A
     normalized substring check: whitespace-insensitive, case-insensitive.
-    Never trusts the model's own claim that a quote is verbatim."""
+    Never trusts the model's own claim that a quote is verbatim. A
+    missing quote (None -- the model omitted it) is always ungrounded,
+    same as an empty one -- never a special case."""
     if not quote or not source_text:
         return False
     normalize = lambda s: " ".join(s.split()).lower()

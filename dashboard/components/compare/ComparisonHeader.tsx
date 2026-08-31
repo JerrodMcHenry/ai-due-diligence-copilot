@@ -42,16 +42,36 @@ export default function ComparisonHeader({
               href={`/startup/${encodeURIComponent(startup.company_name)}`}
               className="group"
             >
-              {/* Phase 10.9, Part 15/21: SPSRing now renders null as its
-                  own honest "unavailable" state -- coercing to 0 here
-                  would draw a real, danger-red ring for a startup that
-                  simply has no score, indistinguishable from one that
-                  scored zero on real evidence. */}
-              <SPSRing
-                score={startup.overall_score}
-                size="sm"
-                showDetails={false}
-              />
+              {/* Phase 10.9 verification fix: when this startup has a V3
+                  assessment, its overall SPS ring must reflect the SAME
+                  number the Startup Profile page shows -- not V2.1's
+                  overall_score, which stays a real, unrelated number
+                  even when sps_v3.assessment_state is limited/insufficient
+                  (i.e. "no comparable SPS"). Showing V2.1's number here
+                  would imply a false numerical comparability the profile
+                  page itself explicitly refuses to show. SPSRing's own
+                  null-safety (Phase 10.9, Part 15/21) still applies for
+                  the no-sps_v3 (V2.1-only) case below. */}
+              {startup.sps_v3 && startup.sps_v3.assessment_state !== "sufficient" ? (
+                <div
+                  role="img"
+                  aria-label={`${startup.company_name}: ${startup.sps_v3.assessment_state === "limited" ? "Limited assessment" : "Not enough evidence"}`}
+                  className="flex h-[120px] w-[120px] shrink-0 flex-col items-center justify-center gap-1 rounded-full border-2 border-dashed border-border text-center"
+                >
+                  <span className="text-xs font-semibold text-text-muted px-3">
+                    {startup.sps_v3.assessment_state === "limited" ? "Limited" : "Not enough"}
+                  </span>
+                  <span className="text-xs text-text-muted px-3">
+                    {startup.sps_v3.assessment_state === "limited" ? "assessment" : "evidence"}
+                  </span>
+                </div>
+              ) : (
+                <SPSRing
+                  score={startup.sps_v3 ? startup.sps_v3.overall_score : startup.overall_score}
+                  size="sm"
+                  showDetails={false}
+                />
+              )}
 
               <h2 className="mt-3 text-base font-semibold text-text-primary transition-colors group-hover:text-primary">
                 {startup.company_name}

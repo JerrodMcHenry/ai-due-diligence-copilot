@@ -180,6 +180,40 @@ def test_adapter_returns_none_never_raises_on_call_failure() -> None:
     expect(result is None, f"A call failure must degrade to None, got: {result}")
 
 
+def test_missing_verbatim_quote_drops_only_that_claim() -> None:
+    """SPS V3 local activation verification pass -- regression test for a
+    real bug found via a live /analyze run: a claim missing verbatim_quote
+    (the model omitted the field entirely, which real responses do) must
+    only drop THAT claim -- every other, well-formed claim in the SAME
+    pillar must still survive. Before this fix, a strict `str` field
+    meant one missing quote raised a Pydantic ValidationError for the
+    whole pillar, silently discarding every other claim too."""
+    mixed = {
+        "market": {
+            "competitors": [
+                {"named_competitor": "Acme Corp", "differentiator_named": True},  # no verbatim_quote at all
+            ],
+        },
+        "team": {
+            "founder_experience": [
+                {"verbatim_quote": "the CEO previously led engineering at a Fortune 500 logistics company",
+                 "founder_role": "CEO", "experience_type": "DIRECT_DOMAIN"},
+            ],
+        },
+        "product": {}, "execution": {}, "traction": {},
+    }
+
+    with mock.patch.object(adapter, "call_analysis_model", return_value=json.dumps(mixed)):
+        market = _pillar([_observed_subscore("competitive_landscape", ["competes directly with Acme Corp"])])
+        team = _pillar([_observed_subscore("founder", ["the CEO previously led engineering at a Fortune 500 logistics company"])])
+        empty = _pillar([])
+
+        observations = adapter.classify_evidence_for_v3(market, team, empty, empty, empty, id_seed="TESTMISSINGQUOTE")
+
+    expect(len(observations) == 1, f"The unquoted market claim must be dropped, but the well-formed team claim must survive: got {len(observations)} observations")
+    expect(observations[0].founder_role == "CEO", f"Expected the surviving observation to be the Team founder-experience claim, got: {observations[0]}")
+
+
 def test_no_evidence_short_circuits_without_calling_the_model() -> None:
     """When every pillar has zero Observed-status evidence, the adapter
     must not spend an LLM call at all -- classify_evidence_for_v3 returns
@@ -207,6 +241,7 @@ def main() -> None:
         test_inferred_evidence_never_reaches_the_model,
         test_full_adapter_pipeline_produces_deterministic_assessment,
         test_adapter_returns_none_never_raises_on_call_failure,
+        test_missing_verbatim_quote_drops_only_that_claim,
         test_no_evidence_short_circuits_without_calling_the_model,
         test_sps_v3_is_none_by_default_on_a_fresh_model,
     ]
