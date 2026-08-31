@@ -13,6 +13,7 @@ from app.database.db import (create_tables,
                          add_scoring_columns,
                          add_analysis_columns,
                          get_analytics,
+                         get_sps_v3_analytics,
                          add_benchmarking_columns,
                          get_industry_analytics,
                          get_rankings,
@@ -100,6 +101,7 @@ from typing import Literal
 from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
+from app.models.sps_v3 import SPSV3Assessment
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
 from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
@@ -319,6 +321,14 @@ def analytics():
 def industry_analytics():
     return get_industry_analytics()
 
+
+# Phase 10.9, Part 23 -- additive, separate from GET /analytics (which
+# describes the canonical V2.1 population). See get_sps_v3_analytics()'s
+# own docstring in app/database/db.py.
+@app.get("/analytics/sps-v3")
+def sps_v3_analytics():
+    return get_sps_v3_analytics()
+
 @app.get("/rankings")
 def rankings():
     return get_rankings()
@@ -441,6 +451,15 @@ def _build_comparison_startup(row: dict) -> ComparisonStartup:
     methodology = row["methodology"]
     context = methodology.get("context") or {}
 
+    # Phase 10.9, Part 21: pure passthrough of the already-stored,
+    # already-validated sps_v3 JSONB -- re-parsed through the Pydantic
+    # model (not hand-picked fields) so a malformed/partial stored value
+    # fails loudly rather than silently degrading. None whenever the
+    # stored analysis has no sps_v3 at all, which SPSV3Assessment's own
+    # `| None` type on the field already makes the correct default.
+    sps_v3_raw = methodology.get("sps_v3")
+    sps_v3 = SPSV3Assessment(**sps_v3_raw) if sps_v3_raw else None
+
     return ComparisonStartup(
         startup_id=row["startup_id"],
         company_name=context.get("company_name") or row["company_name"] or "",
@@ -455,6 +474,7 @@ def _build_comparison_startup(row: dict) -> ComparisonStartup:
         execution=_build_comparison_pillar("execution", methodology),
         traction=_build_comparison_pillar("traction", methodology),
         financial_health=_build_comparison_pillar("financial_health", methodology),
+        sps_v3=sps_v3,
     )
 
 

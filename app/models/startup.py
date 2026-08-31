@@ -4,6 +4,7 @@ from typing import Literal
 from app.models.scoring import StartupIntelligenceScore, PillarScoreBreakdown, EvidenceStatus
 from app.models.evidence import Evidence
 from app.models.analysis_context import AnalysisContext
+from app.models.sps_v3 import SPSV3Assessment
 from datetime import datetime
 
 
@@ -112,7 +113,17 @@ class SIEMethodologyAnalysis(BaseModel):
 
     executive_coaching_summary: str = ""
     next_actions: list[str] = Field(default_factory=list)
-    
+
+    # Phase 10.9, Part 5: the SPS V3 assessment, additive alongside every
+    # V2.1 field above (startup_intelligence_score, startup_scorecard,
+    # etc.) -- none of which this touches or reinterprets. None on every
+    # analysis produced before this field existed, and on every analysis
+    # produced while the V3 feature flag is off (see
+    # app/ai/sps_v3_adapter.py's SPS_V3_ENABLED) -- never backfilled,
+    # never inferred from the V2.1 fields. A non-None value here is the
+    # ONLY signal that this analysis has a V3 assessment at all.
+    sps_v3: SPSV3Assessment | None = None
+
 
 
 class StartupAnalysisResponse(BaseModel):
@@ -255,6 +266,14 @@ class ComparisonStartup(BaseModel):
     execution: ComparisonPillar
     traction: ComparisonPillar
     financial_health: ComparisonPillar
+
+    # Phase 10.9, Part 21 -- additive passthrough only. None whenever this
+    # startup's latest analysis has no sps_v3 (every historical analysis,
+    # and every analysis produced while the V3 feature flag is off).
+    # Compare never manufactures comparability between a V2.1-only
+    # startup and a V3-assessed one -- see SPS_V3_PRODUCTION_INTEGRATION_10_9.md
+    # Section 21 for the exact UI contract this enables.
+    sps_v3: SPSV3Assessment | None = None
 
 
 class ComparisonResponse(BaseModel):

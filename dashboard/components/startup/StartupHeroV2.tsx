@@ -4,6 +4,7 @@ import { SPSRing } from "@/components/sps";
 import BaseCard from "@/components/ui/BaseCard";
 import ClaimStartupButton from "./ClaimStartupButton";
 import SaveStartupButton from "./SaveStartupButton";
+import SPSV3ScoreSection from "./SPSV3ScoreSection";
 
 import { CONFIDENCE_BADGE_CLASSES, PILLARS } from "./pillarMeta";
 import { AlertIcon, SparkleIcon } from "./icons";
@@ -185,11 +186,20 @@ export default function StartupHeroV2({
     <BaseCard className="p-8">
       <div className="grid gap-10 lg:grid-cols-[320px_1fr] lg:items-center">
         <div className="flex justify-center">
-          <SPSRing
-            score={methodology.startup_intelligence_score}
-            confidence={overallConfidence}
-            size="xl"
-          />
+          {/* Phase 10.9, Part 14: sps_v3 is additive and absent on every
+              analysis produced while the backend's V3 feature flag is
+              off (the default) -- that is the ONLY case handled below by
+              the unchanged V2.1 ring, so today's production behavior is
+              byte-for-byte identical to before this phase. */}
+          {methodology.sps_v3 ? (
+            <SPSV3ScoreSection sps={methodology.sps_v3} />
+          ) : (
+            <SPSRing
+              score={methodology.startup_intelligence_score}
+              confidence={overallConfidence}
+              size="xl"
+            />
+          )}
         </div>
 
         <div>

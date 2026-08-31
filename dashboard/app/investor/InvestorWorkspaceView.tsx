@@ -387,8 +387,13 @@ function WatchedStartupCard({
         </Link>
 
         {watched.has_canonical_analysis ? (
+          // Phase 10.9, Part 15: SPSRing now renders null as its own
+          // honest "unavailable" state -- current_sps is typed
+          // number | null, so coercing to 0 here would draw a real,
+          // scored-zero-looking ring for a canonical analysis that
+          // simply has no score yet.
           <SPSRing
-            score={watched.current_sps ?? 0}
+            score={watched.current_sps}
             trend={watched.has_multiple_analyses ? (watched.sps_delta ?? undefined) : undefined}
             size="xs"
             showDetails={false}

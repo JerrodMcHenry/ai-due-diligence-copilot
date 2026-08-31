@@ -42,8 +42,13 @@ export default function ComparisonHeader({
               href={`/startup/${encodeURIComponent(startup.company_name)}`}
               className="group"
             >
+              {/* Phase 10.9, Part 15/21: SPSRing now renders null as its
+                  own honest "unavailable" state -- coercing to 0 here
+                  would draw a real, danger-red ring for a startup that
+                  simply has no score, indistinguishable from one that
+                  scored zero on real evidence. */}
               <SPSRing
-                score={startup.overall_score ?? 0}
+                score={startup.overall_score}
                 size="sm"
                 showDetails={false}
               />

@@ -29,6 +29,7 @@ const SIZE_CONFIG = {
 
 export default function SPSRing({
   score,
+  unavailableLabel = "Not enough evidence yet",
   trend,
   percentile,
   confidence,
@@ -39,8 +40,29 @@ export default function SPSRing({
   showDetails = true,
   ariaLabel,
 }: SPSRingProps) {
-  const normalizedScore = normalizeSPS(score);
   const config = SIZE_CONFIG[size];
+
+  // Phase 10.9, Part 15: score === null is a first-class branch, not a
+  // fallthrough -- normalizeSPS/getSPSMetadata are never called with a
+  // coerced 0, so an unavailable score can never inherit the "F / needs
+  // attention" danger-red styling a real score of 0 would get.
+  if (score === null) {
+    return (
+      <div className="flex flex-col items-center">
+        <div
+          className="relative flex items-center justify-center rounded-full transition-transform duration-300 ease-out"
+          style={{ width: config.diameter, height: config.diameter }}
+          role="img"
+          aria-label={ariaLabel ?? `Startup Power Score unavailable: ${unavailableLabel}`}
+        >
+          <RingSVG score={null} size={config.diameter} strokeWidth={config.strokeWidth} animated={animated} />
+          <RingCenter score={null} unavailableLabel={showDetails ? unavailableLabel : undefined} compact={size === "xs"} />
+        </div>
+      </div>
+    );
+  }
+
+  const normalizedScore = normalizeSPS(score);
   const metadata = getSPSMetadata(normalizedScore);
 
   const resolvedGrade = grade ?? metadata.grade;

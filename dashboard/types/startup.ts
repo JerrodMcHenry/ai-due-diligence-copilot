@@ -93,6 +93,43 @@ export type PartialStructuralCoverage = {
   note: string;
 };
 
+// Phase 10.9, Part 5: mirrors app/models/sps_v3.py's SPSV3Assessment /
+// SPSV3PillarResult. Additive alongside every V2.1 field on
+// SIEMethodologyAnalysis below -- undefined/null on any analysis that
+// predates this field, or that was produced while the backend's V3
+// feature flag was off. A non-null value here is the ONLY signal that
+// this analysis has a V3 assessment at all -- see
+// docs/methodology/SPS_V3_PRODUCTION_INTEGRATION_10_9.md.
+export type SPSV3ConfidenceLevel = "Low" | "Medium" | "High";
+
+export type SPSV3AssessmentState = "sufficient" | "limited" | "insufficient";
+
+export type SPSV3PillarResult = {
+  pillar: string;
+  // null means this pillar itself did not clear its own coverage floor
+  // -- never a fabricated/defaulted number.
+  strength: number | null;
+  coverage_pct: number;
+  confidence: SPSV3ConfidenceLevel;
+  publishable: boolean;
+  withhold_reason: string | null;
+};
+
+export type SPSV3Assessment = {
+  engine_version: string;
+  scoring_version: string;
+  // The published Startup Power Score under the V3 methodology. null is
+  // a legitimate, common, EXPECTED value (assessment_state !==
+  // "sufficient") -- it must never be read as, or rendered as, 0.
+  overall_score: number | null;
+  coverage_pct: number;
+  confidence: SPSV3ConfidenceLevel;
+  assessment_state: SPSV3AssessmentState;
+  withhold_reason: string | null;
+  pillars: Record<string, SPSV3PillarResult>;
+  computed_at: string;
+};
+
 export type SIEMethodologyAnalysis = {
   context: SIEContext;
 
@@ -115,6 +152,8 @@ export type SIEMethodologyAnalysis = {
 
   startup_scorecard?: unknown;
   analysis_context?: unknown;
+
+  sps_v3?: SPSV3Assessment | null;
 };
 
 export type StartupProfileResponse = {

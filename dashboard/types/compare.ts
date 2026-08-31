@@ -4,7 +4,7 @@
 // no executive_coaching_summary. Every field is read from the same
 // stored methodology JSONB every other canonical surface reads.
 
-import type { ConfidenceLevel } from "./startup";
+import type { ConfidenceLevel, SPSV3Assessment } from "./startup";
 
 export type EvidenceStatus = "Observed" | "Inferred" | "Unavailable";
 
@@ -49,6 +49,12 @@ export interface ComparisonStartup {
   execution: ComparisonPillar;
   traction: ComparisonPillar;
   financial_health: ComparisonPillar;
+
+  // Phase 10.9, Part 21: additive passthrough. null/undefined whenever
+  // this startup's latest analysis has no V3 assessment -- Compare must
+  // never manufacture comparability between a V2.1-only startup and a
+  // V3-assessed one (see the backend's ComparisonStartup docstring).
+  sps_v3?: SPSV3Assessment | null;
 }
 
 export interface ComparisonResponse {

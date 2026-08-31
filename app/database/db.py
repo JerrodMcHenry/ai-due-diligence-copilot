@@ -2254,6 +2254,69 @@ def get_analytics():
         ),
     }
 
+
+def get_sps_v3_analytics():
+    """
+    Phase 10.9, Part 23. Deliberately separate from get_analytics() above
+    rather than folded into it -- V3 is an additive, feature-flagged,
+    parallel assessment (see app/ai/sps_v3_adapter.py), not a replacement
+    for the canonical V2.1 population get_analytics() describes, so
+    mixing the two into one response would misrepresent what's actually
+    being counted.
+
+    "Latest analysis per startup that HAS an sps_v3 at all" -- the same
+    ROW_NUMBER()-per-startup shape get_rankings() uses, scoped to rows
+    where methodology->'sps_v3' is present, so re-analyzing a startup
+    under V3 doesn't double count its history. average_overall_score
+    only ever averages SUFFICIENT rows' real numbers -- assessment_state
+    'limited'/'insufficient' rows are counted in their own bucket, never
+    contributing a null (or a fabricated 0) to that average (Phase 10.9
+    Part 23's explicit "never treat null as zero").
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT
+                methodology->'sps_v3'->>'assessment_state' AS assessment_state,
+                (methodology->'sps_v3'->>'overall_score')::float AS overall_score
+            FROM (
+                SELECT
+                    methodology,
+                    ROW_NUMBER() OVER (
+                        PARTITION BY startup_id
+                        ORDER BY created_at DESC, id DESC
+                    ) AS row_number
+                FROM analyses
+                WHERE methodology IS NOT NULL
+                  AND methodology->'sps_v3' IS NOT NULL
+                  AND startup_id IS NOT NULL
+            ) ranked
+            WHERE row_number = 1
+        """))
+
+        rows = result.mappings().all()
+
+    counts = {"sufficient": 0, "limited": 0, "insufficient": 0}
+    sufficient_scores = []
+
+    for row in rows:
+        state = row["assessment_state"]
+        if state in counts:
+            counts[state] += 1
+        if state == "sufficient" and row["overall_score"] is not None:
+            sufficient_scores.append(row["overall_score"])
+
+    return {
+        "total_v3_assessed": len(rows),
+        "sufficient": counts["sufficient"],
+        "limited": counts["limited"],
+        "insufficient": counts["insufficient"],
+        "average_sufficient_overall_score": (
+            round(sum(sufficient_scores) / len(sufficient_scores), 2)
+            if sufficient_scores else None
+        ),
+    }
+
+
 def get_industry_analytics():
     with engine.begin() as connection:
         result = connection.execute(text("""
