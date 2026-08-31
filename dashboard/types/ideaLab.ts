@@ -263,7 +263,12 @@ export type MissionType =
   | "economics"
   | "other";
 
-export type MissionSource = "vps_guidance" | "founder_created";
+// Phase 11 -- Pitch Deck Coach V2, Part 13: "pitch_deck_coach" added
+// alongside the existing two values -- a mission a founder explicitly
+// created from a deck review's "Make this a mission" button. See
+// app/models/venture_missions.py::MissionSource for the matching backend
+// widen.
+export type MissionSource = "vps_guidance" | "founder_created" | "pitch_deck_coach";
 
 export type MissionStatus = "active" | "completed" | "dismissed";
 
@@ -280,6 +285,11 @@ export interface VentureMission {
   status: MissionStatus;
   learning_summary: string | null;
   learning_recorded_at: string | null;
+  // Phase 11, Part 14: a playbook slug (dashboard/content/playbooks), or
+  // null when nothing maps cleanly. The first real use of this
+  // long-reserved field -- see app/database/db.py's
+  // create_venture_mission() docstring.
+  resource_ref: string | null;
   created_at: string;
   updated_at: string;
   completed_at: string | null;
@@ -291,4 +301,5 @@ export interface CreateMissionRequest {
   mission_type?: MissionType;
   related_category?: string | null;
   source?: MissionSource;
+  resource_ref?: string | null;
 }

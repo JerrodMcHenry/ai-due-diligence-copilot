@@ -16,6 +16,7 @@ import VentureOverview from "@/components/idea-lab/VentureOverview";
 import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
+import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
@@ -29,6 +30,7 @@ import NextStepCard from "@/components/journey/NextStepCard";
 import { resolveIdeaLabNextStep } from "@/lib/journey/resolveIdeaLabNextStep";
 import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 import { stashVentureDescriptionForAnalyze } from "@/lib/ventureToStartupHandoff";
+import { consumePitchDeckMission } from "@/lib/pitchDeckMissionHandoff";
 
 import {
   compareVentureScenarios,
@@ -84,10 +86,52 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // clears this back to null. `missionedMilestones` is the reverse
   // direction -- which vps_guidance-sourced mission titles already exist,
   // so NextMoves can show "Added ✓" instead of offering a duplicate.
+  //
+  // Phase 11 -- Pitch Deck Coach V2, Part 13: `description`, `source`,
+  // and `resourceRef` are additive, optional fields on the SAME
+  // pendingMission channel -- a deck-review-originated mission carries
+  // its own description/provenance/playbook slug, where a NextMoves
+  // suggestion leaves them undefined (MissionsSection defaults
+  // source to "vps_guidance" and resource_ref to null when absent, see
+  // its own pendingMission-consumption effect).
   const [pendingMission, setPendingMission] = useState<
-    { title: string; relatedCategory: string; missionType: MissionType } | null
+    {
+      title: string;
+      relatedCategory: string;
+      missionType: MissionType;
+      description?: string | null;
+      source?: "vps_guidance" | "pitch_deck_coach";
+      resourceRef?: string | null;
+    } | null
   >(null);
   const [missionedMilestones, setMissionedMilestones] = useState<string[]>([]);
+
+  // Phase 11, Part 13: a deck-review "Make this a mission" click stashes
+  // one fix (lib/pitchDeckMissionHandoff.ts) and navigates here -- this
+  // consumes it ONCE, the same read-and-clear contract every other
+  // same-tab handoff in this codebase already uses (see
+  // lib/ventureToStartupHandoff.ts). Deliberately still routes through
+  // the SAME pendingMission state MissionsSection already renders a
+  // confirmation step for -- nothing is created without the founder
+  // seeing it first.
+  useEffect(() => {
+    // Deferred to a microtask -- same "avoid synchronous setState inside
+    // an effect body" discipline MissionsSection.tsx's own loadMissions()
+    // effect already applies (see that file's matching comment).
+    Promise.resolve().then(() => {
+      const handoff = consumePitchDeckMission();
+      if (handoff) {
+        setPendingMission({
+          title: handoff.title,
+          description: handoff.description,
+          relatedCategory: handoff.relatedCategory ?? "other",
+          missionType: handoff.missionType,
+          source: "pitch_deck_coach",
+          resourceRef: handoff.resourceRef,
+        });
+      }
+    });
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -339,6 +383,19 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             router.push("/analyze");
           }}
         /> : null}
+
+        {/* Phase 11 -- Pitch Deck Coach V2, Part 17: the Idea Lab -> Pitch
+            connection. Reuses the exact same, already-built, deliberately
+            data-decoupled teaser Founder Workspace already shows
+            (components/founder/PitchDeckCoachTeaser.tsx) -- Pitch Deck
+            Coach reviews are ownership-scoped to the founder's account,
+            never to a specific venture, so this is navigation only, same
+            as there. Shown once a venture has a model result (Idea ->
+            Model has happened), matching the stated journey order
+            (Idea -> Model -> Validate -> Missions -> Pitch -> ...)
+            without gating on "ready for real startup" -- a founder can
+            reasonably want deck coaching well before that point. */}
+        {venture.model_result ? <PitchDeckCoachTeaser /> : null}
 
         {venture.model_result ? (
           <NextMoves

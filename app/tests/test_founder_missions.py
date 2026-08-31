@@ -394,6 +394,70 @@ def test_vps_guidance_mission_is_idempotent() -> None:
         _cleanup()
 
 
+def test_pitch_deck_coach_mission_persists_with_resource_ref() -> None:
+    """Phase 11 -- Pitch Deck Coach V2, Part 13/14: a mission created via
+    the deck review's "Make this a mission" flow uses source
+    'pitch_deck_coach' (not vps_guidance or founder_created) and carries
+    a resource_ref (a playbook slug) end to end."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            venture = _create_venture(USER_A)
+            mission = _create_mission(
+                venture["id"], USER_A,
+                title="Clarify initial GTM strategy",
+                description="Investors need to understand how you'll acquire your first repeatable customers.",
+                mission_type="gtm",
+                related_category="gtm",
+                source="pitch_deck_coach",
+                resource_ref="go-to-market",
+            )
+            expect(mission["source"] == "pitch_deck_coach", f"Source must round-trip as pitch_deck_coach, got {mission['source']}")
+            expect(mission["resource_ref"] == "go-to-market", f"resource_ref must round-trip, got {mission['resource_ref']}")
+
+            reopened = client.get(f"/ventures/{venture['id']}/missions", headers=_auth_headers(USER_A)).json()
+            expect(len(reopened) == 1, "The pitch-deck-coach mission must persist")
+            expect(reopened[0]["resource_ref"] == "go-to-market", "resource_ref must survive a reload, not just the create response")
+    finally:
+        _cleanup()
+
+
+def test_resource_ref_defaults_to_null_when_absent() -> None:
+    """No caller before Phase 11 ever sent resource_ref -- confirms the
+    new, optional field defaults to null rather than breaking any
+    existing mission-creation shape (vps_guidance, founder_created)."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            venture = _create_venture(USER_A)
+            mission = _create_mission(venture["id"], USER_A, source="founder_created")
+            expect(mission["resource_ref"] is None, f"resource_ref must default to null when the caller never sends it, got {mission['resource_ref']!r}")
+    finally:
+        _cleanup()
+
+
+def test_pitch_deck_coach_mission_is_idempotent() -> None:
+    """Same dedup guarantee as vps_guidance (Part 13's own "clicking twice
+    must not create a duplicate" requirement) -- source <> 'founder_created'
+    already covers pitch_deck_coach without any separate index."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            venture = _create_venture(USER_A)
+            first = _create_mission(
+                venture["id"], USER_A, title="Clarify initial GTM strategy", source="pitch_deck_coach"
+            )
+            second = _create_mission(
+                venture["id"], USER_A, title="Clarify initial GTM strategy", source="pitch_deck_coach"
+            )
+            expect(first["id"] == second["id"], "Same pitch_deck_coach title must return the same mission, not a duplicate")
+
+            reopened = client.get(f"/ventures/{venture['id']}/missions", headers=_auth_headers(USER_A)).json()
+            expect(len(reopened) == 1, "Exactly one row must exist for a deduplicated pitch_deck_coach mission")
+    finally:
+        _cleanup()
+
+
 def test_founder_created_missions_are_not_deduplicated() -> None:
     _ensure_test_users()
     try:
@@ -726,6 +790,9 @@ TESTS = [
     test_reflection_persists,
     test_founder_created_mission_persists,
     test_vps_guidance_mission_is_idempotent,
+    test_pitch_deck_coach_mission_persists_with_resource_ref,
+    test_resource_ref_defaults_to_null_when_absent,
+    test_pitch_deck_coach_mission_is_idempotent,
     test_founder_created_missions_are_not_deduplicated,
     test_mission_creation_does_not_change_vps,
     test_mission_completion_does_not_change_vps,

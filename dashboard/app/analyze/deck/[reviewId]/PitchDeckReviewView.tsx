@@ -17,6 +17,7 @@ import Button from "@/components/ui/Button";
 import { getPitchDeckReview } from "@/lib/api";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import NextStepCard from "@/components/journey/NextStepCard";
+import MakeMissionButton from "./MakeMissionButton";
 import { getPlaybookForDeckSection } from "@/lib/playbooks/resourceMap";
 import type {
   DeckReadinessLabel,
@@ -227,6 +228,8 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
                       <p className="mt-1 text-sm leading-6 text-text-secondary">{fix.why_it_matters}</p>
                       <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-text-muted">Try this</p>
                       <p className="mt-1 text-sm leading-6 text-text-secondary">{fix.try_this}</p>
+
+                      <MakeMissionButton fix={fix} />
                     </div>
                   </div>
                 </BaseCard>

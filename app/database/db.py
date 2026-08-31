@@ -3140,6 +3140,35 @@ def create_venture_missions_table():
     print("venture_missions table created successfully.")
 
 
+def add_pitch_deck_coach_mission_source():
+    """
+    Phase 11 -- Pitch Deck Coach V2, Part 13. Same migration shape as
+    add_fundraising_gap_source_to_founder_actions() (Phase 8): widens the
+    CHECK constraint to allow a third source value, 'pitch_deck_coach',
+    for a mission a founder explicitly created from a deck review's
+    top_fixes card ("Make this a mission"). Deliberately its own source
+    value, not reused 'vps_guidance' or 'founder_created': provenance
+    should say where a mission actually came from, and this codebase's
+    own established pattern (founder_actions' 'sie_recommendation' /
+    'founder_created' / 'fundraising_gap' trio) is exactly this --
+    distinct source per real origin. Dedup behavior is intentionally the
+    SAME as vps_guidance (source <> 'founder_created' already covers any
+    non-founder_created value, this one included) -- clicking "Make this
+    a mission" twice for the identical fix title on the same venture
+    must not create two rows. Never touches existing rows.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            ALTER TABLE venture_missions DROP CONSTRAINT IF EXISTS venture_missions_source_check
+        """))
+        connection.execute(text("""
+            ALTER TABLE venture_missions ADD CONSTRAINT venture_missions_source_check
+            CHECK (source IN ('vps_guidance', 'founder_created', 'pitch_deck_coach'))
+        """))
+
+    print("venture_missions.source migrated to include pitch_deck_coach.")
+
+
 def _mission_ownership_join_clause() -> str:
     # Ownership is enforced by this JOIN's predicate, not by a Python
     # check performed after a row is fetched -- the same discipline
@@ -3157,8 +3186,8 @@ def list_venture_missions_for_owner(user_id: str, venture_id: int):
             SELECT vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
                    vm.description, vm.mission_type, vm.related_category,
                    vm.source, vm.source_ref, vm.status, vm.learning_summary,
-                   vm.learning_recorded_at, vm.created_at, vm.updated_at,
-                   vm.completed_at
+                   vm.learning_recorded_at, vm.resource_ref, vm.created_at,
+                   vm.updated_at, vm.completed_at
             FROM venture_missions vm
             {_mission_ownership_join_clause()}
             WHERE vm.venture_id = :venture_id AND v.user_id = :user_id
@@ -3176,14 +3205,24 @@ def create_venture_mission(
     mission_type: str,
     related_category: str | None,
     source: str,
+    resource_ref: str | None = None,
 ):
     """
-    Creates one venture_missions row, OR -- for a vps_guidance-sourced
-    mission whose exact title already exists for this venture -- returns
-    the existing row untouched. Verbatim the same idempotency contract as
-    create_founder_action() (see that function's own docstring for the
-    full reasoning); source_ref is derived HERE from title, never accepted
-    from the caller, and founder_created missions are never deduplicated.
+    Creates one venture_missions row, OR -- for a vps_guidance/
+    pitch_deck_coach-sourced mission whose exact title already exists for
+    this venture -- returns the existing row untouched. Verbatim the same
+    idempotency contract as create_founder_action() (see that function's
+    own docstring for the full reasoning); source_ref is derived HERE
+    from title, never accepted from the caller, and founder_created
+    missions are never deduplicated.
+
+    resource_ref (Phase 11, Part 14): the first real use of the column
+    Phase 10.7 reserved as "future Founder Playbook hook" -- a playbook
+    slug (e.g. "go-to-market") the caller resolved BEFORE calling this
+    (via lib/playbooks/resourceMap.ts on the frontend), never computed
+    here. None for every existing caller (vps_guidance suggestions,
+    founder-authored missions) -- this function's signature default
+    keeps their behavior byte-identical.
 
     Ownership is enforced by the caller (app/api.py) verifying
     get_modeled_venture_for_user(user_id, venture_id) is not None BEFORE
@@ -3198,11 +3237,13 @@ def create_venture_mission(
         result = connection.execute(text("""
             INSERT INTO venture_missions (
                 venture_id, created_by_user_id, title, description,
-                mission_type, related_category, source, source_ref, status
+                mission_type, related_category, source, source_ref,
+                resource_ref, status
             )
             VALUES (
                 :venture_id, :created_by_user_id, :title, :description,
-                :mission_type, :related_category, :source, :source_ref, 'active'
+                :mission_type, :related_category, :source, :source_ref,
+                :resource_ref, 'active'
             )
             ON CONFLICT (venture_id, source_ref)
                 WHERE source <> 'founder_created'
@@ -3210,8 +3251,8 @@ def create_venture_mission(
             RETURNING
                 id, venture_id, created_by_user_id, title, description,
                 mission_type, related_category, source, source_ref, status,
-                learning_summary, learning_recorded_at, created_at,
-                updated_at, completed_at
+                learning_summary, learning_recorded_at, resource_ref,
+                created_at, updated_at, completed_at
         """), {
             "venture_id": venture_id,
             "created_by_user_id": user_id,
@@ -3221,6 +3262,7 @@ def create_venture_mission(
             "related_category": related_category,
             "source": source,
             "source_ref": source_ref,
+            "resource_ref": resource_ref,
         })
 
         row = result.mappings().first()
@@ -3231,8 +3273,8 @@ def create_venture_mission(
         existing = connection.execute(text("""
             SELECT id, venture_id, created_by_user_id, title, description,
                    mission_type, related_category, source, source_ref, status,
-                   learning_summary, learning_recorded_at, created_at,
-                   updated_at, completed_at
+                   learning_summary, learning_recorded_at, resource_ref,
+                   created_at, updated_at, completed_at
             FROM venture_missions
             WHERE venture_id = :venture_id AND source_ref = :source_ref
         """), {"venture_id": venture_id, "source_ref": source_ref}).mappings().first()
@@ -3272,8 +3314,8 @@ def update_venture_mission_status_for_owner(
             RETURNING vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
                       vm.description, vm.mission_type, vm.related_category,
                       vm.source, vm.source_ref, vm.status, vm.learning_summary,
-                      vm.learning_recorded_at, vm.created_at, vm.updated_at,
-                      vm.completed_at
+                      vm.learning_recorded_at, vm.resource_ref, vm.created_at,
+                      vm.updated_at, vm.completed_at
         """), {
             "mission_id": mission_id,
             "venture_id": venture_id,
@@ -3306,8 +3348,8 @@ def record_venture_mission_learning_for_owner(
             RETURNING vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
                       vm.description, vm.mission_type, vm.related_category,
                       vm.source, vm.source_ref, vm.status, vm.learning_summary,
-                      vm.learning_recorded_at, vm.created_at, vm.updated_at,
-                      vm.completed_at
+                      vm.learning_recorded_at, vm.resource_ref, vm.created_at,
+                      vm.updated_at, vm.completed_at
         """), {
             "mission_id": mission_id,
             "venture_id": venture_id,

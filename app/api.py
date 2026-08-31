@@ -52,6 +52,7 @@ from app.database.db import (create_tables,
                          update_modeled_venture_for_user,
                          delete_modeled_venture_for_user,
                          create_venture_missions_table,
+                         add_pitch_deck_coach_mission_source,
                          list_venture_missions_for_owner,
                          create_venture_mission,
                          update_venture_mission_status_for_owner,
@@ -194,6 +195,12 @@ create_modeled_ventures_table()
 # modeled_ventures(id), which must already exist by this point (same
 # ordering reasoning as modeled_ventures's own migration above).
 create_venture_missions_table()
+
+# Phase 11 -- Pitch Deck Coach V2, Part 13. Widens venture_missions.source
+# to allow 'pitch_deck_coach' -- see add_pitch_deck_coach_mission_source()'s
+# own docstring in app/database/db.py. Additive only; existing rows and
+# every other source value are untouched.
+add_pitch_deck_coach_mission_source()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -927,6 +934,7 @@ def create_mission(
         mission_type=request.mission_type,
         related_category=request.related_category,
         source=request.source,
+        resource_ref=request.resource_ref,
     )
     return VentureMissionResponse(**mission)
 

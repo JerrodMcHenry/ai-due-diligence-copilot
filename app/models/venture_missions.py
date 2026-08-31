@@ -32,7 +32,7 @@ MissionType = Literal[
     "other",
 ]
 
-MissionSource = Literal["vps_guidance", "founder_created"]
+MissionSource = Literal["vps_guidance", "founder_created", "pitch_deck_coach"]
 
 MissionStatus = Literal["active", "completed", "dismissed"]
 
@@ -47,6 +47,14 @@ class CreateMissionRequest(BaseModel):
     # founder-created mission may not map to any VPS category at all.
     related_category: str | None = Field(default=None, max_length=50)
     source: MissionSource = "founder_created"
+    # Phase 11, Part 14: a playbook slug the CALLER already resolved
+    # (dashboard/lib/playbooks/resourceMap.ts) -- this endpoint never
+    # looks one up itself, and never validates it against the playbook
+    # catalog (that catalog is frontend-only content, per
+    # dashboard/content/playbooks/'s own module boundary). None is the
+    # correct, common value for every mission with no obvious playbook
+    # fit -- never fabricated.
+    resource_ref: str | None = Field(default=None, max_length=100)
 
 
 class UpdateMissionStatusRequest(BaseModel):
@@ -70,6 +78,7 @@ class VentureMissionResponse(BaseModel):
     status: str
     learning_summary: str | None = None
     learning_recorded_at: datetime | None = None
+    resource_ref: str | None = None
     created_at: datetime
     updated_at: datetime
     completed_at: datetime | None = None

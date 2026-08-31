@@ -12,6 +12,7 @@ import CategoryChangesList from "./CategoryChangesList";
 import { explainCategoryChanges } from "./categoryChangeExplain";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
+import { getPlaybookBySlug } from "@/content/playbooks";
 
 import {
   createVentureMission,
@@ -64,6 +65,14 @@ type PendingMission = {
   title: string;
   relatedCategory: string;
   missionType: MissionType;
+  // Phase 11 -- Pitch Deck Coach V2, Part 13: optional, additive.
+  // Undefined for a NextMoves/vps_guidance suggestion (the original
+  // Phase 10.7 shape); populated for a deck-review-originated mission
+  // (source defaults to "vps_guidance" below when absent, preserving
+  // the exact pre-Phase-11 behavior for every existing caller).
+  description?: string | null;
+  source?: "vps_guidance" | "pitch_deck_coach";
+  resourceRef?: string | null;
 };
 
 type MissionsSectionProps = {
@@ -187,9 +196,11 @@ export default function MissionsSection({
           ventureId,
           {
             title: pendingMission!.title,
+            description: pendingMission!.description ?? null,
             mission_type: pendingMission!.missionType,
             related_category: pendingMission!.relatedCategory || null,
-            source: "vps_guidance",
+            source: pendingMission!.source ?? "vps_guidance",
+            resource_ref: pendingMission!.resourceRef ?? null,
           },
           token
         );
@@ -398,12 +409,20 @@ export default function MissionsSection({
 
               {/* Phase 10.9 -- Founder Playbooks V1, Part 5A: purely
                   additive -- the mission is fully usable (Start/Complete/
-                  Dismiss/Reflect) whether or not a playbook link renders. */}
+                  Dismiss/Reflect) whether or not a playbook link renders.
+                  Phase 11, Part 14: a mission with its own resource_ref
+                  (currently only ever set by a "Make this a mission" click
+                  from a deck review -- see MakeMissionButton.tsx) already
+                  names the exact right playbook; the missionType/
+                  relatedCategory-derived lookup is the fallback for every
+                  mission that doesn't carry one. */}
               {(() => {
-                const playbook = getPlaybookForMission({
-                  missionType: primaryMission.mission_type,
-                  relatedCategory: primaryMission.related_category,
-                });
+                const playbook = primaryMission.resource_ref
+                  ? getPlaybookBySlug(primaryMission.resource_ref)
+                  : getPlaybookForMission({
+                      missionType: primaryMission.mission_type,
+                      relatedCategory: primaryMission.related_category,
+                    });
                 return playbook ? <PlaybookLink slug={playbook.slug} label={`Learn: ${playbook.title} →`} /> : null;
               })()}
 
