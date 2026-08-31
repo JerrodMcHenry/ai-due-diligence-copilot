@@ -1,0 +1,71 @@
+{
+  "slug": "F_lovable",
+  "v2_1_overall_score": 71.6,
+  "v2_1_context": {
+    "company_name": "Lovable",
+    "industry": "AI",
+    "business_model": "SaaS",
+    "company_stage": "Series B+",
+    "funding_stage": "Series B+"
+  },
+  "sps_v3": {
+    "engine_version": "SPS_V3_10_9",
+    "scoring_version": "sps_v3.10_9.1",
+    "overall_score": null,
+    "coverage_pct": 26.8,
+    "confidence": "Medium",
+    "assessment_state": "limited",
+    "withhold_reason": "Overall coverage 26.8% < 35% floor (gate.overall_coverage_floor_pct).",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "strength": 5.5,
+        "coverage_pct": 20.0,
+        "confidence": "Medium",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 20.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Team": {
+        "pillar": "Team",
+        "strength": 7.5,
+        "coverage_pct": 40.0,
+        "confidence": "Medium",
+        "publishable": true,
+        "withhold_reason": null
+      },
+      "Product": {
+        "pillar": "Product",
+        "strength": 5.5,
+        "coverage_pct": 25.0,
+        "confidence": "Medium",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 25.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "strength": 8.14,
+        "coverage_pct": 50.0,
+        "confidence": "Medium",
+        "publishable": true,
+        "withhold_reason": null
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "strength": 5.5,
+        "coverage_pct": 15.0,
+        "confidence": "Medium",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 15.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "strength": null,
+        "coverage_pct": 0.0,
+        "confidence": "Low",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 0.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      }
+    },
+    "computed_at": "2026-08-31T05:14:30.739621+00:00"
+  }
+}

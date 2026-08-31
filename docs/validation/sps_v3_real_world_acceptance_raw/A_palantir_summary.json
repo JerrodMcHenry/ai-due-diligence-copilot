@@ -1,0 +1,71 @@
+{
+  "slug": "A_palantir",
+  "v2_1_overall_score": 69.8,
+  "v2_1_context": {
+    "company_name": "Palantir Technologies",
+    "industry": "AI",
+    "business_model": "Enterprise Software",
+    "company_stage": "Growth",
+    "funding_stage": "Growth"
+  },
+  "sps_v3": {
+    "engine_version": "SPS_V3_10_9",
+    "scoring_version": "sps_v3.10_9.1",
+    "overall_score": null,
+    "coverage_pct": 9.0,
+    "confidence": "Medium",
+    "assessment_state": "insufficient",
+    "withhold_reason": "Overall coverage 9.0% < 35% floor (gate.overall_coverage_floor_pct).",
+    "pillars": {
+      "Market": {
+        "pillar": "Market",
+        "strength": null,
+        "coverage_pct": 0.0,
+        "confidence": "Low",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 0.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Team": {
+        "pillar": "Team",
+        "strength": 9.5,
+        "coverage_pct": 20.0,
+        "confidence": "Medium",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 20.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Product": {
+        "pillar": "Product",
+        "strength": null,
+        "coverage_pct": 0.0,
+        "confidence": "Low",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 0.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Execution": {
+        "pillar": "Execution",
+        "strength": 9.5,
+        "coverage_pct": 33.0,
+        "confidence": "Medium",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 33.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Traction": {
+        "pillar": "Traction",
+        "strength": null,
+        "coverage_pct": 0.0,
+        "confidence": "Low",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 0.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      },
+      "Financial Health": {
+        "pillar": "Financial Health",
+        "strength": null,
+        "coverage_pct": 0.0,
+        "confidence": "Low",
+        "publishable": false,
+        "withhold_reason": "Pillar coverage 0.0% < 40% floor (gate.min_pillar_coverage_pct)."
+      }
+    },
+    "computed_at": "2026-08-31T05:14:18.891733+00:00"
+  }
+}

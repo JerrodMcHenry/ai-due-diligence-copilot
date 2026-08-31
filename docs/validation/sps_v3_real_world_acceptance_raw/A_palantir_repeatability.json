@@ -1,0 +1,152 @@
+{
+  "identical": true,
+  "run1": {
+    "sps": "None",
+    "coverage_pct": "9.0",
+    "confidence": "MEDIUM",
+    "publishable": false,
+    "ux_state": "INSUFFICIENT",
+    "pillars": {
+      "Market": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Team": {
+        "strength": "9.50",
+        "coverage_pct": "20.0",
+        "confidence": "MEDIUM",
+        "publishable": false
+      },
+      "Product": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Execution": {
+        "strength": "9.50",
+        "coverage_pct": "33.0",
+        "confidence": "MEDIUM",
+        "publishable": false
+      },
+      "Traction": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Financial Health": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      }
+    },
+    "dimension_scores": {
+      "market_size": "None",
+      "market_growth": "None",
+      "market_timing": "None",
+      "competitive_intensity": "None",
+      "customer_demand": "None",
+      "founder_market_fit": "None",
+      "technical_capability": "9.5",
+      "business_capability": "None",
+      "leadership": "None",
+      "execution_track_record_team": "None",
+      "customer_value": "None",
+      "differentiation": "None",
+      "product_accessibility": "None",
+      "defensibility": "None",
+      "adoption_potential": "None",
+      "gtm_execution": "None",
+      "product_execution": "9.5",
+      "operating_discipline": "None",
+      "strategic_execution": "None",
+      "current_scale": "None",
+      "growth_trajectory": "None",
+      "customer_adoption": "None",
+      "retention_engagement": "None",
+      "commercial_validation": "None",
+      "revenue_quality": "None",
+      "unit_economics": "None",
+      "capital_efficiency": "None"
+    }
+  },
+  "run2": {
+    "sps": "None",
+    "coverage_pct": "9.0",
+    "confidence": "MEDIUM",
+    "publishable": false,
+    "ux_state": "INSUFFICIENT",
+    "pillars": {
+      "Market": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Team": {
+        "strength": "9.50",
+        "coverage_pct": "20.0",
+        "confidence": "MEDIUM",
+        "publishable": false
+      },
+      "Product": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Execution": {
+        "strength": "9.50",
+        "coverage_pct": "33.0",
+        "confidence": "MEDIUM",
+        "publishable": false
+      },
+      "Traction": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      },
+      "Financial Health": {
+        "strength": "None",
+        "coverage_pct": "0.0",
+        "confidence": "LOW",
+        "publishable": false
+      }
+    },
+    "dimension_scores": {
+      "market_size": "None",
+      "market_growth": "None",
+      "market_timing": "None",
+      "competitive_intensity": "None",
+      "customer_demand": "None",
+      "founder_market_fit": "None",
+      "technical_capability": "9.5",
+      "business_capability": "None",
+      "leadership": "None",
+      "execution_track_record_team": "None",
+      "customer_value": "None",
+      "differentiation": "None",
+      "product_accessibility": "None",
+      "defensibility": "None",
+      "adoption_potential": "None",
+      "gtm_execution": "None",
+      "product_execution": "9.5",
+      "operating_discipline": "None",
+      "strategic_execution": "None",
+      "current_scale": "None",
+      "growth_trajectory": "None",
+      "customer_adoption": "None",
+      "retention_engagement": "None",
+      "commercial_validation": "None",
+      "revenue_quality": "None",
+      "unit_economics": "None",
+      "capital_efficiency": "None"
+    }
+  },
+  "num_observations": 4
+}
