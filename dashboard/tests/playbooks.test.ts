@@ -47,6 +47,21 @@ const REQUIRED_SLUGS = [
   "hiring",
 ];
 
+// Phase 12 (Founder Playbooks V1) -- the five playbooks this phase
+// targets: 3 upgraded in place (customer-discovery, problem-validation,
+// mvp keep their original, already-shipped slugs) + 2 new
+// (pricing-validation, early-traction). All five must carry the deeper
+// Phase-12 structure (good/weak signal, before-you-start, etc.) -- the
+// other 9 playbooks are explicitly out of this phase's scope and are not
+// required to.
+const PHASE_12_TARGET_SLUGS = [
+  "customer-discovery",
+  "problem-validation",
+  "mvp",
+  "pricing-validation",
+  "early-traction",
+];
+
 function test_valid_playbook_resolution(): void {
   const playbook = getPlaybookBySlug("customer-discovery");
   expect(playbook !== undefined, "A known slug must resolve to a playbook");
@@ -106,6 +121,59 @@ function test_journey_groups_cover_every_playbook_exactly_once(): void {
   }
 }
 
+// --- Phase 12 tests: exactly 5 target playbooks, deeper structure ----------
+
+function test_exactly_five_phase_12_playbooks_exist(): void {
+  expect(PHASE_12_TARGET_SLUGS.length === 5, "Phase 12 targets exactly 5 playbooks");
+  for (const slug of PHASE_12_TARGET_SLUGS) {
+    expect(getPlaybookBySlug(slug) !== undefined, `Phase 12 target playbook "${slug}" must exist`);
+  }
+}
+
+function test_no_duplicate_playbook_slugs(): void {
+  const slugs = getAllPlaybooks().map((p) => p.slug);
+  const unique = new Set(slugs);
+  expect(unique.size === slugs.length, `Playbook slugs must be unique, got duplicates in: ${slugs.join(", ")}`);
+}
+
+function test_phase_12_playbooks_have_the_deeper_structure(): void {
+  for (const slug of PHASE_12_TARGET_SLUGS) {
+    const playbook = getPlaybookBySlug(slug)!;
+    expect(!!playbook.objective?.trim(), `${slug}: objective (what you're trying to learn) must be present`);
+    expect((playbook.beforeYouStart?.length ?? 0) >= 2, `${slug}: beforeYouStart must have at least 2 items`);
+    expect((playbook.questionsToAskOrDo?.length ?? 0) >= 3, `${slug}: questionsToAskOrDo must have at least 3 items`);
+    expect((playbook.goodSignal?.length ?? 0) >= 2, `${slug}: goodSignal must have at least 2 items`);
+    expect((playbook.weakSignal?.length ?? 0) >= 2, `${slug}: weakSignal must have at least 2 items`);
+    expect(!!playbook.whenYoureDone?.trim(), `${slug}: whenYoureDone must be present`);
+    expect((playbook.whatToDoNext?.length ?? 0) >= 2, `${slug}: whatToDoNext must have at least 2 items`);
+    expect((playbook.relatedMissionTypes?.length ?? 0) >= 1, `${slug}: relatedMissionTypes must name at least one mission_type`);
+  }
+}
+
+function test_customer_discovery_has_an_example_script(): void {
+  const playbook = getPlaybookBySlug("customer-discovery")!;
+  expect((playbook.exampleScript?.length ?? 0) >= 4, "customer-discovery must include a worked example interview script");
+  for (const line of playbook.exampleScript ?? []) {
+    expect(line.speaker.trim().length > 0, "Every script line needs a speaker label");
+    expect(line.line.trim().length > 0, "Every script line needs actual dialogue");
+  }
+}
+
+function test_content_avoids_filler_language(): void {
+  // Part 22's explicit filler examples must not appear verbatim as
+  // standalone advice anywhere in the 5 target playbooks' steps or
+  // questionsToAskOrDo -- a light guard against regressing into vague
+  // advice, not a literary style-checker.
+  const FILLER_PHRASES = ["talk to your customers.", "validate your idea.", "focus on value.", "iterate based on feedback."];
+  for (const slug of PHASE_12_TARGET_SLUGS) {
+    const playbook = getPlaybookBySlug(slug)!;
+    const haystack = [...playbook.steps, ...(playbook.questionsToAskOrDo ?? [])].join(" ").toLowerCase();
+    for (const filler of FILLER_PHRASES) {
+      expect(!haystack.includes(filler), `${slug}: contains filler-level advice ("${filler}") instead of concrete guidance`);
+    }
+  }
+}
+
 // --- Centralized mapping tests (Part 6/15) ----------------------------------
 
 function test_vps_category_mapping_covers_all_six_categories(): void {
@@ -123,14 +191,29 @@ function test_vps_category_mapping_covers_all_six_categories(): void {
 }
 
 function test_mission_type_mapping_examples() {
-  // Part 5A's own worked examples.
+  // Part 5A's own worked examples, updated by Phase 12 Part 12: "Test
+  // willingness to pay" -> pricing_validation, "Acquire first customers"
+  // -> early_traction (both repointed in resourceMap.ts's
+  // MISSION_TYPE_TO_PLAYBOOK -- see that file's own comment for why).
   expect(
     getPlaybookForMission({ missionType: "customer_discovery" })?.slug === "customer-discovery",
     "Customer interview mission (mission_type=customer_discovery) should map to Customer Discovery"
   );
   expect(
-    getPlaybookForMission({ missionType: "pricing" })?.slug === "pricing",
-    "Pricing experiment (mission_type=pricing) should map to Pricing"
+    getPlaybookForMission({ missionType: "validation" })?.slug === "problem-validation",
+    "Validate-severity/frequency mission (mission_type=validation) should map to Problem Validation"
+  );
+  expect(
+    getPlaybookForMission({ missionType: "product" })?.slug === "mvp",
+    "Test-prototype mission (mission_type=product) should map to MVP"
+  );
+  expect(
+    getPlaybookForMission({ missionType: "pricing" })?.slug === "pricing-validation",
+    "Pricing/willingness-to-pay mission (mission_type=pricing) should map to Pricing & Willingness-to-Pay"
+  );
+  expect(
+    getPlaybookForMission({ missionType: "gtm" })?.slug === "early-traction",
+    "Acquire-first-customers mission (mission_type=gtm) should map to Early Traction & First Customers"
   );
   // "Market research" from missionSuggestions.ts's own table has
   // missionType="other" + relatedCategory="market_potential" -- mission_type
@@ -139,6 +222,14 @@ function test_mission_type_mapping_examples() {
     getPlaybookForMission({ missionType: "other", relatedCategory: "market_potential" })?.slug === "market-sizing",
     "A mission with no specific mission_type mapping must fall back to related_category"
   );
+}
+
+function test_unknown_resource_ref_returns_undefined_not_a_guess(): void {
+  // Mirrors exactly how MissionsSection.tsx resolves a mission's own
+  // resource_ref (getPlaybookBySlug(primaryMission.resource_ref)) --
+  // an unrecognized/stale resource_ref value must resolve to undefined,
+  // never throw and never silently guess a fallback playbook.
+  expect(getPlaybookBySlug("this-slug-does-not-exist") === undefined, "An unknown resource_ref must resolve to undefined");
 }
 
 function test_mission_with_no_mapping_remains_usable_without_a_playbook(): void {
@@ -231,8 +322,14 @@ const TESTS: [string, () => void][] = [
   ["test_content_completeness", test_content_completeness],
   ["test_related_playbooks_resolve", test_related_playbooks_resolve],
   ["test_journey_groups_cover_every_playbook_exactly_once", test_journey_groups_cover_every_playbook_exactly_once],
+  ["test_exactly_five_phase_12_playbooks_exist", test_exactly_five_phase_12_playbooks_exist],
+  ["test_no_duplicate_playbook_slugs", test_no_duplicate_playbook_slugs],
+  ["test_phase_12_playbooks_have_the_deeper_structure", test_phase_12_playbooks_have_the_deeper_structure],
+  ["test_customer_discovery_has_an_example_script", test_customer_discovery_has_an_example_script],
+  ["test_content_avoids_filler_language", test_content_avoids_filler_language],
   ["test_vps_category_mapping_covers_all_six_categories", test_vps_category_mapping_covers_all_six_categories],
   ["test_mission_type_mapping_examples", test_mission_type_mapping_examples],
+  ["test_unknown_resource_ref_returns_undefined_not_a_guess", test_unknown_resource_ref_returns_undefined_not_a_guess],
   ["test_mission_with_no_mapping_remains_usable_without_a_playbook", test_mission_with_no_mapping_remains_usable_without_a_playbook],
   ["test_deck_section_mapping_examples", test_deck_section_mapping_examples],
   ["test_deck_section_with_no_clear_resource_returns_null", test_deck_section_with_no_clear_resource_returns_null],

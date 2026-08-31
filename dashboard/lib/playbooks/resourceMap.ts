@@ -43,11 +43,24 @@ const VPS_CATEGORY_TO_PLAYBOOK: Record<string, string> = {
 // one; related_category is optional free text). "other" intentionally has
 // no entry -- a mission with no confident mapping shows no playbook link,
 // per Part 5A's "must remain usable without opening the playbook."
+//
+// Phase 12 (Founder Playbooks V1, Part 12): "pricing" and "gtm" repointed
+// from the general Business Model & Pricing / Go-to-Market playbooks to
+// the new, more specific Pricing & Willingness-to-Pay / Early Traction
+// playbooks. A "pricing" or "gtm" MISSION is a founder being nudged to go
+// gather real-world evidence right now (test willingness to pay; acquire
+// first customers) -- the validation-focused playbook is the closer match
+// for that moment than the general strategy guide. The general "pricing"
+// and "go-to-market" playbooks remain fully reachable from other contexts
+// that ARE about broader strategy, not a specific validation nudge: deck
+// sections (business_model/financials -> pricing, gtm -> go-to-market)
+// and the readiness-pillar map (execution -> go-to-market) below are
+// unchanged.
 const MISSION_TYPE_TO_PLAYBOOK: Record<string, string> = {
   customer_discovery: "customer-discovery",
   validation: "problem-validation",
-  pricing: "pricing",
-  gtm: "go-to-market",
+  pricing: "pricing-validation",
+  gtm: "early-traction",
   product: "mvp",
   founder: "hiring",
   economics: "pricing",
