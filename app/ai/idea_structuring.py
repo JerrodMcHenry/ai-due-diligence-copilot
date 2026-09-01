@@ -25,6 +25,7 @@ wants this to stay simple.
 
 import json
 import os
+import re
 
 from dotenv import load_dotenv
 from openai import OpenAI
@@ -246,7 +247,76 @@ def _quote_is_verifiable(source_quote: str | None, description: str) -> bool:
     return _normalize_text(source_quote) in _normalize_text(description)
 
 
-def _sanitize_field(field: dict | None, description: str, *, allow_inferred: bool) -> dict:
+_NUMBER_PATTERN = re.compile(r"\$?\s?([0-9][0-9,]*(?:\.[0-9]+)?)\s?([kKmM])?\b")
+
+
+def _extract_numbers(text: str) -> list[float]:
+    """
+    Every plain number mentioned anywhere in the founder's description,
+    with $/,/K/M formatting normalized to a plain float -- e.g. "$850K"
+    and "72" both become real entries. Used only by
+    _revenue_value_is_verifiable below; deliberately permissive (it's a
+    membership check against, not a full parse of, the description).
+    """
+    numbers: list[float] = []
+    for match in _NUMBER_PATTERN.finditer(text):
+        raw, suffix = match.group(1), match.group(2)
+        try:
+            value = float(raw.replace(",", ""))
+        except ValueError:
+            continue
+        if suffix and suffix.lower() == "k":
+            value *= 1_000
+        elif suffix and suffix.lower() == "m":
+            value *= 1_000_000
+        numbers.append(value)
+    return numbers
+
+
+def _revenue_value_is_verifiable(value: float | None, description: str) -> bool:
+    """
+    Build V3 -- a real, demonstrated defect this closes: Build V3's own
+    live test of the exact prompt example "We charge $199 per location
+    per month. We have three paying gyms." returned monthly_revenue=597
+    (199 x 3) tagged "user_provided" with a real, independently-
+    verifiable source_quote -- because _quote_is_verifiable only checks
+    that the QUOTE TEXT is real, not that the QUOTE actually states the
+    CLAIMED NUMBER. Multiplying a stated price by a stated customer
+    count is exactly the kind of derived-not-observed figure Part 7 ("No
+    Hallucinated Business Data") and the validation group's own prompt
+    rules forbid ("actual dollars already collected... not a
+    projection") -- SIE does not compute a founder's revenue for them.
+    This is an ADDITIONAL numeric-specific gate on top of
+    _quote_is_verifiable, used only for monthly_revenue /
+    prior_monthly_revenue (the two validation fields with a legitimate,
+    prompt-sanctioned derivation to allow for: ARR / 12). Accepts a
+    value only if it's either:
+      - stated directly as a number somewhere in the description
+        (within a small rounding tolerance), or
+      - a stated annual figure divided by 12 (within a small rounding
+        tolerance) -- the one derivation the prompt explicitly sanctions.
+    Any other arithmetic (price x customer count, growth-rate projections,
+    etc.) is not on this allow-list and fails closed.
+    """
+    if value is None:
+        return True
+
+    tolerance = max(1.0, abs(value) * 0.01)
+    for number in _extract_numbers(description):
+        if abs(number - value) <= tolerance:
+            return True
+        if abs(number / 12 - value) <= tolerance:
+            return True
+    return False
+
+
+def _sanitize_field(
+    field: dict | None,
+    description: str,
+    *,
+    allow_inferred: bool,
+    numeric_guard: bool = False,
+) -> dict:
     """
     Applied to EVERY leaf field, not just validation -- but the
     allow_inferred=False path (used exclusively for the validation group)
@@ -256,6 +326,11 @@ def _sanitize_field(field: dict | None, description: str, *, allow_inferred: boo
     source_quote is independently verified against the founder's actual
     submitted text. "ai_inferred" is not just discouraged for validation
     -- it is programmatically impossible to reach this function's output.
+
+    `numeric_guard`, Build V3: an additional check applied only to
+    monthly_revenue / prior_monthly_revenue -- see
+    _revenue_value_is_verifiable's own docstring for the specific,
+    demonstrated defect this closes.
     """
     if not isinstance(field, dict):
         return {"value": None, "provenance": "unknown", "source_quote": None}
@@ -264,7 +339,11 @@ def _sanitize_field(field: dict | None, description: str, *, allow_inferred: boo
     value = field.get("value")
     source_quote = field.get("source_quote")
 
-    if provenance == "user_provided" and _quote_is_verifiable(source_quote, description):
+    if (
+        provenance == "user_provided"
+        and _quote_is_verifiable(source_quote, description)
+        and (not numeric_guard or _revenue_value_is_verifiable(value, description))
+    ):
         return {"value": value, "provenance": "user_provided", "source_quote": source_quote}
 
     if allow_inferred and provenance == "ai_inferred" and value is not None:
@@ -316,9 +395,17 @@ def _sanitize_draft(raw: dict, description: str) -> dict:
     # The one group where allow_inferred=False -- see _sanitize_field's
     # own docstring. This is what makes fabricated validation
     # structurally unreachable regardless of what the LLM returned.
+    # numeric_guard is additionally enabled for the two revenue fields --
+    # see _revenue_value_is_verifiable's own docstring for the specific
+    # price x customer_count fabrication this was added to close.
     validation_raw = raw.get("validation") if isinstance(raw.get("validation"), dict) else {}
     sanitized["validation"] = {
-        field_name: _sanitize_field(validation_raw.get(field_name), description, allow_inferred=False)
+        field_name: _sanitize_field(
+            validation_raw.get(field_name),
+            description,
+            allow_inferred=False,
+            numeric_guard=field_name in ("monthly_revenue", "prior_monthly_revenue"),
+        )
         for field_name in _VALIDATION_FIELDS
     }
 

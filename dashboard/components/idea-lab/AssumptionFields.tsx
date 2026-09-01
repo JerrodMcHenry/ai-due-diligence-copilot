@@ -12,9 +12,19 @@ type FieldWrapperProps = {
   // (the venture workspace's own assumption editor) keeps working with
   // no badge shown at all.
   badge?: React.ReactNode;
+  // Build V3, Part 11: the founder's own words this field's value was
+  // drawn/derived from (VentureDraft's `source_quote`, e.g. "$3,000-
+  // $12,000/year" behind a $7,500 midpoint price_point) -- shown as its
+  // own line, never folded into the badge, so a derived/rounded value
+  // never reads as if the founder typed that exact number. Only ever
+  // passed by the creation-review screen, which is the only caller
+  // holding real VentureDraft source_quote data; the post-create editor
+  // has none (provenance is UI-only from the draft stage on, see
+  // types/ideaLab.ts's own comment on draftToAssumptions).
+  hint?: string | null;
 };
 
-function FieldWrapper({ label, htmlFor, children, badge }: FieldWrapperProps) {
+function FieldWrapper({ label, htmlFor, children, badge, hint }: FieldWrapperProps) {
   return (
     <div>
       <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1.5">
@@ -24,6 +34,9 @@ function FieldWrapper({ label, htmlFor, children, badge }: FieldWrapperProps) {
         {badge}
       </div>
       {children}
+      {hint ? (
+        <p className="mt-1 text-[11px] italic leading-4 text-text-muted">You said: &ldquo;{hint}&rdquo;</p>
+      ) : null}
     </div>
   );
 }
@@ -39,6 +52,7 @@ export function TextField({
   placeholder,
   multiline,
   badge,
+  hint,
 }: {
   id: string;
   label: string;
@@ -47,9 +61,10 @@ export function TextField({
   placeholder?: string;
   multiline?: boolean;
   badge?: React.ReactNode;
+  hint?: string | null;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id} badge={badge}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge} hint={hint}>
       {multiline ? (
         <textarea
           id={id}
@@ -82,6 +97,7 @@ export function NumberField({
   step = 1,
   placeholder,
   badge,
+  hint,
 }: {
   id: string;
   label: string;
@@ -91,9 +107,10 @@ export function NumberField({
   step?: number;
   placeholder?: string;
   badge?: React.ReactNode;
+  hint?: string | null;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id} badge={badge}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge} hint={hint}>
       <input
         id={id}
         type="number"
@@ -119,6 +136,7 @@ export function SelectField({
   options,
   onChange,
   badge,
+  hint,
 }: {
   id: string;
   label: string;
@@ -126,9 +144,10 @@ export function SelectField({
   options: string[];
   onChange: (value: string | null) => void;
   badge?: React.ReactNode;
+  hint?: string | null;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id} badge={badge}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge} hint={hint}>
       <select
         id={id}
         value={value ?? ""}
@@ -152,15 +171,17 @@ export function ToggleField({
   value,
   onChange,
   badge,
+  hint,
 }: {
   id: string;
   label: string;
   value: boolean | null;
   onChange: (value: boolean | null) => void;
   badge?: React.ReactNode;
+  hint?: string | null;
 }) {
   return (
-    <FieldWrapper label={label} htmlFor={id} badge={badge}>
+    <FieldWrapper label={label} htmlFor={id} badge={badge} hint={hint}>
       <select
         id={id}
         value={value === null ? "" : value ? "yes" : "no"}

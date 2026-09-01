@@ -599,7 +599,17 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           <div className="mt-4 space-y-3">
             <VentureBasicsAccordion
               targetCustomer={targetCustomer}
-              onTargetCustomer={setTargetCustomer}
+              // Build V3, Part 3 investigation finding: `target_customer`
+              // is stored BOTH as its own top-level column AND inside
+              // `assumptions` (compute_vps() reads `assumptions.
+              // target_customer` directly -- see vps_scoring.py's
+              // `_score_problem_solution`). Editing only the top-level
+              // piece here silently dropped a founder's edit from the
+              // actual scored/saved model -- both must update together.
+              onTargetCustomer={(value) => {
+                setTargetCustomer(value);
+                setDraft((prev) => ({ ...prev, target_customer: value }));
+              }}
               industry={industry}
               onIndustry={setIndustry}
               businessModel={businessModel}

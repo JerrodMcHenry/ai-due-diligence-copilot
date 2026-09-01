@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
@@ -15,8 +16,19 @@ import {
   ToggleField,
 } from "@/components/idea-lab/AssumptionFields";
 
+import { compareVentureScenarios } from "@/lib/api";
 import { draftToAssumptions, VENTURE_STAGES } from "@/types";
-import type { VentureAssumptions, VentureDraft } from "@/types";
+import type { DraftProvenance, VentureAssumptions, VentureDraft } from "@/types";
+
+// Build V3, Part 11: only a VERIFIED founder quote is ever shown as a
+// "You said" hint -- an "ai_inferred"/"unknown" field's source_quote is
+// always null already (idea_structuring.py's own sanitize step never
+// sets one), but this stays explicit rather than trusting that by
+// omission, since a hint rendered next to a guess would misattribute it
+// to the founder.
+function quoteHint(field: { provenance: DraftProvenance; source_quote: string | null }): string | null {
+  return field.provenance === "user_provided" ? field.source_quote : null;
+}
 
 type VentureBasics = {
   name: string;
@@ -138,6 +150,17 @@ export default function VentureDraftReview({
         stillFiguringOut={defaultStillFiguringOut()}
       />
 
+      {/* Build V3, Part 14: a restrained, honestly-framed preview --
+          reuses the SAME stateless POST /ventures/scenario-compare every
+          "Recalculate (preview)"/"What If" call in the workspace already
+          uses (compute_vps() itself is completely untouched), just with
+          current == modified so it returns one real score for the
+          founder's current review-time assumptions. Nothing here is
+          persisted; if the founder edits a field below, the preview
+          recomputes from the updated assumptions after a short pause
+          (see VpsPreview's own debounce) rather than on every keystroke. */}
+      <VpsPreview assumptions={assumptions} />
+
       <Disclosure summary="Review and edit the full model" defaultOpen={false}>
         <div className="space-y-3">
           <p className="text-xs text-text-muted">
@@ -154,13 +177,27 @@ export default function VentureDraftReview({
             value={industry}
             onChange={setIndustry}
             badge={<ProvenanceBadge provenance={draft.industry.provenance} />}
+            hint={quoteHint(draft.industry)}
           />
           <TextField
             id="review-customer"
             label="Target customer"
             value={targetCustomer}
-            onChange={setTargetCustomer}
+            // Build V3, Part 3 investigation finding: `target_customer` is
+            // stored BOTH as its own top-level column (`targetCustomer`
+            // here, sent as `basics.targetCustomer`) AND inside
+            // `assumptions` (compute_vps() reads `assumptions.target_customer`
+            // directly, see vps_scoring.py's `_score_problem_solution`).
+            // Editing only the top-level piece silently dropped a
+            // founder's correction from the actual scored model -- both
+            // must update together so a correction here truly becomes
+            // canonical, not just cosmetically displayed.
+            onChange={(value) => {
+              setTargetCustomer(value);
+              setAssumptions((prev) => ({ ...prev, target_customer: value }));
+            }}
             badge={<ProvenanceBadge provenance={draft.target_customer.provenance} />}
+            hint={quoteHint(draft.target_customer)}
           />
           <TextField
             id="review-business-model"
@@ -168,6 +205,7 @@ export default function VentureDraftReview({
             value={businessModel}
             onChange={setBusinessModel}
             badge={<ProvenanceBadge provenance={draft.business_model.provenance} />}
+            hint={quoteHint(draft.business_model)}
           />
           <SelectField
             id="review-stage"
@@ -176,6 +214,7 @@ export default function VentureDraftReview({
             options={[...VENTURE_STAGES]}
             onChange={(value) => setStage(value ?? VENTURE_STAGES[0])}
             badge={<ProvenanceBadge provenance={draft.stage.provenance} />}
+            hint={quoteHint(draft.stage)}
           />
         </ReviewAccordion>
 
@@ -187,6 +226,7 @@ export default function VentureDraftReview({
             options={["Small", "Medium", "Large", "Very Large"]}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, market: { ...prev.market, estimated_market_size: value } }))}
             badge={<ProvenanceBadge provenance={draft.market.estimated_market_size.provenance} />}
+            hint={quoteHint(draft.market.estimated_market_size)}
           />
           <SelectField
             id="review-competition"
@@ -195,6 +235,7 @@ export default function VentureDraftReview({
             options={["Low", "Medium", "High"]}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, market: { ...prev.market, competition_intensity: value } }))}
             badge={<ProvenanceBadge provenance={draft.market.competition_intensity.provenance} />}
+            hint={quoteHint(draft.market.competition_intensity)}
           />
           <TextField
             id="review-market-description"
@@ -202,6 +243,7 @@ export default function VentureDraftReview({
             value={assumptions.market.market_description}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, market: { ...prev.market, market_description: value } }))}
             badge={<ProvenanceBadge provenance={draft.market.market_description.provenance} />}
+            hint={quoteHint(draft.market.market_description)}
             multiline
           />
         </ReviewAccordion>
@@ -213,6 +255,7 @@ export default function VentureDraftReview({
             value={assumptions.problem_solution.problem_statement}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, problem_solution: { ...prev.problem_solution, problem_statement: value } }))}
             badge={<ProvenanceBadge provenance={draft.problem_solution.problem_statement.provenance} />}
+            hint={quoteHint(draft.problem_solution.problem_statement)}
             multiline
           />
           <TextField
@@ -221,6 +264,7 @@ export default function VentureDraftReview({
             value={assumptions.problem_solution.solution_description}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, problem_solution: { ...prev.problem_solution, solution_description: value } }))}
             badge={<ProvenanceBadge provenance={draft.problem_solution.solution_description.provenance} />}
+            hint={quoteHint(draft.problem_solution.solution_description)}
             multiline
           />
           <TextField
@@ -229,6 +273,7 @@ export default function VentureDraftReview({
             value={assumptions.problem_solution.differentiation}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, problem_solution: { ...prev.problem_solution, differentiation: value } }))}
             badge={<ProvenanceBadge provenance={draft.problem_solution.differentiation.provenance} />}
+            hint={quoteHint(draft.problem_solution.differentiation)}
             multiline
           />
         </ReviewAccordion>
@@ -240,6 +285,7 @@ export default function VentureDraftReview({
             value={assumptions.founder.founder_count}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, founder: { ...prev.founder, founder_count: value } }))}
             badge={<ProvenanceBadge provenance={draft.founder.founder_count.provenance} />}
+            hint={quoteHint(draft.founder.founder_count)}
           />
           <NumberField
             id="review-founder-experience"
@@ -248,6 +294,7 @@ export default function VentureDraftReview({
             value={assumptions.founder.relevant_domain_experience_years}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, founder: { ...prev.founder, relevant_domain_experience_years: value } }))}
             badge={<ProvenanceBadge provenance={draft.founder.relevant_domain_experience_years.provenance} />}
+            hint={quoteHint(draft.founder.relevant_domain_experience_years)}
           />
           <ToggleField
             id="review-technical-cofounder"
@@ -255,6 +302,7 @@ export default function VentureDraftReview({
             value={assumptions.founder.has_technical_cofounder}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, founder: { ...prev.founder, has_technical_cofounder: value } }))}
             badge={<ProvenanceBadge provenance={draft.founder.has_technical_cofounder.provenance} />}
+            hint={quoteHint(draft.founder.has_technical_cofounder)}
           />
           <ToggleField
             id="review-business-cofounder"
@@ -262,6 +310,7 @@ export default function VentureDraftReview({
             value={assumptions.founder.has_business_cofounder}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, founder: { ...prev.founder, has_business_cofounder: value } }))}
             badge={<ProvenanceBadge provenance={draft.founder.has_business_cofounder.provenance} />}
+            hint={quoteHint(draft.founder.has_business_cofounder)}
           />
         </ReviewAccordion>
 
@@ -272,6 +321,7 @@ export default function VentureDraftReview({
             value={assumptions.gtm.primary_acquisition_strategy}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, gtm: { ...prev.gtm, primary_acquisition_strategy: value } }))}
             badge={<ProvenanceBadge provenance={draft.gtm.primary_acquisition_strategy.provenance} />}
+            hint={quoteHint(draft.gtm.primary_acquisition_strategy)}
             multiline
           />
           <NumberField
@@ -280,6 +330,7 @@ export default function VentureDraftReview({
             value={assumptions.gtm.expected_cac}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, gtm: { ...prev.gtm, expected_cac: value } }))}
             badge={<ProvenanceBadge provenance={draft.gtm.expected_cac.provenance} />}
+            hint={quoteHint(draft.gtm.expected_cac)}
           />
         </ReviewAccordion>
 
@@ -290,6 +341,7 @@ export default function VentureDraftReview({
             value={assumptions.economics.pricing_model}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, economics: { ...prev.economics, pricing_model: value } }))}
             badge={<ProvenanceBadge provenance={draft.economics.pricing_model.provenance} />}
+            hint={quoteHint(draft.economics.pricing_model)}
           />
           <NumberField
             id="review-price-point"
@@ -297,6 +349,7 @@ export default function VentureDraftReview({
             value={assumptions.economics.price_point}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, economics: { ...prev.economics, price_point: value } }))}
             badge={<ProvenanceBadge provenance={draft.economics.price_point.provenance} />}
+            hint={quoteHint(draft.economics.price_point)}
           />
           <NumberField
             id="review-margin"
@@ -304,6 +357,7 @@ export default function VentureDraftReview({
             value={assumptions.economics.expected_gross_margin_pct}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, economics: { ...prev.economics, expected_gross_margin_pct: value } }))}
             badge={<ProvenanceBadge provenance={draft.economics.expected_gross_margin_pct.provenance} />}
+            hint={quoteHint(draft.economics.expected_gross_margin_pct)}
           />
         </ReviewAccordion>
 
@@ -318,6 +372,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.customer_interviews}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, customer_interviews: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.customer_interviews.provenance} />}
+            hint={quoteHint(draft.validation.customer_interviews)}
           />
           <NumberField
             id="review-waitlist"
@@ -325,6 +380,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.waitlist_signups}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, waitlist_signups: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.waitlist_signups.provenance} />}
+            hint={quoteHint(draft.validation.waitlist_signups)}
           />
           <NumberField
             id="review-paying"
@@ -332,6 +388,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.paying_customers}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, paying_customers: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.paying_customers.provenance} />}
+            hint={quoteHint(draft.validation.paying_customers)}
           />
           <NumberField
             id="review-revenue"
@@ -339,6 +396,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.monthly_revenue}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, monthly_revenue: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.monthly_revenue.provenance} />}
+            hint={quoteHint(draft.validation.monthly_revenue)}
           />
           <NumberField
             id="review-prior-revenue"
@@ -346,6 +404,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.prior_monthly_revenue}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, prior_monthly_revenue: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.prior_monthly_revenue.provenance} />}
+            hint={quoteHint(draft.validation.prior_monthly_revenue)}
           />
           <NumberField
             id="review-retention"
@@ -353,6 +412,7 @@ export default function VentureDraftReview({
             value={assumptions.validation.retention_pct}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.retention_pct.provenance} />}
+            hint={quoteHint(draft.validation.retention_pct)}
           />
         </ReviewAccordion>
 
@@ -363,6 +423,7 @@ export default function VentureDraftReview({
             value={assumptions.capital.starting_capital}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, capital: { ...prev.capital, starting_capital: value } }))}
             badge={<ProvenanceBadge provenance={draft.capital.starting_capital.provenance} />}
+            hint={quoteHint(draft.capital.starting_capital)}
           />
           <NumberField
             id="review-burn"
@@ -370,6 +431,7 @@ export default function VentureDraftReview({
             value={assumptions.capital.monthly_burn}
             onChange={(value) => setAssumptions((prev) => ({ ...prev, capital: { ...prev.capital, monthly_burn: value } }))}
             badge={<ProvenanceBadge provenance={draft.capital.monthly_burn.provenance} />}
+            hint={quoteHint(draft.capital.monthly_burn)}
           />
         </ReviewAccordion>
         </div>
@@ -384,6 +446,75 @@ export default function VentureDraftReview({
         </Button>
       </div>
     </div>
+  );
+}
+
+// Build V3, Part 14. Deliberately NOT VPSResultPanel (that panel's
+// full category breakdown, "Path to Stronger," and playbook links are
+// squarely a post-creation, Learn-adjacent surface -- showing all of
+// that before a venture even exists would compete with the review flow
+// and risk exactly the "optimize the create flow around maximizing VPS"
+// framing Part 14 explicitly forbids). This shows one honestly-framed
+// number and nothing to act on.
+function VpsPreview({ assumptions }: { assumptions: VentureAssumptions }) {
+  const { getToken } = useAuth();
+  const [result, setResult] = useState<{ vps: number | null } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    // Debounced, not on every keystroke -- Part 9's progressive-
+    // disclosure spirit applies to network calls too, not just what's
+    // visible on screen. setIsLoading is deliberately only ever called
+    // from inside this callback (never synchronously in the effect body
+    // itself) -- react-hooks/set-state-in-effect flags the latter as a
+    // cascading-render risk.
+    const timer = setTimeout(async () => {
+      setIsLoading(true);
+      try {
+        const token = await getToken();
+        if (!token) {
+          if (!cancelled) setIsLoading(false);
+          return;
+        }
+        const response = await compareVentureScenarios(assumptions, assumptions, token);
+        if (!cancelled) setResult(response.current);
+      } catch (error) {
+        console.error("Failed to preview venture score:", error);
+        if (!cancelled) setResult(null);
+      } finally {
+        if (!cancelled) setIsLoading(false);
+      }
+    }, 500);
+
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [assumptions, getToken]);
+
+  // Fails silently (no error banner) -- this preview is a nice-to-have
+  // during review, never a blocker: "Create Venture" works regardless of
+  // whether this call succeeds.
+  if (isLoading || !result || result.vps === null) {
+    return null;
+  }
+
+  return (
+    <BaseCard className="p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+        Based on what we know so far
+      </p>
+      <div className="mt-2 flex items-baseline gap-2">
+        <span className="text-3xl font-bold text-primary">{result.vps.toFixed(1)}</span>
+        <span className="text-sm text-text-muted">/ 10 · Venture Potential Score</span>
+      </div>
+      <p className="mt-2 text-xs text-text-secondary">
+        This reflects your current assumptions, not a verdict — it changes as you correct fields below
+        or add real evidence later. There&rsquo;s nothing here to maximize before creating your venture.
+      </p>
+    </BaseCard>
   );
 }
 
