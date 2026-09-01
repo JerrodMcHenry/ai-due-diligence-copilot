@@ -68,6 +68,20 @@ function resolveWhyItMatters(missionTitle: string, relatedCategory: string | nul
   return relatedCategory ? (WHY_IT_MATTERS[relatedCategory] ?? null) : null;
 }
 
+// Founder Loop Final Acceptance Audit -- a real, demonstrated bug: the two
+// quick-tag buttons below ("I learned something useful" / "No useful
+// signal yet") unconditionally overwrote the reflection textarea via
+// setReflectionText(...), silently destroying anything the founder had
+// already typed. A live walkthrough reproduced this exactly -- typing a
+// real reflection, then clicking either quick tag, replaced the founder's
+// own words with the canned phrase, with no undo. This directly violates
+// Part 8's "founder text preserved" guarantee. The fix: only apply a
+// canned phrase when the field is empty or still holds one of these two
+// phrases verbatim (so toggling between the two quick options before
+// typing anything still works) -- once the founder has typed anything of
+// their own, the buttons stop overwriting it.
+const CANNED_REFLECTIONS = ["I learned something useful.", "No useful signal yet."];
+
 const CATEGORY_OPTIONS = [
   { value: "", label: "No specific category" },
   { value: "validation", label: "Validation" },
@@ -550,7 +564,11 @@ export default function MissionsSection({
                       type="button"
                       variant="secondary"
                       size="sm"
-                      onClick={() => setReflectionText("I learned something useful.")}
+                      onClick={() => {
+                        if (!reflectionText.trim() || CANNED_REFLECTIONS.includes(reflectionText.trim())) {
+                          setReflectionText("I learned something useful.");
+                        }
+                      }}
                     >
                       I learned something useful
                     </Button>
@@ -558,7 +576,11 @@ export default function MissionsSection({
                       type="button"
                       variant="secondary"
                       size="sm"
-                      onClick={() => setReflectionText("No useful signal yet.")}
+                      onClick={() => {
+                        if (!reflectionText.trim() || CANNED_REFLECTIONS.includes(reflectionText.trim())) {
+                          setReflectionText("No useful signal yet.");
+                        }
+                      }}
                     >
                       No useful signal yet
                     </Button>

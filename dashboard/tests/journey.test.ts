@@ -468,6 +468,39 @@ function test_format_vps_delta(): void {
   expect(formatVpsDelta(null, 7.4) === "7.4", "A null before value (e.g. a newly-scored category) must not crash or fabricate a delta");
 }
 
+// Founder Loop Final Acceptance Audit -- a real, demonstrated bug: the two
+// quick-tag buttons in the "Record What I Learned" flow ("I learned
+// something useful" / "No useful signal yet") unconditionally called
+// setReflectionText(...), silently destroying any real reflection the
+// founder had already typed. A live walkthrough reproduced this exactly.
+// MissionsSection.tsx has no test coverage of its own (it's a stateful
+// React component with real API calls, outside this repo's plain-node
+// pure-file test family, and this repo has no jest/RTL to mount it) --
+// this is a source-inspection guard in the same spirit as
+// tests/playbooks.test.ts's own missionSuggestions.ts checks: it can't
+// exercise the click behavior itself, but it makes reverting the guard
+// (re-introducing the unconditional overwrite) fail CI.
+function test_reflection_quick_tags_never_unconditionally_overwrite_founder_text(): void {
+  const source = readFileSync(path.join(DASHBOARD_ROOT, "components/idea-lab/MissionsSection.tsx"), "utf-8");
+
+  expect(
+    source.includes("CANNED_REFLECTIONS"),
+    "Expected a CANNED_REFLECTIONS guard constant -- has the reflection-preservation fix been removed?"
+  );
+
+  // Every setReflectionText("...") call that sets one of the two canned
+  // phrases must appear only inside a guarded block (the literal
+  // unconditional call form must not be reachable directly off onClick).
+  expect(
+    !/onClick=\{\(\) => setReflectionText\("I learned something useful\.?"?\)\}/.test(source),
+    "The \"I learned something useful\" button must not unconditionally overwrite reflectionText"
+  );
+  expect(
+    !/onClick=\{\(\) => setReflectionText\("No useful signal yet\.?"?\)\}/.test(source),
+    "The \"No useful signal yet\" button must not unconditionally overwrite reflectionText"
+  );
+}
+
 const TESTS: [string, () => void][] = [
   ["test_journey_stages_have_eight_unique_ids", test_journey_stages_have_eight_unique_ids],
   ["test_journey_stages_are_complete", test_journey_stages_are_complete],
@@ -507,6 +540,7 @@ const TESTS: [string, () => void][] = [
   ["test_format_history_date_group_label_today_and_yesterday", test_format_history_date_group_label_today_and_yesterday],
   ["test_group_history_events_by_date_preserves_order_and_groups_consecutive_same_day", test_group_history_events_by_date_preserves_order_and_groups_consecutive_same_day],
   ["test_format_vps_delta", test_format_vps_delta],
+  ["test_reflection_quick_tags_never_unconditionally_overwrite_founder_text", test_reflection_quick_tags_never_unconditionally_overwrite_founder_text],
 ];
 
 function main(): void {
