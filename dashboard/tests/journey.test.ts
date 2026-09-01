@@ -27,6 +27,7 @@ import { inferEvidenceStepIndex, resolveVentureStepIndex } from "../lib/journey/
 import { getAllPlaybooks } from "../content/playbooks/index.ts";
 import { getWhatIfScenarios } from "../components/idea-lab/whatIfScenarios.ts";
 import { summarizeConceptForCard } from "../components/idea-lab/summarizeConceptForCard.ts";
+import { formatHistoryDateGroupLabel, groupHistoryEventsByDate, formatVpsDelta } from "../lib/journey/formatVentureHistory.ts";
 
 function expect(condition: boolean, message: string): void {
   if (!condition) {
@@ -195,6 +196,7 @@ const FILES_THAT_MUST_STAY_PURE = [
   "lib/journey/inferVentureStage.ts",
   "components/idea-lab/whatIfScenarios.ts",
   "components/idea-lab/summarizeConceptForCard.ts",
+  "lib/journey/formatVentureHistory.ts",
 ];
 
 function test_journey_modules_contain_no_scoring_or_persistence_calls(): void {
@@ -431,6 +433,41 @@ function test_summarize_concept_is_pure(): void {
   expect(summarizeConceptForCard(description) === summarizeConceptForCard(description), "Must be deterministic");
 }
 
+// --- Founder Progress / Venture History V1 ---------------------------------
+
+function test_format_history_date_group_label_today_and_yesterday(): void {
+  const now = new Date(2026, 8, 12, 15, 0, 0); // Sept 12, 2026, 3pm local
+  const today = new Date(2026, 8, 12, 9, 0, 0).toISOString();
+  const yesterday = new Date(2026, 8, 11, 23, 0, 0).toISOString();
+  const older = new Date(2026, 7, 28, 10, 0, 0).toISOString();
+
+  expect(formatHistoryDateGroupLabel(today, now) === "Today", `Expected "Today", got ${formatHistoryDateGroupLabel(today, now)}`);
+  expect(formatHistoryDateGroupLabel(yesterday, now) === "Yesterday", `Expected "Yesterday", got ${formatHistoryDateGroupLabel(yesterday, now)}`);
+  expect(formatHistoryDateGroupLabel(older, now) === "AUG 28", `Expected "AUG 28", got ${formatHistoryDateGroupLabel(older, now)}`);
+}
+
+function test_group_history_events_by_date_preserves_order_and_groups_consecutive_same_day(): void {
+  const now = new Date(2026, 8, 12, 15, 0, 0);
+  const events = [
+    { event_type: "model_updated", occurred_at: new Date(2026, 8, 12, 10, 0, 0).toISOString() },
+    { event_type: "learning_recorded", occurred_at: new Date(2026, 8, 12, 9, 0, 0).toISOString() },
+    { event_type: "action_completed", occurred_at: new Date(2026, 8, 5, 9, 0, 0).toISOString() },
+    { event_type: "venture_created", occurred_at: new Date(2026, 7, 28, 9, 0, 0).toISOString() },
+  ];
+  const groups = groupHistoryEventsByDate(events, now);
+  expect(groups.length === 3, `Expected 3 date groups, got ${groups.length}`);
+  expect(groups[0].label === "Today" && groups[0].events.length === 2, "The two Sept 12 events must be grouped under one 'Today' header, in original order");
+  expect(groups[0].events[0].event_type === "model_updated", "Original chronological order (most-recent-first) must be preserved within a group");
+  expect(groups[1].events.length === 1 && groups[2].events.length === 1, "Non-adjacent single-event days must not be merged");
+}
+
+function test_format_vps_delta(): void {
+  expect(formatVpsDelta(7.4, 7.4) === "7.4 (unchanged)", `Expected unchanged framing, got "${formatVpsDelta(7.4, 7.4)}"`);
+  expect(formatVpsDelta(7.0, 8.0) === "7.0 → 8.0", `Expected an arrow for a real change, got "${formatVpsDelta(7.0, 8.0)}"`);
+  expect(formatVpsDelta(7.4, 6.9) === "7.4 → 6.9", "A decline must still be shown as a plain fact, not hidden");
+  expect(formatVpsDelta(null, 7.4) === "7.4", "A null before value (e.g. a newly-scored category) must not crash or fabricate a delta");
+}
+
 const TESTS: [string, () => void][] = [
   ["test_journey_stages_have_eight_unique_ids", test_journey_stages_have_eight_unique_ids],
   ["test_journey_stages_are_complete", test_journey_stages_are_complete],
@@ -467,6 +504,9 @@ const TESTS: [string, () => void][] = [
   ["test_summarize_concept_uses_first_sentence_when_short", test_summarize_concept_uses_first_sentence_when_short],
   ["test_summarize_concept_never_returns_the_entire_long_description", test_summarize_concept_never_returns_the_entire_long_description],
   ["test_summarize_concept_is_pure", test_summarize_concept_is_pure],
+  ["test_format_history_date_group_label_today_and_yesterday", test_format_history_date_group_label_today_and_yesterday],
+  ["test_group_history_events_by_date_preserves_order_and_groups_consecutive_same_day", test_group_history_events_by_date_preserves_order_and_groups_consecutive_same_day],
+  ["test_format_vps_delta", test_format_vps_delta],
 ];
 
 function main(): void {

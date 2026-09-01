@@ -156,6 +156,13 @@ class UpdateVentureRequest(BaseModel):
     target_customer: str | None = Field(default=None, max_length=500)
     stage: str | None = Field(default=None, max_length=50)
     assumptions: VentureAssumptions = Field(default_factory=VentureAssumptions)
+    # Founder Progress / Venture History V1. Optional, additive. Set ONLY
+    # by MissionsSection's own "Update my model ->" flow, which has a
+    # specific mission in hand at the moment it calls this endpoint --
+    # never inferred/guessed server-side. None (the default) for every
+    # other caller (the general "Edit the full model" editor), preserving
+    # exact prior behavior for that flow.
+    related_mission_id: int | None = None
 
 
 class VentureResponse(BaseModel):
@@ -329,3 +336,60 @@ class StructureIdeaRequest(BaseModel):
 
 class StructureIdeaResponse(BaseModel):
     draft: VentureDraft
+
+
+# ---------------------------------------------------------------------------
+# Phase 16 -- Founder Progress / Venture History V1.
+#
+# A deliberately SMALL, closed set of event types (Part 3's own explicit
+# instruction) -- not a generic/polymorphic event envelope. Every event
+# maps to exactly one real, persisted source (see
+# app/api.py::get_venture_history()'s own docstring for the full
+# source-to-event mapping); nothing here is inferred or fabricated.
+# ---------------------------------------------------------------------------
+
+VentureHistoryEventType = Literal[
+    "venture_created", "action_added", "learning_recorded",
+    "action_completed", "model_updated",
+]
+
+
+class VentureHistoryCategoryChange(BaseModel):
+    key: str
+    label: str
+    before: float | None = None
+    after: float | None = None
+
+
+class VentureHistoryEvent(BaseModel):
+    event_type: VentureHistoryEventType
+    occurred_at: datetime
+    title: str
+    # Founder-written text preserved VERBATIM where the event is
+    # learning_recorded -- never summarized, never reinterpreted.
+    description: str | None = None
+    # model_updated (and venture_created, when derivable) only. Category
+    # deltas are limited to categories that actually changed -- an
+    # unchanged category is never listed as a "0.0 -> 0.0" non-event.
+    before_vps: float | None = None
+    after_vps: float | None = None
+    category_changes: list[VentureHistoryCategoryChange] = Field(default_factory=list)
+    # action_added / learning_recorded / action_completed only -- links
+    # this event back to the specific mission it came from. Also set on
+    # a model_updated event when it was made through that mission's own
+    # "Update my model" flow (Part 10's Action -> Learning -> Model
+    # Update -> VPS connection), never inferred otherwise.
+    mission_id: int | None = None
+    mission_title: str | None = None
+
+
+class VentureHistoryResponse(BaseModel):
+    events: list[VentureHistoryEvent]
+    # Part 8's compact summary -- every field here is directly derivable
+    # from the events list itself (the response never carries a number
+    # the events don't already substantiate).
+    current_vps: float | None = None
+    started_at: datetime
+    actions_completed: int = 0
+    model_updates_count: int = 0
+    strongest_improvement: VentureHistoryCategoryChange | None = None

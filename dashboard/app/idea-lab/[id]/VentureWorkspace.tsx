@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
@@ -16,6 +16,7 @@ import VentureOverview from "@/components/idea-lab/VentureOverview";
 import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
+import VentureProgress from "@/components/idea-lab/VentureProgress";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
@@ -37,6 +38,7 @@ import {
   compareVentureScenarios,
   deleteVenture,
   getVenture,
+  getVentureHistory,
   updateVenture,
 } from "@/lib/api";
 import { emptyAssumptions, VENTURE_STAGES } from "@/types";
@@ -45,6 +47,7 @@ import type {
   MissionType,
   ScenarioCompareResponse,
   VentureAssumptions,
+  VentureHistoryResponse,
   VentureResponse,
   VPSResult,
 } from "@/types";
@@ -144,6 +147,26 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // of data MissionsSection already loads.
   const [recentLearning, setRecentLearning] = useState<RecentLearning | null>(null);
 
+  // Founder Progress / Venture History V1. One dedicated GET, loaded once
+  // alongside the venture itself and refreshed only after an action that
+  // could actually change it (a mission-list change, or a saved model
+  // update) -- never on every render, never N+1 (Section 17).
+  const [history, setHistory] = useState<VentureHistoryResponse | null>(null);
+  const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+
+  const refreshHistory = useCallback(async () => {
+    const token = await getToken();
+    if (!token) return;
+    try {
+      const data = await getVentureHistory(ventureId, token);
+      setHistory(data);
+    } catch (error) {
+      console.error("Failed to load venture history:", error);
+    } finally {
+      setIsLoadingHistory(false);
+    }
+  }, [ventureId, getToken]);
+
   // Phase 11, Part 13: a deck-review "Make this a mission" click stashes
   // one fix (lib/pitchDeckMissionHandoff.ts) and navigates here -- this
   // consumes it ONCE, the same read-and-clear contract every other
@@ -201,6 +224,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           setStage(data.stage);
           setDraft(data.assumptions);
           setLoadState("ready");
+          refreshHistory();
         }
       } catch (error) {
         console.error("Failed to load venture:", error);
@@ -218,7 +242,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     return () => {
       isMounted = false;
     };
-  }, [ventureId, getToken]);
+  }, [ventureId, getToken, refreshHistory]);
 
   function buildRequestBody(assumptions: VentureAssumptions) {
     return { name: name.trim() || "Untitled venture", description, industry, business_model: businessModel, target_customer: targetCustomer, stage, assumptions };
@@ -293,6 +317,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
       setVenture(updated);
       setDraft(updated.assumptions);
       setScenario(null);
+      refreshHistory();
     } catch (error) {
       console.error("Failed to save venture:", error);
       setActionError("Your changes could not be saved. Try again.");
@@ -449,12 +474,21 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           }}
           pendingMission={pendingMission}
           onPendingMissionConsumed={() => setPendingMission(null)}
-          onMissionTitlesChanged={setMissionedMilestones}
+          onMissionTitlesChanged={(titles) => {
+            setMissionedMilestones(titles);
+            // Founder Progress / Venture History V1: fires after every
+            // mission-list mutation (create, status change, learning
+            // recorded) -- MissionsSection's own loadMissions() already
+            // reloads for exactly those cases, so this reuses that same
+            // signal rather than adding new props/wiring.
+            refreshHistory();
+          }}
           onRecentLearningChanged={setRecentLearning}
           onVentureUpdated={(updated) => {
             setVenture(updated);
             setDraft(updated.assumptions);
             setScenario(null);
+            refreshHistory();
           }}
         />
         </div>
@@ -479,6 +513,16 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             there's nothing real to show (no invented empty state, no
             fabricated interpretation of founder-written text). */}
         {recentLearning ? <RecentLearningCard learning={recentLearning} /> : null}
+
+        {/* Founder Progress / Venture History V1 -- "what changed,"
+            answered directly: a compact, always-visible summary
+            (current VPS, started date, actions completed, model
+            updates, strongest improvement) plus the full chronological
+            timeline one click away. Positioned as a natural extension
+            of Recent Learning (F), immediately before Founder Tools (G)
+            -- never ahead of Venture -> What Matters Now -> Current
+            Action -> Next Moves. */}
+        <VentureProgress history={history} isLoading={isLoadingHistory} />
 
         {/* Phase 13, Part 15/17/18: Founder Tools (G) -- restrained,
             secondary, grouped under one heading so these read as

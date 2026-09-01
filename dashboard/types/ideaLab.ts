@@ -149,6 +149,11 @@ export interface CreateVentureRequest {
   target_customer?: string | null;
   stage?: string | null;
   assumptions: VentureAssumptions;
+  // Founder Progress / Venture History V1. Only meaningful (and only
+  // ever sent) on an UPDATE (updateVenture() reuses this same request
+  // shape) -- see MissionsSection.tsx's own handleUpdateModel() for the
+  // one call site that sets it. Ignored by the backend on create.
+  related_mission_id?: number | null;
 }
 
 export interface ScenarioCompareResponse {
@@ -315,6 +320,47 @@ export interface VentureMission {
   created_at: string;
   updated_at: string;
   completed_at: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// Phase 16 -- Founder Progress / Venture History V1. Mirrors
+// app/models/idea_lab.py's own VentureHistory* models exactly. A small,
+// closed set of event types -- not a generic event envelope.
+// ---------------------------------------------------------------------------
+
+export type VentureHistoryEventType =
+  | "venture_created"
+  | "action_added"
+  | "learning_recorded"
+  | "action_completed"
+  | "model_updated";
+
+export interface VentureHistoryCategoryChange {
+  key: string;
+  label: string;
+  before: number | null;
+  after: number | null;
+}
+
+export interface VentureHistoryEvent {
+  event_type: VentureHistoryEventType;
+  occurred_at: string;
+  title: string;
+  description: string | null;
+  before_vps: number | null;
+  after_vps: number | null;
+  category_changes: VentureHistoryCategoryChange[];
+  mission_id: number | null;
+  mission_title: string | null;
+}
+
+export interface VentureHistoryResponse {
+  events: VentureHistoryEvent[];
+  current_vps: number | null;
+  started_at: string;
+  actions_completed: number;
+  model_updates_count: number;
+  strongest_improvement: VentureHistoryCategoryChange | null;
 }
 
 export interface CreateMissionRequest {

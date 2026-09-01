@@ -57,6 +57,9 @@ from app.database.db import (create_tables,
                          create_venture_mission,
                          update_venture_mission_status_for_owner,
                          record_venture_mission_learning_for_owner,
+                         create_venture_model_updates_table,
+                         create_venture_model_update,
+                         list_venture_model_updates_for_owner,
                          create_startup_claims_table,
                          create_startup_claim,
                          list_startup_claims_for_user,
@@ -103,7 +106,7 @@ from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.sps_v3 import SPSV3Assessment
-from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft
+from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange
 from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -195,6 +198,11 @@ create_modeled_ventures_table()
 # modeled_ventures(id), which must already exist by this point (same
 # ordering reasoning as modeled_ventures's own migration above).
 create_venture_missions_table()
+
+# Phase 16 -- Founder Progress / Venture History V1. venture_model_updates
+# FKs to both modeled_ventures(id) and venture_missions(id), so it must be
+# created after both.
+create_venture_model_updates_table()
 
 # Phase 11 -- Pitch Deck Coach V2, Part 13. Widens venture_missions.source
 # to allow 'pitch_deck_coach' -- see add_pitch_deck_coach_mission_source()'s
@@ -814,6 +822,16 @@ def update_venture(
     request: UpdateVentureRequest,
     current_user: AuthenticatedUser = RequireAuth,
 ):
+    # Founder Progress / Venture History V1: the "before" snapshot must be
+    # read BEFORE the UPDATE runs -- this is the one and only place a
+    # venture's prior assumptions/model_result are ever captured, since
+    # modeled_ventures itself only ever stores current state (Part 5's own
+    # investigation finding). Ownership is still enforced structurally by
+    # update_modeled_venture_for_user()'s own WHERE clause below, not by
+    # this read succeeding -- a venture that doesn't belong to this user
+    # returns None here and 404s exactly as before this phase.
+    previous = get_modeled_venture_for_user(current_user.user_id, venture_id)
+
     assumptions_dict = request.assumptions.model_dump()
     model_result = _build_model_result(assumptions_dict)
 
@@ -832,6 +850,27 @@ def update_venture(
 
     if not updated:
         raise HTTPException(status_code=404, detail="Venture not found.")
+
+    # THE VPS FIREWALL, restated: this history write happens exclusively
+    # inside the SAME PUT this venture's assumptions were already,
+    # independently, explicitly saved through -- it never runs from any
+    # mission/learning endpoint, and it never itself computes or changes
+    # a score (model_result above was already computed regardless of
+    # whether history recording happens at all). Only written when the
+    # assumptions ACTUALLY changed -- a no-op "Save" (e.g. clicking Save
+    # with no edits) must not manufacture a history entry.
+    if previous is not None and previous.get("assumptions") != assumptions_dict:
+        create_venture_model_update(
+            venture_id=venture_id,
+            user_id=current_user.user_id,
+            before_vps=(previous.get("model_result") or {}).get("vps"),
+            after_vps=(model_result or {}).get("vps"),
+            before_categories=(previous.get("model_result") or {}).get("categories", []),
+            after_categories=(model_result or {}).get("categories", []),
+            before_assumptions=previous.get("assumptions") or {},
+            after_assumptions=assumptions_dict,
+            related_mission_id=request.related_mission_id,
+        )
 
     venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
     return VentureResponse(**venture)
@@ -981,6 +1020,148 @@ def record_mission_learning(
         raise HTTPException(status_code=404, detail="Mission not found.")
 
     return VentureMissionResponse(**mission)
+
+
+# ---------------------------------------------------------------------------
+# Phase 16 -- Founder Progress / Venture History V1.
+#
+# get_venture_history() is a READ-ONLY assembly over data that ALREADY
+# exists once this phase's own single new write path (update_venture()'s
+# create_venture_model_update() call, above) has run -- no new "event"
+# table beyond venture_model_updates itself, no generic event platform.
+# Exactly THREE queries (the venture row, its missions, its model
+# updates), all already-existing single-query functions except the one
+# new one -- never N+1 (Part 17).
+#
+# Source -> event mapping (Part 16's own required documentation):
+#   venture_created    <- modeled_ventures.created_at (exact, real)
+#   action_added       <- venture_missions.created_at (exact, real; this
+#                         IS "when the action was added" -- there is no
+#                         separate persisted "started" moment distinct
+#                         from creation, so this event is honestly framed
+#                         as "added," not a fabricated "started at time X
+#                         the founder didn't actually start it at")
+#   learning_recorded  <- venture_missions.learning_recorded_at +
+#                         .learning_summary (verbatim, exact, real)
+#   action_completed   <- venture_missions.completed_at (exact, real)
+#   model_updated       <- venture_model_updates (exact, real -- the one
+#                         genuinely new persistence this phase added)
+# ---------------------------------------------------------------------------
+
+_CATEGORY_CHANGE_EPSILON = 0.05  # mirrors dashboard's own categoryChangeExplain.ts threshold
+
+
+def _parse_jsonb(value):
+    if isinstance(value, str):
+        return json.loads(value)
+    return value
+
+
+def _diff_category_changes(before_categories: list, after_categories: list) -> list[VentureHistoryCategoryChange]:
+    before_by_key = {c["key"]: c.get("score") for c in before_categories}
+    changes = []
+    for cat in after_categories:
+        key = cat["key"]
+        before_score = before_by_key.get(key)
+        after_score = cat.get("score")
+        if before_score is None and after_score is None:
+            continue
+        if before_score is not None and after_score is not None and abs(after_score - before_score) < _CATEGORY_CHANGE_EPSILON:
+            continue
+        changes.append(VentureHistoryCategoryChange(
+            key=key, label=cat.get("label", key), before=before_score, after=after_score,
+        ))
+    return changes
+
+
+@app.get("/ventures/{venture_id}/history", response_model=VentureHistoryResponse)
+def get_venture_history(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    venture = _require_owned_venture(current_user, venture_id)
+    missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+    model_updates = list_venture_model_updates_for_owner(current_user.user_id, venture_id)
+
+    missions_by_id = {m["id"]: m for m in missions}
+    events: list[VentureHistoryEvent] = []
+
+    for mission in missions:
+        events.append(VentureHistoryEvent(
+            event_type="action_added",
+            occurred_at=mission["created_at"],
+            title=mission["title"],
+            mission_id=mission["id"],
+            mission_title=mission["title"],
+        ))
+        if mission.get("learning_recorded_at") is not None and mission.get("learning_summary"):
+            events.append(VentureHistoryEvent(
+                event_type="learning_recorded",
+                occurred_at=mission["learning_recorded_at"],
+                title="Learning recorded",
+                description=mission["learning_summary"],
+                mission_id=mission["id"],
+                mission_title=mission["title"],
+            ))
+        if mission.get("completed_at") is not None:
+            events.append(VentureHistoryEvent(
+                event_type="action_completed",
+                occurred_at=mission["completed_at"],
+                title=mission["title"],
+                mission_id=mission["id"],
+                mission_title=mission["title"],
+            ))
+
+    all_category_changes: list[VentureHistoryCategoryChange] = []
+    for update in model_updates:
+        before_categories = _parse_jsonb(update["before_categories"]) or []
+        after_categories = _parse_jsonb(update["after_categories"]) or []
+        category_changes = _diff_category_changes(before_categories, after_categories)
+        all_category_changes.extend(category_changes)
+
+        related_mission = missions_by_id.get(update["related_mission_id"]) if update.get("related_mission_id") else None
+        events.append(VentureHistoryEvent(
+            event_type="model_updated",
+            occurred_at=update["created_at"],
+            title="Model updated",
+            description=(related_mission["learning_summary"] if related_mission and related_mission.get("learning_summary") else None),
+            before_vps=update["before_vps"],
+            after_vps=update["after_vps"],
+            category_changes=category_changes,
+            mission_id=related_mission["id"] if related_mission else None,
+            mission_title=related_mission["title"] if related_mission else None,
+        ))
+
+    # The venture's own creation -- always the earliest event. "Initial
+    # VPS" is the earliest known VPS: the oldest model update's
+    # before_vps if the venture has ever been updated, otherwise the
+    # venture's own current VPS (honest, since nothing has changed since
+    # creation -- see this endpoint's own docstring).
+    initial_vps = model_updates[0]["before_vps"] if model_updates else (venture.get("model_result") or {}).get("vps")
+    events.append(VentureHistoryEvent(
+        event_type="venture_created",
+        occurred_at=venture["created_at"],
+        title="Venture created",
+        after_vps=initial_vps,
+    ))
+
+    events.sort(key=lambda e: e.occurred_at, reverse=True)
+
+    actions_completed = sum(1 for m in missions if m.get("completed_at") is not None)
+
+    strongest_improvement = None
+    positive_changes = [c for c in all_category_changes if c.before is not None and c.after is not None and c.after > c.before]
+    if positive_changes:
+        strongest_improvement = max(positive_changes, key=lambda c: c.after - c.before)
+
+    return VentureHistoryResponse(
+        events=events,
+        current_vps=(venture.get("model_result") or {}).get("vps"),
+        started_at=venture["created_at"],
+        actions_completed=actions_completed,
+        model_updates_count=len(model_updates),
+        strongest_improvement=strongest_improvement,
+    )
 
 
 # ---------------------------------------------------------------------------

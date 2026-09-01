@@ -3362,6 +3362,119 @@ def record_venture_mission_learning_for_owner(
 
 
 # ---------------------------------------------------------------------------
+# Phase 16 -- Founder Progress / Venture History V1.
+#
+# venture_model_updates is narrowly scoped to modeled-venture history --
+# NOT a generic event-sourcing platform, NOT a reuse of SPS's own
+# score_history (that table's schema/semantics are for canonical,
+# real-startup analyses; a modeled venture's VPS is architecturally
+# separate from SPS, same reasoning as everywhere else VPS/SPS are kept
+# apart). One row is written per explicit, successful PUT
+# /ventures/{id} call whose assumptions actually changed -- never for a
+# no-op save, never for anything mission-status/learning-related (THE
+# VPS FIREWALL, restated: no function in this section, and no caller of
+# these functions, ever fires from a mission's status or learning_summary
+# changing -- see app/api.py's update_venture() for the one, single call
+# site that writes here).
+#
+# before_/after_ columns are intentionally redundant with what a
+# reconstruction FROM modeled_ventures alone could never recover once a
+# LATER update overwrites the current row -- this is exactly, and only,
+# the minimum persistence gap Part 5 asked to close: modeled_ventures
+# itself has never stored anything but its own current state.
+def create_venture_model_updates_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_model_updates (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                before_vps DOUBLE PRECISION,
+                after_vps DOUBLE PRECISION,
+                before_categories JSONB NOT NULL,
+                after_categories JSONB NOT NULL,
+                before_assumptions JSONB NOT NULL,
+                after_assumptions JSONB NOT NULL,
+                -- Part 10's Action -> Learning -> Model Update -> VPS
+                -- connection: set only when the update was made from
+                -- MissionsSection's own "Update my model ->" flow for a
+                -- specific mission (never inferred/guessed after the
+                -- fact). ON DELETE SET NULL, not CASCADE: a mission being
+                -- deleted (it never is today, but if that ever changes)
+                -- must not delete real, already-happened history -- it
+                -- just loses the cross-reference.
+                related_mission_id INTEGER REFERENCES venture_missions(id) ON DELETE SET NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+
+    print("venture_model_updates table created successfully.")
+
+
+def create_venture_model_update(
+    venture_id: int,
+    user_id: str,
+    before_vps: float | None,
+    after_vps: float | None,
+    before_categories: list,
+    after_categories: list,
+    before_assumptions: dict,
+    after_assumptions: dict,
+    related_mission_id: int | None,
+):
+    """
+    Ownership is enforced by the caller (app/api.py's update_venture(),
+    the ONLY call site) having already confirmed venture_id belongs to
+    user_id via get_modeled_venture_for_user()/update_modeled_venture_for_user()
+    immediately before this runs -- identical trust boundary to
+    create_venture_mission()'s own docstring.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            INSERT INTO venture_model_updates (
+                venture_id, user_id, before_vps, after_vps,
+                before_categories, after_categories,
+                before_assumptions, after_assumptions, related_mission_id
+            )
+            VALUES (
+                :venture_id, :user_id, :before_vps, :after_vps,
+                :before_categories, :after_categories,
+                :before_assumptions, :after_assumptions, :related_mission_id
+            )
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "before_vps": before_vps,
+            "after_vps": after_vps,
+            "before_categories": json.dumps(before_categories),
+            "after_categories": json.dumps(after_categories),
+            "before_assumptions": json.dumps(before_assumptions),
+            "after_assumptions": json.dumps(after_assumptions),
+            "related_mission_id": related_mission_id,
+        })
+
+
+def list_venture_model_updates_for_owner(user_id: str, venture_id: int):
+    """Same ownership-scoped JOIN discipline as
+    list_venture_missions_for_owner() -- a modeled_ventures row this
+    user_id doesn't own can never match, structurally, not by a
+    Python-level check performed after the fact."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT mu.id, mu.venture_id, mu.before_vps, mu.after_vps,
+                   mu.before_categories, mu.after_categories,
+                   mu.before_assumptions, mu.after_assumptions,
+                   mu.related_mission_id, mu.created_at
+            FROM venture_model_updates mu
+            JOIN modeled_ventures v ON v.id = mu.venture_id
+            WHERE mu.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY mu.created_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+# ---------------------------------------------------------------------------
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures -- only to users(id), the same "clean
 # private entity" shape modeled_ventures and venture_missions already

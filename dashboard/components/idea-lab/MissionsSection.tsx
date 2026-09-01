@@ -336,6 +336,12 @@ export default function MissionsSection({
         {
           ...ventureRequestBase,
           assumptions: { ...currentAssumptions, validation: validationDraft },
+          // Founder Progress / Venture History V1, Part 10: this is the
+          // ONE call site with a specific mission actually in hand at
+          // the moment of the update -- lets the resulting history event
+          // link Action -> Learning -> Model Update -> VPS change back
+          // to the mission that prompted it. Never guessed elsewhere.
+          related_mission_id: primaryMission?.id ?? null,
         },
         token
       );

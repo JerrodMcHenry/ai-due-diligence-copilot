@@ -3,6 +3,7 @@ import type {
   ScenarioCompareResponse,
   StructureIdeaResponse,
   VentureAssumptions,
+  VentureHistoryResponse,
   VentureResponse,
   VentureSummary,
 } from "@/types";
@@ -55,6 +56,11 @@ export function updateVenture(
     body: request,
     token,
   });
+}
+
+// Phase 16 -- Founder Progress / Venture History V1.
+export function getVentureHistory(id: number, token: string): Promise<VentureHistoryResponse> {
+  return apiFetch<VentureHistoryResponse>(`/ventures/${id}/history`, { token });
 }
 
 export function deleteVenture(id: number, token: string): Promise<{ deleted: boolean }> {
