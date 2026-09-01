@@ -160,14 +160,20 @@ _DIMENSIONS_BY_PILLAR_KEY: dict[str, tuple[str, ...]] = {
 
 def sps_v3_enabled() -> bool:
     """
-    Phase 10.9 Part 29 -- the feature flag. Defaults OFF: an analysis
-    run with this unset behaves EXACTLY as it did before this phase (no
-    sps_v3 field is ever populated, no extra LLM call is made). Set
-    SPS_ENGINE_VERSION=v3 in the environment to additionally compute the
-    V3 assessment alongside the always-on V2.1 pipeline. This is
-    intentionally a single boolean env var, not a flag platform.
+    SPS V3 Canonical Activation. V3 is now the DEFAULT for new analyses:
+    an unset SPS_ENGINE_VERSION selects V3, matching this phase's own
+    "a developer should not need SPS_ENGINE_VERSION=v3 for normal
+    operation" requirement. V2.1 remains fully intact and unconditionally
+    computed either way (see run_due_diligence()'s own comment) -- this
+    flag only controls whether the ADDITIVE sps_v3 field is also
+    computed. The narrowly-scoped rollback switch from Phase 10.9 is
+    preserved unchanged: explicitly setting SPS_ENGINE_VERSION=v2_1
+    forces legacy (V3-off) behavior for emergency rollback or testing.
+    Any other explicit value (including a typo) also falls back to
+    legacy -- fails closed toward the previously-shipped behavior, never
+    silently toward an unrecognized third state.
     """
-    return os.getenv("SPS_ENGINE_VERSION", "v2_1").strip().lower() == "v3"
+    return os.getenv("SPS_ENGINE_VERSION", "v3").strip().lower() != "v2_1"
 
 
 _STAGE_KEYWORDS: tuple[tuple[str, Stage], ...] = (

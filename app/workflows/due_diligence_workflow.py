@@ -313,16 +313,18 @@ def run_due_diligence(
 
     overall_score = sie_analysis.startup_intelligence_score
 
-    # Phase 10.9, Part 6/8/29 -- additive, feature-flagged V3 assessment.
-    # Off by default (SPS_ENGINE_VERSION unset/"v2_1"): sie_analysis.sps_v3
-    # stays None and NOTHING above this line changes -- the V2.1 pipeline
-    # that produced overall_score/investment_score/readiness has already
-    # fully run by this point, completely unaffected either way. When
-    # enabled, this makes exactly ONE additional LLM call (a
-    # classification pass over evidence V2.1 already extracted -- no new
-    # research, no new Tavily call) and can only ADD sie_analysis.sps_v3;
-    # it never modifies market_score/team_score/.../overall_score or any
-    # other field already assembled above.
+    # SPS V3 Canonical Activation: sps_v3_enabled() now defaults ON
+    # (SPS_ENGINE_VERSION unset -> V3; explicit "v2_1" -> legacy-only).
+    # NOTHING above this line changes either way -- the V2.1 pipeline
+    # that produced overall_score/investment_score/readiness runs
+    # unconditionally, completely unaffected by this flag; it is not
+    # replaced, only supplemented. When enabled (the default), this makes
+    # exactly ONE additional LLM call (a classification pass over
+    # evidence V2.1 already extracted -- no new research, no new Tavily
+    # call) and can only ADD sie_analysis.sps_v3; it never modifies
+    # market_score/team_score/.../overall_score or any other field
+    # already assembled above. See docs/methodology/
+    # SPS_V3_CANONICAL_ACTIVATION.md for the full activation record.
     if sps_v3_enabled():
         sie_analysis.sps_v3 = compute_sps_v3_assessment(
             sie_analysis,
