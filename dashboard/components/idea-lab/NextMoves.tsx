@@ -76,7 +76,7 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
                       disabled={alreadyMissioned}
                       onClick={() => onMakeMission(milestone)}
                     >
-                      {alreadyMissioned ? "Added to your missions ✓" : "Make this a mission →"}
+                      {alreadyMissioned ? "Added to your actions ✓" : "Make this an action →"}
                     </Button>
                   ) : null}
 

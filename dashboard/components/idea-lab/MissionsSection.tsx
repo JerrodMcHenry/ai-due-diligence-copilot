@@ -10,6 +10,7 @@ import Skeleton from "@/components/ui/Skeleton";
 
 import CategoryChangesList from "./CategoryChangesList";
 import { explainCategoryChanges } from "./categoryChangeExplain";
+import { suggestionForMilestone } from "./missionSuggestions";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 import { getPlaybookBySlug } from "@/content/playbooks";
@@ -44,13 +45,28 @@ import type {
 // is no code path from a mission's status or its learning_summary into
 // VentureAssumptions.
 const WHY_IT_MATTERS: Record<string, string> = {
-  validation: "You currently have very little real customer evidence.",
+  validation: "Real customer evidence — interviews, paying customers, revenue — is earned over time, not assumed.",
   problem_solution: "A clear point of difference makes your idea easier to explain and defend.",
   founder_readiness: "Investors and cofounders look for relevant experience and complementary skills.",
   gtm_feasibility: "Without a clear way to reach customers, even a great product can struggle to grow.",
   economic_potential: "Understanding your margins early avoids building something that can't sustain itself.",
   market_potential: "Knowing your competitive landscape helps you position realistically.",
 };
+
+// Founder Loop V2, Section 5: prefers a milestone-specific `why`
+// (missionSuggestions.ts, aware of the venture's actual current state)
+// over the generic, category-level WHY_IT_MATTERS above -- the old
+// unconditional "You currently have very little real customer evidence"
+// was flatly wrong for a mission tagged "validation" on a venture that
+// already reported real customers/revenue. Pure function: no I/O, reads
+// only what's already in hand.
+function resolveWhyItMatters(missionTitle: string, relatedCategory: string | null): string | null {
+  const milestoneWhy = suggestionForMilestone(missionTitle).why;
+  if (milestoneWhy) {
+    return milestoneWhy;
+  }
+  return relatedCategory ? (WHY_IT_MATTERS[relatedCategory] ?? null) : null;
+}
 
 const CATEGORY_OPTIONS = [
   { value: "", label: "No specific category" },
@@ -229,7 +245,7 @@ export default function MissionsSection({
       } catch (error) {
         console.error("Failed to create mission from suggestion:", error);
         if (!cancelled) {
-          setActionError("Couldn't create that mission. Try again.");
+          setActionError("Couldn't create that action. Try again.");
         }
       } finally {
         if (!cancelled) {
@@ -266,7 +282,7 @@ export default function MissionsSection({
       if (expandedMissionId === missionId) setExpandedMissionId(null);
     } catch (error) {
       console.error("Failed to update mission status:", error);
-      setActionError("Couldn't update that mission. Try again.");
+      setActionError("Couldn't update that action. Try again.");
     } finally {
       setIsBusy(false);
     }
@@ -358,7 +374,7 @@ export default function MissionsSection({
       setShowCustomForm(false);
     } catch (error) {
       console.error("Failed to create custom mission:", error);
-      setActionError("Couldn't create that mission. Try again.");
+      setActionError("Couldn't create that action. Try again.");
     } finally {
       setIsCreatingCustom(false);
     }
@@ -371,7 +387,7 @@ export default function MissionsSection({
   if (loadState === "error") {
     return (
       <div className="rounded-lg border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger">
-        Unable to load your missions. Try refreshing the page.
+        Unable to load your actions. Try refreshing the page.
       </div>
     );
   }
@@ -380,16 +396,27 @@ export default function MissionsSection({
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-semibold text-text-primary">Your Missions</h2>
-          {/* Phase 10.10, Part 5: makes the Next Moves -> Missions
+          <h2 className="text-xl font-semibold text-text-primary">Your Actions</h2>
+          {/* Phase 10.10, Part 5: makes the Next Moves -> Actions
               relationship explicit in copy, not just in adjacent layout --
-              a mission is how a move above actually gets done. */}
+              an action is how a move above actually gets done.
+              Founder Loop V2, Section 3: renamed "Mission" -> "Action" in
+              every FOUNDER-FACING string on this page -- "mission" reads
+              too easily as the company's mission statement. The internal
+              domain model (venture_missions table, MissionType,
+              VentureMission, mission_type/related_category fields, the
+              /ventures/{id}/missions API routes) is unchanged on purpose
+              (Section 3's own "do not blindly rename internal
+              persistence/domain fields" instruction) -- this is a
+              presentation-only rename, the same discipline every prior
+              terminology pass in this app (e.g. founderJourney.ts) has
+              already used. */}
           <p className="mt-0.5 text-xs text-text-muted">
             How you actually work through your next moves, one at a time.
           </p>
         </div>
         <p className="text-xs text-text-muted">
-          {completedCount} mission{completedCount === 1 ? "" : "s"} completed · {activeMissions.length} active
+          {completedCount} action{completedCount === 1 ? "" : "s"} completed · {activeMissions.length} active
         </p>
       </div>
 
@@ -403,28 +430,37 @@ export default function MissionsSection({
         <BaseCard variant="raised" className="space-y-4 p-6">
           {expandedMissionId !== primaryMission.id ? (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your next mission</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your next action</p>
               <p className="text-lg font-bold text-text-primary">{primaryMission.title}</p>
               {primaryMission.description ? (
                 <p className="text-sm leading-6 text-text-secondary">{primaryMission.description}</p>
               ) : null}
               <Button type="button" onClick={() => setExpandedMissionId(primaryMission.id)}>
-                Start Mission
+                Start Action
               </Button>
             </>
           ) : (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Current mission</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Current action</p>
               <p className="text-lg font-bold text-text-primary">{primaryMission.title}</p>
 
-              {primaryMission.related_category && WHY_IT_MATTERS[primaryMission.related_category] ? (
-                <div>
-                  <p className="text-xs font-semibold text-text-muted">Why this matters</p>
-                  <p className="mt-1 text-sm text-text-secondary">
-                    {WHY_IT_MATTERS[primaryMission.related_category]}
-                  </p>
-                </div>
-              ) : null}
+              {/* Founder Loop V2, Section 5: prefers the milestone-specific
+                  `why` (missionSuggestions.ts) when this action originated
+                  from a known vps_guidance milestone -- richer, and aware
+                  of the venture's actual current state (e.g. "you already
+                  have strong traction" vs. the generic category blurb).
+                  Falls back to the generic category-level WHY_IT_MATTERS
+                  for a custom, founder-created action with no matching
+                  milestone. */}
+              {(() => {
+                const why = resolveWhyItMatters(primaryMission.title, primaryMission.related_category);
+                return why ? (
+                  <div>
+                    <p className="text-xs font-semibold text-text-muted">Why this matters</p>
+                    <p className="mt-1 text-sm text-text-secondary">{why}</p>
+                  </div>
+                ) : null;
+              })()}
 
               {/* Phase 10.9 -- Founder Playbooks V1, Part 5A: purely
                   additive -- the mission is fully usable (Start/Complete/
@@ -575,15 +611,15 @@ export default function MissionsSection({
         </BaseCard>
       ) : (
         <BaseCard variant="subtle" className="p-6 text-center">
-          <p className="text-sm font-semibold text-text-primary">No active missions yet.</p>
+          <p className="text-sm font-semibold text-text-primary">No active actions yet.</p>
           <p className="mt-1 text-xs text-text-secondary">
-            Turn one of your next moves above into a mission, or add your own below.
+            Turn one of your next moves above into an action, or add your own below.
           </p>
         </BaseCard>
       )}
 
       {otherActiveMissions.length > 0 ? (
-        <Disclosure summary={`${otherActiveMissions.length} more saved mission${otherActiveMissions.length === 1 ? "" : "s"}`}>
+        <Disclosure summary={`${otherActiveMissions.length} more saved action${otherActiveMissions.length === 1 ? "" : "s"}`}>
           <ul className="space-y-2">
             {otherActiveMissions.map((mission) => (
               <li key={mission.id} className="flex items-center justify-between gap-3 text-sm">
@@ -597,10 +633,10 @@ export default function MissionsSection({
         </Disclosure>
       ) : null}
 
-      <Disclosure summary="Create your own mission">
+      <Disclosure summary="Create your own action">
         {!showCustomForm ? (
           <Button type="button" variant="secondary" size="sm" onClick={() => setShowCustomForm(true)}>
-            + New mission
+            + New action
           </Button>
         ) : (
           <div className="space-y-3">
@@ -643,7 +679,7 @@ export default function MissionsSection({
                 loading={isCreatingCustom}
                 onClick={handleCreateCustomMission}
               >
-                Add Mission
+                Add Action
               </Button>
               <Button type="button" variant="subtle" onClick={() => setShowCustomForm(false)}>
                 Cancel

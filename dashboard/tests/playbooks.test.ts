@@ -211,6 +211,40 @@ function test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbo
   );
 }
 
+// --- Founder Loop V2, Section 5: new traction-stage milestone ---------------
+
+function test_repeatable_growth_milestone_is_registered_and_tagged_gtm(): void {
+  const source = readFileSync(path.join(DASHBOARD_ROOT, "components/idea-lab/missionSuggestions.ts"), "utf-8");
+  const milestoneText = "Prove customer acquisition works repeatably beyond founder-led sales or referrals.";
+  const milestoneIndex = source.indexOf(milestoneText);
+  expect(milestoneIndex !== -1, "New traction-stage milestone string not found in missionSuggestions.ts -- must match app/ai/vps_guidance.py exactly");
+
+  const entryText = source.slice(milestoneIndex, milestoneIndex + 400);
+  expect(/missionType:\s*"gtm"/.test(entryText), `Expected missionType: "gtm", got: ${entryText}`);
+  expect(/relatedCategory:\s*"gtm_feasibility"/.test(entryText), `Expected relatedCategory: "gtm_feasibility", got: ${entryText}`);
+  expect(/why:/.test(entryText), "Expected a `why` field explaining this recommendation");
+}
+
+function test_repeatable_growth_milestone_resolves_to_early_traction_playbook(): void {
+  const playbook = getPlaybookForMission({ missionType: "gtm", relatedCategory: "gtm_feasibility" });
+  expect(playbook?.slug === "early-traction", `Expected "early-traction", got: ${playbook?.slug}`);
+}
+
+function test_every_known_milestone_has_a_why(): void {
+  // Section 5's own requirement: every recommendation must be able to
+  // answer "why does this matter" -- checked structurally (every table
+  // entry has a `why:` key), not by re-deriving the mapping.
+  const source = readFileSync(path.join(DASHBOARD_ROOT, "components/idea-lab/missionSuggestions.ts"), "utf-8");
+  const tableStart = source.indexOf("const KNOWN_MILESTONE_SUGGESTIONS");
+  const tableEnd = source.indexOf("\n};", tableStart);
+  const tableText = source.slice(tableStart, tableEnd);
+
+  const entryCount = (tableText.match(/missionType:/g) ?? []).length;
+  const whyCount = (tableText.match(/why:/g) ?? []).length;
+  expect(entryCount > 0, "Expected at least one milestone suggestion entry");
+  expect(whyCount === entryCount, `Every milestone suggestion should carry a \`why\` -- found ${whyCount} of ${entryCount}`);
+}
+
 // --- Centralized mapping tests (Part 6/15) ----------------------------------
 
 function test_vps_category_mapping_covers_all_six_categories(): void {
@@ -361,6 +395,9 @@ const TESTS: [string, () => void][] = [
   ["test_journey_groups_cover_every_playbook_exactly_once", test_journey_groups_cover_every_playbook_exactly_once],
   ["test_willingness_to_pay_milestone_is_tagged_pricing_not_validation", test_willingness_to_pay_milestone_is_tagged_pricing_not_validation],
   ["test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbook", test_willingness_to_pay_milestone_resolves_to_pricing_validation_playbook],
+  ["test_repeatable_growth_milestone_is_registered_and_tagged_gtm", test_repeatable_growth_milestone_is_registered_and_tagged_gtm],
+  ["test_repeatable_growth_milestone_resolves_to_early_traction_playbook", test_repeatable_growth_milestone_resolves_to_early_traction_playbook],
+  ["test_every_known_milestone_has_a_why", test_every_known_milestone_has_a_why],
   ["test_exactly_five_phase_12_playbooks_exist", test_exactly_five_phase_12_playbooks_exist],
   ["test_no_duplicate_playbook_slugs", test_no_duplicate_playbook_slugs],
   ["test_phase_12_playbooks_have_the_deeper_structure", test_phase_12_playbooks_have_the_deeper_structure],

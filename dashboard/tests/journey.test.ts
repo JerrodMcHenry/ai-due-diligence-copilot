@@ -23,7 +23,10 @@ import {
 } from "../lib/founderJourney.ts";
 import { resolveIdeaLabNextStep } from "../lib/journey/resolveIdeaLabNextStep.ts";
 import { resolveRecentLearning } from "../lib/journey/resolveRecentLearning.ts";
+import { inferEvidenceStepIndex, resolveVentureStepIndex } from "../lib/journey/inferVentureStage.ts";
 import { getAllPlaybooks } from "../content/playbooks/index.ts";
+import { getWhatIfScenarios } from "../components/idea-lab/whatIfScenarios.ts";
+import { summarizeConceptForCard } from "../components/idea-lab/summarizeConceptForCard.ts";
 
 function expect(condition: boolean, message: string): void {
   if (!condition) {
@@ -189,6 +192,9 @@ const FILES_THAT_MUST_STAY_PURE = [
   "lib/founderJourney.ts",
   "lib/journey/resolveIdeaLabNextStep.ts",
   "lib/journey/resolveRecentLearning.ts",
+  "lib/journey/inferVentureStage.ts",
+  "components/idea-lab/whatIfScenarios.ts",
+  "components/idea-lab/summarizeConceptForCard.ts",
 ];
 
 function test_journey_modules_contain_no_scoring_or_persistence_calls(): void {
@@ -208,6 +214,199 @@ function test_venture_handoff_only_uses_sessionstorage_no_network(): void {
     expect(!source.includes(forbidden), `lib/ventureToStartupHandoff.ts must never reference "${forbidden}" (Part 17 firewall)`);
   }
   expect(source.includes("sessionStorage"), "The handoff must use sessionStorage, not a new persistence mechanism");
+}
+
+// --- Founder Loop V2, Section 10: evidence-based journey stage ------------
+
+function emptyMinimalAssumptions(): {
+  market: { estimated_market_size: string | null; competition_intensity: string | null; market_description: string | null };
+  problem_solution: { problem_statement: string | null; solution_description: string | null };
+  founder: { founder_count: number | null };
+  gtm: { primary_acquisition_strategy: string | null };
+  economics: { pricing_model: string | null };
+  validation: { customer_interviews: number | null; waitlist_signups: number | null; paying_customers: number | null; monthly_revenue: number | null };
+} {
+  return {
+    market: { estimated_market_size: null, competition_intensity: null, market_description: null },
+    problem_solution: { problem_statement: null, solution_description: null },
+    founder: { founder_count: null },
+    gtm: { primary_acquisition_strategy: null },
+    economics: { pricing_model: null },
+    validation: { customer_interviews: null, waitlist_signups: null, paying_customers: null, monthly_revenue: null },
+  };
+}
+
+function test_infer_evidence_step_idea_with_nothing_modeled(): void {
+  expect(inferEvidenceStepIndex(null) === 0, "null assumptions must infer Idea (index 0)");
+  expect(inferEvidenceStepIndex(emptyMinimalAssumptions()) === 0, "An empty venture must infer Idea (index 0)");
+}
+
+function test_infer_evidence_step_model_when_assumptions_present(): void {
+  const a = emptyMinimalAssumptions();
+  a.market.estimated_market_size = "Large";
+  expect(inferEvidenceStepIndex(a) === 1, "A venture with a modeled assumption but no real signal should infer Model (index 1)");
+}
+
+function test_infer_evidence_step_experiment_when_interviews_reported(): void {
+  const a = emptyMinimalAssumptions();
+  a.validation.customer_interviews = 10;
+  expect(inferEvidenceStepIndex(a) === 2, "A venture with reported interviews but no traction should infer Experiment (index 2)");
+}
+
+function test_infer_evidence_step_build_when_real_traction_exists(): void {
+  const a = emptyMinimalAssumptions();
+  a.validation.paying_customers = 14;
+  a.validation.monthly_revenue = 70000;
+  expect(inferEvidenceStepIndex(a) === 3, "A venture with real paying customers/revenue should infer Build (index 3)");
+}
+
+function test_infer_evidence_step_never_reaches_fundraise(): void {
+  // Section 10's own point: fundraising isn't every venture's destination
+  // -- evidence of traction alone must never auto-imply it. Index 4
+  // ("Fundraise") is reachable only via the founder's own explicit stage.
+  const a = emptyMinimalAssumptions();
+  a.validation.paying_customers = 1_000_000;
+  a.validation.monthly_revenue = 10_000_000;
+  expect(inferEvidenceStepIndex(a) <= 3, `Evidence alone must never infer past Build (index 3), got ${inferEvidenceStepIndex(a)}`);
+}
+
+function test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence(): void {
+  const traction = emptyMinimalAssumptions();
+  traction.validation.paying_customers = 14;
+
+  // A stale/default manual stage (index 0, "Idea") must not hide real
+  // evidence of traction (index 3, "Build") -- this is the exact
+  // ClaimPilot-shaped bug this phase's own investigation confirmed live.
+  expect(resolveVentureStepIndex(0, traction) === 3, "Real evidence must win over a stale manual 'Idea' selection");
+
+  // An UNMAPPED manual stage (-1, e.g. a nonstandard/free-typed value)
+  // must never outrank real evidence either.
+  expect(resolveVentureStepIndex(-1, traction) === 3, "An unmapped manual stage must not suppress real evidence");
+
+  // A founder's own explicit, FURTHER-ALONG choice (e.g. "Launched",
+  // manual index 4) must never be walked backward by evidence alone.
+  expect(resolveVentureStepIndex(4, traction) === 4, "An explicit further-along founder choice must never be overridden by evidence");
+
+  // No evidence and no manual signal: Idea.
+  expect(resolveVentureStepIndex(-1, null) === 0, "With neither manual nor evidence signal, the result must be Idea (index 0)");
+}
+
+// --- Founder Loop V2, Section 6: context-aware What If scenarios ----------
+
+function assumptionsWithTraction() {
+  return {
+    market: { competition_intensity: "Medium" },
+    founder: { has_technical_cofounder: true, has_business_cofounder: false },
+    gtm: { expected_cac: null },
+    economics: { price_point: null, expected_gross_margin_pct: 60 },
+    validation: { customer_interviews: 85, paying_customers: 14, monthly_revenue: 70000 },
+  };
+}
+
+function assumptionsIdeaStage() {
+  return {
+    market: { competition_intensity: null },
+    founder: { has_technical_cofounder: null, has_business_cofounder: null },
+    gtm: { expected_cac: null },
+    economics: { price_point: null, expected_gross_margin_pct: null },
+    validation: { customer_interviews: null, paying_customers: null, monthly_revenue: null },
+  };
+}
+
+function test_what_if_never_suggests_a_lower_interview_count_than_already_reported(): void {
+  const scenarios = getWhatIfScenarios(assumptionsWithTraction());
+  const interviewScenario = scenarios.find((s) => s.id === "interview-20" || s.id === "interview-more");
+  expect(!!interviewScenario, "Expected an interview scenario to be present");
+
+  const result = interviewScenario!.apply(assumptionsWithTraction());
+  expect(
+    (result.validation.customer_interviews ?? 0) > 85,
+    `A venture with 85 already-reported interviews must never be offered a scenario that lowers it (got ${result.validation.customer_interviews})`
+  );
+  expect(interviewScenario!.id !== "interview-20", "The stale fixed-20 preset must not be offered once interviews already exceed 20");
+}
+
+function test_what_if_scenarios_are_tagged_upside_or_downside(): void {
+  const scenarios = getWhatIfScenarios(assumptionsWithTraction());
+  expect(scenarios.length > 0, "Expected at least one scenario for a traction-stage venture");
+  for (const scenario of scenarios) {
+    expect(scenario.direction === "upside" || scenario.direction === "downside", `Every scenario must be tagged upside or downside, got: ${scenario.direction}`);
+  }
+  expect(scenarios.some((s) => s.direction === "downside"), "A traction-stage venture should be offered at least one downside/risk scenario");
+}
+
+function test_what_if_offers_churn_downside_only_when_paying_customers_exist(): void {
+  const withTraction = getWhatIfScenarios(assumptionsWithTraction());
+  expect(withTraction.some((s) => s.id === "churn"), "A venture with paying customers should be offered a churn/downside scenario");
+
+  const ideaStage = getWhatIfScenarios(assumptionsIdeaStage());
+  expect(!ideaStage.some((s) => s.id === "churn"), "An idea-stage venture with no paying customers must not be offered a churn scenario");
+}
+
+function test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress(): void {
+  // Every "upside" scenario's applied result must be >= the current value
+  // for any numeric validation field it touches -- the core "never
+  // silently downgrade and call it progress" rule.
+  const current = assumptionsWithTraction();
+  const scenarios = getWhatIfScenarios(current);
+
+  for (const scenario of scenarios.filter((s) => s.direction === "upside")) {
+    const result = scenario.apply(current);
+    if (result.validation.paying_customers !== null && current.validation.paying_customers !== null) {
+      expect(
+        result.validation.paying_customers >= current.validation.paying_customers,
+        `Upside scenario "${scenario.id}" must never lower paying_customers (${current.validation.paying_customers} -> ${result.validation.paying_customers})`
+      );
+    }
+    if (result.validation.customer_interviews !== null && current.validation.customer_interviews !== null) {
+      expect(
+        result.validation.customer_interviews >= current.validation.customer_interviews,
+        `Upside scenario "${scenario.id}" must never lower customer_interviews`
+      );
+    }
+  }
+}
+
+function test_what_if_is_pure_and_does_not_mutate_the_input(): void {
+  const original = assumptionsWithTraction();
+  const snapshot = JSON.parse(JSON.stringify(original));
+  const scenarios = getWhatIfScenarios(original);
+  for (const scenario of scenarios) {
+    scenario.apply(original);
+  }
+  expect(JSON.stringify(original) === JSON.stringify(snapshot), "getWhatIfScenarios/apply must never mutate the input assumptions object");
+}
+
+// --- Founder Loop V2 Acceptance Pass: venture card no longer dumps the ---
+// --- entire raw description -----------------------------------------------
+
+function test_summarize_concept_returns_null_for_no_description(): void {
+  expect(summarizeConceptForCard(null) === null, "null description must summarize to null");
+  expect(summarizeConceptForCard("   ") === null, "whitespace-only description must summarize to null");
+}
+
+function test_summarize_concept_uses_first_sentence_when_short(): void {
+  const description = "ClaimPilot recovers denied healthcare claims. It also does other things in later sentences.";
+  expect(
+    summarizeConceptForCard(description) === "ClaimPilot recovers denied healthcare claims.",
+    `Expected just the first sentence, got: ${summarizeConceptForCard(description)}`
+  );
+}
+
+function test_summarize_concept_never_returns_the_entire_long_description(): void {
+  // The real bug this test guards against: VentureWorkspace.tsx used to
+  // pass the ENTIRE raw multi-paragraph description straight into
+  // VentureCard's oneLineConcept prop.
+  const longDescription = "ClaimPilot is an AI-powered revenue-cycle automation platform for independent medical practices and regional healthcare groups without a single period anywhere near the start of this very long run-on sentence that just keeps going and going and going and going and going and going and going and going and going and going and going well past a hundred and sixty characters to prove the point.";
+  const result = summarizeConceptForCard(longDescription);
+  expect(result !== null, "Expected a non-null summary");
+  expect(result!.length < longDescription.length, "Summary must be shorter than the full description");
+  expect(result!.length <= 165, `Summary must stay near the length cap, got ${result!.length} chars: "${result}"`);
+}
+
+function test_summarize_concept_is_pure(): void {
+  const description = "A first sentence. A second sentence.";
+  expect(summarizeConceptForCard(description) === summarizeConceptForCard(description), "Must be deterministic");
 }
 
 const TESTS: [string, () => void][] = [
@@ -230,6 +429,21 @@ const TESTS: [string, () => void][] = [
   ["test_recent_learning_is_pure_and_deterministic", test_recent_learning_is_pure_and_deterministic],
   ["test_journey_modules_contain_no_scoring_or_persistence_calls", test_journey_modules_contain_no_scoring_or_persistence_calls],
   ["test_venture_handoff_only_uses_sessionstorage_no_network", test_venture_handoff_only_uses_sessionstorage_no_network],
+  ["test_infer_evidence_step_idea_with_nothing_modeled", test_infer_evidence_step_idea_with_nothing_modeled],
+  ["test_infer_evidence_step_model_when_assumptions_present", test_infer_evidence_step_model_when_assumptions_present],
+  ["test_infer_evidence_step_experiment_when_interviews_reported", test_infer_evidence_step_experiment_when_interviews_reported],
+  ["test_infer_evidence_step_build_when_real_traction_exists", test_infer_evidence_step_build_when_real_traction_exists],
+  ["test_infer_evidence_step_never_reaches_fundraise", test_infer_evidence_step_never_reaches_fundraise],
+  ["test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence", test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence],
+  ["test_what_if_never_suggests_a_lower_interview_count_than_already_reported", test_what_if_never_suggests_a_lower_interview_count_than_already_reported],
+  ["test_what_if_scenarios_are_tagged_upside_or_downside", test_what_if_scenarios_are_tagged_upside_or_downside],
+  ["test_what_if_offers_churn_downside_only_when_paying_customers_exist", test_what_if_offers_churn_downside_only_when_paying_customers_exist],
+  ["test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress", test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress],
+  ["test_what_if_is_pure_and_does_not_mutate_the_input", test_what_if_is_pure_and_does_not_mutate_the_input],
+  ["test_summarize_concept_returns_null_for_no_description", test_summarize_concept_returns_null_for_no_description],
+  ["test_summarize_concept_uses_first_sentence_when_short", test_summarize_concept_uses_first_sentence_when_short],
+  ["test_summarize_concept_never_returns_the_entire_long_description", test_summarize_concept_never_returns_the_entire_long_description],
+  ["test_summarize_concept_is_pure", test_summarize_concept_is_pure],
 ];
 
 function main(): void {

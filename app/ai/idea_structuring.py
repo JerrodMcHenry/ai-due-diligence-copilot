@@ -123,6 +123,27 @@ revenue, every one of those fields must be "unknown" with a null value --
 regardless of how confident you are in your prediction. This rule
 overrides any general instinct to be helpful or complete.
 
+Two fields are commonly present in a founder's description but easy to
+miss because they aren't phrased as a single obvious sentence -- read
+carefully for them before defaulting to "unknown":
+
+- "differentiation" (under problem_solution): look for ANY statement of
+  why this approach is different from alternatives, not just a sentence
+  that starts with "unlike" or "different from". A stated product
+  capability that competitors are implied not to have, a deliberate
+  choice of who NOT to serve and why (e.g. "we focus on X rather than Y
+  because..."), or a specific mechanism/approach named as distinctive all
+  count. If the founder describes what makes their approach work or who
+  they deliberately target and why, that is differentiation -- classify
+  it as "user_provided" with a real source_quote, not "unknown".
+- "price_point" (under economics): look for ANY stated dollar figure tied
+  to what customers pay -- a single price, a range ("$X-$Y per month"),
+  or a per-unit/per-seat rate. If a range is stated, use the midpoint as
+  the value and quote the range itself as the source_quote. This is
+  still a description of the pricing model that already exists, not a
+  projection -- do not confuse it with "unknown" just because it's a
+  range rather than one number.
+
 Each validation field has a STRICT, NARROW definition -- do not round a
 weaker signal up into a stronger one:
 - "customer_interviews": the number of people the founder has actually

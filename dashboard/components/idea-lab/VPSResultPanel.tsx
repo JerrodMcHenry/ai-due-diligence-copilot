@@ -4,7 +4,7 @@ import ScoreDisplay from "@/components/ui/ScoreDisplay";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { getPlaybookForVpsCategory } from "@/lib/playbooks/resourceMap";
 
-import type { VPSResult } from "@/types";
+import type { PathToStrongerItem, VPSResult } from "@/types";
 
 function getCategoryBarColor(score: number | null): string {
   if (score === null) {
@@ -81,6 +81,8 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
           </Disclosure>
         </div>
       </BaseCard>
+
+      <PathToStronger items={result.path_to_stronger} />
 
       <div>
         <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
@@ -159,6 +161,43 @@ function GuidanceList({
           <li key={index} className="flex gap-2">
             <span aria-hidden="true" className={iconClass}>{icon}</span>
             <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </BaseCard>
+  );
+}
+
+// Founder Loop V2, Section 7 -- "Path to 8" investigation. Deliberately
+// restrained: names WHICH currently-scored categories are below the
+// modeled-strength threshold and WHY (the exact same `_STRENGTHEN_HINTS`
+// text app/ai/vps_guidance.py's `_path_to_stronger()` already computed,
+// ranked by weight x headroom), and explicitly disclaims a promised point
+// gain -- Section 7's hard requirement not to fabricate an expected score
+// delta. A founder who wants an actual number can already get one
+// honestly through What If / Recalculate, which this section points to
+// rather than duplicating.
+function PathToStronger({ items }: { items: PathToStrongerItem[] }) {
+  if (items.length === 0) {
+    return null;
+  }
+
+  return (
+    <BaseCard className="p-5">
+      <h3 className="text-sm font-semibold text-text-primary">Your shortest path to a stronger assessment</h3>
+      <p className="mt-1 text-xs text-text-muted">
+        Your score changes only if the underlying venture fundamentals or evidence change — not by
+        completing actions or reading playbooks. These are the categories most worth strengthening first.
+      </p>
+
+      <ul className="mt-3 space-y-3">
+        {items.map((item) => (
+          <li key={item.key} className="flex items-start justify-between gap-3 border-t border-border pt-3 first:border-t-0 first:pt-0">
+            <div>
+              <p className="text-sm font-semibold text-text-primary">{item.label}</p>
+              <p className="mt-0.5 text-xs text-text-secondary">{item.hint}</p>
+            </div>
+            <span className="shrink-0 text-sm font-semibold text-text-muted">{item.score.toFixed(1)}</span>
           </li>
         ))}
       </ul>

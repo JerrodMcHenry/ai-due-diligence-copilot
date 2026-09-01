@@ -19,7 +19,7 @@ import MissionsSection from "@/components/idea-lab/MissionsSection";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
-import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
+import { stillFiguringOutFromCategories, summarizeConceptForCard } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
   NumberField,
@@ -379,7 +379,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
       <div className="space-y-8">
         <BaseCard className="p-5">
-          <VentureJourney stage={stage} />
+          <VentureJourney stage={stage} assumptions={venture.assumptions} />
         </BaseCard>
 
         <VentureOverview
@@ -730,7 +730,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           {venture.model_result ? (
             <VentureCard
               name={venture.name}
-              oneLineConcept={description}
+              oneLineConcept={summarizeConceptForCard(description)}
               vps={venture.model_result.vps}
               categories={venture.model_result.categories}
             />
@@ -809,11 +809,11 @@ function IdeaLabNextStep({
     return (
       <NextStepCard
         title={nextStep.milestoneText}
-        why="This reduces one of your venture's biggest unknowns right now."
+        why={suggestion.why ?? "This reduces one of your venture's biggest unknowns right now."}
         primaryAction={
           alreadyMissioned
-            ? { label: "Go to your missions", href: "#your-missions" }
-            : { label: "Start this mission", onClick: () => onStartMission(nextStep.milestoneText, suggestion) }
+            ? { label: "Go to your actions", href: "#your-missions" }
+            : { label: "Start this action", onClick: () => onStartMission(nextStep.milestoneText, suggestion) }
         }
         learnPlaybookSlug={playbook?.slug}
       />

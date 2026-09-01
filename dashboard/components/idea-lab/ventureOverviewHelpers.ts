@@ -32,3 +32,5 @@ export function stillFiguringOutFromCategories(categories: VPSCategoryResult[]):
 export function defaultStillFiguringOut(): string[] {
   return Object.values(STILL_FIGURING_OUT_LABELS);
 }
+
+export { summarizeConceptForCard } from "./summarizeConceptForCard";

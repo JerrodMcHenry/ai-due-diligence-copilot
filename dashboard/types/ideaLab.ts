@@ -90,6 +90,17 @@ export interface VPSCategoryResult {
   basis: string[];
 }
 
+// Founder Loop V2, Section 7 ("Path to 8"). See
+// app/ai/vps_guidance.py::_path_to_stronger()'s own docstring -- a
+// currently-scored, below-threshold category plus a deterministic,
+// template-driven hint. Never carries a projected/fabricated score.
+export interface PathToStrongerItem {
+  key: string;
+  label: string;
+  score: number;
+  hint: string;
+}
+
 export interface VPSResult {
   vps: number | null;
   label: string; // "MODELED / ASSUMPTION-BASED"
@@ -99,6 +110,7 @@ export interface VPSResult {
   key_assumptions: string[];
   validation_gaps: string[];
   next_milestones: string[];
+  path_to_stronger: PathToStrongerItem[];
 }
 
 export interface VentureResponse {

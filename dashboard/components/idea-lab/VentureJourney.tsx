@@ -1,4 +1,6 @@
 import { getJourneyStage, VENTURE_JOURNEY_STEP_IDS, VENTURE_STAGE_TO_JOURNEY_STAGE } from "@/lib/founderJourney";
+import { resolveVentureStepIndex } from "@/lib/journey/inferVentureStage";
+import type { VentureAssumptions } from "@/types";
 
 // Phase 10.6 -- Idea Lab V2, Part 4. Reuses Home's IDEA -> MODEL ->
 // EXPERIMENT -> BUILD -> FUNDRAISE progression (components/home/
@@ -18,25 +20,41 @@ import { getJourneyStage, VENTURE_JOURNEY_STEP_IDS, VENTURE_STAGE_TO_JOURNEY_STA
 // same discipline as Phase 10.3's nav relabeling.
 const JOURNEY_LABELS = VENTURE_JOURNEY_STEP_IDS.map((id) => getJourneyStage(id).label);
 
-function currentStepIndex(stage: string | null): number {
+// Founder Loop V2, Section 10: returns -1 (no signal), not 0, when
+// `stage` is unset or doesn't map onto the shared vocabulary -- see
+// lib/journey/inferVentureStage.ts's own docstring for why that
+// distinction matters (an unmapped manual stage must never silently
+// outrank real evidence just by defaulting to "Idea").
+function manualStepIndex(stage: string | null): number {
   if (!stage) {
-    return 0;
+    return -1;
   }
 
   // Goes through the shared normalization map rather than indexing
   // VENTURE_STAGES/VENTURE_JOURNEY_STEP_IDS in parallel -- correct even
   // if the two arrays are ever reordered independently.
   const journeyStageId = VENTURE_STAGE_TO_JOURNEY_STAGE[stage];
-  const index = journeyStageId ? VENTURE_JOURNEY_STEP_IDS.indexOf(journeyStageId) : -1;
-  return index === -1 ? 0 : index;
+  return journeyStageId ? VENTURE_JOURNEY_STEP_IDS.indexOf(journeyStageId) : -1;
 }
 
 type VentureJourneyProps = {
   stage: string | null;
+  // Founder Loop V2, Section 10: optional and additive. Omitted (e.g. a
+  // future caller with no assumptions in hand), this behaves exactly as
+  // before -- manual stage only, defaulting to "Idea" when unset/unmapped.
+  assumptions?: VentureAssumptions | null;
 };
 
-export default function VentureJourney({ stage }: VentureJourneyProps) {
-  const activeIndex = currentStepIndex(stage);
+export default function VentureJourney({ stage, assumptions = null }: VentureJourneyProps) {
+  const manualIndex = manualStepIndex(stage);
+  const activeIndex = Math.max(0, resolveVentureStepIndex(manualIndex, assumptions));
+  // Section 10's explicit requirement: the UI must say WHY this step is
+  // active. True whether the evidence-inferred index or the founder's
+  // own manual stage ended up winning -- both ultimately trace back to
+  // the venture model, never an arbitrary checklist.
+  const explanation = assumptions
+    ? "Based on the status and evidence in your venture model."
+    : "Based on the status you’ve set below — not an assessment of how far along the venture really is.";
 
   return (
     <div>
@@ -77,10 +95,7 @@ export default function VentureJourney({ stage }: VentureJourneyProps) {
         ))}
       </div>
 
-      <p className="mt-3 text-center text-[11px] text-text-muted">
-        Based on the status you&rsquo;ve set below — not an assessment of how far along the venture
-        really is.
-      </p>
+      <p className="mt-3 text-center text-[11px] text-text-muted">{explanation}</p>
     </div>
   );
 }

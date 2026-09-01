@@ -89,6 +89,20 @@ class VPSCategoryResult(BaseModel):
     basis: list[str] = Field(default_factory=list)
 
 
+class PathToStrongerItem(BaseModel):
+    """
+    Founder Loop V2, Section 7 ("Path to 8"): one currently-scored,
+    below-threshold category plus a deterministic, template-driven hint
+    about what would strengthen it -- see
+    app/ai/vps_guidance.py::_path_to_stronger()'s own docstring. Never
+    carries a projected/fabricated score.
+    """
+    key: str
+    label: str
+    score: float
+    hint: str
+
+
 class VPSResult(BaseModel):
     vps: float | None = None
     label: str
@@ -98,6 +112,7 @@ class VPSResult(BaseModel):
     key_assumptions: list[str] = Field(default_factory=list)
     validation_gaps: list[str] = Field(default_factory=list)
     next_milestones: list[str] = Field(default_factory=list)
+    path_to_stronger: list[PathToStrongerItem] = Field(default_factory=list)
 
 
 class CreateVentureRequest(BaseModel):

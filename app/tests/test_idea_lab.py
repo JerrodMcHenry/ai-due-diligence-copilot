@@ -253,6 +253,110 @@ def test_guidance_frames_validation_gap_as_expected_not_failure() -> None:
     )
 
 
+# --- Founder Loop V2, Section 5: context-aware priority selection ----------
+#
+# ClaimPilot-shaped fixture (real modeled venture from this phase's own
+# investigation): paying customers, revenue, and a fully-populated
+# problem/solution/differentiation -- the exact shape that used to
+# recommend "Secure a first paying customer" (already false) and lead
+# with "Define your differentiation" ahead of the much bigger open
+# question a traction-stage venture actually has: whether growth holds up
+# beyond founder-led selling.
+
+TRACTION_ASSUMPTIONS = {
+    "target_customer": "independent medical practices",
+    "market": {"estimated_market_size": "Large", "competition_intensity": "Medium"},
+    "problem_solution": {
+        "problem_statement": "Healthcare providers lose revenue to denied claims.",
+        "solution_description": "AI platform that recovers denied/underpaid claims.",
+        "differentiation": None,  # left unset on purpose -- still a real, worth-naming gap
+    },
+    "founder": {
+        "founder_count": 2,
+        "relevant_domain_experience_years": 12,
+        "has_technical_cofounder": True,
+        "has_business_cofounder": True,
+    },
+    "gtm": {"primary_acquisition_strategy": "Founder-led outbound sales and referrals", "expected_cac": None},
+    "economics": {"pricing_model": "Monthly subscription", "price_point": None, "expected_gross_margin_pct": 82},
+    "validation": {"customer_interviews": 85, "waitlist_signups": None, "paying_customers": 14, "monthly_revenue": 70000},
+    "capital": {"starting_capital": 2_500_000, "monthly_burn": 115_000},
+}
+
+
+def test_traction_venture_does_not_recommend_first_paying_customer() -> None:
+    result = compute_vps(TRACTION_ASSUMPTIONS)
+    guidance = generate_guidance(TRACTION_ASSUMPTIONS, result)
+    expect(
+        "Secure a first paying customer to validate willingness to pay." not in guidance["next_milestones"],
+        "A venture with 14 already-reported paying customers must never be told to secure its first one",
+    )
+
+
+def test_traction_venture_with_weak_gtm_prioritizes_repeatable_growth_first() -> None:
+    result = compute_vps(TRACTION_ASSUMPTIONS)
+    gtm = next(c for c in result["categories"] if c["key"] == "gtm_feasibility")
+    expect(gtm["score"] is not None and gtm["score"] < 7.0, f"Fixture assumption: GTM should score below strength threshold, got {gtm['score']}")
+
+    guidance = generate_guidance(TRACTION_ASSUMPTIONS, result)
+    expect(len(guidance["next_milestones"]) > 0, "Expected at least one milestone")
+    expect(
+        guidance["next_milestones"][0] == "Prove customer acquisition works repeatably beyond founder-led sales or referrals.",
+        f"A traction-stage venture with weak GTM Feasibility should lead with repeatable-growth, got: {guidance['next_milestones'][0]!r}",
+    )
+
+
+def test_idea_stage_venture_still_leads_with_interviews() -> None:
+    # No traction at all (paying=0, no revenue) -- the original,
+    # unchanged priority order for a genuinely early idea must be
+    # preserved: interviews first.
+    idea_stage = dict(SAMPLE_ASSUMPTIONS)
+    idea_stage["validation"] = {"customer_interviews": 2, "waitlist_signups": 0, "paying_customers": 0, "monthly_revenue": None}
+    result = compute_vps(idea_stage)
+    guidance = generate_guidance(idea_stage, result)
+    expect(
+        guidance["next_milestones"][0] == "Interview 20+ target customers to validate the problem is real.",
+        f"An idea-stage venture with no traction should still lead with interviews, got: {guidance['next_milestones'][0]!r}",
+    )
+
+
+# --- Founder Loop V2, Section 7: "Path to 8" guidance -----------------------
+
+
+def test_path_to_stronger_excludes_categories_at_or_above_threshold() -> None:
+    result = compute_vps(TRACTION_ASSUMPTIONS)
+    guidance = generate_guidance(TRACTION_ASSUMPTIONS, result)
+    scores_by_key = {c["key"]: c["score"] for c in result["categories"]}
+
+    for item in guidance["path_to_stronger"]:
+        expect(item["score"] < 7.0, f"path_to_stronger must only include below-threshold categories, got {item}")
+        expect(item["score"] == scores_by_key[item["key"]], "path_to_stronger score must exactly match the real computed category score, never a fabricated one")
+
+
+def test_path_to_stronger_never_includes_unavailable_category() -> None:
+    result = compute_vps(SAMPLE_ASSUMPTIONS)
+    guidance = generate_guidance(SAMPLE_ASSUMPTIONS, result)
+    expect(
+        all(item["score"] is not None for item in guidance["path_to_stronger"]),
+        "path_to_stronger must never include a category that is Unavailable (None)",
+    )
+
+
+def test_path_to_stronger_is_capped_and_ranked_by_weight_and_headroom() -> None:
+    from app.ai.vps_guidance import MAX_PATH_TO_STRONGER
+
+    result = compute_vps(TRACTION_ASSUMPTIONS)
+    guidance = generate_guidance(TRACTION_ASSUMPTIONS, result)
+    expect(len(guidance["path_to_stronger"]) <= MAX_PATH_TO_STRONGER, "path_to_stronger must be capped")
+
+    weights = {
+        "market_potential": 0.20, "problem_solution": 0.20, "founder_readiness": 0.15,
+        "gtm_feasibility": 0.15, "economic_potential": 0.10, "validation": 0.20,
+    }
+    impacts = [weights[item["key"]] * (7.0 - item["score"]) for item in guidance["path_to_stronger"]]
+    expect(impacts == sorted(impacts, reverse=True), "path_to_stronger must be ranked by weight x headroom, most impactful first")
+
+
 # --- 1: creation requires auth ----------------------------------------------
 
 
@@ -537,6 +641,12 @@ TESTS = [
     test_assumptions_preserve_unknown_values,
     test_assumption_vs_observation_provenance_is_structural,
     test_guidance_frames_validation_gap_as_expected_not_failure,
+    test_traction_venture_does_not_recommend_first_paying_customer,
+    test_traction_venture_with_weak_gtm_prioritizes_repeatable_growth_first,
+    test_idea_stage_venture_still_leads_with_interviews,
+    test_path_to_stronger_excludes_categories_at_or_above_threshold,
+    test_path_to_stronger_never_includes_unavailable_category,
+    test_path_to_stronger_is_capped_and_ranked_by_weight_and_headroom,
     test_venture_creation_requires_auth,
     test_all_idea_lab_endpoints_require_auth,
     test_venture_belongs_to_authenticated_user,
