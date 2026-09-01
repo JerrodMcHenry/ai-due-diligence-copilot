@@ -10,7 +10,8 @@
     "test:playbooks": "node tests/playbooks.test.ts",
     "test:journey": "node tests/journey.test.ts",
     "test:founderBetaNav": "node tests/founderBetaNav.test.ts",
-    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav"
+    "test:concepts": "node tests/concepts.test.ts",
+    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav && npm run test:concepts"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",

@@ -17,6 +17,7 @@ import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
 import VentureProgress from "@/components/idea-lab/VentureProgress";
+import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
@@ -702,12 +703,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 onChange={(value) => setDraft((prev) => ({ ...prev, gtm: { ...prev.gtm, primary_acquisition_strategy: value } }))}
                 multiline
               />
-              <NumberField
-                id="gtm-cac"
-                label="Expected CAC ($)"
-                value={draft.gtm.expected_cac}
-                onChange={(value) => setDraft((prev) => ({ ...prev, gtm: { ...prev.gtm, expected_cac: value } }))}
-              />
+              <div>
+                <NumberField
+                  id="gtm-cac"
+                  label="Expected CAC ($)"
+                  value={draft.gtm.expected_cac}
+                  onChange={(value) => setDraft((prev) => ({ ...prev, gtm: { ...prev.gtm, expected_cac: value } }))}
+                />
+                <ConceptDisclosure conceptKey="cac" value={draft.gtm.expected_cac} />
+              </div>
             </AssumptionAccordion>
 
             <AssumptionAccordion title="Economics">
@@ -723,12 +727,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 value={draft.economics.price_point}
                 onChange={(value) => setDraft((prev) => ({ ...prev, economics: { ...prev.economics, price_point: value } }))}
               />
-              <NumberField
-                id="econ-margin"
-                label="Expected gross margin (%)"
-                value={draft.economics.expected_gross_margin_pct}
-                onChange={(value) => setDraft((prev) => ({ ...prev, economics: { ...prev.economics, expected_gross_margin_pct: value } }))}
-              />
+              <div>
+                <NumberField
+                  id="econ-margin"
+                  label="Expected gross margin (%)"
+                  value={draft.economics.expected_gross_margin_pct}
+                  onChange={(value) => setDraft((prev) => ({ ...prev, economics: { ...prev.economics, expected_gross_margin_pct: value } }))}
+                />
+                <ConceptDisclosure conceptKey="gross_margin" value={draft.economics.expected_gross_margin_pct} />
+              </div>
             </AssumptionAccordion>
 
             <AssumptionAccordion title="What you've learned (founder-reported observations)">
@@ -762,12 +769,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 value={draft.validation.prior_monthly_revenue}
                 onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, prior_monthly_revenue: value } }))}
               />
-              <NumberField
-                id="val-retention"
-                label="Retention (%)"
-                value={draft.validation.retention_pct}
-                onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
-              />
+              <div>
+                <NumberField
+                  id="val-retention"
+                  label="Retention (%)"
+                  value={draft.validation.retention_pct}
+                  onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
+                />
+                <ConceptDisclosure conceptKey="retention" value={draft.validation.retention_pct} />
+              </div>
             </AssumptionAccordion>
 
             <AssumptionAccordion title="Capital">
@@ -777,12 +787,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 value={draft.capital.starting_capital}
                 onChange={(value) => setDraft((prev) => ({ ...prev, capital: { ...prev.capital, starting_capital: value } }))}
               />
-              <NumberField
-                id="capital-burn"
-                label="Monthly burn ($)"
-                value={draft.capital.monthly_burn}
-                onChange={(value) => setDraft((prev) => ({ ...prev, capital: { ...prev.capital, monthly_burn: value } }))}
-              />
+              <div>
+                <NumberField
+                  id="capital-burn"
+                  label="Monthly burn ($)"
+                  value={draft.capital.monthly_burn}
+                  onChange={(value) => setDraft((prev) => ({ ...prev, capital: { ...prev.capital, monthly_burn: value } }))}
+                />
+                <ConceptDisclosure conceptKey="burn" value={draft.capital.monthly_burn} />
+              </div>
             </AssumptionAccordion>
           </div>
         </section>

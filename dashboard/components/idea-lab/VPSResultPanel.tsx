@@ -2,6 +2,7 @@ import BaseCard from "@/components/ui/BaseCard";
 import Disclosure from "@/components/ui/Disclosure";
 import ScoreDisplay from "@/components/ui/ScoreDisplay";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
+import VpsCategoryExplainer from "@/components/learn/VpsCategoryExplainer";
 import { getPlaybookForVpsCategory } from "@/lib/playbooks/resourceMap";
 
 import type { PathToStrongerItem, VPSResult } from "@/types";
@@ -120,6 +121,11 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
                 ) : category.basis.length > 0 ? (
                   <p className="mt-1.5 truncate text-[11px] text-text-muted">{category.basis[0]}</p>
                 ) : null}
+
+                {/* Learn V1, Part 5/6: WHAT this category means and WHY it
+                    matters, distinct from the Playbook link right below it
+                    (HOW to actually work on it -- Part 12). */}
+                <VpsCategoryExplainer categoryKey={category.key} score={category.score} />
 
                 {playbook ? <PlaybookLink slug={playbook.slug} className="mt-2 block" /> : null}
               </BaseCard>

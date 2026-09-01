@@ -1,4 +1,6 @@
 import Button from "@/components/ui/Button";
+import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
+import { getMetricConceptForWhatIfScenario } from "@/content/concepts";
 
 import { getWhatIfScenarios } from "./whatIfScenarios";
 
@@ -23,6 +25,28 @@ type WhatIfPanelProps = {
 
 export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunning }: WhatIfPanelProps) {
   const scenarios = getWhatIfScenarios(currentAssumptions);
+
+  // Learn V1, Part 15: "if a scenario uses a concept like CAC/gross
+  // margin/pricing/churn, the founder should be able to understand the
+  // concept... do not turn What If into a lesson page." ONE small,
+  // collapsed-by-default section below the chips -- not a trigger per
+  // chip, which would be exactly the clutter Part 19 warns against --
+  // covering only the concepts the CURRENTLY offered scenarios actually
+  // reference, deduplicated. Never mutates a scenario or changes what
+  // clicking a chip does.
+  const referencedConceptKeys = Array.from(
+    new Set(
+      scenarios
+        .map((scenario) => getMetricConceptForWhatIfScenario(scenario.id)?.key)
+        .filter((key): key is string => Boolean(key))
+    )
+  );
+
+  const conceptValueByKey: Record<string, number | null> = {
+    cac: currentAssumptions.gtm.expected_cac,
+    gross_margin: currentAssumptions.economics.expected_gross_margin_pct,
+    retention: currentAssumptions.validation.retention_pct,
+  };
 
   return (
     <div>
@@ -66,6 +90,15 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
           </Button>
         ))}
       </div>
+
+      {referencedConceptKeys.length > 0 ? (
+        <div className="mt-3 space-y-1.5 border-t border-border pt-3">
+          <p className="text-[11px] font-semibold text-text-muted">New to these terms?</p>
+          {referencedConceptKeys.map((key) => (
+            <ConceptDisclosure key={key} conceptKey={key} value={conceptValueByKey[key] ?? null} />
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 }

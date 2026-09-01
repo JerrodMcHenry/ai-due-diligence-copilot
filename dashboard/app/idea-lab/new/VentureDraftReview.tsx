@@ -8,6 +8,7 @@ import Button from "@/components/ui/Button";
 import Disclosure from "@/components/ui/Disclosure";
 import ProvenanceBadge from "@/components/idea-lab/ProvenanceBadge";
 import VentureOverview from "@/components/idea-lab/VentureOverview";
+import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { defaultStillFiguringOut } from "@/components/idea-lab/ventureOverviewHelpers";
 import {
   NumberField,
@@ -324,14 +325,17 @@ export default function VentureDraftReview({
             hint={quoteHint(draft.gtm.primary_acquisition_strategy)}
             multiline
           />
-          <NumberField
-            id="review-gtm-cac"
-            label="Expected CAC ($)"
-            value={assumptions.gtm.expected_cac}
-            onChange={(value) => setAssumptions((prev) => ({ ...prev, gtm: { ...prev.gtm, expected_cac: value } }))}
-            badge={<ProvenanceBadge provenance={draft.gtm.expected_cac.provenance} />}
-            hint={quoteHint(draft.gtm.expected_cac)}
-          />
+          <div>
+            <NumberField
+              id="review-gtm-cac"
+              label="Expected CAC ($)"
+              value={assumptions.gtm.expected_cac}
+              onChange={(value) => setAssumptions((prev) => ({ ...prev, gtm: { ...prev.gtm, expected_cac: value } }))}
+              badge={<ProvenanceBadge provenance={draft.gtm.expected_cac.provenance} />}
+              hint={quoteHint(draft.gtm.expected_cac)}
+            />
+            <ConceptDisclosure conceptKey="cac" value={assumptions.gtm.expected_cac} />
+          </div>
         </ReviewAccordion>
 
         <ReviewAccordion title="Economics">
@@ -351,14 +355,17 @@ export default function VentureDraftReview({
             badge={<ProvenanceBadge provenance={draft.economics.price_point.provenance} />}
             hint={quoteHint(draft.economics.price_point)}
           />
-          <NumberField
-            id="review-margin"
-            label="Expected gross margin (%)"
-            value={assumptions.economics.expected_gross_margin_pct}
-            onChange={(value) => setAssumptions((prev) => ({ ...prev, economics: { ...prev.economics, expected_gross_margin_pct: value } }))}
-            badge={<ProvenanceBadge provenance={draft.economics.expected_gross_margin_pct.provenance} />}
-            hint={quoteHint(draft.economics.expected_gross_margin_pct)}
-          />
+          <div>
+            <NumberField
+              id="review-margin"
+              label="Expected gross margin (%)"
+              value={assumptions.economics.expected_gross_margin_pct}
+              onChange={(value) => setAssumptions((prev) => ({ ...prev, economics: { ...prev.economics, expected_gross_margin_pct: value } }))}
+              badge={<ProvenanceBadge provenance={draft.economics.expected_gross_margin_pct.provenance} />}
+              hint={quoteHint(draft.economics.expected_gross_margin_pct)}
+            />
+            <ConceptDisclosure conceptKey="gross_margin" value={assumptions.economics.expected_gross_margin_pct} />
+          </div>
         </ReviewAccordion>
 
         <ReviewAccordion title="What you've learned (founder-reported observations)">
@@ -406,14 +413,17 @@ export default function VentureDraftReview({
             badge={<ProvenanceBadge provenance={draft.validation.prior_monthly_revenue.provenance} />}
             hint={quoteHint(draft.validation.prior_monthly_revenue)}
           />
-          <NumberField
-            id="review-retention"
-            label="Retention (%)"
-            value={assumptions.validation.retention_pct}
-            onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
-            badge={<ProvenanceBadge provenance={draft.validation.retention_pct.provenance} />}
-            hint={quoteHint(draft.validation.retention_pct)}
-          />
+          <div>
+            <NumberField
+              id="review-retention"
+              label="Retention (%)"
+              value={assumptions.validation.retention_pct}
+              onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
+              badge={<ProvenanceBadge provenance={draft.validation.retention_pct.provenance} />}
+              hint={quoteHint(draft.validation.retention_pct)}
+            />
+            <ConceptDisclosure conceptKey="retention" value={assumptions.validation.retention_pct} />
+          </div>
         </ReviewAccordion>
 
         <ReviewAccordion title="Capital">
@@ -425,14 +435,17 @@ export default function VentureDraftReview({
             badge={<ProvenanceBadge provenance={draft.capital.starting_capital.provenance} />}
             hint={quoteHint(draft.capital.starting_capital)}
           />
-          <NumberField
-            id="review-burn"
-            label="Monthly burn ($)"
-            value={assumptions.capital.monthly_burn}
-            onChange={(value) => setAssumptions((prev) => ({ ...prev, capital: { ...prev.capital, monthly_burn: value } }))}
-            badge={<ProvenanceBadge provenance={draft.capital.monthly_burn.provenance} />}
-            hint={quoteHint(draft.capital.monthly_burn)}
-          />
+          <div>
+            <NumberField
+              id="review-burn"
+              label="Monthly burn ($)"
+              value={assumptions.capital.monthly_burn}
+              onChange={(value) => setAssumptions((prev) => ({ ...prev, capital: { ...prev.capital, monthly_burn: value } }))}
+              badge={<ProvenanceBadge provenance={draft.capital.monthly_burn.provenance} />}
+              hint={quoteHint(draft.capital.monthly_burn)}
+            />
+            <ConceptDisclosure conceptKey="burn" value={assumptions.capital.monthly_burn} />
+          </div>
         </ReviewAccordion>
         </div>
       </Disclosure>
