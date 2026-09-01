@@ -8,11 +8,13 @@ import PersonalMenu from "./PersonalMenu";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 // Phase 10.3 -- Shell & Navigation Reset. The universal primary
-// navigation is now exactly three consumer-facing destinations -- see
-// the Phase 10.2 audit's own "That is the product" framing. Do NOT add a
-// fourth top-level item here without a real product decision; personal/
-// account-specific destinations (My Ideas, My Startup, Watchlist,
-// Investor intelligence) live in PersonalMenu instead, never here.
+// navigation started as exactly three consumer-facing destinations --
+// see the Phase 10.2 audit's own "That is the product" framing. Phase 15
+// -- Founder Beta Surface Audit removed "Explore" (see PRIMARY_NAVIGATION's
+// own comment below for why), leaving two. Do NOT add another top-level
+// item here without a real product decision; personal/account-specific
+// destinations (My Ideas, My Startup, Learn) live in PersonalMenu
+// instead, never here.
 type PrimaryDestination = {
   name: string;
   href: string;
@@ -25,14 +27,27 @@ type PrimaryDestination = {
   activeOn: string[];
 };
 
-// Explore's primary link is /rankings (Part 2: "Primary route may
-// initially point to /rankings... We are NOT merging /rankings and
-// /search implementation in this phase") -- Search/Startup Profile/
-// Compare are reached contextually FROM Explore, not as separate primary
-// destinations, but the nav should still visually read as "Explore" when
-// a visitor is anywhere in that family.
+// Phase 15 -- Founder Beta Surface Audit, Part 6/21: "Explore" removed
+// from primary navigation. Not a deletion -- /rankings, /search,
+// /compare, /startup/[id] remain fully functional at their existing
+// URLs (Part 16/17's "hide, don't delete" principle) and
+// isPrimaryDestinationActive below is untouched, so nothing about how a
+// destination becomes "active" changed. This is a visibility decision
+// only, backed by a verified, concrete finding: the live discovery
+// dataset (GET /rankings, GET /discover, GET /top-startups) currently
+// returns exactly one row, and that row's own company_name is "Unknown"
+// -- a co-equal, always-visible 1-of-3 primary nav slot pointing at that
+// experience actively damages Founder Beta credibility (Part 22/23's
+// "empty product surface" test). Revert this the moment the discovery
+// dataset is credible again -- see docs/validation/
+// SPS_V3_ADAPTER_HARDENING.md's sibling doc for this phase's own report
+// and the deferred Intelligence Dataset Strategy recommendation.
+//
+// "Analyze" is NOT part of this cold-start problem -- POST /analyze
+// evaluates exactly the one company a founder describes, using the same
+// complete, frozen SPS pipeline regardless of how many OTHER companies
+// exist in the database, so it stays a primary destination.
 export const PRIMARY_NAVIGATION: PrimaryDestination[] = [
-  { name: "Explore", href: "/rankings", activeOn: ["/rankings", "/search", "/startup", "/compare"] },
   { name: "Build", href: "/idea-lab", activeOn: ["/idea-lab"] },
   { name: "Analyze", href: "/analyze", activeOn: ["/analyze"] },
 ];

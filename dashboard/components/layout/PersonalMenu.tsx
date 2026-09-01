@@ -4,20 +4,29 @@ import { UserButton } from "@clerk/nextjs";
 
 // Phase 10.3 -- Shell & Navigation Reset, Part 3. Restrained, consumer-
 // facing personal navigation -- NOT the old 8-item sidebar recreated
-// inside a dropdown. Exactly four destinations, each with the friendlier
-// label Part 3 specifies (route/backend concepts are completely
-// unchanged -- this is presentation language only):
+// inside a dropdown. Route/backend concepts are completely unchanged --
+// this is presentation language only:
 //
-//   My Ideas             -> /idea-lab   (was "Idea Lab")
-//   My Startup            -> /founder    (was "Founder Workspace")
-//   Watchlist              -> /saved      (was "Saved Startups")
-//   Investor intelligence  -> /investor   (was "Investor Workspace")
+//   My Ideas -> /idea-lab   (was "Idea Lab")
+//   My Startup -> /founder  (was "Founder Workspace")
+//
+// Phase 15 -- Founder Beta Surface Audit, Part 11/15/21: "Watchlist"
+// (/saved) and "Investor intelligence" (/investor) removed from this
+// menu -- not deleted (Part 16). Both are watchlist/discovery surfaces
+// over the SAME cold-start-affected canonical startup population
+// PRIMARY_NAVIGATION's own "Explore" removal addresses (see
+// TopNav.tsx) -- there is currently nothing meaningful for a founder to
+// watch or for an investor to browse. Both routes remain fully
+// functional at their existing URLs for any user who already knows to
+// go there (auth/authorization completely unchanged); this is a
+// visibility decision only. Revert alongside Explore once the dataset
+// is credible.
 //
 // Shown unconditionally to every signed-in user, same as the old
 // Sidebar's own behavior -- each destination's own page already handles
-// "you have nothing here yet" honestly (FounderHome/SavedStartupsView/
-// InvestorWorkspaceView's existing empty states), so this menu doesn't
-// need to fetch anything to decide what to show.
+// "you have nothing here yet" honestly (FounderHome's existing empty
+// state), so this menu doesn't need to fetch anything to decide what to
+// show.
 //
 // Phase 10.3 follow-up fix: this originally wrapped Clerk's own
 // <UserButton /> (which renders its own <button>) inside a second,
@@ -51,22 +60,6 @@ function StartupIcon() {
   );
 }
 
-function WatchlistIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
-      <path d="M6 4h12v17l-6-3.5L6 21V4Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function InvestorIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
-      <path d="M4 20V10M11 20V4M18 20v-7" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 function LearnIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
@@ -89,8 +82,6 @@ export default function PersonalMenu() {
       <UserButton.MenuItems>
         <UserButton.Link label="My Ideas" href="/idea-lab" labelIcon={<IdeaIcon />} />
         <UserButton.Link label="My Startup" href="/founder" labelIcon={<StartupIcon />} />
-        <UserButton.Link label="Watchlist" href="/saved" labelIcon={<WatchlistIcon />} />
-        <UserButton.Link label="Investor intelligence" href="/investor" labelIcon={<InvestorIcon />} />
         <UserButton.Link label="Learn" href="/playbooks" labelIcon={<LearnIcon />} />
       </UserButton.MenuItems>
     </UserButton>

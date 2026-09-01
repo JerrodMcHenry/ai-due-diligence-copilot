@@ -5,13 +5,22 @@ import BaseCard from "@/components/ui/BaseCard";
 // Phase 10.10 -- Founder Journey Integration, Part 4/16. Replaces the
 // old two-CTA pair (ThreePaths.tsx's own "Analyze a startup" card AND
 // AnalyzeCallout.tsx, a second section further down the page pointing at
-// the exact same /analyze route with overlapping copy) with FOUR
-// distinct entry points, one per Part 4's own stated visitor: "I have an
-// idea," "I already have a startup," "I have a pitch deck," "I want
-// inspiration." Every link still goes straight into an EXISTING route --
-// no new pages, no new logic, same discipline the old ThreePaths already
-// established. AnalyzeCallout.tsx is deleted; nothing it did isn't
-// covered here.
+// the exact same /analyze route with overlapping copy) with distinct
+// entry points, one per Part 4's own stated visitor. Every link still
+// goes straight into an EXISTING route -- no new pages, no new logic,
+// same discipline the old ThreePaths already established. AnalyzeCallout.tsx
+// is deleted; nothing it did isn't covered here.
+//
+// Phase 15 -- Founder Beta Surface Audit, Part 14/24: the fourth path
+// ("I want inspiration" -> "Explore startups" -> /rankings) was removed
+// here, not deleted as a route -- /rankings itself is untouched and
+// still fully reachable by direct URL. The live discovery dataset it
+// promised ("Browse startup profiles, rankings, compare companies") is
+// currently a single row named "Unknown" (verified via GET /rankings
+// during this phase's audit); leading a brand-new Founder Beta visitor
+// there from the homepage's own primary entry grid would undercut the
+// exact trust this page exists to build. Restore this path once the
+// dataset is credible.
 type Path = {
   eyebrow: string;
   title: string;
@@ -68,20 +77,6 @@ const PATHS: Path[] = [
       </svg>
     ),
   },
-  {
-    eyebrow: "I want inspiration",
-    title: "Explore startups",
-    description:
-      "Browse startup profiles, rankings, compare companies, and understand what drives their scores.",
-    cta: "Explore startups",
-    href: "/rankings",
-    icon: (
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
-        <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-        <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-      </svg>
-    ),
-  },
 ];
 
 export default function EntryPaths() {
@@ -91,7 +86,7 @@ export default function EntryPaths() {
         Where do you want to start?
       </h2>
 
-      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {PATHS.map((path) => (
           <Link key={path.href} href={path.href} className="group block">
             <BaseCard

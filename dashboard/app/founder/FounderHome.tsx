@@ -109,24 +109,30 @@ function EmptyState() {
 
       <p className="mx-auto mt-3 max-w-md text-sm text-text-secondary">
         Founder Workspace unlocks once you&rsquo;re a verified member of a
-        startup on SIE. Find your company and claim it from its public
-        Startup Profile, or check Discover Startups if it hasn&rsquo;t been
-        analyzed yet.
+        startup on SIE. If your company hasn&rsquo;t been analyzed yet,
+        start there and claim it from its new Startup Profile.
       </p>
 
+      {/* Phase 15 -- Founder Beta Surface Audit, Part 15/24: swapped
+          which action is primary here. "Analyze a startup" always works
+          (it evaluates whatever the founder describes, independent of
+          how many other companies exist on SIE) and is now the prominent
+          button; "Discover Startups" (a search over the currently
+          near-empty canonical population -- Part 8/16) is de-emphasized
+          but still present and fully functional, not removed. */}
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <Link
-          href="/search"
+          href="/analyze"
           className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
         >
-          Discover Startups
+          Analyze a startup
         </Link>
 
         <Link
-          href="/analyze"
+          href="/search"
           className="rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-text-secondary transition-colors hover:border-primary hover:text-primary"
         >
-          Analyze a startup
+          Discover Startups
         </Link>
       </div>
     </BaseCard>

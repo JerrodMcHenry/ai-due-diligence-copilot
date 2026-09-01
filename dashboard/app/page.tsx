@@ -1,8 +1,5 @@
-import { Suspense } from "react";
-
 import CompetitionTeaser from "@/components/home/CompetitionTeaser";
 import EntryPaths from "@/components/home/EntryPaths";
-import ExplorePreview from "@/components/home/ExplorePreview";
 import Hero from "@/components/home/Hero";
 import IdeaJourney from "@/components/home/IdeaJourney";
 import ScenarioExamples from "@/components/home/ScenarioExamples";
@@ -20,17 +17,23 @@ import VisualPayoff from "@/components/home/VisualPayoff";
 //
 // A Server Component (the old Home was "use client" for its own
 // client-side analytics fetch -- Hero is the only piece here that needs
-// the client, and it's marked "use client" itself; everything else can
-// render on the server, including ExplorePreview's own data fetch,
-// matching the same convention /rankings and /search already use).
+// the client, and it's marked "use client" itself).
 //
-// force-dynamic: without this, Next.js prerenders "/" once at BUILD time
-// (confirmed via a real production build -- it was marked "○ Static"),
-// which would bake ExplorePreview's real startup list into the page
-// permanently until the next deploy. The old Home fetched its own data
-// client-side on every visit and never had this problem; this is the
-// server-rendered equivalent of that same freshness guarantee, not a new
-// behavior.
+// Phase 15 -- Founder Beta Surface Audit, Part 14/19: ExplorePreview
+// ("See how real startups stack up") removed from this page -- not
+// deleted (components/home/ExplorePreview.tsx is untouched and still
+// exports a working component). The live discovery dataset it rendered
+// currently has exactly one row, whose own company_name is literally
+// "Unknown" -- rendering that on the homepage is a straightforward
+// "empty product surface" failure (Part 22), not a acceptable "small
+// but real" example. Bring it back once the dataset backing GET
+// /top-startups is credible again.
+//
+// force-dynamic kept (harmless with no dynamic content left on this
+// page today; a deliberate precaution against silently re-baking stale
+// data into a build-time-prerendered page if ExplorePreview, or
+// anything else data-driven, is ever added back here without someone
+// re-checking this line).
 export const dynamic = "force-dynamic";
 
 export default function HomePage() {
@@ -46,10 +49,6 @@ export default function HomePage() {
       <IdeaJourney />
 
       <ScenarioExamples />
-
-      <Suspense fallback={null}>
-        <ExplorePreview />
-      </Suspense>
 
       <CompetitionTeaser />
 
