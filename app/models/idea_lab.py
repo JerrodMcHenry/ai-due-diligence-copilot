@@ -64,6 +64,23 @@ class ValidationObservations(BaseModel):
     waitlist_signups: int | None = Field(default=None, ge=0, le=10_000_000)
     paying_customers: int | None = Field(default=None, ge=0, le=10_000_000)
     monthly_revenue: float | None = Field(default=None, ge=0)
+    # SIE Intelligence Reset. Same founder-REPORTED-OBSERVATION epistemic
+    # status as every other field in this group -- never inferred, only
+    # accepted from an explicit, independently-verified founder claim
+    # (see idea_structuring.py's own validation-group firewall). Added
+    # because a growth-stage venture's single most decision-relevant
+    # traction-quality signals (is revenue growing, is it sticking) had
+    # NO field to land in at all -- see the ApexGrid regression case
+    # (281% YoY growth, 128% NRR, both real and stated, both previously
+    # invisible to VPS).
+    prior_monthly_revenue: float | None = Field(
+        default=None, ge=0,
+        description="Monthly revenue approximately 12 months before `monthly_revenue`, if the founder stated it -- used only to compute a real, evidence-based growth signal, never assumed.",
+    )
+    retention_pct: float | None = Field(
+        default=None, ge=0, le=500,
+        description="The single most relevant retention/net-expansion figure the founder explicitly reported (e.g. gross or net revenue retention). Upper bound is loose (>100 is a legitimate net-expansion figure), not a claim retention literally cannot exceed 500%.",
+    )
 
 
 class CapitalAssumptions(BaseModel):
@@ -117,7 +134,10 @@ class VPSResult(BaseModel):
 
 class CreateVentureRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
-    description: str | None = Field(default=None, max_length=5000)
+    # SIE Intelligence Reset: raised to match StructureIdeaRequest's own
+    # 8000 -- the persisted description must never be truncated relative
+    # to what was actually structured/reviewed.
+    description: str | None = Field(default=None, max_length=8000)
     industry: str | None = Field(default=None, max_length=200)
     business_model: str | None = Field(default=None, max_length=200)
     target_customer: str | None = Field(default=None, max_length=500)
@@ -127,7 +147,10 @@ class CreateVentureRequest(BaseModel):
 
 class UpdateVentureRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
-    description: str | None = Field(default=None, max_length=5000)
+    # SIE Intelligence Reset: raised to match StructureIdeaRequest's own
+    # 8000 -- the persisted description must never be truncated relative
+    # to what was actually structured/reviewed.
+    description: str | None = Field(default=None, max_length=8000)
     industry: str | None = Field(default=None, max_length=200)
     business_model: str | None = Field(default=None, max_length=200)
     target_customer: str | None = Field(default=None, max_length=500)
@@ -267,6 +290,8 @@ class DraftValidationObservations(BaseModel):
     waitlist_signups: DraftNumberField = Field(default_factory=DraftNumberField)
     paying_customers: DraftNumberField = Field(default_factory=DraftNumberField)
     monthly_revenue: DraftNumberField = Field(default_factory=DraftNumberField)
+    prior_monthly_revenue: DraftNumberField = Field(default_factory=DraftNumberField)
+    retention_pct: DraftNumberField = Field(default_factory=DraftNumberField)
 
 
 class DraftCapitalAssumptions(BaseModel):
@@ -290,12 +315,16 @@ class VentureDraft(BaseModel):
 
 
 class StructureIdeaRequest(BaseModel):
-    # Bounded well below MAX_COMPANY_TEXT_LENGTH (analyze's own 50,000 --
-    # see app/models/startup.py) -- this is a short idea pitch, not a
-    # pasted document; a generous ceiling here is about rejecting a
-    # pathological paste cleanly (Part 3's "oversized input -> clean
-    # 4xx"), not accommodating long-form text.
-    description: str = Field(min_length=1, max_length=4000)
+    # SIE Intelligence Reset: raised from 4000 -- confirmed root cause of
+    # real evidence loss for an evidence-rich company (see the
+    # ApexGrid regression case: 186 paying customers/$11.8M ARR/retention/
+    # GTM-channel/founder-background evidence silently truncated at
+    # exactly 4000 characters, mid-sentence, before extraction ever ran).
+    # Still bounded well below MAX_COMPANY_TEXT_LENGTH (analyze's own
+    # 50,000 -- see app/models/startup.py) -- this stays a short pitch,
+    # not a full document, but it must fit a real company's real
+    # evidence, not just an idea-stage founder's paragraph.
+    description: str = Field(min_length=1, max_length=8000)
 
 
 class StructureIdeaResponse(BaseModel):

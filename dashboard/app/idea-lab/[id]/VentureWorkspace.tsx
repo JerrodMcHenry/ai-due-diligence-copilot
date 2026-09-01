@@ -702,6 +702,18 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 value={draft.validation.monthly_revenue}
                 onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, monthly_revenue: value } }))}
               />
+              <NumberField
+                id="val-prior-revenue"
+                label="Monthly revenue ~12 months ago ($)"
+                value={draft.validation.prior_monthly_revenue}
+                onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, prior_monthly_revenue: value } }))}
+              />
+              <NumberField
+                id="val-retention"
+                label="Retention (%)"
+                value={draft.validation.retention_pct}
+                onChange={(value) => setDraft((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
+              />
             </AssumptionAccordion>
 
             <AssumptionAccordion title="Capital">

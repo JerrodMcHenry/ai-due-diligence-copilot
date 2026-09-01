@@ -35,7 +35,12 @@ type MinimalAssumptions = {
   founder: { has_technical_cofounder: boolean | null; has_business_cofounder: boolean | null };
   gtm: { expected_cac: number | null };
   economics: { price_point: number | null; expected_gross_margin_pct: number | null };
-  validation: { customer_interviews: number | null; paying_customers: number | null; monthly_revenue: number | null };
+  validation: {
+    customer_interviews: number | null;
+    paying_customers: number | null;
+    monthly_revenue: number | null;
+    retention_pct: number | null;
+  };
 };
 
 export type WhatIfScenario = {
@@ -70,17 +75,25 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
   const intensity = current.market.competition_intensity;
   const hasTechnicalCofounder = current.founder.has_technical_cofounder;
   const hasBusinessCofounder = current.founder.has_business_cofounder;
+  // SIE Intelligence Reset: matches vps_guidance.py's own
+  // _has_meaningful_commercial_scale() threshold exactly -- a company at
+  // real commercial scale should never be offered "what if I interview
+  // 20 customers", the confirmed regression case (a company with 186
+  // paying customers and $11.8M ARR was offered this exact scenario).
+  // "Is the problem real" is no longer a meaningful open question at
+  // this scale; it isn't lower-priority, it's inapplicable.
+  const hasCommercialScale = (paying !== null && paying >= 10) || (revenue !== null && revenue >= 10_000);
 
   // --- Validation upside: always relative to what's already reported ---
 
-  if (interviews === null || interviews < 20) {
+  if (!hasCommercialScale && (interviews === null || interviews < 20)) {
     scenarios.push({
       id: "interview-20",
       question: "What if I interview 20 customers?",
       direction: "upside",
       apply: (a) => ({ ...a, validation: { ...a.validation, customer_interviews: 20 } }),
     });
-  } else {
+  } else if (!hasCommercialScale && interviews !== null) {
     const target = interviews + 15;
     scenarios.push({
       id: "interview-more",
@@ -130,6 +143,31 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
       direction: "upside",
       apply: (a) => ({ ...a, validation: { ...a.validation, monthly_revenue: target } }),
     });
+  }
+
+  // --- Retention: only a meaningful question once there's a commercial
+  // base to retain -- SIE Intelligence Reset's new retention_pct field ---
+
+  const retention = current.validation.retention_pct;
+  if (hasCommercialScale) {
+    if (retention === null || retention < 110) {
+      const target = retention === null ? 105 : Math.min(140, retention + 15);
+      scenarios.push({
+        id: "retention-improves",
+        question: `What if retention reaches ${target}%?`,
+        direction: "upside",
+        apply: (a) => ({ ...a, validation: { ...a.validation, retention_pct: target } }),
+      });
+    }
+    if (retention === null || retention >= 80) {
+      const target = retention === null ? 65 : Math.max(30, retention - 25);
+      scenarios.push({
+        id: "retention-falls",
+        question: `What if retention falls to ${target}%?`,
+        direction: "downside",
+        apply: (a) => ({ ...a, validation: { ...a.validation, retention_pct: target } }),
+      });
+    }
   }
 
   // --- Pricing / GTM ---

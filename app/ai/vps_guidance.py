@@ -77,6 +77,16 @@ def _key_assumptions(assumptions: dict) -> list[str]:
 
 def _validation_gaps(assumptions: dict) -> list[str]:
     validation = assumptions.get("validation") or {}
+
+    # SIE Intelligence Reset: a company with real commercial scale
+    # (confirmed regression case: 186 paying customers, $983K/mo revenue)
+    # must not be told "this is expected at the idea stage" -- that
+    # framing is only honest for a company that hasn't earned commercial
+    # validation yet. "No interviews reported" is not a gap worth naming
+    # once direct commercial proof already exists.
+    if _has_meaningful_commercial_scale(assumptions):
+        return []
+
     gaps = []
 
     if validation.get("customer_interviews") is None:
@@ -107,6 +117,25 @@ def _has_real_traction(assumptions: dict) -> bool:
     paying = validation.get("paying_customers")
     revenue = validation.get("monthly_revenue")
     return bool((paying is not None and paying > 0) or (revenue is not None and revenue > 0))
+
+
+def _has_meaningful_commercial_scale(assumptions: dict) -> bool:
+    """
+    SIE Intelligence Reset. A stricter bar than `_has_real_traction()`:
+    genuine, non-trivial commercial scale (matching
+    vps_scoring.py::_validation_commercial_scale()'s own "solid base"
+    tier), not merely a first dollar or first customer. Used to fully
+    SUPPRESS (not just deprioritize) beginner-stage recommendations that
+    are actively wrong at this scale -- the confirmed regression case:
+    a company with 186 paying customers and $11.8M ARR was still told
+    "interview 20+ target customers to validate the problem is real,"
+    which is not a lower-priority-but-still-valid suggestion at that
+    scale, it is simply inapplicable. Never affects VPS itself.
+    """
+    validation = assumptions.get("validation") or {}
+    paying = validation.get("paying_customers")
+    revenue = validation.get("monthly_revenue")
+    return bool((paying is not None and paying >= 10) or (revenue is not None and revenue >= 10_000))
 
 
 def _next_milestones(assumptions: dict, categories_by_key: dict) -> list[str]:
@@ -142,16 +171,22 @@ def _next_milestones(assumptions: dict, categories_by_key: dict) -> list[str]:
     # breaks ties, same as the old fixed sequence did.
     candidates: list[tuple[int, str]] = []
 
+    has_commercial_scale = _has_meaningful_commercial_scale(assumptions)
+
     if not has_traction:
         if interviews is None or interviews < 20:
             candidates.append((0, "Interview 20+ target customers to validate the problem is real."))
         if paying is None or paying == 0:
             candidates.append((1, "Secure a first paying customer to validate willingness to pay."))
-    elif interviews is None or interviews < 20:
-        # Still a real gap worth naming for a traction-stage venture, but
-        # no longer the FIRST thing to ask -- it already has stronger
-        # signal than interviews alone.
+    elif not has_commercial_scale and (interviews is None or interviews < 20):
+        # Still a real gap worth naming for a venture with only light
+        # traction, but no longer the FIRST thing to ask -- it already
+        # has stronger signal than interviews alone.
         candidates.append((4, "Interview 20+ target customers to validate the problem is real."))
+    # Once real commercial scale exists (paying >= 10 or revenue >=
+    # $10K/mo), interviews are simply not offered at all -- not
+    # deprioritized, suppressed. The problem being real is no longer a
+    # meaningful uncertainty for a company at this scale.
 
     gtm = categories_by_key.get("gtm_feasibility")
     if gtm and gtm["score"] is None:

@@ -178,7 +178,20 @@ export default function NewVentureForm() {
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             placeholder={IDEA_PLACEHOLDER}
-            maxLength={4000}
+            // SIE Intelligence Reset -- root cause #1 of the ApexGrid
+            // regression case: a real, evidence-rich company's
+            // description (traction metrics, retention, GTM channel
+            // mix, founder backgrounds, etc.) routinely exceeds 4000
+            // characters. At 4000 the browser silently discarded
+            // everything past that point -- confirmed live: ApexGrid's
+            // stored description cut off mid-sentence, and every fact
+            // that would have come after was never even sent to
+            // extraction. 8000 is still well below /analyze's own
+            // 50,000-character ceiling (a different, much more
+            // thorough evidence pipeline) -- this is a short pitch,
+            // not a full document, but it must fit a real company's
+            // real evidence.
+            maxLength={8000}
             disabled={phase === "structuring"}
             className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 disabled:opacity-60"
           />

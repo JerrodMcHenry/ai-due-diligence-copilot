@@ -74,7 +74,9 @@ _RESPONSE_SHAPE = """
     "customer_interviews": {same shape, value is a number or null},
     "waitlist_signups": {same shape, value is a number or null},
     "paying_customers": {same shape, value is a number or null},
-    "monthly_revenue": {same shape, value is a number or null}
+    "monthly_revenue": {same shape, value is a number or null},
+    "prior_monthly_revenue": {same shape, value is a number or null},
+    "retention_pct": {same shape, value is a number or null}
   },
   "capital": {
     "starting_capital": {same shape, value is a number or null},
@@ -165,7 +167,27 @@ weaker signal up into a stronger one:
   unknown/null.
 - "monthly_revenue": actual dollars already collected per month, not a
   projection, target, or expected future number ("we plan to reach
-  $1M ARR" is a projection, not observed revenue -- unknown/null).
+  $1M ARR" is a projection, not observed revenue -- unknown/null). If the
+  founder states an ANNUAL figure (ARR, annual revenue), convert it to a
+  monthly figure (divide by 12) -- this is a unit conversion of a stated
+  fact, not an inference, so it is still "user_provided".
+- "prior_monthly_revenue": actual monthly revenue from an earlier,
+  explicitly stated point in time (e.g. "up from $X twelve months ago",
+  "$X a year ago"), converted to monthly the same way as
+  "monthly_revenue" above. Only set this when the founder names a
+  specific past revenue figure AND roughly when it was -- a vague "we've
+  grown a lot" is not enough. This field exists only so a REAL growth
+  rate can be computed later from two real numbers; never invent a
+  starting point.
+- "retention_pct": a single retention or net-revenue-expansion
+  percentage the founder explicitly stated (e.g. "96% gross retention",
+  "128% net revenue retention", "very few customers churn"-type
+  statements do NOT count, only an actual stated percentage does). If
+  the founder gives multiple retention figures (gross retention, net
+  retention, churn rate), prefer net revenue retention if stated,
+  otherwise gross retention; if only a churn rate is given, convert it
+  to a retention percentage (100 - churn%). Do not average multiple
+  figures together.
 
 Return ONLY valid JSON matching this exact shape (no prose, no markdown
 fences):
@@ -270,7 +292,10 @@ _ASSUMPTION_GROUPS = {
     "capital": ["starting_capital", "monthly_burn"],
 }
 
-_VALIDATION_FIELDS = ["customer_interviews", "waitlist_signups", "paying_customers", "monthly_revenue"]
+_VALIDATION_FIELDS = [
+    "customer_interviews", "waitlist_signups", "paying_customers", "monthly_revenue",
+    "prior_monthly_revenue", "retention_pct",
+]
 
 _TOP_LEVEL_FIELDS = ["name", "industry", "business_model", "target_customer", "stage"]
 

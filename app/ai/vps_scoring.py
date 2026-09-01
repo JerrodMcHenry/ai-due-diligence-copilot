@@ -143,6 +143,11 @@ def _score_problem_solution(assumptions: dict) -> CategoryResult:
     score = 5.0
 
     if problem and solution:
+        # SIE Intelligence Reset: previously a basis note only, worth
+        # zero points -- part of why this category's ceiling (7.5) fell
+        # short of what a genuinely complete, well-articulated model
+        # deserves. A real, if modest, completeness bonus.
+        score += 0.5
         basis.append("Both a problem statement and a solution description are provided")
     elif problem:
         score -= 1.0
@@ -152,8 +157,20 @@ def _score_problem_solution(assumptions: dict) -> CategoryResult:
         basis.append("Solution described, but the problem it solves isn't stated")
 
     if differentiation and len(differentiation.strip()) > 20:
-        score += 1.5
-        basis.append("A specific differentiation is described")
+        # SIE Intelligence Reset: a second tier for a genuinely
+        # substantive differentiation (not just past the 20-character
+        # floor) -- this dimension's own top evidence anchor. Confirmed
+        # defect this fixes: the category's own mathematical ceiling
+        # (7.5, unreachable past that regardless of evidence quality)
+        # was one reason VPS's overall ceiling fell short of 9 even for
+        # a maximally strong synthetic company across every other
+        # category.
+        if len(differentiation.strip()) > 80:
+            score += 2.0
+            basis.append("A specific, well-articulated differentiation is described")
+        else:
+            score += 1.5
+            basis.append("A specific differentiation is described")
 
     if target_customer:
         score += 1.0
@@ -262,43 +279,166 @@ def _score_economic_potential(assumptions: dict) -> CategoryResult:
     return CategoryResult("economic_potential", VPS_CATEGORY_LABELS["economic_potential"], _clamp(score), basis)
 
 
+def _validation_commercial_scale(paying: float | None, revenue: float | None) -> float:
+    """
+    SIE Intelligence Reset. Deterministic 0-8 base from the two
+    strongest, most reliably founder-reported commercial-validation
+    facts: real paying customers and real reported revenue. Explicit
+    evidence-anchor tiers (not a single early cap) so real dynamic
+    range survives at scale -- the confirmed defect this replaces: the
+    old formula capped ALL credit at 10 paying customers, making 186
+    paying customers score identically to 10, and gave a single flat
+    "+2" for ANY nonzero revenue, making $983K/mo indistinguishable
+    from $12/year (the ApexGrid regression case's central bug).
+
+    Tiers (paying customers / monthly revenue, either independently):
+      absent            -> 0
+      a few / early      -> 2.0   (1-2 customers, or <$1K/mo)
+      early commercial   -> 3.0   (3-9 customers, or $1K-$10K/mo)
+      solid base         -> 4.5   (10-49 customers, or $10K-$50K/mo)
+      strong base        -> 5.5   (50-99 customers, or $50K-$250K/mo)
+      large scale        -> 6.5   (100+ customers, or $250K+/mo) -- STRONG anchor
+    Both present at "solid" tier or better adds +1.0: genuine paired
+    commercial validation (people pay AND the business collects real
+    money), not just the stronger signal counted once.
+    """
+    if not paying and not revenue:
+        return 0.0
+
+    score = 0.0
+
+    if paying:
+        if paying >= 100:
+            score = max(score, 6.5)
+        elif paying >= 50:
+            score = max(score, 5.5)
+        elif paying >= 10:
+            score = max(score, 4.5)
+        elif paying >= 3:
+            score = max(score, 3.0)
+        else:
+            score = max(score, 2.0)
+
+    if revenue:
+        if revenue >= 250_000:
+            score = max(score, 6.5)
+        elif revenue >= 50_000:
+            score = max(score, 5.5)
+        elif revenue >= 10_000:
+            score = max(score, 4.5)
+        elif revenue >= 1_000:
+            score = max(score, 3.0)
+        else:
+            score = max(score, 2.0)
+
+    if paying and revenue and paying >= 10 and revenue >= 10_000:
+        score += 1.0
+
+    return min(score, 8.0)
+
+
+def _validation_modifiers(
+    revenue: float | None, prior_revenue: float | None, retention_pct: float | None
+) -> tuple[float, list[str]]:
+    """
+    Growth and retention as EXPLICIT additive modifiers on top of the
+    commercial-scale base above -- never a floor, never a penalty for
+    being unstated (Rulebook: unknown information must not lower
+    Strength). Only applies when the underlying facts are actually
+    known; a declining revenue trend or weak retention are genuine
+    NEGATIVE evidence and lower the score, which is different in kind
+    from simply not having the fact at all.
+    """
+    modifier = 0.0
+    basis: list[str] = []
+
+    if revenue is not None and prior_revenue is not None and prior_revenue > 0:
+        growth = (revenue - prior_revenue) / prior_revenue
+        if growth >= 1.5:
+            modifier += 1.5
+            basis.append(f"~{growth * 100:.0f}% revenue growth over the reported period")
+        elif growth >= 0.5:
+            modifier += 0.75
+            basis.append(f"~{growth * 100:.0f}% revenue growth over the reported period")
+        elif growth < -0.15:
+            modifier -= 2.0
+            basis.append(f"revenue declined ~{abs(growth) * 100:.0f}% over the reported period")
+        elif growth < 0:
+            modifier -= 0.75
+            basis.append(f"revenue declined slightly (~{abs(growth) * 100:.0f}%) over the reported period")
+
+    if retention_pct is not None:
+        if retention_pct >= 110:
+            modifier += 1.0
+            basis.append(f"{retention_pct:g}% retention indicates strong net expansion")
+        elif retention_pct >= 95:
+            modifier += 0.5
+            basis.append(f"{retention_pct:g}% retention reported")
+        elif retention_pct < 70:
+            modifier -= 2.5
+            basis.append(f"{retention_pct:g}% retention is a significant negative signal")
+        elif retention_pct < 85:
+            modifier -= 1.0
+            basis.append(f"{retention_pct:g}% retention is a modeled weak point")
+
+    return modifier, basis
+
+
 def _score_validation(assumptions: dict) -> CategoryResult:
     """
     The one category scored from founder-REPORTED OBSERVATIONS, not
-    modeled assumptions -- see this module's own docstring. Deliberately
-    starts at 0, not a neutral midpoint: validation is earned by real
-    signal, never assumed. A pure idea with none of these fields set is
-    correctly Unavailable here (excluded from the weighted average, not
-    scored as a 0-out-of-10 failure) -- see compute_vps()'s
-    renormalization.
+    modeled assumptions -- see this module's own docstring. A pure idea
+    with none of these fields set is correctly Unavailable here
+    (excluded from the weighted average, not scored as a 0-out-of-10
+    failure) -- see compute_vps()'s renormalization.
+
+    Two regimes, both earned by real signal, never assumed:
+    - Pre-commercial (no paying customers, no revenue): interviews and
+      waitlist signal only -- UNCHANGED from the prior formula, which
+      was never the reported defect.
+    - Commercial (paying customers and/or revenue reported): scaled via
+      _validation_commercial_scale()'s evidence-anchor tiers, then
+      adjusted by _validation_modifiers()'s growth/retention evidence --
+      replaces the old formula's early hard cap, the confirmed root
+      cause of the ApexGrid regression case (186 paying customers /
+      $11.8M ARR / 281% growth / 128% NRR scoring ~5, indistinguishable
+      from a company with 10 customers and $1 of revenue).
     """
     validation = assumptions.get("validation") or {}
     interviews = validation.get("customer_interviews")
     waitlist = validation.get("waitlist_signups")
     paying = validation.get("paying_customers")
     revenue = validation.get("monthly_revenue")
+    prior_revenue = validation.get("prior_monthly_revenue")
+    retention_pct = validation.get("retention_pct")
 
     if interviews is None and waitlist is None and paying is None and revenue is None:
         return CategoryResult("validation", VPS_CATEGORY_LABELS["validation"], None)
 
-    basis = []
-    score = 0.0
+    basis: list[str] = []
 
-    if interviews is not None:
-        score += min(max(interviews, 0) / 25.0, 1.0) * 3.0
-        basis.append(f"{interviews} customer interviews reported")
+    if paying or revenue:
+        score = _validation_commercial_scale(paying, revenue)
+        if paying:
+            basis.append(f"{paying} paying customers reported")
+        if revenue:
+            basis.append(f"${revenue:,.0f}/mo in reported revenue")
 
-    if waitlist is not None:
-        score += min(max(waitlist, 0) / 200.0, 1.0) * 2.0
-        basis.append(f"{waitlist} waitlist signups reported")
-
-    if paying is not None:
-        score += min(max(paying, 0) / 10.0, 1.0) * 3.0
-        basis.append(f"{paying} paying customers reported")
-
-    if revenue is not None and revenue > 0:
-        score += 2.0
-        basis.append(f"${revenue:,.0f}/mo in reported revenue")
+        modifier, modifier_basis = _validation_modifiers(revenue, prior_revenue, retention_pct)
+        score += modifier
+        basis.extend(modifier_basis)
+    else:
+        # Pre-commercial: the original interview/waitlist formula --
+        # never the reported defect, left unchanged (Part 16: don't
+        # discard a working safeguard because a different part of the
+        # system was broken).
+        score = 0.0
+        if interviews is not None:
+            score += min(max(interviews, 0) / 25.0, 1.0) * 3.0
+            basis.append(f"{interviews} customer interviews reported")
+        if waitlist is not None:
+            score += min(max(waitlist, 0) / 200.0, 1.0) * 2.0
+            basis.append(f"{waitlist} waitlist signups reported")
 
     return CategoryResult("validation", VPS_CATEGORY_LABELS["validation"], _clamp(score), basis)
 

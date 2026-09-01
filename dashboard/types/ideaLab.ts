@@ -42,6 +42,10 @@ export interface ValidationObservations {
   waitlist_signups: number | null;
   paying_customers: number | null;
   monthly_revenue: number | null;
+  // SIE Intelligence Reset. Same founder-reported-observation status as
+  // every other field here -- see app/models/idea_lab.py's own comment.
+  prior_monthly_revenue: number | null;
+  retention_pct: number | null;
 }
 
 export interface CapitalAssumptions {
@@ -78,6 +82,8 @@ export function emptyAssumptions(): VentureAssumptions {
       waitlist_signups: null,
       paying_customers: null,
       monthly_revenue: null,
+      prior_monthly_revenue: null,
+      retention_pct: null,
     },
     capital: { starting_capital: null, monthly_burn: null },
   };
@@ -202,6 +208,8 @@ export interface VentureDraft {
     waitlist_signups: DraftField<number>;
     paying_customers: DraftField<number>;
     monthly_revenue: DraftField<number>;
+    prior_monthly_revenue: DraftField<number>;
+    retention_pct: DraftField<number>;
   };
   capital: {
     starting_capital: DraftField<number>;
@@ -251,6 +259,8 @@ export function draftToAssumptions(draft: VentureDraft): VentureAssumptions {
       waitlist_signups: draft.validation.waitlist_signups.value,
       paying_customers: draft.validation.paying_customers.value,
       monthly_revenue: draft.validation.monthly_revenue.value,
+      prior_monthly_revenue: draft.validation.prior_monthly_revenue.value,
+      retention_pct: draft.validation.retention_pct.value,
     },
     capital: {
       starting_capital: draft.capital.starting_capital.value,

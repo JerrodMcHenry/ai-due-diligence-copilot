@@ -760,6 +760,18 @@ function ValidationUpdateForm({
           value={draft.monthly_revenue}
           onChange={(value) => onChange({ ...draft, monthly_revenue: value })}
         />
+        <NumberInput
+          id="validation-prior-revenue"
+          label="Monthly revenue ~12mo ago ($)"
+          value={draft.prior_monthly_revenue}
+          onChange={(value) => onChange({ ...draft, prior_monthly_revenue: value })}
+        />
+        <NumberInput
+          id="validation-retention"
+          label="Retention (%)"
+          value={draft.retention_pct}
+          onChange={(value) => onChange({ ...draft, retention_pct: value })}
+        />
       </div>
 
       <div className="flex gap-2">

@@ -299,7 +299,7 @@ function assumptionsWithTraction() {
     founder: { has_technical_cofounder: true, has_business_cofounder: false },
     gtm: { expected_cac: null },
     economics: { price_point: null, expected_gross_margin_pct: 60 },
-    validation: { customer_interviews: 85, paying_customers: 14, monthly_revenue: 70000 },
+    validation: { customer_interviews: 85, paying_customers: 14, monthly_revenue: 70000, retention_pct: null },
   };
 }
 
@@ -309,21 +309,43 @@ function assumptionsIdeaStage() {
     founder: { has_technical_cofounder: null, has_business_cofounder: null },
     gtm: { expected_cac: null },
     economics: { price_point: null, expected_gross_margin_pct: null },
-    validation: { customer_interviews: null, paying_customers: null, monthly_revenue: null },
+    validation: { customer_interviews: null, paying_customers: null, monthly_revenue: null, retention_pct: null },
   };
 }
 
 function test_what_if_never_suggests_a_lower_interview_count_than_already_reported(): void {
-  const scenarios = getWhatIfScenarios(assumptionsWithTraction());
+  // A pre-commercial venture (no paying customers/revenue yet) with 85
+  // already-reported interviews -- the interview scenario must still
+  // move forward from the real current value, never reset it downward.
+  const preCommercialManyInterviews = {
+    ...assumptionsIdeaStage(),
+    validation: { customer_interviews: 85, paying_customers: null, monthly_revenue: null, retention_pct: null },
+  };
+  const scenarios = getWhatIfScenarios(preCommercialManyInterviews);
   const interviewScenario = scenarios.find((s) => s.id === "interview-20" || s.id === "interview-more");
-  expect(!!interviewScenario, "Expected an interview scenario to be present");
+  expect(!!interviewScenario, "Expected an interview scenario to be present for a pre-commercial venture");
 
-  const result = interviewScenario!.apply(assumptionsWithTraction());
+  const result = interviewScenario!.apply(preCommercialManyInterviews);
   expect(
     (result.validation.customer_interviews ?? 0) > 85,
     `A venture with 85 already-reported interviews must never be offered a scenario that lowers it (got ${result.validation.customer_interviews})`
   );
   expect(interviewScenario!.id !== "interview-20", "The stale fixed-20 preset must not be offered once interviews already exceed 20");
+}
+
+function test_what_if_suppresses_interview_scenario_at_commercial_scale(): void {
+  // The confirmed regression case (Section 15 of the SIE Intelligence
+  // Reset phase): a venture with real commercial scale (paying >= 10 or
+  // revenue >= $10K/mo) must not be offered ANY "what if I interview N
+  // customers" scenario -- not deprioritized, fully absent. Whether the
+  // problem is real is no longer a meaningful open question at this
+  // scale.
+  const scenarios = getWhatIfScenarios(assumptionsWithTraction()); // 14 paying, $70K/mo
+  const interviewScenario = scenarios.find((s) => s.id === "interview-20" || s.id === "interview-more");
+  expect(
+    interviewScenario === undefined,
+    `A venture with real commercial scale must not be offered an interview scenario, got: ${interviewScenario?.question}`
+  );
 }
 
 function test_what_if_scenarios_are_tagged_upside_or_downside(): void {
@@ -436,6 +458,7 @@ const TESTS: [string, () => void][] = [
   ["test_infer_evidence_step_never_reaches_fundraise", test_infer_evidence_step_never_reaches_fundraise],
   ["test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence", test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence],
   ["test_what_if_never_suggests_a_lower_interview_count_than_already_reported", test_what_if_never_suggests_a_lower_interview_count_than_already_reported],
+  ["test_what_if_suppresses_interview_scenario_at_commercial_scale", test_what_if_suppresses_interview_scenario_at_commercial_scale],
   ["test_what_if_scenarios_are_tagged_upside_or_downside", test_what_if_scenarios_are_tagged_upside_or_downside],
   ["test_what_if_offers_churn_downside_only_when_paying_customers_exist", test_what_if_offers_churn_downside_only_when_paying_customers_exist],
   ["test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress", test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress],

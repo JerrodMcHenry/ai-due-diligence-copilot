@@ -340,6 +340,20 @@ export default function VentureDraftReview({
             onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, monthly_revenue: value } }))}
             badge={<ProvenanceBadge provenance={draft.validation.monthly_revenue.provenance} />}
           />
+          <NumberField
+            id="review-prior-revenue"
+            label="Monthly revenue ~12 months ago ($)"
+            value={assumptions.validation.prior_monthly_revenue}
+            onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, prior_monthly_revenue: value } }))}
+            badge={<ProvenanceBadge provenance={draft.validation.prior_monthly_revenue.provenance} />}
+          />
+          <NumberField
+            id="review-retention"
+            label="Retention (%)"
+            value={assumptions.validation.retention_pct}
+            onChange={(value) => setAssumptions((prev) => ({ ...prev, validation: { ...prev.validation, retention_pct: value } }))}
+            badge={<ProvenanceBadge provenance={draft.validation.retention_pct.provenance} />}
+          />
         </ReviewAccordion>
 
         <ReviewAccordion title="Capital">
