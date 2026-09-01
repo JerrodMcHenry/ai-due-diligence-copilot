@@ -108,8 +108,37 @@ def build_default_registry() -> ParameterRegistry:
     P("band.no_signal", "0", "NO_SIGNAL never scores -- placeholder only, unused numerically.", "10.8F provisional", "0", "0")
     P("band.single_signal", "5.5", "Provisional midpoint for a single-populated-field classification (Rulebook 'credible but ordinary').", "10.8F provisional", "5.0", "6.0")
     P("band.multiple_signals", "7.5", "Provisional midpoint for a multi-field classification ('strong, specifically evidenced').", "10.8F provisional", "7.0", "8.0")
-    P("band.comprehensive", "9.5", "Provisional midpoint for the strongest classification ('exceptional').", "10.8F provisional", "9.0", "10.0")
+    # SPS V3 Finalization: raised from 9.5 to the top of this parameter's
+    # own already-declared sensitivity range (9.0-10.0) -- 4+ independent,
+    # non-contradicted corroborating signals with zero negative evidence
+    # IS the strongest reasonable observable anchor for a Category B
+    # dimension; reserving headroom above it served no company that could
+    # ever actually reach it. Confirmed defect this fixes: dimension-level
+    # 10 was mathematically unreachable for every Category B dimension
+    # (18 of 27) regardless of evidence strength.
+    P("band.comprehensive", "10.0", "The strongest classification ('elite') -- 4+ deduplicated, non-conflicting corroborating signals, no negative evidence.", "10.8F provisional, raised to range ceiling in SPS V3 Finalization", "9.0", "10.0")
     P("band.negative_signal", "2.0", "Provisional midpoint for a contradicted/negative classification.", "10.8F provisional", "0.0", "4.0")
+
+    # --- Retention & Engagement (Traction): explicit multi-tier bands ---
+    # SPS V3 Finalization. eval_retention_engagement() previously
+    # hardcoded two literal thresholds (110/95) directly in evaluators.py,
+    # in violation of this file's own stated design principle ("every
+    # classification->score mapping reads its band values from the
+    # registry, never a bare literal"), AND collapsed everything below
+    # 110% NRR into one flat "ORDINARY" score of 5.5 -- a company
+    # reporting 95% retention and a company reporting a genuinely weak
+    # 40% retention scored identically. Both defects fixed together:
+    # thresholds now live here, and weak/poor retention is explicit
+    # negative-in-kind evidence (Rulebook: known negative evidence must
+    # lower Strength), not silently treated the same as "not stated".
+    P("traction.retention.elite_pct", "125", "NRR/GRR at or above this is ELITE retention (net expansion at scale).", "SPS V3 Finalization", "115", "140")
+    P("traction.retention.strong_pct", "105", "NRR/GRR at or above this (below elite) is STRONG retention.", "SPS V3 Finalization", "100", "115")
+    P("traction.retention.ordinary_pct", "85", "NRR/GRR at or above this (below strong) is ORDINARY/developing retention.", "SPS V3 Finalization", "75", "95")
+    P("traction.retention.weak_pct", "70", "NRR/GRR at or above this (below ordinary) is WEAK retention -- a real negative signal, not merely 'less strong'.", "SPS V3 Finalization", "60", "80")
+    # Below weak_pct: SEVERE -- treated the same as explicit negative
+    # evidence (band.negative_signal), since retention that low is
+    # itself direct evidence of a struggling business, whether or not a
+    # separately-cited NegativeSignalObservation also exists.
 
     # --- Publishability gates (Phase 10.8J simplification, Part 10-11 --
     # ONE rule at the SPS level, ONE rule at the pillar level. Three

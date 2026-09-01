@@ -616,18 +616,52 @@ def eval_retention_engagement(company: EvidenceBundle, registry: ParameterRegist
             RuleTrace("TRACTION.RETENTION.CONFLICT.V1", (), "Retention observations are in unresolved conflict."), (),
         )
     latest = resolved_ret[0].accepted_observation
-    nrr = latest.nrr_pct
-    if nrr is not None and nrr >= Decimal("110"):
+    # SPS V3 Finalization: prefer NRR (captures expansion, the strongest
+    # single retention signal) when disclosed; fall back to GRR; derive
+    # a retention-equivalent from a disclosed churn rate as a last
+    # resort (100 - churn). Never averages multiple figures together.
+    figure = latest.nrr_pct
+    if figure is None:
+        figure = latest.grr_pct
+    if figure is None and latest.logo_churn_pct is not None:
+        figure = Decimal("100") - latest.logo_churn_pct
+
+    elite = registry.value("traction.retention.elite_pct")
+    strong = registry.value("traction.retention.strong_pct")
+    ordinary = registry.value("traction.retention.ordinary_pct")
+    weak = registry.value("traction.retention.weak_pct")
+
+    if figure is None:
+        return DimensionResult(
+            "retention_engagement", "Traction", Decimal("0.20"), None, AvailabilityStatus.UNAVAILABLE_INSUFFICIENT,
+            ConfidenceLevel.LOW, ClassificationResult("NO_SIGNAL", ()),
+            RuleTrace("TRACTION.RETENTION.V1", (), "Retention observation present but no NRR/GRR/churn figure could be resolved."), (),
+        )
+
+    if figure >= elite:
+        score, band = Decimal("10.0"), "ELITE"
+    elif figure >= strong:
         score, band = Decimal("8.5"), "STRONG"
-    elif nrr is not None and nrr >= Decimal("95"):
+    elif figure >= ordinary:
         score, band = Decimal("5.5"), "ORDINARY"
+    elif figure >= weak:
+        score, band = Decimal("3.5"), "WEAK"
     else:
-        score, band = Decimal("5.5"), "ORDINARY"
+        # Retention this low is direct evidence of a struggling
+        # business in its own right -- treated as negative-in-kind,
+        # matching band.negative_signal, whether or not a separately
+        # cited NegativeSignalObservation also exists for this company.
+        score, band = registry.value("band.negative_signal"), "SEVERE"
+
     return DimensionResult(
         "retention_engagement", "Traction", Decimal("0.20"), score, AvailabilityStatus.SCORABLE,
         confidence_from_evidence([latest]),
-        ClassificationResult(band, (latest.observation_id,)),
-        RuleTrace("TRACTION.RETENTION.V1", (), f"NRR/GRR/churn-based classification: {band}"),
+        ClassificationResult(band, (latest.observation_id,), reason=f"Retention figure {figure}% -> {band}"),
+        RuleTrace(
+            "TRACTION.RETENTION.V1",
+            ("traction.retention.elite_pct", "traction.retention.strong_pct", "traction.retention.ordinary_pct", "traction.retention.weak_pct"),
+            f"{figure}% retention -> {band}",
+        ),
         (latest.observation_id,),
     )
 

@@ -10,7 +10,7 @@
       },
       "business_capability": {
         "availability": "SCORABLE",
-        "score": "9.5"
+        "score": "10.0"
       },
       "capital_efficiency": {
         "availability": "SCORABLE",
@@ -94,7 +94,7 @@
       },
       "retention_engagement": {
         "availability": "SCORABLE",
-        "score": "8.5"
+        "score": "10.0"
       },
       "revenue_quality": {
         "availability": "SCORABLE",
@@ -114,7 +114,7 @@
       }
     },
     "publishable": true,
-    "sps": "66.8"
+    "sps": "67.6"
   },
   "B": {
     "company_id": "SYNTH_EXCEPTIONAL_MEDIUM_COVERAGE",
@@ -1030,7 +1030,7 @@
       },
       "retention_engagement": {
         "availability": "SCORABLE",
-        "score": "8.5"
+        "score": "10.0"
       },
       "revenue_quality": {
         "availability": "SCORABLE",
@@ -1050,7 +1050,7 @@
       }
     },
     "publishable": true,
-    "sps": "62.8"
+    "sps": "63.3"
   },
   "J": {
     "company_id": "SYNTH_ABUNDANT_NEGATIVE",
