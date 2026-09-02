@@ -17,6 +17,8 @@ import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
 import VentureProgress from "@/components/idea-lab/VentureProgress";
+import Tabs, { TabPanel } from "@/components/ui/Tabs";
+import FundraisingSimulator from "@/components/fundraising/FundraisingSimulator";
 import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
@@ -154,6 +156,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // update) -- never on every render, never N+1 (Section 17).
   const [history, setHistory] = useState<VentureHistoryResponse | null>(null);
   const [isLoadingHistory, setIsLoadingHistory] = useState(true);
+
+  // Phase 21B -- Fundraising Simulator V1, Part 25. Simulate's own
+  // internal tab -- "Venture" is the existing, unmodified What If /
+  // ScenarioComparison flow; "Fundraising" is new. Neither reads from nor
+  // writes to the other; switching tabs never mutates the venture (Part 23).
+  const [simulateTab, setSimulateTab] = useState<"venture" | "fundraising">("venture");
 
   const refreshHistory = useCallback(async () => {
     const token = await getToken();
@@ -540,24 +548,58 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
           {venture.model_result ? <PitchDeckCoachTeaser /> : null}
 
-          <BaseCard className="p-5">
-            <WhatIfPanel
-              currentAssumptions={venture.assumptions}
-              onRunScenario={handleRunScenario}
-              isRunning={isPreviewing}
-            />
-          </BaseCard>
+          {/* Phase 21B, Part 25/26: Fundraising Simulator lives inside
+              Simulate's own [ Venture ] [ Fundraising ] tabs, below the
+              primary founder loop (What Matters Now -> Current Action ->
+              Next Moves) -- never above it. "Venture" is the exact,
+              unmodified What If / ScenarioComparison flow that already
+              existed here (Simulate V1); "Fundraising" is new and fully
+              isolated (its own ephemeral state, no venture read beyond
+              the founder's own name, no venture write ever). */}
+          <Tabs
+            tabs={[
+              { id: "venture", label: "Venture" },
+              { id: "fundraising", label: "Fundraising" },
+            ]}
+            activeId={simulateTab}
+            onChange={(id) => setSimulateTab(id as "venture" | "fundraising")}
+          />
 
-          {scenario ? (
-            <ScenarioComparison
-              scenario={scenario}
-              currentAssumptions={venture.assumptions}
-              scenarioAssumptions={draft}
-              onApply={handleSave}
-              onDiscard={() => setScenario(null)}
-              isApplying={isSaving}
-            />
-          ) : null}
+          <TabPanel id="venture" activeId={simulateTab}>
+            <div className="space-y-3">
+              <BaseCard className="p-5">
+                <WhatIfPanel
+                  currentAssumptions={venture.assumptions}
+                  onRunScenario={handleRunScenario}
+                  isRunning={isPreviewing}
+                />
+              </BaseCard>
+
+              {scenario ? (
+                <ScenarioComparison
+                  scenario={scenario}
+                  currentAssumptions={venture.assumptions}
+                  scenarioAssumptions={draft}
+                  onApply={handleSave}
+                  onDiscard={() => setScenario(null)}
+                  isApplying={isSaving}
+                />
+              ) : null}
+            </div>
+          </TabPanel>
+
+          <TabPanel id="fundraising" activeId={simulateTab}>
+            {/* Phase 21B live walkthrough finding: `name` here is the
+                VENTURE's own title state (e.g. "ApexGrid"), not a
+                founder's personal name -- this app has no founder-name
+                field anywhere (confirmed during Phase 21A/21B
+                investigation; VentureAssumptions only has
+                founder_count). Passing it as founderName pre-filled the
+                "You -- 100%" shortcut's row with the company name
+                instead of "You". Nothing to pass here honestly, so the
+                default ("You") is used. */}
+            <FundraisingSimulator founderName="" />
+          </TabPanel>
 
           <Link
             href="/playbooks"

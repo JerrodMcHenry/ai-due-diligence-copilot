@@ -13,7 +13,8 @@
     "test:concepts": "node tests/concepts.test.ts",
     "test:simulate": "node tests/simulate.test.ts",
     "test:fundraising": "node tests/fundraising.test.ts",
-    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav && npm run test:concepts && npm run test:simulate && npm run test:fundraising"
+    "test:fundraisingUi": "node tests/fundraisingUi.test.ts",
+    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav && npm run test:concepts && npm run test:simulate && npm run test:fundraising && npm run test:fundraisingUi"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",
