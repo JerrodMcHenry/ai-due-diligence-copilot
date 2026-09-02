@@ -342,6 +342,17 @@ export interface VentureHistoryCategoryChange {
   after: number | null;
 }
 
+// Phase 24 -- Weekly Founder Review V1, Part 7. Already-formatted
+// before/after strings (see app/api.py::_diff_assumption_changes() for
+// the curated field list and formatting rule) -- never a raw value the
+// frontend would need per-field formatting knowledge to display.
+export interface VentureHistoryAssumptionChange {
+  field_path: string;
+  label: string;
+  before: string;
+  after: string;
+}
+
 export interface VentureHistoryEvent {
   event_type: VentureHistoryEventType;
   occurred_at: string;
@@ -350,6 +361,7 @@ export interface VentureHistoryEvent {
   before_vps: number | null;
   after_vps: number | null;
   category_changes: VentureHistoryCategoryChange[];
+  assumption_changes: VentureHistoryAssumptionChange[];
   mission_id: number | null;
   mission_title: string | null;
 }

@@ -107,7 +107,7 @@ from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.sps_v3 import SPSV3Assessment
-from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange
+from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange, VentureHistoryAssumptionChange
 from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse, CaptureObservationRequest
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -1123,6 +1123,57 @@ def _diff_category_changes(before_categories: list, after_categories: list) -> l
     return changes
 
 
+# Phase 24 -- Weekly Founder Review V1, Part 7. A small, CURATED set of
+# assumption fields worth showing as a human-readable "before -> after"
+# line ("Price point $500 -> $299") -- deliberately not every field in
+# VentureAssumptions (most, like free-text market_description, have no
+# honest single-line diff). Each entry is (dotted path, display label,
+# formatter). Mirrors CaptureWhatHappened.tsx's own fieldPathLabel()/
+# formatValue() set on the frontend (Phase 23) for the three fields it
+# already knows how to propose, extended with a few more numeric fields
+# that already exist on VentureAssumptions and are equally safe to diff.
+def _fmt_dollars(value) -> str:
+    return f"${value:,.0f}"
+
+
+def _fmt_count(value) -> str:
+    return f"{value:,.0f}" if isinstance(value, (int, float)) else str(value)
+
+
+def _fmt_percent(value) -> str:
+    return f"{value:g}%"
+
+
+_ASSUMPTION_DIFF_FIELDS: list[tuple[str, str, str, callable]] = [
+    # (category, key, label, formatter)
+    ("economics", "price_point", "Price point", _fmt_dollars),
+    ("economics", "expected_gross_margin_pct", "Gross margin", _fmt_percent),
+    ("validation", "customer_interviews", "Customer interviews", _fmt_count),
+    ("validation", "waitlist_signups", "Waitlist signups", _fmt_count),
+    ("validation", "paying_customers", "Paying customers", _fmt_count),
+    ("validation", "monthly_revenue", "Monthly revenue", _fmt_dollars),
+    ("validation", "retention_pct", "Retention", _fmt_percent),
+]
+
+
+def _diff_assumption_changes(before_assumptions: dict, after_assumptions: dict) -> list[VentureHistoryAssumptionChange]:
+    changes: list[VentureHistoryAssumptionChange] = []
+    for category, key, label, formatter in _ASSUMPTION_DIFF_FIELDS:
+        before_value = (before_assumptions.get(category) or {}).get(key)
+        after_value = (after_assumptions.get(category) or {}).get(key)
+        if before_value == after_value:
+            continue
+        if before_value is None and after_value is None:
+            continue
+        changes.append(VentureHistoryAssumptionChange(
+            field_path=f"{category}.{key}",
+            label=label,
+            before="Unknown" if before_value is None else formatter(before_value),
+            after="Unknown" if after_value is None else formatter(after_value),
+        ))
+    return changes
+
+
 @app.get("/ventures/{venture_id}/history", response_model=VentureHistoryResponse)
 def get_venture_history(
     venture_id: int,
@@ -1168,6 +1219,10 @@ def get_venture_history(
         category_changes = _diff_category_changes(before_categories, after_categories)
         all_category_changes.extend(category_changes)
 
+        before_assumptions = _parse_jsonb(update.get("before_assumptions")) or {}
+        after_assumptions = _parse_jsonb(update.get("after_assumptions")) or {}
+        assumption_changes = _diff_assumption_changes(before_assumptions, after_assumptions)
+
         related_mission = missions_by_id.get(update["related_mission_id"]) if update.get("related_mission_id") else None
         events.append(VentureHistoryEvent(
             event_type="model_updated",
@@ -1177,6 +1232,7 @@ def get_venture_history(
             before_vps=update["before_vps"],
             after_vps=update["after_vps"],
             category_changes=category_changes,
+            assumption_changes=assumption_changes,
             mission_id=related_mission["id"] if related_mission else None,
             mission_title=related_mission["title"] if related_mission else None,
         ))

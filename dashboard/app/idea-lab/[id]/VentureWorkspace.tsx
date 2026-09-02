@@ -18,6 +18,7 @@ import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
 import CaptureWhatHappened from "@/components/idea-lab/CaptureWhatHappened";
 import VentureProgress from "@/components/idea-lab/VentureProgress";
+import WeeklyReview from "@/components/idea-lab/WeeklyReview";
 import Tabs, { TabPanel } from "@/components/ui/Tabs";
 import FundraisingSimulator from "@/components/fundraising/FundraisingSimulator";
 import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
@@ -552,6 +553,30 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             there's nothing real to show (no invented empty state, no
             fabricated interpretation of founder-written text). */}
         {recentLearning ? <RecentLearningCard learning={recentLearning} /> : null}
+
+        {/* Phase 24 -- Weekly Founder Review V1. Sits directly before
+            Venture Progress (Part 3's own "WEEKLY REVIEW / RECENT
+            PROGRESS" placement) -- the review is this week's story, the
+            unmodified VentureProgress below it remains the all-time
+            compact summary + full-history handoff (Part 16: "if a
+            simple 'View full venture history' handoff is enough for V1,
+            use it" -- it already is). Reuses the exact same
+            missionedMilestones/setPendingMission wiring IdeaLabNextStep
+            above already uses -- one shared mission-creation pathway,
+            never a second one. */}
+        <WeeklyReview
+          history={history}
+          isLoadingHistory={isLoadingHistory}
+          modelResult={venture.model_result}
+          missionedMilestones={missionedMilestones}
+          onStartMission={(milestoneText, suggestion) =>
+            setPendingMission({
+              title: milestoneText,
+              relatedCategory: suggestion.relatedCategory,
+              missionType: suggestion.missionType,
+            })
+          }
+        />
 
         {/* Founder Progress / Venture History V1 -- "what changed,"
             answered directly: a compact, always-visible summary

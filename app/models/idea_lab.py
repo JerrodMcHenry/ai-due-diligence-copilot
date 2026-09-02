@@ -361,6 +361,22 @@ class VentureHistoryCategoryChange(BaseModel):
     after: float | None = None
 
 
+# Phase 24 -- Weekly Founder Review V1, Part 7 ("What changed" must show
+# real field-level changes -- "Price point $500 -> $299" -- not only
+# category-score deltas). before_assumptions/after_assumptions already
+# exist on every venture_model_updates row (Phase 16); this is the first
+# time either is exposed through the API, as a small, curated,
+# already-changed-only diff -- never the full assumptions blob. See
+# app/api.py::_diff_assumption_changes() for the exact field list and
+# "only if changed" rule, mirroring _diff_category_changes()'s own
+# established pattern.
+class VentureHistoryAssumptionChange(BaseModel):
+    field_path: str
+    label: str
+    before: str
+    after: str
+
+
 class VentureHistoryEvent(BaseModel):
     event_type: VentureHistoryEventType
     occurred_at: datetime
@@ -374,6 +390,9 @@ class VentureHistoryEvent(BaseModel):
     before_vps: float | None = None
     after_vps: float | None = None
     category_changes: list[VentureHistoryCategoryChange] = Field(default_factory=list)
+    # model_updated only -- see VentureHistoryAssumptionChange's own
+    # docstring.
+    assumption_changes: list[VentureHistoryAssumptionChange] = Field(default_factory=list)
     # action_added / learning_recorded / action_completed only -- links
     # this event back to the specific mission it came from. Also set on
     # a model_updated event when it was made through that mission's own
