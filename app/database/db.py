@@ -3282,6 +3282,83 @@ def create_venture_mission(
         return dict(existing)
 
 
+def capture_venture_observation(
+    venture_id: int,
+    user_id: str,
+    title: str,
+    learning_summary: str,
+    related_category: str | None,
+):
+    """
+    Phase 23 -- Universal Founder Capture V1. "Save what happened" is
+    NOT a fourth venture_missions write path -- it is the existing
+    create -> record-learning -> complete sequence
+    (create_venture_mission() -> record_venture_mission_learning_for_owner()
+    -> update_venture_mission_status_for_owner()), collapsed into ONE
+    atomic INSERT because a capture's learning_summary is known at
+    creation time (unlike an ordinary mission, which is created active
+    and reflected on later). This produces the exact same row shape,
+    the exact same three get_venture_history() events (action_added,
+    learning_recorded, action_completed -- see that endpoint's own
+    source-to-event mapping, unchanged by this phase), and is subject to
+    the exact same VPS FIREWALL as every other venture_missions write:
+    nothing here touches modeled_ventures.assumptions or
+    modeled_ventures.model_result, and no caller of this function ever
+    calls compute_vps()/update_modeled_venture_for_user(). A capture has
+    no code path to a score -- only the founder's own explicit,
+    separate PUT /ventures/{id} call (THE VPS FIREWALL, restated in
+    app/api.py::update_venture()'s own comment) can do that.
+
+    mission_type is always 'other' (an observation is not a task in the
+    existing customer_discovery/validation/pricing/gtm/product/founder/
+    economics taxonomy -- see venture_missions' own CHECK constraint;
+    forcing a capture into one of those seven would be a false
+    classification, not a true one) and source is always
+    'founder_created' (both already-valid values; no schema migration
+    needed). related_category is the ALREADY-EXISTING free-text display
+    label column (create_venture_mission()'s own docstring: "a display
+    label... not a foreign key into the scoring engine") -- reused here
+    to hold the founder's chosen capture category (e.g.
+    "customer_conversation"), never validated against VPS_CATEGORIES,
+    exactly as it already isn't for any other mission.
+
+    Deliberately never deduplicated (source_ref stays NULL, same as
+    every other founder_created row) -- two captures with identical text
+    are two real, distinct observations, not a double-click to collapse.
+
+    Ownership is enforced by the caller (app/api.py), exactly like
+    create_venture_mission() -- this function trusts venture_id was
+    already confirmed to belong to user_id.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            INSERT INTO venture_missions (
+                venture_id, created_by_user_id, title, description,
+                mission_type, related_category, source, source_ref,
+                status, learning_summary, learning_recorded_at, completed_at
+            )
+            VALUES (
+                :venture_id, :created_by_user_id, :title, NULL,
+                'other', :related_category, 'founder_created', NULL,
+                'completed', :learning_summary, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
+            )
+            RETURNING
+                id, venture_id, created_by_user_id, title, description,
+                mission_type, related_category, source, source_ref, status,
+                learning_summary, learning_recorded_at, resource_ref,
+                created_at, updated_at, completed_at
+        """), {
+            "venture_id": venture_id,
+            "created_by_user_id": user_id,
+            "title": title,
+            "related_category": related_category,
+            "learning_summary": learning_summary,
+        })
+
+        row = result.mappings().first()
+        return dict(row)
+
+
 def update_venture_mission_status_for_owner(
     user_id: str, venture_id: int, mission_id: int, new_status: str
 ):

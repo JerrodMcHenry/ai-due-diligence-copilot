@@ -57,6 +57,7 @@ from app.database.db import (create_tables,
                          create_venture_mission,
                          update_venture_mission_status_for_owner,
                          record_venture_mission_learning_for_owner,
+                         capture_venture_observation,
                          create_venture_model_updates_table,
                          create_venture_model_update,
                          list_venture_model_updates_for_owner,
@@ -107,7 +108,7 @@ from fastapi import Query
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.sps_v3 import SPSV3Assessment
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange
-from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse
+from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse, CaptureObservationRequest
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -1019,6 +1020,54 @@ def record_mission_learning(
     if mission is None:
         raise HTTPException(status_code=404, detail="Mission not found.")
 
+    return VentureMissionResponse(**mission)
+
+
+# ---------------------------------------------------------------------------
+# Phase 23 -- Universal Founder Capture V1. "Save what happened" -- one
+# atomic write (db.capture_venture_observation()) composing the SAME
+# create/learning/complete venture_missions fields the three endpoints
+# above already write individually. Not a new architecture: the response
+# is the same VentureMissionResponse, the resulting row is indistinguishable
+# from one an ordinary mission flow could have produced, and it shows up
+# in GET /ventures/{id}/history through the exact same, unmodified
+# source-to-event mapping. THE VPS FIREWALL is unchanged: this endpoint
+# never calls compute_vps()/update_modeled_venture_for_user() -- see
+# db.capture_venture_observation()'s own docstring.
+#
+# Title derivation: the founder is only ever asked "What happened?" --
+# never a separate title field (Part 2's own instruction). The stored
+# title is the first line of their own text, trimmed to fit the existing
+# title column's 300-char limit (shared with every other mission title),
+# falling back to a generic label only for the pathological case of a
+# single very long line with no natural break.
+# ---------------------------------------------------------------------------
+
+
+def _derive_capture_title(text_value: str) -> str:
+    first_line = text_value.strip().splitlines()[0].strip()
+    if not first_line:
+        return "What happened"
+    if len(first_line) <= 300:
+        return first_line
+    return first_line[:297].rstrip() + "..."
+
+
+@app.post("/ventures/{venture_id}/capture", response_model=VentureMissionResponse)
+def capture_observation(
+    venture_id: int,
+    request: CaptureObservationRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    mission = capture_venture_observation(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        title=_derive_capture_title(request.text),
+        learning_summary=request.text.strip(),
+        related_category=request.category,
+    )
     return VentureMissionResponse(**mission)
 
 

@@ -16,6 +16,7 @@ import VentureOverview from "@/components/idea-lab/VentureOverview";
 import VentureCard from "@/components/idea-lab/VentureCard";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
+import CaptureWhatHappened from "@/components/idea-lab/CaptureWhatHappened";
 import VentureProgress from "@/components/idea-lab/VentureProgress";
 import Tabs, { TabPanel } from "@/components/ui/Tabs";
 import FundraisingSimulator from "@/components/fundraising/FundraisingSimulator";
@@ -468,6 +469,35 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             changed (same data, same firewall, same component) -- only
             its position on the page and the addition of the
             onRecentLearningChanged callback below. */}
+        {/* Phase 23 -- Universal Founder Capture V1. STATUS -> PRIORITY ->
+            CAPTURE -> ACTION -> LEARNING: sits directly after "what
+            matters now" and before Actions, always visible, never behind
+            Progress or "Edit the full model" -- Part 2's own placement
+            instruction. Reuses the exact same ventureRequestBase shape
+            and onVentureUpdated/refreshHistory wiring MissionsSection
+            already uses below (same VPS firewall, same history refresh
+            signal, no new plumbing pattern). */}
+        <CaptureWhatHappened
+          ventureId={ventureId}
+          currentAssumptions={venture.assumptions}
+          currentModelResult={venture.model_result}
+          ventureRequestBase={{
+            name: name.trim() || "Untitled venture",
+            description,
+            industry,
+            business_model: businessModel,
+            target_customer: targetCustomer,
+            stage,
+          }}
+          onVentureUpdated={(updated) => {
+            setVenture(updated);
+            setDraft(updated.assumptions);
+            setScenario(null);
+            refreshHistory();
+          }}
+          onHistoryChanged={refreshHistory}
+        />
+
         <div id="your-missions">
         <MissionsSection
           ventureId={ventureId}

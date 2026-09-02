@@ -7,6 +7,7 @@ import BaseCard from "@/components/ui/BaseCard";
 import { PILLARS } from "@/components/startup/pillarMeta";
 
 import { createFounderUpdate, editFounderUpdate, getFounderUpdates } from "@/lib/api";
+import { extractCaptureSignals } from "@/lib/captureSignals";
 
 import type { PillarKey } from "@/components/startup/pillarMeta";
 import type {
@@ -338,6 +339,25 @@ function UpdateForm({
           disabled={isSubmitting}
           className="w-full rounded-lg border border-border bg-background px-3 py-2 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 disabled:opacity-60"
         />
+        {/* Phase 23 -- Universal Founder Capture V1, Part 14: the SAME
+            deterministic, zero-AI signal detector the Idea Lab capture
+            surface uses (lib/captureSignals.ts) -- shown here purely as
+            an informational preview, never auto-filling a field. This
+            never becomes SPS evidence and never changes update_type or
+            the metric fields on its own; the founder still types
+            everything themselves. Keeps this track's own "What
+            happened?" moment honestly on par with the venture track's,
+            without touching founder_update's evidence semantics. */}
+        {title.trim() ? (
+          (() => {
+            const signals = extractCaptureSignals(title);
+            return signals.length > 0 ? (
+              <p className="mt-1.5 text-xs text-text-muted">
+                SIE noticed: {signals.map((s) => s.label).join(", ")}
+              </p>
+            ) : null;
+          })()
+        ) : null}
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">

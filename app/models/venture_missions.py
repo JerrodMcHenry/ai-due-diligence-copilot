@@ -65,6 +65,19 @@ class RecordMissionLearningRequest(BaseModel):
     learning_summary: str = Field(min_length=1, max_length=4000)
 
 
+# Phase 23 -- Universal Founder Capture V1. "What happened?" -- the
+# founder's own words are the ONLY required field. `title` is never
+# asked of the founder separately (see app/api.py::capture_observation()
+# for how it's derived); `category` is the same free-text, unvalidated
+# display label venture_missions.related_category already is everywhere
+# else (never a foreign key into VPS_CATEGORIES). This is a request
+# shape, not a new persistence shape -- it maps directly onto
+# db.capture_venture_observation()'s existing venture_missions columns.
+class CaptureObservationRequest(BaseModel):
+    text: str = Field(min_length=1, max_length=4000)
+    category: str | None = Field(default=None, max_length=50)
+
+
 class VentureMissionResponse(BaseModel):
     id: int
     venture_id: int

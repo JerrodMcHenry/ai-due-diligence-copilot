@@ -206,6 +206,16 @@ export default function FounderStartupWorkspaceView({
         <PitchDeckCoachTeaser />
       </div>
 
+      {/* Phase 23 -- Universal Founder Capture V1, Part 14: moved ahead of
+          Actions/Milestones to match the same STATUS -> PRIORITY ->
+          CAPTURE -> ACTION hierarchy the Idea Lab venture workspace now
+          uses (CaptureWhatHappened there, RecentUpdates here) -- "record
+          what happened" should not require scrolling past the action
+          list to find it. RecentUpdates itself is unmodified in
+          persistence/semantics: still founder_update rows, still never
+          touching SPS (see that component's own docstring). */}
+      <RecentUpdates startupId={startup_id} />
+
       {/* Phase 7.3 -- Founder Progress & Improvement V1: rendered even
           when this startup has no canonical analysis yet, since
           founder-created actions don't depend on one (Part 17) -- only
@@ -223,8 +233,6 @@ export default function FounderStartupWorkspaceView({
           create milestones and updates" with no analysis). Neither
           component reads or writes methodology/SPS at all. */}
       <Milestones startupId={startup_id} />
-
-      <RecentUpdates startupId={startup_id} />
 
       {/* Part 15: the single re-analysis nudge at the true end of the
           operating loop (Needs Attention -> Action Plan -> Milestones ->

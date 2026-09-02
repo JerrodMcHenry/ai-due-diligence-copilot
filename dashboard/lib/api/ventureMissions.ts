@@ -50,3 +50,23 @@ export function recordVentureMissionLearning(
     token,
   });
 }
+
+// Phase 23 -- Universal Founder Capture V1. "Save what happened" -- one
+// call, POST /ventures/{id}/capture, which atomically creates + records
+// learning on + completes a venture_missions row server-side (see
+// app/database/db.py::capture_venture_observation()'s own docstring for
+// why this is a composition of the three calls above, not a new
+// architecture). Returns the same VentureMission shape every mission
+// call already returns.
+export function captureVentureObservation(
+  ventureId: number,
+  text: string,
+  category: string | null,
+  token: string
+): Promise<VentureMission> {
+  return apiFetch<VentureMission>(`/ventures/${ventureId}/capture`, {
+    method: "POST",
+    body: { text, category },
+    token,
+  });
+}
