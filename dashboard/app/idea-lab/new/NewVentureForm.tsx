@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
@@ -31,6 +31,16 @@ type Phase = "describe" | "structuring" | "review";
 export default function NewVentureForm() {
   const router = useRouter();
   const { getToken } = useAuth();
+  // Phase 28 -- Product Analytics & Growth Measurement V1, Part 17. Read
+  // ONCE, at mount -- a snapshot's own CTA link
+  // (SnapshotCtaLink.tsx) carries ?ref=snapshot&share={publicId}. Only
+  // "snapshot" is ever trusted downstream (the backend independently
+  // re-validates this exact pairing -- see POST /ventures's own "attributed_source"
+  // logic -- so a malformed/spoofed query string here has no effect
+  // beyond being silently ignored server-side).
+  const searchParams = useSearchParams();
+  const attributionRef = searchParams.get("ref");
+  const attributionShareId = searchParams.get("share");
 
   const [phase, setPhase] = useState<Phase>("describe");
   const [description, setDescription] = useState("");
@@ -121,6 +131,8 @@ export default function NewVentureForm() {
           target_customer: confirmed.basics.targetCustomer,
           stage: confirmed.basics.stage,
           assumptions: confirmed.assumptions,
+          source: attributionRef === "snapshot" ? "snapshot" : undefined,
+          share_public_id: attributionRef === "snapshot" ? attributionShareId : undefined,
         },
         token
       );

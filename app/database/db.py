@@ -4133,3 +4133,482 @@ def add_methodology_column():
 
     except Exception as error:
         print("methodology migration skipped", error)
+
+
+# ---------------------------------------------------------------------------
+# Phase 28 -- Product Analytics & Growth Measurement V1.
+#
+# ONE new, append-only table. No new AI system, no new score, no
+# recommendation change (Part 21). This is behavioral telemetry -- what
+# happened, to which venture, when -- never a second copy of founder
+# content. venture_missions/venture_model_updates (founder-facing product
+# memory) and product_events (aggregate measurement) are deliberately
+# separate, per Part 20's own instruction, even though they're both
+# written from the same underlying founder actions.
+#
+# Investigated first (Part 1): `lib/api/analytics.ts` and the platform-
+# wide `/analytics`, `/top-startups` endpoints are aggregate STARTUP
+# rankings analytics, a completely different concern (confirmed already,
+# repeatedly, since Phase 22). There is no per-founder behavioral event
+# mechanism anywhere in this codebase before this phase.
+#
+# Schema, deliberately close to (not identical to) Part 5's own candidate
+# fields, after determining what's actually necessary:
+#   id              -- surrogate key
+#   event_name      -- one of a small, fixed set (see app/api.py's own
+#                      logging call sites -- there is no generic
+#                      "log any event" path anywhere in this codebase)
+#   user_id         -- nullable: an anonymous public-snapshot view has no
+#                      signed-in user at all
+#   venture_id      -- nullable: not every event is venture-scoped (there
+#                      are none that aren't, currently, but the column
+#                      stays nullable rather than assuming that forever)
+#   share_public_id -- nullable: only distribution events carry this
+#   source          -- nullable: currently used for exactly one thing,
+#                      venture_created's own "organic" vs. "snapshot"
+#                      attribution (Part 17) -- a safe, small enum string,
+#                      never a URL, never a referrer, never a user agent
+#   metadata        -- JSONB, allowlisted per call site (see each
+#                      log_product_event() call in app/api.py), NEVER
+#                      free text -- no Capture/learning/Action text, no
+#                      raw description, no fundraising terms, ever
+#   created_at      -- when the event was recorded
+#
+# No FK constraints to users/modeled_ventures -- deliberately, matching
+# this table's own append-only, best-effort nature (Part 19: analytics
+# must fail open, never block a real founder action; a hard FK failure
+# on an ordinary DELETE /ventures/{id} would be exactly the kind of
+# telemetry-blocks-product failure this phase forbids). Referential
+# integrity for reporting is instead enforced query-side (a report simply
+# excludes/nulls out anything that no longer resolves).
+def create_product_events_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS product_events (
+                id SERIAL PRIMARY KEY,
+                event_name TEXT NOT NULL,
+                user_id TEXT,
+                venture_id INTEGER,
+                share_public_id TEXT,
+                source TEXT,
+                metadata JSONB NOT NULL DEFAULT '{}'::jsonb,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS idx_product_events_name_created
+            ON product_events (event_name, created_at)
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS idx_product_events_venture
+            ON product_events (venture_id)
+        """))
+
+    print("product_events table created successfully.")
+
+
+# Phase 28, Part 2/3. The complete, closed set of event names this
+# codebase will ever insert -- there is no code path anywhere that
+# accepts an arbitrary event_name from a request body (Part 5's own "no
+# arbitrary frontend metadata dumping" instruction extends to the event
+# name itself, not just its metadata). Every one of these is logged from
+# exactly one call site in app/api.py, documented there with the precise
+# state transition that triggers it.
+QUALIFYING_BUILDING_EVENTS = (
+    "action_created",
+    "action_completed",
+    "learning_recorded",
+    "capture_recorded",
+    "venture_model_updated",
+)
+
+_ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
+    "venture_created",
+    "snapshot_enabled",
+    "snapshot_disabled",
+    "snapshot_viewed_publicly",
+    "snapshot_link_copied",
+    "snapshot_cta_clicked",
+}
+
+
+def log_product_event(
+    event_name: str,
+    user_id: str | None = None,
+    venture_id: int | None = None,
+    share_public_id: str | None = None,
+    source: str | None = None,
+    metadata: dict | None = None,
+) -> None:
+    """
+    THE single write path for product_events -- every call site in
+    app/api.py calls this, never a raw INSERT of its own. Deliberately
+    swallows its own failures (Part 19: "analytics should fail open" --
+    a telemetry outage must never block Capture, an Action, a model
+    update, or a share toggle from succeeding). Asserts event_name is one
+    of the fixed set in Python, before ever reaching SQL -- a typo'd
+    event name fails loudly in dev/tests rather than silently polluting
+    the table with an unrecognized string no report will ever look for.
+    """
+    if event_name not in _ALL_EVENT_NAMES:
+        raise ValueError(f"Unrecognized product event name: {event_name!r}")
+
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                INSERT INTO product_events
+                    (event_name, user_id, venture_id, share_public_id, source, metadata)
+                VALUES
+                    (:event_name, :user_id, :venture_id, :share_public_id, :source, :metadata)
+            """), {
+                "event_name": event_name,
+                "user_id": user_id,
+                "venture_id": venture_id,
+                "share_public_id": share_public_id,
+                "source": source,
+                "metadata": json.dumps(metadata or {}),
+            })
+    except Exception as error:
+        # Fail open, always -- see this function's own docstring. Printed,
+        # not raised, so a telemetry outage is visible in logs without
+        # ever surfacing to the founder or aborting their real request.
+        print(f"product_events insert skipped for '{event_name}'", error)
+
+
+# Phase 28, Part 16. The one existing, already-repo-wide convention for
+# marking test-created data: every automated test in app/tests/ that
+# creates a real user row uses a "zztest_" user_id prefix (21 of 45 test
+# files, confirmed by direct grep before writing this). No new
+# environment/marker system was invented -- this reuses that exact,
+# already-established convention. A public/anonymous event (no user_id)
+# is excluded instead by checking whether the venture it's attributed to
+# belongs to a zztest_ user, since a live browser walkthrough against a
+# zztest_-seeded venture (e.g. this phase's own live acceptance testing)
+# would otherwise still pollute aggregate counts.
+_TEST_EXCLUSION_SQL = """
+    (pe.user_id IS NULL OR pe.user_id NOT LIKE 'zztest_%')
+    AND (pe.venture_id IS NULL OR NOT EXISTS (
+        SELECT 1 FROM modeled_ventures v
+        WHERE v.id = pe.venture_id AND v.user_id LIKE 'zztest_%'
+    ))
+"""
+
+
+def _test_exclusion_sql(exclude_test_users: bool) -> str:
+    """`exclude_test_users=False` exists ONLY for this file's own hand-
+    calculated-fixture regression test (Part 24), which necessarily
+    creates its fixture ventures under a zztest_ user (the same cleanup
+    lifecycle every other test in this codebase already relies on) and
+    needs to verify the report arithmetic against exactly those rows,
+    independent of the exclusion filter that's separately, directly
+    tested by test_zztest_users_excluded_from_reports(). Every real call
+    site (the admin endpoint) always uses the default True."""
+    return _TEST_EXCLUSION_SQL if exclude_test_users else "TRUE"
+
+
+def _qualifying_events_sql_list() -> str:
+    return ", ".join(f"'{name}'" for name in QUALIFYING_BUILDING_EVENTS)
+
+
+def get_north_star_report(window_days: int) -> dict:
+    """Weekly/rolling-window Active Building Ventures: distinct ventures
+    with >=1 qualifying event in the trailing `window_days`. Excludes
+    venture_created itself (Part 7's own explicit decision -- creation is
+    activation, not ongoing building)."""
+    with engine.begin() as connection:
+        row = connection.execute(text(f"""
+            SELECT COUNT(DISTINCT pe.venture_id) AS active_ventures
+            FROM product_events pe
+            WHERE pe.event_name IN ({_qualifying_events_sql_list()})
+              AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
+              AND {_TEST_EXCLUSION_SQL}
+        """), {"days": window_days}).mappings().first()
+
+    return {"window_days": window_days, "active_ventures": row["active_ventures"] or 0}
+
+
+def get_meaningful_building_days_report(window_days: int) -> dict:
+    """Part 10's own chosen metric: distinct (venture, calendar day) pairs
+    with >=1 qualifying event, in the window -- never a fabricated
+    "session" count. Reported both as a total and per-active-venture."""
+    with engine.begin() as connection:
+        row = connection.execute(text(f"""
+            SELECT COUNT(DISTINCT (pe.venture_id, DATE(pe.created_at))) AS building_days,
+                   COUNT(DISTINCT pe.venture_id) AS active_ventures
+            FROM product_events pe
+            WHERE pe.event_name IN ({_qualifying_events_sql_list()})
+              AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
+              AND {_TEST_EXCLUSION_SQL}
+        """), {"days": window_days}).mappings().first()
+
+    active = row["active_ventures"] or 0
+    building_days = row["building_days"] or 0
+    return {
+        "window_days": window_days,
+        "meaningful_building_days": building_days,
+        "active_ventures": active,
+        "building_days_per_active_venture": round(building_days / active, 2) if active else None,
+    }
+
+
+def get_engagement_counts_report(window_days: int) -> dict:
+    """Captures / Active Venture and Actions Completed / Active Venture --
+    Part 11's own two named engagement ratios. Denominator is the SAME
+    active-venture count get_north_star_report() already computes, not a
+    second, possibly-inconsistent definition of "active"."""
+    with engine.begin() as connection:
+        counts = connection.execute(text(f"""
+            SELECT
+                COUNT(*) FILTER (WHERE pe.event_name = 'capture_recorded') AS captures,
+                COUNT(*) FILTER (WHERE pe.event_name = 'action_completed') AS actions_completed,
+                COUNT(DISTINCT pe.venture_id) AS active_ventures
+            FROM product_events pe
+            WHERE pe.event_name IN ({_qualifying_events_sql_list()})
+              AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
+              AND {_TEST_EXCLUSION_SQL}
+        """), {"days": window_days}).mappings().first()
+
+    active = counts["active_ventures"] or 0
+    return {
+        "window_days": window_days,
+        "captures": counts["captures"] or 0,
+        "actions_completed": counts["actions_completed"] or 0,
+        "active_ventures": active,
+        "captures_per_active_venture": round((counts["captures"] or 0) / active, 2) if active else None,
+        "actions_completed_per_active_venture": round((counts["actions_completed"] or 0) / active, 2) if active else None,
+    }
+
+
+def get_activation_report(window_days: int, exclude_test_users: bool = True, venture_ids: list[int] | None = None) -> dict:
+    """
+    Part 8's own investigation, resolved: "venture_created + an
+    immediately-populated recommendation" was rejected as too weak --
+    compute_vps() always returns SOME model_result synchronously at
+    creation, so virtually every venture would "activate" by that
+    definition regardless of whether the founder ever did anything real.
+
+    ACTIVATION, as implemented: a venture counts as activated if it
+    performed >=1 qualifying building event (the same set the North Star
+    uses) within 24 hours of its own venture_created event. This is
+    venture-level (not session-level -- no session infrastructure exists
+    anywhere in this codebase), anchored on a real, already-logged
+    timestamp pair, and requires genuine founder-initiated follow-through,
+    not just seeing a recommendation SIE computed automatically.
+    """
+    exclusion = _test_exclusion_sql(exclude_test_users)
+    # venture_ids: None in every real call site (the admin endpoint never
+    # passes it) -- exists solely so this file's own hand-calculated-
+    # fixture test can scope a report to exactly its own fixture
+    # ventures, isolated from whatever other real/test data happens to
+    # already be in this shared dev database.
+    scope = "AND pe.venture_id = ANY(:venture_ids)" if venture_ids else ""
+    with engine.begin() as connection:
+        row = connection.execute(text(f"""
+            WITH created AS (
+                SELECT pe.venture_id, pe.created_at
+                FROM product_events pe
+                WHERE pe.event_name = 'venture_created'
+                  AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
+                  AND {exclusion}
+                  {scope}
+            )
+            SELECT
+                COUNT(*) AS total_created,
+                COUNT(*) FILTER (
+                    WHERE EXISTS (
+                        SELECT 1 FROM product_events q
+                        WHERE q.venture_id = created.venture_id
+                          AND q.event_name IN ({_qualifying_events_sql_list()})
+                          AND q.created_at > created.created_at
+                          AND q.created_at <= created.created_at + INTERVAL '24 hours'
+                    )
+                ) AS activated_count
+            FROM created
+        """), {"days": window_days, "venture_ids": venture_ids}).mappings().first()
+
+    total = row["total_created"] or 0
+    activated = row["activated_count"] or 0
+    return {
+        "window_days": window_days,
+        "ventures_created": total,
+        "activated": activated,
+        "activation_rate": round(activated / total, 4) if total else None,
+    }
+
+
+def get_retention_report(lookback_days: int = 60, exclude_test_users: bool = True, venture_ids: list[int] | None = None) -> dict:
+    """
+    Part 9. Venture-level (explicitly labeled as such -- a single founder
+    can own multiple ventures, and every other Phase 22-27 metric already
+    treats a venture, not a founder, as the unit of analysis). Cohorted
+    on venture_created (not a separate "activation timestamp" row -- a
+    deliberate V1 simplification, documented in
+    docs/product/PRODUCT_ANALYTICS_V1.md, that keeps this one query
+    readable instead of introducing a second cohort-anchor concept).
+
+    W1 = among ventures that (a) were created between 14 and `lookback_days`
+    ago (so their day 7-13 window has actually elapsed) and (b) activated
+    (per get_activation_report()'s own definition), what fraction
+    performed >=1 qualifying event during days 7-13 after creation.
+
+    D1/D7/D30 are simpler point checks: of the SAME activated cohort,
+    what fraction had >=1 qualifying event at all within 1/7/30 days of
+    creation (cumulative, not "on exactly that day").
+    """
+    qualifying = _qualifying_events_sql_list()
+    exclusion = _test_exclusion_sql(exclude_test_users)
+    scope = "AND pe.venture_id = ANY(:venture_ids)" if venture_ids else ""
+    with engine.begin() as connection:
+        row = connection.execute(text(f"""
+            WITH cohort AS (
+                SELECT pe.venture_id, pe.created_at
+                FROM product_events pe
+                WHERE pe.event_name = 'venture_created'
+                  AND pe.created_at <= NOW() - INTERVAL '13 days'
+                  AND pe.created_at >= NOW() - INTERVAL '1 day' * :lookback
+                  AND {exclusion}
+                  {scope}
+            ),
+            activated AS (
+                SELECT cohort.venture_id, cohort.created_at
+                FROM cohort
+                WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = cohort.venture_id
+                      AND q.event_name IN ({qualifying})
+                      AND q.created_at > cohort.created_at
+                      AND q.created_at <= cohort.created_at + INTERVAL '24 hours'
+                )
+            )
+            SELECT
+                COUNT(*) AS activated_total,
+                COUNT(*) FILTER (WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = activated.venture_id
+                      AND q.event_name IN ({qualifying})
+                      AND q.created_at >= activated.created_at + INTERVAL '7 days'
+                      AND q.created_at < activated.created_at + INTERVAL '14 days'
+                )) AS retained_w1,
+                COUNT(*) FILTER (WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = activated.venture_id
+                      AND q.event_name IN ({qualifying})
+                      AND q.created_at <= activated.created_at + INTERVAL '1 day'
+                )) AS active_d1,
+                COUNT(*) FILTER (WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = activated.venture_id
+                      AND q.event_name IN ({qualifying})
+                      AND q.created_at <= activated.created_at + INTERVAL '7 days'
+                )) AS active_d7,
+                COUNT(*) FILTER (WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = activated.venture_id
+                      AND q.event_name IN ({qualifying})
+                      AND q.created_at <= activated.created_at + INTERVAL '30 days'
+                )) AS active_d30
+            FROM activated
+        """), {"lookback": lookback_days, "venture_ids": venture_ids}).mappings().first()
+
+    total = row["activated_total"] or 0
+
+    def _rate(count):
+        return round(count / total, 4) if total else None
+
+    return {
+        "lookback_days": lookback_days,
+        "cohort_unit": "venture",
+        "activated_cohort_size": total,
+        "w1_retention": _rate(row["retained_w1"] or 0),
+        "d1_retention": _rate(row["active_d1"] or 0),
+        "d7_retention": _rate(row["active_d7"] or 0),
+        "d30_retention": _rate(row["active_d30"] or 0),
+    }
+
+
+def get_distribution_report(window_days: int, exclude_test_users: bool = True, venture_ids: list[int] | None = None) -> dict:
+    """Part 11's distribution metrics, plus Part 12's funnel bottom two
+    stages. share_activation_rate's denominator is ventures that reached
+    'activated' status in the window (Part 25's own worked examples pair
+    share activation against retained/activated ventures, not all-time
+    venture count) -- ventures that never really got going are not a fair
+    denominator for "did the founder choose to share.\""""
+    exclusion = _test_exclusion_sql(exclude_test_users)
+    scope = "AND pe.venture_id = ANY(:venture_ids)" if venture_ids else ""
+    with engine.begin() as connection:
+        activation = connection.execute(text(f"""
+            WITH created AS (
+                SELECT pe.venture_id, pe.created_at
+                FROM product_events pe
+                WHERE pe.event_name = 'venture_created'
+                  AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
+                  AND {exclusion}
+                  {scope}
+            ),
+            activated AS (
+                SELECT created.venture_id FROM created
+                WHERE EXISTS (
+                    SELECT 1 FROM product_events q
+                    WHERE q.venture_id = created.venture_id
+                      AND q.event_name IN ({_qualifying_events_sql_list()})
+                      AND q.created_at > created.created_at
+                      AND q.created_at <= created.created_at + INTERVAL '24 hours'
+                )
+            )
+            SELECT
+                (SELECT COUNT(*) FROM activated) AS activated_total,
+                (SELECT COUNT(DISTINCT pe.venture_id) FROM product_events pe
+                    WHERE pe.event_name = 'snapshot_enabled'
+                      AND pe.venture_id IN (SELECT venture_id FROM activated)
+                      AND {exclusion}
+                ) AS shared_among_activated
+        """), {"days": window_days, "venture_ids": venture_ids}).mappings().first()
+
+        counts = connection.execute(text(f"""
+            SELECT
+                COUNT(*) FILTER (WHERE pe.event_name = 'snapshot_enabled') AS snapshots_enabled,
+                COUNT(*) FILTER (WHERE pe.event_name = 'snapshot_link_copied') AS links_copied,
+                COUNT(*) FILTER (WHERE pe.event_name = 'snapshot_viewed_publicly') AS public_views,
+                COUNT(*) FILTER (WHERE pe.event_name = 'snapshot_cta_clicked') AS cta_clicks,
+                COUNT(*) FILTER (WHERE pe.event_name = 'venture_created' AND pe.source = 'snapshot') AS ventures_created_from_snapshot
+            FROM product_events pe
+            WHERE pe.created_at >= NOW() - INTERVAL '1 day' * :days
+              AND {exclusion}
+              {scope}
+        """), {"days": window_days, "venture_ids": venture_ids}).mappings().first()
+
+    activated_total = activation["activated_total"] or 0
+    shared = activation["shared_among_activated"] or 0
+    public_views = counts["public_views"] or 0
+    cta_clicks = counts["cta_clicks"] or 0
+    created_from_snapshot = counts["ventures_created_from_snapshot"] or 0
+
+    return {
+        "window_days": window_days,
+        "activated_ventures": activated_total,
+        "snapshots_enabled": counts["snapshots_enabled"] or 0,
+        "share_activation_rate": round(shared / activated_total, 4) if activated_total else None,
+        "snapshot_links_copied": counts["links_copied"] or 0,
+        "public_snapshot_views": public_views,
+        "snapshot_cta_clicks": cta_clicks,
+        "snapshot_cta_click_rate": round(cta_clicks / public_views, 4) if public_views else None,
+        "ventures_created_from_snapshot": created_from_snapshot,
+        "snapshot_to_venture_creation_rate": round(created_from_snapshot / public_views, 4) if public_views else None,
+    }
+
+
+def get_full_analytics_report(window_days: int) -> dict:
+    """The one function the admin reporting endpoint calls -- assembles
+    every report above for a single window, plus the fixed 60-day
+    retention lookback (Part 14: 7-day and 30-day windows are both
+    supported by passing window_days; retention always looks back far
+    enough to have at least one fully-elapsed W1 cohort regardless of
+    which window_days the caller asked for)."""
+    return {
+        "north_star": get_north_star_report(window_days),
+        "activation": get_activation_report(window_days),
+        "retention": get_retention_report(),
+        "meaningful_building_days": get_meaningful_building_days_report(window_days),
+        "engagement": get_engagement_counts_report(window_days),
+        "distribution": get_distribution_report(window_days),
+    }

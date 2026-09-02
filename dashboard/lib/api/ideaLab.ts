@@ -107,6 +107,26 @@ export function getPublicVentureSnapshot(publicId: string): Promise<VentureSnaps
   return apiFetch<VentureSnapshotResponse>(`/ventures/share/${publicId}`);
 }
 
+// Phase 28 -- Product Analytics & Growth Measurement V1. Two narrow,
+// purpose-built client-event calls (Part 4's own explicit exception to
+// "prefer server-side" for events a backend transaction genuinely can't
+// see). Both take no body -- the event name and every field are decided
+// server-side from the URL path alone (see the matching endpoints' own
+// docstrings in app/api.py).
+export function logSnapshotLinkCopied(ventureId: number, token: string): Promise<{ logged: boolean }> {
+  return apiFetch<{ logged: boolean }>(`/ventures/${ventureId}/share/link-copied`, {
+    method: "POST",
+    token,
+  });
+}
+
+// Public, no token -- callable from an anonymous recipient's browser.
+export function logSnapshotCtaClicked(publicId: string): Promise<{ logged: boolean }> {
+  return apiFetch<{ logged: boolean }>(`/ventures/share/${publicId}/cta-clicked`, {
+    method: "POST",
+  });
+}
+
 export function compareVentureScenarios(
   currentAssumptions: VentureAssumptions,
   modifiedAssumptions: VentureAssumptions,

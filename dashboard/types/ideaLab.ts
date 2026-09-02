@@ -196,6 +196,14 @@ export interface CreateVentureRequest {
   // shape) -- see MissionsSection.tsx's own handleUpdateModel() for the
   // one call site that sets it. Ignored by the backend on create.
   related_mission_id?: number | null;
+  // Phase 28 -- Product Analytics & Growth Measurement V1, Part 17.
+  // ANALYTICS-ONLY attribution -- never persisted onto the venture
+  // itself, read once by the backend purely to tag the venture_created
+  // event it logs. Only NewVentureForm.tsx sets these (from the
+  // ?ref=snapshot&share={publicId} query params a snapshot's CTA link
+  // carries); every other caller omits them.
+  source?: string | null;
+  share_public_id?: string | null;
 }
 
 export interface ScenarioCompareResponse {

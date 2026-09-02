@@ -143,6 +143,18 @@ class CreateVentureRequest(BaseModel):
     target_customer: str | None = Field(default=None, max_length=500)
     stage: str | None = Field(default=None, max_length=50)  # Idea | Researching | Validating | Building | Launched
     assumptions: VentureAssumptions = Field(default_factory=VentureAssumptions)
+    # Phase 28 -- Product Analytics & Growth Measurement V1, Part 17.
+    # ANALYTICS-ONLY attribution, never persisted onto the venture row
+    # itself (modeled_ventures gains no new column here) -- read once by
+    # POST /ventures purely to tag the venture_created product_events row
+    # it logs. `source` is a closed, tiny, safe enum (never a URL,
+    # referrer, or user agent); `share_public_id` is the SAME opaque id
+    # already visible in the /v/{publicId} link a recipient was looking
+    # at -- forwarding it one hop for attribution is not new information
+    # leakage (Part 17: "do not build cross-site tracking, do not
+    # fingerprint").
+    source: str | None = Field(default=None, max_length=50)
+    share_public_id: str | None = Field(default=None, max_length=100)
 
 
 class UpdateVentureRequest(BaseModel):

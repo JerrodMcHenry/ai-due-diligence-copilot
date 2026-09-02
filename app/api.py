@@ -55,6 +55,9 @@ from app.database.db import (create_tables,
                          get_venture_share_settings_for_owner,
                          update_venture_share_settings_for_owner,
                          get_venture_by_share_public_id,
+                         create_product_events_table,
+                         log_product_event,
+                         get_full_analytics_report,
                          create_venture_missions_table,
                          add_pitch_deck_coach_mission_source,
                          list_venture_missions_for_owner,
@@ -203,6 +206,13 @@ create_modeled_ventures_table()
 # table just created above -- must run after it, same reasoning as every
 # other add_*_columns() call in this file.
 add_venture_share_columns()
+
+# Phase 28 -- Product Analytics & Growth Measurement V1. No FK to
+# modeled_ventures/users (see create_product_events_table()'s own
+# docstring), so ordering relative to those tables' own migrations
+# doesn't strictly matter -- placed here for narrative proximity to the
+# venture-track tables whose events it mostly logs.
+create_product_events_table()
 
 # Phase 10.7 -- Founder Missions V1. venture_missions FKs to
 # modeled_ventures(id), which must already exist by this point (same
@@ -791,6 +801,24 @@ def create_venture(
         )
 
     venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
+
+    # Phase 28 -- Product Analytics & Growth Measurement V1. THE one
+    # server-side attribution decision point: `source` is only ever
+    # trusted as "snapshot" (never any other client-supplied string) and
+    # only when a real share_public_id accompanies it -- everything else
+    # collapses to organic (None), regardless of what the request claims.
+    # This is deliberately conservative: a client cannot fabricate a
+    # "snapshot" attribution without also naming a real, resolvable
+    # public_id a real recipient would have actually seen.
+    attributed_source = "snapshot" if (request.source == "snapshot" and request.share_public_id) else None
+    _log_event_safe(
+        "venture_created",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        share_public_id=request.share_public_id if attributed_source else None,
+        source=attributed_source,
+    )
+
     return VentureResponse(**venture)
 
 
@@ -880,6 +908,33 @@ def update_venture(
             before_assumptions=previous.get("assumptions") or {},
             after_assumptions=assumptions_dict,
             related_mission_id=request.related_mission_id,
+        )
+        # Phase 28, Part 3/4: fires in the EXACT SAME branch that just
+        # decided a real venture_model_updates history row is warranted --
+        # never a second, possibly-inconsistent definition of "the model
+        # actually changed." This is also why a pure rename (Phase 26,
+        # Part 15) never fires this event: a rename sends identical
+        # assumptions, so this whole branch (history AND analytics) is
+        # skipped, for the same reason. Covers Simulate-Apply and the
+        # manual assumption editor identically -- both reach this exact
+        # code path through the same PUT, and this phase deliberately
+        # does not distinguish them (see the doc's own "events rejected/
+        # deferred" section).
+        before_vps = (previous.get("model_result") or {}).get("vps")
+        after_vps = (model_result or {}).get("vps")
+        if before_vps is None or after_vps is None:
+            vps_delta_bucket = "unknown"
+        elif after_vps > before_vps + 0.05:
+            vps_delta_bucket = "increased"
+        elif after_vps < before_vps - 0.05:
+            vps_delta_bucket = "decreased"
+        else:
+            vps_delta_bucket = "unchanged"
+        _log_event_safe(
+            "venture_model_updated",
+            user_id=current_user.user_id,
+            venture_id=venture_id,
+            metadata={"vps_delta_bucket": vps_delta_bucket},
         )
 
     venture = get_modeled_venture_for_user(current_user.user_id, venture_id)
@@ -1033,6 +1088,15 @@ def update_venture_share(
     request: UpdateVentureShareRequest,
     current_user: AuthenticatedUser = RequireAuth,
 ):
+    # Phase 28, Part 3/18: read BEFORE writing, same pattern
+    # venture_model_updated's own before/after comparison above already
+    # uses -- this is what lets the event fire ONLY on a genuine
+    # private->public (or public->private) TRANSITION, never on a
+    # double-submit of the same state (Part 18's own explicit "enable
+    # sharing button double-submit... should not create duplicate
+    # logical activation events").
+    previous = get_venture_share_settings_for_owner(current_user.user_id, venture_id)
+
     updated = update_venture_share_settings_for_owner(
         user_id=current_user.user_id,
         venture_id=venture_id,
@@ -1043,6 +1107,23 @@ def update_venture_share(
 
     if updated is None:
         raise HTTPException(status_code=404, detail="Venture not found.")
+
+    was_enabled = bool(previous and previous["share_enabled"])
+    is_enabled = bool(updated["share_enabled"])
+    if is_enabled and not was_enabled:
+        _log_event_safe(
+            "snapshot_enabled",
+            user_id=current_user.user_id,
+            venture_id=venture_id,
+            share_public_id=updated["share_public_id"],
+        )
+    elif was_enabled and not is_enabled:
+        _log_event_safe(
+            "snapshot_disabled",
+            user_id=current_user.user_id,
+            venture_id=venture_id,
+            share_public_id=updated["share_public_id"],
+        )
 
     return VentureShareSettings(
         enabled=updated["share_enabled"],
@@ -1067,11 +1148,69 @@ def get_public_venture_snapshot(public_id: str):
     if venture is None:
         raise HTTPException(status_code=404, detail="This venture snapshot is not available.")
 
+    # Phase 28, Part 3/4: fires only on a REAL, successfully-resolved
+    # public view -- a 404 (disabled/unknown id) logs nothing at all, so
+    # "Public Snapshot Views" can never be inflated by scraping/guessing
+    # attempts. No user_id (this visitor is anonymous, by design -- Part
+    # 6: "do not fingerprint users"); venture_id + share_public_id are
+    # enough to attribute the view to the right venture for reporting
+    # without tracking who the visitor is.
+    _log_event_safe("snapshot_viewed_publicly", venture_id=venture["id"], share_public_id=public_id)
+
     return _build_venture_snapshot(
         venture,
         show_vps=bool(venture["share_show_vps"]),
         show_validation=bool(venture["share_show_validation"]),
     )
+
+
+# Phase 28, Part 4/5. Two narrow, purpose-built endpoints -- deliberately
+# NOT one generic "log any client event" endpoint (that would be exactly
+# the "arbitrary event explorer" the directive forbids, and a real abuse
+# surface on the public one). Each accepts an EMPTY body: the event name
+# and every field are decided entirely server-side from the URL path and
+# auth context, never from anything the client sends.
+@app.post("/ventures/{venture_id}/share/link-copied")
+def log_snapshot_link_copied(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    _log_event_safe("snapshot_link_copied", user_id=current_user.user_id, venture_id=venture_id)
+    return {"logged": True}
+
+
+@app.post("/ventures/share/{public_id}/cta-clicked")
+def log_snapshot_cta_clicked(public_id: str):
+    """
+    Public, unauthenticated -- the recipient clicking "Model your own
+    venture" has no Clerk session. Validated against a REAL, currently-
+    enabled snapshot before logging (the same lookup the public view
+    itself uses) so this can't be used to write arbitrary garbage rows
+    for nonexistent ids; beyond that one check, no rate-limiting/abuse
+    infrastructure was built (out of this phase's explicit scope).
+    """
+    venture = get_venture_by_share_public_id(public_id)
+    if venture is not None:
+        _log_event_safe("snapshot_cta_clicked", venture_id=venture["id"], share_public_id=public_id)
+    return {"logged": venture is not None}
+
+
+@app.get("/admin/analytics")
+def get_admin_analytics_report(
+    window_days: int = 7,
+    current_user: AuthenticatedUser = RequireAdmin,
+):
+    """
+    Phase 28, Part 13. The smallest safe internal reporting surface --
+    reuses the EXACT SAME RequireAdmin dependency this codebase already
+    uses for claim-approval endpoints (app/auth.py, Phase 7.1A). No new
+    RBAC/role system, no new admin table, no admin flag anywhere on
+    `users`. window_days is clamped to a sane range so this can't be
+    abused into an unbounded full-table scan.
+    """
+    clamped_window = max(1, min(window_days, 365))
+    return get_full_analytics_report(clamped_window)
 
 
 @app.post("/ventures/scenario-compare", response_model=ScenarioCompareResponse)
@@ -1131,6 +1270,22 @@ def _require_owned_venture(current_user: AuthenticatedUser, venture_id: int):
     return venture
 
 
+# Phase 28, Part 19: BELT AND SUSPENDERS. log_product_event() already
+# catches its own INSERT failures internally (see its own docstring in
+# app/database/db.py) -- this wraps every call site here too, so that
+# even a failure mode INSIDE this codebase's own analytics layer (a
+# raised ValueError from an unrecognized event name, an unexpected
+# exception before the INSERT is even attempted) can never propagate
+# into a 500 response for a real founder action. Every one of the 9 call
+# sites in this file goes through this wrapper, never log_product_event()
+# directly.
+def _log_event_safe(event_name: str, **kwargs) -> None:
+    try:
+        log_product_event(event_name, **kwargs)
+    except Exception as error:
+        print(f"product event logging failed for '{event_name}' (call-site guard)", error)
+
+
 @app.get("/ventures/{venture_id}/missions", response_model=list[VentureMissionResponse])
 def list_venture_missions(
     venture_id: int,
@@ -1160,6 +1315,17 @@ def create_mission(
         source=request.source,
         resource_ref=request.resource_ref,
     )
+    # Phase 28, Part 3: fires only after a real mission row is persisted --
+    # never on the founder merely opening "Create your own action" or a
+    # NextMoves suggestion rendering. `mission_source` mirrors this
+    # mission's own already-safe, closed `source` enum (vps_guidance /
+    # founder_created / pitch_deck_coach) -- never its title/description.
+    _log_event_safe(
+        "action_created",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"mission_source": mission["source"]},
+    )
     return VentureMissionResponse(**mission)
 
 
@@ -1182,6 +1348,16 @@ def update_mission_status(
     if mission is None:
         raise HTTPException(status_code=404, detail="Mission not found.")
 
+    # Phase 28, Part 3/18: fires ONLY on the "completed" transition, never
+    # "dismissed" -- a real, deliberate building outcome. The UI's own
+    # existing flow hides the complete affordance once a mission is
+    # already completed (no redundant call in normal use), so this
+    # doesn't re-check prior status server-side (Part 18: "do not
+    # overengineer global event deduplication -- handle obvious cases at
+    # event-source level").
+    if request.status == "completed":
+        _log_event_safe("action_completed", user_id=current_user.user_id, venture_id=venture_id)
+
     return VentureMissionResponse(**mission)
 
 
@@ -1203,6 +1379,15 @@ def record_mission_learning(
 
     if mission is None:
         raise HTTPException(status_code=404, detail="Mission not found.")
+
+    # Phase 28, Part 2: a genuine, distinct building behavior -- an
+    # ORDINARY mission's own reflection step, never fired for a capture
+    # (captures never call this endpoint at all; see
+    # capture_venture_observation()'s own atomic-INSERT design, which
+    # sets learning_recorded_at directly without going through this code
+    # path -- so this event and capture_recorded can never double-fire
+    # for the same real founder action).
+    _log_event_safe("learning_recorded", user_id=current_user.user_id, venture_id=venture_id)
 
     return VentureMissionResponse(**mission)
 
@@ -1251,6 +1436,20 @@ def capture_observation(
         title=_derive_capture_title(request.text),
         learning_summary=request.text.strip(),
         related_category=request.category,
+    )
+    # Phase 28, Part 2/6: `category` is the founder's own pre-existing
+    # optional chip selection (customer_conversation / product / etc.) --
+    # already a closed, safe enum on CaptureObservationRequest, never the
+    # captured text itself. Signal-count/outcome-class classification
+    # (captureSignals.ts) is frontend-only and runs AFTER this call
+    # succeeds -- deliberately not duplicated server-side just to enrich
+    # this event's metadata (see docs/product/PRODUCT_ANALYTICS_V1.md's
+    # own "events rejected/deferred" section for the full reasoning).
+    _log_event_safe(
+        "capture_recorded",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"category": request.category},
     )
     return VentureMissionResponse(**mission)
 

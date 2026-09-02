@@ -7,7 +7,7 @@ import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 import VentureSnapshotCard from "./VentureSnapshotCard";
 
-import { getVentureShare, getVentureSharePreview, updateVentureShare } from "@/lib/api";
+import { getVentureShare, getVentureSharePreview, logSnapshotLinkCopied, updateVentureShare } from "@/lib/api";
 import type { VentureShareSettings, VentureSnapshotResponse } from "@/types";
 
 // Phase 27 -- Shareable Venture Snapshot V1, Part 5/13/16/17. Supersedes
@@ -102,6 +102,17 @@ export default function ShareVentureSnapshot({ ventureId }: { ventureId: number 
       await navigator.clipboard.writeText(url);
       setCopyStatus("copied");
       setTimeout(() => setCopyStatus("idle"), 2000);
+      // Phase 28, Part 3/4: fires only after the copy genuinely
+      // succeeded -- never on the button render, never on a failed
+      // clipboard write. Best-effort: a logging failure here must never
+      // surface to the founder as a copy failure (the copy itself
+      // already succeeded by this point).
+      try {
+        const token = await getToken();
+        if (token) await logSnapshotLinkCopied(ventureId, token);
+      } catch (logErr) {
+        console.error("Failed to log link-copied event:", logErr);
+      }
     } catch (err) {
       console.error("Failed to copy link:", err);
       setError("Couldn't copy the link. Select and copy it manually.");

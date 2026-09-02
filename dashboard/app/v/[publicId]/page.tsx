@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 
 import BaseCard from "@/components/ui/BaseCard";
 import VentureSnapshotCard from "@/components/idea-lab/VentureSnapshotCard";
+import SnapshotCtaLink from "@/components/idea-lab/SnapshotCtaLink";
 
 import { getPublicVentureSnapshot } from "@/lib/api";
 import type { VentureSnapshotResponse } from "@/types";
@@ -72,12 +73,7 @@ export default async function VentureSnapshotPage({ params }: Props) {
       <VentureSnapshotCard snapshot={snapshot} />
 
       <div className="mx-auto max-w-xl text-center">
-        <Link
-          href="/idea-lab/new"
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-surface px-4 py-2.5 text-sm font-semibold text-text-primary transition-colors hover:border-primary"
-        >
-          Model your own venture →
-        </Link>
+        <SnapshotCtaLink publicId={publicId} />
       </div>
     </div>
   );
