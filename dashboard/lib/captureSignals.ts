@@ -31,6 +31,7 @@
 export type CaptureFieldPath =
   | "validation.customer_interviews"
   | "validation.paying_customers"
+  | "validation.retention_pct"
   | "economics.price_point";
 
 export interface ProposedSignal {
@@ -50,6 +51,21 @@ export interface ProposedSignal {
   // callers can choose non-punitive copy/emphasis, never to hide or
   // downweight the signal itself.
   readonly polarity: "positive" | "negative" | "neutral";
+  // Phase 26 -- Retention Loop Closure, Part 3 (Capture Outcome Classes).
+  // Present ONLY on informational-only signals (fieldPath is absent) that
+  // describe something worth a founder looking into, not just knowing --
+  // e.g. an unquantified churn mention or a product-friction complaint.
+  // Absent (never true) on field-mapped signals, since those already have
+  // a stronger outcome (an "Update my model" proposal) -- Part 6's "avoid
+  // CTA explosion" means a signal never carries both an update-model AND
+  // a make-this-an-action affordance. Absent on informational signals that
+  // are real but don't call for investigation (a shipped milestone, a
+  // mentioned competitor) -- those stay Class C, learning-only.
+  readonly actionRelevant?: boolean;
+  // A short, honest, deterministic action title -- present only when
+  // actionRelevant is true. Never AI-generated; a fixed string per
+  // pattern, exactly like every other label in this module.
+  readonly suggestedActionTitle?: string;
 }
 
 const NUMBER_WORDS: Record<string, number> = {
@@ -172,26 +188,127 @@ function extractNewCustomerSignal(text: string): ProposedSignal[] {
   }];
 }
 
+// Signal 4 -- Phase 26, Part 5 (root-cause fix for the churn dead-end).
+// A COUNTABLE churn mention -- "Three customers churned this month.",
+// "2 customers cancelled" -- requires BOTH a number AND a churn verb in
+// proximity, the identical discipline extractInterviewSignals already
+// applies, so a bare "the customer churned" (no count) never matches
+// here and instead falls through to the informational, unquantified
+// churn signal below. A countable churn is exactly as safe to propose as
+// the existing "new paying customer" +1 -- both are a delta on the same
+// real, already-canonical validation.paying_customers field; this is
+// just the negative direction of that same mechanic, not a new field.
+const CHURN_COUNT_PATTERN = /\b(\w+)\s+(?:customers?|users?|clients?)\s+(?:churned|cancel(?:l?ed)?|left)\b/gi;
+
+function extractChurnCountSignals(text: string): ProposedSignal[] {
+  const signals: ProposedSignal[] = [];
+  let match: RegExpExecArray | null;
+  let index = 0;
+  CHURN_COUNT_PATTERN.lastIndex = 0;
+  while ((match = CHURN_COUNT_PATTERN.exec(text)) !== null) {
+    const count = parseCount(match[1]);
+    if (count === null) continue;
+    signals.push({
+      id: makeId("churn-count", index++),
+      label: `${count} customer${count === 1 ? "" : "s"} churned`,
+      sourceQuote: match[0].trim(),
+      fieldPath: "validation.paying_customers",
+      proposedValue: -count, // a negative delta -- current + (-count), same mechanic as the +1 new-customer signal above
+      polarity: "negative",
+    });
+  }
+  return signals;
+}
+
+// Signal 5 -- Phase 26, Part 5. An explicit retention percentage --
+// "Retention dropped to 82%.", "Retention is at 91%" -- validation.
+// retention_pct is a real, already-scored VentureAssumptions field (see
+// app/api.py::_ASSUMPTION_DIFF_FIELDS and the Retention field already on
+// the venture-creation review screen); this module simply never proposed
+// a value for it before. Like price_point, this is a REPLACEMENT
+// (an observed rate), never a delta.
+const RETENTION_PATTERN = /\bretention\b[^.!?%]{0,30}?(\d{1,3})\s?%/i;
+const NEGATIVE_TREND_NEARBY = /\b(?:dropped|fell|falling|declined|declining|down|worsened|slipped)\b/i;
+const POSITIVE_TREND_NEARBY = /\b(?:rose|rising|improved|improving|increased|increasing|up|grew|climbed)\b/i;
+
+function extractRetentionSignal(text: string): ProposedSignal[] {
+  const match = RETENTION_PATTERN.exec(text);
+  if (!match) return [];
+  const pct = Number(match[1]);
+  if (!Number.isFinite(pct) || pct < 0 || pct > 100) return [];
+
+  const windowStart = Math.max(0, match.index - 20);
+  const surrounding = text.slice(windowStart, match.index + match[0].length);
+  const polarity: ProposedSignal["polarity"] = NEGATIVE_TREND_NEARBY.test(surrounding)
+    ? "negative"
+    : POSITIVE_TREND_NEARBY.test(surrounding)
+      ? "positive"
+      : "neutral";
+
+  return [{
+    id: "retention-0",
+    label: `Retention at ${pct}%`,
+    sourceQuote: match[0].trim(),
+    fieldPath: "validation.retention_pct",
+    proposedValue: pct,
+    polarity,
+  }];
+}
+
 // Informational-only signals: real, worth showing, but with no safe
 // single-field mapping onto VentureAssumptions (Part 5: "do NOT pretend
 // every note can be structured"). Each entry is [pattern, label,
-// polarity].
+// polarity, actionRelevant?, suggestedActionTitle?].
+//
+// Phase 26, Part 3/5: actionRelevant marks the signals that name
+// something worth a founder investigating, not just recording -- churn
+// (unquantified -- a countable churn is handled above as a MODEL-RELEVANT
+// delta instead) and product/customer friction. A shipped milestone, a
+// mentioned competitor, a fundraising mention, and a confirmed problem
+// are real but don't call for an action of their own; they stay
+// Class C (learning-only).
 const INFORMATIONAL_PATTERNS: ReadonlyArray<{
   pattern: RegExp;
   label: string;
   polarity: ProposedSignal["polarity"];
+  actionRelevant?: boolean;
+  suggestedActionTitle?: string;
 }> = [
-  { pattern: /\bchurned\b|\bcancel(?:l?ed)?\b|\blost the customer\b/i, label: "Customer churn mentioned", polarity: "negative" },
+  {
+    pattern: /\bchurned\b|\bcancel(?:l?ed)?\b|\blost the customer\b/i,
+    label: "Customer churn mentioned",
+    polarity: "negative",
+    actionRelevant: true,
+    suggestedActionTitle: "Investigate why this customer churned",
+  },
+  {
+    pattern: /\bcomplain(?:ed|t)?\b|\bfrustrat(?:ed|ion)\b|\bconfused about\b/i,
+    label: "Customer friction/complaint mentioned",
+    polarity: "negative",
+    actionRelevant: true,
+    suggestedActionTitle: "Investigate the friction customers are reporting",
+  },
   { pattern: /\bshipped\b|\blaunched\b|\breleased\b|\bdeployed\b/i, label: "Product milestone mentioned", polarity: "positive" },
   { pattern: /\binvestor\b|\bVC\b|\bterm sheet\b|\bfundrais(?:e|ing)\b|\bpitch(?:ed)?\b/i, label: "Fundraising conversation mentioned", polarity: "neutral" },
   { pattern: /\bcompetitor(?:s)?\b/i, label: "Competitor/market observation mentioned", polarity: "neutral" },
-  { pattern: /\bexperiment\b|\bfailed\b|\bdidn't work\b|\bdid not work\b|\bno(?:body| one) clicked\b/i, label: "Experiment result mentioned", polarity: "neutral" },
+  {
+    pattern: /\bexperiment\b|\bfailed\b|\bdidn't work\b|\bdid not work\b|\bno(?:body| one) clicked\b/i,
+    label: "Experiment result mentioned",
+    polarity: "neutral",
+    actionRelevant: true,
+    suggestedActionTitle: "Investigate why this experiment didn't work",
+  },
   { pattern: /\b(?:said|confirmed|agreed)\b[^.!?]{0,40}\bproblem\b/i, label: "Problem confirmation mentioned", polarity: "positive" },
 ];
 
-function extractInformationalSignals(text: string): ProposedSignal[] {
+function extractInformationalSignals(text: string, suppressChurn: boolean): ProposedSignal[] {
   const signals: ProposedSignal[] = [];
-  INFORMATIONAL_PATTERNS.forEach(({ pattern, label, polarity }, i) => {
+  INFORMATIONAL_PATTERNS.forEach(({ pattern, label, polarity, actionRelevant, suggestedActionTitle }, i) => {
+    // The unquantified churn pattern is the first entry above -- suppressed
+    // when a COUNTABLE churn signal already matched the same note, so a
+    // founder never sees both "Customer churn mentioned" (informational)
+    // and "N customers churned" (field-mapped) for the same real event.
+    if (i === 0 && suppressChurn) return;
     const match = pattern.exec(text);
     if (!match) return;
     signals.push({
@@ -199,22 +316,28 @@ function extractInformationalSignals(text: string): ProposedSignal[] {
       label,
       sourceQuote: match[0].trim(),
       polarity,
+      ...(actionRelevant ? { actionRelevant: true, suggestedActionTitle } : {}),
     });
   });
   return signals;
 }
 
 // Public entry point. Order is deliberate: field-mappable signals first
-// (interviews, price, new customer), informational signals last -- the
-// review UI (Part 6) renders editable proposals before plain-text ones.
+// (interviews, price, new customer, churn count, retention),
+// informational signals last -- the review UI (Part 6) renders editable
+// proposals before plain-text ones.
 export function extractCaptureSignals(text: string): ProposedSignal[] {
   const trimmed = text.trim();
   if (!trimmed) return [];
+
+  const churnCountSignals = extractChurnCountSignals(trimmed);
 
   return [
     ...extractInterviewSignals(trimmed),
     ...extractPriceSignals(trimmed),
     ...extractNewCustomerSignal(trimmed),
-    ...extractInformationalSignals(trimmed),
+    ...churnCountSignals,
+    ...extractRetentionSignal(trimmed),
+    ...extractInformationalSignals(trimmed, churnCountSignals.length > 0),
   ];
 }

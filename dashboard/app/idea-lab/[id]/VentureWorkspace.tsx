@@ -35,6 +35,7 @@ import {
 } from "@/components/idea-lab/AssumptionFields";
 import NextStepCard from "@/components/journey/NextStepCard";
 import { resolveIdeaLabNextStep } from "@/lib/journey/resolveIdeaLabNextStep";
+import { resolveLatestModelChange } from "@/lib/journey/resolveLatestModelChange";
 import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 import { stashVentureDescriptionForAnalyze } from "@/lib/ventureToStartupHandoff";
 import { consumePitchDeckMission } from "@/lib/pitchDeckMissionHandoff";
@@ -82,19 +83,87 @@ function formatUpdatedAt(iso: string): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-// Phase 13, Part 13. Restrained "recent learning" presentation -- exact
-// founder-written text only, never summarized or reinterpreted. Renders
-// nothing when there's nothing to show (Part 19: no fake values, no
-// invented empty-state metric).
-function RecentLearningCard({ learning }: { learning: RecentLearning }) {
-  const when = formatUpdatedAt(learning.recordedAt);
+// Phase 26 -- Retention Loop Closure, Part 8/9/11 (cross-session working
+// context). Supersedes Phase 13's own standalone RecentLearningCard --
+// that card's one fact (the most recent learning_summary) is now ONE
+// line inside this slightly wider, still small, still fully deterministic
+// strip, rather than a separate card the Weekly Review's own "What you
+// learned" list then repeated verbatim (Phase 25's own documented
+// duplication finding). Nothing here is new data: `learning` and
+// `primaryMissionTitle` are both lifted from MissionsSection via the
+// exact same callback pattern (onRecentLearningChanged /
+// onPrimaryMissionChanged); `latestModelChange` reads the SAME `history`
+// buildWeeklyReview.ts already consumes, just unwindowed.
+//
+// Part 10's own instruction, honored exactly: never "since your last
+// visit" (no session/login timestamp exists anywhere in this codebase)
+// -- only "current," "most recent," and "latest," each backed by a real
+// persisted timestamp.
+//
+// Renders nothing at all when there is truly nothing beyond "what to do
+// next" to report (a brand-new venture, or one with no action/learning/
+// model-update history yet) -- IdeaLabNextStep directly above already
+// owns that state fully; this strip would just be empty noise there.
+function WhereThingsStand({
+  learning,
+  primaryMissionTitle,
+  latestModelChange,
+}: {
+  learning: RecentLearning | null;
+  primaryMissionTitle: string | null;
+  latestModelChange: ReturnType<typeof resolveLatestModelChange>;
+}) {
+  if (!learning && !primaryMissionTitle && !latestModelChange) {
+    return null;
+  }
+
+  const learningWhen = learning ? formatUpdatedAt(learning.recordedAt) : "";
+
   return (
     <BaseCard className="p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Recent learning</p>
-      <p className="mt-2 text-sm leading-6 text-text-primary">{learning.summary}</p>
-      <p className="mt-2 text-xs text-text-muted">
-        From &ldquo;{learning.missionTitle}&rdquo;{when ? ` · ${when}` : ""}
-      </p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Where things stand</p>
+
+      <div className="mt-3 space-y-3">
+        {primaryMissionTitle ? (
+          <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
+            <span className="text-text-secondary">Current action:</span>
+            <span className="font-medium text-text-primary">{primaryMissionTitle}</span>
+            <a href="#your-missions" className="text-xs font-semibold text-primary hover:text-primary-hover">
+              Continue →
+            </a>
+          </p>
+        ) : null}
+
+        {learning ? (
+          <p className="text-sm leading-6">
+            <span className="text-text-secondary">Most recent learning:</span>{" "}
+            <span className="text-text-primary">&ldquo;{learning.summary}&rdquo;</span>
+            {learningWhen ? <span className="text-xs text-text-muted"> · {learningWhen}</span> : null}
+          </p>
+        ) : null}
+
+        {latestModelChange ? (
+          <div className="text-sm">
+            <p className="flex flex-wrap items-baseline gap-x-2">
+              <span className="text-text-secondary">Latest model update:</span>
+              {latestModelChange.beforeVps !== null && latestModelChange.afterVps !== null ? (
+                <span className="font-medium text-text-primary">
+                  VPS {latestModelChange.beforeVps.toFixed(1)} <span aria-hidden="true" className="text-text-muted">→</span>{" "}
+                  {latestModelChange.afterVps.toFixed(1)}
+                </span>
+              ) : (
+                <span className="font-medium text-text-primary">recorded</span>
+              )}
+            </p>
+            {latestModelChange.primaryAssumptionChange ? (
+              <p className="mt-0.5 text-xs text-text-muted">
+                {latestModelChange.primaryAssumptionChange.label}: {latestModelChange.primaryAssumptionChange.before}{" "}
+                → {latestModelChange.primaryAssumptionChange.after}
+              </p>
+            ) : null}
+          </div>
+        ) : null}
+      </div>
     </BaseCard>
   );
 }
@@ -151,6 +220,31 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // as missionedMilestones above) -- no new fetch, purely a derived view
   // of data MissionsSection already loads.
   const [recentLearning, setRecentLearning] = useState<RecentLearning | null>(null);
+  // Phase 26 -- Retention Loop Closure, Part 9/11. Same "lift a derived
+  // summary up via callback" pattern as recentLearning/missionedMilestones
+  // above -- MissionsSection already computes its own primaryMission
+  // (the current active action) for its own rendering; this just reports
+  // that same value up so the compact "Where things stand" strip can
+  // reference it without a second fetch or a second definition of what
+  // "current action" means.
+  const [primaryMissionTitle, setPrimaryMissionTitle] = useState<string | null>(null);
+
+  // Phase 26, Part 13/15. A minimal, isolated rename affordance -- reuses
+  // the SAME PUT /ventures/{id} pathway every other save on this page
+  // already uses, but always sends venture.assumptions/description/
+  // industry/business_model/target_customer/stage exactly as last saved
+  // (never the possibly-edited `draft`/`industry`/`businessModel`/`stage`
+  // component state), so a rename can never accidentally persist an
+  // unrelated unsaved edit sitting in "Edit the full model." Because only
+  // `name` differs from `venture`'s own last-saved snapshot, the backend's
+  // existing assumptions-only diff (app/api.py::update_venture) writes no
+  // venture_model_updates row and computes the identical VPS -- the
+  // firewall Part 15 requires, satisfied by the existing endpoint's own
+  // logic, not new code.
+  const [isRenaming, setIsRenaming] = useState(false);
+  const [renameValue, setRenameValue] = useState("");
+  const [isSavingRename, setIsSavingRename] = useState(false);
+  const [renameError, setRenameError] = useState<string | null>(null);
 
   // Founder Progress / Venture History V1. One dedicated GET, loaded once
   // alongside the venture itself and refreshed only after an action that
@@ -357,6 +451,53 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     }
   }
 
+  async function handleRenameVenture() {
+    if (!venture) return;
+    const trimmed = renameValue.trim();
+    if (!trimmed) {
+      setRenameError("Give it a name, or Cancel.");
+      return;
+    }
+
+    setIsSavingRename(true);
+    setRenameError(null);
+
+    try {
+      const token = await getToken();
+      if (!token) {
+        setRenameError("Your session expired. Sign in again.");
+        return;
+      }
+
+      // Deliberately built from `venture`'s own last-saved fields, NOT
+      // from `draft`/`industry`/`businessModel`/`stage` component state
+      // -- see this state's own comment above for why that isolation is
+      // the actual safety guarantee here.
+      const updated = await updateVenture(
+        ventureId,
+        {
+          name: trimmed,
+          description: venture.description,
+          industry: venture.industry,
+          business_model: venture.business_model,
+          target_customer: venture.target_customer,
+          stage: venture.stage,
+          assumptions: venture.assumptions,
+        },
+        token
+      );
+
+      setVenture(updated);
+      setName(updated.name);
+      setIsRenaming(false);
+    } catch (error) {
+      console.error("Failed to rename venture:", error);
+      setRenameError("Couldn't rename that. Try again.");
+    } finally {
+      setIsSavingRename(false);
+    }
+  }
+
   if (loadState === "loading") {
     return (
       <div className="space-y-6">
@@ -401,17 +542,60 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             : "Modeled venture — Idea Lab"
         }
         action={
-          <Button
-            type="button"
-            variant="subtle"
-            disabled={isDeleting}
-            onClick={handleDelete}
-            className="hover:text-danger"
-          >
-            {isDeleting ? "Deleting..." : "Delete venture"}
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              type="button"
+              variant="subtle"
+              onClick={() => {
+                setRenameValue(venture.name);
+                setRenameError(null);
+                setIsRenaming(true);
+              }}
+            >
+              Rename
+            </Button>
+            <Button
+              type="button"
+              variant="subtle"
+              disabled={isDeleting}
+              onClick={handleDelete}
+              className="hover:text-danger"
+            >
+              {isDeleting ? "Deleting..." : "Delete venture"}
+            </Button>
+          </div>
         }
       />
+
+      {/* Phase 26, Part 13/15: identity metadata only -- renaming never
+          touches assumptions, never touches VPS, never writes model-
+          change history, never creates an action, never touches SPS.
+          See handleRenameVenture()'s own comment for exactly how that's
+          guaranteed. */}
+      {isRenaming ? (
+        <BaseCard className="-mt-4 mb-8 p-4">
+          <label htmlFor="venture-rename" className="block text-xs font-semibold uppercase tracking-wide text-text-muted">
+            Venture name
+          </label>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <input
+              id="venture-rename"
+              type="text"
+              value={renameValue}
+              onChange={(event) => setRenameValue(event.target.value)}
+              maxLength={200}
+              className="min-w-0 flex-1 rounded-lg border border-border bg-background px-3 py-2 text-sm text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+            />
+            <Button type="button" size="sm" disabled={isSavingRename} loading={isSavingRename} onClick={handleRenameVenture}>
+              {isSavingRename ? "Saving..." : "Save name"}
+            </Button>
+            <Button type="button" variant="subtle" size="sm" disabled={isSavingRename} onClick={() => setIsRenaming(false)}>
+              Cancel
+            </Button>
+          </div>
+          {renameError ? <p className="mt-2 text-xs text-danger">{renameError}</p> : null}
+        </BaseCard>
+      ) : null}
 
       <div className="space-y-8">
         <BaseCard className="p-5">
@@ -462,6 +646,17 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           }}
         /> : null}
 
+        {/* Phase 26 -- Retention Loop Closure, Part 8/9/11. Sits directly
+            after "what matters now" -- see WhereThingsStand's own
+            docstring for exactly what it shows and why it renders
+            nothing when there's nothing beyond the priority above to
+            report. */}
+        <WhereThingsStand
+          learning={recentLearning}
+          primaryMissionTitle={primaryMissionTitle}
+          latestModelChange={history ? resolveLatestModelChange(history.events) : null}
+        />
+
         {/* Phase 13 -- Founder Home / Venture Command Center, Part 6/10.
             Reordered so Current Mission (D) renders immediately after
             "what matters now" (C), ahead of the fuller Next Moves list
@@ -497,6 +692,21 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             refreshHistory();
           }}
           onHistoryChanged={refreshHistory}
+          onStartMission={(title, suggestion) =>
+            setPendingMission({
+              title,
+              relatedCategory: suggestion.relatedCategory,
+              missionType: suggestion.missionType,
+            })
+          }
+          currentPriorityText={
+            venture.model_result
+              ? (() => {
+                  const step = resolveIdeaLabNextStep(venture.model_result);
+                  return step.kind === "work_on_milestone" ? step.milestoneText : null;
+                })()
+              : null
+          }
         />
 
         <div id="your-missions">
@@ -524,6 +734,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             refreshHistory();
           }}
           onRecentLearningChanged={setRecentLearning}
+          onPrimaryMissionChanged={setPrimaryMissionTitle}
           onVentureUpdated={(updated) => {
             setVenture(updated);
             setDraft(updated.assumptions);
@@ -548,11 +759,11 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           />
         ) : null}
 
-        {/* Phase 13, Part 13/14: Recent Learning (F) -- purely derived
-            from data MissionsSection already loads; renders nothing when
-            there's nothing real to show (no invented empty state, no
-            fabricated interpretation of founder-written text). */}
-        {recentLearning ? <RecentLearningCard learning={recentLearning} /> : null}
+        {/* Phase 13's own standalone "Recent Learning" (F) card was
+            folded into WhereThingsStand above (Phase 26, Part 11) -- its
+            content (recentLearning) still flows from the exact same
+            MissionsSection callback, just rendered in one place instead
+            of two. */}
 
         {/* Phase 24 -- Weekly Founder Review V1. Sits directly before
             Venture Progress (Part 3's own "WEEKLY REVIEW / RECENT

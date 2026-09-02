@@ -23,6 +23,7 @@ import {
 } from "../lib/founderJourney.ts";
 import { resolveIdeaLabNextStep } from "../lib/journey/resolveIdeaLabNextStep.ts";
 import { resolveRecentLearning } from "../lib/journey/resolveRecentLearning.ts";
+import { resolveLatestModelChange } from "../lib/journey/resolveLatestModelChange.ts";
 import { inferEvidenceStepIndex, resolveVentureStepIndex } from "../lib/journey/inferVentureStage.ts";
 import { getAllPlaybooks } from "../content/playbooks/index.ts";
 import { getWhatIfScenarios } from "../components/idea-lab/whatIfScenarios.ts";
@@ -174,6 +175,48 @@ function test_recent_learning_is_pure_and_deterministic(): void {
   expect(JSON.stringify(first) === JSON.stringify(second), "Identical input must always produce identical output");
 }
 
+// --- resolveLatestModelChange (Phase 26, Part 8/9/11) --------------------
+
+function test_latest_model_change_null_when_no_updates(): void {
+  const events = [
+    { event_type: "venture_created", occurred_at: "2026-01-01T00:00:00Z", before_vps: null, after_vps: 5.0, assumption_changes: [] },
+    { event_type: "action_added", occurred_at: "2026-01-02T00:00:00Z", before_vps: null, after_vps: null, assumption_changes: [] },
+  ];
+  expect(resolveLatestModelChange(events) === null, "Zero model_updated events must resolve to null, not a fabricated value");
+}
+
+function test_latest_model_change_picks_first_since_events_are_newest_first(): void {
+  // The backend already returns events newest-first (app/api.py's own
+  // events.sort(..., reverse=True)) -- this function must NOT re-sort;
+  // it trusts that ordering and takes the first model_updated match.
+  const events = [
+    { event_type: "action_added", occurred_at: "2026-03-01T00:00:00Z", before_vps: null, after_vps: null, assumption_changes: [] },
+    { event_type: "model_updated", occurred_at: "2026-02-15T00:00:00Z", before_vps: 6.5, after_vps: 6.9, assumption_changes: [{ label: "Price point", before: "$500", after: "$299" }] },
+    { event_type: "model_updated", occurred_at: "2026-01-01T00:00:00Z", before_vps: 5.0, after_vps: 6.5, assumption_changes: [] },
+  ];
+  const result = resolveLatestModelChange(events);
+  expect(result !== null, "Expected a real result");
+  expect(result?.beforeVps === 6.5 && result?.afterVps === 6.9, `Must pick the newest-first (already-sorted) model_updated event, got before=${result?.beforeVps} after=${result?.afterVps}`);
+  expect(result?.primaryAssumptionChange?.label === "Price point", "Must surface the first curated assumption change on that update");
+}
+
+function test_latest_model_change_handles_no_assumption_diff(): void {
+  const events = [
+    { event_type: "model_updated", occurred_at: "2026-01-01T00:00:00Z", before_vps: 6.9, after_vps: 6.9, assumption_changes: [] },
+  ];
+  const result = resolveLatestModelChange(events);
+  expect(result !== null && result.primaryAssumptionChange === null, "An update with no curated assumption diff must report null, not a fabricated one");
+}
+
+function test_latest_model_change_is_pure_and_deterministic(): void {
+  const events = [
+    { event_type: "model_updated", occurred_at: "2026-01-01T00:00:00Z", before_vps: 6.0, after_vps: 6.4, assumption_changes: [] },
+  ];
+  const first = resolveLatestModelChange(events);
+  const second = resolveLatestModelChange(events);
+  expect(JSON.stringify(first) === JSON.stringify(second), "Identical input must always produce identical output");
+}
+
 // --- Firewall: journey modules touch no scoring/persistence layer -------
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -193,6 +236,7 @@ const FILES_THAT_MUST_STAY_PURE = [
   "lib/founderJourney.ts",
   "lib/journey/resolveIdeaLabNextStep.ts",
   "lib/journey/resolveRecentLearning.ts",
+  "lib/journey/resolveLatestModelChange.ts",
   "lib/journey/inferVentureStage.ts",
   "components/idea-lab/whatIfScenarios.ts",
   "components/idea-lab/summarizeConceptForCard.ts",
@@ -519,6 +563,10 @@ const TESTS: [string, () => void][] = [
   ["test_recent_learning_picks_most_recent_by_recorded_at", test_recent_learning_picks_most_recent_by_recorded_at],
   ["test_recent_learning_considers_completed_missions_too", test_recent_learning_considers_completed_missions_too],
   ["test_recent_learning_is_pure_and_deterministic", test_recent_learning_is_pure_and_deterministic],
+  ["test_latest_model_change_null_when_no_updates", test_latest_model_change_null_when_no_updates],
+  ["test_latest_model_change_picks_first_since_events_are_newest_first", test_latest_model_change_picks_first_since_events_are_newest_first],
+  ["test_latest_model_change_handles_no_assumption_diff", test_latest_model_change_handles_no_assumption_diff],
+  ["test_latest_model_change_is_pure_and_deterministic", test_latest_model_change_is_pure_and_deterministic],
   ["test_journey_modules_contain_no_scoring_or_persistence_calls", test_journey_modules_contain_no_scoring_or_persistence_calls],
   ["test_venture_handoff_only_uses_sessionstorage_no_network", test_venture_handoff_only_uses_sessionstorage_no_network],
   ["test_infer_evidence_step_idea_with_nothing_modeled", test_infer_evidence_step_idea_with_nothing_modeled],

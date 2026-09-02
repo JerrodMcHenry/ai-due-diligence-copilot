@@ -86,6 +86,23 @@ export default function VentureDraftReview({
   // placeholder hint) invites the founder to actually name it; blank
   // still safely falls back to "Untitled venture" in handleConfirm below.
   const [name, setName] = useState(draft.name.value ?? "");
+
+  // Phase 26 -- Retention Loop Closure, Part 13/14/16. Phase 25's own
+  // finding: a founder easily SKIPPED this field entirely, since an
+  // empty text input with only a placeholder hint carries no signal that
+  // anything was left undecided -- the venture then silently became
+  // "Untitled venture" with no founder choice behind it at all. This
+  // turns naming into an explicit, unskippable decision: when SIE found
+  // no real name to prefill (draft.name.value is null/empty -- e.g. the
+  // founder never named their company in their own description), the
+  // founder must either type a name OR explicitly click "I don't have a
+  // name yet" before Create Venture is enabled. When SIE DID safely
+  // extract a real name (e.g. "ClaimPilot helps medical practices...."),
+  // the field is already prefilled and no extra decision is required --
+  // Part 16's own explicit case.
+  const [nameDecision, setNameDecision] = useState<"decided" | "undecided">(
+    draft.name.value ? "decided" : "undecided"
+  );
   const [industry, setIndustry] = useState(draft.industry.value);
   const [businessModel, setBusinessModel] = useState(draft.business_model.value);
   const [targetCustomer, setTargetCustomer] = useState(draft.target_customer.value);
@@ -93,6 +110,19 @@ export default function VentureDraftReview({
   const [assumptions, setAssumptions] = useState<VentureAssumptions>(() =>
     draftToAssumptions(draft)
   );
+
+  function handleNameChange(value: string | null) {
+    setName(value ?? "");
+    // Typing anything IS the decision -- no need to also click a button.
+    setNameDecision("decided");
+  }
+
+  function handleNoNameYet() {
+    setName("");
+    setNameDecision("decided");
+  }
+
+  const canCreate = nameDecision === "decided";
 
   function handleConfirm() {
     onConfirm({
@@ -135,9 +165,23 @@ export default function VentureDraftReview({
           id="review-name"
           label="What's your venture called?"
           value={name}
-          onChange={(value) => setName(value ?? "")}
+          onChange={handleNameChange}
           placeholder={suggestNamePlaceholder(originalDescription)}
         />
+        {nameDecision === "undecided" ? (
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={handleNoNameYet}
+              className="text-xs font-semibold text-primary hover:text-primary-hover"
+            >
+              I don&rsquo;t have a name yet
+            </button>
+            <span className="text-xs text-text-muted">
+              -- pick one before creating, or say you don&rsquo;t have one yet.
+            </span>
+          </div>
+        ) : null}
       </BaseCard>
 
       {/* Phase 10.6, Part 3: the plain-language summary a founder sees
@@ -450,13 +494,18 @@ export default function VentureDraftReview({
         </div>
       </Disclosure>
 
-      <div className="flex items-center justify-end gap-3">
-        <Button type="button" variant="secondary" onClick={onBack}>
-          Back
-        </Button>
-        <Button type="button" disabled={isSubmitting} loading={isSubmitting} onClick={handleConfirm}>
-          {isSubmitting ? "Creating..." : "Create Venture"}
-        </Button>
+      <div className="flex flex-col items-end gap-2">
+        {!canCreate ? (
+          <p className="text-xs text-text-muted">Name your venture above (or say you don&rsquo;t have one yet) to continue.</p>
+        ) : null}
+        <div className="flex items-center justify-end gap-3">
+          <Button type="button" variant="secondary" onClick={onBack}>
+            Back
+          </Button>
+          <Button type="button" disabled={isSubmitting || !canCreate} loading={isSubmitting} onClick={handleConfirm}>
+            {isSubmitting ? "Creating..." : "Create Venture"}
+          </Button>
+        </div>
       </div>
     </div>
   );

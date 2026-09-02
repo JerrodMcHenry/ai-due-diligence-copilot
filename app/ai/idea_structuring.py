@@ -113,6 +113,14 @@ experience, customer counts) that the founder did not state or strongly
 imply -- if you cannot point to real textual support, the field is
 "unknown", not a guessed number.
 
+One exception to the general "ai_inferred" rule above: never set "name"
+to "ai_inferred". If the founder's description names their company or
+product, classify it "user_provided" exactly as you would any other
+directly-stated fact (a name stated up front, e.g. "ClaimPilot helps...",
+counts exactly the same as a name mentioned mid-sentence). If they never
+name it, "name" is "unknown" -- just never invent a plausible-sounding
+one of your own the way you might reasonably infer an industry.
+
 THE "validation" GROUP IS DIFFERENT FROM EVERY OTHER GROUP. It represents
 REAL-WORLD VALIDATION: customer interviews actually conducted, a waitlist
 that actually exists, customers actually paying, revenue actually
@@ -383,7 +391,21 @@ def _sanitize_draft(raw: dict, description: str) -> dict:
     sanitized: dict = {}
 
     for field_name in _TOP_LEVEL_FIELDS:
-        sanitized[field_name] = _sanitize_field(raw.get(field_name), description, allow_inferred=True)
+        # Phase 26 -- Retention Loop Closure, Part 14: "name" is the ONE
+        # top-level field where allow_inferred=True would be actively
+        # harmful -- an "ai_inferred" name is the LLM INVENTING a brand
+        # name from the idea, exactly what Part 14 explicitly forbids
+        # ("Do not invent a brand name... Do not use an LLM solely to
+        # generate startup names"). Every other top-level field (industry,
+        # business_model, target_customer, stage) is a genuinely
+        # reasonable modeling assumption to infer from context; a company
+        # NAME is not -- it's either something the founder actually said,
+        # or it's unknown. Mirrors the validation group's own
+        # allow_inferred=False pattern immediately below, just for one
+        # field instead of a whole group.
+        sanitized[field_name] = _sanitize_field(
+            raw.get(field_name), description, allow_inferred=field_name != "name"
+        )
 
     for group_name, field_names in _ASSUMPTION_GROUPS.items():
         group_raw = raw.get(group_name) if isinstance(raw.get(group_name), dict) else {}

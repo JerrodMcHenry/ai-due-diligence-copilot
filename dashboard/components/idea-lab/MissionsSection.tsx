@@ -132,6 +132,14 @@ type MissionsSectionProps = {
   // positioned wherever the Command Center hierarchy wants it, independent
   // of where this component itself renders.
   onRecentLearningChanged?: (learning: RecentLearning | null) => void;
+  // Phase 26 -- Retention Loop Closure, Part 8/9/11. Same lift-via-
+  // callback pattern as onRecentLearningChanged directly above -- reports
+  // the SAME primaryMission (activeMissions[0]) this component already
+  // computes for its own rendering below, just the title, so a compact
+  // "Where things stand" strip elsewhere on the page can reference the
+  // founder's current action without a second fetch or a second
+  // definition of "current action."
+  onPrimaryMissionChanged?: (title: string | null) => void;
 };
 
 export type { RecentLearning };
@@ -148,6 +156,7 @@ export default function MissionsSection({
   onVentureUpdated,
   onMissionTitlesChanged,
   onRecentLearningChanged,
+  onPrimaryMissionChanged,
 }: MissionsSectionProps) {
   const { getToken } = useAuth();
 
@@ -219,6 +228,12 @@ export default function MissionsSection({
 
   useEffect(() => {
     onRecentLearningChanged?.(resolveRecentLearning(missions));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [missions]);
+
+  useEffect(() => {
+    const active = missions.filter((m) => m.status === "active");
+    onPrimaryMissionChanged?.(active[0]?.title ?? null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [missions]);
 

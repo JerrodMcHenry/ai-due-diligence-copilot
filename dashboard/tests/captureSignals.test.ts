@@ -95,13 +95,90 @@ function test_unstructured_note_hallucinates_nothing(): void {
 
 // --- Additional fixtures from the directive's own Part 3 examples ----------
 
-function test_churn_note_is_informational_only(): void {
-  const text = "Three customers churned this month because onboarding takes too long.";
+// Phase 26 -- Retention Loop Closure, Part 5. Superseded from Phase 23's
+// original assertion: a COUNTABLE churn mention ("Three customers
+// churned...") now safely proposes a negative delta on the existing,
+// already-canonical validation.paying_customers field -- the identical
+// mechanic the "new paying customer" +1 signal already used, just
+// negative. This is deliberately DIFFERENT from an unquantified churn
+// mention (see test_unquantified_churn_is_action_relevant below), per
+// Phase 25's own explicit finding: "these should not all be treated
+// identically if the evidence differs."
+function test_countable_churn_is_model_relevant(): void {
+  const text = "Three customers churned this month.";
   const signals = extractCaptureSignals(text);
-  const churn = signals.find((s) => s.label.includes("churn"));
-  expect(churn !== undefined, "Must surface the churn mention");
-  expect(churn!.fieldPath === undefined, "Churn must never silently decrement paying_customers -- no safe field mapping exists for a raw churn count");
+  const churn = signals.find((s) => s.fieldPath === "validation.paying_customers");
+  expect(churn !== undefined, "A countable churn mention must propose a paying_customers delta");
+  expect(churn!.proposedValue === -3, `Must propose a -3 delta, got ${churn!.proposedValue}`);
   expect(churn!.polarity === "negative", "Churn is real negative evidence, correctly labeled as such (not punitive language, just accurate polarity)");
+  // No duplicate: the generic informational "Customer churn mentioned"
+  // signal must be suppressed when the countable version already fired,
+  // so a founder never sees the same real event listed twice.
+  const duplicateInfo = signals.filter((s) => s.label === "Customer churn mentioned");
+  expect(duplicateInfo.length === 0, "Must not also surface the generic informational churn signal alongside the countable, field-mapped one");
+}
+
+// Phase 26, Part 3/5 (the directive's own reproduced dead-end example).
+// An UNQUANTIFIED churn mention has no safe number to propose a delta
+// from -- it must stay informational, but Class B (ACTION-RELEVANT), not
+// a silent dead end: the founder should be told this may be worth
+// investigating, using the existing action-creation pathway.
+function test_unquantified_churn_is_action_relevant(): void {
+  const text = "Customer cancelled because onboarding took too long.";
+  const signals = extractCaptureSignals(text);
+  const churn = signals.find((s) => s.label === "Customer churn mentioned");
+  expect(churn !== undefined, "Must surface the churn mention");
+  expect(churn!.fieldPath === undefined, "An unquantified churn mention must never invent a count to decrement paying_customers by");
+  expect(churn!.actionRelevant === true, "An unquantified churn mention must be marked action-relevant -- Phase 25's own dead-end case");
+  expect(typeof churn!.suggestedActionTitle === "string" && churn!.suggestedActionTitle!.length > 0, "Must carry a deterministic suggested action title");
+}
+
+// Phase 26, Part 5: a quality/friction complaint is real negative
+// evidence, but it is NOT churn -- conflating the two would misrepresent
+// what the founder actually observed (nobody said they left).
+function test_complaint_is_distinct_from_churn(): void {
+  const text = "Five customers complained about onboarding.";
+  const signals = extractCaptureSignals(text);
+  const churnLabeled = signals.find((s) => s.label.includes("churn"));
+  expect(churnLabeled === undefined, "A complaint must never be mislabeled as churn -- no customer was said to have left");
+  const complaint = signals.find((s) => s.label.includes("friction") || s.label.includes("complaint"));
+  expect(complaint !== undefined, "Must surface the complaint as its own distinct signal");
+  expect(complaint!.fieldPath === undefined, "A complaint has no safe canonical field mapping");
+  expect(complaint!.actionRelevant === true, "A complaint is action-relevant -- worth investigating");
+}
+
+// Phase 26, Part 5: an explicit retention percentage IS a safe,
+// already-canonical field (validation.retention_pct already exists and
+// is already scored/diffed elsewhere in this codebase) -- this must
+// propose a value, not dead-end like the unquantified churn case.
+function test_retention_percentage_is_model_relevant(): void {
+  const text = "Retention dropped to 82%.";
+  const signals = extractCaptureSignals(text);
+  const retention = signals.find((s) => s.fieldPath === "validation.retention_pct");
+  expect(retention !== undefined, "An explicit retention percentage must propose a validation.retention_pct value");
+  expect(retention!.proposedValue === 82, `Must propose 82, got ${retention!.proposedValue}`);
+  expect(retention!.polarity === "negative", "'Dropped to' must be read as a negative trend");
+}
+
+// Phase 26, Part 5's own explicit instruction: these three examples must
+// NOT all be treated identically.
+function test_churn_examples_are_differentiated(): void {
+  const unquantified = extractCaptureSignals("Customer cancelled because onboarding took too long.");
+  const countable = extractCaptureSignals("Three customers churned this month.");
+  const retention = extractCaptureSignals("Retention dropped to 82%.");
+
+  expect(
+    unquantified.every((s) => s.fieldPath === undefined),
+    "Unquantified churn must never propose a canonical field"
+  );
+  expect(
+    countable.some((s) => s.fieldPath === "validation.paying_customers" && s.proposedValue === -3),
+    "Countable churn must propose a specific paying_customers delta"
+  );
+  expect(
+    retention.some((s) => s.fieldPath === "validation.retention_pct" && s.proposedValue === 82),
+    "An explicit retention percentage must propose a specific retention_pct value"
+  );
 }
 
 function test_product_shipped_is_informational_only(): void {
@@ -144,7 +221,11 @@ const TESTS = [
   test_first_customer_signed,
   test_negative_pricing_evidence,
   test_unstructured_note_hallucinates_nothing,
-  test_churn_note_is_informational_only,
+  test_countable_churn_is_model_relevant,
+  test_unquantified_churn_is_action_relevant,
+  test_complaint_is_distinct_from_churn,
+  test_retention_percentage_is_model_relevant,
+  test_churn_examples_are_differentiated,
   test_product_shipped_is_informational_only,
   test_investor_note_is_informational_only,
   test_failed_experiment_is_neutral_not_punitive,

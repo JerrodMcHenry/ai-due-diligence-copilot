@@ -329,6 +329,34 @@ def test_customer_interviews_cannot_be_inferred() -> None:
     expect(draft["validation"]["customer_interviews"]["value"] is None, "An inferred interview count must be stripped to null")
 
 
+# --- 10b: Phase 26, Part 14 -- "name" can never be inferred ------------------
+
+
+def test_venture_name_cannot_be_inferred() -> None:
+    # Adversarial: the fake LLM tries to invent a plausible-sounding brand
+    # name as "ai_inferred" -- exactly the failure mode Part 14 forbids
+    # ("Do not invent a brand name from the idea unless explicitly
+    # requested"). This must be stripped just like an inferred
+    # paying_customers/customer_interviews claim above, even though
+    # "name" isn't in the validation group.
+    fake = _minimal_fake_response(name=_field("ContractorBooks AI", "ai_inferred"))
+    with _patched_llm(fake):
+        draft = structure_idea(DESCRIPTION)
+
+    expect(draft["name"]["value"] is None, "An inferred venture name must be stripped to null")
+    expect(draft["name"]["provenance"] == "unknown", "Must be forced to 'unknown', never a guessed brand name")
+
+
+def test_venture_name_preserved_when_explicitly_stated() -> None:
+    description = "ContractorBooks is an AI bookkeeping tool for independent construction contractors."
+    fake = _minimal_fake_response(name=_field("ContractorBooks", "user_provided", "ContractorBooks"))
+    with _patched_llm(fake):
+        draft = structure_idea(description)
+
+    expect(draft["name"]["value"] == "ContractorBooks", "An explicitly stated, verifiable name must be preserved")
+    expect(draft["name"]["provenance"] == "user_provided", "Must keep user_provided provenance")
+
+
 # --- 11: explicitly stated validation CAN be preserved -----------------------
 
 
@@ -471,6 +499,8 @@ TESTS = [
     test_paying_customers_cannot_be_inferred,
     test_revenue_cannot_be_inferred,
     test_customer_interviews_cannot_be_inferred,
+    test_venture_name_cannot_be_inferred,
+    test_venture_name_preserved_when_explicitly_stated,
     test_explicitly_stated_validation_is_preserved_when_quote_verifies,
     test_unverifiable_user_provided_claim_is_stripped,
     test_malformed_llm_response_fails_safely,
