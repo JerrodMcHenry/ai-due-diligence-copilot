@@ -4285,6 +4285,38 @@ def log_product_event(
 # belongs to a zztest_ user, since a live browser walkthrough against a
 # zztest_-seeded venture (e.g. this phase's own live acceptance testing)
 # would otherwise still pollute aggregate counts.
+# Phase 29 -- Private Beta Readiness, Part 13/25. A second, real
+# contamination source Phase 28 hadn't yet accounted for: the creator/
+# operator's OWN real (non-zztest_) account, used for every phase's own
+# extensive live testing across this entire engagement. That account is
+# never a real beta founder, so it must be excluded from beta metrics
+# exactly like a zztest_ user is -- otherwise Day-1 beta numbers would be
+# silently inflated by the creator's own dev traffic. Reused, not
+# reinvented: ADMIN_USER_IDS already exists (app/auth.py, Phase 7.1A) as
+# the server-side allowlist of exactly those accounts. Read directly here
+# via the same os.getenv() pattern app/auth.py's own
+# _resolve_admin_user_ids() uses, rather than importing from app.auth --
+# app/auth.py already imports FROM this module (get_or_create_user), so
+# the reverse import would be circular. This is intentionally the same
+# small, duplicated env-read every other *_ALLOWED_ORIGINS/*_USER_IDS
+# pattern in this codebase already accepts (see app/api.py's own
+# CORS_ALLOWED_ORIGINS comment) -- not a new architecture.
+def _resolve_admin_user_ids_for_exclusion() -> list[str]:
+    raw = os.getenv("ADMIN_USER_IDS", "")
+    return [user_id.strip() for user_id in raw.split(",") if user_id.strip()]
+
+
+def _excluded_user_ids_sql_list() -> str:
+    """A literal SQL list, not a bind param -- ADMIN_USER_IDS is a small,
+    server-operator-controlled env var (never per-request/client input),
+    the same trust level _qualifying_events_sql_list() already extends to
+    its own hardcoded Python tuple. Single quotes are still escaped
+    defensively. Returns "" (an empty list literal is invalid SQL) when
+    no admins are configured -- callers handle that case themselves."""
+    ids = _resolve_admin_user_ids_for_exclusion()
+    return ", ".join("'" + admin_id.replace("'", "''") + "'" for admin_id in ids)
+
+
 _TEST_EXCLUSION_SQL = """
     (pe.user_id IS NULL OR pe.user_id NOT LIKE 'zztest_%')
     AND (pe.venture_id IS NULL OR NOT EXISTS (
@@ -4302,35 +4334,66 @@ def _test_exclusion_sql(exclude_test_users: bool) -> str:
     needs to verify the report arithmetic against exactly those rows,
     independent of the exclusion filter that's separately, directly
     tested by test_zztest_users_excluded_from_reports(). Every real call
-    site (the admin endpoint) always uses the default True."""
-    return _TEST_EXCLUSION_SQL if exclude_test_users else "TRUE"
+    site (the admin endpoint) always uses the default True.
+
+    When True, ALSO excludes any current ADMIN_USER_IDS account (Part
+    13/25's own "clean beta baseline" requirement) -- both exclusions
+    live in one fragment so every report function automatically gets
+    both without a second parameter to remember to pass.
+    """
+    if not exclude_test_users:
+        return "TRUE"
+
+    admin_ids_sql = _excluded_user_ids_sql_list()
+    admin_exclusion = f"AND (pe.user_id IS NULL OR pe.user_id NOT IN ({admin_ids_sql}))" if admin_ids_sql else ""
+    admin_venture_exclusion = (
+        f"""AND (pe.venture_id IS NULL OR NOT EXISTS (
+            SELECT 1 FROM modeled_ventures v
+            WHERE v.id = pe.venture_id AND v.user_id IN ({admin_ids_sql})
+        ))"""
+        if admin_ids_sql else ""
+    )
+    return f"{_TEST_EXCLUSION_SQL} {admin_exclusion} {admin_venture_exclusion}"
 
 
 def _qualifying_events_sql_list() -> str:
     return ", ".join(f"'{name}'" for name in QUALIFYING_BUILDING_EVENTS)
 
 
-def get_north_star_report(window_days: int) -> dict:
+def get_north_star_report(window_days: int, exclude_test_users: bool = True) -> dict:
     """Weekly/rolling-window Active Building Ventures: distinct ventures
     with >=1 qualifying event in the trailing `window_days`. Excludes
     venture_created itself (Part 7's own explicit decision -- creation is
-    activation, not ongoing building)."""
+    activation, not ongoing building).
+
+    Phase 29 fix: this function (and the two below) previously referenced
+    the raw _TEST_EXCLUSION_SQL constant directly rather than calling
+    _test_exclusion_sql() -- meaning the Part 13/25 admin-account
+    exclusion added this phase silently did NOT apply here, even though
+    it applied to activation/retention/distribution. Live-verified bug:
+    the admin dashboard showed "Ventures created: 0" (correctly excluded)
+    alongside "Captures: 2" (NOT excluded) for the same creator-only
+    testing session. Fixed by routing all six report functions through
+    the one shared _test_exclusion_sql() call.
+    """
+    exclusion = _test_exclusion_sql(exclude_test_users)
     with engine.begin() as connection:
         row = connection.execute(text(f"""
             SELECT COUNT(DISTINCT pe.venture_id) AS active_ventures
             FROM product_events pe
             WHERE pe.event_name IN ({_qualifying_events_sql_list()})
               AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
-              AND {_TEST_EXCLUSION_SQL}
+              AND {exclusion}
         """), {"days": window_days}).mappings().first()
 
     return {"window_days": window_days, "active_ventures": row["active_ventures"] or 0}
 
 
-def get_meaningful_building_days_report(window_days: int) -> dict:
+def get_meaningful_building_days_report(window_days: int, exclude_test_users: bool = True) -> dict:
     """Part 10's own chosen metric: distinct (venture, calendar day) pairs
     with >=1 qualifying event, in the window -- never a fabricated
     "session" count. Reported both as a total and per-active-venture."""
+    exclusion = _test_exclusion_sql(exclude_test_users)
     with engine.begin() as connection:
         row = connection.execute(text(f"""
             SELECT COUNT(DISTINCT (pe.venture_id, DATE(pe.created_at))) AS building_days,
@@ -4338,7 +4401,7 @@ def get_meaningful_building_days_report(window_days: int) -> dict:
             FROM product_events pe
             WHERE pe.event_name IN ({_qualifying_events_sql_list()})
               AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
-              AND {_TEST_EXCLUSION_SQL}
+              AND {exclusion}
         """), {"days": window_days}).mappings().first()
 
     active = row["active_ventures"] or 0
@@ -4351,11 +4414,12 @@ def get_meaningful_building_days_report(window_days: int) -> dict:
     }
 
 
-def get_engagement_counts_report(window_days: int) -> dict:
+def get_engagement_counts_report(window_days: int, exclude_test_users: bool = True) -> dict:
     """Captures / Active Venture and Actions Completed / Active Venture --
     Part 11's own two named engagement ratios. Denominator is the SAME
     active-venture count get_north_star_report() already computes, not a
     second, possibly-inconsistent definition of "active"."""
+    exclusion = _test_exclusion_sql(exclude_test_users)
     with engine.begin() as connection:
         counts = connection.execute(text(f"""
             SELECT
@@ -4365,7 +4429,7 @@ def get_engagement_counts_report(window_days: int) -> dict:
             FROM product_events pe
             WHERE pe.event_name IN ({_qualifying_events_sql_list()})
               AND pe.created_at >= NOW() - INTERVAL '1 day' * :days
-              AND {_TEST_EXCLUSION_SQL}
+              AND {exclusion}
         """), {"days": window_days}).mappings().first()
 
     active = counts["active_ventures"] or 0

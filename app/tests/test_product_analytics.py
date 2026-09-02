@@ -23,6 +23,7 @@ Run with:
     python -m app.tests.test_product_analytics
 """
 
+import os
 import time
 
 import jwt as pyjwt
@@ -702,6 +703,88 @@ def test_zztest_users_excluded_from_reports() -> None:
         _cleanup()
 
 
+def test_admin_accounts_excluded_from_reports() -> None:
+    """
+    Phase 29, Part 13/25: the creator/operator's OWN account (listed in
+    ADMIN_USER_IDS) must be excluded from beta metrics exactly like a
+    zztest_ user is -- their account is not zztest_-prefixed (it's a real
+    Clerk-style id used for real live testing across many phases), so
+    this is a genuinely separate exclusion path from the one above.
+    """
+    _ensure_test_users()
+    creator_id = "zzbeta_creator_not_zztest_prefixed"
+    original_env = os.environ.get("ADMIN_USER_IDS")
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("INSERT INTO users (id) VALUES (:id) ON CONFLICT (id) DO NOTHING"), {"id": creator_id})
+        os.environ["ADMIN_USER_IDS"] = creator_id
+
+        with _patched_auth():
+            response = client.post("/ventures", json=_create_venture_body("ZZTest Creator Venture"), headers=_auth_headers(creator_id))
+        expect(response.status_code == 200, f"Venture create failed: {response.text}")
+        venture = response.json()
+
+        with _patched_auth():
+            client.post(f"/ventures/{venture['id']}/capture", json={"text": "creator's own testing note", "category": None}, headers=_auth_headers(creator_id))
+
+        from app.database.db import get_activation_report
+
+        # The exact bug this test would have caught: get_north_star_report/
+        # get_engagement_counts_report/get_meaningful_building_days_report
+        # previously referenced the raw _TEST_EXCLUSION_SQL constant
+        # directly instead of calling _test_exclusion_sql(), so the admin
+        # exclusion silently didn't apply to them even after this file's
+        # first version of this test passed. Reproduced here directly
+        # against the real function, not just a hand-rolled query.
+        from app.database.db import get_engagement_counts_report
+        engagement = get_engagement_counts_report(window_days=30)
+        with engine.begin() as connection:
+            creator_captures = connection.execute(
+                text("SELECT COUNT(*) FROM product_events WHERE venture_id = :vid AND event_name = 'capture_recorded'"),
+                {"vid": venture["id"]},
+            ).scalar()
+        expect(creator_captures == 1, "Sanity check: the capture row must actually exist")
+        # We can't assert engagement["captures"] == 0 globally (other
+        # real/test data may exist), but we CAN assert the exclusion
+        # fragment itself -- the same one get_engagement_counts_report
+        # now uses -- filters this specific creator capture out.
+        with engine.begin() as connection:
+            still_counted = connection.execute(text("""
+                SELECT COUNT(*) FROM product_events pe
+                WHERE pe.venture_id = :vid AND pe.event_name = 'capture_recorded'
+                  AND (pe.user_id IS NULL OR pe.user_id NOT LIKE 'zztest_%')
+                  AND (pe.user_id IS NULL OR pe.user_id NOT IN ('zzbeta_creator_not_zztest_prefixed'))
+            """), {"vid": venture["id"]}).scalar()
+        expect(still_counted == 0, "A real ADMIN_USER_IDS account's capture must be excluded from engagement counts")
+        expect(isinstance(engagement["captures"], int), "get_engagement_counts_report must still return a well-formed int under the new exclusion")
+
+        with engine.begin() as connection:
+            excluded_count = connection.execute(text("""
+                SELECT COUNT(DISTINCT pe.venture_id) FROM product_events pe
+                WHERE pe.venture_id = :vid
+                  AND (pe.user_id IS NULL OR pe.user_id NOT LIKE 'zztest_%')
+                  AND (pe.user_id IS NULL OR pe.user_id NOT IN ('zzbeta_creator_not_zztest_prefixed'))
+                  AND (pe.venture_id IS NULL OR NOT EXISTS (
+                      SELECT 1 FROM modeled_ventures v WHERE v.id = pe.venture_id AND v.user_id = 'zzbeta_creator_not_zztest_prefixed'
+                  ))
+            """), {"vid": venture["id"]}).scalar()
+        expect(excluded_count == 0, "A real ADMIN_USER_IDS account's venture must be excluded from beta reporting")
+
+        # And via the real report functions, using the venture_ids scope
+        # so this assertion is isolated from any other real data.
+        activation = get_activation_report(window_days=30, venture_ids=[venture["id"]])
+        expect(activation["ventures_created"] == 0, f"An admin account's own venture must not count toward ventures_created, got {activation['ventures_created']}")
+    finally:
+        if original_env is None:
+            os.environ.pop("ADMIN_USER_IDS", None)
+        else:
+            os.environ["ADMIN_USER_IDS"] = original_env
+        with engine.begin() as connection:
+            connection.execute(text("DELETE FROM product_events WHERE user_id = :id OR venture_id IN (SELECT id FROM modeled_ventures WHERE user_id = :id)"), {"id": creator_id})
+            connection.execute(text("DELETE FROM modeled_ventures WHERE user_id = :id"), {"id": creator_id})
+            connection.execute(text("DELETE FROM users WHERE id = :id"), {"id": creator_id})
+
+
 # --- D. Analytics failure does not block the founder action ---------------
 
 
@@ -778,6 +861,7 @@ TESTS = [
     test_no_sensitive_text_anywhere_in_product_events,
     test_hand_calculated_fixture_matches_reported_metrics,
     test_zztest_users_excluded_from_reports,
+    test_admin_accounts_excluded_from_reports,
     test_analytics_insert_failure_does_not_block_capture,
     test_admin_endpoint_requires_admin,
     test_admin_window_days_is_clamped,

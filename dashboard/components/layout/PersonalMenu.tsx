@@ -69,6 +69,33 @@ function LearnIcon() {
   );
 }
 
+function FeedbackIcon() {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
+      <path d="M21 15a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v9Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+// Phase 29 -- Private Beta Readiness, Part 22. No existing support/
+// contact/feedback mechanism was found anywhere in this codebase
+// (confirmed by direct grep before adding this). This is the smallest
+// possible option on the directive's own preferred hierarchy: a plain
+// `mailto:` link, reusing the founder's own already-installed mail
+// client -- zero new backend endpoint, zero new persistence, zero new
+// architecture. The prefilled subject/body asks exactly the three
+// questions the directive names (confusing / broken / an idea) and
+// nothing else; whatever the founder writes goes directly from their own
+// mail client to the creator's inbox and is never seen by, or stored in,
+// SIE itself.
+const FEEDBACK_MAILTO =
+  "mailto:jamcoderswe@gmail.com?subject=" +
+  encodeURIComponent("SIE feedback") +
+  "&body=" +
+  encodeURIComponent(
+    "Something confusing:\n\nSomething broken:\n\nAn idea:\n\n(Delete whichever don't apply -- anything at all is welcome.)"
+  );
+
 // Phase 10.9 -- Founder Playbooks V1, Part 11: no new TopNav item --
 // "Learn" is discovered here, the same restrained account-menu path
 // every other personal/non-primary destination already uses, plus
@@ -83,6 +110,7 @@ export default function PersonalMenu() {
         <UserButton.Link label="My Ideas" href="/idea-lab" labelIcon={<IdeaIcon />} />
         <UserButton.Link label="My Startup" href="/founder" labelIcon={<StartupIcon />} />
         <UserButton.Link label="Learn" href="/playbooks" labelIcon={<LearnIcon />} />
+        <UserButton.Link label="Send feedback" href={FEEDBACK_MAILTO} labelIcon={<FeedbackIcon />} />
       </UserButton.MenuItems>
     </UserButton>
   );
