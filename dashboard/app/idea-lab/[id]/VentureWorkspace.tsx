@@ -13,7 +13,7 @@ import VPSResultPanel from "@/components/idea-lab/VPSResultPanel";
 import ScenarioComparison from "@/components/idea-lab/ScenarioComparison";
 import VentureJourney from "@/components/idea-lab/VentureJourney";
 import VentureOverview from "@/components/idea-lab/VentureOverview";
-import VentureCard from "@/components/idea-lab/VentureCard";
+import ShareVentureSnapshot from "@/components/idea-lab/ShareVentureSnapshot";
 import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
 import CaptureWhatHappened from "@/components/idea-lab/CaptureWhatHappened";
@@ -25,7 +25,7 @@ import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
-import { stillFiguringOutFromCategories, summarizeConceptForCard } from "@/components/idea-lab/ventureOverviewHelpers";
+import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
   NumberField,
@@ -1111,21 +1111,20 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         </section>
         </Disclosure>
 
-        {/* Phase 10.6, Part 11: visual architecture for a future
-            shareable venture card -- see VentureCard.tsx's own comment.
-            Collapsed by default so it doesn't compete with the primary
-            workspace; nothing here is wired to sharing yet. */}
-        <Disclosure summary="Preview your venture card" defaultOpen={false}>
+        {/* Phase 27 -- Shareable Venture Snapshot V1, Part 17: supersedes
+            Phase 10.6's old "Preview your venture card" disclosure
+            (VentureCard.tsx, removed this phase) -- that presentation-
+            only mockup is now a real, wired Share panel: preview,
+            toggles, enable, copy link, disable, all through the new
+            share_* endpoints. Collapsed by default, same placement, same
+            reasoning (doesn't compete with the primary Build workspace
+            above it). */}
+        <Disclosure summary="Share your venture" defaultOpen={false}>
           {venture.model_result ? (
-            <VentureCard
-              name={venture.name}
-              oneLineConcept={summarizeConceptForCard(description)}
-              vps={venture.model_result.vps}
-              categories={venture.model_result.categories}
-            />
+            <ShareVentureSnapshot ventureId={ventureId} />
           ) : (
             <p className="text-sm text-text-muted">
-              Model a few assumptions to see a preview of your venture card.
+              Model a few assumptions before sharing your venture.
             </p>
           )}
         </Disclosure>

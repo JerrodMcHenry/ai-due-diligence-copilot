@@ -179,6 +179,80 @@ class VentureResponse(BaseModel):
     updated_at: datetime
 
 
+class UpdateVentureShareRequest(BaseModel):
+    """Phase 27 -- Shareable Venture Snapshot V1. Founder-only request to
+    enable/disable sharing and set the two visibility toggles. Deliberately
+    just three booleans -- Part 5's own "do not turn V1 into a 30-toggle
+    privacy settings product" instruction."""
+    enabled: bool
+    show_vps: bool = False
+    show_validation: bool = True
+
+
+class VentureShareSettings(BaseModel):
+    """The founder's OWN view of their share state -- never returned to
+    anyone but the venture's owner. public_id is None until sharing has
+    been enabled at least once."""
+    enabled: bool
+    public_id: str | None = None
+    show_vps: bool
+    show_validation: bool
+
+
+class VentureSnapshotCategory(BaseModel):
+    """Deliberately NOT VPSCategoryResult -- that type carries a `basis`
+    field of free-text rationale strings never audited for public
+    exposure. This is a separate, minimal, explicitly-allowlisted shape
+    with exactly the three fields Part 8's own example structure shows
+    (category name + score, nothing else)."""
+    key: str
+    label: str
+    score: float | None = None
+
+
+class VentureSnapshotResponse(BaseModel):
+    """
+    Phase 27 -- Shareable Venture Snapshot V1, Part 4's own central
+    instruction: "A public endpoint must return an explicit allowlisted
+    DTO. Do NOT serialize the full venture and hide fields only in the
+    frontend." This is that DTO. It is returned by BOTH the founder's own
+    preview endpoint (GET /ventures/{id}/share) and the public endpoint
+    (GET /ventures/share/{public_id}) -- the exact same shape, so a
+    founder's preview can never diverge from what a recipient actually
+    sees (Part 16).
+
+    Structurally incapable of carrying: raw founder `description` text
+    (can contain CAC/burn/revenue figures typed in free-form prose --
+    see the ApexGrid regression case), captures, venture history, private
+    Actions/missions, fundraising-simulator data, cap-table assumptions,
+    CAC, burn, runway, gross margin, or starting capital -- none of these
+    fields exist on this model at all, so there is nothing for a future
+    careless call site to accidentally serialize.
+    """
+    name: str
+    stage: str | None = None
+    problem_statement: str | None = None
+    solution_description: str | None = None
+    target_customer: str | None = None
+    # Pre-formatted, human-readable strings ONLY (e.g. "22 customer
+    # conversations reported") -- never raw numbers the frontend would
+    # need field-specific formatting knowledge to render safely. Empty
+    # when share_show_validation is False OR when the venture has no
+    # reportable validation fields yet.
+    evidence: list[str] = Field(default_factory=list)
+    # The founder's current single top priority, reusing the exact same
+    # next_milestones[0] the private workspace's own What Matters Now
+    # already shows -- never a second recommendation engine. None when
+    # the venture has no VPS yet or has no open milestones.
+    current_frontier: str | None = None
+    # Both None unless the founder enabled "Show VPS" -- see
+    # app/api.py's own endpoint docstring for exactly how these are
+    # gated.
+    vps: float | None = None
+    vps_categories: list[VentureSnapshotCategory] | None = None
+    updated_at: datetime
+
+
 class VentureSummary(BaseModel):
     """List-view shape -- deliberately excludes the full assumptions/
     category breakdown (mirrors DiscoveryResult/SavedStartupEntry's own

@@ -2,9 +2,12 @@ import type {
   CreateVentureRequest,
   ScenarioCompareResponse,
   StructureIdeaResponse,
+  UpdateVentureShareRequest,
   VentureAssumptions,
   VentureHistoryResponse,
   VentureResponse,
+  VentureShareSettings,
+  VentureSnapshotResponse,
   VentureSummary,
 } from "@/types";
 
@@ -68,6 +71,40 @@ export function deleteVenture(id: number, token: string): Promise<{ deleted: boo
     method: "DELETE",
     token,
   });
+}
+
+// Phase 27 -- Shareable Venture Snapshot V1. These three, unlike every
+// other function in this file, are NOT all founder-only: getVentureShare/
+// updateVentureShare/getVentureSharePreview require a token (owner-only,
+// same as every other venture endpoint); getPublicVentureSnapshot
+// deliberately takes NO token at all -- it is THE public, unauthenticated
+// route, and passing no `token` to apiFetch already omits the
+// Authorization header entirely (see lib/api/client.ts).
+
+export function getVentureShare(id: number, token: string): Promise<VentureShareSettings> {
+  return apiFetch<VentureShareSettings>(`/ventures/${id}/share`, { token });
+}
+
+export function updateVentureShare(
+  id: number,
+  request: UpdateVentureShareRequest,
+  token: string
+): Promise<VentureShareSettings> {
+  return apiFetch<VentureShareSettings>(`/ventures/${id}/share`, {
+    method: "PUT",
+    body: request,
+    token,
+  });
+}
+
+export function getVentureSharePreview(id: number, token: string): Promise<VentureSnapshotResponse> {
+  return apiFetch<VentureSnapshotResponse>(`/ventures/${id}/share/preview`, { token });
+}
+
+// THE public call -- no token, callable from the public /v/[publicId]
+// page with zero Clerk session in scope.
+export function getPublicVentureSnapshot(publicId: string): Promise<VentureSnapshotResponse> {
+  return apiFetch<VentureSnapshotResponse>(`/ventures/share/${publicId}`);
 }
 
 export function compareVentureScenarios(

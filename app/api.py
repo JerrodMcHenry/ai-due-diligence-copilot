@@ -51,6 +51,10 @@ from app.database.db import (create_tables,
                          get_modeled_venture_for_user,
                          update_modeled_venture_for_user,
                          delete_modeled_venture_for_user,
+                         add_venture_share_columns,
+                         get_venture_share_settings_for_owner,
+                         update_venture_share_settings_for_owner,
+                         get_venture_by_share_public_id,
                          create_venture_missions_table,
                          add_pitch_deck_coach_mission_source,
                          list_venture_missions_for_owner,
@@ -107,7 +111,7 @@ from fastapi import Query
 
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.sps_v3 import SPSV3Assessment
-from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange, VentureHistoryAssumptionChange
+from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange, VentureHistoryAssumptionChange, UpdateVentureShareRequest, VentureShareSettings, VentureSnapshotResponse, VentureSnapshotCategory
 from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse, CaptureObservationRequest
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -194,6 +198,11 @@ backfill_startup_ids()
 # in app/database/db.py) -- ordering relative to the migrations above
 # only matters because it references users(id), which must already exist.
 create_modeled_ventures_table()
+
+# Phase 27 -- Shareable Venture Snapshot V1. Additive columns on the
+# table just created above -- must run after it, same reasoning as every
+# other add_*_columns() call in this file.
+add_venture_share_columns()
 
 # Phase 10.7 -- Founder Missions V1. venture_missions FKs to
 # modeled_ventures(id), which must already exist by this point (same
@@ -888,6 +897,181 @@ def delete_venture(
         raise HTTPException(status_code=404, detail="Venture not found.")
 
     return {"deleted": True}
+
+
+# ---------------------------------------------------------------------------
+# Phase 27 -- Shareable Venture Snapshot V1.
+#
+# THE FIREWALL, restated exactly as every prior phase's own capture/model-
+# update firewall was: nothing in this section calls compute_vps(),
+# _build_model_result(), create_venture_model_update(), create_venture_mission(),
+# or update_modeled_venture_for_user(). Enabling/disabling/previewing a
+# snapshot reads and writes ONLY the four share_* columns added by
+# add_venture_share_columns() -- it can never change VPS, never writes
+# venture_model_updates history, never creates an Action, never touches
+# SPS (an entirely separate table/pipeline this section has no import of).
+# ---------------------------------------------------------------------------
+
+def _build_venture_snapshot(venture: dict, show_vps: bool, show_validation: bool) -> VentureSnapshotResponse:
+    """
+    THE single allowlisted DTO builder -- used by BOTH the founder's own
+    preview (GET /ventures/{id}/share) and the public endpoint
+    (GET /ventures/share/{public_id}). One function, one place the
+    public/private shape can ever be defined, so a preview can never
+    honestly diverge from what a recipient actually sees (Part 16).
+
+    `venture` here is deliberately whatever get_venture_by_share_public_id()
+    or get_modeled_venture_for_user() returned -- both include the full
+    `assumptions` dict, but this function reads only the specific,
+    named sub-fields it builds evidence strings from. It never returns
+    `assumptions` itself, never reads/returns `description`, and never
+    reads/returns economics.expected_gross_margin_pct, gtm.expected_cac,
+    or capital.* -- those fields are structurally never touched here,
+    not merely omitted from the output.
+    """
+    assumptions = venture.get("assumptions") or {}
+    problem_solution = assumptions.get("problem_solution") or {}
+    validation = assumptions.get("validation") or {}
+    economics = assumptions.get("economics") or {}
+    model_result = venture.get("model_result") or {}
+
+    evidence: list[str] = []
+    if show_validation:
+        interviews = validation.get("customer_interviews")
+        if interviews:
+            evidence.append(f"{interviews:,} customer conversation{'s' if interviews != 1 else ''} reported")
+
+        waitlist = validation.get("waitlist_signups")
+        if waitlist:
+            evidence.append(f"{waitlist:,} waitlist signup{'s' if waitlist != 1 else ''}")
+
+        paying = validation.get("paying_customers")
+        if paying:
+            evidence.append(f"{paying:,} paying customer{'s' if paying != 1 else ''} reported")
+
+        price_point = economics.get("price_point")
+        if price_point:
+            evidence.append(f"${price_point:,.0f}/month pricing")
+
+        revenue = validation.get("monthly_revenue")
+        if revenue:
+            evidence.append(f"${revenue:,.0f}/mo modeled revenue")
+
+        retention = validation.get("retention_pct")
+        if retention:
+            evidence.append(f"{retention:g}% retention reported")
+
+    next_milestones = model_result.get("next_milestones") or []
+    current_frontier = next_milestones[0] if next_milestones else None
+
+    vps_value = model_result.get("vps") if show_vps else None
+    vps_categories = None
+    if show_vps:
+        vps_categories = [
+            VentureSnapshotCategory(key=c["key"], label=c["label"], score=c.get("score"))
+            for c in (model_result.get("categories") or [])
+        ]
+
+    return VentureSnapshotResponse(
+        name=venture["name"],
+        stage=venture.get("stage"),
+        problem_statement=problem_solution.get("problem_statement"),
+        solution_description=problem_solution.get("solution_description"),
+        target_customer=venture.get("target_customer"),
+        evidence=evidence,
+        current_frontier=current_frontier,
+        vps=vps_value,
+        vps_categories=vps_categories,
+        updated_at=venture["updated_at"],
+    )
+
+
+@app.get("/ventures/{venture_id}/share", response_model=VentureShareSettings)
+def get_venture_share(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    settings = get_venture_share_settings_for_owner(current_user.user_id, venture_id)
+
+    if settings is None:
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    return VentureShareSettings(
+        enabled=settings["share_enabled"],
+        public_id=settings["share_public_id"],
+        show_vps=settings["share_show_vps"],
+        show_validation=settings["share_show_validation"],
+    )
+
+
+@app.get("/ventures/{venture_id}/share/preview", response_model=VentureSnapshotResponse)
+def preview_venture_share(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """
+    The founder's own preview -- rendered with the SAME DTO builder the
+    public endpoint uses below, so "what I'm about to share" can never
+    look safer than what a recipient actually receives (Part 16). Reads
+    the venture's CURRENT share_show_vps/share_show_validation toggles,
+    regardless of whether sharing is currently enabled -- a founder must
+    be able to preview before ever turning sharing on.
+    """
+    venture = _require_owned_venture(current_user, venture_id)
+    settings = get_venture_share_settings_for_owner(current_user.user_id, venture_id)
+
+    return _build_venture_snapshot(
+        venture,
+        show_vps=bool(settings and settings["share_show_vps"]),
+        show_validation=bool(settings is None or settings["share_show_validation"]),
+    )
+
+
+@app.put("/ventures/{venture_id}/share", response_model=VentureShareSettings)
+def update_venture_share(
+    venture_id: int,
+    request: UpdateVentureShareRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    updated = update_venture_share_settings_for_owner(
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        enabled=request.enabled,
+        show_vps=request.show_vps,
+        show_validation=request.show_validation,
+    )
+
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Venture not found.")
+
+    return VentureShareSettings(
+        enabled=updated["share_enabled"],
+        public_id=updated["share_public_id"],
+        show_vps=updated["share_show_vps"],
+        show_validation=updated["share_show_validation"],
+    )
+
+
+@app.get("/ventures/share/{public_id}", response_model=VentureSnapshotResponse)
+def get_public_venture_snapshot(public_id: str):
+    """
+    THE public route. No auth dependency at all -- matches this file's
+    own existing public-endpoint precedent (get_startup_profile,
+    startup_trends). get_venture_by_share_public_id() already filters on
+    share_enabled=TRUE in SQL, so a disabled or never-shared id returns
+    None here -- indistinguishable, by design, from a malformed/unknown
+    one (never leaks which case it was).
+    """
+    venture = get_venture_by_share_public_id(public_id)
+
+    if venture is None:
+        raise HTTPException(status_code=404, detail="This venture snapshot is not available.")
+
+    return _build_venture_snapshot(
+        venture,
+        show_vps=bool(venture["share_show_vps"]),
+        show_validation=bool(venture["share_show_validation"]),
+    )
 
 
 @app.post("/ventures/scenario-compare", response_model=ScenarioCompareResponse)

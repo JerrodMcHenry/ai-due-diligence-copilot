@@ -1,6 +1,7 @@
 import os
 import json
 import hashlib
+import secrets
 from datetime import datetime
 
 from dotenv import load_dotenv
@@ -3062,6 +3063,151 @@ def delete_modeled_venture_for_user(user_id: str, venture_id: int) -> bool:
         """), {"venture_id": venture_id, "user_id": user_id})
 
         return result.rowcount > 0
+
+
+# ---------------------------------------------------------------------------
+# Phase 27 -- Shareable Venture Snapshot V1. Four narrowly-scoped additive
+# columns on the EXISTING modeled_ventures table -- no new table, no
+# generic "permissions"/"visibility" system. Investigated first (Part 1):
+# no share/public-token architecture existed anywhere in this repository
+# before this phase.
+#
+# share_public_id is generated ONCE, the first time sharing is ever
+# enabled, and never regenerated or deleted afterward -- disabling sets
+# share_enabled=false but leaves the id in place, so re-enabling reuses
+# the exact same URL (Part 15's "do not build snapshot versioning," and
+# Part 6's "prefer an opaque public identifier... venture IDs directly
+# enumerable" -- a random, unguessable token, never the sequential
+# integer `id` this table already exposes internally). The value itself
+# is never treated as a secret credential -- knowing it is exactly
+# equivalent to having the link, which is the intended sharing model
+# (Part 4/6's own "a person needs the link," not a password).
+def add_venture_share_columns():
+    columns = [
+        "share_enabled BOOLEAN NOT NULL DEFAULT FALSE",
+        "share_public_id TEXT",
+        "share_show_vps BOOLEAN NOT NULL DEFAULT FALSE",
+        "share_show_validation BOOLEAN NOT NULL DEFAULT TRUE",
+    ]
+
+    for column in columns:
+        column_name = column.split()[0]
+        try:
+            with engine.begin() as connection:
+                connection.execute(text(
+                    f"ALTER TABLE modeled_ventures ADD COLUMN {column}"
+                ))
+            print(f"{column_name} column added")
+        except Exception as e:
+            print(f"{column_name} migration skipped", e)
+
+    # A unique index, not a UNIQUE column constraint, so multiple rows
+    # that have never enabled sharing (share_public_id IS NULL) don't
+    # collide against Postgres's own NULL-uniqueness semantics -- this
+    # index only ever needs to guarantee uniqueness among REAL, generated
+    # tokens.
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                CREATE UNIQUE INDEX IF NOT EXISTS idx_modeled_ventures_share_public_id
+                ON modeled_ventures (share_public_id)
+                WHERE share_public_id IS NOT NULL
+            """))
+        print("idx_modeled_ventures_share_public_id index created")
+    except Exception as e:
+        print("idx_modeled_ventures_share_public_id migration skipped", e)
+
+
+def get_venture_share_settings_for_owner(user_id: str, venture_id: int) -> dict | None:
+    """Owner-only read of the current share settings. Returns None (never
+    a 404-shaped partial) when the venture doesn't exist or belongs to a
+    different user -- the same non-leaking shape get_modeled_venture_for_user()
+    already established."""
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT share_enabled, share_public_id, share_show_vps, share_show_validation
+            FROM modeled_ventures
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id}).mappings().first()
+
+    return dict(row) if row is not None else None
+
+
+def update_venture_share_settings_for_owner(
+    user_id: str,
+    venture_id: int,
+    enabled: bool,
+    show_vps: bool,
+    show_validation: bool,
+) -> dict | None:
+    """Enables/disables sharing and updates the two visibility toggles in
+    one call. Generates share_public_id ONLY the first time `enabled` is
+    True and no id exists yet -- every subsequent enable/disable cycle
+    reuses that same id (Part 14/15's own "disable, then re-enable if
+    architecture supports it" and "URL remains stable" requirements)."""
+    with engine.begin() as connection:
+        current = connection.execute(text("""
+            SELECT share_public_id FROM modeled_ventures
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id}).mappings().first()
+
+        if current is None:
+            return None
+
+        public_id = current["share_public_id"]
+        if enabled and not public_id:
+            # 16 bytes of randomness, URL-safe -- ~128 bits of entropy,
+            # structurally unguessable (Part 6's own "do not make venture
+            # IDs directly enumerable" requirement, satisfied by using
+            # secrets.token_urlsafe rather than the sequential `id`).
+            public_id = secrets.token_urlsafe(16)
+
+        connection.execute(text("""
+            UPDATE modeled_ventures
+            SET share_enabled = :enabled,
+                share_public_id = :public_id,
+                share_show_vps = :show_vps,
+                share_show_validation = :show_validation
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "enabled": enabled,
+            "public_id": public_id,
+            "show_vps": show_vps,
+            "show_validation": show_validation,
+        })
+
+        row = connection.execute(text("""
+            SELECT share_enabled, share_public_id, share_show_vps, share_show_validation
+            FROM modeled_ventures
+            WHERE id = :venture_id AND user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id}).mappings().first()
+
+    return dict(row) if row is not None else None
+
+
+def get_venture_by_share_public_id(public_id: str) -> dict | None:
+    """THE public, unauthenticated lookup. Returns None both when no
+    venture has this public_id at all AND when one does but sharing is
+    currently disabled -- a caller can never distinguish "wrong link" from
+    "this founder turned sharing off," matching this module's own
+    established non-leaking-404 precedent (get_modeled_venture_for_user's
+    docstring) one level up. share_enabled is checked in SQL, not in
+    Python after the fact, so a disabled venture's row is never even
+    returned to the caller."""
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT id, name, stage, target_customer, assumptions, model_result,
+                   share_show_vps, share_show_validation, updated_at
+            FROM modeled_ventures
+            WHERE share_public_id = :public_id AND share_enabled = TRUE
+        """), {"public_id": public_id}).mappings().first()
+
+    if row is None:
+        return None
+
+    return _parse_venture_row(dict(row))
 
 
 # ---------------------------------------------------------------------------

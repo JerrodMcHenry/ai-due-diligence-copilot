@@ -141,6 +141,48 @@ export interface VentureSummary {
   updated_at: string;
 }
 
+// ---------------------------------------------------------------------------
+// Phase 27 -- Shareable Venture Snapshot V1. Mirrors app/models/idea_lab.py's
+// own UpdateVentureShareRequest / VentureShareSettings / VentureSnapshotCategory
+// / VentureSnapshotResponse exactly.
+// ---------------------------------------------------------------------------
+
+export interface UpdateVentureShareRequest {
+  enabled: boolean;
+  show_vps: boolean;
+  show_validation: boolean;
+}
+
+export interface VentureShareSettings {
+  enabled: boolean;
+  public_id: string | null;
+  show_vps: boolean;
+  show_validation: boolean;
+}
+
+export interface VentureSnapshotCategory {
+  key: string;
+  label: string;
+  score: number | null;
+}
+
+// THE allowlisted public shape -- returned by both the founder's own
+// preview and the public route. Deliberately has no field for raw
+// description, assumptions, history, captures, actions, or any
+// fundraising/cap-table data -- see the backend model's own docstring.
+export interface VentureSnapshotResponse {
+  name: string;
+  stage: string | null;
+  problem_statement: string | null;
+  solution_description: string | null;
+  target_customer: string | null;
+  evidence: string[];
+  current_frontier: string | null;
+  vps: number | null;
+  vps_categories: VentureSnapshotCategory[] | null;
+  updated_at: string;
+}
+
 export interface CreateVentureRequest {
   name: string;
   description?: string | null;
