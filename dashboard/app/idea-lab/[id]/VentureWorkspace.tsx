@@ -551,6 +551,8 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           {scenario ? (
             <ScenarioComparison
               scenario={scenario}
+              currentAssumptions={venture.assumptions}
+              scenarioAssumptions={draft}
               onApply={handleSave}
               onDiscard={() => setScenario(null)}
               isApplying={isSaving}

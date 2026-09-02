@@ -3,6 +3,7 @@ import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { getMetricConceptForWhatIfScenario } from "@/content/concepts";
 
 import { getWhatIfScenarios } from "./whatIfScenarios";
+import CustomScenarioForm from "./CustomScenarioForm";
 
 import type { VentureAssumptions } from "@/types";
 
@@ -50,10 +51,16 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
 
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">What if?</h3>
+      {/* Simulate V1, Part 3: "What if?" is now founder-facing "Simulate"
+          -- nothing about the underlying mechanism changed (this is still
+          the exact same WhatIfPanel component, still the same
+          onRunScenario/compareVentureScenarios path; only the label and
+          supporting copy changed, per Part 3's own "do not rename backend
+          functions unnecessarily"). */}
+      <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">Simulate</h3>
       <p className="mt-1 text-xs text-text-muted">
-        Try a real scenario, based on where your venture stands today — nothing is saved until you choose to
-        apply it.
+        Explore how different assumptions could affect your venture without changing your actual model — nothing
+        is saved until you choose to apply it.
       </p>
 
       <div className="mt-3 flex flex-wrap gap-2">
@@ -99,6 +106,12 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
           ))}
         </div>
       ) : null}
+
+      {/* Simulate V1, Part 7/17: one custom-scenario affordance, same
+          interface for every founder (no beginner/advanced toggle) --
+          collapsed by default so it never competes with the one-tap
+          presets above it. */}
+      <CustomScenarioForm currentAssumptions={currentAssumptions} onRunScenario={onRunScenario} isRunning={isRunning} />
     </div>
   );
 }

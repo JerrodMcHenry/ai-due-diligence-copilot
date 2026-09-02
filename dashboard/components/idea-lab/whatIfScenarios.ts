@@ -23,6 +23,12 @@
 // category -- see that module's own `_CATEGORY_SCORERS` -- so no
 // scenario here touches it; a burn/runway "what if" would preview zero
 // VPS change, which would look broken even though it's honest).
+// Simulate V1: the commercial-scale threshold now lives in one shared
+// pure module (lib/simulate/hasCommercialScale.ts) -- reused unchanged by
+// the new custom-scenario builder. Same relative-import-with-extension
+// convention this file's own docstring below already follows.
+import { hasCommercialScale as computeHasCommercialScale } from "../../lib/simulate/hasCommercialScale.ts";
+
 // A structural subset of VentureAssumptions -- only the fields this
 // module actually reads/writes. Deliberately not imported from "@/types"
 // (zero "@/..." alias imports here, same discipline as
@@ -82,7 +88,7 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
   // paying customers and $11.8M ARR was offered this exact scenario).
   // "Is the problem real" is no longer a meaningful open question at
   // this scale; it isn't lower-priority, it's inapplicable.
-  const hasCommercialScale = (paying !== null && paying >= 10) || (revenue !== null && revenue >= 10_000);
+  const hasCommercialScale = computeHasCommercialScale(paying, revenue);
 
   // --- Validation upside: always relative to what's already reported ---
 
