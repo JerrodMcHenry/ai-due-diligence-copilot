@@ -41,7 +41,7 @@ export default function ConceptDisclosure({ conceptKey, value = null, className 
 
   return (
     <details className={["group mt-1.5", className].join(" ")}>
-      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-[11px] font-semibold text-primary marker:content-none hover:text-primary-hover">
+      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary marker:content-none hover:text-primary-hover">
         What&rsquo;s this?
         <span aria-hidden="true" className="text-text-muted transition-transform group-open:rotate-180">▾</span>
       </summary>

@@ -259,6 +259,18 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // writes to the other; switching tabs never mutates the venture (Part 23).
   const [simulateTab, setSimulateTab] = useState<"venture" | "fundraising">("venture");
 
+  // Phase 29B Closure, Part 2. See MissionsSection's own
+  // missionsRefreshSignal comment for the full root cause: a capture
+  // saved via CaptureWhatHappened creates a completed-status mission row
+  // MissionsSection has no trigger to know about, so its own "N actions
+  // completed" count went stale relative to VentureProgress's (sourced
+  // from history). Bumped from the exact same onHistoryChanged callback
+  // CaptureWhatHappened already calls after every save below -- no new
+  // fetch, no new endpoint, just reusing the existing "something in
+  // history-relevant state changed" signal to also tell MissionsSection
+  // to reload.
+  const [missionsRefreshSignal, setMissionsRefreshSignal] = useState(0);
+
   const refreshHistory = useCallback(async () => {
     const token = await getToken();
     if (!token) return;
@@ -691,7 +703,14 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             setScenario(null);
             refreshHistory();
           }}
-          onHistoryChanged={refreshHistory}
+          onHistoryChanged={() => {
+            refreshHistory();
+            // Phase 29B Closure, Part 2 -- see missionsRefreshSignal's own
+            // comment above. Fires for both a new capture (handleSave)
+            // and a model update tied to one (handleUpdateModel) -- either
+            // way, MissionsSection's own missions list may now be stale.
+            setMissionsRefreshSignal((n) => n + 1);
+          }}
           onStartMission={(title, suggestion) =>
             setPendingMission({
               title,
@@ -714,6 +733,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           ventureId={ventureId}
           currentAssumptions={venture.assumptions}
           currentModelResult={venture.model_result}
+          missionsRefreshSignal={missionsRefreshSignal}
           ventureRequestBase={{
             name: name.trim() || "Untitled venture",
             description,

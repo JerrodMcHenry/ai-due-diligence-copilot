@@ -297,7 +297,7 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
                 >
                   <div className="min-w-0">
                     <p className="text-sm text-text-primary">{suggestion.text}</p>
-                    <span className="mt-1 inline-block rounded-full border border-border px-2 py-0.5 text-[11px] font-medium text-text-muted">
+                    <span className="mt-1 inline-block rounded-full border border-border px-2 py-0.5 text-xs font-medium text-text-muted">
                       {suggestion.pillarLabel}
                     </span>
                   </div>
@@ -485,12 +485,12 @@ function ActionRow({
 
       <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
         {pillarLabel ? (
-          <span className="rounded-full border border-border px-2 py-0.5 text-[11px] font-medium text-text-muted">
+          <span className="rounded-full border border-border px-2 py-0.5 text-xs font-medium text-text-muted">
             {pillarLabel}
           </span>
         ) : null}
         {action.source === "sie_recommendation" ? (
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
             SIE
           </span>
         ) : null}
@@ -498,7 +498,7 @@ function ActionRow({
             action from an SIE pillar recommendation -- same idea, a
             different source/provenance, per Part 16's own requirement. */}
         {action.source === "fundraising_gap" ? (
-          <span className="rounded-full bg-warning/10 px-2 py-0.5 text-[11px] font-medium text-warning">
+          <span className="rounded-full bg-warning/10 px-2 py-0.5 text-xs font-medium text-warning">
             Fundraising
           </span>
         ) : null}

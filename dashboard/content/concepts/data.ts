@@ -163,16 +163,20 @@ export const METRIC_CONCEPTS: Record<string, MetricConcept> = {
 const FUNDRAISING_CONCEPTS: Record<string, MetricConcept> = {
   safe: {
     key: "safe",
-    name: "SAFE (Simple Agreement for Future Equity)",
+    // Phase 29B, Part 9: the engine only ever models the specific
+    // "Post-Money SAFE" structure (Y Combinator's own standard, see
+    // lib/fundraising/safe.ts's docstring) -- named explicitly here so a
+    // founder never assumes this supports a generic or pre-money SAFE.
+    name: "Post-Money SAFE (Simple Agreement for Future Equity)",
     whatIsThis:
-      "A SAFE is a common early-stage investment document where an investor gives you money now in exchange for equity later -- usually when you raise a priced round in the future. It is not a loan (no interest, no repayment obligation) and it is not equity yet.",
+      "A SAFE is a common early-stage investment document where an investor gives you money now in exchange for equity later -- usually when you raise a priced round in the future. It is not a loan (no interest, no repayment obligation) and it is not equity yet. This tool specifically models the \"Post-Money\" SAFE structure (the current market standard) -- your ownership percentage after conversion is calculated against the company's value AFTER this SAFE money comes in, not before.",
     whyItMatters:
       "SAFEs let founders raise money quickly without agreeing on a company valuation up front. But the terms you agree to now -- especially the valuation cap -- determine how much ownership that money converts into later, so it's worth understanding before you sign one.",
     playbookSlug: "cap-table",
     personalize: (value) =>
       value === null
-        ? "This scenario doesn't have a SAFE amount yet. Once you enter one, you can see roughly what it would be worth if it converted today."
-        : `This scenario models a SAFE investment of about $${value.toLocaleString()}.`,
+        ? "This scenario doesn't have a Post-Money SAFE amount yet. Once you enter one, you can see roughly what it would be worth if it converted today."
+        : `This scenario models a Post-Money SAFE investment of about $${value.toLocaleString()}.`,
   },
   valuation_cap: {
     key: "valuation_cap",

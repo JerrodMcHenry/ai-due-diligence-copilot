@@ -20,7 +20,7 @@ export default function VentureSnapshotCard({ snapshot }: { snapshot: VentureSna
   return (
     <BaseCard variant="raised" className="mx-auto max-w-xl overflow-hidden p-0">
       <div className="bg-gradient-to-br from-primary-soft to-surface p-6 sm:p-8">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Venture</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Venture</p>
         <h1 className="mt-1 text-2xl font-bold text-text-primary sm:text-3xl">{snapshot.name}</h1>
         {snapshot.stage ? (
           <span className="mt-2 inline-block rounded-full bg-primary-soft px-3 py-1 text-xs font-semibold text-primary">
@@ -96,7 +96,10 @@ export default function VentureSnapshotCard({ snapshot }: { snapshot: VentureSna
                   ))}
               </ul>
             ) : null}
-            <p className="mt-3 text-[11px] leading-5 text-text-muted">
+            {/* Phase 29B, Part 7/10: bumped from an arbitrary 11px -- this
+                disclaimer is exactly the trust-framing language a public
+                viewer needs to actually read, not tertiary metadata. */}
+            <p className="mt-3 text-xs leading-5 text-text-muted">
               A model-based assessment from the information provided to SIE — not a company-quality, investment,
               or success prediction.
             </p>

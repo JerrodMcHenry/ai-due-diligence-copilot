@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
@@ -140,6 +140,23 @@ type MissionsSectionProps = {
   // founder's current action without a second fetch or a second
   // definition of "current action."
   onPrimaryMissionChanged?: (title: string | null) => void;
+  // Phase 29B Closure, Part 2. A real, live-observed defect: this
+  // section's own "N actions completed" count (below) and
+  // VentureProgress's "Actions completed" stat (sourced from
+  // GET /ventures/{id}/history) are the SAME concept -- every
+  // venture_missions row with status "completed", captures included --
+  // but this component only ever reloads its own `missions` list on
+  // mount or its own internal mutations (handleStatusChange, creating a
+  // custom action). A capture saved through the sibling
+  // CaptureWhatHappened component creates a new completed-status mission
+  // row directly, with no callback wired to tell THIS component to
+  // reload -- so its count went stale (observed live: 0 vs. 1, then 1
+  // vs. 2, after two captures). Bumped by the parent (VentureWorkspace)
+  // from the exact same onHistoryChanged callback CaptureWhatHappened
+  // already calls after every save -- no new endpoint, no new progress
+  // system, just telling this component about a change it already had
+  // the data to reflect.
+  missionsRefreshSignal?: number;
 };
 
 export type { RecentLearning };
@@ -155,6 +172,7 @@ export default function MissionsSection({
   onPendingMissionConsumed,
   onVentureUpdated,
   onMissionTitlesChanged,
+  missionsRefreshSignal,
   onRecentLearningChanged,
   onPrimaryMissionChanged,
 }: MissionsSectionProps) {
@@ -220,6 +238,22 @@ export default function MissionsSection({
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ventureId]);
+
+  // Phase 29B Closure, Part 2 -- see missionsRefreshSignal's own comment
+  // above. Skips the very first render (the mount effect right above
+  // already covers that) so bumping the signal never causes a redundant
+  // duplicate fetch on load; every bump after that reloads this
+  // component's own missions list so its "N actions completed" count
+  // never goes stale relative to a capture saved by its sibling.
+  const isFirstMissionsRefreshSignal = useRef(true);
+  useEffect(() => {
+    if (isFirstMissionsRefreshSignal.current) {
+      isFirstMissionsRefreshSignal.current = false;
+      return;
+    }
+    loadMissions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [missionsRefreshSignal]);
 
   useEffect(() => {
     onMissionTitlesChanged?.(missions.filter((m) => m.source === "vps_guidance").map((m) => m.title));

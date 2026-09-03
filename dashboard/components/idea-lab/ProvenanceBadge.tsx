@@ -8,7 +8,7 @@ import type { DraftProvenance } from "@/types";
 export default function ProvenanceBadge({ provenance }: { provenance: DraftProvenance }) {
   if (provenance === "user_provided") {
     return (
-      <span className="rounded-full bg-primary-soft px-2 py-0.5 text-[10px] font-semibold text-primary">
+      <span className="rounded-full bg-primary-soft px-2 py-0.5 text-xs font-semibold text-primary">
         Based on your description
       </span>
     );
@@ -16,14 +16,14 @@ export default function ProvenanceBadge({ provenance }: { provenance: DraftProve
 
   if (provenance === "ai_inferred") {
     return (
-      <span className="rounded-full bg-warning-soft px-2 py-0.5 text-[10px] font-semibold text-warning">
+      <span className="rounded-full bg-warning-soft px-2 py-0.5 text-xs font-semibold text-warning">
         Modeled assumption
       </span>
     );
   }
 
   return (
-    <span className="rounded-full bg-surface-muted px-2 py-0.5 text-[10px] font-medium text-text-muted">
+    <span className="rounded-full bg-surface-muted px-2 py-0.5 text-xs font-medium text-text-muted">
       Not provided yet
     </span>
   );

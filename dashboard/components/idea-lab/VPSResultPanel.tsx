@@ -64,7 +64,12 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
 
         <div className="mx-auto mt-4 max-w-md">
           <Disclosure summary="What does this score mean?">
-            <ul className="space-y-1.5 text-xs leading-5 text-text-secondary">
+            {/* Phase 29B, Part 7: bumped from text-xs -- this is the core
+                explanation of what the founder's score means, standing on
+                its own with room to breathe (not a compact card), so it
+                belongs with "important supporting copy" rather than
+                tertiary metadata. */}
+            <ul className="space-y-1.5 text-sm leading-6 text-text-secondary">
               {/* Phase 14 -- Founder Journey Audit, Part 8/10: rewritten
                   without bare "VPS"/"SPS" acronyms. Neither term is
                   defined anywhere else in the modeled-venture founder
@@ -92,7 +97,7 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
             -- never a general "what's affecting this score" dump of the
             internal model, and never shown when it doesn't apply. */}
         {result.sole_uncorroborated_category ? (
-          <p className="mx-auto mt-3 max-w-md text-center text-xs text-text-muted">
+          <p className="mx-auto mt-3 max-w-md text-center text-sm text-text-muted">
             Only one part of your model is scored so far, and nothing here has been
             independently validated yet — so this score reflects that it&rsquo;s a single,
             uncorroborated assumption, not the category score shown below. A second
@@ -136,9 +141,9 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
                 </div>
 
                 {category.score === null ? (
-                  <p className="mt-1.5 text-[11px] text-text-muted">We don&rsquo;t know this yet</p>
+                  <p className="mt-1.5 text-xs text-text-muted">We don&rsquo;t know this yet</p>
                 ) : category.basis.length > 0 ? (
-                  <p className="mt-1.5 truncate text-[11px] text-text-muted">{category.basis[0]}</p>
+                  <p className="mt-1.5 truncate text-xs text-text-muted">{category.basis[0]}</p>
                 ) : null}
 
                 {/* Learn V1, Part 5/6: WHAT this category means and WHY it

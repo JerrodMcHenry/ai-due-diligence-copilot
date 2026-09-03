@@ -76,7 +76,11 @@ export default function VentureJourney({ stage, assumptions = null }: VentureJou
               </span>
               <span
                 className={[
-                  "text-[11px] font-semibold",
+                  // Phase 29B, Part 7: bumped from an arbitrary 11px (below
+                  // the design system's own smallest defined step) to
+                  // text-xs -- this is the founder's primary journey-stage
+                  // wayfinding label, not tertiary metadata.
+                  "text-xs font-semibold",
                   index === activeIndex ? "text-primary" : "text-text-muted",
                 ].join(" ")}
               >
@@ -95,7 +99,7 @@ export default function VentureJourney({ stage, assumptions = null }: VentureJou
         ))}
       </div>
 
-      <p className="mt-3 text-center text-[11px] text-text-muted">{explanation}</p>
+      <p className="mt-3 text-center text-xs text-text-muted">{explanation}</p>
     </div>
   );
 }

@@ -93,7 +93,7 @@ export default function VentureProgress({ history, isLoading }: VentureProgressP
 function SummaryStat({ label, value }: { label: string; value: string }) {
   return (
     <div>
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">{label}</p>
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{label}</p>
       <p className="mt-0.5 text-lg font-bold text-text-primary">{value}</p>
     </div>
   );

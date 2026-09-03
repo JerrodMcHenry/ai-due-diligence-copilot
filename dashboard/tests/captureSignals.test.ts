@@ -202,6 +202,42 @@ function test_failed_experiment_is_neutral_not_punitive(): void {
   expect(experiment!.polarity !== "negative" || !experiment!.label.toLowerCase().includes("fail"), "Experiment outcome must not be labeled with punitive language even though the founder's own word was 'failed'");
 }
 
+// Phase 29B Closure, Part 3 -- a real, live-reproduced gap: "Two more
+// customers signed up this week" produced NO paying-customer signal at
+// all (the existing NEW_CUSTOMER_PATTERN requires "signed"/"closed"
+// immediately followed by the word "customer", not a preceding count).
+// Mirrors test_countable_churn_is_model_relevant's own shape exactly --
+// same field, opposite direction.
+function test_countable_new_customers_is_model_relevant(): void {
+  const text = "Two more customers signed up this week.";
+  const signals = extractCaptureSignals(text);
+  const growth = signals.find((s) => s.fieldPath === "validation.paying_customers");
+  expect(growth !== undefined, "A countable new-customer mention must propose a paying_customers delta");
+  expect(growth!.proposedValue === 2, `Must propose a +2 delta, got ${growth!.proposedValue}`);
+  expect(growth!.polarity === "positive", "New paying customers are positive evidence");
+}
+
+function test_countable_new_customers_recognizes_started_paying_phrasing(): void {
+  const signals = extractCaptureSignals("Three users started paying this month.");
+  const growth = signals.find((s) => s.fieldPath === "validation.paying_customers");
+  expect(growth !== undefined, "'started paying' must be recognized as a countable new-paying-customer signal");
+  expect(growth!.proposedValue === 3, `Must propose a +3 delta, got ${growth!.proposedValue}`);
+}
+
+// The exact original live-reproduced sentence: a domain-specific noun
+// ("contractors" instead of customers/users/clients) still does not
+// match -- documented as a deliberate limit (Phase 29B Closure, Part 3's
+// own conclusion), not an oversight. Covering arbitrary business
+// vocabulary would require broader inference than a fixed pattern can
+// safely offer.
+function test_domain_specific_noun_remains_a_documented_gap(): void {
+  const signals = extractCaptureSignals(
+    "Two more contractors signed up this week at $25/month, bringing us to 5 paying customers."
+  );
+  const growth = signals.find((s) => s.fieldPath === "validation.paying_customers");
+  expect(growth === undefined, "A domain-specific noun ('contractors') is a documented, deliberate gap, not something this fix claims to cover");
+}
+
 // --- Determinism / purity -----------------------------------------------
 
 function test_extraction_is_pure_and_deterministic(): void {
@@ -226,6 +262,9 @@ const TESTS = [
   test_complaint_is_distinct_from_churn,
   test_retention_percentage_is_model_relevant,
   test_churn_examples_are_differentiated,
+  test_countable_new_customers_is_model_relevant,
+  test_countable_new_customers_recognizes_started_paying_phrasing,
+  test_domain_specific_noun_remains_a_documented_gap,
   test_product_shipped_is_informational_only,
   test_investor_note_is_informational_only,
   test_failed_experiment_is_neutral_not_punitive,

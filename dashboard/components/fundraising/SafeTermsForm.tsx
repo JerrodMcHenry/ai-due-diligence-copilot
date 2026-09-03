@@ -45,7 +45,11 @@ export default function SafeTermsForm({ safes, onChange }: SafeTermsFormProps) {
       {safes.map((safe, i) => (
         <div key={safe.id} className="rounded-2xl border border-border p-4">
           <div className="flex items-center justify-between gap-2">
-            <p className="text-sm font-semibold text-text-primary">SAFE {i + 1}</p>
+            {/* Phase 29B, Part 9: the engine only ever models a Post-Money
+                SAFE (lib/fundraising/safe.ts) -- named explicitly right
+                where the founder enters terms, not just in a glossary
+                entry they may never open. */}
+            <p className="text-sm font-semibold text-text-primary">Post-Money SAFE {i + 1}</p>
             {safes.length > 1 ? (
               <Button type="button" variant="subtle" size="sm" onClick={() => remove(safe.id)} className="hover:text-danger">
                 Remove

@@ -107,7 +107,21 @@ def _score_market_potential(assumptions: dict) -> CategoryResult:
     intensity = market.get("competition_intensity")
     description = market.get("market_description")
 
-    if size is None and intensity is None and not description:
+    # Phase 29B, Part 3/5 -- a real, live-reproduced defect: `description`
+    # is free text that never itself contributes a point to `score` below
+    # (it only ever produces a basis NOTE) -- but its mere presence used to
+    # be enough, on its own, to flip this category from Unavailable to
+    # "scored" at exactly the neutral base (5.0), silently mixing a
+    # non-informative 5.0 into compute_vps()'s weighted average. Live
+    # reproduction (the same "structured early startup" fixture, run 5
+    # times) showed the LLM inconsistently choosing whether to paraphrase
+    # context into this field, producing VPS 4.4 four times and 4.6 once
+    # for otherwise-identical founder-stated facts -- purely because one
+    # run additionally wrote a market_description sentence carrying no
+    # actual size/competition signal. Only `size`/`intensity` (the two
+    # fields that actually move `score` below) can establish this category
+    # as scored now; `description` alone no longer can.
+    if size is None and intensity is None:
         return CategoryResult("market_potential", VPS_CATEGORY_LABELS["market_potential"], None)
 
     basis = []
@@ -122,9 +136,6 @@ def _score_market_potential(assumptions: dict) -> CategoryResult:
     if intensity in intensity_points:
         score += intensity_points[intensity]
         basis.append(f"Assumed competitive intensity: {intensity}")
-
-    if description and size is None and intensity is None:
-        basis.append("Market description provided, but no size/competition assumption")
 
     return CategoryResult("market_potential", VPS_CATEGORY_LABELS["market_potential"], _clamp(score), basis)
 
@@ -232,17 +243,39 @@ def _score_gtm_feasibility(assumptions: dict) -> CategoryResult:
         score += 1.0
         basis.append(f"Stated acquisition strategy: {strategy}")
 
-    if cac is not None and price_point:
-        ratio = price_point / cac if cac > 0 else 0
-        if ratio > 3:
-            score += 2.0
-            basis.append("Assumed price point comfortably exceeds assumed CAC")
-        elif ratio >= 1:
-            score += 0.5
-            basis.append("Assumed price point modestly exceeds assumed CAC")
+    # Phase 29B, Part 5 -- two real, live-reproduced bugs found by
+    # adversarial testing, both from treating "price_point" as a truthy
+    # check instead of an `is not None` check, and from forcing CAC=0
+    # through the same ratio math as a real positive CAC:
+    #   1. `price_point: 0` (an explicitly-stated free product) was
+    #      treated as `price_point` being ABSENT ("elif cac is not None:
+    #      ... no price point to check it against") -- a fabricated claim
+    #      that nothing was stated, when $0 was in fact stated.
+    #   2. `cac: 0` (the best possible acquisition cost, free) forced
+    #      `ratio = 0`, which fell into the SAME "else" branch as a
+    #      genuinely bad ratio, scoring the best possible input as if CAC
+    #      exceeded price ("Assumed CAC exceeds the assumed price point")
+    #      -- live-verified: cac=0/price=49 scored a 3.0 (penalized),
+    #      *worse* than cac=10/price=49's 7.0. Backwards.
+    if cac is not None and price_point is not None:
+        if cac == 0:
+            if price_point > 0:
+                score += 2.0
+                basis.append("Assumed customer acquisition cost is zero against a positive assumed price point")
+            # price_point == 0 and cac == 0 together carry no informative
+            # ratio -- deliberately silent rather than asserting either
+            # direction (Part 5: never fabricate certainty).
         else:
-            score -= 2.0
-            basis.append("Assumed CAC exceeds the assumed price point")
+            ratio = price_point / cac
+            if ratio > 3:
+                score += 2.0
+                basis.append("Assumed price point comfortably exceeds assumed CAC")
+            elif ratio >= 1:
+                score += 0.5
+                basis.append("Assumed price point modestly exceeds assumed CAC")
+            else:
+                score -= 2.0
+                basis.append("Assumed CAC exceeds the assumed price point")
     elif cac is not None:
         basis.append("CAC assumed, but no price point to check it against")
 
@@ -255,7 +288,17 @@ def _score_economic_potential(assumptions: dict) -> CategoryResult:
     price_point = econ.get("price_point")
     margin = econ.get("expected_gross_margin_pct")
 
-    if not pricing_model and price_point is None and margin is None:
+    # Phase 29B, Part 3/5: the same class of defect just fixed in
+    # _score_market_potential() above -- `price_point` never itself moves
+    # `score` in this function (it's only read here for the availability
+    # check; the actual price-vs-CAC comparison lives in
+    # _score_gtm_feasibility()), so a price_point-only submission used to
+    # silently score this category at exactly the neutral base (5.0) with
+    # an EMPTY basis list -- no explanation at all for why the category
+    # went from Unavailable to a specific number. Only `pricing_model`/
+    # `margin` (the two fields that actually move `score` below) can
+    # establish this category as scored now.
+    if not pricing_model and margin is None:
         return CategoryResult("economic_potential", VPS_CATEGORY_LABELS["economic_potential"], None)
 
     basis = []
@@ -412,7 +455,18 @@ def _score_validation(assumptions: dict) -> CategoryResult:
     prior_revenue = validation.get("prior_monthly_revenue")
     retention_pct = validation.get("retention_pct")
 
-    if interviews is None and waitlist is None and paying is None and revenue is None:
+    # Phase 29B, Part 4/5 -- a real, live-reproduced defect: a founder who
+    # explicitly reports ONLY retention (e.g. "our retention is 65%", no
+    # interview count, waitlist, paying-customer count, or revenue stated
+    # alongside it) had that fact silently discarded entirely -- this
+    # category returned Unavailable, exactly as if nothing had been
+    # reported at all, with the founder's real, explicitly-stated number
+    # invisible anywhere in the response. retention_pct now also
+    # establishes this category as scored; the modifier below already
+    # guards itself on `retention_pct is not None`, so it now actually
+    # runs for this case rather than being unreachable inside the
+    # commercial-only branch below.
+    if interviews is None and waitlist is None and paying is None and revenue is None and retention_pct is None:
         return CategoryResult("validation", VPS_CATEGORY_LABELS["validation"], None)
 
     basis: list[str] = []
@@ -423,10 +477,6 @@ def _score_validation(assumptions: dict) -> CategoryResult:
             basis.append(f"{paying} paying customers reported")
         if revenue:
             basis.append(f"${revenue:,.0f}/mo in reported revenue")
-
-        modifier, modifier_basis = _validation_modifiers(revenue, prior_revenue, retention_pct)
-        score += modifier
-        basis.extend(modifier_basis)
     else:
         # Pre-commercial: the original interview/waitlist formula --
         # never the reported defect, left unchanged (Part 16: don't
@@ -439,6 +489,14 @@ def _score_validation(assumptions: dict) -> CategoryResult:
         if waitlist is not None:
             score += min(max(waitlist, 0) / 200.0, 1.0) * 2.0
             basis.append(f"{waitlist} waitlist signups reported")
+
+    # Growth/retention modifiers now apply regardless of which branch
+    # above established the base score -- previously only reachable from
+    # the commercial branch, which is exactly why a retention-only report
+    # (paying/revenue both unset) never reached this call at all.
+    modifier, modifier_basis = _validation_modifiers(revenue, prior_revenue, retention_pct)
+    score += modifier
+    basis.extend(modifier_basis)
 
     return CategoryResult("validation", VPS_CATEGORY_LABELS["validation"], _clamp(score), basis)
 

@@ -139,6 +139,20 @@ export default function CaptureWhatHappened({
   const [savedMission, setSavedMission] = useState<VentureMission | null>(null);
   const [signals, setSignals] = useState<ProposedSignal[]>([]);
   const [checkedSignalIds, setCheckedSignalIds] = useState<Set<string>>(new Set());
+  // Phase 29B, Part 6 -- a real, live-reproduced bug: the signal preview
+  // below (line ~417) read `currentAssumptions` live, so once
+  // handleUpdateModel() succeeded and the parent's assumptions prop
+  // advanced (e.g. interviews 18 -> 21), this same card kept re-rendering
+  // the SAME fixed delta against the NEW baseline (showing "21 -> 24"),
+  // right next to "What changed," which correctly showed the update had
+  // ALREADY happened -- a founder had no way to tell whether "21 -> 24"
+  // was a still-pending offer or stale leftover math. Frozen once, at the
+  // moment signals are computed, so the preview always reflects what was
+  // true when the founder was actually deciding whether to apply it --
+  // handleUpdateModel() itself is untouched and still reads live
+  // currentAssumptions at click time, so correctness of the actual PUT
+  // is unaffected.
+  const [baselineAssumptions, setBaselineAssumptions] = useState<VentureAssumptions | null>(null);
 
   const [isUpdatingModel, setIsUpdatingModel] = useState(false);
   const [modelUpdateError, setModelUpdateError] = useState<string | null>(null);
@@ -163,6 +177,7 @@ export default function CaptureWhatHappened({
     setError(null);
     setSavedMission(null);
     setSignals([]);
+    setBaselineAssumptions(null);
     setCheckedSignalIds(new Set());
     setModelChangeResult(null);
     setModelChangeCategories(null);
@@ -206,6 +221,7 @@ export default function CaptureWhatHappened({
 
       setSavedMission(mission);
       setSignals(found);
+      setBaselineAssumptions(currentAssumptions);
       // Field-mapped signals default to checked (the founder can still
       // uncheck any of them before choosing "Update my model" -- Part 6's
       // confirm/correct/remove requirement); informational-only signals
@@ -339,7 +355,7 @@ export default function CaptureWhatHappened({
             </button>
           ))}
         </div>
-        <p className="mt-1 text-[11px] text-text-muted">Category is optional -- just for your own organization.</p>
+        <p className="mt-1 text-xs text-text-muted">Category is optional -- just for your own organization.</p>
 
         {fieldMappedPreview.length > 0 ? (
           <p className="mt-3 text-xs text-text-secondary">
@@ -403,7 +419,7 @@ export default function CaptureWhatHappened({
       <p className="text-sm font-semibold text-text-primary">Saved to your venture history.</p>
 
       <div className="mt-3 rounded-lg border border-border bg-surface p-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">You recorded</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">You recorded</p>
         <p className="mt-1 text-sm leading-6 text-text-primary">&ldquo;{savedMission?.learning_summary}&rdquo;</p>
       </div>
 
@@ -414,7 +430,7 @@ export default function CaptureWhatHappened({
           {fieldMappedSignals.length > 0 ? (
             <ul className="mt-2 space-y-2">
               {fieldMappedSignals.map((signal) => {
-                const current = currentFieldValue(currentAssumptions, signal.fieldPath);
+                const current = currentFieldValue(baselineAssumptions ?? currentAssumptions, signal.fieldPath);
                 const isPrice = signal.fieldPath === "economics.price_point";
                 const isPercent = signal.fieldPath === "validation.retention_pct";
                 // interviews/paying_customers propose a +/-delta; price and

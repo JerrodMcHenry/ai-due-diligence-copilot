@@ -344,17 +344,17 @@ function MilestoneRow({
 
         <div className="mt-1 flex flex-wrap items-center gap-1.5">
           <span
-            className={["rounded-full px-2 py-0.5 text-[11px] font-medium", STATUS_BADGE_CLASSES[milestone.status]].join(" ")}
+            className={["rounded-full px-2 py-0.5 text-xs font-medium", STATUS_BADGE_CLASSES[milestone.status]].join(" ")}
           >
             {STATUS_LABELS[milestone.status]}
           </span>
           {pillarLabel ? (
-            <span className="rounded-full border border-border px-2 py-0.5 text-[11px] font-medium text-text-muted">
+            <span className="rounded-full border border-border px-2 py-0.5 text-xs font-medium text-text-muted">
               {pillarLabel}
             </span>
           ) : null}
           {milestone.target_date ? (
-            <span className="text-[11px] text-text-muted">Target: {formatTargetDate(milestone.target_date)}</span>
+            <span className="text-xs text-text-muted">Target: {formatTargetDate(milestone.target_date)}</span>
           ) : null}
         </div>
       </div>

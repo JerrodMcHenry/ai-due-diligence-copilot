@@ -35,7 +35,11 @@ function FieldWrapper({ label, htmlFor, children, badge, hint }: FieldWrapperPro
       </div>
       {children}
       {hint ? (
-        <p className="mt-1 text-[11px] italic leading-4 text-text-muted">You said: &ldquo;{hint}&rdquo;</p>
+        // Phase 29B, Part 7: bumped from an arbitrary 11px -- this is the
+        // founder's own verbatim words, and this one shared wrapper
+        // renders the hint for every field across the entire venture
+        // creation/review form, so the fix applies everywhere at once.
+        <p className="mt-1 text-xs italic leading-5 text-text-muted">You said: &ldquo;{hint}&rdquo;</p>
       ) : null}
     </div>
   );

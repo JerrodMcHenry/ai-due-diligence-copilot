@@ -85,7 +85,7 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
           >
             <span
               className={[
-                "rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide",
+                "rounded-full px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide",
                 scenario.direction === "upside"
                   ? "bg-success-soft text-success"
                   : "bg-danger-soft text-danger",
@@ -100,7 +100,7 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
 
       {referencedConceptKeys.length > 0 ? (
         <div className="mt-3 space-y-1.5 border-t border-border pt-3">
-          <p className="text-[11px] font-semibold text-text-muted">New to these terms?</p>
+          <p className="text-xs font-semibold text-text-muted">New to these terms?</p>
           {referencedConceptKeys.map((key) => (
             <ConceptDisclosure key={key} conceptKey={key} value={conceptValueByKey[key] ?? null} />
           ))}

@@ -188,6 +188,49 @@ function extractNewCustomerSignal(text: string): ProposedSignal[] {
   }];
 }
 
+// Phase 29B Closure, Part 3 -- a real, live-reproduced gap: a founder
+// writing "Two more customers signed up this week" got NO paying-customer
+// signal at all (NEW_CUSTOMER_PATTERN above requires the literal word
+// "customer" immediately after "signed"/"closed", not a preceding COUNT).
+// This mirrors CHURN_COUNT_PATTERN's exact discipline directly below --
+// same field, opposite direction, same "number + noun + verb, both
+// required" safety net (a false structural match without a real number
+// is filtered by parseCount() returning null, exactly as churn already
+// relies on) -- not a new mechanic, the missing half of an existing one.
+//
+// Deliberately still narrow: verbs are restricted to ones that
+// specifically imply becoming a PAYING customer (signed up, started
+// paying, began paying, subscribed) -- not "joined"/"signed on", which
+// are ambiguous with a free trial, a call, or an unrelated signup, and
+// would risk a false paying-customer signal this field's own definition
+// doesn't support. A domain-specific noun ("contractors", "riders",
+// "diners", ...) instead of "customers/users/clients" still won't match
+// (documented in this module's own docstring update below) -- covering
+// arbitrary business vocabulary would require broader inference than a
+// fixed pattern can safely offer, and every signal here is reviewed and
+// checkable by the founder before anything is applied regardless.
+const NEW_CUSTOMER_COUNT_PATTERN = /\b(\w+)\s+(?:more\s+)?(?:new\s+)?(?:customers?|users?|clients?)\s+(?:signed up|started paying|began paying|subscribed)\b/gi;
+
+function extractNewCustomerCountSignals(text: string): ProposedSignal[] {
+  const signals: ProposedSignal[] = [];
+  let match: RegExpExecArray | null;
+  let index = 0;
+  NEW_CUSTOMER_COUNT_PATTERN.lastIndex = 0;
+  while ((match = NEW_CUSTOMER_COUNT_PATTERN.exec(text)) !== null) {
+    const count = parseCount(match[1]);
+    if (count === null) continue;
+    signals.push({
+      id: makeId("new-customer-count", index++),
+      label: `${count} new paying customer${count === 1 ? "" : "s"}`,
+      sourceQuote: match[0].trim(),
+      fieldPath: "validation.paying_customers",
+      proposedValue: count, // a +count delta, not an absolute count -- same discipline as extractNewCustomerSignal's own +1
+      polarity: "positive",
+    });
+  }
+  return signals;
+}
+
 // Signal 4 -- Phase 26, Part 5 (root-cause fix for the churn dead-end).
 // A COUNTABLE churn mention -- "Three customers churned this month.",
 // "2 customers cancelled" -- requires BOTH a number AND a churn verb in
@@ -336,6 +379,7 @@ export function extractCaptureSignals(text: string): ProposedSignal[] {
     ...extractInterviewSignals(trimmed),
     ...extractPriceSignals(trimmed),
     ...extractNewCustomerSignal(trimmed),
+    ...extractNewCustomerCountSignals(trimmed),
     ...churnCountSignals,
     ...extractRetentionSignal(trimmed),
     ...extractInformationalSignals(trimmed, churnCountSignals.length > 0),

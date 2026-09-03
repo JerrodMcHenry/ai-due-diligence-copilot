@@ -163,7 +163,7 @@ function MembershipGrid({
           >
             <BaseCard className="flex h-full flex-col justify-between gap-4 p-6 transition-colors group-hover:border-primary">
               <div>
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">
+                <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                   Startup member
                 </p>
                 <h3 className="mt-1 text-lg font-bold text-text-primary">

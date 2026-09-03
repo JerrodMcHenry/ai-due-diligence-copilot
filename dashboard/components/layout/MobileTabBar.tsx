@@ -63,7 +63,7 @@ export default function MobileTabBar() {
               href={item.href}
               aria-current={active ? "page" : undefined}
               className={[
-                "flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-[11px] font-semibold transition-colors",
+                "flex min-h-14 flex-1 flex-col items-center justify-center gap-0.5 rounded-xl py-1.5 text-xs font-semibold transition-colors",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-inset",
                 active ? "text-primary" : "text-text-muted",
               ].join(" ")}

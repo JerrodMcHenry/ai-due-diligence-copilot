@@ -18,21 +18,26 @@ const OPTIONS: ChooserOption[] = [
   {
     id: "first-raise",
     label: "Raise my first money",
-    description: "Model your very first outside investment -- we'll walk you through it.",
+    description: "Model your very first outside investment (a Post-Money SAFE) -- we'll walk you through it.",
     path: "safe",
     safeCount: 1,
   },
   {
     id: "issue-safe",
     label: "Issue a SAFE",
-    description: "Model a SAFE (Simple Agreement for Future Equity) investment.",
+    // Phase 29B, Part 9: the engine only ever models a Post-Money SAFE
+    // (see lib/fundraising/safe.ts's own docstring) -- this is the exact
+    // beginner-first-touchpoint copy a founder reads before knowing that
+    // distinction exists, so it belongs here, not just in a glossary
+    // entry they may never open.
+    description: "Model a Post-Money SAFE (Simple Agreement for Future Equity) investment.",
     path: "safe",
     safeCount: 1,
   },
   {
     id: "multiple-safes",
     label: "Model multiple SAFEs",
-    description: "See how two SAFEs with different terms play out together.",
+    description: "See how two Post-Money SAFEs with different terms play out together.",
     path: "safe",
     safeCount: 2,
   },
@@ -46,7 +51,7 @@ const OPTIONS: ChooserOption[] = [
   {
     id: "safe-then-seed",
     label: "Model SAFE → Seed",
-    description: "See what happens when an existing SAFE converts at a future priced round.",
+    description: "See what happens when an existing Post-Money SAFE converts at a future priced round.",
     path: "safe_then_round",
     safeCount: 1,
   },
