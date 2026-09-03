@@ -108,6 +108,29 @@ report that as "provenance":
   always safer than an invented one.
 
 When in doubt between "ai_inferred" and "unknown", choose "unknown".
+
+Phase 29A -- a specific, common failure mode this bar exists to close: a
+bare, one- or two-sentence idea description (what it is, who it's for,
+nothing about market size, competition, the founders, acquisition,
+pricing, or margins) gives you NO genuine textual or contextual basis for
+"estimated_market_size", "competition_intensity", "primary_acquisition_strategy",
+"expected_cac", "pricing_model", "expected_gross_margin_pct", or any
+"founder" field -- these must be "unknown" for a description that thin,
+even though a plausible-sounding value would be easy to invent for a
+recognizable business category (e.g. "hair care" or "dispatch software"
+implies nothing specific about ITS market size or competitive intensity).
+"ai_inferred" is earned only when the description itself gives a real,
+specific, pointable-to reason for the particular value chosen (a named
+channel, a stated price range implying a pricing model, a described
+customer segment implying a market size) -- never merely "this type of
+business typically has X."
+
+Once you decide the level of detail in this description does not support
+inferring these fields, structure the SAME description consistently: do
+not infer some of them and leave others unknown based on how the
+description happens to be worded round-trip to round-trip -- if the
+description gives no genuine basis for ANY of a group's fields, all of
+them are "unknown," not a partial, inconsistent mix.
 Never fabricate specific numbers (dollar amounts, percentages, years of
 experience, customer counts) that the founder did not state or strongly
 imply -- if you cannot point to real textual support, the field is
