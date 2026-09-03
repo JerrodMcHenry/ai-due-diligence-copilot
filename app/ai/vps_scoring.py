@@ -453,10 +453,60 @@ _CATEGORY_SCORERS = {
 }
 
 
+_NEUTRAL_ANCHOR = 5.0  # the same starting base every category scorer above uses before evidence adjusts it
+
 def compute_vps(assumptions: dict) -> dict:
     """
     Pure, deterministic function: identical assumptions always produce an
     identical result (Part 19 test 15). No randomness, no LLM call.
+
+    Phase 29A -- VPS Determinism, Reproducibility & Calibration Fix. A
+    real, live-reproduced defect (20 real structure_idea() calls against
+    one immutable fixture: "I want to start a hair loss company for men
+    and women with our special serum" produced VPS 6.5 fifteen times and
+    8.0 five times) traced to its exact mechanism: in every one of those
+    20 runs, "problem_solution" was the ONLY scored category (market,
+    founder, gtm, economic_potential, and validation were all honestly
+    Unknown) -- so the old renormalization gave that ONE category 100% of
+    the weight. The LLM's own paraphrase of "differentiation" varied
+    trivially between runs ("Special serum" vs. "Use of a special
+    serum") -- a semantically identical restatement of the SAME solution,
+    not a new fact -- but crossed _score_problem_solution()'s own
+    `len(differentiation) > 20` bonus threshold, swinging that one
+    category (and therefore the entire VPS) by a full 1.5 points.
+
+    This was not scoring nondeterminism (Part 4's own 100x-identical-
+    model test, run separately, produced 1 unique result out of 100 --
+    compute_vps() itself was already provably pure) and not primarily an
+    LLM-structuring bug either (market/founder/gtm/economic_potential
+    stayed uniformly Unknown across all 20 real runs for this fixture --
+    the LLM was NOT randomly inventing stronger/weaker assumptions here).
+    It was a CALIBRATION defect: the renormalization scheme let a single,
+    uncorroborated modeled assumption (never validated against any real
+    evidence, and never checked against any second independent category)
+    single-handedly set VPS, with no dampening for how little the model
+    actually establishes about the venture.
+
+    THE FIX: when validation (the one category scored from founder-
+    REPORTED OBSERVATIONS, not modeled assumptions -- see this module's
+    own docstring) is Unavailable AND exactly one other (modeled-
+    assumption) category is scored, that lone, uncorroborated assumption
+    is treated as conveying no net signal above or below the neutral
+    anchor every category scorer itself starts from -- not because its
+    own point value is wrong, but because one uncorroborated guess, with
+    zero real evidence anywhere in the model, is not enough basis to
+    move VPS away from "we don't know yet." The moment a SECOND
+    independent category is scored (whether a second modeled assumption
+    or real validation evidence), normal renormalization resumes
+    unchanged -- this branch is deliberately narrow, not a general
+    dampening of sparse models.
+
+    Verified against the directive's own calibration ladder (idea-only
+    -> customer discovery -> early validation -> early traction ->
+    stronger operating business, all built on this exact venture):
+    5.0 < 5.2 < 5.6 < 5.7 < 7.6 -- strictly monotonic, where the old
+    formula gave 8.0 < 5.2 (inverted: real customer-discovery evidence
+    LOWERED the score relative to a bare idea, exactly backwards).
 
     Returns:
         {
@@ -466,14 +516,41 @@ def compute_vps(assumptions: dict) -> dict:
                                     # fabricated as 0.
             "label": "MODELED / ASSUMPTION-BASED",
             "categories": [ {key, label, score, basis}, ... ],
+            "sole_uncorroborated_category": bool,  # Phase 29A, Part 13 --
+                                    # True exactly when the dampening
+                                    # branch above fired (see that branch's
+                                    # own comment). Lets the review screen
+                                    # explain, without re-deriving this
+                                    # rule itself, why the shown VPS
+                                    # doesn't match the one category score
+                                    # displayed beside it.
         }
     """
     categories = [scorer(assumptions) for scorer in _CATEGORY_SCORERS.values()]
 
     scored = [c for c in categories if c.score is not None]
+    validation_scored = any(c.key == "validation" and c.score is not None for c in categories)
+
+    # Phase 29A, Part 13: whether the dampening branch below fired. Exposed
+    # on the result (not re-derived on the frontend from category data) so
+    # the review screen can show a small, honest note explaining WHY the
+    # overall score doesn't match the one category score displayed right
+    # next to it -- without the frontend needing its own copy of this
+    # aggregation rule. category-level score/basis are unaffected either
+    # way; this flag only describes the aggregate.
+    sole_uncorroborated_category = len(scored) == 1 and not validation_scored
 
     if not scored:
         vps = None
+    elif sole_uncorroborated_category:
+        # The narrow, explicitly-documented exception above -- a single
+        # uncorroborated modeled assumption, unsupported by any real
+        # evidence, reports as the neutral anchor rather than its own
+        # raw score. category-level basis/score displays are UNCHANGED
+        # (a founder can still see exactly what was assumed and why) --
+        # only the aggregate VPS this one category would otherwise have
+        # single-handedly set is affected.
+        vps = _NEUTRAL_ANCHOR
     else:
         total_weight = sum(VPS_CATEGORY_WEIGHTS[c.key] for c in scored)
         weighted_sum = sum(c.score * VPS_CATEGORY_WEIGHTS[c.key] for c in scored)
@@ -490,4 +567,5 @@ def compute_vps(assumptions: dict) -> dict:
             {"key": c.key, "label": c.label, "score": c.score, "basis": c.basis}
             for c in categories
         ],
+        "sole_uncorroborated_category": sole_uncorroborated_category,
     }

@@ -81,6 +81,25 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
             </ul>
           </Disclosure>
         </div>
+
+        {/* Phase 29A, Part 13: restrained, targeted explanation for the
+            one case this phase's audit actually found confusing --
+            exactly one modeled category scored, with no independent
+            validation evidence, so the overall score below sits at the
+            neutral starting point rather than matching that one
+            category's own displayed score further down. Shown only when
+            compute_vps() itself reports this (sole_uncorroborated_category)
+            -- never a general "what's affecting this score" dump of the
+            internal model, and never shown when it doesn't apply. */}
+        {result.sole_uncorroborated_category ? (
+          <p className="mx-auto mt-3 max-w-md text-center text-xs text-text-muted">
+            Only one part of your model is scored so far, and nothing here has been
+            independently validated yet — so this score reflects that it&rsquo;s a single,
+            uncorroborated assumption, not the category score shown below. A second
+            modeled category or real evidence (interviews, signups, paying customers)
+            will let it reflect what you&rsquo;ve actually described.
+          </p>
+        ) : null}
       </BaseCard>
 
       <PathToStronger items={result.path_to_stronger} />

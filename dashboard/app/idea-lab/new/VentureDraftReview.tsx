@@ -520,7 +520,7 @@ export default function VentureDraftReview({
 // number and nothing to act on.
 function VpsPreview({ assumptions }: { assumptions: VentureAssumptions }) {
   const { getToken } = useAuth();
-  const [result, setResult] = useState<{ vps: number | null } | null>(null);
+  const [result, setResult] = useState<{ vps: number | null; sole_uncorroborated_category: boolean } | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -576,6 +576,18 @@ function VpsPreview({ assumptions }: { assumptions: VentureAssumptions }) {
         This reflects your current assumptions, not a verdict — it changes as you correct fields below
         or add real evidence later. There&rsquo;s nothing here to maximize before creating your venture.
       </p>
+      {/* Phase 29A, Part 13/14: same restrained note as the post-creation
+          panel (VPSResultPanel), reusing the same compute_vps()-reported
+          flag rather than a second copy of the aggregation rule. This is
+          exactly the case this phase's audit found: a bare idea with one
+          modeled category and no real evidence yet, where the score
+          intentionally sits at the neutral starting point. */}
+      {result.sole_uncorroborated_category ? (
+        <p className="mt-2 text-xs text-text-muted">
+          Right now this is based on a single, uncorroborated guess about your idea — that&rsquo;s why
+          it sits at the neutral starting point rather than higher or lower.
+        </p>
+      ) : null}
     </BaseCard>
   );
 }

@@ -117,6 +117,12 @@ export interface VPSResult {
   validation_gaps: string[];
   next_milestones: string[];
   path_to_stronger: PathToStrongerItem[];
+  // Phase 29A, Part 13: true exactly when compute_vps() dampened a single,
+  // uncorroborated modeled-assumption category (no independent validation
+  // evidence) toward the neutral anchor rather than using its own raw
+  // score for the aggregate -- see vps_scoring.py's compute_vps()
+  // docstring. Category-level score/basis are unaffected either way.
+  sole_uncorroborated_category: boolean;
 }
 
 export interface VentureResponse {

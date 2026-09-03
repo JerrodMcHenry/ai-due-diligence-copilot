@@ -130,6 +130,13 @@ class VPSResult(BaseModel):
     validation_gaps: list[str] = Field(default_factory=list)
     next_milestones: list[str] = Field(default_factory=list)
     path_to_stronger: list[PathToStrongerItem] = Field(default_factory=list)
+    # Phase 29A, Part 13: True exactly when compute_vps()'s dampening
+    # branch fired (a single, uncorroborated modeled-assumption category
+    # with no independent validation evidence) -- see vps_scoring.py's own
+    # compute_vps() docstring. Lets the review screen explain, in one
+    # restrained line, why the overall score doesn't match the one
+    # category score shown right next to it.
+    sole_uncorroborated_category: bool = False
 
 
 class CreateVentureRequest(BaseModel):
