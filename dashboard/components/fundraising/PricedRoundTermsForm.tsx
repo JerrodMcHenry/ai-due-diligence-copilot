@@ -74,7 +74,7 @@ export default function PricedRoundTermsForm({
       <ConceptDisclosure conceptKey="priced_round" value={null} />
 
       <Disclosure summary="Advanced: option pool" defaultOpen={false}>
-        <p className="text-xs leading-5 text-text-muted">
+        <p className="text-sm leading-6 text-text-muted">
           Add a new option pool as part of this round, sized as a percentage of your company&rsquo;s CURRENT shares
           (before this round) -- not a target percentage of the company after the round, which Fundraising Simulator
           V1 does not calculate.

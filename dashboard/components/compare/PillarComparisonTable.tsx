@@ -62,11 +62,11 @@ export default function PillarComparisonTable({
                         <span className="truncate">{startup.company_name}</span>
 
                         {isLeader ? (
-                          <span className="shrink-0 rounded-full bg-success-soft px-2 py-0.5 text-[10px] font-semibold text-success">
+                          <span className="shrink-0 rounded-full bg-success-soft px-2 py-0.5 text-xs font-semibold text-success">
                             Leads
                           </span>
                         ) : isTied ? (
-                          <span className="shrink-0 rounded-full bg-primary-soft px-2 py-0.5 text-[10px] font-semibold text-primary">
+                          <span className="shrink-0 rounded-full bg-primary-soft px-2 py-0.5 text-xs font-semibold text-primary">
                             Tied
                           </span>
                         ) : null}
@@ -91,7 +91,7 @@ export default function PillarComparisonTable({
                       </dd>
 
                       {score === null ? (
-                        <p className="mt-1 text-[11px] text-text-muted">
+                        <p className="mt-1 text-xs text-text-muted">
                           Unavailable — no scoreable evidence
                         </p>
                       ) : null}

@@ -404,7 +404,7 @@ function WatchedStartupCard({
             aria-label="Score not yet available"
             className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-border"
           >
-            <span className="text-[10px] font-medium text-text-muted">N/A</span>
+            <span className="text-xs font-medium text-text-muted">N/A</span>
           </div>
         )}
       </div>

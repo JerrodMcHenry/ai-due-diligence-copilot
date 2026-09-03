@@ -606,7 +606,7 @@ export default function AnalyzeStartupForm() {
             className="font-mono"
           />
 
-          <p className="text-xs text-text-muted">
+          <p className="text-sm text-text-muted">
             At least one source is required. Provide any combination --
             SIE combines everything you give it into one analysis.
           </p>
@@ -678,7 +678,7 @@ function AnalyzingState({ elapsedSeconds }: { elapsedSeconds: number }) {
           ))}
         </ul>
 
-        <p className="mt-4 text-xs text-text-muted">
+        <p className="mt-4 text-sm text-text-muted">
           This describes what the analysis covers, not live progress -- SIE
           doesn&rsquo;t currently report which stage is in flight, so no
           single step is shown as complete until the whole analysis

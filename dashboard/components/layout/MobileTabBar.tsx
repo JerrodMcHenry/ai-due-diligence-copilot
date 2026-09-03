@@ -6,11 +6,11 @@ import { usePathname } from "next/navigation";
 import { PRIMARY_NAVIGATION, isPrimaryDestinationActive } from "./TopNav";
 
 // Phase 10.3 -- Shell & Navigation Reset, Part 5. A purpose-built mobile
-// primary navigation -- the SAME three destinations as the desktop top
-// nav (single source of truth, imported from TopNav.tsx, so the two
-// surfaces can never disagree about what "Explore/Build/Analyze" means
-// or which routes count as active), presented as a native-feeling bottom
-// tab bar instead of a hamburger drawer replicating every route. Account/
+// primary navigation -- the SAME destinations as the desktop top nav
+// (single source of truth, imported from TopNav.tsx, so the two surfaces
+// can never disagree about what "Build/Analyze/Learn" means or which
+// routes count as active), presented as a native-feeling bottom tab bar
+// instead of a hamburger drawer replicating every route. Account/
 // personal navigation deliberately stays in the header (PersonalMenu),
 // not duplicated here -- Part 5: "Account/personal functionality can
 // remain accessible from the top/header account affordance."
@@ -20,10 +20,24 @@ import { PRIMARY_NAVIGATION, isPrimaryDestinationActive } from "./TopNav";
 // bottom-padding that keeps this bar from covering page content on
 // mobile).
 const TAB_ICONS: Record<string, React.ReactNode> = {
-  Explore: (
+  // Founder Experience Model correction, Part 2: "Learn" replaces the
+  // stale, no-longer-referenced "Explore" icon entry (Phase 15 already
+  // removed "Explore" from PRIMARY_NAVIGATION itself; this map simply
+  // hadn't been cleaned up since).
+  Learn: (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-5">
-      <circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M20 20l-3.5-3.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5v-16z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5a2.5 2.5 0 0 1 2.5 2.5v-16z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
     </svg>
   ),
   Build: (

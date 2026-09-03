@@ -100,30 +100,50 @@ function formatUpdatedAt(iso: string): string {
 // -- only "current," "most recent," and "latest," each backed by a real
 // persisted timestamp.
 //
-// Renders nothing at all when there is truly nothing beyond "what to do
-// next" to report (a brand-new venture, or one with no action/learning/
-// model-update history yet) -- IdeaLabNextStep directly above already
-// owns that state fully; this strip would just be empty noise there.
+// Founder Experience Model correction. Used to render nothing at all for
+// a brand-new venture (no action/learning/model-update history yet) --
+// now it ALWAYS renders, because "where things stand" starts with
+// `state` (Part 6's own required first element of the guidance
+// hierarchy: a concise description of the venture's current state), which
+// is always meaningful even for a venture with zero history ("Idea" is a
+// real, honest answer, not an empty one). The activity fields below it
+// (current action / most recent learning / latest model update) remain
+// exactly as conditional as before -- still nothing invented for a
+// venture with no history yet.
 function WhereThingsStand({
+  stage,
+  assumptions,
   learning,
   primaryMissionTitle,
   latestModelChange,
 }: {
+  stage: string | null;
+  assumptions: VentureAssumptions;
   learning: RecentLearning | null;
   primaryMissionTitle: string | null;
   latestModelChange: ReturnType<typeof resolveLatestModelChange>;
 }) {
-  if (!learning && !primaryMissionTitle && !latestModelChange) {
-    return null;
-  }
-
   const learningWhen = learning ? formatUpdatedAt(learning.recordedAt) : "";
 
   return (
-    <BaseCard className="p-5">
+    // Global visual polish, Part 4/5: raised, not the same flat surface as
+    // every other card on the page -- this is the first thing a founder's
+    // eye should land on (Part 6's own instruction), and the existing
+    // 3-variant BaseCard system already has exactly the right tool for
+    // that (the same "raised" variant NextStepCard directly below already
+    // uses), rather than inventing a new visual treatment.
+    <BaseCard variant="raised" className="p-5">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Where things stand</p>
 
-      <div className="mt-3 space-y-3">
+      <div className="mt-2">
+        <VentureJourney stage={stage} assumptions={assumptions} />
+      </div>
+
+      <div className={
+        learning || primaryMissionTitle || latestModelChange
+          ? "mt-4 space-y-3 border-t border-border pt-4"
+          : "hidden"
+      }>
         {primaryMissionTitle ? (
           <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
             <span className="text-text-secondary">Current action:</span>
@@ -610,26 +630,29 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
       ) : null}
 
       <div className="space-y-8">
-        <BaseCard className="p-5">
-          <VentureJourney stage={stage} assumptions={venture.assumptions} />
-        </BaseCard>
-
-        <VentureOverview
-          idea={description}
-          whoItsFor={targetCustomer}
-          howItMakesMoney={businessModel}
-          stillFiguringOut={
-            venture.model_result ? stillFiguringOutFromCategories(venture.model_result.categories) : []
-          }
-        />
-
-        {venture.model_result ? <VPSResultPanel result={venture.model_result} /> : null}
-
         {actionError ? (
           <div className="rounded-lg border border-danger/20 bg-danger-soft px-4 py-3 text-sm text-danger">
             {actionError}
           </div>
         ) : null}
+
+        {/* Founder Experience Model correction, Part 6/7. The workspace's
+            own guidance hierarchy now answers, in order, top to bottom:
+            WHERE THINGS STAND (this card, state + recent activity) ->
+            CURRENT FOCUS / NEXT ACTION / WHY (IdeaLabNextStep directly
+            below). The old numbered Idea->Model->Experiment->Build->
+            Fundraise stepper card that used to sit here is gone --
+            VentureJourney itself is now just the state description
+            WhereThingsStand renders inline (see that component's own
+            updated docstring); this is a reorder and a merge, not new
+            data or a new inference system. */}
+        <WhereThingsStand
+          stage={stage}
+          assumptions={venture.assumptions}
+          learning={recentLearning}
+          primaryMissionTitle={primaryMissionTitle}
+          latestModelChange={history ? resolveLatestModelChange(history.events) : null}
+        />
 
         {/* Phase 10.10, Part 5/6: ONE headline "what should I do next?"
             card, deterministically derived from the exact same
@@ -658,16 +681,16 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           }}
         /> : null}
 
-        {/* Phase 26 -- Retention Loop Closure, Part 8/9/11. Sits directly
-            after "what matters now" -- see WhereThingsStand's own
-            docstring for exactly what it shows and why it renders
-            nothing when there's nothing beyond the priority above to
-            report. */}
-        <WhereThingsStand
-          learning={recentLearning}
-          primaryMissionTitle={primaryMissionTitle}
-          latestModelChange={history ? resolveLatestModelChange(history.events) : null}
+        <VentureOverview
+          idea={description}
+          whoItsFor={targetCustomer}
+          howItMakesMoney={businessModel}
+          stillFiguringOut={
+            venture.model_result ? stillFiguringOutFromCategories(venture.model_result.categories) : []
+          }
         />
+
+        {venture.model_result ? <VPSResultPanel result={venture.model_result} /> : null}
 
         {/* Phase 13 -- Founder Home / Venture Command Center, Part 6/10.
             Reordered so Current Mission (D) renders immediately after
@@ -819,18 +842,25 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             Action -> Next Moves. */}
         <VentureProgress history={history} isLoading={isLoadingHistory} />
 
-        {/* Phase 13, Part 15/17/18: Founder Tools (G) -- restrained,
-            secondary, grouped under one heading so these read as
-            supporting tools rather than competing with the primary
-            status -> priority -> action -> learning flow above. Pitch
-            Deck Coach and What If are the SAME, unmodified components
-            Phase 10.10/10.6 already built -- only their position and
-            grouping changed. The Playbooks library link is new (Phase 13
-            Part 16): general, unconditional access to the same
-            dashboard/content/playbooks the contextual "Learn how" links
-            above already point into -- no new mapping system. */}
+        {/* Founder Experience Model correction, Part 5/6. Renamed from
+            "Founder tools" to "Explore" to say plainly what Part 5 itself
+            requires: Model/What-if, Fundraising, Learn, and Pitch Deck
+            Coach are OPTIONAL capabilities a founder can reach whenever
+            they're useful -- never mandatory stages, never gated by
+            venture state or VPS, never implying fundraising is the
+            destination. Restrained and secondary, grouped under one
+            heading positioned below the primary status -> focus ->
+            action -> why flow above, so Explore never visually competes
+            with the current next action (Part 6's own explicit
+            instruction). Every component inside is the SAME, unmodified
+            one Phase 10.10/10.6/13/21B already built -- only the
+            heading, framing sentence, and grouping changed. */}
         <section className="space-y-3">
-          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Founder tools</h2>
+          <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Explore</h2>
+          <p className="text-sm text-text-secondary">
+            Optional tools you can use whenever they&rsquo;re helpful — not steps to complete, and
+            nothing here changes your venture unless you explicitly apply it.
+          </p>
 
           {venture.model_result ? <PitchDeckCoachTeaser /> : null}
 
@@ -844,7 +874,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               the founder's own name, no venture write ever). */}
           <Tabs
             tabs={[
-              { id: "venture", label: "Venture" },
+              { id: "venture", label: "Model / What-If" },
               { id: "fundraising", label: "Fundraising" },
             ]}
             activeId={simulateTab}
@@ -853,7 +883,13 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
           <TabPanel id="venture" activeId={simulateTab}>
             <div className="space-y-3">
-              <BaseCard className="p-5">
+              {/* Global visual polish, Part 4/5: "subtle" surface for
+                  Explore's own tool cards -- the same 3-variant BaseCard
+                  system used to elevate Where Things Stand above, applied
+                  in the opposite direction here so these optional tools
+                  visually recede rather than reading as equally weighted
+                  against the primary next-action card. */}
+              <BaseCard variant="subtle" className="p-5">
                 <WhatIfPanel
                   currentAssumptions={venture.assumptions}
                   onRunScenario={handleRunScenario}
@@ -891,7 +927,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             href="/playbooks"
             className="flex items-center justify-between rounded-2xl border border-border bg-surface p-5 text-sm font-semibold text-text-primary transition-colors hover:border-primary"
           >
-            Browse founder playbooks
+            Learn: browse founder playbooks
             <span aria-hidden="true" className="text-primary">→</span>
           </Link>
         </section>

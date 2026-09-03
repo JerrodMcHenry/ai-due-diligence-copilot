@@ -39,7 +39,7 @@ export default function FundraisingResult({ result }: FundraisingResultProps) {
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-xs text-text-muted">
+        <p className="mt-3 text-sm text-text-muted">
           Try adjusting the round&rsquo;s valuation, or the SAFE&rsquo;s cap, and simulate again.
         </p>
       </BaseCard>
@@ -117,7 +117,7 @@ export default function FundraisingResult({ result }: FundraisingResultProps) {
             <span className="text-sm text-text-secondary">After this financing</span>
             <span className="text-lg font-semibold text-text-primary">{result.runway.postFinancingLabel}</span>
           </div>
-          <p className="mt-2 text-xs text-text-muted">{result.runway.note}</p>
+          <p className="mt-2 text-sm text-text-muted">{result.runway.note}</p>
         </BaseCard>
       ) : null}
 

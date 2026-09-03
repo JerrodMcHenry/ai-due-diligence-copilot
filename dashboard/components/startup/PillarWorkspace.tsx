@@ -67,7 +67,7 @@ export default function PillarWorkspace({
             aria-label="Score not yet available"
             className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-border"
           >
-            <span className="text-[10px] font-medium text-text-muted">
+            <span className="text-xs font-medium text-text-muted">
               N/A
             </span>
           </div>
@@ -458,7 +458,7 @@ const SUBSCORE_ROW_GRID =
 function SubscoreTable({ subscores }: { subscores: Subscore[] }) {
   return (
     <div className="space-y-1.5">
-      <div className={[SUBSCORE_ROW_GRID, "px-3 text-[10px] font-semibold uppercase tracking-wide text-text-muted"].join(" ")}>
+      <div className={[SUBSCORE_ROW_GRID, "px-3 text-xs font-semibold uppercase tracking-wide text-text-muted"].join(" ")}>
         <span>Dimension</span>
         <span className="text-right">Score</span>
         <span className="text-right">Weight</span>
@@ -529,7 +529,7 @@ function SubscoreRow({ subscore }: { subscore: Subscore }) {
 
         <span
           className={[
-            "justify-self-center rounded-full px-2 py-0.5 text-center text-[10px] font-medium",
+            "justify-self-center rounded-full px-2 py-0.5 text-center text-xs font-medium",
             (subscore.evidence_status &&
               EVIDENCE_STATUS_BADGE_CLASSES[subscore.evidence_status]) ??
               "border border-border text-text-muted",
@@ -556,7 +556,7 @@ function SubscoreRow({ subscore }: { subscore: Subscore }) {
               Confidence:{" "}
               <span
                 className={[
-                  "rounded-full px-2 py-0.5 text-[11px] font-medium",
+                  "rounded-full px-2 py-0.5 text-xs font-medium",
                   CONFIDENCE_BADGE_CLASSES[subscore.confidence as ConfidenceLevel],
                 ].join(" ")}
               >

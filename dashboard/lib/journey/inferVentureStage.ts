@@ -96,3 +96,57 @@ export function resolveVentureStepIndex(manualIndex: number, assumptions: Minima
   const evidenceIndex = inferEvidenceStepIndex(assumptions);
   return Math.max(manualIndex, evidenceIndex);
 }
+
+// Founder Experience Model correction, Part 4. The 5-position stepper
+// index above (0-4, "fundraise" included via a founder's own manual
+// "Launched" selection) is now re-presented as ONE OF THREE plain-
+// language DESCRIPTIONS of where a venture appears to stand -- not
+// unlockable levels, and never a claim the venture must have passed
+// through the others in order (Part 3's own explicit instruction: no
+// staircase). Deliberately reuses this file's own existing, already-
+// tested resolveVentureStepIndex()/inferEvidenceStepIndex() rather than
+// inventing a second inference system -- this is a display BUCKETING of
+// the same evidence, not a new score:
+//   - 0 or 1 (no evidence yet, or modeled assumptions only) -> "idea":
+//     still defining the problem, customer, solution, and assumptions.
+//   - 2 (customer interviews or waitlist signups reported) -> "validating":
+//     testing whether those assumptions are true against real evidence.
+//   - 3 or 4 (real paying customers/revenue, or a founder-set "Launched")
+//     -> "building": executing against increasingly validated assumptions.
+// "Fundraise" is deliberately NOT its own state here (Part 3/5's own
+// instruction: fundraising is a tool, never entrepreneurship's
+// destination, and is never implied by traction alone) -- a founder who
+// has actually raised still reads as "building," which remains true
+// regardless of financing history.
+export type VentureStateId = "idea" | "validating" | "building";
+
+export interface VentureStateInfo {
+  id: VentureStateId;
+  label: string;
+  description: string;
+}
+
+export const VENTURE_STATES: Record<VentureStateId, VentureStateInfo> = {
+  idea: {
+    id: "idea",
+    label: "Idea",
+    description: "Defining the problem, customer, solution, and the assumptions that matter most.",
+  },
+  validating: {
+    id: "validating",
+    label: "Validating",
+    description: "Testing whether the important assumptions are true against real-world evidence.",
+  },
+  building: {
+    id: "building",
+    label: "Building",
+    description: "Executing against increasingly validated assumptions and tracking real progress.",
+  },
+};
+
+export function resolveVentureState(manualIndex: number, assumptions: MinimalAssumptions | null): VentureStateInfo {
+  const stepIndex = resolveVentureStepIndex(manualIndex, assumptions);
+  if (stepIndex >= 3) return VENTURE_STATES.building;
+  if (stepIndex === 2) return VENTURE_STATES.validating;
+  return VENTURE_STATES.idea;
+}

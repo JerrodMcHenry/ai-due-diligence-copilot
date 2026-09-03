@@ -79,7 +79,7 @@ export default function PathChooser({ onChoose, onCompare }: PathChooserProps) {
             className="rounded-2xl border border-border bg-surface p-4 text-left transition-colors hover:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
           >
             <span className="block text-sm font-semibold text-text-primary">{option.label}</span>
-            <span className="mt-1 block text-xs leading-5 text-text-muted">{option.description}</span>
+            <span className="mt-1 block text-sm leading-6 text-text-muted">{option.description}</span>
           </button>
         ))}
       </div>

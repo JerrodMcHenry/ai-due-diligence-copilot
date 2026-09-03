@@ -96,10 +96,13 @@ export default function VentureSnapshotCard({ snapshot }: { snapshot: VentureSna
                   ))}
               </ul>
             ) : null}
-            {/* Phase 29B, Part 7/10: bumped from an arbitrary 11px -- this
-                disclaimer is exactly the trust-framing language a public
-                viewer needs to actually read, not tertiary metadata. */}
-            <p className="mt-3 text-xs leading-5 text-text-muted">
+            {/* Global readability audit: bumped again, from text-xs to
+                text-sm (Phase 29B had already bumped it once, from an
+                arbitrary 11px) -- this disclaimer is trust-framing
+                language a public viewer (often a third party like an
+                investor) needs to actually read clearly, not tertiary
+                metadata that 12px is meant for. */}
+            <p className="mt-3 text-sm leading-6 text-text-muted">
               A model-based assessment from the information provided to SIE — not a company-quality, investment,
               or success prediction.
             </p>

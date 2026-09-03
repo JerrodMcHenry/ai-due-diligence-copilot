@@ -1,24 +1,36 @@
-import { getJourneyStage } from "@/lib/founderJourney";
-
-// Phase 10.5, Part 6. "SIE isn't only an idea grader -- it stays useful as
-// the idea becomes a real company." A concise five-step progression, kept
-// aspirational without implying any guarantee (no "get funded", no
-// success framing) -- each step's description says what SIE HELPS WITH,
-// never what it promises will happen.
-//
-// Phase 10.10, Part 3: labels now come from the shared founderJourney.ts
-// vocabulary (a curated 5-of-8 subset, matching VentureJourney.tsx's own
-// per-venture stepper) instead of a second, separately hardcoded array --
-// only the SIE-specific "what this helps with" descriptions stay local to
-// this marketing component, since founderJourney.ts's own descriptions
-// are deliberately product-agnostic ("Test the assumptions that matter"),
-// not phrased as what SIE itself does.
-const STEPS = [
-  { label: getJourneyStage("idea").label, description: "Describe it in your own words." },
-  { label: getJourneyStage("model").label, description: "SIE structures it into a venture model." },
-  { label: getJourneyStage("experiment").label, description: "Test assumptions, run what-if scenarios." },
-  { label: getJourneyStage("build").label, description: "Track milestones and progress as a founder." },
-  { label: getJourneyStage("fundraise").label, description: "Understand your fundraising readiness." },
+// Founder Experience Model correction, Part 1. This used to render the
+// same numbered 1-2-3-4-5 stepper (circles joined by a connecting line)
+// as the per-venture VentureJourney stepper it was modeled on -- see
+// that component's own updated docstring for why that shape is
+// conceptually wrong: it told a visitor, before they'd even started,
+// that startups move through a mandatory one-way staircase ending in
+// fundraising. This is marketing/product explanation ("what does SIE
+// help with"), not a claim about any real venture's state -- so unlike
+// VentureJourney, there is no state to infer here at all; this is a
+// static, order-agnostic description of SIE's capabilities, redesigned
+// to say so honestly: no numbers, no connecting line, no forward-only
+// visual, and copy that says outright that modeling/validating/building
+// repeat and that fundraising is optional.
+const CAPABILITIES = [
+  {
+    label: "Shape an idea",
+    description: "Describe it in your own words. SIE structures it into a venture model you can correct.",
+  },
+  {
+    label: "Model & validate — as many times as it takes",
+    description:
+      "Test assumptions, run what-if scenarios, and revisit your model as often as you learn something new. This isn't a one-time step.",
+  },
+  {
+    label: "Build & keep learning",
+    description:
+      "Track real progress as you execute. Building and validating aren't sequential — most founders do both at once, continuously.",
+  },
+  {
+    label: "Fundraise when it's relevant to you",
+    description:
+      "Model SAFEs, priced rounds, and dilution whenever you're actually considering raising — optional, and not every founder needs it.",
+  },
 ];
 
 export default function IdeaJourney() {
@@ -29,50 +41,21 @@ export default function IdeaJourney() {
       </h2>
 
       <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-6 text-text-secondary">
-        SIE stays useful at every stage — not just while you&rsquo;re still
-        deciding whether to start.
+        SIE stays useful at every point along the way — not a checklist to complete in order, but a set of
+        capabilities you return to as your venture evolves.
       </p>
 
-      {/* Desktop: one horizontal row, circles joined by a connecting line
-          running behind them. Below md: a plain vertical list -- kept as
-          a genuinely separate layout rather than one DOM shape forced to
-          read both ways, since a shared connector is fragile at these
-          very different aspect ratios. md (768px), not sm (640px): five
-          circles + labels genuinely need that much room, matching the
-          same breakpoint TopNav/MobileTabBar already switch on. */}
-      <div className="relative mt-10 hidden md:grid md:grid-cols-5 md:gap-4">
-        <div
-          aria-hidden="true"
-          className="absolute left-0 right-0 top-[18px] h-px bg-border"
-          style={{ marginInline: "10%" }}
-        />
-
-        {STEPS.map((step, index) => (
-          <div key={step.label} className="relative flex flex-col items-center text-center">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-surface text-sm font-bold text-primary">
-              {index + 1}
-            </span>
-
-            <p className="mt-3 text-sm font-bold text-text-primary">{step.label}</p>
-            <p className="mt-1 text-xs leading-5 text-text-muted">{step.description}</p>
+      {/* A plain, order-agnostic grid -- deliberately no numbers and no
+          connecting line between cards, so nothing here reads as "step 1
+          before step 2." */}
+      <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
+        {CAPABILITIES.map((capability) => (
+          <div key={capability.label} className="rounded-2xl border border-border bg-surface p-5">
+            <p className="text-sm font-bold text-text-primary">{capability.label}</p>
+            <p className="mt-1.5 text-sm leading-6 text-text-secondary">{capability.description}</p>
           </div>
         ))}
       </div>
-
-      <ol className="mt-10 space-y-5 md:hidden">
-        {STEPS.map((step, index) => (
-          <li key={step.label} className="flex items-start gap-4">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full border-2 border-primary bg-surface text-sm font-bold text-primary">
-              {index + 1}
-            </span>
-
-            <div className="pt-1">
-              <p className="text-sm font-bold text-text-primary">{step.label}</p>
-              <p className="mt-0.5 text-xs leading-5 text-text-muted">{step.description}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
     </section>
   );
 }

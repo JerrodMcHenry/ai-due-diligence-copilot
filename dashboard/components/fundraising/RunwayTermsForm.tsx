@@ -17,7 +17,7 @@ type RunwayTermsFormProps = {
 export default function RunwayTermsForm({ runway, onChange }: RunwayTermsFormProps) {
   return (
     <Disclosure summary="Optional: see modeled runway" defaultOpen={false}>
-      <p className="text-xs leading-5 text-text-muted">
+      <p className="text-sm leading-6 text-text-muted">
         Add your current cash on hand and monthly burn to see how this financing would change your modeled runway.
         Assumes burn stays constant -- this is not a forecast.
       </p>

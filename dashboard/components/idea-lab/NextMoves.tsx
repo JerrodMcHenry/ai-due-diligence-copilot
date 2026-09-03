@@ -88,7 +88,7 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
         })}
       </ol>
 
-      <p className="mt-4 text-xs text-text-muted">
+      <p className="mt-4 text-sm text-text-muted">
         These reduce the venture&rsquo;s biggest unknowns first — not guarantees of success.
       </p>
     </BaseCard>

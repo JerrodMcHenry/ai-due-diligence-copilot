@@ -24,7 +24,7 @@ import {
 import { resolveIdeaLabNextStep } from "../lib/journey/resolveIdeaLabNextStep.ts";
 import { resolveRecentLearning } from "../lib/journey/resolveRecentLearning.ts";
 import { resolveLatestModelChange } from "../lib/journey/resolveLatestModelChange.ts";
-import { inferEvidenceStepIndex, resolveVentureStepIndex } from "../lib/journey/inferVentureStage.ts";
+import { inferEvidenceStepIndex, resolveVentureStepIndex, resolveVentureState } from "../lib/journey/inferVentureStage.ts";
 import { getAllPlaybooks } from "../content/playbooks/index.ts";
 import { getWhatIfScenarios } from "../components/idea-lab/whatIfScenarios.ts";
 import { summarizeConceptForCard } from "../components/idea-lab/summarizeConceptForCard.ts";
@@ -337,6 +337,70 @@ function test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidenc
   expect(resolveVentureStepIndex(-1, null) === 0, "With neither manual nor evidence signal, the result must be Idea (index 0)");
 }
 
+// --- Founder Experience Model correction: resolveVentureState() ------------
+// Re-buckets the SAME 0-4 index the tests above already exercise into one
+// of three plain-language descriptions -- no new inference, so these
+// tests mirror the ones above exactly, just asserting the bucketed label
+// instead of the raw index.
+
+function test_venture_state_idea_with_nothing_modeled(): void {
+  expect(resolveVentureState(-1, null).id === "idea", "No evidence and no manual signal must resolve to 'idea'");
+}
+
+function test_venture_state_idea_when_only_assumptions_modeled(): void {
+  const a = emptyMinimalAssumptions();
+  a.problem_solution.problem_statement = "Something";
+  expect(resolveVentureState(-1, a).id === "idea", "Modeled assumptions alone (evidence index 1) must still bucket to 'idea', not a separate state");
+}
+
+function test_venture_state_validating_when_interviews_reported(): void {
+  const a = emptyMinimalAssumptions();
+  a.validation.customer_interviews = 10;
+  expect(resolveVentureState(-1, a).id === "validating", "Reported interviews (evidence index 2) must bucket to 'validating'");
+}
+
+function test_venture_state_building_when_real_traction_exists(): void {
+  const a = emptyMinimalAssumptions();
+  a.validation.paying_customers = 14;
+  expect(resolveVentureState(-1, a).id === "building", "Real paying customers (evidence index 3) must bucket to 'building'");
+}
+
+function test_venture_state_never_reaches_a_fundraise_state(): void {
+  // Part 3/5's own explicit instruction: fundraising is a tool, never a
+  // maturity state or entrepreneurship's destination -- there must be no
+  // fourth bucket a venture "graduates" into, no matter how strong its
+  // evidence, and even a founder's own explicit "Launched" manual stage
+  // (index 4) must still read as "building," not a separate state.
+  const a = emptyMinimalAssumptions();
+  a.validation.paying_customers = 1_000_000;
+  a.validation.monthly_revenue = 10_000_000;
+  expect(resolveVentureState(-1, a).id === "building", "Even extreme traction must bucket to 'building', never a separate 'fundraise' state");
+  expect(resolveVentureState(4, a).id === "building", "An explicit 'Launched' manual stage must still read as 'building', not a separate state");
+}
+
+function test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state(): void {
+  // A stale/default manual stage must not hide real evidence, mirroring
+  // test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence
+  // above -- but expressed as the bucketed state a founder actually reads.
+  const traction = emptyMinimalAssumptions();
+  traction.validation.paying_customers = 14;
+  expect(resolveVentureState(0, traction).id === "building", "Real evidence must win over a stale manual 'Idea' selection");
+}
+
+function test_venture_state_descriptions_are_plain_language_not_a_score(): void {
+  // Every state's description must read as a description of current
+  // activity, never a percentage, a level number, or a claim of
+  // completion -- Part 4's own explicit instruction against fabricating
+  // false precision.
+  const indexByState: Record<string, number> = { idea: 0, validating: 2, building: 3 };
+  for (const [id, index] of Object.entries(indexByState)) {
+    const state = resolveVentureState(index, null);
+    expect(state.id === id, `resolveVentureState(${index}, null) must resolve to '${id}', got '${state.id}'`);
+    expect(typeof state.label === "string" && state.label.length > 0, `${id}: must have a non-empty plain-language label`);
+    expect(!/%|\blevel\b|\bstage \d\b/i.test(state.description), `${id}: description must not imply a percentage or numbered level: "${state.description}"`);
+  }
+}
+
 // --- Founder Loop V2, Section 6: context-aware What If scenarios ----------
 
 function assumptionsWithTraction() {
@@ -575,6 +639,13 @@ const TESTS: [string, () => void][] = [
   ["test_infer_evidence_step_build_when_real_traction_exists", test_infer_evidence_step_build_when_real_traction_exists],
   ["test_infer_evidence_step_never_reaches_fundraise", test_infer_evidence_step_never_reaches_fundraise],
   ["test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence", test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence],
+  ["test_venture_state_idea_with_nothing_modeled", test_venture_state_idea_with_nothing_modeled],
+  ["test_venture_state_idea_when_only_assumptions_modeled", test_venture_state_idea_when_only_assumptions_modeled],
+  ["test_venture_state_validating_when_interviews_reported", test_venture_state_validating_when_interviews_reported],
+  ["test_venture_state_building_when_real_traction_exists", test_venture_state_building_when_real_traction_exists],
+  ["test_venture_state_never_reaches_a_fundraise_state", test_venture_state_never_reaches_a_fundraise_state],
+  ["test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state", test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state],
+  ["test_venture_state_descriptions_are_plain_language_not_a_score", test_venture_state_descriptions_are_plain_language_not_a_score],
   ["test_what_if_never_suggests_a_lower_interview_count_than_already_reported", test_what_if_never_suggests_a_lower_interview_count_than_already_reported],
   ["test_what_if_suppresses_interview_scenario_at_commercial_scale", test_what_if_suppresses_interview_scenario_at_commercial_scale],
   ["test_what_if_scenarios_are_tagged_upside_or_downside", test_what_if_scenarios_are_tagged_upside_or_downside],

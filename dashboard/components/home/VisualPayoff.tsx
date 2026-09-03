@@ -28,7 +28,12 @@ export default function VisualPayoff() {
         {CATEGORIES.map((category) => (
           <BaseCard key={category.label} variant="subtle" className="p-5">
             <p className="text-sm font-semibold text-text-primary">{category.label}</p>
-            <p className="mt-1 text-xs leading-5 text-text-muted">{category.description}</p>
+            {/* Global readability audit: bumped from text-xs/text-muted --
+                muted text on this card's own muted surface (variant
+                "subtle") was a genuine low-contrast combination, not just
+                a small-text one -- text-secondary reads clearly against
+                the same background in both themes. */}
+            <p className="mt-1 text-sm leading-6 text-text-secondary">{category.description}</p>
           </BaseCard>
         ))}
       </div>

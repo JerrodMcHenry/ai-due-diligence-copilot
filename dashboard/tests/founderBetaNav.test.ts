@@ -48,6 +48,25 @@ function test_explore_removed_from_primary_navigation(): void {
   expect(/name:\s*"Analyze"/.test(arrayText), "\"Analyze\" must remain a primary destination -- it has no cold-start dependency");
 }
 
+// Founder Experience Model correction, Part 2. The global primary
+// switcher is Build | Analyze | Learn -- Learn promoted from an
+// account-menu-only link to a genuinely global product mode, per that
+// phase's own explicit instruction. Fundraising/Simulate must never
+// appear here (they stay founder tools inside a venture's workspace).
+function test_global_nav_is_build_analyze_learn(): void {
+  const source = readSource("components/layout/TopNav.tsx");
+  const arrayStart = source.indexOf("export const PRIMARY_NAVIGATION");
+  const arrayEnd = source.indexOf("];", arrayStart);
+  const arrayText = source.slice(arrayStart, arrayEnd);
+
+  expect(/name:\s*"Build"/.test(arrayText), "\"Build\" must remain a primary destination");
+  expect(/name:\s*"Analyze"/.test(arrayText), "\"Analyze\" must remain a primary destination");
+  expect(/name:\s*"Learn"/.test(arrayText), "\"Learn\" must be a primary destination -- Founder Experience Model correction, Part 2");
+  expect(/href:\s*"\/playbooks"/.test(arrayText), "\"Learn\" must route into the existing /playbooks experience, not a new one");
+  expect(!/name:\s*"Fundraising"/.test(arrayText), "\"Fundraising\" must never be a global primary destination -- it stays a founder tool inside the venture workspace");
+  expect(!/name:\s*"Simulate"/.test(arrayText), "\"Simulate\" must never be a global primary destination -- it stays a founder tool inside the venture workspace");
+}
+
 function test_mobile_tab_bar_shares_the_same_primary_navigation_source(): void {
   // MobileTabBar must import PRIMARY_NAVIGATION from TopNav rather than
   // defining its own list -- otherwise a desktop nav change (like this
@@ -132,6 +151,7 @@ function test_entry_paths_no_longer_offers_explore_startups_card(): void {
 
 const TESTS: [string, () => void][] = [
   ["test_explore_removed_from_primary_navigation", test_explore_removed_from_primary_navigation],
+  ["test_global_nav_is_build_analyze_learn", test_global_nav_is_build_analyze_learn],
   ["test_mobile_tab_bar_shares_the_same_primary_navigation_source", test_mobile_tab_bar_shares_the_same_primary_navigation_source],
   ["test_watchlist_and_investor_removed_from_account_menu", test_watchlist_and_investor_removed_from_account_menu],
   ["test_deemphasized_routes_remain_present_on_disk", test_deemphasized_routes_remain_present_on_disk],

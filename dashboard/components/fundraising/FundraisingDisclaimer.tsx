@@ -4,7 +4,7 @@
 // disclaimer text").
 export default function FundraisingDisclaimer() {
   return (
-    <p className="text-xs leading-5 text-text-muted">
+    <p className="text-sm leading-6 text-text-muted">
       Fundraising Simulator models potential outcomes from the assumptions you enter. Actual financing outcomes
       depend on your company&rsquo;s real capitalization and legal documents. This is educational decision support,
       not legal, tax, or investment advice.

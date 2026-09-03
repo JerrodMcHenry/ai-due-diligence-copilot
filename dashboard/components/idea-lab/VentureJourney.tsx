@@ -1,105 +1,80 @@
-import { getJourneyStage, VENTURE_JOURNEY_STEP_IDS, VENTURE_STAGE_TO_JOURNEY_STAGE } from "@/lib/founderJourney";
-import { resolveVentureStepIndex } from "@/lib/journey/inferVentureStage";
+import { resolveVentureState } from "@/lib/journey/inferVentureStage";
+import { VENTURE_STAGE_TO_JOURNEY_STAGE, VENTURE_JOURNEY_STEP_IDS } from "@/lib/founderJourney";
 import type { VentureAssumptions } from "@/types";
 
-// Phase 10.6 -- Idea Lab V2, Part 4. Reuses Home's IDEA -> MODEL ->
-// EXPERIMENT -> BUILD -> FUNDRAISE progression (components/home/
-// IdeaJourney.tsx) as a per-venture position indicator -- product
-// navigation and progress framing, explicitly NOT an objective claim the
-// venture has reached a business stage (Part 4). It is a straightforward
-// relabeling of the EXISTING `stage` field's five values (VENTURE_STAGES,
-// unchanged) onto friendlier journey language.
+// Founder Experience Model correction. This component used to render a
+// numbered 1-2-3-4-5 stepper (Idea -> Model -> Experiment -> Build ->
+// Fundraise) with earlier circles filled solid and a connecting line --
+// a staircase that visually claimed mandatory, one-way, unlockable
+// progression no matter what its own docstring said. That was
+// conceptually wrong: modeling happens repeatedly, founders return to
+// assumptions after learning, validation and building overlap, and
+// fundraising is a tool some founders never use at all -- never the
+// destination every venture is implicitly working toward.
 //
-// Phase 10.10, Part 3: the labels themselves now come from the ONE
-// shared founderJourney.ts vocabulary (VENTURE_STAGE_TO_JOURNEY_STAGE's
-// own docstring has the full Idea/Researching/Validating/Building/
-// Launched -> idea/model/experiment/build/fundraise mapping) instead of
-// a second, locally hardcoded label array. The underlying `stage` value
-// stored on the venture, the VENTURE_STAGES dropdown, and every API
-// contract remain completely unchanged -- this is presentation only,
-// same discipline as Phase 10.3's nav relabeling.
-const JOURNEY_LABELS = VENTURE_JOURNEY_STEP_IDS.map((id) => getJourneyStage(id).label);
-
-// Founder Loop V2, Section 10: returns -1 (no signal), not 0, when
-// `stage` is unset or doesn't map onto the shared vocabulary -- see
-// lib/journey/inferVentureStage.ts's own docstring for why that
-// distinction matters (an unmapped manual stage must never silently
-// outrank real evidence just by defaulting to "Idea").
+// This is now a single, plain-language DESCRIPTION of where the venture
+// appears to stand right now (see lib/journey/inferVentureStage.ts's own
+// resolveVentureState() docstring for the full reasoning) -- not a
+// position on a path, not a level, and never rendered as something the
+// venture must move forward through in order. The same underlying
+// evidence (the founder's own manual `stage` field, reconciled with real
+// assumptions/validation data already in the model) is reused completely
+// unchanged; only the presentation changed, from a forward-only stepper
+// to a single current-state statement that can equally describe a
+// venture moving backward as new evidence complicates an assumption.
 function manualStepIndex(stage: string | null): number {
   if (!stage) {
     return -1;
   }
 
-  // Goes through the shared normalization map rather than indexing
-  // VENTURE_STAGES/VENTURE_JOURNEY_STEP_IDS in parallel -- correct even
-  // if the two arrays are ever reordered independently.
   const journeyStageId = VENTURE_STAGE_TO_JOURNEY_STAGE[stage];
   return journeyStageId ? VENTURE_JOURNEY_STEP_IDS.indexOf(journeyStageId) : -1;
 }
 
+// Global visual polish, Part 4. Three mutually-exclusive states, shown
+// ONE at a time (never simultaneously competing for attention the way
+// e.g. six always-visible VPS categories would) -- restrained venture-
+// state identity using colors this design system already defines for
+// other purposes, not new hues invented for this: "idea" stays neutral
+// (nothing earned yet, not a judgment), "validating" uses "info" (the
+// same token MissionsSection/Badge already use for an in-progress/
+// informational state), "building" uses "success" (real execution
+// underway). The state's own text label is always shown alongside --
+// color is reinforcement, never the only signal.
+const STATE_PILL_CLASSES: Record<string, string> = {
+  idea: "bg-surface-muted text-text-secondary",
+  validating: "bg-info-soft text-info",
+  building: "bg-success-soft text-success",
+};
+
 type VentureJourneyProps = {
   stage: string | null;
-  // Founder Loop V2, Section 10: optional and additive. Omitted (e.g. a
-  // future caller with no assumptions in hand), this behaves exactly as
-  // before -- manual stage only, defaulting to "Idea" when unset/unmapped.
+  // Optional and additive. Omitted, this behaves exactly as before --
+  // manual stage only, defaulting to "Idea" when unset/unmapped.
   assumptions?: VentureAssumptions | null;
 };
 
 export default function VentureJourney({ stage, assumptions = null }: VentureJourneyProps) {
   const manualIndex = manualStepIndex(stage);
-  const activeIndex = Math.max(0, resolveVentureStepIndex(manualIndex, assumptions));
-  // Section 10's explicit requirement: the UI must say WHY this step is
-  // active. True whether the evidence-inferred index or the founder's
-  // own manual stage ended up winning -- both ultimately trace back to
-  // the venture model, never an arbitrary checklist.
-  const explanation = assumptions
-    ? "Based on the status and evidence in your venture model."
-    : "Based on the status you’ve set below — not an assessment of how far along the venture really is.";
+  const state = resolveVentureState(manualIndex, assumptions);
 
   return (
-    <div>
-      <div className="flex items-center">
-        {JOURNEY_LABELS.map((label, index) => (
-          <div key={label} className="flex flex-1 items-center last:flex-none">
-            <div className="flex flex-col items-center gap-1.5">
-              <span
-                className={[
-                  "flex size-7 shrink-0 items-center justify-center rounded-full border-2 text-xs font-bold",
-                  index < activeIndex
-                    ? "border-primary bg-primary text-white"
-                    : index === activeIndex
-                      ? "border-primary bg-surface text-primary"
-                      : "border-border bg-surface text-text-muted",
-                ].join(" ")}
-              >
-                {index + 1}
-              </span>
-              <span
-                className={[
-                  // Phase 29B, Part 7: bumped from an arbitrary 11px (below
-                  // the design system's own smallest defined step) to
-                  // text-xs -- this is the founder's primary journey-stage
-                  // wayfinding label, not tertiary metadata.
-                  "text-xs font-semibold",
-                  index === activeIndex ? "text-primary" : "text-text-muted",
-                ].join(" ")}
-              >
-                {label}
-              </span>
-            </div>
-
-            {index < JOURNEY_LABELS.length - 1 ? (
-              <span
-                aria-hidden="true"
-                className={["mx-1.5 h-px flex-1", index < activeIndex ? "bg-primary" : "bg-border"].join(" ")}
-                style={{ marginBottom: "1.1rem" }}
-              />
-            ) : null}
-          </div>
-        ))}
-      </div>
-
-      <p className="mt-3 text-center text-xs text-text-muted">{explanation}</p>
+    <div className="flex flex-wrap items-center gap-3">
+      <span
+        className={[
+          "inline-flex shrink-0 items-center rounded-full px-3 py-1 text-sm font-bold",
+          STATE_PILL_CLASSES[state.id],
+        ].join(" ")}
+      >
+        {state.label}
+      </span>
+      <p className="text-sm leading-6 text-text-secondary">
+        {state.description}{" "}
+        <span className="text-text-muted">
+          This describes where things stand right now, not a level you&rsquo;ve unlocked — it can move
+          forward or backward as new evidence comes in.
+        </span>
+      </p>
     </div>
   );
 }

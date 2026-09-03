@@ -11,10 +11,16 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 // navigation started as exactly three consumer-facing destinations --
 // see the Phase 10.2 audit's own "That is the product" framing. Phase 15
 // -- Founder Beta Surface Audit removed "Explore" (see PRIMARY_NAVIGATION's
-// own comment below for why), leaving two. Do NOT add another top-level
-// item here without a real product decision; personal/account-specific
-// destinations (My Ideas, My Startup, Learn) live in PersonalMenu
-// instead, never here.
+// own comment below for why), leaving two; the Founder Experience Model
+// correction added "Learn" back as the third (a genuinely global product
+// mode, not an account-specific destination -- see that entry's own
+// comment). Do NOT add another top-level item here without a real
+// product decision; personal/account-specific destinations (My Ideas, My
+// Startup) live in PersonalMenu instead, never here. Fundraising and
+// Simulate/Model-What-If are explicitly EXCLUDED from this list --
+// founder tools reachable from inside a venture's workspace, never
+// promoted to the global switcher (Founder Experience Model correction,
+// Part 2's own explicit instruction).
 type PrimaryDestination = {
   name: string;
   href: string;
@@ -47,9 +53,22 @@ type PrimaryDestination = {
 // evaluates exactly the one company a founder describes, using the same
 // complete, frozen SPS pipeline regardless of how many OTHER companies
 // exist in the database, so it stays a primary destination.
+// Founder Experience Model correction, Part 2. "Learn" added as the
+// third primary destination -- Part 5's own instruction that Learn is a
+// GLOBAL product mode, not just a founder-tool link buried inside one
+// venture's workspace. Routes into the exact same /playbooks experience
+// PersonalMenu's own "Learn" entry and every contextual "Learn how ->"
+// link across the app already point into -- no second Learn
+// implementation, just a more visible entry point to the one that
+// exists. Deliberately does NOT add Fundraising or Simulate here (the
+// directive's own explicit instruction) -- those stay founder tools
+// reachable from inside a venture's workspace ("Explore"), never
+// promoted to the global switcher a signed-out visitor or a founder with
+// no venture yet would also see.
 export const PRIMARY_NAVIGATION: PrimaryDestination[] = [
   { name: "Build", href: "/idea-lab", activeOn: ["/idea-lab"] },
   { name: "Analyze", href: "/analyze", activeOn: ["/analyze"] },
+  { name: "Learn", href: "/playbooks", activeOn: ["/playbooks"] },
 ];
 
 export function isPrimaryDestinationActive(pathname: string, destination: PrimaryDestination): boolean {

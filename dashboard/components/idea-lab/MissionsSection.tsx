@@ -595,7 +595,7 @@ export default function MissionsSection({
               {reflectingMissionId === primaryMission.id ? (
                 <div className="space-y-3 rounded-xl border border-border p-4">
                   <p className="text-sm font-semibold text-text-primary">What did you learn?</p>
-                  <p className="text-xs text-text-muted">
+                  <p className="text-sm text-text-muted">
                     &ldquo;What happened when you tried this?&rdquo; A failed experiment is still useful
                     learning.
                   </p>

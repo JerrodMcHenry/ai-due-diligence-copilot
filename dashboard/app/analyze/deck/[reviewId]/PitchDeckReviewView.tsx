@@ -289,7 +289,7 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
             <div className="mt-3 space-y-2">
               {review.prep_questions.map((item, index) => (
                 <BaseCard key={index} className="p-4">
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                     Possible investor question
                   </p>
                   <p className="mt-1 text-sm leading-6 text-text-primary">&ldquo;{item.question}&rdquo;</p>
@@ -329,7 +329,7 @@ function StoryCard({ label, field }: { label: string; field: DeckStoryField }) {
       <p className={`mt-1.5 text-sm leading-6 ${field.found ? "text-text-primary" : "text-text-muted italic"}`}>
         {field.summary}
       </p>
-      {pageLabel ? <p className="mt-2 text-[11px] text-text-muted">{pageLabel}</p> : null}
+      {pageLabel ? <p className="mt-2 text-xs text-text-muted">{pageLabel}</p> : null}
     </BaseCard>
   );
 }
@@ -348,28 +348,28 @@ function SectionCard({ section }: { section: DeckSectionCoaching }) {
       <div className="flex flex-wrap items-center justify-between gap-2">
         <p className="text-sm font-semibold text-text-primary">{section.label}</p>
         <div className="flex items-center gap-2">
-          {pageLabel ? <span className="text-[11px] text-text-muted">{pageLabel}</span> : null}
+          {pageLabel ? <span className="text-xs text-text-muted">{pageLabel}</span> : null}
           <Badge tone={STATUS_TONE[section.status]}>{STATUS_LABEL[section.status]}</Badge>
         </div>
       </div>
 
       {section.what_its_saying ? (
         <div className="mt-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">What this is saying</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What this is saying</p>
           <p className="mt-1 text-sm leading-6 text-text-secondary">{section.what_its_saying}</p>
         </div>
       ) : null}
 
       {section.whats_working ? (
         <div className="mt-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">What&rsquo;s working</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What&rsquo;s working</p>
           <p className="mt-1 text-sm leading-6 text-text-secondary">{section.whats_working}</p>
         </div>
       ) : null}
 
       {section.may_confuse ? (
         <div className="mt-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
             What may confuse an investor
           </p>
           <p className="mt-1 text-sm leading-6 text-text-secondary">{section.may_confuse}</p>
@@ -377,13 +377,13 @@ function SectionCard({ section }: { section: DeckSectionCoaching }) {
       ) : null}
 
       <div className="mt-3">
-        <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Why investors care</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Why investors care</p>
         <p className="mt-1 text-sm leading-6 text-text-secondary">{section.why_investors_care}</p>
       </div>
 
       {section.try_this ? (
         <div className="mt-3">
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-text-muted">Try this</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Try this</p>
           <p className="mt-1 text-sm leading-6 text-text-secondary">{section.try_this}</p>
         </div>
       ) : null}

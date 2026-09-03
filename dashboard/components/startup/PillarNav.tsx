@@ -47,7 +47,7 @@ export default function PillarNav({
                   aria-label="Score not yet available"
                   className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-border"
                 >
-                  <span className="text-[10px] font-medium text-text-muted">
+                  <span className="text-xs font-medium text-text-muted">
                     N/A
                   </span>
                 </div>
@@ -70,7 +70,7 @@ export default function PillarNav({
 
               <span
                 className={[
-                  "shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium",
+                  "shrink-0 rounded-full px-2 py-0.5 text-xs font-medium",
                   CONFIDENCE_BADGE_CLASSES[data.confidence],
                 ].join(" ")}
               >

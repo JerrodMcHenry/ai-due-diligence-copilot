@@ -147,7 +147,7 @@ function Stat({
 
   return (
     <div>
-      <p className="text-[11px] font-medium uppercase tracking-wide text-text-muted">
+      <p className="text-xs font-medium uppercase tracking-wide text-text-muted">
         {label}
       </p>
       <p className={["mt-0.5 text-xl font-bold", toneClass].join(" ")}>
@@ -244,10 +244,16 @@ function SPSLineChart({
           );
         })}
 
-        <text x={2} y={PADDING_TOP + 3} className="fill-text-muted text-[9px]">
+        {/* Global readability audit: bumped from 9px. These stay below
+            the general 12px floor with a documented reason -- axis tick
+            values inside a fixed 640x200 viewBox chart, where every extra
+            unit competes for real space against up to 6 date labels and
+            the plotted line itself. 11px is the largest size that doesn't
+            crowd the y-axis values into the plotted area. */}
+        <text x={2} y={PADDING_TOP + 3} className="fill-text-muted text-[11px]">
           {yMax}
         </text>
-        <text x={2} y={baselineY + 3} className="fill-text-muted text-[9px]">
+        <text x={2} y={baselineY + 3} className="fill-text-muted text-[11px]">
           {yMin}
         </text>
 
@@ -270,7 +276,7 @@ function SPSLineChart({
               x={x}
               y={CHART_HEIGHT - 8}
               textAnchor="middle"
-              className="fill-text-muted text-[9px]"
+              className="fill-text-muted text-[11px]"
             >
               {formatShortDate(point.created_at)}
             </text>
