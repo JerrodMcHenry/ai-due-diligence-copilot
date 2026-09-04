@@ -25,6 +25,11 @@ import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import { type RecentLearning } from "@/lib/journey/resolveRecentLearning";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
+import {
+  useVentureGraduation,
+  VentureGraduationAction,
+  VentureGraduationBanner,
+} from "@/components/idea-lab/VentureGraduation";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
@@ -530,6 +535,24 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     }
   }
 
+  // Phase 31 -- Venture -> Startup Graduation V1. Called unconditionally
+  // (React hook rules -- this sits above every early return below), one
+  // fetch for the whole page (Section 17's "no N+1" discipline) rather
+  // than one per placement. `venture?.assumptions` falls back to
+  // emptyAssumptions() while still loading -- harmless, since
+  // isEligibleForGraduationSuggestion() on all-null validation fields is
+  // simply `false`, and the real assumptions replace it the instant
+  // loadVenture() resolves.
+  const graduation = useVentureGraduation(ventureId, {
+    name: venture?.name ?? "",
+    description,
+    industry,
+    business_model: businessModel,
+    target_customer: targetCustomer,
+    stage,
+    assumptions: venture?.assumptions ?? emptyAssumptions(),
+  });
+
   if (loadState === "loading") {
     return (
       <div className="space-y-6">
@@ -654,6 +677,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           latestModelChange={history ? resolveLatestModelChange(history.events) : null}
         />
 
+        {/* Phase 31 -- Venture -> Startup Graduation V1, Part 10: a
+            persistent, honest "operating startup" banner once graduated
+            -- never buried, never hidden behind Explore. Renders nothing
+            until graduated. */}
+        <VentureGraduationBanner state={graduation} />
+
         {/* Phase 10.10, Part 5/6: ONE headline "what should I do next?"
             card, deterministically derived from the exact same
             next_milestones/vps data NextMoves already renders below it
@@ -680,6 +709,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             router.push("/analyze");
           }}
         /> : null}
+
+        {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10:
+            positioned right after the primary next-step card, before
+            Venture Overview -- moderately prominent, but never competing
+            with What Matters Now above it. Renders nothing unless the
+            venture is eligible (real paying customers or revenue
+            reported) AND not already graduated -- the quiet manual-only
+            equivalent lives in Explore below instead. */}
+        {graduation.eligible ? <VentureGraduationAction state={graduation} prominent /> : null}
 
         <VentureOverview
           idea={description}
@@ -930,6 +968,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             Learn: browse founder playbooks
             <span aria-hidden="true" className="text-primary">→</span>
           </Link>
+
+          {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3: the
+              manual-only path Part 3 explicitly allows ("graduation may
+              remain manually accessible without a suggestion") -- shown
+              here, quietly, only when the venture ISN'T eligible for the
+              prominent suggestion above (and isn't already graduated).
+              Same review flow either way -- just a different entry
+              point and framing. */}
+          {!graduation.eligible ? <VentureGraduationAction state={graduation} prominent={false} /> : null}
         </section>
 
         <Disclosure id="edit-the-full-model" summary="Edit the full model" defaultOpen={false}>

@@ -1,9 +1,12 @@
 import type {
   CreateVentureRequest,
+  GraduateVentureRequest,
+  GraduateVentureResponse,
   ScenarioCompareResponse,
   StructureIdeaResponse,
   UpdateVentureShareRequest,
   VentureAssumptions,
+  VentureGraduationStatus,
   VentureHistoryResponse,
   VentureResponse,
   VentureShareSettings,
@@ -124,6 +127,57 @@ export function logSnapshotLinkCopied(ventureId: number, token: string): Promise
 export function logSnapshotCtaClicked(publicId: string): Promise<{ logged: boolean }> {
   return apiFetch<{ logged: boolean }>(`/ventures/share/${publicId}/cta-clicked`, {
     method: "POST",
+  });
+}
+
+// Phase 31 -- Venture -> Startup Graduation V1. All three founder-only,
+// same token discipline as every other function in this file -- a
+// venture's graduation state is private founder data, never public.
+
+export function logGraduationPromptShown(ventureId: number, token: string): Promise<{ logged: boolean }> {
+  return apiFetch<{ logged: boolean }>(`/ventures/${ventureId}/graduation/prompt-shown`, {
+    method: "POST",
+    token,
+  });
+}
+
+export function logGraduationStarted(ventureId: number, token: string): Promise<{ logged: boolean }> {
+  return apiFetch<{ logged: boolean }>(`/ventures/${ventureId}/graduation/started`, {
+    method: "POST",
+    token,
+  });
+}
+
+export function getVentureGraduationStatus(
+  id: number,
+  token: string
+): Promise<VentureGraduationStatus> {
+  return apiFetch<VentureGraduationStatus>(`/ventures/${id}/graduation`, { token });
+}
+
+export function graduateVenture(
+  id: number,
+  request: GraduateVentureRequest,
+  token: string
+): Promise<GraduateVentureResponse> {
+  return apiFetch<GraduateVentureResponse>(`/ventures/${id}/graduate`, {
+    method: "POST",
+    body: request,
+    token,
+  });
+}
+
+// Fire-and-forget-shaped from the caller's side, mirroring
+// logSnapshotLinkCopied()'s own pattern -- the server decides every
+// field from the URL path and auth context, never from anything sent
+// here.
+export function logStartupOpenedFromVenture(
+  ventureId: number,
+  token: string
+): Promise<{ logged: boolean }> {
+  return apiFetch<{ logged: boolean }>(`/ventures/${ventureId}/graduation/startup-opened`, {
+    method: "POST",
+    token,
   });
 }
 

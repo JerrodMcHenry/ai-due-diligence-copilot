@@ -147,7 +147,7 @@ export default function FounderStartupWorkspaceView({
     );
   }
 
-  const { startup_id, canonical_name, created_at, methodology, sps_history } = workspace;
+  const { startup_id, canonical_name, created_at, methodology, sps_history, graduated_from_venture } = workspace;
   const publicProfileHref = `/startup/${encodeURIComponent(canonical_name)}`;
   // Phase 7.2.1 -- Deterministic Founder Re-analysis: startup_id in the
   // query string is what makes AnalyzeStartupForm verify membership and
@@ -179,6 +179,25 @@ export default function FounderStartupWorkspaceView({
           </div>
         }
       />
+
+      {/* Phase 31 -- Venture -> Startup Graduation V1, Part 11. One
+          restrained acknowledgment, never repeated elsewhere on this
+          page -- present only when this startup was actually created via
+          graduation (see get_venture_graduation_by_startup()'s own
+          docstring in app/database/db.py). Links back to the source
+          venture's own history, never duplicating or migrating it here. */}
+      {graduated_from_venture ? (
+        <p className="text-sm text-text-muted">
+          Created from your{" "}
+          <Link
+            href={`/idea-lab/${graduated_from_venture.venture_id}`}
+            className="font-semibold text-primary hover:text-primary-hover"
+          >
+            {graduated_from_venture.venture_name}
+          </Link>{" "}
+          venture.
+        </p>
+      ) : null}
 
       {!methodology ? (
         <NotYetAnalyzed canonicalName={canonical_name} reanalyzeHref={reanalyzeHref} />

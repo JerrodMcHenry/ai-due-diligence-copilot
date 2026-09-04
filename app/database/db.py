@@ -371,10 +371,24 @@ def create_startup_claim(
     startup_id: int,
     justification: str,
     contact_email: str | None,
+    verification_method: str = "manual_review",
 ) -> int:
     """
     Creates exactly one pending startup_claims row. Never touches
     startup_memberships -- see this section's own module-level comment.
+
+    `verification_method` defaults to 'manual_review' -- the exact
+    previous, hardcoded value -- so every existing caller is byte-for-byte
+    unaffected. Phase 31 -- Venture -> Startup Graduation V1 -- is the one
+    new caller passing 'venture_graduation' instead: a claim whose
+    provenance is unambiguous (the startup row was just created, in the
+    same request, from this exact user's own venture, so there is no
+    possibility of a competing/false claim the way there is for a
+    pre-existing Analyze-created startup) and is therefore immediately
+    self-approved rather than queued for human review -- see
+    create_venture_graduation()'s own docstring for the full reasoning.
+    This column has no CHECK constraint (unlike `status`), so this is a
+    purely additive, non-breaking parameter.
 
     Raises:
         StartupNotFoundError -- startup_id doesn't exist.
@@ -421,13 +435,14 @@ def create_startup_claim(
                     justification, contact_email
                 )
                 VALUES (
-                    :user_id, :startup_id, 'pending', 'manual_review',
+                    :user_id, :startup_id, 'pending', :verification_method,
                     :justification, :contact_email
                 )
                 RETURNING id
             """), {
                 "user_id": user_id,
                 "startup_id": startup_id,
+                "verification_method": verification_method,
                 "justification": justification,
                 "contact_email": contact_email,
             })
@@ -766,6 +781,17 @@ def get_founder_startup_workspace(startup_id: int):
         if isinstance(methodology, str):
             methodology = json.loads(methodology)
 
+    # Phase 31 -- Venture -> Startup Graduation V1, Part 11. A second,
+    # independent read (get_venture_graduation_by_startup() opens its own
+    # connection) rather than folding into the transaction above -- this
+    # is a rare, tiny lookup (at most one row ever exists per startup_id,
+    # per that table's own UNIQUE(venture_id) -- not per-startup, but a
+    # given startup can only ever be the *target* of one graduation
+    # relationship in practice for V1's single-founder-initiated flow) and
+    # keeping it separate means a future change to either function never
+    # risks the other's transaction boundary.
+    graduated_from_venture = get_venture_graduation_by_startup(startup_row["id"])
+
     return {
         "startup_id": startup_row["id"],
         "canonical_name": startup_row["canonical_name"],
@@ -781,6 +807,14 @@ def get_founder_startup_workspace(startup_id: int):
             }
             for row in history_rows
         ],
+        "graduated_from_venture": (
+            {
+                "venture_id": graduated_from_venture["venture_id"],
+                "venture_name": graduated_from_venture["venture_name"],
+            }
+            if graduated_from_venture is not None
+            else None
+        ),
     }
 
 
@@ -4229,6 +4263,19 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     "snapshot_viewed_publicly",
     "snapshot_link_copied",
     "snapshot_cta_clicked",
+    # Phase 31 -- Venture -> Startup Graduation V1, Part 14. Deliberately
+    # NOT added to QUALIFYING_BUILDING_EVENTS -- that tuple feeds the
+    # Meaningful Building Days / North Star reports' own existing
+    # definition of "building", which this phase was explicitly told not
+    # to redefine. graduation_prompt_shown/graduation_started are logged
+    # client-side (VentureGraduation.tsx / GraduateVentureReview.tsx);
+    # venture_graduated and startup_opened_from_venture are logged from
+    # app/api.py -- see each call site's own comment for the exact
+    # trigger.
+    "graduation_prompt_shown",
+    "graduation_started",
+    "venture_graduated",
+    "startup_opened_from_venture",
 }
 
 
@@ -4676,3 +4723,518 @@ def get_full_analytics_report(window_days: int) -> dict:
         "engagement": get_engagement_counts_report(window_days),
         "distribution": get_distribution_report(window_days),
     }
+
+
+# ---------------------------------------------------------------------------
+# Phase 31 -- Venture -> Startup Graduation V1.
+#
+# Closes the seam Phase 30's own audit identified: modeled_ventures and
+# startups have zero database relationship, and the only prior bridge
+# (lib/ventureToStartupHandoff.ts) carries forward free text only, never
+# a durable link. This section adds exactly one new table --
+# venture_graduations -- a pure relationship/provenance record. It never
+# copies VentureAssumptions into startups (which has no columns to
+# receive them -- canonical_name/normalized_name/created_at only, see
+# create_startups_table()'s own schema); the founder's structured venture
+# context instead flows through the EXISTING /analyze pipeline as
+# reviewable free text (see app/api.py's build_graduation_prefill_text()),
+# so SPS independently re-derives its own evidence/confidence exactly as
+# it does for any other submission -- no second scoring system, no
+# provenance system, no fabricated evidence.
+#
+# Graduation is always founder-initiated (POST /ventures/{id}/graduate).
+# Nothing in this section is ever called from a background job, a
+# migration, or in response to a VPS value -- grep app/ for
+# "create_venture_graduation(" to confirm the one real call site.
+#
+# MEMBERSHIP INVARIANT PRESERVED: this section never inserts into
+# startup_memberships directly. It calls the EXISTING, unchanged
+# approve_startup_claim() -- still the only function in this codebase
+# that may do that insert (test_no_new_membership_write_path remains
+# true) -- immediately after creating a claim whose provenance is
+# unambiguous (see create_venture_graduation()'s own docstring).
+# ---------------------------------------------------------------------------
+
+
+class StartupNameCollisionError(Exception):
+    """Raised when graduation would otherwise create a startup whose
+    normalized name collides with an EXISTING startup the founder does
+    not already own. Deliberately fails closed rather than silently
+    attaching the founder's venture to a stranger's analyzed company
+    (Phase 30's own explicit finding: startups.normalized_name is
+    globally unique and get_or_create_startup()'s ON CONFLICT DO NOTHING
+    would otherwise resolve to whatever row already holds that name,
+    regardless of who created it or what it represents). Never resolved
+    by fuzzy matching, AI, or an automatic rename -- Part 13's own
+    explicit instruction: "Never merge companies automatically based on
+    name." The founder must pick a different name, or -- if the existing
+    startup really is already theirs -- use the connect-existing-startup
+    path instead, which this error's own caller directs them toward."""
+
+
+class StartupAlreadyGraduatedError(Exception):
+    """Raised when a graduation attempt's target startup already has a
+    DIFFERENT venture's graduation linkage -- the
+    venture_graduations_startup_id_key UNIQUE constraint's own violation,
+    translated into a clean application-level error the same way
+    StartupNameCollisionError translates the startups.normalized_name
+    constraint. Reachable only via the "connect an existing startup"
+    path (Part 13): a brand new startup this function just created can
+    never already be graduation-linked to anything. Never resolved
+    automatically -- a startup can only ever be one venture's origin
+    story."""
+
+
+def create_venture_graduations_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_graduations (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL UNIQUE
+                    REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                startup_id INTEGER NOT NULL REFERENCES startups(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                trigger TEXT NOT NULL CHECK (trigger IN ('suggested', 'manual')),
+                connected_existing_startup BOOLEAN NOT NULL DEFAULT FALSE,
+                fields_transferred_count INTEGER NOT NULL DEFAULT 0,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS idx_venture_graduations_startup
+            ON venture_graduations (startup_id)
+        """))
+
+    print("venture_graduations table created successfully.")
+
+
+def add_venture_graduations_startup_unique_constraint():
+    """
+    Phase 31A -- Graduation Integrity Hardening, database invariant
+    audit (finding #3). A startup may be the graduation target of AT
+    MOST ONE venture -- without this, "connect an existing startup"
+    (Part 13) could let a second, unrelated venture attach itself to a
+    startup that already has an originating venture, leaving
+    get_venture_graduation_by_startup() to arbitrarily pick one of two
+    equally-valid graduation rows for the Founder Workspace's "Created
+    from your X venture" acknowledgment -- silently wrong provenance,
+    never surfaced as an error. venture_id already had its own UNIQUE
+    constraint (a venture can graduate at most once); this closes the
+    matching gap on the startup side.
+
+    Additive-only migration, matching this file's own established
+    try/except-swallow idiom (see add_venture_share_columns() for the
+    same pattern) -- Postgres has no `ADD CONSTRAINT IF NOT EXISTS`, so a
+    second run against a table that already has this constraint simply
+    hits (and swallows) a "constraint already exists" error, exactly
+    like every ADD COLUMN migration in this file already does for its
+    own re-run case.
+    """
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE venture_graduations
+                ADD CONSTRAINT venture_graduations_startup_id_key UNIQUE (startup_id)
+            """))
+        print("venture_graduations_startup_id_key constraint added")
+    except Exception as e:
+        print("venture_graduations_startup_id_key migration skipped", e)
+
+
+def get_venture_graduation_for_owner(user_id: str, venture_id: int):
+    """The caller's own graduation record for this venture, or None if it
+    has never graduated. Scoped to user_id in the SQL itself (the venture
+    ownership check this codebase's other per-user queries already use),
+    not merely by trusting a caller-supplied venture_id -- so this can
+    never leak another user's graduation linkage even if called with a
+    venture_id that exists but belongs to someone else (it simply returns
+    None, matching _require_owned_venture()'s own "venture not found"
+    framing at the API layer)."""
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT vg.id, vg.venture_id, vg.startup_id, vg.trigger,
+                   vg.connected_existing_startup, vg.created_at,
+                   s.canonical_name AS startup_name
+            FROM venture_graduations vg
+            JOIN modeled_ventures mv ON mv.id = vg.venture_id
+            JOIN startups s ON s.id = vg.startup_id
+            WHERE vg.venture_id = :venture_id AND mv.user_id = :user_id
+        """), {"venture_id": venture_id, "user_id": user_id}).mappings().first()
+
+        return dict(row) if row is not None else None
+
+
+def get_venture_graduation_by_startup(startup_id: int):
+    """The 'created from your venture' acknowledgment Founder Workspace
+    shows (Part 11) -- looked up by startup_id, which
+    get_founder_startup_workspace()'s own caller already has and has
+    already verified membership for (RequireStartupMember runs first at
+    the API layer). Returns venture name/id only -- never any venture
+    assumption/evidence content -- so Founder Workspace can render one
+    restrained link without a second, wider read of the venture itself."""
+    with engine.begin() as connection:
+        row = connection.execute(text("""
+            SELECT vg.venture_id, mv.name AS venture_name
+            FROM venture_graduations vg
+            JOIN modeled_ventures mv ON mv.id = vg.venture_id
+            WHERE vg.startup_id = :startup_id
+        """), {"startup_id": startup_id}).mappings().first()
+
+        return dict(row) if row is not None else None
+
+
+def _find_venture_graduation_claim(user_id: str, startup_id: int, connection=None):
+    """
+    Phase 31A -- Graduation Integrity Hardening. The most recent
+    startup_claims row tagged verification_method='venture_graduation'
+    for this exact (user_id, startup_id) pair, or None. This is the ONLY
+    signal used to tell "this startup was created by this exact user's
+    own (possibly crashed) graduation attempt" apart from "this is really
+    some other, unrelated company that happens to share a name" -- a
+    plain "zero members, zero claims" check would NOT be safe here, since
+    plenty of real, legitimately unclaimed startups exist from the
+    ordinary /analyze pipeline (get_or_create_startup() never creates a
+    membership or claim for anyone). Only a claim actually tagged
+    'venture_graduation' from this exact user proves this history.
+
+    Accepts an optional existing `connection` so this can run INSIDE
+    resolve_startup_for_graduation()'s own transaction (atomic with the
+    existence check that decides whether to recover or collide) as well
+    as standalone (a fresh connection is opened when none is given).
+    """
+    query = text("""
+        SELECT id, status FROM startup_claims
+        WHERE user_id = :user_id AND startup_id = :startup_id
+          AND verification_method = 'venture_graduation'
+        ORDER BY submitted_at DESC
+        LIMIT 1
+    """)
+    params = {"user_id": user_id, "startup_id": startup_id}
+
+    if connection is not None:
+        row = connection.execute(query, params).mappings().first()
+    else:
+        with engine.begin() as fresh_connection:
+            row = fresh_connection.execute(query, params).mappings().first()
+
+    return dict(row) if row is not None else None
+
+
+def _resolve_existing_startup_for_graduation(
+    connection, startup_id: int, user_id: str, company_name: str
+) -> tuple[int, bool, int | None]:
+    """
+    Phase 31A -- Graduation Integrity Hardening. Shared collision/recovery
+    decision for resolve_startup_for_graduation() -- used both when a
+    startup with this name already existed before the call, and by the
+    concurrent-insert-race fallback, so this decision is made in exactly
+    one place rather than duplicated.
+
+    Returns (startup_id, connected_existing_startup, pending_claim_id) --
+    see resolve_startup_for_graduation()'s own docstring for the full
+    contract.
+    """
+    already_member = connection.execute(text("""
+        SELECT 1 FROM startup_memberships
+        WHERE user_id = :user_id AND startup_id = :startup_id
+    """), {"user_id": user_id, "startup_id": startup_id}).scalar()
+
+    if already_member is not None:
+        return startup_id, True, None
+
+    own_claim = _find_venture_graduation_claim(user_id, startup_id, connection=connection)
+
+    if own_claim is not None and own_claim["status"] in ("pending", "approved"):
+        # Provably this exact user's own prior graduation attempt at this
+        # exact startup -- recoverable, never a collision. If the claim
+        # is already 'approved' but membership is somehow still missing
+        # (only reachable via external interference, e.g. a membership
+        # later revoked by hand -- never by graduation's own write
+        # sequence), pending_claim_id=None tells
+        # _ensure_graduation_membership() to create a fresh claim rather
+        # than re-approve a claim that isn't pending.
+        pending_claim_id = own_claim["id"] if own_claim["status"] == "pending" else None
+        return startup_id, False, pending_claim_id
+
+    raise StartupNameCollisionError(
+        f"A startup named {company_name!r} already exists."
+    )
+
+
+def resolve_startup_for_graduation(company_name: str, user_id: str) -> tuple[int, bool, int | None]:
+    """
+    Returns (startup_id, connected_existing_startup, pending_claim_id).
+    Deliberately NOT get_or_create_startup() -- that function's own ON
+    CONFLICT DO NOTHING is correct for Analyze (any two analyses of "the
+    same company" really should resolve to one shared startup, regardless
+    of who submitted them), but wrong for graduation: a venture named the
+    same as some OTHER user's already-analyzed company must never
+    silently attach this founder's evidence to it.
+
+    pending_claim_id is the id of a PENDING startup_claims row that
+    create_venture_graduation() (via _ensure_graduation_membership()) must
+    still approve to complete the membership grant -- None when
+    membership is already fully granted, or when a fresh claim must be
+    created from scratch instead of reusing an existing one.
+
+    Phase 31A -- Graduation Integrity Hardening, finding #1. When a BRAND
+    NEW startup is created, a pending startup_claims row
+    (verification_method='venture_graduation') is now inserted in the
+    SAME transaction as the startup itself. Before this fix, a crash
+    between "create the startup" and "grant membership" (two separate
+    transactions in the old design) left an ORPHAN startup with no
+    durable trace of who created it or why -- a retry under the same
+    company name would find that orphan, see the founder wasn't yet a
+    member of it, and raise StartupNameCollisionError, PERMANENTLY
+    locking the founder out of ever graduating under that exact name
+    again (their own abandoned attempt blocked their own retry, with no
+    way to recover it). Committing the claim atomically with the startup
+    closes this: a retry can now always prove "this is provably my own
+    prior attempt" (a venture_graduation-tagged claim from this exact
+    user_id exists for this exact startup_id) apart from "this is really
+    someone else's company" (no such claim exists) -- see
+    _resolve_existing_startup_for_graduation() for the shared decision
+    both this function's "already existed" branch and its
+    concurrent-insert-race branch now use.
+
+    (original semantics, otherwise unchanged):
+    - No existing startup with this normalized name: creates a fresh row
+      plus its own pending claim (see above), returns (new_id, False,
+      claim_id).
+    - An existing startup with this normalized name that the caller
+      already has an approved membership for: returns (existing_id, True,
+      None) -- the safe "connect existing startup" case (Part 13),
+      exact-name-match plus already-verified ownership, never fuzzy
+      matching.
+    - An existing startup with this normalized name that the caller does
+      NOT already own, but DOES have their own venture-graduation claim
+      for (pending or approved): the founder's own recoverable orphan
+      from a previous partial attempt.
+    - An existing startup with this normalized name the caller has no
+      relationship to at all: raises StartupNameCollisionError rather
+      than ever attaching to it.
+    """
+    normalized_name = company_name.strip().lower() if company_name else ""
+
+    if not normalized_name:
+        raise ValueError("company_name must not be empty")
+
+    try:
+        with engine.begin() as connection:
+            existing = connection.execute(text("""
+                SELECT id FROM startups WHERE normalized_name = :normalized_name
+            """), {"normalized_name": normalized_name}).mappings().first()
+
+            if existing is not None:
+                return _resolve_existing_startup_for_graduation(
+                    connection, existing["id"], user_id, company_name
+                )
+
+            result = connection.execute(text("""
+                INSERT INTO startups (canonical_name, normalized_name)
+                VALUES (:canonical_name, :normalized_name)
+                RETURNING id
+            """), {
+                "canonical_name": company_name.strip(),
+                "normalized_name": normalized_name,
+            })
+            new_startup_id = result.scalar()
+
+            # Atomic with the startup insert above -- see this function's
+            # own docstring (Phase 31A, finding #1). Never routed through
+            # create_startup_claim() itself: that function opens its OWN
+            # transaction (which would defeat the atomicity this fix
+            # exists for) and its already-member/already-pending guards
+            # are moot anyway -- this startup did not exist a moment ago,
+            # so neither condition can be true.
+            claim_result = connection.execute(text("""
+                INSERT INTO startup_claims (
+                    user_id, startup_id, status, verification_method, justification
+                )
+                VALUES (
+                    :user_id, :startup_id, 'pending', 'venture_graduation',
+                    'Created via venture graduation.'
+                )
+                RETURNING id
+            """), {"user_id": user_id, "startup_id": new_startup_id})
+
+            return new_startup_id, False, claim_result.scalar()
+    except IntegrityError:
+        # Race: another request created a startup with this exact
+        # normalized name between our SELECT and our INSERT above.
+        #
+        # Phase 31A -- Graduation Integrity Hardening, a SECOND bug this
+        # phase's own real-concurrency test
+        # (test_parallel_graduation_requests_converge_to_one_relationship)
+        # caught directly: the ORIGINAL recovery code re-queried using
+        # the SAME `connection` still inside the SAME `with engine.begin()`
+        # block whose INSERT had just failed. Postgres aborts an ENTIRE
+        # transaction the instant any statement inside it fails and
+        # refuses every further command (`InFailedSqlTransaction`) until
+        # a rollback happens -- so that re-query itself always raised a
+        # second, worse error under a REAL concurrent race, rather than
+        # ever actually recovering. Letting the IntegrityError propagate
+        # all the way out of the `with` block above (instead of being
+        # caught inside it) is what triggers SQLAlchemy's own
+        # rollback-on-exception behavior; the retry below then opens a
+        # genuinely FRESH transaction on a clean connection, exactly as
+        # this function's own docstring describes.
+        with engine.begin() as connection:
+            existing_id = connection.execute(text("""
+                SELECT id FROM startups WHERE normalized_name = :normalized_name
+            """), {"normalized_name": normalized_name}).scalar()
+            return _resolve_existing_startup_for_graduation(
+                connection, existing_id, user_id, company_name
+            )
+
+
+def _ensure_graduation_membership(user_id: str, startup_id: int, pending_claim_id: int | None) -> None:
+    """
+    Phase 31A -- Graduation Integrity Hardening. Idempotent, self-healing
+    membership grant -- the ONLY place graduation grants startup access,
+    called from create_venture_graduation() BEFORE the venture_graduations
+    row is inserted (see that function's own comment for why the
+    ordering itself is the fix for finding #2). Reuses, never duplicates,
+    the only code path allowed to write startup_memberships
+    (create_startup_claim() + approve_startup_claim() -- self-approval is
+    safe here for the same provenance reasoning this module's own
+    venture_graduations section docstring already gives).
+
+    Self-heals every reachable partial state on this exact
+    (user_id, startup_id) pair:
+      - already a member -- no-op, nothing to do (this is what makes a
+        RETRY of an already-fully-granted membership safe, and what makes
+        the "connect existing startup" path -- which always arrives here
+        already a member -- a guaranteed no-op).
+      - a pending claim from a previous attempt exists (pending_claim_id
+        given) -- approve it. approve_startup_claim() is itself a safe
+        no-op if that claim is no longer pending for any reason.
+      - no usable claim at all -- create one fresh and approve it,
+        tolerating the race where membership or a pending claim from a
+        concurrent request appeared between the caller's own check and
+        this call.
+    """
+    if user_has_startup_membership(user_id, startup_id):
+        return
+
+    if pending_claim_id is not None:
+        approve_startup_claim(pending_claim_id, admin_user_id=user_id)
+        if user_has_startup_membership(user_id, startup_id):
+            return
+        # The claim we were given is no longer usable (e.g. rejected or
+        # cancelled by an admin between attempts) -- fall through and
+        # create a fresh one rather than leaving the founder stuck.
+
+    try:
+        claim_id = create_startup_claim(
+            user_id=user_id,
+            startup_id=startup_id,
+            justification="Created via venture graduation.",
+            contact_email=None,
+            verification_method="venture_graduation",
+        )
+    except AlreadyMemberError:
+        return
+    except DuplicatePendingClaimError:
+        # Race: a pending claim appeared between our check above and this
+        # call (e.g. a concurrent retry) -- approve THAT one instead of
+        # erroring.
+        claim = _find_venture_graduation_claim(user_id, startup_id)
+        if claim is not None and claim["status"] == "pending":
+            approve_startup_claim(claim["id"], admin_user_id=user_id)
+        return
+
+    approve_startup_claim(claim_id, admin_user_id=user_id)
+
+
+def create_venture_graduation(
+    venture_id: int,
+    startup_id: int,
+    user_id: str,
+    trigger: str,
+    connected_existing_startup: bool,
+    fields_transferred_count: int,
+    pending_claim_id: int | None = None,
+):
+    """
+    Idempotent from the founder's perspective (Part 7/12): the UNIQUE
+    constraint on venture_graduations.venture_id is the database-level
+    duplicate protection a disabled button alone can never guarantee
+    (double-click, two parallel tabs, back-button-then-resubmit, a
+    direct repeated API call -- all land here). ON CONFLICT DO NOTHING
+    means a second graduation attempt for an already-graduated venture
+    writes nothing and this function's caller (app/api.py) re-reads the
+    existing row instead of treating a conflict as an error.
+
+    Phase 31A -- Graduation Integrity Hardening, finding #2. Membership is
+    now granted (via _ensure_graduation_membership(), self-healing) BEFORE
+    the venture_graduations row is inserted, not after. This ordering is
+    the fix: before this change, a crash between "insert
+    venture_graduations" and "grant membership" (two separate
+    transactions) left a venture that read as `graduated=true` whose
+    founder had no actual startup_memberships row -- a state the old
+    caller (the API endpoint) treated as fully successful on every
+    subsequent read, since it only checked "does a venture_graduations
+    row exist," never "does membership actually exist too." With
+    membership granted FIRST, a venture_graduations row can only ever be
+    inserted (this function raises before reaching that INSERT if
+    _ensure_graduation_membership() itself fails) once membership is
+    already durably committed -- "graduated but no membership" is no
+    longer a reachable state at all, rather than a state that has to be
+    detected and repaired on every read. The one remaining failure
+    window (a crash strictly between the membership commit and the
+    venture_graduations commit) is fully self-healing on a plain retry:
+    resolve_startup_for_graduation() will find the startup with
+    membership already granted (connected_existing_startup=True) and this
+    function will insert the venture_graduations row it never got to the
+    first time -- never a duplicate startup, never a duplicate
+    membership, never a second claim.
+    """
+    _ensure_graduation_membership(user_id, startup_id, pending_claim_id)
+
+    try:
+        with engine.begin() as connection:
+            result = connection.execute(text("""
+                INSERT INTO venture_graduations (
+                    venture_id, startup_id, user_id, trigger,
+                    connected_existing_startup, fields_transferred_count
+                )
+                VALUES (
+                    :venture_id, :startup_id, :user_id, :trigger,
+                    :connected_existing_startup, :fields_transferred_count
+                )
+                ON CONFLICT (venture_id) DO NOTHING
+                RETURNING id
+            """), {
+                "venture_id": venture_id,
+                "startup_id": startup_id,
+                "user_id": user_id,
+                "trigger": trigger,
+                "connected_existing_startup": connected_existing_startup,
+                "fields_transferred_count": fields_transferred_count,
+            })
+            inserted_id = result.scalar()
+    except IntegrityError as error:
+        # ON CONFLICT (venture_id) DO NOTHING already absorbed the
+        # expected idempotency case (this exact venture already
+        # graduated) without ever reaching here -- any IntegrityError
+        # that DOES reach here must be the OTHER unique constraint
+        # (venture_graduations_startup_id_key, database invariant #3):
+        # this startup already has a graduation link from a DIFFERENT
+        # venture. Reachable only via "connect an existing startup"
+        # (Part 13) -- a brand new startup this same call just created
+        # can never already be linked to anything.
+        raise StartupAlreadyGraduatedError(
+            f"Startup {startup_id} is already linked to a different venture."
+        ) from error
+
+    if inserted_id is None:
+        # Already graduated (idempotent no-op) -- caller re-reads via
+        # get_venture_graduation_for_owner() rather than treating this as
+        # an error. Membership was already (re-)ensured above regardless
+        # of this outcome, which is exactly what self-heals a venture
+        # whose ONE remaining failure window (see this function's own
+        # docstring) was hit on a previous attempt.
+        return None
+
+    return inserted_id

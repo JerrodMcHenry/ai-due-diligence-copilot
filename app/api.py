@@ -80,6 +80,7 @@ from app.database.db import (create_tables,
                          DuplicatePendingClaimError,
                          AlreadyMemberError,
                          get_startup_memberships_for_user,
+                         user_has_startup_membership,
                          get_founder_startup_workspace,
                          create_founder_actions_table,
                          list_founder_actions_for_startup,
@@ -107,7 +108,15 @@ from app.database.db import (create_tables,
                          create_pitch_deck_review,
                          list_pitch_deck_reviews_for_user,
                          get_pitch_deck_review_for_user,
-                         count_recent_pitch_deck_reviews
+                         count_recent_pitch_deck_reviews,
+                         create_venture_graduations_table,
+                         add_venture_graduations_startup_unique_constraint,
+                         get_venture_graduation_for_owner,
+                         get_venture_graduation_by_startup,
+                         resolve_startup_for_graduation,
+                         create_venture_graduation,
+                         StartupNameCollisionError,
+                         StartupAlreadyGraduatedError
 )
 from typing import Literal
 from fastapi import Query
@@ -119,6 +128,7 @@ from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatu
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
+from app.models.venture_graduation import VentureGraduationStatus, GraduateVentureRequest, GraduateVentureResponse
 from app.models.founder_action import FounderAction, CreateFounderActionRequest, UpdateFounderActionStatusRequest, FOUNDER_ACTION_PILLARS
 from app.models.founder_update import FounderUpdate, CreateFounderUpdateRequest, UpdateFounderUpdateRequest, FOUNDER_UPDATE_PILLARS
 from app.models.startup_milestone import StartupMilestone, CreateMilestoneRequest, UpdateMilestoneStatusRequest, MILESTONE_PILLARS
@@ -275,6 +285,22 @@ add_fundraising_gap_source_to_founder_actions()
 # app/database/db.py for the full design record (the partial unique
 # index is what makes the concurrency lock durable across processes).
 create_analysis_runs_table()
+
+# Phase 31 -- Venture -> Startup Graduation V1. venture_graduations FKs to
+# modeled_ventures(id), startups(id), and users(id), all of which already
+# exist by this point (modeled_ventures and startups/startup_memberships
+# are created above). See create_venture_graduations_table()'s own
+# docstring in app/database/db.py for why this is a pure relationship
+# record and never a second copy of venture content.
+create_venture_graduations_table()
+
+# Phase 31A -- Graduation Integrity Hardening, database invariant #3:
+# a startup may be the graduation target of at most one venture. Purely
+# additive (see add_venture_graduations_startup_unique_constraint()'s own
+# docstring for the try/except-swallow idempotency this shares with every
+# other add_*_columns() migration in this file); must run after the
+# table above exists.
+add_venture_graduations_startup_unique_constraint()
 
 @app.get("/health")
 def health():
@@ -1653,6 +1679,230 @@ def get_venture_history(
 
 
 # ---------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
+# Phase 31 -- Venture -> Startup Graduation V1.
+#
+# The founder must explicitly choose to graduate -- nothing here ever
+# runs from a background job, a VPS threshold, or any other automatic
+# trigger. Both endpoints below sit behind the exact same
+# _require_owned_venture() every other /ventures/{venture_id}/* endpoint
+# uses (RequireAuth + an owner-scoped lookup that 404s for "doesn't
+# exist" and "belongs to someone else" identically, per that function's
+# own docstring).
+#
+# GRADUATION NEVER FABRICATES SPS/VPS DATA: creating a startup+membership
+# here does not create, or imply the existence of, any analysis row --
+# get_founder_startup_workspace() already renders a membership-only,
+# zero-analysis startup correctly (methodology/created_at stay None, per
+# that function's own docstring), so the founder lands on a real, honest
+# "not yet analyzed" workspace, never a placeholder score. VPS itself
+# (compute_vps(), venture_missions, venture_model_updates) is completely
+# untouched by either endpoint below -- grep confirms neither imports nor
+# calls anything from vps_scoring.py/vps_guidance.py.
+# ---------------------------------------------------------------------------
+
+
+@app.post("/ventures/{venture_id}/graduation/prompt-shown")
+def log_graduation_prompt_shown(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """
+    Part 14: fired once, client-side, when VentureGraduation.tsx actually
+    renders the ELIGIBLE, prominent suggestion variant for this venture
+    (never the quiet manual-only link, never a re-render of the same
+    state) -- same "server decides every field from the URL path and auth
+    context" pattern as log_snapshot_link_copied().
+    """
+    _require_owned_venture(current_user, venture_id)
+    _log_event_safe("graduation_prompt_shown", user_id=current_user.user_id, venture_id=venture_id)
+    return {"logged": True}
+
+
+@app.post("/ventures/{venture_id}/graduation/started")
+def log_graduation_started(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """Part 14: fired once, client-side, when the founder opens
+    GraduateVentureReview (the review-before-create screen) -- distinct
+    from venture_graduated, which only fires once the founder actually
+    confirms and the row is persisted. A founder who opens the review and
+    backs out logs this event and nothing else."""
+    _require_owned_venture(current_user, venture_id)
+    _log_event_safe("graduation_started", user_id=current_user.user_id, venture_id=venture_id)
+    return {"logged": True}
+
+
+@app.get("/ventures/{venture_id}/graduation", response_model=VentureGraduationStatus)
+def get_venture_graduation_status(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    graduation = get_venture_graduation_for_owner(current_user.user_id, venture_id)
+
+    if graduation is None:
+        return VentureGraduationStatus(graduated=False)
+
+    return VentureGraduationStatus(
+        graduated=True,
+        startup_id=graduation["startup_id"],
+        startup_name=graduation["startup_name"],
+        connected_existing_startup=graduation["connected_existing_startup"],
+        graduated_at=graduation["created_at"],
+    )
+
+
+@app.post("/ventures/{venture_id}/graduate", response_model=GraduateVentureResponse)
+def graduate_venture(
+    venture_id: int,
+    request: GraduateVentureRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """
+    Idempotent by construction (Part 12's adversarial duplicate-protection
+    requirement): a double-click, two parallel tabs, a refreshed page
+    resubmitting, or a direct repeated API call for the SAME venture_id
+    all land on venture_graduations' own UNIQUE(venture_id) constraint --
+    create_venture_graduation() returns None on a conflict rather than
+    raising, and this endpoint responds with the EXISTING graduation
+    (never a second startup, never an error) exactly as if the caller had
+    called GET .../graduation instead. This makes "double-click" and
+    "already graduated, POST again" behave identically -- both are safe.
+
+    Two resolution paths, matching GraduateVentureRequest's own docstring:
+
+    - connect_existing_startup_id set (Part 13): ownership is checked
+      directly (a membership row must already exist for this exact user +
+      startup_id) -- the ONLY safe case for "connect existing", never
+      fuzzy name matching, never AI, never automatic merge. A non-member
+      or nonexistent id 404s with the same "not found" framing
+      RequireStartupMember itself uses, so this can't be used to probe
+      which startup ids exist.
+    - otherwise: resolve_startup_for_graduation() either creates a fresh
+      startup or raises StartupNameCollisionError (a startup with this
+      exact name exists and the founder does not already own it) --
+      surfaced as 409 Conflict, never silently attached to a stranger's
+      company.
+
+    Membership is granted via create_venture_graduation()'s own reuse of
+    create_startup_claim() + approve_startup_claim() (self-approval) --
+    see that function's docstring in app/database/db.py for the full
+    provenance reasoning. This endpoint never inserts into
+    startup_memberships itself (test_no_new_membership_write_path would
+    fail if it did).
+
+    Phase 31A -- Graduation Integrity Hardening: the write sequence
+    (startup + its claim atomically -> membership -> venture_graduations
+    linkage, in that order) is specifically designed so that a crash at
+    ANY point still converges to one correct Venture <-> Startup
+    relationship on a plain retry of this same endpoint -- never an
+    orphan startup, never a permanent lockout, never a venture that reads
+    as graduated without real access. See resolve_startup_for_graduation()
+    and create_venture_graduation()'s own docstrings in app/database/db.py
+    for the full failure-mode analysis, and
+    app/tests/test_venture_graduation.py's "Phase 31A" section for the
+    tests proving it.
+    """
+    _require_owned_venture(current_user, venture_id)
+
+    existing = get_venture_graduation_for_owner(current_user.user_id, venture_id)
+    if existing is not None:
+        return GraduateVentureResponse(
+            startup_id=existing["startup_id"],
+            startup_name=existing["startup_name"],
+            connected_existing_startup=existing["connected_existing_startup"],
+        )
+
+    pending_claim_id: int | None = None
+
+    if request.connect_existing_startup_id is not None:
+        is_member = user_has_startup_membership(
+            current_user.user_id, request.connect_existing_startup_id
+        )
+
+        if not is_member:
+            raise HTTPException(status_code=404, detail="Startup not found.")
+
+        startup_id = request.connect_existing_startup_id
+        connected_existing_startup = True
+    else:
+        try:
+            startup_id, connected_existing_startup, pending_claim_id = resolve_startup_for_graduation(
+                request.company_name, current_user.user_id
+            )
+        except StartupNameCollisionError as error:
+            raise HTTPException(status_code=409, detail=str(error))
+
+    try:
+        create_venture_graduation(
+            venture_id=venture_id,
+            startup_id=startup_id,
+            user_id=current_user.user_id,
+            trigger=request.trigger,
+            connected_existing_startup=connected_existing_startup,
+            fields_transferred_count=request.fields_transferred_count,
+            pending_claim_id=pending_claim_id,
+        )
+    except StartupAlreadyGraduatedError as error:
+        # Database invariant #3 (Phase 31A): reachable only via "connect
+        # an existing startup" -- that startup already has a DIFFERENT
+        # venture's graduation link. Never resolved automatically; the
+        # founder must pick a different startup to connect, or leave this
+        # venture ungraduated.
+        raise HTTPException(status_code=409, detail=str(error))
+
+    startup_name = get_venture_graduation_for_owner(current_user.user_id, venture_id)["startup_name"]
+
+    # Part 14: fires only after the graduation row is actually persisted
+    # (or the connect-existing path completes) -- never on merely opening
+    # the review screen (that's graduation_started, logged client-side --
+    # see VentureGraduation.tsx). No venture/startup content in metadata,
+    # matching every other analytics call site's "closed vocabulary
+    # values only" discipline.
+    _log_event_safe(
+        "venture_graduated",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={
+            "trigger": request.trigger,
+            "connected_existing_startup": connected_existing_startup,
+        },
+    )
+
+    return GraduateVentureResponse(
+        startup_id=startup_id,
+        startup_name=startup_name,
+        connected_existing_startup=connected_existing_startup,
+    )
+
+
+@app.post("/ventures/{venture_id}/graduation/startup-opened")
+def log_startup_opened_from_venture(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    """
+    Part 14: fired only from the Venture-side "Open Startup Profile ->"
+    control a graduated venture shows (never from the Startup side, and
+    never from any other Analyze/Founder Workspace navigation) -- mirrors
+    log_snapshot_link_copied()'s own "server decides every field from the
+    URL path and auth context, client sends nothing" pattern. Requires an
+    actual graduation row to exist (same _require_owned_venture ownership
+    gate as every other /ventures/{id}/* endpoint, plus this explicit
+    existence check) so a stray call for a never-graduated venture can't
+    pollute the count.
+    """
+    _require_owned_venture(current_user, venture_id)
+
+    if get_venture_graduation_for_owner(current_user.user_id, venture_id) is not None:
+        _log_event_safe("startup_opened_from_venture", user_id=current_user.user_id, venture_id=venture_id)
+
+    return {"logged": True}
+
+
 # Phase 10.8 -- Pitch Deck Coach V1. Deliberately separate from POST
 # /analyze in every way that matters (see app/ai/pitch_deck_coaching.py's
 # own module docstring for the full investigation/boundary record): this

@@ -27,6 +27,18 @@ class FounderSPSHistoryPoint(BaseModel):
     startup_intelligence_score: float | None = None
 
 
+class GraduatedFromVenture(BaseModel):
+    """Phase 31 -- Venture -> Startup Graduation V1, Part 11. Present only
+    when this startup was created via venture graduation -- the one
+    restrained "Created from your X venture" acknowledgment Founder
+    Workspace shows, plus a link back to that venture's own history. Never
+    carries any venture assumption/evidence content -- see
+    get_venture_graduation_by_startup()'s own docstring in
+    app/database/db.py."""
+    venture_id: int
+    venture_name: str
+
+
 class FounderStartupWorkspace(BaseModel):
     startup_id: int
     canonical_name: str
@@ -38,3 +50,4 @@ class FounderStartupWorkspace(BaseModel):
     created_at: datetime | None = None
     methodology: SIEMethodologyAnalysis | None = None
     sps_history: list[FounderSPSHistoryPoint] = Field(default_factory=list)
+    graduated_from_venture: GraduatedFromVenture | None = None

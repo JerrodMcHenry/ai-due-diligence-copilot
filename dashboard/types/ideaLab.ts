@@ -431,6 +431,33 @@ export interface VentureHistoryResponse {
   strongest_improvement: VentureHistoryCategoryChange | null;
 }
 
+// Phase 31 -- Venture -> Startup Graduation V1. See
+// app/models/venture_graduation.py's own docstring -- deliberately no
+// eligibility/suggestion field here; that's a pure client-side function
+// (lib/journey/resolveGraduationEligibility.ts), not a backend response.
+export interface VentureGraduationStatus {
+  graduated: boolean;
+  startup_id: number | null;
+  startup_name: string | null;
+  connected_existing_startup: boolean;
+  graduated_at: string | null;
+}
+
+export type GraduationTrigger = "suggested" | "manual";
+
+export interface GraduateVentureRequest {
+  company_name: string;
+  trigger: GraduationTrigger;
+  connect_existing_startup_id?: number | null;
+  fields_transferred_count?: number;
+}
+
+export interface GraduateVentureResponse {
+  startup_id: number;
+  startup_name: string;
+  connected_existing_startup: boolean;
+}
+
 export interface CreateMissionRequest {
   title: string;
   description?: string | null;

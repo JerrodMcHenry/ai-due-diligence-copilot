@@ -199,18 +199,24 @@ export default function AnalyzeStartupForm() {
   // Phase 10.10 -- Founder Journey Integration, Part 8: pre-fills
   // "Additional Company Information" with the founder's own venture
   // description if they arrived via Idea Lab's "Ready to turn this into a
-  // real startup?" bridge (see lib/ventureToStartupHandoff.ts). Never
-  // runs for a founder-targeted re-analysis (?startup_id=) -- that flow
-  // always re-analyzes the SAME existing canonical startup, which has
-  // nothing to do with any modeled venture's description. Promise.
-  // resolve().then() is the same genuine microtask boundary NewVentureForm.tsx
-  // already uses for the analogous homepage-idea consume, for the same
-  // "sessionStorage doesn't exist during SSR" reason.
+  // real startup?" bridge (see lib/ventureToStartupHandoff.ts).
+  //
+  // Phase 31 -- Venture -> Startup Graduation V1, Part 5: this USED to
+  // early-return for a founder-targeted re-analysis (?startup_id=), on
+  // the assumption that flow "always re-analyzes the SAME existing
+  // canonical startup, which has nothing to do with any modeled
+  // venture's description." Graduation makes that assumption false: it
+  // redirects the founder to exactly this `?startup_id=` re-analysis
+  // flow immediately after creating a brand-new startup FROM a venture,
+  // stashing that venture's own reviewable summary first. Removing the
+  // early-return costs nothing for the normal re-analysis case --
+  // consumeVentureDescriptionForAnalyze() already returns null harmlessly
+  // when nothing was stashed, exactly like every other visit to
+  // /analyze. Promise.resolve().then() is the same genuine microtask
+  // boundary NewVentureForm.tsx already uses for the analogous
+  // homepage-idea consume, for the same "sessionStorage doesn't exist
+  // during SSR" reason.
   useEffect(() => {
-    if (requestedStartupId !== null) {
-      return;
-    }
-
     Promise.resolve().then(() => {
       const stashedDescription = consumeVentureDescriptionForAnalyze();
 

@@ -75,12 +75,46 @@ TEST_USER_ID = "test-user-analyze-unified"
 
 client = TestClient(api.app)
 
-# See module docstring: this file tests multi-source assembly, not auth,
-# so it bypasses the real Clerk verification with a fixed fake identity
-# for its own process lifetime.
-api.app.dependency_overrides[get_current_user] = lambda: AuthenticatedUser(
-    user_id=TEST_USER_ID
-)
+
+# Phase 31A -- Aggregate Test Health finding. The get_current_user
+# override below (see module docstring) USED TO be applied as bare
+# module-level code, executed the instant this module was imported. That
+# used to say "for its own process lifetime" and was never restored --
+# harmless for a genuinely separate process
+# (`python -m app.tests.test_analyze_unified`), but a confirmed,
+# reproduced root cause of widespread cross-file failures under a single
+# combined `pytest app/tests/` run: pytest imports (collects) EVERY test
+# module in the whole target path before running ANY test in ANY file --
+# so bare module-level code here was already silently active from the
+# very start of the run, well before this file's own tests ever
+# executed, overriding get_current_user for every other file's requests
+# too (including ones that run earlier, like
+# test_analysis_usage_protection.py, which is only earlier in
+# EXECUTION order, not in collection order) -- regardless of what
+# Authorization header they sent or what their own JWT-mocking harness
+# intended (FastAPI's dependency_overrides takes absolute precedence
+# over the real dependency). This is exactly what
+# test_founder_reanalysis.py's own module docstring assumed couldn't
+# happen ("these tests genuinely care about which user is making the
+# request") -- it can, and did.
+#
+# Fix: move the override into setup_module(), paired with
+# teardown_module() removing it -- both are standard pytest/xUnit-style
+# hooks, run only immediately before/after THIS module's own tests
+# execute (never merely at import/collection time). No new test
+# framework, no conftest.py, no change to this file's own
+# standalone-invocation contract: `python -m app.tests.test_analyze_unified`
+# still runs every test function directly, and pytest itself still calls
+# setup_module() before the first test in this file and teardown_module()
+# after the last one either way.
+def setup_module(module) -> None:
+    api.app.dependency_overrides[get_current_user] = lambda: AuthenticatedUser(
+        user_id=TEST_USER_ID
+    )
+
+
+def teardown_module(module) -> None:
+    api.app.dependency_overrides.pop(get_current_user, None)
 
 
 def _ensure_test_user() -> None:
@@ -502,32 +536,40 @@ TESTS = [
 
 
 def main() -> None:
-    print("\nUnified Multi-Source Analyze Startup tests")
-    print("-" * 72)
+    # Phase 31A: pytest calls setup_module()/teardown_module() around
+    # this file's tests automatically -- a plain `python -m` run does
+    # not, so this standalone entry point calls them itself (the exact
+    # same functions, not a second definition of the override).
+    setup_module(None)
+    try:
+        print("\nUnified Multi-Source Analyze Startup tests")
+        print("-" * 72)
 
-    _ensure_test_user()
-    _cleanup_analysis_runs()
+        _ensure_test_user()
+        _cleanup_analysis_runs()
 
-    failures: list[str] = []
+        failures: list[str] = []
 
-    for test in TESTS:
-        name = test.__name__
+        for test in TESTS:
+            name = test.__name__
 
-        try:
-            test()
-        except AssertionError as error:
-            print(f"FAIL  {name}\n      {error}")
-            failures.append(name)
-        else:
-            print(f"PASS  {name}")
+            try:
+                test()
+            except AssertionError as error:
+                print(f"FAIL  {name}\n      {error}")
+                failures.append(name)
+            else:
+                print(f"PASS  {name}")
 
-    _cleanup_analysis_runs()
+        _cleanup_analysis_runs()
 
-    print("-" * 72)
-    print(f"{len(TESTS) - len(failures)}/{len(TESTS)} passed")
+        print("-" * 72)
+        print(f"{len(TESTS) - len(failures)}/{len(TESTS)} passed")
 
-    if failures:
-        raise SystemExit(1)
+        if failures:
+            raise SystemExit(1)
+    finally:
+        teardown_module(None)
 
 
 if __name__ == "__main__":
