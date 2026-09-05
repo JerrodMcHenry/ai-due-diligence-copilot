@@ -28,7 +28,17 @@ export default function RingCenter({
     return (
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
         <span className="text-5xl font-bold tracking-tight text-text-muted">—</span>
-        <span className="mt-1 text-sm font-medium text-text-secondary">SPS</span>
+        {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/6:
+            live-discovered on the founder workspace and public profile --
+            "SPS" appeared bare, with no expansion anywhere near the ring
+            itself, unlike VPS's own "VENTURE POTENTIAL SCORE" eyebrow
+            treatment elsewhere in the product. Spelled out (at a
+            deliberately smaller size to still fit the ring's fixed
+            diameter -- Part 8's own "constrained UI label" exception) so
+            a first-time founder never has to already know the acronym. */}
+        <span className="mt-1 max-w-[7rem] text-xs font-medium leading-tight text-text-secondary">
+          Startup Power Score
+        </span>
         {unavailableLabel ? (
           <span className="mt-2 text-xs text-text-muted">{unavailableLabel}</span>
         ) : null}
@@ -52,7 +62,12 @@ export default function RingCenter({
         {score.toFixed(1)}
       </span>
 
-      <span className="mt-1 text-sm font-medium text-text-secondary">SPS</span>
+      {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/6: see the
+          matching comment in the Unavailable branch above for the full
+          reasoning -- "SPS" spelled out, sized to still fit the ring. */}
+      <span className="mt-1 max-w-[7rem] text-xs font-medium leading-tight text-text-secondary">
+        Startup Power Score
+      </span>
 
       {grade ? (
         <span className="mt-2 text-sm font-semibold text-text-primary">

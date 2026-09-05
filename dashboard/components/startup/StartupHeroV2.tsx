@@ -145,12 +145,20 @@ export default function StartupHeroV2({
   const overallConfidence = getOverallConfidence(methodology);
   const recommendation = getRecommendation(methodology.startup_scorecard);
   const analysisType = getAnalysisType(methodology.analysis_context);
-  const methodologyVersion = getMethodologyVersion(methodology.analysis_context);
   const analysisDate = formatAnalysisDate(createdAt);
 
+  // Phase 31C-A -- Global Founder UX Acceptance, Part 1/6: this used to
+  // also include "Methodology v2.1-spec-2026-08-29" (the raw internal
+  // spec-version string, live-discovered on both this public profile and
+  // Founder Workspace) -- exactly the kind of implementation detail
+  // Part 1's "do not expose unnecessary system terminology" targets. A
+  // founder/investor has no use for that string; the date it was
+  // analyzed is the actually meaningful fact, kept below.
+  // getMethodologyVersion() itself is untouched (still exported, still
+  // computed the same way) in case a future internal-only surface needs
+  // it -- this is a display-only removal, not a methodology change.
   const metaLineParts = [
     analysisType,
-    methodologyVersion ? `Methodology ${methodologyVersion}` : null,
     analysisDate ? `Analyzed ${analysisDate}` : null,
   ].filter((part): part is string => Boolean(part));
 

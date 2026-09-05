@@ -458,11 +458,19 @@ function test_what_if_suppresses_interview_scenario_at_commercial_scale(): void 
   );
 }
 
-function test_what_if_scenarios_are_tagged_upside_or_downside(): void {
+// Phase 31C, Part 6: "experiment" added as a third, neutral direction --
+// see whatIfScenarios.ts's own WhatIfScenario.direction docstring for
+// the full root-cause investigation (an action/experiment whose outcome
+// isn't yet known must never be labeled as if a favorable or unfavorable
+// outcome already happened).
+function test_what_if_scenarios_are_tagged_upside_downside_or_experiment(): void {
   const scenarios = getWhatIfScenarios(assumptionsWithTraction());
   expect(scenarios.length > 0, "Expected at least one scenario for a traction-stage venture");
   for (const scenario of scenarios) {
-    expect(scenario.direction === "upside" || scenario.direction === "downside", `Every scenario must be tagged upside or downside, got: ${scenario.direction}`);
+    expect(
+      scenario.direction === "upside" || scenario.direction === "downside" || scenario.direction === "experiment",
+      `Every scenario must be tagged upside, downside, or experiment, got: ${scenario.direction}`
+    );
   }
   expect(scenarios.some((s) => s.direction === "downside"), "A traction-stage venture should be offered at least one downside/risk scenario");
 }
@@ -648,7 +656,7 @@ const TESTS: [string, () => void][] = [
   ["test_venture_state_descriptions_are_plain_language_not_a_score", test_venture_state_descriptions_are_plain_language_not_a_score],
   ["test_what_if_never_suggests_a_lower_interview_count_than_already_reported", test_what_if_never_suggests_a_lower_interview_count_than_already_reported],
   ["test_what_if_suppresses_interview_scenario_at_commercial_scale", test_what_if_suppresses_interview_scenario_at_commercial_scale],
-  ["test_what_if_scenarios_are_tagged_upside_or_downside", test_what_if_scenarios_are_tagged_upside_or_downside],
+  ["test_what_if_scenarios_are_tagged_upside_downside_or_experiment", test_what_if_scenarios_are_tagged_upside_downside_or_experiment],
   ["test_what_if_offers_churn_downside_only_when_paying_customers_exist", test_what_if_offers_churn_downside_only_when_paying_customers_exist],
   ["test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress", test_what_if_never_overwrites_a_real_value_and_presents_it_as_progress],
   ["test_what_if_is_pure_and_does_not_mutate_the_input", test_what_if_is_pure_and_does_not_mutate_the_input],

@@ -18,7 +18,8 @@
     "test:weeklyReview": "node tests/buildWeeklyReview.test.ts",
     "test:graduation": "node tests/graduationEligibility.test.ts",
     "test:graduationSummary": "node tests/graduationSummary.test.ts",
-    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav && npm run test:concepts && npm run test:simulate && npm run test:fundraising && npm run test:fundraisingUi && npm run test:captureSignals && npm run test:weeklyReview && npm run test:graduation && npm run test:graduationSummary"
+    "test:whatIfSemantics": "node tests/whatIfSemantics.test.ts",
+    "test": "npm run test:playbooks && npm run test:journey && npm run test:founderBetaNav && npm run test:concepts && npm run test:simulate && npm run test:fundraising && npm run test:fundraisingUi && npm run test:captureSignals && npm run test:weeklyReview && npm run test:graduation && npm run test:graduationSummary && npm run test:whatIfSemantics"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.8.2",

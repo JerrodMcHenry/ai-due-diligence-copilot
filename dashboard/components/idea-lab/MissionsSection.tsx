@@ -87,7 +87,7 @@ const CATEGORY_OPTIONS = [
   { value: "validation", label: "Validation" },
   { value: "problem_solution", label: "Problem & Solution" },
   { value: "founder_readiness", label: "Founder Readiness" },
-  { value: "gtm_feasibility", label: "GTM Feasibility" },
+  { value: "gtm_feasibility", label: "Reaching Customers" },
   { value: "economic_potential", label: "Economic Potential" },
   { value: "market_potential", label: "Market Potential" },
 ];

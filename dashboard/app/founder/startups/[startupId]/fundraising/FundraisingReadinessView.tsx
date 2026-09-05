@@ -242,9 +242,15 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                   Power Score doesn&rsquo;t automatically mean an investor-ready story, and a
                   modest one doesn&rsquo;t rule one out.
                 </p>
+                {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/2/6:
+                    live-discovered bare "SPS" plus 12px text on an
+                    explanation of a real methodology firewall (Fundraising
+                    Readiness never feeds back into the score) -- exactly
+                    the kind of thing a founder needs to actually be able
+                    to read. Bumped to the 14px floor, spelled out. */}
                 {readiness.current_sps !== null ? (
-                  <p className="mt-2 text-xs text-text-muted">
-                    Current SPS: <span className="font-medium text-text-secondary">{readiness.current_sps.toFixed(1)}</span>{" "}
+                  <p className="mt-2 text-sm text-text-muted">
+                    Current Startup Power Score: <span className="font-medium text-text-secondary">{readiness.current_sps.toFixed(1)}</span>{" "}
                     (shown for context only — Fundraising Readiness never changes it, and never appears in Rankings).
                   </p>
                 ) : null}
@@ -316,13 +322,23 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                         : "—"}
                     </span>
                   </div>
+                  {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/2/6:
+                      "SPS 8.0/10" was doubly confusing -- bare jargon,
+                      AND actually mislabeled (this is the PILLAR's own
+                      0-10 score, not the aggregate Startup Power Score,
+                      which is 0-100). Relabeled for accuracy, not just
+                      readability. Kept at the compact metadata size
+                      (Part 8's own "genuinely constrained UI" exception --
+                      three figures on one line, six times on this page)
+                      but the weakness sentence below it is real
+                      explanatory prose and bumped to the 14px floor. */}
                   <p className="mt-1 text-xs text-text-muted">
                     {pillar.score !== null
-                      ? `SPS ${pillar.score.toFixed(1)}/10 · ${pillar.confidence} confidence · ${pillar.evidence_coverage.toFixed(0)}% evidence coverage`
+                      ? `Pillar score ${pillar.score.toFixed(1)}/10 · ${pillar.confidence} confidence · ${pillar.evidence_coverage.toFixed(0)}% evidence coverage`
                       : "No usable evidence yet"}
                   </p>
                   {pillar.top_weakness ? (
-                    <p className="mt-2 text-xs text-text-secondary">{pillar.top_weakness}</p>
+                    <p className="mt-2 text-sm text-text-secondary">{pillar.top_weakness}</p>
                   ) : null}
                 </BaseCard>
               ))}
@@ -360,7 +376,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                 <div key={item.category} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3.5">
                   <div>
                     <p className="text-sm font-medium text-text-primary">{item.category}</p>
-                    <p className="text-xs text-text-muted">{item.note}</p>
+                    <p className="text-sm text-text-muted">{item.note}</p>
                   </div>
                   <span
                     className={[
@@ -373,7 +389,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                 </div>
               ))}
             </BaseCard>
-            <p className="mt-2 text-xs text-text-muted">
+            <p className="mt-2 text-sm text-text-muted">
               Checklist status reflects SIE&rsquo;s current assessment — completing Action
               Plan items or milestones doesn&rsquo;t change it directly. Re-analyzing does.
             </p>
@@ -396,7 +412,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
             </Link>
           </BaseCard>
 
-          <p className="text-xs leading-5 text-text-muted">
+          <p className="text-sm leading-6 text-text-muted">
             {readiness.pitch_deck_note} Fundraising Readiness is a separate, deterministic
             assessment of how prepared and well-evidenced your story is for a fundraising
             conversation — it is not your Startup Power Score, and completing actions or

@@ -65,6 +65,24 @@ type PrimaryDestination = {
 // reachable from inside a venture's workspace ("Explore"), never
 // promoted to the global switcher a signed-out visitor or a founder with
 // no venture yet would also see.
+// Phase 31C -- Founder Experience Simplification, Part 3: evaluated
+// adding a fourth "Test" destination (Build | Test | Analyze | Learn,
+// for "test assumptions, run experiments, capture evidence") and
+// deliberately did NOT add one. Investigation found no real, single
+// cross-venture "test" destination to point it at -- What-If and Capture
+// are both scoped to ONE venture's own workspace (a founder with several
+// ventures has per-venture testing tools, not a shared test hub), so a
+// global nav item here would either duplicate a venture's own workspace
+// or require building a genuinely new cross-venture aggregation page --
+// the exact kind of new surface Part 13 explicitly prohibits ("prefer
+// deletion and simplification over adding components"). The JOB itself
+// (test an assumption, capture what happened) is real and is served --
+// inside the venture workspace, where What If and Capture already live,
+// with "What If" itself renamed off internal terminology (see
+// VentureWorkspace.tsx's own Tabs comment) to match this same plain-
+// language principle. Revisit this decision only if a real, single,
+// cross-venture "test" surface is ever built for its own reasons -- never
+// add the nav label first and grow a page to justify it.
 export const PRIMARY_NAVIGATION: PrimaryDestination[] = [
   { name: "Build", href: "/idea-lab", activeOn: ["/idea-lab"] },
   { name: "Analyze", href: "/analyze", activeOn: ["/analyze"] },

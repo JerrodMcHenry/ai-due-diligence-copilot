@@ -48,13 +48,25 @@ export default function WeeklyReview({
   const review = buildWeeklyReview(history);
   const nextStep = resolveIdeaLabNextStep(modelResult);
 
+  // Phase 31C-A -- Global Founder UX Acceptance, Part 3: live-discovered
+  // duplication -- a brand-new venture used to show BOTH this card's own
+  // "Your venture history is just getting started" AND
+  // VentureProgress.tsx's near-identical "Your venture journey starts
+  // here" immediately below it on the page, saying the same thing twice.
+  // VentureProgress already owns the honest "nothing yet" empty state
+  // for a venture with no real history (Section 12's own requirement) --
+  // this component renders nothing at all for that case instead of a
+  // second, redundant copy of it. Nothing about the non-empty states
+  // below changed.
+  if (review.isBrandNew) {
+    return null;
+  }
+
   return (
     <BaseCard className="p-5">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{review.windowLabel}</p>
 
-      {review.isBrandNew ? (
-        <BrandNewState />
-      ) : !review.hasActivityInWindow ? (
+      {!review.hasActivityInWindow ? (
         <QuietWeekState nextStep={nextStep} missionedMilestones={missionedMilestones} onStartMission={onStartMission} />
       ) : (
         <ActiveWeekSections review={review} />
@@ -69,18 +81,6 @@ export default function WeeklyReview({
         <FocusNext nextStep={nextStep} missionedMilestones={missionedMilestones} onStartMission={onStartMission} />
       ) : null}
     </BaseCard>
-  );
-}
-
-function BrandNewState() {
-  return (
-    <div className="mt-3">
-      <p className="text-sm text-text-primary">Your venture history is just getting started.</p>
-      <p className="mt-1.5 text-sm leading-6 text-text-secondary">
-        As you take actions, capture what happens, and update your model, this space will fill in with what you did,
-        what you learned, and what changed.
-      </p>
-    </div>
   );
 }
 

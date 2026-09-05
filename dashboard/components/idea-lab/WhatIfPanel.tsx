@@ -83,15 +83,24 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
             onClick={() => onRunScenario(scenario.apply(currentAssumptions) as VentureAssumptions)}
             className="inline-flex items-center gap-1.5"
           >
+            {/* Phase 31C, Part 6: a third, neutral badge for a scenario
+                that represents taking an action or setting an assumption
+                whose real effect isn't uniformly good or bad (see
+                whatIfScenarios.ts's own WhatIfScenario.direction
+                docstring for the full root-cause investigation) -- never
+                rendered green or red, since neither claim would be
+                honest. */}
             <span
               className={[
                 "rounded-full px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide",
                 scenario.direction === "upside"
                   ? "bg-success-soft text-success"
-                  : "bg-danger-soft text-danger",
+                  : scenario.direction === "downside"
+                    ? "bg-danger-soft text-danger"
+                    : "bg-surface-muted text-text-secondary",
               ].join(" ")}
             >
-              {scenario.direction === "upside" ? "Upside" : "Risk"}
+              {scenario.direction === "upside" ? "Upside" : scenario.direction === "downside" ? "Risk" : "Test"}
             </span>
             {scenario.question}
           </Button>

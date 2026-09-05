@@ -56,7 +56,31 @@ export type WhatIfScenario = {
   // (stronger than today) from a downside/risk one (weaker than today,
   // deliberately, to stress-test the model) -- never presented the same
   // way in the UI.
-  direction: "upside" | "downside";
+  //
+  // Phase 31C, Part 6 -- a demonstrated, live-reproduced semantic bug:
+  // "What if I interview 20 customers?" was labeled "upside" even though
+  // running it dropped VPS 5.0 -> 3.7. Root cause investigation
+  // (the backend VPS scoring engine's own aggregation/dampening logic --
+  // see app/ai/vps_scoring.py's own module docstring) found
+  // this math is NOT a scoring defect -- conducting 20 interviews with no
+  // stated outcome is genuinely weak evidence on the category's own 0-10
+  // scale, and once Validation becomes a second scored category, Phase
+  // 29A's "sole uncorroborated category" dampening (which had been
+  // holding the overall score at a flattering neutral 5.0) correctly
+  // stops applying. The actual bug is semantic: interviewing customers is
+  // an ACTION/EXPERIMENT (the founder does it; the RESULT -- positive,
+  // negative, mixed, inconclusive -- isn't known yet), never itself a
+  // favorable outcome. Labeling the ACT of running an experiment as
+  // "upside" presupposes a good result that hasn't happened.
+  //
+  // "experiment" is the fix: a genuinely neutral third label for a
+  // scenario that represents taking an action or setting an assumption
+  // whose real effect isn't uniformly favorable or unfavorable --
+  // distinct from "upside" (a scenario that STATES a favorable outcome
+  // already happened, e.g. "5 customers agree to pay") and "downside" (a
+  // scenario that states an unfavorable one, e.g. "3 customers churn").
+  // Rendered with neutral styling in WhatIfPanel.tsx, never green or red.
+  direction: "upside" | "downside" | "experiment";
   // Typed against the minimal shape only -- at runtime this always
   // receives (and, via object spread, fully preserves) the caller's real
   // full VentureAssumptions object; see WhatIfPanel.tsx's own call site
@@ -92,11 +116,15 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
 
   // --- Validation upside: always relative to what's already reported ---
 
+  // Phase 31C, Part 6: an experiment, not an outcome -- see this file's
+  // WhatIfScenario.direction docstring for the full root-cause
+  // investigation. Conducting interviews doesn't guarantee what you'll
+  // learn.
   if (!hasCommercialScale && (interviews === null || interviews < 20)) {
     scenarios.push({
       id: "interview-20",
       question: "What if I interview 20 customers?",
-      direction: "upside",
+      direction: "experiment",
       apply: (a) => ({ ...a, validation: { ...a.validation, customer_interviews: 20 } }),
     });
   } else if (!hasCommercialScale && interviews !== null) {
@@ -104,7 +132,7 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
     scenarios.push({
       id: "interview-more",
       question: `What if I interview ${target} customers?`,
-      direction: "upside",
+      direction: "experiment",
       apply: (a) => ({ ...a, validation: { ...a.validation, customer_interviews: target } }),
     });
   }
@@ -178,20 +206,27 @@ export function getWhatIfScenarios(current: MinimalAssumptions): WhatIfScenario[
 
   // --- Pricing / GTM ---
 
+  // Phase 31C, Part 6: a pricing decision is a modeling assumption, not a
+  // proven favorable outcome -- whether $29/month turns out to be a good
+  // price depends on the market, not on the act of naming a number.
   if (!priceSet) {
     scenarios.push({
       id: "price-29",
       question: "What if I charge $29/month?",
-      direction: "upside",
+      direction: "experiment",
       apply: (a) => ({ ...a, economics: { ...a.economics, price_point: 29 } }),
     });
   }
 
   if (!cacSet) {
+    // Phase 31C, Part 6: a bare, unqualified CAC assumption isn't
+    // inherently bad -- $50 is fine against a $500 price point and bad
+    // against a $10 one. Only a RISE in an already-known CAC (the
+    // "cac-rises" branch below) is a genuine, unconditional downside.
     scenarios.push({
       id: "cac-50",
       question: "What if customer acquisition costs $50?",
-      direction: "downside",
+      direction: "experiment",
       apply: (a) => ({ ...a, gtm: { ...a.gtm, expected_cac: 50 } }),
     });
   } else {

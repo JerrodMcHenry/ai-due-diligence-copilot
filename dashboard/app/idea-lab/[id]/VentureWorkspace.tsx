@@ -587,6 +587,14 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
   const hasUnsavedChanges = !assumptionsEqual(draft, venture.assumptions);
 
+  // Phase 31C-A -- Global Founder UX Acceptance, Part 3: the SAME
+  // resolver IdeaLabNextStep (below) already calls, reused here only to
+  // find out WHICH milestone (if any) it's about to show as the one
+  // dominant next action -- so NextMoves can skip that exact entry
+  // instead of repeating it. No new recommendation logic.
+  const primaryNextStep = venture.model_result ? resolveIdeaLabNextStep(venture.model_result) : null;
+  const primaryMilestoneText = primaryNextStep?.kind === "work_on_milestone" ? primaryNextStep.milestoneText : undefined;
+
   return (
     <>
       <PageHeader
@@ -710,14 +718,19 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           }}
         /> : null}
 
-        {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10:
-            positioned right after the primary next-step card, before
-            Venture Overview -- moderately prominent, but never competing
-            with What Matters Now above it. Renders nothing unless the
-            venture is eligible (real paying customers or revenue
-            reported) AND not already graduated -- the quiet manual-only
-            equivalent lives in Explore below instead. */}
-        {graduation.eligible ? <VentureGraduationAction state={graduation} prominent /> : null}
+        {/* Phase 31C -- Founder Experience Simplification, Part 4: "what
+            happens afterward" -- the one thing the workspace never
+            actually said out loud. A founder shouldn't have to infer the
+            loop from noticing Capture and Missions exist further down
+            the page; this states it once, plainly, right next to the
+            action it explains. Pure copy -- no new state, no new
+            mechanism, describes exactly what CaptureWhatHappened /
+            MissionsSection / the model-update path already do. */}
+        {venture.model_result ? (
+          <p className="text-center text-sm leading-6 text-text-muted">
+            Do this → record what happened → SIE updates its understanding → you get your next guidance.
+          </p>
+        ) : null}
 
         <VentureOverview
           idea={description}
@@ -828,6 +841,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         {venture.model_result ? (
           <NextMoves
             milestones={venture.model_result.next_milestones}
+            skipMilestoneText={primaryMilestoneText}
             missionedMilestones={missionedMilestones}
             onMakeMission={(milestoneText) => {
               const suggestion = suggestionForMilestone(milestoneText);
@@ -880,6 +894,18 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             Action -> Next Moves. */}
         <VentureProgress history={history} isLoading={isLoadingHistory} />
 
+        {/* Phase 31C -- Founder Experience Simplification, Part 4/9:
+            moved down from directly under the primary next-step card
+            (where it competed with What Matters Now as a second
+            prominent CTA) to sit just above Explore instead -- graduation
+            is exactly the kind of "advanced capability" Part 9 lists as
+            subordinate, discovered when the founder is ready for it, not
+            a second decision competing for attention at the top of the
+            page. Still rendered with its own "prominent" framing (real
+            evidence deserves more than the quiet manual link), just no
+            longer stacked immediately below the one dominant action. */}
+        {graduation.eligible ? <VentureGraduationAction state={graduation} prominent /> : null}
+
         {/* Founder Experience Model correction, Part 5/6. Renamed from
             "Founder tools" to "Explore" to say plainly what Part 5 itself
             requires: Model/What-if, Fundraising, Learn, and Pitch Deck
@@ -910,9 +936,15 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               existed here (Simulate V1); "Fundraising" is new and fully
               isolated (its own ephemeral state, no venture read beyond
               the founder's own name, no venture write ever). */}
+          {/* Phase 31C, Part 3: "Model / What-If" was internal product
+              terminology leaking into a founder-facing label -- renamed
+              to plain "What If?" (the exact vocabulary this whole feature
+              already uses everywhere else: "What if I interview 20
+              customers?" etc.). Same tab, same id, same unmodified
+              content -- copy only. */}
           <Tabs
             tabs={[
-              { id: "venture", label: "Model / What-If" },
+              { id: "venture", label: "What If?" },
               { id: "fundraising", label: "Fundraising" },
             ]}
             activeId={simulateTab}

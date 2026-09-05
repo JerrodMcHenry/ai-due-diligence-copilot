@@ -12,7 +12,7 @@ const CATEGORIES = [
   { label: "Market Potential", description: "How big is the opportunity, really?" },
   { label: "Problem & Solution", description: "Is the problem real, and does the solution fit?" },
   { label: "Founder Readiness", description: "What relevant experience do you bring?" },
-  { label: "GTM Feasibility", description: "Can you actually reach these customers?" },
+  { label: "Reaching Customers", description: "Can you actually reach these customers?" },
   { label: "Economic Potential", description: "Could this become a real business?" },
   { label: "Validation", description: "What evidence backs up your assumptions?" },
 ];

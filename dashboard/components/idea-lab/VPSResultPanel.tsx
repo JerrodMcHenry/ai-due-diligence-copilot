@@ -107,63 +107,76 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
         ) : null}
       </BaseCard>
 
-      <PathToStronger items={result.path_to_stronger} />
+      {/* Phase 31C -- Founder Experience Simplification, Part 4/9: VPS is
+          a diagnostic, not the report the workspace opens with -- the
+          headline score + "what does this mean" above stays visible, but
+          the full category-by-category breakdown, strengths/unknowns,
+          and Path to Stronger are detail a founder can open when they
+          actually want it, not content that competes with the one
+          dominant next-action card above this panel. Nothing here is
+          removed -- same data, same components, only collapsed by
+          default (Disclosure, not a route or a second fetch). */}
+      <Disclosure summary="See the full score breakdown" defaultOpen={false}>
+        <div className="space-y-6 pt-2">
+          <PathToStronger items={result.path_to_stronger} />
 
-      <div>
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
-          How your model breaks down
-        </h3>
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
+              How your model breaks down
+            </h3>
 
-        <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {result.categories.map((category) => {
-            // Phase 10.9 -- Founder Playbooks V1, Part 5B: a single central
-            // lookup (dashboard/lib/playbooks/resourceMap.ts) -- no new VPS
-            // logic, compute_vps() untouched, category.key is the exact
-            // same field this panel already renders.
-            const playbook = getPlaybookForVpsCategory(category.key);
+            <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {result.categories.map((category) => {
+                // Phase 10.9 -- Founder Playbooks V1, Part 5B: a single central
+                // lookup (dashboard/lib/playbooks/resourceMap.ts) -- no new VPS
+                // logic, compute_vps() untouched, category.key is the exact
+                // same field this panel already renders.
+                const playbook = getPlaybookForVpsCategory(category.key);
 
-            return (
-              <BaseCard key={category.key} className="p-4">
-                <div className="flex items-center justify-between">
-                  <p className="text-sm font-medium text-text-secondary">{category.label}</p>
-                  <p className="text-sm font-semibold text-text-primary">
-                    {category.score !== null ? category.score.toFixed(1) : "—"}
-                  </p>
-                </div>
+                return (
+                  <BaseCard key={category.key} className="p-4">
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm font-medium text-text-secondary">{category.label}</p>
+                      <p className="text-sm font-semibold text-text-primary">
+                        {category.score !== null ? category.score.toFixed(1) : "—"}
+                      </p>
+                    </div>
 
-                <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
-                  {category.score !== null ? (
-                    <div
-                      className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
-                      style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
-                    />
-                  ) : null}
-                </div>
+                    <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-surface-muted">
+                      {category.score !== null ? (
+                        <div
+                          className={`h-full rounded-full ${getCategoryBarColor(category.score)}`}
+                          style={{ width: `${Math.max(0, Math.min(100, (category.score / 10) * 100))}%` }}
+                        />
+                      ) : null}
+                    </div>
 
-                {category.score === null ? (
-                  <p className="mt-1.5 text-xs text-text-muted">We don&rsquo;t know this yet</p>
-                ) : category.basis.length > 0 ? (
-                  <p className="mt-1.5 truncate text-xs text-text-muted">{category.basis[0]}</p>
-                ) : null}
+                    {category.score === null ? (
+                      <p className="mt-1.5 text-sm text-text-secondary">We don&rsquo;t know this yet</p>
+                    ) : category.basis.length > 0 ? (
+                      <p className="mt-1.5 text-sm leading-6 text-text-secondary">{category.basis[0]}</p>
+                    ) : null}
 
-                {/* Learn V1, Part 5/6: WHAT this category means and WHY it
-                    matters, distinct from the Playbook link right below it
-                    (HOW to actually work on it -- Part 12). */}
-                <VpsCategoryExplainer categoryKey={category.key} score={category.score} />
+                    {/* Learn V1, Part 5/6: WHAT this category means and WHY it
+                        matters, distinct from the Playbook link right below it
+                        (HOW to actually work on it -- Part 12). */}
+                    <VpsCategoryExplainer categoryKey={category.key} score={category.score} />
 
-                {playbook ? <PlaybookLink slug={playbook.slug} className="mt-2 block" /> : null}
-              </BaseCard>
-            );
-          })}
+                    {playbook ? <PlaybookLink slug={playbook.slug} className="mt-2 block" /> : null}
+                  </BaseCard>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <GuidanceList title="Strongest modeled areas" items={result.strengths} icon="▲" iconClass="text-success" />
+            <GuidanceList title="Biggest modeled unknowns" items={result.risks} icon="▼" iconClass="text-danger" />
+            <GuidanceList title="What you believe" items={result.key_assumptions} icon="•" iconClass="text-primary" />
+            <DiscoveryGaps items={result.validation_gaps} />
+          </div>
         </div>
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <GuidanceList title="Strongest modeled areas" items={result.strengths} icon="▲" iconClass="text-success" />
-        <GuidanceList title="Biggest modeled unknowns" items={result.risks} icon="▼" iconClass="text-danger" />
-        <GuidanceList title="What you believe" items={result.key_assumptions} icon="•" iconClass="text-primary" />
-        <DiscoveryGaps items={result.validation_gaps} />
-      </div>
+      </Disclosure>
     </div>
   );
 }

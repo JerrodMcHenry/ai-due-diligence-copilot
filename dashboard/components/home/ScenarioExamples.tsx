@@ -32,7 +32,7 @@ export default function ScenarioExamples() {
         ))}
       </div>
 
-      <p className="mt-6 text-xs font-semibold uppercase tracking-wide text-text-muted">
+      <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-text-muted">
         Change the assumptions · See how the model changes · Learn what to do next
       </p>
     </section>

@@ -19,18 +19,33 @@ import { getPlaybookForMission } from "@/lib/playbooks/resourceMap";
 // NextMoves itself never creates anything; it only reports which
 // milestone text the founder chose. The founder always chooses --
 // nothing here is auto-converted into a mission.
+//
+// Phase 31C-A -- Global Founder UX Acceptance, Part 3: live-discovered
+// duplication -- milestones[0] is exactly what resolveIdeaLabNextStep()
+// already shows as the ONE dominant "What should I do next?" card
+// directly above this one, so a founder used to see the identical
+// recommendation twice on the same page. `skipMilestoneText` (VentureWorkspace.tsx
+// passes it only when the primary card is actually showing a milestone,
+// via that SAME resolver -- no second recommendation logic here) filters
+// that one entry out before slicing to the top 3, so this card always
+// shows genuinely NEW options, not a restatement.
 type NextMovesProps = {
   milestones: string[];
   onMakeMission?: (milestoneText: string) => void;
   missionedMilestones?: string[];
+  skipMilestoneText?: string;
 };
 
-export default function NextMoves({ milestones, onMakeMission, missionedMilestones = [] }: NextMovesProps) {
-  if (milestones.length === 0) {
+export default function NextMoves({ milestones, onMakeMission, missionedMilestones = [], skipMilestoneText }: NextMovesProps) {
+  const remaining = skipMilestoneText
+    ? milestones.filter((milestone) => milestone !== skipMilestoneText)
+    : milestones;
+
+  if (remaining.length === 0) {
     return null;
   }
 
-  const topThree = milestones.slice(0, 3);
+  const topThree = remaining.slice(0, 3);
 
   return (
     <BaseCard variant="raised" className="p-6">

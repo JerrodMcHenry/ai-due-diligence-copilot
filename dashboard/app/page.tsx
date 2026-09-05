@@ -37,8 +37,15 @@ import VisualPayoff from "@/components/home/VisualPayoff";
 export const dynamic = "force-dynamic";
 
 export default function HomePage() {
+  // Phase 31C -- Founder Experience Simplification, Part 11: the prior
+  // space-y-24/28 gap between EVERY section (six of them) compounded
+  // into several hundred pixels of pure dead space down an already-short
+  // page -- confirmed live (a visitor scrolling past "Where do you want
+  // to start?" landed on an almost entirely empty viewport before the
+  // next section's content appeared). Tightened, not removed: sections
+  // still read as distinct, but the page no longer feels mostly blank.
   return (
-    <div className="space-y-24 pb-16 sm:space-y-28">
+    <div className="space-y-14 pb-16 sm:space-y-16">
       <div>
         <Hero />
         <VisualPayoff />

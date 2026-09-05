@@ -43,7 +43,13 @@ function formatShortDate(iso: string): string {
 
 export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistoryProps) {
   const gradientId = useId();
-  const currentLabel = isLegacyLabel ? "V2.1 SPS (legacy)" : "Current SPS";
+  // Phase 31C-A -- Global Founder UX Acceptance, Part 1/2/6: "SPS" spelled
+  // out to "Score" throughout this component's labels -- live-discovered
+  // bare on the public Startup Profile ("SPS HISTORY" / "CURRENT SPS").
+  // The V2.1 methodology tag itself is kept (it's a real, meaningful
+  // disambiguation between two methodology generations -- see this
+  // component's own docstring -- not jargon to remove).
+  const currentLabel = isLegacyLabel ? "V2.1 Score (legacy)" : "Current Score";
 
   if (history.length === 0) {
     return (
@@ -51,7 +57,7 @@ export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistor
         <SectionHeading isLegacyLabel={isLegacyLabel} />
         <p className="mt-3 text-sm text-text-muted">
           No historical analyses yet. Run another analysis for this company
-          to start tracking its SPS over time.
+          to start tracking its Startup Power Score over time.
         </p>
       </BaseCard>
     );
@@ -124,7 +130,7 @@ export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistor
 function SectionHeading({ isLegacyLabel }: { isLegacyLabel: boolean }) {
   return (
     <h2 className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
-      {isLegacyLabel ? "V2.1 SPS History" : "SPS History"}
+      {isLegacyLabel ? "V2.1 Score History" : "Score History"}
     </h2>
   );
 }

@@ -62,7 +62,12 @@ VPS_CATEGORY_LABELS = {
     "market_potential": "Market Potential",
     "problem_solution": "Problem & Solution Strength",
     "founder_readiness": "Founder Readiness",
-    "gtm_feasibility": "GTM Feasibility",
+    # Phase 31C -- Founder Experience Simplification, Part 1/11: "GTM" is
+    # startup-insider jargon a first-time founder shouldn't need to know
+    # to read their own score -- this is a label-only rename (the
+    # dict KEY, weight, and scoring logic are all completely unchanged;
+    # see this module's own "Do NOT change methodology" boundary).
+    "gtm_feasibility": "Reaching Customers",
     "economic_potential": "Economic Potential",
     "validation": "Validation",
 }

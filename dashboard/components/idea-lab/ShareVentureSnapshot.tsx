@@ -203,7 +203,11 @@ export default function ShareVentureSnapshot({ ventureId }: { ventureId: number 
         <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-text-muted">
           {settings.enabled ? "What recipients see" : "Preview — not shared yet"}
         </p>
-        <VentureSnapshotCard snapshot={preview} />
+        {/* Phase 31C-A -- Global Founder UX Acceptance, Part 5/6: this
+            preview is embedded inside the venture workspace page, which
+            already has its own <h1> -- see VentureSnapshotCard's own
+            asEmbeddedPreview docstring for the heading-hierarchy fix. */}
+        <VentureSnapshotCard snapshot={preview} asEmbeddedPreview />
       </div>
     </div>
   );

@@ -274,9 +274,13 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
         </div>
       ) : null}
 
-      <p className="mt-3 text-xs leading-5 text-text-muted">
-        Completing actions tracks your execution progress. Your SPS only changes
-        when new evidence is analyzed.
+      {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/2/6:
+          live-discovered bare "SPS" plus 12px body copy -- bumped to the
+          14px helper-copy floor and spelled out the score name, same
+          fix as the SPS ring itself (RingCenter.tsx). */}
+      <p className="mt-3 text-sm leading-6 text-text-muted">
+        Completing actions tracks your execution progress. Your Startup Power Score only
+        changes when new evidence is analyzed.
       </p>
 
       {rowError ? <p className="mt-2 text-xs text-danger">{rowError}</p> : null}

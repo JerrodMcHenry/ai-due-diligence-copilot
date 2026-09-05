@@ -219,7 +219,7 @@ export default function PitchDeckCoachUpload() {
 
           <Button type="submit">Review My Deck</Button>
 
-          <p className="text-xs text-text-muted">
+          <p className="text-sm text-text-muted">
             This is a coaching tool, not an investment decision -- it never scores your startup and
             never affects any Startup Power Score. It&rsquo;s private to your account.
           </p>

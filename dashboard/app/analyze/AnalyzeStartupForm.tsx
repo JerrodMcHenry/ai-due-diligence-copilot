@@ -473,9 +473,13 @@ export default function AnalyzeStartupForm() {
             className="flex min-h-32 flex-col items-start gap-2 rounded-2xl border border-border bg-surface p-6 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
           >
             <span className="text-base font-semibold text-text-primary">Analyze My Startup</span>
+            {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/6:
+                live-discovered bare "Methodology v2" -- an internal
+                version name with no meaning to a first-time founder.
+                Replaced with what the process actually does. */}
             <span className="text-sm leading-6 text-text-secondary">
-              Provide a website, pitch deck, or company information and build a full Startup Profile
-              against the Methodology v2 intelligence framework.
+              Provide a website, pitch deck, or company information and build a full,
+              evidence-based Startup Profile.
             </span>
           </button>
         </div>
@@ -515,8 +519,8 @@ export default function AnalyzeStartupForm() {
         title={isFounderTargeted ? "Re-analyze Startup" : "Analyze Startup"}
         subtitle={
           isFounderTargeted
-            ? "Provide a company website, an updated pitch deck, or additional information -- SIE combines it with its own research and refreshes this startup's Methodology v2 intelligence."
-            : "Provide a company website, a pitch deck, additional information, or any combination -- SIE will combine what you give it with its own research and build one full Startup Profile against the Methodology v2 intelligence framework."
+            ? "Provide a company website, an updated pitch deck, or additional information -- SIE combines it with its own research and refreshes this startup's intelligence."
+            : "Provide a company website, a pitch deck, additional information, or any combination -- SIE will combine what you give it with its own research and build one full, evidence-based Startup Profile."
         }
       />
 

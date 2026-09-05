@@ -18,7 +18,6 @@ import NextStepCard from "@/components/journey/NextStepCard";
 import { PILLARS } from "@/components/startup/pillarMeta";
 import {
   formatAnalysisDate,
-  getMethodologyVersion,
   getOverallConfidence,
 } from "@/components/startup/StartupHeroV2";
 
@@ -269,7 +268,7 @@ export default function FounderStartupWorkspaceView({
             </p>
             <p className="mt-1 text-sm text-text-secondary">
               Update {canonical_name}&rsquo;s startup intelligence to see whether your
-              SPS reflects what&rsquo;s actually happened.
+              Startup Power Score reflects what&rsquo;s actually happened.
             </p>
           </div>
           <Link
@@ -323,7 +322,6 @@ function OverviewSection({
   spsHistory: SPSHistoryPoint[];
 }) {
   const confidence = getOverallConfidence(methodology);
-  const methodologyVersion = getMethodologyVersion(methodology.analysis_context);
   const analysisDate = createdAt ? formatAnalysisDate(createdAt) : null;
 
   // "How has SPS changed" -- change since the immediately preceding
@@ -335,8 +333,13 @@ function OverviewSection({
         spsHistory[spsHistory.length - 2].startup_intelligence_score
       : undefined;
 
+  // Phase 31C-A, Part 1/6: dropped the raw internal methodology-version
+  // string (getMethodologyVersion()) from this line -- see
+  // StartupHeroV2.tsx's own matching comment for the full reasoning
+  // (live-discovered on this exact screen: "Methodology
+  // v2.1-spec-2026-08-29"). "Analyzed {date}" is the fact a founder
+  // actually needs.
   const metaParts = [
-    methodologyVersion ? `Methodology ${methodologyVersion}` : null,
     analysisDate ? `Analyzed ${analysisDate}` : null,
   ].filter((part): part is string => Boolean(part));
 
