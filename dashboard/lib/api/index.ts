@@ -9,6 +9,7 @@ export * from "./discovery";
 export * from "./compare";
 export * from "./ideaLab";
 export * from "./ventureMissions";
+export * from "./buildIntelligence";
 export * from "./startupClaims";
 export * from "./startupMemberships";
 export * from "./founder";

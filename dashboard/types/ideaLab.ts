@@ -344,6 +344,21 @@ export type MissionType =
   | "product"
   | "founder"
   | "economics"
+  // Phase 34D -- SIE Build Intelligence Loop V1. Widened per
+  // docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.1 -- see
+  // app/models/venture_missions.py's own matching widen.
+  | "problem_interview"
+  | "prototype_test"
+  | "landing_page_test"
+  | "willingness_to_pay_test"
+  | "paid_pilot"
+  | "pre_sale"
+  | "outbound_test"
+  | "pricing_test"
+  | "channel_test"
+  | "retention_observation"
+  | "competitive_research"
+  | "unit_economics"
   | "other";
 
 // Phase 11 -- Pitch Deck Coach V2, Part 13: "pitch_deck_coach" added
@@ -376,6 +391,17 @@ export interface VentureMission {
   created_at: string;
   updated_at: string;
   completed_at: string | null;
+  // Phase 34D -- SIE Build Intelligence Loop V1. See CreateMissionRequest's
+  // own comment below for question_text/why_it_matters.
+  // interpretation_summary/interpretation_limitations are set once
+  // confirmed evidence exists for this mission (POST /ventures/{id}/evidence),
+  // and updated (not appended) if further evidence arrives before the
+  // mission completes.
+  question_text: string | null;
+  why_it_matters: string | null;
+  interpretation_summary: string | null;
+  interpretation_limitations: string | null;
+  interpretation_generated_at: string | null;
 }
 
 // ---------------------------------------------------------------------------
@@ -465,4 +491,115 @@ export interface CreateMissionRequest {
   related_category?: string | null;
   source?: MissionSource;
   resource_ref?: string | null;
+  question_text?: string | null;
+  why_it_matters?: string | null;
+}
+
+// ---------------------------------------------------------------------------
+// Phase 34D -- SIE Build Intelligence Loop V1. Mirrors
+// app/models/venture_missions.py's Evidence/Decision/Recommendation
+// contracts exactly -- see
+// docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D for the
+// accepted schema these implement.
+// ---------------------------------------------------------------------------
+
+export type EvidenceType =
+  | "founder_claim"
+  | "reported_preference"
+  | "observed_behavior"
+  | "commitment"
+  | "transaction"
+  | "longitudinal_outcome"
+  | "external_source";
+
+// The canonical six-value provenance vocabulary
+// (docs/product/SIE_BUILD_METHODOLOGY_V1.md §14).
+export type Provenance =
+  | "founder_said"
+  | "founder_observed"
+  | "sie_inferred"
+  | "sie_calculated"
+  | "external_source"
+  | "still_unknown";
+
+export type EvidenceRelationship = "supports" | "contradicts" | "mixed" | "neutral";
+
+export interface CreateEvidenceRequest {
+  related_mission_id?: number | null;
+  related_decision_id?: number | null;
+  evidence_type: EvidenceType;
+  statement: string;
+  provenance: Provenance;
+  source_quote?: string | null;
+  structured_field_path?: string | null;
+  structured_value?: number | null;
+  relationship?: EvidenceRelationship | null;
+  occurred_at?: string | null;
+  idempotency_key?: string | null;
+}
+
+export interface VentureEvidence {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  related_mission_id: number | null;
+  related_decision_id: number | null;
+  evidence_type: EvidenceType;
+  statement: string;
+  provenance: Provenance;
+  source_quote: string | null;
+  structured_field_path: string | null;
+  structured_value: number | null;
+  relationship: EvidenceRelationship | null;
+  founder_confirmed: boolean;
+  superseded_by_id: number | null;
+  occurred_at: string | null;
+  recorded_at: string;
+}
+
+export interface CreateDecisionRequest {
+  related_mission_id?: number | null;
+  sie_recommendation: string;
+  sie_reasoning: string;
+  founder_choice: string;
+  founder_rationale?: string | null;
+  evidence_ids?: number[];
+  supersedes_decision_id?: number | null;
+  idempotency_key?: string | null;
+}
+
+export interface VentureDecision {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  related_mission_id: number | null;
+  sie_recommendation: string;
+  sie_reasoning: string;
+  founder_choice: string;
+  founder_rationale: string | null;
+  evidence_ids: number[];
+  supersedes_decision_id: number | null;
+  decided_at: string;
+}
+
+export interface CurrentQuestion {
+  mission_id: number;
+  question_text: string;
+  why_it_matters: string | null;
+}
+
+export interface BuildRecommendation {
+  question_text: string;
+  why_it_matters: string;
+  recommended_test_type: MissionType;
+  recommended_test_title: string;
+  what_to_do: string;
+  what_to_record: string;
+  what_result_would_be_informative: string;
+  what_this_will_not_prove: string;
+}
+
+export interface BuildRecommendationResponse {
+  current_question: CurrentQuestion | null;
+  recommendation: BuildRecommendation | null;
 }

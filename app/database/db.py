@@ -3378,7 +3378,9 @@ def list_venture_missions_for_owner(user_id: str, venture_id: int):
                    vm.description, vm.mission_type, vm.related_category,
                    vm.source, vm.source_ref, vm.status, vm.learning_summary,
                    vm.learning_recorded_at, vm.resource_ref, vm.created_at,
-                   vm.updated_at, vm.completed_at
+                   vm.updated_at, vm.completed_at, vm.question_text,
+                   vm.why_it_matters, vm.interpretation_summary,
+                   vm.interpretation_limitations, vm.interpretation_generated_at
             FROM venture_missions vm
             {_mission_ownership_join_clause()}
             WHERE vm.venture_id = :venture_id AND v.user_id = :user_id
@@ -3386,6 +3388,29 @@ def list_venture_missions_for_owner(user_id: str, venture_id: int):
         """), {"venture_id": venture_id, "user_id": user_id})
 
         return [dict(row) for row in result.mappings().all()]
+
+
+_MISSION_COLUMNS = """
+                id, venture_id, created_by_user_id, title, description,
+                mission_type, related_category, source, source_ref, status,
+                learning_summary, learning_recorded_at, resource_ref,
+                created_at, updated_at, completed_at,
+                question_text, why_it_matters, interpretation_summary,
+                interpretation_limitations, interpretation_generated_at
+"""
+
+# Same column list, `vm.`-qualified -- required whenever the query also
+# joins `modeled_ventures v` (which shares column names like `id` with
+# venture_missions), or the bare names above would be ambiguous.
+_MISSION_COLUMNS_VM = """
+                vm.id, vm.venture_id, vm.created_by_user_id, vm.title,
+                vm.description, vm.mission_type, vm.related_category,
+                vm.source, vm.source_ref, vm.status, vm.learning_summary,
+                vm.learning_recorded_at, vm.resource_ref, vm.created_at,
+                vm.updated_at, vm.completed_at, vm.question_text,
+                vm.why_it_matters, vm.interpretation_summary,
+                vm.interpretation_limitations, vm.interpretation_generated_at
+"""
 
 
 def create_venture_mission(
@@ -3397,6 +3422,8 @@ def create_venture_mission(
     related_category: str | None,
     source: str,
     resource_ref: str | None = None,
+    question_text: str | None = None,
+    why_it_matters: str | None = None,
 ):
     """
     Creates one venture_missions row, OR -- for a vps_guidance/
@@ -3415,6 +3442,13 @@ def create_venture_mission(
     founder-authored missions) -- this function's signature default
     keeps their behavior byte-identical.
 
+    question_text / why_it_matters (Phase 34D -- SIE Build Intelligence
+    Loop V1): the specific unknown this Test targets, set once at
+    creation and otherwise immutable -- see
+    docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.1. Both
+    default to None so every pre-existing caller (vps_guidance
+    suggestions, "Create your own action") keeps working byte-identical.
+
     Ownership is enforced by the caller (app/api.py) verifying
     get_modeled_venture_for_user(user_id, venture_id) is not None BEFORE
     this runs -- this function itself does not re-check ownership because
@@ -3425,25 +3459,21 @@ def create_venture_mission(
     source_ref = title.strip() if source != "founder_created" else None
 
     with engine.begin() as connection:
-        result = connection.execute(text("""
+        result = connection.execute(text(f"""
             INSERT INTO venture_missions (
                 venture_id, created_by_user_id, title, description,
                 mission_type, related_category, source, source_ref,
-                resource_ref, status
+                resource_ref, status, question_text, why_it_matters
             )
             VALUES (
                 :venture_id, :created_by_user_id, :title, :description,
                 :mission_type, :related_category, :source, :source_ref,
-                :resource_ref, 'active'
+                :resource_ref, 'active', :question_text, :why_it_matters
             )
             ON CONFLICT (venture_id, source_ref)
                 WHERE source <> 'founder_created'
                 DO NOTHING
-            RETURNING
-                id, venture_id, created_by_user_id, title, description,
-                mission_type, related_category, source, source_ref, status,
-                learning_summary, learning_recorded_at, resource_ref,
-                created_at, updated_at, completed_at
+            RETURNING {_MISSION_COLUMNS}
         """), {
             "venture_id": venture_id,
             "created_by_user_id": user_id,
@@ -3454,6 +3484,8 @@ def create_venture_mission(
             "source": source,
             "source_ref": source_ref,
             "resource_ref": resource_ref,
+            "question_text": question_text,
+            "why_it_matters": why_it_matters,
         })
 
         row = result.mappings().first()
@@ -3461,11 +3493,8 @@ def create_venture_mission(
         if row is not None:
             return dict(row)
 
-        existing = connection.execute(text("""
-            SELECT id, venture_id, created_by_user_id, title, description,
-                   mission_type, related_category, source, source_ref, status,
-                   learning_summary, learning_recorded_at, resource_ref,
-                   created_at, updated_at, completed_at
+        existing = connection.execute(text(f"""
+            SELECT {_MISSION_COLUMNS}
             FROM venture_missions
             WHERE venture_id = :venture_id AND source_ref = :source_ref
         """), {"venture_id": venture_id, "source_ref": source_ref}).mappings().first()
@@ -3522,7 +3551,7 @@ def capture_venture_observation(
     already confirmed to belong to user_id.
     """
     with engine.begin() as connection:
-        result = connection.execute(text("""
+        result = connection.execute(text(f"""
             INSERT INTO venture_missions (
                 venture_id, created_by_user_id, title, description,
                 mission_type, related_category, source, source_ref,
@@ -3533,11 +3562,7 @@ def capture_venture_observation(
                 'other', :related_category, 'founder_created', NULL,
                 'completed', :learning_summary, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
             )
-            RETURNING
-                id, venture_id, created_by_user_id, title, description,
-                mission_type, related_category, source, source_ref, status,
-                learning_summary, learning_recorded_at, resource_ref,
-                created_at, updated_at, completed_at
+            RETURNING {_MISSION_COLUMNS}
         """), {
             "venture_id": venture_id,
             "created_by_user_id": user_id,
@@ -3583,7 +3608,9 @@ def update_venture_mission_status_for_owner(
                       vm.description, vm.mission_type, vm.related_category,
                       vm.source, vm.source_ref, vm.status, vm.learning_summary,
                       vm.learning_recorded_at, vm.resource_ref, vm.created_at,
-                      vm.updated_at, vm.completed_at
+                      vm.updated_at, vm.completed_at, vm.question_text,
+                      vm.why_it_matters, vm.interpretation_summary,
+                      vm.interpretation_limitations, vm.interpretation_generated_at
         """), {
             "mission_id": mission_id,
             "venture_id": venture_id,
@@ -3617,7 +3644,9 @@ def record_venture_mission_learning_for_owner(
                       vm.description, vm.mission_type, vm.related_category,
                       vm.source, vm.source_ref, vm.status, vm.learning_summary,
                       vm.learning_recorded_at, vm.resource_ref, vm.created_at,
-                      vm.updated_at, vm.completed_at
+                      vm.updated_at, vm.completed_at, vm.question_text,
+                      vm.why_it_matters, vm.interpretation_summary,
+                      vm.interpretation_limitations, vm.interpretation_generated_at
         """), {
             "mission_id": mission_id,
             "venture_id": venture_id,
@@ -3740,6 +3769,446 @@ def list_venture_model_updates_for_owner(user_id: str, venture_id: int):
         """), {"venture_id": venture_id, "user_id": user_id})
 
         return [dict(row) for row in result.mappings().all()]
+
+
+# ---------------------------------------------------------------------------
+# Phase 34D -- SIE Build Intelligence Loop V1.
+#
+# Implements the architecture accepted in
+# docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md exactly -- see
+# that document's §D for the full reasoning behind every design choice
+# below, not repeated here. Two new tables (venture_decisions,
+# venture_evidence) plus the additive venture_missions columns already
+# added above (question_text, why_it_matters, interpretation_summary,
+# interpretation_limitations, interpretation_generated_at).
+#
+# Table creation order matters: venture_decisions is created BEFORE
+# venture_evidence because venture_evidence.related_decision_id
+# references it.
+# ---------------------------------------------------------------------------
+
+def add_venture_intelligence_columns():
+    """
+    Additive-only migration on the existing venture_missions table --
+    every existing row is valid post-migration with these five columns
+    simply NULL. Same idempotent-per-column try/except shape as
+    add_venture_share_columns() (this file, Phase 27); safe to re-run.
+    """
+    columns = [
+        "question_text TEXT",
+        "why_it_matters TEXT",
+        "interpretation_summary TEXT",
+        "interpretation_limitations TEXT",
+        "interpretation_generated_at TIMESTAMP",
+    ]
+
+    for column in columns:
+        column_name = column.split()[0]
+        try:
+            with engine.begin() as connection:
+                connection.execute(text(
+                    f"ALTER TABLE venture_missions ADD COLUMN {column}"
+                ))
+            print(f"{column_name} column added to venture_missions")
+        except Exception as e:
+            print(f"{column_name} migration skipped", e)
+
+    # Widen mission_type's CHECK constraint to the fuller test taxonomy
+    # (SIE_BUILD_METHODOLOGY_V1.md §10) -- exact same
+    # DROP CONSTRAINT IF EXISTS / ADD CONSTRAINT shape as
+    # add_pitch_deck_coach_mission_source()'s own widening of the
+    # `source` constraint (this file, Phase 11). Every existing value is
+    # still valid; this is purely additive and safe to re-run.
+    with engine.begin() as connection:
+        connection.execute(text(
+            "ALTER TABLE venture_missions DROP CONSTRAINT IF EXISTS venture_missions_mission_type_check"
+        ))
+        connection.execute(text("""
+            ALTER TABLE venture_missions ADD CONSTRAINT venture_missions_mission_type_check
+            CHECK (mission_type IN (
+                'customer_discovery', 'validation', 'pricing', 'gtm', 'product',
+                'founder', 'economics', 'problem_interview', 'prototype_test',
+                'landing_page_test', 'willingness_to_pay_test', 'paid_pilot',
+                'pre_sale', 'outbound_test', 'pricing_test', 'channel_test',
+                'retention_observation', 'competitive_research', 'unit_economics',
+                'other'
+            ))
+        """))
+
+    print("venture_missions.mission_type widened to the full test taxonomy.")
+
+
+def create_venture_decisions_table():
+    """
+    Permanently separates SIE's recommendation from the founder's actual
+    choice -- see CreateDecisionRequest's own docstring in
+    app/models/venture_missions.py. `evidence_ids` is a plain Postgres
+    array (not a join table) -- a short, immutable-once-decided list with
+    no attributes of its own worth a separate table, the same judgment
+    already made for venture_evidence.superseded_by_id-style corrections
+    elsewhere in this design. `supersedes_decision_id` is how a reversal
+    is represented: a NEW row, never an edit to the old one (§18
+    append-only history).
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_decisions (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                related_mission_id INTEGER REFERENCES venture_missions(id) ON DELETE SET NULL,
+                sie_recommendation TEXT NOT NULL,
+                sie_reasoning TEXT NOT NULL,
+                founder_choice TEXT NOT NULL,
+                founder_rationale TEXT,
+                evidence_ids INTEGER[] NOT NULL DEFAULT '{}',
+                supersedes_decision_id INTEGER REFERENCES venture_decisions(id) ON DELETE SET NULL,
+                -- Phase 34D §17 idempotency: a client-generated key, unique
+                -- when present. A retried submission with the same key
+                -- returns the existing row instead of creating a duplicate
+                -- (see create_venture_decision()'s own docstring).
+                idempotency_key TEXT,
+                decided_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS venture_decisions_idempotency_key_idx
+            ON venture_decisions (idempotency_key)
+            WHERE idempotency_key IS NOT NULL
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_decisions_venture_idx
+            ON venture_decisions (venture_id, decided_at DESC)
+        """))
+
+    print("venture_decisions table created successfully.")
+
+
+def create_venture_evidence_table():
+    """
+    The single genuinely new durable concept this phase adds -- see
+    CreateEvidenceRequest's own docstring in app/models/venture_missions.py
+    and SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.2. `evidence_type`
+    and `provenance` are both CHECK-constrained to the canonical
+    vocabularies from SIE_BUILD_METHODOLOGY_V1.md §4/§14 -- no Evidence
+    Score, no confidence percentage, anywhere in this schema.
+    `superseded_by_id` is a self-reference used exactly like
+    venture_decisions.supersedes_decision_id: a correction inserts a NEW
+    row and points the OLD row at it; nothing is ever edited in place.
+    An Outcome (SIE_BUILD_METHODOLOGY_V1.md §13) is simply a row with
+    evidence_type='longitudinal_outcome' and related_decision_id set --
+    no separate outcomes table.
+
+    Created AFTER venture_decisions because related_decision_id
+    references it.
+    """
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_evidence (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                related_mission_id INTEGER REFERENCES venture_missions(id) ON DELETE SET NULL,
+                related_decision_id INTEGER REFERENCES venture_decisions(id) ON DELETE SET NULL,
+                evidence_type TEXT NOT NULL CHECK (evidence_type IN (
+                    'founder_claim', 'reported_preference', 'observed_behavior',
+                    'commitment', 'transaction', 'longitudinal_outcome', 'external_source'
+                )),
+                statement TEXT NOT NULL,
+                provenance TEXT NOT NULL CHECK (provenance IN (
+                    'founder_said', 'founder_observed', 'sie_inferred',
+                    'sie_calculated', 'external_source', 'still_unknown'
+                )),
+                source_quote TEXT,
+                structured_field_path TEXT,
+                structured_value DOUBLE PRECISION,
+                relationship TEXT CHECK (relationship IN ('supports', 'contradicts', 'mixed', 'neutral')),
+                founder_confirmed BOOLEAN NOT NULL DEFAULT FALSE,
+                superseded_by_id INTEGER REFERENCES venture_evidence(id) ON DELETE SET NULL,
+                idempotency_key TEXT,
+                occurred_at TIMESTAMP,
+                recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS venture_evidence_idempotency_key_idx
+            ON venture_evidence (idempotency_key)
+            WHERE idempotency_key IS NOT NULL
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_evidence_venture_idx
+            ON venture_evidence (venture_id, recorded_at DESC)
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_evidence_mission_idx
+            ON venture_evidence (related_mission_id)
+        """))
+
+    print("venture_evidence table created successfully.")
+
+
+_EVIDENCE_COLUMNS = """
+                id, venture_id, user_id, related_mission_id, related_decision_id,
+                evidence_type, statement, provenance, source_quote,
+                structured_field_path, structured_value, relationship,
+                founder_confirmed, superseded_by_id, occurred_at, recorded_at
+"""
+
+
+def create_venture_evidence(
+    venture_id: int,
+    user_id: str,
+    evidence_type: str,
+    statement: str,
+    provenance: str,
+    related_mission_id: int | None = None,
+    related_decision_id: int | None = None,
+    source_quote: str | None = None,
+    structured_field_path: str | None = None,
+    structured_value: float | None = None,
+    relationship: str | None = None,
+    occurred_at=None,
+    idempotency_key: str | None = None,
+):
+    """
+    Ownership of related_mission_id/related_decision_id is enforced by
+    the CALLER (app/api.py) via the same ownership-scoped SELECT every
+    other mutation in this file already uses BEFORE this runs -- this
+    function trusts venture_id/related_mission_id/related_decision_id
+    were already confirmed to belong to user_id, exactly like
+    create_venture_mission() trusts its own venture_id.
+
+    Idempotent when idempotency_key is provided (Phase 34D §17): a
+    retried request with the same key returns the existing row via
+    ON CONFLICT ... DO NOTHING + a fallback SELECT, the identical pattern
+    create_venture_mission() already uses for its own source_ref dedup.
+    Founder-confirmed evidence is always inserted with
+    founder_confirmed=True -- there is no code path that persists an
+    unconfirmed candidate signal (see app/api.py's own comment on this).
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_evidence (
+                venture_id, user_id, related_mission_id, related_decision_id,
+                evidence_type, statement, provenance, source_quote,
+                structured_field_path, structured_value, relationship,
+                founder_confirmed, occurred_at, idempotency_key
+            )
+            VALUES (
+                :venture_id, :user_id, :related_mission_id, :related_decision_id,
+                :evidence_type, :statement, :provenance, :source_quote,
+                :structured_field_path, :structured_value, :relationship,
+                TRUE, :occurred_at, :idempotency_key
+            )
+            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+                DO NOTHING
+            RETURNING {_EVIDENCE_COLUMNS}
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "related_mission_id": related_mission_id,
+            "related_decision_id": related_decision_id,
+            "evidence_type": evidence_type,
+            "statement": statement,
+            "provenance": provenance,
+            "source_quote": source_quote,
+            "structured_field_path": structured_field_path,
+            "structured_value": structured_value,
+            "relationship": relationship,
+            "occurred_at": occurred_at,
+            "idempotency_key": idempotency_key,
+        })
+
+        row = result.mappings().first()
+        if row is not None:
+            return dict(row)
+
+        # idempotency_key collided with an existing row -- return it
+        # (idempotent success), never a duplicate, never an error.
+        existing = connection.execute(text(f"""
+            SELECT {_EVIDENCE_COLUMNS}
+            FROM venture_evidence
+            WHERE idempotency_key = :idempotency_key
+        """), {"idempotency_key": idempotency_key}).mappings().first()
+
+        return dict(existing)
+
+
+def list_venture_evidence_for_owner(user_id: str, venture_id: int, related_mission_id: int | None = None):
+    """Same ownership-scoped JOIN discipline as list_venture_missions_for_owner()."""
+    clause = "AND ve.related_mission_id = :related_mission_id" if related_mission_id is not None else ""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT ve.id, ve.venture_id, ve.user_id, ve.related_mission_id,
+                   ve.related_decision_id, ve.evidence_type, ve.statement,
+                   ve.provenance, ve.source_quote, ve.structured_field_path,
+                   ve.structured_value, ve.relationship, ve.founder_confirmed,
+                   ve.superseded_by_id, ve.occurred_at, ve.recorded_at
+            FROM venture_evidence ve
+            JOIN modeled_ventures v ON v.id = ve.venture_id
+            WHERE ve.venture_id = :venture_id AND v.user_id = :user_id
+            {clause}
+            ORDER BY ve.recorded_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id, "related_mission_id": related_mission_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def supersede_venture_evidence_for_owner(user_id: str, venture_id: int, evidence_id: int, superseded_by_id: int):
+    """
+    Correction, never destruction (§18): points the OLD evidence row at
+    the NEW one that corrects it. The old row's own statement/type/
+    provenance are never rewritten -- a founder (or a future admin view)
+    can always see exactly what was originally recorded and what it was
+    later corrected to.
+
+    Not yet called from any API endpoint (Phase 34D-A audit, 2026-09):
+    the V1 founder-facing loop has no "correct this evidence" UI, so
+    nothing invokes this today. Kept rather than removed -- it is the
+    correct, ownership-scoped implementation of a requirement the
+    accepted architecture explicitly calls for
+    (docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §18), not a
+    stale draft; wiring a correction UI to it is future scope, not a
+    reason to delete working, spec-matching plumbing now.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            UPDATE venture_evidence ve
+            SET superseded_by_id = :superseded_by_id
+            FROM modeled_ventures v
+            WHERE ve.venture_id = v.id
+              AND ve.id = :evidence_id
+              AND ve.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING ve.id
+        """), {
+            "evidence_id": evidence_id,
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "superseded_by_id": superseded_by_id,
+        })
+        row = result.mappings().first()
+        return row is not None
+
+
+_DECISION_COLUMNS = """
+                id, venture_id, user_id, related_mission_id, sie_recommendation,
+                sie_reasoning, founder_choice, founder_rationale, evidence_ids,
+                supersedes_decision_id, decided_at
+"""
+
+
+def create_venture_decision(
+    venture_id: int,
+    user_id: str,
+    sie_recommendation: str,
+    sie_reasoning: str,
+    founder_choice: str,
+    related_mission_id: int | None = None,
+    founder_rationale: str | None = None,
+    evidence_ids: list[int] | None = None,
+    supersedes_decision_id: int | None = None,
+    idempotency_key: str | None = None,
+):
+    """
+    Ownership of related_mission_id/every id in evidence_ids is enforced
+    by the CALLER (app/api.py), exactly as create_venture_evidence()
+    documents. Idempotent when idempotency_key is provided, same
+    ON CONFLICT + fallback-SELECT pattern as create_venture_evidence().
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_decisions (
+                venture_id, user_id, related_mission_id, sie_recommendation,
+                sie_reasoning, founder_choice, founder_rationale, evidence_ids,
+                supersedes_decision_id, idempotency_key
+            )
+            VALUES (
+                :venture_id, :user_id, :related_mission_id, :sie_recommendation,
+                :sie_reasoning, :founder_choice, :founder_rationale, :evidence_ids,
+                :supersedes_decision_id, :idempotency_key
+            )
+            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+                DO NOTHING
+            RETURNING {_DECISION_COLUMNS}
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "related_mission_id": related_mission_id,
+            "sie_recommendation": sie_recommendation,
+            "sie_reasoning": sie_reasoning,
+            "founder_choice": founder_choice,
+            "founder_rationale": founder_rationale,
+            "evidence_ids": evidence_ids or [],
+            "supersedes_decision_id": supersedes_decision_id,
+            "idempotency_key": idempotency_key,
+        })
+
+        row = result.mappings().first()
+        if row is not None:
+            return dict(row)
+
+        existing = connection.execute(text(f"""
+            SELECT {_DECISION_COLUMNS}
+            FROM venture_decisions
+            WHERE idempotency_key = :idempotency_key
+        """), {"idempotency_key": idempotency_key}).mappings().first()
+
+        return dict(existing)
+
+
+def list_venture_decisions_for_owner(user_id: str, venture_id: int):
+    """Same ownership-scoped JOIN discipline as list_venture_missions_for_owner()."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT vd.id, vd.venture_id, vd.user_id, vd.related_mission_id,
+                   vd.sie_recommendation, vd.sie_reasoning, vd.founder_choice,
+                   vd.founder_rationale, vd.evidence_ids, vd.supersedes_decision_id,
+                   vd.decided_at
+            FROM venture_decisions vd
+            JOIN modeled_ventures v ON v.id = vd.venture_id
+            WHERE vd.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY vd.decided_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id})
+
+        return [dict(row) for row in result.mappings().all()]
+
+
+def set_venture_mission_interpretation_for_owner(
+    user_id: str, venture_id: int, mission_id: int,
+    interpretation_summary: str, interpretation_limitations: str,
+):
+    """
+    Update-in-place, deliberately -- see VentureMissionResponse's own
+    docstring in app/models/venture_missions.py for why this is the one
+    place in this design where that's correct rather than append-only:
+    a test has exactly one live interpretation cycle in this V1's
+    single-question model, and a founder revising it before the test
+    completes should see the latest reading, not a growing list.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE venture_missions vm
+            SET interpretation_summary = :interpretation_summary,
+                interpretation_limitations = :interpretation_limitations,
+                interpretation_generated_at = CURRENT_TIMESTAMP,
+                updated_at = CURRENT_TIMESTAMP
+            FROM modeled_ventures v
+            WHERE vm.venture_id = v.id
+              AND vm.id = :mission_id
+              AND vm.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING {_MISSION_COLUMNS_VM}
+        """), {
+            "mission_id": mission_id,
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "interpretation_summary": interpretation_summary,
+            "interpretation_limitations": interpretation_limitations,
+        })
+
+        row = result.mappings().first()
+        return dict(row) if row is not None else None
 
 
 # ---------------------------------------------------------------------------
@@ -4287,6 +4756,14 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     "graduation_started",
     "venture_graduated",
     "startup_opened_from_venture",
+    # Phase 34D -- SIE Build Intelligence Loop V1. Deliberately NOT added
+    # to QUALIFYING_BUILDING_EVENTS -- same reasoning as graduation's own
+    # events above: that tuple's "Meaningful Building Days" definition is
+    # out of scope to redefine in this phase. Logged from app/api.py's
+    # new POST /ventures/{id}/evidence and POST /ventures/{id}/decisions
+    # endpoints.
+    "evidence_confirmed",
+    "decision_recorded",
 }
 
 

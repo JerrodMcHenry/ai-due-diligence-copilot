@@ -26,6 +26,7 @@ import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
 import PrimaryCommandCard from "@/components/idea-lab/PrimaryCommandCard";
+import CurrentQuestionCard from "@/components/idea-lab/CurrentQuestionCard";
 import {
   useVentureGraduation,
   VentureGraduationAction,
@@ -924,6 +925,16 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 already graduated (VentureGraduationBanner above covers
                 that state). */}
             <VentureGraduationAction state={graduation} prominent={graduation.eligible} />
+
+            {/* Phase 34D -- SIE Build Intelligence Loop V1. Deliberately
+                additive and self-contained -- proves the
+                question -> test -> result -> evidence -> interpretation ->
+                recommendation -> decision -> outcome loop end to end
+                without touching anything else on this tab. Does not
+                replace PrimaryCommandCard, NextMoves, or Your Active
+                Work above -- see this phase's own explicit "do not
+                redesign Idea Lab" instruction. */}
+            <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} />
           </div>
         </TabPanel>
 

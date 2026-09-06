@@ -116,7 +116,15 @@ from app.database.db import (create_tables,
                          resolve_startup_for_graduation,
                          create_venture_graduation,
                          StartupNameCollisionError,
-                         StartupAlreadyGraduatedError
+                         StartupAlreadyGraduatedError,
+                         add_venture_intelligence_columns,
+                         create_venture_decisions_table,
+                         create_venture_evidence_table,
+                         create_venture_evidence,
+                         list_venture_evidence_for_owner,
+                         create_venture_decision,
+                         list_venture_decisions_for_owner,
+                         set_venture_mission_interpretation_for_owner,
 )
 from typing import Literal
 from fastapi import Query
@@ -124,7 +132,14 @@ from fastapi import Query
 from app.models.startup import StartupAnalysisRequest, StartupAnalysisResponse, StartupProfileResponse, UpdateAnalysisRequest, WebsiteAnalysisRequest, MAX_COMPANY_TEXT_LENGTH, SavedStartupEntry, SavedStartupStatus, DiscoveryResponse, DiscoveryFilterOptions, ComparisonResponse, ComparisonStartup, ComparisonPillar, ComparisonSubscore
 from app.models.sps_v3 import SPSV3Assessment
 from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, VentureResponse, VentureSummary, VPSResult, ScenarioCompareRequest, ScenarioCompareResponse, StructureIdeaRequest, StructureIdeaResponse, VentureDraft, VentureHistoryResponse, VentureHistoryEvent, VentureHistoryCategoryChange, VentureHistoryAssumptionChange, UpdateVentureShareRequest, VentureShareSettings, VentureSnapshotResponse, VentureSnapshotCategory
-from app.models.venture_missions import CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest, VentureMissionResponse, CaptureObservationRequest
+from app.models.venture_missions import (
+    CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest,
+    VentureMissionResponse, CaptureObservationRequest,
+    CreateEvidenceRequest, VentureEvidenceResponse,
+    CreateDecisionRequest, VentureDecisionResponse,
+    BuildRecommendationResponse, CurrentQuestion, BuildRecommendation,
+)
+from app.ai.build_recommendation import build_intelligence_state, generate_interpretation
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -239,6 +254,16 @@ create_venture_model_updates_table()
 # own docstring in app/database/db.py. Additive only; existing rows and
 # every other source value are untouched.
 add_pitch_deck_coach_mission_source()
+
+# Phase 34D -- SIE Build Intelligence Loop V1. Additive venture_missions
+# columns (question_text, why_it_matters, interpretation_*) + a widened
+# mission_type CHECK, then the two new tables the accepted architecture
+# (docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D) calls for.
+# venture_decisions must be created before venture_evidence, which
+# references it.
+add_venture_intelligence_columns()
+create_venture_decisions_table()
+create_venture_evidence_table()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -1340,6 +1365,8 @@ def create_mission(
         related_category=request.related_category,
         source=request.source,
         resource_ref=request.resource_ref,
+        question_text=request.question_text,
+        why_it_matters=request.why_it_matters,
     )
     # Phase 28, Part 3: fires only after a real mission row is persisted --
     # never on the founder merely opening "Create your own action" or a
@@ -1416,6 +1443,211 @@ def record_mission_learning(
     _log_event_safe("learning_recorded", user_id=current_user.user_id, venture_id=venture_id)
 
     return VentureMissionResponse(**mission)
+
+
+# ---------------------------------------------------------------------------
+# Phase 34D -- SIE Build Intelligence Loop V1.
+#
+# QUESTION -> TEST -> RESULT -> EVIDENCE -> INTERPRETATION -> RECOMMENDATION
+# -> DECISION -> OUTCOME. "Start a test" reuses POST .../missions above
+# (extended with question_text/why_it_matters); "record a result" reuses
+# POST .../missions/{id}/learning above unchanged. This section adds
+# exactly the two genuinely new resources the accepted architecture
+# calls for (docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D):
+# Evidence and Decision -- plus one small read-only endpoint that answers
+# "what matters now" without touching VentureResponse's existing,
+# widely-used shape at all.
+# ---------------------------------------------------------------------------
+
+@app.get("/ventures/{venture_id}/recommendation", response_model=BuildRecommendationResponse)
+def get_venture_recommendation(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    venture = _require_owned_venture(current_user, venture_id)
+
+    missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+    active_mission = next(
+        (m for m in missions if m["status"] == "active" and m.get("question_text")),
+        None,
+    )
+    evidence_rows = list_venture_evidence_for_owner(current_user.user_id, venture_id)
+    # Superseded evidence is corrected, not deleted (§18) -- but a
+    # correction means the ORIGINAL row is no longer the founder's
+    # current understanding, so the recommendation engine reasons only
+    # over the still-current ones.
+    current_evidence = [e for e in evidence_rows if e["superseded_by_id"] is None]
+
+    state = build_intelligence_state(
+        venture_name=venture["name"],
+        model_result=venture.get("model_result"),
+        active_mission=active_mission,
+        evidence_rows=current_evidence,
+    )
+    return BuildRecommendationResponse(
+        current_question=CurrentQuestion(**state["current_question"]) if state["current_question"] else None,
+        recommendation=BuildRecommendation(**state["recommendation"]) if state["recommendation"] else None,
+    )
+
+
+@app.get("/ventures/{venture_id}/evidence", response_model=list[VentureEvidenceResponse])
+def list_venture_evidence(
+    venture_id: int,
+    mission_id: int | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    evidence = list_venture_evidence_for_owner(current_user.user_id, venture_id, related_mission_id=mission_id)
+    return [VentureEvidenceResponse(**row) for row in evidence]
+
+
+# Phase 34D §6/§19: founder confirmation is mandatory -- this endpoint is
+# the ONLY way a venture_evidence row is ever created, and it always
+# writes founder_confirmed=True (see create_venture_evidence()'s own
+# docstring in app/database/db.py). There is no code path where
+# captureSignals.ts's client-side extraction alone, without this explicit
+# call, becomes durable evidence.
+@app.post("/ventures/{venture_id}/evidence", response_model=VentureEvidenceResponse)
+def create_evidence(
+    venture_id: int,
+    request: CreateEvidenceRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    # Ownership, restated for the two optional cross-references this
+    # request can carry (§17: "evidence cannot attach to a mission from
+    # another venture" / "...to another venture's decision") -- both are
+    # re-scoped through THIS venture_id, never trusted as bare ids.
+    if request.related_mission_id is not None:
+        missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+        if not any(m["id"] == request.related_mission_id for m in missions):
+            raise HTTPException(status_code=404, detail="Mission not found for this venture.")
+    if request.related_decision_id is not None:
+        decisions = list_venture_decisions_for_owner(current_user.user_id, venture_id)
+        if not any(d["id"] == request.related_decision_id for d in decisions):
+            raise HTTPException(status_code=404, detail="Decision not found for this venture.")
+
+    evidence = create_venture_evidence(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        evidence_type=request.evidence_type,
+        statement=request.statement,
+        provenance=request.provenance,
+        related_mission_id=request.related_mission_id,
+        related_decision_id=request.related_decision_id,
+        source_quote=request.source_quote,
+        structured_field_path=request.structured_field_path,
+        structured_value=request.structured_value,
+        relationship=request.relationship,
+        occurred_at=request.occurred_at,
+        idempotency_key=request.idempotency_key,
+    )
+
+    # Once evidence is confirmed for a question, (re)generate its
+    # interpretation from the FULL current evidence set for that
+    # mission -- never just the newest row -- per
+    # generate_interpretation()'s own docstring.
+    if request.related_mission_id is not None:
+        all_evidence_for_mission = [
+            e for e in list_venture_evidence_for_owner(current_user.user_id, venture_id, related_mission_id=request.related_mission_id)
+            if e["superseded_by_id"] is None
+        ]
+        missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+        mission = next((m for m in missions if m["id"] == request.related_mission_id), None)
+        if mission is not None:
+            interpretation = generate_interpretation(mission.get("question_text") or mission["title"], all_evidence_for_mission)
+            set_venture_mission_interpretation_for_owner(
+                user_id=current_user.user_id,
+                venture_id=venture_id,
+                mission_id=request.related_mission_id,
+                interpretation_summary=interpretation["summary"],
+                interpretation_limitations=interpretation["limitations"],
+            )
+
+    _log_event_safe(
+        "evidence_confirmed",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"evidence_type": evidence["evidence_type"], "provenance": evidence["provenance"]},
+    )
+
+    return VentureEvidenceResponse(**evidence)
+
+
+@app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])
+def list_venture_decisions(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    decisions = list_venture_decisions_for_owner(current_user.user_id, venture_id)
+    return [VentureDecisionResponse(**row) for row in decisions]
+
+
+# Phase 34D §10: SIE's recommendation and the founder's actual choice are
+# both required fields on the SAME request, but are never collapsed --
+# they are stored in two separate columns and rendered as two separate
+# facts everywhere downstream (§13 founder authority: the founder is
+# never required to agree with SIE).
+@app.post("/ventures/{venture_id}/decisions", response_model=VentureDecisionResponse)
+def create_decision(
+    venture_id: int,
+    request: CreateDecisionRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+
+    if request.related_mission_id is not None:
+        missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
+        if not any(m["id"] == request.related_mission_id for m in missions):
+            raise HTTPException(status_code=404, detail="Mission not found for this venture.")
+    if request.supersedes_decision_id is not None:
+        decisions = list_venture_decisions_for_owner(current_user.user_id, venture_id)
+        if not any(d["id"] == request.supersedes_decision_id for d in decisions):
+            raise HTTPException(status_code=404, detail="Decision not found for this venture.")
+    # §17: every id in evidence_ids must belong to this venture -- never
+    # trusted as bare client-supplied ids.
+    if request.evidence_ids:
+        venture_evidence_ids = {e["id"] for e in list_venture_evidence_for_owner(current_user.user_id, venture_id)}
+        if not set(request.evidence_ids).issubset(venture_evidence_ids):
+            raise HTTPException(status_code=404, detail="One or more evidence ids do not belong to this venture.")
+
+    decision = create_venture_decision(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        sie_recommendation=request.sie_recommendation,
+        sie_reasoning=request.sie_reasoning,
+        founder_choice=request.founder_choice,
+        related_mission_id=request.related_mission_id,
+        founder_rationale=request.founder_rationale,
+        evidence_ids=request.evidence_ids,
+        supersedes_decision_id=request.supersedes_decision_id,
+        idempotency_key=request.idempotency_key,
+    )
+
+    # A decision resolves the question its mission was testing -- mark
+    # that mission completed, the same transition the founder's own
+    # "complete" action already produces elsewhere (§7: "do not create a
+    # second Tests table" extends to "do not create a second completion
+    # mechanism" -- this reuses update_venture_mission_status_for_owner()
+    # unchanged).
+    if request.related_mission_id is not None:
+        update_venture_mission_status_for_owner(
+            user_id=current_user.user_id,
+            venture_id=venture_id,
+            mission_id=request.related_mission_id,
+            new_status="completed",
+        )
+
+    _log_event_safe(
+        "decision_recorded",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"founder_choice": decision["founder_choice"]},
+    )
+
+    return VentureDecisionResponse(**decision)
 
 
 # ---------------------------------------------------------------------------

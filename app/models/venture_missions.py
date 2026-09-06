@@ -29,6 +29,24 @@ MissionType = Literal[
     "product",
     "founder",
     "economics",
+    # Phase 34D -- SIE Build Intelligence Loop V1. Widened per the accepted
+    # architecture (docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md
+    # §D.1) to cover the fuller test taxonomy
+    # (docs/product/SIE_BUILD_METHODOLOGY_V1.md §10) a Test can now
+    # represent -- purely additive, every existing row's mission_type
+    # remains valid.
+    "problem_interview",
+    "prototype_test",
+    "landing_page_test",
+    "willingness_to_pay_test",
+    "paid_pilot",
+    "pre_sale",
+    "outbound_test",
+    "pricing_test",
+    "channel_test",
+    "retention_observation",
+    "competitive_research",
+    "unit_economics",
     "other",
 ]
 
@@ -55,6 +73,16 @@ class CreateMissionRequest(BaseModel):
     # correct, common value for every mission with no obvious playbook
     # fit -- never fabricated.
     resource_ref: str | None = Field(default=None, max_length=100)
+    # Phase 34D -- SIE Build Intelligence Loop V1. The specific unknown
+    # this Test targets, and why it matters -- both optional (a founder's
+    # own ad-hoc action may have neither), both immutable once set (see
+    # add_venture_intelligence_columns() in app/database/db.py). Together
+    # these give "the question this test was answering" a stable, durable
+    # anchor without a separate Hypothesis/Unknown table -- see
+    # docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.1/§G for
+    # the full reasoning.
+    question_text: str | None = Field(default=None, max_length=500)
+    why_it_matters: str | None = Field(default=None, max_length=1000)
 
 
 class UpdateMissionStatusRequest(BaseModel):
@@ -95,3 +123,149 @@ class VentureMissionResponse(BaseModel):
     created_at: datetime
     updated_at: datetime
     completed_at: datetime | None = None
+    # Phase 34D -- SIE Build Intelligence Loop V1. See CreateMissionRequest's
+    # own comment for question_text/why_it_matters. interpretation_* is
+    # written once confirmed Evidence exists for this mission (see
+    # app/ai/build_recommendation.py::generate_interpretation()) and may be
+    # UPDATED (not appended) if further evidence arrives before the mission
+    # completes -- the one place in this phase's design where in-place
+    # update is correct, mirroring learning_summary's own existing
+    # update-in-place semantics for the identical reason.
+    question_text: str | None = None
+    why_it_matters: str | None = None
+    interpretation_summary: str | None = None
+    interpretation_limitations: str | None = None
+    interpretation_generated_at: datetime | None = None
+
+
+# ---------------------------------------------------------------------------
+# Phase 34D -- SIE Build Intelligence Loop V1. Evidence + Decision contracts.
+# See docs/product/SIE_BUILD_METHODOLOGY_V1.md (canonical methodology) and
+# docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.2/§D.3 (accepted
+# schema) -- this file implements that schema exactly, not a competing
+# design.
+# ---------------------------------------------------------------------------
+
+EvidenceType = Literal[
+    "founder_claim",
+    "reported_preference",
+    "observed_behavior",
+    "commitment",
+    "transaction",
+    "longitudinal_outcome",
+    "external_source",
+]
+
+# The canonical six-value provenance vocabulary (SIE_BUILD_METHODOLOGY_V1.md
+# §14). EXTERNAL_SOURCE and STILL_UNKNOWN are reserved -- no code path in
+# this phase produces either (no external data integration exists yet;
+# "still unknown" describes the ABSENCE of evidence, never an Evidence row
+# itself), but both are valid enum values so a future phase can use them
+# without a migration.
+Provenance = Literal[
+    "founder_said",
+    "founder_observed",
+    "sie_inferred",
+    "sie_calculated",
+    "external_source",
+    "still_unknown",
+]
+
+EvidenceRelationship = Literal["supports", "contradicts", "mixed", "neutral"]
+
+
+class CreateEvidenceRequest(BaseModel):
+    related_mission_id: int | None = None
+    related_decision_id: int | None = None
+    evidence_type: EvidenceType
+    statement: str = Field(min_length=1, max_length=2000)
+    provenance: Provenance
+    source_quote: str | None = Field(default=None, max_length=2000)
+    structured_field_path: str | None = Field(default=None, max_length=100)
+    structured_value: float | None = None
+    relationship: EvidenceRelationship | None = None
+    occurred_at: datetime | None = None
+    # Phase 34D §17 (idempotency): optional, client-generated. When
+    # provided and a row with the same key already exists for this
+    # venture, that existing row is returned unchanged rather than a
+    # duplicate being inserted -- see create_venture_evidence()'s own
+    # docstring in app/database/db.py.
+    idempotency_key: str | None = Field(default=None, max_length=100)
+
+
+class VentureEvidenceResponse(BaseModel):
+    id: int
+    venture_id: int
+    user_id: str
+    related_mission_id: int | None = None
+    related_decision_id: int | None = None
+    evidence_type: str
+    statement: str
+    provenance: str
+    source_quote: str | None = None
+    structured_field_path: str | None = None
+    structured_value: float | None = None
+    relationship: str | None = None
+    founder_confirmed: bool
+    superseded_by_id: int | None = None
+    occurred_at: datetime | None = None
+    recorded_at: datetime
+
+
+class CreateDecisionRequest(BaseModel):
+    related_mission_id: int | None = None
+    sie_recommendation: str = Field(min_length=1, max_length=2000)
+    sie_reasoning: str = Field(min_length=1, max_length=2000)
+    founder_choice: str = Field(min_length=1, max_length=500)
+    founder_rationale: str | None = Field(default=None, max_length=2000)
+    evidence_ids: list[int] = Field(default_factory=list)
+    # Set when this Decision reverses/revises an earlier one -- the prior
+    # row is never edited or deleted (§18 append-only history).
+    supersedes_decision_id: int | None = None
+    idempotency_key: str | None = Field(default=None, max_length=100)
+
+
+class VentureDecisionResponse(BaseModel):
+    id: int
+    venture_id: int
+    user_id: str
+    related_mission_id: int | None = None
+    sie_recommendation: str
+    sie_reasoning: str
+    founder_choice: str
+    founder_rationale: str | None = None
+    evidence_ids: list[int]
+    supersedes_decision_id: int | None = None
+    decided_at: datetime
+
+
+class CurrentQuestion(BaseModel):
+    mission_id: int
+    question_text: str
+    why_it_matters: str | None = None
+
+
+class BuildRecommendation(BaseModel):
+    question_text: str
+    why_it_matters: str
+    recommended_test_type: MissionType
+    recommended_test_title: str
+    what_to_do: str
+    what_to_record: str
+    what_result_would_be_informative: str
+    what_this_will_not_prove: str
+
+
+class BuildRecommendationResponse(BaseModel):
+    """
+    GET /ventures/{venture_id}/recommendation. Deliberately its own small
+    read-only endpoint rather than fields bolted onto VentureResponse
+    (app/models/idea_lab.py) -- VentureResponse is unpacked from a plain
+    dict at three call sites (create/get/update) in app/api.py, and this
+    keeps that existing, working shape completely untouched. `current_question`
+    is None exactly when no active mission carries a question_text right
+    now; `recommendation` is None exactly when a question IS currently
+    active (there is nothing new to recommend until it resolves).
+    """
+    current_question: CurrentQuestion | None = None
+    recommendation: BuildRecommendation | None = None

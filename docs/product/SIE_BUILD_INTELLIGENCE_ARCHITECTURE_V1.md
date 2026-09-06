@@ -735,3 +735,80 @@ One LedgerFlow vertical slice only. Kept intentionally small.
 **Explicit scope boundary:** Phase 34D implements exactly this slice for missions/evidence/decisions on one
 question at a time. It does not build multi-hypothesis tracking, a recommendation-quality feedback loop,
 scheduled check-ins, external evidence ingestion, or any UI beyond the nine blocks in §L.
+
+---
+
+## IMPLEMENTATION APPENDIX (Phase 34D)
+
+**Status:** Implemented and live-tested (LedgerFlow + a second, unrelated "DocSync" venture). This
+appendix records what actually shipped against this document's own predictions above — read it as a diff,
+not a restatement.
+
+### What matched the proposal exactly
+
+- Two new tables (`venture_evidence`, `venture_decisions`), additive `venture_missions` columns
+  (`question_text`, `why_it_matters`, `interpretation_summary`, `interpretation_limitations`,
+  `interpretation_generated_at`), no `Hypothesis`/`Unknown`/`Outcome` table — exactly the "Option C Hybrid"
+  this doc recommended.
+- Ownership enforced at the SQL join level (`JOIN modeled_ventures v ... WHERE v.user_id = :user_id`) on
+  every new list/create function, mirroring `list_venture_missions_for_owner`'s existing pattern — never
+  app-level check-then-trust.
+- Idempotency via a client-supplied `idempotency_key` column + partial unique index + `ON CONFLICT ...
+  DO NOTHING` + fallback select, on both new tables — mirrors `create_venture_mission`'s existing
+  `source_ref` dedup.
+- Append-only correction: `superseded_by_id` (evidence) / `supersedes_decision_id` (decisions), both
+  self-referencing FKs; a correction is a new row, the old row's content is never edited in place.
+- `captureSignals.ts` reused completely unchanged as the sole extraction engine; a second extraction system
+  was never built.
+- `app/ai/build_recommendation.py` is zero-LLM, template/rule-driven, matching `vps_guidance.py`'s existing
+  discipline — confirmed by `test_evidence_and_decision_never_change_vps_or_assumptions` and by the fact the
+  module has no OpenAI/Tavily import at all.
+- Canonical provenance vocabulary implemented as a lowercase-snake-case CHECK constraint
+  (`founder_said`/`founder_observed`/`sie_inferred`/`sie_calculated`/`external_source`/`still_unknown`);
+  every signal the founder confirms through the UI is written as `founder_observed`, never a stronger claim.
+
+### Where the implementation deviated, and why
+
+- **No `PATCH /ventures/{id}/missions/{mission_id}` endpoint was added.** The pre-existing
+  `POST /ventures/{venture_id}/missions/{mission_id}/learning` endpoint
+  (`record_venture_mission_learning_for_owner`) already does exactly the "submit a result" job. Reusing it
+  instead of adding a parallel endpoint is a direct application of this doc's own "adapt before inventing"
+  governing rule.
+- **Outcome ("what happened afterward?") is not a separate concept in the API** — it is a normal
+  `POST /ventures/{id}/evidence` call with `evidence_type="longitudinal_outcome"` and
+  `related_decision_id` set instead of `related_mission_id`. The founder-facing UI (`OutcomeState` in
+  `CurrentQuestionCard.tsx`) makes this feel like a distinct moment; the backend does not need to know it is
+  one.
+- **"SIE's recommendation before a decision" and "the next question once nothing is active" turned out to
+  be the same computation.** `build_intelligence_state(venture_name, model_result, active_mission,
+  evidence_rows)` returns `{current_question, recommendation}` with exactly one populated at a time — there
+  is one recommendation engine, not two, which this doc left open as a question and 34D resolved by
+  building it once.
+- **`GET /ventures/{venture_id}/recommendation`** was added as a small dedicated read endpoint (not
+  predicted above) rather than folding `current_question`/`recommendation` onto the main venture response,
+  because `CurrentQuestionCard.tsx` needed to refresh this slice independently of the rest of the Overview
+  tab's data without over-fetching.
+- **Evidence/decision writes stay in `app/api.py`, not a new router file** — consistent with this codebase's
+  existing convention of one flat `api.py` rather than per-feature routers.
+
+### Files actually touched (see the Phase 34D final report for the complete list)
+
+Backend: `app/models/venture_missions.py`, `app/database/db.py`, `app/api.py`,
+`app/ai/build_recommendation.py` (new), `app/tests/test_build_intelligence_loop.py` (new).
+Frontend: `dashboard/types/ideaLab.ts`, `dashboard/lib/api/index.ts`,
+`dashboard/lib/api/buildIntelligence.ts` (new), `dashboard/lib/build/evidenceMapping.ts` (new),
+`dashboard/components/idea-lab/CurrentQuestionCard.tsx` (new),
+`dashboard/app/idea-lab/[id]/VentureWorkspace.tsx`, `dashboard/tests/buildIntelligenceLoop.test.ts` (new).
+
+### Verified live (not just unit-tested)
+
+Two full loops were run against the live dev server and Postgres, not just the automated suite: LedgerFlow
+(`Will qualified controllers actually pay for a dedicated solution?` → confirmed transaction + interview
+evidence → interpretation/limitations → recommendation shifted to
+`Will customers actually use and retain LedgerFlow?` → founder decision recorded → mixed outcome
+(`one renewed, one churned`, relationship tagged `Mixed -- some of both`) → next recommendation correctly
+became a retention-driver question, not a reversion to generic discovery), and a second, vocabulary-disjoint
+venture ("DocSync," a developer-tool API-docs product) proving the same mechanics produce sensible guidance
+with zero shared business vocabulary, including a founder decision that explicitly disagreed with SIE's
+recommendation (with rationale), both preserved separately in `venture_decisions`. All of this was
+re-verified after a full page reload at each step (server-derived state, no client-only memory).
