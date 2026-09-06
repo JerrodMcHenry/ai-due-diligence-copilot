@@ -17,7 +17,18 @@
 
   --text-primary: #172033;
   --text-secondary: #5f6b7b;
-  --text-muted: #8a96a8;
+  /* Phase 31C-B -- Global Typography & Readability Correction, Part 2/13:
+     root-cause token fix. The old value (#8a96a8) measured ~3.0:1
+     contrast against white/surface -- below the 4.5:1 WCAG AA floor for
+     normal text -- yet was used throughout the app not just for genuine
+     metadata (timestamps, badges) but for meaningful secondary/
+     explanatory copy (Part 4), which is what made so much of the product
+     read as "washed out" regardless of font-size fixes. Darkened to
+     ~4.6:1. This intentionally narrows the gap to --text-secondary
+     (~5.4:1) -- Part 4 explicitly asks that only genuine metadata look
+     "strongly subdued," so the two roles converging somewhat is the
+     correct direction, not a regression. No hue change, no new token. */
+  --text-muted: #6b7686;
 
   --primary: #2563eb;
   --primary-hover: #1d4ed8;
@@ -69,7 +80,12 @@
 
   --text-primary: #eef4ff;
   --text-secondary: #a8b6ca;
-  --text-muted: #718198;
+  /* Phase 31C-B, Part 2/13: same root-cause fix as :root above -- the old
+     value measured only ~4.45:1 against card surfaces (--surface-raised),
+     borderline-failing for the meaningful secondary/explanatory copy it
+     was actually carrying. Lightened for comfortable, unambiguous
+     contrast (~5.6:1+) against every dark-mode surface token. */
+  --text-muted: #8492a8;
 
   --primary: #4f8cff;
   --primary-hover: #70a2ff;

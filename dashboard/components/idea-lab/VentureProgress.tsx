@@ -32,7 +32,7 @@ export default function VentureProgress({ history, isLoading }: VentureProgressP
     return (
       <BaseCard className="p-6 text-center">
         <h3 className="text-sm font-semibold text-text-primary">Your venture journey starts here</h3>
-        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+        <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
           As you test assumptions, complete founder actions, record what you learn, and update your venture
           model, SIE will build a history of how your startup evolves.
         </p>

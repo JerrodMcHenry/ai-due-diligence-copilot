@@ -83,7 +83,7 @@ export default function RankingsPage() {
               into Build -- Explore should inspire builders, not only
               serve investors. Existing route only. */}
           {rankings.length > 0 ? (
-            <p className="mt-6 text-center text-sm text-text-muted">
+            <p className="mt-6 text-center text-sm text-text-secondary">
               Inspired by what you see?{" "}
               <Link href="/idea-lab" className="font-semibold text-primary hover:text-primary-hover">
                 Build your own idea →

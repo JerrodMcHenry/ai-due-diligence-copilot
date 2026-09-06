@@ -58,7 +58,7 @@ export default function CustomScenarioForm({ currentAssumptions, onRunScenario, 
       </summary>
 
       <div className="space-y-3 border-t border-border px-4 py-4">
-        <p className="text-xs text-text-muted">
+        <p className="text-sm text-text-secondary">
           Change more than one assumption at once, then preview the combined effect. Leave a field as-is to keep it
           unchanged.
         </p>

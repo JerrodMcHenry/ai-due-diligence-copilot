@@ -134,10 +134,10 @@ export default function ShareVentureSnapshot({ ventureId }: { ventureId: number 
       <BaseCard className="p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
-            <p className="text-sm font-semibold text-text-primary">
+            <p className="text-base font-semibold text-text-primary">
               {settings.enabled ? "Sharing is on" : "Sharing is off"}
             </p>
-            <p className="mt-0.5 text-xs text-text-secondary">
+            <p className="mt-0.5 text-base leading-7 text-text-secondary">
               {settings.enabled
                 ? "Anyone with the link below can view this snapshot. Nothing else about your venture is public."
                 : "Private until you turn this on. Preview below shows exactly what a recipient would see."}

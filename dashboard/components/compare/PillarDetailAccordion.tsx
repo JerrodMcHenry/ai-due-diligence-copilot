@@ -30,7 +30,7 @@ export default function PillarDetailAccordion({
             key={pillar.key}
             className="group rounded-2xl border border-border bg-surface open:pb-2"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-semibold text-text-primary marker:content-none">
+            <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-base font-semibold text-text-primary marker:content-none">
               {pillar.label}
 
               <span

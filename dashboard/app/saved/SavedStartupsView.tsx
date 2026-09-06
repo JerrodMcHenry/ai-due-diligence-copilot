@@ -305,7 +305,7 @@ function EmptyState() {
         No saved startups yet
       </p>
 
-      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
         Save a startup from its Startup Profile to track it here — you&rsquo;ll
         always see its latest Startup Power Score, not a snapshot from when
         you saved it.

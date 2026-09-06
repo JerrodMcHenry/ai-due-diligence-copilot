@@ -58,7 +58,7 @@ export default function VentureOverview({
               {stillFiguringOut.map((item) => (
                 <li
                   key={item}
-                  className="rounded-full bg-warning-soft px-3 py-1 text-xs font-semibold text-warning"
+                  className="rounded-full bg-warning-soft px-3 py-1 text-sm font-semibold text-warning"
                 >
                   {item}
                 </li>

@@ -159,7 +159,7 @@ function SetupState() {
         Select 2–4 startups to compare
       </p>
 
-      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
         Head to Discovery or your Saved Startups, check &ldquo;Compare&rdquo;
         on the companies you&rsquo;re weighing against each other, then come
         back here.
@@ -228,7 +228,7 @@ function NotEnoughResolvedState({
         Not enough startups to compare
       </p>
 
-      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
         {resolvedCount === 0
           ? `None of the ${requestedCount} requested startups have canonical intelligence yet.`
           : `Only ${resolvedCount} of ${requestedCount} requested startups have canonical intelligence -- at least 2 are needed to compare.`}

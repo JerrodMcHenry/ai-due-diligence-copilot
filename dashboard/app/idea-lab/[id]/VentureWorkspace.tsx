@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 import Disclosure from "@/components/ui/Disclosure";
@@ -149,26 +150,31 @@ function WhereThingsStand({
           ? "mt-4 space-y-3 border-t border-border pt-4"
           : "hidden"
       }>
+        {/* Phase 31C-C, Part 5/9: this strip's own value rows bumped
+            text-sm -> text-base -- "current state" content a founder is
+            meant to actually read, not a compact metadata table. The
+            "Continue ->" link and the assumption-delta caption stay at
+            the 14px metadata floor (text-sm, up from text-xs). */}
         {primaryMissionTitle ? (
-          <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
+          <p className="flex flex-wrap items-baseline gap-x-2 text-base">
             <span className="text-text-secondary">Current action:</span>
             <span className="font-medium text-text-primary">{primaryMissionTitle}</span>
-            <a href="#your-missions" className="text-xs font-semibold text-primary hover:text-primary-hover">
+            <a href="#your-missions" className="text-sm font-semibold text-primary hover:text-primary-hover">
               Continue →
             </a>
           </p>
         ) : null}
 
         {learning ? (
-          <p className="text-sm leading-6">
+          <p className="text-base leading-7">
             <span className="text-text-secondary">Most recent learning:</span>{" "}
             <span className="text-text-primary">&ldquo;{learning.summary}&rdquo;</span>
-            {learningWhen ? <span className="text-xs text-text-muted"> · {learningWhen}</span> : null}
+            {learningWhen ? <span className="text-sm text-text-muted"> · {learningWhen}</span> : null}
           </p>
         ) : null}
 
         {latestModelChange ? (
-          <div className="text-sm">
+          <div className="text-base">
             <p className="flex flex-wrap items-baseline gap-x-2">
               <span className="text-text-secondary">Latest model update:</span>
               {latestModelChange.beforeVps !== null && latestModelChange.afterVps !== null ? (
@@ -181,7 +187,7 @@ function WhereThingsStand({
               )}
             </p>
             {latestModelChange.primaryAssumptionChange ? (
-              <p className="mt-0.5 text-xs text-text-muted">
+              <p className="mt-0.5 text-sm text-text-muted">
                 {latestModelChange.primaryAssumptionChange.label}: {latestModelChange.primaryAssumptionChange.before}{" "}
                 → {latestModelChange.primaryAssumptionChange.after}
               </p>
@@ -565,12 +571,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   if (loadState === "not-found") {
     return (
       <BaseCard className="p-10 text-center">
-        <h1 className="text-xl font-bold text-text-primary">Venture not found</h1>
+        <h1 className="text-xl font-bold text-text-primary">Idea not found</h1>
         <p className="mt-3 text-text-secondary">
-          This venture doesn&rsquo;t exist, or doesn&rsquo;t belong to you.
+          This idea doesn&rsquo;t exist, or doesn&rsquo;t belong to you.
         </p>
         <Link href="/idea-lab" className="mt-6 inline-flex text-sm font-semibold text-primary hover:text-primary-hover">
-          Back to Idea Lab →
+          Back to My Ideas →
         </Link>
       </BaseCard>
     );
@@ -597,12 +603,24 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
   return (
     <>
+      {/* Phase 32, Part 7: the directive's own worked example verbatim
+          ("Build / My Ideas / ClaimPilot") -- this page sits two levels
+          below the primary nav's own "Build" destination, deep enough
+          that the nav's active-state highlighting alone doesn't answer
+          "where am I?" the moment a founder has more than one idea. */}
+      <Breadcrumbs
+        items={[
+          { label: "Build", href: "/idea-lab" },
+          { label: "My Ideas", href: "/idea-lab" },
+          { label: venture.name },
+        ]}
+      />
       <PageHeader
         title={venture.name}
         subtitle={
           formatUpdatedAt(venture.updated_at)
-            ? `Modeled venture — Idea Lab · Updated ${formatUpdatedAt(venture.updated_at)}`
-            : "Modeled venture — Idea Lab"
+            ? `Idea · Updated ${formatUpdatedAt(venture.updated_at)}`
+            : "Idea"
         }
         action={
           <div className="flex items-center gap-2">
@@ -726,8 +744,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             action it explains. Pure copy -- no new state, no new
             mechanism, describes exactly what CaptureWhatHappened /
             MissionsSection / the model-update path already do. */}
+        {/* Phase 31C-C, Part 5: this is the one sentence that explains the
+            entire founder loop -- important guidance copy, not a
+            footnote. Bumped to the 16px floor and text-secondary (was
+            text-muted) so it doesn't read as an afterthought. */}
         {venture.model_result ? (
-          <p className="text-center text-sm leading-6 text-text-muted">
+          <p className="text-center text-base leading-7 text-text-secondary">
             Do this → record what happened → SIE updates its understanding → you get your next guidance.
           </p>
         ) : null}
@@ -921,7 +943,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             heading, framing sentence, and grouping changed. */}
         <section className="space-y-3">
           <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Explore</h2>
-          <p className="text-sm text-text-secondary">
+          <p className="text-base text-text-secondary">
             Optional tools you can use whenever they&rsquo;re helpful — not steps to complete, and
             nothing here changes your venture unless you explicitly apply it.
           </p>
@@ -995,7 +1017,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
           <Link
             href="/playbooks"
-            className="flex items-center justify-between rounded-2xl border border-border bg-surface p-5 text-sm font-semibold text-text-primary transition-colors hover:border-primary"
+            className="flex items-center justify-between rounded-2xl border border-border bg-surface p-5 text-base font-semibold text-text-primary transition-colors hover:border-primary"
           >
             Learn: browse founder playbooks
             <span aria-hidden="true" className="text-primary">→</span>
@@ -1037,7 +1059,10 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             </div>
           </div>
 
-          <p className="mt-1 text-xs text-text-muted">
+          {/* Phase 31C-B, Part 5 Example B: the directive's own named
+              regression -- meaningful model-editing guidance rendered at
+              12px/muted. Bumped to the 14px secondary-copy floor. */}
+          <p className="mt-1 text-sm text-text-secondary">
             Everything below except &ldquo;What you&rsquo;ve learned&rdquo; is a modeled assumption, not
             observed evidence.
           </p>
@@ -1258,7 +1283,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           {venture.model_result ? (
             <ShareVentureSnapshot ventureId={ventureId} />
           ) : (
-            <p className="text-sm text-text-muted">
+            <p className="text-sm text-text-secondary">
               Model a few assumptions before sharing your venture.
             </p>
           )}
@@ -1370,7 +1395,7 @@ function AssumptionAccordion({
 }) {
   return (
     <details open={defaultOpen} className="group rounded-2xl border border-border bg-surface open:pb-2">
-      <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-sm font-semibold text-text-primary marker:content-none">
+      <summary className="flex cursor-pointer list-none items-center justify-between px-5 py-4 text-base font-semibold text-text-primary marker:content-none">
         {title}
         <span aria-hidden="true" className="text-text-muted transition-transform group-open:rotate-180">▾</span>
       </summary>

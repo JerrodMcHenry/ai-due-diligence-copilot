@@ -201,7 +201,7 @@ export default function Milestones({ startupId }: MilestonesProps) {
   return (
     <section>
       <h2 className="text-xl font-semibold text-text-primary">Milestones</h2>
-      <p className="mt-1 text-sm text-text-muted">
+      <p className="mt-1 text-sm text-text-secondary">
         {visibleMilestones.length > 0
           ? "The meaningful targets this startup is working toward."
           : "Set your first meaningful company milestone."}
@@ -211,7 +211,7 @@ export default function Milestones({ startupId }: MilestonesProps) {
 
       <BaseCard className="mt-4 p-4">
         {visibleMilestones.length === 0 ? (
-          <p className="text-sm text-text-muted">No milestones yet.</p>
+          <p className="text-sm text-text-secondary">No milestones yet.</p>
         ) : (
           <ul className="divide-y divide-border">
             {visibleMilestones.map((milestone) => (

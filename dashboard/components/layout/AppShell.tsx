@@ -34,7 +34,11 @@ export default function AppShell({ children }: AppShellProps) {
     <div className="min-h-screen bg-background text-foreground">
       <TopNav />
 
-      <main className="min-h-screen pb-24 md:pb-0">
+      {/* Phase 32, Part 2/12: md:pb-0 -> lg:pb-0 -- matches the exact
+          breakpoint TopNav.tsx/MobileTabBar.tsx now swap at, so page
+          content never loses its bottom-tab-bar clearance between 768px
+          and 1024px (where the bottom tab bar still renders). */}
+      <main className="min-h-screen pb-24 lg:pb-0">
         <div className="mx-auto w-full max-w-[1600px] px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
           {children}
         </div>

@@ -58,19 +58,19 @@ export default function VentureSnapshotCard({ snapshot, asEmbeddedPreview = fals
               {snapshot.problem_statement ? (
                 <div>
                   <p className="text-xs font-semibold text-text-secondary">Problem</p>
-                  <p className="mt-0.5 text-sm leading-6 text-text-primary">{snapshot.problem_statement}</p>
+                  <p className="mt-0.5 text-base leading-7 text-text-primary">{snapshot.problem_statement}</p>
                 </div>
               ) : null}
               {snapshot.solution_description ? (
                 <div>
                   <p className="text-xs font-semibold text-text-secondary">Solution</p>
-                  <p className="mt-0.5 text-sm leading-6 text-text-primary">{snapshot.solution_description}</p>
+                  <p className="mt-0.5 text-base leading-7 text-text-primary">{snapshot.solution_description}</p>
                 </div>
               ) : null}
               {snapshot.target_customer ? (
                 <div>
                   <p className="text-xs font-semibold text-text-secondary">For</p>
-                  <p className="mt-0.5 text-sm leading-6 text-text-primary">{snapshot.target_customer}</p>
+                  <p className="mt-0.5 text-base leading-7 text-text-primary">{snapshot.target_customer}</p>
                 </div>
               ) : null}
             </div>
@@ -94,7 +94,7 @@ export default function VentureSnapshotCard({ snapshot, asEmbeddedPreview = fals
         {snapshot.current_frontier ? (
           <section className="rounded-xl border border-primary/20 bg-primary/5 p-4">
             <SectionTag className="text-xs font-semibold uppercase tracking-wide text-text-muted">Proving next</SectionTag>
-            <p className="mt-1.5 text-sm leading-6 text-text-primary">{snapshot.current_frontier}</p>
+            <p className="mt-1.5 text-base leading-7 text-text-primary">{snapshot.current_frontier}</p>
           </section>
         ) : null}
 
@@ -103,7 +103,7 @@ export default function VentureSnapshotCard({ snapshot, asEmbeddedPreview = fals
             <SectionTag className="text-xs font-semibold uppercase tracking-wide text-text-muted">Venture Potential — optional</SectionTag>
             <div className="mt-2 flex items-baseline gap-2">
               <span className="text-3xl font-bold text-primary">{snapshot.vps.toFixed(1)}</span>
-              <span className="text-sm text-text-muted">/ 10</span>
+              <span className="text-sm text-text-secondary">/ 10</span>
             </div>
             {snapshot.vps_categories && snapshot.vps_categories.length > 0 ? (
               <ul className="mt-3 space-y-1.5">
@@ -123,7 +123,7 @@ export default function VentureSnapshotCard({ snapshot, asEmbeddedPreview = fals
                 language a public viewer (often a third party like an
                 investor) needs to actually read clearly, not tertiary
                 metadata that 12px is meant for. */}
-            <p className="mt-3 text-sm leading-6 text-text-muted">
+            <p className="mt-3 text-base leading-7 text-text-secondary">
               A model-based assessment from the information provided to SIE — not a company-quality, investment,
               or success prediction.
             </p>

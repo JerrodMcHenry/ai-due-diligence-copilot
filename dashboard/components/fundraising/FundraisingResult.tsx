@@ -34,12 +34,12 @@ export default function FundraisingResult({ result }: FundraisingResultProps) {
         <p className="text-sm font-semibold text-text-primary">{result.reason}</p>
         <ul className="mt-3 space-y-2">
           {result.warnings.map((w, i) => (
-            <li key={i} className="text-sm leading-6 text-text-secondary">
+            <li key={i} className="text-base leading-7 text-text-secondary">
               {w}
             </li>
           ))}
         </ul>
-        <p className="mt-3 text-sm text-text-muted">
+        <p className="mt-3 text-sm text-text-secondary">
           Try adjusting the round&rsquo;s valuation, or the SAFE&rsquo;s cap, and simulate again.
         </p>
       </BaseCard>
@@ -117,7 +117,7 @@ export default function FundraisingResult({ result }: FundraisingResultProps) {
             <span className="text-sm text-text-secondary">After this financing</span>
             <span className="text-lg font-semibold text-text-primary">{result.runway.postFinancingLabel}</span>
           </div>
-          <p className="mt-2 text-sm text-text-muted">{result.runway.note}</p>
+          <p className="mt-2 text-sm text-text-secondary">{result.runway.note}</p>
         </BaseCard>
       ) : null}
 
@@ -153,7 +153,7 @@ export default function FundraisingResult({ result }: FundraisingResultProps) {
       <Disclosure summary="How was this calculated?">
         <ol className="space-y-3">
           {result.trace.map((step, i) => (
-            <li key={i} className="text-sm leading-6">
+            <li key={i} className="text-base leading-7">
               <span className="font-semibold text-text-primary">{step.label}.</span>{" "}
               <span className="text-text-secondary">{step.detail}</span>
             </li>

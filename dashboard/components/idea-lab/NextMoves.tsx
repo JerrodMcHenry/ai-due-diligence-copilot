@@ -79,7 +79,7 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
                 {index + 1}
               </span>
               <div className="flex-1 pt-0.5">
-                <p className="text-sm leading-6 text-text-primary">{milestone}</p>
+                <p className="text-base leading-7 text-text-primary">{milestone}</p>
 
                 <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
                   {onMakeMission ? (
@@ -103,7 +103,7 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
         })}
       </ol>
 
-      <p className="mt-4 text-sm text-text-muted">
+      <p className="mt-4 text-sm text-text-secondary">
         These reduce the venture&rsquo;s biggest unknowns first — not guarantees of success.
       </p>
     </BaseCard>

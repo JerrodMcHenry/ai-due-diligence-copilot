@@ -30,7 +30,7 @@ export default function EmptyState({ icon, title, description, action, className
       <h3 className="text-lg font-semibold text-text-primary">{title}</h3>
 
       {description ? (
-        <p className="mt-2 max-w-sm text-sm leading-6 text-text-secondary">{description}</p>
+        <p className="mt-2 max-w-sm text-base leading-7 text-text-secondary">{description}</p>
       ) : null}
 
       {action ? <div className="mt-6">{action}</div> : null}

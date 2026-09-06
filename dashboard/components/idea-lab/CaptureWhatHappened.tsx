@@ -324,7 +324,7 @@ export default function CaptureWhatHappened({
     return (
       <BaseCard className="p-5">
         <h2 className="text-base font-semibold text-text-primary">What happened?</h2>
-        <p className="mt-1 text-sm leading-6 text-text-secondary">
+        <p className="mt-1 text-base leading-7 text-text-secondary">
           Write it in your own words. This is saved exactly as you write it -- nothing here changes your Venture
           Potential Score.
         </p>
@@ -355,10 +355,10 @@ export default function CaptureWhatHappened({
             </button>
           ))}
         </div>
-        <p className="mt-1 text-sm text-text-muted">Category is optional -- just for your own organization.</p>
+        <p className="mt-1 text-sm text-text-secondary">Category is optional -- just for your own organization.</p>
 
         {fieldMappedPreview.length > 0 ? (
-          <p className="mt-3 text-sm leading-6 text-text-secondary">
+          <p className="mt-3 text-base leading-7 text-text-secondary">
             SIE may find {fieldMappedPreview.length} possible signal{fieldMappedPreview.length === 1 ? "" : "s"} in
             this -- you&rsquo;ll see them after saving, and nothing changes your model unless you choose to update
             it.
@@ -420,7 +420,7 @@ export default function CaptureWhatHappened({
 
       <div className="mt-3 rounded-lg border border-border bg-surface p-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">You recorded</p>
-        <p className="mt-1 text-sm leading-6 text-text-primary">&ldquo;{savedMission?.learning_summary}&rdquo;</p>
+        <p className="mt-1 text-base leading-7 text-text-primary">&ldquo;{savedMission?.learning_summary}&rdquo;</p>
       </div>
 
       {signals.length > 0 ? (
@@ -507,7 +507,7 @@ export default function CaptureWhatHappened({
           {modelChangeResult.beforeVps !== null &&
           modelChangeResult.afterVps !== null &&
           Math.abs(modelChangeResult.afterVps - modelChangeResult.beforeVps) < 0.05 ? (
-            <p className="mt-1 text-sm text-text-muted">
+            <p className="mt-1 text-sm text-text-secondary">
               Your model was updated. Venture Potential Score did not materially change.
             </p>
           ) : null}
@@ -523,7 +523,7 @@ export default function CaptureWhatHappened({
           <Button type="button" variant="secondary" size="sm" disabled={isUpdatingModel} loading={isUpdatingModel} onClick={handleUpdateModel}>
             {isUpdatingModel ? "Updating..." : "Update my model with these signals"}
           </Button>
-          <p className="mt-1.5 text-sm text-text-muted">
+          <p className="mt-1.5 text-sm text-text-secondary">
             Only the signals checked above are applied. You can also save this and update your model later, or
             never -- that&rsquo;s a fine choice too.
           </p>
@@ -559,8 +559,8 @@ export default function CaptureWhatHappened({
           whatever the resolver now says; this line simply keeps that
           fact visible without the founder scrolling back up). */}
       {currentPriorityText ? (
-        <p className="mt-4 text-sm text-text-muted">
-          <span className="font-medium text-text-secondary">Your current focus:</span> {currentPriorityText}
+        <p className="mt-4 text-sm text-text-secondary">
+          <span className="font-medium text-text-primary">Your current focus:</span> {currentPriorityText}
         </p>
       ) : null}
 

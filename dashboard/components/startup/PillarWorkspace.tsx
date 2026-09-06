@@ -136,7 +136,7 @@ export default function PillarWorkspace({
           {subscores.length > 0 ? (
             <SubscoreTable subscores={subscores} />
           ) : (
-            <p className="text-sm text-text-muted">Not enough evidence.</p>
+            <p className="text-sm text-text-secondary">Not enough evidence.</p>
           )}
         </Section>
 
@@ -202,7 +202,7 @@ function SummaryText({ summary }: { summary: string }) {
   const [expanded, setExpanded] = useState(false);
 
   if (!summary) {
-    return <p className="text-sm text-text-muted">Not enough evidence.</p>;
+    return <p className="text-sm text-text-secondary">Not enough evidence.</p>;
   }
 
   const preview = getSummaryPreview(summary);
@@ -224,7 +224,7 @@ function SummaryText({ summary }: { summary: string }) {
         <button
           type="button"
           onClick={() => setExpanded(false)}
-          className="mt-1.5 text-xs font-semibold text-primary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-primary hover:underline"
         >
           Show less
         </button>
@@ -238,7 +238,7 @@ function SummaryText({ summary }: { summary: string }) {
       <button
         type="button"
         onClick={() => setExpanded(true)}
-        className="mt-1.5 text-xs font-semibold text-primary hover:underline"
+        className="mt-1.5 text-sm font-semibold text-primary hover:underline"
       >
         Read full summary
       </button>
@@ -264,7 +264,7 @@ function CappedList({
   const [expanded, setExpanded] = useState(false);
 
   if (items.length === 0) {
-    return <p className="text-sm text-text-muted">{emptyLabel}</p>;
+    return <p className="text-sm text-text-secondary">{emptyLabel}</p>;
   }
 
   const visibleItems = expanded ? items : items.slice(0, maxVisible);
@@ -288,7 +288,7 @@ function CappedList({
         <button
           type="button"
           onClick={() => setExpanded(true)}
-          className="mt-1.5 text-xs font-semibold text-primary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-primary hover:underline"
         >
           +{remaining} more
         </button>
@@ -296,7 +296,7 @@ function CappedList({
         <button
           type="button"
           onClick={() => setExpanded(false)}
-          className="mt-1.5 text-xs font-semibold text-text-secondary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-text-secondary hover:underline"
         >
           Show less
         </button>
@@ -317,7 +317,7 @@ function RecommendationsList({ items }: { items: string[] }) {
   const [expanded, setExpanded] = useState(false);
 
   if (items.length === 0) {
-    return <p className="text-sm text-text-muted">No recommendations yet.</p>;
+    return <p className="text-sm text-text-secondary">No recommendations yet.</p>;
   }
 
   const visibleItems = expanded
@@ -345,7 +345,7 @@ function RecommendationsList({ items }: { items: string[] }) {
         <button
           type="button"
           onClick={() => setExpanded(true)}
-          className="mt-1.5 text-xs font-semibold text-primary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-primary hover:underline"
         >
           +{remaining} more
         </button>
@@ -353,7 +353,7 @@ function RecommendationsList({ items }: { items: string[] }) {
         <button
           type="button"
           onClick={() => setExpanded(false)}
-          className="mt-1.5 text-xs font-semibold text-text-secondary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-text-secondary hover:underline"
         >
           Show less
         </button>
@@ -376,7 +376,7 @@ function EvidenceList({ items }: { items: Array<Evidence | string> }) {
   const visibleCount = 3;
 
   if (items.length === 0) {
-    return <p className="text-sm text-text-muted">Not enough evidence.</p>;
+    return <p className="text-sm text-text-secondary">Not enough evidence.</p>;
   }
 
   const visibleItems = expanded ? items : items.slice(0, visibleCount);
@@ -428,7 +428,7 @@ function EvidenceList({ items }: { items: Array<Evidence | string> }) {
         <button
           type="button"
           onClick={() => setExpanded(true)}
-          className="mt-1.5 text-xs font-semibold text-primary hover:underline"
+          className="mt-1.5 text-sm font-semibold text-primary hover:underline"
         >
           Show {remaining} more evidence
         </button>
@@ -438,7 +438,7 @@ function EvidenceList({ items }: { items: Array<Evidence | string> }) {
         <button
           type="button"
           onClick={() => setExpanded(false)}
-          className="mt-1.5 ml-4 text-xs font-semibold text-text-secondary hover:underline"
+          className="mt-1.5 ml-4 text-sm font-semibold text-text-secondary hover:underline"
         >
           Show less
         </button>
@@ -570,7 +570,7 @@ function SubscoreRow({ subscore }: { subscore: Subscore }) {
               {subscore.rationale}
             </p>
           ) : (
-            <p className="text-sm text-text-muted">No rationale provided.</p>
+            <p className="text-sm text-text-secondary">No rationale provided.</p>
           )}
 
           <MiniList heading="Evidence" items={subscore.evidence} />
@@ -633,7 +633,7 @@ function TechnicalDetails({
                 {scoringSummary}
               </p>
             ) : (
-              <p className="mt-1.5 text-sm text-text-muted">Not enough evidence.</p>
+              <p className="mt-1.5 text-sm text-text-secondary">Not enough evidence.</p>
             )}
           </div>
 

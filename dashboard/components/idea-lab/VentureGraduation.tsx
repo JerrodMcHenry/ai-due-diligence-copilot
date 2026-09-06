@@ -194,12 +194,20 @@ export function VentureGraduationBanner({ state }: { state: VentureGraduationSta
 
   return (
     <BaseCard variant="subtle" className="flex flex-wrap items-center justify-between gap-3 p-4">
+      {/* Phase 32 -- Product Information Architecture + Seamless User
+          Journey, Part 1/4/9: the button below opens
+          /founder/startups/{id} -- the private Founder Workspace, not
+          the public Startup Profile -- so it's now labeled for where it
+          actually goes. Conflating the two was exactly the kind of
+          mental-model blur Part 1 says must never happen: "Startup
+          Profile" and "Founder Workspace" are two different, specifically
+          named surfaces elsewhere in this same app. */}
       <p className="text-sm text-text-secondary">
-        Operating startup: <span className="font-semibold text-text-primary">{state.status.startup_name}</span> was
-        created from this venture.
+        You&rsquo;re now building{" "}
+        <span className="font-semibold text-text-primary">{state.status.startup_name}</span> as a startup.
       </p>
       <Button type="button" variant="secondary" size="sm" onClick={state.openStartup}>
-        Open Startup Profile →
+        Open Founder Workspace →
       </Button>
     </BaseCard>
   );
@@ -243,11 +251,18 @@ export function VentureGraduationAction({
 
   return (
     <BaseCard variant="raised" className="p-6">
+      {/* Phase 32, Part 4: heading aligned with the directive's own
+          "modeled idea -> founder startup" framing ("Ready to make this
+          a startup?"), and the explanation now names the actual
+          destination (Founder Workspace) instead of only "a Startup
+          Profile tracks this" -- a founder should know where they're
+          headed before they click. */}
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Real evidence, not just a model</p>
-      <p className="mt-1.5 text-lg font-bold text-text-primary">Create a Startup Profile</p>
-      <p className="mt-1.5 text-sm leading-6 text-text-secondary">
-        You&rsquo;ve reported real customers or revenue. A Startup Profile tracks this venture with SIE&rsquo;s
-        canonical intelligence going forward — your venture and its history stay exactly as they are.
+      <p className="mt-1.5 text-lg font-bold text-text-primary">Ready to make this a startup?</p>
+      <p className="mt-1.5 text-base leading-7 text-text-secondary">
+        You&rsquo;ve reported real customers or revenue. Turning this into a startup gives you a private Founder
+        Workspace and a public Startup Profile tracked with SIE&rsquo;s canonical intelligence going forward — your
+        idea and its history stay exactly as they are.
       </p>
       <div className="mt-4">
         <Button type="button" onClick={state.openReview}>

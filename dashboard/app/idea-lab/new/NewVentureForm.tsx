@@ -223,7 +223,7 @@ export default function NewVentureForm() {
           {phase === "structuring" ? "Thinking..." : "Build My Venture Model"}
         </button>
 
-        <p className="text-xs text-text-muted">
+        <p className="text-sm text-text-secondary">
           SIE will propose a starting model based on what you write — you&rsquo;ll
           review and can edit everything before anything is created.
         </p>

@@ -158,7 +158,7 @@ export default function PitchDeckCoachUpload() {
           <div>
             <label
               htmlFor="pitch-deck-coach-file"
-              className="text-xs font-semibold uppercase tracking-wide text-text-secondary"
+              className="text-sm font-semibold uppercase tracking-wide text-text-secondary"
             >
               Pitch Deck (PDF)
             </label>
@@ -219,7 +219,7 @@ export default function PitchDeckCoachUpload() {
 
           <Button type="submit">Review My Deck</Button>
 
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-secondary">
             This is a coaching tool, not an investment decision -- it never scores your startup and
             never affects any Startup Power Score. It&rsquo;s private to your account.
           </p>
@@ -248,7 +248,7 @@ function ReviewingState({ elapsedSeconds }: { elapsedSeconds: number }) {
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-text-muted" aria-live="polite">
+      <p className="mt-6 text-sm text-text-secondary" aria-live="polite">
         Elapsed: {formatElapsed(elapsedSeconds)}
       </p>
 

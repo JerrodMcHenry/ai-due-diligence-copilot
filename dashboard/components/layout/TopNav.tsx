@@ -12,15 +12,17 @@ import ThemeToggle from "@/components/ui/ThemeToggle";
 // see the Phase 10.2 audit's own "That is the product" framing. Phase 15
 // -- Founder Beta Surface Audit removed "Explore" (see PRIMARY_NAVIGATION's
 // own comment below for why), leaving two; the Founder Experience Model
-// correction added "Learn" back as the third (a genuinely global product
-// mode, not an account-specific destination -- see that entry's own
-// comment). Do NOT add another top-level item here without a real
-// product decision; personal/account-specific destinations (My Ideas, My
-// Startup) live in PersonalMenu instead, never here. Fundraising and
-// Simulate/Model-What-If are explicitly EXCLUDED from this list --
-// founder tools reachable from inside a venture's workspace, never
-// promoted to the global switcher (Founder Experience Model correction,
-// Part 2's own explicit instruction).
+// correction added "Learn" back as the third. Phase 32 -- Product
+// Information Architecture, Part 2 -- added "My Startups" as the fourth
+// (see PRIMARY_NAVIGATION's own comment below): the directive's explicit
+// IA is Build / Analyze / My Startups / Learn, and "these are startups
+// I'm actually building" is exactly the kind of first-class, always-
+// present product mode this nav exists to represent -- not an account-
+// settings-adjacent link. Do NOT add a FIFTH item here without a real
+// product decision. Fundraising and Simulate/Model-What-If remain
+// explicitly EXCLUDED -- founder tools reachable from inside a venture's
+// workspace or a specific startup's own Founder Workspace, never
+// promoted to the global switcher.
 type PrimaryDestination = {
   name: string;
   href: string;
@@ -83,9 +85,23 @@ type PrimaryDestination = {
 // language principle. Revisit this decision only if a real, single,
 // cross-venture "test" surface is ever built for its own reasons -- never
 // add the nav label first and grow a page to justify it.
+// Phase 32 -- Product Information Architecture + Seamless User Journey,
+// Part 2. "My Startups" promoted from PersonalMenu's own account-menu-
+// only "My Startup" link (Phase 10.10) to a real, always-visible primary
+// destination -- the directive's own explicit instruction that Founder
+// Workspace access is a first-class product mode ("These are startups
+// I'm actually building"), not an account-settings-adjacent afterthought
+// buried in a dropdown. Route (/founder), backend, and every existing
+// auth/membership check are completely unchanged -- this is the same
+// page, just reachable from the shell itself now instead of only from
+// inside Clerk's account menu. PersonalMenu's own duplicate "My Startup"/
+// "My Ideas"/"Learn" links are removed in the same phase (see that
+// file's own comment) so the two surfaces never show the same
+// destination twice.
 export const PRIMARY_NAVIGATION: PrimaryDestination[] = [
   { name: "Build", href: "/idea-lab", activeOn: ["/idea-lab"] },
   { name: "Analyze", href: "/analyze", activeOn: ["/analyze"] },
+  { name: "My Startups", href: "/founder", activeOn: ["/founder"] },
   { name: "Learn", href: "/playbooks", activeOn: ["/playbooks"] },
 ];
 
@@ -113,18 +129,27 @@ export default function TopNav() {
           <span className="flex size-9 items-center justify-center rounded-xl bg-primary text-sm font-bold text-white shadow-sm">
             SI
           </span>
-          <span className="hidden text-sm font-semibold text-text-primary sm:inline">
+          <span className="hidden text-base font-semibold text-text-primary sm:inline">
             Startup Intelligence
           </span>
         </Link>
 
-        {/* Desktop primary navigation. Hidden on mobile -- the same three
+        {/* Desktop primary navigation. Hidden below lg -- the same
             destinations reappear as the bottom tab bar (MobileTabBar),
             never squeezed in here (Part 5: "No horizontally squeezed
-            desktop nav"). */}
+            desktop nav"). Phase 32, Part 2/12: the breakpoint itself
+            moved md->lg when a fourth item ("My Startups") was added --
+            verified live that four full-text pills plus the wordmark
+            genuinely don't fit at 768px without wrapping or shrinking
+            text, which Part 5's own rule (and this phase's own Part 10/12
+            "do not solve mobile by shrinking text") both rule out.
+            MobileTabBar.tsx's own `lg:hidden` and AppShell.tsx's own
+            `lg:pb-0` were updated to the exact same breakpoint so the two
+            navs swap over together, with no width where both or neither
+            render. */}
         <nav
           aria-label="Primary"
-          className="hidden items-center gap-1 rounded-full border border-border bg-surface-muted p-1 md:flex"
+          className="hidden items-center gap-1 rounded-full border border-border bg-surface-muted p-1 lg:flex"
         >
           {PRIMARY_NAVIGATION.map((item) => {
             const active = isPrimaryDestinationActive(pathname, item);
@@ -135,7 +160,11 @@ export default function TopNav() {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={[
-                  "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
+                  // Phase 31C-C, Part 9: nav links bumped one step
+                  // (text-sm -> text-base, px-4 -> px-5) -- the top nav
+                  // read as visually thin relative to the rest of the
+                  // shell at this size.
+                  "whitespace-nowrap rounded-full px-5 py-2 text-base font-semibold transition-colors",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   active
                     ? "bg-primary text-white shadow-sm"

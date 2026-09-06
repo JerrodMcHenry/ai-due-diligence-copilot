@@ -210,7 +210,7 @@ function EmptyState() {
         Investor Workspace becomes useful once you&apos;re watching a few startups
       </p>
 
-      <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
         Save a startup from its profile, Rankings, or Search to start tracking
         it here -- you&apos;ll see its current Startup Power Score, what
         changed since the last analysis, and what deserves attention.
@@ -272,7 +272,7 @@ function AttentionSection({ items }: { items: InvestorWorkspace["attention_items
 
       {items.length === 0 ? (
         <BaseCard className="mt-4 p-5">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-secondary">
             Nothing needs attention right now -- no meaningful declines, stale
             analyses, or low-confidence intelligence among your watched startups.
           </p>
@@ -307,7 +307,7 @@ function RecentChangesSection({ changes }: { changes: InvestorWorkspace["recent_
 
       {changes.length === 0 ? (
         <BaseCard className="mt-4 p-5">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-secondary">
             No meaningful changes since the previous analysis for any watched
             startup yet.
           </p>
@@ -428,7 +428,7 @@ function WatchedStartupCard({
       {watched.has_canonical_analysis ? <PillarMiniRow pillars={watched.pillars} /> : null}
 
       {watched.attention_reasons.length > 0 ? (
-        <div className="rounded-lg bg-warning/10 px-3 py-2 text-xs text-warning">
+        <div className="rounded-lg bg-warning/10 px-3 py-2 text-sm text-warning">
           {watched.attention_reasons[0]}
         </div>
       ) : null}

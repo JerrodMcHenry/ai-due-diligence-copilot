@@ -130,7 +130,7 @@ export default function ClaimStartupForm({
         />
       </div>
 
-      <p className="text-xs leading-5 text-text-muted">
+      <p className="text-base leading-7 text-text-secondary">
         We manually review startup claims before granting founder access —
         we don&rsquo;t verify domains or documents automatically, and review
         isn&rsquo;t instant. Submitting a claim never changes this startup&rsquo;s

@@ -28,25 +28,33 @@ function FieldWrapper({ label, htmlFor, children, badge, hint }: FieldWrapperPro
   return (
     <div>
       <div className="mb-1.5 flex flex-wrap items-center justify-between gap-1.5">
-        <label htmlFor={htmlFor} className="block text-xs font-medium text-text-muted">
+        {/* Phase 31C-B -- Global Typography & Readability Correction,
+            Part 3/13: this one shared wrapper renders the field label for
+            every assumption across the entire venture creation/review AND
+            "Edit the full model" editor, so bumping it here (text-xs ->
+            text-sm, matching Field.tsx's own form-label treatment) fixes
+            the whole surface at once rather than dozens of call sites. */}
+        <label htmlFor={htmlFor} className="block text-sm font-medium text-text-secondary">
           {label}
         </label>
         {badge}
       </div>
       {children}
       {hint ? (
-        // Phase 29B, Part 7: bumped from an arbitrary 11px -- this is the
-        // founder's own verbatim words, and this one shared wrapper
-        // renders the hint for every field across the entire venture
-        // creation/review form, so the fix applies everywhere at once.
-        <p className="mt-1 text-xs italic leading-5 text-text-muted">You said: &ldquo;{hint}&rdquo;</p>
+        // Phase 29B, Part 7 bumped this from an arbitrary 11px; Phase
+        // 31C-B bumps it again -- this is the founder's own verbatim
+        // words, meaningful quoted content, not metadata.
+        <p className="mt-1 text-sm italic leading-5 text-text-secondary">You said: &ldquo;{hint}&rdquo;</p>
       ) : null}
     </div>
   );
 }
 
+// Part 3: "FORM INPUT TEXT 16px preferred" -- text-sm -> text-base,
+// applied once here for every TextField/NumberField/SelectField/
+// ToggleField in the app.
 const inputClasses =
-  "h-10 w-full rounded-lg border border-border bg-surface px-3 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20";
+  "h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20";
 
 export function TextField({
   id,

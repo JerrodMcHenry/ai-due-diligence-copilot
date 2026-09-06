@@ -480,11 +480,16 @@ export default function MissionsSection({
               presentation-only rename, the same discipline every prior
               terminology pass in this app (e.g. founderJourney.ts) has
               already used. */}
-          <p className="mt-0.5 text-xs text-text-muted">
+          {/* Phase 31C-B -- Global Typography & Readability Correction,
+              Part 5 Example A: this line and the stat line below it are
+              the exact regressions the directive's screenshots showed --
+              real explanatory/progress copy rendered like disposable
+              metadata. Bumped both to the 14px secondary-copy floor. */}
+          <p className="mt-0.5 text-sm text-text-secondary">
             How you actually work through your next moves, one at a time.
           </p>
         </div>
-        <p className="text-xs text-text-muted">
+        <p className="text-sm text-text-secondary">
           {completedCount} action{completedCount === 1 ? "" : "s"} completed · {activeMissions.length} active
         </p>
       </div>
@@ -502,7 +507,7 @@ export default function MissionsSection({
               <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your next action</p>
               <p className="text-lg font-bold text-text-primary">{primaryMission.title}</p>
               {primaryMission.description ? (
-                <p className="text-sm leading-6 text-text-secondary">{primaryMission.description}</p>
+                <p className="text-base leading-7 text-text-secondary">{primaryMission.description}</p>
               ) : null}
               <Button type="button" onClick={() => setExpandedMissionId(primaryMission.id)}>
                 Start Action
@@ -595,7 +600,7 @@ export default function MissionsSection({
               {reflectingMissionId === primaryMission.id ? (
                 <div className="space-y-3 rounded-xl border border-border p-4">
                   <p className="text-sm font-semibold text-text-primary">What did you learn?</p>
-                  <p className="text-sm text-text-muted">
+                  <p className="text-sm text-text-secondary">
                     &ldquo;What happened when you tried this?&rdquo; A failed experiment is still useful
                     learning.
                   </p>
@@ -645,7 +650,7 @@ export default function MissionsSection({
                   </Button>
 
                   {reflectionSavedFor === primaryMission.id ? (
-                    <div className="rounded-lg bg-info-soft px-3 py-2 text-xs text-info">
+                    <div className="rounded-lg bg-info-soft px-3 py-2 text-sm text-info">
                       <p className="font-semibold">That&rsquo;s useful signal.</p>
                       <p className="mt-0.5">
                         Learning what does or doesn&rsquo;t work can save months of building the wrong thing.
@@ -689,7 +694,7 @@ export default function MissionsSection({
       ) : (
         <BaseCard variant="subtle" className="p-6 text-center">
           <p className="text-sm font-semibold text-text-primary">No active actions yet.</p>
-          <p className="mt-1 text-xs text-text-secondary">
+          <p className="mt-1 text-sm text-text-secondary">
             Turn one of your next moves above into an action, or add your own below.
           </p>
         </BaseCard>
@@ -718,7 +723,7 @@ export default function MissionsSection({
         ) : (
           <div className="space-y-3">
             <div>
-              <label htmlFor="custom-mission-title" className="mb-1.5 block text-xs font-medium text-text-muted">
+              <label htmlFor="custom-mission-title" className="mb-1.5 block text-sm font-medium text-text-secondary">
                 Title
               </label>
               <input
@@ -732,7 +737,7 @@ export default function MissionsSection({
             </div>
 
             <div>
-              <label htmlFor="custom-mission-category" className="mb-1.5 block text-xs font-medium text-text-muted">
+              <label htmlFor="custom-mission-category" className="mb-1.5 block text-sm font-medium text-text-secondary">
                 Related category (optional)
               </label>
               <select
@@ -797,7 +802,7 @@ function ValidationUpdateForm({
             {result.afterVps !== null ? result.afterVps.toFixed(1) : "—"}
           </span>
         </p>
-        <p className="text-xs text-text-muted">
+        <p className="text-sm text-text-secondary">
           Your model changed because you updated your own founder-reported observations — not because you
           completed a mission.
         </p>
@@ -876,7 +881,7 @@ function NumberInput({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-xs font-medium text-text-muted">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-text-secondary">
         {label}
       </label>
       <input

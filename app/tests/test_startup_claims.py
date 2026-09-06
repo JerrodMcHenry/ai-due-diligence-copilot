@@ -36,6 +36,8 @@ from app.database.db import (
     discover_startups,
     save_analysis,
     approve_startup_claim,
+    create_startup_claim,
+    user_has_startup_membership,
 )
 
 USER_A = "zztest_claim_user_a"
@@ -734,6 +736,199 @@ def test_public_intelligence_endpoints_remain_public() -> None:
     expect(len(discover_startups()) >= 0, "discover_startups() must still run")
 
 
+# --- Phase 32A -- Trust-State Consistency ------------------------------------
+#
+# GET /me/startup-claims/{startup_id} (ClaimStartupButton.tsx's own data
+# source) now exposes verification_method -- the exact same column
+# list_startup_claims_for_user() already returned, just missing from this
+# one response. venture_graduation-tagged claims are never created
+# through the public POST /startup-claims endpoint (see
+# test_verification_method_cannot_be_client_assigned above) -- graduation
+# only ever creates and self-approves one internally, via
+# create_startup_claim()/approve_startup_claim() directly, exactly as
+# _ensure_graduation_membership() in app/database/db.py does. These tests
+# call those same two functions the same way, rather than re-implementing
+# the graduation HTTP flow, to isolate what's actually being verified
+# here: the exposed field, not the graduation mechanism itself (already
+# covered by test_venture_graduation.py, untouched by this phase).
+
+
+def test_graduation_relationship_exposes_venture_graduation() -> None:
+    """A. Idea -> Startup graduation relationship renders Founder-managed
+    -- i.e. the field the frontend branches on is exactly
+    "venture_graduation" for a self-approved graduation claim."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("GradTrust")
+        claim_id = create_startup_claim(
+            user_id=USER_A,
+            startup_id=startup_id,
+            justification="Created via venture graduation.",
+            contact_email=None,
+            verification_method="venture_graduation",
+        )
+        approve_startup_claim(claim_id, admin_user_id=USER_A)  # self-approval, exactly as graduation does
+
+        with _patched_auth():
+            response = client.get(f"/me/startup-claims/{startup_id}", headers=_auth_headers(USER_A))
+
+        expect(response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}")
+        body = response.json()
+        expect(body is not None, "A self-approved graduation claim must be visible to its own creator")
+        expect(
+            body["verification_method"] == "venture_graduation",
+            f"Expected verification_method 'venture_graduation', got {body.get('verification_method')!r}",
+        )
+    finally:
+        _cleanup()
+
+
+def test_reviewed_claim_exposes_manual_review() -> None:
+    """B. An independently reviewed (admin-approved) claim renders
+    Verified -- verification_method is "manual_review", the real
+    endpoint's own default for every claim a founder submits themselves."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("VerifiedTrust")
+        with _patched_auth():
+            created = client.post(
+                "/startup-claims",
+                json={"startup_id": startup_id, "justification": "I run this company"},
+                headers=_auth_headers(USER_A),
+            )
+            expect(created.status_code == 200, f"Expected 200, got {created.status_code}: {created.text}")
+            approve = client.post(f"/admin/startup-claims/{created.json()['id']}/approve", headers=_auth_headers(ADMIN_USER))
+            expect(approve.status_code == 200, f"Expected 200, got {approve.status_code}: {approve.text}")
+
+            response = client.get(f"/me/startup-claims/{startup_id}", headers=_auth_headers(USER_A))
+
+        expect(response.status_code == 200, f"Expected 200, got {response.status_code}: {response.text}")
+        body = response.json()
+        expect(body is not None, "An approved claim must be visible to its own creator")
+        expect(
+            body["verification_method"] == "manual_review",
+            f"Expected verification_method 'manual_review', got {body.get('verification_method')!r}",
+        )
+    finally:
+        _cleanup()
+
+
+def test_founder_managed_never_reads_as_manual_review() -> None:
+    """C. Founder-managed cannot accidentally render Verified -- the exact
+    value ClaimStartupButton.tsx checks against ('venture_graduation')
+    must never collapse into the 'manual_review' bucket for a graduation
+    claim, however it's read back."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("NoFalseVerified")
+        claim_id = create_startup_claim(
+            user_id=USER_A,
+            startup_id=startup_id,
+            justification="Created via venture graduation.",
+            contact_email=None,
+            verification_method="venture_graduation",
+        )
+        approve_startup_claim(claim_id, admin_user_id=USER_A)
+
+        with _patched_auth():
+            response = client.get(f"/me/startup-claims/{startup_id}", headers=_auth_headers(USER_A))
+
+        body = response.json()
+        expect(
+            body["verification_method"] != "manual_review",
+            "A venture-graduation claim must never expose verification_method='manual_review' -- that would render as the wrong trust badge (Verified instead of Founder-managed)",
+        )
+    finally:
+        _cleanup()
+
+
+def test_verified_never_reads_as_venture_graduation() -> None:
+    """D. A Verified claim cannot accidentally render Founder-managed --
+    the mirror image of C, for the ordinary admin-reviewed path."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("NoFalseFounderManaged")
+        with _patched_auth():
+            created = client.post(
+                "/startup-claims",
+                json={"startup_id": startup_id, "justification": "I run this company"},
+                headers=_auth_headers(USER_A),
+            )
+            client.post(f"/admin/startup-claims/{created.json()['id']}/approve", headers=_auth_headers(ADMIN_USER))
+            response = client.get(f"/me/startup-claims/{startup_id}", headers=_auth_headers(USER_A))
+
+        body = response.json()
+        expect(
+            body["verification_method"] != "venture_graduation",
+            "An admin-reviewed claim must never expose verification_method='venture_graduation' -- that would render as the wrong trust badge (Founder-managed instead of Verified)",
+        )
+    finally:
+        _cleanup()
+
+
+def test_founder_workspace_access_unchanged_by_trust_state() -> None:
+    """E. Existing Founder Workspace access behavior is unchanged: a
+    self-approved (Founder-managed) membership grants exactly the same
+    real startup_memberships row -- and therefore the same
+    RequireStartupMember-gated access -- as an admin-reviewed (Verified)
+    one. Exposing verification_method on the read side must not have
+    touched who can get in."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("AccessUnchanged")
+        claim_id = create_startup_claim(
+            user_id=USER_A,
+            startup_id=startup_id,
+            justification="Created via venture graduation.",
+            contact_email=None,
+            verification_method="venture_graduation",
+        )
+        approve_startup_claim(claim_id, admin_user_id=USER_A)
+
+        expect(
+            user_has_startup_membership(USER_A, startup_id),
+            "A self-approved graduation-style claim must still grant a real startup_memberships row, exactly as before this phase",
+        )
+
+        with _patched_auth():
+            response = client.get(f"/founder/startups/{startup_id}", headers=_auth_headers(USER_A))
+        expect(response.status_code == 200, f"Founder-managed membership must still pass RequireStartupMember -- expected 200, got {response.status_code}: {response.text}")
+    finally:
+        _cleanup()
+
+
+def test_claim_and_graduation_mechanics_unchanged() -> None:
+    """F. Existing claim/graduation mechanics are unchanged: submission,
+    approval, and membership-granting all behave exactly as they did
+    before this phase -- this phase only added a SELECT column and a
+    response field, never touched a write path."""
+    _ensure_test_users()
+    try:
+        startup_id = _make_test_startup("MechanicsUnchanged")
+        with _patched_auth():
+            created = client.post(
+                "/startup-claims",
+                json={"startup_id": startup_id, "justification": "x"},
+                headers=_auth_headers(USER_A),
+            )
+        expect(created.status_code == 200, f"Expected 200, got {created.status_code}: {created.text}")
+        expect(created.json()["status"] == "pending", "New claim must still be pending before approval")
+        expect(
+            not user_has_startup_membership(USER_A, startup_id),
+            "Submitting a claim must still never create a membership on its own",
+        )
+
+        with _patched_auth():
+            approve = client.post(f"/admin/startup-claims/{created.json()['id']}/approve", headers=_auth_headers(ADMIN_USER))
+        expect(approve.status_code == 200, f"Expected 200, got {approve.status_code}: {approve.text}")
+        expect(
+            user_has_startup_membership(USER_A, startup_id),
+            "Approval must still grant a real startup_memberships row",
+        )
+    finally:
+        _cleanup()
+
+
 TESTS = [
     test_startup_memberships_untouched_by_submission,
     test_unauthenticated_submission_rejected,
@@ -767,6 +962,12 @@ TESTS = [
     test_claim_submission_never_modifies_saved_startups,
     test_claim_lifecycle_never_modifies_analyses_or_sps,
     test_public_intelligence_endpoints_remain_public,
+    test_graduation_relationship_exposes_venture_graduation,
+    test_reviewed_claim_exposes_manual_review,
+    test_founder_managed_never_reads_as_manual_review,
+    test_verified_never_reads_as_venture_graduation,
+    test_founder_workspace_access_unchanged_by_trust_state,
+    test_claim_and_graduation_mechanics_unchanged,
 ]
 
 

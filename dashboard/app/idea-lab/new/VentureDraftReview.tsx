@@ -177,7 +177,7 @@ export default function VentureDraftReview({
             >
               I don&rsquo;t have a name yet
             </button>
-            <span className="text-xs text-text-muted">
+            <span className="text-sm text-text-secondary">
               -- pick one before creating, or say you don&rsquo;t have one yet.
             </span>
           </div>
@@ -208,7 +208,7 @@ export default function VentureDraftReview({
 
       <Disclosure summary="Review and edit the full model" defaultOpen={false}>
         <div className="space-y-3">
-          <p className="text-xs text-text-muted">
+          <p className="text-sm text-text-secondary">
             Everything below is the complete structured model SIE proposed. Expand any section to
             review or correct it — nothing is saved until you confirm below.
           </p>
@@ -413,7 +413,7 @@ export default function VentureDraftReview({
         </ReviewAccordion>
 
         <ReviewAccordion title="What you've learned (founder-reported observations)">
-          <p className="sm:col-span-2 text-xs text-text-muted">
+          <p className="sm:col-span-2 text-sm text-text-secondary">
             SIE never invents these — they&rsquo;re only filled in when you
             explicitly said so, or when you fill them in yourself below.
           </p>
@@ -496,7 +496,7 @@ export default function VentureDraftReview({
 
       <div className="flex flex-col items-end gap-2">
         {!canCreate ? (
-          <p className="text-xs text-text-muted">Name your venture above (or say you don&rsquo;t have one yet) to continue.</p>
+          <p className="text-sm text-text-secondary">Name your venture above (or say you don&rsquo;t have one yet) to continue.</p>
         ) : null}
         <div className="flex items-center justify-end gap-3">
           <Button type="button" variant="secondary" onClick={onBack}>
@@ -570,7 +570,7 @@ function VpsPreview({ assumptions }: { assumptions: VentureAssumptions }) {
       </p>
       <div className="mt-2 flex items-baseline gap-2">
         <span className="text-3xl font-bold text-primary">{result.vps.toFixed(1)}</span>
-        <span className="text-sm text-text-muted">/ 10 · Venture Potential Score</span>
+        <span className="text-sm text-text-secondary">/ 10 · Venture Potential Score</span>
       </div>
       <p className="mt-2 text-xs text-text-secondary">
         This reflects your current assumptions, not a verdict — it changes as you correct fields below

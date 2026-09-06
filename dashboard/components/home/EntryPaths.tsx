@@ -21,21 +21,22 @@ import BaseCard from "@/components/ui/BaseCard";
 // there from the homepage's own primary entry grid would undercut the
 // exact trust this page exists to build. Restore this path once the
 // dataset is credible.
-type Path = {
-  eyebrow: string;
-  title: string;
-  description: string;
-  cta: string;
-  href: string;
-  icon: React.ReactNode;
-};
-
-const PATHS: Path[] = [
+//
+// Phase 32 -- Product Information Architecture + Seamless User Journey,
+// Part 6. Rebuilt around USER INTENT rather than product artifacts, per
+// the directive's own exact recommended structure:
+//   "I have a pitch deck" / "Review my pitch deck" is deliberately no
+//   longer a co-equal third card here -- the directive's own instruction
+//   is that pitch deck review "should not necessarily compete as an
+//   equal top-level lifecycle state." It's still fully reachable (Part
+//   16's own "hide, don't delete" precedent) via the small link below
+//   the three cards instead, subordinate rather than competing.
+const PATHS = [
   {
     eyebrow: "I have an idea",
-    title: "Build an idea",
+    title: "Explore an Idea",
     description:
-      "Model a startup, explore assumptions, run what-if scenarios, and turn uncertainty into a plan.",
+      "Model something you're considering and determine what would make it stronger — before you build anything.",
     cta: "Start building",
     href: "/idea-lab",
     icon: (
@@ -50,30 +51,30 @@ const PATHS: Path[] = [
     ),
   },
   {
-    eyebrow: "I already have a startup",
-    title: "Analyze my startup",
+    eyebrow: "I'm building a startup",
+    title: "Work on My Startup",
     description:
-      "Analyze your company information or website and get a structured Startup Profile.",
-    cta: "Analyze my startup",
+      "Continue validating, building, fundraising, and improving a startup you're actually pursuing.",
+    cta: "My startups",
+    href: "/founder",
+    icon: (
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
+        <path d="M4 21V9l8-6 8 6v12" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+        <path d="M9 21v-6h6v6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    eyebrow: "I want SIE to evaluate a company",
+    title: "Analyze a Company",
+    description:
+      "Build an evidence-based Startup Profile from a company's website, pitch deck, or public information.",
+    cta: "Analyze",
     href: "/analyze",
     icon: (
       <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
         <path d="M12 3v4M12 17v4M3 12h4M17 12h4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
         <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.8" />
-      </svg>
-    ),
-  },
-  {
-    eyebrow: "I have a pitch deck",
-    title: "Review my pitch deck",
-    description:
-      "Upload a PDF deck and get coaching on the story it tells, what's working, and what to fix first.",
-    cta: "Review my deck",
-    href: "/analyze/deck",
-    icon: (
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-6">
-        <rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" strokeWidth="1.6" />
-        <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
       </svg>
     ),
   },
@@ -97,13 +98,13 @@ export default function EntryPaths() {
                 {path.icon}
               </div>
 
-              <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-text-muted">
+              <p className="mt-4 text-sm font-semibold uppercase tracking-wide text-text-secondary">
                 {path.eyebrow}
               </p>
 
               <p className="mt-1.5 text-lg font-bold text-text-primary">{path.title}</p>
 
-              <p className="mt-2 flex-1 text-sm leading-6 text-text-secondary">
+              <p className="mt-2 flex-1 text-base leading-6 text-text-secondary">
                 {path.description}
               </p>
 
@@ -117,6 +118,16 @@ export default function EntryPaths() {
           </Link>
         ))}
       </div>
+
+      {/* Part 6: pitch deck review kept fully reachable, deliberately
+          subordinate to the three primary journeys above rather than a
+          fourth equal-weight card. */}
+      <p className="mt-6 text-center text-base text-text-secondary">
+        Have a pitch deck instead?{" "}
+        <Link href="/analyze/deck" className="font-semibold text-primary hover:underline">
+          Get it reviewed →
+        </Link>
+      </p>
     </section>
   );
 }

@@ -5,12 +5,12 @@
 // against other users, prizes, or a leaderboard.
 export default function CompetitionTeaser() {
   return (
-    <section className="mx-auto max-w-2xl text-center">
+    <section className="mx-auto max-w-3xl text-center">
       <h2 className="text-xl font-bold text-text-primary sm:text-2xl">
         Think you have the best startup idea?
       </h2>
 
-      <p className="mt-3 text-sm leading-6 text-text-secondary">
+      <p className="mt-3 text-base leading-7 text-text-secondary">
         Build it. Model it. Challenge your assumptions. Whether you&rsquo;re a
         student, in a startup competition, going through an accelerator, or
         just testing an idea on your own — SIE gives you a real starting

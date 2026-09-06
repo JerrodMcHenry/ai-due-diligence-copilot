@@ -19,21 +19,24 @@ const CATEGORIES = [
 
 export default function VisualPayoff() {
   return (
-    <section className="mx-auto max-w-4xl">
-      <p className="text-center text-sm font-medium text-text-muted">
+    // Phase 31C-C -- Global Visual Scale + Readability Correction, Part 2/3:
+    // widened max-w-4xl -> max-w-5xl -- at a normal desktop width this
+    // section previously used ~900px of a 1300px+ available column,
+    // compounding with 14px card text to read as a small island in a big
+    // canvas. Wider container + larger card text (below) fixes both at
+    // once rather than just the text.
+    <section className="mx-auto max-w-5xl">
+      <p className="text-center text-base font-medium text-text-secondary">
         Every idea gets modeled across six categories
       </p>
 
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {CATEGORIES.map((category) => (
-          <BaseCard key={category.label} variant="subtle" className="p-5">
-            <p className="text-sm font-semibold text-text-primary">{category.label}</p>
-            {/* Global readability audit: bumped from text-xs/text-muted --
-                muted text on this card's own muted surface (variant
-                "subtle") was a genuine low-contrast combination, not just
-                a small-text one -- text-secondary reads clearly against
-                the same background in both themes. */}
-            <p className="mt-1 text-sm leading-6 text-text-secondary">{category.description}</p>
+          <BaseCard key={category.label} variant="subtle" className="p-6">
+            <p className="text-base font-semibold text-text-primary">{category.label}</p>
+            {/* Part 1: this is reading content, not metadata -- bumped to
+                the new 16px body-copy floor (was 14px). */}
+            <p className="mt-1.5 text-base leading-6 text-text-secondary">{category.description}</p>
           </BaseCard>
         ))}
       </div>

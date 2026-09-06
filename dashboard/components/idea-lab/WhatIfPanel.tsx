@@ -58,7 +58,7 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
           supporting copy changed, per Part 3's own "do not rename backend
           functions unnecessarily"). */}
       <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">Simulate</h3>
-      <p className="mt-1 text-xs text-text-muted">
+      <p className="mt-1 text-base leading-7 text-text-secondary">
         Explore how different assumptions could affect your venture without changing your actual model — nothing
         is saved until you choose to apply it.
       </p>
@@ -92,7 +92,7 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
                 honest. */}
             <span
               className={[
-                "rounded-full px-1.5 py-0.5 text-xs font-bold uppercase tracking-wide",
+                "rounded-full px-2 py-0.5 text-sm font-bold uppercase tracking-wide",
                 scenario.direction === "upside"
                   ? "bg-success-soft text-success"
                   : scenario.direction === "downside"
@@ -109,7 +109,7 @@ export default function WhatIfPanel({ currentAssumptions, onRunScenario, isRunni
 
       {referencedConceptKeys.length > 0 ? (
         <div className="mt-3 space-y-1.5 border-t border-border pt-3">
-          <p className="text-xs font-semibold text-text-muted">New to these terms?</p>
+          <p className="text-sm font-semibold text-text-secondary">New to these terms?</p>
           {referencedConceptKeys.map((key) => (
             <ConceptDisclosure key={key} conceptKey={key} value={conceptValueByKey[key] ?? null} />
           ))}

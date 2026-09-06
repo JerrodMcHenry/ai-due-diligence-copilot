@@ -30,10 +30,18 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
 
 // min-h-11 (44px) on every size -- Part 10's mobile touch-target floor --
 // sm only shrinks horizontal padding/font, never the tap height.
+//
+// Phase 31C-C -- Global Visual Scale + Readability Correction, Part 9:
+// every size bumped one step (sm: 12px->14px, md: 14px->16px) -- `md` is
+// the default used by nearly every primary CTA in the app ("Build My
+// Startup", "Start this action", "Save Changes"), so it was rendering
+// the app's most important click targets at only 14px. `sm` (used for
+// real secondary actions like "Add to Plan", not decoration) is raised
+// off the 12px floor Part 1 treats as exceptional-only.
 const SIZE_CLASSES: Record<ButtonSize, string> = {
-  sm: "min-h-11 px-3.5 text-xs sm:min-h-9",
-  md: "min-h-11 px-5 text-sm",
-  lg: "min-h-12 px-7 text-base",
+  sm: "min-h-11 px-3.5 text-sm sm:min-h-9",
+  md: "min-h-11 px-5 text-base",
+  lg: "min-h-12 px-7 text-lg",
 };
 
 function Spinner() {

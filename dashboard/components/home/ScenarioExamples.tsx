@@ -14,25 +14,25 @@ const EXAMPLE_QUESTIONS = [
 
 export default function ScenarioExamples() {
   return (
-    <section className="mx-auto max-w-3xl text-center">
+    <section className="mx-auto max-w-4xl text-center">
       <h2 className="text-2xl font-bold tracking-tight text-text-primary sm:text-3xl">
         Change the assumptions. See how the model changes.
       </h2>
 
-      <p className="mt-3 text-sm leading-6 text-text-secondary">
-        Idea Lab lets you test what-if scenarios on your own venture model —
+      <p className="mt-3 text-base leading-7 text-text-secondary">
+        Building your idea lets you test what-if scenarios on your own model —
         here&rsquo;s the kind of thinking it&rsquo;s built for.
       </p>
 
-      <div className="mt-8 grid gap-3 sm:grid-cols-2">
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
         {EXAMPLE_QUESTIONS.map((question) => (
-          <BaseCard key={question} variant="subtle" className="p-5 text-left">
-            <p className="text-sm font-medium text-text-primary">&ldquo;{question}&rdquo;</p>
+          <BaseCard key={question} variant="subtle" className="p-6 text-left">
+            <p className="text-base font-medium text-text-primary">&ldquo;{question}&rdquo;</p>
           </BaseCard>
         ))}
       </div>
 
-      <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-text-muted">
+      <p className="mt-6 text-sm font-semibold uppercase tracking-wide text-text-secondary">
         Change the assumptions · See how the model changes · Learn what to do next
       </p>
     </section>

@@ -72,7 +72,10 @@ export default function Hero() {
             Build My Startup
           </Button>
 
-          <p className="text-xs text-text-muted">
+          {/* Phase 31C-B, Part 5 Example C: trust-building copy a visitor
+              is meant to actually read before committing, not disposable
+              metadata -- bumped text-xs/muted -> text-sm/secondary. */}
+          <p className="text-sm text-text-secondary">
             Free to start. No credit card. Your idea stays yours.
           </p>
         </div>
@@ -81,7 +84,7 @@ export default function Hero() {
             educational invitation that supports "Build My Startup" as the
             primary CTA rather than competing with it -- smaller type,
             secondary position, no button of its own. */}
-        <p className="mt-6 text-sm text-text-muted">
+        <p className="mt-6 text-sm text-text-secondary">
           Never built a startup before?{" "}
           <Link href="/playbooks" className="font-semibold text-primary hover:underline">
             We&rsquo;ll teach you.

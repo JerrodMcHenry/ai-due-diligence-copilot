@@ -41,10 +41,10 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
   if (result.vps === null) {
     return (
       <BaseCard className="p-6 text-center">
-        <p className="text-sm font-semibold text-text-primary">
+        <p className="text-base font-semibold text-text-primary">
           Not enough assumptions yet to model a score.
         </p>
-        <p className="mt-2 text-xs text-text-muted">
+        <p className="mt-2 text-base leading-7 text-text-secondary">
           Add a few assumptions below — even a market size guess or a
           problem statement — to see an initial Venture Potential Score.
         </p>
@@ -69,7 +69,7 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
                 its own with room to breathe (not a compact card), so it
                 belongs with "important supporting copy" rather than
                 tertiary metadata. */}
-            <ul className="space-y-1.5 text-sm leading-6 text-text-secondary">
+            <ul className="space-y-1.5 text-base leading-7 text-text-secondary">
               {/* Phase 14 -- Founder Journey Audit, Part 8/10: rewritten
                   without bare "VPS"/"SPS" acronyms. Neither term is
                   defined anywhere else in the modeled-venture founder
@@ -97,7 +97,7 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
             -- never a general "what's affecting this score" dump of the
             internal model, and never shown when it doesn't apply. */}
         {result.sole_uncorroborated_category ? (
-          <p className="mx-auto mt-3 max-w-md text-center text-sm text-text-muted">
+          <p className="mx-auto mt-3 max-w-md text-center text-base leading-7 text-text-secondary">
             Only one part of your model is scored so far, and nothing here has been
             independently validated yet — so this score reflects that it&rsquo;s a single,
             uncorroborated assumption, not the category score shown below. A second
@@ -121,7 +121,7 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
           <PathToStronger items={result.path_to_stronger} />
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
+            <h3 className="text-base font-semibold uppercase tracking-wide text-text-secondary">
               How your model breaks down
             </h3>
 
@@ -154,7 +154,7 @@ export default function VPSResultPanel({ result, title = "Venture Potential Scor
                     {category.score === null ? (
                       <p className="mt-1.5 text-sm text-text-secondary">We don&rsquo;t know this yet</p>
                     ) : category.basis.length > 0 ? (
-                      <p className="mt-1.5 text-sm leading-6 text-text-secondary">{category.basis[0]}</p>
+                      <p className="mt-1.5 text-base leading-7 text-text-secondary">{category.basis[0]}</p>
                     ) : null}
 
                     {/* Learn V1, Part 5/6: WHAT this category means and WHY it
@@ -198,8 +198,8 @@ function GuidanceList({
 
   return (
     <BaseCard className="p-4">
-      <h3 className="text-sm font-semibold text-text-primary">{title}</h3>
-      <ul className="mt-2 space-y-1.5 text-sm text-text-secondary">
+      <h3 className="text-base font-semibold text-text-primary">{title}</h3>
+      <ul className="mt-2 space-y-1.5 text-base leading-6 text-text-secondary">
         {items.map((item, index) => (
           <li key={index} className="flex gap-2">
             <span aria-hidden="true" className={iconClass}>{icon}</span>
@@ -227,8 +227,8 @@ function PathToStronger({ items }: { items: PathToStrongerItem[] }) {
 
   return (
     <BaseCard className="p-5">
-      <h3 className="text-sm font-semibold text-text-primary">Your shortest path to a stronger assessment</h3>
-      <p className="mt-1 text-xs text-text-muted">
+      <h3 className="text-base font-semibold text-text-primary">Your shortest path to a stronger assessment</h3>
+      <p className="mt-1 text-base leading-7 text-text-secondary">
         Your score changes only if the underlying venture fundamentals or evidence change — not by
         completing actions or reading playbooks. These are the categories most worth strengthening first.
       </p>
@@ -237,10 +237,10 @@ function PathToStronger({ items }: { items: PathToStrongerItem[] }) {
         {items.map((item) => (
           <li key={item.key} className="flex items-start justify-between gap-3 border-t border-border pt-3 first:border-t-0 first:pt-0">
             <div>
-              <p className="text-sm font-semibold text-text-primary">{item.label}</p>
-              <p className="mt-0.5 text-xs text-text-secondary">{item.hint}</p>
+              <p className="text-base font-semibold text-text-primary">{item.label}</p>
+              <p className="mt-0.5 text-sm text-text-secondary">{item.hint}</p>
             </div>
-            <span className="shrink-0 text-sm font-semibold text-text-muted">{item.score.toFixed(1)}</span>
+            <span className="shrink-0 text-base font-semibold text-text-muted">{item.score.toFixed(1)}</span>
           </li>
         ))}
       </ul>
@@ -266,8 +266,8 @@ function DiscoveryGaps({ items }: { items: string[] }) {
 
   return (
     <BaseCard className="p-4">
-      <h3 className="text-sm font-semibold text-text-primary">What you haven&rsquo;t learned yet</h3>
-      <ul className="mt-2 space-y-1.5 text-sm text-text-secondary">
+      <h3 className="text-base font-semibold text-text-primary">What you haven&rsquo;t learned yet</h3>
+      <ul className="mt-2 space-y-1.5 text-base leading-6 text-text-secondary">
         {items.map((item, index) => (
           <li key={index} className="flex gap-2">
             <span aria-hidden="true" className="text-warning">!</span>

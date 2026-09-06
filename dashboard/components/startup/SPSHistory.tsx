@@ -55,7 +55,7 @@ export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistor
     return (
       <BaseCard className="p-6">
         <SectionHeading isLegacyLabel={isLegacyLabel} />
-        <p className="mt-3 text-sm text-text-muted">
+        <p className="mt-3 text-sm text-text-secondary">
           No historical analyses yet. Run another analysis for this company
           to start tracking its Startup Power Score over time.
         </p>
@@ -80,7 +80,7 @@ export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistor
           <Stat label="Last analysis" value={formatDate(latest.created_at)} />
         </div>
 
-        <p className="mt-4 text-sm text-text-muted">
+        <p className="mt-4 text-sm text-text-secondary">
           {isLegacyLabel
             ? "This tracks the earlier V2.1 methodology's score history, separate from the Startup Power Score assessment above."
             : "Only one canonical analysis exists for this company — a trend will appear once a second analysis is recorded."}
@@ -114,7 +114,7 @@ export default function SPSHistory({ history, isLegacyLabel = false }: SPSHistor
       </div>
 
       {isLegacyLabel ? (
-        <p className="mt-2 text-xs text-text-muted">
+        <p className="mt-2 text-sm text-text-secondary">
           This chart tracks the earlier V2.1 methodology&rsquo;s score history, separate from the
           Startup Power Score assessment above.
         </p>

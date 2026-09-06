@@ -95,7 +95,7 @@ export default function ComparisonHeader({
       </div>
 
       {tooClose ? (
-        <p className="mt-3 text-center text-xs text-text-muted">
+        <p className="mt-3 text-center text-sm text-text-secondary">
           These startups have very close Startup Power Scores — treat this
           as roughly tied, not a clear leader.
         </p>

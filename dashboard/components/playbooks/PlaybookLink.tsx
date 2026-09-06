@@ -18,7 +18,11 @@ export default function PlaybookLink({ slug, label = "Learn how →", className 
     <Link
       href={`/playbooks/${slug}`}
       className={[
-        "inline-flex items-center gap-1 text-xs font-semibold text-primary hover:text-primary-hover hover:underline",
+        // Phase 31C-C, Part 9: this is the ONE "Learn how ->" link every
+        // recommendation/mission/gap card in the app renders through --
+        // bumped text-xs -> text-sm since it's a real, clickable link on
+        // nearly every card, not disposable metadata.
+        "inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-primary-hover hover:underline",
         className,
       ].join(" ")}
     >

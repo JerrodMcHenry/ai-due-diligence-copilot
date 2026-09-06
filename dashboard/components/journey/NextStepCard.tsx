@@ -69,8 +69,11 @@ export default function NextStepCard({
   return (
     <BaseCard variant="raised" className={["p-6", className].join(" ")}>
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{eyebrow}</p>
-      <p className="mt-1.5 text-lg font-bold text-text-primary">{title}</p>
-      {why ? <p className="mt-1.5 text-sm leading-6 text-text-secondary">{why}</p> : null}
+      <p className="mt-1.5 text-xl font-bold text-text-primary">{title}</p>
+      {/* Phase 31C-C, Part 5/9: this is THE primary recommendation
+          explanation shown on the app's single most important card
+          ("What should I do next?") -- bumped to the 16px floor. */}
+      {why ? <p className="mt-1.5 text-base leading-7 text-text-secondary">{why}</p> : null}
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <ActionButton action={primaryAction} variant="primary" />

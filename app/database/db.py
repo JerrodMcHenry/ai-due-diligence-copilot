@@ -491,10 +491,21 @@ def get_startup_claim_status_for_user(user_id: str, startup_id: int):
     has claimed or been approved for this startup -- scoped to user_id in
     the SQL itself, same discipline as every other per-user query in this
     file.
+
+    Phase 32A -- Trust-State Consistency: verification_method now
+    selected alongside status -- the same column list_startup_claims_for_
+    user() already reads two functions below, just missing here. Every
+    startup_memberships row was created by approve_startup_claim() acting
+    on some startup_claims row (this table's own core invariant, stated
+    at create_startup_memberships_table()'s section comment), and
+    AlreadyMemberError prevents a second claim once membership exists --
+    so "the caller's most recent claim for this startup" is always the
+    one claim whose verification_method actually explains how they got
+    (or are trying to get) access, never an unrelated stale row.
     """
     with engine.begin() as connection:
         row = connection.execute(text("""
-            SELECT id, status, submitted_at, reviewed_at, rejection_reason
+            SELECT id, status, verification_method, submitted_at, reviewed_at, rejection_reason
             FROM startup_claims
             WHERE user_id = :user_id AND startup_id = :startup_id
             ORDER BY submitted_at DESC

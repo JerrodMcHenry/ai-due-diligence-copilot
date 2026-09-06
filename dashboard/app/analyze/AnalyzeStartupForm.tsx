@@ -455,13 +455,19 @@ export default function AnalyzeStartupForm() {
         />
 
         <div className="grid gap-4 sm:grid-cols-2">
+          {/* Phase 31C-C -- Global Visual Scale + Readability Correction,
+              Part 6: this is the whole decision surface of the page --
+              two cards, a lot of empty canvas around them. Bumped
+              min-height/padding and the card titles to text-lg (18px, the
+              card-heading floor) so the choice reads as substantial
+              rather than as two undersized buttons. */}
           <button
             type="button"
             onClick={() => router.push("/analyze/deck")}
-            className="flex min-h-32 flex-col items-start gap-2 rounded-2xl border border-border bg-surface p-6 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
+            className="flex min-h-40 flex-col items-start gap-2.5 rounded-2xl border border-border bg-surface p-7 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
           >
-            <span className="text-base font-semibold text-text-primary">Review My Pitch Deck</span>
-            <span className="text-sm leading-6 text-text-secondary">
+            <span className="text-lg font-semibold text-text-primary">Review My Pitch Deck</span>
+            <span className="text-base leading-7 text-text-secondary">
               Upload a PDF deck and get coaching on the story it tells, what&rsquo;s working, and what to
               fix first.
             </span>
@@ -470,14 +476,14 @@ export default function AnalyzeStartupForm() {
           <button
             type="button"
             onClick={() => setMode("startup")}
-            className="flex min-h-32 flex-col items-start gap-2 rounded-2xl border border-border bg-surface p-6 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
+            className="flex min-h-40 flex-col items-start gap-2.5 rounded-2xl border border-border bg-surface p-7 text-left transition-colors hover:border-primary/40 hover:bg-surface-muted"
           >
-            <span className="text-base font-semibold text-text-primary">Analyze My Startup</span>
+            <span className="text-lg font-semibold text-text-primary">Analyze My Startup</span>
             {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/6:
                 live-discovered bare "Methodology v2" -- an internal
                 version name with no meaning to a first-time founder.
                 Replaced with what the process actually does. */}
-            <span className="text-sm leading-6 text-text-secondary">
+            <span className="text-base leading-7 text-text-secondary">
               Provide a website, pitch deck, or company information and build a full,
               evidence-based Startup Profile.
             </span>
@@ -502,9 +508,15 @@ export default function AnalyzeStartupForm() {
           <h2 className="text-lg font-semibold text-danger">
             You don&rsquo;t have access to update this startup
           </h2>
+          {/* Phase 32A -- Trust-State Consistency: "verified member" was
+              being used here as a generic synonym for "you don't have
+              access" -- this error covers BOTH the Founder-managed and
+              Verified cases equally (neither has anything to do with why
+              access failed here), so naming "verified" at all was
+              misleading, not just imprecise. */}
           <p className="mx-auto mt-2 max-w-md text-sm text-danger/80">
-            This startup workspace doesn&rsquo;t exist, or you&rsquo;re not a
-            verified member of it.
+            This startup workspace doesn&rsquo;t exist, or you don&rsquo;t
+            have access to it.
           </p>
         </ErrorMessage>
       </>
@@ -554,7 +566,7 @@ export default function AnalyzeStartupForm() {
           <div>
             <label
               htmlFor="pitch-deck-file"
-              className="text-xs font-semibold uppercase tracking-wide text-text-secondary"
+              className="text-sm font-semibold uppercase tracking-wide text-text-secondary"
             >
               Pitch Deck
             </label>
@@ -616,7 +628,7 @@ export default function AnalyzeStartupForm() {
             className="font-mono"
           />
 
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-secondary">
             At least one source is required. Provide any combination --
             SIE combines everything you give it into one analysis.
           </p>
@@ -667,7 +679,7 @@ function AnalyzingState({ elapsedSeconds }: { elapsedSeconds: number }) {
         </div>
       </div>
 
-      <p className="mt-6 text-sm text-text-muted" aria-live="polite">
+      <p className="mt-6 text-sm text-text-secondary" aria-live="polite">
         Elapsed: {formatElapsed(elapsedSeconds)}
       </p>
 
@@ -688,7 +700,7 @@ function AnalyzingState({ elapsedSeconds }: { elapsedSeconds: number }) {
           ))}
         </ul>
 
-        <p className="mt-4 text-sm text-text-muted">
+        <p className="mt-4 text-sm text-text-secondary">
           This describes what the analysis covers, not live progress -- SIE
           doesn&rsquo;t currently report which stage is in flight, so no
           single step is shown as complete until the whole analysis

@@ -37,7 +37,7 @@ export default function PillarComparisonTable({
             </h3>
 
             {pillarInfo.unavailableForAll ? (
-              <p className="mt-3 text-sm text-text-muted">
+              <p className="mt-3 text-sm text-text-secondary">
                 Unavailable for every selected startup.
               </p>
             ) : (

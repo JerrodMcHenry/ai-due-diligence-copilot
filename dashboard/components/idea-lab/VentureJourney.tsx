@@ -68,7 +68,7 @@ export default function VentureJourney({ stage, assumptions = null }: VentureJou
       >
         {state.label}
       </span>
-      <p className="text-sm leading-6 text-text-secondary">
+      <p className="text-base leading-7 text-text-secondary">
         {state.description}{" "}
         <span className="text-text-muted">
           This describes where things stand right now, not a level you&rsquo;ve unlocked — it can move

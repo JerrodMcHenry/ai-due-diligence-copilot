@@ -40,19 +40,21 @@ export default function IdeaJourney() {
         From idea to startup
       </h2>
 
-      <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-3 max-w-2xl text-center text-base leading-7 text-text-secondary">
         SIE stays useful at every point along the way — not a checklist to complete in order, but a set of
         capabilities you return to as your venture evolves.
       </p>
 
       {/* A plain, order-agnostic grid -- deliberately no numbers and no
           connecting line between cards, so nothing here reads as "step 1
-          before step 2." */}
-      <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
+          before step 2." Phase 31C-C, Part 2/3: widened max-w-4xl ->
+          max-w-5xl and bumped card padding/text -- these four cards are
+          the page's main explanation of what the product does. */}
+      <div className="mx-auto mt-10 grid max-w-5xl gap-5 sm:grid-cols-2">
         {CAPABILITIES.map((capability) => (
-          <div key={capability.label} className="rounded-2xl border border-border bg-surface p-5">
-            <p className="text-sm font-bold text-text-primary">{capability.label}</p>
-            <p className="mt-1.5 text-sm leading-6 text-text-secondary">{capability.description}</p>
+          <div key={capability.label} className="rounded-2xl border border-border bg-surface p-6">
+            <p className="text-lg font-bold text-text-primary">{capability.label}</p>
+            <p className="mt-1.5 text-base leading-7 text-text-secondary">{capability.description}</p>
           </div>
         ))}
       </div>

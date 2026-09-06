@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import { cancelMyStartupClaim, getMyStartupClaimStatus, getMyStartups } from "@/lib/api";
+import { resolveStartupTrustState } from "@/lib/trust/resolveStartupTrustState";
 import ClaimStartupForm from "./ClaimStartupForm";
 
 import type { StartupClaimStatus, StartupClaimSubmissionResponse } from "@/types";
@@ -142,6 +143,14 @@ export default function ClaimStartupButton({ startupId }: ClaimStartupButtonProp
     setClaim({
       claim_id: result.id,
       status: result.status,
+      // Phase 32A -- Trust-State Consistency: this button's own form
+      // (ClaimStartupForm) only ever creates a claim for a founder
+      // asserting a relationship to a PRE-EXISTING, already-analyzed
+      // company -- the exact case create_startup_claim() defaults
+      // verification_method to "manual_review" for. Idea -> Startup
+      // graduation is a completely separate code path
+      // (VentureGraduation.tsx) that never renders this component.
+      verification_method: "manual_review",
       submitted_at: new Date().toISOString(),
       reviewed_at: null,
       rejection_reason: null,
@@ -200,9 +209,29 @@ export default function ClaimStartupButton({ startupId }: ClaimStartupButtonProp
   }
 
   if (phase === "member") {
-    return (
+    // Phase 32A -- Trust-State Consistency. This badge used to read
+    // "✓ Verified member" unconditionally for ANY live membership,
+    // including one granted by self-approved Idea -> Startup graduation
+    // (zero independent review) -- the exact conflation Phase 32
+    // identified and this phase fixes. claim is the caller's own most
+    // recent claim for this startup (see ClaimStartupButton's own effect
+    // above); per startup_claims' core invariant, every membership was
+    // created by approving SOME claim, so claim is never null here in
+    // practice -- the `?? "manual_review"` fallback is a conservative
+    // default only, never reachable through this component's own two
+    // creation paths (both always populate verification_method). The
+    // actual branching rule lives in resolveStartupTrustState() (its own
+    // direct unit test: tests/trustState.test.ts), not inlined here, so
+    // it's tested independently of rendering.
+    const trustState = resolveStartupTrustState(claim?.verification_method ?? "manual_review");
+
+    return trustState === "founder_managed" ? (
+      <span className="inline-flex h-9 items-center gap-1.5 rounded-full bg-surface-muted px-4 text-sm font-semibold text-text-secondary">
+        Founder-managed
+      </span>
+    ) : (
       <span className="inline-flex h-9 items-center gap-1.5 rounded-full bg-success-soft px-4 text-sm font-semibold text-success">
-        ✓ Verified member
+        ✓ Verified
       </span>
     );
   }

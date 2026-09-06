@@ -31,12 +31,12 @@ export default function VpsCategoryExplainer({ categoryKey, score, className = "
 
   return (
     <details className={["group mt-1.5", className].join(" ")}>
-      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary marker:content-none hover:text-primary-hover">
+      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-primary marker:content-none hover:text-primary-hover">
         What does this mean?
         <span aria-hidden="true" className="text-text-muted transition-transform group-open:rotate-180">▾</span>
       </summary>
 
-      <div className="mt-1.5 space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-xs leading-5 text-text-secondary">
+      <div className="mt-1.5 space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-base leading-7 text-text-secondary">
         <p className="font-medium text-text-primary">{concept.question}</p>
         <p>{concept.whyItMatters}</p>
         <p>{personalizeVpsCategoryScore(score)}</p>

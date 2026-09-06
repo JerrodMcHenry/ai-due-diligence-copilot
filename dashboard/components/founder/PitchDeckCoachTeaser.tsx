@@ -20,7 +20,7 @@ export default function PitchDeckCoachTeaser() {
             Preparing to raise?
           </p>
           <p className="mt-1 text-base font-semibold text-text-primary">Review your pitch deck</p>
-          <p className="mt-1 text-sm text-text-muted">
+          <p className="mt-1 text-sm text-text-secondary">
             Get coaching on the story it tells and what to fix first.
           </p>
         </div>

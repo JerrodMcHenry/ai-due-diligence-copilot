@@ -31,7 +31,11 @@ export default function Disclosure({ summary, children, defaultOpen = false, cla
       open={defaultOpen}
       className={["group rounded-2xl border border-border bg-surface open:pb-2", className].join(" ")}
     >
-      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-sm font-semibold text-text-primary marker:content-none">
+      {/* Phase 31C-C, Part 9: this summary is the clickable heading of
+          every disclosure in the app ("Edit the full model", "See the
+          full score breakdown", "Create your own action") -- bumped to
+          the 16px card-heading floor. */}
+      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-base font-semibold text-text-primary marker:content-none">
         {summary}
 
         <span

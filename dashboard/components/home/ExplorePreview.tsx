@@ -37,7 +37,7 @@ export default async function ExplorePreview() {
         See how real startups stack up
       </h2>
 
-      <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-6 text-text-secondary">
+      <p className="mx-auto mt-3 max-w-xl text-center text-base leading-7 text-text-secondary">
         Real, public Startup Power Scores — not illustrations.
       </p>
 

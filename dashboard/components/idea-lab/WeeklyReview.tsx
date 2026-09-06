@@ -139,7 +139,7 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
           <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">What you learned</h3>
           <ul className="mt-1.5 space-y-2">
             {whatYouLearned.map((item, i) => (
-              <li key={i} className="text-sm leading-6 text-text-secondary">
+              <li key={i} className="text-base leading-7 text-text-secondary">
                 &ldquo;{item.text}&rdquo;
               </li>
             ))}
@@ -160,7 +160,7 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
               </p>
             ) : null}
             {vpsChange && !vpsMaterialChange && assumptionChanges.length > 0 ? (
-              <p className="text-xs text-text-muted">
+              <p className="text-sm text-text-secondary">
                 Your venture model changed, while Venture Potential Score remained {formatVps(vpsChange.after)}.
               </p>
             ) : null}
@@ -221,7 +221,7 @@ function FocusNext({
     return (
       <div className="mt-4 border-t border-border pt-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{label}</p>
-        <p className="mt-1 text-sm text-text-secondary">Your model looks solid -- see the full picture above.</p>
+        <p className="mt-1 text-sm text-text-secondary">Your model looks solid — see the full picture above.</p>
       </div>
     );
   }

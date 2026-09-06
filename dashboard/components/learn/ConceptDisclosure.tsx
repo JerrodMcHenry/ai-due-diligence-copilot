@@ -41,12 +41,16 @@ export default function ConceptDisclosure({ conceptKey, value = null, className 
 
   return (
     <details className={["group mt-1.5", className].join(" ")}>
-      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-xs font-semibold text-primary marker:content-none hover:text-primary-hover">
+      <summary className="inline-flex cursor-pointer list-none items-center gap-1 text-sm font-semibold text-primary marker:content-none hover:text-primary-hover">
         What&rsquo;s this?
         <span aria-hidden="true" className="text-text-muted transition-transform group-open:rotate-180">▾</span>
       </summary>
 
-      <div className="mt-1.5 space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-xs leading-5 text-text-secondary">
+      {/* Phase 31C-B, Part 3/6: this is Learn's own core educational
+          content -- the whole point of the disclosure -- not a footnote,
+          so it gets the same 14px floor as every other explanatory
+          paragraph in the app. */}
+      <div className="mt-1.5 space-y-2 rounded-lg border border-border bg-surface-muted p-3 text-base leading-7 text-text-secondary">
         <p>{concept.whatIsThis}</p>
         <p>{concept.whyItMatters}</p>
         <p className="font-medium text-text-primary">{concept.personalize(value)}</p>

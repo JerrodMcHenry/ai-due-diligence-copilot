@@ -248,7 +248,7 @@ export default function StartupHeroV2({
           ) : null}
 
           {showPartialCoverageWarning ? (
-            <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-warning/20 bg-warning/10 px-4 py-3 text-sm">
+            <div className="mt-4 flex items-start gap-2.5 rounded-lg border border-warning/20 bg-warning/10 px-4 py-3 text-base">
               <AlertIcon className="mt-0.5 h-4 w-4 shrink-0 text-warning" />
 
               <div>
@@ -256,7 +256,7 @@ export default function StartupHeroV2({
                   Partial structural coverage
                 </p>
 
-                <p className="mt-1 text-text-secondary">
+                <p className="mt-1 leading-7 text-text-secondary">
                   {structuralCoverage?.pillars_unavailable_entirely &&
                   structuralCoverage.pillars_unavailable_entirely.length > 0
                     ? `No scoreable evidence was found for: ${structuralCoverage.pillars_unavailable_entirely.join(", ")}. `

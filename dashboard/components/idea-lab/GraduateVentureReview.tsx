@@ -66,7 +66,7 @@ export default function GraduateVentureReview({
   return (
     <BaseCard variant="raised" className="p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Create Startup Profile</p>
-      <p className="mt-1.5 text-sm leading-6 text-text-secondary">
+      <p className="mt-1.5 text-base leading-7 text-text-secondary">
         This creates a real Startup entry linked to this venture, so you can track it going forward. Nothing is
         analyzed yet — you&rsquo;ll review and submit what to analyze next, exactly like any other startup on SIE.
       </p>
@@ -103,7 +103,7 @@ export default function GraduateVentureReview({
               <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                 What carries over as a starting point
               </p>
-              <p className="mt-1 text-xs text-text-muted">
+              <p className="mt-1 text-sm text-text-secondary">
                 You&rsquo;ll be able to edit or remove any of this before it&rsquo;s submitted for analysis.
               </p>
               <pre className="mt-2 max-h-56 overflow-y-auto whitespace-pre-wrap rounded-lg border border-border bg-surface p-3 text-xs leading-5 text-text-secondary">
@@ -129,7 +129,7 @@ export default function GraduateVentureReview({
               </option>
             ))}
           </select>
-          <p className="mt-2 text-xs text-text-muted">
+          <p className="mt-2 text-sm text-text-secondary">
             Links this venture to a startup you already have access to. Its own intelligence is unaffected.
           </p>
         </div>

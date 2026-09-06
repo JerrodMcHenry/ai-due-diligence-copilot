@@ -79,7 +79,7 @@ export default function MakeMissionButton({ fix }: { fix: PriorityFix }) {
   if (state === "ready" && ventures.length > 1) {
     return (
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <label htmlFor={`mission-venture-${fix.title}`} className="text-xs font-medium text-text-secondary">
+        <label htmlFor={`mission-venture-${fix.title}`} className="text-sm font-medium text-text-secondary">
           Add to which venture?
         </label>
         <select
@@ -112,8 +112,8 @@ export default function MakeMissionButton({ fix }: { fix: PriorityFix }) {
 
   if (state === "ready" && ventures.length === 0) {
     return (
-      <p className="mt-3 text-xs text-text-muted">
-        You don&rsquo;t have a venture in Idea Lab yet.{" "}
+      <p className="mt-3 text-sm text-text-secondary">
+        You don&rsquo;t have an idea started yet.{" "}
         <Link href="/idea-lab/new" className="font-semibold text-primary hover:text-primary-hover">
           Start one
         </Link>{" "}
@@ -123,7 +123,7 @@ export default function MakeMissionButton({ fix }: { fix: PriorityFix }) {
   }
 
   if (state === "error") {
-    return <p className="mt-3 text-xs text-danger">Couldn&rsquo;t load your ventures. Try again.</p>;
+    return <p className="mt-3 text-sm text-danger">Couldn&rsquo;t load your ventures. Try again.</p>;
   }
 
   return (

@@ -540,7 +540,7 @@ function FilterSelect({
 
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-xs font-medium text-text-muted">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-text-secondary">
         {label}
       </label>
 
@@ -583,7 +583,7 @@ function NumberField({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-xs font-medium text-text-muted">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-text-secondary">
         {label}
       </label>
 
@@ -673,7 +673,7 @@ function ResultsSection({
           No startups match these filters
         </p>
 
-        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-text-secondary">
+        <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
           {isFilterActive
             ? "Try widening your filters -- a lower SPS minimum, a different industry, or clearing a filter entirely."
             : "There are no canonical startup analyses yet."}

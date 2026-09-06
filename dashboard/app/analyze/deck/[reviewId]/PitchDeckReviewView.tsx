@@ -190,7 +190,7 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
             <Badge tone={READINESS_TONE[review.readiness_label]}>{review.readiness_label}</Badge>
           </div>
           <p className="mt-2 text-sm text-text-secondary">{READINESS_COPY[review.readiness_label]}</p>
-          <p className="mt-3 text-xs text-text-muted">
+          <p className="mt-3 text-sm text-text-secondary">
             This is a coaching signal, not a score -- it never affects any Startup Power Score, and it
             says nothing about whether your startup itself is a good idea.
           </p>
@@ -221,13 +221,13 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
                     </span>
                     <div className="flex-1">
                       <h3 className="text-sm font-semibold text-text-primary">{fix.title}</h3>
-                      <p className="mt-1.5 text-sm leading-6 text-text-secondary">{fix.issue}</p>
+                      <p className="mt-1.5 text-base leading-7 text-text-secondary">{fix.issue}</p>
                       <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-text-muted">
                         Why it matters
                       </p>
-                      <p className="mt-1 text-sm leading-6 text-text-secondary">{fix.why_it_matters}</p>
+                      <p className="mt-1 text-base leading-7 text-text-secondary">{fix.why_it_matters}</p>
                       <p className="mt-3 text-xs font-semibold uppercase tracking-wide text-text-muted">Try this</p>
-                      <p className="mt-1 text-sm leading-6 text-text-secondary">{fix.try_this}</p>
+                      <p className="mt-1 text-base leading-7 text-text-secondary">{fix.try_this}</p>
 
                       <MakeMissionButton fix={fix} />
                     </div>
@@ -245,7 +245,7 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
               {review.strengths.map((strength, index) => (
                 <BaseCard key={index} className="p-4">
                   <p className="text-sm font-semibold text-text-primary">{strength.title}</p>
-                  <p className="mt-1.5 text-sm leading-6 text-text-secondary">{strength.why_it_works}</p>
+                  <p className="mt-1.5 text-base leading-7 text-text-secondary">{strength.why_it_works}</p>
                 </BaseCard>
               ))}
             </div>
@@ -283,7 +283,7 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
             <h2 className="text-sm font-semibold uppercase tracking-wide text-text-muted">
               Prepare for the conversation
             </h2>
-            <p className="mt-1 text-xs text-text-muted">
+            <p className="mt-1 text-sm text-text-secondary">
               These are possible investor questions based on your deck -- not actual investor feedback.
             </p>
             <div className="mt-3 space-y-2">
@@ -292,7 +292,7 @@ export default function PitchDeckReviewView({ reviewId }: { reviewId: number }) 
                   <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
                     Possible investor question
                   </p>
-                  <p className="mt-1 text-sm leading-6 text-text-primary">&ldquo;{item.question}&rdquo;</p>
+                  <p className="mt-1 text-base leading-7 text-text-primary">&ldquo;{item.question}&rdquo;</p>
                 </BaseCard>
               ))}
             </div>
@@ -326,7 +326,7 @@ function StoryCard({ label, field }: { label: string; field: DeckStoryField }) {
   return (
     <BaseCard className="p-4">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{label}</p>
-      <p className={`mt-1.5 text-sm leading-6 ${field.found ? "text-text-primary" : "text-text-muted italic"}`}>
+      <p className={`mt-1.5 text-base leading-7 ${field.found ? "text-text-primary" : "text-text-muted italic"}`}>
         {field.summary}
       </p>
       {pageLabel ? <p className="mt-2 text-xs text-text-muted">{pageLabel}</p> : null}
@@ -356,14 +356,14 @@ function SectionCard({ section }: { section: DeckSectionCoaching }) {
       {section.what_its_saying ? (
         <div className="mt-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What this is saying</p>
-          <p className="mt-1 text-sm leading-6 text-text-secondary">{section.what_its_saying}</p>
+          <p className="mt-1 text-base leading-7 text-text-secondary">{section.what_its_saying}</p>
         </div>
       ) : null}
 
       {section.whats_working ? (
         <div className="mt-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What&rsquo;s working</p>
-          <p className="mt-1 text-sm leading-6 text-text-secondary">{section.whats_working}</p>
+          <p className="mt-1 text-base leading-7 text-text-secondary">{section.whats_working}</p>
         </div>
       ) : null}
 
@@ -372,19 +372,19 @@ function SectionCard({ section }: { section: DeckSectionCoaching }) {
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
             What may confuse an investor
           </p>
-          <p className="mt-1 text-sm leading-6 text-text-secondary">{section.may_confuse}</p>
+          <p className="mt-1 text-base leading-7 text-text-secondary">{section.may_confuse}</p>
         </div>
       ) : null}
 
       <div className="mt-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Why investors care</p>
-        <p className="mt-1 text-sm leading-6 text-text-secondary">{section.why_investors_care}</p>
+        <p className="mt-1 text-base leading-7 text-text-secondary">{section.why_investors_care}</p>
       </div>
 
       {section.try_this ? (
         <div className="mt-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Try this</p>
-          <p className="mt-1 text-sm leading-6 text-text-secondary">{section.try_this}</p>
+          <p className="mt-1 text-base leading-7 text-text-secondary">{section.try_this}</p>
         </div>
       ) : null}
 

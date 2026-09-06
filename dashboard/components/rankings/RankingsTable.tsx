@@ -100,7 +100,7 @@ function StatCard({
         {value}
       </p>
 
-      <p className="mt-1 text-sm text-text-muted">{detail}</p>
+      <p className="mt-1 text-sm text-text-secondary">{detail}</p>
     </BaseCard>
   );
 }
@@ -304,7 +304,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
             </label>
           </div>
 
-          <p className="mt-3 text-sm text-text-muted">
+          <p className="mt-3 text-sm text-text-secondary">
             Showing {filteredRankings.length} of {rankings.length} startups
           </p>
         </div>
@@ -315,7 +315,7 @@ export default function RankingsTable({ rankings }: RankingsTableProps) {
               No startups match these filters
             </p>
 
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-text-secondary">
               Try changing the company search, industry, or stage.
             </p>
 

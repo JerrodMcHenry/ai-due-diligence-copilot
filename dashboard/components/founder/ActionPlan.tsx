@@ -257,7 +257,7 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h2 className="text-xl font-semibold text-text-primary">Action Plan</h2>
-          <p className="mt-1 text-sm text-text-muted">
+          <p className="mt-1 text-sm text-text-secondary">
             {totalCount > 0
               ? `${completedCount} of ${totalCount} action${totalCount === 1 ? "" : "s"} completed`
               : "Build your improvement plan from SIE recommendations or add your own action."}
@@ -278,7 +278,7 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
           live-discovered bare "SPS" plus 12px body copy -- bumped to the
           14px helper-copy floor and spelled out the score name, same
           fix as the SPS ring itself (RingCenter.tsx). */}
-      <p className="mt-3 text-sm leading-6 text-text-muted">
+      <p className="mt-3 text-base leading-7 text-text-secondary">
         Completing actions tracks your execution progress. Your Startup Power Score only
         changes when new evidence is analyzed.
       </p>
@@ -321,7 +321,7 @@ export default function ActionPlan({ startupId, canonicalName, methodology }: Ac
         ) : null
       ) : (
         <BaseCard className="mt-5 p-5">
-          <p className="text-sm text-text-muted">
+          <p className="text-sm text-text-secondary">
             SIE needs a completed analysis of {canonicalName} before it can suggest
             evidence-based actions. You can still add your own actions below.
           </p>
@@ -453,7 +453,7 @@ function ActionColumn({
       </h3>
 
       {actions.length === 0 ? (
-        <p className="mt-3 text-sm text-text-muted">{emptyLabel}</p>
+        <p className="mt-3 text-sm text-text-secondary">{emptyLabel}</p>
       ) : (
         <ul className="mt-3 space-y-2">
           {actions.map((action) => (

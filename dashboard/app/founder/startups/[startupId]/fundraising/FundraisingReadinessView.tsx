@@ -6,6 +6,7 @@ import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
 import PageHeader from "@/components/layout/PageHeader";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 import { getPlaybookForReadinessGap } from "@/lib/playbooks/resourceMap";
 
@@ -181,9 +182,16 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
 
   return (
     <div className="space-y-8">
+      <Breadcrumbs
+        items={[
+          { label: "My Startups", href: "/founder" },
+          { label: readiness.canonical_name, href: workspaceHref },
+          { label: "Fundraising" },
+        ]}
+      />
       <PageHeader
         title="Fundraising Readiness"
-        subtitle={`${readiness.canonical_name} — private to verified members.`}
+        subtitle={`${readiness.canonical_name} — private to you and your team.`}
         action={
           <Link
             href={workspaceHref}
@@ -228,13 +236,13 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                     </span>
                   </>
                 ) : (
-                  <p className="text-sm text-text-muted">Not enough data to assess yet.</p>
+                  <p className="text-sm text-text-secondary">Not enough data to assess yet.</p>
                 )}
               </div>
 
               <div>
                 <h2 className="text-lg font-semibold text-text-primary">What this means</h2>
-                <p className="mt-2 max-w-prose text-sm leading-6 text-text-secondary">
+                <p className="mt-2 max-w-prose text-base leading-7 text-text-secondary">
                   Fundraising Readiness estimates how well-prepared and well-evidenced{" "}
                   {readiness.canonical_name}&rsquo;s story is for a{" "}
                   <span className="font-medium text-text-primary">{readiness.stage_label}</span>{" "}
@@ -249,7 +257,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                     the kind of thing a founder needs to actually be able
                     to read. Bumped to the 14px floor, spelled out. */}
                 {readiness.current_sps !== null ? (
-                  <p className="mt-2 text-sm text-text-muted">
+                  <p className="mt-2 text-sm text-text-secondary">
                     Current Startup Power Score: <span className="font-medium text-text-secondary">{readiness.current_sps.toFixed(1)}</span>{" "}
                     (shown for context only — Fundraising Readiness never changes it, and never appears in Rankings).
                   </p>
@@ -265,7 +273,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
             <h2 className="text-xl font-semibold text-text-primary">Top Fundraising Gaps</h2>
             {readiness.gaps.length === 0 ? (
               <BaseCard className="mt-4 p-6">
-                <p className="text-sm text-text-muted">
+                <p className="text-sm text-text-secondary">
                   No significant gaps identified from the current analysis.
                 </p>
               </BaseCard>
@@ -350,7 +358,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
             <h2 className="text-xl font-semibold text-text-primary">Questions Investors May Ask</h2>
             {readiness.investor_questions.length === 0 ? (
               <BaseCard className="mt-4 p-6">
-                <p className="text-sm text-text-muted">
+                <p className="text-sm text-text-secondary">
                   No specific investor questions surfaced from the current analysis.
                 </p>
               </BaseCard>
@@ -376,7 +384,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                 <div key={item.category} className="flex flex-wrap items-center justify-between gap-2 px-5 py-3.5">
                   <div>
                     <p className="text-sm font-medium text-text-primary">{item.category}</p>
-                    <p className="text-sm text-text-muted">{item.note}</p>
+                    <p className="text-sm text-text-secondary">{item.note}</p>
                   </div>
                   <span
                     className={[
@@ -389,7 +397,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                 </div>
               ))}
             </BaseCard>
-            <p className="mt-2 text-sm text-text-muted">
+            <p className="mt-2 text-sm text-text-secondary">
               Checklist status reflects SIE&rsquo;s current assessment — completing Action
               Plan items or milestones doesn&rsquo;t change it directly. Re-analyzing does.
             </p>
@@ -412,7 +420,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
             </Link>
           </BaseCard>
 
-          <p className="text-sm leading-6 text-text-muted">
+          <p className="text-base leading-7 text-text-secondary">
             {readiness.pitch_deck_note} Fundraising Readiness is a separate, deterministic
             assessment of how prepared and well-evidenced your story is for a fundraising
             conversation — it is not your Startup Power Score, and completing actions or

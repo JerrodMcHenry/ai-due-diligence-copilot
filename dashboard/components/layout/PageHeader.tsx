@@ -28,8 +28,14 @@ export default function PageHeader({
           {title}
         </h1>
 
+        {/* Phase 31C-C -- Global Visual Scale + Readability Correction,
+            Part 1/9: this subtitle is the one-line description of what
+            the entire page is for, on essentially every page in the app
+            -- real explanatory copy, not secondary text. Bumped to a
+            flat 16px (was 14px on mobile, 16px only from sm+) and a
+            slightly wider reading column. */}
         {subtitle ? (
-          <p className="mt-2 max-w-3xl text-sm leading-6 text-text-secondary sm:text-base">
+          <p className="mt-2 max-w-3xl text-base leading-7 text-text-secondary">
             {subtitle}
           </p>
         ) : null}

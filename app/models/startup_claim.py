@@ -52,9 +52,19 @@ class MyStartupClaim(BaseModel):
 class StartupClaimStatus(BaseModel):
     """Smallest single-startup helper for Phase 7.1B's future 'Claim this
     startup' control. The endpoint returns this or null -- never reveals
-    whether anyone ELSE has claimed the same startup."""
+    whether anyone ELSE has claimed the same startup.
+
+    Phase 32A -- Trust-State Consistency. verification_method added --
+    the exact same column MyStartupClaim already exposes on the list
+    endpoint (GET /me/startup-claims), just missing here. This is the
+    minimum existing field ClaimStartupButton.tsx needs to distinguish a
+    self-approved venture-graduation relationship ("Founder-managed")
+    from an independently admin-reviewed one ("Verified") -- no new
+    column, no new table, no new verification concept: the data already
+    existed, it just wasn't reaching this one response."""
     claim_id: int
     status: ClaimStatus
+    verification_method: str
     submitted_at: datetime
     reviewed_at: datetime | None = None
     rejection_reason: str | None = None

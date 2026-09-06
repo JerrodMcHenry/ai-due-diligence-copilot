@@ -92,7 +92,7 @@ export default function SafeTermsForm({ safes, onChange }: SafeTermsFormProps) {
         </div>
       ))}
 
-      {safes.length === 0 ? <p className="text-sm text-text-muted">No SAFE added yet.</p> : null}
+      {safes.length === 0 ? <p className="text-sm text-text-secondary">No SAFE added yet.</p> : null}
 
       <Button type="button" variant="secondary" size="sm" onClick={add}>
         + Add another SAFE

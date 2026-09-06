@@ -56,15 +56,27 @@ const TAB_ICONS: Record<string, React.ReactNode> = {
       <circle cx="12" cy="12" r="4.5" stroke="currentColor" strokeWidth="1.8" />
     </svg>
   ),
+  // Phase 32, Part 2/12: same icon PersonalMenu's own former "My Startup"
+  // link used, so a founder sees the identical mark in both places
+  // (there is no second one now -- see PersonalMenu.tsx's own comment).
+  "My Startups": (
+    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className="size-5">
+      <path d="M12 3l2.4 5.3 5.6.6-4.2 3.9 1.2 5.6L12 15.8l-5 2.6 1.2-5.6-4.2-3.9 5.6-.6L12 3z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+    </svg>
+  ),
 };
 
 export default function MobileTabBar() {
   const pathname = usePathname();
 
+  // Phase 32, Part 2/12: md:hidden -> lg:hidden below -- see TopNav.tsx's
+  // own comment on why the breakpoint moved when a fourth destination
+  // was added; the two navs must swap at the exact same width or
+  // there's a gap where neither renders.
   return (
     <nav
       aria-label="Primary"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/80 lg:hidden"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
       <div className="mx-auto flex max-w-[1600px] items-stretch justify-around px-2">

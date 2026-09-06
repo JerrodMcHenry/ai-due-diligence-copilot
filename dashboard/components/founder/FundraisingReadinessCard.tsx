@@ -109,10 +109,10 @@ export default function FundraisingReadinessCard({ startupId }: FundraisingReadi
                 </span>
               </p>
             ) : (
-              <p className="mt-1 text-sm text-text-muted">Not enough data to assess yet.</p>
+              <p className="mt-1 text-sm text-text-secondary">Not enough data to assess yet.</p>
             )
           ) : (
-            <p className="mt-1 text-sm text-text-muted">Needs a startup analysis first.</p>
+            <p className="mt-1 text-sm text-text-secondary">Needs a startup analysis first.</p>
           )}
           {readiness.gaps.length > 0 ? (
             <p className="mt-1 text-xs text-text-muted">

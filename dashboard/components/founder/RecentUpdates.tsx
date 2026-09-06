@@ -176,7 +176,7 @@ export default function RecentUpdates({ startupId }: RecentUpdatesProps) {
   return (
     <section>
       <h2 className="text-xl font-semibold text-text-primary">Recent Updates</h2>
-      <p className="mt-1 text-sm text-text-muted">
+      <p className="mt-1 text-sm text-text-secondary">
         {updates.length > 0
           ? "Founder-reported progress, newest first."
           : "Record meaningful progress as your startup evolves."}
@@ -220,7 +220,7 @@ export default function RecentUpdates({ startupId }: RecentUpdatesProps) {
                 <button
                   type="button"
                   onClick={() => setEditingId(update.id)}
-                  className="shrink-0 text-xs font-semibold text-text-muted hover:text-primary"
+                  className="shrink-0 text-sm font-semibold text-text-muted hover:text-primary"
                 >
                   Edit
                 </button>
@@ -447,14 +447,14 @@ function UpdateForm({
         <button
           type="button"
           onClick={() => setShowMetric(true)}
-          className="text-xs font-semibold text-primary hover:text-primary-hover"
+          className="text-sm font-semibold text-primary hover:text-primary-hover"
         >
           + Add a number (optional)
         </button>
       )}
 
       <details className="text-sm">
-        <summary className="cursor-pointer text-xs font-semibold text-text-muted hover:text-text-secondary">
+        <summary className="cursor-pointer text-sm font-semibold text-text-muted hover:text-text-secondary">
           Add more detail (optional)
         </summary>
         <textarea
@@ -467,12 +467,12 @@ function UpdateForm({
         />
       </details>
 
-      <p className="text-xs leading-5 text-text-muted">
+      <p className="text-base leading-7 text-text-secondary">
         This is recorded as founder-reported progress, not independently verified
         evidence. It never changes your SPS.
       </p>
 
-      {error ? <p className="text-xs text-danger">{error}</p> : null}
+      {error ? <p className="text-sm text-danger">{error}</p> : null}
 
       <div className="flex items-center gap-2">
         <button

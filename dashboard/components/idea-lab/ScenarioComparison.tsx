@@ -60,7 +60,7 @@ export default function ScenarioComparison({
     <BaseCard className="space-y-5 border-primary/30 p-6">
       <div>
         <h3 className="text-sm font-semibold uppercase tracking-wide text-text-muted">Scenario Preview</h3>
-        <p className="mt-1 text-xs text-text-muted">
+        <p className="mt-1 text-sm text-text-secondary">
           This is a preview — your saved venture is unchanged until you apply it.
         </p>
       </div>
@@ -95,11 +95,11 @@ export default function ScenarioComparison({
             {scenarioConsequences.map((consequence) => {
               const currentValue = currentConsequences.find((c) => c.key === consequence.key);
               return (
-                <li key={consequence.key} className="text-sm leading-6 text-text-secondary">
+                <li key={consequence.key} className="text-base leading-7 text-text-secondary">
                   <span className="font-medium text-text-primary">{consequence.label}: </span>
                   {consequence.explanation}
                   {!currentValue ? (
-                    <span className="block text-xs text-text-muted">
+                    <span className="block text-sm text-text-secondary">
                       (Not calculable for your current model — {currentAssumptions.economics.price_point === null
                         ? "no price is set yet"
                         : "no paying customers are set yet"}.)

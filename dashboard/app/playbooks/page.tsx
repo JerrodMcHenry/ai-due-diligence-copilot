@@ -27,7 +27,10 @@ export default function PlaybooksIndexPage() {
       <div className="space-y-10">
         {journeyGroups.map((group) => (
           <section key={group.stage}>
-            <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">{group.label}</h2>
+            {/* Phase 31C-B, Part 3/6: a real section heading (grouping the
+                whole journey-stage grid below it), same hierarchy-
+                inversion fix as the playbook detail page's own <h2>s. */}
+            <h2 className="text-base font-semibold uppercase tracking-wide text-text-secondary">{group.label}</h2>
 
             <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {group.playbooks.map((playbook) => (

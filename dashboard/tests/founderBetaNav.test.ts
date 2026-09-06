@@ -81,6 +81,16 @@ function test_mobile_tab_bar_shares_the_same_primary_navigation_source(): void {
 
 // --- Account menu (PersonalMenu.tsx) ---
 
+// Phase 32 -- Product Information Architecture + Seamless User Journey,
+// Part 2/9, updated this test's own assertions (renamed from
+// test_watchlist_and_investor_removed_from_account_menu's original
+// "these must remain" shape): "My Ideas"/"My Startup"/"Learn" are no
+// longer in the account menu at all -- they were promoted to always-
+// visible primary nav destinations (TopNav.tsx's own PRIMARY_NAVIGATION,
+// "My Startup" now "My Startups"), and Section 9's own "duplicate
+// destinations" failure mode is exactly why they were removed from here
+// rather than left as a second copy. Watchlist/Investor intelligence
+// stay removed, unchanged from Phase 15.
 function test_watchlist_and_investor_removed_from_account_menu(): void {
   const source = readSource("components/layout/PersonalMenu.tsx");
   expect(
@@ -91,9 +101,33 @@ function test_watchlist_and_investor_removed_from_account_menu(): void {
     !/label="Investor intelligence"/.test(source),
     "Phase 15: \"Investor intelligence\" must not appear in the account menu -- this is a Founder Beta, and the investor surface is not populated enough to expose"
   );
-  expect(/label="My Ideas"/.test(source), "\"My Ideas\" must remain in the account menu");
-  expect(/label="My Startup"/.test(source), "\"My Startup\" must remain in the account menu");
-  expect(/label="Learn"/.test(source), "\"Learn\" (Playbooks) must remain in the account menu");
+  expect(
+    !/label="My Ideas"/.test(source),
+    "Phase 32: \"My Ideas\" must NOT appear in the account menu -- it is now a primary nav destination (Build), and duplicating it here is exactly the \"duplicate destination\" failure Part 9 asks to remove"
+  );
+  expect(
+    !/label="My Startup"/.test(source),
+    "Phase 32: \"My Startup\" must NOT appear in the account menu -- it is now the primary nav destination \"My Startups\""
+  );
+  expect(
+    !/label="Learn"/.test(source),
+    "Phase 32: \"Learn\" must NOT appear in the account menu -- it is now a primary nav destination"
+  );
+  expect(/label="Send feedback"/.test(source), "\"Send feedback\" must remain -- it has no other home in the shell");
+}
+
+// Phase 32, Part 2. The exact same destinations must be reachable from
+// the primary nav now that PersonalMenu no longer carries them --
+// otherwise removing them from the account menu would be a net loss of
+// access, not a deduplication.
+function test_promoted_destinations_are_reachable_from_primary_nav(): void {
+  const source = readSource("components/layout/TopNav.tsx");
+  const arrayStart = source.indexOf("export const PRIMARY_NAVIGATION");
+  const arrayEnd = source.indexOf("];", arrayStart);
+  const arrayText = source.slice(arrayStart, arrayEnd);
+
+  expect(/name:\s*"My Startups"/.test(arrayText), "\"My Startups\" must be a primary nav destination now that PersonalMenu no longer links to /founder");
+  expect(/href:\s*"\/founder"/.test(arrayText), "The primary nav's \"My Startups\" entry must route into the existing /founder Founder Workspace chooser, not a new page");
 }
 
 // --- Hide, don't delete: every de-emphasized route's page file must still exist ---
@@ -137,16 +171,27 @@ function test_homepage_no_longer_renders_explore_preview(): void {
   expect(!/<ExplorePreview\s*\/>/.test(source), "app/page.tsx must not render <ExplorePreview />");
 }
 
+// Phase 32, Part 6: EntryPaths' own three cards were rebuilt around user
+// intent per the directive's exact recommended structure -- "Build an
+// idea"/"Analyze my startup"/"Review my pitch deck" (the Phase 15-era
+// titles this test originally asserted) are gone from the card grid
+// itself; pitch deck review is deliberately subordinated to a small link
+// below the three cards instead of a co-equal fourth card. The
+// Founder-Beta-era assertion this test keeps -- no "Explore startups"
+// card -- is still correct and unchanged.
 function test_entry_paths_no_longer_offers_explore_startups_card(): void {
   const source = readSource("components/home/EntryPaths.tsx");
   expect(
     !/title:\s*"Explore startups"/.test(source),
     "EntryPaths must not offer an \"Explore startups\" entry path on the Founder Beta homepage"
   );
-  // The other three founder-relevant paths must still be there.
-  for (const title of ["Build an idea", "Analyze my startup", "Review my pitch deck"]) {
-    expect(source.includes(`title:\n    "${title}",`) || source.includes(`title: "${title}",`) || source.includes(title), `EntryPaths must still offer "${title}"`);
+  // The three intent-based paths Phase 32 replaced them with must be there.
+  for (const title of ["Explore an Idea", "Work on My Startup", "Analyze a Company"]) {
+    expect(source.includes(title), `EntryPaths must still offer "${title}"`);
   }
+  // Pitch deck review must remain reachable, just not as a fourth
+  // co-equal card (Part 6's own explicit instruction).
+  expect(source.includes("/analyze/deck"), "Pitch deck review must remain reachable from the homepage, even if subordinate to the three primary cards");
 }
 
 const TESTS: [string, () => void][] = [
@@ -154,6 +199,7 @@ const TESTS: [string, () => void][] = [
   ["test_global_nav_is_build_analyze_learn", test_global_nav_is_build_analyze_learn],
   ["test_mobile_tab_bar_shares_the_same_primary_navigation_source", test_mobile_tab_bar_shares_the_same_primary_navigation_source],
   ["test_watchlist_and_investor_removed_from_account_menu", test_watchlist_and_investor_removed_from_account_menu],
+  ["test_promoted_destinations_are_reachable_from_primary_nav", test_promoted_destinations_are_reachable_from_primary_nav],
   ["test_deemphasized_routes_remain_present_on_disk", test_deemphasized_routes_remain_present_on_disk],
   ["test_explore_preview_component_untouched_not_deleted", test_explore_preview_component_untouched_not_deleted],
   ["test_homepage_no_longer_renders_explore_preview", test_homepage_no_longer_renders_explore_preview],

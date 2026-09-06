@@ -46,7 +46,10 @@ export default function Badge({ tone = "neutral", children, className = "" }: Ba
   return (
     <span
       className={[
-        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
+        // Phase 31C-C, Part 9: bumped text-xs -> text-sm -- still a
+        // compact status pill, but no longer at the 12px "exceptional
+        // only" floor for a control that shows up on nearly every card.
+        "inline-flex items-center rounded-full px-2.5 py-1 text-sm font-semibold",
         TONE_CLASSES[tone],
         className,
       ].join(" ")}

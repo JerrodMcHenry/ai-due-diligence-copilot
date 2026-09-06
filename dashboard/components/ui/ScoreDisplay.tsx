@@ -68,7 +68,7 @@ export default function ScoreDisplay({
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{label}</p>
 
       {score === null ? (
-        <p className="mt-3 text-sm font-medium text-text-secondary">{unavailableText}</p>
+        <p className="mt-3 text-base font-medium text-text-secondary">{unavailableText}</p>
       ) : (
         <>
           <div className="mt-1 flex items-baseline justify-center gap-2">
@@ -92,10 +92,14 @@ export default function ScoreDisplay({
         </>
       )}
 
-      {explanation ? <p className="mt-2 text-xs text-text-muted">{explanation}</p> : null}
+      {/* Phase 31C-B, Part 3/13: a shared primitive feeding VPSResultPanel
+          (and any future caller) -- both lines are real one-line score
+          explanations a founder needs to read, not metadata, so bumped
+          here once rather than at each call site. */}
+      {explanation ? <p className="mt-2 text-base leading-7 text-text-secondary">{explanation}</p> : null}
 
       {modeled ? (
-        <p className="mt-2 text-xs text-text-muted">
+        <p className="mt-2 text-base leading-7 text-text-secondary">
           Based on modeled assumptions — not observed evidence, and not comparable to a real
           company&rsquo;s Startup Power Score.
         </p>

@@ -44,31 +44,11 @@ import { UserButton } from "@clerk/nextjs";
 // stacked ones.
 const ICON_CLASS = "size-4";
 
-function IdeaIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
-      <path d="M9 18h6M10 21h4M8 14a5 5 0 1 1 8 0c-.9.9-1.4 1.6-1.4 2.5h-5.2c0-.9-.5-1.6-1.4-2.5Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function StartupIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
-      <path d="M12 3l2.4 5.3 5.6.6-4.2 3.9 1.2 5.6L12 15.8l-5 2.6 1.2-5.6-4.2-3.9 5.6-.6L12 3z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function LearnIcon() {
-  return (
-    <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
-      <path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5v-15Z" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-      <path d="M4 20.5V5.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
+// Phase 32, Part 2/9: IdeaIcon/StartupIcon/LearnIcon removed along with
+// the menu links they illustrated (see this file's own comment above
+// PersonalMenu()) -- dead code left behind by a removed feature is its
+// own small confusion for the next reader, same as a dead route would
+// be.
 function FeedbackIcon() {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" className={ICON_CLASS}>
@@ -103,13 +83,18 @@ const FEEDBACK_MAILTO =
 // dashboard/lib/playbooks/resourceMap.ts's own callers). /playbooks
 // itself is public (no auth), so this link works identically for every
 // signed-in user regardless of what they've built so far.
+// Phase 32 -- Product Information Architecture + Seamless User Journey,
+// Part 2/9: "My Ideas," "My Startup," and "Learn" removed from this menu
+// -- Section 9's own "duplicate destinations" failure mode, now that all
+// three are always-visible primary nav items (TopNav.tsx/MobileTabBar.tsx)
+// rather than buried inside the account dropdown. Nothing about the
+// destinations themselves changed (same routes, same auth); this menu's
+// only remaining job is genuinely account-scoped actions Clerk itself
+// doesn't already provide a home for.
 export default function PersonalMenu() {
   return (
     <UserButton appearance={{ elements: { userButtonAvatarBox: "size-9" } }}>
       <UserButton.MenuItems>
-        <UserButton.Link label="My Ideas" href="/idea-lab" labelIcon={<IdeaIcon />} />
-        <UserButton.Link label="My Startup" href="/founder" labelIcon={<StartupIcon />} />
-        <UserButton.Link label="Learn" href="/playbooks" labelIcon={<LearnIcon />} />
         <UserButton.Link label="Send feedback" href={FEEDBACK_MAILTO} labelIcon={<FeedbackIcon />} />
       </UserButton.MenuItems>
     </UserButton>

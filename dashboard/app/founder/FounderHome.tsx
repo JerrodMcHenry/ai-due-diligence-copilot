@@ -67,14 +67,22 @@ export default function FounderHome() {
 
   return (
     <div className="space-y-8">
-      {/* Phase 10.10, Part 11: title now matches PersonalMenu's own "My
-          Startup" label exactly (previously the nav said "My Startup" but
-          this page's own H1 said "Founder Workspace" -- the underlying
-          route, backend concept, and every internal reference are
-          unchanged, presentation only). */}
+      {/* Phase 32 -- Product Information Architecture, Part 1/2/6: title
+          matches the new top-level nav destination ("My Startups",
+          plural -- TopNav.tsx) exactly, and the subtitle no longer says
+          "verified as a member of." Membership itself was never actually
+          verification-gated for the common case (a founder graduating
+          their own modeled idea is granted access immediately, self-
+          approved -- see _ensure_graduation_membership() in
+          app/database/db.py); the old copy overstated that as a
+          precondition for every startup here, conflating "you have a
+          private workspace" with "SIE independently verified you" --
+          exactly the distinction Part 1 requires never be blurred.
+          Verification is now its own, separately-shown trust state (see
+          FounderStartupWorkspaceView.tsx's own trust badge). */}
       <PageHeader
-        title="My Startup"
-        subtitle="Your private command center for the startups you've been verified as a member of."
+        title="My Startups"
+        subtitle="Your private command center for the startups you're building."
       />
 
       {loadState === "loading" ? (
@@ -107,10 +115,12 @@ function EmptyState() {
         No startups yet
       </h2>
 
-      <p className="mx-auto mt-3 max-w-md text-sm text-text-secondary">
-        Founder Workspace unlocks once you&rsquo;re a verified member of a
-        startup on SIE. If your company hasn&rsquo;t been analyzed yet,
-        start there and claim it from its new Startup Profile.
+      <p className="mx-auto mt-3 max-w-md text-base leading-7 text-text-secondary">
+        Your Founder Workspace opens once you&rsquo;re managing a startup on
+        SIE — by turning a modeled idea into one, or by claiming a company
+        that&rsquo;s already been analyzed. If your company hasn&rsquo;t
+        been analyzed yet, start there and claim it from its new Startup
+        Profile.
       </p>
 
       {/* Phase 15 -- Founder Beta Surface Audit, Part 15/24: swapped
@@ -123,14 +133,14 @@ function EmptyState() {
       <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
         <Link
           href="/analyze"
-          className="rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-hover"
+          className="rounded-lg bg-primary px-5 py-2.5 text-base font-semibold text-white transition-colors hover:bg-primary-hover"
         >
           Analyze a startup
         </Link>
 
         <Link
           href="/search"
-          className="rounded-lg border border-border px-4 py-2.5 text-sm font-semibold text-text-secondary transition-colors hover:border-primary hover:text-primary"
+          className="rounded-lg border border-border px-5 py-2.5 text-base font-semibold text-text-secondary transition-colors hover:border-primary hover:text-primary"
         >
           Discover Startups
         </Link>
@@ -148,10 +158,10 @@ function MembershipGrid({
 
   return (
     <div>
-      <p className="mb-4 text-sm text-text-secondary">
+      <p className="mb-4 text-base text-text-secondary">
         {isSingle
-          ? "You have one verified startup."
-          : `You have ${memberships.length} verified startups. Choose one to enter its workspace.`}
+          ? "You're managing one startup."
+          : `You're managing ${memberships.length} startups. Choose one to enter its workspace.`}
       </p>
 
       <div className="grid gap-4 sm:grid-cols-2">

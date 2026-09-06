@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
+import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import BaseCard from "@/components/ui/BaseCard";
 import { SPSRing } from "@/components/sps";
 import SPSHistory from "@/components/startup/SPSHistory";
@@ -158,9 +159,19 @@ export default function FounderStartupWorkspaceView({
 
   return (
     <div className="space-y-8">
+      {/* Phase 32, Part 7: matches the directive's own second worked
+          example ("My Startups / ClaimPilot") -- a founder with several
+          startups needs to know which one they're in without re-reading
+          the H1 every time. */}
+      <Breadcrumbs
+        items={[
+          { label: "My Startups", href: "/founder" },
+          { label: canonical_name },
+        ]}
+      />
       <PageHeader
         title={canonical_name}
-        subtitle="Founder Workspace — private to verified members. Public intelligence for this startup is unaffected by anything shown here."
+        subtitle="Founder Workspace — private to you and your team. Public intelligence for this startup is unaffected by anything shown here."
         action={
           <div className="flex flex-wrap items-center gap-2">
             <Link
@@ -179,24 +190,51 @@ export default function FounderStartupWorkspaceView({
         }
       />
 
-      {/* Phase 31 -- Venture -> Startup Graduation V1, Part 11. One
-          restrained acknowledgment, never repeated elsewhere on this
-          page -- present only when this startup was actually created via
-          graduation (see get_venture_graduation_by_startup()'s own
-          docstring in app/database/db.py). Links back to the source
-          venture's own history, never duplicating or migrating it here. */}
-      {graduated_from_venture ? (
-        <p className="text-sm text-text-muted">
-          Created from your{" "}
-          <Link
-            href={`/idea-lab/${graduated_from_venture.venture_id}`}
-            className="font-semibold text-primary hover:text-primary-hover"
-          >
-            {graduated_from_venture.venture_name}
-          </Link>{" "}
-          venture.
-        </p>
-      ) : null}
+      {/* Phase 32 -- Product Information Architecture + Seamless User
+          Journey, Part 1/5. Trust state, shown honestly and explicitly,
+          replacing the old subtitle's "private to verified members" --
+          that language implied every workspace here required an
+          independent SIE review to reach, which was never actually true
+          for the common path: a founder who graduates their own modeled
+          venture is granted this workspace immediately, self-approved,
+          with zero human review (see _ensure_graduation_membership() in
+          app/database/db.py) -- that is a real, legitimate way to reach
+          a private workspace, just not the same claim as "SIE verified
+          your relationship to this company." graduated_from_venture
+          (already returned by GET /founder/startups/{id}, unchanged) is
+          the one reliable, zero-new-schema signal for which case this
+          is: present only when a venture_graduations row exists, which
+          only ever happens via that exact self-approved path. No new
+          endpoint, no new column, no access-control change -- honest
+          labeling of a distinction that already existed in the data. */}
+      <div className="flex flex-wrap items-center gap-3">
+        {graduated_from_venture ? (
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-muted px-3 py-1 text-sm font-semibold text-text-secondary">
+            Founder-managed
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-success-soft px-3 py-1 text-sm font-semibold text-success">
+            ✓ Verified
+          </span>
+        )}
+
+        {graduated_from_venture ? (
+          <p className="text-sm text-text-secondary">
+            Created from your{" "}
+            <Link
+              href={`/idea-lab/${graduated_from_venture.venture_id}`}
+              className="font-semibold text-primary hover:text-primary-hover"
+            >
+              {graduated_from_venture.venture_name}
+            </Link>{" "}
+            venture — self-reported, not yet independently reviewed by SIE.
+          </p>
+        ) : (
+          <p className="text-sm text-text-secondary">
+            SIE has confirmed your relationship to this company.
+          </p>
+        )}
+      </div>
 
       {!methodology ? (
         <NotYetAnalyzed canonicalName={canonical_name} reanalyzeHref={reanalyzeHref} />
@@ -361,13 +399,13 @@ function OverviewSection({
           </h2>
 
           {metaParts.length > 0 ? (
-            <p className="mt-1 text-sm text-text-muted">
+            <p className="mt-1 text-sm text-text-secondary">
               {metaParts.join(" · ")}
             </p>
           ) : null}
 
           {methodology.executive_coaching_summary ? (
-            <p className="mt-4 max-w-prose text-sm leading-6 text-text-secondary">
+            <p className="mt-4 max-w-prose text-base leading-7 text-text-secondary">
               {methodology.executive_coaching_summary}
             </p>
           ) : null}
@@ -407,7 +445,7 @@ function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysi
   if (scored.length === 0) {
     return (
       <BaseCard className="p-6">
-        <p className="text-sm text-text-muted">
+        <p className="text-sm text-text-secondary">
           Not enough evidence yet to identify strengths or priorities.
         </p>
       </BaseCard>
@@ -427,8 +465,16 @@ function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysi
 
   return (
     <div className="grid gap-6 lg:grid-cols-2">
+      {/* Phase 31C-C -- Global Visual Scale + Readability Correction,
+          Part 8/9: these are real <h2> section headings on the founder's
+          main dashboard, rendered at 12px -- the same hierarchy-inversion
+          class as the playbooks page's own headings. Matched to this
+          page's own "Current Standing"/"Action Plan" heading convention
+          (text-lg, regular case, text-primary) instead of the small-caps
+          eyebrow style, since these ARE the section titles, not a label
+          above one. */}
       <BaseCard className="p-6">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
+        <h2 className="text-lg font-semibold text-text-primary">
           What&rsquo;s Working
         </h2>
 
@@ -447,7 +493,7 @@ function PrioritiesSection({ methodology }: { methodology: SIEMethodologyAnalysi
       </BaseCard>
 
       <BaseCard className="p-6">
-        <h2 className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
+        <h2 className="text-lg font-semibold text-text-primary">
           Needs Attention
         </h2>
 
@@ -484,8 +530,8 @@ function PillarHighlight({
   return (
     <div>
       <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold text-text-primary">{pillar.label}</p>
-        <span className={["text-sm font-bold", scoreClassName].join(" ")}>
+        <p className="text-base font-semibold text-text-primary">{pillar.label}</p>
+        <span className={["text-base font-bold", scoreClassName].join(" ")}>
           {(pillar.analysis.score as number).toFixed(1)} / 10
         </span>
       </div>
@@ -493,16 +539,16 @@ function PillarHighlight({
       <ul className="mt-1.5 space-y-1">
         {items.length > 0 ? (
           items.slice(0, 2).map((item, index) => (
-            <li key={index} className="flex gap-2 text-sm text-text-secondary">
+            <li key={index} className="flex gap-2 text-base leading-7 text-text-secondary">
               <span
                 aria-hidden="true"
-                className={["mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", dotClassName].join(" ")}
+                className={["mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full", dotClassName].join(" ")}
               />
               <span>{item}</span>
             </li>
           ))
         ) : (
-          <li className="text-sm text-text-muted">{emptyLabel}</li>
+          <li className="text-base text-text-secondary">{emptyLabel}</li>
         )}
       </ul>
     </div>

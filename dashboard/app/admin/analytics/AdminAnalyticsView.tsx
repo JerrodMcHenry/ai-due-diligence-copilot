@@ -171,7 +171,7 @@ export default function AdminAnalyticsView() {
         </div>
       )}
 
-      <p className="mt-6 text-xs text-text-muted">
+      <p className="mt-6 text-sm text-text-secondary">
         Test/dev data (zztest_-prefixed users) is excluded from every metric above. See
         docs/product/PRODUCT_ANALYTICS_V1.md for exact definitions and known limitations.
       </p>

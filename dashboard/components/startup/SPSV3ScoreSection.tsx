@@ -56,7 +56,7 @@ function LimitedScore({ sps }: { sps: SPSV3Assessment }) {
   return (
     <div className="w-full max-w-xs text-center">
       <p className="text-sm font-semibold text-text-primary">Limited public assessment</p>
-      <p className="mt-1 text-xs text-text-muted">
+      <p className="mt-1 text-sm text-text-secondary">
         Not enough public evidence yet for a full Startup Power Score -- here&rsquo;s what we could
         responsibly assess.
       </p>
@@ -95,7 +95,7 @@ function InsufficientScore({ sps }: { sps: SPSV3Assessment }) {
   return (
     <div className="w-full max-w-xs text-center">
       <p className="text-sm font-semibold text-text-primary">Not enough evidence yet</p>
-      <p className="mt-1 text-xs text-text-muted">
+      <p className="mt-1 text-sm text-text-secondary">
         We don&rsquo;t have enough public evidence yet to evaluate this company&rsquo;s fundamentals.
       </p>
       <CoverageConfidenceBadges sps={sps} />

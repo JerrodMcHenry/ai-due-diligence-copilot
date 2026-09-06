@@ -2111,6 +2111,7 @@ def get_my_startup_claim_status(
     return StartupClaimStatus(
         claim_id=status["id"],
         status=status["status"],
+        verification_method=status["verification_method"],
         submitted_at=status["submitted_at"],
         reviewed_at=status["reviewed_at"],
         rejection_reason=status["rejection_reason"],

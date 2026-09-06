@@ -14,8 +14,13 @@ export type FieldProps = {
   children: ReactNode;
 };
 
+// Phase 31C-B, Part 3/13: form input text bumped text-sm -> text-base
+// (14px -> 16px, the directive's preferred size for form input text) --
+// a single shared primitive change, so every Input/Textarea in the app
+// gets it at once. Existing py-3 padding already leaves enough room; no
+// layout regression.
 export const FIELD_CONTROL_CLASSES =
-  "w-full rounded-xl border bg-surface px-4 py-3 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus:ring-2 focus:ring-primary/20";
+  "w-full rounded-xl border bg-surface px-4 py-3 text-base text-text-primary outline-none transition-colors placeholder:text-text-muted focus:ring-2 focus:ring-primary/20";
 
 export function fieldBorderClasses(hasError: boolean): string {
   return hasError
@@ -30,9 +35,11 @@ export default function Field({ id, label, help, error, required, children }: Fi
   return (
     <div>
       {label ? (
+        // Part 3: form labels called out explicitly (14-16px), not
+        // "genuinely nonessential compact metadata" -- bumped one step.
         <label
           htmlFor={id}
-          className="text-xs font-semibold uppercase tracking-wide text-text-secondary"
+          className="text-sm font-semibold uppercase tracking-wide text-text-secondary"
         >
           {label}
           {required ? <span className="text-danger"> *</span> : null}
@@ -42,7 +49,12 @@ export default function Field({ id, label, help, error, required, children }: Fi
       <div className={label ? "mt-2" : undefined}>{children}</div>
 
       {help && !error ? (
-        <p id={helpId} className="mt-1.5 text-xs text-text-muted">
+        // Phase 31C-B -- Global Typography & Readability Correction,
+        // Part 3/13: form help text is meaningful explanatory copy (it
+        // tells a founder what to actually type), not metadata -- bumped
+        // from text-xs/text-muted to text-sm/text-secondary sitewide,
+        // since every Input/Textarea in the app renders through here.
+        <p id={helpId} className="mt-1.5 text-sm leading-5 text-text-secondary">
           {help}
         </p>
       ) : null}
