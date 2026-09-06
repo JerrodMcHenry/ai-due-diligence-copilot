@@ -501,21 +501,32 @@ export default function MissionsSection({
       ) : null}
 
       {primaryMission ? (
-        <BaseCard variant="raised" className="space-y-4 p-6">
+        // Phase 33 -- Idea Workspace Information Architecture & Founder
+        // Operating Loop, Part 7 (CRITICAL duplication fix). This card
+        // used to render "raised" -- the same visual weight as the old
+        // top-of-page "What should I do next?" card, which meant a
+        // founder with an active action saw the identical milestone
+        // announced twice, at equal prominence, in two places. "Raised"
+        // is now reserved for the one PrimaryCommandCard that actually
+        // claims "this is what to do" (see that component and
+        // NextMoves.tsx's own matching change); this stays a normal-
+        // weight card, since its job here is tracking/managing the
+        // action (start/complete/dismiss/reflect), not recommending it.
+        <BaseCard className="space-y-4 p-6">
           {expandedMissionId !== primaryMission.id ? (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your next action</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Track this action</p>
               <p className="text-lg font-bold text-text-primary">{primaryMission.title}</p>
               {primaryMission.description ? (
                 <p className="text-base leading-7 text-text-secondary">{primaryMission.description}</p>
               ) : null}
               <Button type="button" onClick={() => setExpandedMissionId(primaryMission.id)}>
-                Start Action
+                Manage this action
               </Button>
             </>
           ) : (
             <>
-              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Current action</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">In progress</p>
               <p className="text-lg font-bold text-text-primary">{primaryMission.title}</p>
 
               {/* Founder Loop V2, Section 5: prefers the milestone-specific
@@ -796,15 +807,8 @@ function ValidationUpdateForm({
       <div className="space-y-3">
         <p className="text-sm font-semibold text-text-primary">Your model changed</p>
         <p className="text-sm text-text-secondary">
-          Modeled VPS:{" "}
-          <span className="font-semibold text-text-primary">
-            {result.beforeVps !== null ? result.beforeVps.toFixed(1) : "—"} →{" "}
-            {result.afterVps !== null ? result.afterVps.toFixed(1) : "—"}
-          </span>
-        </p>
-        <p className="text-sm text-text-secondary">
-          Your model changed because you updated your own founder-reported observations — not because you
-          completed a mission.
+          Your model changed because you recorded real evidence — your own founder-reported observations — not
+          because you completed a mission or improved a score.
         </p>
         <CategoryChangesList changes={categoryChanges} heading="Why" />
       </div>
@@ -814,7 +818,8 @@ function ValidationUpdateForm({
   return (
     <div className="space-y-3">
       <p className="text-sm text-text-secondary">
-        Would you like to update your venture model with what you actually observed?
+        Would you like to update your venture model with what you actually observed? These numbers become
+        evidence, not just another assumption.
       </p>
 
       <div className="grid gap-3 sm:grid-cols-2">

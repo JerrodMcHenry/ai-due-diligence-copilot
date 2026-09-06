@@ -13,6 +13,7 @@
 import { hasCommercialScale } from "../lib/simulate/hasCommercialScale.ts";
 import { diffScenarioAssumptions } from "../lib/simulate/assumptionDiff.ts";
 import { computeDirectConsequences } from "../lib/simulate/directConsequences.ts";
+import { buildScenarioInsights } from "../lib/simulate/scenarioInsights.ts";
 import { getWhatIfScenarios } from "../components/idea-lab/whatIfScenarios.ts";
 
 function expect(condition: boolean, message: string): void {
@@ -154,6 +155,106 @@ function test_direct_consequences_never_predicts_anything_beyond_arithmetic(): v
   expect(text.includes("if") && text.includes("modeled"), 'Every consequence must be framed as an "if/then... modeled" scenario calculation');
 }
 
+// --- buildScenarioInsights (Phase 34A) --------------------------------------
+
+function emptyVpsResult(overrides: Partial<{
+  categories: { key: string; label: string; score: number | null; basis: string[] }[];
+  validation_gaps: string[];
+  next_milestones: string[];
+}> = {}) {
+  return {
+    categories: overrides.categories ?? [],
+    validation_gaps: overrides.validation_gaps ?? [],
+    next_milestones: overrides.next_milestones ?? [],
+  };
+}
+
+function test_scenario_insights_never_contains_a_score_field(): void {
+  // Phase 34A's own core requirement: the What-If rebuild must never
+  // expose a VPS number or a per-category numeric score anywhere in its
+  // output shape -- only qualitative sentences.
+  const current = emptyVpsResult({ categories: [{ key: "validation", label: "Validation", score: null, basis: [] }] });
+  const modified = emptyVpsResult({
+    categories: [{ key: "validation", label: "Validation", score: 6.5, basis: ["5 paying customers reported"] }],
+  });
+  const insights = buildScenarioInsights(current, modified);
+  const serialized = JSON.stringify(insights);
+  expect(!/\d\.\d/.test(serialized), `Expected no decimal score anywhere in scenario insights, got: ${serialized}`);
+  expect(!serialized.toLowerCase().includes("vps"), `Expected no "vps" anywhere in scenario insights, got: ${serialized}`);
+}
+
+function test_scenario_insights_a_newly_scored_category_counts_as_strengthened(): void {
+  const current = emptyVpsResult({ categories: [{ key: "validation", label: "Validation", score: null, basis: [] }] });
+  const modified = emptyVpsResult({
+    categories: [{ key: "validation", label: "Validation", score: 6.5, basis: ["5 paying customers reported"] }],
+  });
+  const insights = buildScenarioInsights(current, modified);
+  expect(insights.strengthened.length === 1, `Expected exactly 1 strengthened category, got ${insights.strengthened.length}`);
+  expect(insights.strengthened[0].label === "Validation", `Expected Validation, got "${insights.strengthened[0].label}"`);
+  expect(insights.strengthened[0].reason === "5 paying customers reported", `Expected the real basis sentence, got "${insights.strengthened[0].reason}"`);
+}
+
+function test_scenario_insights_a_lower_score_counts_as_weakened_not_strengthened(): void {
+  // The directive's own worked bug report: adding paying customers can,
+  // through the scoring engine's own renormalization, leave a category
+  // (or the aggregate) lower than before -- this must classify as
+  // "weakened," never silently dropped or miscounted as an improvement.
+  const current = emptyVpsResult({
+    categories: [{ key: "gtm_feasibility", label: "Reaching Customers", score: 7.0, basis: ["Assumed CAC exceeds nothing yet"] }],
+  });
+  const modified = emptyVpsResult({
+    categories: [{ key: "gtm_feasibility", label: "Reaching Customers", score: 4.0, basis: ["Assumed CAC exceeds the assumed price point"] }],
+  });
+  const insights = buildScenarioInsights(current, modified);
+  expect(insights.strengthened.length === 0, "A lower score must never be classified as strengthened");
+  expect(insights.weakened.length === 1, `Expected exactly 1 weakened category, got ${insights.weakened.length}`);
+  expect(insights.weakened[0].label === "Reaching Customers", `Expected Reaching Customers, got "${insights.weakened[0].label}"`);
+}
+
+function test_scenario_insights_still_unknown_combines_null_categories_and_validation_gaps(): void {
+  const current = emptyVpsResult();
+  const modified = emptyVpsResult({
+    categories: [
+      { key: "founder_readiness", label: "Founder Readiness", score: null, basis: [] },
+      { key: "validation", label: "Validation", score: 3.0, basis: ["3 customer interviews reported"] },
+    ],
+    validation_gaps: ["No revenue reported yet."],
+  });
+  const insights = buildScenarioInsights(current, modified);
+  expect(insights.stillUnknown.includes("Founder Readiness"), `Expected "Founder Readiness" in stillUnknown, got: ${insights.stillUnknown.join(", ")}`);
+  expect(insights.stillUnknown.includes("No revenue reported yet."), `Expected the validation gap sentence, got: ${insights.stillUnknown.join(", ")}`);
+  // Validation is scored (not null), so its own label must not ALSO
+  // appear in stillUnknown alongside its real gap sentence.
+  expect(!insights.stillUnknown.includes("Validation"), "A scored category must not appear in stillUnknown by label");
+}
+
+function test_scenario_insights_new_questions_is_a_set_diff_over_next_milestones(): void {
+  const current = emptyVpsResult({ next_milestones: ["Interview 20+ target customers to validate the problem is real."] });
+  const modified = emptyVpsResult({
+    next_milestones: [
+      "Interview 20+ target customers to validate the problem is real.",
+      "Prove customer acquisition works repeatably beyond founder-led sales or referrals.",
+    ],
+  });
+  const insights = buildScenarioInsights(current, modified);
+  expect(insights.newQuestions.length === 1, `Expected exactly 1 new question, got ${insights.newQuestions.length}`);
+  expect(
+    insights.newQuestions[0] === "Prove customer acquisition works repeatably beyond founder-led sales or referrals.",
+    `Unexpected new question: "${insights.newQuestions[0]}"`
+  );
+}
+
+function test_scenario_insights_identical_result_produces_nothing(): void {
+  const result = emptyVpsResult({
+    categories: [{ key: "validation", label: "Validation", score: 6.0, basis: ["reported"] }],
+    next_milestones: ["Define a primary customer-acquisition strategy."],
+  });
+  const insights = buildScenarioInsights(result, { ...result });
+  expect(insights.strengthened.length === 0, "Identical categories must produce no strengthened entries");
+  expect(insights.weakened.length === 0, "Identical categories must produce no weakened entries");
+  expect(insights.newQuestions.length === 0, "Identical next_milestones must produce no new questions");
+}
+
 const TESTS = [
   test_has_commercial_scale_matches_the_original_whatifscenarios_threshold,
   test_what_if_scenarios_still_use_the_shared_threshold,
@@ -164,6 +265,12 @@ const TESTS = [
   test_direct_consequences_computes_mrr_and_arr_when_valid,
   test_direct_consequences_is_empty_when_price_or_customers_unknown,
   test_direct_consequences_never_predicts_anything_beyond_arithmetic,
+  test_scenario_insights_never_contains_a_score_field,
+  test_scenario_insights_a_newly_scored_category_counts_as_strengthened,
+  test_scenario_insights_a_lower_score_counts_as_weakened_not_strengthened,
+  test_scenario_insights_still_unknown_combines_null_categories_and_validation_gaps,
+  test_scenario_insights_new_questions_is_a_set_diff_over_next_milestones,
+  test_scenario_insights_identical_result_produces_nothing,
 ];
 
 function main(): void {

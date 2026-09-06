@@ -26,10 +26,6 @@ type WeeklyReviewProps = {
   onStartMission: (milestoneText: string, suggestion: { relatedCategory: string; missionType: MissionType }) => void;
 };
 
-function formatVps(value: number | null): string {
-  return value === null ? "—" : value.toFixed(1);
-}
-
 export default function WeeklyReview({
   history,
   isLoadingHistory,
@@ -117,8 +113,6 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
   if (whatYouDid.learningsRecorded > 0) didItems.push(`${whatYouDid.learningsRecorded} learning${whatYouDid.learningsRecorded === 1 ? "" : "s"} recorded`);
   if (whatYouDid.modelUpdates > 0) didItems.push(`${whatYouDid.modelUpdates} model update${whatYouDid.modelUpdates === 1 ? "" : "s"}`);
 
-  const vpsMaterialChange = vpsChange && vpsChange.before !== null && vpsChange.after !== null && Math.abs(vpsChange.after - vpsChange.before) >= 0.05;
-
   return (
     <div className="mt-3 space-y-5">
       {didItems.length > 0 ? (
@@ -147,22 +141,19 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
         </section>
       ) : null}
 
+      {/* Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and
+          Decision Support, Part 8: the "Venture Potential Score X → Y"
+          line is gone. `vpsChange !== null` is still used as a plain
+          boolean signal ("a model update happened this week") to decide
+          whether to say so at all -- the ASSUMPTION-level before/after
+          values below (already real, plain facts like "Paying customers:
+          0 → 5," never a score) are the actual content. */}
       {vpsChange || assumptionChanges.length > 0 ? (
         <section>
           <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">What changed</h3>
           <div className="mt-1.5 space-y-1.5">
-            {vpsChange ? (
-              <p className="flex flex-wrap items-baseline gap-x-2 text-sm">
-                <span className="text-text-secondary">Venture Potential Score</span>
-                <span className="font-semibold text-text-primary">
-                  {formatVps(vpsChange.before)} <span aria-hidden="true" className="text-text-muted">→</span> {formatVps(vpsChange.after)}
-                </span>
-              </p>
-            ) : null}
-            {vpsChange && !vpsMaterialChange && assumptionChanges.length > 0 ? (
-              <p className="text-sm text-text-secondary">
-                Your venture model changed, while Venture Potential Score remained {formatVps(vpsChange.after)}.
-              </p>
+            {vpsChange && assumptionChanges.length === 0 ? (
+              <p className="text-sm text-text-secondary">Your venture model was updated this week.</p>
             ) : null}
             {assumptionChanges.map((change) => (
               <p key={change.field_path} className="flex flex-wrap items-baseline gap-x-2 text-sm">
@@ -180,19 +171,18 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
         <section>
           <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Strongest movement</h3>
           {/* Part 8/15: neutral phrasing regardless of direction -- never
-              "declined"/"lost progress"; a downward movement reads as
-              "moved... after your assumptions changed," matching the
-              directive's own worked example verbatim. */}
+              "declined"/"lost progress." Phase 34A: no before/after score
+              numbers -- just which category moved and which direction. */}
           <p className="mt-1.5 text-sm text-text-secondary">
             {strongestMovement.direction === "positive" ? (
               <>
-                <span className="font-medium text-text-primary">{strongestMovement.label}</span> strengthened from{" "}
-                {strongestMovement.before.toFixed(1)} → {strongestMovement.after.toFixed(1)}.
+                <span className="font-medium text-text-primary">{strongestMovement.label}</span> strengthened this
+                week.
               </>
             ) : (
               <>
-                <span className="font-medium text-text-primary">{strongestMovement.label}</span> moved from{" "}
-                {strongestMovement.before.toFixed(1)} → {strongestMovement.after.toFixed(1)} after your assumptions changed.
+                <span className="font-medium text-text-primary">{strongestMovement.label}</span> changed after your
+                assumptions changed.
               </>
             )}
           </p>

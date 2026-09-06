@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
+import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 
 import CategoryChangesList from "./CategoryChangesList";
@@ -325,8 +326,8 @@ export default function CaptureWhatHappened({
       <BaseCard className="p-5">
         <h2 className="text-base font-semibold text-text-primary">What happened?</h2>
         <p className="mt-1 text-base leading-7 text-text-secondary">
-          Write it in your own words. This is saved exactly as you write it -- nothing here changes your Venture
-          Potential Score.
+          Write it in your own words. This is saved exactly as you write it -- nothing here changes your model
+          unless you choose to update it below.
         </p>
 
         <textarea
@@ -444,6 +445,17 @@ export default function CaptureWhatHappened({
                 const formatValue = (value: number | null) =>
                   value === null ? "Unknown" : isPrice ? `$${value.toLocaleString()}/month` : isPercent ? `${value}%` : value.toLocaleString();
 
+                // Phase 34A -- Remove VPS + Rebuild Idea Lab Around
+                // Evidence and Decision Support, Part 7. The exact same
+                // structural rule vps_scoring.py's own module docstring
+                // establishes (everything under assumptions.validation is
+                // a founder-REPORTED OBSERVATION; every other field is a
+                // MODELED ASSUMPTION) applied to each proposed signal, so
+                // the UI can honestly label which kind of change this is
+                // -- no new classification logic, just reading the same
+                // fieldPath string this signal already carries.
+                const isEvidence = signal.fieldPath?.startsWith("validation.") ?? false;
+
                 return (
                   <li key={signal.id} className="flex items-start gap-2.5 rounded-lg border border-border bg-surface p-3">
                     <input
@@ -454,7 +466,12 @@ export default function CaptureWhatHappened({
                       className="mt-0.5 size-4 shrink-0 accent-primary"
                     />
                     <label htmlFor={`signal-${signal.id}`} className="min-w-0 cursor-pointer">
-                      <span className="block text-sm font-medium text-text-primary">{signal.label}</span>
+                      <span className="flex flex-wrap items-center gap-1.5">
+                        <span className="text-sm font-medium text-text-primary">{signal.label}</span>
+                        <Badge tone={isEvidence ? "success" : "neutral"}>
+                          {isEvidence ? "Evidence" : "Assumption update"}
+                        </Badge>
+                      </span>
                       <span className="mt-0.5 block text-xs text-text-muted">from: &ldquo;{signal.sourceQuote}&rdquo;</span>
                       <span className="mt-1 flex items-baseline gap-1.5 text-xs">
                         <span className="font-medium text-text-secondary">{fieldPathLabel(signal.fieldPath)}:</span>
@@ -494,23 +511,9 @@ export default function CaptureWhatHappened({
       {modelChangeResult ? (
         <div className="mt-4 rounded-lg border border-primary/20 bg-primary/5 p-3">
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What changed</p>
-          <p className="mt-1.5 flex items-baseline gap-2 text-sm">
-            <span className="text-text-secondary">Venture Potential Score</span>
-            <span className="font-semibold text-text-primary">
-              {modelChangeResult.beforeVps !== null ? modelChangeResult.beforeVps.toFixed(1) : "—"}
-            </span>
-            <span aria-hidden="true" className="text-text-muted">→</span>
-            <span className="font-semibold text-text-primary">
-              {modelChangeResult.afterVps !== null ? modelChangeResult.afterVps.toFixed(1) : "—"}
-            </span>
+          <p className="mt-1.5 text-sm text-text-secondary">
+            Your model was updated with this evidence.
           </p>
-          {modelChangeResult.beforeVps !== null &&
-          modelChangeResult.afterVps !== null &&
-          Math.abs(modelChangeResult.afterVps - modelChangeResult.beforeVps) < 0.05 ? (
-            <p className="mt-1 text-sm text-text-secondary">
-              Your model was updated. Venture Potential Score did not materially change.
-            </p>
-          ) : null}
           {modelChangeCategories && modelChangeCategories.length > 0 ? (
             <div className="mt-3">
               <CategoryChangesList changes={modelChangeCategories} />
@@ -555,9 +558,13 @@ export default function CaptureWhatHappened({
       {/* Phase 26, Part 7: the founder's orientation is never lost after
           a capture -- shown regardless of outcome class, and unchanged
           unless the founder explicitly updated the model above (in which
-          case IdeaLabNextStep above this component already reflects
-          whatever the resolver now says; this line simply keeps that
-          fact visible without the founder scrolling back up). */}
+          case PrimaryCommandCard above this component already reflects
+          whatever the current focus now is; this line simply keeps that
+          fact visible without the founder scrolling back up). Phase 33
+          live acceptance test: the caller now passes the same
+          primaryMissionTitle ?? primaryMilestoneText value
+          PrimaryCommandCard itself renders, so this line can never name a
+          different "current focus" than the card above it does. */}
       {currentPriorityText ? (
         <p className="mt-4 text-sm text-text-secondary">
           <span className="font-medium text-text-primary">Your current focus:</span> {currentPriorityText}

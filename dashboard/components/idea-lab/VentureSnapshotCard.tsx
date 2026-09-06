@@ -98,38 +98,11 @@ export default function VentureSnapshotCard({ snapshot, asEmbeddedPreview = fals
           </section>
         ) : null}
 
-        {snapshot.vps !== null ? (
-          <section>
-            <SectionTag className="text-xs font-semibold uppercase tracking-wide text-text-muted">Venture Potential — optional</SectionTag>
-            <div className="mt-2 flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-primary">{snapshot.vps.toFixed(1)}</span>
-              <span className="text-sm text-text-secondary">/ 10</span>
-            </div>
-            {snapshot.vps_categories && snapshot.vps_categories.length > 0 ? (
-              <ul className="mt-3 space-y-1.5">
-                {snapshot.vps_categories
-                  .filter((c) => c.score !== null)
-                  .map((c) => (
-                    <li key={c.key} className="flex items-center justify-between text-xs text-text-secondary">
-                      <span>{c.label}</span>
-                      <span className="font-medium text-text-primary">{c.score!.toFixed(1)}</span>
-                    </li>
-                  ))}
-              </ul>
-            ) : null}
-            {/* Global readability audit: bumped again, from text-xs to
-                text-sm (Phase 29B had already bumped it once, from an
-                arbitrary 11px) -- this disclaimer is trust-framing
-                language a public viewer (often a third party like an
-                investor) needs to actually read clearly, not tertiary
-                metadata that 12px is meant for. */}
-            <p className="mt-3 text-base leading-7 text-text-secondary">
-              A model-based assessment from the information provided to SIE — not a company-quality, investment,
-              or success prediction.
-            </p>
-          </section>
-        ) : null}
-
+        {/* Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and
+            Decision Support, Part 2: the "Venture Potential" score section
+            is gone -- see this component's own props docstring; the
+            "Evidence so far" / "Proving next" sections above already tell
+            a recipient more, honestly, than a single number did. */}
         <div className="border-t border-border pt-4 text-center">
           <p className="text-xs text-text-muted">Built with SIE</p>
         </div>

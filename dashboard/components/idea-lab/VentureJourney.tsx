@@ -22,7 +22,13 @@ import type { VentureAssumptions } from "@/types";
 // unchanged; only the presentation changed, from a forward-only stepper
 // to a single current-state statement that can equally describe a
 // venture moving backward as new evidence complicates an assumption.
-function manualStepIndex(stage: string | null): number {
+// Phase 33 -- Idea Workspace Information Architecture & Founder Operating
+// Loop, Part 5: exported so VentureWorkspace.tsx's own compact header
+// status line ("Building · Updated Aug 31") can resolve the
+// exact same state label this component's own full pill+description
+// already uses, via the same resolveVentureState() call, rather than
+// re-deriving "what stage is this" a second, subtly different way.
+export function manualStepIndex(stage: string | null): number {
   if (!stage) {
     return -1;
   }

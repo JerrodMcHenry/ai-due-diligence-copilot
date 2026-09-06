@@ -48,9 +48,16 @@ export default function NextMoves({ milestones, onMakeMission, missionedMileston
   const topThree = remaining.slice(0, 3);
 
   return (
-    <BaseCard variant="raised" className="p-6">
+    // Phase 33 -- Idea Workspace Information Architecture & Founder
+    // Operating Loop, Part 10: renamed "Your next N moves" -> "What to
+    // consider next" -- this card is now explicitly SECONDARY to the
+    // Primary Command Card above it (PrimaryCommandCard.tsx) on Overview;
+    // the old heading read as a second "here's what to do" claim
+    // competing with the primary one. Not raised anymore either, for the
+    // same reason -- "raised" is now reserved for the one primary card.
+    <BaseCard className="p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-        Your next {topThree.length === 1 ? "move" : `${topThree.length} moves`}
+        What to consider next
       </p>
 
       <ol className="mt-3 space-y-3">

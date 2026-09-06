@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useAuth } from "@clerk/nextjs";
+import { useState } from "react";
 
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
@@ -17,7 +16,6 @@ import {
   ToggleField,
 } from "@/components/idea-lab/AssumptionFields";
 
-import { compareVentureScenarios } from "@/lib/api";
 import { draftToAssumptions, VENTURE_STAGES } from "@/types";
 import type { DraftProvenance, VentureAssumptions, VentureDraft } from "@/types";
 
@@ -194,17 +192,6 @@ export default function VentureDraftReview({
         howItMakesMoney={businessModel}
         stillFiguringOut={defaultStillFiguringOut()}
       />
-
-      {/* Build V3, Part 14: a restrained, honestly-framed preview --
-          reuses the SAME stateless POST /ventures/scenario-compare every
-          "Recalculate (preview)"/"What If" call in the workspace already
-          uses (compute_vps() itself is completely untouched), just with
-          current == modified so it returns one real score for the
-          founder's current review-time assumptions. Nothing here is
-          persisted; if the founder edits a field below, the preview
-          recomputes from the updated assumptions after a short pause
-          (see VpsPreview's own debounce) rather than on every keystroke. */}
-      <VpsPreview assumptions={assumptions} />
 
       <Disclosure summary="Review and edit the full model" defaultOpen={false}>
         <div className="space-y-3">
@@ -508,87 +495,6 @@ export default function VentureDraftReview({
         </div>
       </div>
     </div>
-  );
-}
-
-// Build V3, Part 14. Deliberately NOT VPSResultPanel (that panel's
-// full category breakdown, "Path to Stronger," and playbook links are
-// squarely a post-creation, Learn-adjacent surface -- showing all of
-// that before a venture even exists would compete with the review flow
-// and risk exactly the "optimize the create flow around maximizing VPS"
-// framing Part 14 explicitly forbids). This shows one honestly-framed
-// number and nothing to act on.
-function VpsPreview({ assumptions }: { assumptions: VentureAssumptions }) {
-  const { getToken } = useAuth();
-  const [result, setResult] = useState<{ vps: number | null; sole_uncorroborated_category: boolean } | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    // Debounced, not on every keystroke -- Part 9's progressive-
-    // disclosure spirit applies to network calls too, not just what's
-    // visible on screen. setIsLoading is deliberately only ever called
-    // from inside this callback (never synchronously in the effect body
-    // itself) -- react-hooks/set-state-in-effect flags the latter as a
-    // cascading-render risk.
-    const timer = setTimeout(async () => {
-      setIsLoading(true);
-      try {
-        const token = await getToken();
-        if (!token) {
-          if (!cancelled) setIsLoading(false);
-          return;
-        }
-        const response = await compareVentureScenarios(assumptions, assumptions, token);
-        if (!cancelled) setResult(response.current);
-      } catch (error) {
-        console.error("Failed to preview venture score:", error);
-        if (!cancelled) setResult(null);
-      } finally {
-        if (!cancelled) setIsLoading(false);
-      }
-    }, 500);
-
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
-  }, [assumptions, getToken]);
-
-  // Fails silently (no error banner) -- this preview is a nice-to-have
-  // during review, never a blocker: "Create Venture" works regardless of
-  // whether this call succeeds.
-  if (isLoading || !result || result.vps === null) {
-    return null;
-  }
-
-  return (
-    <BaseCard className="p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
-        Based on what we know so far
-      </p>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className="text-3xl font-bold text-primary">{result.vps.toFixed(1)}</span>
-        <span className="text-sm text-text-secondary">/ 10 · Venture Potential Score</span>
-      </div>
-      <p className="mt-2 text-xs text-text-secondary">
-        This reflects your current assumptions, not a verdict — it changes as you correct fields below
-        or add real evidence later. There&rsquo;s nothing here to maximize before creating your venture.
-      </p>
-      {/* Phase 29A, Part 13/14: same restrained note as the post-creation
-          panel (VPSResultPanel), reusing the same compute_vps()-reported
-          flag rather than a second copy of the aggregation rule. This is
-          exactly the case this phase's audit found: a bare idea with one
-          modeled category and no real evidence yet, where the score
-          intentionally sits at the neutral starting point. */}
-      {result.sole_uncorroborated_category ? (
-        <p className="mt-2 text-xs text-text-muted">
-          Right now this is based on a single, uncorroborated guess about your idea — that&rsquo;s why
-          it sits at the neutral starting point rather than higher or lower.
-        </p>
-      ) : null}
-    </BaseCard>
   );
 }
 

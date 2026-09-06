@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import BaseCard from "@/components/ui/BaseCard";
+import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import PlaybookLink from "@/components/playbooks/PlaybookLink";
 
@@ -23,6 +24,15 @@ type NextStepAction =
 
 type NextStepCardProps = {
   eyebrow?: string;
+  // Phase 33 -- Idea Workspace Information Architecture & Founder
+  // Operating Loop, Part 7. Optional, additive -- every existing caller
+  // (FounderStartupWorkspaceView, PitchDeckReviewView, and this file's
+  // own two other call sites in VentureWorkspace.tsx/PrimaryCommandCard)
+  // continues to render identically when omitted. Reuses the same Badge
+  // primitive every status pill in the app already uses -- this is
+  // presentation only, not a new state concept: the caller decides what
+  // (if anything) to label, this component doesn't infer it.
+  badge?: string;
   title: string;
   why?: string;
   primaryAction: NextStepAction;
@@ -59,6 +69,7 @@ function ActionButton({ action, variant }: { action: NextStepAction; variant: "p
 
 export default function NextStepCard({
   eyebrow = "What should I do next?",
+  badge,
   title,
   why,
   primaryAction,
@@ -68,7 +79,10 @@ export default function NextStepCard({
 }: NextStepCardProps) {
   return (
     <BaseCard variant="raised" className={["p-6", className].join(" ")}>
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{eyebrow}</p>
+      <div className="flex flex-wrap items-center gap-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{eyebrow}</p>
+        {badge ? <Badge tone="info">{badge}</Badge> : null}
+      </div>
       <p className="mt-1.5 text-xl font-bold text-text-primary">{title}</p>
       {/* Phase 31C-C, Part 5/9: this is THE primary recommendation
           explanation shown on the app's single most important card

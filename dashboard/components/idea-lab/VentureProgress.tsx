@@ -1,7 +1,7 @@
 import BaseCard from "@/components/ui/BaseCard";
 import Disclosure from "@/components/ui/Disclosure";
 
-import { formatHistoryDateGroupLabel, groupHistoryEventsByDate, formatVpsDelta } from "@/lib/journey/formatVentureHistory";
+import { formatHistoryDateGroupLabel, groupHistoryEventsByDate } from "@/lib/journey/formatVentureHistory";
 
 import type { VentureHistoryCategoryChange, VentureHistoryEvent, VentureHistoryResponse } from "@/types";
 
@@ -20,6 +20,15 @@ type VentureProgressProps = {
   history: VentureHistoryResponse | null;
   isLoading: boolean;
 };
+
+// Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and Decision
+// Support. Every caller that used to print a "before → after" score
+// number now needs a plain direction word instead -- reused by both the
+// summary card's "Strongest movement" line and CategoryChangesList below.
+function movementDirection(before: number | null, after: number | null): "strengthened" | "changed" {
+  if (before === null || after === null || after <= before) return "changed";
+  return "strengthened";
+}
 
 export default function VentureProgress({ history, isLoading }: VentureProgressProps) {
   if (isLoading || !history) {
@@ -47,11 +56,10 @@ export default function VentureProgress({ history, isLoading }: VentureProgressP
     <div className="space-y-3">
       <BaseCard className="p-5">
         <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your progress</p>
-        <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
-          <SummaryStat
-            label="Current VPS"
-            value={history.current_vps !== null ? history.current_vps.toFixed(1) : "—"}
-          />
+        {/* Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and
+            Decision Support, Part 2/8: "Current VPS" is gone -- three
+            real, non-score facts remain. */}
+        <div className="mt-3 grid grid-cols-3 gap-x-4 gap-y-3">
           <SummaryStat label="Started" value={formatHistoryDateGroupLabel(history.started_at, now)} />
           <SummaryStat label="Actions completed" value={String(history.actions_completed)} />
           <SummaryStat label="Model updates" value={String(history.model_updates_count)} />
@@ -59,11 +67,18 @@ export default function VentureProgress({ history, isLoading }: VentureProgressP
 
         {history.strongest_improvement ? (
           <div className="mt-4 border-t border-border pt-3">
-            <p className="text-xs font-semibold text-text-muted">Strongest improvement</p>
+            <p className="text-xs font-semibold text-text-muted">Strongest movement</p>
             <p className="mt-1 text-sm font-medium text-text-primary">
               {history.strongest_improvement.label}{" "}
-              <span className="text-success">
-                {formatVpsDelta(history.strongest_improvement.before, history.strongest_improvement.after)}
+              <span
+                className={
+                  movementDirection(history.strongest_improvement.before, history.strongest_improvement.after) ===
+                  "strengthened"
+                    ? "text-success"
+                    : "text-text-secondary"
+                }
+              >
+                {movementDirection(history.strongest_improvement.before, history.strongest_improvement.after)}
               </span>
             </p>
           </div>
@@ -114,7 +129,7 @@ function CategoryChangesList({ changes }: { changes: VentureHistoryCategoryChang
                 isImprovement ? "font-semibold text-success" : isDecline ? "font-semibold text-danger" : "font-semibold text-text-primary"
               }
             >
-              {formatVpsDelta(change.before, change.after)}
+              {isImprovement ? "strengthened" : isDecline ? "weakened" : "changed"}
             </span>
           </li>
         );
@@ -126,17 +141,15 @@ function CategoryChangesList({ changes }: { changes: VentureHistoryCategoryChang
 // Founder Loop V2, Section 14/15's "no score chasing, no lost-XP
 // framing" applied here directly: a model_updated event is always
 // introduced the same way regardless of direction -- "Your model changed
-// based on new evidence" -- VPS/category deltas are shown as plain facts
-// (color only distinguishes up/down, never "good"/"bad" language), and a
-// decline is never called "lost progress."
+// based on new evidence." Phase 34A: category movement is now shown as a
+// plain word (color only distinguishes up/down, never "good"/"bad"
+// language), never a score number; a decline is never called "lost
+// progress."
 function HistoryEventCard({ event }: { event: VentureHistoryEvent }) {
   if (event.event_type === "venture_created") {
     return (
       <div>
         <p className="text-sm font-semibold text-text-primary">Venture created</p>
-        {event.after_vps !== null ? (
-          <p className="mt-0.5 text-xs text-text-muted">Initial VPS: {event.after_vps.toFixed(1)}</p>
-        ) : null}
       </div>
     );
   }
@@ -172,23 +185,10 @@ function HistoryEventCard({ event }: { event: VentureHistoryEvent }) {
   }
 
   // model_updated
-  const vpsChanged = event.before_vps !== null && event.after_vps !== null && Math.abs(event.after_vps - event.before_vps) >= 0.05;
-  const vpsRose = vpsChanged && event.after_vps! > event.before_vps!;
-  const vpsFell = vpsChanged && event.after_vps! < event.before_vps!;
-
   return (
     <div>
       <p className="text-sm font-semibold text-text-primary">Model updated</p>
       <p className="mt-1 text-sm text-text-secondary">Your model changed based on new evidence.</p>
-
-      <div className="mt-2 flex items-center gap-2 text-sm">
-        <span className="text-xs font-semibold uppercase tracking-wide text-text-muted">VPS</span>
-        <span
-          className={vpsRose ? "font-semibold text-success" : vpsFell ? "font-semibold text-danger" : "font-semibold text-text-primary"}
-        >
-          {formatVpsDelta(event.before_vps, event.after_vps)}
-        </span>
-      </div>
 
       <CategoryChangesList changes={event.category_changes} />
 

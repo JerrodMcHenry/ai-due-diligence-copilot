@@ -1,9 +1,14 @@
-import type { CategoryChange } from "./categoryChangeExplain";
+import { describeCategoryShift, type CategoryChange } from "./categoryChangeExplain";
 
-const DELTA_CLASSES: Record<CategoryChange["deltaDirection"], string> = {
-  positive: "text-movement-positive",
-  negative: "text-movement-negative",
-  neutral: "text-movement-neutral",
+// Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and Decision
+// Support. No numeric delta ("+1.5", "newly scored") anywhere -- only
+// describeCategoryShift()'s plain-word description of what kind of change
+// this was, still derived from the exact same category score data.
+const SHIFT_CLASSES: Record<string, string> = {
+  strengthened: "text-movement-positive",
+  weakened: "text-movement-negative",
+  "now modeled": "text-movement-neutral",
+  "no longer modeled": "text-movement-neutral",
 };
 
 // Phase 10.7 -- shared "Why it changed" presentation for both a scenario
@@ -29,12 +34,13 @@ export default function CategoryChangesList({ changes, heading = "Why it changed
         // Up to 2 basis lines -- enough to explain the movement without
         // reprinting the scorer's entire internal reasoning.
         const reasons = change.basis.slice(0, 2);
+        const shift = describeCategoryShift(change.fromScore, change.toScore);
 
         return (
           <div key={change.key} className="rounded-lg bg-surface-subtle p-3">
             <p className="text-sm font-semibold text-text-primary">
-              {change.label.toUpperCase()}{" "}
-              <span className={DELTA_CLASSES[change.deltaDirection]}>{change.deltaLabel}</span>
+              {change.label.toUpperCase()}
+              {shift ? <span className={`ml-1 ${SHIFT_CLASSES[shift]}`}>{shift}</span> : null}
             </p>
             {reasons.length > 0 ? (
               <ul className="mt-1 space-y-0.5">

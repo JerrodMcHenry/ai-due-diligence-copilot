@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 // Idea Lab V1: small, reusable, labeled inputs for the assumption editor.
 // Every field is nullable-by-default and never silently defaults to a
 // value that would influence scoring -- an empty field commits `null`,
@@ -56,6 +60,19 @@ function FieldWrapper({ label, htmlFor, children, badge, hint }: FieldWrapperPro
 const inputClasses =
   "h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20";
 
+// Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and Decision
+// Support, Part 5. The live walkthrough's own finding: a `rows={2}`
+// textarea showed roughly one visible line of a real problem statement/
+// solution description/differentiation, forcing internal scrolling to
+// read a field the founder is supposed to be reviewing and correcting.
+// `min-h-[7rem]` gives every long-form field a real minimum (~4-5 lines)
+// even when short; the auto-grow effect on TextField below then expands
+// it further to fit whatever the founder typed or SIE proposed, so nested
+// scrolling is never needed to see the whole value. `resize-y` is kept so
+// a founder can still manually expand beyond that if they want more room.
+const textareaClasses =
+  "w-full min-h-[7rem] rounded-lg border border-border bg-surface px-3 py-2.5 text-base leading-6 text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 resize-y overflow-hidden";
+
 export function TextField({
   id,
   label,
@@ -75,16 +92,29 @@ export function TextField({
   badge?: React.ReactNode;
   hint?: string | null;
 }) {
+  // Applies to every multiline caller across the app -- the onboarding
+  // review screen and the "Edit the full model" editor both use this
+  // same TextField, so fixing it here fixes both surfaces at once
+  // (Section 5's own "audit the entire model editor" instruction).
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  useEffect(() => {
+    const el = textareaRef.current;
+    if (!el) return;
+    el.style.height = "auto";
+    el.style.height = `${el.scrollHeight}px`;
+  }, [value, multiline]);
+
   return (
     <FieldWrapper label={label} htmlFor={id} badge={badge} hint={hint}>
       {multiline ? (
         <textarea
+          ref={textareaRef}
           id={id}
-          rows={2}
           value={value ?? ""}
           onChange={(event) => onChange(event.target.value.trim() === "" ? null : event.target.value)}
           placeholder={placeholder}
-          className={`${inputClasses} resize-y py-2`}
+          className={textareaClasses}
         />
       ) : (
         <input

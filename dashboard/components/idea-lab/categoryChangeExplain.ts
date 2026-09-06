@@ -41,6 +41,19 @@ export function categoryDeltaDirection(from: number | null, to: number | null): 
   return to > from ? "positive" : "negative";
 }
 
+// Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and Decision
+// Support. Every caller that used to print formatCategoryDelta()'s
+// numeric string ("+1.5", "newly scored") now needs a plain-word
+// description instead -- no score, no delta number, just what kind of
+// change this was. Reuses the exact same from/to values, just described
+// differently; the underlying category data is completely unchanged.
+export function describeCategoryShift(from: number | null, to: number | null): "now modeled" | "no longer modeled" | "strengthened" | "weakened" | null {
+  if (from === null && to !== null) return "now modeled";
+  if (from !== null && to === null) return "no longer modeled";
+  if (from === null || to === null || Math.abs(to - from) < 0.05) return null;
+  return to > from ? "strengthened" : "weakened";
+}
+
 // A category moving from Unavailable (null) to scored -- or the reverse --
 // is itself a meaningful, explainable change (often the actual reason the
 // overall VPS moved, since compute_vps() renormalizes around whichever

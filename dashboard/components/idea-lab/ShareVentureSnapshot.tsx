@@ -169,19 +169,16 @@ export default function ShareVentureSnapshot({ ventureId }: { ventureId: number 
           </div>
         ) : null}
 
+        {/* Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and
+            Decision Support, Part 2: the "Show Venture Potential Score"
+            toggle is gone -- Idea Lab no longer presents a VPS number
+            anywhere, including a publicly shared snapshot. `show_vps` is
+            still sent below unchanged (whatever it was already set to) so
+            no backend/type change is needed; the backend's own snapshot
+            builder simply never has a reason to include a VPS number in
+            what a recipient sees once VentureSnapshotCard stops rendering
+            it (see that component's own matching change). */}
         <div className="mt-4 space-y-2 border-t border-border pt-3">
-          <label className="flex items-center gap-2.5 text-sm text-text-primary">
-            <input
-              type="checkbox"
-              checked={settings.show_vps}
-              disabled={isBusy}
-              onChange={(event) =>
-                applyChange({ enabled: settings.enabled, show_vps: event.target.checked, show_validation: settings.show_validation })
-              }
-              className="size-4 accent-primary"
-            />
-            Show Venture Potential Score
-          </label>
           <label className="flex items-center gap-2.5 text-sm text-text-primary">
             <input
               type="checkbox"

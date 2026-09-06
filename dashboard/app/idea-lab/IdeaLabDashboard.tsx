@@ -11,23 +11,6 @@ import { listVentures } from "@/lib/api";
 
 import type { VentureSummary } from "@/types";
 
-function formatVps(value: number | null): string {
-  return value === null ? "Not yet modeled" : value.toFixed(1);
-}
-
-function getVpsClasses(value: number | null): string {
-  if (value === null) {
-    return "bg-surface-muted text-text-muted";
-  }
-  if (value >= 7) {
-    return "bg-success-soft text-success";
-  }
-  if (value >= 5) {
-    return "bg-primary-soft text-primary";
-  }
-  return "bg-warning-soft text-warning";
-}
-
 function formatUpdatedAt(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) {
@@ -133,9 +116,8 @@ export default function IdeaLabDashboard() {
           </p>
 
           <p className="mx-auto mt-2 max-w-md text-base leading-7 text-text-secondary">
-            Model a startup idea — even a pure idea with no customers yet —
-            and see a Venture Potential Score built from your own stated
-            assumptions.
+            Model a startup idea — even a pure idea with no customers yet — and see what you&rsquo;d need to
+            prove for it to work, organized around your own stated assumptions.
           </p>
 
           <Link
@@ -152,37 +134,27 @@ export default function IdeaLabDashboard() {
             // Part 4: the directive's own worked example -- the venture
             // TITLE must clearly dominate its metadata at a glance.
             // Title bumped text-base->text-lg (18px, "card heading"
-            // range); VPS badge bumped to text-sm (matches Badge.tsx's
-            // own global bump); stage/date row bumped text-xs->text-sm
-            // (14px, the "metadata" floor, not the 12px "exceptional
-            // only" one); more card padding/gap for breathing room.
+            // range); stage/date row at text-sm (14px, the "metadata"
+            // floor, not the 12px "exceptional only" one); more card
+            // padding/gap for breathing room.
+            //
+            // Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence
+            // and Decision Support, Part 2: the VPS badge and the
+            // "X.X — MODELED, not observed evidence" line are both gone --
+            // `stage` (already a real, founder-set field, unchanged) is
+            // now the card's only status signal.
             <Link key={venture.id} href={`/idea-lab/${venture.id}`}>
               <BaseCard className="flex h-full flex-col gap-3.5 p-6 transition-colors hover:border-primary/40">
-                <div className="flex items-start justify-between gap-3">
-                  <h3 className="min-w-0 truncate text-lg font-semibold text-text-primary">
-                    {venture.name}
-                  </h3>
+                <h3 className="min-w-0 truncate text-lg font-semibold text-text-primary">
+                  {venture.name}
+                </h3>
 
-                  <span
-                    className={[
-                      "shrink-0 rounded-full px-2.5 py-1 text-sm font-semibold",
-                      getVpsClasses(venture.vps),
-                    ].join(" ")}
-                  >
-                    {venture.vps === null ? "—" : `VPS ${venture.vps.toFixed(1)}`}
-                  </span>
-                </div>
-
-                <div className="flex flex-wrap items-center gap-2 text-sm text-text-secondary">
+                <div className="mt-auto flex flex-wrap items-center gap-2 text-sm text-text-secondary">
                   {venture.stage ? (
                     <span className="rounded-full border border-border px-2 py-0.5">{venture.stage}</span>
                   ) : null}
                   <span>Updated {formatUpdatedAt(venture.updated_at)}</span>
                 </div>
-
-                <p className="mt-auto text-sm text-text-secondary">
-                  {formatVps(venture.vps)} — MODELED, not observed evidence
-                </p>
               </BaseCard>
             </Link>
           ))}
