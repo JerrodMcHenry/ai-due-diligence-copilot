@@ -4192,6 +4192,175 @@ def resolve_venture_evidence_for_owner(
         return dict(new_row)
 
 
+# ---------------------------------------------------------------------------
+# Phase 35B -- Financial State Persistence + Runway Engine V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md for the full design.
+#
+# APPEND-ONLY, deliberately -- mirrors venture_model_updates' own
+# before/after-snapshot precedent, never update-in-place. A founder
+# changing cash from $500K to $450K INSERTs a new row; the $500K row is
+# never touched. "Current financial state" is simply the most recent row
+# by (as_of_date DESC, recorded_at DESC) -- there is no separate
+# "current state" table to keep in sync, and no risk of silently
+# overwriting the only copy of a prior snapshot (§12 of the directive).
+#
+# Every money column is NULLABLE and stores INTEGER CENTS -- NULL means
+# "unknown," never zero (§15 of the directive: "unknown is not zero").
+# An explicit zero is stored as the integer 0, indistinguishable from any
+# other real value, and distinguishable from NULL at every layer (SQL,
+# Python, JSON, the calculation engine in app/ai/financial_engine.py).
+# This is the same "no fake precision" discipline
+# dashboard/lib/fundraising/rational.ts already established for cap-table
+# math, applied to a domain (money in, money out) simple enough that
+# plain integer cents -- no Rational/bigint machinery -- is sufficient;
+# see SIE_FINANCIAL_DECISION_ENGINE_V2.md's "money representation"
+# section for the full reasoning.
+#
+# Provenance (Phase 35A §11): every field persisted by this phase is,
+# structurally, FOUNDER_ENTERED actual data -- there is no code path that
+# writes a snapshot row from anything else (no AI estimate, no imported
+# feed, no scenario). Rather than a speculative per-field provenance
+# column with only one real value in it today, that contract is encoded
+# structurally: this is the ONLY write path into this table
+# (create_venture_financial_snapshot(), called from exactly one endpoint,
+# POST /ventures/{id}/financials), so every row's provenance is knowable
+# without a column. HISTORICAL_ACTUAL/IMPORTED/PLANNED/ASSUMPTION/
+# SIE_CALCULATED are documented, future values -- see the doc's own
+# "provenance" section for exactly what would need to change to add them
+# (most likely a `provenance` column on this same table, or a sibling
+# `venture_financial_line_items` table per the 35A design, once a second
+# write path -- a scenario, a planned hire -- actually exists).
+def create_venture_financial_snapshots_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_financial_snapshots (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                as_of_date DATE NOT NULL,
+                cash_balance_cents BIGINT,
+                monthly_recurring_revenue_cents BIGINT,
+                monthly_non_recurring_revenue_cents BIGINT,
+                payroll_cents BIGINT,
+                contractors_cents BIGINT,
+                software_cents BIGINT,
+                marketing_cents BIGINT,
+                rent_cents BIGINT,
+                professional_services_cents BIGINT,
+                other_expenses_cents BIGINT,
+                recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_financial_snapshots_venture_idx
+            ON venture_financial_snapshots (venture_id, as_of_date DESC, recorded_at DESC)
+        """))
+    print("venture_financial_snapshots table created successfully.")
+
+
+_FINANCIAL_SNAPSHOT_COLUMNS = """
+                id, venture_id, user_id, as_of_date, cash_balance_cents,
+                monthly_recurring_revenue_cents, monthly_non_recurring_revenue_cents,
+                payroll_cents, contractors_cents, software_cents, marketing_cents,
+                rent_cents, professional_services_cents, other_expenses_cents, recorded_at
+"""
+
+_FINANCIAL_SNAPSHOT_COLUMNS_QUALIFIED = """
+                vfs.id, vfs.venture_id, vfs.user_id, vfs.as_of_date, vfs.cash_balance_cents,
+                vfs.monthly_recurring_revenue_cents, vfs.monthly_non_recurring_revenue_cents,
+                vfs.payroll_cents, vfs.contractors_cents, vfs.software_cents, vfs.marketing_cents,
+                vfs.rent_cents, vfs.professional_services_cents, vfs.other_expenses_cents, vfs.recorded_at
+"""
+
+
+def create_venture_financial_snapshot(
+    venture_id: int,
+    user_id: str,
+    as_of_date,
+    cash_balance_cents: int | None = None,
+    monthly_recurring_revenue_cents: int | None = None,
+    monthly_non_recurring_revenue_cents: int | None = None,
+    payroll_cents: int | None = None,
+    contractors_cents: int | None = None,
+    software_cents: int | None = None,
+    marketing_cents: int | None = None,
+    rent_cents: int | None = None,
+    professional_services_cents: int | None = None,
+    other_expenses_cents: int | None = None,
+) -> dict:
+    """
+    Ownership of venture_id is enforced by the CALLER (app/api.py) via the
+    same ownership-scoped SELECT every other mutation in this file already
+    uses BEFORE this runs -- identical discipline to create_venture_evidence().
+    Always an INSERT -- there is no update path for this table (see this
+    section's own module comment above).
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_financial_snapshots (
+                venture_id, user_id, as_of_date, cash_balance_cents,
+                monthly_recurring_revenue_cents, monthly_non_recurring_revenue_cents,
+                payroll_cents, contractors_cents, software_cents, marketing_cents,
+                rent_cents, professional_services_cents, other_expenses_cents
+            )
+            VALUES (
+                :venture_id, :user_id, :as_of_date, :cash_balance_cents,
+                :monthly_recurring_revenue_cents, :monthly_non_recurring_revenue_cents,
+                :payroll_cents, :contractors_cents, :software_cents, :marketing_cents,
+                :rent_cents, :professional_services_cents, :other_expenses_cents
+            )
+            RETURNING {_FINANCIAL_SNAPSHOT_COLUMNS}
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "as_of_date": as_of_date,
+            "cash_balance_cents": cash_balance_cents,
+            "monthly_recurring_revenue_cents": monthly_recurring_revenue_cents,
+            "monthly_non_recurring_revenue_cents": monthly_non_recurring_revenue_cents,
+            "payroll_cents": payroll_cents,
+            "contractors_cents": contractors_cents,
+            "software_cents": software_cents,
+            "marketing_cents": marketing_cents,
+            "rent_cents": rent_cents,
+            "professional_services_cents": professional_services_cents,
+            "other_expenses_cents": other_expenses_cents,
+        })
+        return dict(result.mappings().first())
+
+
+def get_latest_venture_financial_snapshot_for_owner(user_id: str, venture_id: int) -> dict | None:
+    """The "current" financial state -- the most recent snapshot by
+    (as_of_date, recorded_at), never a separate "current state" row."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_FINANCIAL_SNAPSHOT_COLUMNS_QUALIFIED}
+            FROM venture_financial_snapshots vfs
+            JOIN modeled_ventures v ON v.id = vfs.venture_id
+            WHERE vfs.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY vfs.as_of_date DESC, vfs.recorded_at DESC
+            LIMIT 1
+        """), {"venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+def list_venture_financial_snapshots_for_owner(user_id: str, venture_id: int) -> list[dict]:
+    """Every snapshot ever recorded for this venture, oldest first -- the
+    "prior financial information remains recoverable" guarantee (§12/§23
+    of the directive), not yet exposed as a dedicated History UI, but
+    fully queryable and tested (see test_venture_financials.py's own
+    history-safety test)."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_FINANCIAL_SNAPSHOT_COLUMNS_QUALIFIED}
+            FROM venture_financial_snapshots vfs
+            JOIN modeled_ventures v ON v.id = vfs.venture_id
+            WHERE vfs.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY vfs.as_of_date ASC, vfs.recorded_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id})
+        return [dict(row) for row in result.mappings().all()]
+
+
 _DECISION_COLUMNS = """
                 id, venture_id, user_id, related_mission_id, sie_recommendation,
                 sie_reasoning, founder_choice, founder_rationale, evidence_ids,
@@ -4871,6 +5040,11 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     # Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same
     # reasoning as evidence_confirmed/decision_recorded above.
     "evidence_resolved",
+    # Phase 35B -- Financial State Persistence + Runway Engine V1. Logged
+    # from app/api.py's new POST /ventures/{id}/financials endpoint.
+    # Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same reasoning
+    # as every other Build/Finance event above.
+    "financial_snapshot_recorded",
 }
 
 

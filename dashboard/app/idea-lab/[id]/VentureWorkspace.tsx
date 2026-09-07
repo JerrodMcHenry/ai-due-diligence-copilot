@@ -19,6 +19,7 @@ import VentureProgress from "@/components/idea-lab/VentureProgress";
 import WeeklyReview from "@/components/idea-lab/WeeklyReview";
 import Tabs, { TabPanel } from "@/components/ui/Tabs";
 import FundraisingSimulator from "@/components/fundraising/FundraisingSimulator";
+import FinanceOverview from "@/components/finance/FinanceOverview";
 import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
@@ -91,10 +92,17 @@ function formatUpdatedAt(iso: string): string {
 // result -- is now Overview's own hero (CurrentQuestionCard), and a
 // separate tab repeating that would be exactly the visual duplication
 // Section 23 forbids, not a genuinely different founder job.
-type TabId = "overview" | "fundraising" | "history";
+// Phase 35B -- Financial State Persistence + Runway Engine V1 adds
+// "finance" as its own tab, deliberately separate from "fundraising"
+// (§18/§19 of that phase's own directive: foundation first, do not
+// prematurely reorganize navigation to satisfy a future information
+// architecture merge -- see docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md
+// §22 for what that eventual merge looks like, not built yet).
+type TabId = "overview" | "finance" | "fundraising" | "history";
 
 const LOCAL_NAV_TABS: { id: TabId; label: string }[] = [
   { id: "overview", label: "Overview" },
+  { id: "finance", label: "Finance" },
   { id: "fundraising", label: "Fundraising" },
   { id: "history", label: "History" },
 ];
@@ -1245,6 +1253,13 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               </section>
             </Disclosure>
           </div>
+        </TabPanel>
+
+        {/* Phase 35B -- Financial State Persistence + Runway Engine V1.
+            A new, standalone tab -- deliberately not merged with
+            Fundraising in this phase (see the TabId comment above). */}
+        <TabPanel id="finance" activeId={tab}>
+          <FinanceOverview ventureId={ventureId} />
         </TabPanel>
 
         {/* Phase 33, Part 13 (Fundraising). Reuses the complete,

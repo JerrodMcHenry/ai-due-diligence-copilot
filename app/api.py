@@ -124,6 +124,10 @@ from app.database.db import (create_tables,
                          create_venture_evidence,
                          list_venture_evidence_for_owner,
                          resolve_venture_evidence_for_owner,
+                         create_venture_financial_snapshots_table,
+                         create_venture_financial_snapshot,
+                         get_latest_venture_financial_snapshot_for_owner,
+                         list_venture_financial_snapshots_for_owner,
                          create_venture_decision,
                          list_venture_decisions_for_owner,
                          set_venture_mission_interpretation_for_owner,
@@ -143,6 +147,11 @@ from app.models.venture_missions import (
     CompanyIntelligenceSummary,
 )
 from app.ai.build_recommendation import build_intelligence_state, generate_interpretation, build_company_intelligence_summary
+from app.models.venture_financials import (
+    CreateFinancialSnapshotRequest, FinancialSnapshotResponse, DerivedFinancialMetrics,
+    ProjectedMonth, VentureFinancialsResponse, FinancialHistoryResponse,
+)
+from app.ai.financial_engine import compute_derived_metrics, project_monthly_cash_flow
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -267,6 +276,12 @@ add_pitch_deck_coach_mission_source()
 add_venture_intelligence_columns()
 create_venture_decisions_table()
 create_venture_evidence_table()
+
+# Phase 35B -- Financial State Persistence + Runway Engine V1. One new,
+# fully independent, append-only table -- no FK to venture_missions/
+# venture_evidence/venture_decisions, ordering relative to them doesn't
+# matter, only that modeled_ventures already exists.
+create_venture_financial_snapshots_table()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -1635,6 +1650,94 @@ def resolve_evidence(
     )
 
     return VentureEvidenceResponse(**new_row)
+
+
+# ---------------------------------------------------------------------------
+# Phase 35B -- Financial State Persistence + Runway Engine V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md.
+#
+# Access doctrine (§2 of the directive): NO gate here on stage,
+# verification, graduation, evidence quantity, or SPS -- _require_owned_venture()
+# is the exact same, and ONLY, authorization check every other Build
+# endpoint already uses. Any founder who owns the venture can read/write
+# its financials, at any stage, unconditionally.
+# ---------------------------------------------------------------------------
+
+def _build_financials_response(snapshot: dict | None) -> VentureFinancialsResponse:
+    if snapshot is None:
+        return VentureFinancialsResponse(latest_snapshot=None, derived=None, projection=[])
+
+    derived = compute_derived_metrics(snapshot)
+    projection = project_monthly_cash_flow(snapshot, snapshot["as_of_date"])
+    return VentureFinancialsResponse(
+        latest_snapshot=FinancialSnapshotResponse(**snapshot),
+        derived=DerivedFinancialMetrics(**derived),
+        projection=[ProjectedMonth(**month) for month in projection],
+    )
+
+
+@app.get("/ventures/{venture_id}/financials", response_model=VentureFinancialsResponse)
+def get_venture_financials(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    snapshot = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+    return _build_financials_response(snapshot)
+
+
+# Always creates a NEW snapshot row (§12: append-only, never overwrites a
+# prior one) -- this is the ONLY write path into venture_financial_snapshots
+# (see create_venture_financial_snapshot()'s own docstring), which is what
+# lets every field's provenance be FOUNDER_ENTERED by construction, with
+# no separate provenance column needed yet.
+@app.post("/ventures/{venture_id}/financials", response_model=VentureFinancialsResponse)
+def create_venture_financials_snapshot(
+    venture_id: int,
+    request: CreateFinancialSnapshotRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    snapshot = create_venture_financial_snapshot(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        as_of_date=request.as_of_date,
+        cash_balance_cents=request.cash_balance_cents,
+        monthly_recurring_revenue_cents=request.monthly_recurring_revenue_cents,
+        monthly_non_recurring_revenue_cents=request.monthly_non_recurring_revenue_cents,
+        payroll_cents=request.payroll_cents,
+        contractors_cents=request.contractors_cents,
+        software_cents=request.software_cents,
+        marketing_cents=request.marketing_cents,
+        rent_cents=request.rent_cents,
+        professional_services_cents=request.professional_services_cents,
+        other_expenses_cents=request.other_expenses_cents,
+    )
+
+    _log_event_safe(
+        "financial_snapshot_recorded",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"as_of_date": str(request.as_of_date)},
+    )
+
+    # Re-fetch the LATEST snapshot rather than trivially returning the one
+    # just inserted: as_of_date is founder-chosen and could, in principle,
+    # be backdated relative to an existing later snapshot -- "current
+    # state" must always mean the same thing GET returns, computed the
+    # same way, never two different definitions of "latest."
+    latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+    return _build_financials_response(latest)
+
+
+@app.get("/ventures/{venture_id}/financials/history", response_model=FinancialHistoryResponse)
+def get_venture_financials_history(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
+    return FinancialHistoryResponse(snapshots=[FinancialSnapshotResponse(**s) for s in snapshots])
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])
