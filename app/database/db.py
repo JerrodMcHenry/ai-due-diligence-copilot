@@ -4361,6 +4361,153 @@ def list_venture_financial_snapshots_for_owner(user_id: str, venture_id: int) ->
         return [dict(row) for row in result.mappings().all()]
 
 
+# ---------------------------------------------------------------------------
+# Phase 35C -- Hiring + Operating Plan Engine V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md for the full design.
+#
+# A dedicated `venture_hire_plans` table rather than the generic
+# `venture_financial_line_items` Phase 35A originally sketched -- with
+# exactly one plan TYPE in this phase (a hire), a `kind` discriminator
+# column carrying one live value would be premature abstraction. The
+# natural evolution once revenue/cost-cut/financing plan types exist
+# (§20 of this phase's directive explicitly defers all of them) is either
+# a sibling table per type or a widened version of this one with a `kind`
+# column added -- a decision for whichever future phase actually needs
+# it, not guessed here.
+#
+# UPDATE-IN-PLACE, deliberately -- mirrors venture_missions.status/
+# learning_summary's own existing update-in-place precedent
+# (SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §D.1), not
+# venture_evidence's append-only superseded_by_id correction pattern. A
+# planned hire is an ACTIVELY-EDITED DRAFT the founder is still shaping
+# ("what if I offer a lower salary?"), not an immutable observation
+# already made -- editing it in place is the same judgment call Build
+# already made for a mission's own in-flight fields. `status` transitions
+# (planned -> cancelled/actualized) are the same UPDATE, never a DELETE:
+# the row -- and the fact that a hire was once planned at all -- always
+# remains queryable. `updated_at` gives a minimal, honest "this changed
+# recently" signal without a full field-level changelog (§18 of the
+# directive: "do not build an elaborate audit UI").
+def create_venture_hire_plans_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_hire_plans (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                role TEXT NOT NULL,
+                employment_type TEXT NOT NULL CHECK (employment_type IN ('employee', 'contractor')),
+                annual_salary_cents BIGINT,
+                burden_percent DOUBLE PRECISION,
+                monthly_cost_cents BIGINT,
+                one_time_cost_cents BIGINT,
+                start_date DATE NOT NULL,
+                end_date DATE,
+                status TEXT NOT NULL DEFAULT 'planned' CHECK (status IN ('planned', 'cancelled', 'actualized')),
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_hire_plans_venture_idx
+            ON venture_hire_plans (venture_id, status)
+        """))
+    print("venture_hire_plans table created successfully.")
+
+
+_HIRE_PLAN_COLUMNS_QUALIFIED = """
+                vhp.id, vhp.venture_id, vhp.user_id, vhp.role, vhp.employment_type,
+                vhp.annual_salary_cents, vhp.burden_percent, vhp.monthly_cost_cents,
+                vhp.one_time_cost_cents, vhp.start_date, vhp.end_date, vhp.status,
+                vhp.created_at, vhp.updated_at
+"""
+
+
+def create_venture_hire_plan(
+    venture_id: int,
+    user_id: str,
+    role: str,
+    employment_type: str,
+    start_date,
+    annual_salary_cents: int | None = None,
+    burden_percent: float | None = None,
+    monthly_cost_cents: int | None = None,
+    one_time_cost_cents: int | None = None,
+    end_date=None,
+) -> dict:
+    """Ownership of venture_id is enforced by the CALLER (app/api.py),
+    identical discipline to create_venture_financial_snapshot()."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_hire_plans (
+                venture_id, user_id, role, employment_type, annual_salary_cents,
+                burden_percent, monthly_cost_cents, one_time_cost_cents, start_date, end_date
+            )
+            VALUES (
+                :venture_id, :user_id, :role, :employment_type, :annual_salary_cents,
+                :burden_percent, :monthly_cost_cents, :one_time_cost_cents, :start_date, :end_date
+            )
+            RETURNING {_HIRE_PLAN_COLUMNS_QUALIFIED.replace("vhp.", "")}
+        """), {
+            "venture_id": venture_id, "user_id": user_id, "role": role,
+            "employment_type": employment_type, "annual_salary_cents": annual_salary_cents,
+            "burden_percent": burden_percent, "monthly_cost_cents": monthly_cost_cents,
+            "one_time_cost_cents": one_time_cost_cents, "start_date": start_date, "end_date": end_date,
+        })
+        return dict(result.mappings().first())
+
+
+def list_venture_hire_plans_for_owner(user_id: str, venture_id: int, status: str | None = None) -> list[dict]:
+    clause = "AND vhp.status = :status" if status is not None else ""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_HIRE_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_hire_plans vhp
+            JOIN modeled_ventures v ON v.id = vhp.venture_id
+            WHERE vhp.venture_id = :venture_id AND v.user_id = :user_id
+            {clause}
+            ORDER BY vhp.start_date ASC, vhp.created_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id, "status": status})
+        return [dict(row) for row in result.mappings().all()]
+
+
+def get_venture_hire_plan_for_owner(user_id: str, venture_id: int, hire_plan_id: int) -> dict | None:
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_HIRE_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_hire_plans vhp
+            JOIN modeled_ventures v ON v.id = vhp.venture_id
+            WHERE vhp.id = :hire_plan_id AND vhp.venture_id = :venture_id AND v.user_id = :user_id
+        """), {"hire_plan_id": hire_plan_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+def update_venture_hire_plan_for_owner(user_id: str, venture_id: int, hire_plan_id: int, **fields) -> dict | None:
+    """Partial update-in-place -- `fields` is whatever the caller
+    (app/api.py) determined should change, already validated. Always sets
+    updated_at. Returns None if the row doesn't exist or isn't owned by
+    this venture/user (ownership re-checked in the same statement, never
+    a separate check-then-trust step)."""
+    if not fields:
+        return get_venture_hire_plan_for_owner(user_id, venture_id, hire_plan_id)
+
+    set_clause = ", ".join(f"{key} = :{key}" for key in fields)
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE venture_hire_plans vhp
+            SET {set_clause}, updated_at = CURRENT_TIMESTAMP
+            FROM modeled_ventures v
+            WHERE vhp.venture_id = v.id
+              AND vhp.id = :hire_plan_id
+              AND vhp.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING {_HIRE_PLAN_COLUMNS_QUALIFIED}
+        """), {**fields, "hire_plan_id": hire_plan_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
 _DECISION_COLUMNS = """
                 id, venture_id, user_id, related_mission_id, sie_recommendation,
                 sie_reasoning, founder_choice, founder_rationale, evidence_ids,
@@ -5045,6 +5192,12 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     # Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same reasoning
     # as every other Build/Finance event above.
     "financial_snapshot_recorded",
+    # Phase 35C -- Hiring + Operating Plan Engine V1. Logged from
+    # app/api.py's new POST /ventures/{id}/hire-plans and
+    # PATCH /ventures/{id}/hire-plans/{id} endpoints. Deliberately NOT
+    # added to QUALIFYING_BUILDING_EVENTS, same reasoning as above.
+    "hire_plan_created",
+    "hire_plan_status_changed",
 }
 
 

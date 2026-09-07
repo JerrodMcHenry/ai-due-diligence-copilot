@@ -741,12 +741,171 @@ Identical to every other Build endpoint: `_require_owned_venture()` (an ownershi
 
 A **35C** phase scoped to `venture_financial_line_items` (§25) — planned hires and financing events as dated projection inputs — is the natural next step, following the same "one new table, reuse the existing pure calculation layer" pattern this phase established. The Fundraising Simulator pre-fill connection (§35.11) is a small, low-risk candidate to bundle into that same phase or run standalone first.
 
-## 35. Architectural requirements (carried into any future implementation phase)
+## 35. Phase 35C — Implemented architecture (hiring + operating plan engine V1)
+
+**Status: Implemented and live-tested.** Documented as a diff against §9/§25's own design above, following
+the same discipline §34 already used for Phase 35B.
+
+### 35.1 Plan data model
+
+One new table, `venture_hire_plans` — `id`, `venture_id`/`user_id` (same ownership pattern as every other
+Build/Finance table), `role`, `employment_type` (`employee`/`contractor`), `annual_salary_cents` +
+`burden_percent` (employee only), `monthly_cost_cents` (contractor only), `one_time_cost_cents`,
+`start_date`, `end_date`, `status` (`planned`/`cancelled`/`actualized`), `created_at`/`updated_at`. A
+dedicated table rather than 35A's originally-sketched generic `venture_financial_line_items` — with exactly
+one plan TYPE this phase, a `kind` discriminator column carrying a single live value would be premature
+abstraction; the natural evolution once a second plan type exists (revenue assumptions, cost cuts,
+financing events — all explicitly deferred, §20 of the directive) is a decision for whichever future phase
+actually needs it.
+
+**What is NOT stored:** `monthly_cost_cents` for an *employee* — always derived from
+`annual_salary_cents`/`burden_percent` (`app/ai/financial_engine.py::compute_hire_monthly_cost_cents()`),
+never persisted redundantly, so the two numbers can never silently disagree. For a *contractor*,
+`monthly_cost_cents` IS the direct input (nothing to derive it from) and is stored as given.
+
+### 35.2 Actual vs. plan
+
+Unchanged, structurally enforced: `venture_hire_plans` has no foreign key to, and no code path ever writes
+to, `venture_financial_snapshots`. A hire plan is calculated AGAINST the latest actual snapshot, at read
+time, never merged into it. Live-verified (§35.14): the canonical snapshot's own row was queried directly
+after every hire-plan create/edit/actualize action in the walkthrough and was byte-identical throughout.
+
+### 35.3 Plan lifecycle
+
+`planned` (the only status that affects a projection) → `cancelled` or `actualized` (both terminal, both
+exclude the row from every projection identically — see §35.11) — via `PATCH`, never a `DELETE`. Editing a
+plan's fields (role, salary, dates, costs) is **update-in-place**, a deliberate departure from
+`venture_evidence`'s own append-only `superseded_by_id` correction pattern: a planned hire is an
+actively-edited DRAFT the founder is still shaping ("what if I offer less?"), not an immutable observation
+already made, mirroring `venture_missions.status`/`.learning_summary`'s own existing update-in-place
+precedent instead. `updated_at` gives a minimal "this changed recently" signal without a full field-level
+changelog (§18 of the directive: "do not build an elaborate audit UI") — a real, named limitation, not an
+oversight (§35.13).
+
+### 35.4 Employee cost model
+
+`annual_salary_cents × (1 + burden_percent/100) ÷ 12`, computed with exact `fractions.Fraction` arithmetic
+(the founder's own percentage, e.g. 25 or 12.5, is converted to an exact basis-point fraction first — never
+a floating-point multiply), rounded to the nearest cent only at the final step. **No default burden
+percentage anywhere** — not in the Pydantic contract, not in the frontend form (blank until typed) — per the
+directive's own explicit "prefer no hidden default" instruction. Live-verified against the directive's exact
+worked example: $180,000 salary, 25% burden → $18,750/month, $225,000/year, to the cent.
+
+### 35.5 Contractor model
+
+`monthly_cost_cents` entered directly, active only between `start_date` and an optional `end_date` — no
+salary/burden semantics at all. Live-verified (backend test Case C): a contractor's cost appears in an
+active month and is exactly zero in a month after its `end_date`.
+
+### 35.6 One-time cost model
+
+Applied exactly once, in the calendar month matching the plan's own `start_date` (or the projection's first
+shown month, if `start_date` predates it — an edge case the engine handles rather than silently drops, see
+`_is_one_time_month()`'s own docstring), added on top of that month's recurring cost, never repeated in any
+later month. Live-verified: a $5,000 equipment cost showed up as exactly $23,750 total impact in the hire's
+own start month (recurring $18,750 + one-time $5,000) and exactly $18,750 in every month after.
+
+### 35.7 Dated projection
+
+`app/ai/financial_engine.py::project_monthly_cash_flow()` (Phase 35B) is EXTENDED, not replaced, with an
+optional `plan_items` parameter — a list of fully generic `{id, monthly_cost_cents, one_time_cost_cents,
+start_date, end_date}` dicts. The function has no concept of "a hire" at all; `hire_to_plan_item()` is the
+one, sole place a `venture_hire_plans` row is translated into that generic shape — exactly the directive's
+own instruction (§9: "hiring should be the first typed dated plan input into a general projection
+architecture," never hiring-specific logic baked into the engine). A future revenue assumption or cost cut
+becomes just another item in the same list, with zero change to the projection function itself. Omitting
+`plan_items` (or passing `[]`) reproduces Phase 35B's original behavior byte-for-byte — proven directly by
+`test_case_o_no_plans_means_identical_projections`.
+
+### 35.8 Current runway vs. plan
+
+Unchanged and deliberately NOT reused for a plan: `compute_derived_metrics()`'s flat `cash ÷ burn` runway
+figure is shown once, labeled "Current runway," computed purely from the actual snapshot. A plan's own
+consequence is read directly off the projection's own `depleted` flag and `date` — a real calendar month
+("cash reaches $0 around July 2027"), never a fabricated fractional runway number for a scenario with dated
+changes (§10 of the directive's own explicit caution).
+
+### 35.9 Hire-now-vs-later
+
+No N-way scenario system, no persisted duplicate plans (§11/§17 of the directive). One ephemeral endpoint,
+`POST /ventures/{id}/hire-plans/preview`, computes a baseline projection (existing planned hires only) and a
+with-this-hire projection (existing + the hypothetical one) from whatever the founder currently has typed
+into the form — called AGAIN with a different `start_date` for the "compare a different date" control.
+Nothing is written to the database at any point in this flow. Live-verified: comparing a December 1 vs.
+March 1 start for the identical hire correctly showed the later start depleting cash one month later
+(August vs. July 2027).
+
+### 35.10 Actualization
+
+A single explicit action, "Mark as actualized" (`status = "actualized"`), rather than the directive's own
+illustrative two-step "mark as started" → "included in your latest snapshot?" flow — judged unnecessary
+complexity for this phase's scope (§18: "do not build an elaborate audit UI") while still requiring an
+explicit founder action, never a silent inference. The row is never deleted; it remains queryable by
+`GET /ventures/{id}/hire-plans` with its history intact.
+
+### 35.11 Double-count protection
+
+`hire_plan_items_for_projection()` filters to `status == "planned"` before ever building the generic
+plan-item list the projection consumes — a `cancelled` OR `actualized` hire is excluded by the exact same
+one-line filter, with no special-casing between the two terminal states. Live-verified for both: after
+either action, `projection_with_plan` became byte-identical to the baseline `projection` (backend Cases J/M,
+and live in the browser — "Planned changes" correctly reverted to "Nothing planned yet" and the Cash Outlook
+table collapsed back to its single-column Phase 35B shape).
+
+### 35.12 Persistence and temporary comparison
+
+Real distinction, not just a naming convention: `POST /ventures/{id}/hire-plans` is the only INSERT path
+into `venture_hire_plans` (a **PERSISTED PLAN**); `POST /ventures/{id}/hire-plans/preview` never touches the
+database at all (a **TEMPORARY COMPARISON**) — confirmed directly by a backend test
+(`test_case_g_hire_now_vs_later_via_preview`) that calls preview twice and then asserts
+`GET /ventures/{id}/hire-plans` still returns `[]`.
+
+### 35.13 History
+
+Real but intentionally minimal, per §18 of the directive ("do not build an elaborate audit UI"): every hire
+plan row, at every status, remains permanently queryable — nothing is ever deleted. What is NOT tracked:
+field-level history of an in-place edit (only the current values plus `updated_at` survive; the fact that a
+role was renamed from "Senior Engineer" to "Staff Engineer," specifically, is not separately recorded). A
+future phase wanting full field-level history has a clear, low-risk path: switch from update-in-place to an
+append-only pattern mirroring `venture_evidence.superseded_by_id`, without changing the table's own columns.
+
+### 35.14 Live walkthrough (MacroFlow, venture 4074)
+
+Reset to the directive's exact baseline (cash $500K, MRR $20K, expenses $70K → burn $50K, runway 10 months),
+then: **(1)** modeled a Senior Engineer ($180K salary, 25% burden, starting 3 months out) — preview showed
+$18,750/mo, $225,000/year, "without this hire: cash reaches $0 around September 2027," "with this hire:
+...around July 2027." **(2)** Compared a March 2027 start via the same preview mechanism — depletion moved
+to August 2027, deterministically later. **(3)** Saved the plan — **a real bug was found and fixed live**:
+the Cash Outlook table crashed (`Cannot read properties of undefined`) because the baseline and with-plan
+projections can have different lengths once a plan changes when cash depletes, and the table read the
+shorter array at the longer array's index. Fixed by merging rows on `month_index` (not raw array position)
+and carrying `$0` forward for whichever side already depleted first, verified live afterward with no further
+errors. **(4)** Edited the hire's start date to March 2027 and added a $5,000 one-time cost — the resulting
+table was hand-verified, month by month, to the cent, against the exact net-cash-change arithmetic.
+**(5)** Reloaded — identical state returned. **(6)** Marked the plan actualized — "Planned changes"
+correctly emptied, the Cash Outlook table correctly collapsed back to one column. **(7)** Queried
+`venture_financial_snapshots` directly after every step — the canonical row was untouched throughout.
+**(8)** Opened Fundraising — rendered identically to before this phase, zero regression.
+
+### 35.15 Fundraising pre-fill — deferred
+
+Audited and judged genuinely NOT trivial enough for this phase's tight scope guard, per the directive's own
+permission to defer: `FundraisingSimulator.tsx` currently has zero async data dependencies (no `ventureId`
+prop, no auth, no fetch) and is the component the user has specifically flagged as one of SIE's strongest
+existing experiences. Pre-filling its runway fields from canonical Finance state would require threading a
+new `ventureId` prop through `VentureWorkspace.tsx`, adding Clerk auth and a fetch effect to a previously
+pure, synchronous component, and doing so inside the exact component the directive names as highest-risk to
+disturb. The reward — a default value in an already-optional, already-collapsed disclosure section — did
+not clear that bar within this phase. **Deferred, not abandoned:** the natural future implementation is
+unchanged from §11's own recommendation — a `GET`-time pre-fill of `RunwayTermsForm`'s initial values,
+founder-editable, never written back to Finance.
+
+## 36. Architectural requirements (carried into any future implementation phase)
 
 Deterministic math; pure functions where possible (extending, not replacing, `rational.ts`/`safe.ts`/
-`pricedRound.ts`/`runway.ts`); explicit assumptions, always labeled as such in the UI; no hidden AI
-calculations anywhere in the financial math; scenarios kept structurally separate from canonical actuals
-(§18); persisted financial state AND persisted scenarios (§25); reload survival; history (§23); testability
-(§29, mirroring existing conventions); ownership/authorization scoped by `venture_id` exactly like every
-existing Build table; venture-continuous access (§21) with no verification gate and no stage gate (§15/§16
-of the directive); no new score anywhere.
+`pricedRound.ts`/`runway.ts`, and now `financial_engine.py`'s own extended projection); explicit
+assumptions, always labeled as such in the UI; no hidden AI calculations anywhere in the financial math;
+scenarios kept structurally separate from canonical actuals (§18); persisted financial state AND persisted
+scenarios (§25); reload survival; history (§23); testability (§29, mirroring existing conventions);
+ownership/authorization scoped by `venture_id` exactly like every existing Build table; venture-continuous
+access (§21) with no verification gate and no stage gate (§15/§16 of the directive); no new score anywhere.

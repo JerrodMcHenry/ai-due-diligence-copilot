@@ -128,6 +128,11 @@ from app.database.db import (create_tables,
                          create_venture_financial_snapshot,
                          get_latest_venture_financial_snapshot_for_owner,
                          list_venture_financial_snapshots_for_owner,
+                         create_venture_hire_plans_table,
+                         create_venture_hire_plan,
+                         list_venture_hire_plans_for_owner,
+                         get_venture_hire_plan_for_owner,
+                         update_venture_hire_plan_for_owner,
                          create_venture_decision,
                          list_venture_decisions_for_owner,
                          set_venture_mission_interpretation_for_owner,
@@ -151,7 +156,15 @@ from app.models.venture_financials import (
     CreateFinancialSnapshotRequest, FinancialSnapshotResponse, DerivedFinancialMetrics,
     ProjectedMonth, VentureFinancialsResponse, FinancialHistoryResponse,
 )
-from app.ai.financial_engine import compute_derived_metrics, project_monthly_cash_flow
+from app.models.venture_hire_plans import (
+    CreateHirePlanRequest, UpdateHirePlanRequest, HirePlanResponse,
+    HireImpactPreview, ProjectedMonthWithPlan,
+)
+from app.ai.financial_engine import (
+    compute_derived_metrics, project_monthly_cash_flow,
+    compute_hire_monthly_cost_cents, compute_hire_annual_cost_cents,
+    hire_plan_items_for_projection, hire_to_plan_item,
+)
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -282,6 +295,11 @@ create_venture_evidence_table()
 # venture_evidence/venture_decisions, ordering relative to them doesn't
 # matter, only that modeled_ventures already exists.
 create_venture_financial_snapshots_table()
+
+# Phase 35C -- Hiring + Operating Plan Engine V1. A second, independent
+# table -- no FK to venture_financial_snapshots (a plan is calculated
+# AGAINST actual state, never joined to a specific snapshot row).
+create_venture_hire_plans_table()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -1663,16 +1681,40 @@ def resolve_evidence(
 # its financials, at any stage, unconditionally.
 # ---------------------------------------------------------------------------
 
-def _build_financials_response(snapshot: dict | None) -> VentureFinancialsResponse:
+def _hire_plan_response(row: dict) -> HirePlanResponse:
+    return HirePlanResponse(
+        **row,
+        computed_monthly_cost_cents=compute_hire_monthly_cost_cents(row),
+        computed_annual_cost_cents=compute_hire_annual_cost_cents(row),
+    )
+
+
+def _build_financials_response(user_id: str, venture_id: int, snapshot: dict | None) -> VentureFinancialsResponse:
+    # Phase 35C: hire plans and the with-plan projection are computed
+    # regardless of whether a snapshot exists -- with no snapshot,
+    # planned_items_for_projection() has nothing to project against
+    # either (project_monthly_cash_flow returns [] the same way §35B's
+    # own empty state already does), so this stays honest by
+    # construction, not by a separate check.
+    all_hires = list_venture_hire_plans_for_owner(user_id, venture_id)
+    hire_plans = [_hire_plan_response(h) for h in all_hires]
+
     if snapshot is None:
-        return VentureFinancialsResponse(latest_snapshot=None, derived=None, projection=[])
+        return VentureFinancialsResponse(
+            latest_snapshot=None, derived=None, projection=[],
+            hire_plans=hire_plans, projection_with_plan=[],
+        )
 
     derived = compute_derived_metrics(snapshot)
     projection = project_monthly_cash_flow(snapshot, snapshot["as_of_date"])
+    plan_items = hire_plan_items_for_projection(all_hires)
+    projection_with_plan = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=plan_items)
     return VentureFinancialsResponse(
         latest_snapshot=FinancialSnapshotResponse(**snapshot),
         derived=DerivedFinancialMetrics(**derived),
         projection=[ProjectedMonth(**month) for month in projection],
+        hire_plans=hire_plans,
+        projection_with_plan=[ProjectedMonthWithPlan(**month) for month in projection_with_plan],
     )
 
 
@@ -1683,7 +1725,7 @@ def get_venture_financials(
 ):
     _require_owned_venture(current_user, venture_id)
     snapshot = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
-    return _build_financials_response(snapshot)
+    return _build_financials_response(current_user.user_id, venture_id, snapshot)
 
 
 # Always creates a NEW snapshot row (§12: append-only, never overwrites a
@@ -1727,7 +1769,7 @@ def create_venture_financials_snapshot(
     # state" must always mean the same thing GET returns, computed the
     # same way, never two different definitions of "latest."
     latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
-    return _build_financials_response(latest)
+    return _build_financials_response(current_user.user_id, venture_id, latest)
 
 
 @app.get("/ventures/{venture_id}/financials/history", response_model=FinancialHistoryResponse)
@@ -1738,6 +1780,168 @@ def get_venture_financials_history(
     _require_owned_venture(current_user, venture_id)
     snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
     return FinancialHistoryResponse(snapshots=[FinancialSnapshotResponse(**s) for s in snapshots])
+
+
+# ---------------------------------------------------------------------------
+# Phase 35C -- Hiring + Operating Plan Engine V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md.
+#
+# Same access doctrine as 35B: _require_owned_venture() only, no stage/
+# verification/graduation gate. A hire PLAN never touches
+# venture_financial_snapshots -- ACTUAL and PLAN remain permanently
+# separate tables, per §1 of this phase's own directive.
+# ---------------------------------------------------------------------------
+
+
+def _create_hire_request_to_row(request: CreateHirePlanRequest) -> dict:
+    """The shape compute_hire_monthly_cost_cents()/hire_to_plan_item()
+    expect -- a plain dict mirroring a DB row's own field names, whether
+    this hire is persisted yet or not (used identically by both the real
+    create endpoint and the never-persisted preview endpoint)."""
+    return {
+        "employment_type": request.employment_type,
+        "annual_salary_cents": request.annual_salary_cents,
+        "burden_percent": request.burden_percent,
+        "monthly_cost_cents": request.monthly_cost_cents,
+        "one_time_cost_cents": request.one_time_cost_cents,
+        "start_date": request.start_date,
+        "end_date": request.end_date,
+    }
+
+
+@app.get("/ventures/{venture_id}/hire-plans", response_model=list[HirePlanResponse])
+def list_hire_plans(
+    venture_id: int,
+    status: str | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    rows = list_venture_hire_plans_for_owner(current_user.user_id, venture_id, status=status)
+    return [_hire_plan_response(r) for r in rows]
+
+
+@app.post("/ventures/{venture_id}/hire-plans", response_model=HirePlanResponse)
+def create_hire_plan(
+    venture_id: int,
+    request: CreateHirePlanRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    row = create_venture_hire_plan(
+        venture_id=venture_id,
+        user_id=current_user.user_id,
+        role=request.role,
+        employment_type=request.employment_type,
+        start_date=request.start_date,
+        annual_salary_cents=request.annual_salary_cents,
+        burden_percent=request.burden_percent,
+        monthly_cost_cents=request.monthly_cost_cents,
+        one_time_cost_cents=request.one_time_cost_cents,
+        end_date=request.end_date,
+    )
+    _log_event_safe(
+        "hire_plan_created",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"employment_type": request.employment_type},
+    )
+    return _hire_plan_response(row)
+
+
+# Partial update -- edits merge onto the EXISTING row before re-validating
+# employee-vs-contractor field shape, since a partial request alone
+# cannot know the other side's current values (e.g. changing only
+# `role` on an existing employee hire must not require re-sending salary/
+# burden). Status transitions (cancel/actualize, §5/§19 of the directive)
+# go through this same endpoint -- a dedicated explicit action, never
+# inferred, and the row is never deleted either way (§18: "do not
+# hard-delete financial planning history").
+@app.patch("/ventures/{venture_id}/hire-plans/{hire_plan_id}", response_model=HirePlanResponse)
+def update_hire_plan(
+    venture_id: int,
+    hire_plan_id: int,
+    request: UpdateHirePlanRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    existing = get_venture_hire_plan_for_owner(current_user.user_id, venture_id, hire_plan_id)
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Hire plan not found.")
+
+    fields = {k: v for k, v in request.model_dump(exclude_unset=True).items()}
+
+    if fields:
+        merged = {**existing, **fields}
+        if merged["employment_type"] == "employee":
+            if merged.get("annual_salary_cents") is None or merged.get("burden_percent") is None:
+                raise HTTPException(status_code=422, detail="An employee hire requires annual_salary_cents and burden_percent.")
+        else:
+            if merged.get("monthly_cost_cents") is None:
+                raise HTTPException(status_code=422, detail="A contractor hire requires monthly_cost_cents.")
+        if merged.get("end_date") is not None and merged["end_date"] < merged["start_date"]:
+            raise HTTPException(status_code=422, detail="end_date cannot be before start_date.")
+
+    updated = update_venture_hire_plan_for_owner(current_user.user_id, venture_id, hire_plan_id, **fields)
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Hire plan not found.")
+
+    if "status" in fields:
+        _log_event_safe(
+            "hire_plan_status_changed",
+            user_id=current_user.user_id,
+            venture_id=venture_id,
+            metadata={"status": fields["status"]},
+        )
+
+    return _hire_plan_response(updated)
+
+
+# Phase 35C §17: a PERSISTED plan vs. a TEMPORARY COMPARISON are
+# structurally different -- this endpoint NEVER writes to
+# venture_hire_plans. It answers "what would this hire do" (before
+# saving) and "hire now vs. later" (called twice with different
+# start_date values) using the exact same calculation path a real save
+# would use, so the preview a founder sees is never a different
+# computation than what they'd get after saving.
+@app.post("/ventures/{venture_id}/hire-plans/preview", response_model=HireImpactPreview)
+def preview_hire_plan(
+    venture_id: int,
+    request: CreateHirePlanRequest,
+    exclude_hire_plan_id: int | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    hypothetical = _create_hire_request_to_row(request)
+    monthly_cost = compute_hire_monthly_cost_cents(hypothetical)
+    annual_cost = compute_hire_annual_cost_cents(hypothetical)
+
+    snapshot = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+    if snapshot is None:
+        return HireImpactPreview(
+            computed_monthly_cost_cents=monthly_cost,
+            computed_annual_cost_cents=annual_cost,
+            baseline_projection=[],
+            with_hire_projection=[],
+        )
+
+    existing_hires = [
+        h for h in list_venture_hire_plans_for_owner(current_user.user_id, venture_id)
+        if h["id"] != exclude_hire_plan_id
+    ]
+    existing_items = hire_plan_items_for_projection(existing_hires)
+
+    baseline = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=existing_items)
+
+    hypothetical_item = hire_to_plan_item({**hypothetical, "id": -1})
+    with_hire_items = existing_items + ([hypothetical_item] if hypothetical_item else [])
+    with_hire = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=with_hire_items)
+
+    return HireImpactPreview(
+        computed_monthly_cost_cents=monthly_cost,
+        computed_annual_cost_cents=annual_cost,
+        baseline_projection=[ProjectedMonthWithPlan(**m) for m in baseline],
+        with_hire_projection=[ProjectedMonthWithPlan(**m) for m in with_hire],
+    )
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])

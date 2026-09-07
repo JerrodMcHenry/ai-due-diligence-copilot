@@ -51,10 +51,57 @@ export interface ProjectedMonth {
   depleted: boolean;
 }
 
+// --- Phase 35C -- Hiring + Operating Plan Engine V1 -------------------------
+// Mirrors app/models/venture_hire_plans.py exactly.
+
+export type EmploymentType = "employee" | "contractor";
+export type HirePlanStatus = "planned" | "cancelled" | "actualized";
+
+export interface CreateHirePlanRequest {
+  role: string;
+  employment_type: EmploymentType;
+  // Employee: annual_salary_cents + burden_percent required, monthly_cost_cents null.
+  // Contractor: monthly_cost_cents required, the other two null.
+  annual_salary_cents: number | null;
+  burden_percent: number | null;
+  monthly_cost_cents: number | null;
+  one_time_cost_cents: number | null;
+  start_date: string; // "YYYY-MM-DD"
+  end_date: string | null;
+}
+
+export interface HirePlan extends CreateHirePlanRequest {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  status: HirePlanStatus;
+  created_at: string;
+  updated_at: string;
+  // Always DERIVED (app/ai/financial_engine.py) -- never re-computed on
+  // the frontend, so the number a founder sees can never drift from the
+  // one the projection actually used.
+  computed_monthly_cost_cents: number | null;
+  computed_annual_cost_cents: number | null;
+}
+
+export interface ProjectedMonthWithPlan extends ProjectedMonth {
+  plan_expense_impact_cents: number;
+  active_plan_item_ids: number[];
+}
+
+export interface HireImpactPreview {
+  computed_monthly_cost_cents: number | null;
+  computed_annual_cost_cents: number | null;
+  baseline_projection: ProjectedMonthWithPlan[];
+  with_hire_projection: ProjectedMonthWithPlan[];
+}
+
 export interface VentureFinancialsResponse {
   latest_snapshot: FinancialSnapshot | null;
   derived: DerivedFinancialMetrics | null;
   projection: ProjectedMonth[];
+  hire_plans: HirePlan[];
+  projection_with_plan: ProjectedMonthWithPlan[];
 }
 
 export interface FinancialHistoryResponse {

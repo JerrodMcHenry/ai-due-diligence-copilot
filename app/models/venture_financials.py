@@ -22,6 +22,8 @@ from datetime import date, datetime
 
 from pydantic import BaseModel, Field
 
+from app.models.venture_hire_plans import HirePlanResponse, ProjectedMonthWithPlan
+
 
 class CreateFinancialSnapshotRequest(BaseModel):
     """
@@ -103,10 +105,19 @@ class VentureFinancialsResponse(BaseModel):
     to null-check twice) -- `derived.status == "insufficient_data"` and
     `projection == []` are the honest "nothing to show yet" values in
     every other case.
+
+    Phase 35C additive fields: `hire_plans` (every status='planned' hire
+    for this venture) and `projection_with_plan` (the SAME projection
+    engine, given those hires) -- `projection` above stays the
+    baseline-only meaning it already had in Phase 35B, byte-identical,
+    for regression safety; `projection_with_plan` is new. See
+    docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md.
     """
     latest_snapshot: FinancialSnapshotResponse | None = None
     derived: DerivedFinancialMetrics | None = None
     projection: list[ProjectedMonth] = Field(default_factory=list)
+    hire_plans: list[HirePlanResponse] = Field(default_factory=list)
+    projection_with_plan: list[ProjectedMonthWithPlan] = Field(default_factory=list)
 
 
 class FinancialHistoryResponse(BaseModel):

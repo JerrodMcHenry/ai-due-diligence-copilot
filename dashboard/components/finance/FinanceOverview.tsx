@@ -6,10 +6,21 @@ import { useAuth } from "@clerk/nextjs";
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 
-import { createVentureFinancialSnapshot, getVentureFinancials } from "@/lib/api";
+import { createVentureFinancialSnapshot, createHirePlan, getVentureFinancials, previewHirePlan, updateHirePlan } from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
-import type { CreateFinancialSnapshotRequest, DerivedFinancialMetrics, FinancialSnapshot, VentureFinancialsResponse, ProjectedMonth } from "@/types";
+import type {
+  CreateFinancialSnapshotRequest,
+  CreateHirePlanRequest,
+  DerivedFinancialMetrics,
+  EmploymentType,
+  FinancialSnapshot,
+  HireImpactPreview,
+  HirePlan,
+  ProjectedMonth,
+  ProjectedMonthWithPlan,
+  VentureFinancialsResponse,
+} from "@/types";
 
 // Phase 35B -- Financial State Persistence + Runway Engine V1. The
 // foundational Finance surface inside the Venture workspace -- see
@@ -43,6 +54,10 @@ export default function FinanceOverview({ ventureId }: Props) {
   const [data, setData] = useState<VentureFinancialsResponse | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Phase 35C: closed | adding a new hire | editing an existing one.
+  // Deliberately separate from `isEditing` (the snapshot form) -- only
+  // one panel is ever open at a time, but they are orthogonal concerns.
+  const [hirePanel, setHirePanel] = useState<{ mode: "closed" } | { mode: "add" } | { mode: "edit"; hire: HirePlan }>({ mode: "closed" });
 
   const refresh = useCallback(async () => {
     const token = await getToken();
@@ -80,6 +95,49 @@ export default function FinanceOverview({ ventureId }: Props) {
     }
   }
 
+  async function withToken<T>(action: (token: string) => Promise<T>): Promise<T | null> {
+    setError(null);
+    const token = await getToken();
+    if (!token) {
+      setError("Your session expired. Sign in again.");
+      return null;
+    }
+    try {
+      return await action(token);
+    } catch (err) {
+      console.error(err);
+      setError("Something went wrong. Try again.");
+      return null;
+    }
+  }
+
+  async function handlePreviewHire(request: CreateHirePlanRequest, excludeId?: number): Promise<HireImpactPreview | null> {
+    return withToken((token) => previewHirePlan(ventureId, request, token, excludeId));
+  }
+
+  async function handleSaveHire(request: CreateHirePlanRequest) {
+    const result = await withToken(async (token) => {
+      if (hirePanel.mode === "edit") {
+        await updateHirePlan(ventureId, hirePanel.hire.id, request, token);
+      } else {
+        await createHirePlan(ventureId, request, token);
+      }
+      return getVentureFinancials(ventureId, token);
+    });
+    if (result) {
+      setData(result);
+      setHirePanel({ mode: "closed" });
+    }
+  }
+
+  async function handleHireStatusChange(hire: HirePlan, status: "cancelled" | "actualized") {
+    const result = await withToken(async (token) => {
+      await updateHirePlan(ventureId, hire.id, { status }, token);
+      return getVentureFinancials(ventureId, token);
+    });
+    if (result) setData(result);
+  }
+
   if (loadState === "loading") {
     return <div className="h-40 animate-pulse rounded-2xl border border-border bg-surface" />;
   }
@@ -96,6 +154,22 @@ export default function FinanceOverview({ ventureId }: Props) {
     return (
       <BaseCard className="space-y-4 p-6 sm:p-7">
         <SnapshotForm existing={data?.latest_snapshot ?? null} onCancel={() => setIsEditing(false)} onSave={handleSave} />
+        {error ? <p className="text-sm text-danger">{error}</p> : null}
+      </BaseCard>
+    );
+  }
+
+  if (hirePanel.mode !== "closed") {
+    return (
+      <BaseCard className="space-y-4 p-6 sm:p-7">
+        <HireForm
+          existing={hirePanel.mode === "edit" ? hirePanel.hire : null}
+          hasFinancialSnapshot={Boolean(data?.latest_snapshot)}
+          currentRunwayLabel={data?.derived ? runwayLabel(data.derived) : "—"}
+          onPreview={handlePreviewHire}
+          onSave={handleSaveHire}
+          onCancel={() => setHirePanel({ mode: "closed" })}
+        />
         {error ? <p className="text-sm text-danger">{error}</p> : null}
       </BaseCard>
     );
@@ -128,7 +202,17 @@ export default function FinanceOverview({ ventureId }: Props) {
 
       <CurrentSnapshotBreakdown snapshot={data.latest_snapshot} />
 
-      {data.projection.length > 0 ? <CashOutlook projection={data.projection} status={data.derived.status} /> : null}
+      <PlannedChangesSection
+        hirePlans={data.hire_plans}
+        onAddHire={() => setHirePanel({ mode: "add" })}
+        onEditHire={(hire) => setHirePanel({ mode: "edit", hire })}
+        onCancelHire={(hire) => handleHireStatusChange(hire, "cancelled")}
+        onActualizeHire={(hire) => handleHireStatusChange(hire, "actualized")}
+      />
+
+      {data.projection.length > 0 ? (
+        <CashOutlook projection={data.projection} projectionWithPlan={data.projection_with_plan} status={data.derived.status} />
+      ) : null}
 
       <div>
         <Button type="button" variant="secondary" onClick={() => setIsEditing(true)}>
@@ -144,12 +228,14 @@ export default function FinanceOverview({ ventureId }: Props) {
 
 // --- Headline: cash / revenue / spend / burn / runway -----------------------
 
+function runwayLabel(derived: DerivedFinancialMetrics): string {
+  if (derived.status === "burning" && derived.runway_months !== null) return `${derived.runway_months} months`;
+  if (derived.status === "out_of_cash") return "0 months";
+  return "—";
+}
+
 function HeadlineMetrics({ snapshot, derived }: { snapshot: FinancialSnapshot; derived: DerivedFinancialMetrics }) {
-  const runwayValue = (() => {
-    if (derived.status === "burning" && derived.runway_months !== null) return `${derived.runway_months} months`;
-    if (derived.status === "out_of_cash") return "0 months";
-    return "—";
-  })();
+  const runwayValue = runwayLabel(derived);
 
   const items: { label: string; value: string }[] = [
     { label: "Cash", value: snapshot.cash_balance_cents !== null ? formatWholeDollars(snapshot.cash_balance_cents) : "Unknown" },
@@ -237,10 +323,34 @@ function CurrentSnapshotBreakdown({ snapshot }: { snapshot: FinancialSnapshot })
 
 // --- Cash outlook: bounded, readable projection summary ---------------------
 
-function CashOutlook({ projection, status }: { projection: ProjectedMonth[]; status: DerivedFinancialMetrics["status"] }) {
+function CashOutlook({
+  projection,
+  projectionWithPlan,
+  status,
+}: {
+  projection: ProjectedMonth[];
+  projectionWithPlan: ProjectedMonthWithPlan[];
+  status: DerivedFinancialMetrics["status"];
+}) {
+  // Phase 35C: only show a second "with planned changes" column when a
+  // planned hire is actually active somewhere in the horizon -- a
+  // venture with no plans must look EXACTLY like Phase 35B's own single-
+  // column table, no visual complexity added for nothing.
+  const hasActivePlan = projectionWithPlan.some((m) => m.plan_expense_impact_cents > 0);
+
+  // The two series can have DIFFERENT LENGTHS -- a plan that costs more
+  // depletes cash sooner and its own array simply stops there, shorter
+  // than the baseline's. Rows are merged by month_index (both series
+  // share the same as_of_date/cadence), never by raw array position,
+  // and a side that already depleted before this row shows $0 rather
+  // than reading past the end of its own (shorter) array.
   const visible = projection.slice(0, 12);
+  const visibleWithPlan = projectionWithPlan.slice(0, 12);
+  const rowCount = Math.max(visible.length, hasActivePlan ? visibleWithPlan.length : 0);
+  const withPlanByIndex = new Map(projectionWithPlan.map((m) => [m.month_index, m]));
   const remaining = projection.length - visible.length;
   const depletionMonth = projection.find((m) => m.depleted);
+  const depletionWithPlan = projectionWithPlan.find((m) => m.depleted);
 
   return (
     <div>
@@ -249,31 +359,422 @@ function CashOutlook({ projection, status }: { projection: ProjectedMonth[]; sta
         {status === "cash_flow_positive"
           ? "Based on your current monthly snapshot. If these numbers stayed unchanged, cash would keep growing."
           : "Based on your current monthly snapshot. If these numbers stayed unchanged, this is what happens next -- not a prediction."}
+        {hasActivePlan ? " \"With planned changes\" includes the hires below." : ""}
       </p>
       <div className="mt-3 overflow-x-auto">
         <table className="w-full text-left text-sm">
           <thead>
             <tr className="text-xs font-semibold uppercase tracking-wide text-text-muted">
               <th className="py-1 pr-3">Month</th>
-              <th className="py-1 text-right">Ending cash</th>
+              <th className="py-1 text-right">{hasActivePlan ? "Current trajectory" : "Ending cash"}</th>
+              {hasActivePlan ? <th className="py-1 pl-3 text-right">With planned changes</th> : null}
             </tr>
           </thead>
           <tbody>
-            {visible.map((m) => (
-              <tr key={m.month_index} className="border-t border-border">
-                <td className="py-1.5 pr-3 text-text-secondary">{formatMonthYear(m.date)}</td>
-                <td className="py-1.5 text-right font-medium text-text-primary">
-                  {formatWholeDollars(m.ending_cash_cents)}
-                  {m.depleted ? <span className="ml-1.5 text-xs font-semibold text-danger">Cash reaches $0</span> : null}
-                </td>
-              </tr>
-            ))}
+            {Array.from({ length: rowCount }, (_, i) => {
+              const monthIndex = i + 1;
+              const base = visible[i];
+              const withPlan = withPlanByIndex.get(monthIndex);
+              // A side with no row for this month has already depleted
+              // in an earlier row -- carry $0 forward rather than
+              // reading past the end of its own (shorter) array.
+              const label = base ? formatMonthYear(base.date) : withPlan ? formatMonthYear(withPlan.date) : "";
+              return (
+                <tr key={monthIndex} className="border-t border-border">
+                  <td className="py-1.5 pr-3 text-text-secondary">{label}</td>
+                  <td className="py-1.5 text-right font-medium text-text-primary">
+                    {formatWholeDollars(base ? base.ending_cash_cents : 0)}
+                    {base?.depleted ? <span className="ml-1.5 text-xs font-semibold text-danger">$0</span> : null}
+                  </td>
+                  {hasActivePlan ? (
+                    <td className="py-1.5 pl-3 text-right font-medium text-text-primary">
+                      {formatWholeDollars(withPlan ? withPlan.ending_cash_cents : 0)}
+                      {withPlan?.depleted ? <span className="ml-1.5 text-xs font-semibold text-danger">$0</span> : null}
+                    </td>
+                  ) : null}
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>
-      {remaining > 0 && !depletionMonth ? (
+      {remaining > 0 && !depletionMonth && !(hasActivePlan && depletionWithPlan) ? (
         <p className="mt-2 text-xs text-text-muted">Continues growing steadily beyond month {visible.length} at this rate.</p>
       ) : null}
+    </div>
+  );
+}
+
+// --- Phase 35C -- planned changes (hire plans) -------------------------------
+
+function hireCostLabel(hire: HirePlan): string {
+  if (hire.computed_monthly_cost_cents === null) return "—";
+  return `${formatWholeDollars(hire.computed_monthly_cost_cents)}/mo`;
+}
+
+function PlannedChangesSection({
+  hirePlans,
+  onAddHire,
+  onEditHire,
+  onCancelHire,
+  onActualizeHire,
+}: {
+  hirePlans: HirePlan[];
+  onAddHire: () => void;
+  onEditHire: (hire: HirePlan) => void;
+  onCancelHire: (hire: HirePlan) => void;
+  onActualizeHire: (hire: HirePlan) => void;
+}) {
+  // Only actively-planned hires are shown -- a cancelled/actualized one
+  // is still safely persisted (§18: never hard-deleted) but this is
+  // deliberately not a full history UI (§13 of the directive).
+  const active = hirePlans.filter((h) => h.status === "planned");
+
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Planned changes</p>
+      {active.length > 0 ? (
+        <ul className="mt-2 space-y-2">
+          {active.map((hire) => (
+            <li key={hire.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
+              <div>
+                <p className="text-sm font-medium text-text-primary">{hire.role}</p>
+                <p className="text-xs text-text-muted">
+                  {hireCostLabel(hire)} starting {formatMonthYear(hire.start_date)}
+                  {hire.end_date ? ` through ${formatMonthYear(hire.end_date)}` : ""}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs">
+                <button type="button" onClick={() => onEditHire(hire)} className="font-semibold text-primary hover:text-primary-hover">
+                  Edit
+                </button>
+                <button type="button" onClick={() => onCancelHire(hire)} className="font-semibold text-text-muted hover:text-danger">
+                  Cancel
+                </button>
+                <button type="button" onClick={() => onActualizeHire(hire)} className="font-semibold text-text-muted hover:text-text-primary">
+                  Mark as actualized
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-1 text-sm leading-6 text-text-secondary">Nothing planned yet.</p>
+      )}
+      <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onAddHire}>
+        Model a hire
+      </Button>
+      <p className="mt-1.5 text-sm leading-6 text-text-secondary">
+        See how adding someone to the team would affect monthly spending and your cash runway.
+      </p>
+    </div>
+  );
+}
+
+// --- Phase 35C -- model a hire: form -> preview -> save ----------------------
+
+type HireFormValues = {
+  role: string;
+  employmentType: EmploymentType;
+  annualSalary: string;
+  burdenPercent: string;
+  monthlyCost: string;
+  oneTimeCost: string;
+  startDate: string;
+  endDate: string;
+};
+
+function hireToFormValues(hire: HirePlan | null): HireFormValues {
+  if (!hire) {
+    return { role: "", employmentType: "employee", annualSalary: "", burdenPercent: "", monthlyCost: "", oneTimeCost: "", startDate: "", endDate: "" };
+  }
+  return {
+    role: hire.role,
+    employmentType: hire.employment_type,
+    annualSalary: hire.annual_salary_cents !== null ? String(centsToDollars(hire.annual_salary_cents)) : "",
+    burdenPercent: hire.burden_percent !== null ? String(hire.burden_percent) : "",
+    monthlyCost: hire.monthly_cost_cents !== null ? String(centsToDollars(hire.monthly_cost_cents)) : "",
+    oneTimeCost: hire.one_time_cost_cents !== null ? String(centsToDollars(hire.one_time_cost_cents)) : "",
+    startDate: hire.start_date,
+    endDate: hire.end_date ?? "",
+  };
+}
+
+function formValuesToRequest(values: HireFormValues): CreateHirePlanRequest | null {
+  if (!values.role.trim() || !values.startDate) return null;
+  if (values.employmentType === "employee") {
+    if (values.annualSalary.trim() === "" || values.burdenPercent.trim() === "") return null;
+    return {
+      role: values.role.trim(),
+      employment_type: "employee",
+      annual_salary_cents: dollarsToCents(Number(values.annualSalary)),
+      burden_percent: Number(values.burdenPercent),
+      monthly_cost_cents: null,
+      one_time_cost_cents: values.oneTimeCost.trim() === "" ? null : dollarsToCents(Number(values.oneTimeCost)),
+      start_date: values.startDate,
+      end_date: values.endDate.trim() === "" ? null : values.endDate,
+    };
+  }
+  if (values.monthlyCost.trim() === "") return null;
+  return {
+    role: values.role.trim(),
+    employment_type: "contractor",
+    annual_salary_cents: null,
+    burden_percent: null,
+    monthly_cost_cents: dollarsToCents(Number(values.monthlyCost)),
+    one_time_cost_cents: values.oneTimeCost.trim() === "" ? null : dollarsToCents(Number(values.oneTimeCost)),
+    start_date: values.startDate,
+    end_date: values.endDate.trim() === "" ? null : values.endDate,
+  };
+}
+
+// The single depletion-month reading a projection ever gets reduced to --
+// a DATE (from the projection's own depleted flag), never a fabricated
+// fractional "runway months" for a plan with dated changes (§10 of the
+// directive: "avoid presenting a fractional runway number if dated
+// changes make that number misleading").
+function cashOutLabel(projection: ProjectedMonthWithPlan[]): string {
+  const depletion = projection.find((m) => m.depleted);
+  if (depletion) return `cash reaches $0 around ${formatMonthYear(depletion.date)}`;
+  if (projection.length === 0) return "not enough financial data to model";
+  return "stays cash-flow positive within the next 24 months";
+}
+
+function HireForm({
+  existing,
+  hasFinancialSnapshot,
+  currentRunwayLabel,
+  onPreview,
+  onSave,
+  onCancel,
+}: {
+  existing: HirePlan | null;
+  hasFinancialSnapshot: boolean;
+  currentRunwayLabel: string;
+  onPreview: (request: CreateHirePlanRequest, excludeId?: number) => Promise<HireImpactPreview | null>;
+  onSave: (request: CreateHirePlanRequest) => Promise<void>;
+  onCancel: () => void;
+}) {
+  const [values, setValues] = useState<HireFormValues>(() => hireToFormValues(existing));
+  const [preview, setPreview] = useState<HireImpactPreview | null>(null);
+  const [compareDate, setCompareDate] = useState("");
+  const [comparePreview, setComparePreview] = useState<HireImpactPreview | null>(null);
+  const [isBusy, setIsBusy] = useState(false);
+
+  function setValue<K extends keyof HireFormValues>(key: K, value: HireFormValues[K]) {
+    setValues((prev) => ({ ...prev, [key]: value }));
+    setPreview(null); // any edit invalidates a shown preview -- never let stale numbers linger
+  }
+
+  const request = formValuesToRequest(values);
+
+  if (!hasFinancialSnapshot) {
+    return (
+      <div className="space-y-3">
+        <h2 className="text-xl font-bold text-text-primary">Model a hire</h2>
+        <p className="text-base leading-7 text-text-secondary">
+          We need your current cash and monthly finances before we can model this hire.
+        </p>
+        <Button type="button" onClick={onCancel}>
+          Add financial snapshot
+        </Button>
+      </div>
+    );
+  }
+
+  if (preview) {
+    const withHireLabel = cashOutLabel(preview.with_hire_projection);
+    const baselineLabel = cashOutLabel(preview.baseline_projection);
+    return (
+      <div className="space-y-5">
+        <div>
+          <h2 className="text-xl font-bold text-text-primary">{values.role || "This hire"}</h2>
+          <p className="mt-1 text-sm text-text-secondary">
+            {values.employmentType === "employee" ? `${values.annualSalary ? "$" + Number(values.annualSalary).toLocaleString("en-US") : ""} salary, ${values.burdenPercent}% burden` : "Contractor"}
+            {" · "}Starts {formatMonthYear(values.startDate)}
+          </p>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Modeled cost</p>
+          <p className="mt-1 text-lg font-bold text-text-primary">
+            {preview.computed_monthly_cost_cents !== null ? `${formatWholeDollars(preview.computed_monthly_cost_cents)}/mo` : "—"}
+          </p>
+          {preview.computed_annual_cost_cents !== null ? (
+            <p className="text-sm text-text-secondary">{formatWholeDollars(preview.computed_annual_cost_cents)}/year fully loaded</p>
+          ) : null}
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Financial impact</p>
+          <p className="mt-1 text-sm leading-7 text-text-secondary">
+            Current runway: <span className="font-medium text-text-primary">{currentRunwayLabel}</span>
+            <br />
+            Without this hire, {baselineLabel}.
+            <br />
+            With this hire, <span className="font-medium text-text-primary">{withHireLabel}</span>.
+          </p>
+        </div>
+
+        <div className="rounded-lg border border-border bg-surface p-3">
+          <p className="text-sm font-medium text-text-secondary">Compare a different start date</p>
+          <div className="mt-2 flex flex-wrap items-end gap-2">
+            <input
+              type="date"
+              value={compareDate}
+              onChange={(event) => setCompareDate(event.target.value)}
+              className="h-9 rounded-md border border-border bg-background px-2 text-sm text-text-primary"
+            />
+            <Button
+              type="button"
+              size="sm"
+              variant="subtle"
+              disabled={!compareDate || isBusy}
+              onClick={async () => {
+                if (!request) return;
+                setIsBusy(true);
+                const result = await onPreview({ ...request, start_date: compareDate }, existing?.id);
+                setComparePreview(result);
+                setIsBusy(false);
+              }}
+            >
+              Compare
+            </Button>
+          </div>
+          {comparePreview ? (
+            <p className="mt-2 text-sm leading-6 text-text-secondary">
+              Starting {formatMonthYear(values.startDate)} vs. {formatMonthYear(compareDate)}: {withHireLabel} vs. {cashOutLabel(comparePreview.with_hire_projection)}.
+            </p>
+          ) : null}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            disabled={isBusy}
+            loading={isBusy}
+            onClick={async () => {
+              if (!request) return;
+              setIsBusy(true);
+              await onSave(request);
+              setIsBusy(false);
+            }}
+          >
+            Save this plan
+          </Button>
+          <Button type="button" variant="subtle" disabled={isBusy} onClick={() => setPreview(null)}>
+            Back to edit
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">Model a hire</h2>
+        <p className="mt-1 text-sm leading-6 text-text-secondary">
+          See how adding someone to the team would affect monthly spending and your cash runway.
+        </p>
+      </div>
+
+      <div>
+        <label className="mb-1 block text-sm font-medium text-text-secondary">Role</label>
+        <input
+          type="text"
+          value={values.role}
+          onChange={(event) => setValue("role", event.target.value)}
+          placeholder="e.g. Senior Engineer"
+          className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+        />
+      </div>
+
+      <div>
+        <p className="mb-1.5 text-sm font-medium text-text-secondary">Employee or contractor?</p>
+        <div className="flex gap-2">
+          {(["employee", "contractor"] as const).map((type) => (
+            <button
+              key={type}
+              type="button"
+              onClick={() => setValue("employmentType", type)}
+              className={[
+                "rounded-full border px-3 py-1.5 text-sm font-medium transition-colors",
+                values.employmentType === type ? "border-primary bg-primary-soft text-primary" : "border-border text-text-secondary hover:border-primary/40",
+              ].join(" ")}
+            >
+              {type === "employee" ? "Employee" : "Contractor"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {values.employmentType === "employee" ? (
+        <div className="grid gap-3 sm:grid-cols-2">
+          <MoneyField label="Annual salary" value={values.annualSalary} onChange={(v) => setValue("annualSalary", v)} />
+          <div>
+            <label className="mb-1 block text-sm font-medium text-text-secondary">Benefits &amp; payroll burden</label>
+            <div className="relative">
+              <input
+                type="number"
+                inputMode="decimal"
+                value={values.burdenPercent}
+                onChange={(event) => setValue("burdenPercent", event.target.value)}
+                placeholder="e.g. 25"
+                className="h-10 w-full rounded-lg border border-border bg-surface pr-8 pl-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+              />
+              <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-text-muted">%</span>
+            </div>
+            <p className="mt-1 text-xs text-text-muted">Your own estimate -- there&rsquo;s no universal default.</p>
+          </div>
+        </div>
+      ) : (
+        <MoneyField label="Monthly cost" value={values.monthlyCost} onChange={(v) => setValue("monthlyCost", v)} />
+      )}
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <label className="mb-1 block text-sm font-medium text-text-secondary">Start date</label>
+          <input
+            type="date"
+            value={values.startDate}
+            onChange={(event) => setValue("startDate", event.target.value)}
+            className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-text-secondary">End date (optional)</label>
+          <input
+            type="date"
+            value={values.endDate}
+            onChange={(event) => setValue("endDate", event.target.value)}
+            className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+          />
+        </div>
+      </div>
+
+      <MoneyField label="One-time cost (optional) -- recruiting, equipment, etc." value={values.oneTimeCost} onChange={(v) => setValue("oneTimeCost", v)} />
+
+      <div className="flex flex-wrap gap-2">
+        <Button
+          type="button"
+          disabled={!request || isBusy}
+          loading={isBusy}
+          onClick={async () => {
+            if (!request) return;
+            setIsBusy(true);
+            const result = await onPreview(request, existing?.id);
+            setPreview(result);
+            setComparePreview(null);
+            setIsBusy(false);
+          }}
+        >
+          See financial impact
+        </Button>
+        <Button type="button" variant="subtle" disabled={isBusy} onClick={onCancel}>
+          Cancel
+        </Button>
+      </div>
     </div>
   );
 }
