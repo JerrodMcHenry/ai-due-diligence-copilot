@@ -153,7 +153,7 @@ function ActiveWeekSections({ review }: { review: ReturnType<typeof buildWeeklyR
           <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">What changed</h3>
           <div className="mt-1.5 space-y-1.5">
             {vpsChange && assumptionChanges.length === 0 ? (
-              <p className="text-sm text-text-secondary">Your venture model was updated this week.</p>
+              <p className="text-sm text-text-secondary">Your venture details were updated this week.</p>
             ) : null}
             {assumptionChanges.map((change) => (
               <p key={change.field_path} className="flex flex-wrap items-baseline gap-x-2 text-sm">

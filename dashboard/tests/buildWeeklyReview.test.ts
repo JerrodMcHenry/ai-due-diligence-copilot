@@ -35,6 +35,10 @@ function baseEvent(overrides: Partial<VentureHistoryEvent>): VentureHistoryEvent
     assumption_changes: [],
     mission_id: null,
     mission_title: null,
+    sie_recommendation: null,
+    founder_choice: null,
+    founder_rationale: null,
+    relationship: null,
     ...overrides,
   };
 }

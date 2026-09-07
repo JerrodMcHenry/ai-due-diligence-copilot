@@ -144,6 +144,9 @@ export interface VentureSummary {
   name: string;
   stage: string | null;
   vps: number | null;
+  // Phase 34E: the venture's current active question, if one exists --
+  // see app/models/idea_lab.py's own VentureSummary docstring.
+  current_question: string | null;
   updated_at: string;
 }
 
@@ -219,8 +222,9 @@ export interface ScenarioCompareResponse {
 
 // Phase 6.1 -- AI-Assisted Idea Setup. Every leaf value the AI proposes
 // carries its own provenance so the review UI can render "Based on your
-// description" / "Modeled assumption" / "Not provided yet" instead of
-// presenting everything with equal, unearned confidence. See
+// description" / "SIE assumption" (Phase 34F; was "Modeled assumption")
+// / "Not provided yet" instead of presenting everything with equal,
+// unearned confidence. See
 // app/models/idea_lab.py's own docstring -- validation fields are held
 // to a stricter backend-enforced contract than this type alone can
 // express (a value here with provenance "ai_inferred" under `validation`
@@ -415,7 +419,12 @@ export type VentureHistoryEventType =
   | "action_added"
   | "learning_recorded"
   | "action_completed"
-  | "model_updated";
+  | "model_updated"
+  // Phase 34E -- Founder Experience Simplification V1: History becomes
+  // Learning History. Mirrors app/models/idea_lab.py's own
+  // VentureHistoryEventType exactly.
+  | "decision_recorded"
+  | "outcome_recorded";
 
 export interface VentureHistoryCategoryChange {
   key: string;
@@ -446,6 +455,13 @@ export interface VentureHistoryEvent {
   assumption_changes: VentureHistoryAssumptionChange[];
   mission_id: number | null;
   mission_title: string | null;
+  // decision_recorded only -- kept as two separate fields, never merged.
+  sie_recommendation: string | null;
+  founder_choice: string | null;
+  founder_rationale: string | null;
+  // outcome_recorded only -- plain-language mapping happens at render
+  // time (see VentureProgress.tsx), never stored pre-formatted.
+  relationship: string | null;
 }
 
 export interface VentureHistoryResponse {

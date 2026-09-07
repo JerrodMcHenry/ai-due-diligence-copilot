@@ -37,20 +37,25 @@ export function manualStepIndex(stage: string | null): number {
   return journeyStageId ? VENTURE_JOURNEY_STEP_IDS.indexOf(journeyStageId) : -1;
 }
 
-// Global visual polish, Part 4. Three mutually-exclusive states, shown
-// ONE at a time (never simultaneously competing for attention the way
-// e.g. six always-visible VPS categories would) -- restrained venture-
-// state identity using colors this design system already defines for
-// other purposes, not new hues invented for this: "idea" stays neutral
-// (nothing earned yet, not a judgment), "validating" uses "info" (the
-// same token MissionsSection/Badge already use for an in-progress/
-// informational state), "building" uses "success" (real execution
-// underway). The state's own text label is always shown alongside --
-// color is reinforcement, never the only signal.
+// Global visual polish, Part 4, extended by Phase 34F. Four mutually-
+// exclusive states, shown ONE at a time (never simultaneously competing
+// for attention) -- restrained venture-state identity using colors this
+// design system already defines for other purposes, not new hues
+// invented for this: "idea" stays neutral (nothing earned yet, not a
+// judgment), "validating" uses "info" (the same token MissionsSection/
+// Badge already use for an in-progress/informational state), "building"
+// uses "success" (real execution underway), "operating" uses "primary"
+// (the same accent token the rest of the app already uses for its own
+// most-active/current state, e.g. NextMoves' numbered circles). The
+// state's own text label is always shown alongside -- color is
+// reinforcement, never the only signal, and none of these colors imply
+// one stage has "more access" than another (Phase 34F's own governing
+// doctrine: stage changes guidance, never feature access).
 const STATE_PILL_CLASSES: Record<string, string> = {
   idea: "bg-surface-muted text-text-secondary",
   validating: "bg-info-soft text-info",
   building: "bg-success-soft text-success",
+  operating: "bg-primary-soft text-primary",
 };
 
 type VentureJourneyProps = {

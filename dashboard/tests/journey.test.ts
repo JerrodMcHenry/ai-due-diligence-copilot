@@ -365,20 +365,31 @@ function test_venture_state_building_when_real_traction_exists(): void {
   expect(resolveVentureState(-1, a).id === "building", "Real paying customers (evidence index 3) must bucket to 'building'");
 }
 
-function test_venture_state_never_reaches_a_fundraise_state(): void {
-  // Part 3/5's own explicit instruction: fundraising is a tool, never a
-  // maturity state or entrepreneurship's destination -- there must be no
-  // fourth bucket a venture "graduates" into, no matter how strong its
-  // evidence, and even a founder's own explicit "Launched" manual stage
-  // (index 4) must still read as "building," not a separate state.
+function test_venture_state_evidence_alone_never_reaches_operating(): void {
+  // Phase 34F, Section 2: "Operating Stage" is a real fourth bucket now
+  // (the directive's own explicit Idea/Validation/Building/Operating
+  // vocabulary), but it must remain reachable ONLY via the founder's own
+  // explicit "Launched" manual stage -- no amount of inferred evidence
+  // alone should ever auto-promote a venture into it. Evidence still
+  // caps at "building," exactly as before.
   const a = emptyMinimalAssumptions();
   a.validation.paying_customers = 1_000_000;
   a.validation.monthly_revenue = 10_000_000;
-  expect(resolveVentureState(-1, a).id === "building", "Even extreme traction must bucket to 'building', never a separate 'fundraise' state");
-  expect(resolveVentureState(4, a).id === "building", "An explicit 'Launched' manual stage must still read as 'building', not a separate state");
+  expect(resolveVentureState(-1, a).id === "building", "Even extreme traction must bucket to 'building', never auto-promote to 'operating'");
 }
 
-function test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state(): void {
+function test_venture_state_explicit_launched_stage_reads_as_operating(): void {
+  // Phase 34F, Section 2: an explicit founder "Launched" selection (manual
+  // index 4) now reads as its own "Operating Stage" -- previously this
+  // collapsed into "building," which the phase's own acceptance test
+  // found ambiguous for a founder who has genuinely launched.
+  const a = emptyMinimalAssumptions();
+  a.validation.paying_customers = 1_000_000;
+  a.validation.monthly_revenue = 10_000_000;
+  expect(resolveVentureState(4, a).id === "operating", "An explicit 'Launched' manual stage must read as 'operating'");
+}
+
+function test_venture_state_manual_stage_can_advance_evidence_wins_when_stale(): void {
   // A stale/default manual stage must not hide real evidence, mirroring
   // test_resolve_step_index_prefers_the_more_advanced_of_manual_and_evidence
   // above -- but expressed as the bucketed state a founder actually reads.
@@ -392,7 +403,7 @@ function test_venture_state_descriptions_are_plain_language_not_a_score(): void 
   // activity, never a percentage, a level number, or a claim of
   // completion -- Part 4's own explicit instruction against fabricating
   // false precision.
-  const indexByState: Record<string, number> = { idea: 0, validating: 2, building: 3 };
+  const indexByState: Record<string, number> = { idea: 0, validating: 2, building: 3, operating: 4 };
   for (const [id, index] of Object.entries(indexByState)) {
     const state = resolveVentureState(index, null);
     expect(state.id === id, `resolveVentureState(${index}, null) must resolve to '${id}', got '${state.id}'`);
@@ -586,9 +597,11 @@ function test_format_vps_delta(): void {
 
 // Founder Loop Final Acceptance Audit -- a real, demonstrated bug: the two
 // quick-tag buttons in the "Record What I Learned" flow ("I learned
-// something useful" / "No useful signal yet") unconditionally called
-// setReflectionText(...), silently destroying any real reflection the
-// founder had already typed. A live walkthrough reproduced this exactly.
+// something useful" / "Nothing useful yet" -- reworded from "No useful
+// signal yet" by Phase 34E's jargon audit, same guard, same two buttons)
+// unconditionally called setReflectionText(...), silently destroying any
+// real reflection the founder had already typed. A live walkthrough
+// reproduced this exactly.
 // MissionsSection.tsx has no test coverage of its own (it's a stateful
 // React component with real API calls, outside this repo's plain-node
 // pure-file test family, and this repo has no jest/RTL to mount it) --
@@ -612,8 +625,8 @@ function test_reflection_quick_tags_never_unconditionally_overwrite_founder_text
     "The \"I learned something useful\" button must not unconditionally overwrite reflectionText"
   );
   expect(
-    !/onClick=\{\(\) => setReflectionText\("No useful signal yet\.?"?\)\}/.test(source),
-    "The \"No useful signal yet\" button must not unconditionally overwrite reflectionText"
+    !/onClick=\{\(\) => setReflectionText\("Nothing useful yet\.?"?\)\}/.test(source),
+    "The \"Nothing useful yet\" button must not unconditionally overwrite reflectionText"
   );
 }
 
@@ -651,8 +664,9 @@ const TESTS: [string, () => void][] = [
   ["test_venture_state_idea_when_only_assumptions_modeled", test_venture_state_idea_when_only_assumptions_modeled],
   ["test_venture_state_validating_when_interviews_reported", test_venture_state_validating_when_interviews_reported],
   ["test_venture_state_building_when_real_traction_exists", test_venture_state_building_when_real_traction_exists],
-  ["test_venture_state_never_reaches_a_fundraise_state", test_venture_state_never_reaches_a_fundraise_state],
-  ["test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state", test_venture_state_manual_stage_can_advance_but_not_invent_a_fourth_state],
+  ["test_venture_state_evidence_alone_never_reaches_operating", test_venture_state_evidence_alone_never_reaches_operating],
+  ["test_venture_state_explicit_launched_stage_reads_as_operating", test_venture_state_explicit_launched_stage_reads_as_operating],
+  ["test_venture_state_manual_stage_can_advance_evidence_wins_when_stale", test_venture_state_manual_stage_can_advance_evidence_wins_when_stale],
   ["test_venture_state_descriptions_are_plain_language_not_a_score", test_venture_state_descriptions_are_plain_language_not_a_score],
   ["test_what_if_never_suggests_a_lower_interview_count_than_already_reported", test_what_if_never_suggests_a_lower_interview_count_than_already_reported],
   ["test_what_if_suppresses_interview_scenario_at_commercial_scale", test_what_if_suppresses_interview_scenario_at_commercial_scale],

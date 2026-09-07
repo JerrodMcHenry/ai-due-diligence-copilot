@@ -613,6 +613,59 @@ def test_recommendation_is_generic_not_domain_specific() -> None:
         _cleanup()
 
 
+def test_recommendation_respects_customer_prerequisite() -> None:
+    """Phase 34F, Section 7: SIE must never recommend interviewing 'target
+    customers' when it doesn't yet know who the target customer is. Uses
+    the phase's own acceptance-test scenario (a macroeconomic-data
+    venture with no described customer) -- vps_guidance.py's own
+    next_milestones() would otherwise put "Interview 20+ target
+    customers..." first, exactly like every other fresh, no-traction
+    venture; the fallback recommendation must substitute a customer-
+    identification question instead."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            body = {
+                "name": "ZZTest Macro Data Venture",
+                "description": "I want to create a product that streamlines macroeconomic data. A Macrobond but cooler.",
+                "industry": None,
+                "business_model": None,
+                "target_customer": None,
+                "stage": "Idea",
+                "assumptions": {**SAMPLE_ASSUMPTIONS, "target_customer": None},
+            }
+            response = client.post("/ventures", json=body, headers=_auth_headers(USER_A))
+            expect(response.status_code == 200, f"Venture create failed: {response.text}")
+            venture = response.json()
+
+            rec = client.get(f"/ventures/{venture['id']}/recommendation", headers=_auth_headers(USER_A)).json()
+            expect(rec["recommendation"] is not None, "a fresh venture with no evidence must still get a recommendation")
+            question = rec["recommendation"]["question_text"].lower()
+            expect(
+                "target customer" not in question,
+                f"must never recommend interviewing 'target customers' before a customer is described, got: {question}",
+            )
+            expect(
+                "who" in question or "customer segment" in question or "figure out" in question,
+                f"expected a customer-identification question first, got: {question}",
+            )
+
+            # Once a target customer IS described, the original
+            # (unmodified) vps_guidance.py milestone becomes reachable
+            # again -- this is a fallback override, not a suppression.
+            update_body = {**body, "target_customer": "economists at investment banks", "assumptions": {**body["assumptions"], "target_customer": "economists at investment banks"}}
+            updated = client.put(f"/ventures/{venture['id']}", json=update_body, headers=_auth_headers(USER_A)).json()
+            expect(updated["target_customer"] == "economists at investment banks", "the update must have taken")
+
+            rec_after = client.get(f"/ventures/{venture['id']}/recommendation", headers=_auth_headers(USER_A)).json()
+            expect(
+                "target customer" in rec_after["recommendation"]["question_text"].lower(),
+                f"once a target customer is known, the original interview milestone should be reachable again, got: {rec_after['recommendation']['question_text']}",
+            )
+    finally:
+        _cleanup()
+
+
 def test_evidence_and_decision_never_change_vps_or_assumptions() -> None:
     """THE FIREWALL, restated for this phase's new tables: recording
     evidence and decisions must never touch modeled_ventures.assumptions
@@ -656,6 +709,7 @@ TESTS = [
     test_recommendation_reflects_willingness_to_pay_evidence,
     test_recommendation_recognizes_mixed_retention_outcome,
     test_recommendation_is_generic_not_domain_specific,
+    test_recommendation_respects_customer_prerequisite,
     test_evidence_and_decision_never_change_vps_or_assumptions,
 ]
 

@@ -11,11 +11,8 @@ import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 import Disclosure from "@/components/ui/Disclosure";
 import VentureUnderstandingPanel from "@/components/idea-lab/VentureUnderstandingPanel";
-import ScenarioComparison from "@/components/idea-lab/ScenarioComparison";
 import VentureJourney, { manualStepIndex } from "@/components/idea-lab/VentureJourney";
-import VentureOverview from "@/components/idea-lab/VentureOverview";
 import ShareVentureSnapshot from "@/components/idea-lab/ShareVentureSnapshot";
-import WhatIfPanel from "@/components/idea-lab/WhatIfPanel";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
 import CaptureWhatHappened from "@/components/idea-lab/CaptureWhatHappened";
 import VentureProgress from "@/components/idea-lab/VentureProgress";
@@ -25,13 +22,13 @@ import FundraisingSimulator from "@/components/fundraising/FundraisingSimulator"
 import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
-import PrimaryCommandCard from "@/components/idea-lab/PrimaryCommandCard";
 import CurrentQuestionCard from "@/components/idea-lab/CurrentQuestionCard";
 import {
   useVentureGraduation,
   VentureGraduationAction,
   VentureGraduationBanner,
 } from "@/components/idea-lab/VentureGraduation";
+import { classifyCategoryKnowledge } from "@/components/idea-lab/ventureKnowledge";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
@@ -45,19 +42,13 @@ import { resolveVentureState } from "@/lib/journey/inferVentureStage";
 import { stashVentureDescriptionForAnalyze } from "@/lib/ventureToStartupHandoff";
 import { consumePitchDeckMission } from "@/lib/pitchDeckMissionHandoff";
 
-import {
-  compareVentureScenarios,
-  deleteVenture,
-  getVenture,
-  getVentureHistory,
-  updateVenture,
-} from "@/lib/api";
+import { deleteVenture, getVenture, getVentureHistory, updateVenture } from "@/lib/api";
 import { emptyAssumptions, VENTURE_STAGES } from "@/types";
 
 import type {
   MissionType,
-  ScenarioCompareResponse,
   VentureAssumptions,
+  VentureHistoryEvent,
   VentureHistoryResponse,
   VentureResponse,
 } from "@/types";
@@ -87,19 +78,24 @@ function formatUpdatedAt(iso: string): string {
   return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 }
 
-// Phase 33 -- Idea Workspace Information Architecture & Founder Operating
-// Loop, Part 2. The five local-navigation destinations, and the ONLY
-// place their ids/labels/order are defined -- both the <Tabs> control and
-// the query-param guard below read from this single source. Adding a
-// sixth destination without demonstrated necessity is explicitly
-// forbidden by the approved architecture; if that ever needs revisiting,
-// it happens here and nowhere else.
-type TabId = "overview" | "model" | "what-if" | "fundraising" | "history";
+// Phase 34E -- Founder Experience Simplification V1. Three local-
+// navigation destinations, down from five -- Model and What-If are
+// removed as primary destinations (see this phase's own final report and
+// docs/product/SIE_BUILD_FOUNDER_EXPERIENCE_V1.md for the full audit and
+// reasoning). This remains the ONLY place the destinations are defined --
+// both the <Tabs> control and the query-param guard below read from this
+// single source.
+//
+// "Validate" (this phase's own initial hypothesis for a fourth
+// destination) was deliberately NOT added: everything it would have
+// held -- the current question, the recommended test, recording a
+// result -- is now Overview's own hero (CurrentQuestionCard), and a
+// separate tab repeating that would be exactly the visual duplication
+// Section 23 forbids, not a genuinely different founder job.
+type TabId = "overview" | "fundraising" | "history";
 
 const LOCAL_NAV_TABS: { id: TabId; label: string }[] = [
   { id: "overview", label: "Overview" },
-  { id: "model", label: "Model" },
-  { id: "what-if", label: "What-If" },
   { id: "fundraising", label: "Fundraising" },
   { id: "history", label: "History" },
 ];
@@ -113,37 +109,62 @@ function isTabId(value: string | null): value is TabId {
   return LOCAL_NAV_TABS.some((candidate) => candidate.id === value);
 }
 
-// Phase 33, Part 9. "Where things stand" is now concise STATUS only --
-// current state (the same VentureJourney pill+sentence this page has
-// always used for that) and the venture's biggest unknown(s), derived
-// from the exact same stillFiguringOutFromCategories() helper
-// VentureOverview's own "What we still need to figure out" list already
-// uses. What used to live here (current action, most recent learning,
-// latest model update) each now has a single, better home: current
-// action is PrimaryCommandCard's own Case B; recent learning and model-
-// update history live in the History tab's existing WeeklyReview /
-// VentureProgress components. Nothing here is new data -- it's the same
-// two facts, reused, with everything else removed per the directive's
-// explicit list of what this card must NOT repeat.
-function WhereThingsStand({
+// Phase 34E -- Founder Experience Simplification V1, Section 9's
+// "VENTURE IDENTITY" step: what is this, who's it for, how might it make
+// money, current stage, and the venture's biggest unknown(s) -- ONE card,
+// where Phase 33 had this split across two (this page's own
+// "Where things stand" card here on Overview, and a near-identical "Your
+// idea / Who it's for / How it might make money / What we still need to
+// figure out" card -- VentureOverview.tsx -- on the now-removed Model
+// tab). Same two underlying facts (VentureJourney's stage state,
+// stillFiguringOutFromCategories()'s unknowns list) as before, rendered
+// exactly once each -- Section 23's own "if two sections answer the same
+// founder question, merge or remove one." "Your idea" itself is NOT
+// repeated here -- PageHeader's subtitle, immediately above this card,
+// already shows the venture's own description.
+function VentureIdentity({
   stage,
   assumptions,
+  whoItsFor,
+  howItMakesMoney,
   stillFiguringOut,
+  onEditDetails,
 }: {
   stage: string | null;
   assumptions: VentureAssumptions;
+  whoItsFor: string | null;
+  howItMakesMoney: string | null;
   stillFiguringOut: string[];
+  onEditDetails: () => void;
 }) {
   return (
-    <BaseCard variant="raised" className="p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Where things stand</p>
-
-      <div className="mt-2">
+    <BaseCard className="p-6">
+      <div className="flex flex-wrap items-start justify-between gap-3">
         <VentureJourney stage={stage} assumptions={assumptions} />
+        {/* Phase 34F, Section 4: outcome-driven, not a profile-maintenance
+            chore -- matches the CTA wording on the section this opens. */}
+        <Button type="button" variant="subtle" size="sm" onClick={onEditDetails}>
+          Add venture context →
+        </Button>
+      </div>
+
+      <div className="mt-5 grid gap-4 sm:grid-cols-2">
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Who it&rsquo;s for</p>
+          <p className="mt-1 text-base leading-6 text-text-primary">
+            {whoItsFor?.trim() || <span className="text-text-muted">Not described yet.</span>}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">How it might make money</p>
+          <p className="mt-1 text-base leading-6 text-text-primary">
+            {howItMakesMoney?.trim() || <span className="text-text-muted">Not described yet.</span>}
+          </p>
+        </div>
       </div>
 
       {stillFiguringOut.length > 0 ? (
-        <div className="mt-4 border-t border-border pt-4">
+        <div className="mt-5 border-t border-border pt-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
             Biggest unknown{stillFiguringOut.length > 1 ? "s" : ""}
           </p>
@@ -158,6 +179,64 @@ function WhereThingsStand({
       ) : null}
     </BaseCard>
   );
+}
+
+// Phase 34E, Section 12: a concise "what SIE currently understands" --
+// deliberately NOT the six-category grading grid by default (that's
+// VentureUnderstandingPanel, still fully intact and one click away via
+// the disclosure below, for a founder who wants the full breakdown).
+// Flattens every category's own real `basis` sentences (never a score,
+// never invented) into one short list; renders nothing when nothing has
+// been modeled yet (Overview's hero above already covers that state).
+function WhatSieUnderstands({ result }: { result: NonNullable<VentureResponse["model_result"]> }) {
+  const categories = classifyCategoryKnowledge(result.categories);
+  const knownFacts = categories.filter((c) => c.hasSignal).flatMap((c) => c.facts);
+
+  if (knownFacts.length === 0) {
+    return null;
+  }
+
+  return (
+    <BaseCard className="p-6">
+      <h2 className="text-lg font-semibold text-text-primary">What SIE understands so far</h2>
+      <ul className="mt-3 space-y-1.5">
+        {knownFacts.slice(0, 6).map((fact) => (
+          <li key={fact} className="flex gap-2 text-base leading-7 text-text-secondary">
+            <span aria-hidden="true" className="text-text-muted">•</span>
+            {fact}
+          </li>
+        ))}
+      </ul>
+      <Disclosure summary="See the full breakdown by category" defaultOpen={false}>
+        <div className="pt-2">
+          <VentureUnderstandingPanel result={result} />
+        </div>
+      </Disclosure>
+    </BaseCard>
+  );
+}
+
+// Phase 34E, Section 9's "RECENT LEARNING / PROGRESS" step -- one line,
+// not a restatement of WeeklyReview/VentureProgress (both stay exclusive
+// to the History tab, per Section 23's own anti-duplication rule).
+// `history.events` is already sorted most-recent-first by the backend.
+function describeHistoryEventTitle(event: VentureHistoryEvent): string {
+  switch (event.event_type) {
+    case "action_added":
+      return `Started: "${event.title}"`;
+    case "action_completed":
+      return `Completed: "${event.title}"`;
+    case "learning_recorded":
+      return "Learning recorded";
+    case "model_updated":
+      return "Venture details updated";
+    case "decision_recorded":
+      return event.founder_choice ? `Decided: "${event.founder_choice}"` : "Decision recorded";
+    case "outcome_recorded":
+      return "Outcome recorded";
+    default:
+      return event.title;
+  }
 }
 
 export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
@@ -194,8 +273,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   const [stage, setStage] = useState<string | null>(null);
   const [draft, setDraft] = useState<VentureAssumptions>(emptyAssumptions());
 
-  const [scenario, setScenario] = useState<ScenarioCompareResponse | null>(null);
-  const [isPreviewing, setIsPreviewing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [actionError, setActionError] = useState<string | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -275,16 +352,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // history-relevant state changed" signal to also tell MissionsSection
   // to reload.
   const [missionsRefreshSignal, setMissionsRefreshSignal] = useState(0);
-
-  // Phase 33, Part 13 (implementation detail). Case A's "Edit your model"
-  // action needs to land on the now-unmounted-until-selected Model tab's
-  // "Edit the full model" disclosure -- a plain onClick can't do both
-  // "switch tabs" and "open+scroll to a not-yet-rendered element" in one
-  // synchronous step. This flag sequences the two: setTab("model") first,
-  // then an effect (once the Model TabPanel has actually mounted) performs
-  // the same openDisclosureAndScrollIntoView() this page has always used
-  // for that exact purpose.
-  const [pendingModelFocus, setPendingModelFocus] = useState(false);
 
   const refreshHistory = useCallback(async () => {
     const token = await getToken();
@@ -376,96 +443,24 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
     };
   }, [ventureId, getToken, refreshHistory]);
 
-  // Phase 33, Part 13 (implementation detail, continued). Runs only once
-  // both conditions are true -- the Model tab is actually active (so its
-  // TabPanel, and therefore the disclosure inside it, exists in the DOM)
-  // and a focus is still pending. requestAnimationFrame gives React one
-  // paint to mount the panel before the DOM lookup runs.
-  useEffect(() => {
-    if (tab !== "model" || !pendingModelFocus) {
-      return;
-    }
-
-    const frame = requestAnimationFrame(() => {
-      openDisclosureAndScrollIntoView("edit-the-full-model");
-      setPendingModelFocus(false);
-    });
-
-    return () => cancelAnimationFrame(frame);
-  }, [tab, pendingModelFocus]);
-
-  function goToEditModel() {
-    setPendingModelFocus(true);
-    setTab("model");
-  }
-
-  // Phase 33, Part 9 (Section 8's "Log what happened" affordance). Capture
-  // stays on Overview -- this never switches tabs, it only scrolls an
-  // already-mounted section into view, exactly the same
-  // scrollIntoView-based mechanism openDisclosureAndScrollIntoView already
-  // uses elsewhere on this page.
-  function scrollToCapture() {
-    document.getElementById("capture-what-happened")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  // Phase 34E -- Founder Experience Simplification V1: editing venture
+  // details is now a contextual disclosure directly on Overview (Section
+  // 6), not a separate Model tab -- so this no longer needs to switch
+  // tabs before it can scroll/expand the disclosure; both happen in the
+  // same synchronous click, since the disclosure is already mounted.
+  function goToEditDetails() {
+    openDisclosureAndScrollIntoView("edit-the-full-model");
   }
 
   function buildRequestBody(assumptions: VentureAssumptions) {
     return { name: name.trim() || "Untitled venture", description, industry, business_model: businessModel, target_customer: targetCustomer, stage, assumptions };
   }
 
-  async function handlePreview() {
-    if (!venture) return;
-
-    setIsPreviewing(true);
-    setActionError(null);
-
-    try {
-      const token = await getToken();
-      if (!token) {
-        setActionError("Your session expired. Sign in again.");
-        return;
-      }
-
-      const result = await compareVentureScenarios(venture.assumptions, draft, token);
-      setScenario(result);
-    } catch (error) {
-      console.error("Failed to preview scenario:", error);
-      setActionError("Couldn't calculate that scenario. Try again.");
-    } finally {
-      setIsPreviewing(false);
-    }
-  }
-
-  // Phase 10.6, Part 7: a "What if?" preset runs through this SAME
-  // preview mechanism -- it only supplies a different `modifiedAssumptions`
-  // value (whatIfScenarios.ts's own patch of the saved venture, not the
-  // manually-edited `draft`). `draft` is updated to match so that if the
-  // founder chooses "Apply & Save" afterward, the existing handleSave()
-  // (unchanged) persists exactly the scenario they just previewed --
-  // there is no separate apply path for a What If result.
-  async function handleRunScenario(modifiedAssumptions: VentureAssumptions) {
-    if (!venture) return;
-
-    setIsPreviewing(true);
-    setActionError(null);
-    setDraft(modifiedAssumptions);
-
-    try {
-      const token = await getToken();
-      if (!token) {
-        setActionError("Your session expired. Sign in again.");
-        return;
-      }
-
-      const result = await compareVentureScenarios(venture.assumptions, modifiedAssumptions, token);
-      setScenario(result);
-    } catch (error) {
-      console.error("Failed to run what-if scenario:", error);
-      setActionError("Couldn't calculate that scenario. Try again.");
-    } finally {
-      setIsPreviewing(false);
-    }
-  }
-
+  // Phase 34E: the separate "Recalculate (preview)" / What-If-only
+  // preview step is gone along with the What-If tab it rendered into
+  // (Section 8) -- editing venture details now just saves directly, one
+  // fewer step for a job that was never actually a "what if," just a
+  // correction.
   async function handleSave() {
     setIsSaving(true);
     setActionError(null);
@@ -480,7 +475,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
       const updated = await updateVenture(ventureId, buildRequestBody(draft), token);
       setVenture(updated);
       setDraft(updated.assumptions);
-      setScenario(null);
       refreshHistory();
     } catch (error) {
       console.error("Failed to save venture:", error);
@@ -609,19 +603,25 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
   const hasUnsavedChanges = !assumptionsEqual(draft, venture.assumptions);
 
-  // Phase 31C-A -- Global Founder UX Acceptance, Part 3: the SAME
-  // resolver PrimaryCommandCard (below) already calls internally, reused
-  // here only to find out WHICH milestone (if any) it's about to show as
-  // the one dominant recommendation -- so NextMoves can skip that exact
-  // entry instead of repeating it. No new recommendation logic.
+  // Phase 34E: the deterministic vps_guidance milestone resolver, still
+  // used for two narrow, still-legitimate jobs -- (1) recognizing
+  // "ready_for_real_startup" for the small Analyze bridge card below
+  // (Section 9's "specialized tools/secondary actions"), and (2) letting
+  // NextMoves skip whichever milestone is already this venture's single
+  // active question, so its "other things to consider" list never repeats
+  // the SIE loop's own current question. It's no longer used to render a
+  // primary "what should I do next" card -- that job belongs to
+  // CurrentQuestionCard alone now (see Section 23's own anti-duplication
+  // rule, and this phase's final report for the removed PrimaryCommandCard).
   const primaryNextStep = venture.model_result ? resolveIdeaLabNextStep(venture.model_result) : null;
   const primaryMilestoneText = primaryNextStep?.kind === "work_on_milestone" ? primaryNextStep.milestoneText : undefined;
+  const readyToAnalyze = primaryNextStep?.kind === "ready_for_real_startup";
 
   // Phase 33, Part 6 (header). A short, restrained textual echo of
   // current state -- reuses the exact same manualStepIndex() +
   // resolveVentureState() pair VentureJourney itself calls, so the header
-  // never disagrees with the fuller state description on Overview's own
-  // Where Things Stand card.
+  // never disagrees with the fuller state description on the Venture
+  // Identity card below.
   //
   // Phase 34A, Part 2: no VPS segment here anymore -- Idea Lab no longer
   // presents a numeric score anywhere, including this compact readout.
@@ -730,10 +730,10 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
         </BaseCard>
       ) : null}
 
-      {/* Phase 33, Part 2/14: the local nav itself -- five destinations,
-          always all five, query-param driven. Wrapped in overflow-x-auto
-          per the 390px requirement (horizontal scroll, never a "More"
-          menu, never hiding Fundraising/History). */}
+      {/* Phase 34E -- Founder Experience Simplification V1: three
+          destinations, wrapped in overflow-x-auto per the 390px
+          requirement (horizontal scroll, never a "More" menu, never
+          hiding Fundraising/History). */}
       <div className="overflow-x-auto pb-2">
         <Tabs tabs={LOCAL_NAV_TABS} activeId={tab} onChange={(id) => setTab(id as TabId)} />
       </div>
@@ -745,12 +745,26 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           </div>
         ) : null}
 
+        {/* Phase 34E -- Founder Experience Simplification V1. Overview is
+            now the home: one clear hierarchy, not a stack of surfaces each
+            claiming to be "what to do" -- Venture Identity (what is this,
+            who's it for, biggest unknowns) -> the intelligence loop hero
+            (what matters now, why, what to do -- CurrentQuestionCard,
+            unchanged from Phase 34D/34D-A) -> what SIE understands ->
+            recent activity -> graduation/analyze bridges -> secondary,
+            de-emphasized "other things you're tracking" -> the venture
+            details editor, contextual and collapsed by default. See
+            docs/product/SIE_BUILD_FOUNDER_EXPERIENCE_V1.md for the full
+            audit and the reasoning behind every removal/move below. */}
         <TabPanel id="overview" activeId={tab}>
           <div className="space-y-8">
-            <WhereThingsStand
+            <VentureIdentity
               stage={stage}
               assumptions={venture.assumptions}
+              whoItsFor={targetCustomer}
+              howItMakesMoney={businessModel}
               stillFiguringOut={venture.model_result ? stillFiguringOutFromCategories(venture.model_result.categories) : []}
+              onEditDetails={goToEditDetails}
             />
 
             {/* Phase 31 -- Venture -> Startup Graduation V1, Part 10: a
@@ -759,251 +773,224 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 secondary tab. Renders nothing until graduated. */}
             <VentureGraduationBanner state={graduation} />
 
-            {/* Phase 33, Part 7 (CRITICAL): the single dynamically-
-                state-driven primary command card -- Case A ("What should
-                I do next?") when no active action exists, Case B ("Your
-                current focus") when one does. Never both; see this
-                component's own docstring for the exact mechanism that
-                guarantees that. */}
-            {venture.model_result ? (
-              <PrimaryCommandCard
-                modelResult={venture.model_result}
-                primaryMissionTitle={primaryMissionTitle}
-                missionedMilestones={missionedMilestones}
-                onStartMission={(milestoneText, suggestion) =>
-                  setPendingMission({
-                    title: milestoneText,
-                    relatedCategory: suggestion.relatedCategory,
-                    missionType: suggestion.missionType,
-                  })
-                }
-                onAnalyzeStartup={() => {
-                  if (description) {
-                    stashVentureDescriptionForAnalyze(description);
-                  }
-                  router.push("/analyze");
-                }}
-                onEditModel={goToEditModel}
-                onLogWhatHappened={scrollToCapture}
-              />
-            ) : null}
-
-            {/* Phase 31C -- Founder Experience Simplification, Part 4:
-                "what happens afterward" -- the one thing the workspace
-                never actually said out loud. Pure copy, no new
-                mechanism -- describes exactly what Capture/Missions/the
-                model-update path already do. */}
-            {venture.model_result ? (
-              <p className="text-center text-base leading-7 text-text-secondary">
-                Do this → record what happened → SIE updates its understanding → you get your next guidance.
-              </p>
-            ) : null}
-
-            {/* Phase 23 -- Universal Founder Capture V1, moved this
-                phase from mid-page to directly reachable from the
-                primary command card's own "Log what happened" action
-                (Section 8) -- same component, same firewall, same
-                onVentureUpdated/refreshHistory wiring, just given an id
-                so scrollToCapture() above has something to scroll to. */}
-            <div id="capture-what-happened">
-              <CaptureWhatHappened
-                ventureId={ventureId}
-                currentAssumptions={venture.assumptions}
-                currentModelResult={venture.model_result}
-                ventureRequestBase={{
-                  name: name.trim() || "Untitled venture",
-                  description,
-                  industry,
-                  business_model: businessModel,
-                  target_customer: targetCustomer,
-                  stage,
-                }}
-                onVentureUpdated={(updated) => {
-                  setVenture(updated);
-                  setDraft(updated.assumptions);
-                  setScenario(null);
-                  refreshHistory();
-                }}
-                onHistoryChanged={() => {
-                  refreshHistory();
-                  // Phase 29B Closure, Part 2 -- see missionsRefreshSignal's
-                  // own comment above. Fires for both a new capture
-                  // (handleSave) and a model update tied to one
-                  // (handleUpdateModel) -- either way, MissionsSection's
-                  // own missions list may now be stale.
-                  setMissionsRefreshSignal((n) => n + 1);
-                }}
-                onStartMission={(title, suggestion) =>
-                  setPendingMission({
-                    title,
-                    relatedCategory: suggestion.relatedCategory,
-                    missionType: suggestion.missionType,
-                  })
-                }
-                // Phase 33 live acceptance test, Part 7/8 fix: this used
-                // to always re-derive the raw resolveIdeaLabNextStep()
-                // recommendation directly, independent of whether the
-                // founder had already started a DIFFERENT milestone as a
-                // real action. That surfaced as a live, observed
-                // contradiction -- PrimaryCommandCard's own "YOUR CURRENT
-                // FOCUS" naming one milestone while this panel's "Your
-                // current focus:" line named a different, stale one right
-                // next to it. Using the exact same primaryMissionTitle ??
-                // primaryMilestoneText value NextMoves' dedup already uses
-                // makes every "current focus" statement on the page agree,
-                // by construction, with the one PrimaryCommandCard shows.
-                currentPriorityText={primaryMissionTitle ?? primaryMilestoneText ?? null}
-              />
-            </div>
-
-            {/* Phase 33, Part 8: "Your Active Work" -- the founder's own
-                action-management surface (start/complete/dismiss/reflect
-                on real venture_missions rows). Unchanged component and
-                data; only the framing heading is new, making explicit
-                that this is where active work is TRACKED, not a second
-                place claiming to tell the founder what to do next -- that
-                claim belongs to PrimaryCommandCard alone. */}
-            <div className="space-y-3">
-              <h2 className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your active work</h2>
-              <div id="your-missions">
-                <MissionsSection
-                  ventureId={ventureId}
-                  currentAssumptions={venture.assumptions}
-                  currentModelResult={venture.model_result}
-                  missionsRefreshSignal={missionsRefreshSignal}
-                  ventureRequestBase={{
-                    name: name.trim() || "Untitled venture",
-                    description,
-                    industry,
-                    business_model: businessModel,
-                    target_customer: targetCustomer,
-                    stage,
-                  }}
-                  pendingMission={pendingMission}
-                  onPendingMissionConsumed={() => setPendingMission(null)}
-                  onMissionTitlesChanged={(titles) => {
-                    setMissionedMilestones(titles);
-                    // Founder Progress / Venture History V1: fires after
-                    // every mission-list mutation (create, status change,
-                    // learning recorded) -- MissionsSection's own
-                    // loadMissions() already reloads for exactly those
-                    // cases, so this reuses that same signal rather than
-                    // adding new props/wiring.
-                    refreshHistory();
-                  }}
-                  onPrimaryMissionChanged={setPrimaryMissionTitle}
-                  onVentureUpdated={(updated) => {
-                    setVenture(updated);
-                    setDraft(updated.assumptions);
-                    setScenario(null);
-                    refreshHistory();
-                  }}
-                />
-              </div>
-            </div>
-
-            {venture.model_result ? (
-              <NextMoves
-                milestones={venture.model_result.next_milestones}
-                skipMilestoneText={primaryMissionTitle ?? primaryMilestoneText}
-                missionedMilestones={missionedMilestones}
-                onMakeMission={(milestoneText) => {
-                  const suggestion = suggestionForMilestone(milestoneText);
-                  setPendingMission({
-                    title: milestoneText,
-                    relatedCategory: suggestion.relatedCategory,
-                    missionType: suggestion.missionType,
-                  });
-                }}
-              />
-            ) : null}
-
-            {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10:
-                ONE contextual placement -- prominent when the existing
-                eligibility check says real evidence has been reported,
-                a quiet manual link otherwise. Renders nothing once
-                already graduated (VentureGraduationBanner above covers
-                that state). */}
-            <VentureGraduationAction state={graduation} prominent={graduation.eligible} />
-
-            {/* Phase 34D -- SIE Build Intelligence Loop V1. Deliberately
-                additive and self-contained -- proves the
-                question -> test -> result -> evidence -> interpretation ->
-                recommendation -> decision -> outcome loop end to end
-                without touching anything else on this tab. Does not
-                replace PrimaryCommandCard, NextMoves, or Your Active
-                Work above -- see this phase's own explicit "do not
-                redesign Idea Lab" instruction. */}
+            {/* Phase 34D/34D-A -- SIE Build Intelligence Loop, now
+                Overview's own hero (Phase 34E, Sections 9-10): "what
+                matters now / why / what to do," progressively revealing
+                the test/result/evidence/interpretation/recommendation/
+                decision/outcome states as they become real. This is the
+                ONE place the workspace answers "what should I do?" --
+                the older, separate "What should I do next?" card
+                (PrimaryCommandCard) and its duplicate "What to consider
+                next" list are retired from this page for exactly that
+                reason (Section 23: two sections answering the same
+                question). Nothing about CurrentQuestionCard's own logic
+                changed. */}
             <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} />
-          </div>
-        </TabPanel>
 
-        {/* Phase 34A -- Remove VPS + Rebuild Idea Lab Around Evidence and
-            Decision Support, Part 4. Required flow, in order: WHAT SIE
-            BELIEVES + WHAT'S UNKNOWN (VentureOverview -- both already live
-            inside that one component), the six-category understanding
-            breakdown (VentureUnderstandingPanel -- what we know / believe
-            / don't know yet per category, no score), then EDIT ASSUMPTIONS
-            (the full editor below). VPSResultPanel is no longer rendered
-            here -- see this phase's final report for what was retained
-            internally and why. A prominent "Edit venture model" action
-            sits at the very top of this tab (Section 4's own explicit
-            requirement) so the editor is never buried below a long read;
-            it reuses the exact same open-and-scroll helper the old
-            "Edit your model" Case A action already used, just fired
-            without needing a tab switch first since we're already here. */}
-        <TabPanel id="model" activeId={tab}>
-          <div className="space-y-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-xl font-semibold text-text-primary">Your venture model</h2>
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => openDisclosureAndScrollIntoView("edit-the-full-model")}
-              >
-                Edit venture model
-              </Button>
+            {/* Phase 34E, Section 9's "specialized tools/secondary
+                actions": the one thing PrimaryCommandCard did that
+                CurrentQuestionCard doesn't -- recognizing a modeled
+                venture is ready for a real, evidence-based Startup
+                Profile, and explaining that boundary honestly. */}
+            {readyToAnalyze ? (
+              <BaseCard className="p-6">
+                <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your model looks solid</p>
+                <h2 className="mt-1 text-lg font-semibold text-text-primary">Ready to turn this into a real startup?</h2>
+                <p className="mt-2 text-base leading-7 text-text-secondary">
+                  This modeled idea shows what COULD work, based on your own assumptions. A real Startup Profile
+                  shows what evidence supports TODAY, built the same way for every company on SIE. Analyzing brings
+                  over your own description as a starting point -- it never creates anything or invents evidence on
+                  your behalf.
+                </p>
+                <Button
+                  type="button"
+                  className="mt-4"
+                  onClick={() => {
+                    if (description) {
+                      stashVentureDescriptionForAnalyze(description);
+                    }
+                    router.push("/analyze");
+                  }}
+                >
+                  Analyze My Startup
+                </Button>
+              </BaseCard>
+            ) : null}
+
+            {venture.model_result ? <WhatSieUnderstands result={venture.model_result} /> : null}
+
+            {/* Phase 34E, Section 9's "recent learning/progress" -- one
+                line, not a restatement of the History tab's own
+                WeeklyReview/VentureProgress (Section 23). */}
+            {!isLoadingHistory && history && history.events.length > 1 ? (
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface-subtle px-4 py-3">
+                <p className="text-sm text-text-secondary">
+                  Most recent: <span className="font-medium text-text-primary">{describeHistoryEventTitle(history.events[0])}</span>
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setTab("history")}
+                  className="shrink-0 text-sm font-semibold text-primary hover:text-primary-hover"
+                >
+                  See full history →
+                </button>
+              </div>
+            ) : null}
+
+            {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10,
+                corrected by Phase 34F, Section 5: the unprominent "Create
+                a Startup Profile from this venture →" quiet link never
+                explained what a Startup Profile is, what creating one
+                does, or why a venture needs to become one -- exactly the
+                gap the acceptance test named. It's removed from the
+                primary journey; only the fully-explained, self-contained
+                card (real evidence reported -> "Ready to make this a
+                startup?", with what/why spelled out) still shows, and
+                only once genuinely eligible. `VentureGraduationAction`'s
+                own non-prominent branch/component is untouched --
+                nothing about graduation itself was removed, only this
+                one under-explained entry point to it. Renders nothing
+                once already graduated (VentureGraduationBanner above
+                covers that state) or not yet eligible. */}
+            {graduation.eligible ? <VentureGraduationAction state={graduation} prominent /> : null}
+
+            {/* Phase 34E, Section 11, corrected by Phase 34F, Section 6:
+                "Other things you're tracking" was still too large and
+                too permanently present for what the acceptance standard
+                asks -- a founder must be free to work on something other
+                than SIE's recommendation, but the primary experience
+                should stay focused on the single highest-value question
+                above. The trigger itself is now the entire pitch
+                ("Working on something else? Add it →") -- no separate
+                intro paragraph, no "tracking" language exposing the
+                internal mission architecture. Nothing about the three
+                components' own logic/data changed -- venture_missions,
+                the capture/model-update firewall, and the milestone
+                suggestions are all exactly as Phase 10/23/33 built them;
+                only this entry point got smaller and plainer. */}
+            <Disclosure summary="Working on something else? Add it →" defaultOpen={false}>
+              <div className="space-y-8 pt-2">
+
+                <div id="capture-what-happened">
+                  <CaptureWhatHappened
+                    ventureId={ventureId}
+                    currentAssumptions={venture.assumptions}
+                    currentModelResult={venture.model_result}
+                    ventureRequestBase={{
+                      name: name.trim() || "Untitled venture",
+                      description,
+                      industry,
+                      business_model: businessModel,
+                      target_customer: targetCustomer,
+                      stage,
+                    }}
+                    onVentureUpdated={(updated) => {
+                      setVenture(updated);
+                      setDraft(updated.assumptions);
+                      refreshHistory();
+                    }}
+                    onHistoryChanged={() => {
+                      refreshHistory();
+                      // Phase 29B Closure, Part 2 -- see missionsRefreshSignal's
+                      // own comment above. Fires for both a new capture
+                      // (handleSave) and a model update tied to one
+                      // (handleUpdateModel) -- either way, MissionsSection's
+                      // own missions list may now be stale.
+                      setMissionsRefreshSignal((n) => n + 1);
+                    }}
+                    onStartMission={(title, suggestion) =>
+                      setPendingMission({
+                        title,
+                        relatedCategory: suggestion.relatedCategory,
+                        missionType: suggestion.missionType,
+                      })
+                    }
+                    currentPriorityText={primaryMissionTitle ?? primaryMilestoneText ?? null}
+                  />
+                </div>
+
+                <div id="your-missions">
+                  <MissionsSection
+                    ventureId={ventureId}
+                    currentAssumptions={venture.assumptions}
+                    currentModelResult={venture.model_result}
+                    missionsRefreshSignal={missionsRefreshSignal}
+                    ventureRequestBase={{
+                      name: name.trim() || "Untitled venture",
+                      description,
+                      industry,
+                      business_model: businessModel,
+                      target_customer: targetCustomer,
+                      stage,
+                    }}
+                    pendingMission={pendingMission}
+                    onPendingMissionConsumed={() => setPendingMission(null)}
+                    onMissionTitlesChanged={(titles) => {
+                      setMissionedMilestones(titles);
+                      refreshHistory();
+                    }}
+                    onPrimaryMissionChanged={setPrimaryMissionTitle}
+                    onVentureUpdated={(updated) => {
+                      setVenture(updated);
+                      setDraft(updated.assumptions);
+                      refreshHistory();
+                    }}
+                  />
+                </div>
+
+                {venture.model_result ? (
+                  <NextMoves
+                    milestones={venture.model_result.next_milestones}
+                    skipMilestoneText={primaryMissionTitle ?? primaryMilestoneText}
+                    missionedMilestones={missionedMilestones}
+                    onMakeMission={(milestoneText) => {
+                      const suggestion = suggestionForMilestone(milestoneText);
+                      setPendingMission({
+                        title: milestoneText,
+                        relatedCategory: suggestion.relatedCategory,
+                        missionType: suggestion.missionType,
+                      });
+                    }}
+                  />
+                ) : null}
+              </div>
+            </Disclosure>
+
+            {/* Phase 34E, Section 6: the old Model tab's editor, retired
+                as a primary destination and moved here as a contextual,
+                collapsed-by-default entry point, opened either by this
+                disclosure directly or by the Venture Identity card's own
+                button above (goToEditDetails()). The editor itself
+                (every field, every accordion) is byte-for-byte the same
+                as before; only its address on the page changed. The
+                separate "Recalculate (preview)" step is gone (Section
+                8) -- Save now applies directly.
+                Phase 34F, Section 4: reframed around the founder benefit
+                -- not "maintain a complete profile," but "SIE gives
+                better guidance the more it understands." The heading and
+                explanation are always visible (even collapsed) so a
+                founder knows WHY before deciding whether to expand it;
+                only the CTA itself is the disclosure's clickable
+                trigger. */}
+            <div>
+              <h2 className="text-lg font-semibold text-text-primary">Help SIE understand your venture</h2>
+              <p className="mt-1 text-sm leading-6 text-text-secondary">
+                Add details about your customers, business model, market, traction, and finances so SIE can
+                give you more relevant guidance and analysis.
+              </p>
             </div>
 
-            <VentureOverview
-              idea={description}
-              whoItsFor={targetCustomer}
-              howItMakesMoney={businessModel}
-              stillFiguringOut={
-                venture.model_result ? stillFiguringOutFromCategories(venture.model_result.categories) : []
-              }
-            />
-
-            {venture.model_result ? <VentureUnderstandingPanel result={venture.model_result} /> : null}
-
-            <Disclosure id="edit-the-full-model" summary="Edit the full model" defaultOpen={false}>
+            <Disclosure id="edit-the-full-model" summary="Add venture context →" defaultOpen={false}>
               <section>
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <h2 className="text-xl font-semibold text-text-primary">What you believe</h2>
-
-                  <div className="flex items-center gap-2">
-                    <Button
-                      type="button"
-                      variant="secondary"
-                      disabled={isPreviewing || !hasUnsavedChanges}
-                      onClick={handlePreview}
-                    >
-                      {isPreviewing ? "Calculating..." : "Recalculate (preview)"}
-                    </Button>
-
-                    <Button
-                      type="button"
-                      disabled={isSaving || !hasUnsavedChanges}
-                      loading={isSaving}
-                      onClick={handleSave}
-                    >
-                      {isSaving ? "Saving..." : "Save Changes"}
-                    </Button>
-                  </div>
+                  <Button type="button" disabled={isSaving || !hasUnsavedChanges} loading={isSaving} onClick={handleSave}>
+                    {isSaving ? "Saving..." : "Save Changes"}
+                  </Button>
                 </div>
 
                 <p className="mt-1 text-sm text-text-secondary">
-                  Everything below except &ldquo;What you&rsquo;ve learned&rdquo; is a modeled assumption, not
+                  Everything below except &ldquo;What you&rsquo;ve learned&rdquo; is an assumption, not
                   observed evidence.
                 </p>
 
@@ -1212,34 +1199,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 </div>
               </section>
             </Disclosure>
-          </div>
-        </TabPanel>
-
-        {/* Phase 33, Part 12 (What-If). Reuses the exact same What If /
-            ScenarioComparison flow that used to live inside Explore's own
-            internal [ Venture ] [ Fundraising ] sub-tabs -- now a
-            top-level destination in its own right, with no math change.
-            "Discard" on ScenarioComparison is the existing, obvious path
-            back to baseline (clears the preview; nothing was ever
-            applied). */}
-        <TabPanel id="what-if" activeId={tab}>
-          <div className="space-y-3">
-            <WhatIfPanel
-              currentAssumptions={venture.assumptions}
-              onRunScenario={handleRunScenario}
-              isRunning={isPreviewing}
-            />
-
-            {scenario ? (
-              <ScenarioComparison
-                scenario={scenario}
-                currentAssumptions={venture.assumptions}
-                scenarioAssumptions={draft}
-                onApply={handleSave}
-                onDiscard={() => setScenario(null)}
-                isApplying={isSaving}
-              />
-            ) : null}
           </div>
         </TabPanel>
 

@@ -149,6 +149,15 @@ export default function IdeaLabDashboard() {
                   {venture.name}
                 </h3>
 
+                {/* Phase 34E -- Founder Experience Simplification V1: "what
+                    should I continue?" per card, not model-centric
+                    metadata -- the venture's current active question
+                    (Phase 34D), when one exists. Two lines, never more,
+                    so the card stays a card, not a second Overview. */}
+                {venture.current_question ? (
+                  <p className="line-clamp-2 text-sm leading-6 text-text-secondary">{venture.current_question}</p>
+                ) : null}
+
                 <div className="mt-auto flex flex-wrap items-center gap-2 text-sm text-text-secondary">
                   {venture.stage ? (
                     <span className="rounded-full border border-border px-2 py-0.5">{venture.stage}</span>

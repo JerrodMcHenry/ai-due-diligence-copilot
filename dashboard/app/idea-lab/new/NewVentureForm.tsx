@@ -149,8 +149,12 @@ export default function NewVentureForm() {
   if (phase === "review" && draft) {
     return (
       <>
+        {/* Phase 34F, Section 3: "Review Your Venture Model" named SIE's
+            own internal representation, not something meaningful to a
+            founder -- renamed to describe the actual founder action
+            (checking/correcting what SIE understood). */}
         <PageHeader
-          title="Review Your Venture Model"
+          title="Review what SIE understood"
           subtitle="Confirm or adjust what SIE understood before creating your venture."
         />
 
@@ -173,8 +177,12 @@ export default function NewVentureForm() {
 
   return (
     <>
+      {/* Phase 34F, Section 3: "Model a new venture" -> "Start a new
+          idea" -- matches the exact CTA language ("Start a New Idea")
+          that already links here from IdeaLabDashboard.tsx, and drops
+          "model" as a noun naming SIE's internal representation. */}
       <PageHeader
-        title="Model a new venture"
+        title="Start a new idea"
         subtitle="Describe your idea in your own words — SIE will propose a structured starting point for you to review."
       />
 
@@ -205,7 +213,14 @@ export default function NewVentureForm() {
             // real evidence.
             maxLength={8000}
             disabled={phase === "structuring"}
-            className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 disabled:opacity-60"
+            // Phase 34E, Section 18: this was the one remaining
+            // text-sm/14px reading surface in the venture-creation flow
+            // -- every other long-form field in this app (AssumptionFields.tsx's
+            // own textareaClasses) was already bumped to 16px/comfortable
+            // line-height in an earlier readability pass; this is the
+            // founder's very first interaction with SIE and deserves the
+            // same treatment, not less.
+            className="w-full resize-y rounded-lg border border-border bg-surface px-4 py-3 text-base leading-7 text-text-primary outline-none transition-colors placeholder:text-text-muted focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20 disabled:opacity-60"
           />
         </div>
 
@@ -218,9 +233,9 @@ export default function NewVentureForm() {
         <button
           type="submit"
           disabled={phase === "structuring"}
-          className="min-h-11 rounded-lg bg-primary px-6 text-sm font-semibold text-white transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
+          className="min-h-11 rounded-lg bg-primary px-6 text-base font-semibold text-white transition-colors hover:bg-primary-hover disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {phase === "structuring" ? "Thinking..." : "Build My Venture Model"}
+          {phase === "structuring" ? "Thinking..." : "See What SIE Understands"}
         </button>
 
         <p className="text-sm text-text-secondary">

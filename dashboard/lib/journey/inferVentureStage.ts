@@ -97,28 +97,33 @@ export function resolveVentureStepIndex(manualIndex: number, assumptions: Minima
   return Math.max(manualIndex, evidenceIndex);
 }
 
-// Founder Experience Model correction, Part 4. The 5-position stepper
-// index above (0-4, "fundraise" included via a founder's own manual
-// "Launched" selection) is now re-presented as ONE OF THREE plain-
-// language DESCRIPTIONS of where a venture appears to stand -- not
-// unlockable levels, and never a claim the venture must have passed
-// through the others in order (Part 3's own explicit instruction: no
-// staircase). Deliberately reuses this file's own existing, already-
-// tested resolveVentureStepIndex()/inferEvidenceStepIndex() rather than
-// inventing a second inference system -- this is a display BUCKETING of
-// the same evidence, not a new score:
+// Founder Experience Model correction, Part 4; relabeled by Phase 34F
+// (Founder Product Doctrine + Acceptance Corrections) Section 2. The
+// 5-position stepper index above (0-4) is now re-presented as ONE OF
+// FOUR plain-language STAGE DESCRIPTIONS of where a venture appears to
+// stand -- explicitly current MATURITY, never unlockable levels, and
+// never a claim the venture must have passed through the others in
+// order (no staircase). Deliberately reuses this file's own existing,
+// already-tested resolveVentureStepIndex()/inferEvidenceStepIndex()
+// rather than inventing a second inference system -- this is a display
+// BUCKETING of the same evidence, not a new score, and per Phase 34F's
+// own governing doctrine, NONE of these four stages gate feature access
+// anywhere in the product -- they change guidance only:
 //   - 0 or 1 (no evidence yet, or modeled assumptions only) -> "idea":
 //     still defining the problem, customer, solution, and assumptions.
 //   - 2 (customer interviews or waitlist signups reported) -> "validating":
 //     testing whether those assumptions are true against real evidence.
-//   - 3 or 4 (real paying customers/revenue, or a founder-set "Launched")
-//     -> "building": executing against increasingly validated assumptions.
-// "Fundraise" is deliberately NOT its own state here (Part 3/5's own
-// instruction: fundraising is a tool, never entrepreneurship's
-// destination, and is never implied by traction alone) -- a founder who
-// has actually raised still reads as "building," which remains true
-// regardless of financing history.
-export type VentureStateId = "idea" | "validating" | "building";
+//   - 3 (real paying customers/revenue) -> "building": executing against
+//     increasingly validated assumptions.
+//   - 4 (a founder-set "Launched") -> "operating": Phase 34F adds this
+//     fourth bucket, reachable ONLY via the founder's own explicit
+//     "Launched" selection (never auto-inferred from evidence alone,
+//     however extreme -- see inferEvidenceStepIndex()'s own ceiling of
+//     3), matching the directive's explicit "Idea/Validation/Building/
+//     Operating Stage" vocabulary. Before this phase, "Launched" also
+//     read as "building"; Phase 34F's acceptance test found that
+//     ambiguous for a founder who has genuinely launched.
+export type VentureStateId = "idea" | "validating" | "building" | "operating";
 
 export interface VentureStateInfo {
   id: VentureStateId;
@@ -129,24 +134,30 @@ export interface VentureStateInfo {
 export const VENTURE_STATES: Record<VentureStateId, VentureStateInfo> = {
   idea: {
     id: "idea",
-    label: "Idea",
+    label: "Idea Stage",
     description: "Defining the problem, customer, solution, and the assumptions that matter most.",
   },
   validating: {
     id: "validating",
-    label: "Validating",
+    label: "Validation Stage",
     description: "Testing whether the important assumptions are true against real-world evidence.",
   },
   building: {
     id: "building",
-    label: "Building",
+    label: "Building Stage",
     description: "Executing against increasingly validated assumptions and tracking real progress.",
+  },
+  operating: {
+    id: "operating",
+    label: "Operating Stage",
+    description: "Running as a real, launched company -- the same tools remain available as the venture evolves.",
   },
 };
 
 export function resolveVentureState(manualIndex: number, assumptions: MinimalAssumptions | null): VentureStateInfo {
   const stepIndex = resolveVentureStepIndex(manualIndex, assumptions);
-  if (stepIndex >= 3) return VENTURE_STATES.building;
+  if (stepIndex >= 4) return VENTURE_STATES.operating;
+  if (stepIndex === 3) return VENTURE_STATES.building;
   if (stepIndex === 2) return VENTURE_STATES.validating;
   return VENTURE_STATES.idea;
 }

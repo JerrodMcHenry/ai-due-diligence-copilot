@@ -80,7 +80,10 @@ function resolveWhyItMatters(missionTitle: string, relatedCategory: string | nul
 // phrases verbatim (so toggling between the two quick options before
 // typing anything still works) -- once the founder has typed anything of
 // their own, the buttons stop overwriting it.
-const CANNED_REFLECTIONS = ["I learned something useful.", "No useful signal yet."];
+// Phase 34E, Section 24 jargon audit: "No useful signal yet" ->
+// "Nothing useful yet" -- "signal" is internal-sounding vocabulary a
+// plainer word says just as well.
+const CANNED_REFLECTIONS = ["I learned something useful.", "Nothing useful yet."];
 
 const CATEGORY_OPTIONS = [
   { value: "", label: "No specific category" },
@@ -502,16 +505,14 @@ export default function MissionsSection({
 
       {primaryMission ? (
         // Phase 33 -- Idea Workspace Information Architecture & Founder
-        // Operating Loop, Part 7 (CRITICAL duplication fix). This card
-        // used to render "raised" -- the same visual weight as the old
-        // top-of-page "What should I do next?" card, which meant a
-        // founder with an active action saw the identical milestone
-        // announced twice, at equal prominence, in two places. "Raised"
-        // is now reserved for the one PrimaryCommandCard that actually
-        // claims "this is what to do" (see that component and
-        // NextMoves.tsx's own matching change); this stays a normal-
-        // weight card, since its job here is tracking/managing the
-        // action (start/complete/dismiss/reflect), not recommending it.
+        // Operating Loop, Part 7 (CRITICAL duplication fix), updated by
+        // Phase 34E. This card never renders "raised" -- that visual
+        // weight is reserved for CurrentQuestionCard, the one place
+        // Overview claims "this is what to do" (see VentureWorkspace.tsx).
+        // This section (now folded into Overview's secondary "Other
+        // things you're tracking" disclosure) stays normal-weight, since
+        // its job is tracking/managing a founder's own actions
+        // (start/complete/dismiss/reflect), not recommending one.
         <BaseCard className="space-y-4 p-6">
           {expandedMissionId !== primaryMission.id ? (
             <>
@@ -643,11 +644,11 @@ export default function MissionsSection({
                       size="sm"
                       onClick={() => {
                         if (!reflectionText.trim() || CANNED_REFLECTIONS.includes(reflectionText.trim())) {
-                          setReflectionText("No useful signal yet.");
+                          setReflectionText("Nothing useful yet.");
                         }
                       }}
                     >
-                      No useful signal yet
+                      Nothing useful yet
                     </Button>
                   </div>
 
@@ -662,7 +663,7 @@ export default function MissionsSection({
 
                   {reflectionSavedFor === primaryMission.id ? (
                     <div className="rounded-lg bg-info-soft px-3 py-2 text-sm text-info">
-                      <p className="font-semibold">That&rsquo;s useful signal.</p>
+                      <p className="font-semibold">Good to know.</p>
                       <p className="mt-0.5">
                         Learning what does or doesn&rsquo;t work can save months of building the wrong thing.
                       </p>
@@ -818,7 +819,7 @@ function ValidationUpdateForm({
   return (
     <div className="space-y-3">
       <p className="text-sm text-text-secondary">
-        Would you like to update your venture model with what you actually observed? These numbers become
+        Would you like to update your venture details with what you actually observed? These numbers become
         evidence, not just another assumption.
       </p>
 

@@ -48,6 +48,7 @@ from app.database.db import (create_tables,
                          create_modeled_ventures_table,
                          create_modeled_venture,
                          list_modeled_ventures_for_user,
+                         list_active_questions_for_user,
                          get_modeled_venture_for_user,
                          update_modeled_venture_for_user,
                          delete_modeled_venture_for_user,
@@ -876,6 +877,9 @@ def create_venture(
 @app.get("/ventures", response_model=list[VentureSummary])
 def list_ventures(current_user: AuthenticatedUser = RequireAuth):
     ventures = list_modeled_ventures_for_user(current_user.user_id)
+    # Phase 34E: one bulk query for every venture's active question at
+    # once -- never one call per card.
+    active_questions = list_active_questions_for_user(current_user.user_id)
 
     return [
         VentureSummary(
@@ -883,6 +887,7 @@ def list_ventures(current_user: AuthenticatedUser = RequireAuth):
             name=venture["name"],
             stage=venture["stage"],
             vps=(venture["model_result"] or {}).get("vps"),
+            current_question=active_questions.get(venture["id"]),
             updated_at=venture["updated_at"],
         )
         for venture in ventures
@@ -1483,6 +1488,10 @@ def get_venture_recommendation(
         model_result=venture.get("model_result"),
         active_mission=active_mission,
         evidence_rows=current_evidence,
+        # Phase 34F, Section 7: lets the fallback recommendation respect
+        # the one prerequisite it must know before recommending customer
+        # interviews -- whether a target customer has been described yet.
+        target_customer=venture.get("target_customer"),
     )
     return BuildRecommendationResponse(
         current_question=CurrentQuestion(**state["current_question"]) if state["current_question"] else None,
@@ -1823,6 +1832,12 @@ def get_venture_history(
     venture = _require_owned_venture(current_user, venture_id)
     missions = list_venture_missions_for_owner(current_user.user_id, venture_id)
     model_updates = list_venture_model_updates_for_owner(current_user.user_id, venture_id)
+    # Phase 34E -- History becomes Learning History: two more read-only
+    # sources over data Phase 34D already persists (venture_decisions,
+    # venture_evidence) -- no new table, no new query pattern beyond what
+    # CurrentQuestionCard's own GET endpoints already do.
+    decisions = list_venture_decisions_for_owner(current_user.user_id, venture_id)
+    evidence = list_venture_evidence_for_owner(current_user.user_id, venture_id)
 
     missions_by_id = {m["id"]: m for m in missions}
     events: list[VentureHistoryEvent] = []
@@ -1876,6 +1891,43 @@ def get_venture_history(
             assumption_changes=assumption_changes,
             mission_id=related_mission["id"] if related_mission else None,
             mission_title=related_mission["title"] if related_mission else None,
+        ))
+
+    # Phase 34E: a decision, once made, is always shown -- a reversed
+    # decision (supersedes_decision_id set on a LATER row) means the
+    # earlier one is superseded; only show each decision once, and prefer
+    # showing it as itself (supersession is about which decision is
+    # CURRENT, not about hiding that an earlier one was ever made) --
+    # so, unlike evidence/outcome below, every decision row gets an event,
+    # since a reversed decision is still real history a founder made.
+    for decision in decisions:
+        events.append(VentureHistoryEvent(
+            event_type="decision_recorded",
+            occurred_at=decision["decided_at"],
+            title="Decision recorded",
+            sie_recommendation=decision["sie_recommendation"],
+            founder_choice=decision["founder_choice"],
+            founder_rationale=decision.get("founder_rationale"),
+            mission_id=decision.get("related_mission_id"),
+            mission_title=(
+                missions_by_id.get(decision["related_mission_id"], {}).get("title")
+                if decision.get("related_mission_id") else None
+            ),
+        ))
+
+    # Outcomes are a stream of check-ins on a past decision (§18
+    # append-only) -- a corrected/superseded one is never shown a second
+    # time once superseded, matching CurrentQuestionCard's own
+    # `!e.superseded_by_id` filtering for "the current view."
+    for row in evidence:
+        if row["evidence_type"] != "longitudinal_outcome" or row.get("superseded_by_id"):
+            continue
+        events.append(VentureHistoryEvent(
+            event_type="outcome_recorded",
+            occurred_at=row["recorded_at"],
+            title="What happened afterward",
+            description=row["statement"],
+            relationship=row.get("relationship"),
         ))
 
     # The venture's own creation -- always the earliest event. "Initial

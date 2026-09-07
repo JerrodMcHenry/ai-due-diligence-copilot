@@ -3390,6 +3390,29 @@ def list_venture_missions_for_owner(user_id: str, venture_id: int):
         return [dict(row) for row in result.mappings().all()]
 
 
+# Phase 34E -- Founder Experience Simplification V1. "My Ideas" (the
+# venture list) needs, per card, "what should I continue?" -- the active
+# question, if any -- without turning that list page into N+1 queries (one
+# per venture). ONE bulk query across every venture this user owns,
+# DISTINCT ON venture_id so a venture with more than one active mission
+# (shouldn't normally happen under the one-active-question-at-a-time V1
+# model, but is not itself invalid) still contributes exactly one row,
+# the most recently created.
+def list_active_questions_for_user(user_id: str) -> dict[int, str]:
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            SELECT DISTINCT ON (vm.venture_id) vm.venture_id, vm.question_text
+            FROM venture_missions vm
+            JOIN modeled_ventures v ON v.id = vm.venture_id
+            WHERE v.user_id = :user_id
+              AND vm.status = 'active'
+              AND vm.question_text IS NOT NULL
+            ORDER BY vm.venture_id, vm.created_at DESC
+        """), {"user_id": user_id})
+
+        return {row["venture_id"]: row["question_text"] for row in result.mappings().all()}
+
+
 _MISSION_COLUMNS = """
                 id, venture_id, created_by_user_id, title, description,
                 mission_type, related_category, source, source_ref, status,

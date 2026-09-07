@@ -2,8 +2,17 @@ import BaseCard from "@/components/ui/BaseCard";
 import Disclosure from "@/components/ui/Disclosure";
 
 import { formatHistoryDateGroupLabel, groupHistoryEventsByDate } from "@/lib/journey/formatVentureHistory";
+import { RELATIONSHIP_LABELS, type RelationshipChoice } from "@/lib/build/evidenceMapping";
 
 import type { VentureHistoryCategoryChange, VentureHistoryEvent, VentureHistoryResponse } from "@/types";
+
+// Phase 34E: a plain-language relationship label, falling back to the
+// raw value only for a relationship this list doesn't recognize (never
+// crashes on unexpected data).
+function relationshipLabel(relationship: string | null): string | null {
+  if (!relationship) return null;
+  return (RELATIONSHIP_LABELS as Record<string, string>)[relationship as RelationshipChoice] ?? relationship;
+}
 
 // Founder Progress / Venture History V1, Section 6. Smallest coherent
 // option chosen after investigating the existing codebase: reuses the
@@ -184,11 +193,50 @@ function HistoryEventCard({ event }: { event: VentureHistoryEvent }) {
     );
   }
 
+  // Phase 34E -- History becomes Learning History. SIE's recommendation
+  // and the founder's own choice are always shown as the two separate
+  // facts they are (Phase 34D's own permanent separation) -- never
+  // collapsed into one line, even here.
+  if (event.event_type === "decision_recorded") {
+    return (
+      <div>
+        <p className="text-sm font-semibold text-text-primary">Decision recorded</p>
+        {event.mission_title ? <p className="mt-1 text-sm text-text-secondary">About: &ldquo;{event.mission_title}&rdquo;</p> : null}
+        {event.sie_recommendation ? (
+          <p className="mt-1.5 text-sm leading-6 text-text-secondary">
+            <span className="font-medium text-text-primary">SIE recommended:</span> {event.sie_recommendation}
+          </p>
+        ) : null}
+        {event.founder_choice ? (
+          <p className="mt-1 text-sm leading-6 text-text-secondary">
+            <span className="font-medium text-text-primary">You decided:</span> {event.founder_choice}
+          </p>
+        ) : null}
+        {event.founder_rationale ? (
+          <p className="mt-1 text-xs italic text-text-muted">&ldquo;{event.founder_rationale}&rdquo;</p>
+        ) : null}
+      </div>
+    );
+  }
+
+  if (event.event_type === "outcome_recorded") {
+    const label = relationshipLabel(event.relationship);
+    return (
+      <div>
+        <p className="text-sm font-semibold text-text-primary">What happened afterward</p>
+        {event.description ? (
+          <p className="mt-1 text-sm italic leading-6 text-text-secondary">&ldquo;{event.description}&rdquo;</p>
+        ) : null}
+        {label ? <p className="mt-1 text-xs text-text-muted">{label}</p> : null}
+      </div>
+    );
+  }
+
   // model_updated
   return (
     <div>
-      <p className="text-sm font-semibold text-text-primary">Model updated</p>
-      <p className="mt-1 text-sm text-text-secondary">Your model changed based on new evidence.</p>
+      <p className="text-sm font-semibold text-text-primary">Venture details updated</p>
+      <p className="mt-1 text-sm text-text-secondary">What SIE knows about your venture changed based on new evidence.</p>
 
       <CategoryChangesList changes={event.category_changes} />
 

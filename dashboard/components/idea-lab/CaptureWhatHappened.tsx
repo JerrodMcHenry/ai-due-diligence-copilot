@@ -410,10 +410,10 @@ export default function CaptureWhatHappened({
   const whatThisMeans = modelChangeResult
     ? null // superseded by the explicit "What changed" block below once applied
     : fieldMappedSignals.length > 0
-      ? "We found information that could update your venture model."
+      ? "We found information that could update what SIE knows about your venture."
       : actionRelevantSignals.length > 0
-        ? "This doesn't change your model yet, but it may be worth investigating."
-        : "Saved. There isn't enough here to change your model yet.";
+        ? "This doesn't change what SIE knows yet, but it may be worth investigating."
+        : "Saved. There isn't enough here to change what SIE knows yet.";
 
   return (
     <BaseCard className="border-success/30 bg-success-soft/40 p-5">
@@ -426,7 +426,11 @@ export default function CaptureWhatHappened({
 
       {signals.length > 0 ? (
         <div className="mt-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">SIE found these possible signals</p>
+          {/* Phase 34E, Section 24 jargon audit: "signals" (internal
+              ProposedSignal vocabulary) never appeared here before this
+              fix -- reworded to match Phase 34D's own established "What
+              we found" plain-language pattern (CurrentQuestionCard.tsx). */}
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What SIE found in what you wrote</p>
 
           {fieldMappedSignals.length > 0 ? (
             <ul className="mt-2 space-y-2">
@@ -556,15 +560,14 @@ export default function CaptureWhatHappened({
       ) : null}
 
       {/* Phase 26, Part 7: the founder's orientation is never lost after
-          a capture -- shown regardless of outcome class, and unchanged
-          unless the founder explicitly updated the model above (in which
-          case PrimaryCommandCard above this component already reflects
-          whatever the current focus now is; this line simply keeps that
-          fact visible without the founder scrolling back up). Phase 33
-          live acceptance test: the caller now passes the same
-          primaryMissionTitle ?? primaryMilestoneText value
-          PrimaryCommandCard itself renders, so this line can never name a
-          different "current focus" than the card above it does. */}
+          a capture -- shown regardless of outcome class. Phase 34E: this
+          component now sits inside Overview's collapsed "Other things
+          you're tracking" section rather than directly under a primary
+          recommendation card, but the value itself is unchanged --
+          `currentPriorityText` is always the same primaryMissionTitle ??
+          primaryMilestoneText VentureWorkspace.tsx computes once, so this
+          line can never disagree with whatever a founder's other actions
+          say their current focus is. */}
       {currentPriorityText ? (
         <p className="mt-4 text-sm text-text-secondary">
           <span className="font-medium text-text-primary">Your current focus:</span> {currentPriorityText}

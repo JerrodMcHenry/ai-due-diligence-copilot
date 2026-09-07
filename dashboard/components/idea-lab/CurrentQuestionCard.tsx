@@ -4,7 +4,6 @@ import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
-import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 
 import { extractCaptureSignals } from "@/lib/captureSignals";
@@ -38,15 +37,17 @@ import type {
   VentureMission,
 } from "@/types";
 
-// Phase 34D -- SIE Build Intelligence Loop V1.
+// Phase 34D -- SIE Build Intelligence Loop V1. Promoted to Overview's own
+// hero by Phase 34E -- Founder Experience Simplification V1 (see that
+// phase's final report for the full reasoning): this card's own internal
+// logic is untouched from 34D/34D-A, only its prominence and its
+// neighbors on the page changed. PrimaryCommandCard (the older, separate
+// "what should I do next?" card) and the old Model/What-If tabs are gone
+// specifically BECAUSE this card now does that job, evidence-aware,
+// alone -- see VentureWorkspace.tsx.
 //
 // QUESTION -> TEST -> RESULT -> EVIDENCE -> INTERPRETATION ->
-// RECOMMENDATION -> DECISION -> OUTCOME, proven end to end. This is a
-// deliberately additive, self-contained surface on the existing Overview
-// tab -- it does not replace PrimaryCommandCard, WhereThingsStand, or
-// anything else already there (Phase 34D §2/§14's own explicit
-// non-goals: no Idea Lab redesign, no navigation change, no removal of
-// Model/What-If).
+// RECOMMENDATION -> DECISION -> OUTCOME, proven end to end.
 //
 // Plain-language labels only (§15) -- "Hypothesis," "Evidence taxonomy,"
 // "Interpretation," "Decision," "Provenance" never appear in this file's
@@ -146,11 +147,16 @@ export default function CurrentQuestionCard({ ventureId, ventureName }: Props) {
   }
 
   return (
-    <BaseCard variant="raised" className="space-y-5 p-6">
-      <div className="flex items-center justify-between gap-3">
-        <h2 className="text-lg font-bold text-text-primary">What matters now</h2>
-        <Badge tone="info">Build loop</Badge>
-      </div>
+    // Phase 34E -- Founder Experience Simplification V1, Sections 9/10:
+    // this is now Overview's hero, deliberately the one "raised" card on
+    // the page (see VentureWorkspace.tsx's own VentureIdentity, which
+    // uses the calmer "default" variant precisely so this stands out by
+    // contrast, not by inventing a new, heavier design primitive). The
+    // "Build loop" badge is gone (Section 24 jargon audit) -- it named
+    // the internal architecture, not a founder job; the heading alone
+    // already says what this is.
+    <BaseCard variant="raised" className="space-y-5 p-6 sm:p-7">
+      <h2 className="text-xl font-bold text-text-primary">What matters now</h2>
 
       {error ? <p className="text-sm text-danger">{error}</p> : null}
 

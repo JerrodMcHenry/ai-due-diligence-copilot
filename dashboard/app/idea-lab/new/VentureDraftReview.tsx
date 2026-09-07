@@ -140,7 +140,7 @@ export default function VentureDraftReview({
       <BaseCard className="p-5">
         <p className="text-sm text-text-secondary">
           Here&rsquo;s what SIE understood from your description. Anything
-          labeled <span className="font-semibold text-warning">Modeled
+          labeled <span className="font-semibold text-warning">SIE
           assumption</span> is a guess for you to correct — nothing here is
           saved until you confirm below.
         </p>
@@ -154,7 +154,7 @@ export default function VentureDraftReview({
       </BaseCard>
 
       {/* Phase 10.11, Part 1/16: a visible naming moment, not buried
-          inside the collapsed "Review and edit the full model" disclosure
+          inside the collapsed "See the full details" disclosure
           below -- naming your startup is a genuine, small delight
           ("Whoa, this actually looks like a startup"), not a form field
           to skip past. */}
@@ -193,10 +193,13 @@ export default function VentureDraftReview({
         stillFiguringOut={defaultStillFiguringOut()}
       />
 
-      <Disclosure summary="Review and edit the full model" defaultOpen={false}>
+      {/* Phase 34F, Section 3: "Review and edit the full model" named
+          SIE's internal representation; the disclosure itself and every
+          field/section inside it are unchanged. */}
+      <Disclosure summary="See the full details" defaultOpen={false}>
         <div className="space-y-3">
           <p className="text-sm text-text-secondary">
-            Everything below is the complete structured model SIE proposed. Expand any section to
+            Everything below is what SIE structured from your description. Expand any section to
             review or correct it — nothing is saved until you confirm below.
           </p>
 

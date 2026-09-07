@@ -176,7 +176,7 @@ export default function ScenarioComparison({
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
         <p className="text-xs text-text-muted">
-          Applying will update your venture model and history.
+          Applying will update your venture details and history.
         </p>
         <div className="flex items-center gap-2">
           <Button type="button" variant="subtle" onClick={onDiscard}>

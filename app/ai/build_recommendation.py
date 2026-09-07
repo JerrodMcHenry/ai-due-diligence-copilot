@@ -160,12 +160,58 @@ _TEST_TEMPLATES = {
 }
 
 
-def _fallback_recommendation(venture_name: str, model_result: dict | None) -> dict:
+def _needs_known_customer(candidate_text: str) -> bool:
+    """
+    Phase 34F, Section 7. A small, named prerequisite check: any milestone
+    that names "target customer(s)" presupposes SIE already knows who that
+    is. Deliberately a single, narrow substring check -- not a rule engine
+    -- covering exactly the demonstrated failure (recommending customer
+    interviews with no described customer segment). See this module's own
+    module docstring appendix below for the other prerequisite-dependency
+    patterns identified but NOT yet corrected (pricing before customer/
+    problem clarity, acquisition before customer definition, retention
+    before usage evidence, scaling before repeatable demand, fundraising
+    without capital context, monetization before customer/value clarity).
+    """
+    return "target customer" in candidate_text.lower()
+
+
+def _fallback_recommendation(venture_name: str, model_result: dict | None, target_customer: str | None = None) -> dict:
     """No Evidence exists yet for this venture -- fall back to the
     existing, unchanged deterministic next_milestones() ranking
-    (app/ai/vps_guidance.py), reused verbatim rather than re-derived."""
+    (app/ai/vps_guidance.py), reused verbatim rather than re-derived,
+    EXCEPT where the chosen milestone fails the one prerequisite check
+    above (Phase 34F, Section 7) -- in that case, ask the prerequisite
+    question first. `vps_guidance.py`'s own next_milestones() list is
+    untouched either way (it still offers the original milestone, and
+    still feeds NextMoves/WeeklyReview unchanged); this override applies
+    only to what CurrentQuestionCard's "What matters now" hero shows."""
     milestones = (model_result or {}).get("next_milestones") or []
-    question_text = milestones[0] if milestones else (
+    chosen = milestones[0] if milestones else None
+
+    has_known_customer = bool(target_customer and target_customer.strip())
+    if chosen and _needs_known_customer(chosen) and not has_known_customer:
+        return {
+            "question_text": f"Figure out exactly who you're building {venture_name} for.",
+            "why_it_matters": (
+                "You haven't identified a specific customer yet. Before testing demand, narrow down who "
+                "experiences this problem most acutely."
+            ),
+            "recommended_test_type": "other",
+            "recommended_test_title": "Choose your first customer segment to investigate",
+            "what_to_do": (
+                "Choose the first customer group you want to investigate -- for example a specific job "
+                "title, industry, or use case that experiences this problem most acutely."
+            ),
+            "what_to_record": "Which group you chose to focus on, and why.",
+            "what_result_would_be_informative": "A believable, specific answer for who has this problem worst -- not \"everyone.\"",
+            "what_this_will_not_prove": (
+                "Whether that group will actually pay for a solution -- that becomes the next question, "
+                "once you know who to ask."
+            ),
+        }
+
+    question_text = chosen if chosen else (
         f"What's the biggest assumption behind {venture_name} that hasn't been tested yet?"
     )
     test_type = "customer_discovery" if "interview" in question_text.lower() else (
@@ -186,6 +232,7 @@ def build_intelligence_state(
     model_result: dict | None,
     active_mission: dict | None,
     evidence_rows: list[dict],
+    target_customer: str | None = None,
 ) -> dict:
     """
     Returns {"current_question": dict | None, "recommendation": dict | None}.
@@ -200,6 +247,11 @@ def build_intelligence_state(
     - otherwise (nothing active, or the active mission's evidence has
       already been interpreted and is awaiting a founder decision) ->
       only recommendation is set.
+
+    `target_customer` (Phase 34F, Section 7) is the venture's own
+    top-level field, passed through only so `_fallback_recommendation()`
+    can apply its one prerequisite check -- never read for anything else
+    here, never a new inference.
     """
     if active_mission is not None and not active_mission.get("interpretation_summary"):
         return {
@@ -212,7 +264,10 @@ def build_intelligence_state(
         }
 
     if not evidence_rows:
-        return {"current_question": None, "recommendation": _fallback_recommendation(venture_name, model_result)}
+        return {
+            "current_question": None,
+            "recommendation": _fallback_recommendation(venture_name, model_result, target_customer),
+        }
 
     # Reason over ALL accumulated evidence, most decision-relevant
     # category first -- outcomes (longitudinal) outrank a single
@@ -262,7 +317,10 @@ def build_intelligence_state(
         # fall back to the same deterministic ranking as the no-evidence
         # case, so a founder with only weak/contradicted early evidence
         # still gets a sensible next step rather than nothing.
-        return {"current_question": None, "recommendation": _fallback_recommendation(venture_name, model_result)}
+        return {
+            "current_question": None,
+            "recommendation": _fallback_recommendation(venture_name, model_result, target_customer),
+        }
 
     template = _TEST_TEMPLATES[test_type]
     recommendation = {

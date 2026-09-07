@@ -280,6 +280,13 @@ class VentureSummary(BaseModel):
     name: str
     stage: str | None = None
     vps: float | None = None
+    # Phase 34E -- Founder Experience Simplification V1. The venture's
+    # current active question (venture_missions.question_text), if one
+    # exists -- lets "My Ideas" answer "what should I continue?" per card
+    # without a founder opening each venture. Sourced from ONE bulk query
+    # across every venture this user owns (list_active_questions_for_user
+    # in app/database/db.py), never one query per card.
+    current_question: str | None = None
     updated_at: datetime
 
 
@@ -444,6 +451,15 @@ class StructureIdeaResponse(BaseModel):
 VentureHistoryEventType = Literal[
     "venture_created", "action_added", "learning_recorded",
     "action_completed", "model_updated",
+    # Phase 34E -- Founder Experience Simplification V1: History becomes
+    # Learning History. These two read the SAME already-existing,
+    # already-owner-scoped venture_decisions/venture_evidence rows Phase
+    # 34D's CurrentQuestionCard already lists -- no new table, no new
+    # persistence, just a second read path over data that already exists.
+    # A superseded (corrected) decision/outcome is never listed a second
+    # time here -- only the current/active row, matching CurrentQuestionCard's
+    # own `!e.superseded_by_id` filtering.
+    "decision_recorded", "outcome_recorded",
 ]
 
 
@@ -493,6 +509,19 @@ class VentureHistoryEvent(BaseModel):
     # Update -> VPS connection), never inferred otherwise.
     mission_id: int | None = None
     mission_title: str | None = None
+    # decision_recorded only: SIE's recommendation and the founder's own
+    # choice, kept as the two separate facts Phase 34D's venture_decisions
+    # table always keeps separate -- never collapsed into one string here
+    # either, even in a plain-language history line.
+    sie_recommendation: str | None = None
+    founder_choice: str | None = None
+    founder_rationale: str | None = None
+    # outcome_recorded only: the plain-language relationship tag the
+    # founder chose (Phase 34D-A) -- "supports"/"contradicts"/"mixed"/
+    # "neutral", mapped to founder-facing copy on the frontend exactly
+    # like CurrentQuestionCard's own RELATIONSHIP_LABELS, never rendered
+    # as the raw enum value.
+    relationship: str | None = None
 
 
 class VentureHistoryResponse(BaseModel):
