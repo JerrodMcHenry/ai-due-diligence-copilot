@@ -86,6 +86,7 @@ export interface HirePlan extends CreateHirePlanRequest {
 
 export interface ProjectedMonthWithPlan extends ProjectedMonth {
   plan_expense_impact_cents: number;
+  plan_revenue_active: boolean;
   active_plan_item_ids: number[];
 }
 
@@ -96,12 +97,77 @@ export interface HireImpactPreview {
   with_hire_projection: ProjectedMonthWithPlan[];
 }
 
+// --- Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1 ---
+// Mirrors app/models/venture_financial_plans.py exactly.
+
+export type FinancialPlanType = "revenue_target" | "expense_change";
+export type ExpenseCategory = "payroll" | "contractors" | "software" | "marketing" | "rent" | "professional_services" | "other";
+export type PlanStatus = "planned" | "cancelled" | "actualized";
+
+export interface CreateFinancialPlanRequest {
+  plan_type: FinancialPlanType;
+  label: string;
+  // revenue_target: null. expense_change: required.
+  category: ExpenseCategory | null;
+  // revenue_target: an ABSOLUTE monthly revenue target (replaces base
+  // revenue outright). expense_change: a SIGNED recurring monthly delta
+  // (positive = increase, negative = cut).
+  amount_cents: number;
+  start_date: string;
+  end_date: string | null;
+}
+
+export interface FinancialPlan extends CreateFinancialPlanRequest {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  status: PlanStatus;
+  last_reconciled_snapshot_id: number | null;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface FinancialPlanImpactPreview {
+  baseline_projection: ProjectedMonthWithPlan[];
+  with_plan_projection: ProjectedMonthWithPlan[];
+}
+
+export interface CreateScenarioRequest {
+  name: string;
+  hire_plan_ids: number[];
+  financial_plan_ids: number[];
+}
+
+export interface Scenario extends CreateScenarioRequest {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  created_at: string;
+  updated_at: string;
+  // Computed live at read time -- never stored. See ScenarioResponse's
+  // own docstring in app/models/venture_financial_plans.py for why.
+  assumptions: string[];
+  projection: ProjectedMonthWithPlan[];
+  ending_cash_at_horizon_cents: number | null;
+  depletion_date: string | null;
+}
+
+export interface ReconciliationItem {
+  plan_kind: "hire" | "financial";
+  plan_id: number;
+  label: string;
+  monthly_amount_cents: number | null;
+  start_date: string;
+}
+
 export interface VentureFinancialsResponse {
   latest_snapshot: FinancialSnapshot | null;
   derived: DerivedFinancialMetrics | null;
   projection: ProjectedMonth[];
   hire_plans: HirePlan[];
+  financial_plans: FinancialPlan[];
   projection_with_plan: ProjectedMonthWithPlan[];
+  pending_reconciliation: ReconciliationItem[];
 }
 
 export interface FinancialHistoryResponse {

@@ -133,6 +133,19 @@ from app.database.db import (create_tables,
                          list_venture_hire_plans_for_owner,
                          get_venture_hire_plan_for_owner,
                          update_venture_hire_plan_for_owner,
+                         add_hire_plan_reconciliation_column,
+                         create_venture_financial_plans_table,
+                         create_venture_financial_plan,
+                         list_venture_financial_plans_for_owner,
+                         get_venture_financial_plan_for_owner,
+                         update_venture_financial_plan_for_owner,
+                         create_venture_financial_scenarios_table,
+                         create_venture_financial_scenario,
+                         list_venture_financial_scenarios_for_owner,
+                         get_venture_financial_scenario_for_owner,
+                         update_venture_financial_scenario_for_owner,
+                         delete_venture_financial_scenario_for_owner,
+                         list_pending_reconciliation_for_owner,
                          create_venture_decision,
                          list_venture_decisions_for_owner,
                          set_venture_mission_interpretation_for_owner,
@@ -160,10 +173,17 @@ from app.models.venture_hire_plans import (
     CreateHirePlanRequest, UpdateHirePlanRequest, HirePlanResponse,
     HireImpactPreview, ProjectedMonthWithPlan,
 )
+from app.models.venture_financial_plans import (
+    CreateFinancialPlanRequest, UpdateFinancialPlanRequest, FinancialPlanResponse,
+    CreateScenarioRequest, UpdateScenarioRequest, ScenarioResponse, ScenarioProjectedMonth,
+    ReconciliationItem, ReconcilePlanRequest, FinancialPlanImpactPreview,
+)
 from app.ai.financial_engine import (
     compute_derived_metrics, project_monthly_cash_flow,
     compute_hire_monthly_cost_cents, compute_hire_annual_cost_cents,
     hire_plan_items_for_projection, hire_to_plan_item,
+    financial_plan_items_for_projection, expense_plan_to_plan_item, revenue_plan_to_plan_item,
+    validate_expense_plan_amount,
 )
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -300,6 +320,13 @@ create_venture_financial_snapshots_table()
 # table -- no FK to venture_financial_snapshots (a plan is calculated
 # AGAINST actual state, never joined to a specific snapshot row).
 create_venture_hire_plans_table()
+
+# Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1.
+# One additive column on the existing (already-populated) hire plans
+# table, plus two new, independent tables.
+add_hire_plan_reconciliation_column()
+create_venture_financial_plans_table()
+create_venture_financial_scenarios_table()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -1689,32 +1716,66 @@ def _hire_plan_response(row: dict) -> HirePlanResponse:
     )
 
 
+def _financial_plan_response(row: dict) -> FinancialPlanResponse:
+    return FinancialPlanResponse(**row)
+
+
+def _all_plan_items_for_projection(all_hires: list[dict], all_financial_plans: list[dict]) -> list[dict]:
+    """The one place hire items and revenue/expense items are combined
+    into a single list for the projection engine (§8/§9 of the Phase 35D
+    directive) -- the engine itself never distinguishes their origin,
+    only their `kind`."""
+    return hire_plan_items_for_projection(all_hires) + financial_plan_items_for_projection(all_financial_plans)
+
+
 def _build_financials_response(user_id: str, venture_id: int, snapshot: dict | None) -> VentureFinancialsResponse:
-    # Phase 35C: hire plans and the with-plan projection are computed
+    # Phase 35C/35D: plans and the with-plan projection are computed
     # regardless of whether a snapshot exists -- with no snapshot,
-    # planned_items_for_projection() has nothing to project against
-    # either (project_monthly_cash_flow returns [] the same way §35B's
-    # own empty state already does), so this stays honest by
-    # construction, not by a separate check.
+    # the projection engine has nothing to project against either
+    # (project_monthly_cash_flow returns [] the same way §35B's own
+    # empty state already does), so this stays honest by construction,
+    # not by a separate check.
     all_hires = list_venture_hire_plans_for_owner(user_id, venture_id)
+    all_financial_plans = list_venture_financial_plans_for_owner(user_id, venture_id)
     hire_plans = [_hire_plan_response(h) for h in all_hires]
+    financial_plans = [_financial_plan_response(p) for p in all_financial_plans]
 
     if snapshot is None:
         return VentureFinancialsResponse(
             latest_snapshot=None, derived=None, projection=[],
-            hire_plans=hire_plans, projection_with_plan=[],
+            hire_plans=hire_plans, financial_plans=financial_plans,
+            projection_with_plan=[], pending_reconciliation=[],
         )
 
     derived = compute_derived_metrics(snapshot)
     projection = project_monthly_cash_flow(snapshot, snapshot["as_of_date"])
-    plan_items = hire_plan_items_for_projection(all_hires)
+    plan_items = _all_plan_items_for_projection(all_hires, all_financial_plans)
     projection_with_plan = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=plan_items)
+
+    pending = list_pending_reconciliation_for_owner(user_id, venture_id, snapshot["id"], snapshot["as_of_date"])
+    pending_reconciliation = [
+        ReconciliationItem(
+            plan_kind="hire", plan_id=h["id"], label=h["role"],
+            monthly_amount_cents=compute_hire_monthly_cost_cents(h), start_date=h["start_date"],
+        )
+        for h in pending["hire_plans"]
+    ] + [
+        ReconciliationItem(
+            plan_kind="financial", plan_id=p["id"], label=p["label"],
+            monthly_amount_cents=p["amount_cents"] if p["plan_type"] == "expense_change" else None,
+            start_date=p["start_date"],
+        )
+        for p in pending["financial_plans"]
+    ]
+
     return VentureFinancialsResponse(
         latest_snapshot=FinancialSnapshotResponse(**snapshot),
         derived=DerivedFinancialMetrics(**derived),
         projection=[ProjectedMonth(**month) for month in projection],
         hire_plans=hire_plans,
+        financial_plans=financial_plans,
         projection_with_plan=[ProjectedMonthWithPlan(**month) for month in projection_with_plan],
+        pending_reconciliation=pending_reconciliation,
     )
 
 
@@ -1942,6 +2003,293 @@ def preview_hire_plan(
         baseline_projection=[ProjectedMonthWithPlan(**m) for m in baseline],
         with_hire_projection=[ProjectedMonthWithPlan(**m) for m in with_hire],
     )
+
+
+# ---------------------------------------------------------------------------
+# Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md. Same access doctrine
+# as 35B/35C: _require_owned_venture() only.
+# ---------------------------------------------------------------------------
+
+
+# Phase 35D §16: this is founder-controlled bookkeeping of MODEL state,
+# never a verification/approval gate -- the founder's own "yes/no" answer
+# is recorded verbatim, SIE never second-guesses or infers it.
+@app.post("/ventures/{venture_id}/financials/reconcile", response_model=VentureFinancialsResponse)
+def reconcile_financial_plan(
+    venture_id: int,
+    request: ReconcilePlanRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+    if latest is None:
+        raise HTTPException(status_code=404, detail="No financial snapshot exists yet.")
+
+    # Always records that this plan has been asked-and-answered against
+    # THIS snapshot (§13: prevents re-nagging on reload, §S) -- "included"
+    # additionally actualizes it (§O); "not included" leaves it planned,
+    # still contributing to future projections (§P), but not re-asked
+    # again unless a NEWER snapshot arrives.
+    fields = {"last_reconciled_snapshot_id": latest["id"]}
+    if request.included:
+        fields["status"] = "actualized"
+
+    if request.plan_kind == "hire":
+        existing = get_venture_hire_plan_for_owner(current_user.user_id, venture_id, request.plan_id)
+        if existing is None:
+            raise HTTPException(status_code=404, detail="Hire plan not found.")
+        update_venture_hire_plan_for_owner(current_user.user_id, venture_id, request.plan_id, **fields)
+    else:
+        existing = get_venture_financial_plan_for_owner(current_user.user_id, venture_id, request.plan_id)
+        if existing is None:
+            raise HTTPException(status_code=404, detail="Financial plan not found.")
+        update_venture_financial_plan_for_owner(current_user.user_id, venture_id, request.plan_id, **fields)
+
+    _log_event_safe(
+        "financial_plan_reconciled",
+        user_id=current_user.user_id, venture_id=venture_id,
+        metadata={"plan_kind": request.plan_kind, "included": request.included},
+    )
+    return _build_financials_response(current_user.user_id, venture_id, latest)
+
+
+# --- Revenue / expense plans --------------------------------------------
+
+
+@app.get("/ventures/{venture_id}/financial-plans", response_model=list[FinancialPlanResponse])
+def list_financial_plans(
+    venture_id: int,
+    status: str | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    rows = list_venture_financial_plans_for_owner(current_user.user_id, venture_id, status=status)
+    return [_financial_plan_response(r) for r in rows]
+
+
+@app.post("/ventures/{venture_id}/financial-plans", response_model=FinancialPlanResponse)
+def create_financial_plan(
+    venture_id: int,
+    request: CreateFinancialPlanRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    if request.plan_type == "expense_change":
+        latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+        error = validate_expense_plan_amount(latest, request.category, request.amount_cents)
+        if error:
+            raise HTTPException(status_code=422, detail=error)
+
+    row = create_venture_financial_plan(
+        venture_id=venture_id, user_id=current_user.user_id, plan_type=request.plan_type,
+        label=request.label, amount_cents=request.amount_cents, start_date=request.start_date,
+        category=request.category, end_date=request.end_date,
+    )
+    _log_event_safe(
+        "financial_plan_created", user_id=current_user.user_id, venture_id=venture_id,
+        metadata={"plan_type": request.plan_type},
+    )
+    return _financial_plan_response(row)
+
+
+@app.patch("/ventures/{venture_id}/financial-plans/{plan_id}", response_model=FinancialPlanResponse)
+def update_financial_plan(
+    venture_id: int,
+    plan_id: int,
+    request: UpdateFinancialPlanRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    existing = get_venture_financial_plan_for_owner(current_user.user_id, venture_id, plan_id)
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Financial plan not found.")
+
+    fields = request.model_dump(exclude_unset=True)
+    if fields:
+        merged = {**existing, **fields}
+        if merged["plan_type"] == "expense_change" and ("amount_cents" in fields or "category" in fields):
+            latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+            error = validate_expense_plan_amount(latest, merged["category"], merged["amount_cents"])
+            if error:
+                raise HTTPException(status_code=422, detail=error)
+        if merged.get("end_date") is not None and merged["end_date"] < merged["start_date"]:
+            raise HTTPException(status_code=422, detail="end_date cannot be before start_date.")
+
+    updated = update_venture_financial_plan_for_owner(current_user.user_id, venture_id, plan_id, **fields)
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Financial plan not found.")
+
+    if "status" in fields:
+        _log_event_safe(
+            "financial_plan_status_changed", user_id=current_user.user_id, venture_id=venture_id,
+            metadata={"status": fields["status"]},
+        )
+    return _financial_plan_response(updated)
+
+
+def _project_with_plan_response(months: list[dict]) -> list[ScenarioProjectedMonth]:
+    return [ScenarioProjectedMonth(**m) for m in months]
+
+
+# Ephemeral -- never writes to venture_financial_plans, identical
+# discipline to POST /ventures/{id}/hire-plans/preview (§17 of the
+# directive: PERSISTED PLAN vs. TEMPORARY COMPARISON).
+@app.post("/ventures/{venture_id}/financial-plans/preview", response_model=FinancialPlanImpactPreview)
+def preview_financial_plan(
+    venture_id: int,
+    request: CreateFinancialPlanRequest,
+    exclude_plan_id: int | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    snapshot = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
+    if snapshot is None:
+        return FinancialPlanImpactPreview(baseline_projection=[], with_plan_projection=[])
+
+    all_hires = list_venture_hire_plans_for_owner(current_user.user_id, venture_id)
+    existing_financial_plans = [
+        p for p in list_venture_financial_plans_for_owner(current_user.user_id, venture_id)
+        if p["id"] != exclude_plan_id
+    ]
+    existing_items = _all_plan_items_for_projection(all_hires, existing_financial_plans)
+    baseline = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=existing_items)
+
+    hypothetical_row = {
+        "id": -1, "plan_type": request.plan_type, "category": request.category,
+        "amount_cents": request.amount_cents, "start_date": request.start_date, "end_date": request.end_date,
+    }
+    hypothetical_item = (
+        expense_plan_to_plan_item(hypothetical_row) if request.plan_type == "expense_change"
+        else revenue_plan_to_plan_item(hypothetical_row)
+    )
+    with_plan = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=existing_items + [hypothetical_item])
+
+    return FinancialPlanImpactPreview(
+        baseline_projection=_project_with_plan_response(baseline),
+        with_plan_projection=_project_with_plan_response(with_plan),
+    )
+
+
+# --- Scenarios -------------------------------------------------------------
+
+
+def _plan_label(kind: str, row: dict) -> str:
+    if kind == "hire":
+        cost = compute_hire_monthly_cost_cents(row)
+        cost_label = f"{cost / 100:,.0f}/mo" if cost is not None else "cost unknown"
+        return f"{row['role']} (${cost_label}, starting {row['start_date'].isoformat()})"
+    if row["plan_type"] == "revenue_target":
+        return f"{row['label']}: revenue becomes ${row['amount_cents'] / 100:,.0f}/month starting {row['start_date'].isoformat()}"
+    sign = "+" if row["amount_cents"] >= 0 else "-"
+    return f"{row['label']}: {row['category']} {sign}${abs(row['amount_cents']) / 100:,.0f}/month starting {row['start_date'].isoformat()}"
+
+
+def _build_scenario_response(user_id: str, venture_id: int, scenario: dict) -> ScenarioResponse:
+    """Computed live, every call -- see ScenarioResponse's own docstring
+    for why nothing here is stored. A cancelled/actualized plan id still
+    referenced by the scenario is silently skipped (never an error)."""
+    snapshot = get_latest_venture_financial_snapshot_for_owner(user_id, venture_id)
+
+    hires = [
+        h for h in (get_venture_hire_plan_for_owner(user_id, venture_id, hid) for hid in scenario["hire_plan_ids"])
+        if h is not None and h["status"] == "planned"
+    ]
+    financial_plans = [
+        p for p in (get_venture_financial_plan_for_owner(user_id, venture_id, pid) for pid in scenario["financial_plan_ids"])
+        if p is not None and p["status"] == "planned"
+    ]
+    assumptions = [_plan_label("hire", h) for h in hires] + [_plan_label("financial", p) for p in financial_plans]
+
+    projection: list[dict] = []
+    if snapshot is not None:
+        items = _all_plan_items_for_projection(hires, financial_plans)
+        projection = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=items)
+
+    depletion = next((m for m in projection if m["depleted"]), None)
+    return ScenarioResponse(
+        **scenario,
+        assumptions=assumptions,
+        projection=_project_with_plan_response(projection),
+        ending_cash_at_horizon_cents=projection[-1]["ending_cash_cents"] if projection else None,
+        depletion_date=depletion["date"] if depletion else None,
+    )
+
+
+@app.get("/ventures/{venture_id}/scenarios", response_model=list[ScenarioResponse])
+def list_scenarios(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    rows = list_venture_financial_scenarios_for_owner(current_user.user_id, venture_id)
+    return [_build_scenario_response(current_user.user_id, venture_id, r) for r in rows]
+
+
+@app.post("/ventures/{venture_id}/scenarios", response_model=ScenarioResponse)
+def create_scenario(
+    venture_id: int,
+    request: CreateScenarioRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    # Ownership of every referenced plan id, re-scoped through THIS
+    # venture -- never trusted as a bare id (§K of the directive: "a
+    # scenario cannot reference another user's plan").
+    for hid in request.hire_plan_ids:
+        if get_venture_hire_plan_for_owner(current_user.user_id, venture_id, hid) is None:
+            raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
+    for pid in request.financial_plan_ids:
+        if get_venture_financial_plan_for_owner(current_user.user_id, venture_id, pid) is None:
+            raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
+
+    row = create_venture_financial_scenario(
+        venture_id=venture_id, user_id=current_user.user_id, name=request.name,
+        hire_plan_ids=request.hire_plan_ids, financial_plan_ids=request.financial_plan_ids,
+    )
+    _log_event_safe("financial_scenario_created", user_id=current_user.user_id, venture_id=venture_id, metadata={})
+    return _build_scenario_response(current_user.user_id, venture_id, row)
+
+
+@app.patch("/ventures/{venture_id}/scenarios/{scenario_id}", response_model=ScenarioResponse)
+def update_scenario(
+    venture_id: int,
+    scenario_id: int,
+    request: UpdateScenarioRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    existing = get_venture_financial_scenario_for_owner(current_user.user_id, venture_id, scenario_id)
+    if existing is None:
+        raise HTTPException(status_code=404, detail="Scenario not found.")
+
+    fields = request.model_dump(exclude_unset=True)
+    if "hire_plan_ids" in fields:
+        for hid in fields["hire_plan_ids"]:
+            if get_venture_hire_plan_for_owner(current_user.user_id, venture_id, hid) is None:
+                raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
+    if "financial_plan_ids" in fields:
+        for pid in fields["financial_plan_ids"]:
+            if get_venture_financial_plan_for_owner(current_user.user_id, venture_id, pid) is None:
+                raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
+
+    updated = update_venture_financial_scenario_for_owner(current_user.user_id, venture_id, scenario_id, **fields)
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Scenario not found.")
+    return _build_scenario_response(current_user.user_id, venture_id, updated)
+
+
+@app.delete("/ventures/{venture_id}/scenarios/{scenario_id}")
+def delete_scenario(
+    venture_id: int,
+    scenario_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    deleted = delete_venture_financial_scenario_for_owner(current_user.user_id, venture_id, scenario_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail="Scenario not found.")
+    return {"deleted": True}
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])

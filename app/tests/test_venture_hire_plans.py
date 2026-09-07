@@ -399,7 +399,7 @@ def test_case_j_cancelled_plan_does_not_affect_projection() -> None:
 
             after_cancel = _get_financials(venture["id"], USER_A).json()
             stripped = [
-                {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "active_plan_item_ids")}
+                {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "plan_revenue_active", "active_plan_item_ids")}
                 for m in after_cancel["projection_with_plan"]
             ]
             expect(stripped == after_cancel["projection"], "a cancelled plan must produce the SAME projection as no plan at all")
@@ -419,7 +419,7 @@ def test_case_m_actualized_plan_stops_affecting_projection() -> None:
 
             after = _get_financials(venture["id"], USER_A).json()
             stripped = [
-                {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "active_plan_item_ids")}
+                {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "plan_revenue_active", "active_plan_item_ids")}
                 for m in after["projection_with_plan"]
             ]
             expect(stripped == after["projection"], "an actualized plan must stop being added on top of the projection (double-counting guard)")
@@ -504,7 +504,7 @@ def test_case_o_no_plans_means_identical_projections() -> None:
             financials = _get_financials(venture["id"], USER_A).json()
             expect(
                 financials["projection"] == [
-                    {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "active_plan_item_ids")}
+                    {k: v for k, v in m.items() if k not in ("plan_expense_impact_cents", "plan_revenue_active", "active_plan_item_ids")}
                     for m in financials["projection_with_plan"]
                 ],
                 "with zero hire plans, the with-plan projection must reduce to exactly the baseline projection",

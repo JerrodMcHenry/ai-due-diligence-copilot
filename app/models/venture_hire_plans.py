@@ -118,6 +118,13 @@ class ProjectedMonthWithPlan(BaseModel):
     revenue_cents: int
     expenses_cents: int
     plan_expense_impact_cents: int
+    # Phase 35D: whether a revenue_target plan is overriding base revenue
+    # this month -- always False in a Phase 35C-only world (no revenue
+    # plans existed yet), added here for the exact same reason
+    # plan_expense_impact_cents was: the underlying engine already
+    # returns it, so every response model that carries a month row
+    # should too, never silently dropping a field the engine computes.
+    plan_revenue_active: bool = False
     active_plan_item_ids: list[int] = Field(default_factory=list)
     net_cash_change_cents: int
     ending_cash_cents: int

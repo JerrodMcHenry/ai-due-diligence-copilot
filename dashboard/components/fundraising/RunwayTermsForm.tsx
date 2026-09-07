@@ -8,19 +8,29 @@ import type { RunwayTerms } from "@/lib/fundraisingUi/types";
 type RunwayTermsFormProps = {
   runway: RunwayTerms;
   onChange: (runway: RunwayTerms) => void;
+  // Phase 35D §24: true when these values were pre-filled from canonical
+  // Finance state (app/ai/financial_engine.py's latest snapshot), not
+  // typed by the founder. Editing them here never writes back to
+  // Finance -- this is purely a provenance label.
+  loadedFromFinance?: boolean;
 };
 
 // Phase 21B, Part 17. Optional -- collapsed by default so it never
 // competes with the required SAFE/round terms above it. Cash and burn
 // are collected only for THIS scenario (never read from or written to the
 // canonical venture model, matching the rest of the simulator's firewall).
-export default function RunwayTermsForm({ runway, onChange }: RunwayTermsFormProps) {
+export default function RunwayTermsForm({ runway, onChange, loadedFromFinance = false }: RunwayTermsFormProps) {
   return (
-    <Disclosure summary="Optional: see modeled runway" defaultOpen={false}>
+    <Disclosure summary="Optional: see modeled runway" defaultOpen={loadedFromFinance}>
       <p className="text-base leading-7 text-text-secondary">
         Add your current cash on hand and monthly burn to see how this financing would change your modeled runway.
         Assumes burn stays constant -- this is not a forecast.
       </p>
+      {loadedFromFinance ? (
+        <p className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-1 text-xs font-semibold text-primary">
+          Loaded from your Finance tab -- editable here, won&apos;t change Finance
+        </p>
+      ) : null}
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         <Input
           id="runway-cash"

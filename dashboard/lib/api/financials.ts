@@ -1,10 +1,16 @@
 import type {
+  CreateFinancialPlanRequest,
   CreateFinancialSnapshotRequest,
   CreateHirePlanRequest,
+  CreateScenarioRequest,
   FinancialHistoryResponse,
+  FinancialPlan,
+  FinancialPlanImpactPreview,
   HireImpactPreview,
   HirePlan,
   HirePlanStatus,
+  PlanStatus,
+  Scenario,
   VentureFinancialsResponse,
 } from "@/types";
 
@@ -67,6 +73,77 @@ export function previewHirePlan(
   return apiFetch<HireImpactPreview>(`/ventures/${ventureId}/hire-plans/preview${query}`, {
     method: "POST",
     body: request,
+    token,
+  });
+}
+
+// --- Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1 ---
+
+export function createFinancialPlan(ventureId: number, request: CreateFinancialPlanRequest, token: string): Promise<FinancialPlan> {
+  return apiFetch<FinancialPlan>(`/ventures/${ventureId}/financial-plans`, { method: "POST", body: request, token });
+}
+
+export function listFinancialPlans(ventureId: number, token: string): Promise<FinancialPlan[]> {
+  return apiFetch<FinancialPlan[]>(`/ventures/${ventureId}/financial-plans`, { token });
+}
+
+export function updateFinancialPlan(
+  ventureId: number,
+  planId: number,
+  fields: Partial<CreateFinancialPlanRequest> & { status?: PlanStatus },
+  token: string
+): Promise<FinancialPlan> {
+  return apiFetch<FinancialPlan>(`/ventures/${ventureId}/financial-plans/${planId}`, { method: "PATCH", body: fields, token });
+}
+
+// NEVER persists -- same discipline as previewHirePlan().
+export function previewFinancialPlan(
+  ventureId: number,
+  request: CreateFinancialPlanRequest,
+  token: string,
+  excludePlanId?: number
+): Promise<FinancialPlanImpactPreview> {
+  const query = excludePlanId !== undefined ? `?exclude_plan_id=${excludePlanId}` : "";
+  return apiFetch<FinancialPlanImpactPreview>(`/ventures/${ventureId}/financial-plans/preview${query}`, {
+    method: "POST",
+    body: request,
+    token,
+  });
+}
+
+export function listScenarios(ventureId: number, token: string): Promise<Scenario[]> {
+  return apiFetch<Scenario[]>(`/ventures/${ventureId}/scenarios`, { token });
+}
+
+export function createScenario(ventureId: number, request: CreateScenarioRequest, token: string): Promise<Scenario> {
+  return apiFetch<Scenario>(`/ventures/${ventureId}/scenarios`, { method: "POST", body: request, token });
+}
+
+export function updateScenario(
+  ventureId: number,
+  scenarioId: number,
+  fields: Partial<CreateScenarioRequest>,
+  token: string
+): Promise<Scenario> {
+  return apiFetch<Scenario>(`/ventures/${ventureId}/scenarios/${scenarioId}`, { method: "PATCH", body: fields, token });
+}
+
+export function deleteScenario(ventureId: number, scenarioId: number, token: string): Promise<{ deleted: boolean }> {
+  return apiFetch<{ deleted: boolean }>(`/ventures/${ventureId}/scenarios/${scenarioId}`, { method: "DELETE", token });
+}
+
+// §16: founder-controlled model bookkeeping, never a verification gate --
+// the founder's own yes/no answer is recorded verbatim.
+export function reconcileFinancialPlan(
+  ventureId: number,
+  planKind: "hire" | "financial",
+  planId: number,
+  included: boolean,
+  token: string
+): Promise<VentureFinancialsResponse> {
+  return apiFetch<VentureFinancialsResponse>(`/ventures/${ventureId}/financials/reconcile`, {
+    method: "POST",
+    body: { plan_kind: planKind, plan_id: planId, included },
     token,
   });
 }

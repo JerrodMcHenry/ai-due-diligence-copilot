@@ -6,19 +6,38 @@ import { useAuth } from "@clerk/nextjs";
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 
-import { createVentureFinancialSnapshot, createHirePlan, getVentureFinancials, previewHirePlan, updateHirePlan } from "@/lib/api";
+import {
+  createVentureFinancialSnapshot,
+  createHirePlan,
+  getVentureFinancials,
+  previewHirePlan,
+  updateHirePlan,
+  createFinancialPlan,
+  updateFinancialPlan,
+  previewFinancialPlan,
+  createScenario,
+  listScenarios,
+  reconcileFinancialPlan,
+} from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
 import type {
+  CreateFinancialPlanRequest,
   CreateFinancialSnapshotRequest,
   CreateHirePlanRequest,
   DerivedFinancialMetrics,
   EmploymentType,
+  ExpenseCategory,
+  FinancialPlan,
+  FinancialPlanImpactPreview,
+  FinancialPlanType,
   FinancialSnapshot,
   HireImpactPreview,
   HirePlan,
   ProjectedMonth,
   ProjectedMonthWithPlan,
+  ReconciliationItem,
+  Scenario,
   VentureFinancialsResponse,
 } from "@/types";
 
@@ -54,10 +73,19 @@ export default function FinanceOverview({ ventureId }: Props) {
   const [data, setData] = useState<VentureFinancialsResponse | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  // Phase 35C: closed | adding a new hire | editing an existing one.
-  // Deliberately separate from `isEditing` (the snapshot form) -- only
-  // one panel is ever open at a time, but they are orthogonal concerns.
-  const [hirePanel, setHirePanel] = useState<{ mode: "closed" } | { mode: "add" } | { mode: "edit"; hire: HirePlan }>({ mode: "closed" });
+  // Phase 35C/35D: closed | choosing what kind of change to model | the
+  // hire form | the revenue/expense form. Deliberately separate from
+  // `isEditing` (the snapshot form) -- only one panel is ever open at a
+  // time, but they are orthogonal concerns. "Model a hire" now opens the
+  // chooser first (§20 of the 35D directive) rather than jumping straight
+  // to the hire form.
+  const [changePanel, setChangePanel] = useState<
+    | { mode: "closed" }
+    | { mode: "choose" }
+    | { mode: "hire"; editing: HirePlan | null }
+    | { mode: "financial"; planType: FinancialPlanType; editing: FinancialPlan | null }
+  >({ mode: "closed" });
+  const [scenarioPanelOpen, setScenarioPanelOpen] = useState(false);
 
   const refresh = useCallback(async () => {
     const token = await getToken();
@@ -117,8 +145,8 @@ export default function FinanceOverview({ ventureId }: Props) {
 
   async function handleSaveHire(request: CreateHirePlanRequest) {
     const result = await withToken(async (token) => {
-      if (hirePanel.mode === "edit") {
-        await updateHirePlan(ventureId, hirePanel.hire.id, request, token);
+      if (changePanel.mode === "hire" && changePanel.editing) {
+        await updateHirePlan(ventureId, changePanel.editing.id, request, token);
       } else {
         await createHirePlan(ventureId, request, token);
       }
@@ -126,7 +154,7 @@ export default function FinanceOverview({ ventureId }: Props) {
     });
     if (result) {
       setData(result);
-      setHirePanel({ mode: "closed" });
+      setChangePanel({ mode: "closed" });
     }
   }
 
@@ -135,6 +163,50 @@ export default function FinanceOverview({ ventureId }: Props) {
       await updateHirePlan(ventureId, hire.id, { status }, token);
       return getVentureFinancials(ventureId, token);
     });
+    if (result) setData(result);
+  }
+
+  async function handlePreviewFinancialPlan(request: CreateFinancialPlanRequest, excludeId?: number): Promise<FinancialPlanImpactPreview | null> {
+    return withToken((token) => previewFinancialPlan(ventureId, request, token, excludeId));
+  }
+
+  async function handleSaveFinancialPlan(request: CreateFinancialPlanRequest) {
+    const result = await withToken(async (token) => {
+      if (changePanel.mode === "financial" && changePanel.editing) {
+        await updateFinancialPlan(ventureId, changePanel.editing.id, request, token);
+      } else {
+        await createFinancialPlan(ventureId, request, token);
+      }
+      return getVentureFinancials(ventureId, token);
+    });
+    if (result) {
+      setData(result);
+      setChangePanel({ mode: "closed" });
+    }
+  }
+
+  async function handleFinancialPlanStatusChange(plan: FinancialPlan, status: "cancelled" | "actualized") {
+    const result = await withToken(async (token) => {
+      await updateFinancialPlan(ventureId, plan.id, { status }, token);
+      return getVentureFinancials(ventureId, token);
+    });
+    if (result) setData(result);
+  }
+
+  async function handleCreateScenario(name: string, hirePlanIds: number[], financialPlanIds: number[]) {
+    const result = await withToken(async (token) => {
+      await createScenario(ventureId, { name, hire_plan_ids: hirePlanIds, financial_plan_ids: financialPlanIds }, token);
+      return getVentureFinancials(ventureId, token);
+    });
+    // Scenarios aren't part of VentureFinancialsResponse -- re-fetch the
+    // scenario list separately (ScenariosSection owns that fetch) but
+    // refresh Finance's own data too in case anything else changed.
+    if (result) setData(result);
+    setScenarioPanelOpen(false);
+  }
+
+  async function handleReconcile(item: ReconciliationItem, included: boolean) {
+    const result = await withToken((token) => reconcileFinancialPlan(ventureId, item.plan_kind, item.plan_id, included, token));
     if (result) setData(result);
   }
 
@@ -159,16 +231,41 @@ export default function FinanceOverview({ ventureId }: Props) {
     );
   }
 
-  if (hirePanel.mode !== "closed") {
+  if (changePanel.mode === "choose") {
+    return (
+      <BaseCard className="space-y-4 p-6 sm:p-7">
+        <ChangeChooser onChoose={(kind) => setChangePanel(kind === "hire" ? { mode: "hire", editing: null } : { mode: "financial", planType: kind, editing: null })} onCancel={() => setChangePanel({ mode: "closed" })} />
+      </BaseCard>
+    );
+  }
+
+  if (changePanel.mode === "hire") {
     return (
       <BaseCard className="space-y-4 p-6 sm:p-7">
         <HireForm
-          existing={hirePanel.mode === "edit" ? hirePanel.hire : null}
+          existing={changePanel.editing}
           hasFinancialSnapshot={Boolean(data?.latest_snapshot)}
           currentRunwayLabel={data?.derived ? runwayLabel(data.derived) : "—"}
           onPreview={handlePreviewHire}
           onSave={handleSaveHire}
-          onCancel={() => setHirePanel({ mode: "closed" })}
+          onCancel={() => setChangePanel({ mode: "closed" })}
+        />
+        {error ? <p className="text-sm text-danger">{error}</p> : null}
+      </BaseCard>
+    );
+  }
+
+  if (changePanel.mode === "financial") {
+    return (
+      <BaseCard className="space-y-4 p-6 sm:p-7">
+        <FinancialPlanForm
+          planType={changePanel.planType}
+          existing={changePanel.editing}
+          hasFinancialSnapshot={Boolean(data?.latest_snapshot)}
+          currentRunwayLabel={data?.derived ? runwayLabel(data.derived) : "—"}
+          onPreview={handlePreviewFinancialPlan}
+          onSave={handleSaveFinancialPlan}
+          onCancel={() => setChangePanel({ mode: "closed" })}
         />
         {error ? <p className="text-sm text-danger">{error}</p> : null}
       </BaseCard>
@@ -198,21 +295,39 @@ export default function FinanceOverview({ ventureId }: Props) {
 
       {error ? <p className="text-sm text-danger">{error}</p> : null}
 
+      {data.pending_reconciliation.length > 0 ? (
+        <ReconciliationBanner items={data.pending_reconciliation} onAnswer={handleReconcile} />
+      ) : null}
+
       <HeadlineMetrics snapshot={data.latest_snapshot} derived={data.derived} />
 
       <CurrentSnapshotBreakdown snapshot={data.latest_snapshot} />
 
       <PlannedChangesSection
         hirePlans={data.hire_plans}
-        onAddHire={() => setHirePanel({ mode: "add" })}
-        onEditHire={(hire) => setHirePanel({ mode: "edit", hire })}
+        financialPlans={data.financial_plans}
+        onAddChange={() => setChangePanel({ mode: "choose" })}
+        onEditHire={(hire) => setChangePanel({ mode: "hire", editing: hire })}
         onCancelHire={(hire) => handleHireStatusChange(hire, "cancelled")}
         onActualizeHire={(hire) => handleHireStatusChange(hire, "actualized")}
+        onEditFinancialPlan={(plan) => setChangePanel({ mode: "financial", planType: plan.plan_type, editing: plan })}
+        onCancelFinancialPlan={(plan) => handleFinancialPlanStatusChange(plan, "cancelled")}
+        onActualizeFinancialPlan={(plan) => handleFinancialPlanStatusChange(plan, "actualized")}
       />
 
       {data.projection.length > 0 ? (
         <CashOutlook projection={data.projection} projectionWithPlan={data.projection_with_plan} status={data.derived.status} />
       ) : null}
+
+      <ScenariosSection
+        ventureId={ventureId}
+        hirePlans={data.hire_plans.filter((h) => h.status === "planned")}
+        financialPlans={data.financial_plans.filter((p) => p.status === "planned")}
+        isCreating={scenarioPanelOpen}
+        onOpenCreate={() => setScenarioPanelOpen(true)}
+        onCloseCreate={() => setScenarioPanelOpen(false)}
+        onCreate={handleCreateScenario}
+      />
 
       <div>
         <Button type="button" variant="secondary" onClick={() => setIsEditing(true)}>
@@ -223,6 +338,92 @@ export default function FinanceOverview({ ventureId }: Props) {
         </p>
       </div>
     </BaseCard>
+  );
+}
+
+// --- Phase 35D -- reconciliation: "your finances changed" -------------------
+
+function ReconciliationBanner({
+  items,
+  onAnswer,
+}: {
+  items: ReconciliationItem[];
+  onAnswer: (item: ReconciliationItem, included: boolean) => Promise<void>;
+}) {
+  const [busyKey, setBusyKey] = useState<string | null>(null);
+
+  async function answer(item: ReconciliationItem, included: boolean) {
+    const key = `${item.plan_kind}-${item.plan_id}`;
+    setBusyKey(key);
+    await onAnswer(item, included);
+    setBusyKey(null);
+  }
+
+  return (
+    <div className="rounded-lg border border-warning/30 bg-warning/5 p-4">
+      <p className="text-sm font-semibold text-text-primary">Your finances changed</p>
+      <p className="mt-1 text-sm leading-6 text-text-secondary">
+        You have planned changes that were due to start by now. Is this now included in the financial snapshot you
+        just entered?
+      </p>
+      <ul className="mt-3 space-y-2.5">
+        {items.map((item) => {
+          const key = `${item.plan_kind}-${item.plan_id}`;
+          const isBusy = busyKey === key;
+          return (
+            <li key={key} className="rounded-md border border-border bg-surface p-3">
+              <p className="text-sm font-medium text-text-primary">
+                {item.label}
+                {item.monthly_amount_cents !== null ? ` — ${formatWholeDollars(Math.abs(item.monthly_amount_cents))}/mo` : ""}
+              </p>
+              <p className="text-xs text-text-muted">Planned start: {formatMonthYear(item.start_date)}</p>
+              <div className="mt-2 flex gap-2">
+                <Button type="button" size="sm" disabled={isBusy} loading={isBusy} onClick={() => answer(item, true)}>
+                  Yes, it&rsquo;s included
+                </Button>
+                <Button type="button" size="sm" variant="subtle" disabled={isBusy} onClick={() => answer(item, false)}>
+                  No, keep modeling it separately
+                </Button>
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
+
+// --- Phase 35D -- "model a change" chooser -----------------------------------
+
+function ChangeChooser({ onChoose, onCancel }: { onChoose: (kind: "hire" | FinancialPlanType) => void; onCancel: () => void }) {
+  const options: { kind: "hire" | FinancialPlanType; title: string; description: string }[] = [
+    { kind: "hire", title: "Hire someone", description: "Model an employee or contractor and see the cost impact." },
+    { kind: "revenue_target", title: "Change revenue", description: "Model what happens if monthly revenue rises or falls." },
+    { kind: "expense_change", title: "Change spending", description: "Model increasing or cutting one spending category." },
+  ];
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">Model a change</h2>
+        <p className="mt-1 text-sm leading-6 text-text-secondary">What kind of change do you want to see the impact of?</p>
+      </div>
+      <div className="space-y-2">
+        {options.map((option) => (
+          <button
+            key={option.kind}
+            type="button"
+            onClick={() => onChoose(option.kind)}
+            className="block w-full rounded-lg border border-border bg-surface p-3 text-left transition-colors hover:border-primary/40"
+          >
+            <p className="text-sm font-semibold text-text-primary">{option.title}</p>
+            <p className="text-xs text-text-secondary">{option.description}</p>
+          </button>
+        ))}
+      </div>
+      <Button type="button" variant="subtle" onClick={onCancel}>
+        Cancel
+      </Button>
+    </div>
   );
 }
 
@@ -412,31 +613,49 @@ function hireCostLabel(hire: HirePlan): string {
   return `${formatWholeDollars(hire.computed_monthly_cost_cents)}/mo`;
 }
 
+function financialPlanLabel(plan: FinancialPlan): string {
+  if (plan.plan_type === "revenue_target") {
+    return `Revenue becomes ${formatWholeDollars(plan.amount_cents)}/mo`;
+  }
+  const sign = plan.amount_cents >= 0 ? "+" : "-";
+  return `${plan.category} ${sign}${formatWholeDollars(Math.abs(plan.amount_cents))}/mo`;
+}
+
 function PlannedChangesSection({
   hirePlans,
-  onAddHire,
+  financialPlans,
+  onAddChange,
   onEditHire,
   onCancelHire,
   onActualizeHire,
+  onEditFinancialPlan,
+  onCancelFinancialPlan,
+  onActualizeFinancialPlan,
 }: {
   hirePlans: HirePlan[];
-  onAddHire: () => void;
+  financialPlans: FinancialPlan[];
+  onAddChange: () => void;
   onEditHire: (hire: HirePlan) => void;
   onCancelHire: (hire: HirePlan) => void;
   onActualizeHire: (hire: HirePlan) => void;
+  onEditFinancialPlan: (plan: FinancialPlan) => void;
+  onCancelFinancialPlan: (plan: FinancialPlan) => void;
+  onActualizeFinancialPlan: (plan: FinancialPlan) => void;
 }) {
-  // Only actively-planned hires are shown -- a cancelled/actualized one
+  // Only actively-planned items are shown -- a cancelled/actualized one
   // is still safely persisted (§18: never hard-deleted) but this is
   // deliberately not a full history UI (§13 of the directive).
-  const active = hirePlans.filter((h) => h.status === "planned");
+  const activeHires = hirePlans.filter((h) => h.status === "planned");
+  const activeFinancialPlans = financialPlans.filter((p) => p.status === "planned");
+  const hasAny = activeHires.length > 0 || activeFinancialPlans.length > 0;
 
   return (
     <div>
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Planned changes</p>
-      {active.length > 0 ? (
+      {hasAny ? (
         <ul className="mt-2 space-y-2">
-          {active.map((hire) => (
-            <li key={hire.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
+          {activeHires.map((hire) => (
+            <li key={`hire-${hire.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
               <div>
                 <p className="text-sm font-medium text-text-primary">{hire.role}</p>
                 <p className="text-xs text-text-muted">
@@ -457,15 +676,37 @@ function PlannedChangesSection({
               </div>
             </li>
           ))}
+          {activeFinancialPlans.map((plan) => (
+            <li key={`plan-${plan.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
+              <div>
+                <p className="text-sm font-medium text-text-primary">{plan.label}</p>
+                <p className="text-xs text-text-muted">
+                  {financialPlanLabel(plan)} starting {formatMonthYear(plan.start_date)}
+                  {plan.end_date ? ` through ${formatMonthYear(plan.end_date)}` : ""}
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-3 text-xs">
+                <button type="button" onClick={() => onEditFinancialPlan(plan)} className="font-semibold text-primary hover:text-primary-hover">
+                  Edit
+                </button>
+                <button type="button" onClick={() => onCancelFinancialPlan(plan)} className="font-semibold text-text-muted hover:text-danger">
+                  Cancel
+                </button>
+                <button type="button" onClick={() => onActualizeFinancialPlan(plan)} className="font-semibold text-text-muted hover:text-text-primary">
+                  Mark as actualized
+                </button>
+              </div>
+            </li>
+          ))}
         </ul>
       ) : (
         <p className="mt-1 text-sm leading-6 text-text-secondary">Nothing planned yet.</p>
       )}
-      <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onAddHire}>
-        Model a hire
+      <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onAddChange}>
+        Model a change
       </Button>
       <p className="mt-1.5 text-sm leading-6 text-text-secondary">
-        See how adding someone to the team would affect monthly spending and your cash runway.
+        See how a hire, a revenue change, or a spending change would affect your cash runway.
       </p>
     </div>
   );
@@ -772,6 +1013,450 @@ function HireForm({
           See financial impact
         </Button>
         <Button type="button" variant="subtle" disabled={isBusy} onClick={onCancel}>
+          Cancel
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// --- Phase 35D -- model a revenue/expense change: form -> preview -> save ---
+
+const EXPENSE_CATEGORY_LABELS: Record<ExpenseCategory, string> = {
+  payroll: "Payroll",
+  contractors: "Contractors",
+  software: "Software",
+  marketing: "Marketing",
+  rent: "Rent",
+  professional_services: "Professional services",
+  other: "Other",
+};
+
+type FinancialFormValues = {
+  label: string;
+  category: ExpenseCategory;
+  amount: string; // dollars, as typed -- sign convention differs by planType, see below
+  startDate: string;
+  endDate: string;
+};
+
+function financialPlanToFormValues(planType: FinancialPlanType, plan: FinancialPlan | null): FinancialFormValues {
+  if (!plan) {
+    return { label: "", category: "marketing", amount: "", startDate: "", endDate: "" };
+  }
+  return {
+    label: plan.label,
+    category: plan.category ?? "marketing",
+    amount: String(Math.abs(centsToDollars(plan.amount_cents))),
+    startDate: plan.start_date,
+    endDate: plan.end_date ?? "",
+  };
+}
+
+// Revenue: the founder always enters a positive target figure. Expense:
+// the founder chooses "increase" or "cut" separately (see the form
+// below) and this converts that choice + a positive number into the
+// signed delta the backend expects.
+function financialFormValuesToRequest(
+  planType: FinancialPlanType,
+  values: FinancialFormValues,
+  direction: "increase" | "cut"
+): CreateFinancialPlanRequest | null {
+  if (!values.label.trim() || !values.startDate || values.amount.trim() === "") return null;
+  const amountDollars = Number(values.amount);
+  if (!Number.isFinite(amountDollars) || amountDollars < 0) return null;
+
+  if (planType === "revenue_target") {
+    return {
+      plan_type: "revenue_target",
+      label: values.label.trim(),
+      category: null,
+      amount_cents: dollarsToCents(amountDollars),
+      start_date: values.startDate,
+      end_date: values.endDate.trim() === "" ? null : values.endDate,
+    };
+  }
+  return {
+    plan_type: "expense_change",
+    label: values.label.trim(),
+    category: values.category,
+    amount_cents: direction === "cut" ? -dollarsToCents(amountDollars) : dollarsToCents(amountDollars),
+    start_date: values.startDate,
+    end_date: values.endDate.trim() === "" ? null : values.endDate,
+  };
+}
+
+function FinancialPlanForm({
+  planType,
+  existing,
+  hasFinancialSnapshot,
+  currentRunwayLabel,
+  onPreview,
+  onSave,
+  onCancel,
+}: {
+  planType: FinancialPlanType;
+  existing: FinancialPlan | null;
+  hasFinancialSnapshot: boolean;
+  currentRunwayLabel: string;
+  onPreview: (request: CreateFinancialPlanRequest, excludeId?: number) => Promise<FinancialPlanImpactPreview | null>;
+  onSave: (request: CreateFinancialPlanRequest) => Promise<void>;
+  onCancel: () => void;
+}) {
+  const [values, setValues] = useState<FinancialFormValues>(() => financialPlanToFormValues(planType, existing));
+  const [direction, setDirection] = useState<"increase" | "cut">(existing && existing.amount_cents < 0 ? "cut" : "increase");
+  const [preview, setPreview] = useState<FinancialPlanImpactPreview | null>(null);
+  const [isBusy, setIsBusy] = useState(false);
+
+  function setValue<K extends keyof FinancialFormValues>(key: K, value: FinancialFormValues[K]) {
+    setValues((prev) => ({ ...prev, [key]: value }));
+    setPreview(null);
+  }
+
+  const request = financialFormValuesToRequest(planType, values, direction);
+  const title = planType === "revenue_target" ? "Change revenue" : "Change spending";
+
+  if (!hasFinancialSnapshot) {
+    return (
+      <div className="space-y-3">
+        <h2 className="text-xl font-bold text-text-primary">{title}</h2>
+        <p className="text-base leading-7 text-text-secondary">We need your current cash and monthly finances before we can model this change.</p>
+        <Button type="button" onClick={onCancel}>
+          Add financial snapshot
+        </Button>
+      </div>
+    );
+  }
+
+  if (preview) {
+    const withPlanLabel = cashOutLabel(preview.with_plan_projection);
+    const baselineLabel = cashOutLabel(preview.baseline_projection);
+    return (
+      <div className="space-y-5">
+        <div>
+          <h2 className="text-xl font-bold text-text-primary">{values.label || title}</h2>
+          <p className="mt-1 text-sm text-text-secondary">
+            {planType === "revenue_target"
+              ? `Revenue becomes $${Number(values.amount || 0).toLocaleString("en-US")}/mo`
+              : `${EXPENSE_CATEGORY_LABELS[values.category]} ${direction === "cut" ? "-" : "+"}$${Number(values.amount || 0).toLocaleString("en-US")}/mo`}
+            {" · "}Starting {formatMonthYear(values.startDate)}
+          </p>
+        </div>
+
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Financial impact</p>
+          <p className="mt-1 text-sm leading-7 text-text-secondary">
+            Current runway: <span className="font-medium text-text-primary">{currentRunwayLabel}</span>
+            <br />
+            Without this change, {baselineLabel}.
+            <br />
+            With this change, <span className="font-medium text-text-primary">{withPlanLabel}</span>.
+          </p>
+          <p className="mt-2 text-xs text-text-muted">
+            {planType === "revenue_target"
+              ? `Scenario assumption: revenue becomes $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}. If this assumption holds, this is the modeled result -- not a prediction.`
+              : `Scenario assumption: ${EXPENSE_CATEGORY_LABELS[values.category].toLowerCase()} ${direction === "cut" ? "falls" : "rises"} by $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}.`}
+          </p>
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          <Button
+            type="button"
+            disabled={isBusy}
+            loading={isBusy}
+            onClick={async () => {
+              if (!request) return;
+              setIsBusy(true);
+              await onSave(request);
+              setIsBusy(false);
+            }}
+          >
+            Save this plan
+          </Button>
+          <Button type="button" variant="subtle" disabled={isBusy} onClick={() => setPreview(null)}>
+            Back to edit
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-4">
+      <div>
+        <h2 className="text-xl font-bold text-text-primary">{title}</h2>
+        <p className="mt-1 text-sm leading-6 text-text-secondary">
+          {planType === "revenue_target"
+            ? "What monthly revenue should we model, and when would this begin?"
+            : "What spending would change, by how much, and when would this begin?"}
+        </p>
+      </div>
+
+      <div>
+        <label className="mb-1 block text-sm font-medium text-text-secondary">Name this scenario assumption</label>
+        <input
+          type="text"
+          value={values.label}
+          onChange={(event) => setValue("label", event.target.value)}
+          placeholder={planType === "revenue_target" ? "e.g. Revenue downside" : "e.g. Cut contractor spend"}
+          className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+        />
+      </div>
+
+      {planType === "expense_change" ? (
+        <>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-text-secondary">Which category?</label>
+            <select
+              value={values.category}
+              onChange={(event) => setValue("category", event.target.value as ExpenseCategory)}
+              className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary"
+            >
+              {(Object.entries(EXPENSE_CATEGORY_LABELS) as [ExpenseCategory, string][]).map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <p className="mb-1.5 text-sm font-medium text-text-secondary">Increase or cut?</p>
+            <div className="flex gap-2">
+              {(["increase", "cut"] as const).map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => {
+                    setDirection(d);
+                    setPreview(null);
+                  }}
+                  className={[
+                    "rounded-full border px-3 py-1.5 text-sm font-medium transition-colors",
+                    direction === d ? "border-primary bg-primary-soft text-primary" : "border-border text-text-secondary hover:border-primary/40",
+                  ].join(" ")}
+                >
+                  {d === "increase" ? "Increase" : "Cut"}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      ) : null}
+
+      <MoneyField
+        label={planType === "revenue_target" ? "Monthly revenue target" : "Monthly amount"}
+        value={values.amount}
+        onChange={(v) => setValue("amount", v)}
+      />
+
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <label className="mb-1 block text-sm font-medium text-text-secondary">Start date</label>
+          <input
+            type="date"
+            value={values.startDate}
+            onChange={(event) => setValue("startDate", event.target.value)}
+            className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+          />
+        </div>
+        <div>
+          <label className="mb-1 block text-sm font-medium text-text-secondary">End date (optional)</label>
+          <input
+            type="date"
+            value={values.endDate}
+            onChange={(event) => setValue("endDate", event.target.value)}
+            className="h-10 w-full rounded-lg border border-border bg-surface px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+        <Button
+          type="button"
+          disabled={!request || isBusy}
+          loading={isBusy}
+          onClick={async () => {
+            if (!request) return;
+            setIsBusy(true);
+            const result = await onPreview(request, existing?.id);
+            setPreview(result);
+            setIsBusy(false);
+          }}
+        >
+          See financial impact
+        </Button>
+        <Button type="button" variant="subtle" disabled={isBusy} onClick={onCancel}>
+          Cancel
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+// --- Phase 35D -- scenarios: compare named operating plans -------------------
+
+function ScenariosSection({
+  ventureId: _ventureId,
+  hirePlans,
+  financialPlans,
+  isCreating,
+  onOpenCreate,
+  onCloseCreate,
+  onCreate,
+}: {
+  ventureId: number;
+  hirePlans: HirePlan[];
+  financialPlans: FinancialPlan[];
+  isCreating: boolean;
+  onOpenCreate: () => void;
+  onCloseCreate: () => void;
+  onCreate: (name: string, hirePlanIds: number[], financialPlanIds: number[]) => Promise<void>;
+}) {
+  const { getToken } = useAuth();
+  const [scenarios, setScenarios] = useState<Scenario[] | null>(null);
+
+  const refresh = useCallback(async () => {
+    const token = await getToken();
+    if (!token) return;
+    const result = await listScenarios(_ventureId, token);
+    setScenarios(result);
+  }, [_ventureId, getToken]);
+
+  // Fetches on mount, and re-fetches whenever a create finishes
+  // (isCreating flips back to false) or the available plans change (a
+  // hire/plan was added/edited elsewhere) -- one effect, not two, so
+  // mounting never fires a redundant duplicate fetch.
+  useEffect(() => {
+    if (isCreating) return;
+    Promise.resolve().then(() => {
+      refresh();
+    });
+  }, [isCreating, hirePlans, financialPlans, refresh]);
+
+  const hasAnyPlan = hirePlans.length > 0 || financialPlans.length > 0;
+
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Scenarios</p>
+
+      {scenarios && scenarios.length > 0 ? (
+        <div className="mt-2 space-y-3">
+          {scenarios.map((scenario) => (
+            <div key={scenario.id} className="rounded-lg border border-border bg-surface p-3">
+              <p className="text-sm font-semibold text-text-primary">{scenario.name}</p>
+              {scenario.assumptions.length > 0 ? (
+                <ul className="mt-1 list-disc pl-5 text-xs text-text-secondary">
+                  {scenario.assumptions.map((a, i) => (
+                    <li key={i}>{a}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="mt-1 text-xs text-text-muted">No plans currently selected.</p>
+              )}
+              <p className="mt-1.5 text-sm text-text-secondary">
+                {scenario.depletion_date
+                  ? `Reaches modeled cash depletion around ${formatMonthYear(scenario.depletion_date)}.`
+                  : scenario.ending_cash_at_horizon_cents !== null
+                    ? `Stays cash-flow positive -- ${formatWholeDollars(scenario.ending_cash_at_horizon_cents)} projected in 24 months.`
+                    : "Not enough financial data to model."}
+              </p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="mt-1 text-sm leading-6 text-text-secondary">No saved scenarios yet.</p>
+      )}
+
+      {isCreating ? (
+        <CreateScenarioForm hirePlans={hirePlans} financialPlans={financialPlans} onCancel={onCloseCreate} onCreate={onCreate} />
+      ) : (
+        <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onOpenCreate} disabled={!hasAnyPlan}>
+          Create scenario
+        </Button>
+      )}
+      {!hasAnyPlan && !isCreating ? <p className="mt-1.5 text-xs text-text-muted">Model a hire, revenue, or spending change first to build a scenario from it.</p> : null}
+    </div>
+  );
+}
+
+function CreateScenarioForm({
+  hirePlans,
+  financialPlans,
+  onCancel,
+  onCreate,
+}: {
+  hirePlans: HirePlan[];
+  financialPlans: FinancialPlan[];
+  onCancel: () => void;
+  onCreate: (name: string, hirePlanIds: number[], financialPlanIds: number[]) => Promise<void>;
+}) {
+  const [name, setName] = useState("");
+  const [selectedHireIds, setSelectedHireIds] = useState<Set<number>>(new Set());
+  const [selectedFinancialIds, setSelectedFinancialIds] = useState<Set<number>>(new Set());
+  const [isBusy, setIsBusy] = useState(false);
+
+  function toggle(set: Set<number>, setSet: (s: Set<number>) => void, id: number) {
+    const next = new Set(set);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    setSet(next);
+  }
+
+  const hasSelection = selectedHireIds.size > 0 || selectedFinancialIds.size > 0;
+
+  return (
+    <div className="mt-3 space-y-3 rounded-lg border border-border bg-surface p-3">
+      <div>
+        <label className="mb-1 block text-sm font-medium text-text-secondary">Scenario name</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(event) => setName(event.target.value)}
+          placeholder="e.g. Growth Plan"
+          className="h-10 w-full rounded-lg border border-border bg-background px-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+        />
+      </div>
+      <div>
+        <p className="mb-1.5 text-sm font-medium text-text-secondary">Include</p>
+        <ul className="space-y-1.5">
+          {hirePlans.map((hire) => (
+            <li key={`hire-${hire.id}`}>
+              <label className="flex items-center gap-2 text-sm text-text-primary">
+                <input type="checkbox" checked={selectedHireIds.has(hire.id)} onChange={() => toggle(selectedHireIds, setSelectedHireIds, hire.id)} className="size-4 accent-primary" />
+                {hire.role} ({hireCostLabel(hire)})
+              </label>
+            </li>
+          ))}
+          {financialPlans.map((plan) => (
+            <li key={`plan-${plan.id}`}>
+              <label className="flex items-center gap-2 text-sm text-text-primary">
+                <input
+                  type="checkbox"
+                  checked={selectedFinancialIds.has(plan.id)}
+                  onChange={() => toggle(selectedFinancialIds, setSelectedFinancialIds, plan.id)}
+                  className="size-4 accent-primary"
+                />
+                {plan.label} ({financialPlanLabel(plan)})
+              </label>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="flex flex-wrap gap-2">
+        <Button
+          type="button"
+          size="sm"
+          disabled={!name.trim() || !hasSelection || isBusy}
+          loading={isBusy}
+          onClick={async () => {
+            setIsBusy(true);
+            await onCreate(name.trim(), [...selectedHireIds], [...selectedFinancialIds]);
+            setIsBusy(false);
+          }}
+        >
+          Save
+        </Button>
+        <Button type="button" variant="subtle" size="sm" disabled={isBusy} onClick={onCancel}>
           Cancel
         </Button>
       </div>

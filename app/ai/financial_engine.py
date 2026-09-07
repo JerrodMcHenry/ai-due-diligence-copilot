@@ -164,39 +164,60 @@ def project_monthly_cash_flow(
     A deterministic "what happens if the current monthly snapshot
     continues" projection -- NOT a forecast (no growth, no seasonality,
     no assumption about the future beyond "these numbers stay the same"),
-    now extended (Phase 35C) to accept dated PLAN items on top of the
-    flat actual snapshot.
+    extended in Phase 35C (dated hiring costs) and Phase 35D (dated
+    revenue/expense plans) to accept dated PLAN items on top of the flat
+    actual snapshot.
 
-    `plan_items`, when given, is a list of GENERIC dated cost items --
-    {id, monthly_cost_cents, one_time_cost_cents, start_date, end_date}.
-    This function has no idea any of them represent a "hire" -- that
-    translation happens exactly once, in hire_to_plan_item() below, per
-    §9 of the Phase 35C directive ("hiring should be the first typed
-    dated plan input into a general projection architecture," never
-    hiring-specific logic baked into the engine itself). A future revenue
-    assumption, cost cut, or financing event becomes just another item in
-    this same list, with no change to this function.
+    `plan_items`, when given, is a list of GENERIC dated financial
+    effects, each one of two kinds (Phase 35D §8 -- "the projection engine
+    should conceptually consume dated financial effects rather than
+    React/database-specific objects"):
+
+      - `kind: "expense_delta"` -- {id, kind, monthly_cost_cents (a
+        SIGNED recurring delta -- positive adds to expenses, negative
+        reduces them), one_time_cost_cents, start_date, end_date}. A hire
+        (Phase 35C, always positive) and an expense-change plan (Phase
+        35D, either sign) are the SAME shape to this function -- it has
+        no idea which produced a given item. This is what proves 35C's
+        own adapter pattern generalizes, exactly as that phase's directive
+        asked this phase to confirm.
+      - `kind: "revenue_target"` -- {id, kind, target_revenue_cents,
+        start_date, end_date}. Deliberately NOT a delta: an absolute
+        monthly figure that REPLACES (never adds to) base revenue for
+        every month it's active, so "MRR becomes $40,000" always means
+        exactly that regardless of what the underlying actual snapshot
+        says -- see revenue_plan_to_plan_item()'s own docstring for why a
+        delta representation would silently drift from the founder's
+        stated assumption if the actual snapshot later changes. If more
+        than one revenue_target item is active in the same month
+        (composing two overlapping revenue plans in one scenario --  not
+        a supported V1 use case), the most-recently-created one wins,
+        deterministically, rather than the two being meaninglessly summed
+        or averaged.
 
     Omitting `plan_items` (or passing []) reproduces Phase 35B's exact
-    original behavior byte-for-byte -- every month's plan_expense_impact_cents
-    is 0, so total_revenue/total_expenses collapse to the same constant
-    base_revenue/base_expenses every month, exactly as before (see
-    test_venture_financials.py's own Case O regression test, and
-    test_venture_hire_plans.py's Case O here).
+    original behavior byte-for-byte -- see test_venture_financials.py's
+    own Case O regression test, test_venture_hire_plans.py's Case O, and
+    this phase's own Case V/W.
 
     Returns [] when cash, revenue, or expenses are unknown -- a
     projection cannot honestly be drawn without all three (never
     substitutes an assumed value, same rule as compute_derived_metrics).
 
     Each month is {month_index (1-based), date, starting_cash_cents,
-    revenue_cents, expenses_cents (both TOTAL, i.e. base + plan impact),
-    plan_expense_impact_cents, active_plan_item_ids, net_cash_change_cents,
-    ending_cash_cents, depleted}. Terminates early (the last row has
-    depleted=True, ending_cash_cents floored at 0 -- cash can never be
-    displayed as negative) the month cash would run out; otherwise runs
-    the full `horizon_months` and stops -- bounded so a cash-flow-positive
-    company never gets a meaningless endless table (§9 of the 35B
-    directive).
+    revenue_cents, expenses_cents (both TOTAL, i.e. base adjusted by any
+    active plan items), plan_expense_impact_cents, plan_revenue_active
+    (bool -- whether a revenue_target item is overriding base revenue
+    this month), active_plan_item_ids, net_cash_change_cents,
+    ending_cash_cents, depleted}. `expenses_cents` is floored at 0 --
+    total company spend can never be displayed as negative, the
+    projection-time half of Phase 35D §7's "never negative expense"
+    invariant (the other half, rejecting an impossible plan at creation
+    time, lives in validate_expense_plan_amount() below). Terminates
+    early (the last row has depleted=True, ending_cash_cents floored at 0)
+    the month cash would run out; otherwise runs the full `horizon_months`
+    and stops -- bounded so a cash-flow-positive company never gets a
+    meaningless endless table (§9 of the 35B directive).
     """
     metrics = compute_derived_metrics(snapshot)
     cash = snapshot.get("cash_balance_cents")
@@ -218,16 +239,26 @@ def project_monthly_cash_flow(
             p for p in plan_items
             if p["start_date"] <= month_date and (p.get("end_date") is None or month_date <= p["end_date"])
         ]
-        recurring_impact = sum((p["monthly_cost_cents"] or 0) for p in active_items)
+        expense_items = [p for p in active_items if p.get("kind", "expense_delta") == "expense_delta"]
+        revenue_items = [p for p in active_items if p.get("kind") == "revenue_target"]
+
+        recurring_impact = sum((p.get("monthly_cost_cents") or 0) for p in expense_items)
         one_time_impact = sum(
             (p.get("one_time_cost_cents") or 0)
             for p in plan_items
-            if _is_one_time_month(p["start_date"], month_date, i)
+            if p.get("kind", "expense_delta") == "expense_delta" and _is_one_time_month(p["start_date"], month_date, i)
         )
         plan_expense_impact = recurring_impact + one_time_impact
 
-        total_revenue = base_revenue
-        total_expenses = base_expenses + plan_expense_impact
+        if revenue_items:
+            winning_revenue_item = max(revenue_items, key=lambda p: p["id"])
+            total_revenue = winning_revenue_item["target_revenue_cents"]
+            plan_revenue_active = True
+        else:
+            total_revenue = base_revenue
+            plan_revenue_active = False
+
+        total_expenses = max(base_expenses + plan_expense_impact, 0)
         net_cash_change = total_revenue - total_expenses
         ending_cash = starting_cash + net_cash_change
         depleted = ending_cash <= 0 and net_cash_change < 0
@@ -240,7 +271,15 @@ def project_monthly_cash_flow(
             "revenue_cents": total_revenue,
             "expenses_cents": total_expenses,
             "plan_expense_impact_cents": plan_expense_impact,
-            "active_plan_item_ids": [p["id"] for p in active_items],
+            "plan_revenue_active": plan_revenue_active,
+            # Sorted, deterministically, regardless of the CALLER's own
+            # plan_items list order (Phase 35D §9: "test order
+            # independence" -- every monetary field is already
+            # commutative by construction; this makes the one cosmetic,
+            # non-monetary field order-independent too, so the full
+            # month dict, not just its dollar amounts, is identical no
+            # matter what order plans were supplied in).
+            "active_plan_item_ids": sorted(p["id"] for p in active_items),
             "net_cash_change_cents": net_cash_change,
             "ending_cash_cents": display_ending_cash,
             "depleted": depleted,
@@ -323,4 +362,114 @@ def hire_plan_items_for_projection(hires: list[dict]) -> list[dict]:
     each to the generic plan-item shape, dropping any that can't be
     costed (see hire_to_plan_item's own docstring)."""
     items = [hire_to_plan_item(h) for h in hires if h.get("status") == "planned"]
+    return [item for item in items if item is not None]
+
+
+# ---------------------------------------------------------------------------
+# Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1.
+#
+# The second and third adapters into the SAME generic projection engine
+# above, proving 35C's own "hiring should be the first typed dated plan
+# input into a general projection architecture" claim: neither adapter
+# below changes project_monthly_cash_flow() itself, only translates a
+# venture_financial_plans row into the {kind, ...} shape it already
+# understands.
+# ---------------------------------------------------------------------------
+
+_EXPENSE_CATEGORY_FIELDS = {
+    "payroll": "payroll_cents",
+    "contractors": "contractors_cents",
+    "software": "software_cents",
+    "marketing": "marketing_cents",
+    "rent": "rent_cents",
+    "professional_services": "professional_services_cents",
+    "other": "other_expenses_cents",
+}
+
+
+def validate_expense_plan_amount(latest_snapshot: dict | None, category: str, amount_cents: int) -> str | None:
+    """
+    Phase 35D §7: "a cost-cut plan must never make an expense category
+    mathematically negative." Returns an error message (reject) if this
+    delta, applied to what the LATEST actual snapshot says that category
+    currently is, would drive it negative -- None means the plan is safe
+    to create.
+
+    A ONE-TIME, creation-time check against currently-known actual state,
+    not a continuously-re-validated runtime constraint (documented
+    limitation, §7 of the directive's own "choose the safest
+    representation" framing): if the actual snapshot changes later such
+    that this delta WOULD have been rejected, the already-created plan is
+    not retroactively invalidated -- the projection engine's own
+    total-expenses floor (see project_monthly_cash_flow's docstring) is
+    the safety net for that case, at the level of the total, not the
+    individual category.
+
+    Skips validation (returns None -- allowed) when no actual snapshot
+    exists yet, or the category's current value is unknown -- there is
+    nothing to validate against, and project_monthly_cash_flow() already
+    returns [] for a venture with no usable actual state regardless.
+    """
+    if latest_snapshot is None:
+        return None
+    current_value = latest_snapshot.get(_EXPENSE_CATEGORY_FIELDS[category])
+    if current_value is None:
+        return None
+    if current_value + amount_cents < 0:
+        return (
+            f"This would reduce {category.replace('_', ' ')} below $0 "
+            f"(currently {current_value / 100:,.0f} cents short by {-(current_value + amount_cents) / 100:,.0f})."
+        )
+    return None
+
+
+def expense_plan_to_plan_item(plan: dict) -> dict:
+    """Adapts one venture_financial_plans row (plan_type='expense_change')
+    into the generic expense_delta shape. `amount_cents` is the row's own
+    SIGNED delta (positive = increase, negative = cut) -- the category
+    itself (payroll/marketing/etc.) is display/validation-only metadata
+    the projection engine never sees; only the net effect on total
+    expenses matters to it."""
+    return {
+        "id": plan["id"],
+        "kind": "expense_delta",
+        "monthly_cost_cents": plan["amount_cents"],
+        "one_time_cost_cents": 0,
+        "start_date": plan["start_date"],
+        "end_date": plan.get("end_date"),
+    }
+
+
+def revenue_plan_to_plan_item(plan: dict) -> dict:
+    """Adapts one venture_financial_plans row (plan_type='revenue_target')
+    into the generic revenue_target shape. Deliberately an ABSOLUTE
+    target (`amount_cents` on the row IS the target, stored as entered),
+    never a delta computed against base revenue at creation time -- a
+    delta would silently drift from the founder's stated "$40,000/month"
+    assumption the moment the underlying actual snapshot's own revenue
+    changed for an unrelated reason (a new snapshot recorded, a
+    reconciliation). An absolute target means exactly the same thing
+    every time it's read, regardless of what else changes."""
+    return {
+        "id": plan["id"],
+        "kind": "revenue_target",
+        "target_revenue_cents": plan["amount_cents"],
+        "start_date": plan["start_date"],
+        "end_date": plan.get("end_date"),
+    }
+
+
+def financial_plan_to_plan_item(plan: dict) -> dict | None:
+    if plan["plan_type"] == "expense_change":
+        return expense_plan_to_plan_item(plan)
+    if plan["plan_type"] == "revenue_target":
+        return revenue_plan_to_plan_item(plan)
+    return None
+
+
+def financial_plan_items_for_projection(plans: list[dict]) -> list[dict]:
+    """Same discipline as hire_plan_items_for_projection(): status='planned'
+    only (cancelled/actualized plans -- §17 of the directive, the same
+    lifecycle as hires -- must never affect a projection)."""
+    items = [financial_plan_to_plan_item(p) for p in plans if p.get("status") == "planned"]
     return [item for item in items if item is not None]

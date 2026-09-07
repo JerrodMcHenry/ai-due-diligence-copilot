@@ -1266,7 +1266,11 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             unmodified FundraisingSimulator tree -- no math change.
             PitchDeckCoachTeaser sits above it as the contextual doorway
             the directive asks for (pitch quality matters most exactly
-            when a founder is thinking about raising). */}
+            when a founder is thinking about raising).
+            Phase 35D §24: `ventureId` additionally lets the Runway
+            section pre-fill (read-only) from canonical Finance state --
+            see FundraisingSimulator.tsx's own comment for the isolation
+            guarantees. */}
         <TabPanel id="fundraising" activeId={tab}>
           <div className="space-y-3">
             {venture.model_result ? <PitchDeckCoachTeaser /> : null}
@@ -1275,7 +1279,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 founder's personal name -- this app has no founder-name
                 field anywhere. Nothing honest to pass, so the default
                 ("You") is used. */}
-            <FundraisingSimulator founderName="" />
+            <FundraisingSimulator founderName="" ventureId={ventureId} />
           </div>
         </TabPanel>
 

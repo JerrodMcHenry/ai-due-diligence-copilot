@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
+
+import { getVentureFinancials } from "@/lib/api";
+import { centsToDollars } from "@/lib/finance/money";
 
 import PathChooser from "./PathChooser";
 import StartingCapTableBuilder from "./StartingCapTableBuilder";
@@ -61,11 +65,22 @@ function buildInput(ownership: UiStakeholder[], draft: ScenarioDraft, runway: Ru
 // event is created, VPS/SPS are never touched. `founderName` is the only
 // real venture data this component reads, purely as a display default for
 // the "You -- 100%" starting-ownership shortcut.
+//
+// Phase 35D §24: `ventureId` (optional -- every existing call site
+// without it behaves exactly as before) additionally lets the runway
+// fields pre-fill from canonical Finance state on mount, ONE read-only
+// fetch, never a write. This is the ONLY thing Finance data touches here
+// -- the fundraising math itself (runScenario/computeRunway) is
+// completely untouched, and nothing a founder types into this simulator
+// (including an edit that overwrites the pre-filled value) is ever
+// written back to Finance.
 type FundraisingSimulatorProps = {
   founderName: string;
+  ventureId?: number;
 };
 
-export default function FundraisingSimulator({ founderName }: FundraisingSimulatorProps) {
+export default function FundraisingSimulator({ founderName, ventureId }: FundraisingSimulatorProps) {
+  const { getToken } = useAuth();
   const [ownership, setOwnership] = useState<UiStakeholder[] | null>(null);
   const [step, setStep] = useState<Step>("chooser");
   const [compareMode, setCompareMode] = useState(false);
@@ -73,6 +88,42 @@ export default function FundraisingSimulator({ founderName }: FundraisingSimulat
   const [draftA, setDraftA] = useState<ScenarioDraft | null>(null);
   const [draftB, setDraftB] = useState<ScenarioDraft | null>(null);
   const [runway, setRunway] = useState<RunwayTerms>({ cashOnHandDollars: null, monthlyBurnDollars: null });
+  const [runwayPrefilled, setRunwayPrefilled] = useState(false);
+
+  // Runs once, only if a ventureId was supplied. Populates the runway
+  // fields ONLY if the founder hasn't already touched them (still at
+  // their initial null default) -- never overwrites a real edit, even
+  // one made before this fetch resolves.
+  useEffect(() => {
+    if (ventureId === undefined) return;
+    let cancelled = false;
+    (async () => {
+      const token = await getToken();
+      if (!token || cancelled) return;
+      try {
+        const financials = await getVentureFinancials(ventureId, token);
+        if (cancelled) return;
+        const cash = financials.latest_snapshot?.cash_balance_cents ?? null;
+        const burn = financials.derived?.net_burn_cents ?? null;
+        const hasUsableBurn = burn !== null && burn > 0;
+        if (cash === null && !hasUsableBurn) return;
+        setRunway((prev) => {
+          if (prev.cashOnHandDollars !== null || prev.monthlyBurnDollars !== null) return prev; // founder already typed something
+          return {
+            cashOnHandDollars: cash !== null ? centsToDollars(cash) : null,
+            monthlyBurnDollars: hasUsableBurn ? centsToDollars(burn as number) : null,
+          };
+        });
+        setRunwayPrefilled(true);
+      } catch (err) {
+        console.error("Failed to pre-fill runway from Finance:", err);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentionally runs once per mount/ventureId, not on every getToken identity change
+  }, [ventureId]);
 
   const [resultA, setResultA] = useState<ScenarioResult | null>(null);
   const [resultB, setResultB] = useState<ScenarioResult | null>(null);
@@ -168,7 +219,7 @@ export default function FundraisingSimulator({ founderName }: FundraisingSimulat
           )}
 
           <BaseCard className="p-5">
-            <RunwayTermsForm runway={runway} onChange={setRunway} />
+            <RunwayTermsForm runway={runway} onChange={setRunway} loadedFromFinance={runwayPrefilled} />
           </BaseCard>
 
           <div className="flex flex-wrap items-center gap-3">

@@ -23,6 +23,7 @@ from datetime import date, datetime
 from pydantic import BaseModel, Field
 
 from app.models.venture_hire_plans import HirePlanResponse, ProjectedMonthWithPlan
+from app.models.venture_financial_plans import FinancialPlanResponse, ReconciliationItem
 
 
 class CreateFinancialSnapshotRequest(BaseModel):
@@ -106,17 +107,25 @@ class VentureFinancialsResponse(BaseModel):
     `projection == []` are the honest "nothing to show yet" values in
     every other case.
 
-    Phase 35C additive fields: `hire_plans` (every status='planned' hire
-    for this venture) and `projection_with_plan` (the SAME projection
-    engine, given those hires) -- `projection` above stays the
+    Phase 35C additive fields: `hire_plans` (every hire for this venture,
+    any status) and `projection_with_plan` (the SAME projection engine,
+    given the status='planned' ones) -- `projection` above stays the
     baseline-only meaning it already had in Phase 35B, byte-identical,
-    for regression safety; `projection_with_plan` is new. See
+    for regression safety; `projection_with_plan` is new.
+
+    Phase 35D additive fields: `financial_plans` (every revenue/expense
+    plan, any status -- mirrors `hire_plans`), `pending_reconciliation`
+    (§13/§14 -- planned items whose start_date has already passed as of
+    the latest snapshot and haven't been reconciled against it yet; empty
+    whenever nothing needs asking). See
     docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md.
     """
     latest_snapshot: FinancialSnapshotResponse | None = None
     derived: DerivedFinancialMetrics | None = None
     projection: list[ProjectedMonth] = Field(default_factory=list)
     hire_plans: list[HirePlanResponse] = Field(default_factory=list)
+    financial_plans: list[FinancialPlanResponse] = Field(default_factory=list)
+    pending_reconciliation: list[ReconciliationItem] = Field(default_factory=list)
     projection_with_plan: list[ProjectedMonthWithPlan] = Field(default_factory=list)
 
 

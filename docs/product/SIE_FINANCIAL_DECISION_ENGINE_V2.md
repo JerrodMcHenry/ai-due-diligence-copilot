@@ -909,3 +909,142 @@ scenarios kept structurally separate from canonical actuals (§18); persisted fi
 scenarios (§25); reload survival; history (§23); testability (§29, mirroring existing conventions);
 ownership/authorization scoped by `venture_id` exactly like every existing Build table; venture-continuous
 access (§21) with no verification gate and no stage gate (§15/§16 of the directive); no new score anywhere.
+
+## 37. Phase 35D — Implemented architecture (operating scenarios + financial plan reconciliation V1)
+
+### 37.1 Revenue plan semantics
+
+`venture_financial_plans` (new table, `plan_type="revenue_target"`) stores an **absolute monthly MRR
+target**, not a delta — "starting January, MRR = $40,000" — deliberately chosen over a percentage/delta
+semantic (per the directive's own preference for a "clear V1 semantic") specifically to avoid silent drift
+if the underlying actual snapshot's own revenue value changes independently later. `revenue_plan_to_plan_item()`
+documents this choice inline. UI copy never says "SIE expects revenue to fall/rise" — always "Scenario
+assumption: MRR becomes $X beginning \<month\>," preserving the ACTUAL/SCENARIO boundary from §18.
+
+### 37.2 Expense plan semantics
+
+`plan_type="expense_change"` stores a **signed recurring monthly delta** against one of the 7 existing
+expense categories (payroll/contractors/software/marketing/rent/professional_services/other) — "cut
+contractors by $10,000/mo" needs no knowledge of the current contractor spend value to express. The
+never-negative-expense invariant is enforced twice: creation-time (`validate_expense_plan_amount()` rejects
+a plan that would drive the category's *currently known* value negative, HTTP 422) and projection-time
+(`total_expenses = max(base_expenses + plan_expense_impact, 0)` — a floor, not a rejection, protecting
+against drift between creation-time and read-time actuals).
+
+### 37.3 Generic projection-event contract (validated, not just designed)
+
+`project_monthly_cash_flow()` still takes one undifferentiated `plan_items: list[dict]` — 35C's
+`hire_to_plan_item()` output is untouched and still has no `kind` key at all (defaults to
+`"expense_delta"` via `p.get("kind", "expense_delta")`), proving the adapter pattern generalizes with zero
+changes to hiring's own code path. `revenue_target` items replace (not add to) base revenue for their
+active months; if two are active in the same month (not a supported composition, but resolved
+deterministically rather than silently summed) the one with the highest `id` — the most recently created —
+wins. `active_plan_item_ids` is sorted before being returned, fixing a genuine minor bug caught during
+manual order-independence testing (the field itself, not any dollar amount, was order-dependent).
+
+### 37.4 Plan composition
+
+Hire + expense-change + revenue-target compose by straightforward month-by-month superposition (expenses
+sum, revenue-target replaces) and were hand-verified live down to the cent (April 2027:
+`$7,000,000 base + $1,875,000 hire + $1,500,000 marketing = $10,375,000` total expenses cents). Composition
+is provably order-independent: `project_monthly_cash_flow()` called with the same plan set in two different
+input orders returns byte-identical output.
+
+### 37.5 Scenario persistence and baseline semantics (decided, not hand-waved)
+
+`venture_financial_scenarios` stores `{id, venture_id, user_id, name, hire_plan_ids[], financial_plan_ids[],
+created_at, updated_at}` — a **named selection of plan IDs**, never a frozen copy of actual state. A
+scenario's numeric result (`assumptions`, `projection`, `ending_cash_at_horizon_cents`, `depletion_date`) is
+always computed live, at read time, against whatever the latest actual snapshot and the current values of
+the selected plans say — explicitly against the directive's own instruction not to copy the canonical
+snapshot into the scenario. "What assumptions was this scenario based on" is answered by the plans
+themselves being durably, separately persisted, not by freezing the scenario's own computed numbers. A
+cancelled or actualized plan still referenced by a scenario's id lists is silently excluded from the live
+computation (never an error, never removed from the membership list) — verified by
+`test_case_l_cancelled_plan_referenced_by_a_scenario_is_honestly_excluded`.
+
+### 37.6 Reconciliation lifecycle
+
+One explicit action, not the directive's own illustrative two-step flow:
+`POST /ventures/{id}/financials/reconcile {plan_kind, plan_id, included}`. `included=true` sets
+`status="actualized"` and records `last_reconciled_snapshot_id`; `included=false` records only
+`last_reconciled_snapshot_id`, leaving `status="planned"` unchanged — clearing the question without
+guessing. The pending-reconciliation query surfaces any `planned` hire or financial plan whose `start_date`
+is on/before the latest snapshot's `as_of_date` AND whose `last_reconciled_snapshot_id` is not the latest
+snapshot's id — so a plan dismissed against an older snapshot re-surfaces honestly against a newer one,
+rather than being silently forgotten. This is founder-controlled bookkeeping of model state, never a
+verification/approval gate: nothing blocks saving a new actual snapshot, and an unresolved reconciliation
+question survives reload indefinitely until the founder answers it (§S).
+
+### 37.7 Snapshot/reconciliation atomicity
+
+Saving a new actual snapshot and surfacing pending reconciliation are two reads of durable state (the new
+row, and the existing `planned` rows compared against it), not a single transaction that could leave a
+"snapshot saved but reconciliation lost" partial state — there is nothing to lose, because reconciliation
+answers are derived at read time from `last_reconciled_snapshot_id`, never written at snapshot-save time.
+
+### 37.8 Isolation proofs (Cases Y/Z)
+
+`test_case_y_no_scenario_can_mutate_canonical_actual_state` asserts `venture_financial_snapshots` is
+unchanged after every scenario/plan/reconciliation operation. No scenario, plan, or projection value is
+written to any table `app/ai/investment_score.py`, `app/ai/scorecard.py`, or the SIE Analyze pipeline reads
+from — Finance stays a parallel, unconnected subsystem exactly as scoped in §18/§20 of the design.
+
+### 37.9 Fundraising pre-fill — implemented (reversing the 35C deferral)
+
+Reconsidered and implemented, judged genuinely isolated this time. `FundraisingSimulator` takes an optional
+`ventureId?: number` prop (every existing call site without it is behaviorally identical to before — the
+new `useEffect` returns immediately when `ventureId` is `undefined`). When supplied, one read-only
+`GET /ventures/{id}/financials` fires once on mount and pre-fills `RunwayTermsForm`'s cash-on-hand/
+monthly-burn fields **only if the founder hasn't already typed into either field** (a `prev.cashOnHandDollars
+!== null || prev.monthlyBurnDollars !== null` guard, checked inside the `setRunway` updater so a founder's
+own concurrent edit always wins even if it lands before the fetch resolves). A cash-flow-positive company's
+negative "burn" is not pre-filled (only `net_burn_cents > 0` is used) since this form has a single burn
+field with no sign concept. `RunwayTermsForm` gained an optional `loadedFromFinance` prop that (a) opens the
+previously-collapsed "Optional: see modeled runway" disclosure by default so the founder actually sees the
+pre-filled numbers, and (b) renders an explicit "Loaded from your Finance tab -- editable here, won't change
+Finance" badge. `VentureWorkspace.tsx`'s Fundraising tab now passes its already-in-scope `ventureId` down.
+
+**Isolation, live-verified on MacroFlow (venture 4074):** opened Fundraising, the runway section auto-opened
+pre-filled with the venture's real canonical values (`$381,250` cash / `$68,750`/mo burn, matching the
+Finance tab exactly), confirmed editable (changed cash to `999,999` via direct field manipulation), and
+confirmed via `read_network_requests` that the *only* network call this component ever made to
+`/ventures/{id}/financials` for the whole session was the initial `GET` — no `POST`/`PATCH` was issued by
+editing the field or clicking Simulate (the entire scenario-math path, `runScenario()`, is and remains pure
+client-side computation with zero network calls, per Phase 21B's original design). Re-checked the Finance
+tab afterward: cash and burn were unchanged at $381,250/$68,750 — the edited scenario value never reached
+canonical Finance.
+
+### 37.10 `VentureAssumptions.capital` audit (re-confirmed from Phase 35A)
+
+Still read in exactly one place in production code: `app/ai/vps_guidance.py`, which turns
+`assumptions["capital"]["monthly_burn"]` into a single labeled coaching sentence ("Assumption: monthly burn
+is $X") inside VPS guidance text — never treated as ground truth, never written anywhere, never read by
+`financial_engine.py` or any Finance surface. On the dashboard it is editable in exactly two places
+(`VentureWorkspace.tsx`'s Overview assumptions editor and `VentureDraftReview.tsx`'s idea-setup flow),
+always rendered with the same `ProvenanceBadge`/hint treatment as every other idea-lab draft field (market
+size, GTM channel, etc.) — no founder-facing surface presents it as a financial fact, and it is entirely
+disconnected from `venture_financial_snapshots`. **Recommended disposition: leave as-is.** It legitimately
+serves the pre-Finance "sketch your assumptions" idea stage (a founder with no real financial history yet
+still benefits from a rough burn/capital assumption informing VPS guidance), the two data paths never read
+or write each other, and there is no evidence of founder confusion between them. Do not migrate or delete;
+revisit only if a future phase wants to nudge founders from this rough assumption toward recording real
+Finance data once they have it.
+
+### 37.11 Limitations (honest, not exhaustive)
+
+No AI-generated forecasting or probability modeling of revenue (unchanged scope guard). Reconciliation is a
+single yes/no action, not a multi-step audit trail of *why* a founder answered as they did. Scenario
+comparison in the UI supports 2-3 scenarios visible at once, not an arbitrary number. `venture_hire_plans`
+and `venture_financial_plans` remain two separate tables with parallel-but-not-unified lifecycle code (a
+deliberate non-refactor, per the directive's own instruction not to disturb 35C's working persistence).
+Field-level edit history is still not tracked for any plan type (same limitation carried over from 35C's
+§35.13).
+
+### 37.12 Next implementation phase
+
+Natural next steps, none begun here per this phase's own STOP: fundraising-event persistence (recording an
+actual raise against canonical Finance once it closes, closing the loop between the Fundraising Simulator's
+hypotheticals and real cash), Build-intelligence connection (surfacing a completed scenario/plan as
+evidence), and eventually letting founders relabel or graduate a `VentureAssumptions.capital` guess into a
+real Finance snapshot with one click once they have real numbers.

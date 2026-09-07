@@ -4415,11 +4415,32 @@ def create_venture_hire_plans_table():
     print("venture_hire_plans table created successfully.")
 
 
+# Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1, §13.
+# Additive column, safe on an existing table with real rows (every
+# existing hire plan simply starts with this NULL -- "never reconciled
+# against any snapshot yet," the correct honest default). Records which
+# financial snapshot (by id) a founder has already answered the
+# reconciliation question against for THIS plan -- see
+# list_pending_reconciliation_for_owner()'s own docstring for exactly how
+# this prevents re-asking about a plan the founder already resolved,
+# while still asking again if a NEWER snapshot arrives.
+def add_hire_plan_reconciliation_column():
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE venture_hire_plans
+                ADD COLUMN last_reconciled_snapshot_id INTEGER REFERENCES venture_financial_snapshots(id) ON DELETE SET NULL
+            """))
+        print("venture_hire_plans.last_reconciled_snapshot_id added.")
+    except Exception as e:
+        print("last_reconciled_snapshot_id migration skipped", e)
+
+
 _HIRE_PLAN_COLUMNS_QUALIFIED = """
                 vhp.id, vhp.venture_id, vhp.user_id, vhp.role, vhp.employment_type,
                 vhp.annual_salary_cents, vhp.burden_percent, vhp.monthly_cost_cents,
                 vhp.one_time_cost_cents, vhp.start_date, vhp.end_date, vhp.status,
-                vhp.created_at, vhp.updated_at
+                vhp.created_at, vhp.updated_at, vhp.last_reconciled_snapshot_id
 """
 
 
@@ -4506,6 +4527,270 @@ def update_venture_hire_plan_for_owner(user_id: str, venture_id: int, hire_plan_
         """), {**fields, "hire_plan_id": hire_plan_id, "venture_id": venture_id, "user_id": user_id})
         row = result.mappings().first()
         return dict(row) if row else None
+
+
+# ---------------------------------------------------------------------------
+# Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1. See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md.
+#
+# venture_financial_plans covers the two NEW plan types this phase adds
+# (revenue_target, expense_change) -- one table, not two, since both
+# share an identical shape (a signed/absolute amount, a category only
+# meaningful for expense_change, a dated window, the same
+# planned/cancelled/actualized lifecycle as venture_hire_plans). This is
+# deliberately NOT a merge with venture_hire_plans itself: hiring's own
+# fields (employment_type, salary, burden) have no equivalent here, and
+# Phase 35C's own directive explicitly forbade refactoring working hire
+# persistence "merely for theoretical purity." A `plan_type` discriminator
+# column is justified NOW specifically because there are two new,
+# genuinely interchangeable-shaped types being added at once -- the exact
+# threshold 35A/35C's own commentary already named for when this becomes
+# worth it.
+def create_venture_financial_plans_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_financial_plans (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                plan_type TEXT NOT NULL CHECK (plan_type IN ('revenue_target', 'expense_change')),
+                label TEXT NOT NULL,
+                category TEXT CHECK (category IN (
+                    'payroll', 'contractors', 'software', 'marketing', 'rent', 'professional_services', 'other'
+                )),
+                amount_cents BIGINT NOT NULL,
+                start_date DATE NOT NULL,
+                end_date DATE,
+                status TEXT NOT NULL DEFAULT 'planned' CHECK (status IN ('planned', 'cancelled', 'actualized')),
+                last_reconciled_snapshot_id INTEGER REFERENCES venture_financial_snapshots(id) ON DELETE SET NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_financial_plans_venture_idx
+            ON venture_financial_plans (venture_id, status)
+        """))
+    print("venture_financial_plans table created successfully.")
+
+
+_FINANCIAL_PLAN_COLUMNS_QUALIFIED = """
+                vfp.id, vfp.venture_id, vfp.user_id, vfp.plan_type, vfp.label, vfp.category,
+                vfp.amount_cents, vfp.start_date, vfp.end_date, vfp.status,
+                vfp.last_reconciled_snapshot_id, vfp.created_at, vfp.updated_at
+"""
+
+
+def create_venture_financial_plan(
+    venture_id: int,
+    user_id: str,
+    plan_type: str,
+    label: str,
+    amount_cents: int,
+    start_date,
+    category: str | None = None,
+    end_date=None,
+) -> dict:
+    """Ownership of venture_id, and the §7 never-negative-expense
+    validation, are both enforced by the CALLER (app/api.py) -- identical
+    discipline to create_venture_hire_plan()."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_financial_plans (
+                venture_id, user_id, plan_type, label, category, amount_cents, start_date, end_date
+            )
+            VALUES (
+                :venture_id, :user_id, :plan_type, :label, :category, :amount_cents, :start_date, :end_date
+            )
+            RETURNING {_FINANCIAL_PLAN_COLUMNS_QUALIFIED.replace("vfp.", "")}
+        """), {
+            "venture_id": venture_id, "user_id": user_id, "plan_type": plan_type, "label": label,
+            "category": category, "amount_cents": amount_cents, "start_date": start_date, "end_date": end_date,
+        })
+        return dict(result.mappings().first())
+
+
+def list_venture_financial_plans_for_owner(user_id: str, venture_id: int, status: str | None = None) -> list[dict]:
+    clause = "AND vfp.status = :status" if status is not None else ""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_FINANCIAL_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_financial_plans vfp
+            JOIN modeled_ventures v ON v.id = vfp.venture_id
+            WHERE vfp.venture_id = :venture_id AND v.user_id = :user_id
+            {clause}
+            ORDER BY vfp.start_date ASC, vfp.created_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id, "status": status})
+        return [dict(row) for row in result.mappings().all()]
+
+
+def get_venture_financial_plan_for_owner(user_id: str, venture_id: int, plan_id: int) -> dict | None:
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_FINANCIAL_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_financial_plans vfp
+            JOIN modeled_ventures v ON v.id = vfp.venture_id
+            WHERE vfp.id = :plan_id AND vfp.venture_id = :venture_id AND v.user_id = :user_id
+        """), {"plan_id": plan_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+def update_venture_financial_plan_for_owner(user_id: str, venture_id: int, plan_id: int, **fields) -> dict | None:
+    """Update-in-place, identical discipline and identical reasoning to
+    update_venture_hire_plan_for_owner() -- see that function's own
+    docstring."""
+    if not fields:
+        return get_venture_financial_plan_for_owner(user_id, venture_id, plan_id)
+
+    set_clause = ", ".join(f"{key} = :{key}" for key in fields)
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE venture_financial_plans vfp
+            SET {set_clause}, updated_at = CURRENT_TIMESTAMP
+            FROM modeled_ventures v
+            WHERE vfp.venture_id = v.id
+              AND vfp.id = :plan_id
+              AND vfp.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING {_FINANCIAL_PLAN_COLUMNS_QUALIFIED}
+        """), {**fields, "plan_id": plan_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+# venture_financial_scenarios -- a NAMED SELECTION of plan ids, never a
+# frozen copy of actual state. `hire_plan_ids`/`financial_plan_ids` are
+# plain Postgres arrays, mirroring venture_decisions.evidence_ids' own
+# precedent (db.py, Phase 34D) -- "a short, immutable-once-decided list
+# with no need for its own queryable attributes," the same judgment
+# reapplied here for "which plans does this scenario include." See
+# docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md's own "scenario
+# baseline semantics" section for why NOTHING about the actual financial
+# state is copied into this table -- a scenario's numeric result is
+# always recomputed live, at read time, against whatever the LATEST
+# actual snapshot and the SELECTED plans' CURRENT values currently say.
+def create_venture_financial_scenarios_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_financial_scenarios (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                name TEXT NOT NULL,
+                hire_plan_ids INTEGER[] NOT NULL DEFAULT '{}',
+                financial_plan_ids INTEGER[] NOT NULL DEFAULT '{}',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_financial_scenarios_venture_idx
+            ON venture_financial_scenarios (venture_id)
+        """))
+    print("venture_financial_scenarios table created successfully.")
+
+
+_SCENARIO_COLUMNS_QUALIFIED = """
+                vfs.id, vfs.venture_id, vfs.user_id, vfs.name,
+                vfs.hire_plan_ids, vfs.financial_plan_ids, vfs.created_at, vfs.updated_at
+"""
+
+
+def create_venture_financial_scenario(
+    venture_id: int, user_id: str, name: str, hire_plan_ids: list[int], financial_plan_ids: list[int]
+) -> dict:
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_financial_scenarios (venture_id, user_id, name, hire_plan_ids, financial_plan_ids)
+            VALUES (:venture_id, :user_id, :name, :hire_plan_ids, :financial_plan_ids)
+            RETURNING {_SCENARIO_COLUMNS_QUALIFIED.replace("vfs.", "")}
+        """), {
+            "venture_id": venture_id, "user_id": user_id, "name": name,
+            "hire_plan_ids": hire_plan_ids, "financial_plan_ids": financial_plan_ids,
+        })
+        return dict(result.mappings().first())
+
+
+def list_venture_financial_scenarios_for_owner(user_id: str, venture_id: int) -> list[dict]:
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_SCENARIO_COLUMNS_QUALIFIED}
+            FROM venture_financial_scenarios vfs
+            JOIN modeled_ventures v ON v.id = vfs.venture_id
+            WHERE vfs.venture_id = :venture_id AND v.user_id = :user_id
+            ORDER BY vfs.created_at ASC
+        """), {"venture_id": venture_id, "user_id": user_id})
+        return [dict(row) for row in result.mappings().all()]
+
+
+def get_venture_financial_scenario_for_owner(user_id: str, venture_id: int, scenario_id: int) -> dict | None:
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_SCENARIO_COLUMNS_QUALIFIED}
+            FROM venture_financial_scenarios vfs
+            JOIN modeled_ventures v ON v.id = vfs.venture_id
+            WHERE vfs.id = :scenario_id AND vfs.venture_id = :venture_id AND v.user_id = :user_id
+        """), {"scenario_id": scenario_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+def update_venture_financial_scenario_for_owner(user_id: str, venture_id: int, scenario_id: int, **fields) -> dict | None:
+    if not fields:
+        return get_venture_financial_scenario_for_owner(user_id, venture_id, scenario_id)
+    set_clause = ", ".join(f"{key} = :{key}" for key in fields)
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE venture_financial_scenarios vfs
+            SET {set_clause}, updated_at = CURRENT_TIMESTAMP
+            FROM modeled_ventures v
+            WHERE vfs.venture_id = v.id
+              AND vfs.id = :scenario_id
+              AND vfs.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING {_SCENARIO_COLUMNS_QUALIFIED}
+        """), {**fields, "scenario_id": scenario_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return dict(row) if row else None
+
+
+def delete_venture_financial_scenario_for_owner(user_id: str, venture_id: int, scenario_id: int) -> bool:
+    """A scenario is a saved SELECTION/query, not a fact about the world
+    (unlike a plan or evidence row) -- deleting one is safe and carries no
+    history obligation."""
+    with engine.begin() as connection:
+        result = connection.execute(text("""
+            DELETE FROM venture_financial_scenarios vfs
+            USING modeled_ventures v
+            WHERE vfs.venture_id = v.id
+              AND vfs.id = :scenario_id
+              AND vfs.venture_id = :venture_id
+              AND v.user_id = :user_id
+            RETURNING vfs.id
+        """), {"scenario_id": scenario_id, "venture_id": venture_id, "user_id": user_id})
+        return result.mappings().first() is not None
+
+
+# Phase 35D §13 reconciliation query: "planned" hires/plans whose
+# start_date is already at-or-before the LATEST snapshot's own as_of_date
+# (i.e., should plausibly already be reflected in what the founder just
+# entered) AND have not already been reconciled against THIS SPECIFIC
+# snapshot. Re-surfaces on a NEWER snapshot even for a plan the founder
+# already dismissed against an OLDER one -- correct, because a newer
+# snapshot is new information that could change the answer.
+def list_pending_reconciliation_for_owner(user_id: str, venture_id: int, latest_snapshot_id: int, as_of_date) -> dict:
+    hires = list_venture_hire_plans_for_owner(user_id, venture_id, status="planned")
+    plans = list_venture_financial_plans_for_owner(user_id, venture_id, status="planned")
+    pending_hires = [
+        h for h in hires
+        if h["start_date"] <= as_of_date and h["last_reconciled_snapshot_id"] != latest_snapshot_id
+    ]
+    pending_plans = [
+        p for p in plans
+        if p["start_date"] <= as_of_date and p["last_reconciled_snapshot_id"] != latest_snapshot_id
+    ]
+    return {"hire_plans": pending_hires, "financial_plans": pending_plans}
 
 
 _DECISION_COLUMNS = """
@@ -5198,6 +5483,14 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     # added to QUALIFYING_BUILDING_EVENTS, same reasoning as above.
     "hire_plan_created",
     "hire_plan_status_changed",
+    # Phase 35D -- Operating Scenarios + Financial Plan Reconciliation V1.
+    # Logged from app/api.py's new financial-plan/scenario/reconciliation
+    # endpoints. Deliberately NOT added to QUALIFYING_BUILDING_EVENTS,
+    # same reasoning as every other Build/Finance event above.
+    "financial_plan_created",
+    "financial_plan_status_changed",
+    "financial_plan_reconciled",
+    "financial_scenario_created",
 }
 
 
