@@ -27,10 +27,13 @@ import {
   listVentureEvidence,
   listVentureMissions,
   recordVentureMissionLearning,
+  resolveVentureEvidence,
 } from "@/lib/api";
 
 import type {
+  BlockingEvidenceItem,
   BuildRecommendation,
+  CompanyIntelligenceSummary,
   CurrentQuestion,
   VentureDecision,
   VentureEvidence,
@@ -60,11 +63,20 @@ import type {
 type Props = {
   ventureId: number;
   ventureName: string;
+  // Phase 34G -- SIE Intelligence Advantage V1. This component already
+  // fetches GET /ventures/{id}/recommendation on every refresh; its
+  // response now also carries a company-intelligence summary
+  // (§10-13). Rather than a second fetch, the parent (VentureWorkspace.tsx)
+  // receives it here and renders its own separate "what SIE knows /
+  // still figuring out / what changed" section from it -- the same
+  // lifted-state pattern this codebase already uses for
+  // primaryMissionTitle/missionedMilestones.
+  onCompanyIntelligence?: (summary: CompanyIntelligenceSummary) => void;
 };
 
 type LoadState = "loading" | "ready" | "error";
 
-export default function CurrentQuestionCard({ ventureId, ventureName }: Props) {
+export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyIntelligence }: Props) {
   const { getToken } = useAuth();
 
   const [loadState, setLoadState] = useState<LoadState>("loading");
@@ -90,12 +102,13 @@ export default function CurrentQuestionCard({ ventureId, ventureName }: Props) {
       setDecisions(decisionList);
       setCurrentQuestion(rec.current_question);
       setRecommendation(rec.recommendation);
+      onCompanyIntelligence?.(rec.company_intelligence);
       setLoadState("ready");
     } catch (err) {
       console.error("Failed to load the current question:", err);
       setLoadState("error");
     }
-  }, [ventureId, getToken]);
+  }, [ventureId, getToken, onCompanyIntelligence]);
 
   useEffect(() => {
     // Promise.resolve().then() is a genuine microtask boundary, not
@@ -236,6 +249,12 @@ export default function CurrentQuestionCard({ ventureId, ventureName }: Props) {
                 },
                 token
               );
+              await refresh();
+            })
+          }
+          onResolveEvidence={(evidenceId, resolutionNote) =>
+            withToken(async (token) => {
+              await resolveVentureEvidence(ventureId, evidenceId, resolutionNote, token);
               await refresh();
             })
           }
@@ -431,6 +450,102 @@ function DecisionState({
   );
 }
 
+// --- Phase 34G-A §2/§3/§6/§10: a specific, resolvable tension -------------
+//
+// SIE never lets a founder outvote a contradiction by volume (§2: "8
+// supports > 1 contradiction = validated" is explicitly forbidden), and
+// never lets it disappear on its own -- but a founder who KNOWS the
+// old result no longer reflects reality (a one-off, a different
+// segment, before a real product change) has an explicit, honest way to
+// say so, in their own words. Resolving does not edit or delete
+// anything -- it stays visible in full venture history.
+function BlockingEvidencePanel({
+  items,
+  onResolve,
+}: {
+  items: BlockingEvidenceItem[];
+  onResolve: (evidenceId: number, resolutionNote: string) => Promise<void | null>;
+}) {
+  return (
+    <div className="rounded-lg border border-warning/30 bg-warning/5 p-3 space-y-2.5">
+      <p className="text-sm font-medium text-text-primary">
+        These specific results are creating this tension. If one no longer reflects where things stand, you
+        can mark it resolved.
+      </p>
+      <ul className="space-y-2">
+        {items.map((item) => (
+          <BlockingEvidenceRow key={item.id} item={item} onResolve={onResolve} />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function BlockingEvidenceRow({
+  item,
+  onResolve,
+}: {
+  item: BlockingEvidenceItem;
+  onResolve: (evidenceId: number, resolutionNote: string) => Promise<void | null>;
+}) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [note, setNote] = useState("");
+  const [isSaving, setIsSaving] = useState(false);
+  const [isResolved, setIsResolved] = useState(false);
+
+  if (isResolved) {
+    return (
+      <li className="rounded-md border border-border bg-surface p-2.5 text-sm text-text-secondary">
+        Marked resolved -- SIE will re-evaluate what matters most next time you check.
+      </li>
+    );
+  }
+
+  return (
+    <li className="rounded-md border border-border bg-surface p-2.5">
+      <p className="text-sm text-text-secondary">&ldquo;{item.statement}&rdquo;</p>
+      {!isOpen ? (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="mt-1.5 text-xs font-semibold text-primary hover:text-primary-hover"
+        >
+          Was this addressed?
+        </button>
+      ) : (
+        <div className="mt-2 space-y-2">
+          <input
+            type="text"
+            value={note}
+            onChange={(event) => setNote(event.target.value)}
+            placeholder="e.g. This was a different segment -- our focus now is enterprise, where results are strong."
+            className="h-9 w-full rounded-md border border-border bg-background px-2.5 text-sm text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+          />
+          <div className="flex gap-2">
+            <Button
+              type="button"
+              size="sm"
+              disabled={isSaving || !note.trim()}
+              loading={isSaving}
+              onClick={async () => {
+                setIsSaving(true);
+                await onResolve(item.id, note.trim());
+                setIsSaving(false);
+                setIsResolved(true);
+              }}
+            >
+              Mark resolved
+            </Button>
+            <Button type="button" variant="subtle" size="sm" disabled={isSaving} onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+          </div>
+        </div>
+      )}
+    </li>
+  );
+}
+
 // --- Case: nothing active -- recommend the next question --------------------
 
 function RecommendationState({
@@ -438,11 +553,13 @@ function RecommendationState({
   recommendation,
   onStartTest,
   onStartCustomTest,
+  onResolveEvidence,
 }: {
   ventureName: string;
   recommendation: BuildRecommendation | null;
   onStartTest: () => Promise<void | null>;
   onStartCustomTest: (questionText: string, whyItMatters: string) => Promise<void | null>;
+  onResolveEvidence: (evidenceId: number, resolutionNote: string) => Promise<void | null>;
 }) {
   const [isStarting, setIsStarting] = useState(false);
   const [showCustom, setShowCustom] = useState(false);
@@ -460,6 +577,10 @@ function RecommendationState({
         <p className="mt-1 text-lg font-semibold text-text-primary">{recommendation.question_text}</p>
         <p className="mt-1 text-base leading-7 text-text-secondary">{recommendation.why_it_matters}</p>
       </div>
+
+      {recommendation.blocking_evidence.length > 0 ? (
+        <BlockingEvidencePanel items={recommendation.blocking_evidence} onResolve={onResolveEvidence} />
+      ) : null}
 
       <div className="rounded-lg border border-border bg-surface p-3">
         <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Try this</p>
@@ -643,6 +764,23 @@ export function CandidateEvidenceReview({
 
   const drafts = signals.map((signal) => buildEvidenceDraft(signal));
 
+  // Phase 34G-A §7/§8: SIE never gets to silently decide a result meant
+  // nothing just because no regex matched it. When nothing structured
+  // was extracted, the founder can classify the raw text themselves, in
+  // plain language, using the SAME evidence-type/relationship vocabulary
+  // the checkbox flow above already uses -- no new AI system, no
+  // additional regex, just a fallback for exactly the gap the raw-note
+  // path otherwise leaves silent.
+  const [fallbackType, setFallbackType] = useState<EvidenceTypeChoice | null>(null);
+  const [fallbackRelationship, setFallbackRelationship] = useState<RelationshipChoice | null>(null);
+
+  async function confirmStructuredFallback() {
+    if (!fallbackType || !hasExplicitRelationship(fallbackRelationship)) return;
+    setIsSaving(true);
+    await onConfirm([toRawTextEvidencePayload(resultText, fallbackType, fallbackRelationship)]);
+    setIsSaving(false);
+  }
+
   // Phase 34D-A: a checked signal is only ready to confirm once the
   // founder has explicitly picked its relationship in `relationships` --
   // never falling back to the signal's polarity-implied default. This is
@@ -688,10 +826,40 @@ export function CandidateEvidenceReview({
 
   if (signals.length === 0) {
     return (
-      <div className="space-y-2">
-        <p className="text-sm text-text-secondary">Nothing specific was recognized in what you wrote -- that&rsquo;s fine.</p>
-        <Button type="button" variant="secondary" size="sm" disabled={isSaving} loading={isSaving} onClick={confirmRawTextOnly}>
-          Save this as-is
+      <div className="space-y-3">
+        <p className="text-sm text-text-secondary">
+          SIE didn&rsquo;t recognize a specific result in what you wrote -- that&rsquo;s fine, but it also means
+          nothing here will change what SIE recommends next unless you classify it yourself below.
+        </p>
+        <div className="space-y-2 rounded-lg border border-border bg-surface p-3">
+          <p className="text-sm font-medium text-text-secondary">What did this result show?</p>
+          <select
+            value={fallbackType ?? ""}
+            onChange={(event) => setFallbackType(event.target.value as EvidenceTypeChoice)}
+            className="h-9 w-full rounded-md border border-border bg-background px-2.5 text-sm text-text-primary"
+          >
+            <option value="" disabled>
+              Choose the closest match…
+            </option>
+            {Object.entries(EVIDENCE_TYPE_LABELS).map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+          {fallbackType ? <RelationshipPicker value={fallbackRelationship} onChange={setFallbackRelationship} /> : null}
+          <Button
+            type="button"
+            size="sm"
+            disabled={isSaving || !fallbackType || !hasExplicitRelationship(fallbackRelationship)}
+            loading={isSaving}
+            onClick={confirmStructuredFallback}
+          >
+            Classify and save
+          </Button>
+        </div>
+        <Button type="button" variant="subtle" size="sm" disabled={isSaving} loading={isSaving} onClick={confirmRawTextOnly}>
+          Just save the note as unclassified text
         </Button>
       </div>
     );

@@ -4114,6 +4114,84 @@ def supersede_venture_evidence_for_owner(user_id: str, venture_id: int, evidence
         return row is not None
 
 
+# Phase 34G-A -- Intelligence Resolution + Learning Integrity Hardening,
+# §3/§6. The first real caller of the supersede mechanism above: a
+# founder-explicit way to say "this specific old result should no longer
+# be treated as the current picture" -- covering all four of the
+# directive's illustrative reasons (incorrect, superseded, a different
+# segment, before a major product change) with ONE small action rather
+# than four separate mechanisms, per the directive's own "do not build a
+# large evidence-management system" instruction.
+#
+# Distinguishes EXISTS from CURRENTLY DECISION-DOMINANT: the old row is
+# never edited or deleted (still fully queryable via
+# list_venture_evidence_for_owner() -- "superseded evidence remains in
+# history," §3/§11) -- it is simply excluded from every `superseded_by_id
+# IS NULL` view (app/api.py's own `current_evidence` filter, already in
+# place since Phase 34D), which is exactly what removes it from the
+# recommendation engine's stage_mix computation (app/ai/build_recommendation.py)
+# without silently averaging it away or claiming it was wrong.
+#
+# Both writes happen in ONE transaction -- a resolution note that gets
+# created but never actually clears the old row (or vice versa) would be
+# a genuinely confusing half-state, unlike the two independent,
+# separately-atomic evidence/decision writes documented in
+# docs/product/SIE_BUILD_INTELLIGENCE_ARCHITECTURE_V1.md §K (those are
+# independent facts; a resolution is fundamentally one fact about one
+# other row, so it gets one transaction).
+def resolve_venture_evidence_for_owner(
+    user_id: str,
+    venture_id: int,
+    evidence_id: int,
+    resolution_note: str,
+) -> dict | None:
+    """
+    Creates a new venture_evidence row holding the founder's own
+    resolution note (evidence_type inherited from the row being resolved,
+    so it stays part of the same funnel stage; relationship left NULL --
+    this row is a note ABOUT resolving a tension, not itself new
+    supporting/contradicting evidence) and points the OLD row's
+    superseded_by_id at it, atomically. Returns the new row's dict, or
+    None if `evidence_id` doesn't exist, isn't owned by this venture/user,
+    or is already superseded (idempotent no-op on a repeat call, mirroring
+    every other *_for_owner ownership check in this file).
+    """
+    with engine.begin() as connection:
+        old_row = connection.execute(text("""
+            SELECT ve.id, ve.evidence_type, ve.superseded_by_id
+            FROM venture_evidence ve
+            JOIN modeled_ventures v ON v.id = ve.venture_id
+            WHERE ve.id = :evidence_id AND ve.venture_id = :venture_id AND v.user_id = :user_id
+            FOR UPDATE
+        """), {"evidence_id": evidence_id, "venture_id": venture_id, "user_id": user_id}).mappings().first()
+
+        if old_row is None or old_row["superseded_by_id"] is not None:
+            return None
+
+        new_row = connection.execute(text("""
+            INSERT INTO venture_evidence (
+                venture_id, user_id, evidence_type, statement, provenance,
+                relationship, founder_confirmed
+            )
+            VALUES (:venture_id, :user_id, :evidence_type, :statement, 'founder_said', NULL, TRUE)
+            RETURNING id, venture_id, user_id, related_mission_id, related_decision_id,
+                      evidence_type, statement, provenance, source_quote,
+                      structured_field_path, structured_value, relationship,
+                      founder_confirmed, superseded_by_id, occurred_at, recorded_at
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "evidence_type": old_row["evidence_type"],
+            "statement": resolution_note,
+        }).mappings().first()
+
+        connection.execute(text("""
+            UPDATE venture_evidence SET superseded_by_id = :new_id WHERE id = :old_id
+        """), {"new_id": new_row["id"], "old_id": old_row["id"]})
+
+        return dict(new_row)
+
+
 _DECISION_COLUMNS = """
                 id, venture_id, user_id, related_mission_id, sie_recommendation,
                 sie_reasoning, founder_choice, founder_rationale, evidence_ids,
@@ -4787,6 +4865,12 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     # endpoints.
     "evidence_confirmed",
     "decision_recorded",
+    # Phase 34G-A -- Intelligence Resolution + Learning Integrity
+    # Hardening, §3/§6. Logged from app/api.py's new
+    # POST /ventures/{id}/evidence/{evidence_id}/resolve endpoint.
+    # Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same
+    # reasoning as evidence_confirmed/decision_recorded above.
+    "evidence_resolved",
 }
 
 

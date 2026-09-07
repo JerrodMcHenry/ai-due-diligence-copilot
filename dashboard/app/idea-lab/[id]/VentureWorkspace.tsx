@@ -28,7 +28,6 @@ import {
   VentureGraduationAction,
   VentureGraduationBanner,
 } from "@/components/idea-lab/VentureGraduation";
-import { classifyCategoryKnowledge } from "@/components/idea-lab/ventureKnowledge";
 import { stillFiguringOutFromCategories } from "@/components/idea-lab/ventureOverviewHelpers";
 import { suggestionForMilestone } from "@/components/idea-lab/missionSuggestions";
 import {
@@ -46,9 +45,9 @@ import { deleteVenture, getVenture, getVentureHistory, updateVenture } from "@/l
 import { emptyAssumptions, VENTURE_STAGES } from "@/types";
 
 import type {
+  CompanyIntelligenceSummary,
   MissionType,
   VentureAssumptions,
-  VentureHistoryEvent,
   VentureHistoryResponse,
   VentureResponse,
 } from "@/types";
@@ -181,62 +180,115 @@ function VentureIdentity({
   );
 }
 
-// Phase 34E, Section 12: a concise "what SIE currently understands" --
-// deliberately NOT the six-category grading grid by default (that's
-// VentureUnderstandingPanel, still fully intact and one click away via
-// the disclosure below, for a founder who wants the full breakdown).
-// Flattens every category's own real `basis` sentences (never a score,
-// never invented) into one short list; renders nothing when nothing has
-// been modeled yet (Overview's hero above already covers that state).
-function WhatSieUnderstands({ result }: { result: NonNullable<VentureResponse["model_result"]> }) {
-  const categories = classifyCategoryKnowledge(result.categories);
-  const knownFacts = categories.filter((c) => c.hasSignal).flatMap((c) => c.facts);
+// Phase 34E, Section 12, superseded by Phase 34G -- SIE Intelligence
+// Advantage V1, §10-13: "what SIE currently understands" is now driven
+// by accumulated EVIDENCE (venture_evidence, missions, decisions --
+// exactly the state actually driving CurrentQuestionCard's own
+// recommendation) rather than VPS category `basis` sentences, which
+// answer a different question (what's been MODELED, not what's been
+// OBSERVED). The old VPS-category view is not gone -- it is still fully
+// intact and one click away via "See the full breakdown by category"
+// -- it is just no longer the DEFAULT content, since Section 10's own
+// instruction is that this section "should summarize the state that is
+// actually driving SIE's recommendation."
+//
+// Three state-dependent sub-sections (WHAT SIE KNOWS / STILL FIGURING
+// OUT / WHAT CHANGED RECENTLY), each rendered only when non-empty --
+// §18's own explicit "do not overwhelm a brand-new venture with empty
+// intelligence sections" applies per-section, not just to the whole
+// card. A single "See full history →" link replaces Phase 34E's own
+// separate "Most recent: ..." one-liner (Section 23's anti-duplication
+// rule: once "what changed" says something specific and evidence-
+// grounded, repeating a second, vaguer "most recent" line right below
+// it would be exactly the kind of duplication that rule forbids).
+function CompanyIntelligenceState({
+  modelResult,
+  companyIntelligence,
+  hasHistory,
+  onSeeHistory,
+}: {
+  modelResult: NonNullable<VentureResponse["model_result"]> | null;
+  companyIntelligence: CompanyIntelligenceSummary | null;
+  hasHistory: boolean;
+  onSeeHistory: () => void;
+}) {
+  const knows = companyIntelligence?.what_sie_knows ?? [];
+  const stillFiguringOut = companyIntelligence?.still_figuring_out ?? [];
+  const whatChanged = companyIntelligence?.what_changed ?? [];
+  const hasAnyIntelligence = knows.length > 0 || stillFiguringOut.length > 0 || whatChanged.length > 0;
 
-  if (knownFacts.length === 0) {
+  // Nothing to show yet at all (brand-new venture, no evidence, no
+  // model) -- Overview's hero above already covers this state.
+  if (!hasAnyIntelligence && !modelResult) {
     return null;
   }
 
   return (
-    <BaseCard className="p-6">
-      <h2 className="text-lg font-semibold text-text-primary">What SIE understands so far</h2>
-      <ul className="mt-3 space-y-1.5">
-        {knownFacts.slice(0, 6).map((fact) => (
-          <li key={fact} className="flex gap-2 text-base leading-7 text-text-secondary">
-            <span aria-hidden="true" className="text-text-muted">•</span>
-            {fact}
-          </li>
-        ))}
-      </ul>
-      <Disclosure summary="See the full breakdown by category" defaultOpen={false}>
-        <div className="pt-2">
-          <VentureUnderstandingPanel result={result} />
+    <BaseCard className="space-y-5 p-6">
+      {knows.length > 0 ? (
+        <div>
+          <h2 className="text-lg font-semibold text-text-primary">What SIE knows</h2>
+          <ul className="mt-2 space-y-1.5">
+            {knows.map((fact) => (
+              <li key={fact} className="flex gap-2 text-base leading-7 text-text-secondary">
+                <span aria-hidden="true" className="text-text-muted">•</span>
+                {fact}
+              </li>
+            ))}
+          </ul>
         </div>
-      </Disclosure>
+      ) : null}
+
+      {stillFiguringOut.length > 0 ? (
+        <div className={knows.length > 0 ? "border-t border-border pt-4" : undefined}>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Still figuring out</p>
+          <ul className="mt-2 space-y-1.5">
+            {stillFiguringOut.map((item) => (
+              <li key={item} className="flex gap-2 text-base leading-7 text-text-secondary">
+                <span aria-hidden="true" className="text-text-muted">•</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {whatChanged.length > 0 ? (
+        <div className={knows.length > 0 || stillFiguringOut.length > 0 ? "border-t border-border pt-4" : undefined}>
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What changed recently</p>
+          <ul className="mt-2 space-y-1.5">
+            {whatChanged.map((item) => (
+              <li key={item} className="flex gap-2 text-base leading-7 text-text-secondary">
+                <span aria-hidden="true" className="text-text-muted">•</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
+
+      {!hasAnyIntelligence ? (
+        <p className="text-base leading-7 text-text-secondary">
+          Nothing has been tested yet -- once you record a result, SIE will start building a real
+          understanding of your venture here.
+        </p>
+      ) : null}
+
+      {hasHistory ? (
+        <button type="button" onClick={onSeeHistory} className="text-sm font-semibold text-primary hover:text-primary-hover">
+          See full history →
+        </button>
+      ) : null}
+
+      {modelResult ? (
+        <Disclosure summary="See the full breakdown by category" defaultOpen={false}>
+          <div className="pt-2">
+            <VentureUnderstandingPanel result={modelResult} />
+          </div>
+        </Disclosure>
+      ) : null}
     </BaseCard>
   );
-}
-
-// Phase 34E, Section 9's "RECENT LEARNING / PROGRESS" step -- one line,
-// not a restatement of WeeklyReview/VentureProgress (both stay exclusive
-// to the History tab, per Section 23's own anti-duplication rule).
-// `history.events` is already sorted most-recent-first by the backend.
-function describeHistoryEventTitle(event: VentureHistoryEvent): string {
-  switch (event.event_type) {
-    case "action_added":
-      return `Started: "${event.title}"`;
-    case "action_completed":
-      return `Completed: "${event.title}"`;
-    case "learning_recorded":
-      return "Learning recorded";
-    case "model_updated":
-      return "Venture details updated";
-    case "decision_recorded":
-      return event.founder_choice ? `Decided: "${event.founder_choice}"` : "Decision recorded";
-    case "outcome_recorded":
-      return "Outcome recorded";
-    default:
-      return event.title;
-  }
 }
 
 export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
@@ -352,6 +404,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // history-relevant state changed" signal to also tell MissionsSection
   // to reload.
   const [missionsRefreshSignal, setMissionsRefreshSignal] = useState(0);
+
+  // Phase 34G -- SIE Intelligence Advantage V1. Lifted from
+  // CurrentQuestionCard's own already-fetched recommendation response
+  // (see that component's own onCompanyIntelligence prop) so
+  // CompanyIntelligenceState below can render it without a second fetch.
+  const [companyIntelligence, setCompanyIntelligence] = useState<CompanyIntelligenceSummary | null>(null);
 
   const refreshHistory = useCallback(async () => {
     const token = await getToken();
@@ -785,7 +843,7 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 reason (Section 23: two sections answering the same
                 question). Nothing about CurrentQuestionCard's own logic
                 changed. */}
-            <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} />
+            <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} onCompanyIntelligence={setCompanyIntelligence} />
 
             {/* Phase 34E, Section 9's "specialized tools/secondary
                 actions": the one thing PrimaryCommandCard did that
@@ -817,25 +875,12 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               </BaseCard>
             ) : null}
 
-            {venture.model_result ? <WhatSieUnderstands result={venture.model_result} /> : null}
-
-            {/* Phase 34E, Section 9's "recent learning/progress" -- one
-                line, not a restatement of the History tab's own
-                WeeklyReview/VentureProgress (Section 23). */}
-            {!isLoadingHistory && history && history.events.length > 1 ? (
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border bg-surface-subtle px-4 py-3">
-                <p className="text-sm text-text-secondary">
-                  Most recent: <span className="font-medium text-text-primary">{describeHistoryEventTitle(history.events[0])}</span>
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setTab("history")}
-                  className="shrink-0 text-sm font-semibold text-primary hover:text-primary-hover"
-                >
-                  See full history →
-                </button>
-              </div>
-            ) : null}
+            <CompanyIntelligenceState
+              modelResult={venture.model_result}
+              companyIntelligence={companyIntelligence}
+              hasHistory={!isLoadingHistory && Boolean(history) && history!.events.length > 1}
+              onSeeHistory={() => setTab("history")}
+            />
 
             {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10,
                 corrected by Phase 34F, Section 5: the unprominent "Create

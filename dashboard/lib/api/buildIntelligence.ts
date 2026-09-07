@@ -42,6 +42,24 @@ export function createVentureEvidence(
   });
 }
 
+// Phase 34G-A -- Intelligence Resolution + Learning Integrity Hardening,
+// §3/§6. Marks one specific evidence row (from a recommendation's own
+// `blocking_evidence`) as no longer the current picture, in the
+// founder's own words -- never edits/deletes it. See
+// resolve_venture_evidence_for_owner() in app/database/db.py.
+export function resolveVentureEvidence(
+  ventureId: number,
+  evidenceId: number,
+  resolutionNote: string,
+  token: string
+): Promise<VentureEvidence> {
+  return apiFetch<VentureEvidence>(`/ventures/${ventureId}/evidence/${evidenceId}/resolve`, {
+    method: "POST",
+    body: { resolution_note: resolutionNote },
+    token,
+  });
+}
+
 export function listVentureDecisions(ventureId: number, token: string): Promise<VentureDecision[]> {
   return apiFetch<VentureDecision[]>(`/ventures/${ventureId}/decisions`, { token });
 }

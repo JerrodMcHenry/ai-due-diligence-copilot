@@ -193,6 +193,18 @@ class CreateEvidenceRequest(BaseModel):
     idempotency_key: str | None = Field(default=None, max_length=100)
 
 
+# Phase 34G-A §3/§6. Founder-explicit resolution: "this result was
+# incorrect / has been superseded / applied to a different segment / was
+# before a major product change" are all, deliberately, the SAME
+# underlying action in V1 -- a short, founder-written note explaining why
+# a specific old piece of evidence should no longer be treated as the
+# current picture. Never a large evidence-management system -- one field,
+# one action, reusing the existing append-only superseded_by_id mechanic
+# (app/database/db.py::resolve_venture_evidence_for_owner()).
+class ResolveEvidenceRequest(BaseModel):
+    resolution_note: str = Field(min_length=1, max_length=1000)
+
+
 class VentureEvidenceResponse(BaseModel):
     id: int
     venture_id: int
@@ -245,6 +257,22 @@ class CurrentQuestion(BaseModel):
     why_it_matters: str | None = None
 
 
+class BlockingEvidenceItem(BaseModel):
+    """
+    Phase 34G-A §2/§3. One specific evidence row currently pinning the
+    recommendation at its stage because it contradicts (or is tagged
+    mixed against) other evidence at the same stage -- never the full
+    evidence history, only the rows a founder-facing "was this
+    addressed?" affordance should render next to. Resolving one (via
+    `POST /ventures/{id}/evidence/{evidence_id}/resolve`) does not edit
+    or delete it -- see `resolve_venture_evidence_for_owner()` in
+    app/database/db.py.
+    """
+    id: int
+    statement: str
+    relationship: str
+
+
 class BuildRecommendation(BaseModel):
     question_text: str
     why_it_matters: str
@@ -254,6 +282,28 @@ class BuildRecommendation(BaseModel):
     what_to_record: str
     what_result_would_be_informative: str
     what_this_will_not_prove: str
+    # Phase 34G-A §2/§3/§10. Non-empty exactly when a live, unresolved
+    # contradiction/mixed tension is what's pinning this recommendation --
+    # see BlockingEvidenceItem. Empty list (never omitted) when nothing is
+    # blocking, so the frontend never has to special-case a missing field.
+    blocking_evidence: list[BlockingEvidenceItem] = Field(default_factory=list)
+
+
+class CompanyIntelligenceSummary(BaseModel):
+    """
+    Phase 34G -- SIE Intelligence Advantage V1, §10-13. A concise,
+    evidence-driven "what SIE knows / what SIE is still figuring out /
+    what changed recently" summary -- see
+    app/ai/build_recommendation.py::build_company_intelligence_summary()
+    for exactly how each list is derived (always from already-persisted
+    rows, never invented, never a score). Any list may be empty --
+    state-dependent rendering on the frontend means an empty section is
+    simply not shown (§18: a brand-new venture should not need to render
+    every section).
+    """
+    what_sie_knows: list[str] = Field(default_factory=list)
+    still_figuring_out: list[str] = Field(default_factory=list)
+    what_changed: list[str] = Field(default_factory=list)
 
 
 class BuildRecommendationResponse(BaseModel):
@@ -266,6 +316,10 @@ class BuildRecommendationResponse(BaseModel):
     is None exactly when no active mission carries a question_text right
     now; `recommendation` is None exactly when a question IS currently
     active (there is nothing new to recommend until it resolves).
+    `company_intelligence` (Phase 34G) is computed in the same call --
+    no second round-trip -- from the same evidence/mission rows already
+    fetched to answer the recommendation question.
     """
     current_question: CurrentQuestion | None = None
     recommendation: BuildRecommendation | None = None
+    company_intelligence: CompanyIntelligenceSummary = Field(default_factory=CompanyIntelligenceSummary)

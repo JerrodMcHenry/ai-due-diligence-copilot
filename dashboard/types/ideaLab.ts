@@ -604,6 +604,17 @@ export interface CurrentQuestion {
   why_it_matters: string | null;
 }
 
+// Phase 34G-A -- Intelligence Resolution + Learning Integrity Hardening,
+// §2/§3. One specific evidence row currently pinning the recommendation
+// because it contradicts (or is tagged mixed against) other evidence at
+// the same stage. Mirrors app/models/venture_missions.py's own
+// BlockingEvidenceItem exactly.
+export interface BlockingEvidenceItem {
+  id: number;
+  statement: string;
+  relationship: string;
+}
+
 export interface BuildRecommendation {
   question_text: string;
   why_it_matters: string;
@@ -613,9 +624,24 @@ export interface BuildRecommendation {
   what_to_record: string;
   what_result_would_be_informative: string;
   what_this_will_not_prove: string;
+  // Phase 34G-A §2/§3/§10. Always present (never undefined), empty when
+  // nothing is currently blocking. See BlockingEvidenceItem.
+  blocking_evidence: BlockingEvidenceItem[];
+}
+
+// Phase 34G -- SIE Intelligence Advantage V1, §10-13. Mirrors
+// app/models/venture_missions.py's own CompanyIntelligenceSummary
+// exactly -- see app/ai/build_recommendation.py::build_company_intelligence_summary()
+// for how each list is derived. Any list may be empty; state-dependent
+// rendering means an empty list is simply not shown.
+export interface CompanyIntelligenceSummary {
+  what_sie_knows: string[];
+  still_figuring_out: string[];
+  what_changed: string[];
 }
 
 export interface BuildRecommendationResponse {
   current_question: CurrentQuestion | null;
   recommendation: BuildRecommendation | null;
+  company_intelligence: CompanyIntelligenceSummary;
 }

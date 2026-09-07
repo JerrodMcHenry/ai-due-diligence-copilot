@@ -233,6 +233,50 @@ function test_every_evidence_type_and_relationship_has_a_label(): void {
   }
 }
 
+// --- Phase 34G-A -- structured fallback (Cases H-L) ------------------------
+//
+// CurrentQuestionCard.tsx's own structured-fallback picker (used when
+// extractCaptureSignals() returns zero field-mapped signals) routes
+// through this exact function with a founder-chosen evidence type and
+// relationship -- these tests prove each of the funnel's required
+// evidence shapes (problem/commitment/transaction/retention) can become
+// real, structured evidence through it, and that the unclassified-note
+// path never accidentally does the same.
+
+function test_case_h_prototype_usage_result_becomes_structured_evidence(): void {
+  const payload = toRawTextEvidencePayload(
+    "Gave 5 analysts a working prototype; 4 of the 5 came back and used it again on their own.",
+    "observed_behavior",
+    "supports"
+  );
+  expect(payload.evidence_type === "observed_behavior", "prototype/usage results must be representable as observed_behavior");
+  expect(payload.relationship === "supports", "the founder's own relationship choice must be preserved");
+}
+
+function test_case_i_commitment_result_becomes_structured_evidence(): void {
+  const payload = toRawTextEvidencePayload("2 prospects agreed to a paid pilot starting next month.", "commitment", "supports");
+  expect(payload.evidence_type === "commitment", "commitment results must be representable as commitment evidence");
+}
+
+function test_case_j_transaction_result_becomes_structured_evidence(): void {
+  const payload = toRawTextEvidencePayload("3 pilot customers paid $500/month each.", "transaction", "supports");
+  expect(payload.evidence_type === "transaction", "payment results must be representable as transaction evidence");
+}
+
+function test_case_k_retention_result_becomes_structured_evidence(): void {
+  const payload = toRawTextEvidencePayload("2 of 3 customers renewed; 1 churned.", "longitudinal_outcome", "mixed");
+  expect(payload.evidence_type === "longitudinal_outcome", "retention/renewal results must be representable as longitudinal_outcome evidence");
+  expect(payload.relationship === "mixed", "a genuinely mixed retention result must be representable as mixed, not forced to one side");
+}
+
+function test_case_l_unclassified_note_never_falsely_advances_intelligence(): void {
+  // Mirrors confirmRawTextOnly() in CurrentQuestionCard.tsx exactly: no
+  // relationship is ever passed for the "just save the note" path.
+  const payload = toRawTextEvidencePayload("Something happened but I'm not sure what it means yet.", "founder_claim");
+  expect(payload.relationship === undefined, "an unclassified note must carry no relationship -- it must not silently look like resolved evidence");
+  expect(payload.evidence_type === "founder_claim", "an unclassified note falls back to the weakest evidence type, never a stronger unearned one");
+}
+
 const TESTS = [
   test_result_text_produces_candidate_signals,
   test_no_recognized_signal_still_returns_empty_not_fabricated,
@@ -254,6 +298,11 @@ const TESTS = [
   test_doesnt_tell_us_yet_option_maps_to_canonical_neutral,
   test_evidence_type_labels_are_plain_language_not_taxonomy_jargon,
   test_every_evidence_type_and_relationship_has_a_label,
+  test_case_h_prototype_usage_result_becomes_structured_evidence,
+  test_case_i_commitment_result_becomes_structured_evidence,
+  test_case_j_transaction_result_becomes_structured_evidence,
+  test_case_k_retention_result_becomes_structured_evidence,
+  test_case_l_unclassified_note_never_falsely_advances_intelligence,
 ];
 
 function main(): void {

@@ -123,6 +123,7 @@ from app.database.db import (create_tables,
                          create_venture_evidence_table,
                          create_venture_evidence,
                          list_venture_evidence_for_owner,
+                         resolve_venture_evidence_for_owner,
                          create_venture_decision,
                          list_venture_decisions_for_owner,
                          set_venture_mission_interpretation_for_owner,
@@ -136,11 +137,12 @@ from app.models.idea_lab import CreateVentureRequest, UpdateVentureRequest, Vent
 from app.models.venture_missions import (
     CreateMissionRequest, UpdateMissionStatusRequest, RecordMissionLearningRequest,
     VentureMissionResponse, CaptureObservationRequest,
-    CreateEvidenceRequest, VentureEvidenceResponse,
+    CreateEvidenceRequest, VentureEvidenceResponse, ResolveEvidenceRequest,
     CreateDecisionRequest, VentureDecisionResponse,
     BuildRecommendationResponse, CurrentQuestion, BuildRecommendation,
+    CompanyIntelligenceSummary,
 )
-from app.ai.build_recommendation import build_intelligence_state, generate_interpretation
+from app.ai.build_recommendation import build_intelligence_state, generate_interpretation, build_company_intelligence_summary
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -1493,9 +1495,24 @@ def get_venture_recommendation(
         # interviews -- whether a target customer has been described yet.
         target_customer=venture.get("target_customer"),
     )
+    # Phase 34G §10-13: computed from the SAME evidence/mission rows
+    # already fetched above -- no second round-trip, no new AI call.
+    completed_missions = [m for m in missions if m.get("completed_at") is not None]
+    decisions = list_venture_decisions_for_owner(current_user.user_id, venture_id)
+    latest_decision = decisions[-1] if decisions else None
+    company_intelligence = build_company_intelligence_summary(
+        evidence_rows=current_evidence,
+        completed_missions=completed_missions,
+        latest_decision=latest_decision,
+        # Phase 34G-A §9: the identical gate the recommendation itself
+        # checks first, so "still figuring out" agrees with it by
+        # construction rather than by convention.
+        target_customer=venture.get("target_customer"),
+    )
     return BuildRecommendationResponse(
         current_question=CurrentQuestion(**state["current_question"]) if state["current_question"] else None,
         recommendation=BuildRecommendation(**state["recommendation"]) if state["recommendation"] else None,
+        company_intelligence=CompanyIntelligenceSummary(**company_intelligence),
     )
 
 
@@ -1582,6 +1599,42 @@ def create_evidence(
     )
 
     return VentureEvidenceResponse(**evidence)
+
+
+# Phase 34G-A §3/§6 -- Intelligence Resolution + Learning Integrity
+# Hardening. The minimum founder-facing mechanism that distinguishes
+# EXISTS from CURRENTLY DECISION-DOMINANT: marks one specific
+# contradicting/mixed evidence row (surfaced to the founder as
+# `BuildRecommendation.blocking_evidence`) as no longer the current
+# picture, in the founder's own words. Never edits or deletes the
+# original row -- see resolve_venture_evidence_for_owner()'s own
+# docstring. This is NOT a general "correct any evidence" endpoint; it is
+# scoped to exactly the resolution gesture the directive asked for.
+@app.post("/ventures/{venture_id}/evidence/{evidence_id}/resolve", response_model=VentureEvidenceResponse)
+def resolve_evidence(
+    venture_id: int,
+    evidence_id: int,
+    request: ResolveEvidenceRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    new_row = resolve_venture_evidence_for_owner(
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        evidence_id=evidence_id,
+        resolution_note=request.resolution_note,
+    )
+    if new_row is None:
+        raise HTTPException(status_code=404, detail="Evidence not found, or it has already been resolved.")
+
+    _log_event_safe(
+        "evidence_resolved",
+        user_id=current_user.user_id,
+        venture_id=venture_id,
+        metadata={"resolved_evidence_id": evidence_id},
+    )
+
+    return VentureEvidenceResponse(**new_row)
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])
