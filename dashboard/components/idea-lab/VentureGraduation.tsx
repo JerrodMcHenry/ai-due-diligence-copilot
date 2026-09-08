@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
@@ -208,20 +209,29 @@ export function VentureGraduationBanner({ state }: { state: VentureGraduationSta
   return (
     <BaseCard variant="subtle" className="flex flex-wrap items-center justify-between gap-3 p-4">
       {/* Phase 32 -- Product Information Architecture + Seamless User
-          Journey, Part 1/4/9: the button below opens
-          /founder/startups/{id} -- the private Founder Workspace, not
-          the public Startup Profile -- so it's now labeled for where it
-          actually goes. Conflating the two was exactly the kind of
-          mental-model blur Part 1 says must never happen: "Startup
-          Profile" and "Founder Workspace" are two different, specifically
-          named surfaces elsewhere in this same app. */}
+          Journey, Part 1/4/9: originally opened /founder/startups/{id},
+          the private Founder Workspace, since that used to be a genuinely
+          different destination from this page.
+          Phase 37E -- Company Lifecycle + Public Identity Convergence,
+          Section 5: since Phase 37B, this banner only ever renders on
+          the linked company's OWN Venture Workspace -- the old button
+          just bounced the founder through a same-page redirect back to
+          here (see FounderStartupWorkspaceView.tsx's own linked_venture_id
+          redirect). Repointed to the one genuinely different, useful
+          destination from this exact page: the public profile this
+          action just made visible (state.openStartup / its analytics
+          event are left intact and exported unchanged -- only this
+          button's own destination changed). */}
       <p className="text-sm text-text-secondary">
         You&rsquo;re now building{" "}
         <span className="font-semibold text-text-primary">{state.status.startup_name}</span> as a startup.
       </p>
-      <Button type="button" variant="secondary" size="sm" onClick={state.openStartup}>
-        Open Founder Workspace →
-      </Button>
+      <Link
+        href={`/startup/${encodeURIComponent(state.status.startup_name ?? "")}`}
+        className="inline-flex h-9 items-center rounded-lg border border-border px-3.5 text-sm font-semibold text-text-secondary transition-colors hover:border-primary hover:text-primary"
+      >
+        View public profile →
+      </Link>
     </BaseCard>
   );
 }

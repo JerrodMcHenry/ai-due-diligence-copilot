@@ -1390,7 +1390,190 @@ profile-without-analysis fix (§37.5, explicitly deferred again this phase, not 
 convergence, and eventual retirement of the now-doubly-confirmed-unreachable-for-linked-startups renderings
 noted in §38.14 once a concrete 37D/37E-adjacent migration design exists (none does yet — none was built).
 
-## 39. Non-goals of this document
+## 39. Phase 37E — Company Lifecycle + Public Identity Convergence
+
+Phase 37E removed the remaining founder-facing lifecycle/identity confusion: fixed the public-profile-
+without-analysis gap (37C/37D's own deferred issue), reframed "graduation" language everywhere it still
+implied approval or a second workspace, removed a genuine duplicate "make this real" entry point, and
+renamed "My Ideas" to "My Companies" to fix a page-title-level version of the same ambiguity already fixed
+at the stage-badge level. No schema merge, no route migration, no scoring change.
+
+### 39.1 Terminology map (as found)
+
+| Term | Meant | Founder needs to know it? | Real lifecycle state or artifact? |
+|---|---|---|---|
+| Idea / Ideas (nav) | — | N/A | Already removed from primary nav (Phase 32/34A) — "Build" is the nav label |
+| My Ideas (page title/breadcrumb) | The founder's own modeled ventures, any stage | Yes, but the word "Idea" implied a stage, not a collection | Artifact — renamed to **My Companies** this phase |
+| Idea Stage / Validation Stage / Building Stage / Operating Stage | Real, evidence-derived maturity buckets | Yes | Real lifecycle state — already correctly implemented (Phase 34F, `lib/journey/inferVentureStage.ts`) |
+| Graduate / Graduation | — | No | Pure implementation term — confirmed absent from all founder-facing copy already |
+| Create Startup Profile | Create the public identity + venture_graduations bridge | Yes | Real action — term kept, description expanded (Section 13) |
+| Analyze My Startup / Evaluate with SIE | Run a standalone, evidence-based evaluation | Yes | Real action — but had a genuine duplicate (Section 39.5) |
+| Public Profile / Startup Profile | The public `/startup/{name}` page | Yes | Real, separate surface — boundary already correct, one honesty gap fixed (Section 39.2) |
+| Verified / Founder-managed | Trust/provenance signal | Yes | Real, already correctly scoped to public/claim context (Phase 32A) — confirmed not an access gate |
+| Claimed / Claim | Ownership assertion workflow | Yes | Real, already explicit about not being verification/approval (`ClaimStartupForm.tsx`'s own copy) |
+| My Startups | Every startup identity the founder has live membership on (own linked companies + externally-claimed legacy ones) | Yes | Real, distinct set from My Companies — kept (Section 39.6) |
+
+### 39.2 Public-profile-without-analysis — fixed
+
+**Root cause** (confirmed in 37C, fixed here): `get_startup_by_name()` queried only `analyses` (`WHERE
+methodology IS NOT NULL`). Fixed with a fallback: when no qualifying analysis exists, it now queries
+`startups` directly by `normalized_name` (the same pre-computed, UNIQUE-constrained column
+`resolve_startup_for_graduation()` already relies on for collision-free lookup — confirmed no new collision
+risk, Section 19's own concern). Returns a distinct, honest shape: `has_analysis: false`, `methodology:
+None`, `canonical_name` always present. A company with neither an analysis nor a `startups` row still
+returns `None` (unchanged 404).
+
+`StartupProfileResponse` gained `canonical_name: str` and `has_analysis: bool`; `methodology` became
+`SIEMethodologyAnalysis | None`. The public profile page (`app/startup/[id]/page.tsx`) now renders three
+distinct states: **A** (`!startup`) "Startup not found" — unchanged; **B** (`!startup.has_analysis`) a new,
+minimal, honest block showing only the company's own name, Claim/Save controls, and "SIE has not analyzed
+{name} yet — there is no Startup Power Score, pillar breakdown, or evidence to show"; **C** (existing
+methodology) — completely unchanged rendering path.
+
+Live-verified end-to-end on a freshly created company (FridgeChef 37E Test, `venture_id=8212`,
+`startup_id=75037`): public profile showed the honest **B** state immediately after profile creation, then
+correctly showed the real 60.6 SPS / pillar breakdown (**C**) after an intentional analysis — with zero
+change to the venture id, Build, Finance, Fundraising, or History in between.
+
+### 39.3 Profile creation — documented, then explained accurately
+
+**What `POST /ventures/{id}/graduate` actually does** (read from `resolve_startup_for_graduation()` /
+`create_venture_graduation()` in `app/database/db.py` before writing any copy, per Section 17): inserts (or
+reuses, for "connect existing") one `startups` row, inserts one `venture_graduations` row bridging
+`venture_id` → `startup_id`, and grants the founder a `startup_memberships` row (self-approved, zero human
+review — unchanged from Phase 31). It does **not** run any analysis, does **not** write to `analyses`, does
+**not** change `modeled_ventures` in any way Build/Finance/Fundraising/History depend on, and does **not**
+touch `startup_claims` or trust state.
+
+**Founder-facing effect, now stated explicitly** (`GraduateVentureReview.tsx`, expanded per Section 13):
+a public profile becomes visible immediately at `/startup/{name}` (honestly labeled not-yet-evaluated, per
+Section 39.2's fix — previously this claim would have been false); nothing about how the founder builds the
+venture changes; SIE has not verified or approved anything.
+
+### 39.4 "Graduation" language — already absent, confirmed
+
+Grepped every `.tsx` file for founder-facing occurrences of "graduate"/"graduation": zero matches outside
+code comments and internal identifiers (`VentureGraduationBanner`, `useVentureGraduation`, etc.). This
+convergence was already complete before 37E — Phase 31's own Part 15 ("never 'you're ready,' 'graduated,' or
+'congratulations'") held. One real gap found and fixed: `VentureGraduationBanner`'s own button used to open
+`/founder/startups/{id}`, which (since Phase 37B) immediately redirects back to the exact page the banner
+renders on — a same-page loop with no destination. Repointed to "View public profile →", the one genuinely
+different, useful destination reachable from that exact banner.
+
+### 39.5 Analyze-my-startup overlap — found and resolved
+
+**Found**: `VentureWorkspace.tsx`'s Overview tab rendered a "Ready to turn this into a real startup? / Analyze
+My Startup" card, independently eligible from (and able to render simultaneously with)
+`VentureGraduationAction`'s own "Ready to make this a startup?" card. Its button routed to the generic
+`/analyze` page with no `startup_id` — creating a brand-new, **unlinked** startup with no
+`venture_graduations` bridge back to the venture at all. This is the exact "second Analyze My Startup path"
+Phase 37B's own architecture doc (§36.9) flagged as unresolved and handed to this phase.
+
+**Resolved**: removed the duplicate card entirely (Overview now has exactly one "make this real" entry
+point — the correct, linked one). The remaining, legitimately different disconnected-evaluation entry point
+(inside the Analyze tab's own "no startup identity yet" state, for a founder who wants to try SIE's
+evaluation without creating a company identity first) was **not** removed — Section 16 forbids disappearing
+features — but its copy now says plainly "This runs a standalone evaluation, not tied to {venture}," and a
+quiet "Create a Startup Profile from this venture →" link (reusing `VentureGraduationAction`'s own non-
+prominent control, not a new mechanism) sits directly below it as the path to a tracked evaluation.
+
+### 39.6 My Ideas / Idea Lab / My Startups — verdicts
+
+- **Idea Lab**: **RENAME UI ONLY — already complete** (Phase 32/34A removed it as a user-facing label
+  entirely; "Build" is the nav-level term). No further action.
+- **My Ideas**: **RENAME** → **My Companies**. This list holds ventures at every stage, including ones with
+  real six-figure ARR (Section 4's own stage-vocabulary work already proved "Idea" alone is ambiguous at the
+  per-venture badge level — this was the identical ambiguity one level up, at the collection-title level).
+  Updated: `IdeaLabDashboard.tsx`'s `PageHeader` title, `VentureWorkspace.tsx`'s breadcrumb and not-found
+  page ("Idea not found" → "Company not found"). Route (`/idea-lab`) and the "Start a New Idea" creation CTA
+  are unchanged — a brand-new entry legitimately does start as just an idea; "Build" (the top nav item) is
+  also unchanged.
+- **My Startups**: **KEEP**, distinct from My Companies. Confirmed via actual data source, not assumption:
+  My Companies is `list_modeled_ventures_for_user()` (owned `modeled_ventures` rows only). My Startups is
+  `get_startup_memberships_for_user()` (every live `startup_memberships` row), a materially different set —
+  it includes startups the founder reached via an approved **claim** on a company they never modeled as a
+  venture at all (e.g. Retool has no corresponding My Companies entry). Merging them would require new
+  backend aggregation across two independent relationships for no founder benefit; kept as two distinct,
+  correctly-named surfaces.
+
+### 39.7 Trust / verification — audited, no changes needed
+
+Re-read `ClaimStartupButton.tsx`, `ClaimStartupForm.tsx`, and the `resolveStartupTrustState()` call site.
+Confirmed already correct and unchanged by prior phases (Phase 32A): "Founder-managed" vs "✓ Verified" is
+derived purely from `verification_method`, never implies product-access, and `ClaimStartupForm`'s own
+copy already explicitly disclaims "automated verification, domain verification, legal ownership
+verification, a guarantee of approval." No founder-facing text implies verification/claiming/analysis
+grants any Build/Finance/Fundraising/History capability. No changes made.
+
+### 39.8 Private capability access — proven, not assumed
+
+Live-verified on the fresh FridgeChef 37E Test venture, before any profile existed: Overview, Finance ("Add
+your finances"), Fundraising (SAFE/priced-round options, Pitch Deck Coach teaser), and History all rendered
+fully functional. No gate exists anywhere keyed on public-profile existence, analysis existence, or
+verification state — confirmed by direct observation, not by re-stating the architecture's own claim.
+
+### 39.9 Company name consistency — divergence found, documented (not "fixed")
+
+Live-observed on the same test company: the private venture name ("FridgeChef 37E Test"), the `analyses`/
+`startups` table's `company_name`/`canonical_name` ("FridgeChef 37E Test" — confirmed by the public route
+successfully resolving `/startup/FridgeChef%2037E%20Test`), and `methodology.context.company_name` (the
+LLM's own extracted name, rendered as bare "FridgeChef" by `StartupHeroV2`) can genuinely diverge — the
+model normalized/shortened the name during analysis. This is a **pre-existing, independent** field (the
+identity bridge itself still resolves entirely by ID/normalized_name, never by this extracted string — no
+name-matching risk introduced or discovered) and is **not** fixed here per this phase's own explicit
+instruction ("Do not introduce silent name matching... do not 'fix' it by synchronizing blindly"). Documented
+as a known cosmetic divergence for a future phase to decide whether/how to reconcile display copy.
+
+### 39.10 Public profile routing — audited, no redesign
+
+`startups.normalized_name` carries a `UNIQUE` constraint (confirmed in schema); the Section 39.2 fallback
+query uses this exact column, so it cannot introduce a collision the existing `resolve_startup_for_graduation()`
+guard doesn't already prevent at write time. No slug migration, no routing redesign.
+
+### 39.11 Test matrix and live walkthrough
+
+A–H, J–N, R–T, U–Y, AA–AC confirmed via the unmodified/extended backend suite (168 tests total this phase:
+15 in `test_startup_entity_migration.py` including 3 new, plus the full re-run of
+`test_saved_startups`/`test_startup_claims`/`test_security_hardening`/`test_venture_graduation`/
+`test_idea_lab`/`test_founder_workspace` — zero failures). I (profile creation preserves venture id), O/P/Q
+(public profile states), Z (Analyze scoring unchanged), AD (missing-company vs. unanalyzed-company are
+now distinct) confirmed live below.
+
+**Fresh company walkthrough** (Section 30's own acceptance script, FridgeChef 37E Test):
+Pre-profile — Overview/Finance/Fundraising/History all functional, Analyze tab showed the honest "no
+startup identity yet" dual-path state (standalone evaluation vs. create profile). Created a Startup Profile:
+**same venture id (8212) throughout**, Overview immediately showed the graduation banner with a working
+"View public profile →" link, Analyze tab switched to the honest "no analysis yet" state (deterministic,
+`startup_id`-scoped). Visited the public profile before analysis: rendered the new honest B-state (Section
+39.2), no fake SPS. Ran a real, intentional analysis (SPS 60.6, C, Medium confidence, full six-pillar
+breakdown). Re-visited the public profile: now showed the real analysis, V2.1 score history (60.6, 1
+analysis), unchanged trust badge.
+
+**STATE A–F**: A (FridgeChef pre-profile) PASS. B (FridgeChef post-profile, pre-analysis) PASS. C
+(FridgeChef post-analysis) PASS. D (Retool, unlinked, analyzed) PASS — legacy Founder Workspace intact,
+dedicated fundraising page still un-redirected, still functional. E (FridgeChef public profile, pre-
+analysis) PASS. F (FridgeChef public profile, post-analysis) PASS.
+
+### 39.12 A defect found and fixed mid-phase (JSX whitespace)
+
+While live-testing the new dual-path Analyze empty state and the expanded `GraduateVentureReview` copy,
+found three more instances of the same JSX-whitespace-collapse defect first identified in Phase 37C (an
+expression immediately followed by plain text loses its leading space in this toolchain, unpredictably,
+regardless of same-line/multi-line positioning) — all in text written this phase. Fixed each with an
+explicit `{" "}`, re-verified via direct DOM `textContent` reads (not screenshots) after each fix, then
+re-ran the full `tsc`/`eslint`/`next build` suite. No formula, routing, or data logic was touched by these
+fixes — text only.
+
+### 39.13 Remaining architectural risk / 37F candidates
+
+- Company-name divergence between private venture name, canonical `startups` name, and LLM-extracted
+  `methodology.context.company_name` (Section 39.9) — cosmetic today, worth a display-copy decision later.
+- `FundraisingReadinessCard`/`PitchDeckCoachTeaser` renderings inside the legacy `FounderStartupWorkspaceView.tsx`
+  remain unreachable-for-linked/load-bearing-for-unlinked (carried over from 37D, unchanged this phase).
+- founder_actions/founder_updates/startup_milestones migration groundwork (37D's own handoff, still no
+  concrete backfill design — none built this phase either).
+
+## 40. Non-goals of this document
 
 This document does not implement any part of the convergence, run any migration, change any schema, rename
 any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital

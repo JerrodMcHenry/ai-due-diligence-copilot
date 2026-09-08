@@ -144,8 +144,18 @@ class StartupProfileResponse(BaseModel):
     # backfill; the frontend Save control hides itself when this is None
     # rather than guessing an id to save.
     startup_id: int | None = None
+    # Phase 37E -- Company Lifecycle + Public Identity Convergence,
+    # Section 6. The company's own canonical name -- always present, even
+    # when has_analysis is False, so the honest "not yet evaluated" state
+    # can still say whose page this is.
+    canonical_name: str
     created_at: datetime
-    methodology: SIEMethodologyAnalysis
+    # None exactly when has_analysis is False -- a company that exists
+    # (a real `startups` row) but has never been analyzed. Never a
+    # fabricated SPS/pillar breakdown; the frontend renders a distinct,
+    # honest state for this case instead of treating it as "not found."
+    methodology: SIEMethodologyAnalysis | None = None
+    has_analysis: bool = True
 
 
 class SavedStartupEntry(BaseModel):

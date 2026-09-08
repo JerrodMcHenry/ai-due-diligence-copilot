@@ -66,9 +66,24 @@ export default function GraduateVentureReview({
   return (
     <BaseCard variant="raised" className="p-6">
       <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Create Startup Profile</p>
+      {/* Phase 37E -- Company Lifecycle + Public Identity Convergence,
+          Section 13/17: expanded from a single sentence after auditing
+          exactly what this action does (see get_startup_for_graduation()/
+          resolve_startup_for_graduation() in app/database/db.py) --
+          inserts a startups row (or links to one you already own),
+          creates a venture_graduations bridge row, and grants you
+          membership. It does NOT run SIE's analysis, does NOT change
+          anything about how you build this venture, and does NOT make
+          SIE "approve" or "verify" the company -- verification is a
+          separate, independent claim workflow. The one thing this
+          answer previously left out: a public page at /startup/{name}
+          becomes visible immediately, showing the company name honestly
+          labeled "not yet evaluated" until you choose to analyze it. */}
       <p className="mt-1.5 text-base leading-7 text-text-secondary">
-        This creates a real Startup entry linked to this venture, so you can track it going forward. Nothing is
-        analyzed yet — you&rsquo;ll review and submit what to analyze next, exactly like any other startup on SIE.
+        This creates a public company profile linked to this venture, so you can track it going
+        forward. The profile is visible right away — honestly labeled as not yet evaluated until
+        you choose to run an analysis, which is a separate, later step. This never changes how you
+        build {venture.name}{" "}here, and it doesn&rsquo;t mean SIE has verified or approved anything.
       </p>
 
       {existingStartups.length > 0 ? (

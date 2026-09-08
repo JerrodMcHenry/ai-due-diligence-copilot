@@ -164,8 +164,14 @@ export type StartupProfileResponse = {
   // historical rows that predate the write path; the Save control hides
   // itself rather than guessing an id to save.
   startup_id: number | null;
+  // Phase 37E: always present, even when has_analysis is false.
+  canonical_name: string;
   created_at: string;
-  methodology: SIEMethodologyAnalysis;
+  // Phase 37E -- Company Lifecycle + Public Identity Convergence,
+  // Section 6: null exactly when has_analysis is false -- a company that
+  // exists but hasn't been analyzed yet. Never fabricated.
+  methodology: SIEMethodologyAnalysis | null;
+  has_analysis: boolean;
 };
 
 // Saved Startups (Watchlist Phase 1): GET /me/saved-startups row shape.

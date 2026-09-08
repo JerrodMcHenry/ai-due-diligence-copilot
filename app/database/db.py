@@ -2147,6 +2147,24 @@ def get_startup_by_name(company_name: str):
     rows that predate both the backfill and this column) means the
     frontend has nothing valid to save and hides the control rather than
     guessing.
+
+    Phase 37E -- Company Lifecycle + Public Identity Convergence, Section
+    6. Before this phase, a company with a real `startups` row (e.g. a
+    freshly graduated one, per Phase 31) but zero analyses fell straight
+    through to `None` here -- the public route then rendered "Startup not
+    found," identical to a company that doesn't exist at all. That was
+    dishonest: the company DOES exist, it just hasn't been evaluated yet.
+    This function now distinguishes the two: if no qualifying analysis
+    exists, it falls back to a direct `startups` lookup by
+    `normalized_name` (the same `LOWER(TRIM(...))` normalization the
+    analyses query already used, now via the pre-computed, UNIQUE-
+    constrained column instead of a live string transform -- see
+    `startups`'s own schema comment; the UNIQUE constraint is also why
+    this fallback can never return more than one row, so no new collision
+    risk is introduced). `has_analysis` tells the caller which case this
+    is; `methodology` is None only in the fallback case -- never a
+    fabricated SPS/pillar breakdown for a company that hasn't been
+    evaluated (Section 6's own explicit requirement).
     """
     normalized_company_name = company_name.strip()
 
@@ -2156,7 +2174,8 @@ def get_startup_by_name(company_name: str):
                 id,
                 startup_id,
                 created_at,
-                methodology
+                methodology,
+                company_name AS canonical_name
             FROM analyses
             WHERE LOWER(TRIM(company_name)) =
                   LOWER(TRIM(:company_name))
@@ -2169,8 +2188,26 @@ def get_startup_by_name(company_name: str):
 
         row = result.mappings().first()
 
-    if row is None:
-        return None
+        if row is None:
+            startup_row = connection.execute(text("""
+                SELECT id, canonical_name, created_at
+                FROM startups
+                WHERE normalized_name = LOWER(TRIM(:company_name))
+            """), {
+                "company_name": normalized_company_name
+            }).mappings().first()
+
+            if startup_row is None:
+                return None
+
+            return {
+                "id": startup_row["id"],
+                "startup_id": startup_row["id"],
+                "canonical_name": startup_row["canonical_name"],
+                "created_at": startup_row["created_at"],
+                "methodology": None,
+                "has_analysis": False,
+            }
 
     startup = dict(row)
 
@@ -2178,6 +2215,8 @@ def get_startup_by_name(company_name: str):
         startup["methodology"] = json.loads(
             startup["methodology"]
         )
+
+    startup["has_analysis"] = True
 
     return startup
 

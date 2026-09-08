@@ -655,12 +655,16 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   if (loadState === "not-found") {
     return (
       <BaseCard className="p-10 text-center">
-        <h1 className="text-xl font-bold text-text-primary">Idea not found</h1>
+        {/* Phase 37E -- Company Lifecycle + Public Identity Convergence,
+            Section 10: "Idea not found" mislabeled a not-found/not-owned
+            error for a venture at ANY stage, not just Idea Stage --
+            matches the "My Companies" rename below it. */}
+        <h1 className="text-xl font-bold text-text-primary">Company not found</h1>
         <p className="mt-3 text-text-secondary">
-          This idea doesn&rsquo;t exist, or doesn&rsquo;t belong to you.
+          This company doesn&rsquo;t exist, or doesn&rsquo;t belong to you.
         </p>
         <Link href="/idea-lab" className="mt-6 inline-flex text-sm font-semibold text-primary hover:text-primary-hover">
-          Back to My Ideas →
+          Back to My Companies →
         </Link>
       </BaseCard>
     );
@@ -689,7 +693,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // rule, and this phase's final report for the removed PrimaryCommandCard).
   const primaryNextStep = venture.model_result ? resolveIdeaLabNextStep(venture.model_result) : null;
   const primaryMilestoneText = primaryNextStep?.kind === "work_on_milestone" ? primaryNextStep.milestoneText : undefined;
-  const readyToAnalyze = primaryNextStep?.kind === "ready_for_real_startup";
 
   // Phase 33, Part 6 (header). A short, restrained textual echo of
   // current state -- reuses the exact same manualStepIndex() +
@@ -713,11 +716,14 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
           ("Build / My Ideas / ClaimPilot") -- this page sits two levels
           below the primary nav's own "Build" destination, deep enough
           that the nav's active-state highlighting alone doesn't answer
-          "where am I?" the moment a founder has more than one idea. */}
+          "where am I?" the moment a founder has more than one venture.
+          Phase 37E, Section 10: middle label renamed "My Ideas" -> "My
+          Companies" to match IdeaLabDashboard.tsx's own page-title
+          rename; "Build" (the nav-level label) is unchanged. */}
       <Breadcrumbs
         items={[
           { label: "Build", href: "/idea-lab" },
-          { label: "My Ideas", href: "/idea-lab" },
+          { label: "My Companies", href: "/idea-lab" },
           { label: venture.name },
         ]}
       />
@@ -862,34 +868,36 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
             <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} onCompanyIntelligence={setCompanyIntelligence} />
 
             {/* Phase 34E, Section 9's "specialized tools/secondary
-                actions": the one thing PrimaryCommandCard did that
-                CurrentQuestionCard doesn't -- recognizing a modeled
-                venture is ready for a real, evidence-based Startup
-                Profile, and explaining that boundary honestly. */}
-            {readyToAnalyze ? (
-              <BaseCard className="p-6">
-                <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your model looks solid</p>
-                <h2 className="mt-1 text-lg font-semibold text-text-primary">Ready to turn this into a real startup?</h2>
-                <p className="mt-2 text-base leading-7 text-text-secondary">
-                  This modeled idea shows what COULD work, based on your own assumptions. A real Startup Profile
-                  shows what evidence supports TODAY, built the same way for every company on SIE. Analyzing brings
-                  over your own description as a starting point -- it never creates anything or invents evidence on
-                  your behalf.
-                </p>
-                <Button
-                  type="button"
-                  className="mt-4"
-                  onClick={() => {
-                    if (description) {
-                      stashVentureDescriptionForAnalyze(description);
-                    }
-                    router.push("/analyze");
-                  }}
-                >
-                  Analyze My Startup
-                </Button>
-              </BaseCard>
-            ) : null}
+                actions" originally lived here as a "Ready to turn this
+                into a real startup? -> Analyze My Startup" card, routing
+                into the generic, disconnected /analyze flow (the same
+                path an entirely unrelated company's text would go
+                through) whenever venture.model_result looked solid
+                enough.
+
+                Phase 37E -- Company Lifecycle + Public Identity
+                Convergence, Section 8: removed. It was a second,
+                competing "make this venture real" entry point that could
+                render AT THE SAME TIME as VentureGraduationAction's own
+                "Ready to make this a startup?" card below (their
+                eligibility checks -- resolveIdeaLabNextStep's
+                model-completeness heuristic vs.
+                isEligibleForGraduationSuggestion's real-evidence check --
+                are independent and can both fire), and its own action
+                created a brand-new, UNLINKED startup with no bridge back
+                to this venture at all (no venture_graduations row) --
+                exactly the "second Analyze My Startup path" duplicate
+                identity risk Phase 37B's own architecture doc (Section
+                36.9) flagged as unresolved and handed to this phase.
+                VentureGraduationAction below is the one, correct "make
+                this real" entry point: it creates the proper linked
+                bridge, is honestly worded (Part 15's own "never 'you're
+                ready'" discipline), and remains reachable regardless of
+                this removal -- nothing about graduation eligibility or
+                mechanics changed. A founder who wants to run a fully
+                separate, disconnected evaluation of some other text can
+                still do so any time from the top-level Analyze nav item;
+                that path was never venture-specific to begin with. */}
 
             <CompanyIntelligenceState
               modelResult={venture.model_result}
@@ -1342,7 +1350,22 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
               <p className="mx-auto mt-3 max-w-md text-base leading-7 text-text-secondary">
                 Analyze evaluates a company using SIE&rsquo;s methodology based on evidence
                 available today -- separate from building {venture.name} here.{" "}
-                {venture.name} hasn&rsquo;t been evaluated yet.
+                {venture.name}{" "}hasn&rsquo;t been evaluated yet.
+              </p>
+              {/* Phase 37E -- Company Lifecycle + Public Identity
+                  Convergence, Section 8: this button always ran a
+                  standalone evaluation with no bridge back to this
+                  venture (the exact same /analyze path any unrelated
+                  company's text would use) -- copy now says so plainly
+                  instead of implying it evaluates "this venture." The
+                  quiet link below is the actual path to a TRACKED
+                  evaluation: reuses VentureGraduationAction's own
+                  non-prominent control unmodified, so creating a company
+                  profile here is the identical action available from
+                  Overview -- not a second, competing mechanism. */}
+              <p className="mx-auto mt-2 max-w-md text-sm text-text-muted">
+                This runs a standalone evaluation, not tied to {venture.name}{" "}-- the same tool
+                you&rsquo;d use for any other company&rsquo;s text.
               </p>
               <Button
                 type="button"
@@ -1354,8 +1377,11 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                   router.push("/analyze");
                 }}
               >
-                Evaluate {venture.name} with SIE
+                Run a standalone evaluation
               </Button>
+              <div className="mt-4">
+                <VentureGraduationAction state={graduation} prominent={false} />
+              </div>
             </BaseCard>
           ) : (
             <VentureAnalyzeSection startupId={graduation.status.startup_id} />

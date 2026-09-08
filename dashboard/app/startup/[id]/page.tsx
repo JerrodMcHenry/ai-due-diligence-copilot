@@ -6,6 +6,8 @@ import BaseCard from "@/components/ui/BaseCard";
 import StartupHeroV2 from "@/components/startup/StartupHeroV2";
 import SPSHistory from "@/components/startup/SPSHistory";
 import IntelligencePillars from "@/components/startup/IntelligencePillars";
+import ClaimStartupButton from "@/components/startup/ClaimStartupButton";
+import SaveStartupButton from "@/components/startup/SaveStartupButton";
 
 import type { SPSHistoryPoint, StartupProfileResponse } from "@/types";
 
@@ -99,6 +101,40 @@ export default async function StartupProfilePage({ params }: Props) {
           Back to search →
         </Link>
       </BaseCard>
+    );
+  }
+
+  // Phase 37E -- Company Lifecycle + Public Identity Convergence, Section
+  // 6. Distinguishes "this company does not exist" (the !startup branch
+  // above) from "this company exists but SIE hasn't analyzed it yet" --
+  // previously indistinguishable, both rendering the same "Startup not
+  // found" message even though the second case has a real, canonical
+  // company behind it (e.g. a freshly created company profile). Only
+  // genuinely public facts render here -- the company's own name and
+  // when it was added -- never a fabricated score, pillar, or
+  // confidence value for a company with no analysis at all.
+  if (!startup.has_analysis || !startup.methodology) {
+    return (
+      <div className="space-y-8">
+        <BaseCard className="p-10">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <h1 className="text-4xl font-bold text-text-primary">{startup.canonical_name}</h1>
+
+            {startup.startup_id != null ? (
+              <div className="flex flex-col items-end gap-2">
+                <ClaimStartupButton startupId={startup.startup_id} />
+                <SaveStartupButton startupId={startup.startup_id} />
+              </div>
+            ) : null}
+          </div>
+
+          <p className="mt-4 max-w-prose text-base leading-7 text-text-secondary">
+            SIE has not analyzed {startup.canonical_name} yet — there is no Startup Power Score,
+            pillar breakdown, or evidence to show. This page will update automatically once an
+            analysis exists.
+          </p>
+        </BaseCard>
+      </div>
     );
   }
 

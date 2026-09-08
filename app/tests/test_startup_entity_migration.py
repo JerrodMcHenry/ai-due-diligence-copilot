@@ -468,6 +468,72 @@ def test_existing_canonical_surfaces_unchanged() -> None:
         _cleanup(ids)
 
 
+def test_company_with_no_analysis_returns_honest_profile_not_none() -> None:
+    """Phase 37E -- Company Lifecycle + Public Identity Convergence,
+    Section 6. A `startups` row with zero qualifying analyses (the exact
+    shape of a freshly graduated/created company) must resolve to an
+    honest, distinct profile -- never the same `None` a truly nonexistent
+    company gets, and never a fabricated methodology."""
+    canonical_name = f"{TEST_PREFIX} No Analysis"
+    normalized_name = canonical_name.lower()
+
+    with engine.begin() as connection:
+        startup_id = connection.execute(
+            text(
+                "INSERT INTO startups (canonical_name, normalized_name) "
+                "VALUES (:name, :norm) RETURNING id"
+            ),
+            {"name": canonical_name, "norm": normalized_name},
+        ).scalar()
+
+    try:
+        profile = get_startup_by_name(canonical_name)
+
+        expect(profile is not None, "Expected an honest profile dict, not None, for an existing startups row")
+        expect(
+            profile["has_analysis"] is False,
+            f"Expected has_analysis=False for a company with zero analyses, got {profile.get('has_analysis')}",
+        )
+        expect(
+            profile["methodology"] is None,
+            f"Expected methodology=None (never fabricated) for a company with zero analyses, got {profile['methodology']}",
+        )
+        expect(
+            profile["canonical_name"] == canonical_name,
+            f"Expected canonical_name={canonical_name!r}, got {profile['canonical_name']!r}",
+        )
+        expect(
+            profile["startup_id"] == startup_id and profile["id"] == startup_id,
+            f"Expected startup_id/id to be the startups.id {startup_id}, got {profile['startup_id']}/{profile['id']}",
+        )
+    finally:
+        _cleanup([])
+
+
+def test_company_with_analysis_still_reports_has_analysis_true() -> None:
+    """The existing, common case (an analysis with real methodology)
+    must be unaffected by the Section 6 fallback -- has_analysis=True,
+    methodology populated, exactly as before this phase."""
+    ids = [_insert_test_analysis(f"{TEST_PREFIX} HasAnalysis", offset_seconds=0, methodology={"startup_intelligence_score": 42})]
+
+    try:
+        profile = get_startup_by_name(f"{TEST_PREFIX} HasAnalysis")
+
+        expect(profile is not None, "Expected a profile for a company with a real analysis")
+        expect(profile["has_analysis"] is True, f"Expected has_analysis=True, got {profile.get('has_analysis')}")
+        expect(profile["methodology"] is not None, "Expected methodology to be populated, not None")
+    finally:
+        _cleanup(ids)
+
+
+def test_truly_nonexistent_company_still_returns_none() -> None:
+    """A company with neither an analysis nor a startups row must still
+    404 (return None) -- the Section 6 fallback only ever recognizes a
+    company that genuinely exists in the startups table."""
+    profile = get_startup_by_name(f"{TEST_PREFIX} Never Created Anywhere")
+    expect(profile is None, "Expected None for a company that was never created via any path")
+
+
 TESTS = [
     test_startups_table_exists_with_expected_shape,
     test_analyses_startup_id_column_and_fk_exist,
@@ -481,6 +547,9 @@ TESTS = [
     test_no_membership_or_saved_rows_created_by_backfill,
     test_legacy_analysis_rows_preserved,
     test_existing_canonical_surfaces_unchanged,
+    test_company_with_no_analysis_returns_honest_profile_not_none,
+    test_company_with_analysis_still_reports_has_analysis_true,
+    test_truly_nonexistent_company_still_returns_none,
 ]
 
 

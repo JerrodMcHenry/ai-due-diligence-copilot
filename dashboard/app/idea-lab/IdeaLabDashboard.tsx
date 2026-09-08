@@ -11,6 +11,27 @@ import { listVentures } from "@/lib/api";
 
 import type { VentureSummary } from "@/types";
 
+// Phase 37E -- Company Lifecycle + Public Identity Convergence, Section 4.
+// This list only ever has the venture's raw, founder-set `stage` string
+// (VentureSummary has no `assumptions` -- fetching that per card would be
+// the N+1 this lightweight list deliberately avoids elsewhere), so it
+// cannot run the full evidence-aware resolveVentureState() the venture's
+// own detail page uses (VentureWorkspace.tsx) -- a venture whose real
+// evidence has outpaced its manually-set stage may still show the
+// earlier label here until that page's own resolver corrects it. What
+// this table DOES fix: a bare "Idea" pill read, out of context, as this
+// venture's TYPE or LEGITIMACY rather than its current stage -- exactly
+// the ambiguity this phase's own audit named. Every value gets the same
+// "Stage" framing the detail page already uses (VENTURE_STATES in
+// lib/journey/inferVentureStage.ts), so "Idea" never appears bare.
+const STAGE_CARD_LABELS: Record<string, string> = {
+  Idea: "Idea Stage",
+  Researching: "Researching Stage",
+  Validating: "Validation Stage",
+  Building: "Building Stage",
+  Launched: "Operating Stage",
+};
+
 function formatUpdatedAt(iso: string): string {
   const date = new Date(iso);
   if (Number.isNaN(date.getTime())) {
@@ -79,16 +100,24 @@ export default function IdeaLabDashboard() {
       {/* Phase 32 -- Product Information Architecture + Seamless User
           Journey, Part 3: "Idea Lab" removed as a user-facing label --
           a founder shouldn't need to know what an "Idea Lab" is to use
-          it. Title now "My Ideas" (the exact route this nav destination
-          is called from PersonalMenu's own prior presentation-layer
-          rename, now promoted to a real page title too); CTA now "Start
-          a New Idea," plain founder language, replacing the internal
-          "venture" term. Route (/idea-lab, /idea-lab/new) and every
-          backend/type name are unchanged -- see this phase's own
-          terminology map for the full list of what did and didn't
-          rename. */}
+          it. CTA "Start a New Idea," plain founder language, replacing
+          the internal "venture" term -- left unchanged by 37E below,
+          since a new entry usually does start as just an idea. Route
+          (/idea-lab, /idea-lab/new) and every backend/type name are
+          unchanged -- see this phase's own terminology map for the full
+          list of what did and didn't rename.
+          Phase 37E -- Company Lifecycle + Public Identity Convergence,
+          Section 10: title changed from "My Ideas" to "My Companies."
+          This list holds every venture regardless of stage -- including
+          ones with real paying customers and six figures of ARR (see
+          lib/journey/inferVentureStage.ts's own "Operating Stage"
+          bucket) -- so a bare "Ideas" label was exactly the same
+          ambiguity Section 4 already fixed on each card's own stage
+          badge, one level up. "Build" (the top-level nav item pointing
+          here) is intentionally left as-is; this only renames the
+          in-page title/breadcrumb one level below it. */}
       <PageHeader
-        title="My Ideas"
+        title="My Companies"
         subtitle="Start with just an idea. SIE helps you model it, test your assumptions, and see what would make it stronger — before you build anything."
         action={
           <Link
@@ -160,7 +189,9 @@ export default function IdeaLabDashboard() {
 
                 <div className="mt-auto flex flex-wrap items-center gap-2 text-sm text-text-secondary">
                   {venture.stage ? (
-                    <span className="rounded-full border border-border px-2 py-0.5">{venture.stage}</span>
+                    <span className="rounded-full border border-border px-2 py-0.5">
+                      {STAGE_CARD_LABELS[venture.stage] ?? venture.stage}
+                    </span>
                   ) : null}
                   <span>Updated {formatUpdatedAt(venture.updated_at)}</span>
                 </div>
