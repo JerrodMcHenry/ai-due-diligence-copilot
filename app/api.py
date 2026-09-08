@@ -115,6 +115,7 @@ from app.database.db import (create_tables,
                          add_venture_graduations_startup_unique_constraint,
                          get_venture_graduation_for_owner,
                          get_venture_graduation_by_startup,
+                         resolve_linked_venture_for_owned_startup,
                          resolve_startup_for_graduation,
                          create_venture_graduation,
                          StartupNameCollisionError,
@@ -3274,7 +3275,7 @@ def get_founder_startup(
     startup_id: int,
     current_user: AuthenticatedUser = RequireStartupMember,
 ):
-    workspace = get_founder_startup_workspace(startup_id)
+    workspace = get_founder_startup_workspace(startup_id, current_user.user_id)
 
     if workspace is None:
         # Should be unreachable once RequireStartupMember has already
@@ -3520,7 +3521,7 @@ def get_fundraising_readiness(
     startup_id: int,
     current_user: AuthenticatedUser = RequireStartupMember,
 ):
-    workspace = get_founder_startup_workspace(startup_id)
+    workspace = get_founder_startup_workspace(startup_id, current_user.user_id)
 
     if workspace is None:
         raise HTTPException(status_code=404, detail="Startup not found.")

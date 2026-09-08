@@ -141,7 +141,7 @@ export function useVentureGraduation(
         return;
       }
 
-      const result = await graduateVenture(
+      await graduateVenture(
         ventureId,
         {
           company_name: args.companyName,
@@ -156,7 +156,20 @@ export function useVentureGraduation(
         stashGraduationSummaryForAnalyze(venture);
       }
 
-      router.push(`/analyze?startup_id=${result.startup_id}`);
+      // Phase 37B -- Company Identity + Workspace Routing Bridge.
+      // Graduation is now a status change ("a startup profile exists"),
+      // not a transition into a different product -- the founder stays
+      // right here, in the same Venture Workspace. Re-fetching status
+      // (rather than navigating away) is what makes
+      // VentureGraduationBanner take over from VentureGraduationAction in
+      // place, so "what happened" is shown honestly without inventing a
+      // new success message. Analyzing this startup remains available,
+      // whenever the founder chooses it, from that same banner or from
+      // Explore's own "Ready to turn this into a real startup?" card --
+      // never automatic.
+      closeReview();
+      const refreshedStatus = await getVentureGraduationStatus(ventureId, token);
+      setStatus(refreshedStatus);
     } catch (submitError) {
       console.error("Failed to graduate venture:", submitError);
       setError("This startup could not be created. Try again.");

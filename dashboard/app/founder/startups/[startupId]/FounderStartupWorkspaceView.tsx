@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import PageHeader from "@/components/layout/PageHeader";
@@ -56,6 +57,7 @@ export default function FounderStartupWorkspaceView({
   startupId,
 }: FounderStartupWorkspaceViewProps) {
   const { getToken } = useAuth();
+  const router = useRouter();
 
   const [workspace, setWorkspace] = useState<FounderStartupWorkspace | null>(null);
   const [loadState, setLoadState] = useState<LoadState>("loading");
@@ -106,7 +108,21 @@ export default function FounderStartupWorkspaceView({
     };
   }, [startupId, getToken]);
 
-  if (loadState === "loading") {
+  // Phase 37B -- Company Identity + Workspace Routing Bridge. Backward
+  // compatibility for bookmarks/old links/direct navigation: once this
+  // startup's own workspace response says it's linked (ownership-
+  // checked) to a venture the caller still owns, redirect into the
+  // existing Venture Workspace rather than rendering the page below at
+  // all -- there is no second operating workspace for a linked company.
+  // An unlinked (legacy) startup's `linked_venture_id` is null and this
+  // effect is a no-op, so that case renders exactly as before this phase.
+  useEffect(() => {
+    if (loadState === "ready" && workspace?.linked_venture_id != null) {
+      router.replace(`/idea-lab/${workspace.linked_venture_id}`);
+    }
+  }, [loadState, workspace, router]);
+
+  if (loadState === "loading" || (loadState === "ready" && workspace?.linked_venture_id != null)) {
     return (
       <div className="space-y-6">
         <div className="h-40 animate-pulse rounded-2xl border border-border bg-surface" />

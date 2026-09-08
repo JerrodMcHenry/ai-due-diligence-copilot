@@ -532,6 +532,128 @@ def test_workspace_for_non_graduated_startup_has_no_provenance() -> None:
 
 
 # ---------------------------------------------------------------------------
+# Phase 37B -- Company Identity + Workspace Routing Bridge. Cases F/G/H/I:
+# the canonical startup->venture resolution rule
+# (resolve_linked_venture_for_owned_startup(), surfaced as
+# `linked_venture_id` on both GET /founder/startups/{id} and GET
+# /me/startups) must resolve a real link, report no-link honestly for an
+# unlinked/legacy startup, and fail closed the moment the linked venture
+# does not belong to the caller -- never company-name matching, never
+# "latest venture", never inference.
+# ---------------------------------------------------------------------------
+
+
+def test_case_f_linked_startup_resolves_to_correct_venture() -> None:
+    _ensure_test_users()
+    try:
+        venture_id = _make_venture(USER_A, "Linked")
+        company_name = f"{TEST_PREFIX} Linked Inc"
+        with _patched_auth():
+            graduate_response = client.post(
+                f"/ventures/{venture_id}/graduate",
+                json={"company_name": company_name, "trigger": "manual"},
+                headers=_auth_headers(USER_A),
+            )
+            startup_id = graduate_response.json()["startup_id"]
+
+            workspace_response = client.get(f"/founder/startups/{startup_id}", headers=_auth_headers(USER_A))
+            expect(workspace_response.status_code == 200, f"Expected 200, got {workspace_response.status_code}")
+            expect(
+                workspace_response.json()["linked_venture_id"] == venture_id,
+                f"Expected linked_venture_id={venture_id}, got {workspace_response.json()['linked_venture_id']}",
+            )
+
+            list_response = client.get("/me/startups", headers=_auth_headers(USER_A))
+            expect(list_response.status_code == 200, f"Expected 200, got {list_response.status_code}")
+            row = next(r for r in list_response.json() if r["startup_id"] == startup_id)
+            expect(
+                row["linked_venture_id"] == venture_id,
+                f"GET /me/startups must expose the same resolution, got {row['linked_venture_id']}",
+            )
+    finally:
+        _cleanup()
+
+
+def test_case_g_unlinked_owned_startup_reports_no_link() -> None:
+    _ensure_test_users()
+    try:
+        startup_id = get_or_create_startup(f"{TEST_PREFIX} Unlinked Inc")
+        with engine.begin() as connection:
+            connection.execute(text("""
+                INSERT INTO startup_memberships (user_id, startup_id, role)
+                VALUES (:uid, :sid, 'member')
+                ON CONFLICT DO NOTHING
+            """), {"uid": USER_A, "sid": startup_id})
+
+        with _patched_auth():
+            workspace_response = client.get(f"/founder/startups/{startup_id}", headers=_auth_headers(USER_A))
+            expect(workspace_response.status_code == 200, f"Expected 200, got {workspace_response.status_code}")
+            expect(
+                workspace_response.json()["linked_venture_id"] is None,
+                "An unlinked (legacy) startup must report no linked venture -- never a guess.",
+            )
+
+            list_response = client.get("/me/startups", headers=_auth_headers(USER_A))
+            row = next(r for r in list_response.json() if r["startup_id"] == startup_id)
+            expect(row["linked_venture_id"] is None, "GET /me/startups must agree: no link.")
+    finally:
+        _cleanup()
+
+
+def test_case_h_and_i_a_co_members_venture_is_never_resolved_for_a_startup_they_share() -> None:
+    """Cases H/I combined: USER_A graduates their own venture into a
+    startup; USER_B is separately (legitimately) granted membership on
+    that SAME startup (a plausible co-founder scenario), but USER_B never
+    owned the venture that originally graduated into it. Resolving
+    linked_venture_id AS USER_B must fail closed -- never resolve to
+    USER_A's venture_id, never leak it, never guess a fallback."""
+    _ensure_test_users()
+    try:
+        venture_id = _make_venture(USER_A, "Shared")
+        company_name = f"{TEST_PREFIX} Shared Inc"
+        with _patched_auth():
+            graduate_response = client.post(
+                f"/ventures/{venture_id}/graduate",
+                json={"company_name": company_name, "trigger": "manual"},
+                headers=_auth_headers(USER_A),
+            )
+            startup_id = graduate_response.json()["startup_id"]
+
+        # USER_B is granted a real, independent membership on the SAME
+        # startup -- deliberately not via graduation, to isolate exactly
+        # the case this rule must fail closed on.
+        with engine.begin() as connection:
+            connection.execute(text("""
+                INSERT INTO startup_memberships (user_id, startup_id, role)
+                VALUES (:uid, :sid, 'member')
+                ON CONFLICT DO NOTHING
+            """), {"uid": USER_B, "sid": startup_id})
+
+        with _patched_auth():
+            workspace_response = client.get(f"/founder/startups/{startup_id}", headers=_auth_headers(USER_B))
+            expect(workspace_response.status_code == 200, f"Expected 200, got {workspace_response.status_code}")
+            expect(
+                workspace_response.json()["linked_venture_id"] is None,
+                f"USER_B must never resolve to USER_A's venture_id={venture_id}; got {workspace_response.json()['linked_venture_id']}",
+            )
+
+            list_response = client.get("/me/startups", headers=_auth_headers(USER_B))
+            row = next(r for r in list_response.json() if r["startup_id"] == startup_id)
+            expect(row["linked_venture_id"] is None, "GET /me/startups must agree: fail closed for USER_B.")
+
+            # USER_A, meanwhile, still correctly resolves their own link --
+            # this isn't a case of the link breaking for everyone, only of
+            # it correctly never extending to someone who doesn't own it.
+            owner_response = client.get(f"/founder/startups/{startup_id}", headers=_auth_headers(USER_A))
+            expect(
+                owner_response.json()["linked_venture_id"] == venture_id,
+                "USER_A's own resolution must be unaffected by USER_B's separate membership.",
+            )
+    finally:
+        _cleanup()
+
+
+# ---------------------------------------------------------------------------
 # Phase 31A -- Graduation Integrity & Acceptance Hardening.
 #
 # These tests directly simulate a crash at each meaningful boundary of
@@ -912,6 +1034,10 @@ TESTS = [
     test_graduation_never_mutates_venture_model_result,
     test_founder_workspace_shows_graduation_provenance,
     test_workspace_for_non_graduated_startup_has_no_provenance,
+    # Phase 37B -- Company Identity + Workspace Routing Bridge.
+    test_case_f_linked_startup_resolves_to_correct_venture,
+    test_case_g_unlinked_owned_startup_reports_no_link,
+    test_case_h_and_i_a_co_members_venture_is_never_resolved_for_a_startup_they_share,
     # Phase 31A -- Graduation Integrity & Acceptance Hardening.
     test_failure_after_startup_creation_orphan_recovers_on_retry,
     test_orphan_from_one_user_still_blocks_a_different_user,

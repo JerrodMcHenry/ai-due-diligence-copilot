@@ -8,4 +8,11 @@ export interface MyStartupMembership {
   startup_id: number;
   canonical_name: string;
   role: string;
+  // Phase 37B -- Company Identity + Workspace Routing Bridge. Present
+  // only when this startup is linked (via venture_graduations) to a
+  // modeled_venture the caller themselves owns -- ownership-checked
+  // server-side. When present, this row should route into the existing
+  // Venture Workspace (/idea-lab/{linked_venture_id}) instead of the
+  // legacy Founder Workspace.
+  linked_venture_id: number | null;
 }

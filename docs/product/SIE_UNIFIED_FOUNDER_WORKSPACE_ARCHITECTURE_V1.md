@@ -822,7 +822,167 @@ depending on whether their startup has a linked venture — mitigated by the dua
 
 ---
 
-## 36. Non-goals of this document
+## 36. Phase 37B — Implementation (Company Identity + Workspace Routing Bridge)
+
+Phase 37B implemented the first slice of §33's sequence: identity continuity between startup identity and
+the existing Venture Workspace, plus the blank-venture-name fix. Nothing from §7 (Founder Workspace's SPS/
+Fundraising Readiness/founder_actions/founder_updates capabilities) was moved. No schema changed.
+
+### 36.1 Bridge implementation
+
+Confirmed, before writing any code (per §5's own instruction), that `venture_graduations` already bridges
+`venture_id` → `startup_id` exactly as §4's audit described, and is sufficient on its own — **no new mapping
+table was added**. One new, small, reusable resolution function was added:
+`resolve_linked_venture_for_owned_startup(user_id, startup_id) -> int | None` (`app/database/db.py`),
+implementing the canonical rule from the architecture doc's own §6 exactly: authorize via the caller's
+already-established startup membership (unchanged, still `RequireStartupMember`), look up
+`venture_graduations` for this `startup_id`, and only return a `venture_id` whose `modeled_ventures.user_id`
+matches the caller. No company-name matching, no "latest venture," no inference — confirmed by the function's
+own single SQL statement having no other predicate available to fall back on.
+
+This single function backs both consumers: `GET /founder/startups/{startup_id}` (one row, added as a new
+`linked_venture_id` field on `FounderStartupWorkspace`) and `GET /me/startups` (batched, via the identical
+ownership-checked JOIN predicate inlined directly into `get_startup_memberships_for_user()`'s own query,
+rather than N calls to the singular function — avoiding the N+1 the directive's own §23 warned against).
+
+### 36.2 Authorization behavior
+
+Fail-closed, verified by a new, deliberately adversarial test
+(`test_case_h_and_i_a_co_members_venture_is_never_resolved_for_a_startup_they_share`): a second user granted
+a legitimate, independent `startup_memberships` row on a startup that a *different* user's venture graduated
+into never resolves that venture's id — `linked_venture_id` comes back `None` for them specifically, while
+the actual owner's own resolution is confirmed unaffected. No new authorization surface was introduced;
+`RequireStartupMember` and venture-ownership checks are exactly as they were.
+
+### 36.3 Routing behavior
+
+- **My Startups** (`FounderHome.tsx`): each row's `Link href` is chosen directly from
+  `membership.linked_venture_id` — `/idea-lab/{id}` when present, the unchanged `/founder/startups/{id}`
+  otherwise. One mapping, no second button, no founder-facing "linked"/"legacy" language.
+- **Direct/legacy URL** (`FounderStartupWorkspaceView.tsx`): on load, if the workspace response's own
+  `linked_venture_id` is present, the page calls `router.replace()` into the Venture Workspace instead of
+  rendering the Founder Workspace UI at all (the loading skeleton is shown through the redirect, so there is
+  no flash of the old view first). An unlinked startup's `linked_venture_id` is `null` and this is a no-op —
+  the page renders exactly as it did before this phase.
+
+### 36.4 Legacy fallback (no-link edge case)
+
+Unchanged: `FounderStartupWorkspaceView`, `founder_actions`, `founder_updates`, and every other Founder
+Workspace capability remain fully intact and are the ones actually reached whenever
+`resolve_linked_venture_for_owned_startup()` returns `None`. Nothing about this phase alters that path's
+behavior in any way — confirmed by `test_case_g_unlinked_owned_startup_reports_no_link` and by
+`test_workspace_for_non_graduated_startup_has_no_provenance` (pre-existing, still passing unmodified).
+
+### 36.5 Blank-name fix
+
+**Root cause** (frontend): `VentureDraftReview.tsx`'s naming gate tracked a one-time `"decided"/"undecided"`
+flag that, once flipped to `"decided"` (by an AI-prefilled name, or by typing anything at all, including
+later clearing it), never flipped back — so clearing a previously-good name left `canCreate` `true` with no
+real name behind it. Reproduced and fixed: the gate is now recomputed live from the *current* trimmed name
+value plus a separate, explicit `saidNoNameYet` flag that only the "I don't have a name yet" button sets.
+Clearing any name — typed, AI-prefilled, or otherwise — now correctly re-disables "Create Venture" and
+re-shows an inline **"Give your venture a name before continuing."** message, not just a disabled button with
+no visible reason.
+
+**Root cause** (backend): `CreateVentureRequest`/`UpdateVentureRequest`'s `name` field already had
+`min_length=1` (rejecting a bare `""`), but nothing rejected a whitespace-only string (`"   "` satisfies
+`min_length=1`). Fixed with one shared `field_validator` (`_require_real_venture_name`, `app/models/
+idea_lab.py`) on both request models: strips the value, raises `ValueError` (→ 422) if empty after
+stripping, otherwise returns the trimmed value for persistence.
+
+### 36.6 Existing unnamed ventures
+
+Investigated before building anything new, per §4's own explicit off-ramp. Finding: the venture-name
+defect never actually persisted a truly blank name — `VentureDraftReview.tsx`'s own `handleConfirm` already
+substituted the literal string `"Untitled venture"` whenever the trimmed input was empty, so every affected
+record has a real, non-blank (if unhelpful) name string, not a null/empty one. Two consequences: (1) these
+records are **not** blocked by anything new here — they remain fully readable and editable, since a
+non-blank `UpdateVentureRequest.name` value passes the new validator without issue; (2) the one genuinely
+"identity-sensitive" moment (creating a *public* Startup Profile) is **already** gated by a real, working,
+independent non-blank check — `GraduateVentureReview.tsx`'s own `companyName` field, pre-filled from the
+venture's name but separately editable, with its own `canSubmit = companyName.trim().length > 0`. A founder
+graduating an "Untitled venture" record sees exactly that string pre-filled in the graduation form and can
+fix it right there before creating a public identity. Building a *second*, new remediation surface on top of
+an already-working gate would have materially expanded this phase for no protective benefit it doesn't
+already have — so, per the phase's own explicit permission, no new legacy-repair UI was built.
+
+### 36.7 Graduation redirect
+
+**Before**: a successful `POST /ventures/{id}/graduate` navigated the founder to `/analyze?startup_id={id}`
+— out of the Venture Workspace, into a different flow, before they ever saw an acknowledgment in place.
+
+**After**: `submit()` (`VentureGraduation.tsx`) no longer navigates anywhere. It re-fetches the venture's own
+graduation status in place, which flips the already-existing `VentureGraduationBanner` into its `graduated`
+branch — *"You're now building [name] as a startup"* with an "Open Founder Workspace →" button — directly on
+the same Venture Workspace page the founder was already looking at. No new component, no new copy invented:
+the existing banner already said exactly the right thing; it simply never got the chance to render before the
+old code navigated away first. Clicking "Open Founder Workspace →" now correctly bounces straight back into
+this same Venture Workspace, since the startup it opens is, by construction, linked.
+
+### 36.8 Startup creation / deduplication
+
+Untouched. `resolve_startup_for_graduation()`, its name-collision detection (`StartupNameCollisionError`),
+and the existing "connect existing startup" flow were not modified in any way — confirmed by the full,
+unmodified `test_venture_graduation.py` collision/idempotency test group (12 tests) still passing.
+
+### 36.9 Second "Analyze My Startup" path
+
+Not solved in 37B, per its own explicit scope. Confirmed unchanged and confirmed **not made worse**: Analyze's
+`get_or_create_startup()` path still never creates a `venture_graduations` row, never grants membership, and
+still cannot itself produce a `linked_venture_id` for anyone (only an actual graduation can). The remaining
+overlap (a founder can still reach the same company via both paths and end up needing "connect existing
+startup" to reconcile them) is exactly as documented in the architecture doc's own §6, unchanged, and remains
+37E's to resolve.
+
+### 36.10 My Ideas / Build list
+
+Verified, not changed: `list_modeled_ventures_for_user()` has no graduation-based filtering (no join to
+`venture_graduations` at all), and neither does the frontend's `IdeaLabDashboard.tsx`. A graduated venture
+continues to appear in My Ideas exactly as before — nothing was at risk here, so nothing was touched.
+
+### 36.11 Live walkthrough — honest status
+
+**Not completed via an actual browser session this phase.** The browser automation session's Clerk login had
+expired/logged out by the time this phase reached its live-walkthrough step; per this session's own binding
+safety rules, signing back in (any method — email, Google OAuth) is not an action Claude may perform on the
+user's behalf, so the walkthrough was not forced through. This is reported plainly rather than fabricated.
+
+In its place, the full acceptance story (Section 1/§30's own script) was verified at the API layer, through
+the real FastAPI app (the same backend every live click ultimately calls), via new, purpose-built tests:
+create-with-blank-name rejected, create-with-real-name succeeds, graduate, `linked_venture_id` resolves
+correctly for the owner, `GET /me/startups` agrees, a legitimate co-member of the same startup never resolves
+someone else's venture, an unlinked/legacy startup correctly reports no link on both endpoints. This proves
+every *mechanical* claim in the acceptance story end-to-end. What it does **not** prove is the actual browser
+redirect firing, the graduation banner rendering in place, or the visual "Give your venture a name" message
+appearing — those remain unverified by a real click this phase and should be spot-checked live before this
+phase is considered fully closed, or at the start of 37C.
+
+### 36.12 Test matrix status
+
+A–I confirmed via new/existing automated backend tests (see §37.13). J/K (My Startups click routing) and L/M
+(direct URL redirect) are implemented and typecheck-clean but not live-verified per §37.11. N (graduation
+success stays in Venture Workspace) is implemented, typecheck-clean, not live-verified. O–W are regression
+claims, all confirmed via the complete, unmodified existing backend suite passing with zero failures.
+
+### 36.13 New/updated tests this phase
+
+- `app/tests/test_idea_lab.py`: `test_case_b_blank_venture_name_rejected`,
+  `test_case_c_whitespace_only_venture_name_rejected` (plus trims-a-real-name-with-whitespace confirmation),
+  `test_case_c2_blank_venture_name_rejected_on_update`.
+- `app/tests/test_venture_graduation.py`: `test_case_f_linked_startup_resolves_to_correct_venture`,
+  `test_case_g_unlinked_owned_startup_reports_no_link`,
+  `test_case_h_and_i_a_co_members_venture_is_never_resolved_for_a_startup_they_share`.
+
+Full backend suite (51 modules) re-run after every change: zero failures. Full frontend suite (16 scripts):
+zero failures, unchanged counts. `tsc --noEmit`, `eslint`, and `next build` all clean.
+
+### 36.14 Remaining convergence work (unchanged from the architecture doc's own §33)
+
+37C (Founder Workspace capabilities relocate into Build as a new, additive Analyze section), 37D (retire
+duplicate actions/updates via dual-read + backfill), 37E (full graduation UX convergence — the phase that
+should also perform the live spot-check this phase's own §37.11 deferred), 37F (cleanup).
+
+## 37. Non-goals of this document
 
 This document does not implement any part of the convergence, run any migration, change any schema, rename
 any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital

@@ -18,4 +18,11 @@ export interface FounderStartupWorkspace {
   methodology: SIEMethodologyAnalysis | null;
   sps_history: SPSHistoryPoint[];
   graduated_from_venture: GraduatedFromVenture | null;
+  // Phase 37B -- Company Identity + Workspace Routing Bridge.
+  // Ownership-checked (distinct from graduated_from_venture above, which
+  // is purely informational and unfiltered). Present only when the
+  // CURRENT caller themselves owns the linked venture -- the signal this
+  // page uses to redirect into the existing Venture Workspace rather
+  // than rendering the legacy Founder Workspace.
+  linked_venture_id: number | null;
 }

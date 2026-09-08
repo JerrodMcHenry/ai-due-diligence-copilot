@@ -18,7 +18,7 @@ easy to accidentally leak one into a response shaped for the other.
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class MarketAssumptions(BaseModel):
@@ -139,6 +139,28 @@ class VPSResult(BaseModel):
     sole_uncorroborated_category: bool = False
 
 
+# Phase 37B -- Company Identity + Workspace Routing Bridge. `min_length=1`
+# alone (the pre-existing bound on `name` below) rejects a bare "" but
+# NOT a whitespace-only string ("   " has length 3) -- confirmed live in
+# Phase 36 as a real defect: the frontend's own naming gate had a
+# matching hole (see VentureDraftReview.tsx's own Phase 37B comment), and
+# together they let a venture be created with no real name at all,
+# silently, with no error anywhere. This is the backend half of that
+# fix -- defense in depth for any caller that isn't the one frontend form
+# (a direct API call, a future client), since the frontend fix alone
+# can't protect that. Trims before storing (a leading/trailing-space name
+# is still a real name), matching this file's own "normal values may be
+# trimmed" convention already used elsewhere in this codebase (e.g.
+# StructureIdeaRequest's sibling validators).
+def _require_real_venture_name(value: str) -> str:
+    trimmed = value.strip()
+
+    if not trimmed:
+        raise ValueError("Venture name cannot be blank.")
+
+    return trimmed
+
+
 class CreateVentureRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
     # SIE Intelligence Reset: raised to match StructureIdeaRequest's own
@@ -163,6 +185,11 @@ class CreateVentureRequest(BaseModel):
     source: str | None = Field(default=None, max_length=50)
     share_public_id: str | None = Field(default=None, max_length=100)
 
+    @field_validator("name")
+    @classmethod
+    def _validate_name(cls, value: str) -> str:
+        return _require_real_venture_name(value)
+
 
 class UpdateVentureRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
@@ -182,6 +209,11 @@ class UpdateVentureRequest(BaseModel):
     # other caller (the general "Edit the full model" editor), preserving
     # exact prior behavior for that flow.
     related_mission_id: int | None = None
+
+    @field_validator("name")
+    @classmethod
+    def _validate_name(cls, value: str) -> str:
+        return _require_real_venture_name(value)
 
 
 class VentureResponse(BaseModel):

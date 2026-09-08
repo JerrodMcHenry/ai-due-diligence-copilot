@@ -366,6 +366,67 @@ def test_venture_creation_requires_auth() -> None:
         expect(response.status_code == 401, f"Expected 401, got {response.status_code}")
 
 
+# --- Phase 37B, Cases B/C: blank/whitespace-only venture names rejected ----
+# The one truly new backend behavior this phase adds: defense in depth for
+# any caller (a direct API call, a future client) that isn't the one
+# frontend form whose own matching bug is fixed separately (see
+# VentureDraftReview.tsx's own Phase 37B comment). min_length=1 alone
+# already rejected a bare "" before this phase; these tests specifically
+# exercise the new field_validator's whitespace-only case, plus confirm a
+# real name with incidental whitespace is trimmed, not rejected.
+
+
+def test_case_b_blank_venture_name_rejected() -> None:
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            response = client.post(
+                "/ventures", json=_create_venture_body(name=""), headers=_auth_headers(USER_A)
+            )
+            expect(response.status_code == 422, f"Expected 422 for blank name, got {response.status_code} {response.text}")
+    finally:
+        _cleanup()
+
+
+def test_case_c_whitespace_only_venture_name_rejected() -> None:
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            response = client.post(
+                "/ventures", json=_create_venture_body(name="   "), headers=_auth_headers(USER_A)
+            )
+            expect(response.status_code == 422, f"Expected 422 for whitespace-only name, got {response.status_code} {response.text}")
+
+            # A real name with incidental surrounding whitespace is
+            # trimmed and accepted, never rejected -- the validator
+            # blocks EMPTY-after-trim, not whitespace itself.
+            response = client.post(
+                "/ventures", json=_create_venture_body(name="  RelayOps  "), headers=_auth_headers(USER_A)
+            )
+            expect(response.status_code == 200, f"Expected a real name to be accepted, got {response.status_code} {response.text}")
+            expect(response.json()["name"] == "RelayOps", f"Expected the name to be trimmed, got: {response.json()['name']!r}")
+    finally:
+        _cleanup()
+
+
+def test_case_c2_blank_venture_name_rejected_on_update() -> None:
+    """Same validator, same discipline, on UpdateVentureRequest -- a
+    founder (or any caller) must never be able to blank out an existing
+    venture's name via PUT either."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            created = client.post("/ventures", json=_create_venture_body(), headers=_auth_headers(USER_A)).json()
+            venture_id = created["id"]
+
+            response = client.put(
+                f"/ventures/{venture_id}", json=_create_venture_body(name="   "), headers=_auth_headers(USER_A)
+            )
+            expect(response.status_code == 422, f"Expected 422 for whitespace-only name on update, got {response.status_code} {response.text}")
+    finally:
+        _cleanup()
+
+
 # --- 23: all Idea Lab endpoints remain private ------------------------------
 
 
@@ -648,6 +709,9 @@ TESTS = [
     test_path_to_stronger_never_includes_unavailable_category,
     test_path_to_stronger_is_capped_and_ranked_by_weight_and_headroom,
     test_venture_creation_requires_auth,
+    test_case_b_blank_venture_name_rejected,
+    test_case_c_whitespace_only_venture_name_rejected,
+    test_case_c2_blank_venture_name_rejected_on_update,
     test_all_idea_lab_endpoints_require_auth,
     test_venture_belongs_to_authenticated_user,
     test_user_cannot_access_another_users_venture,

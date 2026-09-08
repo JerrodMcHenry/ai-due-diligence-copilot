@@ -98,9 +98,20 @@ export default function VentureDraftReview({
   // extract a real name (e.g. "ClaimPilot helps medical practices...."),
   // the field is already prefilled and no extra decision is required --
   // Part 16's own explicit case.
-  const [nameDecision, setNameDecision] = useState<"decided" | "undecided">(
-    draft.name.value ? "decided" : "undecided"
-  );
+  //
+  // Phase 37B fix: the previous version tracked this as a one-time
+  // "decided"/"undecided" flag that, once flipped to "decided" (by a
+  // prefilled name, or by typing anything at all), never flipped back --
+  // so a founder who cleared a perfectly good, AI-prefilled name back to
+  // empty left the venture nameless with Create Venture still enabled
+  // (reproduced live in Phase 36; 6 pre-existing "Untitled venture"
+  // records in this same dataset are the direct result). `saidNoNameYet`
+  // now records ONLY the explicit "I don't have a name yet" choice;
+  // whether a name is actually present is always freshly computed from
+  // the current `name` value, so clearing any name -- typed, prefilled,
+  // or otherwise -- correctly re-blocks Create Venture and re-shows the
+  // prompt below, every time, not just the first time.
+  const [saidNoNameYet, setSaidNoNameYet] = useState(false);
   const [industry, setIndustry] = useState(draft.industry.value);
   const [businessModel, setBusinessModel] = useState(draft.business_model.value);
   const [targetCustomer, setTargetCustomer] = useState(draft.target_customer.value);
@@ -109,18 +120,24 @@ export default function VentureDraftReview({
     draftToAssumptions(draft)
   );
 
+  const trimmedName = name.trim();
+  const showNamePrompt = trimmedName.length === 0 && !saidNoNameYet;
+  const canCreate = trimmedName.length > 0 || saidNoNameYet;
+
   function handleNameChange(value: string | null) {
     setName(value ?? "");
-    // Typing anything IS the decision -- no need to also click a button.
-    setNameDecision("decided");
+    // Typing real content overrides an earlier "no name yet" choice --
+    // but typing (or clearing) back down to blank must NOT silently keep
+    // counting as "still decided" the way the old flag did.
+    if ((value ?? "").trim().length > 0) {
+      setSaidNoNameYet(false);
+    }
   }
 
   function handleNoNameYet() {
     setName("");
-    setNameDecision("decided");
+    setSaidNoNameYet(true);
   }
-
-  const canCreate = nameDecision === "decided";
 
   function handleConfirm() {
     onConfirm({
@@ -166,8 +183,11 @@ export default function VentureDraftReview({
           onChange={handleNameChange}
           placeholder={suggestNamePlaceholder(originalDescription)}
         />
-        {nameDecision === "undecided" ? (
+        {showNamePrompt ? (
           <div className="mt-2 flex flex-wrap items-center gap-2">
+            <p className="w-full text-sm font-medium text-warning">
+              Give your venture a name before continuing.
+            </p>
             <button
               type="button"
               onClick={handleNoNameYet}

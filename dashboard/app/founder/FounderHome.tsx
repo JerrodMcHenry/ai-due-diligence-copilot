@@ -168,7 +168,19 @@ function MembershipGrid({
         {memberships.map((membership) => (
           <Link
             key={membership.startup_id}
-            href={`/founder/startups/${membership.startup_id}`}
+            // Phase 37B -- Company Identity + Workspace Routing Bridge.
+            // One understandable mapping, applied here: a startup linked
+            // (ownership-checked, server-side) to a venture the founder
+            // still operates opens that same Venture Workspace directly;
+            // everything else still opens the legacy Founder Workspace,
+            // exactly as before this phase. No second button, no founder-
+            // facing "linked"/"legacy" language -- the click just does
+            // the right thing.
+            href={
+              membership.linked_venture_id !== null
+                ? `/idea-lab/${membership.linked_venture_id}`
+                : `/founder/startups/${membership.startup_id}`
+            }
             className="group block"
           >
             <BaseCard className="flex h-full flex-col justify-between gap-4 p-6 transition-colors group-hover:border-primary">

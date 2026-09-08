@@ -683,6 +683,18 @@ def get_startup_memberships_for_user(user_id: str):
     should join out to canonical analyses via startup_id at read time,
     the same "join, don't copy" principle get_saved_startups_for_user()
     already applies.
+
+    Phase 37B: additionally exposes `linked_venture_id` -- the same
+    ownership-checked resolution resolve_linked_venture_for_owned_startup()
+    performs for a single startup, batched here as one extra LEFT JOIN
+    rather than N follow-up calls (Section 23/24's own "avoid an extra
+    network request per startup" instruction). The second LEFT JOIN's own
+    `mv.user_id = sm.user_id` condition is what makes this fail closed:
+    since this whole query is already scoped to `sm.user_id = :user_id`,
+    that condition is equivalent to checking the linked venture's owner
+    against the current caller -- if a venture_graduations row exists but
+    points at a venture owned by someone else, `mv.id` (and therefore
+    `linked_venture_id`) comes back NULL, never that other user's row.
     """
     with engine.begin() as connection:
         result = connection.execute(text("""
@@ -691,9 +703,12 @@ def get_startup_memberships_for_user(user_id: str):
                 sm.startup_id AS startup_id,
                 s.canonical_name AS canonical_name,
                 sm.role AS role,
-                sm.created_at AS created_at
+                sm.created_at AS created_at,
+                mv.id AS linked_venture_id
             FROM startup_memberships sm
             JOIN startups s ON s.id = sm.startup_id
+            LEFT JOIN venture_graduations vg ON vg.startup_id = sm.startup_id
+            LEFT JOIN modeled_ventures mv ON mv.id = vg.venture_id AND mv.user_id = sm.user_id
             WHERE sm.user_id = :user_id
             ORDER BY sm.created_at ASC
         """), {"user_id": user_id})
@@ -728,7 +743,7 @@ def user_has_startup_membership(user_id: str, startup_id: int) -> bool:
 # documents for RequireAdmin.
 # ---------------------------------------------------------------------------
 
-def get_founder_startup_workspace(startup_id: int):
+def get_founder_startup_workspace(startup_id: int, user_id: str):
     """
     Everything Founder Workspace V1's default view needs for one startup,
     in one read: the canonical identity (from startups itself, so this
@@ -753,6 +768,13 @@ def get_founder_startup_workspace(startup_id: int):
     passed (a membership row can't exist for a startup_id that isn't
     real, per the FK), but is still checked so this function is safe to
     call on its own.
+
+    Phase 37B: `user_id` (the already-authenticated, already-membership-
+    checked caller) is used ONLY to resolve `linked_venture_id` via
+    resolve_linked_venture_for_owned_startup() -- the ownership-checked
+    routing signal, distinct from the unfiltered `graduated_from_venture`
+    acknowledgment below. Never used to re-check startup membership
+    itself (that remains RequireStartupMember's job).
     """
     with engine.begin() as connection:
         startup_row = connection.execute(text("""
@@ -802,6 +824,7 @@ def get_founder_startup_workspace(startup_id: int):
     # keeping it separate means a future change to either function never
     # risks the other's transaction boundary.
     graduated_from_venture = get_venture_graduation_by_startup(startup_row["id"])
+    linked_venture_id = resolve_linked_venture_for_owned_startup(user_id, startup_row["id"])
 
     return {
         "startup_id": startup_row["id"],
@@ -826,6 +849,7 @@ def get_founder_startup_workspace(startup_id: int):
             if graduated_from_venture is not None
             else None
         ),
+        "linked_venture_id": linked_venture_id,
     }
 
 
@@ -6096,6 +6120,46 @@ def get_venture_graduation_by_startup(startup_id: int):
         """), {"startup_id": startup_id}).mappings().first()
 
         return dict(row) if row is not None else None
+
+
+def resolve_linked_venture_for_owned_startup(user_id: str, startup_id: int) -> int | None:
+    """
+    Phase 37B -- Company Identity + Workspace Routing Bridge. The one
+    canonical resolution rule for "does this founder continue operating
+    in the existing Venture Workspace for this startup, or does the
+    legacy Founder Workspace apply?" -- see
+    docs/product/SIE_UNIFIED_FOUNDER_WORKSPACE_ARCHITECTURE_V1.md's own
+    Phase 37B section for the full design record.
+
+    Returns the linked venture_id ONLY when BOTH hold:
+      1. a venture_graduations row links this exact startup_id to some venture, AND
+      2. that venture's own modeled_ventures.user_id matches user_id.
+
+    Deliberately NOT the same query as get_venture_graduation_by_startup()
+    (which powers the unrelated "created from your X venture"
+    acknowledgment already shown inside Founder Workspace, and does not
+    filter by ownership -- that acknowledgment is historically true
+    regardless of who's asking). A ROUTING decision must fail closed the
+    moment the linked venture belongs to someone other than the caller --
+    e.g. a co-founder who legitimately holds a startup_memberships row
+    for this startup but never owned the venture that originally
+    graduated into it must never be sent into a venture that isn't
+    theirs. No company-name matching, no "latest venture", no inference
+    of any kind -- only this exact, explicit link, ownership-checked.
+
+    Callers are responsible for having already established the caller is
+    a member of startup_id (RequireStartupMember) before calling this --
+    this function does not re-check startup membership itself, matching
+    this file's existing division of responsibility (see
+    get_founder_startup_workspace()'s own docstring for the same split).
+    """
+    with engine.begin() as connection:
+        return connection.execute(text("""
+            SELECT vg.venture_id
+            FROM venture_graduations vg
+            JOIN modeled_ventures mv ON mv.id = vg.venture_id
+            WHERE vg.startup_id = :startup_id AND mv.user_id = :user_id
+        """), {"startup_id": startup_id, "user_id": user_id}).scalar()
 
 
 def _find_venture_graduation_claim(user_id: str, startup_id: int, connection=None):

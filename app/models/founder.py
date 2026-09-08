@@ -51,3 +51,16 @@ class FounderStartupWorkspace(BaseModel):
     methodology: SIEMethodologyAnalysis | None = None
     sps_history: list[FounderSPSHistoryPoint] = Field(default_factory=list)
     graduated_from_venture: GraduatedFromVenture | None = None
+    # Phase 37B -- Company Identity + Workspace Routing Bridge. Present
+    # ONLY when this startup is linked, via venture_graduations, to a
+    # modeled_venture the CURRENT caller themselves owns (ownership-
+    # checked -- see resolve_linked_venture_for_owned_startup()'s own
+    # docstring). Deliberately a separate field from
+    # `graduated_from_venture` above: that field is an unfiltered, purely
+    # informational acknowledgment ("created from your X venture", true
+    # regardless of who's asking), while this one is the fail-closed
+    # signal the frontend uses to decide whether to redirect into the
+    # existing Venture Workspace at all -- the two must never be
+    # conflated. None means "render the legacy Founder Workspace",
+    # exactly as before this phase.
+    linked_venture_id: int | None = None
