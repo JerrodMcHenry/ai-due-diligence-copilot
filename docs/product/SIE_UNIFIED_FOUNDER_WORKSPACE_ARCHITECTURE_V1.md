@@ -1573,7 +1573,158 @@ fixes — text only.
 - founder_actions/founder_updates/startup_milestones migration groundwork (37D's own handoff, still no
   concrete backfill design — none built this phase either).
 
-## 40. Non-goals of this document
+## 40. Phase 37F — Convergence Cleanup + Dead Code Audit
+
+Surgical cleanup phase closing out the 37-series. Found and removed one genuinely dead component and two
+unused imports; confirmed everything else audited from 37B–37E is either live-canonical or legitimately
+legacy-compatible; confirmed the public-profile fallback leaks nothing private; documented the company-name
+divergence with a live rename test rather than theorizing about it.
+
+### 40.1 Dead code found and removed
+
+- **`dashboard/components/idea-lab/PrimaryCommandCard.tsx`** — GLOBALLY DEAD. Zero import statements
+  anywhere in the repo (confirmed by grep; every remaining reference was a comment describing its own
+  retirement, dating to Phase 34E: *"the older, separate 'What should I do next?' card (PrimaryCommandCard)
+  ... retired from this page"*). It still carried the exact stale copy this series has been removing
+  elsewhere (*"Ready to turn this into a real startup?"*, *"Analyze My Startup"*) — never actually visible
+  to a founder since nothing rendered it, but worth deleting outright rather than leaving a landmine for a
+  future import. Deleted; `tsc --noEmit` confirmed clean afterward (nothing depended on it).
+- **`app/api.py`**: two unused imports, `get_venture_graduation_by_startup` and
+  `resolve_linked_venture_for_owned_startup` (both real, live, correctly-used functions — but called only
+  from *inside* `app/database/db.py`'s own `get_founder_startup_workspace()`, never directly from `api.py`,
+  which had imported them anyway since Phase 37B). Removed the two import lines only; the functions
+  themselves are untouched and still fully in use. Verified `python -c "import app.api"` succeeds and the
+  full backend suite still passes.
+
+**Found, out of scope, not removed**: `ScenarioComparison.tsx`, `VPSResultPanel.tsx`, `WhatIfPanel.tsx`
+(`components/idea-lab/`) are also globally dead by the same test (zero live importers; every remaining
+mention is a comment noting what replaced them) — but they predate the 37-series entirely, from Phase
+31C/34A's own VPS-removal work. Per this phase's own scope (37B–37E cleanup, not a whole-app dead-code
+sweep) and Section 27's performance discipline, these are reported here rather than deleted today.
+
+### 40.2 Duplicate renderings — none remaining
+
+Re-confirmed by direct call-site grep (not by re-trusting 37D/37E's own prior conclusions):
+`FundraisingReadinessCard` has exactly two live consumers — `FounderStartupWorkspaceView.tsx` (legacy,
+unlinked) and `VentureAnalyzeSection.tsx` (unified Analyze tab, linked) — each reachable only by its own
+audience, never both for the same company. `PitchDeckCoachTeaser` has exactly two live consumers —
+`VentureWorkspace.tsx`'s Fundraising tab (canonical home, confirmed 37D) and `FounderStartupWorkspaceView.tsx`
+(legacy) — `VentureAnalyzeSection.tsx` contains only a *comment* referencing it, no import, no render (37D's
+removal held). No duplicate renderings found anywhere.
+
+### 40.3 Legacy compatibility code — confirmed still load-bearing, preserved
+
+`ActionPlan.tsx`, `RecentUpdates.tsx`, `Milestones.tsx` each have exactly one consumer:
+`FounderStartupWorkspaceView.tsx`. Confirmed reachable live this phase via Retool (unlinked, startup_id=13)
+— all three sections rendered. **Not touched.** `founder_actions`/`founder_updates`/`startup_milestones`
+tables, endpoints, and models are all still wired to these three components — **not touched.**
+
+### 40.4 Public profile — three states re-confirmed, no leak
+
+Re-verified live (not re-derived from 37E's own report) on two independent companies:
+- **Missing** — unchanged 404-equivalent "Startup not found" path, untouched this phase.
+- **Exists, no analysis** — FridgeChef 37E Test and RelayOps Graduation Test 37BA's public profiles both
+  render the honest fallback ("SIE has not analyzed {name} yet — there is no Startup Power Score, pillar
+  breakdown, or evidence to show"), Founder-managed badge, Save control — no fake SPS, no fake pillars.
+- **Exists, analyzed** — FridgeChef 37E Test's profile, post-analysis, shows the real SPS 60.6 / pillar
+  breakdown / score history — unchanged rendering path.
+
+**Data-boundary audit**: read `get_startup_by_name()`'s fallback query directly — it selects only
+`startups.id, canonical_name, created_at`, nothing else. `StartupProfileResponse`'s field list is `id,
+startup_id, canonical_name, created_at, methodology, has_analysis` — no field capable of carrying
+`venture_evidence`, `venture_decisions`, Finance state, hire plans, financial scenarios, or Build history.
+**No leak found or possible through this path** — the fallback never touches any `venture_*` table at all.
+
+### 40.5 Company-name divergence — documented via a live rename test, not theory
+
+Read the three name sources' origins directly, then proved the behavior with a real rename (not inferred):
+
+| Source | Origin | Controlled by | Displayed at |
+|---|---|---|---|
+| `modeled_ventures.name` | Founder-typed | Founder (Rename control) | Private Venture Workspace (title, breadcrumb) |
+| `startups.canonical_name` / `analyses.company_name` | Set once at creation/graduation | System (identity/routing) | Public profile's own **no-analysis** fallback (Section 6, Phase 37E); URL routing for both states |
+| `methodology.context.company_name` | LLM-extracted from analysis input | The AI, per analysis run | Public profile's own **analyzed** hero (`StartupHeroV2`, pre-existing, unchanged) |
+
+**Live test** (FridgeChef 37E Test, `venture_id=8212`): renamed the private venture to "FridgeChef Renamed
+Private." Observed: (1) Venture Workspace title/breadcrumb updated immediately to the new name — correct,
+founder-controlled. (2) The Overview graduation banner ("You're now building **FridgeChef 37E Test** as a
+startup") kept the **original** name — correct, not a bug: it reflects the startup's own registered name,
+untouched by a venture-level rename, and is not tied to identity resolution (identity is the id/bridge, not
+this text). (3) The public profile at `/startup/FridgeChef%2037E%20Test` still resolved correctly (routing
+by `normalized_name`, unaffected by the private rename) and still displayed "FridgeChef" (the original
+LLM-extracted name from the one analysis on file) — unaffected, as expected, since nothing about a venture
+rename touches `analyses`.
+
+**Divergence possible**: YES, confirmed live, in exactly the way the architecture already intends — three
+independently-controlled labels for one identity, never used for identity resolution (always id/bridge-
+based), never silently corrupted by a rename.
+
+**Display rule — actual state, not idealized**: the private/routing halves of the candidate rule (Section
+13) already hold exactly as stated. The "Public Profile: `startups.canonical_name` is authoritative" half is
+only true for the **no-analysis** fallback; the analyzed-state hero has always displayed the LLM-extracted
+`methodology.context.company_name` instead (pre-existing, system-wide, since long before the 37-series).
+**Not fixed this phase**: switching the analyzed-state hero to `canonical_name` would change the primary
+heading of every already-analyzed public profile in the product — a system-wide display-convention change,
+not a "tiny presentation bug" scoped to new code, and explicitly the kind of change Section 25 says to defer
+rather than fold into a cleanup phase. Documented as the one remaining piece of identity debt; no
+synchronization, migration, or name-matching was added or considered.
+
+### 40.6 Routes — classified, none removed
+
+| Route | Classification | Job |
+|---|---|---|
+| `/idea-lab` | CANONICAL | My Companies list |
+| `/idea-lab/{venture_id}` | CANONICAL | Venture Workspace |
+| `/idea-lab/new` | CANONICAL | Venture creation |
+| `/founder` | CANONICAL | My Startups list |
+| `/founder/startups/{startup_id}` | LEGACY COMPATIBILITY | Legacy Founder Workspace for unlinked startups; redirects to Venture Workspace for linked ones |
+| `/founder/startups/{startup_id}/fundraising` | LEGACY COMPATIBILITY | Legacy Fundraising Readiness page for unlinked startups; redirects for linked ones (Phase 37D fix) |
+| `/startup/{name}` | CANONICAL | Public profile, all three states |
+| `/analyze` | CANONICAL | Standalone evaluation entry (pitch deck / startup text) |
+
+No globally unreachable route found. Nothing removed.
+
+### 40.7 Copy audit — no remaining stale founder-facing language
+
+Re-grepped for "My Ideas," "Graduate/Graduation," "real startup," "turn this into a startup," and duplicate
+"Analyze My Startup" semantics across all founder-facing `.tsx` files. Every remaining hit is a code
+comment or a legitimately different, still-correct use (`/analyze`'s own generic "Analyze My Startup" choice
+card — the actual standalone tool, not the removed venture-specific duplicate; unrelated "real startups"
+marketing copy on `/rankings`/home preview pages, meaning "actual analyzed companies" not "graduated
+ventures"). No further copy changes made.
+
+### 40.8 Security/authorization — regression only, unchanged
+
+`RequireStartupMember`/`RequireAuth`/ownership checks on every linked-resolution and legacy endpoint are
+byte-for-byte unchanged this phase. The one new backend code path (`get_startup_by_name()`'s fallback) is a
+public, unauthenticated, read-only query already used by an existing public endpoint — no new authorization
+surface, no new grant, no capability unlocked by profile creation, claim, or analysis.
+
+### 40.9 Live walkthrough
+
+Linked analyzed (FridgeChef 37E Test) — Analyze tab renders full SPS/pillars, Overview clean. Linked
+unanalyzed (RelayOps Graduation Test 37BA) — honest empty state, unchanged. Unlinked legacy (Retool) —
+Action Plan/Recent Updates/Milestones all confirmed rendering. Public analyzed (FridgeChef) — real SPS
+60.6. Public unanalyzed (both FridgeChef pre-analysis and RelayOps) — honest fallback, no fake data.
+
+### 40.10 Responsive check
+
+`resize_window` to 390×844 reported success but `window.innerWidth` read back 2091px — the same
+long-documented tooling limitation from every prior phase this session (35D-A/B, 37A, 37B-A, 37D). No time
+spent fighting it further, per this phase's own Section 23 instruction. No new grid/table/multi-column
+layout was introduced this phase (only text/copy and one component deletion), so responsive risk from this
+phase's own changes is minimal; not independently re-verified at a true narrow width.
+
+### 40.11 Remaining debt (for a future, non-37-series phase)
+
+- Company-name display divergence on the analyzed public-profile hero (Section 40.5) — a deliberate,
+  documented, low-urgency product decision, not a bug.
+- Pre-existing, pre-37-series dead code (`ScenarioComparison.tsx`, `VPSResultPanel.tsx`, `WhatIfPanel.tsx`)
+  — flagged, not removed, out of this phase's scope.
+- founder_actions/founder_updates/startup_milestones migration groundwork — still no concrete backfill
+  design (unchanged since 37D/37E).
+
+## 41. Non-goals of this document
 
 This document does not implement any part of the convergence, run any migration, change any schema, rename
 any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital
