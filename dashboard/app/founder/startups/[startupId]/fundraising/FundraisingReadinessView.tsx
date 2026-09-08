@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
@@ -45,6 +46,7 @@ const CHECKLIST_STATUS_CLASSES: Record<string, string> = {
 // SPS/methodology/Rankings/Discovery -- this page only ever reads.
 export default function FundraisingReadinessView({ startupId }: FundraisingReadinessViewProps) {
   const { getToken } = useAuth();
+  const router = useRouter();
 
   const [readiness, setReadiness] = useState<FundraisingReadiness | null>(null);
   const [loadState, setLoadState] = useState<LoadState>("loading");
@@ -110,6 +112,20 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
     };
   }, [startupId, getToken]);
 
+  // Phase 37D -- Unified Workspace Simplification + Legacy Containment.
+  // Same backward-compatibility redirect FounderStartupWorkspaceView.tsx
+  // already applies (Phase 37B): a linked company has no second
+  // "operating fundraising readiness" page -- this dedicated view exists
+  // only for unlinked, legacy-workspace startups. `linked_venture_id` is
+  // ownership-checked server-side; a null value (the common, unlinked
+  // case) makes this a no-op, so this page renders exactly as it did
+  // before this phase for every startup that isn't linked.
+  useEffect(() => {
+    if (loadState === "ready" && readiness?.linked_venture_id != null) {
+      router.replace(`/idea-lab/${readiness.linked_venture_id}?tab=analyze`);
+    }
+  }, [loadState, readiness, router]);
+
   async function handleAddGapToPlan(gap: ReadinessGap) {
     setPendingGapTexts((previous) => new Set(previous).add(gap.source_text));
     setActionError(null);
@@ -144,7 +160,7 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
     }
   }
 
-  if (loadState === "loading") {
+  if (loadState === "loading" || (loadState === "ready" && readiness?.linked_venture_id != null)) {
     return (
       <div className="space-y-6">
         <div className="h-32 animate-pulse rounded-2xl border border-border bg-surface" />
@@ -246,9 +262,10 @@ export default function FundraisingReadinessView({ startupId }: FundraisingReadi
                   Fundraising Readiness estimates how well-prepared and well-evidenced{" "}
                   {readiness.canonical_name}&rsquo;s story is for a{" "}
                   <span className="font-medium text-text-primary">{readiness.stage_label}</span>{" "}
-                  fundraising conversation — not how good the company is. A strong Startup
-                  Power Score doesn&rsquo;t automatically mean an investor-ready story, and a
-                  modest one doesn&rsquo;t rule one out.
+                  fundraising conversation — not how good the company is, and not the odds of
+                  actually closing a round. A strong Startup Power Score doesn&rsquo;t
+                  automatically mean an investor-ready story, and a modest one doesn&rsquo;t rule
+                  one out.
                 </p>
                 {/* Phase 31C-A -- Global Founder UX Acceptance, Part 1/2/6:
                     live-discovered bare "SPS" plus 12px text on an

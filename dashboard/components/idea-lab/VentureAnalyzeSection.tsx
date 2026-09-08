@@ -9,7 +9,6 @@ import { SPSRing } from "@/components/sps";
 import SPSHistory from "@/components/startup/SPSHistory";
 import IntelligencePillars from "@/components/startup/IntelligencePillars";
 import FundraisingReadinessCard from "@/components/founder/FundraisingReadinessCard";
-import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import { getOverallConfidence } from "@/components/startup/StartupHeroV2";
 
 import { getFounderStartupWorkspace } from "@/lib/api";
@@ -38,6 +37,20 @@ type VentureAnalyzeSectionProps = {
 // linked company -- rendering them a second time here would be exactly
 // the kind of duplication this phase exists to remove. This section only
 // ever reads existing canonical intelligence; it never writes.
+//
+// Phase 37D -- Unified Workspace Simplification + Legacy Containment.
+// Critical UX review found PitchDeckCoachTeaser (a fundraising-prep
+// doorway, unrelated to "what does the evidence say") already duplicated
+// in the Fundraising tab -- removed the second copy here rather than
+// leaving competing promotional cards. Fundraising Readiness (a distinct,
+// genuinely useful lens on this same canonical evidence -- kept, see the
+// component's own comment below) moved below the pillar breakdown: it is
+// a secondary, specialized tool, not the primary "how does SIE see this
+// company" answer. Score History is now a closed-by-default disclosure
+// here (the shared SPSHistory component itself is unchanged, still used
+// as-is on the public profile) -- a single number/chart is low-value
+// primary real estate for a company with one or two analyses, and this
+// keeps it available without competing with the pillar breakdown above.
 export default function VentureAnalyzeSection({ startupId }: VentureAnalyzeSectionProps) {
   const { getToken } = useAuth();
 
@@ -123,9 +136,8 @@ export default function VentureAnalyzeSection({ startupId }: VentureAnalyzeSecti
           No SIE company analysis has been run yet
         </h2>
         <p className="mx-auto mt-3 max-w-md text-base leading-7 text-text-secondary">
-          {canonical_name}{" "}
-          has a startup profile, but SIE hasn&rsquo;t evaluated it yet.
-          Analyzing looks at the evidence available today — it never changes how you build{" "}
+          SIE hasn&rsquo;t evaluated {canonical_name}{" "}
+          yet. Analyzing looks at the evidence available today — it never changes how you build{" "}
           {canonical_name} here.
         </p>
         <Link
@@ -192,14 +204,31 @@ export default function VentureAnalyzeSection({ startupId }: VentureAnalyzeSecti
         </div>
       </BaseCard>
 
-      <div className="grid gap-4 sm:grid-cols-2">
-        <FundraisingReadinessCard startupId={startupId} />
-        <PitchDeckCoachTeaser />
-      </div>
-
       <IntelligencePillars methodology={methodology} />
 
-      <SPSHistory history={sps_history} />
+      {/* Phase 37D, Section 12: kept, but demoted -- a distinct, real
+          lens on this same canonical evidence ("how defensible is it for
+          a fundraising conversation," not "how good is the company"),
+          not the primary answer to what this tab exists to answer. See
+          FundraisingReadinessCard's own comment for the label-accuracy
+          fix applied alongside this move. */}
+      <FundraisingReadinessCard startupId={startupId} />
+
+      {/* Phase 37D, Section 11: closed by default -- a single number or
+          chart is low-value primary real estate next to the pillar
+          breakdown above; still one click away for a founder tracking
+          change over multiple analyses. */}
+      <details className="group">
+        <summary className="cursor-pointer list-none text-sm font-semibold text-text-primary marker:content-none">
+          <span className="inline-flex items-center gap-1.5">
+            Score history
+            <span aria-hidden="true" className="text-text-muted transition-transform group-open:rotate-180">▾</span>
+          </span>
+        </summary>
+        <div className="mt-3">
+          <SPSHistory history={sps_history} />
+        </div>
+      </details>
 
       <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-border p-4">
         <Link

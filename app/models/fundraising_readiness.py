@@ -69,3 +69,13 @@ class FundraisingReadinessResponse(BaseModel):
     # all. Never blended into readiness_score.
     current_sps: float | None = None
     analyzed_at: str | None = None
+    # Phase 37D -- Unified Workspace Simplification + Legacy Containment.
+    # Ownership-checked, routing-authoritative (identical semantics to
+    # FounderStartupWorkspace.linked_venture_id, Phase 37B) -- lets the
+    # frontend redirect a linked company's founder into the Venture
+    # Workspace's own Analyze tab instead of rendering this legacy page,
+    # closing the exact gap this phase's own audit found: this endpoint
+    # already fetches get_founder_startup_workspace() internally, which
+    # has computed this value all along, so exposing it here is free (no
+    # new query, no new resolution logic). None for an unlinked startup.
+    linked_venture_id: int | None = None

@@ -1184,7 +1184,213 @@ without a concrete backfill design), 37E (public-profile-without-analysis fix pe
 convergence), 37F (cleanup of the now-unreachable-for-linked-startups renderings noted in §37.12, once 37D/E
 land).
 
-## 38. Non-goals of this document
+## 38. Phase 37D — Unified Workspace Simplification + Legacy Containment
+
+Phase 37D re-confirmed 37C's legacy-containment findings from actual call sites, closed one real
+linked-company containment gap 37C left open, and critically simplified the Analyze tab's rendered
+experience. No data migrated, no formula/scoring changed, no new tab added.
+
+### 38.1 Legacy systems re-audit
+
+Confirmed by grepping every consumer, not by re-reading 37C's own conclusions: `ActionPlan.tsx`,
+`Milestones.tsx`, and `RecentUpdates.tsx` are each imported by exactly one file,
+`FounderStartupWorkspaceView.tsx` — which redirects away before rendering its body whenever
+`linked_venture_id` is non-null (Phase 37B). No other component or page imports them. This confirms 37C's
+"no founder-facing path" claim for those three specifically.
+
+### 38.2 The gap 37C left open: Fundraising Readiness page had no containment
+
+**Found live, not assumed**: `FundraisingReadinessView.tsx` (the dedicated `/founder/startups/{id}/fundraising`
+page) had **zero** `linked_venture_id` check — unlike its sibling `FounderStartupWorkspaceView.tsx`, it never
+redirected a linked company's founder away. Worse, 37C's own new `FundraisingReadinessCard` inside the
+Analyze tab links directly to this exact page, meaning 37C had *added a new, reachable path* into a page that
+could then let a linked company's founder click "Add to Action Plan" — a live, real write into `founder_actions`
+for a linked company, contradicting 37C's own "no linked-company write path" claim.
+
+**Fixed**: `GET /founder/startups/{id}/fundraising` already internally calls `get_founder_startup_workspace()`
+(Phase 37B), which has computed `linked_venture_id` all along — exposing it on `FundraisingReadinessResponse`
+required zero new queries. `FundraisingReadinessView.tsx` now carries the identical redirect-on-load pattern
+`FounderStartupWorkspaceView.tsx` already uses. Live-verified: navigating directly to
+`/founder/startups/45391/fundraising` (ClaimPilot, linked) now redirects cleanly to `/idea-lab/893?tab=analyze`
+with no flash; the same URL pattern for Retool (startup_id=13, unlinked) renders normally with no redirect.
+
+### 38.3 founder_actions — call sites confirmed, verdict unchanged
+
+**Call sites**: `ActionPlan.tsx` (legacy workspace) and `FundraisingReadinessView.tsx`'s "Add to Action Plan"
+button (now contained per §38.2) are the only two UI writers; `GET/POST/PATCH /founder/startups/{id}/actions`
+are the only backend endpoints, gated by `RequireStartupMember`.
+
+**Verdict**: **LEGACY ONLY**, confirmed. No unique linked-company capability found. Table, endpoints, and
+legacy UI untouched; nothing migrated.
+
+**Linked-company write path**: **NO** (was effectively YES via §38.2's gap until fixed this phase).
+
+### 38.4 founder_updates — call sites confirmed, verdict unchanged
+
+**Call sites**: `RecentUpdates.tsx` (legacy workspace) only. `GET/POST/PATCH /founder/startups/{id}/updates`,
+gated by `RequireStartupMember`. No other consumer found.
+
+**Verdict**: **LEGACY ONLY**, confirmed. Table, endpoints, legacy UI untouched.
+
+**Linked-company write path**: **NO**.
+
+### 38.5 startup_milestones audit
+
+**What it represents**: a target/goal the startup is trying to reach (title, optional target date, optional
+related pillar), with a plain status enum (planned/in_progress/achieved/cancelled) — structurally identical
+in kind to founder_actions (workflow state, zero evidence/decision/outcome model), just framed as a goal
+rather than a task. Confirmed via `app/models/startup_milestone.py`'s own docstring and schema. No other
+canonical system reads or depends on it (confirmed: `next_milestones` referenced elsewhere in `api.py` is an
+unrelated Idea Lab/VPS modeling field, not this table).
+
+**Call sites**: `Milestones.tsx` (legacy workspace) only. `GET/POST/PATCH /founder/startups/{id}/milestones`.
+
+**Verdict**: **LEGACY ONLY**. Same reasoning as founder_actions — Build's own evidence-first loop already
+gives a linked company a richer answer to "what am I working toward." Not migrated (no proven semantic
+equivalence to any Build concept); table and legacy UI untouched.
+
+**Linked-company write path**: **NO** (inherits the same `FounderStartupWorkspaceView.tsx` redirect
+protection as founder_actions/founder_updates — confirmed by the same single-consumer grep in §38.1).
+
+### 38.6 Analyze tab — critical UX review and changes made
+
+Reviewed the actual rendered experience live on ClaimPilot (real analysis, 68.5/C+/Medium confidence, 6
+scored pillars, Fundraising Readiness 53/Developing/2 gaps) rather than assuming the 37C layout was correct
+merely because everything belonged more under Analyze than Overview.
+
+**Findings**:
+- `PitchDeckCoachTeaser` was rendered in Analyze **and** already, independently, in the Fundraising tab (pre-
+  existing, correct placement) — a genuine duplicate, and pure promotional clutter relative to Analyze's own
+  stated job ("how does SIE evaluate this company from evidence"). **Removed from Analyze.**
+- `FundraisingReadinessCard` sat directly beside the primary SPS card, before the pillar breakdown — visually
+  implying equal priority with the core evaluation. **Moved to after the pillar breakdown** (secondary,
+  specialized tool, not the primary answer).
+- `SPSHistory` (a stat/chart of one number over time) sat inline, always expanded, immediately after the
+  pillars — low information density for a company with 1-2 analyses. **Wrapped in a closed-by-default
+  `<details>` disclosure**, local to this component only; the shared `SPSHistory` component itself and its
+  usage on the public profile are unchanged.
+- The pillar breakdown itself (`IntelligencePillars`/`PillarNav`/`PillarWorkspace`) was **already** progressive
+  disclosure — one pillar expanded at a time via a left-hand nav, not six equally loud dashboards. Confirmed
+  live (Market/Team/Product/Execution/Traction/Financial Health all listed, one drills in at a time). **No
+  change needed.**
+- The no-analysis empty-state copy said "{name} has a startup profile, but SIE hasn't evaluated it yet" —
+  Section 26's exact trap: the public *profile* does not actually exist/render until an analysis exists
+  (§37.5's own finding). **Fixed** to "SIE hasn't evaluated {name} yet," removing the "has a startup profile"
+  claim entirely.
+- One real text-rendering defect (not from this phase, carried from 37C, caught while re-reading the
+  component for this review) — none found this pass; the two `{expr}` whitespace fixes from 37C were re-
+  verified still correct live.
+
+**Analyze tab before**: SPS card → [Fundraising Readiness + Pitch Deck Coach, 2-col] → pillars → SPS history
+(always expanded) → footer links.
+
+**Analyze tab after**: SPS card (evaluation state, confidence, coverage warning) → pillars (progressive
+disclosure, unchanged) → Fundraising Readiness (secondary, demoted, now with an honest label clarifier —
+see §38.7) → Score history (closed-by-default disclosure) → footer links (public profile, re-analyze).
+
+### 38.7 Fundraising Readiness — second product trial
+
+**Does it materially change a founder's decision?** Yes, evaluated honestly against the alternative of just
+using SPS/confidence: it adds a *stage-weighted* reweighting of the same six pillars (a pre-seed company is
+not penalized for weak Traction/Financial evidence the way a Series A company would be), a ranked, capped
+list of specific evidence gaps, generated investor questions tied to those exact gaps, and a defensibility
+checklist — none of which SPS, Build, or Finance provide. This is materially more actionable than a bare
+confidence badge for a founder actually preparing to raise.
+
+**Does the label match the formula?** **NO** — this is a real semantic mismatch. The formula measures how
+*defensible* the current evidence is (confidence × coverage, stage-weighted) — not the odds of successfully
+closing a round. "Fundraising Readiness" paired with a 0-100 score invites the stronger, incorrect reading.
+
+**Verdict**: **KEEP SECONDARY**. Not sunk-cost — the capability itself earns its place; only its prominence
+was wrong. **Label fix implemented** (Section 13's "small copy fix" path, not a rename): added one line —
+"How defensible your evidence is, not your odds of raising" — under the eyebrow on `FundraisingReadinessCard`
+(shared by both the unified Analyze tab and the legacy Founder Workspace, so the fix applies uniformly), and
+extended the dedicated `/fundraising` page's own explanatory paragraph with "...and not the odds of actually
+closing a round." Formula, backend, and endpoint untouched.
+
+### 38.8 Pitch Deck Coach — verdict
+
+A real, separate capability (`/analyze/deck`, its own AI-assisted coaching flow) whose teaser card is a plain,
+static link with no data fetch of its own. Its actual job — "prepare pitch materials before a raise" — has
+nothing to do with Analyze's job ("what does the evidence say"), and it was already correctly placed inside
+the Fundraising tab (pre-37C, unmodified) as of this phase's audit.
+
+**Verdict**: **MOVE TO FUNDRAISING** — already there; the fix was removing 37C's accidental second copy from
+Analyze, not moving code.
+
+### 38.9 SPS History — verdict
+
+**KEEP SECONDARY**. Real value for a company with several re-analyses over time (evidence of change is a
+legitimate founder question), near-zero primary value for the common one-or-two-analysis case this repository
+mostly contains right now. Collapsed by default in the Analyze tab only; the underlying data, the shared
+component, and its unmodified, always-visible usage on the public profile are untouched.
+
+### 38.10 Live walkthrough
+
+**LINKED + ANALYZED (ClaimPilot)**: Overview confirmed still clean (no SPS/pillars/readiness/trust — no
+regression from 37D's own changes). Analyze tab re-verified end-to-end with the new hierarchy: SPS card
+unchanged and correct, full six-pillar progressive disclosure confirmed, Fundraising Readiness card now
+appears after pillars with the new clarifier line visible, Score History confirmed collapsed by default and
+expands correctly on click, footer links unchanged. Direct navigation to the legacy
+`/founder/startups/45391/fundraising` URL now redirects cleanly to `/idea-lab/893?tab=analyze` (§38.2's fix,
+live-confirmed, no console errors).
+
+**LINKED + UNANALYZED (RelayOps Graduation Test 37BA)**: empty state re-verified with the corrected copy —
+"SIE hasn't evaluated RelayOps Graduation Test 37BA yet" (no "has a startup profile" claim), intentional
+"Analyze this company" link present, no automatic analysis.
+
+**UNLINKED LEGACY (Retool)**: legacy Founder Workspace's Action Plan, Recent Updates, and Milestones sections
+all confirmed still rendering (headings present, unmodified). The dedicated `/founder/startups/13/fundraising`
+page renders normally with no redirect (unlinked, as expected) and shows the updated, more explicit
+"...and not the odds of actually closing a round" copy — confirming the copy fix applies universally, not
+just to linked companies.
+
+### 38.11 Responsive check — tooling limitation, honestly reported
+
+`resize_window` to 390×844 and to 768×1024 both reported success but `window.innerWidth` read back as 2091px
+regardless — the same environmental tooling limitation documented in multiple prior phases (35D-A/B, 37A,
+37B-A), not a product defect. Structural reasoning in place of a live narrow-viewport screenshot: this
+phase's own Analyze changes *removed* the one 2-column grid that existed in 37C's version (Fundraising
+Readiness + Pitch Deck Coach side-by-side) and replaced it with a fully linear, single-column stack of cards
+and a native `<details>` disclosure — strictly lower responsive risk than what shipped in 37C, which was
+itself live-verified clean at a 667px viewport in Phase 37B-A's own walkthrough (the one narrow width this
+tooling has reliably produced across phases). Desktop (2091px, the only width this session's tool would
+actually produce) is confirmed clean via every screenshot above.
+
+### 38.12 Regressions
+
+Overview, Finance, Fundraising (deterministic simulator math), History, trust/access, My Startups routing,
+and graduation routing were not touched this phase and were spot-checked live where a walkthrough state
+already exercised them (Overview on ClaimPilot; Fundraising tab's own Pitch Deck Coach placement, confirmed
+undisturbed).
+
+### 38.13 Files changed
+
+- `app/models/fundraising_readiness.py` (added `linked_venture_id` field)
+- `app/api.py` (`get_fundraising_readiness` now passes `linked_venture_id` through, zero new queries)
+- `dashboard/types/fundraisingReadiness.ts` (mirrors the new field)
+- `dashboard/app/founder/startups/[startupId]/fundraising/FundraisingReadinessView.tsx` (redirect guard;
+  explanatory-paragraph copy fix)
+- `dashboard/components/founder/FundraisingReadinessCard.tsx` (label-accuracy clarifier line)
+- `dashboard/components/idea-lab/VentureAnalyzeSection.tsx` (removed duplicate Pitch Deck Coach teaser;
+  repositioned Fundraising Readiness after pillars; collapsed Score History behind a disclosure; fixed the
+  no-analysis empty-state copy)
+
+### 38.14 Dead code
+
+Nothing newly dead this phase. `FundraisingReadinessCard`/`PitchDeckCoachTeaser`'s renderings inside the
+legacy `FounderStartupWorkspaceView.tsx` remain the same "unreachable for linked, load-bearing for unlinked"
+classification §37.12 already recorded — unchanged by this phase, still deferred to 37F.
+
+### 38.15 Remaining legacy surface / 37E handoff
+
+Legacy Founder Workspace remains a pure compatibility surface for unlinked startups — no features added, no
+Build capabilities synchronized backward, per this phase's own §18 instruction. 37E inherits: the public-
+profile-without-analysis fix (§37.5, explicitly deferred again this phase, not touched), full graduation UX
+convergence, and eventual retirement of the now-doubly-confirmed-unreachable-for-linked-startups renderings
+noted in §38.14 once a concrete 37D/37E-adjacent migration design exists (none does yet — none was built).
+
+## 39. Non-goals of this document
 
 This document does not implement any part of the convergence, run any migration, change any schema, rename
 any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital

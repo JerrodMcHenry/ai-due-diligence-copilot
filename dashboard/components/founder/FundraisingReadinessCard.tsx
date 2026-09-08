@@ -93,6 +93,16 @@ export default function FundraisingReadinessCard({ startupId }: FundraisingReadi
           <p className="text-xs font-semibold uppercase tracking-wider text-text-secondary">
             Fundraising Readiness
           </p>
+          {/* Phase 37D -- Unified Workspace Simplification + Legacy
+              Containment, Section 13: the formula measures how
+              DEFENSIBLE the current evidence is (confidence x coverage,
+              stage-weighted) -- not the odds of a successful raise. The
+              bare label plus a 0-100 score invites that stronger reading;
+              this one line heads it off without renaming the capability
+              or touching the formula. Shown on every branch below, since
+              the risk of misreading exists whether or not a score is
+              available yet. */}
+          <p className="text-xs text-text-muted">How defensible your evidence is, not your odds of raising</p>
           {readiness.has_canonical_analysis ? (
             readiness.readiness_score !== null ? (
               <p className="mt-1 flex items-center gap-2">

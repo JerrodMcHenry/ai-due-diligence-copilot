@@ -3574,6 +3574,7 @@ def get_fundraising_readiness(
         pitch_deck_note=assessment.pitch_deck_note,
         current_sps=current_sps,
         analyzed_at=created_at.isoformat() if created_at is not None else None,
+        linked_venture_id=workspace["linked_venture_id"],
     )
 
 

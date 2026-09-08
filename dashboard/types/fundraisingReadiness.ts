@@ -48,4 +48,9 @@ export interface FundraisingReadiness {
   pitch_deck_note: string;
   current_sps: number | null;
   analyzed_at: string | null;
+  // Phase 37D -- Unified Workspace Simplification + Legacy Containment.
+  // Ownership-checked; non-null means this startup is linked to a
+  // venture the caller owns, so the page redirects into that Venture
+  // Workspace's Analyze tab instead of rendering here.
+  linked_venture_id: number | null;
 }
