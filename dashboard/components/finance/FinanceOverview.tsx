@@ -61,10 +61,10 @@ type LoadState = "loading" | "ready" | "error";
 
 const STATUS_COPY: Record<DerivedFinancialMetrics["status"], { label: string; tone: "default" | "positive" | "warning" | "danger" }> = {
   insufficient_data: { label: "Add more numbers to calculate burn and runway", tone: "default" },
-  cash_flow_positive: { label: "Cash-flow positive at the current snapshot", tone: "positive" },
-  break_even: { label: "Break-even at the current snapshot", tone: "default" },
+  cash_flow_positive: { label: "Cash-flow positive at these numbers", tone: "positive" },
+  break_even: { label: "Break-even at these numbers", tone: "default" },
   burning: { label: "", tone: "warning" }, // runway_months renders the actual number instead
-  out_of_cash: { label: "Out of cash at the current snapshot", tone: "danger" },
+  out_of_cash: { label: "Out of cash at these numbers", tone: "danger" },
 };
 
 export default function FinanceOverview({ ventureId }: Props) {
@@ -277,10 +277,11 @@ export default function FinanceOverview({ ventureId }: Props) {
       <BaseCard className="space-y-3 p-6 sm:p-7 text-center">
         <h2 className="text-xl font-bold text-text-primary">Finance</h2>
         <p className="mx-auto max-w-md text-base leading-7 text-text-secondary">
-          Add your current cash, revenue, and monthly spending to calculate burn and runway.
+          Add your current cash, revenue, and monthly spending so SIE can calculate your burn and runway --
+          and model decisions like a hire, a revenue change, or raising money.
         </p>
         <Button type="button" onClick={() => setIsEditing(true)}>
-          Add financial snapshot
+          Add your finances
         </Button>
       </BaseCard>
     );
@@ -363,8 +364,9 @@ function ReconciliationBanner({
     <div className="rounded-lg border border-warning/30 bg-warning/5 p-4">
       <p className="text-sm font-semibold text-text-primary">Your finances changed</p>
       <p className="mt-1 text-sm leading-6 text-text-secondary">
-        You have planned changes that were due to start by now. Is this now included in the financial snapshot you
-        just entered?
+        We don&rsquo;t want to count a planned change twice. The changes below were due to start by now -- if
+        their cost or revenue is already part of the numbers you just entered, tell us so we stop modeling them
+        as a separate, future change.
       </p>
       <ul className="mt-3 space-y-2.5">
         {items.map((item) => {
@@ -376,7 +378,7 @@ function ReconciliationBanner({
                 {item.label}
                 {item.monthly_amount_cents !== null ? ` — ${formatWholeDollars(Math.abs(item.monthly_amount_cents))}/mo` : ""}
               </p>
-              <p className="text-xs text-text-muted">Planned start: {formatMonthYear(item.start_date)}</p>
+              <p className="text-sm text-text-muted">Planned start: {formatMonthYear(item.start_date)}</p>
               <div className="mt-2 flex gap-2">
                 <Button type="button" size="sm" disabled={isBusy} loading={isBusy} onClick={() => answer(item, true)}>
                   Yes, it&rsquo;s included
@@ -416,7 +418,7 @@ function ChangeChooser({ onChoose, onCancel }: { onChoose: (kind: "hire" | Finan
             className="block w-full rounded-lg border border-border bg-surface p-3 text-left transition-colors hover:border-primary/40"
           >
             <p className="text-sm font-semibold text-text-primary">{option.title}</p>
-            <p className="text-xs text-text-secondary">{option.description}</p>
+            <p className="text-sm text-text-secondary">{option.description}</p>
           </button>
         ))}
       </div>
@@ -459,7 +461,7 @@ function HeadlineMetrics({ snapshot, derived }: { snapshot: FinancialSnapshot; d
       <div className="grid grid-cols-2 gap-x-4 gap-y-4 sm:grid-cols-5">
         {items.map((item) => (
           <div key={item.label}>
-            <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">{item.label}</p>
+            <p className="text-sm font-semibold uppercase tracking-wide text-text-muted">{item.label}</p>
             <p className="mt-1 text-lg font-bold text-text-primary">{item.value}</p>
           </div>
         ))}
@@ -495,27 +497,33 @@ function CurrentSnapshotBreakdown({ snapshot }: { snapshot: FinancialSnapshot })
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Current monthly snapshot</p>
+      <p className="text-sm font-semibold uppercase tracking-wide text-text-muted">This month&rsquo;s numbers</p>
       <div className="mt-2 grid gap-x-8 gap-y-4 sm:grid-cols-2">
         {revenueRows.length > 0 ? (
-          <ul className="space-y-1.5">
-            {revenueRows.map((r) => (
-              <li key={r.label} className="flex items-center justify-between text-sm">
-                <span className="text-text-secondary">{r.label}</span>
-                <span className="font-medium text-text-primary">{formatWholeDollars(r.cents!)}</span>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <p className="mb-1 text-xs font-semibold text-text-muted">Revenue</p>
+            <ul className="space-y-1.5">
+              {revenueRows.map((r) => (
+                <li key={r.label} className="flex items-center justify-between text-sm">
+                  <span className="text-text-secondary">{r.label}</span>
+                  <span className="font-medium text-text-primary">{formatWholeDollars(r.cents!)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
         {expenseRows.length > 0 ? (
-          <ul className="space-y-1.5">
-            {expenseRows.map((r) => (
-              <li key={r.label} className="flex items-center justify-between text-sm">
-                <span className="text-text-secondary">{r.label}</span>
-                <span className="font-medium text-text-primary">{formatWholeDollars(r.cents!)}</span>
-              </li>
-            ))}
-          </ul>
+          <div>
+            <p className="mb-1 text-xs font-semibold text-text-muted">Spending</p>
+            <ul className="space-y-1.5">
+              {expenseRows.map((r) => (
+                <li key={r.label} className="flex items-center justify-between text-sm">
+                  <span className="text-text-secondary">{r.label}</span>
+                  <span className="font-medium text-text-primary">{formatWholeDollars(r.cents!)}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         ) : null}
       </div>
     </div>
@@ -555,11 +563,11 @@ function CashOutlook({
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Cash outlook</p>
+      <p className="text-sm font-semibold uppercase tracking-wide text-text-muted">Cash outlook</p>
       <p className="mt-1 text-sm leading-6 text-text-secondary">
         {status === "cash_flow_positive"
-          ? "Based on your current monthly snapshot. If these numbers stayed unchanged, cash would keep growing."
-          : "Based on your current monthly snapshot. If these numbers stayed unchanged, this is what happens next -- not a prediction."}
+          ? "Based on this month's numbers. If they stayed unchanged, cash would keep growing."
+          : "Based on this month's numbers. If they stayed unchanged, this is what happens next -- not a prediction."}
         {hasActivePlan ? " \"With planned changes\" includes the hires below." : ""}
       </p>
       <div className="mt-3 overflow-x-auto">
@@ -583,14 +591,12 @@ function CashOutlook({
               return (
                 <tr key={monthIndex} className="border-t border-border">
                   <td className="py-1.5 pr-3 text-text-secondary">{label}</td>
-                  <td className="py-1.5 text-right font-medium text-text-primary">
+                  <td className={["py-1.5 text-right font-medium", base?.depleted ? "text-danger" : "text-text-primary"].join(" ")}>
                     {formatWholeDollars(base ? base.ending_cash_cents : 0)}
-                    {base?.depleted ? <span className="ml-1.5 text-xs font-semibold text-danger">$0</span> : null}
                   </td>
                   {hasActivePlan ? (
-                    <td className="py-1.5 pl-3 text-right font-medium text-text-primary">
+                    <td className={["py-1.5 pl-3 text-right font-medium", withPlan?.depleted ? "text-danger" : "text-text-primary"].join(" ")}>
                       {formatWholeDollars(withPlan ? withPlan.ending_cash_cents : 0)}
-                      {withPlan?.depleted ? <span className="ml-1.5 text-xs font-semibold text-danger">$0</span> : null}
                     </td>
                   ) : null}
                 </tr>
@@ -618,7 +624,8 @@ function financialPlanLabel(plan: FinancialPlan): string {
     return `Revenue becomes ${formatWholeDollars(plan.amount_cents)}/mo`;
   }
   const sign = plan.amount_cents >= 0 ? "+" : "-";
-  return `${plan.category} ${sign}${formatWholeDollars(Math.abs(plan.amount_cents))}/mo`;
+  const categoryLabel = plan.category ? EXPENSE_CATEGORY_LABELS[plan.category] : "Spending";
+  return `${categoryLabel} ${sign}${formatWholeDollars(Math.abs(plan.amount_cents))}/mo`;
 }
 
 function PlannedChangesSection({
@@ -651,14 +658,14 @@ function PlannedChangesSection({
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Planned changes</p>
+      <p className="text-sm font-semibold uppercase tracking-wide text-text-muted">Planned changes</p>
       {hasAny ? (
         <ul className="mt-2 space-y-2">
           {activeHires.map((hire) => (
             <li key={`hire-${hire.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
               <div>
                 <p className="text-sm font-medium text-text-primary">{hire.role}</p>
-                <p className="text-xs text-text-muted">
+                <p className="text-sm text-text-secondary">
                   {hireCostLabel(hire)} starting {formatMonthYear(hire.start_date)}
                   {hire.end_date ? ` through ${formatMonthYear(hire.end_date)}` : ""}
                 </p>
@@ -671,7 +678,7 @@ function PlannedChangesSection({
                   Cancel
                 </button>
                 <button type="button" onClick={() => onActualizeHire(hire)} className="font-semibold text-text-muted hover:text-text-primary">
-                  Mark as actualized
+                  Mark as already happened
                 </button>
               </div>
             </li>
@@ -680,7 +687,7 @@ function PlannedChangesSection({
             <li key={`plan-${plan.id}`} className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border bg-surface p-3">
               <div>
                 <p className="text-sm font-medium text-text-primary">{plan.label}</p>
-                <p className="text-xs text-text-muted">
+                <p className="text-sm text-text-secondary">
                   {financialPlanLabel(plan)} starting {formatMonthYear(plan.start_date)}
                   {plan.end_date ? ` through ${formatMonthYear(plan.end_date)}` : ""}
                 </p>
@@ -693,7 +700,7 @@ function PlannedChangesSection({
                   Cancel
                 </button>
                 <button type="button" onClick={() => onActualizeFinancialPlan(plan)} className="font-semibold text-text-muted hover:text-text-primary">
-                  Mark as actualized
+                  Mark as already happened
                 </button>
               </div>
             </li>
@@ -702,7 +709,7 @@ function PlannedChangesSection({
       ) : (
         <p className="mt-1 text-sm leading-6 text-text-secondary">Nothing planned yet.</p>
       )}
-      <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onAddChange}>
+      <Button type="button" className="mt-2" onClick={onAddChange}>
         Model a change
       </Button>
       <p className="mt-1.5 text-sm leading-6 text-text-secondary">
@@ -817,7 +824,7 @@ function HireForm({
           We need your current cash and monthly finances before we can model this hire.
         </p>
         <Button type="button" onClick={onCancel}>
-          Add financial snapshot
+          Add your finances
         </Button>
       </div>
     );
@@ -1122,7 +1129,7 @@ function FinancialPlanForm({
         <h2 className="text-xl font-bold text-text-primary">{title}</h2>
         <p className="text-base leading-7 text-text-secondary">We need your current cash and monthly finances before we can model this change.</p>
         <Button type="button" onClick={onCancel}>
-          Add financial snapshot
+          Add your finances
         </Button>
       </div>
     );
@@ -1152,10 +1159,10 @@ function FinancialPlanForm({
             <br />
             With this change, <span className="font-medium text-text-primary">{withPlanLabel}</span>.
           </p>
-          <p className="mt-2 text-xs text-text-muted">
+          <p className="mt-2 text-sm text-text-muted">
             {planType === "revenue_target"
-              ? `Scenario assumption: revenue becomes $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}. If this assumption holds, this is the modeled result -- not a prediction.`
-              : `Scenario assumption: ${EXPENSE_CATEGORY_LABELS[values.category].toLowerCase()} ${direction === "cut" ? "falls" : "rises"} by $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}.`}
+              ? `Assumption: revenue becomes $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}. If this holds, this is the modeled result -- not a prediction.`
+              : `Assumption: ${EXPENSE_CATEGORY_LABELS[values.category].toLowerCase()} ${direction === "cut" ? "falls" : "rises"} by $${Number(values.amount || 0).toLocaleString("en-US")}/month beginning ${formatMonthYear(values.startDate)}.`}
           </p>
         </div>
 
@@ -1337,7 +1344,10 @@ function ScenariosSection({
 
   return (
     <div>
-      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Scenarios</p>
+      <p className="text-sm font-semibold uppercase tracking-wide text-text-muted">Compare plans</p>
+      <p className="mt-1 text-sm leading-6 text-text-secondary">
+        Combine your planned changes into named plans and see how their cash outcomes differ, side by side.
+      </p>
 
       {scenarios && scenarios.length > 0 ? (
         <div className="mt-2 space-y-3">
@@ -1345,17 +1355,17 @@ function ScenariosSection({
             <div key={scenario.id} className="rounded-lg border border-border bg-surface p-3">
               <p className="text-sm font-semibold text-text-primary">{scenario.name}</p>
               {scenario.assumptions.length > 0 ? (
-                <ul className="mt-1 list-disc pl-5 text-xs text-text-secondary">
+                <ul className="mt-1 list-disc pl-5 text-sm text-text-secondary">
                   {scenario.assumptions.map((a, i) => (
                     <li key={i}>{a}</li>
                   ))}
                 </ul>
               ) : (
-                <p className="mt-1 text-xs text-text-muted">No plans currently selected.</p>
+                <p className="mt-1 text-sm text-text-muted">No planned changes currently selected.</p>
               )}
-              <p className="mt-1.5 text-sm text-text-secondary">
+              <p className="mt-1.5 text-sm font-medium text-text-primary">
                 {scenario.depletion_date
-                  ? `Reaches modeled cash depletion around ${formatMonthYear(scenario.depletion_date)}.`
+                  ? `Cash runs out around ${formatMonthYear(scenario.depletion_date)}.`
                   : scenario.ending_cash_at_horizon_cents !== null
                     ? `Stays cash-flow positive -- ${formatWholeDollars(scenario.ending_cash_at_horizon_cents)} projected in 24 months.`
                     : "Not enough financial data to model."}
@@ -1364,17 +1374,19 @@ function ScenariosSection({
           ))}
         </div>
       ) : (
-        <p className="mt-1 text-sm leading-6 text-text-secondary">No saved scenarios yet.</p>
+        <p className="mt-1 text-sm leading-6 text-text-secondary">No saved plans to compare yet.</p>
       )}
 
       {isCreating ? (
         <CreateScenarioForm hirePlans={hirePlans} financialPlans={financialPlans} onCancel={onCloseCreate} onCreate={onCreate} />
       ) : (
         <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={onOpenCreate} disabled={!hasAnyPlan}>
-          Create scenario
+          Create a plan to compare
         </Button>
       )}
-      {!hasAnyPlan && !isCreating ? <p className="mt-1.5 text-xs text-text-muted">Model a hire, revenue, or spending change first to build a scenario from it.</p> : null}
+      {!hasAnyPlan && !isCreating ? (
+        <p className="mt-1.5 text-sm text-text-muted">Model a hire, revenue, or spending change first, then combine them here to compare.</p>
+      ) : null}
     </div>
   );
 }
@@ -1407,7 +1419,7 @@ function CreateScenarioForm({
   return (
     <div className="mt-3 space-y-3 rounded-lg border border-border bg-surface p-3">
       <div>
-        <label className="mb-1 block text-sm font-medium text-text-secondary">Scenario name</label>
+        <label className="mb-1 block text-sm font-medium text-text-secondary">Plan name</label>
         <input
           type="text"
           value={name}
@@ -1569,26 +1581,42 @@ function SnapshotForm({
         </p>
       </div>
 
-      <MoneyField label="Current cash" value={values.cash_balance_cents} onChange={(v) => setValue("cash_balance_cents", v)} />
+      <MoneyField
+        label="Current cash"
+        value={values.cash_balance_cents}
+        onChange={(v) => setValue("cash_balance_cents", v)}
+        placeholder="Unknown"
+      />
 
       <div>
         <p className="mb-2 text-sm font-semibold text-text-primary">Monthly revenue</p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <MoneyField label="Recurring revenue" value={values.monthly_recurring_revenue_cents} onChange={(v) => setValue("monthly_recurring_revenue_cents", v)} />
-          <MoneyField label="Other monthly revenue" value={values.monthly_non_recurring_revenue_cents} onChange={(v) => setValue("monthly_non_recurring_revenue_cents", v)} />
+          <MoneyField
+            label="Recurring revenue"
+            value={values.monthly_recurring_revenue_cents}
+            onChange={(v) => setValue("monthly_recurring_revenue_cents", v)}
+            placeholder="Unknown"
+          />
+          <MoneyField label="Other monthly revenue" value={values.monthly_non_recurring_revenue_cents} onChange={(v) => setValue("monthly_non_recurring_revenue_cents", v)} placeholder="Unknown" />
         </div>
       </div>
 
+      {/* Phase 35D-A Case F: EVERY field here can be genuinely unknown --
+          not just the two NO_DEFAULT_FIELDS that start blank for a
+          founder's first snapshot. A returning founder editing an
+          existing snapshot can just as easily have left "Rent" unset
+          before; its blank input must read "Unknown," never a bare "0"
+          that looks identical to a real, typed zero. */}
       <div>
         <p className="mb-2 text-sm font-semibold text-text-primary">Monthly spending</p>
         <div className="grid gap-3 sm:grid-cols-2">
-          <MoneyField label="Payroll" value={values.payroll_cents} onChange={(v) => setValue("payroll_cents", v)} />
-          <MoneyField label="Contractors" value={values.contractors_cents} onChange={(v) => setValue("contractors_cents", v)} />
-          <MoneyField label="Software" value={values.software_cents} onChange={(v) => setValue("software_cents", v)} />
-          <MoneyField label="Marketing" value={values.marketing_cents} onChange={(v) => setValue("marketing_cents", v)} />
-          <MoneyField label="Rent" value={values.rent_cents} onChange={(v) => setValue("rent_cents", v)} />
-          <MoneyField label="Professional services" value={values.professional_services_cents} onChange={(v) => setValue("professional_services_cents", v)} />
-          <MoneyField label="Other" value={values.other_expenses_cents} onChange={(v) => setValue("other_expenses_cents", v)} />
+          <MoneyField label="Payroll" value={values.payroll_cents} onChange={(v) => setValue("payroll_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Contractors" value={values.contractors_cents} onChange={(v) => setValue("contractors_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Software" value={values.software_cents} onChange={(v) => setValue("software_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Marketing" value={values.marketing_cents} onChange={(v) => setValue("marketing_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Rent" value={values.rent_cents} onChange={(v) => setValue("rent_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Professional services" value={values.professional_services_cents} onChange={(v) => setValue("professional_services_cents", v)} placeholder="Unknown" />
+          <MoneyField label="Other" value={values.other_expenses_cents} onChange={(v) => setValue("other_expenses_cents", v)} placeholder="Unknown" />
         </div>
       </div>
 
@@ -1617,7 +1645,22 @@ function SnapshotForm({
   );
 }
 
-function MoneyField({ label, value, onChange }: { label: string; value: string; onChange: (value: string) => void }) {
+function MoneyField({
+  label,
+  value,
+  onChange,
+  placeholder = "0",
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  // Phase 35D-A §11: a blank field showing placeholder "0" is visually
+  // identical to a real, typed "0" -- undermining the NULL-vs-zero
+  // distinction the moment a founder just glances at the form instead of
+  // clicking in. Fields that can be genuinely unknown (see
+  // NO_DEFAULT_FIELDS) pass "Unknown" here instead.
+  placeholder?: string;
+}) {
   return (
     <div>
       <label className="mb-1 block text-sm font-medium text-text-secondary">{label}</label>
@@ -1628,7 +1671,7 @@ function MoneyField({ label, value, onChange }: { label: string; value: string; 
           inputMode="decimal"
           value={value}
           onChange={(event) => onChange(event.target.value)}
-          placeholder="0"
+          placeholder={placeholder}
           className="h-10 w-full rounded-lg border border-border bg-surface pl-6 pr-3 text-base text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
         />
       </div>

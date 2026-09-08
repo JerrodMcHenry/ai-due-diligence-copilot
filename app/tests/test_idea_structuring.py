@@ -435,11 +435,29 @@ def test_unauthenticated_structuring_request_rejected() -> None:
 
 
 def test_oversized_and_empty_input_rejected() -> None:
+    # Phase 35D-A §20: StructureIdeaRequest.description's max_length was
+    # intentionally raised from 4000 to 8000 during the SIE Intelligence
+    # Reset (see app/models/idea_lab.py's own comment on the field --
+    # the ApexGrid regression case, real evidence silently truncated at
+    # exactly 4000 characters). This test's threshold was never updated
+    # to match, so it asserted a 422 at 4001 chars that the current,
+    # intentional contract correctly accepts (200) -- a stale test, not a
+    # product regression. Updated to exercise the actual current
+    # boundary: 8000 is accepted, 8001 is rejected.
     with _patched_auth():
         empty = client.post("/ventures/structure-idea", json={"description": ""}, headers=_auth_headers())
         expect(empty.status_code == 422, f"Expected 422 for empty description, got {empty.status_code}")
 
-        oversized = client.post("/ventures/structure-idea", json={"description": "x" * 4001}, headers=_auth_headers())
+        # 8000 chars must clear request validation and reach the (mocked)
+        # LLM call -- never a real network call in this test suite.
+        fake = _minimal_fake_response()
+        with _patched_llm(fake):
+            at_limit = client.post("/ventures/structure-idea", json={"description": "x" * 8000}, headers=_auth_headers())
+        expect(at_limit.status_code != 422, f"Expected the 8000-char contract limit to be accepted, got {at_limit.status_code}")
+
+        # 8001 chars must be rejected by request validation alone -- no
+        # LLM call should happen, so this one is deliberately NOT patched.
+        oversized = client.post("/ventures/structure-idea", json={"description": "x" * 8001}, headers=_auth_headers())
         expect(oversized.status_code == 422, f"Expected 422 for oversized description, got {oversized.status_code}")
 
 

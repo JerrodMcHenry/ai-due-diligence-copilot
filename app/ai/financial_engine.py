@@ -387,7 +387,12 @@ _EXPENSE_CATEGORY_FIELDS = {
 }
 
 
-def validate_expense_plan_amount(latest_snapshot: dict | None, category: str, amount_cents: int) -> str | None:
+def validate_expense_plan_amount(
+    latest_snapshot: dict | None,
+    category: str,
+    amount_cents: int,
+    other_active_deltas_cents: int = 0,
+) -> str | None:
     """
     Phase 35D §7: "a cost-cut plan must never make an expense category
     mathematically negative." Returns an error message (reject) if this
@@ -395,15 +400,25 @@ def validate_expense_plan_amount(latest_snapshot: dict | None, category: str, am
     currently is, would drive it negative -- None means the plan is safe
     to create.
 
+    Phase 35D-A §14/§15 (Case L/K): `other_active_deltas_cents` is the sum
+    of every OTHER currently-`planned` expense_change plan already active
+    on this same category (0 if there are none, or the caller doesn't
+    pass one -- every pre-35D-A call site is unaffected). Without this, two
+    individually-safe cuts on the same category (e.g. contractors -$10K,
+    then contractors -$15K against a $20K category) could each pass this
+    check in isolation while their COMBINED effect drives the category
+    negative -- a real gap the projection engine's own total-expenses
+    floor (see project_monthly_cash_flow's docstring) does not close,
+    because that floor operates on the aggregate total, not per category.
+
     A ONE-TIME, creation-time check against currently-known actual state,
     not a continuously-re-validated runtime constraint (documented
     limitation, §7 of the directive's own "choose the safest
     representation" framing): if the actual snapshot changes later such
     that this delta WOULD have been rejected, the already-created plan is
     not retroactively invalidated -- the projection engine's own
-    total-expenses floor (see project_monthly_cash_flow's docstring) is
-    the safety net for that case, at the level of the total, not the
-    individual category.
+    total-expenses floor is the safety net for that case, at the level of
+    the total, not the individual category.
 
     Skips validation (returns None -- allowed) when no actual snapshot
     exists yet, or the category's current value is unknown -- there is
@@ -415,11 +430,61 @@ def validate_expense_plan_amount(latest_snapshot: dict | None, category: str, am
     current_value = latest_snapshot.get(_EXPENSE_CATEGORY_FIELDS[category])
     if current_value is None:
         return None
-    if current_value + amount_cents < 0:
+    combined_delta = amount_cents + other_active_deltas_cents
+    if current_value + combined_delta < 0:
+        category_label = category.replace("_", " ")
+        shortfall_dollars = -(current_value + combined_delta) / 100
+        if other_active_deltas_cents != 0:
+            return (
+                f"This would take {category_label} below $0 once combined with your other planned "
+                f"changes to this category. {category_label.capitalize()} is currently "
+                f"${current_value / 100:,.0f}/month, and your planned changes to it now total "
+                f"-${-combined_delta / 100:,.0f}/month -- ${shortfall_dollars:,.0f} more than there is to cut."
+            )
         return (
-            f"This would reduce {category.replace('_', ' ')} below $0 "
-            f"(currently {current_value / 100:,.0f} cents short by {-(current_value + amount_cents) / 100:,.0f})."
+            f"This would take {category_label} below $0. It's currently ${current_value / 100:,.0f}/month, "
+            f"which isn't enough to absorb a ${abs(amount_cents) / 100:,.0f}/month cut "
+            f"(short by ${shortfall_dollars:,.0f})."
         )
+    return None
+
+
+def _date_ranges_overlap(start_a, end_a, start_b, end_b) -> bool:
+    """True if [start_a, end_a] and [start_b, end_b] share any date --
+    a None end means "still active," i.e. unbounded. Shared helper for
+    validate_no_overlapping_revenue_target(); a plain closed-interval
+    overlap test, nothing financial-engine-specific about it."""
+    if end_a is not None and start_b > end_a:
+        return False
+    if end_b is not None and start_a > end_b:
+        return False
+    return True
+
+
+def validate_no_overlapping_revenue_target(
+    other_active_plans: list[dict],
+    start_date,
+    end_date,
+) -> str | None:
+    """
+    Phase 35D-A §15/Case M: two revenue_target plans active in the same
+    month is not a supported composition (project_monthly_cash_flow()
+    breaks the tie deterministically -- highest id wins -- but silently,
+    with no founder-visible explanation). Rather than let a founder
+    create that ambiguous state at all, the safer V1 behavior chosen here
+    is to PREVENT it: a new or edited revenue_target plan is rejected if
+    its own active date range overlaps any OTHER currently-`planned`
+    revenue_target plan's own range. `other_active_plans` is the venture's
+    other planned revenue_target rows (already excluding the plan being
+    edited, if any) -- empty means nothing to conflict with.
+    """
+    for other in other_active_plans:
+        if _date_ranges_overlap(start_date, end_date, other["start_date"], other.get("end_date")):
+            return (
+                f"You already have an active revenue plan (\"{other['label']}\") covering this period, "
+                f"starting {other['start_date'].isoformat() if hasattr(other['start_date'], 'isoformat') else other['start_date']}. "
+                "Cancel or edit that plan first, or choose dates that don't overlap it."
+            )
     return None
 
 

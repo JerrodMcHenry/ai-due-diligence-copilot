@@ -1,3 +1,4 @@
+from datetime import date
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -183,7 +184,7 @@ from app.ai.financial_engine import (
     compute_hire_monthly_cost_cents, compute_hire_annual_cost_cents,
     hire_plan_items_for_projection, hire_to_plan_item,
     financial_plan_items_for_projection, expense_plan_to_plan_item, revenue_plan_to_plan_item,
-    validate_expense_plan_amount,
+    validate_expense_plan_amount, validate_no_overlapping_revenue_target,
 )
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -2068,6 +2069,23 @@ def list_financial_plans(
     return [_financial_plan_response(r) for r in rows]
 
 
+def _other_active_financial_plans(
+    user_id: str, venture_id: int, plan_type: str, exclude_id: int | None = None, category: str | None = None
+) -> list[dict]:
+    """Every OTHER currently-`planned` financial plan of the given type
+    (and, for expense_change, the same category) -- used by both the
+    combined-category-floor check (Case L/K) and the revenue-target
+    overlap check (Case M) so a new/edited plan is validated against
+    what's ALREADY active, not just itself in isolation."""
+    rows = list_venture_financial_plans_for_owner(user_id, venture_id, status="planned")
+    return [
+        r for r in rows
+        if r["id"] != exclude_id
+        and r["plan_type"] == plan_type
+        and (category is None or r.get("category") == category)
+    ]
+
+
 @app.post("/ventures/{venture_id}/financial-plans", response_model=FinancialPlanResponse)
 def create_financial_plan(
     venture_id: int,
@@ -2077,7 +2095,14 @@ def create_financial_plan(
     _require_owned_venture(current_user, venture_id)
     if request.plan_type == "expense_change":
         latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
-        error = validate_expense_plan_amount(latest, request.category, request.amount_cents)
+        others = _other_active_financial_plans(current_user.user_id, venture_id, "expense_change", category=request.category)
+        other_deltas = sum(o["amount_cents"] for o in others)
+        error = validate_expense_plan_amount(latest, request.category, request.amount_cents, other_deltas)
+        if error:
+            raise HTTPException(status_code=422, detail=error)
+    elif request.plan_type == "revenue_target":
+        others = _other_active_financial_plans(current_user.user_id, venture_id, "revenue_target")
+        error = validate_no_overlapping_revenue_target(others, request.start_date, request.end_date)
         if error:
             raise HTTPException(status_code=422, detail=error)
 
@@ -2110,7 +2135,16 @@ def update_financial_plan(
         merged = {**existing, **fields}
         if merged["plan_type"] == "expense_change" and ("amount_cents" in fields or "category" in fields):
             latest = get_latest_venture_financial_snapshot_for_owner(current_user.user_id, venture_id)
-            error = validate_expense_plan_amount(latest, merged["category"], merged["amount_cents"])
+            others = _other_active_financial_plans(
+                current_user.user_id, venture_id, "expense_change", exclude_id=plan_id, category=merged["category"]
+            )
+            other_deltas = sum(o["amount_cents"] for o in others)
+            error = validate_expense_plan_amount(latest, merged["category"], merged["amount_cents"], other_deltas)
+            if error:
+                raise HTTPException(status_code=422, detail=error)
+        if merged["plan_type"] == "revenue_target" and ("start_date" in fields or "end_date" in fields):
+            others = _other_active_financial_plans(current_user.user_id, venture_id, "revenue_target", exclude_id=plan_id)
+            error = validate_no_overlapping_revenue_target(others, merged["start_date"], merged.get("end_date"))
             if error:
                 raise HTTPException(status_code=422, detail=error)
         if merged.get("end_date") is not None and merged["end_date"] < merged["start_date"]:
@@ -2174,15 +2208,46 @@ def preview_financial_plan(
 # --- Scenarios -------------------------------------------------------------
 
 
+# Phase 35D-A §13/§16: founder-facing text must read "March 2027," never
+# the raw ISO date a DB row or request model carries -- mirrors
+# dashboard/lib/finance/money.ts::formatMonthYear() exactly so a
+# scenario's assumption bullets (built server-side) read identically to
+# every other date the founder sees on the same page (built client-side).
+_MONTH_NAMES = (
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December",
+)
+
+
+def _format_month_year(value) -> str:
+    d = date.fromisoformat(value) if isinstance(value, str) else value
+    return f"{_MONTH_NAMES[d.month - 1]} {d.year}"
+
+
+# Mirrors dashboard/components/finance/FinanceOverview.tsx's own
+# EXPENSE_CATEGORY_LABELS exactly -- a raw category code like
+# "professional_services" must never reach founder-facing text.
+_EXPENSE_CATEGORY_DISPLAY_LABELS = {
+    "payroll": "Payroll",
+    "contractors": "Contractors",
+    "software": "Software",
+    "marketing": "Marketing",
+    "rent": "Rent",
+    "professional_services": "Professional services",
+    "other": "Other",
+}
+
+
 def _plan_label(kind: str, row: dict) -> str:
     if kind == "hire":
         cost = compute_hire_monthly_cost_cents(row)
         cost_label = f"{cost / 100:,.0f}/mo" if cost is not None else "cost unknown"
-        return f"{row['role']} (${cost_label}, starting {row['start_date'].isoformat()})"
+        return f"{row['role']} (${cost_label}, starting {_format_month_year(row['start_date'])})"
     if row["plan_type"] == "revenue_target":
-        return f"{row['label']}: revenue becomes ${row['amount_cents'] / 100:,.0f}/month starting {row['start_date'].isoformat()}"
+        return f"{row['label']}: revenue becomes ${row['amount_cents'] / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
     sign = "+" if row["amount_cents"] >= 0 else "-"
-    return f"{row['label']}: {row['category']} {sign}${abs(row['amount_cents']) / 100:,.0f}/month starting {row['start_date'].isoformat()}"
+    category_label = _EXPENSE_CATEGORY_DISPLAY_LABELS.get(row["category"], row["category"])
+    return f"{row['label']}: {category_label} {sign}${abs(row['amount_cents']) / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
 
 
 def _build_scenario_response(user_id: str, venture_id: int, scenario: dict) -> ScenarioResponse:

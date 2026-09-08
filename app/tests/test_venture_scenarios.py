@@ -300,6 +300,83 @@ def test_case_f_impossible_expense_cut_is_rejected() -> None:
         _cleanup()
 
 
+# --- Phase 35D-A stress-test hardening: combined-category floor (Case L/K),
+# revenue-target overlap prevention (Case M) --------------------------------
+
+
+def test_case_35da_l_combined_same_category_cuts_are_rejected_once_they_exceed_the_category() -> None:
+    """Two INDIVIDUALLY-safe cuts on the same category can still combine
+    into an impossible one. contractors = $20K: a first -$10K cut is
+    safe alone; a second -$15K cut would ALSO be safe alone (against the
+    unchanged $20K snapshot value), but the two COMBINED (-$25K) would
+    take contractors to -$5K. The second plan must be rejected."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            venture = _create_venture(USER_A, "ZZTest Scenario 35DA-L")
+            _post_snapshot(venture["id"], USER_A, as_of_date="2026-09-01")  # contractors = $20K
+            first = _create_financial_plan(
+                venture["id"], USER_A, plan_type="expense_change", label="First cut", category="contractors",
+                amount_cents=-1_000_000, start_date="2026-10-01",
+            )
+            expect(first.status_code == 200, f"the first, individually-safe cut must be accepted, got: {first.status_code} {first.text}")
+
+            second = _create_financial_plan(
+                venture["id"], USER_A, plan_type="expense_change", label="Second cut", category="contractors",
+                amount_cents=-1_500_000, start_date="2026-11-01",
+            )
+            expect(
+                second.status_code == 422,
+                f"a second cut that is only safe in isolation, but combines with the first to exceed the category, must be rejected, got: {second.status_code} {second.text}",
+            )
+
+            # A cut on a DIFFERENT category is unaffected by the first one.
+            other_category = _create_financial_plan(
+                venture["id"], USER_A, plan_type="expense_change", label="Marketing cut", category="marketing",
+                amount_cents=-500_000, start_date="2026-11-01",
+            )
+            expect(other_category.status_code == 200, f"a cut on an unrelated category must not be blocked by another category's plans, got: {other_category.status_code} {other_category.text}")
+    finally:
+        _cleanup()
+
+
+def test_case_35da_m_overlapping_revenue_targets_are_rejected_not_silently_resolved() -> None:
+    """Case M: two revenue_target plans active over the same period is
+    not a supported composition. Rather than let the engine's own
+    highest-id tiebreak resolve it silently, creation is rejected
+    outright -- the safer V1 behavior."""
+    _ensure_test_users()
+    try:
+        with _patched_auth():
+            venture = _create_venture(USER_A, "ZZTest Scenario 35DA-M")
+            _post_snapshot(venture["id"], USER_A, as_of_date="2026-09-01")
+            first = _create_financial_plan(
+                venture["id"], USER_A, plan_type="revenue_target", label="Plan A", category=None,
+                amount_cents=4_000_000, start_date="2026-10-01", end_date="2026-12-01",
+            )
+            expect(first.status_code == 200, f"the first revenue plan must be accepted, got: {first.status_code} {first.text}")
+
+            overlapping = _create_financial_plan(
+                venture["id"], USER_A, plan_type="revenue_target", label="Plan B", category=None,
+                amount_cents=1_000_000, start_date="2026-11-01", end_date=None,
+            )
+            expect(
+                overlapping.status_code == 422,
+                f"a second revenue_target plan whose active range overlaps the first must be rejected, got: {overlapping.status_code} {overlapping.text}",
+            )
+
+            non_overlapping = _create_financial_plan(
+                venture["id"], USER_A, plan_type="revenue_target", label="Plan C", category=None,
+                amount_cents=1_000_000, start_date="2027-01-01", end_date=None,
+            )
+            expect(
+                non_overlapping.status_code == 200,
+                f"a revenue_target plan starting strictly after the first one ends must be accepted, got: {non_overlapping.status_code} {non_overlapping.text}",
+            )
+    finally:
+        _cleanup()
+
+
 # --- Composition (Cases G-H) -----------------------------------------------
 
 
@@ -618,6 +695,8 @@ TESTS = [
     test_case_d_expense_cut_applies_from_its_own_start_month,
     test_case_e_expense_increase,
     test_case_f_impossible_expense_cut_is_rejected,
+    test_case_35da_l_combined_same_category_cuts_are_rejected_once_they_exceed_the_category,
+    test_case_35da_m_overlapping_revenue_targets_are_rejected_not_silently_resolved,
     test_case_g_hire_marketing_revenue_compose_in_correct_months,
     test_case_h_plan_order_does_not_affect_the_projection,
     test_case_i_scenarios_produce_different_deterministic_projections,
