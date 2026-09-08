@@ -1,0 +1,831 @@
+# SIE Unified Founder Workspace — Architecture + Convergence Plan V1
+
+**Phase 37A.** This is an architecture and planning document. No code was changed to produce it. Every claim
+below is sourced from reading the current repository (`app/database/db.py`, `app/api.py`, and the relevant
+frontend components) this phase, plus real row counts queried from the local dev database. Where a prior
+phase's report is referenced, it is only as a pointer to what to re-verify — every number and code path here
+was re-read, not assumed.
+
+---
+
+## 1. Current architecture map
+
+```
+users (Clerk-backed, id = Clerk user id)
+  │
+  ├── modeled_ventures (user_id)  ─────────────────────────────┐
+  │     assumptions JSONB, model_result JSONB (VPS+guidance)   │
+  │     │                                                       │
+  │     ├── venture_missions (venture_id)      "Your Actions"   │  BUILD
+  │     ├── venture_evidence (venture_id)      evidence loop    │  (all venture_id-scoped,
+  │     ├── venture_decisions (venture_id)     decisions        │   all owned via
+  │     ├── venture_model_updates (venture_id) VPS recompute log│   users.id = modeled_ventures.user_id)
+  │     ├── venture_financial_snapshots (venture_id)  Finance   │
+  │     ├── venture_hire_plans (venture_id)                     │
+  │     ├── venture_financial_plans (venture_id)                │
+  │     ├── venture_financial_scenarios (venture_id)            │
+  │     └── venture_graduations (venture_id UNIQUE) ────────────┘
+  │            │
+  │            ▼ startup_id (UNIQUE — at most one venture per startup)
+  ├── startups (normalized_name UNIQUE)  ◀──────── also created directly by Analyze
+  │     │                                           (get_or_create_startup, UNOWNED by construction)
+  │     ├── startup_memberships (user_id, startup_id)   ownership/role
+  │     ├── startup_claims (user_id, startup_id, status, verification_method)
+  │     ├── founder_actions (startup_id)         "Action Plan" — separate action system
+  │     ├── founder_updates (startup_id)         "Recent Updates" — separate update system
+  │     ├── startup_milestones (startup_id)
+  │     ├── analyses (startup_id)                canonical SPS/pillar analysis rows
+  │     └── score_history (analysis_id)          legacy V2.1 score trend only
+  │
+  └── saved_startups (user_id, startup_id)       bookmarks, unrelated to ownership
+```
+
+**Key structural fact, confirmed by reading every relevant schema this phase**: `modeled_ventures` has **no
+foreign key to `startups` at all**. The only bridge between the two identity roots is the single link table
+`venture_graduations` (`venture_id` UNIQUE, `startup_id` UNIQUE). Everything Build produces
+(`venture_missions`, `venture_evidence`, `venture_decisions`, all of Finance) stays permanently attached to
+`modeled_ventures.id` — graduation never moves, copies, or touches any of it.
+
+---
+
+## 2. Identity map (per §3 of the directive)
+
+| Object | Purpose | PK | User relationship | Company relationship | Creation path | Read paths | Write paths | UI consumers | Canonical? | Duplicated? | Lifecycle-specific? | Safe to retire? |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `modeled_ventures` | A founder's own private, editable model of a company they're building | `id` | `user_id` (owner, direct FK) | *is* the company (pre-graduation) | Idea Lab "Start a new idea" | `list_modeled_ventures_for_user`, `get_modeled_venture_for_user` | `create_modeled_venture`, `update_modeled_venture_for_user` | `VentureWorkspace.tsx` and all of Build | Yes, for Build | No | No — spans idea through revenue | No — this is the durable company record |
+| `startups` | The stable, name-deduplicated identity every canonical Analyze/Rankings/Discovery query keys off | `id` | None directly — ownership is via `startup_memberships` | *is* the company (public/evaluation identity) | Either (a) Analyze's `get_or_create_startup` (unowned), or (b) graduation's `resolve_startup_for_graduation` | `get_founder_startup_workspace`, public `/startup/[id]` reads | `create_startup` (Analyze), graduation | `FounderStartupWorkspaceView`, public Startup Profile | Yes, for Analyze/public identity | No, but see §4 | No | No |
+| `startup_memberships` | Who owns/operates a startup | `id` | `user_id` | `startup_id` | `create_startup_claim` + `approve_startup_claim` (self-approved on graduation, human-reviewed otherwise) | membership checks throughout `app/api.py` | graduation, claim approval | trust badges, access gates | Yes | No | No | No |
+| `startup_claims` | The audit trail of *how* membership was granted (manual review vs. unambiguous graduation provenance) | `id` | `user_id` | `startup_id` | Claim submission or graduation | admin review queue, `FounderWorkspace` | `create_startup_claim`, `approve/reject` | Claim submission UI, admin review | Yes | No | No | No |
+| `venture_graduations` | The one link between a `modeled_venture` and a `startup` | `id` | `user_id` (redundant with both sides, kept for query convenience) | both | Graduation endpoint | `get_venture_graduation_for_owner`, `get_venture_graduation_by_startup` | `create_venture_graduation` (idempotent) | Graduation banner, "created from your X venture" acknowledgment | Yes | No | Yes — this table's entire purpose is a lifecycle transition | No |
+| `analyses` (canonical) | One completed Analyze run's full methodology JSONB | `id` | none direct | `startup_id` | `/analyze` pipeline | `get_analyses`, `get_analysis_by_id` | `save_analysis` | Public profile, `FounderStartupWorkspaceView`, Rankings | Yes | No | No | No |
+| `score_history` | Legacy V2.1 trend line only (confirmed: no V3/SPS field exists on this table) | `id` | none | `analysis_id` → `startup_id` | Every analysis save (legacy path) | `SPSHistory.tsx` | `save_analysis`'s legacy write | Public profile's "V2.1 Score (legacy)" chart | Partially — real data, stale methodology | No | Yes — a fossil of the V2.1 era | Eventually, once migrated to track V3 or explicitly retired for low-coverage cases |
+| `venture_financial_snapshots` | Actual financial state, append-only | `id` | via `modeled_ventures.user_id` | `venture_id` | Finance "Add your finances" | Finance tab, Fundraising pre-fill | Finance save | `FinanceOverview.tsx` | Yes | No | No | No |
+| `venture_hire_plans` / `venture_financial_plans` / `venture_financial_scenarios` | Planned changes + comparisons | `id` each | via venture | `venture_id` | Finance "Model a change" | Finance tab | Finance save/update | `FinanceOverview.tsx` | Yes | No | No | No |
+| `venture_missions` | Build's own question/test/action loop | `id` | via venture | `venture_id` | Overview's recommendation engine + founder-added | Overview "What matters now," "Your Actions" | Recording a result, deciding, adding a custom action | `CurrentQuestionCard.tsx`, `MissionsSection.tsx` | Yes, for Build | **Yes — duplicates `founder_actions`'s job** | No | No |
+| `venture_evidence` | Build's classified, question-linked evidence | `id` | via venture | `venture_id` | Recording a test result | Overview, History | Evidence capture flow | `CurrentQuestionCard.tsx` | Yes, for Build | **Overlaps `founder_updates`'s job, not identical (see §9)** | No | No |
+| `venture_decisions` | "SIE recommended X / you decided Y" | `id` | via venture | `venture_id` | Deciding on a recommendation | Overview, History | Decision recording | `CurrentQuestionCard.tsx`, History | Yes, for Build | No direct duplicate found | No | No |
+| `founder_actions` | My Startups' "Action Plan" | `id` | `created_by_user_id` (attribution only — shared per-startup, not per-member, per its own code comment) | `startup_id` | SIE recommendation "Add to Plan," or founder-created | `FounderStartupWorkspaceView` | `create_founder_action`, `update_founder_action_status` | Action Plan card | Yes, for My Startups | **Yes — duplicates `venture_missions`'s job** | No | See §8 recommendation |
+| `founder_updates` | My Startups' "Recent Updates" | `id` | `created_by_user_id` | `startup_id` | "+ Add Update" | Founder Workspace "Recent Updates" | `create_founder_update` | Recent Updates card | Yes, for My Startups | Overlapping-but-distinct job vs. `venture_evidence` (see §9) | No | See §9 recommendation |
+| `startup_milestones` | Founder-set milestones | `id` | `created_by_user_id` | `startup_id` | "+ Add milestone" | Founder Workspace | create/update | Milestones card | Yes | No direct Build equivalent (Build has no milestone concept) | No | No |
+
+---
+
+## 3. Existing data counts (local dev DB, row counts only, no user data exposed)
+
+| Table | Count |
+|---|---|
+| `modeled_ventures` | 142 |
+| `venture_graduations` | **1** |
+| `startups` | 24 |
+| `startup_memberships` | 3 |
+| `startup_claims` | 6 |
+| `founder_actions` | 3 |
+| `founder_updates` | 2 |
+| `venture_missions` | 113 |
+| `venture_evidence` | 18 |
+| `venture_decisions` | 7 |
+| `analyses` | 88 |
+| `venture_hire_plans` | 4 |
+| `venture_financial_plans` | 5 |
+| `venture_financial_scenarios` | 5 |
+| Ventures with any Finance data | 3 |
+
+**This materially de-risks convergence.** Only **one** venture has ever graduated in this dataset. The
+`founder_actions`/`founder_updates` volumes (3 and 2 rows) are trivially small compared to `venture_missions`
+(113) and `venture_evidence` (18) — confirming Build's own action/evidence loop is both the older and far
+more heavily used system. Migrating or bridging the tiny `founder_*` tables is a small, low-risk operation;
+the reverse would not be.
+
+---
+
+## 4. Identity question — Venture vs. Startup
+
+**Why both exist today, read from the code, not assumed**: `modeled_ventures` was built first, as a private,
+freely-editable "sketch" a founder owns outright (`user_id` FK, no name-uniqueness constraint — two different
+users, or the same user, can each have a venture named the same thing). `startups` was built to solve a
+completely different problem: **canonical, name-deduplicated identity across every Analyze run ever
+performed, by anyone, for Rankings/Discovery/Compare** — `normalized_name` is `UNIQUE`, and a `startups` row
+is explicitly, deliberately created **unowned** the moment anyone runs Analyze on a company, even a stranger.
+Ownership (`startup_memberships`) was bolted on later as a separate concept from analysis. Graduation
+(`venture_graduations`) was built later still, as the bridge — and it is exactly that: a bridge, not a merge.
+
+**Does a modeled venture represent a fundamentally different entity?** No. It represents the *same company*,
+before that company has (or wants) a public, evidence-based, name-deduplicated identity. The two tables model
+two different *concerns* about one real-world company — "my own private working model of my company" vs.
+"the one canonical, publicly-comparable record of this company" — not two different companies.
+
+**What does graduation actually create?** Confirmed in code (`create_venture_graduation`,
+`resolve_startup_for_graduation`): a `startups` row (if one doesn't already exist under this name), a
+self-approved `startup_claims` row (`verification_method='venture_graduation'` — auto-approved because the
+provenance is unambiguous, unlike a stranger claiming an Analyze-created startup), a `startup_memberships`
+row, and the `venture_graduations` link row itself. **It copies zero Build data.** `fields_transferred_count`
+is a purely client-side UX metric (how many fields the frontend pre-filled into the *next* Analyze form from
+the venture's own description) — not a server-side data migration.
+
+**What data stays attached to `modeled_venture`?** Everything Build has ever produced: missions, evidence,
+decisions, all of Finance. Permanently, whether or not graduation ever happens.
+
+**What does `startup_id` unlock?** Public Startup Profile, SPS/Analyze history, Fundraising Readiness,
+`founder_actions`/`founder_updates`/milestones, and trust/membership semantics — none of which currently read
+anything from the venture side except the one-line "graduated from your X venture" acknowledgment (confirmed:
+`get_founder_startup_workspace()` calls `get_venture_graduation_by_startup()` for exactly that acknowledgment
+and nothing else).
+
+**What would break if one company concept eventually replaced both?** Concretely, today: nothing catastrophic
+— actual usage of the bridge is nearly zero (1 graduation). The real risk is not breakage but scope: `startups`
+rows are also created, unowned, by strangers analyzing a company they don't operate — a single "Company"
+table would have to cleanly support an owned, actively-modeled row and an anonymous, evaluation-only row for
+the same real-world company without conflating the two, which is precisely the job `modeled_ventures` +
+`startups` + `startup_memberships` already do across three tables. Collapsing them into one entity would
+either reintroduce that distinction as columns/flags on a single table (no less complexity, more migration
+risk) or lose the "anyone can be Analyzed without becoming ownable" property that Rankings/Discovery/Compare
+depend on today.
+
+**Recommendation: OPTION B** — make the venture (renamed conceptually, not necessarily in the database, to
+"the company's Build record") the **canonical operating identity**, and treat `startups` as the **optional
+public/evaluation identity** attached to it via the existing graduation link, unowned analysis still
+supported exactly as today. This is not Option D (a new Company table): it uses only tables that already
+exist, changes zero schemas, and simply changes *which identity the founder's own workspace is keyed by
+going forward* (their venture, continuously) versus *which identity the public sees* (the startup, once
+graduated). Full reasoning for rejecting the other options is in §33.
+
+---
+
+## 5. Graduation audit
+
+**Today, technically:** an idempotent, crash-safe, three-table write (startup + self-approved claim →
+membership → graduation link) triggered from Build's Overview, gated by `hasPayingCustomers || hasRevenue`
+(a real evidence threshold, confirmed in `resolveGraduationEligibility.ts`) for the *suggested* banner, but
+also reachable manually. It does not touch, copy, or lock any Build data.
+
+**What it should mean, product-wise:** a status change — "this company now also has a public, evidence-based
+identity" — not a workspace change. A founder should keep operating in the exact same place they always have.
+
+**Does it need to exist as a founder-visible transition?** Yes, but as a much smaller moment than today: an
+acknowledgment ("RelayOps now has a public Startup Profile") rather than a doorway into a different product.
+
+**Could graduation become a lifecycle/status change rather than a workspace change?** Yes — this is exactly
+the recommended direction. The workspace a founder is in before and after should be identical; only a
+"Public Profile" affordance and a trust badge should appear as new.
+
+**Does it need a new name?** Not decided in this phase (no renames performed), but "graduation" itself
+already implies exactly the wrong idea — that the founder leaves one place for a better one. Worth
+reconsidering in the implementation phase that touches this, not now.
+
+---
+
+## 6. Second "become real" path — full audit
+
+`readyToAnalyze` (driven by the server's own `primaryNextStep.kind === "ready_for_real_startup"`, a
+*different* signal than `graduation.eligible`'s `hasPayingCustomers || hasRevenue`) renders a card whose
+button calls `stashVentureDescriptionForAnalyze(description)` then `router.push("/analyze")`.
+
+**What does it create?** Nothing by itself — it only pre-fills the Analyze input form and navigates there.
+Running Analyze from that point creates (or reuses) a `startups` row via Analyze's own, completely
+independent `get_or_create_startup` path — **unowned**, exactly like a stranger analyzing any public company.
+
+**Does it create startup identity? Membership/claim state?** It creates startup identity (a `startups` row)
+if one doesn't exist, but explicitly does **not** create membership or a claim — confirmed by the same
+architectural rule that governs every Analyze-created startup ("analyzing a startup must never grant
+membership").
+
+**How does it overlap with graduation? Can a founder trigger both? What happens if they do?** Yes, a founder
+can trigger both, in either order, and the system has **already been engineered to handle exactly this**:
+`resolve_startup_for_graduation()` raises `StartupNameCollisionError` (409) if a `startups` row with this
+exact name already exists and the founder doesn't already own it — surfaced today as an explicit "connect
+existing startup" flow (`connected_existing_startup=True`) rather than a silent duplicate. This is a real,
+handled overlap, not a naive bug — but it is still user-visible friction: a founder who analyzes their own
+company first, then later graduates, has to manually reconcile two names into one record instead of the
+system recognizing "this is the same company" automatically from the venture↔startup relationship.
+
+**Which one should own startup identity creation?** Recommend: **graduation should be the only path that
+creates an *owned* startup identity for a founder's own company.** "Analyze my company" should still be
+freely runnable at any time (for anyone, on any company, exactly as today) but, when run from *inside* a
+founder's own venture workspace on their own company, should transparently attach its resulting analysis to
+that venture's own eventual startup identity (creating it via the same graduation-adjacent path, not a second
+unowned one) rather than risking a same-name collision. This does not change Analyze's behavior for
+evaluating other people's companies at all.
+
+---
+
+## 7. Workspace feature matrix
+
+| Capability | Venture Workspace (Build) | Founder Workspace (My Startups) | Classification |
+|---|---|---|---|
+| Overview / what matters now | Yes — evidence-first recommendation engine | No equivalent | KEEP IN UNIFIED WORKSPACE |
+| Company Intelligence State (six-category qualitative) | Yes | No | KEEP IN UNIFIED WORKSPACE |
+| Questions / tests | Yes | No | KEEP IN UNIFIED WORKSPACE |
+| Evidence + contradictions | Yes | No (has "Recent Updates" instead — different job, see §9) | KEEP IN UNIFIED WORKSPACE |
+| Decisions | Yes | No | KEEP IN UNIFIED WORKSPACE |
+| History | Yes (per-venture) | No equivalent | KEEP IN UNIFIED WORKSPACE (see §29 for what merges in) |
+| Finance (actuals, hiring, plans, scenarios) | Yes | No — confirmed zero reads of any `venture_financial_*` table | KEEP IN UNIFIED WORKSPACE |
+| Fundraising (SAFE/priced round simulator) | Yes | No | KEEP IN UNIFIED WORKSPACE |
+| SPS + pillar breakdown | No | Yes | MOVE TO ANALYZE (accessible on demand, not the default Overview) |
+| Fundraising Readiness | No | Yes | MOVE TO ANALYZE (it is derived entirely from canonical `analyses` methodology — confirmed in code — not from Finance/Fundraising at all) |
+| Founder Actions | No (has `venture_missions`/"Your Actions" instead) | Yes | MERGE WITH EXISTING BUILD CAPABILITY (`venture_missions`) |
+| Founder Updates | No (has `venture_evidence` instead, different semantics) | Yes | MERGE WITH EXISTING BUILD CAPABILITY, as a distinct "progress log" entry type inside one capture surface (see §9) |
+| Milestones | No | Yes | KEEP IN UNIFIED WORKSPACE (genuinely has no Build equivalent today) |
+| Public profile / sharing | No (Build has its own separate "Share venture snapshot," a different, pre-graduation preview) | Yes (links to `/startup/[id]`) | PUBLIC PROFILE ONLY (stays a separate surface by design, per §21) |
+| Trust status (Verified / Founder-managed) | No | Yes, shown prominently | PUBLIC PROFILE ONLY, going forward (currently also shown inside the private workspace with no clear purpose there — DEFER removal of the badge itself to the implementation phase, not decided here) |
+| Analyze entry | Yes (`readyToAnalyze` card) | Yes ("Re-analyze") | KEEP IN UNIFIED WORKSPACE, one coherent entry point (see §6/§22) |
+| Startup metadata (name, industry from Analyze) | No | Yes | KEEP IN UNIFIED WORKSPACE, read-only display of the linked public identity |
+
+---
+
+## 8. Duplicate action system — `venture_missions` vs. `founder_actions`
+
+| | `venture_missions` | `founder_actions` |
+|---|---|---|
+| Schema richness | Full intelligence-loop participant: question text, why-it-matters, test description, interpretation, `mission_type` taxonomy, linked evidence/decision | Simple workflow record: title, description, related_pillar, status, source |
+| Statuses | Part of a recommend → test → learn → decide cycle | `todo / in_progress / completed / dismissed` |
+| Ownership | `venture_id` (single-owner, matches `modeled_ventures.user_id`) | `startup_id`, explicitly **shared per-startup, not per-member** (any verified member sees/acts on the same plan — a deliberate multi-founder design point `venture_missions` doesn't need yet since ventures are single-owner) |
+| Creation | SIE recommendation engine, or founder-added | SIE recommendation ("Add to Plan"), fundraising-gap-derived, or founder-created |
+| Recommendation relationship | **Is** the recommendation engine's own substrate | Consumes a recommendation (from SPS pillar gaps or Fundraising Readiness gaps) as a one-time "Add to Plan" import — no ongoing loop |
+| Analytics relationship | Feeds Build's own product-event history | Independent |
+| Data volume (this dataset) | **113 rows** | **3 rows** |
+| Migration complexity | N/A (survives) | Low — trivial row count, simple schema, one real feature (multi-member sharing) not yet present on the other side |
+
+**Does `founder_actions` contain any behavior `venture_missions` cannot represent?** Exactly one:
+**multi-member sharing** (`venture_missions` has no concept of "other people on this team" because a venture
+today has exactly one owner; `founder_actions` was explicitly built to be shared across `startup_memberships`
+members). Everything else — status lifecycle, SIE-sourced vs. founder-created, dedup-by-title — is either
+already present in `venture_missions` or trivially representable.
+
+**Canonical recommendation:** `venture_missions` survives, confirmed correct. `founder_actions`' one
+genuinely missing capability (multi-member visibility) becomes a requirement to add to `venture_missions`
+*only if/when* the venture-side ever needs to support co-founders — not a reason to keep two systems today.
+
+---
+
+## 9. Duplicate evidence/update system — `venture_evidence` vs. `founder_updates`
+
+These are **not** the same concept, and the code says so explicitly (`founder_updates`' own module comment:
+*"Distinct from app/models/evidence.py's Evidence model on purpose... founder_updates rows are never inserted
+into methodology.evidence"*).
+
+- `venture_evidence` is **evidence for a specific, currently-open question** — it carries a relationship
+  classification (supports/mixed/contradicts/doesn't tell us yet) against that question, and directly drives
+  the next recommendation.
+- `founder_updates` is a **general, typed progress log** ("customer," "revenue," "product," "team,"
+  "fundraising," "partnership," "validation," "operations," "other") with no question attached and no
+  evidentiary weight — closer to a company changelog than a test result.
+
+**Does `founder_updates` contain anything not representable by `venture_evidence`?** Yes: the ability to log
+something that happened **without it being evidence for any specific open question** — a founder shipping a
+feature, closing a partnership, or hitting a metric milestone that isn't "testing" anything in particular.
+`venture_evidence` today is always tied to a mission/question; a bare, untethered "update" doesn't fit that
+shape without forcing a fake question onto it.
+
+**Recommend, honestly, not by faking equivalence:** keep both *concepts* — they answer genuinely different
+questions ("what did we learn that changes our understanding" vs. "what happened, generally") — but present
+them to the founder as **one capture surface** ("What happened?") that asks, only when relevant, whether this
+relates to something currently being tested. If yes, it becomes `venture_evidence` (with the existing
+classification step); if no, it becomes a general log entry. The 2-row volume of `founder_updates` in this
+dataset means migrating existing rows into whichever new home is chosen is trivial regardless of which shape
+is picked.
+
+---
+
+## 10. Decision/outcome continuity
+
+Confirmed in code: **no post-graduation workflow writes to `venture_decisions` today.** Once a venture
+graduates, its Build-side decision history is frozen at that moment; My Startups has no decision-recording
+concept at all (only `founder_actions`' simpler status field, and `founder_updates`' log). This means a
+graduated company's "why did we decide this" story silently stops being recorded the moment it becomes most
+interesting (a company that's actually operating).
+
+**Design direction:** the same `venture_decisions` (and `venture_missions`/`venture_evidence`) graph should
+keep being written to indefinitely, regardless of graduation status — there should be exactly one decision
+history for a company's entire life, not a pre-startup one and a post-startup one. This falls directly out of
+recommending `modeled_ventures` remain the canonical operating identity (§4) — nothing needs to change about
+these tables' schemas for this to be true; graduation simply needs to stop being treated as an exit from the
+workspace that writes to them.
+
+---
+
+## 11. Finance ownership
+
+Confirmed: every Finance table (`venture_financial_snapshots`, `venture_hire_plans`, `venture_financial_plans`,
+`venture_financial_scenarios`) is keyed by `venture_id`, and `get_founder_startup_workspace()` reads none of
+them. **Finance continues working after graduation** (nothing about graduation touches or locks it) but
+**Founder Workspace cannot currently see it at all.**
+
+**Does `startup_id` need Finance data?** Not structurally — Fundraising Readiness and SPS don't consume
+financial actuals today (confirmed: `assess_fundraising_readiness` reads only the `analyses` methodology
+JSONB). The *product* value of connecting them (a defensible score that also knows the real runway) is a
+separate, future question explicitly out of scope here (Phase 36's own P1 finding, not this phase's job).
+
+**Should Finance remain attached to the persistent company workspace identity, not lifecycle status?**
+**Confirmed, validated.** This is the safest and only architecturally consistent answer: Finance was built
+venture-scoped from day one (35B), has three phases of verified-correct math on top of that scoping, and
+`modeled_ventures` is recommended as the canonical operating identity anyway (§4). Moving it to `startup_id`
+would (a) break it for every venture that hasn't graduated — the overwhelming majority, 142 vs. 1 — and (b)
+gain nothing, since nothing currently reads Finance via `startup_id` regardless.
+
+---
+
+## 12. Fundraising ownership
+
+The SAFE/priced-round **simulator** persists nothing (confirmed unchanged from every prior phase's audit,
+re-verified this phase by reading `FundraisingSimulator.tsx`'s own architecture comments) — it is entirely
+ephemeral client-side state, `venture_id`-scoped only in the sense that its one read (Finance pre-fill) is
+keyed by the venture. Founder Workspace exposes none of it.
+
+**"Fundraising Readiness" is a completely different thing that happens to share a word.** Confirmed in code
+(`app/ai/fundraising_readiness.py`'s own extensive module docstring): it is a deterministic function of
+**confidence × evidence coverage of the canonical Analyze/SPS pillar data**, stage-weighted — "how defensible
+is this score," not "what does the evidence show." It reads zero Finance data and zero Fundraising simulator
+data. It is architecturally an **Analyze-family artifact**, not a Fundraising-family one.
+
+**Recommended naming/placement boundary:** keep Fundraising Readiness's actual mechanism exactly as-is (it is
+well-designed and genuinely useful), but its future home should sit next to Analyze/SPS in the unified
+workspace, not next to the Fundraising simulator — the shared word "Fundraising" between two unrelated
+systems is the entire source of confusion, not the underlying logic of either.
+
+---
+
+## 13. SPS ownership — future boundary
+
+Confirmed present in exactly three places: the public Startup Profile, Founder Workspace's own Overview
+(prominently, at the top), and Analyze's own results screen (the same data, freshly computed). Not currently
+in Rankings' own per-row display beyond the sortable score column (unchanged, out of scope).
+
+**Future rule, validated against the repository**: SPS is an *Analyze* capability — an evaluation of a
+company from available evidence — and should never be the founder's own default operating view. The
+directive's own suggested pattern is directly supported by what already exists: `analyses`/`score_history`
+are already `startup_id`-scoped and already computed independently of any operating-workspace state, so
+"Analyze → View latest company analysis → SPS + pillars + confidence + evidence coverage" is a *presentation*
+change (where SPS is shown, and with what prominence), not a data-model change.
+
+---
+
+## 14. Fundraising Readiness score — verdict
+
+**KEEP**, relocate in the eventual IA per §12. It is not redundant, not legacy, not actively confusing at the
+*mechanism* level — it is a well-documented, deterministic, genuinely different lens than SPS itself
+(confidence/coverage-weighted rather than score-weighted), and it explicitly does not duplicate the
+now-superseded LLM-based `readiness_score.py::generate_readiness_score()` (a different, older, still-partially-
+alive legacy concept whose only remaining live consumer is the "Executive Coaching Summary" text — worth its
+own future look, not conflated with Fundraising Readiness here). Its confusion is entirely about *where it's
+shown and what it's named next to* (the Fundraising simulator), not about its own design.
+
+---
+
+## 15. Trust state audit
+
+| Surface | Trust language shown | Matters? |
+|---|---|---|
+| Public Startup Profile (`/startup/[id]`) | "Verified" / claim status | **Yes — this is the entire point.** A public viewer or investor needs to know whether the person operating this profile is who they claim to be. |
+| Investor/diligence context | Same | **Yes**, for the same reason. |
+| Private Founder Workspace (`/founder/startups/[id]`) | "✓ Verified — SIE has confirmed your relationship to this company" | **No clear purpose found.** The page's own copy says it is "private to you and your team" — the founder already knows who they are; this badge doesn't gate anything on this page, confirmed by reading the page's own component tree (no conditional rendering keyed off trust status found gating any private-workspace capability). |
+| Build / Venture Workspace | None shown today | N/A — consistent with the recommendation below. |
+
+**Every capability search performed this phase** (§16) found **zero** cases where Build capabilities —
+questions, tests, evidence, decisions, Finance, Fundraising, Analyze-on-your-own-company — require anything
+beyond `RequireAuth` + ownership (`user_id` match). Trust/verification gates exist **only** around
+`startup_id`-scoped surfaces that are inherently about a *claim of ownership over a canonical, possibly-
+public identity* (My Startups access, admin claim review) — never around the act of building, modeling,
+planning, or evidencing a company a founder already, unambiguously, controls in their own venture.
+
+---
+
+## 16. Product access audit — gate classification
+
+| Gate | Where | Classification |
+|---|---|---|
+| `RequireAuth` + `user_id` match on every `modeled_ventures`/Finance/Fundraising/evidence/mission/decision endpoint | `app/api.py`, throughout | **SECURITY REQUIRED** — correct, minimal, unrelated to trust/verification |
+| `RequireStartupMember` on `founder_actions`/`founder_updates`/Founder Workspace reads | `app/api.py` | **SECURITY REQUIRED** — a startup can have multiple members; this correctly checks *membership*, not *verification status* |
+| `startup_claims.status = 'approved'` required to grant `startup_memberships` (except self-approved graduation claims) | `approve_startup_claim` | **SECURITY REQUIRED** for the *stranger-claims-an-existing-startup* case — this is exactly the fraud-prevention job trust verification exists for |
+| "✓ Verified" badge display inside private Founder Workspace | `FounderStartupWorkspaceView` | **TRUST DISPLAY ONLY** — shown, gates nothing found |
+| Graduation eligibility (`hasPayingCustomers \|\| hasRevenue`) | `resolveGraduationEligibility.ts` | **Not a trust gate at all** — an evidence threshold for a *suggestion* banner, not an access restriction; manual graduation remains available regardless |
+| Public Startup Profile's trust badge | `/startup/[id]` | **TRUST DISPLAY, and here it is the correct, load-bearing use** — this is exactly the audience for whom the distinction matters |
+
+**No unnecessary restriction on a founder's own building/modeling/planning capability was found anywhere in
+this codebase.** The one real issue is display-only: trust language appearing on a page where it doesn't
+inform any decision the reader (the founder themselves) needs to make.
+
+---
+
+## 17. URL / routing architecture
+
+**Current:** `/idea-lab` (My Ideas list), `/idea-lab/[id]` (Venture Workspace), `/founder` (My Startups list),
+`/founder/startups/[id]` (Founder Workspace), `/startup/[id]` (public profile), `/analyze` (Analyze entry).
+
+**Recommended future direction (not a migration plan — a target to converge toward eventually):** keep
+`/idea-lab/[id]` as the one operating workspace route for a company throughout its life (it already accepts a
+venture at any stage, from idea through revenue) rather than introducing a new `/build/[company]` route
+purely for aesthetics — the directive's own instruction to avoid optimizing URLs for looks over migration
+risk applies directly here. `/founder`'s future is answered in §18: if it survives at all, it should route
+*into* `/idea-lab/[id]` for the linked venture, not to a separate template. `/founder/startups/[id]` and
+`/startup/[id]` remain distinct (private operating view vs. public profile — §21), but the *operating* half of
+that pair converges onto the existing venture route rather than keeping `FounderStartupWorkspaceView` as a
+second template.
+
+---
+
+## 18. "My Startups" future
+
+**Recommend (A): a list of founder-managed companies whose entries open the unified workspace** (i.e., the
+existing `/idea-lab/[id]` for the linked venture, when one exists). Do not maintain two separate lists.
+Concretely: `/founder` keeps existing as an index (it may legitimately have different filtering — "companies
+I've graduated" vs. Build's full "everything I'm modeling, at any stage") but its "Enter Workspace" action
+should point at the same operating workspace Build already provides, not a second template
+(`FounderStartupWorkspaceView`). For the one edge case this phase's data confirms is real —a `startups` row
+with membership but **no** linked `modeled_venture` (an owner who claimed an Analyze-created startup without
+ever having built it in Build first, plausible given 24 startups vs. only 1 graduation) — the unified
+workspace needs a graceful "no venture history yet, start building" state rather than assuming graduation
+always precedes membership.
+
+---
+
+## 19. "My Ideas" future
+
+Evaluated against current data (142 ventures, spanning "Idea" through "Early revenue" stage labels already
+observed live) and UX: the directive's suggested reframe — one list ("All Companies" or "My Ventures") with
+lifecycle labels (Exploring/Validating/Building/Operating) rather than a hard Idea-vs-Startup object split —
+is well supported. The existing `stage` field on `modeled_ventures` already carries exactly this kind of
+information informally (free-text stage strings observed live: "Idea," "Early revenue"); formalizing it into
+one small, ordered vocabulary is a presentation and light-validation change, not a schema redesign. **No
+rename performed this phase**, per instruction — this is a recommendation to validate further in
+implementation, not a decision made here.
+
+---
+
+## 20. Lifecycle vocabulary
+
+Overlapping fields found: `modeled_ventures.stage` (free text, e.g. "Idea," "Early revenue" — observed live),
+Analyze's `company_stage`/`funding_stage` (used by Fundraising Readiness's stage-weighting), and the implicit
+"graduated / not graduated" boolean from `venture_graduations`. These are three different axes today (maturity
+self-report, external funding-round terminology, and a binary identity flag) collapsed by founders into one
+mental "how far along am I" question.
+
+**Recommended founder-facing vocabulary (not implemented): Exploring → Validating → Building → Operating** —
+a single, ordered, founder-facing progression that a `modeled_venture` moves through continuously, with
+"has a public Startup Profile" as an *independent*, optional flag (not a lifecycle stage) that can be true
+at any point from Validating onward. This directly avoids requiring a founder to understand "Idea object vs.
+Venture object vs. Startup object" — they only ever need to understand where their one company currently
+stands.
+
+---
+
+## 21. Public profile boundary
+
+The public Startup Profile (`/startup/[id]`) is correctly, and should remain, a **separate surface** from the
+private operating workspace — it displays SPS, evidence coverage, trust status, and a coaching-style summary
+aimed at an external viewer, none of which belongs inside a founder's own private evidence loop. The
+recommended convergence (§4, §7) does not touch this boundary at all: it only asks that the *private* side
+stop being needlessly split into two products. Sharing/privacy controls for the public profile stay exactly
+where they are.
+
+---
+
+## 22. Analyze-my-company — future behavior
+
+**Founder operates in the unified workspace → optionally chooses "Analyze my company" → SIE runs the Analyze
+methodology → the result becomes an evaluation artifact attached to the company's (existing or newly linked)
+`startups` row → it does not replace or overwrite Build state, evidence history, Finance, or the
+recommendation engine.**
+
+**Data flow that can safely happen:**
+- **BUILD → ANALYZE**: the venture's own description/assumptions may pre-fill the Analyze input form (as
+  today, via `stashVentureDescriptionForAnalyze`) — this is founder-supplied text becoming founder-supplied
+  text elsewhere, not a factual claim crossing a trust boundary.
+- **ANALYZE → BUILD**: nothing should flow automatically. An Analyze result is Analyze's own, separately
+  evidenced conclusion; Build's recommendation engine should not silently treat "SPS says Product is weak" as
+  equivalent to a founder-recorded piece of evidence. A founder could manually choose to record "SIE's
+  analysis flagged X" as their own new evidence entry (a deliberate, founder-initiated action, exactly like
+  any other self-reported fact today) — never an automatic write.
+
+---
+
+## 23. Hypothetical-data protection rules (explicit)
+
+1. Finance scenarios, hire plans, and planned revenue/expense changes **never** write to
+   `venture_financial_snapshots` (unchanged, already enforced, re-verified this phase by re-reading the
+   Finance code paths — no new risk introduced by this architecture).
+2. Fundraising simulator inputs/outputs **never** persist anywhere, and specifically never reach
+   `venture_financial_snapshots` or any `analyses` row (unchanged).
+3. Build's own assumption fields (`modeled_ventures.assumptions`, explicitly labeled "What you believe... not
+   observed evidence") must never be read as if they were Analyze evidence — they already carry a distinct
+   provenance tag (`user_provided`/`ai_inferred`) that Analyze's own evidence model does not share, and no
+   code path found this phase converts one into the other automatically.
+4. **New rule this architecture must enforce going forward**: an Analyze result attached to a company via the
+   unified workspace must never automatically become a `venture_evidence` row, a `venture_decision`, or a
+   `venture_missions` recommendation input — only an explicit, founder-initiated action may create that link
+   (§22).
+
+---
+
+## 24. Data migration / compatibility strategy
+
+**No deletion, ever, without a separate future decision.** For every existing system:
+
+- `startups`, `startup_memberships`, `startup_claims`: unchanged — these are the correct, permanent identity
+  and trust tables regardless of which option is chosen.
+- `founder_actions` (3 rows): dual-read during transition — the unified workspace reads both
+  `venture_missions` (for graduated ventures with a linked history) and any remaining `founder_actions` rows
+  for startups with **no** linked venture (the "claimed without ever building" edge case from §18), never
+  silently dropping either. A one-time backfill can copy the 3 existing rows into `venture_missions`-shaped
+  entries **only** for startups that do have a linked venture; the handful with no venture link keep their
+  `founder_actions` rows readable indefinitely (dual-read, not deleted) until a future phase explicitly
+  retires the table.
+- `founder_updates` (2 rows): same dual-read/backfill pattern, tagged as "imported historical update" rather
+  than reclassified as `venture_evidence` (per §9 — never fake equivalence).
+- `analyses`, `score_history`: unchanged — these already correctly live independently of the operating
+  workspace.
+- `venture_graduations` (1 row): unchanged schema; its *meaning* shifts from "workspace transition" to
+  "public-identity link," but the row itself needs no migration.
+- `modeled_ventures` and all Build tables: unchanged, zero migration — they are the tables the recommended
+  architecture keeps canonical.
+- Legacy routes (`/founder/startups/[id]`): kept alive with a redirect to `/idea-lab/[id]` for the linked
+  venture once that convergence ships, never a hard 404, so no existing bookmark/share link breaks.
+
+**Rollback:** every step above is additive or redirect-based; nothing proposed here requires an irreversible
+schema change, so rollback at any phase is "stop reading the new source, resume reading the old one" — no
+data is put in a state only the new code path can interpret.
+
+---
+
+## 25. Blank venture-name defect — root cause and future fix
+
+**Root cause, confirmed by re-reading the review-step component this phase**: the "What's your venture
+called?" field is a plain controlled input with no `required` validation and no non-empty check gating the
+"Create Venture" button's `disabled` state — the button's enablement was never wired to the name field's
+value at all, only to whether the AI-structuring step had completed. Clearing the field after the AI
+correctly pre-filled it leaves the button fully clickable, and `create_modeled_venture` itself has no
+NOT-NULL-content constraint beyond `NOT NULL` at the SQL level (an empty string satisfies `NOT NULL`).
+
+**Future fix (for the implementation phase, not built here):**
+- **Frontend**: disable "Create Venture" when the trimmed name is empty; if a name was previously
+  AI-suggested and then cleared, restore the suggestion or show inline "a name is required" rather than
+  silently accepting blank.
+- **Backend**: add a real validation rule (non-empty, trimmed, reasonable max length) to the venture-creation
+  request model, returning 422 rather than accepting whitespace-only names — defense in depth, since the
+  frontend fix alone doesn't protect a direct API call.
+- **Existing damaged records**: do not auto-rename. Surface a one-time, dismissible prompt on any venture
+  still literally named "Untitled venture" ("Give this venture a name") the next time its owner opens it —
+  never silently rewrite a founder's own data without their action.
+
+---
+
+## 26. Low-coverage SPS false precision — disposition
+
+Confirmed, live, in Phase 36: a "Coverage 5% / Not enough evidence yet" banner alongside a full six-pillar
+numeric breakdown and a "V2.1 SCORE (LEGACY)" number. **Founder Workspace convergence naturally reduces this
+problem's blast radius on the founder's own experience**, because SPS stops being the founder's default
+Overview (§13) — a founder building their own company will encounter this only when they deliberately choose
+"Analyze my company," where some amount of "this is still evaluation, not certainty" framing is already
+expected. It does **not** fix the underlying issue for a public viewer or investor looking at a low-coverage
+company's public profile, which is unaffected by workspace convergence entirely. **Recommend a separate,
+future Analyze-hardening phase** to decide whether low-coverage companies should suppress the pillar
+breakdown and legacy score entirely rather than merely labeling them — explicitly not solved here, per this
+phase's own instruction not to redesign SPS.
+
+---
+
+## 27. Legacy/dead code impact classification
+
+| Component/system | Classification |
+|---|---|
+| `FounderStartupWorkspaceView` and its child components | **REQUIRED DURING MIGRATION** (it's the live template for every current My Startups visit) → **SAFE TO RETIRE AFTER CONVERGENCE**, once the unified workspace fully covers its jobs |
+| `founder_actions` UI components | **REQUIRED DURING MIGRATION** for the no-linked-venture edge case (§18) → **SAFE TO RETIRE** once that edge case is otherwise handled |
+| `founder_updates` UI components | Same as above |
+| Fundraising Readiness surface | **STILL LIVE ELSEWHERE** — relocates (§12/§14), does not retire |
+| Dead VPS UI (`VPSResultPanel.tsx`, `vps_guidance.py` output) | **SAFE TO RETIRE** independent of convergence — already fully dead per Phase 36's own code-level confirmation, zero relationship to this convergence work |
+| `WhatIfPanel.tsx` / `ScenarioComparison.tsx` | **SAFE TO RETIRE** independent of convergence, same as above |
+| `generate_guidance()` output path | **SAFE TO RETIRE** independent of convergence |
+| Legacy startup claim UX (manual review flow) | **STILL LIVE ELSEWHERE** — this is the correct, load-bearing path for stranger-claims-an-existing-startup and must not be touched by this convergence at all |
+
+---
+
+## 28. Three convergence options
+
+### Option 1 — Bridge (recommended)
+
+**Product behavior:** the venture workspace (`/idea-lab/[id]`) becomes the one place a founder operates their
+company, at every lifecycle stage. Graduation stops being a workspace transition and becomes a status flag
+plus a public-profile affordance. My Startups becomes an index that opens the same workspace.
+**Canonical entity:** `modeled_ventures` (Option B from §4).
+**Database impact:** none — zero schema changes. Only new *read* paths (the unified workspace additionally
+reads `startups`/`analyses`/trust status when a graduation link exists) and new, additive dual-read handling
+for the `founder_actions`/`founder_updates` edge case.
+**Migration complexity:** Low. No destructive migration; a small backfill for 3 + 2 rows.
+**Frontend impact:** Moderate — `FounderStartupWorkspaceView`'s unique capabilities (SPS display, Fundraising
+Readiness, Action Plan, Recent Updates, Milestones) get either relocated into the venture workspace as new
+sections or replaced by the equivalent Build capability; the template itself is retired after convergence.
+**API impact:** Additive endpoints only (venture workspace needs to read `startups`/`analyses`/trust for a
+linked venture); no existing endpoint needs to change behavior.
+**Backward compatibility:** High — old `/founder/startups/[id]` URLs redirect; nothing is deleted during the
+transition.
+**Risk:** Low-to-moderate — the main risk is scope creep in "how much of Founder Workspace's UI moves into
+Build's Overview vs. becomes a secondary tab," not data risk.
+**Benefits:** Directly solves the P0 from Phase 36 with the smallest possible data-model change; leverages
+that graduation is barely used (1 row) so there's almost no existing "post-graduation" experience to disrupt.
+**What retires:** `FounderStartupWorkspaceView`, `founder_actions`/`founder_updates` as primary systems (kept
+readable during migration).
+**What survives:** everything in `modeled_ventures`'s own tree, `startups`/`startup_memberships`/
+`startup_claims`, `analyses`/`score_history`, public profile.
+
+### Option 2 — Startup-canonical
+
+**Product behavior:** flip the direction — make `startups` the canonical operating identity, and migrate
+`modeled_ventures`' own data (missions, evidence, decisions, Finance) to be `startup_id`-scoped instead,
+auto-creating a `startups` row for every venture immediately (even idea-stage, pre-graduation) rather than
+only at graduation.
+**Canonical entity:** `startups` (Option C from §4).
+**Database impact:** High — every Build table (`venture_missions`, `venture_evidence`, `venture_decisions`,
+all four Finance tables) would need a new `startup_id` column, a backfill for **142 existing ventures** (only
+1 of which currently has a `startups` row at all), and a decision about `normalized_name` uniqueness for the
+141 that don't.
+**Migration complexity:** High.
+**Frontend impact:** High — every Build API call and component currently keyed by `venture_id` changes key.
+**API impact:** High — nearly every Build endpoint's routing/ownership check changes.
+**Backward compatibility:** Low without a long dual-key transition.
+**Risk:** High, for a large migration whose main justification (name-based public dedup) doesn't need to
+apply to a venture that has no public presence yet.
+**Benefits:** A cleaner "everything is a startup" story if the product ever wants every venture to be
+publicly discoverable from creation — not a goal stated anywhere in this phase's brief.
+**What retires:** `modeled_ventures` eventually.
+**What survives:** `startups` and its whole existing tree, unchanged in spirit.
+**Rejected because:** it inverts the far larger, far more actively-used system (142 ventures, 113 missions,
+18 evidence rows) to fit the far smaller, far less-used one (1 graduation), and it forces every idea-stage
+venture to acquire a public, name-deduplicated identity it doesn't want or need yet.
+
+### Option 3 — New canonical Company entity
+
+**Product behavior:** introduce a new `companies` table; both `modeled_ventures` and `startups` become
+child/adjacent records pointing at it.
+**Canonical entity:** a new `Company` (Option D from §4).
+**Database impact:** Highest — a new table, a backfill mapping every existing venture and startup to a new
+company row (including resolving the ambiguous cases where a venture and a startup for "the same" company
+exist without a `venture_graduations` link between them, which — per this phase's own count — is likely most
+of the 24 startups, since only 1 has a confirmed graduation link), and every downstream query touching either
+table needs a new join.
+**Migration complexity:** Highest.
+**Frontend/API impact:** Highest — a third identity concept now needs representing everywhere.
+**Backward compatibility:** Requires the most extensive compatibility shimming of the three options.
+**Risk:** Highest, and for the least proven benefit.
+**Benefits:** Theoretical architectural symmetry.
+**What retires:** Nothing directly; adds a layer on top of everything.
+**What survives:** Everything, but nothing simplifies.
+**Rejected, per the directive's own explicit skepticism of this option**: it is exactly the kind of
+"architecturally elegant but not repository-justified" design the phase asks to be wary of. Nothing in the
+actual data (142 ventures, 1 graduation, 24 startups mostly ungraduated) demonstrates a real need for a third
+identity layer — `modeled_ventures` already *is* the operating company record; introducing a fourth table to
+sit above both existing identities would solve a problem the repository doesn't currently have.
+
+---
+
+## 29. Recommended architecture: Option 1 (Bridge)
+
+**Canonical company entity:** `modeled_ventures` — the founder's continuous operating record, from idea
+through revenue through fundraising, unchanged in schema.
+
+**What happens to `modeled_ventures`:** nothing — it becomes explicitly, permanently canonical rather than
+implicitly so.
+
+**What happens to `startups`:** unchanged in schema and in its existing job (canonical public/evaluation
+identity, still creatable unowned by anyone running Analyze on any company). Its *product* role narrows to
+exactly that — evaluation and public identity — and stops being asked to also serve as an operating
+workspace.
+
+**What happens to `venture_graduations`:** unchanged in schema; its product meaning shifts from "workspace
+transition" to "this venture now also has a public Startup Profile."
+
+**What happens to `founder_actions`:** dual-read during migration (§24), retired as a primary system once the
+unified workspace's action list (`venture_missions`) covers every startup that has a linked venture; kept
+alive, unmodified, for the no-linked-venture edge case until a later phase addresses that case explicitly.
+
+**What happens to `founder_updates`:** same treatment as `founder_actions`, surfaced in the unified workspace
+as a distinct "general update" entry type alongside (not merged into) evidence, per §9.
+
+**What happens to `startup_memberships`/`startup_claims`:** unchanged — remain the correct trust/ownership
+tables, now consumed *by* the unified workspace (to know whether a public profile/trust badge exists for this
+venture's linked startup) rather than gating a separate workspace.
+
+**What happens to SPS/`analyses`:** unchanged in schema; relocates in presentation to an on-demand "Analyze"
+section inside the unified workspace (§13) rather than dominating the default Overview.
+
+**What happens to Finance:** unchanged — stays on `venture_id`, confirmed safe (§11).
+
+**What happens to Fundraising:** unchanged — stays ephemeral, `venture_id`-scoped for its one Finance-read
+(§12); Fundraising Readiness relocates in presentation only, next to Analyze rather than next to the
+simulator.
+
+**What happens to the public Startup Profile:** unchanged, remains a fully separate surface (§21).
+
+---
+
+## 30. Unified workspace information architecture (product level, not pixel-level)
+
+Given the existing capabilities (already verified live and in code across Phases 34–36), the smallest
+intuitive structure a founder needs weekly:
+
+- **Overview** — what matters now, why, what changed, current financial context where relevant, next action.
+  (Unchanged from Build's own current Overview in spirit; §31 for hierarchy.)
+- **Finance** — unchanged, exactly as it exists today.
+- **Fundraising** — unchanged, exactly as it exists today.
+- **History** — one continuous timeline, surviving graduation (§32).
+- **Analyze** — new section (not a new system): "View latest company analysis" → SPS, pillars, confidence,
+  evidence coverage, Fundraising Readiness — plus, if a public profile exists, a link to it and its trust
+  status. This is where My Startups' unique capabilities live on, relocated rather than duplicated.
+
+No new top-level area is introduced. "Validate / Decisions" as a separate tab (floated as a possibility in
+the directive) is not recommended as a *new* tab — Build's existing Overview already carries this job live
+today (questions, tests, evidence, decisions all appear there); splitting it into a separate tab would be
+new complexity the current, working design doesn't need.
+
+---
+
+## 31. Overview future — hierarchy
+
+Confirmed by this phase's own repeated live testing: what matters now / why / next action already **is** the
+right hierarchy (Phase 34E's own prior work, re-validated). The recommended change is exclusion, not
+addition: SPS, pillar dashboards, and Fundraising Readiness must **not** appear here by default — they move
+to the new Analyze section (§30) and surface on Overview, at most, as a small, optional "last analyzed
+[date], view →" pointer, never as the page's own headline number.
+
+---
+
+## 32. History future — one timeline
+
+Recommended founder-facing event types for one continuous timeline, spanning the company's whole life:
+venture created; question selected; test completed; evidence recorded; decision made; outcome recorded;
+financial snapshot recorded; plan created/reconciled; fundraising modeled; company stage changed; **Analyze
+run completed** (new — currently invisible to Build's own History); **public profile created** (new — the
+former "graduation," reframed per §5); **verification/trust status changed** (new). Not all of these need new
+tables — `venture_missions`/`venture_evidence`/`venture_decisions`/Finance tables already produce most of
+this; "Analyze run completed" and "public profile created/trust changed" are the only genuinely new event
+sources, and both already have a durable row to read from (`analyses.created_at`, `venture_graduations.
+created_at`, `startup_claims`'s own status/timestamps) — no new generic event table is needed.
+
+---
+
+## 33. Implementation sequence (small, independently testable, rollback-safe phases)
+
+- **37B — Identity + routing bridge + blank-name fix.** Wire the unified workspace to read `startups`/
+  `analyses`/trust status for a venture's linked graduation (additive reads only); add the redirect from
+  `/founder/startups/[id]` to the linked venture; fix the blank-venture-name defect (frontend + backend
+  validation) per §25. No data migration.
+- **37C — Founder Workspace capabilities relocate into Build.** Add the "Analyze" section (§30) to the
+  venture workspace showing SPS/pillars/confidence/Fundraising Readiness for a linked startup. Still
+  additive; `FounderStartupWorkspaceView` stays live in parallel.
+- **37D — Retire duplicate actions/updates.** Dual-read `founder_actions`/`founder_updates` into the unified
+  workspace's own equivalents for ventures with a linked graduation; backfill the (very small) existing rows;
+  keep the no-linked-venture edge case on the old tables.
+- **37E — Graduation UX convergence.** Reframe graduation as a status/public-profile moment rather than a
+  workspace transition; retire the `/founder` index's separate template in favor of opening the unified
+  workspace.
+- **37F — Cleanup.** Retire `FounderStartupWorkspaceView` and its now-unused child components once 37B–37E are
+  confirmed stable; separately, and independently of this whole sequence, retire the already-fully-dead VPS/
+  What-If/`generate_guidance` code identified in Phase 36 and re-confirmed here (§27) — unrelated cleanup that
+  can happen at any time.
+
+Every phase above is additive-only until 37F, and 37F itself only removes code already proven, by this
+phase's own repository read, to have zero remaining live dependents.
+
+---
+
+## 34. Migration invariants
+
+No existing founder loses access to a company. No evidence row is lost. No decision row is lost. No Finance
+history is lost. No analysis/SPS artifact is lost. No public profile URL breaks without a redirect. Trust
+status is preserved exactly as recorded. Hypothetical Finance/Fundraising data never becomes factual Analyze
+data (§23). Graduated ventures retain their entire pre-graduation history (already true today — nothing
+proposed here changes it). No duplicate company records are accidentally created (§6's collision handling
+already exists and must be preserved, not bypassed).
+
+---
+
+## 35. Risks
+
+**Highest-risk phase: 37E (graduation UX convergence)** — the only phase in the sequence that changes a
+founder-visible behavior (what happens when they graduate) rather than only adding new reads; must be tested
+against the one real existing graduation record plus fresh test cases before shipping.
+
+**Biggest product risk:** relocating too much of Founder Workspace's UI into Build's Overview and
+recreating the same "score dominates the operating view" problem this whole convergence exists to fix — the
+Analyze section must stay secondary by construction (§31), not just by initial intent.
+
+**Biggest data-migration risk:** the no-linked-venture edge case (a `startups` row with membership but no
+`venture_graduations` row) — this phase's data suggests it affects the majority of the 24 startups (since
+only 1 has a confirmed graduation link) and needs its own graceful unified-workspace state (§18), not an
+assumption that every My Startups entry has Build history to show.
+
+**Biggest authorization risk:** none identified as new — every access check audited this phase (§16) is
+already correctly scoped; the convergence adds read paths, not new write/access surfaces, so it does not
+introduce new authorization complexity if implemented as additive-only through 37D.
+
+**Biggest UX risk:** founders mid-migration seeing two slightly different "action list" or "update log" UIs
+depending on whether their startup has a linked venture — mitigated by the dual-read design ensuring the
+*content* is consistent even before the UI itself fully converges.
+
+---
+
+## 36. Non-goals of this document
+
+This document does not implement any part of the convergence, run any migration, change any schema, rename
+any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital
+Planning, connect Finance data into Build's recommendation text, or introduce a new Company table. It
+documents what exists, validates the architecture hypothesis against the actual repository, and recommends a
+sequence for a future set of implementation phases to execute.
