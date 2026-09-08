@@ -2239,15 +2239,28 @@ _EXPENSE_CATEGORY_DISPLAY_LABELS = {
 
 
 def _plan_label(kind: str, row: dict) -> str:
+    """
+    Phase 35D-B §6 (Case F): describes the actual financial CHANGE, never
+    the plan's own arbitrary founder-given nickname. 35D's original
+    version prefixed every line with `{row['label']}: ...` -- inside a
+    scenario/comparison, that nickname carries no necessary information
+    the description itself doesn't already convey, and can actively
+    contradict the scenario's own name (a plan named "Growth" showing up,
+    unremarked, inside a scenario named "Conservative Plan"). The
+    founder's own label is still the PRIMARY, bolded line everywhere a
+    plan is shown on its own (Planned Changes) -- only the assumption
+    list built for a plan COMBINATION drops it in favor of a plain
+    description of what actually changes.
+    """
     if kind == "hire":
         cost = compute_hire_monthly_cost_cents(row)
         cost_label = f"{cost / 100:,.0f}/mo" if cost is not None else "cost unknown"
-        return f"{row['role']} (${cost_label}, starting {_format_month_year(row['start_date'])})"
+        return f"{row['role']} starts {_format_month_year(row['start_date'])} (${cost_label})"
     if row["plan_type"] == "revenue_target":
-        return f"{row['label']}: revenue becomes ${row['amount_cents'] / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
-    sign = "+" if row["amount_cents"] >= 0 else "-"
+        return f"Revenue becomes ${row['amount_cents'] / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
     category_label = _EXPENSE_CATEGORY_DISPLAY_LABELS.get(row["category"], row["category"])
-    return f"{row['label']}: {category_label} {sign}${abs(row['amount_cents']) / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
+    direction = "increases" if row["amount_cents"] >= 0 else "decreases"
+    return f"{category_label} spending {direction} ${abs(row['amount_cents']) / 100:,.0f}/month starting {_format_month_year(row['start_date'])}"
 
 
 def _build_scenario_response(user_id: str, venture_id: int, scenario: dict) -> ScenarioResponse:

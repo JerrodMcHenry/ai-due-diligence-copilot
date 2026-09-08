@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
@@ -86,6 +86,10 @@ export default function FinanceOverview({ ventureId }: Props) {
     | { mode: "financial"; planType: FinancialPlanType; editing: FinancialPlan | null }
   >({ mode: "closed" });
   const [scenarioPanelOpen, setScenarioPanelOpen] = useState(false);
+  // Phase 35D-B: scrolled/focused when the contextual "Compare plans"
+  // prompt is clicked -- reuses the existing Compare Plans section
+  // rather than opening a second comparison surface.
+  const scenariosSectionRef = useRef<HTMLDivElement>(null);
 
   const refresh = useCallback(async () => {
     const token = await getToken();
@@ -210,6 +214,15 @@ export default function FinanceOverview({ ventureId }: Props) {
     if (result) setData(result);
   }
 
+  // Phase 35D-B: the contextual "Compare plans" handoff reuses the
+  // existing Compare Plans workflow -- it opens the same create-plan
+  // form ScenariosSection's own button opens, then scrolls it into
+  // view, rather than building a second comparison surface.
+  function handleCompareClick() {
+    setScenarioPanelOpen(true);
+    scenariosSectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
   if (loadState === "loading") {
     return <div className="h-40 animate-pulse rounded-2xl border border-border bg-surface" />;
   }
@@ -287,6 +300,13 @@ export default function FinanceOverview({ ventureId }: Props) {
     );
   }
 
+  // Phase 35D-B §3/§12: comparison only becomes useful once there is
+  // more than one ACTIVE (status === "planned") change to combine --
+  // cancelled/actualized plans never count (Case E), matching the exact
+  // same filter PlannedChangesSection and ScenariosSection already use.
+  const activePlanCount =
+    data.hire_plans.filter((h) => h.status === "planned").length + data.financial_plans.filter((p) => p.status === "planned").length;
+
   return (
     <BaseCard className="space-y-6 p-6 sm:p-7">
       <div className="flex items-start justify-between gap-4">
@@ -316,19 +336,23 @@ export default function FinanceOverview({ ventureId }: Props) {
         onActualizeFinancialPlan={(plan) => handleFinancialPlanStatusChange(plan, "actualized")}
       />
 
+      {activePlanCount >= 2 && !scenarioPanelOpen ? <ComparePlansPrompt onCompare={handleCompareClick} /> : null}
+
       {data.projection.length > 0 ? (
         <CashOutlook projection={data.projection} projectionWithPlan={data.projection_with_plan} status={data.derived.status} />
       ) : null}
 
-      <ScenariosSection
-        ventureId={ventureId}
-        hirePlans={data.hire_plans.filter((h) => h.status === "planned")}
-        financialPlans={data.financial_plans.filter((p) => p.status === "planned")}
-        isCreating={scenarioPanelOpen}
-        onOpenCreate={() => setScenarioPanelOpen(true)}
-        onCloseCreate={() => setScenarioPanelOpen(false)}
-        onCreate={handleCreateScenario}
-      />
+      <div ref={scenariosSectionRef}>
+        <ScenariosSection
+          ventureId={ventureId}
+          hirePlans={data.hire_plans.filter((h) => h.status === "planned")}
+          financialPlans={data.financial_plans.filter((p) => p.status === "planned")}
+          isCreating={scenarioPanelOpen}
+          onOpenCreate={() => setScenarioPanelOpen(true)}
+          onCloseCreate={() => setScenarioPanelOpen(false)}
+          onCreate={handleCreateScenario}
+        />
+      </div>
 
       <div>
         <Button type="button" variant="secondary" onClick={() => setIsEditing(true)}>
@@ -715,6 +739,26 @@ function PlannedChangesSection({
       <p className="mt-1.5 text-sm leading-6 text-text-secondary">
         See how a hire, a revenue change, or a spending change would affect your cash runway.
       </p>
+    </div>
+  );
+}
+
+// --- Phase 35D-B -- contextual "Compare plans" handoff -----------------------
+// Surfaces only once comparison is actually useful (2+ active planned
+// changes, per §3/§12 -- Case B/C) -- never a permanent fixture next to
+// a single change, and never a second comparison surface: clicking it
+// opens and scrolls to the SAME Compare Plans section/form the founder
+// could always reach on their own further down the page.
+function ComparePlansPrompt({ onCompare }: { onCompare: () => void }) {
+  return (
+    <div className="rounded-lg border border-primary/30 bg-primary-soft p-4">
+      <p className="text-sm font-semibold text-text-primary">You have multiple planned changes</p>
+      <p className="mt-1 text-sm leading-6 text-text-secondary">
+        Compare different combinations of them to see how they affect your cash.
+      </p>
+      <Button type="button" size="sm" className="mt-3" onClick={onCompare}>
+        Compare plans
+      </Button>
     </div>
   );
 }
@@ -1200,7 +1244,7 @@ function FinancialPlanForm({
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium text-text-secondary">Name this scenario assumption</label>
+        <label className="mb-1 block text-sm font-medium text-text-secondary">Name this change</label>
         <input
           type="text"
           value={values.label}
