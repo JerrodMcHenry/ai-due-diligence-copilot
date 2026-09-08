@@ -24,6 +24,7 @@ import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
 import CurrentQuestionCard from "@/components/idea-lab/CurrentQuestionCard";
+import VentureAnalyzeSection from "@/components/idea-lab/VentureAnalyzeSection";
 import {
   useVentureGraduation,
   VentureGraduationAction,
@@ -98,13 +99,20 @@ function formatUpdatedAt(iso: string): string {
 // prematurely reorganize navigation to satisfy a future information
 // architecture merge -- see docs/product/SIE_FINANCIAL_DECISION_ENGINE_V2.md
 // §22 for what that eventual merge looks like, not built yet).
-type TabId = "overview" | "finance" | "fundraising" | "history";
+// Phase 37C -- Legacy Founder Workspace Capability Triage + Unified
+// Workspace Integration adds "analyze": the smallest useful "how does
+// SIE evaluate this company" surface, for a venture already linked to a
+// startup identity -- see the "analyze" TabPanel below for the honest
+// not-linked-yet state. Deliberately NOT named after any architecture
+// term (no "linked"/"graduated"/"canonical" in the visible label).
+type TabId = "overview" | "finance" | "fundraising" | "history" | "analyze";
 
 const LOCAL_NAV_TABS: { id: TabId; label: string }[] = [
   { id: "overview", label: "Overview" },
   { id: "finance", label: "Finance" },
   { id: "fundraising", label: "Fundraising" },
   { id: "history", label: "History" },
+  { id: "analyze", label: "Analyze" },
 ];
 
 // Mirrors CompareView.tsx's own parseStartupIds() discipline: an
@@ -1307,6 +1315,51 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
 
             <VentureProgress history={history} isLoading={isLoadingHistory} />
           </div>
+        </TabPanel>
+
+        {/* Phase 37C -- Legacy Founder Workspace Capability Triage +
+            Unified Workspace Integration. "How does SIE evaluate this
+            company" -- distinct from Overview's "what should I do next"
+            (Section 16's own Overview-protection rule: no SPS, no
+            pillars, no Fundraising Readiness there). startup_id is
+            resolved through the exact same ownership-checked
+            venture_graduations bridge Phase 37B already established
+            (`graduation.status`, fetched once by useVentureGraduation
+            above -- no second fetch, no name matching). A venture with
+            no startup identity yet gets an honest bridge into the
+            existing Analyze flow, never a silently-created startup. */}
+        <TabPanel id="analyze" activeId={tab}>
+          {graduation.status === null ? (
+            <div className="h-40 animate-pulse rounded-2xl border border-border bg-surface" />
+          ) : !graduation.status.graduated || graduation.status.startup_id == null ? (
+            <BaseCard className="p-8 text-center">
+              <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                Company Analysis
+              </p>
+              <h2 className="mt-1 text-lg font-semibold text-text-primary">
+                No SIE company evaluation yet
+              </h2>
+              <p className="mx-auto mt-3 max-w-md text-base leading-7 text-text-secondary">
+                Analyze evaluates a company using SIE&rsquo;s methodology based on evidence
+                available today -- separate from building {venture.name} here.{" "}
+                {venture.name} hasn&rsquo;t been evaluated yet.
+              </p>
+              <Button
+                type="button"
+                className="mt-5"
+                onClick={() => {
+                  if (description) {
+                    stashVentureDescriptionForAnalyze(description);
+                  }
+                  router.push("/analyze");
+                }}
+              >
+                Evaluate {venture.name} with SIE
+              </Button>
+            </BaseCard>
+          ) : (
+            <VentureAnalyzeSection startupId={graduation.status.startup_id} />
+          )}
         </TabPanel>
       </div>
     </>

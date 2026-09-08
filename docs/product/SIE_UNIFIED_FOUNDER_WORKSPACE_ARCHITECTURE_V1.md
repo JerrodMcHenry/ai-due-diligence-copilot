@@ -982,7 +982,209 @@ zero failures, unchanged counts. `tsc --noEmit`, `eslint`, and `next build` all 
 duplicate actions/updates via dual-read + backfill), 37E (full graduation UX convergence — the phase that
 should also perform the live spot-check this phase's own §37.11 deferred), 37F (cleanup).
 
-## 37. Non-goals of this document
+## 37. Phase 37C — Legacy Founder Workspace Capability Triage + Unified Workspace Integration
+
+Phase 37C audited every visible legacy Founder Workspace capability against actual repository behavior
+(not assumption), classified each A–E, and implemented the smallest useful "Analyze" surface inside the
+unified Venture Workspace for a linked company. Nothing was deleted, migrated, or redesigned; the legacy
+Founder Workspace remains fully intact for unlinked startups.
+
+### 37.1 Capability audit and classification
+
+| Capability | Classification | Reasoning |
+|---|---|---|
+| SPS (Startup Power Score) | B — Analyze | Read-only rendering of the existing `startup_intelligence_score`; not an operating-state concept. |
+| SPS pillars / dimension breakdown | B — Analyze | Same shared, read-only components (`IntelligencePillars`/`PillarNav`/`PillarWorkspace`) already used by the public profile — reused unmodified, not duplicated. |
+| Fundraising Readiness | MOVE TO ANALYZE (see §37.6) | Investigated in full (formula, backend, UI, call sites) — genuinely distinct from SPS, Build, and Finance; not a duplicate of anything. Capability kept as-is; only its entry point relocates. |
+| founder_actions (Action Plan) | LEGACY ONLY (see §37.7) | Plain workflow tracking with no evidence/decision/outcome modeling; Build's own venture_missions/Current Question/decisions loop already does this job better for a linked company. |
+| founder_updates (Recent Updates) | LEGACY ONLY (see §37.8) | Heterogeneous, self-reported, explicitly non-evidence (own docstring says so); Build's own capture flow (`CaptureWhatHappened`) already covers this for a linked company. |
+| startup_milestones (Milestones) | LEGACY ONLY | Same reasoning and same verdict as founder_actions — plain status tracking, never touches scoring, superseded by Build's own loop for a linked company. |
+| trust (Founder-managed / Verified badge) | C — Public Profile / Trust only | Already a single, reused, pure function (`resolveStartupTrustState`), rendered on the public profile only; not a private-workspace concept. |
+| public profile | C — Public Profile / Trust only | Confirmed genuinely separate — reads directly from `analyses` by company name, requires zero auth, independent of both workspaces. |
+| startup metadata (edit controls) | N/A — does not exist | Audited and confirmed: the legacy Founder Workspace has no startup-level settings/edit UI at all (`canonical_name` is read-only there); nothing to classify or migrate. |
+| claim/membership controls (`ClaimStartupButton`/`Form`) | C — Public Profile / Trust only | Already correctly scoped to the public profile only; never rendered inside either workspace. |
+| Build intelligence, Finance, Fundraising (simulator), History | A — already integrated | Confirmed unchanged, still native to the Venture Workspace. |
+
+### 37.2 Overview protection
+
+Confirmed by reading `VentureWorkspace.tsx`'s Overview tab content directly: it renders `VentureIdentity`,
+`VentureGraduationBanner`, `CurrentQuestionCard`, the graduation-eligible "Ready to turn this into a real
+startup?" card, and `CompanyIntelligenceState` — no SPS, no pillars, no Fundraising Readiness, no trust
+badge. Phase 37C added nothing to this tab; the new capability lives entirely in a new, separate "Analyze"
+tab (live-confirmed empty of SPS clutter — see §37.10, Test C).
+
+### 37.3 Unified workspace IA before / after
+
+**Before**: `Overview | Finance | Fundraising | History` (four tabs, `VentureWorkspace.tsx`'s own `TabId`
+union).
+
+**After**: `Overview | Finance | Fundraising | History | Analyze` (one new tab appended). No existing tab
+was renamed, reordered, or restructured.
+
+### 37.4 Analyze surface — what was built
+
+One new component, `dashboard/components/idea-lab/VentureAnalyzeSection.tsx`, rendered only inside the new
+"analyze" `TabPanel`:
+
+- **startup_id resolution**: reuses `graduation.status` from the `useVentureGraduation` hook
+  `VentureWorkspace.tsx` already calls once per page load (Part 17's own "no N+1" discipline) — the exact
+  same ownership-checked `GET /ventures/{venture_id}/graduation` → `venture_graduations` bridge Phase 37B
+  established. No new backend endpoint, no second fetch, no company-name matching.
+- **No startup identity yet**: an honest inline state in `VentureWorkspace.tsx` itself ("No SIE company
+  evaluation yet") with an intentional "Evaluate {venture} with SIE" button routing to the existing general
+  `/analyze` flow (reusing the same `stashVentureDescriptionForAnalyze` convenience Overview's own bridge
+  card already uses). Never silently creates a startup.
+- **Startup identity, no canonical analysis**: `VentureAnalyzeSection` calls the exact same
+  `GET /founder/startups/{id}` the legacy Founder Workspace reads, and when `methodology` is null, shows an
+  honest empty state ("No SIE company analysis has been run yet") with an intentional "Analyze this company"
+  link to the deterministic re-analysis path (`/analyze?startup_id={id}`) — never zeros, never a fabricated
+  pillar breakdown, never an automatic run.
+- **Startup identity with an existing analysis**: renders `SPSRing` (with `getOverallConfidence`, reused
+  unmodified from `StartupHeroV2`), the existing `structural_coverage.partial_structural_coverage` warning
+  (reused verbatim, no new confidence formula), `FundraisingReadinessCard`, `PitchDeckCoachTeaser`,
+  `IntelligencePillars`, and `SPSHistory` — all pre-existing, unmodified, shared components. Footer links to
+  the public profile and to re-analysis.
+
+No new endpoint, no new score, no new AI call, no Build→Analyze data contamination (Finance/hire-plan/
+fundraising-scenario data is never read by this component).
+
+### 37.5 Public-profile-without-analysis finding
+
+**Root cause** (confirmed by reading `get_startup_by_name()` in `app/database/db.py`): the public profile's
+backing query reads directly from the `analyses` table (`WHERE ... AND methodology IS NOT NULL`), not from
+the canonical `startups` table — architecturally, "Startup Profile" *is* "latest canonical analysis of this
+company," full stop. A `startups` row that exists (e.g., via graduation) with zero qualifying `analyses` rows
+has no query path to a profile at all; "Startup not found" is the only possible response, not a bug in the
+404 handling itself.
+
+**Acceptable?** Yes, as far as it goes — showing "not found" rather than fabricating a shell profile is
+exactly this product's own honesty doctrine (never zeros, never fake pillars). The one real gap: the
+identical message is shown for "no such company exists" and "this company exists but has no public content
+yet," which could read as more discouraging than accurate to a founder who just graduated.
+
+**Recommended fix**: a small, additive change — `get_startup_by_name()` falls back to a `startups`-table
+lookup by canonical name when the `analyses` lookup misses, and the public profile route distinguishes "no
+startup exists with this name" from "exists, not yet analyzed" with different, honest copy for the second
+case. Not implemented in 37C: it touches the public-profile response contract and its frontend rendering,
+which is real, if small, scope beyond a routing-triage phase.
+
+**Recommended phase**: a dedicated public-profile phase (37E or a follow-on "profile honesty" phase) — not
+37D, which is scoped to founder_actions/founder_updates migration groundwork.
+
+### 37.6 Fundraising Readiness — verdict: MOVE TO ANALYZE
+
+Audited in full: formula (`app/ai/fundraising_readiness.py` — deterministic, confidence × evidence-coverage
+"defensibility" weighting, stage-aware, zero LLM calls, zero persistence), backend (one read-only endpoint,
+`GET /founder/startups/{id}/fundraising`, reusing the existing workspace read), UI (a compact teaser card
+plus one dedicated page), and its relationship to every other system:
+
+- **Not a duplicate of SPS**: SPS measures what the evidence shows; Readiness measures how *defensible* that
+  evidence is for a fundraising conversation. The module's own docstring documents a real prior duplicate
+  (`readiness_score` / `generate_readiness_score()`, an ungrounded LLM re-scoring of the same pillars) that
+  this module deliberately does **not** wrap or extend — that legacy field is untouched, unused here.
+- **Not a duplicate of Build**: it can push gaps into the shared Action Plan (`source='fundraising_gap'`),
+  but the gaps themselves come from a distinct, deterministic computation Build has no equivalent of.
+- **Not a duplicate of Finance/the deterministic Fundraising simulator**: cash/runway/SAFE math is
+  completely unrelated to evidence-defensibility scoring; zero shared inputs, zero shared code.
+- **Does the number deserve to exist?** Yes — it answers a real, distinct founder question ("am I ready to
+  raise, and what will investors push on") that nothing else in the product answers.
+
+**Verdict**: the capability is kept exactly as-is (backend, formula, dedicated `/fundraising` page all
+untouched). Only its *entry point* moves — for a linked company it now surfaces from the new Analyze tab
+(alongside SPS/pillars, the other lens on the same canonical evaluation) rather than being a fixture in the
+legacy workspace body. The legacy Founder Workspace's own copy of `FundraisingReadinessCard` is untouched
+and still serves unlinked startups.
+
+### 37.7 founder_actions — verdict: LEGACY ONLY
+
+**Unique founder job, if any**: a shared, per-startup to-do list (todo/in-progress/completed), sourced from
+SIE recommendations, founder-authored text, or Fundraising Readiness gaps. Compared directly against Build's
+own venture_missions / Current Question / decisions / outcomes loop: founder_actions has no evidence model,
+no decision model, no outcome model — it is materially thinner than what Build already gives a linked
+company for "what should I do next."
+
+**Verdict**: **LEGACY ONLY**. Not integrated into the unified workspace (would duplicate, not improve, the
+weekly workflow); not retired (the table, endpoints, and legacy UI all remain fully functional for unlinked
+startups, and existing rows are real history); not migrated (Section 10's own explicit prohibition on
+guessing semantic equivalence between founder_actions rows and venture_missions rows — no backfill was
+attempted or should be).
+
+### 37.8 founder_updates — verdict: LEGACY ONLY
+
+**What they actually represent**: heterogeneous, self-reported progress notes across nine free-form
+categories (customer/revenue/product/team/fundraising/partnership/validation/operations/other), always
+labeled "Founder reported" in the UI, explicitly stated by the model's own docstring to never be canonical
+evidence and to never touch SPS/methodology.
+
+**Verdict**: **LEGACY ONLY**. Not treated as Evidence (would contaminate `venture_evidence`'s own semantics
+— explicitly forbidden). Not built into a new update system inside the unified workspace: Build's own
+`CaptureWhatHappened` ("what happened") capture flow already gives a linked company an equivalent, tighter-
+integrated capture surface. Existing founder_updates rows remain fully readable via the unchanged legacy
+Founder Workspace for unlinked startups; nothing was migrated or backfilled.
+
+### 37.9 Startup metadata
+
+No editable startup-level metadata surface exists anywhere in the legacy Founder Workspace to triage —
+confirmed by reading `FounderStartupWorkspaceView.tsx` in full: `canonical_name` is shown read-only in the
+header/breadcrumbs only. Venture-level rename/delete already exists on the Idea Lab side
+(`Rename`/`Delete venture`, unrelated to this phase). No action was needed or taken.
+
+### 37.10 Test matrix and live walkthrough
+
+A/B/C/D/E/F/G/H confirmed live (see below); I/K/L/M/N/O/P/Q/R/S/T/U/V/W confirmed via the complete,
+unmodified existing backend suite re-run after this phase's change (144 tests across
+`test_venture_graduation.py`, `test_idea_lab.py`, `test_founder_workspace.py`, `test_fundraising_readiness.py`,
+`test_founder_actions.py`, `test_founder_evidence.py` — zero failures, zero backend code touched this phase).
+
+**STATE 1 — linked, ClaimPilot (venture_id=893, startup_id=45391)**: no canonical analysis existed at the
+start of this phase (a genuine, honest discovery, not a defect — confirmed via direct DB query that both
+graduated/linked startups in this environment had zero analyses). Live-ran a real, intentional analysis
+through the new "Analyze this company" entry point (`/analyze?startup_id=45391`, correctly pre-labeled
+"Updating intelligence for: ClaimPilot — this analysis will be attached directly to ClaimPilot's existing
+profile"). Once complete, the Analyze tab correctly rendered SPS Ring (68.5, C+, Medium confidence),
+Fundraising Readiness (53, Developing, 2 gaps), Pitch Deck teaser, full pillar/dimension breakdown with
+Public/Inferred/Unavailable evidence tags, and Score History (68.5, 1 historical analysis) — Overview
+remained untouched by any of this. "View public profile" correctly opened `/startup/ClaimPilot`
+independently, showing the "Founder-managed" trust badge and the same 68.5 legacy score, disambiguated from
+a separately low-coverage V3 assessment on that page — confirming the public/private boundary held under a
+real, freshly-created analysis.
+
+**STATE 2 — linked, no analysis, RelayOps Graduation Test 37BA (venture_id=7616, startup_id=73091)**: the
+Analyze tab correctly showed "No SIE company analysis has been run yet" with no fake SPS, no fake pillars,
+and an intentional "Analyze this company" link — confirmed no automatic analysis ran merely from opening the
+tab.
+
+**STATE 3 — unlinked legacy, Retool (startup_id=13)**: the legacy Founder Workspace rendered exactly as
+before (SPS 71.1, "✓ Verified" badge, What's Working/Needs Attention) with no "Analyze" tab, no redirect, and
+survived a fresh reload — zero regression, confirmed untouched.
+
+### 37.11 Defect found and fixed
+
+One real defect surfaced live in STATE 1 and STATE 2: two text interpolations in the new
+`VentureAnalyzeSection.tsx` rendered with a missing space (`"ClaimPilottoday"`, `"37BAhas"`) — a JSX
+whitespace-collapse artifact (an expression immediately followed by text that wraps onto a new source line
+loses its separating space unless an explicit `{" "}` is inserted, the same pattern already used correctly
+elsewhere in this codebase). Fixed by adding explicit `{" "}` at both sites; re-verified live via direct DOM
+`textContent` reads on both ClaimPilot and RelayOps Graduation Test 37BA after the fix, then re-ran the full
+`tsc --noEmit` / `eslint` / `next build` suite (all clean) per the phase's own Defect Rule. No other code was
+changed as a result.
+
+### 37.12 Dead/legacy UI
+
+Nothing became unreachable this phase for *unlinked* startups (the legacy Founder Workspace's own routing is
+untouched). For *linked* startups, `FundraisingReadinessCard` and `PitchDeckCoachTeaser`'s renderings inside
+`FounderStartupWorkspaceView.tsx` are now unreachable in practice (a linked startup always redirects away
+from that view per Phase 37B), but the code itself is still load-bearing for unlinked startups and was left
+in place — correctly classified "still required by unlinked legacy Founder Workspace," not dead code.
+
+### 37.13 Remaining convergence work
+
+37D (founder_actions/founder_updates migration groundwork, per §33 — no migration attempted or recommended
+without a concrete backfill design), 37E (public-profile-without-analysis fix per §37.5, full graduation UX
+convergence), 37F (cleanup of the now-unreachable-for-linked-startups renderings noted in §37.12, once 37D/E
+land).
+
+## 38. Non-goals of this document
 
 This document does not implement any part of the convergence, run any migration, change any schema, rename
 any route, merge or delete any table or component, redesign SPS, change any scoring formula, build Capital
