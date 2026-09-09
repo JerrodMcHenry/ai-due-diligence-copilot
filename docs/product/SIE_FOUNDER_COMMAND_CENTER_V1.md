@@ -737,3 +737,121 @@ should build onto — not replace.
    absence in 38B should render as nothing shown, not an empty placeholder.
 
 No AI. No new table. No new score. No Fundraising touch.
+
+## 40. Phase 38C implementation (as built)
+
+38C's own governing rule ("a cross-system statement may exist only when two or more independently
+persisted facts create useful information that neither fact provides alone") was applied to the three
+candidate connections named in the directive — one was rejected outright on a structural audit, one was
+scoped down from its most general form on a second structural audit, and one was implemented as designed.
+Nothing here calls the model; every function is pure and deterministic.
+
+### Decision × Finance: rejected, no structural link
+
+Read `VentureDecisionResponse` (`app/models/venture_missions.py`) directly. Its only structural relationship
+to anything else is `related_mission_id` (Build) and `evidence_ids` — there is no
+`hire_plan_id`/`financial_plan_id` column, and no other FK to any Finance entity exists anywhere in that
+model. Per the directive's own instruction, this gap was **not** closed with text-matching a decision's
+`founder_choice` string against a hire/plan label — that would fabricate a connection the schema doesn't
+support and could misfire on coincidental wording. **Nothing was built for this connection.** The smallest
+schema change that would close the gap (documented for a future phase, not built now): add a nullable
+`related_financial_plan_id` FK to `venture_decisions`, populated only when a founder explicitly links a
+decision to a plan at decision-creation time — never inferred after the fact.
+
+### Plan × Actual: scoped to `revenue_target` plans only
+
+Audited `ScenarioResponse`'s own docstring (`app/models/venture_financial_plans.py`): scenario projections
+are "computed at read time, never stored" — this codebase has no frozen baseline for `expense_change`
+plans, which store a signed delta against a category value that was never snapshotted at plan-creation
+time. Reconstructing "what payroll was expected to become" would require either an assumed historical
+snapshot (not guaranteed to exist) or a new frozen-baseline column (a real schema change, not attempted).
+Per the directive's own Plan Baseline Problem instruction, this was **not** faked.
+
+`revenue_target` plans are structurally different: `amount_cents` is stored as an absolute monthly figure
+("it replaces total revenue outright" — `CreateFinancialPlanRequest`'s own docstring), directly comparable
+to the latest snapshot's own `total_monthly_revenue_cents` with no historical reconstruction needed. This
+is the one Plan × Actual connection implemented, in
+`dashboard/lib/build/commandCenterCrossSystem.ts::findRevenueTargetDivergence()`: it selects the
+most-recently-started `planned`, non-cancelled `revenue_target` plan whose `start_date` has passed, and
+returns a divergence fact only when its `amount_cents` differs from `derived.total_monthly_revenue_cents`
+(plain inequality — no materiality threshold, which would itself be an invented rule). A matching actual,
+an unknown actual (`total_monthly_revenue_cents === null`), a not-yet-started plan, and a cancelled plan
+all correctly produce no statement.
+
+Also audited `list_pending_reconciliation_for_owner()` (`app/database/db.py`) directly: it is purely
+date/status-based (has a plan's `start_date` passed, un-reconciled against the latest snapshot) and
+computes no numeric planned-vs-actual divergence at all — it could not be reused for this connection, so a
+new pure derivation function was written instead of retrofitting reconciliation's own semantics.
+
+### Build × Finance: scoped to snapshot staleness only
+
+Per the directive's own no-arbitrary-threshold rule, this connection never touches runway, burn, or cash
+qualitatively — it states only a snapshot's own age, reusing the 60-day figure this same document already
+established in §22, not a new number invented for this phase
+(`commandCenterCrossSystem.ts::findStaleFinanceContext()`, `STALE_SNAPSHOT_DAYS = 60`). It fires only when
+Build owns the primary "what matters now" slot (i.e., never when the financial-constraint card is already
+active — that card already names its own snapshot date) and only when a current Build focus text exists
+(lifted from `CurrentQuestionCard`'s own recommendation response via a new `onFocusText` callback — no
+second fetch, following the established "lift, don't re-fetch" pattern from Phase 34G).
+
+### Placement and ordering
+
+Both connections render inside one new "Relevant company context" card, below `CurrentQuestionCard`, only
+when Build (not Finance) owns the primary slot — a divergence found while the financial-constraint card is
+active is folded directly into `FinancialPriorityCard`'s own body and traceability instead of spawning a
+competing section. Plan × Actual divergence is ordered above Build × Finance staleness per the directive's
+own §16 priority; both are naturally capped at 2 since only two connection types exist. The card renders
+nothing (not an empty shell) when neither connection has a fact to state — silence is the default, per the
+directive's own hard non-goal.
+
+### Test results
+
+New test file `dashboard/tests/commandCenterCrossSystem.test.ts` (registered as `npm run
+test:commandCenterCrossSystem`, included in the aggregate `npm test`): 13/13 passed, covering both
+functions exhaustively — no plans, no derived metrics, unknown actual revenue, `expense_change` plans
+never compared, not-yet-started plans, cancelled plans, matching actuals, real divergence, most-recently-
+started-plan-wins, no focus text, no snapshot, fresh snapshot, and stale snapshot. Full frontend suite (18
+test files including this one) re-run: all passing. `tsc --noEmit`, `eslint`, and `next build` all clean.
+No backend file was touched this phase, so the backend suite was spot-checked rather than run in full.
+
+### Live walkthrough results (5 states, all reconfirmed by direct DOM `textContent` reads, not screenshots alone)
+
+1. **Build-only, silence** (ClaimPilot, `venture_id=893`): Build's own recommendation renders under "What
+   matters now" with no "Relevant company context" card and no financial priority card — confirmed live
+   (`hasRelevantContext: false`, `hasFinancialPriority: false`).
+2. **Silence with Finance present but no connection** (RelayOps): fresh, matching Finance data produces no
+   cross-system statement — confirmed in an earlier pass of this same phase.
+3. **Combined: both connections present** (FridgeChef Renamed Private, `venture_id=8212`): a stale (99-day)
+   snapshot and a real revenue divergence (planned $30,000/mo "Reach $30K MRR" vs. actual $10,000/mo) both
+   render in the "Relevant company context" card, divergence first, each traceable via an expandable "Why
+   SIE is showing this ▾" disclosure.
+4. **Staleness-only** (same venture, plan `amount_cents` temporarily set equal to actual revenue to remove
+   the divergence, snapshot left stale): confirmed live — only the staleness statement rendered
+   (`hasDivergenceText: false`, `hasStaleText: true`).
+5. **Divergence-only** (same venture, plan mismatch restored, snapshot `as_of_date` temporarily moved to
+   38 days old): confirmed live — only the divergence statement rendered (`hasDivergenceText: true`,
+   `hasStaleText: false`).
+
+After state 5, venture 8212's fixture data was restored to the combined state (3) and reconfirmed live,
+since that is the richest state and the one worth leaving behind as a standing demo fixture — consistent
+with this session's established convention of leaving disposable test data in place rather than reverting
+every venture to a pristine state.
+
+A JSX whitespace-collapse bug (the same recurring artifact documented in multiple prior phases this
+session) was found and fixed during this walkthrough: `{staleContext.daysStale}` immediately followed by a
+line break and then literal text lost its separating space ("99days old"). Fixed with an explicit `{" "}`
+token. The traceability `<li>` bullets use the same expression-then-text pattern but entirely on one source
+line each, which this bug does not affect — confirmed correct by direct DOM read rather than assumed safe.
+
+### Known limitations
+
+- `resize_window` again reports success without changing `window.innerWidth` in this environment (the same
+  limitation reconfirmed in every prior phase this session). `RelevantContext` reuses the same `BaseCard`/
+  stacked-`<p>` primitives already responsive-verified in 38B with no new grid/flex breakpoints, so
+  responsive risk is judged low, but a true narrow-viewport screenshot was not obtained.
+- Decision × Finance remains unimplemented — closing it defensibly requires a schema change (§40 above),
+  not a workaround.
+- Runway-based (non-zero-cash) escalation still does not exist, per the same Section 22 gate reaffirmed in
+  38B — unchanged by this phase.
+
+No AI. No new score. No SPS/pillar influence. No Build×Analyze. No Fundraising touch.

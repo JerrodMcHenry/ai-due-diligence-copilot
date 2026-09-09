@@ -79,11 +79,26 @@ type Props = {
   // completely unaffected either way; only whether IT renders the page's
   // primary heading changes.
   heading?: string | null;
+  // Phase 38C -- Cross-System Founder Intelligence V1. Same "lift, don't
+  // re-fetch" pattern as onCompanyIntelligence above: the plain-text
+  // label for whatever Build currently considers its focus (the active
+  // mission's question if one is being tested, else the current
+  // recommendation's question) -- the one Build-side fact
+  // CommandCenter.tsx's own cross-system connections need. Never a new
+  // fetch; read straight off the same recommendation response this
+  // component already has.
+  onFocusText?: (text: string | null) => void;
 };
 
 type LoadState = "loading" | "ready" | "error";
 
-export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyIntelligence, heading = "What matters now" }: Props) {
+export default function CurrentQuestionCard({
+  ventureId,
+  ventureName,
+  onCompanyIntelligence,
+  heading = "What matters now",
+  onFocusText,
+}: Props) {
   const { getToken } = useAuth();
 
   const [loadState, setLoadState] = useState<LoadState>("loading");
@@ -110,12 +125,13 @@ export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyI
       setCurrentQuestion(rec.current_question);
       setRecommendation(rec.recommendation);
       onCompanyIntelligence?.(rec.company_intelligence);
+      onFocusText?.(rec.current_question?.question_text ?? rec.recommendation?.question_text ?? null);
       setLoadState("ready");
     } catch (err) {
       console.error("Failed to load the current question:", err);
       setLoadState("error");
     }
-  }, [ventureId, getToken, onCompanyIntelligence]);
+  }, [ventureId, getToken, onCompanyIntelligence, onFocusText]);
 
   useEffect(() => {
     // Promise.resolve().then() is a genuine microtask boundary, not

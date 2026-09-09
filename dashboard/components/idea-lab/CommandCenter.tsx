@@ -12,8 +12,14 @@ import VentureUnderstandingPanel from "@/components/idea-lab/VentureUnderstandin
 import { getVentureFinancials } from "@/lib/api";
 import { formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 import { isFinancialConstraintActive } from "@/lib/build/commandCenterPriority";
+import {
+  findRevenueTargetDivergence,
+  findStaleFinanceContext,
+  type RevenueTargetDivergence,
+  type StaleFinanceContext,
+} from "@/lib/build/commandCenterCrossSystem";
 
-import type { CompanyIntelligenceSummary, DerivedFinancialMetrics, FinancialSnapshot, VPSResult } from "@/types";
+import type { CompanyIntelligenceSummary, DerivedFinancialMetrics, FinancialPlan, FinancialSnapshot, VPSResult } from "@/types";
 
 type Props = {
   ventureId: number;
@@ -57,7 +63,12 @@ export default function CommandCenter({ ventureId, ventureName, modelResult, has
   const [financeState, setFinanceState] = useState<FinanceLoadState>("loading");
   const [derived, setDerived] = useState<DerivedFinancialMetrics | null>(null);
   const [snapshot, setSnapshot] = useState<FinancialSnapshot | null>(null);
+  const [financialPlans, setFinancialPlans] = useState<FinancialPlan[]>([]);
   const [companyIntelligence, setCompanyIntelligence] = useState<CompanyIntelligenceSummary | null>(null);
+  // Phase 38C -- Cross-System Founder Intelligence V1. Lifted from
+  // CurrentQuestionCard's own already-fetched recommendation response,
+  // same "no second fetch" pattern as companyIntelligence above.
+  const [focusText, setFocusText] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -74,6 +85,7 @@ export default function CommandCenter({ ventureId, ventureName, modelResult, has
         if (isMounted) {
           setDerived(data.derived);
           setSnapshot(data.latest_snapshot);
+          setFinancialPlans(data.financial_plans);
           setFinanceState("ready");
         }
       } catch (error) {
@@ -106,18 +118,45 @@ export default function CommandCenter({ ventureId, ventureName, modelResult, has
   const whatChanged = companyIntelligence?.what_changed ?? [];
   const hasAnyBuildContext = knows.length > 0 || stillFiguringOut.length > 0 || whatChanged.length > 0;
 
+  // Phase 38C -- Cross-System Founder Intelligence V1. Both derivations
+  // are pure and read only data this component already has on hand (no
+  // new fetch). Section 16's own priority order: a real plan-vs-actual
+  // divergence ranks above a Build-focus staleness note. Capped at the
+  // two connection TYPES this phase implements (never more than one of
+  // each can exist at a time, so this is already <= 2 total). The
+  // staleness connection never fires when Finance already owns the
+  // primary "what matters now" slot (the financial priority card already
+  // names its own snapshot date -- see the module comment on
+  // findStaleFinanceContext for why).
+  const revenueDivergence =
+    financeState === "ready" ? findRevenueTargetDivergence(financialPlans, derived, snapshot?.as_of_date ?? null) : null;
+  const staleContext =
+    !financialConstraint && financeState === "ready"
+      ? findStaleFinanceContext(focusText, snapshot?.as_of_date ?? null, new Date())
+      : null;
+
   return (
     <div className="space-y-6">
       {financialConstraint ? (
-        <FinancialPriorityCard ventureId={ventureId} ventureName={ventureName} constraint={financialConstraint} />
+        <FinancialPriorityCard
+          ventureId={ventureId}
+          ventureName={ventureName}
+          constraint={financialConstraint}
+          revenueDivergence={revenueDivergence}
+        />
       ) : null}
 
       <CurrentQuestionCard
         ventureId={ventureId}
         ventureName={ventureName}
         onCompanyIntelligence={setCompanyIntelligence}
+        onFocusText={setFocusText}
         heading={financialConstraint ? null : "What matters now"}
       />
+
+      {!financialConstraint && (revenueDivergence || staleContext) ? (
+        <RelevantContext ventureId={ventureId} revenueDivergence={revenueDivergence} staleContext={staleContext} />
+      ) : null}
 
       {/* Phase 38B, Section 16: this is the SAME content the old
           CompanyIntelligenceState private function rendered (Phase 34G
@@ -208,10 +247,18 @@ function FinancialPriorityCard({
   ventureId,
   ventureName,
   constraint,
+  revenueDivergence,
 }: {
   ventureId: number;
   ventureName: string;
   constraint: { derived: DerivedFinancialMetrics; snapshot: FinancialSnapshot | null };
+  // Phase 38C: a real revenue-target divergence can co-exist with an
+  // out_of_cash state (the two facts are independent) -- rather than a
+  // second card competing for "what matters now," it's folded into this
+  // same card's own "relevant company context" line and traceability,
+  // per §15's own placement rule (cross-system context lives INSIDE the
+  // current primary card, never as a rival section).
+  revenueDivergence: RevenueTargetDivergence | null;
 }) {
   const { derived, snapshot } = constraint;
   const [showTrace, setShowTrace] = useState(false);
@@ -238,6 +285,15 @@ function FinancialPriorityCard({
         Review your cash plan →
       </Link>
 
+      {revenueDivergence ? (
+        <p className="text-base leading-7 text-text-secondary">
+          Your plan, &ldquo;{revenueDivergence.planLabel},&rdquo; targeted{" "}
+          {formatWholeDollars(revenueDivergence.plannedAmountCents)}/month in revenue starting{" "}
+          {formatMonthYear(revenueDivergence.startDate)}. Your latest snapshot shows{" "}
+          {formatWholeDollars(revenueDivergence.actualAmountCents)}/month in total revenue.
+        </p>
+      ) : null}
+
       <div>
         <button
           type="button"
@@ -252,6 +308,90 @@ function FinancialPriorityCard({
             <li>• Monthly net burn: {burnLabel}</li>
             {snapshotDateLabel ? <li>• Snapshot date: {snapshotDateLabel}</li> : null}
             <li>• Status: cash is at or below zero while spending exceeds revenue</li>
+            {revenueDivergence ? (
+              <>
+                <li>• Planned: &ldquo;{revenueDivergence.planLabel}&rdquo; ({formatWholeDollars(revenueDivergence.plannedAmountCents)}/month, starting {formatMonthYear(revenueDivergence.startDate)})</li>
+                <li>• Actual (latest snapshot): {formatWholeDollars(revenueDivergence.actualAmountCents)}/month total revenue</li>
+              </>
+            ) : null}
+          </ul>
+        ) : null}
+      </div>
+    </BaseCard>
+  );
+}
+
+// --- Relevant company context (cross-system, Phase 38C) --------------------
+//
+// Renders only when at least one connection exists (§15: "if no
+// meaningful connection exists, render nothing -- silence is correct").
+// Placed directly below CurrentQuestionCard, above "Current context,"
+// matching §15's own placement diagram. Never rendered when the
+// financial priority card already owns the primary slot -- a revenue
+// divergence in THAT state is instead folded into that card itself (see
+// FinancialPriorityCard above), and the staleness connection is
+// meaningless once Finance already dominates.
+function RelevantContext({
+  ventureId,
+  revenueDivergence,
+  staleContext,
+}: {
+  ventureId: number;
+  revenueDivergence: RevenueTargetDivergence | null;
+  staleContext: StaleFinanceContext | null;
+}) {
+  const [showTrace, setShowTrace] = useState(false);
+
+  return (
+    <BaseCard className="space-y-3 p-6">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Relevant company context</p>
+
+      {revenueDivergence ? (
+        <p className="text-base leading-7 text-text-secondary">
+          Your plan, &ldquo;{revenueDivergence.planLabel},&rdquo; targeted{" "}
+          {formatWholeDollars(revenueDivergence.plannedAmountCents)}/month in revenue starting{" "}
+          {formatMonthYear(revenueDivergence.startDate)}. Your latest snapshot shows{" "}
+          {formatWholeDollars(revenueDivergence.actualAmountCents)}/month in total revenue.
+        </p>
+      ) : null}
+
+      {staleContext ? (
+        <p className="text-base leading-7 text-text-secondary">
+          &ldquo;{staleContext.focusText}&rdquo; remains your current focus. Your latest financial snapshot is{" "}
+          {staleContext.daysStale}{" "}
+          days old, so SIE can&rsquo;t yet connect your financial position to this.
+        </p>
+      ) : null}
+
+      <Link
+        href={`/idea-lab/${ventureId}?tab=finance`}
+        className="inline-flex text-sm font-semibold text-primary hover:text-primary-hover"
+      >
+        Review Finance →
+      </Link>
+
+      <div>
+        <button
+          type="button"
+          onClick={() => setShowTrace((v) => !v)}
+          className="text-sm font-semibold text-primary hover:text-primary-hover"
+        >
+          Why SIE is showing this {showTrace ? "▴" : "▾"}
+        </button>
+        {showTrace ? (
+          <ul className="mt-2 space-y-1 text-sm text-text-secondary">
+            {revenueDivergence ? (
+              <>
+                <li>• Planned: &ldquo;{revenueDivergence.planLabel}&rdquo; ({formatWholeDollars(revenueDivergence.plannedAmountCents)}/month, starting {formatMonthYear(revenueDivergence.startDate)})</li>
+                <li>• Actual (latest snapshot): {formatWholeDollars(revenueDivergence.actualAmountCents)}/month total revenue</li>
+              </>
+            ) : null}
+            {staleContext ? (
+              <>
+                <li>• Current Build focus: {staleContext.focusText}</li>
+                <li>• Latest financial snapshot: {staleContext.daysStale} days old</li>
+              </>
+            ) : null}
           </ul>
         ) : null}
       </div>
