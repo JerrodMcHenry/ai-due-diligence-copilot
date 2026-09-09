@@ -55,6 +55,19 @@ _REVENUE_FIELDS = (
 
 DEFAULT_PROJECTION_HORIZON_MONTHS = 24
 
+# Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation V1.
+# Stamped onto every venture_financial_commitments row at the moment its
+# expected_monthly is computed (§9/§24 of docs/product/
+# SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md) so a future reader can
+# tell which era's projection math produced a given frozen number. Bump
+# this BY HAND only when project_monthly_cash_flow()'s own math changes
+# in a way that would produce a different result for the same inputs --
+# never automatically, never as a trigger to recompute anything: a
+# commitment's own already-stored expected_monthly is NEVER recalculated
+# against a newer version, by design (a historical expectation must not
+# silently mutate just because the engine improved later).
+FINANCIAL_PROJECTION_CALCULATION_VERSION = "1"
+
 
 def _sum_or_none(values: list[int | None]) -> int | None:
     """None ("unknown") poisons the sum -- summing an unknown quantity

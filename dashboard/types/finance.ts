@@ -173,3 +173,64 @@ export interface VentureFinancialsResponse {
 export interface FinancialHistoryResponse {
   snapshots: FinancialSnapshot[];
 }
+
+// --- Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation
+// V1. Mirrors app/models/venture_financial_commitments.py exactly. See
+// docs/product/SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md for the
+// accepted architecture. `plan_snapshot`/`expected_monthly` are frozen at
+// commitment time and NEVER recomputed -- a GET always returns the exact
+// stored values, byte-identical no matter what the live scenario/plan
+// rows say by the time it's read.
+
+export type CommitmentStatus = "active" | "superseded" | "abandoned";
+export type PlanSnapshotKind = "hire" | "revenue_target" | "expense_change";
+
+export interface PlanSnapshotItem {
+  id: number;
+  kind: PlanSnapshotKind;
+  label: string;
+  start_date: string;
+  end_date: string | null;
+  // Hire-specific (kind === "hire").
+  role: string | null;
+  employment_type: EmploymentType | null;
+  annual_salary_cents: number | null;
+  burden_percent: number | null;
+  monthly_cost_cents: number | null;
+  one_time_cost_cents: number | null;
+  // revenue_target / expense_change-specific.
+  category: ExpenseCategory | null;
+  amount_cents: number | null;
+}
+
+export interface CreateFinancialCommitmentRequest {
+  // Exactly one source: scenario_id, OR hire_plan_ids/financial_plan_ids
+  // -- never both, never neither (enforced server-side).
+  scenario_id?: number | null;
+  hire_plan_ids?: number[];
+  financial_plan_ids?: number[];
+  related_decision_id?: number | null;
+  founder_rationale?: string | null;
+  idempotency_key?: string | null;
+}
+
+export interface FinancialCommitmentResponse {
+  id: number;
+  venture_id: number;
+  user_id: string;
+  committed_at: string;
+  source_snapshot_id: number;
+  scenario_id: number | null;
+  scenario_name: string | null;
+  hire_plan_ids: number[];
+  financial_plan_ids: number[];
+  plan_snapshot: PlanSnapshotItem[];
+  calculation_version: string;
+  projection_start: string;
+  projection_horizon_months: number;
+  expected_monthly: ProjectedMonthWithPlan[];
+  related_decision_id: number | null;
+  status: CommitmentStatus;
+  supersedes_commitment_id: number | null;
+  founder_rationale: string | null;
+}

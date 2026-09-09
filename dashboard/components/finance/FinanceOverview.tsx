@@ -18,6 +18,8 @@ import {
   createScenario,
   listScenarios,
   reconcileFinancialPlan,
+  createFinancialCommitment,
+  listFinancialCommitments,
 } from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
@@ -28,6 +30,7 @@ import type {
   DerivedFinancialMetrics,
   EmploymentType,
   ExpenseCategory,
+  FinancialCommitmentResponse,
   FinancialPlan,
   FinancialPlanImpactPreview,
   FinancialPlanType,
@@ -1365,12 +1368,28 @@ function ScenariosSection({
 }) {
   const { getToken } = useAuth();
   const [scenarios, setScenarios] = useState<Scenario[] | null>(null);
+  // Phase 38D-A: which scenario (if any) already has an ACTIVE commitment
+  // -- purely informational (§15), never gates re-committing (§16: a
+  // founder may legitimately commit again later).
+  const [commitmentsByScenario, setCommitmentsByScenario] = useState<Record<number, FinancialCommitmentResponse>>({});
 
   const refresh = useCallback(async () => {
     const token = await getToken();
     if (!token) return;
-    const result = await listScenarios(_ventureId, token);
-    setScenarios(result);
+    const [scenarioResult, commitmentResult] = await Promise.all([
+      listScenarios(_ventureId, token),
+      listFinancialCommitments(_ventureId, token),
+    ]);
+    setScenarios(scenarioResult);
+    const bySceneario: Record<number, FinancialCommitmentResponse> = {};
+    for (const commitment of commitmentResult) {
+      if (commitment.scenario_id !== null && commitment.status === "active" && !bySceneario[commitment.scenario_id]) {
+        // list is most-recent-first (see list_venture_financial_commitments_for_owner's
+        // own ORDER BY committed_at DESC) -- the first match per scenario is the latest.
+        bySceneario[commitment.scenario_id] = commitment;
+      }
+    }
+    setCommitmentsByScenario(bySceneario);
   }, [_ventureId, getToken]);
 
   // Fetches on mount, and re-fetches whenever a create finishes
@@ -1396,25 +1415,13 @@ function ScenariosSection({
       {scenarios && scenarios.length > 0 ? (
         <div className="mt-2 space-y-3">
           {scenarios.map((scenario) => (
-            <div key={scenario.id} className="rounded-lg border border-border bg-surface p-3">
-              <p className="text-sm font-semibold text-text-primary">{scenario.name}</p>
-              {scenario.assumptions.length > 0 ? (
-                <ul className="mt-1 list-disc pl-5 text-sm text-text-secondary">
-                  {scenario.assumptions.map((a, i) => (
-                    <li key={i}>{a}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="mt-1 text-sm text-text-muted">No planned changes currently selected.</p>
-              )}
-              <p className="mt-1.5 text-sm font-medium text-text-primary">
-                {scenario.depletion_date
-                  ? `Cash runs out around ${formatMonthYear(scenario.depletion_date)}.`
-                  : scenario.ending_cash_at_horizon_cents !== null
-                    ? `Stays cash-flow positive -- ${formatWholeDollars(scenario.ending_cash_at_horizon_cents)} projected in 24 months.`
-                    : "Not enough financial data to model."}
-              </p>
-            </div>
+            <ScenarioCard
+              key={scenario.id}
+              ventureId={_ventureId}
+              scenario={scenario}
+              existingCommitment={commitmentsByScenario[scenario.id] ?? null}
+              onCommitted={refresh}
+            />
           ))}
         </div>
       ) : (
@@ -1431,6 +1438,125 @@ function ScenariosSection({
       {!hasAnyPlan && !isCreating ? (
         <p className="mt-1.5 text-sm text-text-muted">Model a hire, revenue, or spending change first, then combine them here to compare.</p>
       ) : null}
+    </div>
+  );
+}
+
+// Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation V1.
+// One scenario card's own commit action + confirmation state. Modeling,
+// editing, and comparing scenarios (everything above this component)
+// never creates a commitment -- only this explicit, named button does
+// (§4/§5 of the directive: "no automatic commitment").
+function ScenarioCard({
+  ventureId,
+  scenario,
+  existingCommitment,
+  onCommitted,
+}: {
+  ventureId: number;
+  scenario: Scenario;
+  existingCommitment: FinancialCommitmentResponse | null;
+  onCommitted: () => void;
+}) {
+  const { getToken } = useAuth();
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [justCommitted, setJustCommitted] = useState<FinancialCommitmentResponse | null>(null);
+  // One idempotency key per in-flight attempt -- a double-click while
+  // `submitting` is true is already blocked by the disabled button below
+  // (Case V), but generating this up front also makes a client-side
+  // retry (e.g. a flaky network request the browser resends) collapse to
+  // the SAME commitment row rather than a second one, without ever
+  // deduplicating two genuinely separate, later button presses (§16).
+  const idempotencyKeyRef = useRef<string | null>(null);
+
+  async function handleCommit() {
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    if (!idempotencyKeyRef.current) {
+      idempotencyKeyRef.current =
+        typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : `${ventureId}-${scenario.id}-${Date.now()}-${Math.random()}`;
+    }
+    try {
+      const token = await getToken();
+      if (!token) throw new Error("Not signed in.");
+      const commitment = await createFinancialCommitment(
+        ventureId,
+        { scenario_id: scenario.id, idempotency_key: idempotencyKeyRef.current },
+        token
+      );
+      setJustCommitted(commitment);
+      idempotencyKeyRef.current = null;
+      onCommitted();
+    } catch (err) {
+      setError(
+        err instanceof Error && err.message
+          ? err.message
+          : "Couldn't save this commitment. Your latest financial snapshot may be incomplete."
+      );
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  const committed = justCommitted ?? existingCommitment;
+
+  return (
+    <div className="rounded-lg border border-border bg-surface p-3">
+      <p className="text-sm font-semibold text-text-primary">{scenario.name}</p>
+      {scenario.assumptions.length > 0 ? (
+        <ul className="mt-1 list-disc pl-5 text-sm text-text-secondary">
+          {scenario.assumptions.map((a, i) => (
+            <li key={i}>{a}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-1 text-sm text-text-muted">No planned changes currently selected.</p>
+      )}
+      <p className="mt-1.5 text-sm font-medium text-text-primary">
+        {scenario.depletion_date
+          ? `Cash runs out around ${formatMonthYear(scenario.depletion_date)}.`
+          : scenario.ending_cash_at_horizon_cents !== null
+            ? `Stays cash-flow positive -- ${formatWholeDollars(scenario.ending_cash_at_horizon_cents)} projected in 24 months.`
+            : "Not enough financial data to model."}
+      </p>
+
+      {committed ? (
+        <div className="mt-2 rounded-md border border-border bg-background p-2.5">
+          <p className="text-sm font-semibold text-text-primary">
+            {justCommitted ? "Operating plan committed" : "Committed"}
+          </p>
+          <p className="mt-0.5 text-sm text-text-secondary">
+            SIE saved what you expected from this plan on {formatMonthYear(committed.committed_at.slice(0, 10))}.
+            Future actuals can be compared against this expectation.
+          </p>
+          <p className="mt-1 text-sm text-text-muted">
+            {committed.expected_monthly.length > 0
+              ? (() => {
+                  const depletedMonth = committed.expected_monthly.find((m) => m.depleted);
+                  return depletedMonth
+                    ? `Committed projection: cash runs out around ${formatMonthYear(depletedMonth.date)}.`
+                    : `Committed projection: ${formatWholeDollars(
+                        committed.expected_monthly[committed.expected_monthly.length - 1].ending_cash_cents
+                      )} in ${committed.projection_horizon_months} months.`;
+                })()
+              : null}
+          </p>
+        </div>
+      ) : null}
+
+      {error ? <p className="mt-1.5 text-sm text-red-600">{error}</p> : null}
+
+      <Button type="button" variant="secondary" size="sm" className="mt-2" onClick={handleCommit} disabled={submitting}>
+        {submitting ? "Committing…" : committed ? "Commit to this plan again" : "Commit to this plan"}
+      </Button>
+      <p className="mt-1 text-xs leading-5 text-text-muted">
+        Save this as the operating plan you&rsquo;re choosing so SIE can remember what you expected and compare it
+        with what happens later.
+      </p>
     </div>
   );
 }

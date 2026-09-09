@@ -1,8 +1,10 @@
 import type {
+  CreateFinancialCommitmentRequest,
   CreateFinancialPlanRequest,
   CreateFinancialSnapshotRequest,
   CreateHirePlanRequest,
   CreateScenarioRequest,
+  FinancialCommitmentResponse,
   FinancialHistoryResponse,
   FinancialPlan,
   FinancialPlanImpactPreview,
@@ -146,4 +148,33 @@ export function reconcileFinancialPlan(
     body: { plan_kind: planKind, plan_id: planId, included },
     token,
   });
+}
+
+// --- Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation
+// V1. Nothing here is ever recomputed or updated -- there is no
+// update/delete client function, matching the append-only backend by
+// design (see docs/product/SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md).
+
+export function createFinancialCommitment(
+  ventureId: number,
+  request: CreateFinancialCommitmentRequest,
+  token: string
+): Promise<FinancialCommitmentResponse> {
+  return apiFetch<FinancialCommitmentResponse>(`/ventures/${ventureId}/financial-commitments`, {
+    method: "POST",
+    body: request,
+    token,
+  });
+}
+
+export function listFinancialCommitments(ventureId: number, token: string): Promise<FinancialCommitmentResponse[]> {
+  return apiFetch<FinancialCommitmentResponse[]>(`/ventures/${ventureId}/financial-commitments`, { token });
+}
+
+export function getFinancialCommitment(
+  ventureId: number,
+  commitmentId: number,
+  token: string
+): Promise<FinancialCommitmentResponse> {
+  return apiFetch<FinancialCommitmentResponse>(`/ventures/${ventureId}/financial-commitments/${commitmentId}`, { token });
 }

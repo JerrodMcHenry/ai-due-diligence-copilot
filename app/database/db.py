@@ -4856,6 +4856,208 @@ def list_pending_reconciliation_for_owner(user_id: str, venture_id: int, latest_
     return {"hire_plans": pending_hires, "financial_plans": pending_plans}
 
 
+# ---------------------------------------------------------------------------
+# Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation V1.
+# See docs/product/SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md for the
+# accepted architecture (§24 "minimum schema").
+#
+# The ONE new object the 38D architecture calls for. Deliberately NOT a
+# frozen copy of venture_financial_scenarios (that table stays exactly
+# what it already is -- a hypothetical, always-live-recomputed named
+# selection, per its own docstring above) -- this is a SEPARATE,
+# independent, append-only fact: "the founder explicitly committed to
+# this financial expectation on this date." `plan_snapshot` and
+# `expected_monthly` are JSONB because both are written EXACTLY ONCE,
+# never queried by a SQL predicate, and always read back whole -- the
+# same "avoid five tables for one workflow" judgment already applied to
+# venture_financial_scenarios.hire_plan_ids/financial_plan_ids (plain
+# arrays, not a join table).
+#
+# `status`/`supersedes_commitment_id` mirror venture_decisions' own
+# already-shipped append-only reversal pattern exactly (self-FK, a NEW
+# row on reversal, never an edit to the old one) -- included in the
+# schema now per the accepted architecture, but NO code path in this
+# phase ever sets status to anything but 'active' or writes
+# supersedes_commitment_id (38D-A directive §3: "creation is the
+# important operation" -- supersede/abandon lifecycle actions are
+# explicitly deferred, not needed to safely create a commitment).
+# `founder_explanation`/`explanation_recorded_at` (38D-C's own future
+# scope) are deliberately NOT columns on this table yet -- adding an
+# unused column ahead of the phase that gives it meaning would be
+# exactly the "improvise additional schema" this phase's own directive
+# forbids.
+def create_venture_financial_commitments_table():
+    with engine.begin() as connection:
+        connection.execute(text("""
+            CREATE TABLE IF NOT EXISTS venture_financial_commitments (
+                id SERIAL PRIMARY KEY,
+                venture_id INTEGER NOT NULL REFERENCES modeled_ventures(id) ON DELETE CASCADE,
+                user_id TEXT NOT NULL REFERENCES users(id),
+                committed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                -- NOT NULL + RESTRICT, not SET NULL: §8 of the directive
+                -- forbids a commitment ever existing without a real source
+                -- snapshot, and snapshots have no delete path in this
+                -- codebase anyway (append-only, confirmed above) -- RESTRICT
+                -- just makes that guarantee explicit rather than relying on
+                -- SET NULL silently fighting a NOT NULL constraint.
+                source_snapshot_id INTEGER NOT NULL REFERENCES venture_financial_snapshots(id) ON DELETE RESTRICT,
+                scenario_id INTEGER REFERENCES venture_financial_scenarios(id) ON DELETE SET NULL,
+                scenario_name TEXT,
+                hire_plan_ids INTEGER[] NOT NULL DEFAULT '{}',
+                financial_plan_ids INTEGER[] NOT NULL DEFAULT '{}',
+                plan_snapshot JSONB NOT NULL,
+                calculation_version TEXT NOT NULL,
+                projection_start DATE NOT NULL,
+                projection_horizon_months INTEGER NOT NULL,
+                expected_monthly JSONB NOT NULL,
+                related_decision_id INTEGER REFERENCES venture_decisions(id) ON DELETE SET NULL,
+                status TEXT NOT NULL DEFAULT 'active' CHECK (status IN ('active', 'superseded', 'abandoned')),
+                supersedes_commitment_id INTEGER REFERENCES venture_financial_commitments(id) ON DELETE SET NULL,
+                founder_rationale TEXT,
+                idempotency_key TEXT
+            )
+        """))
+        connection.execute(text("""
+            CREATE UNIQUE INDEX IF NOT EXISTS venture_financial_commitments_idempotency_key_idx
+            ON venture_financial_commitments (idempotency_key)
+            WHERE idempotency_key IS NOT NULL
+        """))
+        connection.execute(text("""
+            CREATE INDEX IF NOT EXISTS venture_financial_commitments_venture_idx
+            ON venture_financial_commitments (venture_id, committed_at DESC)
+        """))
+    print("venture_financial_commitments table created successfully.")
+
+
+_COMMITMENT_COLUMNS = """
+                id, venture_id, user_id, committed_at, source_snapshot_id,
+                scenario_id, scenario_name, hire_plan_ids, financial_plan_ids,
+                plan_snapshot, calculation_version, projection_start,
+                projection_horizon_months, expected_monthly, related_decision_id,
+                status, supersedes_commitment_id, founder_rationale
+"""
+
+
+def _parse_commitment_json_fields(row: dict) -> dict:
+    """psycopg2/SQLAlchemy sometimes returns a JSONB column already
+    decoded, sometimes as a raw string, depending on the exact driver
+    path taken -- identical defensive `isinstance(..., str)` guard
+    already used everywhere else JSONB is read back in this file (e.g.
+    the `methodology`/`model_result` fields above)."""
+    for field in ("plan_snapshot", "expected_monthly"):
+        if isinstance(row.get(field), str):
+            row[field] = json.loads(row[field])
+    return row
+
+
+def create_venture_financial_commitment(
+    venture_id: int,
+    user_id: str,
+    source_snapshot_id: int,
+    plan_snapshot: list[dict],
+    calculation_version: str,
+    projection_start,
+    projection_horizon_months: int,
+    expected_monthly: list[dict],
+    hire_plan_ids: list[int] | None = None,
+    financial_plan_ids: list[int] | None = None,
+    scenario_id: int | None = None,
+    scenario_name: str | None = None,
+    related_decision_id: int | None = None,
+    founder_rationale: str | None = None,
+    idempotency_key: str | None = None,
+) -> dict:
+    """
+    Ownership of venture_id/scenario_id/every id in hire_plan_ids,
+    financial_plan_ids/related_decision_id is enforced by the CALLER
+    (app/api.py), identical discipline to create_venture_decision().
+    Always exactly ONE INSERT -- the frozen fields (plan_snapshot,
+    expected_monthly, calculation_version, source_snapshot_id,
+    committed_at) are never written to again by any other function in
+    this file (§3 of the 38D-A directive: append-only historical
+    integrity). Idempotent when idempotency_key is provided, the
+    identical ON CONFLICT + fallback-SELECT pattern create_venture_decision()
+    and create_venture_evidence() already use.
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            INSERT INTO venture_financial_commitments (
+                venture_id, user_id, source_snapshot_id, scenario_id, scenario_name,
+                hire_plan_ids, financial_plan_ids, plan_snapshot, calculation_version,
+                projection_start, projection_horizon_months, expected_monthly,
+                related_decision_id, founder_rationale, idempotency_key
+            )
+            VALUES (
+                :venture_id, :user_id, :source_snapshot_id, :scenario_id, :scenario_name,
+                :hire_plan_ids, :financial_plan_ids, CAST(:plan_snapshot AS JSONB), :calculation_version,
+                :projection_start, :projection_horizon_months, CAST(:expected_monthly AS JSONB),
+                :related_decision_id, :founder_rationale, :idempotency_key
+            )
+            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+                DO NOTHING
+            RETURNING {_COMMITMENT_COLUMNS}
+        """), {
+            "venture_id": venture_id,
+            "user_id": user_id,
+            "source_snapshot_id": source_snapshot_id,
+            "scenario_id": scenario_id,
+            "scenario_name": scenario_name,
+            "hire_plan_ids": hire_plan_ids or [],
+            "financial_plan_ids": financial_plan_ids or [],
+            "plan_snapshot": json.dumps(plan_snapshot),
+            "calculation_version": calculation_version,
+            "projection_start": projection_start,
+            "projection_horizon_months": projection_horizon_months,
+            "expected_monthly": json.dumps(expected_monthly),
+            "related_decision_id": related_decision_id,
+            "founder_rationale": founder_rationale,
+            "idempotency_key": idempotency_key,
+        })
+
+        row = result.mappings().first()
+        if row is not None:
+            return _parse_commitment_json_fields(dict(row))
+
+        existing = connection.execute(text(f"""
+            SELECT {_COMMITMENT_COLUMNS}
+            FROM venture_financial_commitments
+            WHERE idempotency_key = :idempotency_key
+        """), {"idempotency_key": idempotency_key}).mappings().first()
+
+        return _parse_commitment_json_fields(dict(existing))
+
+
+def list_venture_financial_commitments_for_owner(user_id: str, venture_id: int) -> list[dict]:
+    """Every commitment ever made for this venture, most recent first --
+    the full, honest timeline (§17 of the accepted architecture:
+    "independent commitment events, not one giant operating-plan
+    object")."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_COMMITMENT_COLUMNS}
+            FROM venture_financial_commitments
+            WHERE venture_id = :venture_id AND user_id = :user_id
+            ORDER BY committed_at DESC
+        """), {"venture_id": venture_id, "user_id": user_id})
+        return [_parse_commitment_json_fields(dict(row)) for row in result.mappings().all()]
+
+
+def get_venture_financial_commitment_for_owner(user_id: str, venture_id: int, commitment_id: int) -> dict | None:
+    """Returns the row EXACTLY as stored -- no recomputation, no
+    re-derivation of expected_monthly/plan_snapshot from live plan rows.
+    This is the load-bearing guarantee of the whole phase: a GET must
+    never depend on the current state of venture_hire_plans/
+    venture_financial_plans/venture_financial_snapshots."""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_COMMITMENT_COLUMNS}
+            FROM venture_financial_commitments
+            WHERE id = :commitment_id AND venture_id = :venture_id AND user_id = :user_id
+        """), {"commitment_id": commitment_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return _parse_commitment_json_fields(dict(row)) if row else None
+
+
 _DECISION_COLUMNS = """
                 id, venture_id, user_id, related_mission_id, sie_recommendation,
                 sie_reasoning, founder_choice, founder_rationale, evidence_ids,
@@ -5554,6 +5756,11 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     "financial_plan_status_changed",
     "financial_plan_reconciled",
     "financial_scenario_created",
+    # Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation
+    # V1. Logged from app/api.py's new POST /ventures/{id}/financial-commitments
+    # endpoint. Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same
+    # reasoning as every other Finance event above.
+    "financial_commitment_created",
 }
 
 

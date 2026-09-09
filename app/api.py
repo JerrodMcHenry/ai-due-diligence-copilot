@@ -149,6 +149,10 @@ from app.database.db import (create_tables,
                          create_venture_decision,
                          list_venture_decisions_for_owner,
                          set_venture_mission_interpretation_for_owner,
+                         create_venture_financial_commitments_table,
+                         create_venture_financial_commitment,
+                         list_venture_financial_commitments_for_owner,
+                         get_venture_financial_commitment_for_owner,
 )
 from typing import Literal
 from fastapi import Query
@@ -184,6 +188,10 @@ from app.ai.financial_engine import (
     hire_plan_items_for_projection, hire_to_plan_item,
     financial_plan_items_for_projection, expense_plan_to_plan_item, revenue_plan_to_plan_item,
     validate_expense_plan_amount, validate_no_overlapping_revenue_target,
+    DEFAULT_PROJECTION_HORIZON_MONTHS, FINANCIAL_PROJECTION_CALCULATION_VERSION,
+)
+from app.models.venture_financial_commitments import (
+    CreateFinancialCommitmentRequest, FinancialCommitmentResponse, PlanSnapshotItem,
 )
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
@@ -327,6 +335,12 @@ create_venture_hire_plans_table()
 add_hire_plan_reconciliation_column()
 create_venture_financial_plans_table()
 create_venture_financial_scenarios_table()
+
+# Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation V1.
+# Must run AFTER venture_decisions, venture_financial_snapshots,
+# venture_financial_scenarios all exist -- this table's own FKs reference
+# every one of them.
+create_venture_financial_commitments_table()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -2367,6 +2381,181 @@ def delete_scenario(
     if not deleted:
         raise HTTPException(status_code=404, detail="Scenario not found.")
     return {"deleted": True}
+
+
+# ---------------------------------------------------------------------------
+# Phase 38D-A -- Financial Commitment Persistence + Frozen Expectation V1.
+# See docs/product/SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md for the
+# accepted architecture.
+#
+# A Committed Plan is NOT a scenario -- venture_financial_scenarios above
+# stays exactly what it already is: hypothetical, always live-recomputed.
+# This section only ever READS venture_hire_plans/venture_financial_plans/
+# venture_financial_scenarios/venture_financial_snapshots/venture_decisions
+# -- it never writes to any of them. The one new write path
+# (create_venture_financial_commitment) is append-only by construction:
+# there is no PATCH/DELETE endpoint in this phase (§3/§25 of the
+# directive).
+
+
+def _plan_snapshot_item(source_kind: str, row: dict) -> dict:
+    """One included plan/hire's own input VALUES, frozen at commitment
+    time -- never a bare id, since the underlying row is confirmed
+    mutable (Phase 35C/35D's own update-in-place design). See
+    PlanSnapshotItem's own docstring
+    (app/models/venture_financial_commitments.py)."""
+    if source_kind == "hire":
+        return {
+            "id": row["id"], "kind": "hire", "label": row["role"],
+            "start_date": row["start_date"], "end_date": row.get("end_date"),
+            "role": row["role"], "employment_type": row["employment_type"],
+            "annual_salary_cents": row.get("annual_salary_cents"),
+            "burden_percent": row.get("burden_percent"),
+            "monthly_cost_cents": compute_hire_monthly_cost_cents(row),
+            "one_time_cost_cents": row.get("one_time_cost_cents"),
+        }
+    return {
+        "id": row["id"], "kind": row["plan_type"], "label": row["label"],
+        "start_date": row["start_date"], "end_date": row.get("end_date"),
+        "category": row.get("category"), "amount_cents": row["amount_cents"],
+    }
+
+
+@app.post("/ventures/{venture_id}/financial-commitments", response_model=FinancialCommitmentResponse)
+def create_financial_commitment(
+    venture_id: int,
+    request: CreateFinancialCommitmentRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    user_id = current_user.user_id
+
+    # §4/§18 of the 38D-A directive: exactly one commitment source -- a
+    # saved scenario (resolved server-side into ITS OWN current
+    # hire_plan_ids/financial_plan_ids, never trusting a client-supplied
+    # copy) or an explicit set of individual plan ids.
+    # CreateFinancialCommitmentRequest's own validator already rejects
+    # supplying both/neither.
+    scenario_name = None
+    if request.scenario_id is not None:
+        scenario = get_venture_financial_scenario_for_owner(user_id, venture_id, request.scenario_id)
+        if scenario is None:
+            raise HTTPException(status_code=404, detail="Scenario not found for this venture.")
+        scenario_name = scenario["name"]
+        hire_plan_ids = scenario["hire_plan_ids"]
+        financial_plan_ids = scenario["financial_plan_ids"]
+    else:
+        hire_plan_ids = request.hire_plan_ids
+        financial_plan_ids = request.financial_plan_ids
+
+    # Ownership of every referenced plan id, re-scoped through THIS
+    # venture -- identical discipline to create_scenario()'s own
+    # validation (§11: fail closed on a foreign plan/scenario/decision).
+    hires = []
+    for hid in hire_plan_ids:
+        hire = get_venture_hire_plan_for_owner(user_id, venture_id, hid)
+        if hire is None:
+            raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
+        hires.append(hire)
+    financial_plans = []
+    for pid in financial_plan_ids:
+        plan = get_venture_financial_plan_for_owner(user_id, venture_id, pid)
+        if plan is None:
+            raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
+        financial_plans.append(plan)
+
+    if request.related_decision_id is not None:
+        decisions = list_venture_decisions_for_owner(user_id, venture_id)
+        if not any(d["id"] == request.related_decision_id for d in decisions):
+            raise HTTPException(status_code=404, detail="Decision not found for this venture.")
+
+    # §8: never permit a commitment without a real source snapshot --
+    # identical guard to POST .../financials/reconcile's own.
+    snapshot = get_latest_venture_financial_snapshot_for_owner(user_id, venture_id)
+    if snapshot is None:
+        raise HTTPException(status_code=404, detail="No financial snapshot exists yet.")
+
+    # §21: the frozen plan_snapshot/expected_monthly must agree on
+    # exactly what was included -- reuse the SAME status='planned' filter
+    # the live scenario engine already applies (hire_plan_items_for_projection/
+    # financial_plan_items_for_projection's own internal filter, identical
+    # to _build_scenario_response's own explicit one above) so a
+    # cancelled/actualized plan is silently excluded here exactly as it
+    # already is everywhere else -- never silently included (Case T/U).
+    active_hires = [h for h in hires if h["status"] == "planned"]
+    active_financial_plans = [p for p in financial_plans if p["status"] == "planned"]
+
+    plan_items = _all_plan_items_for_projection(active_hires, active_financial_plans)
+    expected_monthly = project_monthly_cash_flow(snapshot, snapshot["as_of_date"], plan_items=plan_items)
+
+    # §20: NULL != 0. project_monthly_cash_flow() returns [] ONLY when
+    # cash/revenue/expenses are unknown (its own docstring) -- never a
+    # partial or fake projection. An honest validation error, no row
+    # written (§10 transactional consistency: calculation happens BEFORE
+    # any insert is attempted).
+    if not expected_monthly:
+        raise HTTPException(
+            status_code=422,
+            detail="Cannot commit: your latest financial snapshot doesn't have complete cash, revenue, "
+                   "and expense data yet.",
+        )
+
+    plan_snapshot = (
+        [_plan_snapshot_item("hire", h) for h in active_hires]
+        + [_plan_snapshot_item("financial", p) for p in active_financial_plans]
+    )
+
+    commitment = create_venture_financial_commitment(
+        venture_id=venture_id,
+        user_id=user_id,
+        source_snapshot_id=snapshot["id"],
+        plan_snapshot=[PlanSnapshotItem(**item).model_dump(mode="json") for item in plan_snapshot],
+        calculation_version=FINANCIAL_PROJECTION_CALCULATION_VERSION,
+        projection_start=snapshot["as_of_date"],
+        projection_horizon_months=DEFAULT_PROJECTION_HORIZON_MONTHS,
+        expected_monthly=[m.model_dump(mode="json") for m in _project_with_plan_response(expected_monthly)],
+        hire_plan_ids=[h["id"] for h in active_hires],
+        financial_plan_ids=[p["id"] for p in active_financial_plans],
+        scenario_id=request.scenario_id,
+        scenario_name=scenario_name,
+        related_decision_id=request.related_decision_id,
+        founder_rationale=request.founder_rationale,
+        idempotency_key=request.idempotency_key,
+    )
+
+    _log_event_safe(
+        "financial_commitment_created",
+        user_id=user_id, venture_id=venture_id,
+        metadata={"scenario_id": request.scenario_id, "plan_count": len(plan_snapshot)},
+    )
+
+    return FinancialCommitmentResponse(**commitment)
+
+
+@app.get("/ventures/{venture_id}/financial-commitments", response_model=list[FinancialCommitmentResponse])
+def list_financial_commitments(
+    venture_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    rows = list_venture_financial_commitments_for_owner(current_user.user_id, venture_id)
+    return [FinancialCommitmentResponse(**row) for row in rows]
+
+
+# GET-by-id returns the row EXACTLY as stored -- see
+# get_venture_financial_commitment_for_owner()'s own docstring
+# (app/database/db.py). No recomputation happens on this path, ever.
+@app.get("/ventures/{venture_id}/financial-commitments/{commitment_id}", response_model=FinancialCommitmentResponse)
+def get_financial_commitment(
+    venture_id: int,
+    commitment_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    commitment = get_venture_financial_commitment_for_owner(current_user.user_id, venture_id, commitment_id)
+    if commitment is None:
+        raise HTTPException(status_code=404, detail="Commitment not found.")
+    return FinancialCommitmentResponse(**commitment)
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])
