@@ -83,6 +83,15 @@ export default function FinanceOverview({ ventureId }: Props) {
   const [data, setData] = useState<VentureFinancialsResponse | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Phase 40A-FIX -- Private Beta P1 Hardening, P1 #2: mirrors
+  // ScenarioCard's own idempotencyKeyRef below -- disabling the Save
+  // button while `isSaving` is true (SnapshotForm's own guard) blocks a
+  // same-tab double-click, but not a genuine duplicate submit (a resent
+  // request after a flaky response, or two tabs open on the same form).
+  // Lives here, not in SnapshotForm, because only this component's
+  // handleSave() actually knows whether the request succeeded --
+  // SnapshotForm's onSave prop never throws back up to it.
+  const snapshotIdempotencyKeyRef = useRef<string | null>(null);
   // Phase 35C/35D: closed | choosing what kind of change to model | the
   // hire form | the revenue/expense form. Deliberately separate from
   // `isEditing` (the snapshot form) -- only one panel is ever open at a
@@ -127,10 +136,26 @@ export default function FinanceOverview({ ventureId }: Props) {
       setError("Your session expired. Sign in again.");
       return;
     }
+    if (!snapshotIdempotencyKeyRef.current) {
+      snapshotIdempotencyKeyRef.current =
+        typeof crypto !== "undefined" && "randomUUID" in crypto
+          ? crypto.randomUUID()
+          : `${ventureId}-${request.as_of_date}-${Date.now()}-${Math.random()}`;
+    }
     try {
-      const result = await createVentureFinancialSnapshot(ventureId, request, token);
+      const result = await createVentureFinancialSnapshot(
+        ventureId,
+        { ...request, idempotency_key: snapshotIdempotencyKeyRef.current },
+        token
+      );
       setData(result);
       setIsEditing(false);
+      // Cleared only on success, same as ScenarioCard's own ref -- a
+      // later, genuinely separate snapshot submission (the next time this
+      // form is opened) must get its own fresh key, never reuse this
+      // one. A failed attempt keeps the same key so a retry collapses to
+      // the one row instead of creating a second.
+      snapshotIdempotencyKeyRef.current = null;
     } catch (err) {
       console.error(err);
       setError("Something went wrong saving these numbers. Try again.");

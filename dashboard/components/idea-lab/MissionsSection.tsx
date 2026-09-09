@@ -206,6 +206,13 @@ export default function MissionsSection({
   const [customTitle, setCustomTitle] = useState("");
   const [customCategory, setCustomCategory] = useState("");
   const [isCreatingCustom, setIsCreatingCustom] = useState(false);
+  // Phase 40A-FIX -- Private Beta P1 Hardening, P1 #2: `disabled` on the
+  // button below (Case V-equivalent) already blocks a same-tab double-
+  // click, but not a resent request or a second tab -- this key makes
+  // either collapse to the one mission instead of creating a duplicate.
+  // Cleared on success (see handleCreateCustomMission), so a later,
+  // genuinely separate custom mission gets its own fresh key.
+  const customMissionIdempotencyKeyRef = useRef<string | null>(null);
 
   const [isBusy, setIsBusy] = useState(false);
 
@@ -435,11 +442,23 @@ export default function MissionsSection({
         setActionError("Your session expired. Sign in again.");
         return;
       }
+      if (!customMissionIdempotencyKeyRef.current) {
+        customMissionIdempotencyKeyRef.current =
+          typeof crypto !== "undefined" && "randomUUID" in crypto
+            ? crypto.randomUUID()
+            : `${ventureId}-${trimmed}-${Date.now()}-${Math.random()}`;
+      }
       await createVentureMission(
         ventureId,
-        { title: trimmed, related_category: customCategory || null, source: "founder_created" },
+        {
+          title: trimmed,
+          related_category: customCategory || null,
+          source: "founder_created",
+          idempotency_key: customMissionIdempotencyKeyRef.current,
+        },
         token
       );
+      customMissionIdempotencyKeyRef.current = null;
       await loadMissions();
       setCustomTitle("");
       setCustomCategory("");

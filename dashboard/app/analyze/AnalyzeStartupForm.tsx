@@ -177,6 +177,16 @@ export default function AnalyzeStartupForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState<string | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  // Phase 40A-FIX -- Private Beta P1 Hardening, P1 #3: Venture Workspace's
+  // own "Run a standalone evaluation" button already tells a founder this
+  // won't be tied to their venture (see VentureWorkspace.tsx's own
+  // comment) -- but that promise wasn't echoed on THIS side once they
+  // land here with their venture description pre-filled, so nothing
+  // confirmed it actually happened. Tracked separately from
+  // `companyText` itself so clearing/editing the textarea doesn't need to
+  // un-set this -- the note describes how the text GOT here, not what it
+  // currently contains.
+  const [arrivedFromVenture, setArrivedFromVenture] = useState(false);
 
   const requestedStartupId = parseStartupIdParam(searchParams.get("startup_id"));
   const [founderTarget, setFounderTarget] = useState<FounderTargetState>(
@@ -223,6 +233,7 @@ export default function AnalyzeStartupForm() {
       if (stashedDescription) {
         setCompanyText(stashedDescription);
         setMode("startup");
+        setArrivedFromVenture(true);
       }
     });
   }, [requestedStartupId]);
@@ -547,6 +558,24 @@ export default function AnalyzeStartupForm() {
           <p className="mt-2 text-sm text-text-secondary">
             This analysis will be attached directly to {founderTarget.canonicalName}
             &rsquo;s existing profile -- it will never create a separate startup.
+          </p>
+        </div>
+      ) : null}
+
+      {/* Phase 40A-FIX -- Private Beta P1 Hardening, P1 #3: the reciprocal
+          half of VentureWorkspace.tsx's "This runs a standalone
+          evaluation, not tied to {venture.name}" copy -- confirms, on
+          arrival, that pre-filling this textarea from a venture did not
+          quietly link the two. Never shown together with the founder-
+          targeted box above: that box means an existing startup's
+          `?startup_id=` re-analysis, a completely different entry point
+          from a fresh Idea Lab venture that has no startup yet. */}
+      {arrivedFromVenture && !isFounderTargeted && !isSubmitting ? (
+        <div className="mb-6 rounded-xl border border-info/30 bg-info-soft px-5 py-4">
+          <p className="text-sm text-text-secondary">
+            Pre-filled from your venture&rsquo;s description. This builds a new,
+            independent Startup Profile -- it won&rsquo;t be linked to or update
+            your venture workspace.
           </p>
         </div>
       ) : null}

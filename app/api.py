@@ -61,6 +61,7 @@ from app.database.db import (create_tables,
                          log_product_event,
                          get_full_analytics_report,
                          create_venture_missions_table,
+                         add_mission_idempotency_column,
                          add_pitch_deck_coach_mission_source,
                          list_venture_missions_for_owner,
                          create_venture_mission,
@@ -125,6 +126,7 @@ from app.database.db import (create_tables,
                          list_venture_evidence_for_owner,
                          resolve_venture_evidence_for_owner,
                          create_venture_financial_snapshots_table,
+                         add_financial_snapshot_idempotency_column,
                          create_venture_financial_snapshot,
                          get_latest_venture_financial_snapshot_for_owner,
                          list_venture_financial_snapshots_for_owner,
@@ -132,12 +134,14 @@ from app.database.db import (create_tables,
                          create_venture_hire_plan,
                          list_venture_hire_plans_for_owner,
                          get_venture_hire_plan_for_owner,
+                         list_venture_hire_plans_for_owner_by_ids,
                          update_venture_hire_plan_for_owner,
                          add_hire_plan_reconciliation_column,
                          create_venture_financial_plans_table,
                          create_venture_financial_plan,
                          list_venture_financial_plans_for_owner,
                          get_venture_financial_plan_for_owner,
+                         list_venture_financial_plans_for_owner_by_ids,
                          update_venture_financial_plan_for_owner,
                          create_venture_financial_scenarios_table,
                          create_venture_financial_scenario,
@@ -154,6 +158,7 @@ from app.database.db import (create_tables,
                          list_venture_financial_commitments_for_owner,
                          get_venture_financial_commitment_for_owner,
                          add_financial_commitment_explanation_columns,
+                         fix_idempotency_key_scoping_to_prevent_cross_user_replay,
                          update_venture_financial_commitment_explanation_for_owner,
 )
 from typing import Literal
@@ -303,6 +308,10 @@ create_product_events_table()
 # ordering reasoning as modeled_ventures's own migration above).
 create_venture_missions_table()
 
+# Phase 40A-FIX -- Private Beta P1 Hardening. Additive column on the
+# table just created above.
+add_mission_idempotency_column()
+
 # Phase 16 -- Founder Progress / Venture History V1. venture_model_updates
 # FKs to both modeled_ventures(id) and venture_missions(id), so it must be
 # created after both.
@@ -330,6 +339,10 @@ create_venture_evidence_table()
 # matter, only that modeled_ventures already exists.
 create_venture_financial_snapshots_table()
 
+# Phase 40A-FIX -- Private Beta P1 Hardening. Additive column on the
+# table just created above.
+add_financial_snapshot_idempotency_column()
+
 # Phase 35C -- Hiring + Operating Plan Engine V1. A second, independent
 # table -- no FK to venture_financial_snapshots (a plan is calculated
 # AGAINST actual state, never joined to a specific snapshot row).
@@ -351,6 +364,13 @@ create_venture_financial_commitments_table()
 # Phase 38D-C -- Founder Explanation + Learning Capture V1. Additive
 # columns on the table just created above.
 add_financial_commitment_explanation_columns()
+
+# Phase 40A-FIX -- Private Beta P1 Hardening / Security Correction. Must
+# run after venture_decisions, venture_evidence, and
+# venture_financial_commitments all exist (their idempotency_key
+# columns/indexes are already present from earlier migrations above --
+# this only re-scopes the unique index each already has).
+fix_idempotency_key_scoping_to_prevent_cross_user_replay()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -1458,6 +1478,7 @@ def create_mission(
         resource_ref=request.resource_ref,
         question_text=request.question_text,
         why_it_matters=request.why_it_matters,
+        idempotency_key=request.idempotency_key,
     )
     # Phase 28, Part 3: fires only after a real mission row is persisted --
     # never on the founder merely opening "Create your own action" or a
@@ -1839,6 +1860,7 @@ def create_venture_financials_snapshot(
         rent_cents=request.rent_cents,
         professional_services_cents=request.professional_services_cents,
         other_expenses_cents=request.other_expenses_cents,
+        idempotency_key=request.idempotency_key,
     )
 
     _log_event_safe(
@@ -2289,17 +2311,31 @@ def _plan_label(kind: str, row: dict) -> str:
 def _build_scenario_response(user_id: str, venture_id: int, scenario: dict) -> ScenarioResponse:
     """Computed live, every call -- see ScenarioResponse's own docstring
     for why nothing here is stored. A cancelled/actualized plan id still
-    referenced by the scenario is silently skipped (never an error)."""
+    referenced by the scenario is silently skipped (never an error).
+
+    Phase 40A-FIX: this used to issue one DB round trip per id in
+    hire_plan_ids/financial_plan_ids (a genuine N+1 -- Phase 40A's own
+    audit finding). Now issues exactly TWO queries total regardless of
+    how many plans the scenario references
+    (list_venture_hire_plans_for_owner_by_ids/
+    list_venture_financial_plans_for_owner_by_ids, each a single
+    `WHERE id = ANY(...)` with ownership enforced in the query itself),
+    then reconstructs each list in the scenario's OWN stored id order via
+    an in-memory dict lookup -- the exact same filter (status='planned'
+    only) and the exact same output order as the original per-id loop,
+    just batched."""
     snapshot = get_latest_venture_financial_snapshot_for_owner(user_id, venture_id)
 
-    hires = [
-        h for h in (get_venture_hire_plan_for_owner(user_id, venture_id, hid) for hid in scenario["hire_plan_ids"])
-        if h is not None and h["status"] == "planned"
-    ]
-    financial_plans = [
-        p for p in (get_venture_financial_plan_for_owner(user_id, venture_id, pid) for pid in scenario["financial_plan_ids"])
-        if p is not None and p["status"] == "planned"
-    ]
+    hire_by_id = {
+        h["id"]: h
+        for h in list_venture_hire_plans_for_owner_by_ids(user_id, venture_id, scenario["hire_plan_ids"], status="planned")
+    }
+    financial_by_id = {
+        p["id"]: p
+        for p in list_venture_financial_plans_for_owner_by_ids(user_id, venture_id, scenario["financial_plan_ids"], status="planned")
+    }
+    hires = [hire_by_id[hid] for hid in scenario["hire_plan_ids"] if hid in hire_by_id]
+    financial_plans = [financial_by_id[pid] for pid in scenario["financial_plan_ids"] if pid in financial_by_id]
     assumptions = [_plan_label("hire", h) for h in hires] + [_plan_label("financial", p) for p in financial_plans]
 
     projection: list[dict] = []
@@ -2336,12 +2372,21 @@ def create_scenario(
     _require_owned_venture(current_user, venture_id)
     # Ownership of every referenced plan id, re-scoped through THIS
     # venture -- never trusted as a bare id (§K of the directive: "a
-    # scenario cannot reference another user's plan").
+    # scenario cannot reference another user's plan"). Phase 40A-FIX:
+    # batched into one query per id-list (any status is a valid
+    # reference here, matching the original per-id lookup's own
+    # unfiltered behavior) instead of one query per id.
+    owned_hire_ids = {
+        h["id"] for h in list_venture_hire_plans_for_owner_by_ids(current_user.user_id, venture_id, request.hire_plan_ids)
+    }
     for hid in request.hire_plan_ids:
-        if get_venture_hire_plan_for_owner(current_user.user_id, venture_id, hid) is None:
+        if hid not in owned_hire_ids:
             raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
+    owned_financial_ids = {
+        p["id"] for p in list_venture_financial_plans_for_owner_by_ids(current_user.user_id, venture_id, request.financial_plan_ids)
+    }
     for pid in request.financial_plan_ids:
-        if get_venture_financial_plan_for_owner(current_user.user_id, venture_id, pid) is None:
+        if pid not in owned_financial_ids:
             raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
 
     row = create_venture_financial_scenario(
@@ -2365,13 +2410,20 @@ def update_scenario(
         raise HTTPException(status_code=404, detail="Scenario not found.")
 
     fields = request.model_dump(exclude_unset=True)
+    # Phase 40A-FIX: batched, same reasoning as create_scenario() above.
     if "hire_plan_ids" in fields:
+        owned_hire_ids = {
+            h["id"] for h in list_venture_hire_plans_for_owner_by_ids(current_user.user_id, venture_id, fields["hire_plan_ids"])
+        }
         for hid in fields["hire_plan_ids"]:
-            if get_venture_hire_plan_for_owner(current_user.user_id, venture_id, hid) is None:
+            if hid not in owned_hire_ids:
                 raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
     if "financial_plan_ids" in fields:
+        owned_financial_ids = {
+            p["id"] for p in list_venture_financial_plans_for_owner_by_ids(current_user.user_id, venture_id, fields["financial_plan_ids"])
+        }
         for pid in fields["financial_plan_ids"]:
-            if get_venture_financial_plan_for_owner(current_user.user_id, venture_id, pid) is None:
+            if pid not in owned_financial_ids:
                 raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
 
     updated = update_venture_financial_scenario_for_owner(current_user.user_id, venture_id, scenario_id, **fields)
@@ -2461,18 +2513,25 @@ def create_financial_commitment(
     # Ownership of every referenced plan id, re-scoped through THIS
     # venture -- identical discipline to create_scenario()'s own
     # validation (§11: fail closed on a foreign plan/scenario/decision).
+    # Phase 40A-FIX: batched into one query per id-list (any status is a
+    # valid reference here -- status filtering happens separately below,
+    # matching the original per-id lookup's own unfiltered behavior)
+    # instead of one query per id, while preserving the exact
+    # hire_plan_ids/financial_plan_ids order for plan_snapshot.
+    owned_hires_by_id = {h["id"]: h for h in list_venture_hire_plans_for_owner_by_ids(user_id, venture_id, hire_plan_ids)}
     hires = []
     for hid in hire_plan_ids:
-        hire = get_venture_hire_plan_for_owner(user_id, venture_id, hid)
-        if hire is None:
+        if hid not in owned_hires_by_id:
             raise HTTPException(status_code=404, detail=f"Hire plan {hid} not found for this venture.")
-        hires.append(hire)
+        hires.append(owned_hires_by_id[hid])
+    owned_financial_by_id = {
+        p["id"]: p for p in list_venture_financial_plans_for_owner_by_ids(user_id, venture_id, financial_plan_ids)
+    }
     financial_plans = []
     for pid in financial_plan_ids:
-        plan = get_venture_financial_plan_for_owner(user_id, venture_id, pid)
-        if plan is None:
+        if pid not in owned_financial_by_id:
             raise HTTPException(status_code=404, detail=f"Financial plan {pid} not found for this venture.")
-        financial_plans.append(plan)
+        financial_plans.append(owned_financial_by_id[pid])
 
     if request.related_decision_id is not None:
         decisions = list_venture_decisions_for_owner(user_id, venture_id)

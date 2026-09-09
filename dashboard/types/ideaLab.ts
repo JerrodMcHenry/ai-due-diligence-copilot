@@ -509,6 +509,13 @@ export interface CreateMissionRequest {
   resource_ref?: string | null;
   question_text?: string | null;
   why_it_matters?: string | null;
+  // Phase 40A-FIX -- Private Beta P1 Hardening. Optional, client-
+  // generated -- mirrors venture_decisions/venture_financial_commitments'
+  // own idempotency_key field (see app/models/venture_missions.py).
+  // Separate from and additional to source_ref's own payload-based dedup;
+  // closes the gap for founder_created missions, which that mechanism
+  // never covered.
+  idempotency_key?: string;
 }
 
 // ---------------------------------------------------------------------------

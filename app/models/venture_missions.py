@@ -83,6 +83,19 @@ class CreateMissionRequest(BaseModel):
     # the full reasoning.
     question_text: str | None = Field(default=None, max_length=500)
     why_it_matters: str | None = Field(default=None, max_length=1000)
+    # Phase 40A-FIX -- Private Beta P1 Hardening. Optional, client-
+    # generated request-identity key -- a retried submission with the
+    # same key returns the existing row instead of creating a duplicate
+    # mission (see create_venture_mission()'s own docstring,
+    # app/database/db.py). Separate from, and additional to, that
+    # function's own pre-existing source_ref title-based dedup (which
+    # only ever covered vps_guidance/pitch_deck_coach-sourced missions,
+    # never founder_created ones) -- this is the one mechanism that
+    # protects a founder-authored custom mission from a genuine
+    # double-submit. Two genuinely separate submissions (no key, or two
+    # different keys) are both real, legitimate history -- never
+    # deduplicated by matching title/description alone.
+    idempotency_key: str | None = Field(default=None, max_length=100)
 
 
 class UpdateMissionStatusRequest(BaseModel):

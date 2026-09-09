@@ -3476,6 +3476,49 @@ def list_active_questions_for_user(user_id: str) -> dict[int, str]:
         return {row["venture_id"]: row["question_text"] for row in result.mappings().all()}
 
 
+# Phase 40A-FIX -- Private Beta P1 Hardening. Additive column, separate
+# from and additional to venture_missions' own pre-existing
+# `(venture_id, source_ref) WHERE source <> 'founder_created'` unique
+# index -- that index collapses accidentally-duplicate vps_guidance/
+# pitch_deck_coach SUGGESTIONS by matching title (a payload-similarity
+# mechanism, confirmed by create_venture_mission()'s own docstring:
+# "founder_created missions are never deduplicated" by it at all). This
+# new column is the ONE genuine request-identity mechanism, identical
+# shape to venture_decisions'/venture_financial_snapshots' own
+# idempotency_key, and is what actually protects a founder-authored
+# custom mission (the one case the existing index explicitly skips)
+# from a real double-submit.
+def add_mission_idempotency_column():
+    """
+    Scoped to (created_by_user_id, idempotency_key), not a bare
+    idempotency_key -- see add_financial_snapshot_idempotency_column()'s
+    own docstring for the exact cross-user replay finding this scoping
+    closes. `created_by_user_id` is venture_missions' own user-identity
+    column (this table predates the `user_id` naming convention later
+    tables use).
+    """
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE venture_missions
+                ADD COLUMN idempotency_key TEXT
+            """))
+    except Exception as e:
+        print("venture_missions.idempotency_key migration skipped", e)
+
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("DROP INDEX IF EXISTS venture_missions_idempotency_key_idx"))
+            connection.execute(text("""
+                CREATE UNIQUE INDEX IF NOT EXISTS venture_missions_idempotency_key_idx
+                ON venture_missions (created_by_user_id, idempotency_key)
+                WHERE idempotency_key IS NOT NULL
+            """))
+        print("venture_missions.idempotency_key added.")
+    except Exception as e:
+        print("venture_missions.idempotency_key_idx migration skipped", e)
+
+
 _MISSION_COLUMNS = """
                 id, venture_id, created_by_user_id, title, description,
                 mission_type, related_category, source, source_ref, status,
@@ -3510,6 +3553,7 @@ def create_venture_mission(
     resource_ref: str | None = None,
     question_text: str | None = None,
     why_it_matters: str | None = None,
+    idempotency_key: str | None = None,
 ):
     """
     Creates one venture_missions row, OR -- for a vps_guidance/
@@ -3518,7 +3562,7 @@ def create_venture_mission(
     idempotency contract as create_founder_action() (see that function's
     own docstring for the full reasoning); source_ref is derived HERE
     from title, never accepted from the caller, and founder_created
-    missions are never deduplicated.
+    missions are never deduplicated BY THIS MECHANISM.
 
     resource_ref (Phase 11, Part 14): the first real use of the column
     Phase 10.7 reserved as "future Founder Playbook hook" -- a playbook
@@ -3541,10 +3585,67 @@ def create_venture_mission(
     venture_id here is only ever a value the caller already confirmed
     belongs to user_id, same as create_founder_action() trusts an
     already-verified startup_id.
+
+    idempotency_key (Phase 40A-FIX): a SEPARATE, additional
+    request-identity mechanism from the source_ref dedup above -- see
+    add_mission_idempotency_column()'s own docstring. When omitted (the
+    default), this function's SQL and behavior are byte-identical to
+    before this phase: the ORIGINAL `ON CONFLICT (venture_id, source_ref)
+    WHERE source <> 'founder_created'` statement runs unchanged, and a
+    founder_created mission (source_ref always NULL) is still never
+    deduplicated by it. When provided, a DIFFERENT INSERT statement runs
+    instead, targeting `ON CONFLICT (idempotency_key)` -- this is what
+    actually protects a founder-authored custom mission (or any other
+    caller that chooses to pass one) from a genuine double-submit. Both
+    statements insert the exact same row shape; only the conflict target
+    differs, and Postgres only supports one arbiter per INSERT, which is
+    why this is a branch rather than a single combined statement.
     """
     source_ref = title.strip() if source != "founder_created" else None
 
     with engine.begin() as connection:
+        if idempotency_key is not None:
+            result = connection.execute(text(f"""
+                INSERT INTO venture_missions (
+                    venture_id, created_by_user_id, title, description,
+                    mission_type, related_category, source, source_ref,
+                    resource_ref, status, question_text, why_it_matters, idempotency_key
+                )
+                VALUES (
+                    :venture_id, :created_by_user_id, :title, :description,
+                    :mission_type, :related_category, :source, :source_ref,
+                    :resource_ref, 'active', :question_text, :why_it_matters, :idempotency_key
+                )
+                ON CONFLICT (created_by_user_id, idempotency_key) WHERE idempotency_key IS NOT NULL
+                    DO NOTHING
+                RETURNING {_MISSION_COLUMNS}
+            """), {
+                "venture_id": venture_id,
+                "created_by_user_id": user_id,
+                "title": title,
+                "description": description,
+                "mission_type": mission_type,
+                "related_category": related_category,
+                "source": source,
+                "source_ref": source_ref,
+                "resource_ref": resource_ref,
+                "question_text": question_text,
+                "why_it_matters": why_it_matters,
+                "idempotency_key": idempotency_key,
+            })
+
+            row = result.mappings().first()
+            if row is not None:
+                return dict(row)
+
+            existing = connection.execute(text(f"""
+                SELECT {_MISSION_COLUMNS}
+                FROM venture_missions
+                WHERE idempotency_key = :idempotency_key AND created_by_user_id = :created_by_user_id
+            """), {"idempotency_key": idempotency_key, "created_by_user_id": user_id}).mappings().first()
+
+            return dict(existing)
+
         result = connection.execute(text(f"""
             INSERT INTO venture_missions (
                 venture_id, created_by_user_id, title, description,
@@ -4086,7 +4187,7 @@ def create_venture_evidence(
                 :structured_field_path, :structured_value, :relationship,
                 TRUE, :occurred_at, :idempotency_key
             )
-            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+            ON CONFLICT (user_id, idempotency_key) WHERE idempotency_key IS NOT NULL
                 DO NOTHING
             RETURNING {_EVIDENCE_COLUMNS}
         """), {
@@ -4114,8 +4215,8 @@ def create_venture_evidence(
         existing = connection.execute(text(f"""
             SELECT {_EVIDENCE_COLUMNS}
             FROM venture_evidence
-            WHERE idempotency_key = :idempotency_key
-        """), {"idempotency_key": idempotency_key}).mappings().first()
+            WHERE idempotency_key = :idempotency_key AND user_id = :user_id
+        """), {"idempotency_key": idempotency_key, "user_id": user_id}).mappings().first()
 
         return dict(existing)
 
@@ -4321,6 +4422,53 @@ def create_venture_financial_snapshots_table():
     print("venture_financial_snapshots table created successfully.")
 
 
+# Phase 40A-FIX -- Private Beta P1 Hardening. Additive column on an
+# already-populated table -- every existing snapshot starts with NULL
+# ("this row predates request-identity idempotency," the correct honest
+# default). Identical shape/index pattern to venture_decisions'/
+# venture_financial_commitments' own idempotency_key: a nullable TEXT
+# column plus a unique index scoped to non-null values only, so any
+# number of pre-existing (and future, deliberately keyless) rows can
+# keep NULL without colliding with each other.
+def add_financial_snapshot_idempotency_column():
+    """
+    The unique index is scoped to (user_id, idempotency_key), NOT a bare
+    idempotency_key -- deliberately, per a security finding made while
+    testing this exact phase's own required cross-user regression case.
+    idempotency_key is entirely client-supplied, unvalidated free text;
+    a bare-key unique index (plus a correspondingly unscoped fallback
+    SELECT) would let User B submit a key equal to one User A already
+    used and receive User A's row back. Scoping by user_id makes that
+    structurally impossible: the SAME literal key string is a completely
+    independent value for every different user_id.
+    """
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE venture_financial_snapshots
+                ADD COLUMN idempotency_key TEXT
+            """))
+    except Exception as e:
+        print("venture_financial_snapshots.idempotency_key migration skipped", e)
+
+    # DROP + CREATE (by name) rather than CREATE ... IF NOT EXISTS alone
+    # -- an index name existing already does not mean its DEFINITION is
+    # the corrected one, and "IF NOT EXISTS" only checks the name. Safe
+    # to re-run indefinitely: dropping a nonexistent index and creating
+    # an already-correct one are both no-ops.
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("DROP INDEX IF EXISTS venture_financial_snapshots_idempotency_key_idx"))
+            connection.execute(text("""
+                CREATE UNIQUE INDEX IF NOT EXISTS venture_financial_snapshots_idempotency_key_idx
+                ON venture_financial_snapshots (user_id, idempotency_key)
+                WHERE idempotency_key IS NOT NULL
+            """))
+        print("venture_financial_snapshots.idempotency_key added.")
+    except Exception as e:
+        print("venture_financial_snapshots.idempotency_key_idx migration skipped", e)
+
+
 _FINANCIAL_SNAPSHOT_COLUMNS = """
                 id, venture_id, user_id, as_of_date, cash_balance_cents,
                 monthly_recurring_revenue_cents, monthly_non_recurring_revenue_cents,
@@ -4350,6 +4498,7 @@ def create_venture_financial_snapshot(
     rent_cents: int | None = None,
     professional_services_cents: int | None = None,
     other_expenses_cents: int | None = None,
+    idempotency_key: str | None = None,
 ) -> dict:
     """
     Ownership of venture_id is enforced by the CALLER (app/api.py) via the
@@ -4357,6 +4506,15 @@ def create_venture_financial_snapshot(
     uses BEFORE this runs -- identical discipline to create_venture_evidence().
     Always an INSERT -- there is no update path for this table (see this
     section's own module comment above).
+
+    Phase 40A-FIX: idempotent when idempotency_key is provided -- the
+    identical ON CONFLICT + fallback-SELECT pattern create_venture_decision()/
+    create_venture_evidence()/create_venture_financial_commitment() already
+    use. A retried request with the same key returns the EXISTING row,
+    never a second, duplicate historical snapshot. Omitting the key (the
+    default) reproduces this function's own prior behavior exactly --
+    always a fresh INSERT, byte-identical for every caller that hasn't
+    been updated to pass one.
     """
     with engine.begin() as connection:
         result = connection.execute(text(f"""
@@ -4364,14 +4522,16 @@ def create_venture_financial_snapshot(
                 venture_id, user_id, as_of_date, cash_balance_cents,
                 monthly_recurring_revenue_cents, monthly_non_recurring_revenue_cents,
                 payroll_cents, contractors_cents, software_cents, marketing_cents,
-                rent_cents, professional_services_cents, other_expenses_cents
+                rent_cents, professional_services_cents, other_expenses_cents, idempotency_key
             )
             VALUES (
                 :venture_id, :user_id, :as_of_date, :cash_balance_cents,
                 :monthly_recurring_revenue_cents, :monthly_non_recurring_revenue_cents,
                 :payroll_cents, :contractors_cents, :software_cents, :marketing_cents,
-                :rent_cents, :professional_services_cents, :other_expenses_cents
+                :rent_cents, :professional_services_cents, :other_expenses_cents, :idempotency_key
             )
+            ON CONFLICT (user_id, idempotency_key) WHERE idempotency_key IS NOT NULL
+                DO NOTHING
             RETURNING {_FINANCIAL_SNAPSHOT_COLUMNS}
         """), {
             "venture_id": venture_id,
@@ -4387,8 +4547,20 @@ def create_venture_financial_snapshot(
             "rent_cents": rent_cents,
             "professional_services_cents": professional_services_cents,
             "other_expenses_cents": other_expenses_cents,
+            "idempotency_key": idempotency_key,
         })
-        return dict(result.mappings().first())
+
+        row = result.mappings().first()
+        if row is not None:
+            return dict(row)
+
+        existing = connection.execute(text(f"""
+            SELECT {_FINANCIAL_SNAPSHOT_COLUMNS}
+            FROM venture_financial_snapshots
+            WHERE idempotency_key = :idempotency_key AND user_id = :user_id
+        """), {"idempotency_key": idempotency_key, "user_id": user_id}).mappings().first()
+
+        return dict(existing)
 
 
 def get_latest_venture_financial_snapshot_for_owner(user_id: str, venture_id: int) -> dict | None:
@@ -4567,6 +4739,31 @@ def get_venture_hire_plan_for_owner(user_id: str, venture_id: int, hire_plan_id:
         return dict(row) if row else None
 
 
+# Phase 40A-FIX -- Private Beta P1 Hardening. Batched sibling of
+# get_venture_hire_plan_for_owner() -- ownership (venture_id + user_id)
+# is enforced IN THE QUERY ITSELF, identical to every single-id lookup
+# in this file, not by fetching everything and filtering in Python.
+# Callers that previously issued one query per referenced id (scenario
+# building, scenario/commitment ownership validation) now issue exactly
+# one query for the whole batch. Returns [] immediately for an empty
+# id list -- `= ANY('{}')` is legal SQL but a wasted round trip.
+def list_venture_hire_plans_for_owner_by_ids(
+    user_id: str, venture_id: int, hire_plan_ids: list[int], status: str | None = None
+) -> list[dict]:
+    if not hire_plan_ids:
+        return []
+    clause = "AND vhp.status = :status" if status is not None else ""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_HIRE_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_hire_plans vhp
+            JOIN modeled_ventures v ON v.id = vhp.venture_id
+            WHERE vhp.id = ANY(:hire_plan_ids) AND vhp.venture_id = :venture_id AND v.user_id = :user_id
+            {clause}
+        """), {"hire_plan_ids": hire_plan_ids, "venture_id": venture_id, "user_id": user_id, "status": status})
+        return [dict(row) for row in result.mappings().all()]
+
+
 def update_venture_hire_plan_for_owner(user_id: str, venture_id: int, hire_plan_id: int, **fields) -> dict | None:
     """Partial update-in-place -- `fields` is whatever the caller
     (app/api.py) determined should change, already validated. Always sets
@@ -4697,6 +4894,28 @@ def get_venture_financial_plan_for_owner(user_id: str, venture_id: int, plan_id:
         """), {"plan_id": plan_id, "venture_id": venture_id, "user_id": user_id})
         row = result.mappings().first()
         return dict(row) if row else None
+
+
+# Phase 40A-FIX -- Private Beta P1 Hardening. Batched sibling of
+# get_venture_financial_plan_for_owner() -- see
+# list_venture_hire_plans_for_owner_by_ids()'s own docstring immediately
+# above for the exact same reasoning, applied here to
+# venture_financial_plans.
+def list_venture_financial_plans_for_owner_by_ids(
+    user_id: str, venture_id: int, plan_ids: list[int], status: str | None = None
+) -> list[dict]:
+    if not plan_ids:
+        return []
+    clause = "AND vfp.status = :status" if status is not None else ""
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            SELECT {_FINANCIAL_PLAN_COLUMNS_QUALIFIED}
+            FROM venture_financial_plans vfp
+            JOIN modeled_ventures v ON v.id = vfp.venture_id
+            WHERE vfp.id = ANY(:plan_ids) AND vfp.venture_id = :venture_id AND v.user_id = :user_id
+            {clause}
+        """), {"plan_ids": plan_ids, "venture_id": venture_id, "user_id": user_id, "status": status})
+        return [dict(row) for row in result.mappings().all()]
 
 
 def update_venture_financial_plan_for_owner(user_id: str, venture_id: int, plan_id: int, **fields) -> dict | None:
@@ -4854,6 +5073,54 @@ def list_pending_reconciliation_for_owner(user_id: str, venture_id: int, latest_
         if p["start_date"] <= as_of_date and p["last_reconciled_snapshot_id"] != latest_snapshot_id
     ]
     return {"hire_plans": pending_hires, "financial_plans": pending_plans}
+
+
+# Phase 40A-FIX -- Private Beta P1 Hardening / Security Correction.
+# Discovered while implementing this phase's own P1 #2 (idempotency for
+# financial snapshots/missions) and confirmed by this phase's own
+# required cross-user regression test: venture_decisions,
+# venture_evidence, and venture_financial_commitments each originally
+# enforced idempotency_key uniqueness GLOBALLY -- a bare `(idempotency_key)
+# WHERE idempotency_key IS NOT NULL` index, paired with an equally
+# unscoped fallback SELECT (`WHERE idempotency_key = :idempotency_key`,
+# no user_id filter). idempotency_key is entirely client-supplied,
+# unvalidated free text -- an authenticated User B submitting the exact
+# same key string User A had already used (guessed, reused, or simply
+# coincidentally identical) would receive User A's own row back from the
+# fallback SELECT. That is a real cross-tenant data exposure, not a
+# theoretical one, and is exactly what this phase's own directive asked
+# to re-verify ("User B cannot replay User A's idempotency key to obtain
+# User A's resource").
+#
+# Fix: widen each unique index to (user_id, idempotency_key). Safe to
+# migrate onto existing data -- global uniqueness always implies
+# per-user uniqueness, so no existing row can violate the new, more
+# permissive constraint. Each function's own fallback SELECT is updated
+# in the SAME phase to add "AND user_id = :user_id" (see
+# create_venture_evidence()/create_venture_financial_commitment()/
+# create_venture_decision()'s own fallback queries). This phase's own
+# two NEW idempotency mechanisms (venture_financial_snapshots,
+# venture_missions) were written with the correct scoping from the
+# start -- see add_financial_snapshot_idempotency_column()'s and
+# add_mission_idempotency_column()'s own docstrings.
+def fix_idempotency_key_scoping_to_prevent_cross_user_replay():
+    fixes = [
+        ("venture_decisions_idempotency_key_idx", "venture_decisions"),
+        ("venture_evidence_idempotency_key_idx", "venture_evidence"),
+        ("venture_financial_commitments_idempotency_key_idx", "venture_financial_commitments"),
+    ]
+    for index_name, table_name in fixes:
+        try:
+            with engine.begin() as connection:
+                connection.execute(text(f"DROP INDEX IF EXISTS {index_name}"))
+                connection.execute(text(f"""
+                    CREATE UNIQUE INDEX IF NOT EXISTS {index_name}
+                    ON {table_name} (user_id, idempotency_key)
+                    WHERE idempotency_key IS NOT NULL
+                """))
+            print(f"{index_name} re-scoped to (user_id, idempotency_key).")
+        except Exception as e:
+            print(f"{index_name} re-scoping skipped", e)
 
 
 # ---------------------------------------------------------------------------
@@ -5019,7 +5286,7 @@ def create_venture_financial_commitment(
                 :projection_start, :projection_horizon_months, CAST(:expected_monthly AS JSONB),
                 :related_decision_id, :founder_rationale, :idempotency_key
             )
-            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+            ON CONFLICT (user_id, idempotency_key) WHERE idempotency_key IS NOT NULL
                 DO NOTHING
             RETURNING {_COMMITMENT_COLUMNS}
         """), {
@@ -5047,8 +5314,8 @@ def create_venture_financial_commitment(
         existing = connection.execute(text(f"""
             SELECT {_COMMITMENT_COLUMNS}
             FROM venture_financial_commitments
-            WHERE idempotency_key = :idempotency_key
-        """), {"idempotency_key": idempotency_key}).mappings().first()
+            WHERE idempotency_key = :idempotency_key AND user_id = :user_id
+        """), {"idempotency_key": idempotency_key, "user_id": user_id}).mappings().first()
 
         return _parse_commitment_json_fields(dict(existing))
 
@@ -5160,7 +5427,7 @@ def create_venture_decision(
                 :sie_reasoning, :founder_choice, :founder_rationale, :evidence_ids,
                 :supersedes_decision_id, :idempotency_key
             )
-            ON CONFLICT (idempotency_key) WHERE idempotency_key IS NOT NULL
+            ON CONFLICT (user_id, idempotency_key) WHERE idempotency_key IS NOT NULL
                 DO NOTHING
             RETURNING {_DECISION_COLUMNS}
         """), {
@@ -5183,8 +5450,8 @@ def create_venture_decision(
         existing = connection.execute(text(f"""
             SELECT {_DECISION_COLUMNS}
             FROM venture_decisions
-            WHERE idempotency_key = :idempotency_key
-        """), {"idempotency_key": idempotency_key}).mappings().first()
+            WHERE idempotency_key = :idempotency_key AND user_id = :user_id
+        """), {"idempotency_key": idempotency_key, "user_id": user_id}).mappings().first()
 
         return dict(existing)
 

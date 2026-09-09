@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAuth } from "@clerk/nextjs";
 
 import BaseCard from "@/components/ui/BaseCard";
@@ -108,6 +108,12 @@ export default function CurrentQuestionCard({
   const [currentQuestion, setCurrentQuestion] = useState<CurrentQuestion | null>(null);
   const [recommendation, setRecommendation] = useState<BuildRecommendation | null>(null);
   const [error, setError] = useState<string | null>(null);
+  // Phase 40A-FIX -- Private Beta P1 Hardening, P1 #2: same convention as
+  // FinanceOverview.tsx's own snapshotIdempotencyKeyRef -- withToken()
+  // below swallows a thrown error into `setError`/`null`, so this must
+  // live here (where the action callback's own success/failure is
+  // visible), not inside RecommendationState's button component.
+  const customMissionIdempotencyKeyRef = useRef<string | null>(null);
 
   const refresh = useCallback(async () => {
     const token = await getToken();
@@ -261,6 +267,12 @@ export default function CurrentQuestionCard({
           }
           onStartCustomTest={(questionText, whyItMatters) =>
             withToken(async (token) => {
+              if (!customMissionIdempotencyKeyRef.current) {
+                customMissionIdempotencyKeyRef.current =
+                  typeof crypto !== "undefined" && "randomUUID" in crypto
+                    ? crypto.randomUUID()
+                    : `${ventureId}-${questionText}-${Date.now()}-${Math.random()}`;
+              }
               await createVentureMission(
                 ventureId,
                 {
@@ -269,9 +281,15 @@ export default function CurrentQuestionCard({
                   source: "founder_created",
                   question_text: questionText,
                   why_it_matters: whyItMatters || null,
+                  idempotency_key: customMissionIdempotencyKeyRef.current,
                 },
                 token
               );
+              // Only reached on success -- a throw above (caught by
+              // withToken, outside this callback) leaves the ref set so a
+              // retry reuses the same key instead of creating a second
+              // mission.
+              customMissionIdempotencyKeyRef.current = null;
               await refresh();
             })
           }

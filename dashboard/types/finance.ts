@@ -20,6 +20,10 @@ export interface CreateFinancialSnapshotRequest {
   rent_cents: number | null;
   professional_services_cents: number | null;
   other_expenses_cents: number | null;
+  // Phase 40A-FIX -- Private Beta P1 Hardening. Optional, client-
+  // generated -- mirrors venture_decisions/venture_financial_commitments'
+  // own idempotency_key field (see app/models/venture_financials.py).
+  idempotency_key?: string;
 }
 
 export interface FinancialSnapshot extends CreateFinancialSnapshotRequest {

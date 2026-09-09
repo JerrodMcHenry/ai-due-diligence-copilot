@@ -53,6 +53,16 @@ class CreateFinancialSnapshotRequest(BaseModel):
     rent_cents: int | None = None
     professional_services_cents: int | None = None
     other_expenses_cents: int | None = None
+    # Phase 40A-FIX -- Private Beta P1 Hardening. Optional, client-
+    # generated -- a retried submission with the same key returns the
+    # existing row instead of creating a duplicate historical snapshot
+    # (see create_venture_financial_snapshot()'s own docstring,
+    # app/database/db.py). Identical shape to venture_decisions/
+    # venture_financial_commitments' own idempotency_key field. Two
+    # genuinely separate submissions (no key, or two different keys) are
+    # both real, legitimate historical records -- never deduplicated by
+    # payload similarity.
+    idempotency_key: str | None = Field(default=None, max_length=100)
 
 
 class FinancialSnapshotResponse(BaseModel):
