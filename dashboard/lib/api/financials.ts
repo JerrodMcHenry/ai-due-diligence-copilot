@@ -4,6 +4,7 @@ import type {
   CreateFinancialSnapshotRequest,
   CreateHirePlanRequest,
   CreateScenarioRequest,
+  FinancialCommitmentComparisonResponse,
   FinancialCommitmentResponse,
   FinancialHistoryResponse,
   FinancialPlan,
@@ -177,4 +178,18 @@ export function getFinancialCommitment(
   token: string
 ): Promise<FinancialCommitmentResponse> {
   return apiFetch<FinancialCommitmentResponse>(`/ventures/${ventureId}/financial-commitments/${commitmentId}`, { token });
+}
+
+// --- Phase 38D-B -- Committed Expectation vs Actual V1 ----------------------
+// A pure read -- never persists anything, never mutates the commitment.
+
+export function getFinancialCommitmentComparison(
+  ventureId: number,
+  commitmentId: number,
+  token: string
+): Promise<FinancialCommitmentComparisonResponse> {
+  return apiFetch<FinancialCommitmentComparisonResponse>(
+    `/ventures/${ventureId}/financial-commitments/${commitmentId}/comparison`,
+    { token }
+  );
 }

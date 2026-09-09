@@ -192,7 +192,9 @@ from app.ai.financial_engine import (
 )
 from app.models.venture_financial_commitments import (
     CreateFinancialCommitmentRequest, FinancialCommitmentResponse, PlanSnapshotItem,
+    FinancialCommitmentComparisonResponse,
 )
+from app.ai.commitment_comparison import build_commitment_comparison
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -2556,6 +2558,30 @@ def get_financial_commitment(
     if commitment is None:
         raise HTTPException(status_code=404, detail="Commitment not found.")
     return FinancialCommitmentResponse(**commitment)
+
+
+# Phase 38D-B -- Committed Expectation vs Actual V1. Pure read: no new
+# table, no write, no mutation of the commitment row. Reuses the SAME two
+# ownership-scoped reads (get_venture_financial_commitment_for_owner,
+# list_venture_financial_snapshots_for_owner) every other Finance
+# endpoint already uses -- see app/ai/commitment_comparison.py's own
+# module docstring for the full comparison contract.
+@app.get(
+    "/ventures/{venture_id}/financial-commitments/{commitment_id}/comparison",
+    response_model=FinancialCommitmentComparisonResponse,
+)
+def get_financial_commitment_comparison(
+    venture_id: int,
+    commitment_id: int,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    commitment = get_venture_financial_commitment_for_owner(current_user.user_id, venture_id, commitment_id)
+    if commitment is None:
+        raise HTTPException(status_code=404, detail="Commitment not found.")
+    snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
+    comparison = build_commitment_comparison(commitment, snapshots, compute_derived_metrics)
+    return FinancialCommitmentComparisonResponse(**comparison)
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])

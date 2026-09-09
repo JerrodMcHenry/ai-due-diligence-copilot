@@ -100,3 +100,50 @@ class FinancialCommitmentResponse(BaseModel):
     status: CommitmentStatus
     supersedes_commitment_id: int | None = None
     founder_rationale: str | None = None
+
+
+# --- Phase 38D-B -- Committed Expectation vs Actual V1 ----------------------
+#
+# See app/ai/commitment_comparison.py's own module docstring and
+# docs/product/SIE_COMMITTED_PLAN_LEARNING_ARCHITECTURE_V1.md §33 for the
+# full design. Nothing below is ever persisted -- every one of these
+# response models is built fresh, at read time, from `expected_monthly`
+# (already frozen, Phase 38D-A) and `venture_financial_snapshots` (already
+# canonical, append-only). Comparison status describes DATA AVAILABILITY
+# only ("awaiting_actuals"/"partially_observed"/"observed") -- never a
+# performance judgment (no "on_track"/"healthy"/etc.).
+
+ComparisonStatus = Literal["awaiting_actuals", "partially_observed", "observed"]
+
+
+class MetricComparison(BaseModel):
+    """One comparable metric for one month. `expected` is never null --
+    a commitment can only be created when every frozen month's inputs
+    were already fully known (38D-A's own validation guard). `actual`/
+    `variance` are null exactly when no eligible actual value exists for
+    this specific metric this month -- never a fabricated zero."""
+    expected: int
+    actual: int | None = None
+    variance: int | None = None
+
+
+class MonthComparison(BaseModel):
+    month_index: int
+    date: date
+    actual_snapshot_id: int | None = None
+    actual_as_of_date: date | None = None
+    cash: MetricComparison
+    revenue: MetricComparison
+    expenses: MetricComparison
+    net_cash_change: MetricComparison
+
+
+class FinancialCommitmentComparisonResponse(BaseModel):
+    commitment_id: int
+    committed_at: datetime
+    source_snapshot_id: int
+    scenario_name: str | None = None
+    calculation_version: str
+    months: list[MonthComparison]
+    latest_comparable_month: date | None = None
+    comparison_status: ComparisonStatus

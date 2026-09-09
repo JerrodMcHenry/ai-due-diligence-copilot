@@ -20,6 +20,7 @@ import {
   reconcileFinancialPlan,
   createFinancialCommitment,
   listFinancialCommitments,
+  getFinancialCommitmentComparison,
 } from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
@@ -30,6 +31,7 @@ import type {
   DerivedFinancialMetrics,
   EmploymentType,
   ExpenseCategory,
+  FinancialCommitmentComparisonResponse,
   FinancialCommitmentResponse,
   FinancialPlan,
   FinancialPlanImpactPreview,
@@ -37,6 +39,8 @@ import type {
   FinancialSnapshot,
   HireImpactPreview,
   HirePlan,
+  MetricComparison,
+  MonthComparison,
   ProjectedMonth,
   ProjectedMonthWithPlan,
   ReconciliationItem,
@@ -1545,6 +1549,7 @@ function ScenarioCard({
                 })()
               : null}
           </p>
+          <CommitmentComparisonSection ventureId={ventureId} commitmentId={committed.id} />
         </div>
       ) : null}
 
@@ -1558,6 +1563,124 @@ function ScenarioCard({
         with what happens later.
       </p>
     </div>
+  );
+}
+
+// Phase 38D-B -- Committed Expectation vs Actual V1. A pure read, fetched
+// once per committed plan -- never writes anything, never touches the
+// commitment itself. Lives inside the SAME "Committed" panel the
+// commitment's own confirmation renders in (§14: no new tab, no History/
+// Analyze/Overview detour).
+function CommitmentComparisonSection({ ventureId, commitmentId }: { ventureId: number; commitmentId: number }) {
+  const { getToken } = useAuth();
+  const [comparison, setComparison] = useState<FinancialCommitmentComparisonResponse | null>(null);
+  const [showEarlierMonths, setShowEarlierMonths] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const token = await getToken();
+      if (!token) return;
+      const result = await getFinancialCommitmentComparison(ventureId, commitmentId, token);
+      if (!cancelled) setComparison(result);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [ventureId, commitmentId, getToken]);
+
+  if (!comparison) return null;
+
+  if (comparison.comparison_status === "awaiting_actuals") {
+    return (
+      <div className="mt-2 border-t border-border pt-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Expected vs. actual</p>
+        <p className="mt-1 text-sm text-text-secondary">
+          Waiting for actuals. SIE has saved what you expected -- add a financial snapshot for a future month to
+          compare this plan with what actually happened.
+        </p>
+      </div>
+    );
+  }
+
+  // §15: latest observed month first, earlier ones tucked behind
+  // progressive disclosure -- never every month of a (possibly 24-month)
+  // projection dumped at once. `months` is already chronological
+  // (month_index ascending), so the last entry with an actual is the
+  // most recent one.
+  const observedMonths = comparison.months.filter((m) => m.actual_snapshot_id !== null);
+  const latestMonth = observedMonths[observedMonths.length - 1] ?? null;
+  const earlierMonths = observedMonths.slice(0, -1).reverse();
+
+  return (
+    <div className="mt-2 border-t border-border pt-2">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Expected vs. actual</p>
+      {latestMonth ? <MonthComparisonCard month={latestMonth} /> : null}
+      {earlierMonths.length > 0 ? (
+        <div className="mt-2">
+          <button
+            type="button"
+            onClick={() => setShowEarlierMonths((v) => !v)}
+            className="text-sm font-semibold text-primary hover:text-primary-hover"
+          >
+            {showEarlierMonths ? "Hide" : "See"} earlier observed months ({earlierMonths.length}){" "}
+            {showEarlierMonths ? "▴" : "▾"}
+          </button>
+          {showEarlierMonths ? (
+            <div className="mt-2 space-y-3">
+              {earlierMonths.map((month) => (
+                <MonthComparisonCard key={month.month_index} month={month} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+// §7: neutral arithmetic only -- a plain signed dollar amount, never a
+// qualitative word ("behind," "underperforming," etc.). §15's own three
+// metrics (cash, revenue, expenses) only -- net_cash_change is part of
+// the API contract (Case F) but deliberately left out of this V1 table to
+// avoid overloading the founder with a fourth, partly-redundant row.
+function MonthComparisonCard({ month }: { month: MonthComparison }) {
+  return (
+    <div className="mt-1.5">
+      <p className="text-sm font-semibold text-text-primary">{formatMonthYear(month.date)}</p>
+      <table className="mt-1 w-full text-sm">
+        <thead>
+          <tr className="text-left text-xs uppercase tracking-wide text-text-muted">
+            <th className="pb-1 pr-3 font-semibold">Metric</th>
+            <th className="pb-1 pr-3 font-semibold">Expected</th>
+            <th className="pb-1 pr-3 font-semibold">Actual</th>
+            <th className="pb-1 font-semibold">Difference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <MetricComparisonRow label="Cash" metric={month.cash} />
+          <MetricComparisonRow label="Revenue" metric={month.revenue} />
+          <MetricComparisonRow label="Expenses" metric={month.expenses} />
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function MetricComparisonRow({ label, metric }: { label: string; metric: MetricComparison }) {
+  return (
+    <tr>
+      <td className="py-0.5 pr-3 text-text-muted">{label}</td>
+      <td className="py-0.5 pr-3 text-text-secondary">{formatWholeDollars(metric.expected)}</td>
+      <td className="py-0.5 pr-3 text-text-secondary">
+        {metric.actual !== null ? formatWholeDollars(metric.actual) : "—"}
+      </td>
+      <td className="py-0.5 font-medium text-text-primary">
+        {metric.variance !== null
+          ? `${metric.variance >= 0 ? "+" : "-"}${formatWholeDollars(Math.abs(metric.variance))}`
+          : "—"}
+      </td>
+    </tr>
   );
 }
 

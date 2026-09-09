@@ -1,9 +1,9 @@
 # SIE Committed Plan → Actual → Learning Architecture V1
 
 Phase 38D was a pure design phase — §§1-31 below reflect that original, nothing-implemented state and are
-left unmodified. **Phase 38D-A (§32) has since implemented the first slice: commitment persistence + frozen
-expectation.** Expected-vs-actual comparison, variance, founder explanation, and Command Center integration
-remain unimplemented, per 38D-A's own explicit scope guards (§32).
+left unmodified. **Phase 38D-A (§32) has since implemented commitment persistence + frozen expectation, and
+Phase 38D-B (§33) has implemented deterministic expected-vs-actual comparison.** Founder explanation, learning,
+and Command Center integration remain unimplemented, per 38D-B's own explicit scope guards (§33).
 
 The original §§1-31 audited answer to one question: what is the smallest durable schema that lets SIE
 truthfully compare "what a founder expected" against "what actually happened," months later, without
@@ -736,3 +736,174 @@ left in place as a standing demonstration of the new feature.
   reproduced; confidence instead comes from the `disabled={submitting}` guard read directly in the
   component plus the backend idempotency test, which is the same standard of proof this session has used for
   analogous UI-guard claims in prior phases.
+
+## 33. Phase 38D-B implementation (as built)
+
+Implements the OBSERVE step from §30's own sequencing — deterministic expected-vs-actual comparison only.
+No new persisted concept, no table, no AI, no explanation, no recommendation. `founder_explanation` and any
+notion of "why" remain 38D-C's own scope, untouched.
+
+### Comparison contract
+
+A new pure module, `app/ai/commitment_comparison.py::build_commitment_comparison()`, takes a raw
+`venture_financial_commitments` row plus the venture's full snapshot history and returns, at read time only:
+
+```
+FinancialCommitmentComparisonResponse
+  commitment_id, committed_at, source_snapshot_id, scenario_name, calculation_version
+  months: MonthComparison[]
+    month_index, date, actual_snapshot_id, actual_as_of_date
+    cash / revenue / expenses / net_cash_change: { expected, actual, variance }
+  latest_comparable_month
+  comparison_status: "awaiting_actuals" | "partially_observed" | "observed"
+```
+
+Nothing here is persisted. No table was added — confirmed by re-running `app.api` import after this phase's
+changes and observing no new `CREATE TABLE` line.
+
+### Actual-source rules
+
+EXPECTED comes exclusively from the commitment's own already-frozen `expected_monthly` (Phase 38D-A) — never
+regenerated, never re-reading the scenario, live plan rows, or the financial engine. ACTUAL comes exclusively
+from `venture_financial_snapshots` via `compute_derived_metrics()`, the same function every other actual-state
+read in this codebase already uses — never inferred from a plan's own `status` (a hire becoming `'actualized'`
+establishes nothing about the canonical financial snapshot, per §4 of the directive).
+
+### Month alignment
+
+Calendar-month match: for each expected month, find snapshots whose `as_of_date` falls in the exact same
+`(year, month)`. No nearest/previous/next/interpolation. When multiple snapshots exist in the same month, the
+winner is `(as_of_date DESC, recorded_at DESC)` — the identical tie-break
+`get_latest_venture_financial_snapshot_for_owner()` already uses, reused verbatim rather than inventing a new
+rule (§18).
+
+**Additional eligibility rule (§20):** a snapshot must also have `as_of_date >= commitment.committed_at`'s own
+date. Audited why this is necessary: `project_monthly_cash_flow()`'s own month_index=1 is always exactly one
+calendar month after the source snapshot's `as_of_date` (`_add_months(as_of_date, 1)`, confirmed directly by
+reading the function and by a dedicated regression test, §33's own Case Y below) — and since the commit
+endpoint always uses the LATEST snapshot as its source, no snapshot already existing at commit time can ever
+coincide with month_index=1's own calendar month *unless* it was entered (or backdated) after the fact. A
+backdated snapshot dated before the commitment itself cannot honestly represent a realized result of a plan
+that did not yet exist — exactly the directive's own December 20/December 5 example. This rule is applied to
+EVERY expected month, not just the first: a founder who deliberates a long time before committing accepts
+that comparison starts counting from the moment of commitment forward (documented tradeoff, see LIMITATIONS).
+
+### Comparable metrics
+
+| Metric | Expected source | Actual source | Included? |
+|---|---|---|---|
+| Cash | `ending_cash_cents` | `cash_balance_cents` | Yes — same semantic meaning, a point-in-time balance |
+| Revenue | `revenue_cents` | `total_monthly_revenue_cents` (derived) | Yes |
+| Expenses | `expenses_cents` | `total_monthly_expenses_cents` (derived) | Yes |
+| Net cash change | `net_cash_change_cents` | computed fresh as `actual_revenue - actual_expenses` | Yes, but NOT via `compute_derived_metrics()`'s own `net_burn_cents` — that field uses the OPPOSITE sign convention (`expenses - revenue`, positive = burning); reusing it directly would have silently flipped a sign. Computed identically to the expected side's own formula instead. |
+
+### Excluded metrics and why
+
+- **Runway** — per the directive's own default recommendation, confirmed correct by audit: `ScenarioProjectedMonth`
+  has no runway field at all on the expected side, and `runway_months` on the actual side is a forward-looking
+  derived quantity computed from the CURRENT snapshot's own trajectory — there is no honest "expected runway at
+  month N" to compare against. Excluded entirely.
+- **plan_expense_impact_cents / plan_revenue_active / active_plan_item_ids / depleted / starting_cash_cents** —
+  structural projection metadata (which plans were active, whether the plan itself depletes) with no actual-side
+  equivalent; not comparable metrics, excluded from the comparison (though `date`/`month_index` remain as
+  context fields).
+
+### Variance semantics
+
+`variance = actual - expected`, sign preserved, always. Verified: an expense overrun produces a POSITIVE
+variance, a cash shortfall produces a NEGATIVE variance (both directly asserted in tests). No qualitative
+language anywhere in the response or the UI — a plain signed dollar figure only (e.g. `+$2,980`, `-$63,000`).
+
+### Missing-data behavior
+
+`expected` is never null (a commitment can only be created when every frozen month's inputs were already
+fully known — 38D-A's own 422 guard). `actual`/`variance` are null exactly when no eligible snapshot exists
+for that month, OR an eligible snapshot exists but that specific field was never recorded on it (independently
+per metric — a snapshot with cash but no revenue still lets cash compare while revenue and net_cash_change
+stay null). Never a fabricated zero.
+
+### Comparison status
+
+Three states, describing DATA AVAILABILITY only: `awaiting_actuals` (zero months observed), `partially_observed`
+(some but not all), `observed` (every projected month has a matching actual). No `on_track`/`healthy`/
+performance-judgment state was created — none was needed, and the directive explicitly forbade inventing one
+without an existing accepted precedent.
+
+### API
+
+One new endpoint: `GET /ventures/{venture_id}/financial-commitments/{commitment_id}/comparison`. Reuses the
+exact two ownership-scoped reads every other Finance endpoint already uses
+(`get_venture_financial_commitment_for_owner`, `list_venture_financial_snapshots_for_owner`) — no new database
+function was written for this phase. No POST, no PATCH, no persistence.
+
+### UX
+
+Lives inside the same "Committed"/confirmation panel `FinanceOverview.tsx`'s `ScenarioCard` already renders
+(38D-A) — no new tab, no History/Analyze/Overview detour (§14). A new `CommitmentComparisonSection` fetches
+the comparison once the commitment exists and renders:
+
+- `awaiting_actuals`: "Waiting for actuals..." plus the directive's own specified copy pointing at the
+  existing "Update cash & monthly finances" action.
+- Otherwise: the latest observed month's own Cash/Revenue/Expenses table (Expected/Actual/Difference columns,
+  a plain signed dollar figure, no words), with earlier observed months tucked behind a "See earlier observed
+  months (N) ▾" progressive disclosure — never every month of a 24-month projection dumped at once (§15).
+  `net_cash_change` is part of the API contract and tested, but deliberately left out of the V1 table to match
+  the directive's own three-metric UX example exactly and avoid a redundant fourth row.
+
+### Authorization
+
+Identical ownership-scoped pattern as every other Finance/commitment endpoint — verified directly
+(`test_api_ownership_blocks_user_b`). No verification/graduation/analysis/public-profile gate of any kind.
+
+### Tests
+
+New file `app/tests/test_commitment_comparison.py`: 23/23 passing, two layers —
+15 direct pure-function unit tests (month alignment, the pre-commit exclusion rule, multi-snapshot tie-break
+including a same-as_of_date `recorded_at` tie-break, null propagation per metric, the first-projection-month
+regression proving `_add_months` semantics directly) and 8 API-level integration tests (authorization,
+awaiting/partially-observed status through the real endpoint, a structural no-recompute proof, cash-flow-positive
+and out-of-cash neutral-arithmetic cases, and a full re-verification of 38D-A's own source-mutation immutability
+guarantee now that a comparison read-path exists alongside it). Full regression spot-check
+(`test_venture_financial_commitments`, `test_venture_scenarios`, `test_venture_financials`,
+`test_venture_hire_plans`, `test_build_intelligence_loop`, `test_venture_graduation`, `test_idea_lab`,
+`test_founder_workspace`) all passing — zero regression. Frontend: `tsc --noEmit`, `eslint`, `next build`, and
+the full `npm test` suite all clean.
+
+A real bug was caught and fixed during test-writing: the first implementation of `_as_date()` used
+`isinstance(value, date)` to detect an already-converted date, which silently also matches `datetime` (a
+`datetime` is itself a subclass of `date` in Python) — `commitment["committed_at"]` (a real `datetime`) was
+passed through unconverted and then failed to compare against a plain `date`. Fixed by checking
+`isinstance(value, datetime)` first. Caught by the very first pure-function test run, before any live
+verification — exactly the value of writing the unit-test layer first.
+
+### Live walkthrough
+
+On the same `venture_id=8212` fixture, using the standing 38D-A commitment (id=35, "38D-A Walkthrough Plan"):
+confirmed the frozen commitment panel still rendered with its original $519,540 projection untouched, then
+confirmed the "Expected vs. actual" section correctly showed "Waiting for actuals" (no eligible snapshot yet).
+Computed September 2026's expected values by hand from the frozen `expected_monthly` (cash $204,960, revenue
+$30,000, expenses $15,020), added a real financial snapshot dated September 20, 2026 (chosen specifically to
+satisfy both the calendar-month match AND the `>= committed_at` rule, since the commitment's own September
+2026 committed_at postdates its June-sourced month 1/2), and confirmed the live UI table showed exactly the
+hand-computed variances (-$24,960 / -$5,000 / +$2,980) — verified via direct DOM read, not a screenshot alone.
+Added a second September snapshot (Sept 28, different values) and confirmed, both via the API and the live
+re-rendered UI, that the LATER `as_of_date` deterministically won, replacing the comparison with newly
+hand-verified variances (+$5,040 / +$2,000 / +$980). Reloaded to confirm persistence. Edited the underlying
+hire's salary from $120K to $600K directly against the live backend and confirmed via the API that every
+expected-side value across every month was byte-identical before and after, while the actual side was also
+correctly untouched (a plan edit alone establishes nothing about canonical actuals). Afterward, removed both
+walkthrough-only snapshots and reverted the hire's salary, then reconfirmed live that the commitment's
+comparison correctly returned to "Waiting for actuals" and that Phase 38C's own standing Command Center demo
+on this venture (stale snapshot + revenue divergence) still rendered with no regression.
+
+### Limitations
+
+- **Early-month unobservability**: because the `>= committed_at` eligibility rule applies to every month, a
+  commitment made well after its own source snapshot has expected months that can NEVER be observed (any
+  snapshot dated in those calendar months necessarily predates the commitment). This is a deliberate,
+  documented tradeoff favoring "never show a data point that could be mistaken for pre-decision history" over
+  completeness — not an oversight.
+- `net_cash_change` exists in the API but has no UI row in this phase (documented above).
+- No comparison surface exists anywhere outside Finance (Command Center integration is explicitly out of
+  scope, per the directive's own §26).
+- No founder explanation, no interpretation, no recommendation anywhere in this phase's own code — by design.

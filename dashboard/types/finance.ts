@@ -234,3 +234,40 @@ export interface FinancialCommitmentResponse {
   supersedes_commitment_id: number | null;
   founder_rationale: string | null;
 }
+
+// --- Phase 38D-B -- Committed Expectation vs Actual V1 ----------------------
+// Mirrors app/models/venture_financial_commitments.py's own new response
+// models exactly. Nothing here is ever persisted -- see
+// app/ai/commitment_comparison.py's own module docstring.
+// `comparison_status` describes DATA AVAILABILITY only, never a
+// performance judgment.
+
+export type ComparisonStatus = "awaiting_actuals" | "partially_observed" | "observed";
+
+export interface MetricComparison {
+  expected: number;
+  actual: number | null;
+  variance: number | null;
+}
+
+export interface MonthComparison {
+  month_index: number;
+  date: string; // "YYYY-MM-DD"
+  actual_snapshot_id: number | null;
+  actual_as_of_date: string | null;
+  cash: MetricComparison;
+  revenue: MetricComparison;
+  expenses: MetricComparison;
+  net_cash_change: MetricComparison;
+}
+
+export interface FinancialCommitmentComparisonResponse {
+  commitment_id: number;
+  committed_at: string;
+  source_snapshot_id: number;
+  scenario_name: string | null;
+  calculation_version: string;
+  months: MonthComparison[];
+  latest_comparable_month: string | null;
+  comparison_status: ComparisonStatus;
+}
