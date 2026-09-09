@@ -100,6 +100,24 @@ class FinancialCommitmentResponse(BaseModel):
     status: CommitmentStatus
     supersedes_commitment_id: int | None = None
     founder_rationale: str | None = None
+    # Phase 38D-C -- the one mutable pair on this otherwise append-only
+    # row. `explanation_recorded_at` is always the LATEST save (first
+    # write or an edit -- never a created-vs-updated distinction, never a
+    # revision history). Both null until the founder records one.
+    founder_explanation: str | None = None
+    explanation_recorded_at: datetime | None = None
+
+
+class UpdateFinancialCommitmentExplanationRequest(BaseModel):
+    """Phase 38D-C. The founder's own causal interpretation of an already-
+    observed variance -- provenance is always founder-said, never an SIE
+    conclusion (see app/ai/commitment_comparison.py's own module
+    docstring for the expected/actual/explanation separation this
+    enforces). Never empty -- clearing an explanation is not a supported
+    action in V1 (no delete path was requested by the accepted
+    architecture); a founder who wants to retract one edits it to
+    whatever they now believe is accurate."""
+    founder_explanation: str = Field(min_length=1, max_length=2000)
 
 
 # --- Phase 38D-B -- Committed Expectation vs Actual V1 ----------------------

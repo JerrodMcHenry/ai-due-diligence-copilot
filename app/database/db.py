@@ -4881,11 +4881,6 @@ def list_pending_reconciliation_for_owner(user_id: str, venture_id: int, latest_
 # supersedes_commitment_id (38D-A directive §3: "creation is the
 # important operation" -- supersede/abandon lifecycle actions are
 # explicitly deferred, not needed to safely create a commitment).
-# `founder_explanation`/`explanation_recorded_at` (38D-C's own future
-# scope) are deliberately NOT columns on this table yet -- adding an
-# unused column ahead of the phase that gives it meaning would be
-# exactly the "improvise additional schema" this phase's own directive
-# forbids.
 def create_venture_financial_commitments_table():
     with engine.begin() as connection:
         connection.execute(text("""
@@ -4929,12 +4924,43 @@ def create_venture_financial_commitments_table():
     print("venture_financial_commitments table created successfully.")
 
 
+# Phase 38D-C -- Founder Explanation + Learning Capture V1. Additive
+# columns on an already-populated table -- every existing commitment
+# simply starts with both NULL ("no explanation recorded yet," the
+# correct honest default, exactly the same judgment already made for
+# venture_hire_plans.last_reconciled_snapshot_id in Phase 35D).
+#
+# This is the ONE mutable pair on an otherwise append-only row --
+# precedented directly by venture_missions.learning_summary's own
+# existing update-in-place field (cited by name in the 38D architecture
+# doc's own §12), not a new pattern invented here. Saving/editing an
+# explanation touches ONLY these two columns -- see
+# update_venture_financial_commitment_explanation_for_owner()'s own
+# docstring for the exact SET clause, which the 38D-C directive requires
+# never widen to any other column on this table.
+def add_financial_commitment_explanation_columns():
+    try:
+        with engine.begin() as connection:
+            connection.execute(text("""
+                ALTER TABLE venture_financial_commitments
+                ADD COLUMN founder_explanation TEXT
+            """))
+            connection.execute(text("""
+                ALTER TABLE venture_financial_commitments
+                ADD COLUMN explanation_recorded_at TIMESTAMP
+            """))
+        print("venture_financial_commitments.founder_explanation/explanation_recorded_at added.")
+    except Exception as e:
+        print("founder_explanation/explanation_recorded_at migration skipped", e)
+
+
 _COMMITMENT_COLUMNS = """
                 id, venture_id, user_id, committed_at, source_snapshot_id,
                 scenario_id, scenario_name, hire_plan_ids, financial_plan_ids,
                 plan_snapshot, calculation_version, projection_start,
                 projection_horizon_months, expected_monthly, related_decision_id,
-                status, supersedes_commitment_id, founder_rationale
+                status, supersedes_commitment_id, founder_rationale,
+                founder_explanation, explanation_recorded_at
 """
 
 
@@ -5054,6 +5080,45 @@ def get_venture_financial_commitment_for_owner(user_id: str, venture_id: int, co
             FROM venture_financial_commitments
             WHERE id = :commitment_id AND venture_id = :venture_id AND user_id = :user_id
         """), {"commitment_id": commitment_id, "venture_id": venture_id, "user_id": user_id})
+        row = result.mappings().first()
+        return _parse_commitment_json_fields(dict(row)) if row else None
+
+
+def update_venture_financial_commitment_explanation_for_owner(
+    user_id: str, venture_id: int, commitment_id: int, founder_explanation: str
+) -> dict | None:
+    """
+    Phase 38D-C. The ONLY UPDATE path this table has -- and its own SET
+    clause touches EXACTLY two columns, `founder_explanation` and
+    `explanation_recorded_at` (always CURRENT_TIMESTAMP, whether this is
+    the first save or an edit of an existing one -- §5 of the directive:
+    "explanation_recorded_at should consistently represent the latest
+    successful explanation save/update," never a created-vs-updated
+    distinction, never a revision history). Every other column --
+    `plan_snapshot`, `expected_monthly`, `committed_at`,
+    `source_snapshot_id`, `calculation_version`, and everything else --
+    is absent from this statement entirely, not merely unchanged by
+    coincidence: there is no code path in this function that could ever
+    touch them, which is what keeps 38D-A's frozen-expectation guarantee
+    load-bearing rather than just conventionally honored.
+
+    Returns None if the row doesn't exist or isn't owned by this
+    venture/user (ownership re-checked in the same statement, the same
+    discipline as update_venture_hire_plan_for_owner()).
+    """
+    with engine.begin() as connection:
+        result = connection.execute(text(f"""
+            UPDATE venture_financial_commitments
+            SET founder_explanation = :founder_explanation,
+                explanation_recorded_at = CURRENT_TIMESTAMP
+            WHERE id = :commitment_id AND venture_id = :venture_id AND user_id = :user_id
+            RETURNING {_COMMITMENT_COLUMNS}
+        """), {
+            "founder_explanation": founder_explanation,
+            "commitment_id": commitment_id,
+            "venture_id": venture_id,
+            "user_id": user_id,
+        })
         row = result.mappings().first()
         return _parse_commitment_json_fields(dict(row)) if row else None
 
@@ -5761,6 +5826,11 @@ _ALL_EVENT_NAMES = frozenset(QUALIFYING_BUILDING_EVENTS) | {
     # endpoint. Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same
     # reasoning as every other Finance event above.
     "financial_commitment_created",
+    # Phase 38D-C -- Founder Explanation + Learning Capture V1. Logged
+    # from app/api.py's new PATCH .../financial-commitments/{id}/explanation
+    # endpoint. Deliberately NOT added to QUALIFYING_BUILDING_EVENTS, same
+    # reasoning as every other Finance event above.
+    "financial_commitment_explanation_recorded",
 }
 
 

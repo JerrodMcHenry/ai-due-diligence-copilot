@@ -153,6 +153,8 @@ from app.database.db import (create_tables,
                          create_venture_financial_commitment,
                          list_venture_financial_commitments_for_owner,
                          get_venture_financial_commitment_for_owner,
+                         add_financial_commitment_explanation_columns,
+                         update_venture_financial_commitment_explanation_for_owner,
 )
 from typing import Literal
 from fastapi import Query
@@ -192,7 +194,7 @@ from app.ai.financial_engine import (
 )
 from app.models.venture_financial_commitments import (
     CreateFinancialCommitmentRequest, FinancialCommitmentResponse, PlanSnapshotItem,
-    FinancialCommitmentComparisonResponse,
+    FinancialCommitmentComparisonResponse, UpdateFinancialCommitmentExplanationRequest,
 )
 from app.ai.commitment_comparison import build_commitment_comparison
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
@@ -343,6 +345,10 @@ create_venture_financial_scenarios_table()
 # venture_financial_scenarios all exist -- this table's own FKs reference
 # every one of them.
 create_venture_financial_commitments_table()
+
+# Phase 38D-C -- Founder Explanation + Learning Capture V1. Additive
+# columns on the table just created above.
+add_financial_commitment_explanation_columns()
 
 # Phase 10.8 -- Pitch Deck Coach V1. pitch_deck_reviews has no FK to
 # startups/analyses/modeled_ventures (see create_pitch_deck_reviews_table()'s
@@ -2582,6 +2588,52 @@ def get_financial_commitment_comparison(
     snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
     comparison = build_commitment_comparison(commitment, snapshots, compute_derived_metrics)
     return FinancialCommitmentComparisonResponse(**comparison)
+
+
+# Phase 38D-C -- Founder Explanation + Learning Capture V1. The ONLY
+# write path for founder_explanation/explanation_recorded_at -- see
+# update_venture_financial_commitment_explanation_for_owner()'s own
+# docstring (app/database/db.py) for exactly which two columns this
+# touches and, just as importantly, which columns it structurally
+# cannot touch. §3 of the directive: explanation capture requires at
+# least one actual observation to already exist -- re-derives
+# `comparison_status` via the SAME pure function the comparison endpoint
+# itself uses (no new eligibility concept, no invented variance
+# threshold) and rejects (409) while still `awaiting_actuals`.
+@app.patch(
+    "/ventures/{venture_id}/financial-commitments/{commitment_id}/explanation",
+    response_model=FinancialCommitmentResponse,
+)
+def update_financial_commitment_explanation(
+    venture_id: int,
+    commitment_id: int,
+    request: UpdateFinancialCommitmentExplanationRequest,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    commitment = get_venture_financial_commitment_for_owner(current_user.user_id, venture_id, commitment_id)
+    if commitment is None:
+        raise HTTPException(status_code=404, detail="Commitment not found.")
+
+    snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
+    comparison = build_commitment_comparison(commitment, snapshots, compute_derived_metrics)
+    if comparison["comparison_status"] == "awaiting_actuals":
+        raise HTTPException(
+            status_code=409,
+            detail="An explanation can only be recorded once at least one actual financial snapshot has been observed for this plan.",
+        )
+
+    updated = update_venture_financial_commitment_explanation_for_owner(
+        current_user.user_id, venture_id, commitment_id, request.founder_explanation
+    )
+    if updated is None:
+        raise HTTPException(status_code=404, detail="Commitment not found.")
+
+    _log_event_safe(
+        "financial_commitment_explanation_recorded",
+        user_id=current_user.user_id, venture_id=venture_id, metadata={},
+    )
+    return FinancialCommitmentResponse(**updated)
 
 
 @app.get("/ventures/{venture_id}/decisions", response_model=list[VentureDecisionResponse])

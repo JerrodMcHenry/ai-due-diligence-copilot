@@ -21,6 +21,7 @@ import {
   createFinancialCommitment,
   listFinancialCommitments,
   getFinancialCommitmentComparison,
+  updateFinancialCommitmentExplanation,
 } from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
@@ -1549,7 +1550,7 @@ function ScenarioCard({
                 })()
               : null}
           </p>
-          <CommitmentComparisonSection ventureId={ventureId} commitmentId={committed.id} />
+          <CommitmentComparisonSection ventureId={ventureId} commitment={committed} />
         </div>
       ) : null}
 
@@ -1571,23 +1572,35 @@ function ScenarioCard({
 // commitment itself. Lives inside the SAME "Committed" panel the
 // commitment's own confirmation renders in (§14: no new tab, no History/
 // Analyze/Overview detour).
-function CommitmentComparisonSection({ ventureId, commitmentId }: { ventureId: number; commitmentId: number }) {
+function CommitmentComparisonSection({
+  ventureId,
+  commitment,
+}: {
+  ventureId: number;
+  commitment: FinancialCommitmentResponse;
+}) {
   const { getToken } = useAuth();
   const [comparison, setComparison] = useState<FinancialCommitmentComparisonResponse | null>(null);
   const [showEarlierMonths, setShowEarlierMonths] = useState(false);
+  // Phase 38D-C -- local mirror of the commitment's own two mutable
+  // fields, updated directly from the PATCH response so this section
+  // never needs to re-fetch the whole commitment just to show a fresh
+  // explanation.
+  const [founderExplanation, setFounderExplanation] = useState(commitment.founder_explanation);
+  const [explanationRecordedAt, setExplanationRecordedAt] = useState(commitment.explanation_recorded_at);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       const token = await getToken();
       if (!token) return;
-      const result = await getFinancialCommitmentComparison(ventureId, commitmentId, token);
+      const result = await getFinancialCommitmentComparison(ventureId, commitment.id, token);
       if (!cancelled) setComparison(result);
     })();
     return () => {
       cancelled = true;
     };
-  }, [ventureId, commitmentId, getToken]);
+  }, [ventureId, commitment.id, getToken]);
 
   if (!comparison) return null;
 
@@ -1635,6 +1648,129 @@ function CommitmentComparisonSection({ ventureId, commitmentId }: { ventureId: n
           ) : null}
         </div>
       ) : null}
+      <FounderExplanationSection
+        ventureId={ventureId}
+        commitmentId={commitment.id}
+        founderExplanation={founderExplanation}
+        onSaved={(updated) => {
+          setFounderExplanation(updated.founder_explanation);
+          setExplanationRecordedAt(updated.explanation_recorded_at);
+        }}
+        explanationRecordedAt={explanationRecordedAt}
+      />
+    </div>
+  );
+}
+
+// Phase 38D-C -- Founder Explanation + Learning Capture V1. Renders only
+// once at least one comparable month already exists (its parent,
+// CommitmentComparisonSection, never mounts this while
+// comparison_status === "awaiting_actuals" -- Case H). The explanation
+// is always presented as the FOUNDER's own words -- never "SIE
+// determined"/"the reason was"/"we learned" -- see §4 of the directive.
+function FounderExplanationSection({
+  ventureId,
+  commitmentId,
+  founderExplanation,
+  explanationRecordedAt,
+  onSaved,
+}: {
+  ventureId: number;
+  commitmentId: number;
+  founderExplanation: string | null;
+  explanationRecordedAt: string | null;
+  onSaved: (updated: FinancialCommitmentResponse) => void;
+}) {
+  const { getToken } = useAuth();
+  const [isEditing, setIsEditing] = useState(false);
+  const [draft, setDraft] = useState(founderExplanation ?? "");
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  async function handleSave() {
+    const trimmed = draft.trim();
+    if (!trimmed || submitting) return;
+    setSubmitting(true);
+    setError(null);
+    try {
+      const token = await getToken();
+      if (!token) throw new Error("Not signed in.");
+      const updated = await updateFinancialCommitmentExplanation(ventureId, commitmentId, { founder_explanation: trimmed }, token);
+      onSaved(updated);
+      setIsEditing(false);
+    } catch {
+      setError("Couldn't save your explanation. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (!isEditing) {
+    if (founderExplanation) {
+      return (
+        <div className="mt-2 rounded-md border border-border bg-background p-2.5">
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Your explanation</p>
+          <p className="mt-1 text-sm text-text-primary">{founderExplanation}</p>
+          {explanationRecordedAt ? (
+            <p className="mt-1 text-xs text-text-muted">Recorded {formatMonthYear(explanationRecordedAt.slice(0, 10))}.</p>
+          ) : null}
+          <button
+            type="button"
+            onClick={() => {
+              setDraft(founderExplanation);
+              setIsEditing(true);
+            }}
+            className="mt-1.5 text-sm font-semibold text-primary hover:text-primary-hover"
+          >
+            Edit your explanation
+          </button>
+        </div>
+      );
+    }
+    return (
+      <div className="mt-2">
+        <button
+          type="button"
+          onClick={() => {
+            setDraft("");
+            setIsEditing(true);
+          }}
+          className="text-sm font-semibold text-primary hover:text-primary-hover"
+        >
+          What explains the difference?
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-2 rounded-md border border-border bg-background p-2.5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What explains the difference?</p>
+      <p className="mt-1 text-xs leading-5 text-text-muted">
+        This is your own interpretation, not something SIE calculated -- it&rsquo;s saved as your explanation, kept
+        separate from the numbers above.
+      </p>
+      <textarea
+        value={draft}
+        onChange={(event) => setDraft(event.target.value)}
+        rows={3}
+        maxLength={2000}
+        placeholder="e.g. Enterprise customer signed six weeks later than expected and implementation contractor costs ran above plan."
+        className="mt-1.5 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-primary outline-none focus-visible:border-primary focus-visible:ring-2 focus-visible:ring-primary/20"
+      />
+      {error ? <p className="mt-1 text-sm text-red-600">{error}</p> : null}
+      <div className="mt-1.5 flex items-center gap-3">
+        <Button type="button" size="sm" onClick={handleSave} disabled={submitting || draft.trim().length === 0}>
+          {submitting ? "Saving…" : "Save explanation"}
+        </Button>
+        <button
+          type="button"
+          onClick={() => setIsEditing(false)}
+          className="text-sm font-medium text-text-muted hover:text-text-secondary"
+        >
+          Cancel
+        </button>
+      </div>
     </div>
   );
 }

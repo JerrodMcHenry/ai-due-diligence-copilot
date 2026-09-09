@@ -14,6 +14,7 @@ import type {
   HirePlanStatus,
   PlanStatus,
   Scenario,
+  UpdateFinancialCommitmentExplanationRequest,
   VentureFinancialsResponse,
 } from "@/types";
 
@@ -191,5 +192,25 @@ export function getFinancialCommitmentComparison(
   return apiFetch<FinancialCommitmentComparisonResponse>(
     `/ventures/${ventureId}/financial-commitments/${commitmentId}/comparison`,
     { token }
+  );
+}
+
+// --- Phase 38D-C -- Founder Explanation + Learning Capture V1 ---------------
+// Update-in-place -- the ONLY write path for founder_explanation. Never
+// touches plan_snapshot/expected_monthly/committed_at/source_snapshot_id
+// (see update_venture_financial_commitment_explanation_for_owner()'s own
+// docstring, app/database/db.py). The backend rejects (409) a commitment
+// still "awaiting_actuals" -- this function does not pre-check that
+// itself, the UI gate + the backend's own rejection are the guard.
+
+export function updateFinancialCommitmentExplanation(
+  ventureId: number,
+  commitmentId: number,
+  request: UpdateFinancialCommitmentExplanationRequest,
+  token: string
+): Promise<FinancialCommitmentResponse> {
+  return apiFetch<FinancialCommitmentResponse>(
+    `/ventures/${ventureId}/financial-commitments/${commitmentId}/explanation`,
+    { method: "PATCH", body: request, token }
   );
 }

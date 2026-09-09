@@ -1,9 +1,10 @@
 # SIE Committed Plan → Actual → Learning Architecture V1
 
 Phase 38D was a pure design phase — §§1-31 below reflect that original, nothing-implemented state and are
-left unmodified. **Phase 38D-A (§32) has since implemented commitment persistence + frozen expectation, and
-Phase 38D-B (§33) has implemented deterministic expected-vs-actual comparison.** Founder explanation, learning,
-and Command Center integration remain unimplemented, per 38D-B's own explicit scope guards (§33).
+left unmodified. **Phase 38D-A (§32) implemented commitment persistence + frozen expectation, Phase 38D-B
+(§33) implemented deterministic expected-vs-actual comparison, and Phase 38D-C (§34) implemented founder
+explanation capture, completing the historical learning chain.** Historical-learning retrieval and Command
+Center integration remain unimplemented, per 38D-C's own explicit scope guards (§34).
 
 The original §§1-31 audited answer to one question: what is the smallest durable schema that lets SIE
 truthfully compare "what a founder expected" against "what actually happened," months later, without
@@ -907,3 +908,126 @@ on this venture (stale snapshot + revenue divergence) still rendered with no reg
 - No comparison surface exists anywhere outside Finance (Command Center integration is explicitly out of
   scope, per the directive's own §26).
 - No founder explanation, no interpretation, no recommendation anywhere in this phase's own code — by design.
+
+## 34. Phase 38D-C implementation (as built)
+
+Implements the EXPLAIN → LEARN steps from §30's own sequencing — completing the historical learning chain
+`MODEL → COMMIT → OBSERVE → COMPARE → EXPLAIN → LEARN`. No AI, no generic learning system, no new score, no
+Command Center integration. In V1, the persisted founder explanation IS the captured learning context — a
+future phase may retrieve it when making new decisions; that retrieval/intelligence layer is explicitly not
+built here.
+
+### Explanation semantics
+
+Two additive columns on the already-existing `venture_financial_commitments` table (no new table — the 38D
+architecture's own §12 anticipated exactly these two fields): `founder_explanation TEXT`,
+`explanation_recorded_at TIMESTAMP`. Both null until the founder records one. Precedented directly by
+`venture_missions.learning_summary`'s own existing update-in-place field, not a new pattern.
+
+### Founder-authored provenance
+
+The explanation is structurally distinct from every other fact on the commitment. `update_venture_financial_commitment_explanation_for_owner()`'s
+own UPDATE statement touches EXACTLY two columns — `founder_explanation`, `explanation_recorded_at` — and no
+others; there is no code path in that function that could touch `plan_snapshot`, `expected_monthly`,
+`committed_at`, `source_snapshot_id`, or `calculation_version`, which is what keeps 38D-A's frozen-expectation
+guarantee load-bearing rather than conventionally honored. The five-fact model (SIE recommendation, founder
+choice, committed expectation, actual result, founder explanation) remains five separate homes, never
+rewritten into each other — unchanged from §14's own table, with the explanation now filled in as the fifth,
+founder-authored row. UI copy never says "SIE determined"/"the reason was"/"we learned" — always "Your
+explanation," "What explains the difference?," attributed to the founder throughout.
+
+### Mutability rules
+
+The explanation is the ONE mutable pair on an otherwise append-only row. `explanation_recorded_at` always
+reflects the LATEST successful save — whether the first write or an edit — never a created-vs-updated
+distinction, never a revision history (no prior text is retained anywhere; an edit replaces the stored value
+entirely, exactly as §5 of the directive specifies). Verified directly: `test_case_c_explanation_can_be_edited`,
+`test_case_d_editing_explanation_changes_no_frozen_expectation_field`.
+
+### Capture eligibility
+
+No variance threshold, no magnitude check — eligibility is purely "has at least one actual observation been
+made," reusing `build_commitment_comparison()`'s own already-established `comparison_status` (no new concept
+invented). The PATCH endpoint re-derives this server-side and rejects (409) while `comparison_status ===
+"awaiting_actuals"`; the frontend never renders the explanation workflow at all in that state (its parent,
+`CommitmentComparisonSection`, returns before mounting `FounderExplanationSection` whenever the awaiting-actuals
+branch is taken) — belt-and-suspenders, not two competing implementations of the same rule.
+
+### API
+
+One new endpoint: `PATCH /ventures/{venture_id}/financial-commitments/{commitment_id}/explanation`, body
+`{founder_explanation: string}` (1-2000 chars). Reuses the existing ownership-scoped commitment read plus the
+existing comparison function for the eligibility check; the one new database function
+(`update_venture_financial_commitment_explanation_for_owner`) is the only write path. No DELETE (clearing an
+explanation is not a supported V1 action — an unwanted explanation is edited to whatever the founder now
+believes, not removed). The comparison endpoint itself (38D-B) was re-verified unchanged and untouched by
+this phase — it still derives expected/actual/variance fresh on every read, confirmed by rerunning
+`test_commitment_comparison.py` in full alongside the new suite.
+
+### Expected/actual/explanation separation
+
+Made explicit, per §12 of this directive: **Expected result** = SIE-calculated historical expectation
+(`expected_monthly`, frozen at commitment time, `sie_calculated` provenance). **Actual result** =
+founder-entered historical actual (`venture_financial_snapshots`, `founder_entered` provenance, unchanged
+since Phase 35B). **Explanation** = founder-authored interpretation (`founder_explanation`, `founder_said`
+provenance, introduced this phase). None of the three is ever computed from, or written into, either of the
+other two.
+
+### Historical integrity guarantees
+
+Re-verified as load-bearing, not merely re-asserted: saving or editing an explanation, at the database level,
+touches no other column on the same row (by construction, not by convention); at the application level, a
+dedicated regression test edits a live plan AFTER an explanation already exists and confirms both the frozen
+expectation AND the explanation itself survive untouched; a newer actual snapshot changes the comparison's own
+observed-month coverage but is proven, by test, to never overwrite an existing explanation.
+
+### Tests
+
+New file `app/tests/test_commitment_explanation.py`: 12/12 passing, covering Cases A (cross-user block), B
+(reload survival), C (edit), D (frozen expectation untouched by explanation save/edit), E (no snapshot ever
+touched), F (a live plan edit after explanation capture moves neither the expectation nor the explanation), G
+(a newer snapshot changes comparison coverage but never overwrites the explanation), H (awaiting-actuals
+rejects capture with 409, and rejected attempts persist nothing), I (a partially-observed commitment supports
+capture), J (null actual metrics remain null through explanation capture), K (structural proof — the endpoint's
+own source contains no OpenAI/Tavily/generation reference of any kind). Full regression re-run alongside this
+phase's own suite: `test_venture_financial_commitments` (21/21), `test_commitment_comparison` (23/23),
+`test_venture_scenarios`, `test_venture_financials`, `test_venture_hire_plans`, `test_build_intelligence_loop`,
+`test_venture_graduation`, `test_idea_lab`, `test_founder_workspace` — all passing, zero regression. Frontend:
+`tsc --noEmit`, `eslint`, `next build`, and the full `npm test` suite all clean.
+
+### UX
+
+Lives inside the same "Committed" panel, directly below the Expected-vs-actual table (§4 of the directive: no
+new tab). A new `FounderExplanationSection` renders only once its parent has already decided the comparison is
+not `awaiting_actuals`. Three states: no explanation yet → a plain link-style prompt, "What explains the
+difference?"; editing → a textarea (with the directive's own example placeholder) plus explicit copy
+("This is your own interpretation, not something SIE calculated") and "Save explanation"/"Cancel"; saved → "Your
+explanation," the founder's own text verbatim, "Recorded {month year}," and an "Edit your explanation" link.
+
+### Live walkthrough
+
+On the standing venture 8212 / commitment id=35 fixture: added a real financial snapshot to establish one
+observed month, confirmed the "What explains the difference?" prompt appeared (not before), typed and saved a
+real explanation through the live UI, confirmed it rendered as "Your explanation" with founder-attributed
+copy. Reloaded and confirmed survival. Edited the explanation through the live UI (a second, different piece
+of text) and confirmed the new text persisted. Confirmed via a direct API read that `expected_monthly[0]` and
+`source_snapshot_id` were byte-identical to their originally-recorded values throughout, and that the
+`source_snapshot_id`'s own referenced snapshot row was itself unchanged. Added a second, later actual snapshot
+and confirmed live that the comparison's observed-month coverage grew (October now shown, September tucked
+behind "See earlier observed months (1)") while the founder's explanation text remained exactly as last
+edited, unaffected. Afterward, removed the walkthrough-only snapshots to restore Phase 38C's own standing
+Command Center demo state on this venture (confirmed live, no regression), and confirmed the commitment
+correctly reverted to `awaiting_actuals` with the explanation section correctly hidden again (Case H,
+reconfirmed live) — the underlying `founder_explanation` text itself was left in place on the row (harmless,
+simply not displayed while ineligible), left as a small forward-looking fixture for whenever this venture next
+accumulates a real actual.
+
+### Limitations
+
+- No revision history — an edit permanently replaces the prior text (deliberate, per §5 of the directive).
+- No way to clear/delete an explanation once set (deliberate — not requested by the accepted architecture).
+- The explanation is invisible while `awaiting_actuals`, even if one is already stored (from a state that
+  later reverted, as in this phase's own live walkthrough) — correct per Case H, but worth noting as a
+  slightly surprising edge case if a venture's snapshot history is ever pruned back below the eligibility bar.
+- No retrieval/intelligence layer, no Command Center connection, no cross-commitment learning — all explicitly
+  out of scope for this phase, per its own directive.

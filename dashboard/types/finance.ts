@@ -233,6 +233,15 @@ export interface FinancialCommitmentResponse {
   status: CommitmentStatus;
   supersedes_commitment_id: number | null;
   founder_rationale: string | null;
+  // Phase 38D-C -- the one mutable pair on this otherwise append-only
+  // response. `explanation_recorded_at` is always the LATEST save (first
+  // write or an edit), never a revision history.
+  founder_explanation: string | null;
+  explanation_recorded_at: string | null;
+}
+
+export interface UpdateFinancialCommitmentExplanationRequest {
+  founder_explanation: string;
 }
 
 // --- Phase 38D-B -- Committed Expectation vs Actual V1 ----------------------
