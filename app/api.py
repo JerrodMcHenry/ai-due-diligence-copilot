@@ -195,8 +195,10 @@ from app.ai.financial_engine import (
 from app.models.venture_financial_commitments import (
     CreateFinancialCommitmentRequest, FinancialCommitmentResponse, PlanSnapshotItem,
     FinancialCommitmentComparisonResponse, UpdateFinancialCommitmentExplanationRequest,
+    RelevantHireHistoryResponse,
 )
 from app.ai.commitment_comparison import build_commitment_comparison
+from app.ai.hiring_history import find_relevant_hire_history
 from app.models.startup_claim import CreateStartupClaimRequest, StartupClaimSubmissionResponse, MyStartupClaim, StartupClaimStatus, AdminStartupClaim, RejectStartupClaimRequest, StartupClaimActionResponse
 from app.models.startup_membership import MyStartupMembership
 from app.models.founder import FounderStartupWorkspace
@@ -2548,6 +2550,45 @@ def list_financial_commitments(
     _require_owned_venture(current_user, venture_id)
     rows = list_venture_financial_commitments_for_owner(current_user.user_id, venture_id)
     return [FinancialCommitmentResponse(**row) for row in rows]
+
+
+# Phase 39B -- Contextual Hiring History Retrieval V1. A pure read: no
+# write, no new table, no mutation of anything. Reuses the SAME two
+# ownership-scoped reads (list_venture_financial_commitments_for_owner,
+# list_venture_financial_snapshots_for_owner) and the SAME comparison
+# function (build_commitment_comparison) every other commitment endpoint
+# already uses -- see app/ai/hiring_history.py's own module docstring
+# for the full eligibility/selection contract. `None` (a null body) is
+# the honest, expected "no relevant history" result -- the SAME
+# convention `GET /me/startup-claims/{startup_id}` already uses, never
+# an error.
+#
+# MUST be declared before the GET .../{commitment_id} route immediately
+# below -- FastAPI/Starlette matches path routes in declaration order,
+# and a static segment ("relevant-hire-history") registered AFTER a
+# same-depth `{commitment_id}: int` route would otherwise be swallowed
+# by it and rejected with a 422 int-parsing error instead of ever
+# reaching this handler.
+@app.get(
+    "/ventures/{venture_id}/financial-commitments/relevant-hire-history",
+    response_model=RelevantHireHistoryResponse | None,
+)
+def get_relevant_hire_history(
+    venture_id: int,
+    exclude_commitment_id: int | None = None,
+    current_user: AuthenticatedUser = RequireAuth,
+):
+    _require_owned_venture(current_user, venture_id)
+    commitments = list_venture_financial_commitments_for_owner(current_user.user_id, venture_id)
+    snapshots = list_venture_financial_snapshots_for_owner(current_user.user_id, venture_id)
+
+    def _comparison_for(commitment: dict) -> dict:
+        return build_commitment_comparison(commitment, snapshots, compute_derived_metrics)
+
+    result = find_relevant_hire_history(commitments, _comparison_for, exclude_commitment_id)
+    if result is None:
+        return None
+    return RelevantHireHistoryResponse(**result)
 
 
 # GET-by-id returns the row EXACTLY as stored -- see

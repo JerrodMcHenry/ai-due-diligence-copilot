@@ -280,3 +280,27 @@ export interface FinancialCommitmentComparisonResponse {
   latest_comparable_month: string | null;
   comparison_status: ComparisonStatus;
 }
+
+// --- Phase 39B -- Contextual Hiring History Retrieval V1 --------------------
+// Mirrors app/models/venture_financial_commitments.py's own
+// RelevantHireHistoryResponse exactly. This is historical CONTEXT, never
+// a recommendation -- there is deliberately no field here for "what to
+// do now." `null` (no response body) is the honest "no relevant
+// history" result, not an error -- see
+// docs/product/SIE_HISTORICAL_INTELLIGENCE_RETRIEVAL_V1.md.
+
+export interface RelevantHireHistoryResponse {
+  historical_commitment_id: number;
+  committed_at: string;
+  role: string;
+  employment_type: EmploymentType;
+  annual_salary_cents: number | null;
+  burden_percent: number | null;
+  modeled_monthly_cost_cents: number | null;
+  observed_month: string; // "YYYY-MM-DD"
+  expected_total_expenses_cents: number;
+  actual_total_expenses_cents: number;
+  expense_variance_cents: number;
+  // Verbatim or absent -- never paraphrased, never invented.
+  founder_explanation: string | null;
+}

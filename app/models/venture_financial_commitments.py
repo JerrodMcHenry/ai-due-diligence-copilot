@@ -165,3 +165,31 @@ class FinancialCommitmentComparisonResponse(BaseModel):
     months: list[MonthComparison]
     latest_comparable_month: date | None = None
     comparison_status: ComparisonStatus
+
+
+# --- Phase 39B -- Contextual Hiring History Retrieval V1 --------------------
+#
+# See app/ai/hiring_history.py's own module docstring and
+# docs/product/SIE_HISTORICAL_INTELLIGENCE_RETRIEVAL_V1.md for the full
+# design. This is historical CONTEXT, never a recommendation -- there is
+# deliberately no field here for "what to do now" (Phase 39A §4's own
+# load-bearing rule). `None` (a null JSON body) is the honest "no
+# relevant history" result, the same established convention
+# `GET /me/startup-claims/{startup_id}` already uses -- never an error.
+
+
+class RelevantHireHistoryResponse(BaseModel):
+    historical_commitment_id: int
+    committed_at: datetime
+    role: str
+    employment_type: str
+    annual_salary_cents: int | None = None
+    burden_percent: float | None = None
+    modeled_monthly_cost_cents: int | None = None
+    observed_month: date
+    expected_total_expenses_cents: int
+    actual_total_expenses_cents: int
+    expense_variance_cents: int
+    # Verbatim or absent -- never paraphrased, never invented. See
+    # find_relevant_hire_history()'s own docstring.
+    founder_explanation: str | None = None

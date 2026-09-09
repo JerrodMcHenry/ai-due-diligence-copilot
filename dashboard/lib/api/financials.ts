@@ -13,6 +13,7 @@ import type {
   HirePlan,
   HirePlanStatus,
   PlanStatus,
+  RelevantHireHistoryResponse,
   Scenario,
   UpdateFinancialCommitmentExplanationRequest,
   VentureFinancialsResponse,
@@ -212,5 +213,20 @@ export function updateFinancialCommitmentExplanation(
   return apiFetch<FinancialCommitmentResponse>(
     `/ventures/${ventureId}/financial-commitments/${commitmentId}/explanation`,
     { method: "PATCH", body: request, token }
+  );
+}
+
+// --- Phase 39B -- Contextual Hiring History Retrieval V1 --------------------
+// A pure read -- never persists, never mutates anything. `null` is the
+// honest "no relevant history" result, not an error -- see
+// docs/product/SIE_HISTORICAL_INTELLIGENCE_RETRIEVAL_V1.md.
+
+export function getRelevantHireHistory(
+  ventureId: number,
+  token: string
+): Promise<RelevantHireHistoryResponse | null> {
+  return apiFetch<RelevantHireHistoryResponse | null>(
+    `/ventures/${ventureId}/financial-commitments/relevant-hire-history`,
+    { token }
   );
 }

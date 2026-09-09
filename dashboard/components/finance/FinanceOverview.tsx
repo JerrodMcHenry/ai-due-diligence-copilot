@@ -22,6 +22,7 @@ import {
   listFinancialCommitments,
   getFinancialCommitmentComparison,
   updateFinancialCommitmentExplanation,
+  getRelevantHireHistory,
 } from "@/lib/api";
 import { dollarsToCents, centsToDollars, formatWholeDollars, formatMonthYear } from "@/lib/finance/money";
 
@@ -45,6 +46,7 @@ import type {
   ProjectedMonth,
   ProjectedMonthWithPlan,
   ReconciliationItem,
+  RelevantHireHistoryResponse,
   Scenario,
   VentureFinancialsResponse,
 } from "@/types";
@@ -264,6 +266,7 @@ export default function FinanceOverview({ ventureId }: Props) {
     return (
       <BaseCard className="space-y-4 p-6 sm:p-7">
         <HireForm
+          ventureId={ventureId}
           existing={changePanel.editing}
           hasFinancialSnapshot={Boolean(data?.latest_snapshot)}
           currentRunwayLabel={data?.derived ? runwayLabel(data.derived) : "—"}
@@ -841,6 +844,7 @@ function cashOutLabel(projection: ProjectedMonthWithPlan[]): string {
 }
 
 function HireForm({
+  ventureId,
   existing,
   hasFinancialSnapshot,
   currentRunwayLabel,
@@ -848,6 +852,7 @@ function HireForm({
   onSave,
   onCancel,
 }: {
+  ventureId: number;
   existing: HirePlan | null;
   hasFinancialSnapshot: boolean;
   currentRunwayLabel: string;
@@ -947,6 +952,15 @@ function HireForm({
             </p>
           ) : null}
         </div>
+
+        {/* Phase 39B -- Contextual Hiring History Retrieval V1. Current
+            decision (above) always renders first; historical context
+            (below) is strictly secondary and never competes visually
+            with it. Employee hires only (§3 of the directive) -- a
+            contractor preview never even attempts the fetch. */}
+        {values.employmentType === "employee" ? (
+          <RelevantHireHistoryCard ventureId={ventureId} />
+        ) : null}
 
         <div className="flex flex-wrap gap-2">
           <Button
@@ -1074,6 +1088,99 @@ function HireForm({
         <Button type="button" variant="subtle" disabled={isBusy} onClick={onCancel}>
           Cancel
         </Button>
+      </div>
+    </div>
+  );
+}
+
+// Phase 39B -- Contextual Hiring History Retrieval V1. Fetches on
+// mount, renders NOTHING while loading and NOTHING when the backend
+// returns null (§13 of the directive: silence is a successful result,
+// never an empty-state message like "no history found"). This is
+// historical CONTEXT, never a recommendation -- there is no field
+// anywhere in this component for "what to do now" (39A's own
+// load-bearing rule, §4).
+function RelevantHireHistoryCard({ ventureId }: { ventureId: number }) {
+  const { getToken } = useAuth();
+  const [history, setHistory] = useState<RelevantHireHistoryResponse | null>(null);
+  const [showTrace, setShowTrace] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const token = await getToken();
+      if (!token) return;
+      const result = await getRelevantHireHistory(ventureId, token);
+      if (!cancelled) setHistory(result);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [ventureId, getToken]);
+
+  if (!history) return null;
+
+  const variance = history.expense_variance_cents;
+  const differenceLabel =
+    variance === 0
+      ? "Observed total monthly expenses matched the committed expectation."
+      : `Observed total monthly expenses were ${formatWholeDollars(Math.abs(variance))} ${variance > 0 ? "above" : "below"} the committed expectation.`;
+
+  return (
+    <div className="rounded-lg border border-border bg-surface p-3">
+      <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Relevant history</p>
+      <p className="mt-1 text-sm font-medium text-text-primary">Last time you committed to an employee hire</p>
+
+      <dl className="mt-2 space-y-1 text-sm">
+        <div className="flex justify-between gap-3">
+          <dt className="text-text-secondary">Role</dt>
+          <dd className="font-medium text-text-primary">{history.role}</dd>
+        </div>
+        {history.annual_salary_cents !== null ? (
+          <div className="flex justify-between gap-3">
+            <dt className="text-text-secondary">Committed salary</dt>
+            <dd className="font-medium text-text-primary">{formatWholeDollars(history.annual_salary_cents)}</dd>
+          </div>
+        ) : null}
+        {history.modeled_monthly_cost_cents !== null ? (
+          <div className="flex justify-between gap-3">
+            <dt className="text-text-secondary">Modeled monthly employment cost</dt>
+            <dd className="font-medium text-text-primary">{formatWholeDollars(history.modeled_monthly_cost_cents)}</dd>
+          </div>
+        ) : null}
+      </dl>
+
+      <p className="mt-2 text-sm leading-6 text-text-secondary">
+        The plan expected total monthly expenses of{" "}
+        <span className="font-medium text-text-primary">{formatWholeDollars(history.expected_total_expenses_cents)}</span>.
+        The observed month ({formatMonthYear(history.observed_month)}) recorded{" "}
+        <span className="font-medium text-text-primary">{formatWholeDollars(history.actual_total_expenses_cents)}</span>.
+      </p>
+      <p className="mt-1 text-sm text-text-secondary">{differenceLabel}</p>
+
+      {history.founder_explanation ? (
+        <div className="mt-2">
+          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">You said</p>
+          <p className="mt-0.5 text-sm italic text-text-primary">&ldquo;{history.founder_explanation}&rdquo;</p>
+        </div>
+      ) : null}
+
+      <div className="mt-2">
+        <button
+          type="button"
+          onClick={() => setShowTrace((v) => !v)}
+          className="text-sm font-semibold text-primary hover:text-primary-hover"
+        >
+          Why is SIE showing this? {showTrace ? "▴" : "▾"}
+        </button>
+        {showTrace ? (
+          <ul className="mt-1.5 space-y-1 text-sm text-text-secondary">
+            <li>• You&rsquo;re modeling an employee hire.</li>
+            <li>• SIE found a previous committed employee hire for this company with observed financial results.</li>
+            <li>• Committed: {formatMonthYear(history.committed_at.slice(0, 10))}</li>
+            <li>• Observed: {formatMonthYear(history.observed_month)}</li>
+          </ul>
+        ) : null}
       </div>
     </div>
   );
