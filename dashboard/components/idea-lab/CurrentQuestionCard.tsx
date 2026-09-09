@@ -66,17 +66,24 @@ type Props = {
   // Phase 34G -- SIE Intelligence Advantage V1. This component already
   // fetches GET /ventures/{id}/recommendation on every refresh; its
   // response now also carries a company-intelligence summary
-  // (§10-13). Rather than a second fetch, the parent (VentureWorkspace.tsx)
-  // receives it here and renders its own separate "what SIE knows /
-  // still figuring out / what changed" section from it -- the same
-  // lifted-state pattern this codebase already uses for
-  // primaryMissionTitle/missionedMilestones.
+  // (§10-13). Rather than a second fetch, the parent (CommandCenter.tsx)
+  // receives it here and renders its own separate "current context"
+  // section from it -- the same lifted-state pattern this codebase
+  // already uses for primaryMissionTitle/missionedMilestones.
   onCompanyIntelligence?: (summary: CompanyIntelligenceSummary) => void;
+  // Phase 38B -- Founder Command Center V1. Defaults to this card's own,
+  // unchanged "What matters now" heading. CommandCenter.tsx passes
+  // `null` only when a higher-priority financial constraint is already
+  // occupying that exact slot on the page -- this card's own body
+  // (testing/decision/outcome flows, contradiction resolution) is
+  // completely unaffected either way; only whether IT renders the page's
+  // primary heading changes.
+  heading?: string | null;
 };
 
 type LoadState = "loading" | "ready" | "error";
 
-export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyIntelligence }: Props) {
+export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyIntelligence, heading = "What matters now" }: Props) {
   const { getToken } = useAuth();
 
   const [loadState, setLoadState] = useState<LoadState>("loading");
@@ -169,7 +176,7 @@ export default function CurrentQuestionCard({ ventureId, ventureName, onCompanyI
     // the internal architecture, not a founder job; the heading alone
     // already says what this is.
     <BaseCard variant="raised" className="space-y-5 p-6 sm:p-7">
-      <h2 className="text-xl font-bold text-text-primary">What matters now</h2>
+      {heading ? <h2 className="text-xl font-bold text-text-primary">{heading}</h2> : null}
 
       {error ? <p className="text-sm text-danger">{error}</p> : null}
 

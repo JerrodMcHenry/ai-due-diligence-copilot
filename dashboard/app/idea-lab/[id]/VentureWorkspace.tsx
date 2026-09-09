@@ -10,7 +10,6 @@ import Breadcrumbs from "@/components/layout/Breadcrumbs";
 import BaseCard from "@/components/ui/BaseCard";
 import Button from "@/components/ui/Button";
 import Disclosure from "@/components/ui/Disclosure";
-import VentureUnderstandingPanel from "@/components/idea-lab/VentureUnderstandingPanel";
 import VentureJourney, { manualStepIndex } from "@/components/idea-lab/VentureJourney";
 import ShareVentureSnapshot from "@/components/idea-lab/ShareVentureSnapshot";
 import MissionsSection from "@/components/idea-lab/MissionsSection";
@@ -23,7 +22,7 @@ import FinanceOverview from "@/components/finance/FinanceOverview";
 import ConceptDisclosure from "@/components/learn/ConceptDisclosure";
 import PitchDeckCoachTeaser from "@/components/founder/PitchDeckCoachTeaser";
 import NextMoves from "@/components/idea-lab/NextMoves";
-import CurrentQuestionCard from "@/components/idea-lab/CurrentQuestionCard";
+import CommandCenter from "@/components/idea-lab/CommandCenter";
 import VentureAnalyzeSection from "@/components/idea-lab/VentureAnalyzeSection";
 import {
   useVentureGraduation,
@@ -47,7 +46,6 @@ import { deleteVenture, getVenture, getVentureHistory, updateVenture } from "@/l
 import { emptyAssumptions, VENTURE_STAGES } from "@/types";
 
 import type {
-  CompanyIntelligenceSummary,
   MissionType,
   VentureAssumptions,
   VentureHistoryResponse,
@@ -196,117 +194,6 @@ function VentureIdentity({
   );
 }
 
-// Phase 34E, Section 12, superseded by Phase 34G -- SIE Intelligence
-// Advantage V1, §10-13: "what SIE currently understands" is now driven
-// by accumulated EVIDENCE (venture_evidence, missions, decisions --
-// exactly the state actually driving CurrentQuestionCard's own
-// recommendation) rather than VPS category `basis` sentences, which
-// answer a different question (what's been MODELED, not what's been
-// OBSERVED). The old VPS-category view is not gone -- it is still fully
-// intact and one click away via "See the full breakdown by category"
-// -- it is just no longer the DEFAULT content, since Section 10's own
-// instruction is that this section "should summarize the state that is
-// actually driving SIE's recommendation."
-//
-// Three state-dependent sub-sections (WHAT SIE KNOWS / STILL FIGURING
-// OUT / WHAT CHANGED RECENTLY), each rendered only when non-empty --
-// §18's own explicit "do not overwhelm a brand-new venture with empty
-// intelligence sections" applies per-section, not just to the whole
-// card. A single "See full history →" link replaces Phase 34E's own
-// separate "Most recent: ..." one-liner (Section 23's anti-duplication
-// rule: once "what changed" says something specific and evidence-
-// grounded, repeating a second, vaguer "most recent" line right below
-// it would be exactly the kind of duplication that rule forbids).
-function CompanyIntelligenceState({
-  modelResult,
-  companyIntelligence,
-  hasHistory,
-  onSeeHistory,
-}: {
-  modelResult: NonNullable<VentureResponse["model_result"]> | null;
-  companyIntelligence: CompanyIntelligenceSummary | null;
-  hasHistory: boolean;
-  onSeeHistory: () => void;
-}) {
-  const knows = companyIntelligence?.what_sie_knows ?? [];
-  const stillFiguringOut = companyIntelligence?.still_figuring_out ?? [];
-  const whatChanged = companyIntelligence?.what_changed ?? [];
-  const hasAnyIntelligence = knows.length > 0 || stillFiguringOut.length > 0 || whatChanged.length > 0;
-
-  // Nothing to show yet at all (brand-new venture, no evidence, no
-  // model) -- Overview's hero above already covers this state.
-  if (!hasAnyIntelligence && !modelResult) {
-    return null;
-  }
-
-  return (
-    <BaseCard className="space-y-5 p-6">
-      {knows.length > 0 ? (
-        <div>
-          <h2 className="text-lg font-semibold text-text-primary">What SIE knows</h2>
-          <ul className="mt-2 space-y-1.5">
-            {knows.map((fact) => (
-              <li key={fact} className="flex gap-2 text-base leading-7 text-text-secondary">
-                <span aria-hidden="true" className="text-text-muted">•</span>
-                {fact}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
-      {stillFiguringOut.length > 0 ? (
-        <div className={knows.length > 0 ? "border-t border-border pt-4" : undefined}>
-          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">Still figuring out</p>
-          <ul className="mt-2 space-y-1.5">
-            {stillFiguringOut.map((item) => (
-              <li key={item} className="flex gap-2 text-base leading-7 text-text-secondary">
-                <span aria-hidden="true" className="text-text-muted">•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
-      {whatChanged.length > 0 ? (
-        <div className={knows.length > 0 || stillFiguringOut.length > 0 ? "border-t border-border pt-4" : undefined}>
-          <p className="text-xs font-semibold uppercase tracking-wide text-text-muted">What changed recently</p>
-          <ul className="mt-2 space-y-1.5">
-            {whatChanged.map((item) => (
-              <li key={item} className="flex gap-2 text-base leading-7 text-text-secondary">
-                <span aria-hidden="true" className="text-text-muted">•</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
-
-      {!hasAnyIntelligence ? (
-        <p className="text-base leading-7 text-text-secondary">
-          Nothing has been tested yet -- once you record a result, SIE will start building a real
-          understanding of your venture here.
-        </p>
-      ) : null}
-
-      {hasHistory ? (
-        <button type="button" onClick={onSeeHistory} className="text-sm font-semibold text-primary hover:text-primary-hover">
-          See full history →
-        </button>
-      ) : null}
-
-      {modelResult ? (
-        <Disclosure summary="See the full breakdown by category" defaultOpen={false}>
-          <div className="pt-2">
-            <VentureUnderstandingPanel result={modelResult} />
-          </div>
-        </Disclosure>
-      ) : null}
-    </BaseCard>
-  );
-}
-
 export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   const router = useRouter();
   const pathname = usePathname();
@@ -420,12 +307,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
   // history-relevant state changed" signal to also tell MissionsSection
   // to reload.
   const [missionsRefreshSignal, setMissionsRefreshSignal] = useState(0);
-
-  // Phase 34G -- SIE Intelligence Advantage V1. Lifted from
-  // CurrentQuestionCard's own already-fetched recommendation response
-  // (see that component's own onCompanyIntelligence prop) so
-  // CompanyIntelligenceState below can render it without a second fetch.
-  const [companyIntelligence, setCompanyIntelligence] = useState<CompanyIntelligenceSummary | null>(null);
 
   const refreshHistory = useCallback(async () => {
     const token = await getToken();
@@ -853,19 +734,35 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 secondary tab. Renders nothing until graduated. */}
             <VentureGraduationBanner state={graduation} />
 
-            {/* Phase 34D/34D-A -- SIE Build Intelligence Loop, now
+            {/* Phase 34D/34D-A -- SIE Build Intelligence Loop, originally
                 Overview's own hero (Phase 34E, Sections 9-10): "what
                 matters now / why / what to do," progressively revealing
                 the test/result/evidence/interpretation/recommendation/
-                decision/outcome states as they become real. This is the
-                ONE place the workspace answers "what should I do?" --
-                the older, separate "What should I do next?" card
-                (PrimaryCommandCard) and its duplicate "What to consider
-                next" list are retired from this page for exactly that
-                reason (Section 23: two sections answering the same
-                question). Nothing about CurrentQuestionCard's own logic
-                changed. */}
-            <CurrentQuestionCard ventureId={ventureId} ventureName={venture.name} onCompanyIntelligence={setCompanyIntelligence} />
+                decision/outcome states as they become real. The older,
+                separate "What should I do next?" card (PrimaryCommandCard)
+                and its duplicate "What to consider next" list were
+                retired from this page for exactly that reason (Section
+                23: two sections answering the same question) -- nothing
+                about that removal changes here.
+                Phase 38B -- Founder Command Center V1
+                (docs/product/SIE_FOUNDER_COMMAND_CENTER_V1.md): this slot
+                is now CommandCenter, which wraps CurrentQuestionCard
+                (unchanged internals -- every testing/decision/outcome/
+                contradiction-resolution interaction still lives there
+                exactly as before) and adds the one thing Build alone
+                could never know: whether an existing, real, objective
+                Finance fact (cash already at or below zero) should take
+                the page's own "what matters now" slot instead. Also now
+                owns what the old, separately-rendered CompanyIntelligenceState
+                function used to render (moved in, not duplicated -- see
+                that file's own removal comment). */}
+            <CommandCenter
+              ventureId={ventureId}
+              ventureName={venture.name}
+              modelResult={venture.model_result}
+              hasHistory={!isLoadingHistory && Boolean(history) && history!.events.length > 1}
+              onSeeHistory={() => setTab("history")}
+            />
 
             {/* Phase 34E, Section 9's "specialized tools/secondary
                 actions" originally lived here as a "Ready to turn this
@@ -898,13 +795,6 @@ export default function VentureWorkspace({ ventureId }: VentureWorkspaceProps) {
                 separate, disconnected evaluation of some other text can
                 still do so any time from the top-level Analyze nav item;
                 that path was never venture-specific to begin with. */}
-
-            <CompanyIntelligenceState
-              modelResult={venture.model_result}
-              companyIntelligence={companyIntelligence}
-              hasHistory={!isLoadingHistory && Boolean(history) && history!.events.length > 1}
-              onSeeHistory={() => setTab("history")}
-            />
 
             {/* Phase 31 -- Venture -> Startup Graduation V1, Part 3/10,
                 corrected by Phase 34F, Section 5: the unprominent "Create
