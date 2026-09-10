@@ -460,6 +460,36 @@ def version():
         "methodology_version": METHODOLOGY_VERSION,
     }
 
+@app.get("/admin/diagnostics/observability-check")
+def observability_check(current_user: AuthenticatedUser = RequireAdmin):
+    """
+    Phase 40C -- Private Beta Deployment. Admin-only. Deliberately raises,
+    so a real server-side exception flows through the exact
+    log-and-capture-and-500 path every other endpoint in this file uses
+    (traceback.print_exc() + capture_exception() + a generic 500). This
+    is the one honest way to confirm production Sentry is actually
+    receiving exceptions -- and tagging them with the right environment --
+    without waiting for a real founder to hit a bug or spending real
+    OpenAI/Tavily budget to force a failure deeper in the stack.
+
+    Takes no body and no query params, and its error reveals nothing
+    about the system -- it only proves the exception pipe works. Safe to
+    keep permanently: RequireAdmin means only a user_id in ADMIN_USER_IDS
+    can reach it, so it is not an abuse or DoS surface.
+    """
+    try:
+        raise RuntimeError(
+            "observability-check: intentional test exception (admin-triggered)"
+        )
+    except Exception as _exc:
+        traceback.print_exc()
+        capture_exception(_exc)
+        raise HTTPException(
+            status_code=500,
+            detail="Observability check triggered a test error (this is expected).",
+        )
+
+
 @app.get("/")
 def health_check():
     return {"status": "API is running"}
