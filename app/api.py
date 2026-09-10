@@ -229,6 +229,14 @@ import traceback
 from app.pdf_extractor import extract_text_from_pdf, extract_pages_from_pdf, MAX_PDF_BYTES, PdfExtractionError
 from app.website_scrapper import extract_text_from_website
 from app.reporting.pdf_generator import generate_pdf_report
+from app.observability import init_observability, capture_exception
+
+# Phase 40C -- Private Beta Deployment + Production Acceptance. Called
+# before the app is otherwise configured, matching Sentry's own "as early
+# in the process as possible" guidance. No-op when SENTRY_DSN is unset
+# (every environment until it's explicitly configured) -- see
+# app/observability.py's own docstring.
+init_observability()
 
 app = FastAPI()
 
@@ -576,8 +584,9 @@ def discover(
     try:
         results = discover_startups(sort=sort, limit=limit, offset=offset, **filters)
         total = count_discover_startups(**filters)
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Discovery results could not be loaded. Please try again.",
@@ -590,8 +599,9 @@ def discover(
 def discover_filter_options():
     try:
         return get_discovery_filter_options()
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Filter options could not be loaded. Please try again.",
@@ -705,8 +715,9 @@ def compare(startups: str = Query(..., min_length=1, max_length=200)):
         resolved_ids = {row["startup_id"] for row in rows}
         missing_ids = [id_ for id_ in bounded_ids if id_ not in resolved_ids]
         comparison_startups = [_build_comparison_startup(row) for row in rows]
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Comparison could not be loaded. Please try again.",
@@ -921,8 +932,9 @@ def structure_idea_endpoint(
             status_code=502,
             detail="We couldn't structure that idea right now. Please try again.",
         )
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=502,
             detail="We couldn't structure that idea right now. Please try again.",
@@ -951,8 +963,9 @@ def create_venture(
             assumptions=assumptions_dict,
             model_result=model_result,
         )
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Your venture could not be saved. Please try again.",
@@ -3395,8 +3408,9 @@ def create_pitch_deck_review_endpoint(
         pdf_bytes = _read_pdf_upload_sync(pdf)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=400,
             detail="That PDF could not be read. Please check the file and try again.",
@@ -3406,8 +3420,9 @@ def create_pitch_deck_review_endpoint(
         pages = extract_pages_from_pdf(pdf_bytes)
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=400,
             detail="That PDF could not be read. Please check the file and try again.",
@@ -3421,8 +3436,9 @@ def create_pitch_deck_review_endpoint(
             status_code=502,
             detail="We couldn't review that pitch deck right now. Please try again.",
         )
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=502,
             detail="We couldn't review that pitch deck right now. Please try again.",
@@ -3436,8 +3452,9 @@ def create_pitch_deck_review_endpoint(
             readiness_label=review["readiness_label"],
             review=review,
         )
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Your review completed but could not be saved. Please try again.",
@@ -3513,8 +3530,9 @@ def submit_startup_claim(
             status_code=409,
             detail="You already have a pending claim for this startup.",
         )
-    except Exception:
+    except Exception as _exc:
         traceback.print_exc()
+        capture_exception(_exc)
         raise HTTPException(
             status_code=500,
             detail="Your claim could not be submitted. Please try again.",
@@ -4153,8 +4171,9 @@ def analyze_unified(
             pdf_bytes = _read_pdf_upload_sync(pdf)
         except ValueError as e:
             raise HTTPException(status_code=400, detail=str(e))
-        except Exception:
+        except Exception as _exc:
             traceback.print_exc()
+            capture_exception(_exc)
             raise HTTPException(
                 status_code=400,
                 detail=(
@@ -4238,8 +4257,9 @@ def analyze_unified(
                 website_text = extract_text_from_website(validated_url.url)
             except ValueError as e:
                 raise HTTPException(status_code=400, detail=str(e))
-            except Exception:
+            except Exception as _exc:
                 traceback.print_exc()
+                capture_exception(_exc)
                 raise HTTPException(
                     status_code=400,
                     detail=(
@@ -4253,8 +4273,9 @@ def analyze_unified(
                 pdf_text = extract_text_from_pdf(pdf_bytes)
             except ValueError as e:
                 raise HTTPException(status_code=400, detail=str(e))
-            except Exception:
+            except Exception as _exc:
                 traceback.print_exc()
+                capture_exception(_exc)
                 raise HTTPException(
                     status_code=400,
                     detail=(
@@ -4310,8 +4331,9 @@ def analyze_unified(
                 analysis_type=analysis_type,
                 evidence_sources=evidence_sources,
             )
-        except Exception:
+        except Exception as _exc:
             traceback.print_exc()
+            capture_exception(_exc)
             raise HTTPException(
                 status_code=502,
                 detail=(
@@ -4357,7 +4379,7 @@ def analyze_unified(
                 # authorized canonical startup instead.
                 startup_id=startup_id,
             )
-        except Exception:
+        except Exception as _exc:
             # Distinct from the pipeline failure above on purpose, same as
             # before Phase 10.1B: the (expensive, multi-minute) analysis DID
             # complete here -- only persisting it failed. save_score_history()
@@ -4366,6 +4388,7 @@ def analyze_unified(
             # analyses.methodology JSONB directly, not the legacy
             # score_history table.
             traceback.print_exc()
+            capture_exception(_exc)
             raise HTTPException(
                 status_code=500,
                 detail=(
